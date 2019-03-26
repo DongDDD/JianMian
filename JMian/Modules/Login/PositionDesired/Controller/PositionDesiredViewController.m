@@ -63,7 +63,7 @@
     //左边 第一级
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item == WSNoFound) {
         
-        return [NSString stringWithFormat:@"第一级%ld",indexPath.row];
+        return [NSString stringWithFormat:@"one one %ld",indexPath.row];
     }
     
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item != WSNoFound && indexPath.rank == WSNoFound) {
