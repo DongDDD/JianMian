@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  LoginViewController.h
 //  JMian
 //
 //  Created by mac on 2019/3/22.
@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+NS_ASSUME_NONNULL_BEGIN
 
-@property (strong, nonatomic) UIWindow *window;
-
+@interface LoginViewController : UIViewController
 
 @end
 
+NS_ASSUME_NONNULL_END

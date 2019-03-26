@@ -7,6 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		044DF2492244C2C700301243 /* WeChat_login@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2402244C2C700301243 /* WeChat_login@3x.png */; };
+		044DF24A2244C2C700301243 /* JIANMIAN_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2412244C2C700301243 /* JIANMIAN_logo@2x.png */; };
+		044DF24B2244C2C700301243 /* JIANMIAN_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2422244C2C700301243 /* JIANMIAN_logo@3x.png */; };
+		044DF24C2244C2C700301243 /* WeChat_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2432244C2C700301243 /* WeChat_login@2x.png */; };
+		044DF24D2244C2C700301243 /* Webkey@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2442244C2C700301243 /* Webkey@2x.png */; };
+		044DF24E2244C2C700301243 /* Webkey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2452244C2C700301243 /* Webkey@3x.png */; };
+		044DF24F2244C2C700301243 /* Webkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2462244C2C700301243 /* Webkey.png */; };
+		044DF2502244C2C700301243 /* JIANMIAN_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2472244C2C700301243 /* JIANMIAN_logo.png */; };
+		044DF2512244C2C700301243 /* WeChat_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2482244C2C700301243 /* WeChat_login.png */; };
+		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
+		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
+		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
+		044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF25E2244D6F100301243 /* LoginPhoneViewController.xib */; };
+		044DF2642244D93E00301243 /* verification_code@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2612244D93D00301243 /* verification_code@2x.png */; };
+		044DF2652244D93E00301243 /* verification_code@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2622244D93D00301243 /* verification_code@3x.png */; };
+		044DF2662244D93E00301243 /* verification_code.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2632244D93E00301243 /* verification_code.png */; };
+		044DF26A2244D9CC00301243 /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2672244D9CC00301243 /* phone@2x.png */; };
+		044DF26B2244D9CC00301243 /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2682244D9CC00301243 /* phone.png */; };
+		044DF26C2244D9CC00301243 /* phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2692244D9CC00301243 /* phone@3x.png */; };
+		047270822248D078005FD1FC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047270812248D078005FD1FC /* BaseViewController.m */; };
+		047CC9D92249BF7C00FE935B /* PositionDesiredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047CC9D72249BF7B00FE935B /* PositionDesiredViewController.m */; };
+		047CC9DF2249C3BE00FE935B /* WSDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047CC9DD2249C3BE00FE935B /* WSDropMenuView.m */; };
 		048FEE322244853C001160C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE312244853C001160C8 /* AppDelegate.m */; };
 		048FEE352244853C001160C8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE342244853C001160C8 /* ViewController.m */; };
 		048FEE382244853C001160C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048FEE362244853C001160C8 /* Main.storyboard */; };
@@ -15,6 +37,34 @@
 		048FEE402244853C001160C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE3F2244853C001160C8 /* main.m */; };
 		048FEE4A2244853C001160C8 /* JMianTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE492244853C001160C8 /* JMianTests.m */; };
 		048FEE552244853C001160C8 /* JMianUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE542244853C001160C8 /* JMianUITests.m */; };
+		049469152244EDC900A5BEB7 /* 组 18@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0494690F2244EDC900A5BEB7 /* 组 18@2x.png */; };
+		049469162244EDC900A5BEB7 /* 组 18@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049469102244EDC900A5BEB7 /* 组 18@3x.png */; };
+		049469172244EDC900A5BEB7 /* 组 18(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 049469112244EDC900A5BEB7 /* 组 18(1).png */; };
+		049469182244EDC900A5BEB7 /* 组 18.png in Resources */ = {isa = PBXBuildFile; fileRef = 049469122244EDC900A5BEB7 /* 组 18.png */; };
+		049469192244EDC900A5BEB7 /* 组 18@3x(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 049469132244EDC900A5BEB7 /* 组 18@3x(1).png */; };
+		0494691A2244EDC900A5BEB7 /* 组 18@2x(1).png in Resources */ = {isa = PBXBuildFile; fileRef = 049469142244EDC900A5BEB7 /* 组 18@2x(1).png */; };
+		0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */; };
+		0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */; };
+		049A513C224875D5007A8068 /* icon_return@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A5133224875D5007A8068 /* icon_return@3x.png */; };
+		049A513D224875D5007A8068 /* icon_return@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A5134224875D5007A8068 /* icon_return@2x.png */; };
+		049A513E224875D5007A8068 /* icon_return @2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A5135224875D5007A8068 /* icon_return @2x.png */; };
+		049A513F224875D5007A8068 /* icon_return.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A5136224875D5007A8068 /* icon_return.png */; };
+		049A5140224875D5007A8068 /* icon_return @3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A5137224875D5007A8068 /* icon_return @3x.png */; };
+		049A5141224875D5007A8068 /* camera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A5138224875D5007A8068 /* camera@2x.png */; };
+		049A5142224875D5007A8068 /* icon_return .png in Resources */ = {isa = PBXBuildFile; fileRef = 049A5139224875D5007A8068 /* icon_return .png */; };
+		049A5143224875D5007A8068 /* camera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A513A224875D5007A8068 /* camera@3x.png */; };
+		049A5144224875D5007A8068 /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A513B224875D5007A8068 /* camera.png */; };
+		049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A51572248972F007A8068 /* BasicInformationViewController.m */; };
+		049A515A2248972F007A8068 /* BasicInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049A51582248972F007A8068 /* BasicInformationViewController.xib */; };
+		049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A515C2248B29C007A8068 /* JobIntensionViewController.m */; };
+		049A515F2248B29C007A8068 /* JobIntensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049A515D2248B29C007A8068 /* JobIntensionViewController.xib */; };
+		049A51722248B50F007A8068 /* 蓝点@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A516C2248B50E007A8068 /* 蓝点@3x.png */; };
+		049A51732248B50F007A8068 /* 椭圆 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A516D2248B50E007A8068 /* 椭圆 3@3x.png */; };
+		049A51742248B50F007A8068 /* 椭圆 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A516E2248B50F007A8068 /* 椭圆 3.png */; };
+		049A51752248B50F007A8068 /* 椭圆 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A516F2248B50F007A8068 /* 椭圆 3@2x.png */; };
+		049A51762248B50F007A8068 /* 蓝点.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A51702248B50F007A8068 /* 蓝点.png */; };
+		049A51772248B50F007A8068 /* 蓝点@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A51712248B50F007A8068 /* 蓝点@2x.png */; };
+		4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +85,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		044DF2402244C2C700301243 /* WeChat_login@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WeChat_login@3x.png"; sourceTree = "<group>"; };
+		044DF2412244C2C700301243 /* JIANMIAN_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_logo@2x.png"; sourceTree = "<group>"; };
+		044DF2422244C2C700301243 /* JIANMIAN_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_logo@3x.png"; sourceTree = "<group>"; };
+		044DF2432244C2C700301243 /* WeChat_login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WeChat_login@2x.png"; sourceTree = "<group>"; };
+		044DF2442244C2C700301243 /* Webkey@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Webkey@2x.png"; sourceTree = "<group>"; };
+		044DF2452244C2C700301243 /* Webkey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Webkey@3x.png"; sourceTree = "<group>"; };
+		044DF2462244C2C700301243 /* Webkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Webkey.png; sourceTree = "<group>"; };
+		044DF2472244C2C700301243 /* JIANMIAN_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JIANMIAN_logo.png; sourceTree = "<group>"; };
+		044DF2482244C2C700301243 /* WeChat_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeChat_login.png; sourceTree = "<group>"; };
+		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		044DF25C2244D6F100301243 /* LoginPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPhoneViewController.h; sourceTree = "<group>"; };
+		044DF25D2244D6F100301243 /* LoginPhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginPhoneViewController.m; sourceTree = "<group>"; };
+		044DF25E2244D6F100301243 /* LoginPhoneViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginPhoneViewController.xib; sourceTree = "<group>"; };
+		044DF2612244D93D00301243 /* verification_code@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "verification_code@2x.png"; sourceTree = "<group>"; };
+		044DF2622244D93D00301243 /* verification_code@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "verification_code@3x.png"; sourceTree = "<group>"; };
+		044DF2632244D93E00301243 /* verification_code.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verification_code.png; sourceTree = "<group>"; };
+		044DF2672244D9CC00301243 /* phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@2x.png"; sourceTree = "<group>"; };
+		044DF2682244D9CC00301243 /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
+		044DF2692244D9CC00301243 /* phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@3x.png"; sourceTree = "<group>"; };
+		047270802248D078005FD1FC /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		047270812248D078005FD1FC /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		0472708A2248F1D0005FD1FC /* DimensMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DimensMacros.h; sourceTree = "<group>"; };
+		0472708B2248F241005FD1FC /* APIStringMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIStringMacros.h; sourceTree = "<group>"; };
+		047CC9D62249BF7B00FE935B /* PositionDesiredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDesiredViewController.h; sourceTree = "<group>"; };
+		047CC9D72249BF7B00FE935B /* PositionDesiredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDesiredViewController.m; sourceTree = "<group>"; };
+		047CC9DD2249C3BE00FE935B /* WSDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDropMenuView.m; sourceTree = "<group>"; };
+		047CC9DE2249C3BE00FE935B /* WSDropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDropMenuView.h; sourceTree = "<group>"; };
 		048FEE2D2244853C001160C8 /* JMian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JMian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048FEE302244853C001160C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		048FEE312244853C001160C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -51,6 +130,39 @@
 		048FEE502244853C001160C8 /* JMianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JMianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		048FEE542244853C001160C8 /* JMianUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMianUITests.m; sourceTree = "<group>"; };
 		048FEE562244853C001160C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0494690F2244EDC900A5BEB7 /* 组 18@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组 18@2x.png"; sourceTree = "<group>"; };
+		049469102244EDC900A5BEB7 /* 组 18@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组 18@3x.png"; sourceTree = "<group>"; };
+		049469112244EDC900A5BEB7 /* 组 18(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组 18(1).png"; sourceTree = "<group>"; };
+		049469122244EDC900A5BEB7 /* 组 18.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组 18.png"; sourceTree = "<group>"; };
+		049469132244EDC900A5BEB7 /* 组 18@3x(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组 18@3x(1).png"; sourceTree = "<group>"; };
+		049469142244EDC900A5BEB7 /* 组 18@2x(1).png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组 18@2x(1).png"; sourceTree = "<group>"; };
+		0494691B2244EEDA00A5BEB7 /* ChooseIdentity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseIdentity.h; sourceTree = "<group>"; };
+		0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseIdentity.m; sourceTree = "<group>"; };
+		0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseIdentity.xib; sourceTree = "<group>"; };
+		049A5133224875D5007A8068 /* icon_return@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return@3x.png"; sourceTree = "<group>"; };
+		049A5134224875D5007A8068 /* icon_return@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return@2x.png"; sourceTree = "<group>"; };
+		049A5135224875D5007A8068 /* icon_return @2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return @2x.png"; sourceTree = "<group>"; };
+		049A5136224875D5007A8068 /* icon_return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_return.png; sourceTree = "<group>"; };
+		049A5137224875D5007A8068 /* icon_return @3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return @3x.png"; sourceTree = "<group>"; };
+		049A5138224875D5007A8068 /* camera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@2x.png"; sourceTree = "<group>"; };
+		049A5139224875D5007A8068 /* icon_return .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return .png"; sourceTree = "<group>"; };
+		049A513A224875D5007A8068 /* camera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera@3x.png"; sourceTree = "<group>"; };
+		049A513B224875D5007A8068 /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		049A51562248972F007A8068 /* BasicInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicInformationViewController.h; sourceTree = "<group>"; };
+		049A51572248972F007A8068 /* BasicInformationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BasicInformationViewController.m; sourceTree = "<group>"; };
+		049A51582248972F007A8068 /* BasicInformationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicInformationViewController.xib; sourceTree = "<group>"; };
+		049A515B2248B29C007A8068 /* JobIntensionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobIntensionViewController.h; sourceTree = "<group>"; };
+		049A515C2248B29C007A8068 /* JobIntensionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobIntensionViewController.m; sourceTree = "<group>"; };
+		049A515D2248B29C007A8068 /* JobIntensionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobIntensionViewController.xib; sourceTree = "<group>"; };
+		049A516C2248B50E007A8068 /* 蓝点@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝点@3x.png"; sourceTree = "<group>"; };
+		049A516D2248B50E007A8068 /* 椭圆 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@3x.png"; sourceTree = "<group>"; };
+		049A516E2248B50F007A8068 /* 椭圆 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3.png"; sourceTree = "<group>"; };
+		049A516F2248B50F007A8068 /* 椭圆 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@2x.png"; sourceTree = "<group>"; };
+		049A51702248B50F007A8068 /* 蓝点.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝点.png"; sourceTree = "<group>"; };
+		049A51712248B50F007A8068 /* 蓝点@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝点@2x.png"; sourceTree = "<group>"; };
+		1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JMian.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2010347C1D130A624B877C02 /* Pods-JMian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.debug.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.debug.xcconfig"; sourceTree = "<group>"; };
+		8A25EDF96D52B70C3945EBB7 /* Pods-JMian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.release.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +170,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +191,150 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044DF23C2244C06900301243 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				044DF2572244D59C00301243 /* LoginViewController.h */,
+				044DF2582244D59C00301243 /* LoginViewController.m */,
+				044DF2592244D59C00301243 /* LoginViewController.xib */,
+				044DF25C2244D6F100301243 /* LoginPhoneViewController.h */,
+				044DF25D2244D6F100301243 /* LoginPhoneViewController.m */,
+				044DF25E2244D6F100301243 /* LoginPhoneViewController.xib */,
+				0494691B2244EEDA00A5BEB7 /* ChooseIdentity.h */,
+				0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */,
+				0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */,
+				049A51562248972F007A8068 /* BasicInformationViewController.h */,
+				049A51572248972F007A8068 /* BasicInformationViewController.m */,
+				049A51582248972F007A8068 /* BasicInformationViewController.xib */,
+				049A515B2248B29C007A8068 /* JobIntensionViewController.h */,
+				049A515C2248B29C007A8068 /* JobIntensionViewController.m */,
+				049A515D2248B29C007A8068 /* JobIntensionViewController.xib */,
+				047CC9D42249BF7B00FE935B /* PositionDesired */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		044DF23F2244C2C700301243 /* 01WeChatLogin_slices */ = {
+			isa = PBXGroup;
+			children = (
+				044DF2682244D9CC00301243 /* phone.png */,
+				044DF2672244D9CC00301243 /* phone@2x.png */,
+				044DF2692244D9CC00301243 /* phone@3x.png */,
+				044DF2632244D93E00301243 /* verification_code.png */,
+				044DF2612244D93D00301243 /* verification_code@2x.png */,
+				044DF2622244D93D00301243 /* verification_code@3x.png */,
+				044DF2402244C2C700301243 /* WeChat_login@3x.png */,
+				044DF2412244C2C700301243 /* JIANMIAN_logo@2x.png */,
+				044DF2422244C2C700301243 /* JIANMIAN_logo@3x.png */,
+				044DF2432244C2C700301243 /* WeChat_login@2x.png */,
+				044DF2442244C2C700301243 /* Webkey@2x.png */,
+				044DF2452244C2C700301243 /* Webkey@3x.png */,
+				044DF2462244C2C700301243 /* Webkey.png */,
+				044DF2472244C2C700301243 /* JIANMIAN_logo.png */,
+				044DF2482244C2C700301243 /* WeChat_login.png */,
+			);
+			path = 01WeChatLogin_slices;
+			sourceTree = "<group>";
+		};
+		0462C71B224492F3003B6639 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				047270802248D078005FD1FC /* BaseViewController.h */,
+				047270812248D078005FD1FC /* BaseViewController.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		0462C71C2244930A003B6639 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		0462C71D2244931C003B6639 /* Define */ = {
+			isa = PBXGroup;
+			children = (
+				0472708A2248F1D0005FD1FC /* DimensMacros.h */,
+				0472708B2248F241005FD1FC /* APIStringMacros.h */,
+			);
+			path = Define;
+			sourceTree = "<group>";
+		};
+		0462C71E2244932D003B6639 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		0462C71F2244934C003B6639 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				044DF23C2244C06900301243 /* Login */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		0462C7202244935D003B6639 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				049A5132224875D5007A8068 /* 04BaseInformation_slices */,
+				0494690E2244EDC900A5BEB7 /* 03 ChooseIdentity_slices */,
+				044DF23F2244C2C700301243 /* 01WeChatLogin_slices */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		0462C7212244936F003B6639 /* ThridParty */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ThridParty;
+			sourceTree = "<group>";
+		};
+		0462C7222244937D003B6639 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		047CC9D42249BF7B00FE935B /* PositionDesired */ = {
+			isa = PBXGroup;
+			children = (
+				047CC9D52249BF7B00FE935B /* Controller */,
+				047CC9D82249BF7B00FE935B /* View */,
+				047CC9DB2249BFF700FE935B /* Model */,
+			);
+			path = PositionDesired;
+			sourceTree = "<group>";
+		};
+		047CC9D52249BF7B00FE935B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				047CC9D62249BF7B00FE935B /* PositionDesiredViewController.h */,
+				047CC9D72249BF7B00FE935B /* PositionDesiredViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		047CC9D82249BF7B00FE935B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				047CC9DE2249C3BE00FE935B /* WSDropMenuView.h */,
+				047CC9DD2249C3BE00FE935B /* WSDropMenuView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		047CC9DB2249BFF700FE935B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		048FEE242244853B001160C8 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +342,8 @@
 				048FEE482244853C001160C8 /* JMianTests */,
 				048FEE532244853C001160C8 /* JMianUITests */,
 				048FEE2E2244853C001160C8 /* Products */,
+				FC374E4AA2E1DABFC6BF04C9 /* Pods */,
+				47579204418359BAEBA6F740 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -101,6 +360,14 @@
 		048FEE2F2244853C001160C8 /* JMian */ = {
 			isa = PBXGroup;
 			children = (
+				0462C71C2244930A003B6639 /* Category */,
+				0462C71B224492F3003B6639 /* Base */,
+				0462C71D2244931C003B6639 /* Define */,
+				0462C71E2244932D003B6639 /* Manager */,
+				0462C71F2244934C003B6639 /* Modules */,
+				0462C7202244935D003B6639 /* Resource */,
+				0462C7212244936F003B6639 /* ThridParty */,
+				0462C7222244937D003B6639 /* Utilities */,
 				048FEE302244853C001160C8 /* AppDelegate.h */,
 				048FEE312244853C001160C8 /* AppDelegate.m */,
 				048FEE332244853C001160C8 /* ViewController.h */,
@@ -132,6 +399,58 @@
 			path = JMianUITests;
 			sourceTree = "<group>";
 		};
+		0494690E2244EDC900A5BEB7 /* 03 ChooseIdentity_slices */ = {
+			isa = PBXGroup;
+			children = (
+				0494690F2244EDC900A5BEB7 /* 组 18@2x.png */,
+				049469102244EDC900A5BEB7 /* 组 18@3x.png */,
+				049469112244EDC900A5BEB7 /* 组 18(1).png */,
+				049469122244EDC900A5BEB7 /* 组 18.png */,
+				049469132244EDC900A5BEB7 /* 组 18@3x(1).png */,
+				049469142244EDC900A5BEB7 /* 组 18@2x(1).png */,
+			);
+			path = "03 ChooseIdentity_slices";
+			sourceTree = "<group>";
+		};
+		049A5132224875D5007A8068 /* 04BaseInformation_slices */ = {
+			isa = PBXGroup;
+			children = (
+				049A516E2248B50F007A8068 /* 椭圆 3.png */,
+				049A516F2248B50F007A8068 /* 椭圆 3@2x.png */,
+				049A516D2248B50E007A8068 /* 椭圆 3@3x.png */,
+				049A51702248B50F007A8068 /* 蓝点.png */,
+				049A51712248B50F007A8068 /* 蓝点@2x.png */,
+				049A516C2248B50E007A8068 /* 蓝点@3x.png */,
+				049A5133224875D5007A8068 /* icon_return@3x.png */,
+				049A5134224875D5007A8068 /* icon_return@2x.png */,
+				049A5135224875D5007A8068 /* icon_return @2x.png */,
+				049A5136224875D5007A8068 /* icon_return.png */,
+				049A5137224875D5007A8068 /* icon_return @3x.png */,
+				049A5138224875D5007A8068 /* camera@2x.png */,
+				049A5139224875D5007A8068 /* icon_return .png */,
+				049A513A224875D5007A8068 /* camera@3x.png */,
+				049A513B224875D5007A8068 /* camera.png */,
+			);
+			path = 04BaseInformation_slices;
+			sourceTree = "<group>";
+		};
+		47579204418359BAEBA6F740 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FC374E4AA2E1DABFC6BF04C9 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2010347C1D130A624B877C02 /* Pods-JMian.debug.xcconfig */,
+				8A25EDF96D52B70C3945EBB7 /* Pods-JMian.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -139,6 +458,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 048FEE592244853C001160C8 /* Build configuration list for PBXNativeTarget "JMian" */;
 			buildPhases = (
+				7B7824ACBD1F1FF3F1486D0B /* [CP] Check Pods Manifest.lock */,
 				048FEE292244853C001160C8 /* Sources */,
 				048FEE2A2244853C001160C8 /* Frameworks */,
 				048FEE2B2244853C001160C8 /* Resources */,
@@ -235,9 +555,50 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				049A51752248B50F007A8068 /* 椭圆 3@2x.png in Resources */,
+				049469182244EDC900A5BEB7 /* 组 18.png in Resources */,
 				048FEE3D2244853C001160C8 /* LaunchScreen.storyboard in Resources */,
+				049A515F2248B29C007A8068 /* JobIntensionViewController.xib in Resources */,
+				044DF2492244C2C700301243 /* WeChat_login@3x.png in Resources */,
+				044DF24E2244C2C700301243 /* Webkey@3x.png in Resources */,
+				049A51742248B50F007A8068 /* 椭圆 3.png in Resources */,
+				044DF2652244D93E00301243 /* verification_code@3x.png in Resources */,
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
+				044DF26A2244D9CC00301243 /* phone@2x.png in Resources */,
+				044DF24D2244C2C700301243 /* Webkey@2x.png in Resources */,
+				049469192244EDC900A5BEB7 /* 组 18@3x(1).png in Resources */,
+				049469152244EDC900A5BEB7 /* 组 18@2x.png in Resources */,
+				049A5140224875D5007A8068 /* icon_return @3x.png in Resources */,
+				049A513F224875D5007A8068 /* icon_return.png in Resources */,
+				044DF24F2244C2C700301243 /* Webkey.png in Resources */,
+				049A5144224875D5007A8068 /* camera.png in Resources */,
+				049A51772248B50F007A8068 /* 蓝点@2x.png in Resources */,
+				049A51732248B50F007A8068 /* 椭圆 3@3x.png in Resources */,
+				044DF2512244C2C700301243 /* WeChat_login.png in Resources */,
+				044DF24C2244C2C700301243 /* WeChat_login@2x.png in Resources */,
+				049A513C224875D5007A8068 /* icon_return@3x.png in Resources */,
+				044DF2662244D93E00301243 /* verification_code.png in Resources */,
+				0494691A2244EDC900A5BEB7 /* 组 18@2x(1).png in Resources */,
+				049A51762248B50F007A8068 /* 蓝点.png in Resources */,
+				0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */,
+				044DF2642244D93E00301243 /* verification_code@2x.png in Resources */,
+				049A5141224875D5007A8068 /* camera@2x.png in Resources */,
+				044DF26C2244D9CC00301243 /* phone@3x.png in Resources */,
+				049A5142224875D5007A8068 /* icon_return .png in Resources */,
+				044DF24A2244C2C700301243 /* JIANMIAN_logo@2x.png in Resources */,
+				044DF26B2244D9CC00301243 /* phone.png in Resources */,
+				044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */,
+				044DF24B2244C2C700301243 /* JIANMIAN_logo@3x.png in Resources */,
 				048FEE382244853C001160C8 /* Main.storyboard in Resources */,
+				044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */,
+				049A51722248B50F007A8068 /* 蓝点@3x.png in Resources */,
+				049469162244EDC900A5BEB7 /* 组 18@3x.png in Resources */,
+				049A513D224875D5007A8068 /* icon_return@2x.png in Resources */,
+				049469172244EDC900A5BEB7 /* 组 18(1).png in Resources */,
+				049A513E224875D5007A8068 /* icon_return @2x.png in Resources */,
+				049A5143224875D5007A8068 /* camera@3x.png in Resources */,
+				044DF2502244C2C700301243 /* JIANMIAN_logo.png in Resources */,
+				049A515A2248972F007A8068 /* BasicInformationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,14 +618,47 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7B7824ACBD1F1FF3F1486D0B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JMian-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		048FEE292244853C001160C8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
+				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
+				047CC9D92249BF7C00FE935B /* PositionDesiredViewController.m in Sources */,
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
+				047CC9DF2249C3BE00FE935B /* WSDropMenuView.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
+				0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */,
 				048FEE322244853C001160C8 /* AppDelegate.m in Sources */,
+				049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */,
+				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
+				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +827,7 @@
 		};
 		048FEE5A2244853C001160C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2010347C1D130A624B877C02 /* Pods-JMian.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -441,6 +836,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = "-.JMian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -449,6 +845,7 @@
 		};
 		048FEE5B2244853C001160C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8A25EDF96D52B70C3945EBB7 /* Pods-JMian.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -457,6 +854,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "-.JMian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

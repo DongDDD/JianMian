@@ -7,6 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "ChooseIdentity.h"    //test
+#import "PositionDesiredViewController.h" //test
+
+
+
+
 
 @interface AppDelegate ()
 
@@ -17,6 +24,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    PositionDesiredViewController *login = [[PositionDesiredViewController alloc] init];
+    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:login];
+   
+    self.window.rootViewController = naVC;
+    
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

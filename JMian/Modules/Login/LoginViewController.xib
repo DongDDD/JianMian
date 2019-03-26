@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAD-co-Nvw">
+                    <rect key="frame" x="30" y="323" width="315" height="50"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="315" id="YIL-is-GF1"/>
+                        <constraint firstAttribute="height" constant="50" id="cGG-VQ-aBT"/>
+                    </constraints>
+                    <state key="normal" title=" 微信登录" image="WeChat_login.png">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5O-Ib-NaR">
+                    <rect key="frame" x="30" y="398" width="315" height="50"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="手机登陆" image="Webkey.png">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="phoneLogin:" destination="-1" eventType="touchUpInside" id="UGf-Pf-Bh1"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JIANMIAN_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="2zX-mD-Rgr">
+                    <rect key="frame" x="107" y="134" width="161" height="111"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="111" id="RfB-xk-Prd"/>
+                        <constraint firstAttribute="width" constant="161" id="aOx-xt-cQ0"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="L5O-Ib-NaR" firstAttribute="width" secondItem="uAD-co-Nvw" secondAttribute="width" id="DnK-OS-KXc"/>
+                <constraint firstItem="L5O-Ib-NaR" firstAttribute="height" secondItem="uAD-co-Nvw" secondAttribute="height" id="LFa-r2-AId"/>
+                <constraint firstItem="uAD-co-Nvw" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="303" id="PiP-LH-aM5"/>
+                <constraint firstItem="2zX-mD-Rgr" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="XBW-yK-cxx"/>
+                <constraint firstItem="2zX-mD-Rgr" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="114" id="bkG-F1-Qw3"/>
+                <constraint firstItem="L5O-Ib-NaR" firstAttribute="top" secondItem="uAD-co-Nvw" secondAttribute="bottom" constant="25" id="eu4-hx-yxl"/>
+                <constraint firstItem="uAD-co-Nvw" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="ezF-V4-bY0"/>
+                <constraint firstItem="L5O-Ib-NaR" firstAttribute="trailing" secondItem="uAD-co-Nvw" secondAttribute="trailing" id="fSw-wD-yDA"/>
+                <constraint firstItem="L5O-Ib-NaR" firstAttribute="leading" secondItem="uAD-co-Nvw" secondAttribute="leading" id="y3S-YY-15k"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="JIANMIAN_logo.png" width="161" height="111"/>
+        <image name="WeChat_login.png" width="20" height="17"/>
+        <image name="Webkey.png" width="20" height="22"/>
+    </resources>
+</document>
