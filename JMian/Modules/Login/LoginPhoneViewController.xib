@@ -37,7 +37,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verification_code.png" translatesAutoresizingMaskIntoConstraints="NO" id="E9e-fs-icf">
                     <rect key="frame" x="48" y="278" width="20" height="27"/>
                 </imageView>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5y9-0G-IKN">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5y9-0G-IKN">
                     <rect key="frame" x="84" y="218" width="212" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="QDE-hJ-Gcv"/>

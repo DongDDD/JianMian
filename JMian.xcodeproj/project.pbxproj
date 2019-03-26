@@ -64,6 +64,12 @@
 		049A51752248B50F007A8068 /* 椭圆 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A516F2248B50F007A8068 /* 椭圆 3@2x.png */; };
 		049A51762248B50F007A8068 /* 蓝点.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A51702248B50F007A8068 /* 蓝点.png */; };
 		049A51772248B50F007A8068 /* 蓝点@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A51712248B50F007A8068 /* 蓝点@2x.png */; };
+		04B10D76224A396E0051892D /* UITextField+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B10D75224A396E0051892D /* UITextField+Extension.m */; };
+		04B10D7A224A3E4C0051892D /* 圆角矩形 5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B10D77224A3E4B0051892D /* 圆角矩形 5@3x.png */; };
+		04B10D7B224A3E4C0051892D /* 圆角矩形 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B10D78224A3E4B0051892D /* 圆角矩形 5.png */; };
+		04B10D7C224A3E4C0051892D /* 圆角矩形 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B10D79224A3E4B0051892D /* 圆角矩形 5@2x.png */; };
+		04B10D80224A46940051892D /* WorkExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B10D7E224A46940051892D /* WorkExperienceViewController.m */; };
+		04B10D81224A46940051892D /* WorkExperienceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B10D7F224A46940051892D /* WorkExperienceViewController.xib */; };
 		4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +166,14 @@
 		049A516F2248B50F007A8068 /* 椭圆 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@2x.png"; sourceTree = "<group>"; };
 		049A51702248B50F007A8068 /* 蓝点.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝点.png"; sourceTree = "<group>"; };
 		049A51712248B50F007A8068 /* 蓝点@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝点@2x.png"; sourceTree = "<group>"; };
+		04B10D74224A396E0051892D /* UITextField+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extension.h"; sourceTree = "<group>"; };
+		04B10D75224A396E0051892D /* UITextField+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extension.m"; sourceTree = "<group>"; };
+		04B10D77224A3E4B0051892D /* 圆角矩形 5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5@3x.png"; sourceTree = "<group>"; };
+		04B10D78224A3E4B0051892D /* 圆角矩形 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5.png"; sourceTree = "<group>"; };
+		04B10D79224A3E4B0051892D /* 圆角矩形 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5@2x.png"; sourceTree = "<group>"; };
+		04B10D7D224A46940051892D /* WorkExperienceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkExperienceViewController.h; sourceTree = "<group>"; };
+		04B10D7E224A46940051892D /* WorkExperienceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkExperienceViewController.m; sourceTree = "<group>"; };
+		04B10D7F224A46940051892D /* WorkExperienceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkExperienceViewController.xib; sourceTree = "<group>"; };
 		1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JMian.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2010347C1D130A624B877C02 /* Pods-JMian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.debug.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.debug.xcconfig"; sourceTree = "<group>"; };
 		8A25EDF96D52B70C3945EBB7 /* Pods-JMian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.release.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.release.xcconfig"; sourceTree = "<group>"; };
@@ -209,6 +223,9 @@
 				049A515B2248B29C007A8068 /* JobIntensionViewController.h */,
 				049A515C2248B29C007A8068 /* JobIntensionViewController.m */,
 				049A515D2248B29C007A8068 /* JobIntensionViewController.xib */,
+				04B10D7D224A46940051892D /* WorkExperienceViewController.h */,
+				04B10D7E224A46940051892D /* WorkExperienceViewController.m */,
+				04B10D7F224A46940051892D /* WorkExperienceViewController.xib */,
 				047CC9D42249BF7B00FE935B /* PositionDesired */,
 			);
 			path = Login;
@@ -248,6 +265,8 @@
 		0462C71C2244930A003B6639 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				04B10D74224A396E0051892D /* UITextField+Extension.h */,
+				04B10D75224A396E0051892D /* UITextField+Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -415,6 +434,9 @@
 		049A5132224875D5007A8068 /* 04BaseInformation_slices */ = {
 			isa = PBXGroup;
 			children = (
+				04B10D78224A3E4B0051892D /* 圆角矩形 5.png */,
+				04B10D79224A3E4B0051892D /* 圆角矩形 5@2x.png */,
+				04B10D77224A3E4B0051892D /* 圆角矩形 5@3x.png */,
 				049A516E2248B50F007A8068 /* 椭圆 3.png */,
 				049A516F2248B50F007A8068 /* 椭圆 3@2x.png */,
 				049A516D2248B50E007A8068 /* 椭圆 3@3x.png */,
@@ -555,8 +577,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B10D7C224A3E4C0051892D /* 圆角矩形 5@2x.png in Resources */,
 				049A51752248B50F007A8068 /* 椭圆 3@2x.png in Resources */,
 				049469182244EDC900A5BEB7 /* 组 18.png in Resources */,
+				04B10D7A224A3E4C0051892D /* 圆角矩形 5@3x.png in Resources */,
 				048FEE3D2244853C001160C8 /* LaunchScreen.storyboard in Resources */,
 				049A515F2248B29C007A8068 /* JobIntensionViewController.xib in Resources */,
 				044DF2492244C2C700301243 /* WeChat_login@3x.png in Resources */,
@@ -575,6 +599,7 @@
 				049A51772248B50F007A8068 /* 蓝点@2x.png in Resources */,
 				049A51732248B50F007A8068 /* 椭圆 3@3x.png in Resources */,
 				044DF2512244C2C700301243 /* WeChat_login.png in Resources */,
+				04B10D81224A46940051892D /* WorkExperienceViewController.xib in Resources */,
 				044DF24C2244C2C700301243 /* WeChat_login@2x.png in Resources */,
 				049A513C224875D5007A8068 /* icon_return@3x.png in Resources */,
 				044DF2662244D93E00301243 /* verification_code.png in Resources */,
@@ -593,6 +618,7 @@
 				044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */,
 				049A51722248B50F007A8068 /* 蓝点@3x.png in Resources */,
 				049469162244EDC900A5BEB7 /* 组 18@3x.png in Resources */,
+				04B10D7B224A3E4C0051892D /* 圆角矩形 5.png in Resources */,
 				049A513D224875D5007A8068 /* icon_return@2x.png in Resources */,
 				049469172244EDC900A5BEB7 /* 组 18(1).png in Resources */,
 				049A513E224875D5007A8068 /* icon_return @2x.png in Resources */,
@@ -649,10 +675,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
+				04B10D80224A46940051892D /* WorkExperienceViewController.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
 				047CC9D92249BF7C00FE935B /* PositionDesiredViewController.m in Sources */,
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
 				047CC9DF2249C3BE00FE935B /* WSDropMenuView.m in Sources */,
+				04B10D76224A396E0051892D /* UITextField+Extension.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
 				0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */,
 				048FEE322244853C001160C8 /* AppDelegate.m in Sources */,

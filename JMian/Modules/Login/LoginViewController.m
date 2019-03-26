@@ -8,6 +8,8 @@
 
 #import "LoginViewController.h"
 #import "LoginPhoneViewController.h"
+#import "PositionDesiredViewController.h"
+
 
 
 @interface LoginViewController ()
@@ -25,6 +27,13 @@
 //    [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"蓝点"]];
 //    [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"蓝点"]];
  
+}
+- (IBAction)testAction:(id)sender {
+    PositionDesiredViewController *postionD = [[PositionDesiredViewController alloc]init];
+    
+    [self.navigationController pushViewController:postionD animated:YES];
+    
+    
 }
 
 - (IBAction)phoneLogin:(id)sender {

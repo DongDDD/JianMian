@@ -151,7 +151,7 @@ static NSString *cellIdent = @"cellIdent";
         _leftTableView_1.dataSource = self;
         [_leftTableView_1 registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdent];
         _leftTableView_1.frame = CGRectMake( Main_Screen_Width/3.0, 0 , Main_Screen_Width/3.0, 0);
-        _leftTableView_1.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
+        _leftTableView_1.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
         _leftTableView_1.tableFooterView = [[UIView alloc]init];
         
         
@@ -172,7 +172,7 @@ static NSString *cellIdent = @"cellIdent";
         _leftTableView_2.dataSource = self;
         [_leftTableView_2 registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdent];
         _leftTableView_2.frame = CGRectMake( Main_Screen_Width/3.0 * 2, 0 , Main_Screen_Width/3.0, 0);
-        _leftTableView_2.backgroundColor = [UIColor colorWithRed:243/255.0 green:243/255.0 blue:243/255.0 alpha:1.0];
+        _leftTableView_2.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
         _leftTableView_2.tableFooterView = [[UIView alloc]init];
         
     }
@@ -185,9 +185,9 @@ static NSString *cellIdent = @"cellIdent";
 
 - (void)_showLeftTableViews{
     
-    self.leftTableView.frame = CGRectMake(self.leftTableView.frame.origin.x, self.leftTableView.frame.origin.y, self.leftTableView.frame.size.width, KTableViewMaxHeight);
-    self.leftTableView_1.frame = CGRectMake(self.leftTableView_1.frame.origin.x, self.leftTableView_1.frame.origin.y, self.leftTableView_1.frame.size.width, KTableViewMaxHeight);
-    self.leftTableView_2.frame = CGRectMake(self.leftTableView_2.frame.origin.x, self.leftTableView_2.frame.origin.y, self.leftTableView_2.frame.size.width, KTableViewMaxHeight);
+    self.leftTableView.frame = CGRectMake(self.leftTableView.frame.origin.x, self.leftTableView.frame.origin.y, self.leftTableView.frame.size.width, Main_Screen_Height-116);
+    self.leftTableView_1.frame = CGRectMake(self.leftTableView_1.frame.origin.x, self.leftTableView_1.frame.origin.y, self.leftTableView_1.frame.size.width, Main_Screen_Height-111);
+    self.leftTableView_2.frame = CGRectMake(self.leftTableView_2.frame.origin.x, self.leftTableView_2.frame.origin.y, self.leftTableView_2.frame.size.width, Main_Screen_Height-111);
    
 }
 
@@ -200,9 +200,7 @@ static NSString *cellIdent = @"cellIdent";
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(dropMenuView:numberWithIndexPath:)]) {
         
         NSInteger count =  [self.dataSource dropMenuView:self numberWithIndexPath:twIndexPath];
-//        if (twIndexPath.column == 1) {
-//            _rightHeight = count * 44.0;
-//        }
+
         return count;
     }else{
         return 0;
@@ -216,11 +214,11 @@ static NSString *cellIdent = @"cellIdent";
     WSIndexPath *twIndexPath = [self _getTwIndexPathForCellWithTableView:tableView indexPath:indexPath];
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent];
     cell.selectedBackgroundView = [[UIView alloc] init];
-    cell.selectedBackgroundView.backgroundColor =  [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1.0];
-    cell.textLabel.textColor = [UIColor colorWithWhite:0.004 alpha:1.000];
-    cell.textLabel.font = [UIFont systemFontOfSize:16];
+    cell.selectedBackgroundView.backgroundColor =  [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
+    cell.textLabel.textColor = [UIColor colorWithRed:101/255.0 green:101/255.0 blue:101/255.0 alpha:1.0];
+    cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.backgroundColor = [UIColor clearColor];
-    cell.textLabel.highlightedTextColor = [UIColor blackColor];
+    cell.textLabel.highlightedTextColor = [UIColor colorWithRed:36/255.0 green:191/255.0 blue:255/255.0 alpha:1.0];
     //    [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1.0];
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(dropMenuView:titleWithIndexPath:)]) {
         

@@ -32,6 +32,7 @@
     self.window.rootViewController = naVC;
     
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
