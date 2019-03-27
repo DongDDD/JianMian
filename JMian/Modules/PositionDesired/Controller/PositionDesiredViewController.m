@@ -8,15 +8,8 @@
 
 #import "PositionDesiredViewController.h"
 #import "WSDropMenuView.h"
-#import "UITextField+Extension.h"
-
 
 @interface PositionDesiredViewController ()<WSDropMenuViewDataSource,WSDropMenuViewDelegate>
-
-@property (nonatomic,strong) NSArray *firstNSArrays;
-
-
-
 
 @end
 
@@ -25,18 +18,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.firstNSArrays = @[@"产品",@"设计",@"汽车",@"运营/客服",@"实习储备",@"旅游",@"教育培训",@"酒店/餐饮 /零售",@"市场会展",@"生产制造",@"行政人事",@"医疗健康",@"财务法务",@"IT科技",@"销售",@"采购贸易",@"文化传媒",@"物流仓储",@"房地产物业",@"房地产物业",@"金融",@"咨询管理 /翻译"];
-    
-    UITextField * searhbar = [UITextField searchBarWithTextField];
-    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
-    style.alignment = NSTextAlignmentCenter;
-    
-    
- 
-    
 
-    searhbar.frame = CGRectMake(40,64,335,33);
-    [self.view addSubview:searhbar];
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
 
@@ -55,19 +38,22 @@
     
     if (indexPath.column == 0 && indexPath.row == WSNoFound) {
         
-        return self.firstNSArrays.count;   //  一级
+        return 20;
     }
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item == WSNoFound) {
         
-        return 5;                        //二级
+        return 5;
     }
     
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item != WSNoFound && indexPath.rank == WSNoFound) {
         
-        return 20;                   //三级
+        return 20;
     }
     
-   
+    if (indexPath.column == 1) {
+        
+        return 3;
+    }
     
     return 0;
 }
@@ -79,7 +65,7 @@
     //左边 第一级
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item == WSNoFound) {
         
-        return self.firstNSArrays[indexPath.row];  //一级
+        return [NSString stringWithFormat:@"one one %ld",indexPath.row];
     }
     
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item != WSNoFound && indexPath.rank == WSNoFound) {
