@@ -28,7 +28,6 @@
 		044DF26C2244D9CC00301243 /* phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2692244D9CC00301243 /* phone@3x.png */; };
 		047270822248D078005FD1FC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047270812248D078005FD1FC /* BaseViewController.m */; };
 		047CC9D92249BF7C00FE935B /* PositionDesiredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047CC9D72249BF7B00FE935B /* PositionDesiredViewController.m */; };
-		047CC9DF2249C3BE00FE935B /* WSDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047CC9DD2249C3BE00FE935B /* WSDropMenuView.m */; };
 		048FEE322244853C001160C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE312244853C001160C8 /* AppDelegate.m */; };
 		048FEE352244853C001160C8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE342244853C001160C8 /* ViewController.m */; };
 		048FEE382244853C001160C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048FEE362244853C001160C8 /* Main.storyboard */; };
@@ -64,12 +63,19 @@
 		049A51752248B50F007A8068 /* 椭圆 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A516F2248B50F007A8068 /* 椭圆 3@2x.png */; };
 		049A51762248B50F007A8068 /* 蓝点.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A51702248B50F007A8068 /* 蓝点.png */; };
 		049A51772248B50F007A8068 /* 蓝点@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 049A51712248B50F007A8068 /* 蓝点@2x.png */; };
-		04B10D76224A396E0051892D /* UITextField+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B10D75224A396E0051892D /* UITextField+Extension.m */; };
 		04B10D7A224A3E4C0051892D /* 圆角矩形 5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B10D77224A3E4B0051892D /* 圆角矩形 5@3x.png */; };
 		04B10D7B224A3E4C0051892D /* 圆角矩形 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B10D78224A3E4B0051892D /* 圆角矩形 5.png */; };
 		04B10D7C224A3E4C0051892D /* 圆角矩形 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B10D79224A3E4B0051892D /* 圆角矩形 5@2x.png */; };
 		04B10D80224A46940051892D /* WorkExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B10D7E224A46940051892D /* WorkExperienceViewController.m */; };
 		04B10D81224A46940051892D /* WorkExperienceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B10D7F224A46940051892D /* WorkExperienceViewController.xib */; };
+		04DD1CEF224B10DC007CB11C /* FailedLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1CED224B10DC007CB11C /* FailedLoadingViewController.m */; };
+		04DD1CF0224B10DC007CB11C /* FailedLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1CEE224B10DC007CB11C /* FailedLoadingViewController.xib */; };
+		04DD1CF5224B1142007CB11C /* break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1CF2224B1142007CB11C /* break@2x.png */; };
+		04DD1CF6224B1142007CB11C /* break.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1CF3224B1142007CB11C /* break.png */; };
+		04DD1CF7224B1142007CB11C /* break@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1CF4224B1142007CB11C /* break@3x.png */; };
+		04DD1CFA224B1F4E007CB11C /* PositionDesiredSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1CF9224B1F4E007CB11C /* PositionDesiredSecondViewController.m */; };
+		04DD1D02224B2E65007CB11C /* WSDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1CFE224B2E65007CB11C /* WSDropMenuView.m */; };
+		04DD1D03224B2E65007CB11C /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D01224B2E65007CB11C /* SearchView.m */; };
 		4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */; };
 /* End PBXBuildFile section */
 
@@ -118,8 +124,6 @@
 		0472708B2248F241005FD1FC /* APIStringMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIStringMacros.h; sourceTree = "<group>"; };
 		047CC9D62249BF7B00FE935B /* PositionDesiredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDesiredViewController.h; sourceTree = "<group>"; };
 		047CC9D72249BF7B00FE935B /* PositionDesiredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDesiredViewController.m; sourceTree = "<group>"; };
-		047CC9DD2249C3BE00FE935B /* WSDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDropMenuView.m; sourceTree = "<group>"; };
-		047CC9DE2249C3BE00FE935B /* WSDropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDropMenuView.h; sourceTree = "<group>"; };
 		048FEE2D2244853C001160C8 /* JMian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JMian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048FEE302244853C001160C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		048FEE312244853C001160C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -166,14 +170,24 @@
 		049A516F2248B50F007A8068 /* 椭圆 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@2x.png"; sourceTree = "<group>"; };
 		049A51702248B50F007A8068 /* 蓝点.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝点.png"; sourceTree = "<group>"; };
 		049A51712248B50F007A8068 /* 蓝点@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝点@2x.png"; sourceTree = "<group>"; };
-		04B10D74224A396E0051892D /* UITextField+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITextField+Extension.h"; sourceTree = "<group>"; };
-		04B10D75224A396E0051892D /* UITextField+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Extension.m"; sourceTree = "<group>"; };
 		04B10D77224A3E4B0051892D /* 圆角矩形 5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5@3x.png"; sourceTree = "<group>"; };
 		04B10D78224A3E4B0051892D /* 圆角矩形 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5.png"; sourceTree = "<group>"; };
 		04B10D79224A3E4B0051892D /* 圆角矩形 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5@2x.png"; sourceTree = "<group>"; };
 		04B10D7D224A46940051892D /* WorkExperienceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WorkExperienceViewController.h; sourceTree = "<group>"; };
 		04B10D7E224A46940051892D /* WorkExperienceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WorkExperienceViewController.m; sourceTree = "<group>"; };
 		04B10D7F224A46940051892D /* WorkExperienceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkExperienceViewController.xib; sourceTree = "<group>"; };
+		04DD1CEC224B10DC007CB11C /* FailedLoadingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FailedLoadingViewController.h; sourceTree = "<group>"; };
+		04DD1CED224B10DC007CB11C /* FailedLoadingViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FailedLoadingViewController.m; sourceTree = "<group>"; };
+		04DD1CEE224B10DC007CB11C /* FailedLoadingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FailedLoadingViewController.xib; sourceTree = "<group>"; };
+		04DD1CF2224B1142007CB11C /* break@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "break@2x.png"; sourceTree = "<group>"; };
+		04DD1CF3224B1142007CB11C /* break.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = break.png; sourceTree = "<group>"; };
+		04DD1CF4224B1142007CB11C /* break@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "break@3x.png"; sourceTree = "<group>"; };
+		04DD1CF8224B1F4E007CB11C /* PositionDesiredSecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PositionDesiredSecondViewController.h; sourceTree = "<group>"; };
+		04DD1CF9224B1F4E007CB11C /* PositionDesiredSecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PositionDesiredSecondViewController.m; sourceTree = "<group>"; };
+		04DD1CFE224B2E65007CB11C /* WSDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDropMenuView.m; sourceTree = "<group>"; };
+		04DD1CFF224B2E65007CB11C /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
+		04DD1D00224B2E65007CB11C /* WSDropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDropMenuView.h; sourceTree = "<group>"; };
+		04DD1D01224B2E65007CB11C /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JMian.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2010347C1D130A624B877C02 /* Pods-JMian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.debug.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.debug.xcconfig"; sourceTree = "<group>"; };
 		8A25EDF96D52B70C3945EBB7 /* Pods-JMian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.release.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.release.xcconfig"; sourceTree = "<group>"; };
@@ -231,7 +245,7 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
-		044DF23F2244C2C700301243 /* 01WeChatLogin_slices */ = {
+		044DF23F2244C2C700301243 /* WeChatLogin_slices */ = {
 			isa = PBXGroup;
 			children = (
 				044DF2682244D9CC00301243 /* phone.png */,
@@ -250,7 +264,7 @@
 				044DF2472244C2C700301243 /* JIANMIAN_logo.png */,
 				044DF2482244C2C700301243 /* WeChat_login.png */,
 			);
-			path = 01WeChatLogin_slices;
+			path = WeChatLogin_slices;
 			sourceTree = "<group>";
 		};
 		0462C71B224492F3003B6639 /* Base */ = {
@@ -265,8 +279,6 @@
 		0462C71C2244930A003B6639 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				04B10D74224A396E0051892D /* UITextField+Extension.h */,
-				04B10D75224A396E0051892D /* UITextField+Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -290,17 +302,20 @@
 		0462C71F2244934C003B6639 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				04DD1CEB224B10BE007CB11C /* FailedLoading */,
 				044DF23C2244C06900301243 /* Login */,
 			);
-			path = Modules;
+			name = Modules;
+			path = ../Modules;
 			sourceTree = "<group>";
 		};
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				049A5132224875D5007A8068 /* 04BaseInformation_slices */,
-				0494690E2244EDC900A5BEB7 /* 03 ChooseIdentity_slices */,
-				044DF23F2244C2C700301243 /* 01WeChatLogin_slices */,
+				04DD1CF1224B1142007CB11C /* break_slices */,
+				049A5132224875D5007A8068 /* BaseInformation_slices */,
+				0494690E2244EDC900A5BEB7 /* ChooseIdentity_slices */,
+				044DF23F2244C2C700301243 /* WeChatLogin_slices */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -334,6 +349,8 @@
 			children = (
 				047CC9D62249BF7B00FE935B /* PositionDesiredViewController.h */,
 				047CC9D72249BF7B00FE935B /* PositionDesiredViewController.m */,
+				04DD1CF8224B1F4E007CB11C /* PositionDesiredSecondViewController.h */,
+				04DD1CF9224B1F4E007CB11C /* PositionDesiredSecondViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -341,8 +358,10 @@
 		047CC9D82249BF7B00FE935B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				047CC9DE2249C3BE00FE935B /* WSDropMenuView.h */,
-				047CC9DD2249C3BE00FE935B /* WSDropMenuView.m */,
+				04DD1CFF224B2E65007CB11C /* SearchView.h */,
+				04DD1D01224B2E65007CB11C /* SearchView.m */,
+				04DD1D00224B2E65007CB11C /* WSDropMenuView.h */,
+				04DD1CFE224B2E65007CB11C /* WSDropMenuView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -418,7 +437,7 @@
 			path = JMianUITests;
 			sourceTree = "<group>";
 		};
-		0494690E2244EDC900A5BEB7 /* 03 ChooseIdentity_slices */ = {
+		0494690E2244EDC900A5BEB7 /* ChooseIdentity_slices */ = {
 			isa = PBXGroup;
 			children = (
 				0494690F2244EDC900A5BEB7 /* 组 18@2x.png */,
@@ -428,10 +447,10 @@
 				049469132244EDC900A5BEB7 /* 组 18@3x(1).png */,
 				049469142244EDC900A5BEB7 /* 组 18@2x(1).png */,
 			);
-			path = "03 ChooseIdentity_slices";
+			path = ChooseIdentity_slices;
 			sourceTree = "<group>";
 		};
-		049A5132224875D5007A8068 /* 04BaseInformation_slices */ = {
+		049A5132224875D5007A8068 /* BaseInformation_slices */ = {
 			isa = PBXGroup;
 			children = (
 				04B10D78224A3E4B0051892D /* 圆角矩形 5.png */,
@@ -453,7 +472,27 @@
 				049A513A224875D5007A8068 /* camera@3x.png */,
 				049A513B224875D5007A8068 /* camera.png */,
 			);
-			path = 04BaseInformation_slices;
+			path = BaseInformation_slices;
+			sourceTree = "<group>";
+		};
+		04DD1CEB224B10BE007CB11C /* FailedLoading */ = {
+			isa = PBXGroup;
+			children = (
+				04DD1CEC224B10DC007CB11C /* FailedLoadingViewController.h */,
+				04DD1CED224B10DC007CB11C /* FailedLoadingViewController.m */,
+				04DD1CEE224B10DC007CB11C /* FailedLoadingViewController.xib */,
+			);
+			path = FailedLoading;
+			sourceTree = "<group>";
+		};
+		04DD1CF1224B1142007CB11C /* break_slices */ = {
+			isa = PBXGroup;
+			children = (
+				04DD1CF2224B1142007CB11C /* break@2x.png */,
+				04DD1CF3224B1142007CB11C /* break.png */,
+				04DD1CF4224B1142007CB11C /* break@3x.png */,
+			);
+			path = break_slices;
 			sourceTree = "<group>";
 		};
 		47579204418359BAEBA6F740 /* Frameworks */ = {
@@ -582,6 +621,7 @@
 				049469182244EDC900A5BEB7 /* 组 18.png in Resources */,
 				04B10D7A224A3E4C0051892D /* 圆角矩形 5@3x.png in Resources */,
 				048FEE3D2244853C001160C8 /* LaunchScreen.storyboard in Resources */,
+				04DD1CF0224B10DC007CB11C /* FailedLoadingViewController.xib in Resources */,
 				049A515F2248B29C007A8068 /* JobIntensionViewController.xib in Resources */,
 				044DF2492244C2C700301243 /* WeChat_login@3x.png in Resources */,
 				044DF24E2244C2C700301243 /* Webkey@3x.png in Resources */,
@@ -590,10 +630,12 @@
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
 				044DF26A2244D9CC00301243 /* phone@2x.png in Resources */,
 				044DF24D2244C2C700301243 /* Webkey@2x.png in Resources */,
+				04DD1CF6224B1142007CB11C /* break.png in Resources */,
 				049469192244EDC900A5BEB7 /* 组 18@3x(1).png in Resources */,
 				049469152244EDC900A5BEB7 /* 组 18@2x.png in Resources */,
 				049A5140224875D5007A8068 /* icon_return @3x.png in Resources */,
 				049A513F224875D5007A8068 /* icon_return.png in Resources */,
+				04DD1CF5224B1142007CB11C /* break@2x.png in Resources */,
 				044DF24F2244C2C700301243 /* Webkey.png in Resources */,
 				049A5144224875D5007A8068 /* camera.png in Resources */,
 				049A51772248B50F007A8068 /* 蓝点@2x.png in Resources */,
@@ -609,6 +651,7 @@
 				044DF2642244D93E00301243 /* verification_code@2x.png in Resources */,
 				049A5141224875D5007A8068 /* camera@2x.png in Resources */,
 				044DF26C2244D9CC00301243 /* phone@3x.png in Resources */,
+				04DD1CF7224B1142007CB11C /* break@3x.png in Resources */,
 				049A5142224875D5007A8068 /* icon_return .png in Resources */,
 				044DF24A2244C2C700301243 /* JIANMIAN_logo@2x.png in Resources */,
 				044DF26B2244D9CC00301243 /* phone.png in Resources */,
@@ -679,13 +722,15 @@
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
 				047CC9D92249BF7C00FE935B /* PositionDesiredViewController.m in Sources */,
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
-				047CC9DF2249C3BE00FE935B /* WSDropMenuView.m in Sources */,
-				04B10D76224A396E0051892D /* UITextField+Extension.m in Sources */,
+				04DD1CEF224B10DC007CB11C /* FailedLoadingViewController.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
+				04DD1D03224B2E65007CB11C /* SearchView.m in Sources */,
 				0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */,
 				048FEE322244853C001160C8 /* AppDelegate.m in Sources */,
+				04DD1CFA224B1F4E007CB11C /* PositionDesiredSecondViewController.m in Sources */,
 				049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */,
 				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
+				04DD1D02224B2E65007CB11C /* WSDropMenuView.m in Sources */,
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

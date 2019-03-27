@@ -1,6 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "group:JMian/../Modules"
+      name = "Modules">
+      <Group
+         location = "group:Modules/FailedLoading"
+         name = "FailedLoading">
+         <FileRef
+            location = "group:Modules/FailedLoading/FailedLoadingViewController.h">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/FailedLoading/FailedLoadingViewController.m">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/FailedLoading/FailedLoadingViewController.xib">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Modules/Login"
+         name = "Login">
+         <FileRef
+            location = "group:Modules/Login/LoginViewController.h">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/LoginViewController.m">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/LoginViewController.xib">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/LoginPhoneViewController.h">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/LoginPhoneViewController.m">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/LoginPhoneViewController.xib">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/ChooseIdentity.h">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/ChooseIdentity.m">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/ChooseIdentity.xib">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/BasicInformationViewController.h">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/BasicInformationViewController.m">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/BasicInformationViewController.xib">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/JobIntensionViewController.h">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/JobIntensionViewController.m">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/JobIntensionViewController.xib">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/WorkExperienceViewController.h">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/WorkExperienceViewController.m">
+         </FileRef>
+         <FileRef
+            location = "group:Modules/Login/WorkExperienceViewController.xib">
+         </FileRef>
+         <Group
+            location = "group:Modules/Login/PositionDesired"
+            name = "PositionDesired">
+            <Group
+               location = "group:Modules/Login/PositionDesired/Controller"
+               name = "Controller">
+               <FileRef
+                  location = "group:Modules/Login/PositionDesired/Controller/PositionDesiredViewController.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Modules/Login/PositionDesired/Controller/PositionDesiredViewController.m">
+               </FileRef>
+            </Group>
+            <Group
+               location = "group:Modules/Login/PositionDesired/View"
+               name = "View">
+               <FileRef
+                  location = "group:Modules/Login/PositionDesired/View/WSDropMenuView.h">
+               </FileRef>
+               <FileRef
+                  location = "group:Modules/Login/PositionDesired/View/WSDropMenuView.m">
+               </FileRef>
+            </Group>
+            <Group
+               location = "group:Modules/Login/PositionDesired/Model"
+               name = "Model">
+            </Group>
+         </Group>
+      </Group>
+   </Group>
    <FileRef
       location = "group:JMian.xcodeproj">
    </FileRef>

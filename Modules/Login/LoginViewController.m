@@ -8,7 +8,13 @@
 
 #import "LoginViewController.h"
 #import "LoginPhoneViewController.h"
-#import "PositionDesiredViewController.h"
+#import "PositionDesiredViewController.h" //test 后期可删除
+#import "WorkExperienceViewController.h" //test 后期可删除
+#import "FailedLoadingViewController.h"//test 后期可删除
+#import "PositionDesiredSecondViewController.h"//test 后期可删除
+
+
+
 
 
 
@@ -29,9 +35,10 @@
  
 }
 - (IBAction)testAction:(id)sender {
-    PositionDesiredViewController *postionD = [[PositionDesiredViewController alloc]init];
+    PositionDesiredSecondViewController *postionD = [[PositionDesiredSecondViewController alloc]init];
     
     [self.navigationController pushViewController:postionD animated:YES];
+    
     
     
 }
