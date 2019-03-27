@@ -67,6 +67,31 @@
 		4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */; };
 		6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */; };
 		6D558632224B4E340037C14E /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558631224B4E330037C14E /* NavigationViewController.m */; };
+		6D558635224B53BE0037C14E /* JMTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558634224B53BE0037C14E /* JMTabBarViewController.m */; };
+		6D55864B224B54D70037C14E /* Search_Home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558637224B54D70037C14E /* Search_Home@3x.png */; };
+		6D55864C224B54D70037C14E /* pitch_on_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558638224B54D70037C14E /* pitch_on_home@3x.png */; };
+		6D55864D224B54D70037C14E /* site_Home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558639224B54D70037C14E /* site_Home@2x.png */; };
+		6D55864E224B54D70037C14E /* home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D55863A224B54D70037C14E /* home@2x.png */; };
+		6D55864F224B54D70037C14E /* home_me_pitch_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D55863B224B54D70037C14E /* home_me_pitch_on@2x.png */; };
+		6D558650224B54D70037C14E /* home_me_pitch_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D55863C224B54D70037C14E /* home_me_pitch_on@3x.png */; };
+		6D558651224B54D70037C14E /* home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D55863D224B54D70037C14E /* home@3x.png */; };
+		6D558652224B54D70037C14E /* site_Home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D55863E224B54D70037C14E /* site_Home@3x.png */; };
+		6D558653224B54D70037C14E /* pitch_on_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D55863F224B54D70037C14E /* pitch_on_home@2x.png */; };
+		6D558654224B54D70037C14E /* Search_Home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558640224B54D70037C14E /* Search_Home@2x.png */; };
+		6D558655224B54D70037C14E /* home_ message_pitch_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558641224B54D70037C14E /* home_ message_pitch_on@3x.png */; };
+		6D558656224B54D70037C14E /* home_ message_pitch_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558642224B54D70037C14E /* home_ message_pitch_on@2x.png */; };
+		6D558657224B54D70037C14E /* home_me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558643224B54D70037C14E /* home_me@2x.png */; };
+		6D558658224B54D70037C14E /* jianmian_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558644224B54D70037C14E /* jianmian_home@3x.png */; };
+		6D558659224B54D70037C14E /* 组 53@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558645224B54D70037C14E /* 组 53@2x.png */; };
+		6D55865A224B54D70037C14E /* jianmian_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558646224B54D70037C14E /* jianmian_home@2x.png */; };
+		6D55865B224B54D70037C14E /* 组 53@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558647224B54D70037C14E /* 组 53@3x.png */; };
+		6D55865C224B54D70037C14E /* home_me@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558648224B54D70037C14E /* home_me@3x.png */; };
+		6D55865D224B54D70037C14E /* home_ message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558649224B54D70037C14E /* home_ message@2x.png */; };
+		6D55865E224B54D70037C14E /* home_ message@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D55864A224B54D70037C14E /* home_ message@3x.png */; };
+		6D558663224B564F0037C14E /* JMMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558661224B564F0037C14E /* JMMineViewController.m */; };
+		6D558664224B564F0037C14E /* JMMineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558662224B564F0037C14E /* JMMineViewController.xib */; };
+		6D558669224B58890037C14E /* JMMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558667224B58890037C14E /* JMMessageViewController.m */; };
+		6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558668224B58890037C14E /* JMMessageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +193,34 @@
 		6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+addGradualLayer.m"; sourceTree = "<group>"; };
 		6D558630224B4E330037C14E /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		6D558631224B4E330037C14E /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
+		6D558633224B53BE0037C14E /* JMTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTabBarViewController.h; sourceTree = "<group>"; };
+		6D558634224B53BE0037C14E /* JMTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTabBarViewController.m; sourceTree = "<group>"; };
+		6D558637224B54D70037C14E /* Search_Home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search_Home@3x.png"; sourceTree = "<group>"; };
+		6D558638224B54D70037C14E /* pitch_on_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pitch_on_home@3x.png"; sourceTree = "<group>"; };
+		6D558639224B54D70037C14E /* site_Home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "site_Home@2x.png"; sourceTree = "<group>"; };
+		6D55863A224B54D70037C14E /* home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2x.png"; sourceTree = "<group>"; };
+		6D55863B224B54D70037C14E /* home_me_pitch_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_me_pitch_on@2x.png"; sourceTree = "<group>"; };
+		6D55863C224B54D70037C14E /* home_me_pitch_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_me_pitch_on@3x.png"; sourceTree = "<group>"; };
+		6D55863D224B54D70037C14E /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
+		6D55863E224B54D70037C14E /* site_Home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "site_Home@3x.png"; sourceTree = "<group>"; };
+		6D55863F224B54D70037C14E /* pitch_on_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pitch_on_home@2x.png"; sourceTree = "<group>"; };
+		6D558640224B54D70037C14E /* Search_Home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search_Home@2x.png"; sourceTree = "<group>"; };
+		6D558641224B54D70037C14E /* home_ message_pitch_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_ message_pitch_on@3x.png"; sourceTree = "<group>"; };
+		6D558642224B54D70037C14E /* home_ message_pitch_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_ message_pitch_on@2x.png"; sourceTree = "<group>"; };
+		6D558643224B54D70037C14E /* home_me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_me@2x.png"; sourceTree = "<group>"; };
+		6D558644224B54D70037C14E /* jianmian_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jianmian_home@3x.png"; sourceTree = "<group>"; };
+		6D558645224B54D70037C14E /* 组 53@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组 53@2x.png"; sourceTree = "<group>"; };
+		6D558646224B54D70037C14E /* jianmian_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jianmian_home@2x.png"; sourceTree = "<group>"; };
+		6D558647224B54D70037C14E /* 组 53@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组 53@3x.png"; sourceTree = "<group>"; };
+		6D558648224B54D70037C14E /* home_me@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_me@3x.png"; sourceTree = "<group>"; };
+		6D558649224B54D70037C14E /* home_ message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_ message@2x.png"; sourceTree = "<group>"; };
+		6D55864A224B54D70037C14E /* home_ message@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_ message@3x.png"; sourceTree = "<group>"; };
+		6D558660224B564F0037C14E /* JMMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMineViewController.h; sourceTree = "<group>"; };
+		6D558661224B564F0037C14E /* JMMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMineViewController.m; sourceTree = "<group>"; };
+		6D558662224B564F0037C14E /* JMMineViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMineViewController.xib; sourceTree = "<group>"; };
+		6D558666224B58890037C14E /* JMMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageViewController.h; sourceTree = "<group>"; };
+		6D558667224B58890037C14E /* JMMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageViewController.m; sourceTree = "<group>"; };
+		6D558668224B58890037C14E /* JMMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMessageViewController.xib; sourceTree = "<group>"; };
 		8A25EDF96D52B70C3945EBB7 /* Pods-JMian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.release.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,7 +268,6 @@
 				049A515B2248B29C007A8068 /* JobIntensionViewController.h */,
 				049A515C2248B29C007A8068 /* JobIntensionViewController.m */,
 				049A515D2248B29C007A8068 /* JobIntensionViewController.xib */,
-				047CC9D42249BF7B00FE935B /* PositionDesired */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -249,6 +301,8 @@
 				6D558631224B4E330037C14E /* NavigationViewController.m */,
 				047270802248D078005FD1FC /* BaseViewController.h */,
 				047270812248D078005FD1FC /* BaseViewController.m */,
+				6D558633224B53BE0037C14E /* JMTabBarViewController.h */,
+				6D558634224B53BE0037C14E /* JMTabBarViewController.m */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -281,6 +335,9 @@
 		0462C71F2244934C003B6639 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				6D558665224B586E0037C14E /* Message */,
+				6D55865F224B56390037C14E /* Mine */,
+				047CC9D42249BF7B00FE935B /* PositionDesired */,
 				044DF23C2244C06900301243 /* Login */,
 			);
 			path = Modules;
@@ -289,6 +346,7 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				6D558636224B54D70037C14E /* home_slices */,
 				049A5132224875D5007A8068 /* 04BaseInformation_slices */,
 				0494690E2244EDC900A5BEB7 /* 03 ChooseIdentity_slices */,
 				044DF23F2244C2C700301243 /* 01WeChatLogin_slices */,
@@ -452,6 +510,53 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D558636224B54D70037C14E /* home_slices */ = {
+			isa = PBXGroup;
+			children = (
+				6D558637224B54D70037C14E /* Search_Home@3x.png */,
+				6D558638224B54D70037C14E /* pitch_on_home@3x.png */,
+				6D558639224B54D70037C14E /* site_Home@2x.png */,
+				6D55863A224B54D70037C14E /* home@2x.png */,
+				6D55863B224B54D70037C14E /* home_me_pitch_on@2x.png */,
+				6D55863C224B54D70037C14E /* home_me_pitch_on@3x.png */,
+				6D55863D224B54D70037C14E /* home@3x.png */,
+				6D55863E224B54D70037C14E /* site_Home@3x.png */,
+				6D55863F224B54D70037C14E /* pitch_on_home@2x.png */,
+				6D558640224B54D70037C14E /* Search_Home@2x.png */,
+				6D558641224B54D70037C14E /* home_ message_pitch_on@3x.png */,
+				6D558642224B54D70037C14E /* home_ message_pitch_on@2x.png */,
+				6D558643224B54D70037C14E /* home_me@2x.png */,
+				6D558644224B54D70037C14E /* jianmian_home@3x.png */,
+				6D558645224B54D70037C14E /* 组 53@2x.png */,
+				6D558646224B54D70037C14E /* jianmian_home@2x.png */,
+				6D558647224B54D70037C14E /* 组 53@3x.png */,
+				6D558648224B54D70037C14E /* home_me@3x.png */,
+				6D558649224B54D70037C14E /* home_ message@2x.png */,
+				6D55864A224B54D70037C14E /* home_ message@3x.png */,
+			);
+			path = home_slices;
+			sourceTree = "<group>";
+		};
+		6D55865F224B56390037C14E /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				6D558660224B564F0037C14E /* JMMineViewController.h */,
+				6D558661224B564F0037C14E /* JMMineViewController.m */,
+				6D558662224B564F0037C14E /* JMMineViewController.xib */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
+		6D558665224B586E0037C14E /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				6D558666224B58890037C14E /* JMMessageViewController.h */,
+				6D558667224B58890037C14E /* JMMessageViewController.m */,
+				6D558668224B58890037C14E /* JMMessageViewController.xib */,
+			);
+			path = Message;
+			sourceTree = "<group>";
+		};
 		FC374E4AA2E1DABFC6BF04C9 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,6 +629,7 @@
 		048FEE252244853B001160C8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = JM;
 				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = mac;
 				TargetAttributes = {
@@ -566,35 +672,47 @@
 			buildActionMask = 2147483647;
 			files = (
 				049A51752248B50F007A8068 /* 椭圆 3@2x.png in Resources */,
+				6D55864F224B54D70037C14E /* home_me_pitch_on@2x.png in Resources */,
+				6D55865C224B54D70037C14E /* home_me@3x.png in Resources */,
 				049469182244EDC900A5BEB7 /* 组 18.png in Resources */,
 				048FEE3D2244853C001160C8 /* LaunchScreen.storyboard in Resources */,
 				049A515F2248B29C007A8068 /* JobIntensionViewController.xib in Resources */,
 				044DF2492244C2C700301243 /* WeChat_login@3x.png in Resources */,
 				044DF24E2244C2C700301243 /* Webkey@3x.png in Resources */,
 				049A51742248B50F007A8068 /* 椭圆 3.png in Resources */,
+				6D558655224B54D70037C14E /* home_ message_pitch_on@3x.png in Resources */,
 				044DF2652244D93E00301243 /* verification_code@3x.png in Resources */,
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
 				044DF26A2244D9CC00301243 /* phone@2x.png in Resources */,
 				044DF24D2244C2C700301243 /* Webkey@2x.png in Resources */,
+				6D558658224B54D70037C14E /* jianmian_home@3x.png in Resources */,
 				049469192244EDC900A5BEB7 /* 组 18@3x(1).png in Resources */,
+				6D558659224B54D70037C14E /* 组 53@2x.png in Resources */,
 				049469152244EDC900A5BEB7 /* 组 18@2x.png in Resources */,
 				049A5140224875D5007A8068 /* icon_return @3x.png in Resources */,
 				049A513F224875D5007A8068 /* icon_return.png in Resources */,
+				6D55864B224B54D70037C14E /* Search_Home@3x.png in Resources */,
+				6D558656224B54D70037C14E /* home_ message_pitch_on@2x.png in Resources */,
 				044DF24F2244C2C700301243 /* Webkey.png in Resources */,
+				6D558657224B54D70037C14E /* home_me@2x.png in Resources */,
+				6D55864E224B54D70037C14E /* home@2x.png in Resources */,
 				049A5144224875D5007A8068 /* camera.png in Resources */,
 				049A51772248B50F007A8068 /* 蓝点@2x.png in Resources */,
 				049A51732248B50F007A8068 /* 椭圆 3@3x.png in Resources */,
 				044DF2512244C2C700301243 /* WeChat_login.png in Resources */,
 				044DF24C2244C2C700301243 /* WeChat_login@2x.png in Resources */,
+				6D55865D224B54D70037C14E /* home_ message@2x.png in Resources */,
 				049A513C224875D5007A8068 /* icon_return@3x.png in Resources */,
 				044DF2662244D93E00301243 /* verification_code.png in Resources */,
 				0494691A2244EDC900A5BEB7 /* 组 18@2x(1).png in Resources */,
+				6D55864D224B54D70037C14E /* site_Home@2x.png in Resources */,
 				049A51762248B50F007A8068 /* 蓝点.png in Resources */,
 				0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */,
 				044DF2642244D93E00301243 /* verification_code@2x.png in Resources */,
 				049A5141224875D5007A8068 /* camera@2x.png in Resources */,
 				044DF26C2244D9CC00301243 /* phone@3x.png in Resources */,
 				049A5142224875D5007A8068 /* icon_return .png in Resources */,
+				6D558650224B54D70037C14E /* home_me_pitch_on@3x.png in Resources */,
 				044DF24A2244C2C700301243 /* JIANMIAN_logo@2x.png in Resources */,
 				044DF26B2244D9CC00301243 /* phone.png in Resources */,
 				044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */,
@@ -602,13 +720,23 @@
 				048FEE382244853C001160C8 /* Main.storyboard in Resources */,
 				044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */,
 				049A51722248B50F007A8068 /* 蓝点@3x.png in Resources */,
+				6D55865B224B54D70037C14E /* 组 53@3x.png in Resources */,
 				049469162244EDC900A5BEB7 /* 组 18@3x.png in Resources */,
+				6D55865A224B54D70037C14E /* jianmian_home@2x.png in Resources */,
+				6D558653224B54D70037C14E /* pitch_on_home@2x.png in Resources */,
 				049A513D224875D5007A8068 /* icon_return@2x.png in Resources */,
 				049469172244EDC900A5BEB7 /* 组 18(1).png in Resources */,
 				049A513E224875D5007A8068 /* icon_return @2x.png in Resources */,
+				6D558654224B54D70037C14E /* Search_Home@2x.png in Resources */,
+				6D55864C224B54D70037C14E /* pitch_on_home@3x.png in Resources */,
+				6D558664224B564F0037C14E /* JMMineViewController.xib in Resources */,
+				6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */,
+				6D558652224B54D70037C14E /* site_Home@3x.png in Resources */,
+				6D558651224B54D70037C14E /* home@3x.png in Resources */,
 				049A5143224875D5007A8068 /* camera@3x.png in Resources */,
 				044DF2502244C2C700301243 /* JIANMIAN_logo.png in Resources */,
 				049A515A2248972F007A8068 /* BasicInformationViewController.xib in Resources */,
+				6D55865E224B54D70037C14E /* home_ message@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +790,7 @@
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
 				047CC9D92249BF7C00FE935B /* PositionDesiredViewController.m in Sources */,
+				6D558663224B564F0037C14E /* JMMineViewController.m in Sources */,
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
 				047CC9DF2249C3BE00FE935B /* WSDropMenuView.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
@@ -671,6 +800,8 @@
 				049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */,
 				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
+				6D558635224B53BE0037C14E /* JMTabBarViewController.m in Sources */,
+				6D558669224B58890037C14E /* JMMessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
