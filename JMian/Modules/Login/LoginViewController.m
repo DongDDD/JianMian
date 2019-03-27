@@ -44,11 +44,21 @@
 }
 
 - (IBAction)phoneLogin:(id)sender {
+    
+    
     LoginPhoneViewController *loginPhone = [[LoginPhoneViewController alloc]initWithNibName:@"LoginPhoneViewController" bundle:nil];
     
     [self.navigationController pushViewController:loginPhone animated:YES];
     
+    
+    
 }
+
+-(void)loginRequest{
+
+
+}
+
 
 /*
 #pragma mark - Navigation
