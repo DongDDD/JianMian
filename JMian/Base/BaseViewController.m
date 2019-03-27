@@ -7,8 +7,8 @@
 //
 
 #import "BaseViewController.h"
-
-
+#import "UIView+addGradualLayer.h"
+#import "DimensMacros.h"
 @interface BaseViewController ()
 
 @end
@@ -17,9 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
-    // Do any additional setup after loading the view.
-//
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    
     UIButton *backBtn = [[UIButton alloc]init];
     backBtn.frame = CGRectMake(-10, 50, 100, 50);
     [backBtn setImage:[UIImage imageNamed:@"icon_return"] forState:UIControlStateNormal];
@@ -32,7 +32,19 @@
     [self.view addSubview:backBtn];
 }
 
+
+-(UIImage*)convertViewToImage:(UIView*)v{
+    CGSize s = v.bounds.size;
+    // 下面方法，第一个参数表示区域大小。第二个参数表示是否是非透明的。如果需  要显示半透明效果，需要传NO，否则传YES。第三个参数就是屏幕密度了
+    UIGraphicsBeginImageContextWithOptions(s, YES, [UIScreen mainScreen].scale);
+    [v.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 -(void)butClick{
+    
     [self.navigationController popViewControllerAnimated:YES];
     
 
