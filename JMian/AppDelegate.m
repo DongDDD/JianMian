@@ -10,8 +10,8 @@
 #import "LoginViewController.h"
 #import "ChooseIdentity.h"    //test
 #import "PositionDesiredViewController.h" //test
-
-
+#import "NavigationViewController.h"
+#import "JMTabBarViewController.h"
 
 
 
@@ -26,10 +26,12 @@
     //雕娜猩
     // Override point for customization after application launch.
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    LoginViewController *login = [[LoginViewController alloc] init];
-    UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:login];
+    
+    JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+//    LoginViewController *login = [[LoginViewController alloc] init];
+//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
    
-    self.window.rootViewController = naVC;
+    self.window.rootViewController = tab;
     
     [self.window makeKeyAndVisible];
     
