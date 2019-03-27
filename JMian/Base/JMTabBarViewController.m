@@ -7,7 +7,7 @@
 //
 
 #import "JMTabBarViewController.h"
-#import "PositionDesiredViewController.h"
+#import "PositionDesiredSecondViewController.h"
 #import "JMMineViewController.h"
 #import "DimensMacros.h"
 #import "JMMessageViewController.h"
@@ -22,7 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    PositionDesiredViewController *home = [[PositionDesiredViewController alloc] init];
+    PositionDesiredSecondViewController *home = [[PositionDesiredSecondViewController alloc] init];
     [self addChildVc:home title:@"首页" image:@"home" selectedImage:@"pitch_on_home"];
 
     JMMessageViewController *message = [[JMMessageViewController alloc] init];

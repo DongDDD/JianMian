@@ -476,10 +476,10 @@
 		04DD1D10224B6E0B007CB11C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				04DD1D11224B6E0B007CB11C /* PositionDesiredSecondViewController.m */,
 				04DD1D12224B6E0B007CB11C /* PositionDesiredViewController.h */,
-				04DD1D13224B6E0B007CB11C /* PositionDesiredSecondViewController.h */,
 				04DD1D14224B6E0B007CB11C /* PositionDesiredViewController.m */,
+				04DD1D13224B6E0B007CB11C /* PositionDesiredSecondViewController.h */,
+				04DD1D11224B6E0B007CB11C /* PositionDesiredSecondViewController.m */,
 			);
 			name = Controller;
 			path = ../../../../../.Trash/JMian/Modules/Login/PositionDesired/Controller;

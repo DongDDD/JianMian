@@ -9,7 +9,10 @@
 #import "JMMineViewController.h"
 #import "PositionDesiredViewController.h"
 
+
+
 @interface JMMineViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *testbtn;
 
 @end
 
@@ -19,8 +22,10 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     
+    
     // Do any additional setup after loading the view from its nib.
 }
+
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     PositionDesiredViewController *vc = [[PositionDesiredViewController alloc] init];
