@@ -14,8 +14,16 @@
 
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate>
 
-@property(nonatomic,strong)UITableView *tableView;
+
+
 @property (weak, nonatomic) IBOutlet UIView *headView;
+@property (weak, nonatomic) IBOutlet UIButton *pushPositionBtn; //j推荐职位
+@property (weak, nonatomic) IBOutlet UIButton *allPositionBtn;//所有职位
+@property (weak, nonatomic) IBOutlet UIButton *companyRequireBtn;//公司要求
+
+//@property(nonatomic)
+
+@property(nonatomic,strong)UITableView *tableView;
 
 
 @end
@@ -52,6 +60,30 @@ static NSString *cellIdent = @"cellIdent";
     
     
 }
+#pragma mark - 推荐职位 -
+
+- (IBAction)pushPositionAction:(UIButton *)sender {
+    
+    
+    
+    
+}
+
+
+#pragma mark - 所有职位 -
+
+
+
+
+
+
+#pragma mark - 公司要求 -
+
+
+
+
+
+
 
 
 #pragma mark - tableView DataSource -

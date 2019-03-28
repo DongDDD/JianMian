@@ -12,7 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="allPositionBtn" destination="kXY-bM-hPm" id="Onm-hS-qMG"/>
+                <outlet property="companyRequireBtn" destination="bHz-sO-2z9" id="8ZJ-aj-DNV"/>
                 <outlet property="headView" destination="sga-NA-PAh" id="zYn-uy-eo3"/>
+                <outlet property="pushPositionBtn" destination="5MJ-YR-D67" id="3au-2t-G5y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -52,6 +55,9 @@
                                     <integer key="value" value="11"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="pushPositionAction:" destination="-1" eventType="touchUpInside" id="iGY-4r-smh"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXY-bM-hPm">
                             <rect key="frame" x="149.5" y="11" width="76" height="22"/>
