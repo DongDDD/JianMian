@@ -54,6 +54,7 @@
     
     //不要忘记添加到父控制器上
     NavigationViewController *nav = [[NavigationViewController alloc] initWithRootViewController:childVc];
+
     [self addChildViewController:nav];
 }
 

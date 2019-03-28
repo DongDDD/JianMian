@@ -51,14 +51,14 @@
 
 }
 
-/*
-#pragma mark - Navigation
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    //判断现在是第几层的navigationController控制器
+    if (self.navigationController.viewControllers.count>1){
+        self.tabBarController.tabBar.hidden = YES;
+    }else{
+        self.tabBarController.tabBar.hidden = NO;
+    }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
-
-@end
+    @end
