@@ -74,6 +74,10 @@
 		04DD1D6C224B6E95007CB11C /* 圆角矩形 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */; };
 		04DD1D6D224B6E95007CB11C /* 圆角矩形 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */; };
 		04DD1D6E224B6E95007CB11C /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D44224B6E95007CB11C /* camera.png */; };
+		04DD1D73224B9100007CB11C /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D72224B9100007CB11C /* HomeTableViewCell.xib */; };
+		04DD1D76224B91C3007CB11C /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D75224B91C3007CB11C /* HomeTableViewCell.m */; };
+		04DD1D7C224B9295007CB11C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D7A224B9295007CB11C /* HomeViewController.m */; };
+		04DD1D7D224B9295007CB11C /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D7B224B9295007CB11C /* HomeViewController.xib */; };
 		4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */; };
 		6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */; };
 		6D558632224B4E340037C14E /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558631224B4E330037C14E /* NavigationViewController.m */; };
@@ -210,6 +214,12 @@
 		04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5@2x.png"; sourceTree = "<group>"; };
 		04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5.png"; sourceTree = "<group>"; };
 		04DD1D44224B6E95007CB11C /* camera.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera.png; sourceTree = "<group>"; };
+		04DD1D72224B9100007CB11C /* HomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		04DD1D74224B91C3007CB11C /* HomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
+		04DD1D75224B91C3007CB11C /* HomeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
+		04DD1D79224B9295007CB11C /* HomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		04DD1D7A224B9295007CB11C /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		04DD1D7B224B9295007CB11C /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JMian.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2010347C1D130A624B877C02 /* Pods-JMian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.debug.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.debug.xcconfig"; sourceTree = "<group>"; };
 		6D55862D224B4D070037C14E /* UIView+addGradualLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+addGradualLayer.h"; sourceTree = "<group>"; };
@@ -339,6 +349,7 @@
 				044DF23C2244C06900301243 /* Login */,
 				04DD1D0A224B6D95007CB11C /* FailedLoading */,
 				047CC9D42249BF7B00FE935B /* PositionDesired */,
+				04DD1D6F224B905E007CB11C /* Home */,
 				6D558665224B586E0037C14E /* Message */,
 				6D55865F224B56390037C14E /* Mine */,
 			);
@@ -555,6 +566,35 @@
 			path = BaseInformation_slices;
 			sourceTree = "<group>";
 		};
+		04DD1D6F224B905E007CB11C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				04DD1D77224B9227007CB11C /* Controller */,
+				04DD1D78224B9227007CB11C /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		04DD1D77224B9227007CB11C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04DD1D79224B9295007CB11C /* HomeViewController.h */,
+				04DD1D7A224B9295007CB11C /* HomeViewController.m */,
+				04DD1D7B224B9295007CB11C /* HomeViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		04DD1D78224B9227007CB11C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				04DD1D74224B91C3007CB11C /* HomeTableViewCell.h */,
+				04DD1D75224B91C3007CB11C /* HomeTableViewCell.m */,
+				04DD1D72224B9100007CB11C /* HomeTableViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		47579204418359BAEBA6F740 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +775,7 @@
 				04DD1D6E224B6E95007CB11C /* camera.png in Resources */,
 				048FEE3D2244853C001160C8 /* LaunchScreen.storyboard in Resources */,
 				049A515F2248B29C007A8068 /* JobIntensionViewController.xib in Resources */,
+				04DD1D73224B9100007CB11C /* HomeTableViewCell.xib in Resources */,
 				04DD1D53224B6E95007CB11C /* phone@2x.png in Resources */,
 				6D558655224B54D70037C14E /* home_ message_pitch_on@3x.png in Resources */,
 				04DD1D69224B6E95007CB11C /* 椭圆 3@3x.png in Resources */,
@@ -770,6 +811,7 @@
 				04DD1D6A224B6E95007CB11C /* 椭圆 3@2x.png in Resources */,
 				048FEE382244853C001160C8 /* Main.storyboard in Resources */,
 				04DD1D50224B6E95007CB11C /* Webkey@2x.png in Resources */,
+				04DD1D7D224B9295007CB11C /* HomeViewController.xib in Resources */,
 				044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */,
 				04DD1D48224B6E95007CB11C /* WeChat_login@3x.png in Resources */,
 				04DD1D68224B6E95007CB11C /* 圆角矩形 5@3x.png in Resources */,
@@ -848,8 +890,10 @@
 			files = (
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
 				04DD1D15224B6E0B007CB11C /* PositionDesiredSecondViewController.m in Sources */,
+				04DD1D76224B91C3007CB11C /* HomeTableViewCell.m in Sources */,
 				04DD1D16224B6E0B007CB11C /* PositionDesiredViewController.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
+				04DD1D7C224B9295007CB11C /* HomeViewController.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
 				04DD1D09224B6D34007CB11C /* SearchView.m in Sources */,
