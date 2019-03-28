@@ -15,6 +15,7 @@
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *headView;
 
 
 @end
@@ -33,13 +34,13 @@ static NSString *cellIdent = @"cellIdent";
 -(void)setTableView{
     
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 111, self.view.bounds.size.width, self.view.bounds.size.height) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.headView.frame.size.height+self.headView.frame.origin.y, SCREEN_WIDTH, self.view.bounds.size.height) style:UITableViewStylePlain];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 131;
+    self.tableView.rowHeight = 141;
     UINib *nib = [UINib nibWithNibName:NSStringFromClass([HomeTableViewCell class]) bundle:[NSBundle mainBundle]];
     [self.tableView registerNib:nib forCellReuseIdentifier:cellIdent];
     
