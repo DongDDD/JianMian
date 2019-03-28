@@ -20,9 +20,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self setNavgationBarColor:[UIColor whiteColor]];
     
 }
-
+    
+- (void)setNavgationBarColor:(UIColor *)color {
+    //去掉黑线
+    [self.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationBar setShadowImage:[[UIImage alloc] init]];
+    
+//    [self.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
+    [self.navigationBar setTintColor:[UIColor whiteColor]];
+    [self.navigationBar setTranslucent:NO];
+    [self.navigationBar setBarTintColor:[UIColor clearColor]];
+    
+    _barBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 100)];
+    _barBackgroundView.backgroundColor = color;
+    UIImage *backImage = [self convertViewToImage:_barBackgroundView];
+    [self.navigationBar setBackgroundImage:backImage forBarMetrics:UIBarMetricsDefault];
+}
+    
 //渐变色
 - (void)multiColorBg {
     [self.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];

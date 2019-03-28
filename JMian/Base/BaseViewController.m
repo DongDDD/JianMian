@@ -8,7 +8,6 @@
 
 #import "BaseViewController.h"
 #import "UIView+addGradualLayer.h"
-#import "DimensMacros.h"
 @interface BaseViewController ()
 
 @end
@@ -18,20 +17,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.extendedLayoutIncludesOpaqueBars = YES;
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    UIButton *backBtn = [[UIButton alloc]init];
-    backBtn.frame = CGRectMake(-10, 50, 100, 50);
-    [backBtn setImage:[UIImage imageNamed:@"icon_return"] forState:UIControlStateNormal];
+    [self setBackBtnImageViewName:@"icon_return"];
 
-   
-    [backBtn addTarget:self action:@selector(butClick) forControlEvents:UIControlEventTouchUpInside];
-
-    
-
-    [self.view addSubview:backBtn];
 }
 
+- (void)setBackBtnImageViewName:(NSString *)imageName {
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftBtn.frame = CGRectMake(0, 0, 20, 14);
+    [leftBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
+    [leftBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
+}
+
+- (void)fanhui {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(UIImage*)convertViewToImage:(UIView*)v{
     CGSize s = v.bounds.size;
@@ -41,14 +47,6 @@
     UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return image;
-}
-
--(void)butClick{
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-
-
 }
 
 - (void)viewWillAppear:(BOOL)animated {
