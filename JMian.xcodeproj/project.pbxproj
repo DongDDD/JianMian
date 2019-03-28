@@ -34,8 +34,8 @@
 		04A247A7224CAAB800DEB8E3 /* CompanyRequirementsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247A6224CAAB800DEB8E3 /* CompanyRequirementsView.m */; };
 		04A247BC224CB79400DEB8E3 /* PositionDesiredSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247B2224CB79400DEB8E3 /* PositionDesiredSecondViewController.m */; };
 		04A247BD224CB79400DEB8E3 /* PositionDesiredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247B5224CB79400DEB8E3 /* PositionDesiredViewController.m */; };
-		04A247BE224CB79400DEB8E3 /* WSDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247B8224CB79400DEB8E3 /* WSDropMenuView.m */; };
 		04A247BF224CB79400DEB8E3 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247B9224CB79400DEB8E3 /* SearchView.m */; };
+		04A247C2224CB83B00DEB8E3 /* WSDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247C1224CB83B00DEB8E3 /* WSDropMenuView.m */; };
 		04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */; };
 		04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */; };
 		04DD1D45224B6E95007CB11C /* break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D18224B6E95007CB11C /* break@2x.png */; };
@@ -178,10 +178,10 @@
 		04A247B3224CB79400DEB8E3 /* PositionDesiredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDesiredViewController.h; sourceTree = "<group>"; };
 		04A247B4224CB79400DEB8E3 /* PositionDesiredSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDesiredSecondViewController.h; sourceTree = "<group>"; };
 		04A247B5224CB79400DEB8E3 /* PositionDesiredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDesiredViewController.m; sourceTree = "<group>"; };
-		04A247B8224CB79400DEB8E3 /* WSDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDropMenuView.m; sourceTree = "<group>"; };
 		04A247B9224CB79400DEB8E3 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
-		04A247BA224CB79400DEB8E3 /* WSDropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDropMenuView.h; sourceTree = "<group>"; };
 		04A247BB224CB79400DEB8E3 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
+		04A247C0224CB83B00DEB8E3 /* WSDropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDropMenuView.h; sourceTree = "<group>"; };
+		04A247C1224CB83B00DEB8E3 /* WSDropMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSDropMenuView.m; sourceTree = "<group>"; };
 		04DD1D0B224B6D95007CB11C /* FailedLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedLoadingViewController.h; sourceTree = "<group>"; };
 		04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedLoadingViewController.xib; sourceTree = "<group>"; };
 		04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedLoadingViewController.m; sourceTree = "<group>"; };
@@ -492,9 +492,9 @@
 		04A247B7224CB79400DEB8E3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04A247B8224CB79400DEB8E3 /* WSDropMenuView.m */,
+				04A247C0224CB83B00DEB8E3 /* WSDropMenuView.h */,
+				04A247C1224CB83B00DEB8E3 /* WSDropMenuView.m */,
 				04A247B9224CB79400DEB8E3 /* SearchView.m */,
-				04A247BA224CB79400DEB8E3 /* WSDropMenuView.h */,
 				04A247BB224CB79400DEB8E3 /* SearchView.h */,
 			);
 			path = View;
@@ -937,13 +937,13 @@
 				04A247A7224CAAB800DEB8E3 /* CompanyRequirementsView.m in Sources */,
 				04DD1D76224B91C3007CB11C /* HomeTableViewCell.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
-				04A247BE224CB79400DEB8E3 /* WSDropMenuView.m in Sources */,
 				04DD1D7C224B9295007CB11C /* HomeViewController.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
 				04A2479F224C7AFF00DEB8E3 /* CALayer+UIColor.m in Sources */,
 				04A247BF224CB79400DEB8E3 /* SearchView.m in Sources */,
 				6D558663224B564F0037C14E /* JMMineViewController.m in Sources */,
+				04A247C2224CB83B00DEB8E3 /* WSDropMenuView.m in Sources */,
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,
