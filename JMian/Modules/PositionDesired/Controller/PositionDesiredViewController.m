@@ -9,6 +9,8 @@
 #import "PositionDesiredViewController.h"
 #import "WSDropMenuView.h"
 #import "SearchView.h"
+#import "LoginViewController.h" //test
+
 
 
 
@@ -35,12 +37,16 @@
 
     WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,111, self.view.frame.size.width, SCREEN_HEIGHT)];
     
+    
+    
     dropMenu.dataSource = self;
     dropMenu.delegate  =self;
     [self.view addSubview:dropMenu];
     
     
     [self setSearchView];
+    
+    
 }
 #pragma mark - WSDropMenuView DataSource -
 
