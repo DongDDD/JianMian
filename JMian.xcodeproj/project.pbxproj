@@ -32,11 +32,11 @@
 		04A2479B224C773A00DEB8E3 /* 0000@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A24798224C773A00DEB8E3 /* 0000@3x.png */; };
 		04A2479C224C773A00DEB8E3 /* 0000@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A24799224C773A00DEB8E3 /* 0000@2x.png */; };
 		04A2479F224C7AFF00DEB8E3 /* CALayer+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A2479E224C7AFF00DEB8E3 /* CALayer+UIColor.m */; };
+		04A247AC224CB4FD00DEB8E3 /* PositionDesiredSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247AA224CB4FD00DEB8E3 /* PositionDesiredSecondViewController.m */; };
+		04A247AF224CB53B00DEB8E3 /* PositionDesiredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247AD224CB53A00DEB8E3 /* PositionDesiredViewController.m */; };
 		04DD1D09224B6D34007CB11C /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D07224B6D34007CB11C /* SearchView.m */; };
 		04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */; };
 		04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */; };
-		04DD1D15224B6E0B007CB11C /* PositionDesiredSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D11224B6E0B007CB11C /* PositionDesiredSecondViewController.m */; };
-		04DD1D16224B6E0B007CB11C /* PositionDesiredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D14224B6E0B007CB11C /* PositionDesiredViewController.m */; };
 		04DD1D45224B6E95007CB11C /* break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D18224B6E95007CB11C /* break@2x.png */; };
 		04DD1D46224B6E95007CB11C /* break.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D19224B6E95007CB11C /* break.png */; };
 		04DD1D47224B6E95007CB11C /* break@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D1A224B6E95007CB11C /* break@3x.png */; };
@@ -173,15 +173,15 @@
 		04A24799224C773A00DEB8E3 /* 0000@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0000@2x.png"; sourceTree = "<group>"; };
 		04A2479D224C7AFF00DEB8E3 /* CALayer+UIColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CALayer+UIColor.h"; sourceTree = "<group>"; };
 		04A2479E224C7AFF00DEB8E3 /* CALayer+UIColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "CALayer+UIColor.m"; sourceTree = "<group>"; };
+		04A247AA224CB4FD00DEB8E3 /* PositionDesiredSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDesiredSecondViewController.m; sourceTree = "<group>"; };
+		04A247AB224CB4FD00DEB8E3 /* PositionDesiredSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDesiredSecondViewController.h; sourceTree = "<group>"; };
+		04A247AD224CB53A00DEB8E3 /* PositionDesiredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDesiredViewController.m; sourceTree = "<group>"; };
+		04A247AE224CB53B00DEB8E3 /* PositionDesiredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDesiredViewController.h; sourceTree = "<group>"; };
 		04DD1D07224B6D34007CB11C /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		04DD1D08224B6D34007CB11C /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		04DD1D0B224B6D95007CB11C /* FailedLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedLoadingViewController.h; sourceTree = "<group>"; };
 		04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedLoadingViewController.xib; sourceTree = "<group>"; };
 		04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedLoadingViewController.m; sourceTree = "<group>"; };
-		04DD1D11224B6E0B007CB11C /* PositionDesiredSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDesiredSecondViewController.m; sourceTree = "<group>"; };
-		04DD1D12224B6E0B007CB11C /* PositionDesiredViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDesiredViewController.h; sourceTree = "<group>"; };
-		04DD1D13224B6E0B007CB11C /* PositionDesiredSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionDesiredSecondViewController.h; sourceTree = "<group>"; };
-		04DD1D14224B6E0B007CB11C /* PositionDesiredViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionDesiredViewController.m; sourceTree = "<group>"; };
 		04DD1D18224B6E95007CB11C /* break@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "break@2x.png"; sourceTree = "<group>"; };
 		04DD1D19224B6E95007CB11C /* break.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = break.png; sourceTree = "<group>"; };
 		04DD1D1A224B6E95007CB11C /* break@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "break@3x.png"; sourceTree = "<group>"; };
@@ -498,10 +498,10 @@
 		04DD1D10224B6E0B007CB11C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				04DD1D12224B6E0B007CB11C /* PositionDesiredViewController.h */,
-				04DD1D14224B6E0B007CB11C /* PositionDesiredViewController.m */,
-				04DD1D13224B6E0B007CB11C /* PositionDesiredSecondViewController.h */,
-				04DD1D11224B6E0B007CB11C /* PositionDesiredSecondViewController.m */,
+				04A247AE224CB53B00DEB8E3 /* PositionDesiredViewController.h */,
+				04A247AD224CB53A00DEB8E3 /* PositionDesiredViewController.m */,
+				04A247AB224CB4FD00DEB8E3 /* PositionDesiredSecondViewController.h */,
+				04A247AA224CB4FD00DEB8E3 /* PositionDesiredSecondViewController.m */,
 			);
 			name = Controller;
 			path = ../../../../../.Trash/JMian/Modules/Login/PositionDesired/Controller;
@@ -929,9 +929,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
-				04DD1D15224B6E0B007CB11C /* PositionDesiredSecondViewController.m in Sources */,
 				04DD1D76224B91C3007CB11C /* HomeTableViewCell.m in Sources */,
-				04DD1D16224B6E0B007CB11C /* PositionDesiredViewController.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				04DD1D7C224B9295007CB11C /* HomeViewController.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
@@ -943,12 +941,14 @@
 				047CC9DF2249C3BE00FE935B /* WSDropMenuView.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,
+				04A247AC224CB4FD00DEB8E3 /* PositionDesiredSecondViewController.m in Sources */,
 				0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */,
 				048FEE322244853C001160C8 /* AppDelegate.m in Sources */,
 				049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */,
 				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
 				6D558635224B53BE0037C14E /* JMTabBarViewController.m in Sources */,
+				04A247AF224CB53B00DEB8E3 /* PositionDesiredViewController.m in Sources */,
 				6D558669224B58890037C14E /* JMMessageViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
