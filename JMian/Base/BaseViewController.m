@@ -8,7 +8,6 @@
 
 #import "BaseViewController.h"
 #import "UIView+addGradualLayer.h"
-#import "DimensMacros.h"
 @interface BaseViewController ()
 
 @end
@@ -18,20 +17,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.extendedLayoutIncludesOpaqueBars = YES;
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    UIButton *backBtn = [[UIButton alloc]init];
-    backBtn.frame = CGRectMake(-10, 50, 100, 50);
-    [backBtn setImage:[UIImage imageNamed:@"icon_return"] forState:UIControlStateNormal];
+    [self setBackBtnImageViewName:@"icon_return"];
 
-   
-    [backBtn addTarget:self action:@selector(butClick) forControlEvents:UIControlEventTouchUpInside];
-
-    
-
-    [self.view addSubview:backBtn];
 }
 
+- (void)setBackBtnImageViewName:(NSString *)imageName {
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftBtn.frame = CGRectMake(0, 0, 20, 14);
+    [leftBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
+    [leftBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
+    self.navigationItem.leftBarButtonItem = leftItem;
+    
+}
+
+- (void)fanhui {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 -(UIImage*)convertViewToImage:(UIView*)v{
     CGSize s = v.bounds.size;
@@ -43,22 +49,14 @@
     return image;
 }
 
--(void)butClick{
-    
-    [self.navigationController popViewControllerAnimated:YES];
-    
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    //判断现在是第几层的navigationController控制器
+    if (self.navigationController.viewControllers.count>1){
+        self.tabBarController.tabBar.hidden = YES;
+    }else{
+        self.tabBarController.tabBar.hidden = NO;
+    }
 
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
-@end
+    @end
