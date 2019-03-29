@@ -36,6 +36,11 @@
 		04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247CB224CB99800DEB8E3 /* PositionDesiredViewController.m */; };
 		04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247CE224CB99800DEB8E3 /* WSDropMenuView.m */; };
 		04A247D5224CB99800DEB8E3 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247CF224CB99800DEB8E3 /* SearchView.m */; };
+		04A247D9224CCC4700DEB8E3 /* JobDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A247D7224CCC4700DEB8E3 /* JobDetailsViewController.m */; };
+		04A247DA224CCC4700DEB8E3 /* JobDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A247D8224CCC4700DEB8E3 /* JobDetailsViewController.xib */; };
+		04A247DE224CE70E00DEB8E3 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A247DB224CE70E00DEB8E3 /* play@2x.png */; };
+		04A247DF224CE70E00DEB8E3 /* play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A247DC224CE70E00DEB8E3 /* play@3x.png */; };
+		04A247E0224CE70E00DEB8E3 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A247DD224CE70E00DEB8E3 /* play.png */; };
 		04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */; };
 		04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */; };
 		04DD1D45224B6E95007CB11C /* break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D18224B6E95007CB11C /* break@2x.png */; };
@@ -182,6 +187,12 @@
 		04A247CF224CB99800DEB8E3 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		04A247D0224CB99800DEB8E3 /* WSDropMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSDropMenuView.h; sourceTree = "<group>"; };
 		04A247D1224CB99800DEB8E3 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
+		04A247D6224CCC4700DEB8E3 /* JobDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobDetailsViewController.h; sourceTree = "<group>"; };
+		04A247D7224CCC4700DEB8E3 /* JobDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JobDetailsViewController.m; sourceTree = "<group>"; };
+		04A247D8224CCC4700DEB8E3 /* JobDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JobDetailsViewController.xib; sourceTree = "<group>"; };
+		04A247DB224CE70E00DEB8E3 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
+		04A247DC224CE70E00DEB8E3 /* play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@3x.png"; sourceTree = "<group>"; };
+		04A247DD224CE70E00DEB8E3 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		04DD1D0B224B6D95007CB11C /* FailedLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedLoadingViewController.h; sourceTree = "<group>"; };
 		04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedLoadingViewController.xib; sourceTree = "<group>"; };
 		04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedLoadingViewController.m; sourceTree = "<group>"; };
@@ -473,9 +484,9 @@
 		04A247C7224CB99800DEB8E3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				04A247CA224CB99800DEB8E3 /* PositionDesiredSecondViewController.h */,
 				04A247C8224CB99800DEB8E3 /* PositionDesiredSecondViewController.m */,
 				04A247C9224CB99800DEB8E3 /* PositionDesiredViewController.h */,
-				04A247CA224CB99800DEB8E3 /* PositionDesiredSecondViewController.h */,
 				04A247CB224CB99800DEB8E3 /* PositionDesiredViewController.m */,
 			);
 			path = Controller;
@@ -491,10 +502,10 @@
 		04A247CD224CB99800DEB8E3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04A247CE224CB99800DEB8E3 /* WSDropMenuView.m */,
-				04A247CF224CB99800DEB8E3 /* SearchView.m */,
 				04A247D0224CB99800DEB8E3 /* WSDropMenuView.h */,
+				04A247CE224CB99800DEB8E3 /* WSDropMenuView.m */,
 				04A247D1224CB99800DEB8E3 /* SearchView.h */,
+				04A247CF224CB99800DEB8E3 /* SearchView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -594,6 +605,9 @@
 				04DD1D79224B9295007CB11C /* HomeViewController.h */,
 				04DD1D7A224B9295007CB11C /* HomeViewController.m */,
 				04DD1D7B224B9295007CB11C /* HomeViewController.xib */,
+				04A247D6224CCC4700DEB8E3 /* JobDetailsViewController.h */,
+				04A247D7224CCC4700DEB8E3 /* JobDetailsViewController.m */,
+				04A247D8224CCC4700DEB8E3 /* JobDetailsViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -621,6 +635,9 @@
 		6D558636224B54D70037C14E /* home_slices */ = {
 			isa = PBXGroup;
 			children = (
+				04A247DD224CE70E00DEB8E3 /* play.png */,
+				04A247DB224CE70E00DEB8E3 /* play@2x.png */,
+				04A247DC224CE70E00DEB8E3 /* play@3x.png */,
 				04A24797224C773A00DEB8E3 /* 0000.png */,
 				04A24799224C773A00DEB8E3 /* 0000@2x.png */,
 				04A24798224C773A00DEB8E3 /* 0000@3x.png */,
@@ -813,17 +830,20 @@
 				6D558656224B54D70037C14E /* home_ message_pitch_on@2x.png in Resources */,
 				04DD1D49224B6E95007CB11C /* verification_code@3x.png in Resources */,
 				6D558657224B54D70037C14E /* home_me@2x.png in Resources */,
+				04A247DE224CE70E00DEB8E3 /* play@2x.png in Resources */,
 				04DD1D56224B6E95007CB11C /* phone.png in Resources */,
 				04DD1D4F224B6E95007CB11C /* phone@3x.png in Resources */,
 				6D55864E224B54D70037C14E /* home@2x.png in Resources */,
 				6D55865D224B54D70037C14E /* home_ message@2x.png in Resources */,
 				6D55864D224B54D70037C14E /* site_Home@2x.png in Resources */,
 				04DD1D45224B6E95007CB11C /* break@2x.png in Resources */,
+				04A247E0224CE70E00DEB8E3 /* play.png in Resources */,
 				04DD1D5B224B6E95007CB11C /* 组 18@3x(1).png in Resources */,
 				04DD1D4D224B6E95007CB11C /* verification_code@2x.png in Resources */,
 				0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */,
 				04DD1D4E224B6E95007CB11C /* WeChat_login@2x.png in Resources */,
 				6D558650224B54D70037C14E /* home_me_pitch_on@3x.png in Resources */,
+				04A247DA224CCC4700DEB8E3 /* JobDetailsViewController.xib in Resources */,
 				04DD1D62224B6E95007CB11C /* 蓝点@3x.png in Resources */,
 				044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */,
 				04DD1D6A224B6E95007CB11C /* 椭圆 3@2x.png in Resources */,
@@ -858,6 +878,7 @@
 				04DD1D4C224B6E95007CB11C /* JIANMIAN_logo@3x.png in Resources */,
 				04DD1D60224B6E95007CB11C /* icon_return@2x.png in Resources */,
 				04DD1D5A224B6E95007CB11C /* 组 18.png in Resources */,
+				04A247DF224CE70E00DEB8E3 /* play@3x.png in Resources */,
 				04DD1D63224B6E95007CB11C /* icon_return @2x.png in Resources */,
 				6D55865E224B54D70037C14E /* home_ message@3x.png in Resources */,
 				04DD1D64224B6E95007CB11C /* 蓝点.png in Resources */,
@@ -937,6 +958,7 @@
 				04DD1D76224B91C3007CB11C /* HomeTableViewCell.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
+				04A247D9224CCC4700DEB8E3 /* JobDetailsViewController.m in Sources */,
 				04DD1D7C224B9295007CB11C /* HomeViewController.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,

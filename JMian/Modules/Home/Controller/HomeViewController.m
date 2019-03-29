@@ -9,6 +9,8 @@
 #import "HomeViewController.h"
 #import "HometableViewCell.h"
 #import "LoginViewController.h"
+#import "JobDetailsViewController.h"
+
 
 
 
@@ -21,7 +23,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *allPositionBtn;//所有职位
 @property (weak, nonatomic) IBOutlet UIButton *companyRequireBtn;//公司要求
 
-//@property(nonatomic)
+
+
 
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -57,14 +60,12 @@ static NSString *cellIdent = @"cellIdent";
     
    
     
-    
-    
 }
 #pragma mark - 推荐职位 -
 
 - (IBAction)pushPositionAction:(UIButton *)sender {
     
-    
+
     
     
 }
@@ -112,7 +113,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    LoginViewController *vc = [[LoginViewController alloc] init];
+    JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
     
     [self.navigationController pushViewController:vc animated:YES];
     

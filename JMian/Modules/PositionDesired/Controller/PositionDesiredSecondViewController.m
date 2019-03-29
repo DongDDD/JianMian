@@ -42,6 +42,7 @@
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.rowHeight = 64;
     
     [self.view addSubview:self.tableView];
    
@@ -89,17 +90,25 @@
     //初始化单元格
     if(cell == nil)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellTableIndentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellTableIndentifier];
         //自带有两种基础的tableView样式，UITableViewCellStyleValue1、2. 后面的文章会讲解自定义样式
     }
     
     UIImage *img = [UIImage imageNamed:@"tachi.png"];
     cell.imageView.image = img;
-    //添加图片
+    
     cell.textLabel.textColor = [UIColor colorWithRed:101/255.0 green:101/255.0 blue:101/255.0 alpha:1.0];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
     cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
-    cell.detailTextLabel.text = @"省份";
+    
+   
+    cell.detailTextLabel.textColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1.0];
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
+    cell.detailTextLabel.text = @"产品/产品经理";
+    
+    
+    
+    
     //添加右侧注释
     
     return cell;
