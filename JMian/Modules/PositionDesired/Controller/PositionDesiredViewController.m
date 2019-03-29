@@ -35,8 +35,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
 
-    WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,111, self.view.frame.size.width, SCREEN_HEIGHT)];
-    
+    WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,SafeAreaTopHeight, self.view.frame.size.width, SCREEN_HEIGHT)];
     
     
     dropMenu.dataSource = self;
@@ -51,7 +50,7 @@
 #pragma mark - WSDropMenuView DataSource -
 
 -(void)setSearchView{
-    self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, NAVIGATION_BAR_HEIGHT+21, SCREEN_WIDTH-40, 33)];
+    self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, SafeAreaTopHeight, SCREEN_WIDTH-40, 33)];
     self.searchView.searchTextField.placeholder = @"                                            搜索";
     self.searchView.searchTextField.returnKeyType =UIReturnKeySearch;
     self.searchView.searchTextField.delegate = self;

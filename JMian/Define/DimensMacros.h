@@ -26,5 +26,18 @@
 
 #define UIColorFromHEX(rgbValue)    [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
+#define SafeAreaBottomHeight (IPHONE_X ? 34 : 0)
+#define SafeAreaTopHeight (IPHONE_X ? 88 : 64)
+#define SafeAreaStatusHeight (IPHONE_X ? 44 : 20)
+
+//判断设备类型
+#define IPHONE_X \
+({BOOL isPhoneX = NO;\
+if (@available(iOS 11.0, *)) {\
+isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;\
+}\
+(isPhoneX);})
+
+
 
 #endif /* DimensMacros_h */
