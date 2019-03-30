@@ -9,9 +9,14 @@
 #ifndef DimensMacros_h
 #define DimensMacros_h
 
+
+
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
 #define NAVIGATION_BAR_HEIGHT 44
+//主色调
+
+#define MASTER_COLOR [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0]
 //状态栏 ＋ 导航栏 高度
 #define STATUS_AND_NAVIGATION_HEIGHT ((STATUS_BAR_HEIGHT) + (NAVIGATION_BAR_HEIGHT))
 
