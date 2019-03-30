@@ -13,9 +13,23 @@
 @interface JobDetailsViewController ()
 
 @property(nonatomic,strong)UIScrollView *scrollView;
-@property(nonatomic,strong)UIView *footOfVideoView;
+@property(nonatomic,strong)UIImageView *videoImageView; //视频播放
+@property(nonatomic,strong)UIView *footOfVideoView;   //职位简介
+@property(nonatomic,strong)UIView *companyIntroductionView; //公司简介
+@property(nonatomic,strong)UIView *jobDescriptionView;//职位描述
 
-@property(nonatomic,strong)UIImageView *videoImageView;
+@property(nonatomic,strong)UILabel *jobDoLab;//岗位职责
+@property(nonatomic,strong)UILabel *jobRequireLab;//任职要求
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -26,11 +40,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     
+    [self.navigationController.navigationBar setTranslucent:true];
     
+
     [self setScrollView];
-    [self setFootOfVideoView];
     [self setVideoImgView];
+    [self setFootOfVideoView];
+    [self setCompanyIntroductionView];
+    [self setJobDescriptionView];
     
     
 }
@@ -38,67 +57,379 @@
 #pragma mark - UI布局
 
 -(void)setScrollView{
-    self.scrollView = [[UIScrollView alloc]init];
+    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     self.scrollView.backgroundColor = [UIColor grayColor];
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height+200);
+    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height+800);
+    self.scrollView.showsVerticalScrollIndicator = NO;
     [self.view addSubview:self.scrollView];
     
-    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view.mas_top).offset(64);
-        make.left.and.right.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_bottom);
-        
-        
-    }];
+//    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view.mas_top);
+//        make.left.and.right.equalTo(self.view);
+//        make.bottom.equalTo(self.view.mas_bottom);
+//
+//
+//    }];
 
 }
 
-#pragma mark - 简介信息
--(void)setFootOfVideoView{
-    
-    self.footOfVideoView = [[UIView alloc]init];
-    self.footOfVideoView.backgroundColor = [UIColor redColor];
-    
-    
-    [self.scrollView addSubview:self.footOfVideoView];
-   
-    [self.footOfVideoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_bottom);
-        make.height.mas_equalTo(136);
-       
-    }];
- 
-}
 
 -(void)setVideoImgView{
     self.videoImageView = [[UIImageView alloc]init];
-    self.videoImageView.backgroundColor = [UIColor blueColor];
+    self.videoImageView.backgroundColor = [UIColor yellowColor];
     [self.scrollView addSubview:self.videoImageView];
     [self.videoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.scrollView.mas_top);
-        make.left.and.right.equalTo(self.view);
-        make.bottom.equalTo(self.footOfVideoView.mas_top);
-    }];
+        make.top.mas_equalTo(self.scrollView.mas_top).mas_offset(-88);
 
-   
+        make.left.and.right.equalTo(self.view);
+        make.height.mas_equalTo(self.view.mas_height).mas_offset(-136);
+
+    }];
+    
+    
     UIButton *playBtn = [[UIButton alloc]init];
     [playBtn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
     [playBtn addTarget:self action:@selector(playAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:playBtn];
+    [self.scrollView addSubview:playBtn];
     [playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self.videoImageView.mas_centerX);
         make.top.mas_equalTo(self.scrollView.mas_top).offset(295);
         make.height.and.with.mas_equalTo(141);
     }];
-    
-    
-    
-    
-    
 
+
+
+
+    
+    
+    
+}
+#pragma mark - 职位简介
+-(void)setFootOfVideoView{
+    
+    self.footOfVideoView = [[UIView alloc]init];
+    self.footOfVideoView.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.footOfVideoView];
+   
+    [self.footOfVideoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.view);
+        make.top.equalTo(self.videoImageView.mas_bottom).mas_offset(0);
+        make.height.mas_equalTo(172);
+       
+    }];
+    
+    //和他聊聊按钮
+    UIButton *btn = [[UIButton alloc]init];
+    btn.backgroundColor = [UIColor greenColor];
+    [btn setTitle:@"和他聊聊" forState:UIControlStateNormal];
+    btn.layer.borderWidth = 0.5;
+    btn.layer.borderColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0].CGColor;
+    btn.layer.cornerRadius = 18.5;
+    [self.footOfVideoView addSubview:btn];
+    
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.footOfVideoView.mas_left).offset(17);
+        make.width.mas_equalTo(136);
+        make.top.mas_equalTo(self.footOfVideoView.mas_top).offset(15);
+        make.height.mas_equalTo(37);
+        
+    }];
+    
+    
+    //投个简历按钮
+    
+    UIButton *btn2 = [[UIButton alloc]init];
+    btn2.backgroundColor = [UIColor greenColor];
+    [btn2 setTitle:@"投个简历" forState:UIControlStateNormal];
+    btn2.layer.borderWidth = 0.5;
+    btn2.layer.borderColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0].CGColor;
+    btn2.layer.cornerRadius = 18.5;
+    [self.footOfVideoView addSubview:btn2];
+    
+    [btn2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(186);
+        make.right.mas_equalTo(self.footOfVideoView.mas_right).offset(-17);
+        make.top.mas_equalTo(btn);
+        make.height.mas_equalTo(btn);
+        
+    }];
+    
+    //职位名称
+    UILabel *jobNameLab = [[UILabel alloc]init];
+    jobNameLab.text = @"UI设计师";
+    jobNameLab.backgroundColor = [UIColor greenColor];
+    jobNameLab.font = [UIFont systemFontOfSize:20];
+    jobNameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
+    [self.footOfVideoView addSubview:jobNameLab];
+    
+    [jobNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(150);
+        make.height.mas_equalTo(19);
+        make.left.mas_equalTo(self.footOfVideoView.mas_left).offset(22);
+        make.top.mas_equalTo(btn.mas_bottom).offset(15);
+        
+    }];
+    
+    //经验 学历
+    
+    UILabel *yearsEduLab = [[UILabel alloc]init];
+    yearsEduLab.text = @"1-3年   大专";
+    yearsEduLab.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
+    yearsEduLab.font = [UIFont systemFontOfSize:15];
+    [self.footOfVideoView addSubview:yearsEduLab];
+    
+    [yearsEduLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(150);
+        make.height.mas_equalTo(15);
+        make.left.mas_equalTo(jobNameLab.mas_left);
+        make.top.mas_equalTo(jobNameLab.mas_bottom).offset(11);
+        
+    }];
+    
+    //公司福利
+  
+    UILabel *fuliLab = [[UILabel alloc]init];
+    fuliLab.text = @"五险一金";
+    fuliLab.backgroundColor = [UIColor colorWithRed:245/255.0 green:246/255.0 blue:250/255.0 alpha:1.0];
+    fuliLab.textAlignment = NSTextAlignmentCenter;
+    fuliLab.font = [UIFont systemFontOfSize:12];
+    fuliLab.adjustsFontSizeToFitWidth = YES;
+    fuliLab.layer.cornerRadius = 3;
+    fuliLab.textColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1.0];
+    [self.footOfVideoView addSubview:fuliLab];
+    
+    [fuliLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(22);
+        make.width.mas_equalTo(63);
+        make.left.mas_equalTo(yearsEduLab.mas_left);
+        make.top.mas_equalTo(yearsEduLab.mas_bottom).offset(10);
+        
+    }];
+    
+    
+    
+    
+}
+#pragma mark - 公司简介
+
+-(void)setCompanyIntroductionView{
+    
+    self.companyIntroductionView = [[UIView alloc]init];
+    self.companyIntroductionView.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.companyIntroductionView];
+    
+    [self.companyIntroductionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(90);
+        make.left.and.right.mas_equalTo(self.footOfVideoView);
+        make.top.mas_equalTo(self.footOfVideoView.mas_bottom);
+    }];
+    
+    UIImageView *iconImage = [[UIImageView alloc]init];
+ 
+    iconImage.image = [UIImage imageNamed:@"play"];
+    iconImage.layer.borderWidth = 0.5;
+    iconImage.layer.borderColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0].CGColor;
+    [self.companyIntroductionView addSubview:iconImage];
+    
+    [iconImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.and.width.mas_equalTo(51);
+        make.left.mas_equalTo(self.companyIntroductionView).offset(23);
+        make.top.mas_equalTo(self.companyIntroductionView.mas_top).offset(20);
+    }];
+    
+    
+    UILabel *companyNameLab = [[UILabel alloc]init];
+    companyNameLab.text = @"空间智能科技";
+    companyNameLab.font = [UIFont systemFontOfSize:16];
+    companyNameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
+    companyNameLab.adjustsFontSizeToFitWidth = YES;
+    [self.companyIntroductionView addSubview:companyNameLab];
+    
+    [companyNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+       
+        make.left.mas_equalTo(iconImage.mas_right).offset(14);
+        make.top.mas_equalTo(self.companyIntroductionView.mas_top).offset(26);
+    }];
+    
+    UILabel * companyMessageLab = [[UILabel alloc]init];
+    companyMessageLab.text = @"移动互联网   不需要融资   20-50人";
+    companyMessageLab.font = [UIFont systemFontOfSize:13];
+    companyMessageLab.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
+    companyMessageLab.adjustsFontSizeToFitWidth = YES;
+    [self.companyIntroductionView addSubview:companyMessageLab];
+
+    [companyMessageLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(companyNameLab);
+        make.top.mas_equalTo(companyNameLab.mas_bottom).offset(10);
+    }];
+    
+    UIImageView *rightImageView = [[UIImageView alloc]init];
+    rightImageView.image = [UIImage imageNamed:@"icon_return "];
+    [self.companyIntroductionView addSubview:rightImageView];
+   
+    [rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.companyIntroductionView.mas_right).offset(-22);
+        make.width.mas_equalTo(7);
+        make.height.mas_equalTo(11);
+        make.centerY.mas_equalTo(self.companyIntroductionView);
+    }];
+    
+    UIView * xian1View = [[UIView alloc]init];
+    xian1View.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
+    [self.companyIntroductionView addSubview:xian1View];
+    
+    [xian1View mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.companyIntroductionView.mas_left).offset(22);
+        make.right.mas_equalTo(self.companyIntroductionView.mas_right).offset(-22);
+        make.height.mas_equalTo(1);
+        make.top.mas_equalTo(self.companyIntroductionView.mas_top);
+    }];
+    
+    UIView * xian2View = [[UIView alloc]init];
+    xian2View.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
+    [self.companyIntroductionView addSubview:xian2View];
+    
+    [xian2View mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.companyIntroductionView.mas_left).offset(22);
+        make.right.mas_equalTo(self.companyIntroductionView.mas_right).offset(-22);
+        make.height.mas_equalTo(1);
+        make.bottom.mas_equalTo(self.companyIntroductionView.mas_bottom);
+    }];
+    
 
 }
+
+
+#pragma mark - 职位描述
+
+-(void)setJobDescriptionView{
+    self.jobDescriptionView = [[UIView alloc]init];
+    self.jobDescriptionView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.jobDescriptionView];
+    
+    [self.jobDescriptionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.companyIntroductionView.mas_left);
+        make.right.mas_equalTo(self.companyIntroductionView.mas_right);
+        
+        make.top.mas_equalTo(self.companyIntroductionView.mas_bottom);
+    }];
+    
+    UILabel *label = [[UILabel alloc]init];
+    label.text = @"职位描述";
+    label.font = [UIFont systemFontOfSize:17];
+    label.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
+    [self.jobDescriptionView addSubview:label];
+    
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.jobDescriptionView.mas_left).offset(22);
+        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(16);
+        make.top.mas_equalTo(self.jobDescriptionView.mas_top).offset(28);
+    }];
+    
+    UILabel *label1 = [[UILabel alloc]init];
+    label1.text = @"岗位职责";
+    label1.font = [UIFont systemFontOfSize:15];
+    label1.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
+    [self.jobDescriptionView addSubview:label1];
+    
+    [label1 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(label.mas_left);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(15);
+        make.top.mas_equalTo(label.mas_bottom).offset(28);
+    }];
+    
+ //岗位职责内容
+    self.jobDoLab =[[UILabel alloc]init];
+    self.jobDoLab.backgroundColor = [UIColor redColor];
+    self.jobDoLab.font = [UIFont systemFontOfSize:14];
+    self.jobDoLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
+    self.jobDoLab.numberOfLines = 0;
+    
+
+    NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    NSString  *testString = @"设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距";
+    NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString];
+    [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString length])];
+    [self.jobDoLab  setAttributedText:setString];
+    [paragraphStyle  setLineSpacing:13.5];
+
+    [self.jobDescriptionView addSubview:self.jobDoLab];
+    
+    
+    [self.jobDoLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(label.mas_left);
+        make.right.mas_equalTo(self.jobDescriptionView.mas_right).offset(-24);
+        
+        make.top.mas_equalTo(label1.mas_bottom).offset(15);
+//        make.bottom.mas_equalTo(self.jobDescriptionView.mas_bottom);
+    }];
+    
+    UILabel *label2 = [[UILabel alloc]init];
+    label2.text = @"任职要求";
+    label2.font = [UIFont systemFontOfSize:15];
+    label2.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
+    [self.jobDescriptionView addSubview:label2];
+    
+    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(label.mas_left);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(15);
+        make.top.mas_equalTo(self.jobDoLab.mas_bottom).offset(35);
+    }];
+    
+    //职责要求内容
+
+    self.jobRequireLab = [[UILabel alloc]init];
+    self.jobRequireLab.backgroundColor = [UIColor redColor];
+    self.jobRequireLab.font = [UIFont systemFontOfSize:14];
+    self.jobRequireLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
+    self.jobRequireLab.numberOfLines = 0;
+    
+    NSMutableParagraphStyle  *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
+    NSString  *testString2 = @"设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距";
+    NSMutableAttributedString  *setString2 = [[NSMutableAttributedString alloc] initWithString:testString2];
+    [setString2  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [testString2 length])];
+    [self.jobRequireLab  setAttributedText:setString2];
+    [paragraphStyle2  setLineSpacing:13.5];
+    
+    
+    [self.jobDescriptionView addSubview:self.jobRequireLab];
+    
+    [self.jobRequireLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(label2.mas_left);
+        make.right.mas_equalTo(self.jobDescriptionView.mas_right).offset(-38);
+        
+        make.top.mas_equalTo(label2.mas_bottom).offset(15);
+        //        make.bottom.mas_equalTo(self.jobDescriptionView.mas_bottom);
+    }];
+    
+    
+    [self.jobDescriptionView mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.jobRequireLab.mas_bottom).offset(30);
+    }];
+
+    
+
+    
+    
+
+}
+//
+//
+//-(void)setMapView{
+//    
+//    UIView *mapView = [[UIView alloc] init];
+//    mapView.
+// 
+//    
+//    
+//    
+//}
+
+
+
 
 -(void)playAction{
    
@@ -107,7 +438,8 @@
     [UIView animateWithDuration:0.2 animations:^{
     [self.videoImageView mas_updateConstraints:^(MASConstraintMaker *make) {
         
-        make.bottom.equalTo(self.view.mas_bottom);
+        make.height.mas_equalTo(self.view.mas_height);
+
         
     }];
 

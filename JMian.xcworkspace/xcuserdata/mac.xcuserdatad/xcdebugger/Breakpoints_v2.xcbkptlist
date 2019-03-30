@@ -26,11 +26,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/Home/Controller/JobDetailsViewController.m"
-            timestampString = "575554805.750718"
+            timestampString = "575605318.936895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "408"
-            endingLineNumber = "408">
+            endingLineNumber = "408"
+            landmarkName = "-setJobDescriptionView"
+            landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
