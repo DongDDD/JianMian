@@ -89,6 +89,7 @@
 		04DD1D7C224B9295007CB11C /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D7A224B9295007CB11C /* HomeViewController.m */; };
 		04DD1D7D224B9295007CB11C /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D7B224B9295007CB11C /* HomeViewController.xib */; };
 		4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */; };
+		6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0209C7224F38E5009BCFE4 /* JMHTTPManager+Login.m */; };
 		6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */; };
 		6D558632224B4E340037C14E /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558631224B4E330037C14E /* NavigationViewController.m */; };
 		6D558635224B53BE0037C14E /* JMTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558634224B53BE0037C14E /* JMTabBarViewController.m */; };
@@ -116,6 +117,8 @@
 		6D558664224B564F0037C14E /* JMMineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558662224B564F0037C14E /* JMMineViewController.xib */; };
 		6D558669224B58890037C14E /* JMMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558667224B58890037C14E /* JMMessageViewController.m */; };
 		6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558668224B58890037C14E /* JMMessageViewController.xib */; };
+		6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */; };
+		6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -245,6 +248,9 @@
 		04DD1D7B224B9295007CB11C /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JMian.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2010347C1D130A624B877C02 /* Pods-JMian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.debug.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.debug.xcconfig"; sourceTree = "<group>"; };
+		6D0209C5224F217B009BCFE4 /* JMHTTPConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHTTPConstant.h; sourceTree = "<group>"; };
+		6D0209C6224F38E5009BCFE4 /* JMHTTPManager+Login.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+Login.h"; sourceTree = "<group>"; };
+		6D0209C7224F38E5009BCFE4 /* JMHTTPManager+Login.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+Login.m"; sourceTree = "<group>"; };
 		6D55862D224B4D070037C14E /* UIView+addGradualLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+addGradualLayer.h"; sourceTree = "<group>"; };
 		6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+addGradualLayer.m"; sourceTree = "<group>"; };
 		6D558630224B4E330037C14E /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
@@ -277,6 +283,10 @@
 		6D558666224B58890037C14E /* JMMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageViewController.h; sourceTree = "<group>"; };
 		6D558667224B58890037C14E /* JMMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageViewController.m; sourceTree = "<group>"; };
 		6D558668224B58890037C14E /* JMMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMessageViewController.xib; sourceTree = "<group>"; };
+		6D62995E224E1E24007E7DE4 /* JMHTTPManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHTTPManager.h; sourceTree = "<group>"; };
+		6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPManager.m; sourceTree = "<group>"; };
+		6D629961224E1F92007E7DE4 /* JMHTTPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHTTPRequest.h; sourceTree = "<group>"; };
+		6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPRequest.m; sourceTree = "<group>"; };
 		8A25EDF96D52B70C3945EBB7 /* Pods-JMian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.release.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -403,6 +413,7 @@
 		0462C7222244937D003B6639 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6D62995D224E0468007E7DE4 /* Network */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -632,6 +643,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6D0209C9224F46E0009BCFE4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6D62995E224E1E24007E7DE4 /* JMHTTPManager.h */,
+				6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */,
+				6D629961224E1F92007E7DE4 /* JMHTTPRequest.h */,
+				6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */,
+				6D0209C5224F217B009BCFE4 /* JMHTTPConstant.h */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		6D558636224B54D70037C14E /* home_slices */ = {
 			isa = PBXGroup;
 			children = (
@@ -683,6 +706,17 @@
 				6D558668224B58890037C14E /* JMMessageViewController.xib */,
 			);
 			path = Message;
+			sourceTree = "<group>";
+		};
+		6D62995D224E0468007E7DE4 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6D0209C9224F46E0009BCFE4 /* Service */,
+				6D0209C6224F38E5009BCFE4 /* JMHTTPManager+Login.h */,
+				6D0209C7224F38E5009BCFE4 /* JMHTTPManager+Login.m */,
+			);
+			name = Network;
+			path = Nw;
 			sourceTree = "<group>";
 		};
 		FC374E4AA2E1DABFC6BF04C9 /* Pods */ = {
@@ -953,9 +987,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */,
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
+				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
 				04A247A7224CAAB800DEB8E3 /* CompanyRequirementsView.m in Sources */,
 				04DD1D76224B91C3007CB11C /* HomeTableViewCell.m in Sources */,
+				6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
 				04A247D9224CCC4700DEB8E3 /* JobDetailsViewController.m in Sources */,
