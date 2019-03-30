@@ -7,12 +7,21 @@
 //
 
 #import "AFHTTPSessionManager.h"
+#import "JMHTTPRequest.h"
+#import "JMHTTPConstant.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger,JMHTTPServiceResponseCode){
+    JMHTTPServiceResponseCodeSuccess = 200,
+} ;
+
 @interface JMHTTPManager : AFHTTPSessionManager
 
+//单例
 + (instancetype)sharedInstance;
+//发起请求
+- (void)sendRequest:(JMHTTPRequest *)request;
 
 @end
 
