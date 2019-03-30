@@ -14,11 +14,17 @@
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
 #define NAVIGATION_BAR_HEIGHT 44
+
+
+//状态栏 ＋ 导航栏 高度
+#define STATUS_AND_NAVIGATION_HEIGHT ((STATUS_BAR_HEIGHT) + (NAVIGATION_BAR_HEIGHT))
+
 //主色调
 
 #define MASTER_COLOR [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0]
-//状态栏 ＋ 导航栏 高度
-#define STATUS_AND_NAVIGATION_HEIGHT ((STATUS_BAR_HEIGHT) + (NAVIGATION_BAR_HEIGHT))
+//分割线颜色
+
+#define XIAN_COLOR  [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]
 
 //屏幕 rect
 #define SCREEN_RECT ([UIScreen mainScreen].bounds)
@@ -34,6 +40,13 @@
 #define SafeAreaBottomHeight (IPHONE_X ? 34 : 0)
 #define SafeAreaTopHeight (IPHONE_X ? 88 : 64)
 #define SafeAreaStatusHeight (IPHONE_X ? 44 : 20)
+
+
+//存储userDefault
+#define kSaveMyDefault(A,B) [[NSUserDefaults standardUserDefaults] setObject:B forKey:A]
+//读取duserDefault
+#define kFetchMyDefault(A) [[NSUserDefaults standardUserDefaults] objectForKey:A]
+
 
 //判断设备类型
 #define IPHONE_X \

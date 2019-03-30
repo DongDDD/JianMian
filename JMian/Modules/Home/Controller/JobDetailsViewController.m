@@ -91,18 +91,17 @@
     [playBtn addTarget:self action:@selector(playAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:playBtn];
     [playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.videoImageView.mas_centerX);
-        make.top.mas_equalTo(self.scrollView.mas_top).offset(295);
+        make.centerX.mas_equalTo(self.videoImageView);
+        make.centerY.mas_equalTo(self.videoImageView);
         make.height.and.with.mas_equalTo(141);
     }];
-
-
-
-
     
     
-    
+
+
 }
+
+
 #pragma mark - 职位简介
 -(void)setFootOfVideoView{
     

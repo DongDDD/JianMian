@@ -52,11 +52,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     //判断现在是第几层的navigationController控制器
-    if (self.navigationController.viewControllers.count>1){
-        self.tabBarController.tabBar.hidden = YES;
-    }else{
-        self.tabBarController.tabBar.hidden = NO;
-    }
+    self.tabBarController.tabBar.hidden = self.navigationController.viewControllers.count > 1 ? YES : NO;
 
 }
     @end

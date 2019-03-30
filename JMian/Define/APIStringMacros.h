@@ -11,7 +11,7 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-#define API_BASE_URL_STRING     @"http://boys.test.companydomain.com/api/"
+#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/api/"
 
 #else
 //Release状态下的线上API
@@ -19,6 +19,8 @@
 
 #endif
 
+#define Login_URL @"login"
+#define User_info_URL @"user/info"
 //接口
 #define GET_CONTENT_DETAIL      @"channel/getContentDetail" //获取内容详情(含上一个和下一个)
 

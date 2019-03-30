@@ -8,7 +8,7 @@
 
 #import "JMMineViewController.h"
 #import "PositionDesiredViewController.h"
-
+#import "JMHTTPManager+Login.h"
 
 
 @interface JMMineViewController ()
@@ -27,8 +27,19 @@
 
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-    PositionDesiredViewController *vc = [[PositionDesiredViewController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+//    [[JMHTTPManager sharedInstance] loginWithMode:@"sms" phone:@"15555555555" captcha:@"123456" sign_id:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+    
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+
+    }];
 }
 
 @end
