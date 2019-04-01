@@ -51,9 +51,29 @@
             break;
         case JMMyResumeCellTypeHeader2:
             self.rowsNum = 1;
-            self.footerheight = 10;
+            self.footerheight = 0;
             self.height = 75;
             self.cellId = JMMyResumeHeader2TableViewCellIdentifier;
+            break;
+        case JMMyResumeCellTypeWorkExperience:
+            self.rowsNum = 2;
+            self.footerheight = 0;
+            self.height = 300;
+            break;
+        case JMMyResumeCellTypeAction:
+            self.rowsNum = 1;
+            self.footerheight = 10;
+            self.height = 99;
+            break;
+        case JMMyResumeCellTypeHeader3:
+            self.rowsNum = 1;
+            self.footerheight = 10;
+            self.height = 75;
+            break;
+        case JMMyResumeCellTypeHeader4:
+            self.rowsNum = 1;
+            self.footerheight = 0;
+            self.height = 75;
             break;
         default:
             break;
@@ -83,12 +103,6 @@
 
 - (void)didSelectedRowAtSection:(NSInteger)section {
     
-}
-
-- (void)setSection:(NSInteger)section {
-    if (!_section) {
-        
-    }
 }
 
 @end

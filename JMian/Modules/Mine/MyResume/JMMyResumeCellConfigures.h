@@ -12,6 +12,8 @@
 #import "JMMyResumeHeaderTableViewCell.h"
 #import "JMMyResumeCareerObjectiveTableViewCell.h"
 #import "JMMyResumeCareerStatusTableViewCell.h"
+#import "JMMyResumeWorkExperienceTableViewCell.h"
+#import "JMMyReSumeActionTableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,6 +24,10 @@ typedef NS_ENUM(NSInteger, JMMyResumeCellType){
     JMMyResumeCellTypeCareerObjective,
     JMMyResumeCellTypeCareerStatus2,
     JMMyResumeCellTypeHeader2,
+    JMMyResumeCellTypeWorkExperience,
+    JMMyResumeCellTypeAction,
+    JMMyResumeCellTypeHeader3,
+    JMMyResumeCellTypeHeader4,
 
 };
 
