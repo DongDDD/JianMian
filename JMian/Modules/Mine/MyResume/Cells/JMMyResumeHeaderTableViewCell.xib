@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="JMMyResumeHeaderTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photograph.png" translatesAutoresizingMaskIntoConstraints="NO" id="T1X-AC-Lp8">
+                        <rect key="frame" x="12" y="13" width="23" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="9PS-y2-5aT"/>
+                            <constraint firstAttribute="width" constant="23" id="G06-uC-iQf"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="图片作品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hXC-Gx-g2C">
+                        <rect key="frame" x="38" y="11.5" width="89.5" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="tNo-3E-16Q"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9SG-93-cTo">
+                        <rect key="frame" x="293" y="15.5" width="7" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="7" id="4hd-5C-pfy"/>
+                            <constraint firstAttribute="height" constant="13" id="j1l-w6-ZWD"/>
+                        </constraints>
+                        <state key="normal" image="icon_return .png"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="T1X-AC-Lp8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Chg-Gt-ZzY"/>
+                    <constraint firstItem="T1X-AC-Lp8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="TzH-ZG-KQr"/>
+                    <constraint firstAttribute="trailing" secondItem="9SG-93-cTo" secondAttribute="trailing" constant="20" id="XGp-NB-sTQ"/>
+                    <constraint firstItem="9SG-93-cTo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YqC-39-i5q"/>
+                    <constraint firstItem="hXC-Gx-g2C" firstAttribute="leading" secondItem="T1X-AC-Lp8" secondAttribute="trailing" constant="3" id="elP-TG-hpe"/>
+                    <constraint firstItem="hXC-Gx-g2C" firstAttribute="centerY" secondItem="T1X-AC-Lp8" secondAttribute="centerY" id="lRs-gh-N2w"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="icon_return .png" width="6.5" height="11"/>
+        <image name="photograph.png" width="23" height="18"/>
+    </resources>
+</document>
