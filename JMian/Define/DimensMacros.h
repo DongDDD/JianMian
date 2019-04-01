@@ -35,6 +35,13 @@
 #define SafeAreaTopHeight (IPHONE_X ? 88 : 64)
 #define SafeAreaStatusHeight (IPHONE_X ? 44 : 20)
 
+
+//存储userDefault
+#define kSaveMyDefault(A,B) [[NSUserDefaults standardUserDefaults] setObject:B forKey:A]
+//读取duserDefault
+#define kFetchMyDefault(A) [[NSUserDefaults standardUserDefaults] objectForKey:A]
+
+
 //判断设备类型
 #define IPHONE_X \
 ({BOOL isPhoneX = NO;\

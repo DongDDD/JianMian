@@ -552,9 +552,12 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				04928372224F133A00214E68 /* 04职位详情_slices */,
+=======
 				6D020A072250F3F8009BCFE4 /* MyResume_slices */,
 				6D0209CB224FB900009BCFE4 /* Mine_slices */,
+>>>>>>> origin/feat_xiaojiba
 				04DD1D32224B6E95007CB11C /* BaseInformation_slices */,
 				04DD1D17224B6E95007CB11C /* break_slices */,
 				04DD1D2B224B6E95007CB11C /* ChooseIdentity_slices */,
@@ -1124,9 +1127,12 @@
 				6D020A3D2251031D009BCFE4 /* JMMyResumeCareerObjectiveTableViewCell.xib in Resources */,
 				6D020A282250F3F9009BCFE4 /* job_wanted@2x.png in Resources */,
 				04DD1D5E224B6E95007CB11C /* camera@3x.png in Resources */,
+<<<<<<< HEAD
 				0492838F224F133A00214E68 /* icon_return 拷贝 6.png in Resources */,
 				0492838D224F133A00214E68 /* icon_return 拷贝 6@2x.png in Resources */,
+=======
 				6D0209FB224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.xib in Resources */,
+>>>>>>> origin/feat_xiaojiba
 				04DD1D4B224B6E95007CB11C /* verification_code.png in Resources */,
 				6D55865C224B54D70037C14E /* home_me@3x.png in Resources */,
 				6D0209E8224FB900009BCFE4 /* interview@2x.png in Resources */,
@@ -1142,14 +1148,18 @@
 				6D0209E7224FB900009BCFE4 /* subscribe@3x.png in Resources */,
 				6D020A2A2250F3F9009BCFE4 /* education@3x.png in Resources */,
 				6D558655224B54D70037C14E /* home_ message_pitch_on@3x.png in Resources */,
+<<<<<<< HEAD
 				04928385224F133A00214E68 /* dingwei@3x.png in Resources */,
+				04DD1D69224B6E95007CB11C /* 椭圆 3@3x.png in Resources */,
+				04928387224F133A00214E68 /* Collection_of_selected@2x.png in Resources */,
+=======
 				6D020A272250F3F9009BCFE4 /* 椭圆 3@2x.png in Resources */,
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
 				04DD1D69224B6E95007CB11C /* 椭圆 3@3x.png in Resources */,
-				04928387224F133A00214E68 /* Collection_of_selected@2x.png in Resources */,
 				6D020A262250F3F9009BCFE4 /* 椭圆 3@3x.png in Resources */,
 				6D0209E2224FB900009BCFE4 /* autonym@2x.png in Resources */,
+>>>>>>> origin/feat_xiaojiba
 				04DD1D6D224B6E95007CB11C /* 圆角矩形 5.png in Resources */,
 				04928396224F133A00214E68 /* Location_of_detail_page@2x.png in Resources */,
 				04DD1D55224B6E95007CB11C /* WeChat_login.png in Resources */,
@@ -1180,8 +1190,11 @@
 				6D0209EF224FB900009BCFE4 /* default_avatar@2x.png in Resources */,
 				6D55864E224B54D70037C14E /* home@2x.png in Resources */,
 				6D55865D224B54D70037C14E /* home_ message@2x.png in Resources */,
+<<<<<<< HEAD
 				04928395224F133A00214E68 /* Collection_of_selected.png in Resources */,
+=======
 				6D020A232250F3F9009BCFE4 /* education@2x.png in Resources */,
+>>>>>>> origin/feat_xiaojiba
 				6D55864D224B54D70037C14E /* site_Home@2x.png in Resources */,
 				04DD1D45224B6E95007CB11C /* break@2x.png in Resources */,
 				04A247E0224CE70E00DEB8E3 /* play.png in Resources */,
@@ -1210,8 +1223,11 @@
 				04A2479B224C773A00DEB8E3 /* 0000@3x.png in Resources */,
 				04928394224F133A00214E68 /* Location_of_detail_page@3x.png in Resources */,
 				04DD1D7D224B9295007CB11C /* HomeViewController.xib in Resources */,
+<<<<<<< HEAD
 				0492838C224F133A00214E68 /*  share .png in Resources */,
+=======
 				6D020A002250F09D009BCFE4 /* JMMyResumeViewController.xib in Resources */,
+>>>>>>> origin/feat_xiaojiba
 				044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */,
 				6D020A222250F3F9009BCFE4 /* experience@2x.png in Resources */,
 				04DD1D48224B6E95007CB11C /* WeChat_login@3x.png in Resources */,
