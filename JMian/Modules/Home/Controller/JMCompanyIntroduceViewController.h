@@ -1,17 +1,16 @@
 //
-//  JobDetailsViewController.h
+//  JMCompanyIntroduceViewController.h
 //  JMian
 //
-//  Created by mac on 2019/3/28.
+//  Created by mac on 2019/4/1.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JobDetailsViewController : BaseViewController
+@interface JMCompanyIntroduceViewController : BaseViewController
 
 @end
 
