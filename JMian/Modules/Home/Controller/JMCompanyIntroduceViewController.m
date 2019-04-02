@@ -105,7 +105,7 @@
     
     [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.scrollView);
-        make.width.mas_equalTo(200);
+//        make.width.mas_equalTo(200);
 //        make.height.mas_equalTo(194);
         make.bottom.mas_equalTo(self.contentView.contenLab.mas_bottom).offset(30);
         make.top.mas_equalTo(self.headerView.mas_bottom);

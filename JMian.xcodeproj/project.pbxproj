@@ -872,12 +872,12 @@
 			children = (
 				6D020A4F22539FAF009BCFE4 /* JobDetailsViewController.h */,
 				6D020A5022539FAF009BCFE4 /* HomeViewController.m */,
-				6D020A5122539FAF009BCFE4 /* JMCompanyIntroduceViewController.h */,
 				6D020A5222539FAF009BCFE4 /* HomeViewController.xib */,
 				6D020A5322539FAF009BCFE4 /* JobDetailsViewController.xib */,
 				6D020A5422539FAF009BCFE4 /* JobDetailsViewController.m */,
 				6D020A5522539FAF009BCFE4 /* HomeViewController.h */,
 				6D020A5622539FAF009BCFE4 /* JMCompanyIntroduceViewController.xib */,
+				6D020A5122539FAF009BCFE4 /* JMCompanyIntroduceViewController.h */,
 				6D020A5722539FAF009BCFE4 /* JMCompanyIntroduceViewController.m */,
 			);
 			path = Controller;
