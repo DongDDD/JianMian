@@ -11,6 +11,7 @@
 #import "Masonry.h"
 #import "MapView.h"
 #import "TwoButtonView.h"
+#import "JMCompanyIntroduceViewController.h"
 
 @interface JobDetailsViewController ()
 
@@ -43,12 +44,19 @@
     [self setScrollView];
     [self setVideoImgView];
     [self setFootOfVideoView];
+    
     [self setCompanyIntroductionView];
     [self setJobDescriptionView];
     [self setMapView];
     [self setHRView];
     
     
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.view layoutIfNeeded];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.HRView.frame.origin.y+self.HRView.frame.size.height+70);
 }
 
 #pragma mark - UI布局
@@ -57,7 +65,7 @@
     self.scrollView = [[UIScrollView alloc]init];
 //    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 //    self.scrollView.backgroundColor = [UIColor grayColor];
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, 1960);
+    
     self.scrollView.showsVerticalScrollIndicator = NO;
     
     [self.view addSubview:self.scrollView];
@@ -222,10 +230,24 @@
 }
 #pragma mark - 公司简介
 
+-(void)introduceAvtion{
+    JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+
+}
+
+
 -(void)setCompanyIntroductionView{
     
     self.companyIntroductionView = [[UIView alloc]init];
     self.companyIntroductionView.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(introduceAvtion)];
+    
+    [self.companyIntroductionView addGestureRecognizer:tap];
+    
+    
     [self.scrollView addSubview:self.companyIntroductionView];
     
     [self.companyIntroductionView mas_makeConstraints:^(MASConstraintMaker *make) {
