@@ -9,6 +9,9 @@
 #import "JobDetailsViewController.h"
 
 #import "Masonry.h"
+#import "MapView.h"
+#import "TwoButtonView.h"
+#import "JMCompanyIntroduceViewController.h"
 
 @interface JobDetailsViewController ()
 
@@ -20,16 +23,9 @@
 
 @property(nonatomic,strong)UILabel *jobDoLab;//岗位职责
 @property(nonatomic,strong)UILabel *jobRequireLab;//任职要求
-
-
-
-
-
-
-
-
-
-
+@property(nonatomic,strong)MapView *mapView;//地图
+@property(nonatomic,strong)UIView *HRView;//职位发布者
+@property(nonatomic,strong)TwoButtonView *twoBtnView;// 和他聊聊 和 投个简历按钮
 
 
 
@@ -48,28 +44,39 @@
     [self setScrollView];
     [self setVideoImgView];
     [self setFootOfVideoView];
+    
     [self setCompanyIntroductionView];
     [self setJobDescriptionView];
+    [self setMapView];
+    [self setHRView];
     
     
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.view layoutIfNeeded];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.HRView.frame.origin.y+self.HRView.frame.size.height+70);
 }
 
 #pragma mark - UI布局
 
 -(void)setScrollView{
-    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    self.scrollView.backgroundColor = [UIColor grayColor];
-    self.scrollView.contentSize = CGSizeMake(self.view.frame.size.width, self.view.frame.size.height+800);
+    self.scrollView = [[UIScrollView alloc]init];
+//    self.scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    self.scrollView.backgroundColor = [UIColor grayColor];
+    
     self.scrollView.showsVerticalScrollIndicator = NO;
+    
     [self.view addSubview:self.scrollView];
     
-//    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.view.mas_top);
-//        make.left.and.right.equalTo(self.view);
-//        make.bottom.equalTo(self.view.mas_bottom);
-//
-//
-//    }];
+    [self.scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.view.mas_top);
+        make.left.and.right.equalTo(self.view);
+        make.height.equalTo(@SCREEN_HEIGHT);
+
+
+    }];
 
 }
 
@@ -82,7 +89,7 @@
         make.top.mas_equalTo(self.scrollView.mas_top).mas_offset(-88);
 
         make.left.and.right.equalTo(self.view);
-        make.height.mas_equalTo(self.view.mas_height).mas_offset(-136);
+        make.height.mas_equalTo(self.view.mas_height).mas_offset(-160);
 
     }];
     
@@ -92,72 +99,83 @@
     [playBtn addTarget:self action:@selector(playAction) forControlEvents:UIControlEventTouchUpInside];
     [self.scrollView addSubview:playBtn];
     [playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.videoImageView.mas_centerX);
-        make.top.mas_equalTo(self.scrollView.mas_top).offset(295);
+        make.centerX.mas_equalTo(self.videoImageView);
+        make.centerY.mas_equalTo(self.videoImageView);
         make.height.and.with.mas_equalTo(141);
     }];
-
-
-
-
     
     
-    
+
+
 }
+
+
 #pragma mark - 职位简介
 -(void)setFootOfVideoView{
     
+    self.twoBtnView = [[TwoButtonView alloc]init];
+    self.twoBtnView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:self.twoBtnView];
+    
+    [self.twoBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.view);
+        make.bottom.equalTo(self.view.mas_bottom);
+        make.height.mas_equalTo(70);
+        
+    }];
+    
+    
+  
     self.footOfVideoView = [[UIView alloc]init];
     self.footOfVideoView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.footOfVideoView];
    
     [self.footOfVideoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self.view);
-        make.top.equalTo(self.videoImageView.mas_bottom).mas_offset(0);
-        make.height.mas_equalTo(172);
+        make.top.equalTo(self.videoImageView.mas_bottom);
+        make.height.mas_equalTo(172-60);
        
     }];
     
-    //和他聊聊按钮
-    UIButton *btn = [[UIButton alloc]init];
-    btn.backgroundColor = [UIColor greenColor];
-    [btn setTitle:@"和他聊聊" forState:UIControlStateNormal];
-    btn.layer.borderWidth = 0.5;
-    btn.layer.borderColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0].CGColor;
-    btn.layer.cornerRadius = 18.5;
-    [self.footOfVideoView addSubview:btn];
-    
-    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.footOfVideoView.mas_left).offset(17);
-        make.width.mas_equalTo(136);
-        make.top.mas_equalTo(self.footOfVideoView.mas_top).offset(15);
-        make.height.mas_equalTo(37);
-        
-    }];
-    
-    
-    //投个简历按钮
-    
-    UIButton *btn2 = [[UIButton alloc]init];
-    btn2.backgroundColor = [UIColor greenColor];
-    [btn2 setTitle:@"投个简历" forState:UIControlStateNormal];
-    btn2.layer.borderWidth = 0.5;
-    btn2.layer.borderColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0].CGColor;
-    btn2.layer.cornerRadius = 18.5;
-    [self.footOfVideoView addSubview:btn2];
-    
-    [btn2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(186);
-        make.right.mas_equalTo(self.footOfVideoView.mas_right).offset(-17);
-        make.top.mas_equalTo(btn);
-        make.height.mas_equalTo(btn);
-        
-    }];
+//    //和他聊聊按钮
+//    UIButton *btn = [[UIButton alloc]init];
+//    btn.backgroundColor = [UIColor greenColor];
+//    [btn setTitle:@"和他聊聊" forState:UIControlStateNormal];
+//    btn.layer.borderWidth = 0.5;
+//    btn.layer.borderColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0].CGColor;
+//    btn.layer.cornerRadius = 18.5;
+//    [self.footOfVideoView addSubview:btn];
+//
+//    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(self.footOfVideoView.mas_left).offset(17);
+//        make.width.mas_equalTo(136);
+//        make.top.mas_equalTo(self.footOfVideoView.mas_top).offset(15);
+//        make.height.mas_equalTo(37);
+//
+//    }];
+//
+//
+//    //投个简历按钮
+//
+//    UIButton *btn2 = [[UIButton alloc]init];
+//    btn2.backgroundColor = [UIColor greenColor];
+//    [btn2 setTitle:@"投个简历" forState:UIControlStateNormal];
+//    btn2.layer.borderWidth = 0.5;
+//    btn2.layer.borderColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0].CGColor;
+//    btn2.layer.cornerRadius = 18.5;
+//    [self.footOfVideoView addSubview:btn2];
+//
+//    [btn2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(btn.mas_left).offset(20);
+//        make.right.mas_equalTo(self.footOfVideoView.mas_right).offset(-17);
+//        make.top.mas_equalTo(btn);
+//        make.height.mas_equalTo(btn);
+//
+//    }];
     
     //职位名称
     UILabel *jobNameLab = [[UILabel alloc]init];
     jobNameLab.text = @"UI设计师";
-    jobNameLab.backgroundColor = [UIColor greenColor];
     jobNameLab.font = [UIFont systemFontOfSize:20];
     jobNameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
     [self.footOfVideoView addSubview:jobNameLab];
@@ -166,7 +184,7 @@
         make.width.mas_equalTo(150);
         make.height.mas_equalTo(19);
         make.left.mas_equalTo(self.footOfVideoView.mas_left).offset(22);
-        make.top.mas_equalTo(btn.mas_bottom).offset(15);
+        make.bottom.mas_equalTo(self.footOfVideoView.mas_bottom).offset(-86);
         
     }];
     
@@ -212,10 +230,24 @@
 }
 #pragma mark - 公司简介
 
+-(void)introduceAvtion{
+    JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+
+}
+
+
 -(void)setCompanyIntroductionView{
     
     self.companyIntroductionView = [[UIView alloc]init];
     self.companyIntroductionView.backgroundColor = [UIColor whiteColor];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(introduceAvtion)];
+    
+    [self.companyIntroductionView addGestureRecognizer:tap];
+    
+    
     [self.scrollView addSubview:self.companyIntroductionView];
     
     [self.companyIntroductionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -296,6 +328,8 @@
         make.bottom.mas_equalTo(self.companyIntroductionView.mas_bottom);
     }];
     
+    
+    
 
 }
 
@@ -305,7 +339,7 @@
 -(void)setJobDescriptionView{
     self.jobDescriptionView = [[UIView alloc]init];
     self.jobDescriptionView.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:self.jobDescriptionView];
+    [self.scrollView addSubview:self.jobDescriptionView];
     
     [self.jobDescriptionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyIntroductionView.mas_left);
@@ -342,14 +376,13 @@
     
  //岗位职责内容
     self.jobDoLab =[[UILabel alloc]init];
-    self.jobDoLab.backgroundColor = [UIColor redColor];
     self.jobDoLab.font = [UIFont systemFontOfSize:14];
     self.jobDoLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
     self.jobDoLab.numberOfLines = 0;
     
 
     NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    NSString  *testString = @"设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距";
+    NSString  *testString = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
     NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString];
     [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString length])];
     [self.jobDoLab  setAttributedText:setString];
@@ -382,13 +415,12 @@
     //职责要求内容
 
     self.jobRequireLab = [[UILabel alloc]init];
-    self.jobRequireLab.backgroundColor = [UIColor redColor];
     self.jobRequireLab.font = [UIFont systemFontOfSize:14];
     self.jobRequireLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
     self.jobRequireLab.numberOfLines = 0;
     
     NSMutableParagraphStyle  *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
-    NSString  *testString2 = @"设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距设置Label的行间距";
+    NSString  *testString2 = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
     NSMutableAttributedString  *setString2 = [[NSMutableAttributedString alloc] initWithString:testString2];
     [setString2  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [testString2 length])];
     [self.jobRequireLab  setAttributedText:setString2];
@@ -416,39 +448,129 @@
     
 
 }
-//
-//
-//-(void)setMapView{
-//    
-//    UIView *mapView = [[UIView alloc] init];
-//    mapView.
-// 
-//    
-//    
-//    
-//}
+#pragma mark - d地图
 
+-(void)setMapView{
+//
+     self.mapView = [[MapView alloc] init];
+    
+    [self.scrollView addSubview:self.mapView];
+    
+    [self.mapView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.mas_equalTo(self.jobDescriptionView);
+            make.height.mas_equalTo(346);
+            make.top.mas_equalTo(self.jobDescriptionView.mas_bottom);
+    }];
+
+
+    
+}
+#pragma mark - 职位发布者
+
+-(void)setHRView{
+    
+    self.HRView = [[UIView alloc]init];
+    self.HRView.backgroundColor = [UIColor whiteColor];
+    [self.scrollView addSubview:self.HRView];
+    
+    [self.HRView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(166);
+        make.top.mas_equalTo(self.mapView.mas_bottom);
+    }];
+
+    UILabel *label = [[UILabel alloc]init];
+    label.text = @"职位发布者";
+    label.font = [UIFont systemFontOfSize:17];
+    label.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
+    [self.HRView addSubview:label];
+    
+    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.jobDescriptionView.mas_left).offset(22);
+        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(16);
+        make.top.mas_equalTo(self.HRView.mas_top).offset(30);
+    }];
+    
+    UIImageView *iconImg = [[UIImageView alloc]init];
+    iconImg.backgroundColor = [UIColor redColor];
+    iconImg.image = [UIImage imageNamed:@""];
+   
+    
+    [self.HRView addSubview:iconImg];
+    
+    [iconImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(label.mas_left);
+        make.width.mas_equalTo(49);
+        make.height.mas_equalTo(51);
+        make.top.mas_equalTo(label.mas_bottom).offset(29);
+    }];
+    
+    UILabel *nameLab = [[UILabel alloc]init];
+    nameLab.text = @"小美";
+    nameLab.font = [UIFont systemFontOfSize:17];
+    nameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
+    [self.HRView addSubview:nameLab];
+    
+    [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(iconImg.mas_right).offset(15);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(16);
+        make.top.mas_equalTo(iconImg.mas_top).offset(7);
+    }];
+    
+    UILabel *nameLab2 = [[UILabel alloc]init];
+    nameLab2.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
+    nameLab2.text = @"空间智能科技 ： HR";
+    nameLab2.font = [UIFont systemFontOfSize:13];
+    [self.HRView addSubview:nameLab2];
+    
+    [nameLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(nameLab);
+        make.width.mas_equalTo(150);
+        make.height.mas_equalTo(13);
+        make.top.mas_equalTo(nameLab.mas_bottom).offset(10);
+    }];
+    
+    UIView * xianView = [[UIView alloc]init];
+    xianView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
+    [self.HRView addSubview:xianView];
+    
+    [xianView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.HRView.mas_left).offset(22);
+        make.right.mas_equalTo(self.HRView.mas_right).offset(-22);
+        make.height.mas_equalTo(1);
+        make.top.mas_equalTo(self.HRView.mas_top);
+    }];
+    
+    
+    
+    
+
+
+
+}
 
 
 
 -(void)playAction{
    
-    
+    NSLog(@"播放按钮");
   
-    [UIView animateWithDuration:0.2 animations:^{
-    [self.videoImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-        
-        make.height.mas_equalTo(self.view.mas_height);
-
-        
-    }];
-
-        [self.view layoutIfNeeded];//强制绘制
-    } completion:^(BOOL finished) {
-        NSLog(@"播放视频");
-
-    }];
-    
+//    [UIView animateWithDuration:0.2 animations:^{
+//    [self.videoImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+//
+//        make.height.mas_equalTo(self.view.mas_height);
+//
+//
+//    }];
+//
+//        [self.view layoutIfNeeded];//强制绘制
+//    } completion:^(BOOL finished) {
+//        NSLog(@"播放视频");
+//
+//    }];
+//
 
 
 
