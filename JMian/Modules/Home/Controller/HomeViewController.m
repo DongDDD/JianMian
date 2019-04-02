@@ -39,11 +39,14 @@ static NSString *cellIdent = @"cellIdent";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self setTitleViewImageViewName:@"jianmian_home"];
+    [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
+    [self setRightBtnImageViewName:@"Search_Home" imageNameShare:@""];
     [self setTableView];
 }
+
 #pragma mark - 布局UI
 -(void)setTableView{
-    
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.headView.frame.size.height+self.headView.frame.origin.y, SCREEN_WIDTH, self.view.bounds.size.height) style:UITableViewStylePlain];
     
@@ -57,7 +60,6 @@ static NSString *cellIdent = @"cellIdent";
     
     
     [self.view addSubview:self.tableView];
-    
    
     
 }
