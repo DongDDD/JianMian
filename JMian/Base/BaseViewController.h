@@ -36,15 +36,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)NSString *rightString;
 
+-(void)setRightBtnTextName:(NSString *)rightLabName;
+
 -(void)setTitleViewImageViewName:(NSString *)imageName;
 
 - (void)setBackBtnImageViewName:(NSString *)imageName textName:(NSString *)textName;
 
--(void)setRightBtnImageViewName:(NSString *)imageNameCollect imageNameShare:(NSString *)imageNameShare;
+- (void)setRightBtnImageViewName:(NSString *)imageName imageNameRight2:(NSString *)imageNameRight2;
 
--(void)collectAction;//收藏按钮
+-(void)rightAction;
 
--(void)shareAction;//分享按钮
+-(void)right2Action;
 @end
 
 NS_ASSUME_NONNULL_END

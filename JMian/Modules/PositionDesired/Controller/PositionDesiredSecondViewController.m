@@ -23,11 +23,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationController setNavigationBarHidden:NO];
+
+    
     self.view.backgroundColor = [UIColor whiteColor];
     NSMutableArray *provinces=[[NSMutableArray alloc] initWithObjects:@"视觉设计师",@"UI设计师",@"多媒体设计师",@"游戏场景",@"美工",@"网页设计师", nil];
     self.dataArray = provinces;
-    
-    
+
     [self setSearchView];
     [self setTableView];
     

@@ -41,7 +41,8 @@ static NSString *cellIdent = @"cellIdent";
     // Do any additional setup after loading the view from its nib.
     [self setTitleViewImageViewName:@"jianmian_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
-    [self setRightBtnImageViewName:@"Search_Home" imageNameShare:@""];
+    [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
+
     [self setTableView];
 }
 
@@ -63,6 +64,18 @@ static NSString *cellIdent = @"cellIdent";
    
     
 }
+
+#pragma mark - 点击事件 -
+
+-(void)rightAction{
+    NSLog(@"搜索");
+    LoginViewController *vc = [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+
 #pragma mark - 推荐职位 -
 
 - (IBAction)pushPositionAction:(UIButton *)sender {
@@ -71,6 +84,8 @@ static NSString *cellIdent = @"cellIdent";
     
     
 }
+
+
 
 
 #pragma mark - 所有职位 -

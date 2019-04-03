@@ -55,7 +55,7 @@
     
     [self.navigationController.navigationBar setTranslucent:true];
     //右上角分享 收藏按钮
-    [self setRightBtnImageViewName:@"Collection_of_selected" imageNameShare:@" share "];
+    [self setRightBtnImageViewName:@"Collection_of_selected" imageNameRight2:@"share"];
 
     [self setScrollView];
     [self setVideoImgView];
@@ -107,12 +107,6 @@
 
 
 #pragma mark - 点击事件
-
--(void)collectAction{
-    NSLog(@"收藏");
-}
-
-
 -(void)disapearAction{
     NSLog(@"222");
     [self.shareBgView setHidden:YES];
@@ -121,8 +115,14 @@
     
 }
 
+-(void)rightAction{
+    NSLog(@"收藏");
+}
 
--(void)shareAction{
+
+
+
+-(void)right2Action{
     
     if (self.shareView == nil) {
         

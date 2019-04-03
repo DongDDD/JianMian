@@ -8,8 +8,6 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-#import "ChooseIdentity.h"    //test
-#import "PositionDesiredViewController.h" //test
 #import "NavigationViewController.h"
 #import "JMTabBarViewController.h"
 

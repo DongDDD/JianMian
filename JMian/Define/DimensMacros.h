@@ -20,7 +20,7 @@
 #define STATUS_AND_NAVIGATION_HEIGHT ((STATUS_BAR_HEIGHT) + (NAVIGATION_BAR_HEIGHT))
 
 //主色调
-
+#define TITLE_COLOR [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]
 #define MASTER_COLOR [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0]
 //分割线颜色
 

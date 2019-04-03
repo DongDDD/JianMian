@@ -29,17 +29,34 @@
     
 }
 
+
+-(void)setTitle:(NSString *)title{
+    UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 80, 50)];
+    
+    titleText.textAlignment = NSTextAlignmentCenter;
+    titleText.textColor = TITLE_COLOR;
+    
+    [titleText setFont:[UIFont systemFontOfSize:16.0]];
+    
+    [titleText setText:title];
+    
+    self.navigationItem.titleView=titleText;
+    
+    
+}
+
+
 - (void)setBackBtnImageViewName:(NSString *)imageName textName:(NSString *)textName{
     
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 19)];
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.frame = CGRectMake(0, 0, 16, 21);
+    leftBtn.frame = CGRectMake(0, 0, 50, 21);
     [leftBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
     [leftBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     
-    UILabel *leftLab = [[UILabel alloc]initWithFrame:CGRectMake(leftBtn.frame.origin.x+leftBtn.frame.size.width+5, 0, 100,leftBtn.frame.size.height)];
+    UILabel *leftLab = [[UILabel alloc]initWithFrame:CGRectMake(leftBtn.frame.origin.x+leftBtn.frame.size.width-5, 0, 100,leftBtn.frame.size.height)];
     leftLab.text = textName;
     leftLab.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
     leftLab.font = [UIFont systemFontOfSize:13];
@@ -50,20 +67,36 @@
     self.navigationItem.leftBarButtonItem = leftItem;
     
 }
-- (void)setRightBtnImageViewName:(NSString *)imageNameCollect imageNameShare:(NSString *)imageNameShare{
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 65, 19)];
+
+-(void)setRightBtnTextName:(NSString *)rightLabName{
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtn.frame = CGRectMake(0, 0, 30, 30);
+    [rightBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn setTitle:rightLabName forState:UIControlStateNormal];
+    [rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    rightBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+}
+
+
+- (void)setRightBtnImageViewName:(NSString *)imageName imageNameRight2:(NSString *)imageNameRight2{
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    colectBtn.frame = CGRectMake(30, 0, 25, 25);
-    [colectBtn addTarget:self action:@selector(collectAction) forControlEvents:UIControlEventTouchUpInside];
-    [colectBtn setImage:[UIImage imageNamed:imageNameCollect] forState:UIControlStateNormal];
+    colectBtn.frame = CGRectMake(45, 0, 25, 25);
+    [colectBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
+    [colectBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [bgView addSubview:colectBtn];
-    if (imageNameShare == nil) {
+    if (imageNameRight2 != nil) {
         UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.backgroundColor = [UIColor redColor];
-        shareBtn.frame = CGRectMake(-10, 0, 25, 25);
-        [shareBtn addTarget:self action:@selector(shareAction) forControlEvents:UIControlEventTouchUpInside];
-        [shareBtn setImage:[UIImage imageNamed:imageNameShare] forState:UIControlStateNormal];
+        shareBtn.frame = CGRectMake(0, 0, 25, 25);
+        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
         [bgView addSubview:shareBtn];
         
     }
@@ -72,16 +105,12 @@
     self.navigationItem.rightBarButtonItem = rightItem;
     
 
-
-    
-    
-    
 }
 
 
 
 
--(void)collectAction{
+-(void)rightAction{
     
     
     
@@ -89,7 +118,7 @@
 }
 
 
--(void)shareAction{
+-(void)right2Action{
     
     
     
