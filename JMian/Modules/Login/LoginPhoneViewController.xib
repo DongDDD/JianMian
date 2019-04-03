@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginPhoneViewController">
             <connections>
+                <outlet property="captchaText" destination="Y8f-e0-i2e" id="qAD-Oz-x9C"/>
+                <outlet property="phoneNumText" destination="5y9-0G-IKN" id="nWY-uH-zPi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

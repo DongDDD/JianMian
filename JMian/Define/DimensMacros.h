@@ -9,6 +9,8 @@
 #ifndef DimensMacros_h
 #define DimensMacros_h
 
+#import <MJExtension.h>
+
 
 
 #define STATUS_BAR_HEIGHT 20

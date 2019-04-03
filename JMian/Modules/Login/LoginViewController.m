@@ -12,7 +12,7 @@
 #import "WorkExperienceViewController.h" //test 后期可删除
 #import "FailedLoadingViewController.h"//test 后期可删除
 #import "PositionDesiredSecondViewController.h"//test 后期可删除
-#import "JMHTTPManager+Login.h"
+
 
 
 
@@ -43,8 +43,6 @@
 }
 
 - (IBAction)phoneLogin:(id)sender {
-    
-
     
     
     LoginPhoneViewController *loginPhone = [[LoginPhoneViewController alloc]initWithNibName:@"LoginPhoneViewController" bundle:nil];
