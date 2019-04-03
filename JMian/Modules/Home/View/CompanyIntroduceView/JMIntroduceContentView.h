@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <YYText.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMIntroduceContentView : UIView
 
 
-@property(nonatomic,strong)UILabel *contenLab;
+@property(nonatomic,strong)YYLabel *contenLab;
 @property(nonatomic,strong)UIButton *spreadBtn;
 @property(nonatomic,weak) id<JMIntroduceContentViewDelegate> delegate;
 @end

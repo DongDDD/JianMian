@@ -9,8 +9,9 @@
 #import "JMIntroduceContentView.h"
 #import "Masonry.h"
 #import "DimensMacros.h"
-#import <YYText.h>
 #import "DimensMacros.h"
+
+NSUInteger const maxLine = 6;
 
 @interface JMIntroduceContentView ()
 
@@ -36,39 +37,59 @@
             make.top.mas_equalTo(self.mas_top).offset(28);
         }];
         
-        self.contenLab =[[UILabel alloc]init];
+        self.contenLab =[[YYLabel alloc]init];
         self.contenLab.numberOfLines = 0;
+        self.contenLab.userInteractionEnabled = YES;
+        
         NSString  *testString = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互6面设计面设计面设计面设计面设计面设计面设计设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输岀优质的界果图够通过视觉元素有效把控网站的整66666666----66666666----66666666----66666666----66666666----66666666----66666666----66666666----66666666----66666666----";
         NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString];
-        setString.yy_font = [UIFont systemFontOfSize:14];
-//        setString.yy_lineSpacing = 14;
-        [self.contenLab  setAttributedText:setString];
+        setString.yy_font = [UIFont systemFontOfSize:15];
+        setString.yy_lineSpacing = 14;
+        setString.yy_alignment = NSTextAlignmentLeft;
+        self.contenLab.attributedText = setString;
 
-        YYTextContainer *container = [YYTextContainer containerWithSize:CGSizeMake(SCREEN_WIDTH - 53, MAXFLOAT)];
-        container.maximumNumberOfRows = 0;
+        YYTextHighlight *hi = [[YYTextHighlight alloc] init];
+        hi.tapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
+            YYTextContainer *container = [YYTextContainer containerWithSize:CGSizeMake(SCREEN_WIDTH - 51, MAXFLOAT)];
+            container.maximumNumberOfRows = 0;
+            self.contentLayout = [YYTextLayout layoutWithContainer:container text:setString.copy];
+            if (self.contentLayout.rowCount > maxLine) {
+                [self.contenLab mas_updateConstraints:^(MASConstraintMaker *make) {
+                    make.height.mas_equalTo(self.contentLayout.textBoundingSize.height);
+                }];
+            }
+        };
+        
+        NSMutableAttributedString *more = [[NSMutableAttributedString alloc] initWithString:@"......展开"];
+        [more yy_setTextHighlight:hi range:[more.string rangeOfString:@"展开"]];
+        [more yy_setColor:UIColorFromHEX(0x666666) range:[more.string rangeOfString:@"......"]];
+        [more yy_setColor:UIColorFromHEX(0x24BFFF) range:[more.string rangeOfString:@"展开"]];
+
+        YYLabel *seeMore = [[YYLabel alloc] init];
+        seeMore.attributedText = more;
+        [seeMore sizeToFit];
+
+        NSAttributedString *truncationToken = [NSAttributedString yy_attachmentStringWithContent:seeMore contentMode:UIViewContentModeCenter attachmentSize:seeMore.frame.size alignToFont:setString.yy_font alignment:YYTextVerticalAlignmentCenter];
+        
+        YYTextContainer *container = [YYTextContainer containerWithSize:CGSizeMake(SCREEN_WIDTH - 51, MAXFLOAT)];
+        container.maximumNumberOfRows = maxLine;
         self.contentLayout = [YYTextLayout layoutWithContainer:container text:setString.copy];
-
+//        self.contenLab.textLayout = self.contentLayout;
+        self.contenLab.truncationToken = truncationToken;
+        
         [self addSubview:self.contenLab];
         [self.contenLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.mas_equalTo(titleLab.mas_left);
-            make.right.mas_equalTo(self.mas_right).offset(-31);
-            make.height.mas_equalTo(157);
+            make.left.mas_equalTo(titleLab).offset(0);
+            make.right.mas_equalTo(self).offset(-31);
+            make.height.mas_equalTo(self.contentLayout.textBoundingSize.height);
             make.top.mas_equalTo(titleLab.mas_bottom).offset(21);
         }];
-        
-        
-        //展开按钮
 
-        UILabel *dotLab = [[UILabel alloc]init];
-        dotLab.font = [UIFont systemFontOfSize:14];
-        dotLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
-        dotLab.backgroundColor = [UIColor whiteColor];
-        dotLab.text = @"......";
-        
-        [self addSubview:dotLab];
+
+
         
         self.spreadBtn = [[UIButton alloc]init];
-        [self.spreadBtn setTitle:@"展开>" forState:UIControlStateNormal];
+        [self.spreadBtn setTitle:@"展开" forState:UIControlStateNormal];
         [self.spreadBtn addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.spreadBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
         self.spreadBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
@@ -78,26 +99,18 @@
         self.spreadBtn.backgroundColor = [UIColor whiteColor];
         
 
-        [self addSubview:self.spreadBtn];
-        
-        [self.spreadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.right.mas_equalTo(self.contenLab.mas_right);
-            make.width.mas_equalTo(100);
-            
-            //            make.top.mas_equalTo(titleLab.mas_bottom).offset(21);
-            make.bottom.mas_equalTo(self.contenLab).mas_offset(0);
-            
-        }];
-    
-        [dotLab mas_makeConstraints:^(MASConstraintMaker *make) {
-            
-            make.right.mas_equalTo(self.spreadBtn.mas_left);
-            make.height.mas_equalTo(self.spreadBtn);
-            make.bottom.mas_equalTo(self.spreadBtn.mas_bottom);
-        
-        }];
-        
+//        [self addSubview:self.spreadBtn];
+//
+//        [self.spreadBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//            make.right.mas_equalTo(self.contenLab.mas_right);
+//            make.width.mas_equalTo(50);
+//
+//            //            make.top.mas_equalTo(titleLab.mas_bottom).offset(21);
+//            make.bottom.mas_equalTo(self.contenLab).mas_offset(0);
+//
+//        }];
+//
         
         UIView * xian1View = [[UIView alloc]init];
         xian1View.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
@@ -129,12 +142,6 @@
 
 #pragma mark - 按钮点击事件，通过代理模式响应
 -(void)btnClick:(UIButton *)btn {
-    int maxLine = 6;
-    if (self.contentLayout.rowCount > maxLine) {
-        [self.contenLab mas_updateConstraints:^(MASConstraintMaker *make) {
-            make.height.mas_equalTo(self.contentLayout.textBoundingSize.height);
-        }];
-    }
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickButton:)]) {
         [self.delegate didClickButton:self.contenLab.frame.size.height];
     }
