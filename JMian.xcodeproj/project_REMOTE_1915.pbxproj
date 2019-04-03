@@ -12,30 +12,6 @@
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
 		044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF25E2244D6F100301243 /* LoginPhoneViewController.xib */; };
 		047270822248D078005FD1FC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047270812248D078005FD1FC /* BaseViewController.m */; };
-		048A594522544C5E00B066D9 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A592622544C5E00B066D9 /* HomeViewController.m */; };
-		048A594622544C5E00B066D9 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048A592822544C5E00B066D9 /* HomeViewController.xib */; };
-		048A594722544C5E00B066D9 /* JobDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048A592922544C5E00B066D9 /* JobDetailsViewController.xib */; };
-		048A594822544C5E00B066D9 /* JobDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A592A22544C5E00B066D9 /* JobDetailsViewController.m */; };
-		048A594922544C5E00B066D9 /* JMCompanyIntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048A592C22544C5E00B066D9 /* JMCompanyIntroduceViewController.xib */; };
-		048A594A22544C5E00B066D9 /* JMCompanyIntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A592D22544C5E00B066D9 /* JMCompanyIntroduceViewController.m */; };
-		048A594B22544C5E00B066D9 /* JMCompanyIntroduceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A592F22544C5E00B066D9 /* JMCompanyIntroduceHeaderView.m */; };
-		048A594C22544C5E00B066D9 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A593022544C5E00B066D9 /* MapView.m */; };
-		048A594F22544C5E00B066D9 /* CompanyRequirementsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A593522544C5E00B066D9 /* CompanyRequirementsView.m */; };
-		048A595222544C5E00B066D9 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A593B22544C5E00B066D9 /* HomeTableViewCell.m */; };
-		048A595322544C5E00B066D9 /* JMIntroduceContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A593F22544C5E00B066D9 /* JMIntroduceContentView.m */; };
-		048A595422544C5E00B066D9 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048A594122544C5E00B066D9 /* HomeTableViewCell.xib */; };
-		048A595522544C5E00B066D9 /* TwoButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A594322544C5E00B066D9 /* TwoButtonView.m */; };
-		048A595B22544D8C00B066D9 /* JMSendMyResumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A595922544D8C00B066D9 /* JMSendMyResumeView.m */; };
-		048A596222544E6400B066D9 /* JMShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A595F22544E6400B066D9 /* JMShareView.m */; };
-		048A596A22544FFC00B066D9 /* JMSendMyResumeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048A596922544FFC00B066D9 /* JMSendMyResumeView.xib */; };
-		048FCFB92253086A0090EDE7 /* share2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048FCFB72253086A0090EDE7 /* share2@3x.png */; };
-		048FCFBA2253086A0090EDE7 /* share2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048FCFB82253086A0090EDE7 /* share2@2x.png */; };
-		048FCFC2225316320090EDE7 /* Share_WeChat.png in Resources */ = {isa = PBXBuildFile; fileRef = 048FCFBC225316320090EDE7 /* Share_WeChat.png */; };
-		048FCFC3225316320090EDE7 /* Share_WeChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048FCFBD225316320090EDE7 /* Share_WeChat@2x.png */; };
-		048FCFC4225316320090EDE7 /* Share_WeChat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048FCFBE225316320090EDE7 /* Share_WeChat@3x.png */; };
-		048FCFC5225316320090EDE7 /* Share_WeChat_friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 048FCFBF225316320090EDE7 /* Share_WeChat_friends.png */; };
-		048FCFC6225316320090EDE7 /* Share_WeChat_friends@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048FCFC0225316320090EDE7 /* Share_WeChat_friends@3x.png */; };
-		048FCFC7225316320090EDE7 /* Share_WeChat_friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048FCFC1225316320090EDE7 /* Share_WeChat_friends@2x.png */; };
 		048FEE322244853C001160C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE312244853C001160C8 /* AppDelegate.m */; };
 		048FEE352244853C001160C8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE342244853C001160C8 /* ViewController.m */; };
 		048FEE382244853C001160C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048FEE362244853C001160C8 /* Main.storyboard */; };
@@ -95,9 +71,12 @@
 		04DD1D62224B6E95007CB11C /* 蓝点@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D38224B6E95007CB11C /* 蓝点@3x.png */; };
 		04DD1D63224B6E95007CB11C /* icon_return @2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D39224B6E95007CB11C /* icon_return @2x.png */; };
 		04DD1D64224B6E95007CB11C /* 蓝点.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3A224B6E95007CB11C /* 蓝点.png */; };
+		04DD1D65224B6E95007CB11C /* 椭圆 3.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3B224B6E95007CB11C /* 椭圆 3.png */; };
 		04DD1D66224B6E95007CB11C /* icon_return.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3C224B6E95007CB11C /* icon_return.png */; };
 		04DD1D67224B6E95007CB11C /* icon_return @3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3D224B6E95007CB11C /* icon_return @3x.png */; };
 		04DD1D68224B6E95007CB11C /* 圆角矩形 5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3E224B6E95007CB11C /* 圆角矩形 5@3x.png */; };
+		04DD1D69224B6E95007CB11C /* 椭圆 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3F224B6E95007CB11C /* 椭圆 3@3x.png */; };
+		04DD1D6A224B6E95007CB11C /* 椭圆 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D40224B6E95007CB11C /* 椭圆 3@2x.png */; };
 		04DD1D6B224B6E95007CB11C /* icon_return .png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D41224B6E95007CB11C /* icon_return .png */; };
 		04DD1D6C224B6E95007CB11C /* 圆角矩形 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */; };
 		04DD1D6D224B6E95007CB11C /* 圆角矩形 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */; };
@@ -108,6 +87,8 @@
 		6D0209E1224FB900009BCFE4 /* autonym@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0209CD224FB900009BCFE4 /* autonym@3x.png */; };
 		6D0209E2224FB900009BCFE4 /* autonym@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0209CE224FB900009BCFE4 /* autonym@2x.png */; };
 		6D0209E3224FB900009BCFE4 /* eliver@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0209CF224FB900009BCFE4 /* eliver@2x.png */; };
+		6D0209E4224FB900009BCFE4 /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0209D0224FB900009BCFE4 /* share@2x.png */; };
+		6D0209E5224FB900009BCFE4 /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0209D1224FB900009BCFE4 /* share@3x.png */; };
 		6D0209E6224FB900009BCFE4 /* enshrine@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0209D2224FB900009BCFE4 /* enshrine@2x.png */; };
 		6D0209E7224FB900009BCFE4 /* subscribe@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0209D3224FB900009BCFE4 /* subscribe@3x.png */; };
 		6D0209E8224FB900009BCFE4 /* interview@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0209D4224FB900009BCFE4 /* interview@2x.png */; };
@@ -160,6 +141,19 @@
 		6D020A47225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A45225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.xib */; };
 		6D020A4B22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A4922525C55009BCFE4 /* JMMyReSumeActionTableViewCell.m */; };
 		6D020A4C22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A4A22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.xib */; };
+		6D020A6722539FB0009BCFE4 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5022539FAF009BCFE4 /* HomeViewController.m */; };
+		6D020A6822539FB0009BCFE4 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A5222539FAF009BCFE4 /* HomeViewController.xib */; };
+		6D020A6922539FB0009BCFE4 /* JobDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A5322539FAF009BCFE4 /* JobDetailsViewController.xib */; };
+		6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5422539FAF009BCFE4 /* JobDetailsViewController.m */; };
+		6D020A6B22539FB0009BCFE4 /* JMCompanyIntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A5622539FAF009BCFE4 /* JMCompanyIntroduceViewController.xib */; };
+		6D020A6C22539FB0009BCFE4 /* JMCompanyIntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5722539FAF009BCFE4 /* JMCompanyIntroduceViewController.m */; };
+		6D020A6D22539FB0009BCFE4 /* JMCompanyIntroduceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5922539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.m */; };
+		6D020A6E22539FB0009BCFE4 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5A22539FAF009BCFE4 /* MapView.m */; };
+		6D020A6F22539FB0009BCFE4 /* CompanyRequirementsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5B22539FAF009BCFE4 /* CompanyRequirementsView.m */; };
+		6D020A7022539FB0009BCFE4 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5D22539FAF009BCFE4 /* HomeTableViewCell.m */; };
+		6D020A7122539FB0009BCFE4 /* JMIntroduceContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A6122539FAF009BCFE4 /* JMIntroduceContentView.m */; };
+		6D020A7222539FB0009BCFE4 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A6322539FAF009BCFE4 /* HomeTableViewCell.xib */; };
+		6D020A7322539FB0009BCFE4 /* TwoButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A6522539FAF009BCFE4 /* TwoButtonView.m */; };
 		6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */; };
 		6D558632224B4E340037C14E /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558631224B4E330037C14E /* NavigationViewController.m */; };
 		6D558635224B53BE0037C14E /* JMTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558634224B53BE0037C14E /* JMTabBarViewController.m */; };
@@ -219,42 +213,6 @@
 		047270812248D078005FD1FC /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		0472708A2248F1D0005FD1FC /* DimensMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DimensMacros.h; sourceTree = "<group>"; };
 		0472708B2248F241005FD1FC /* APIStringMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIStringMacros.h; sourceTree = "<group>"; };
-		048A592522544C5E00B066D9 /* JobDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDetailsViewController.h; sourceTree = "<group>"; };
-		048A592622544C5E00B066D9 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		048A592722544C5E00B066D9 /* JMCompanyIntroduceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCompanyIntroduceViewController.h; sourceTree = "<group>"; };
-		048A592822544C5E00B066D9 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		048A592922544C5E00B066D9 /* JobDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobDetailsViewController.xib; sourceTree = "<group>"; };
-		048A592A22544C5E00B066D9 /* JobDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetailsViewController.m; sourceTree = "<group>"; };
-		048A592B22544C5E00B066D9 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		048A592C22544C5E00B066D9 /* JMCompanyIntroduceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCompanyIntroduceViewController.xib; sourceTree = "<group>"; };
-		048A592D22544C5E00B066D9 /* JMCompanyIntroduceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCompanyIntroduceViewController.m; sourceTree = "<group>"; };
-		048A592F22544C5E00B066D9 /* JMCompanyIntroduceHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCompanyIntroduceHeaderView.m; sourceTree = "<group>"; };
-		048A593022544C5E00B066D9 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
-		048A593522544C5E00B066D9 /* CompanyRequirementsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyRequirementsView.m; sourceTree = "<group>"; };
-		048A593A22544C5E00B066D9 /* TwoButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonView.h; sourceTree = "<group>"; };
-		048A593B22544C5E00B066D9 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
-		048A593C22544C5E00B066D9 /* JMCompanyIntroduceHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCompanyIntroduceHeaderView.h; sourceTree = "<group>"; };
-		048A593E22544C5E00B066D9 /* JMIntroduceContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMIntroduceContentView.h; sourceTree = "<group>"; };
-		048A593F22544C5E00B066D9 /* JMIntroduceContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMIntroduceContentView.m; sourceTree = "<group>"; };
-		048A594022544C5E00B066D9 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
-		048A594122544C5E00B066D9 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
-		048A594222544C5E00B066D9 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
-		048A594322544C5E00B066D9 /* TwoButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonView.m; sourceTree = "<group>"; };
-		048A594422544C5E00B066D9 /* CompanyRequirementsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyRequirementsView.h; sourceTree = "<group>"; };
-		048A595822544D8C00B066D9 /* JMSendMyResumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSendMyResumeView.h; sourceTree = "<group>"; };
-		048A595922544D8C00B066D9 /* JMSendMyResumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMSendMyResumeView.m; sourceTree = "<group>"; };
-		048A595F22544E6400B066D9 /* JMShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMShareView.m; sourceTree = "<group>"; };
-		048A596122544E6400B066D9 /* JMShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMShareView.h; sourceTree = "<group>"; };
-		048A596922544FFC00B066D9 /* JMSendMyResumeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMSendMyResumeView.xib; sourceTree = "<group>"; };
-		048FCFB72253086A0090EDE7 /* share2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share2@3x.png"; sourceTree = "<group>"; };
-		048FCFB82253086A0090EDE7 /* share2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share2@2x.png"; sourceTree = "<group>"; };
-		048FCFBC225316320090EDE7 /* Share_WeChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_WeChat.png; sourceTree = "<group>"; };
-		048FCFBD225316320090EDE7 /* Share_WeChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat@2x.png"; sourceTree = "<group>"; };
-		048FCFBE225316320090EDE7 /* Share_WeChat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat@3x.png"; sourceTree = "<group>"; };
-		048FCFBF225316320090EDE7 /* Share_WeChat_friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_WeChat_friends.png; sourceTree = "<group>"; };
-		048FCFC0225316320090EDE7 /* Share_WeChat_friends@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat_friends@3x.png"; sourceTree = "<group>"; };
-		048FCFC1225316320090EDE7 /* Share_WeChat_friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat_friends@2x.png"; sourceTree = "<group>"; };
-		048FCFCC22534B6D0090EDE7 /* JMSendMyResumeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMSendMyResumeView.xib; sourceTree = "<group>"; };
 		048FEE2D2244853C001160C8 /* JMian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JMian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048FEE302244853C001160C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		048FEE312244853C001160C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -331,9 +289,12 @@
 		04DD1D38224B6E95007CB11C /* 蓝点@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝点@3x.png"; sourceTree = "<group>"; };
 		04DD1D39224B6E95007CB11C /* icon_return @2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return @2x.png"; sourceTree = "<group>"; };
 		04DD1D3A224B6E95007CB11C /* 蓝点.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "蓝点.png"; sourceTree = "<group>"; };
+		04DD1D3B224B6E95007CB11C /* 椭圆 3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3.png"; sourceTree = "<group>"; };
 		04DD1D3C224B6E95007CB11C /* icon_return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_return.png; sourceTree = "<group>"; };
 		04DD1D3D224B6E95007CB11C /* icon_return @3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return @3x.png"; sourceTree = "<group>"; };
 		04DD1D3E224B6E95007CB11C /* 圆角矩形 5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5@3x.png"; sourceTree = "<group>"; };
+		04DD1D3F224B6E95007CB11C /* 椭圆 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@3x.png"; sourceTree = "<group>"; };
+		04DD1D40224B6E95007CB11C /* 椭圆 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@2x.png"; sourceTree = "<group>"; };
 		04DD1D41224B6E95007CB11C /* icon_return .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return .png"; sourceTree = "<group>"; };
 		04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5@2x.png"; sourceTree = "<group>"; };
 		04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5.png"; sourceTree = "<group>"; };
@@ -347,6 +308,8 @@
 		6D0209CD224FB900009BCFE4 /* autonym@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "autonym@3x.png"; sourceTree = "<group>"; };
 		6D0209CE224FB900009BCFE4 /* autonym@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "autonym@2x.png"; sourceTree = "<group>"; };
 		6D0209CF224FB900009BCFE4 /* eliver@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "eliver@2x.png"; sourceTree = "<group>"; };
+		6D0209D0224FB900009BCFE4 /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		6D0209D1224FB900009BCFE4 /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
 		6D0209D2224FB900009BCFE4 /* enshrine@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "enshrine@2x.png"; sourceTree = "<group>"; };
 		6D0209D3224FB900009BCFE4 /* subscribe@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "subscribe@3x.png"; sourceTree = "<group>"; };
 		6D0209D4224FB900009BCFE4 /* interview@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "interview@2x.png"; sourceTree = "<group>"; };
@@ -409,6 +372,28 @@
 		6D020A4822525C55009BCFE4 /* JMMyReSumeActionTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMyReSumeActionTableViewCell.h; sourceTree = "<group>"; };
 		6D020A4922525C55009BCFE4 /* JMMyReSumeActionTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMyReSumeActionTableViewCell.m; sourceTree = "<group>"; };
 		6D020A4A22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMyReSumeActionTableViewCell.xib; sourceTree = "<group>"; };
+		6D020A4F22539FAF009BCFE4 /* JobDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JobDetailsViewController.h; sourceTree = "<group>"; };
+		6D020A5022539FAF009BCFE4 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		6D020A5122539FAF009BCFE4 /* JMCompanyIntroduceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCompanyIntroduceViewController.h; sourceTree = "<group>"; };
+		6D020A5222539FAF009BCFE4 /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		6D020A5322539FAF009BCFE4 /* JobDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JobDetailsViewController.xib; sourceTree = "<group>"; };
+		6D020A5422539FAF009BCFE4 /* JobDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JobDetailsViewController.m; sourceTree = "<group>"; };
+		6D020A5522539FAF009BCFE4 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		6D020A5622539FAF009BCFE4 /* JMCompanyIntroduceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCompanyIntroduceViewController.xib; sourceTree = "<group>"; };
+		6D020A5722539FAF009BCFE4 /* JMCompanyIntroduceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCompanyIntroduceViewController.m; sourceTree = "<group>"; };
+		6D020A5922539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCompanyIntroduceHeaderView.m; sourceTree = "<group>"; };
+		6D020A5A22539FAF009BCFE4 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapView.m; sourceTree = "<group>"; };
+		6D020A5B22539FAF009BCFE4 /* CompanyRequirementsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyRequirementsView.m; sourceTree = "<group>"; };
+		6D020A5C22539FAF009BCFE4 /* TwoButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwoButtonView.h; sourceTree = "<group>"; };
+		6D020A5D22539FAF009BCFE4 /* HomeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTableViewCell.m; sourceTree = "<group>"; };
+		6D020A5E22539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCompanyIntroduceHeaderView.h; sourceTree = "<group>"; };
+		6D020A6022539FAF009BCFE4 /* JMIntroduceContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMIntroduceContentView.h; sourceTree = "<group>"; };
+		6D020A6122539FAF009BCFE4 /* JMIntroduceContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMIntroduceContentView.m; sourceTree = "<group>"; };
+		6D020A6222539FAF009BCFE4 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapView.h; sourceTree = "<group>"; };
+		6D020A6322539FAF009BCFE4 /* HomeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeTableViewCell.xib; sourceTree = "<group>"; };
+		6D020A6422539FAF009BCFE4 /* HomeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTableViewCell.h; sourceTree = "<group>"; };
+		6D020A6522539FAF009BCFE4 /* TwoButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwoButtonView.m; sourceTree = "<group>"; };
+		6D020A6622539FAF009BCFE4 /* CompanyRequirementsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyRequirementsView.h; sourceTree = "<group>"; };
 		6D55862D224B4D070037C14E /* UIView+addGradualLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+addGradualLayer.h"; sourceTree = "<group>"; };
 		6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+addGradualLayer.m"; sourceTree = "<group>"; };
 		6D558630224B4E330037C14E /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
@@ -539,7 +524,7 @@
 		0462C71F2244934C003B6639 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				048A592322544C5E00B066D9 /* Home */,
+				6D020A4D22539FAF009BCFE4 /* Home */,
 				04A247C6224CB99800DEB8E3 /* PositionDesired */,
 				044DF23C2244C06900301243 /* Login */,
 				04DD1D0A224B6D95007CB11C /* FailedLoading */,
@@ -552,7 +537,6 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				048FCFBB225316320090EDE7 /* 05分享_slices */,
 				6D020A072250F3F8009BCFE4 /* MyResume_slices */,
 				6D0209CB224FB900009BCFE4 /* Mine_slices */,
 				04DD1D32224B6E95007CB11C /* BaseInformation_slices */,
@@ -579,101 +563,6 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
-		048A592322544C5E00B066D9 /* Home */ = {
-			isa = PBXGroup;
-			children = (
-				048A592422544C5E00B066D9 /* Controller */,
-				048A592E22544C5E00B066D9 /* View */,
-			);
-			path = Home;
-			sourceTree = "<group>";
-		};
-		048A592422544C5E00B066D9 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				048A592522544C5E00B066D9 /* JobDetailsViewController.h */,
-				048A592622544C5E00B066D9 /* HomeViewController.m */,
-				048A592722544C5E00B066D9 /* JMCompanyIntroduceViewController.h */,
-				048A592822544C5E00B066D9 /* HomeViewController.xib */,
-				048A592922544C5E00B066D9 /* JobDetailsViewController.xib */,
-				048A592A22544C5E00B066D9 /* JobDetailsViewController.m */,
-				048A592B22544C5E00B066D9 /* HomeViewController.h */,
-				048A592C22544C5E00B066D9 /* JMCompanyIntroduceViewController.xib */,
-				048A592D22544C5E00B066D9 /* JMCompanyIntroduceViewController.m */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		048A592E22544C5E00B066D9 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				048A595E22544E6400B066D9 /* ShareVIew */,
-				048A595622544D8C00B066D9 /* SendMyResumeView */,
-				048A592F22544C5E00B066D9 /* JMCompanyIntroduceHeaderView.m */,
-				048A593022544C5E00B066D9 /* MapView.m */,
-				048A593522544C5E00B066D9 /* CompanyRequirementsView.m */,
-				048A593A22544C5E00B066D9 /* TwoButtonView.h */,
-				048A593B22544C5E00B066D9 /* HomeTableViewCell.m */,
-				048A593C22544C5E00B066D9 /* JMCompanyIntroduceHeaderView.h */,
-				048A593D22544C5E00B066D9 /* CompanyIntroduceView */,
-				048A594022544C5E00B066D9 /* MapView.h */,
-				048A594122544C5E00B066D9 /* HomeTableViewCell.xib */,
-				048A594222544C5E00B066D9 /* HomeTableViewCell.h */,
-				048A594322544C5E00B066D9 /* TwoButtonView.m */,
-				048A594422544C5E00B066D9 /* CompanyRequirementsView.h */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		048A593D22544C5E00B066D9 /* CompanyIntroduceView */ = {
-			isa = PBXGroup;
-			children = (
-				048A593E22544C5E00B066D9 /* JMIntroduceContentView.h */,
-				048A593F22544C5E00B066D9 /* JMIntroduceContentView.m */,
-			);
-			path = CompanyIntroduceView;
-			sourceTree = "<group>";
-		};
-		048A595622544D8C00B066D9 /* SendMyResumeView */ = {
-			isa = PBXGroup;
-			children = (
-				048A596922544FFC00B066D9 /* JMSendMyResumeView.xib */,
-				048A595822544D8C00B066D9 /* JMSendMyResumeView.h */,
-				048A595922544D8C00B066D9 /* JMSendMyResumeView.m */,
-			);
-			path = SendMyResumeView;
-			sourceTree = "<group>";
-		};
-		048A595E22544E6400B066D9 /* ShareVIew */ = {
-			isa = PBXGroup;
-			children = (
-				048A595F22544E6400B066D9 /* JMShareView.m */,
-				048A596122544E6400B066D9 /* JMShareView.h */,
-			);
-			path = ShareVIew;
-			sourceTree = "<group>";
-		};
-		048A596822544FAB00B066D9 /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				048FCFCC22534B6D0090EDE7 /* JMSendMyResumeView.xib */,
-			);
-			name = "Recovered References";
-			sourceTree = "<group>";
-		};
-		048FCFBB225316320090EDE7 /* 05分享_slices */ = {
-			isa = PBXGroup;
-			children = (
-				048FCFBC225316320090EDE7 /* Share_WeChat.png */,
-				048FCFBD225316320090EDE7 /* Share_WeChat@2x.png */,
-				048FCFBE225316320090EDE7 /* Share_WeChat@3x.png */,
-				048FCFBF225316320090EDE7 /* Share_WeChat_friends.png */,
-				048FCFC0225316320090EDE7 /* Share_WeChat_friends@3x.png */,
-				048FCFC1225316320090EDE7 /* Share_WeChat_friends@2x.png */,
-			);
-			path = "05分享_slices";
-			sourceTree = "<group>";
-		};
 		048FEE242244853B001160C8 = {
 			isa = PBXGroup;
 			children = (
@@ -683,7 +572,6 @@
 				048FEE2E2244853C001160C8 /* Products */,
 				FC374E4AA2E1DABFC6BF04C9 /* Pods */,
 				47579204418359BAEBA6F740 /* Frameworks */,
-				048A596822544FAB00B066D9 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -844,9 +732,12 @@
 				04DD1D38224B6E95007CB11C /* 蓝点@3x.png */,
 				04DD1D39224B6E95007CB11C /* icon_return @2x.png */,
 				04DD1D3A224B6E95007CB11C /* 蓝点.png */,
+				04DD1D3B224B6E95007CB11C /* 椭圆 3.png */,
 				04DD1D3C224B6E95007CB11C /* icon_return.png */,
 				04DD1D3D224B6E95007CB11C /* icon_return @3x.png */,
 				04DD1D3E224B6E95007CB11C /* 圆角矩形 5@3x.png */,
+				04DD1D3F224B6E95007CB11C /* 椭圆 3@3x.png */,
+				04DD1D40224B6E95007CB11C /* 椭圆 3@2x.png */,
 				04DD1D41224B6E95007CB11C /* icon_return .png */,
 				04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */,
 				04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */,
@@ -878,12 +769,12 @@
 		6D0209CB224FB900009BCFE4 /* Mine_slices */ = {
 			isa = PBXGroup;
 			children = (
-				048FCFB82253086A0090EDE7 /* share2@2x.png */,
-				048FCFB72253086A0090EDE7 /* share2@3x.png */,
 				6D0209CC224FB900009BCFE4 /* eliver@3x.png */,
 				6D0209CD224FB900009BCFE4 /* autonym@3x.png */,
 				6D0209CE224FB900009BCFE4 /* autonym@2x.png */,
 				6D0209CF224FB900009BCFE4 /* eliver@2x.png */,
+				6D0209D0224FB900009BCFE4 /* share@2x.png */,
+				6D0209D1224FB900009BCFE4 /* share@3x.png */,
 				6D0209D2224FB900009BCFE4 /* enshrine@2x.png */,
 				6D0209D3224FB900009BCFE4 /* subscribe@3x.png */,
 				6D0209D4224FB900009BCFE4 /* interview@2x.png */,
@@ -965,6 +856,59 @@
 				6D020A4A22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		6D020A4D22539FAF009BCFE4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6D020A4E22539FAF009BCFE4 /* Controller */,
+				6D020A5822539FAF009BCFE4 /* View */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		6D020A4E22539FAF009BCFE4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6D020A4F22539FAF009BCFE4 /* JobDetailsViewController.h */,
+				6D020A5022539FAF009BCFE4 /* HomeViewController.m */,
+				6D020A5222539FAF009BCFE4 /* HomeViewController.xib */,
+				6D020A5322539FAF009BCFE4 /* JobDetailsViewController.xib */,
+				6D020A5422539FAF009BCFE4 /* JobDetailsViewController.m */,
+				6D020A5522539FAF009BCFE4 /* HomeViewController.h */,
+				6D020A5622539FAF009BCFE4 /* JMCompanyIntroduceViewController.xib */,
+				6D020A5122539FAF009BCFE4 /* JMCompanyIntroduceViewController.h */,
+				6D020A5722539FAF009BCFE4 /* JMCompanyIntroduceViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6D020A5822539FAF009BCFE4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6D020A5922539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.m */,
+				6D020A5A22539FAF009BCFE4 /* MapView.m */,
+				6D020A5B22539FAF009BCFE4 /* CompanyRequirementsView.m */,
+				6D020A5C22539FAF009BCFE4 /* TwoButtonView.h */,
+				6D020A5D22539FAF009BCFE4 /* HomeTableViewCell.m */,
+				6D020A5E22539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.h */,
+				6D020A5F22539FAF009BCFE4 /* CompanyIntroduceView */,
+				6D020A6222539FAF009BCFE4 /* MapView.h */,
+				6D020A6322539FAF009BCFE4 /* HomeTableViewCell.xib */,
+				6D020A6422539FAF009BCFE4 /* HomeTableViewCell.h */,
+				6D020A6522539FAF009BCFE4 /* TwoButtonView.m */,
+				6D020A6622539FAF009BCFE4 /* CompanyRequirementsView.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6D020A5F22539FAF009BCFE4 /* CompanyIntroduceView */ = {
+			isa = PBXGroup;
+			children = (
+				6D020A6022539FAF009BCFE4 /* JMIntroduceContentView.h */,
+				6D020A6122539FAF009BCFE4 /* JMIntroduceContentView.m */,
+			);
+			path = CompanyIntroduceView;
 			sourceTree = "<group>";
 		};
 		6D558636224B54D70037C14E /* home_slices */ = {
@@ -1154,7 +1098,7 @@
 			files = (
 				6D55864F224B54D70037C14E /* home_me_pitch_on@2x.png in Resources */,
 				04DD1D6C224B6E95007CB11C /* 圆角矩形 5@2x.png in Resources */,
-				048FCFC5225316320090EDE7 /* Share_WeChat_friends.png in Resources */,
+				04DD1D65224B6E95007CB11C /* 椭圆 3.png in Resources */,
 				04DD1D59224B6E95007CB11C /* 组 18(1).png in Resources */,
 				6D0209F2224FB900009BCFE4 /* default_avatar@3x.png in Resources */,
 				6D020A3D2251031D009BCFE4 /* JMMyResumeCareerObjectiveTableViewCell.xib in Resources */,
@@ -1165,6 +1109,7 @@
 				6D55865C224B54D70037C14E /* home_me@3x.png in Resources */,
 				6D0209E8224FB900009BCFE4 /* interview@2x.png in Resources */,
 				04DD1D5D224B6E95007CB11C /* 蓝点@2x.png in Resources */,
+				6D020A6922539FB0009BCFE4 /* JobDetailsViewController.xib in Resources */,
 				6D0209ED224FB900009BCFE4 /* enshrine@3x.png in Resources */,
 				04DD1D6E224B6E95007CB11C /* camera.png in Resources */,
 				048FEE3D2244853C001160C8 /* LaunchScreen.storyboard in Resources */,
@@ -1172,16 +1117,15 @@
 				04DD1D53224B6E95007CB11C /* phone@2x.png in Resources */,
 				6D0209E7224FB900009BCFE4 /* subscribe@3x.png in Resources */,
 				6D020A2A2250F3F9009BCFE4 /* education@3x.png in Resources */,
+				6D020A6B22539FB0009BCFE4 /* JMCompanyIntroduceViewController.xib in Resources */,
 				6D558655224B54D70037C14E /* home_ message_pitch_on@3x.png in Resources */,
 				6D020A272250F3F9009BCFE4 /* 椭圆 3@2x.png in Resources */,
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
-				048A595422544C5E00B066D9 /* HomeTableViewCell.xib in Resources */,
+				04DD1D69224B6E95007CB11C /* 椭圆 3@3x.png in Resources */,
 				6D020A262250F3F9009BCFE4 /* 椭圆 3@3x.png in Resources */,
 				6D0209E2224FB900009BCFE4 /* autonym@2x.png in Resources */,
-				048A594722544C5E00B066D9 /* JobDetailsViewController.xib in Resources */,
 				04DD1D6D224B6E95007CB11C /* 圆角矩形 5.png in Resources */,
-				048FCFC6225316320090EDE7 /* Share_WeChat_friends@3x.png in Resources */,
 				04DD1D55224B6E95007CB11C /* WeChat_login.png in Resources */,
 				04DD1D61224B6E95007CB11C /* camera@2x.png in Resources */,
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
@@ -1192,13 +1136,11 @@
 				6D558659224B54D70037C14E /* 组 53@2x.png in Resources */,
 				04DD1D46224B6E95007CB11C /* break.png in Resources */,
 				04DD1D51224B6E95007CB11C /* Webkey@3x.png in Resources */,
-				048FCFC4225316320090EDE7 /* Share_WeChat@3x.png in Resources */,
 				6D55864B224B54D70037C14E /* Search_Home@3x.png in Resources */,
 				04DD1D6B224B6E95007CB11C /* icon_return .png in Resources */,
 				6D558656224B54D70037C14E /* home_ message_pitch_on@2x.png in Resources */,
 				04DD1D49224B6E95007CB11C /* verification_code@3x.png in Resources */,
 				6D558657224B54D70037C14E /* home_me@2x.png in Resources */,
-				048A594622544C5E00B066D9 /* HomeViewController.xib in Resources */,
 				6D020A2D2250F3F9009BCFE4 /*  Close@3x.png in Resources */,
 				6D020A1C2250F3F9009BCFE4 /* icon_return 拷贝 23@2x.png in Resources */,
 				04A247DE224CE70E00DEB8E3 /* play@2x.png in Resources */,
@@ -1211,14 +1153,12 @@
 				6D55864E224B54D70037C14E /* home@2x.png in Resources */,
 				6D55865D224B54D70037C14E /* home_ message@2x.png in Resources */,
 				6D020A232250F3F9009BCFE4 /* education@2x.png in Resources */,
-				048FCFBA2253086A0090EDE7 /* share2@2x.png in Resources */,
 				6D55864D224B54D70037C14E /* site_Home@2x.png in Resources */,
 				04DD1D45224B6E95007CB11C /* break@2x.png in Resources */,
 				04A247E0224CE70E00DEB8E3 /* play.png in Resources */,
 				6D020A2E2250F3F9009BCFE4 /*  Close@2x.png in Resources */,
 				6D020A1F2250F3F9009BCFE4 /* icon_return 拷贝 23@3x.png in Resources */,
 				04DD1D5B224B6E95007CB11C /* 组 18@3x(1).png in Resources */,
-				048FCFC2225316320090EDE7 /* Share_WeChat.png in Resources */,
 				6D020A252250F3F9009BCFE4 /* photograph@3x.png in Resources */,
 				6D0209E9224FB900009BCFE4 /* burse@2x.png in Resources */,
 				6D020A422251186B009BCFE4 /* JMMyResumeCareerStatusTableViewCell.xib in Resources */,
@@ -1226,17 +1166,18 @@
 				0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */,
 				6D0209F1224FB900009BCFE4 /* upinstall@2x.png in Resources */,
 				04DD1D4E224B6E95007CB11C /* WeChat_login@2x.png in Resources */,
-				048A596A22544FFC00B066D9 /* JMSendMyResumeView.xib in Resources */,
 				6D558650224B54D70037C14E /* home_me_pitch_on@3x.png in Resources */,
 				6D0209E1224FB900009BCFE4 /* autonym@3x.png in Resources */,
-				048FCFC3225316320090EDE7 /* Share_WeChat@2x.png in Resources */,
+				6D0209E5224FB900009BCFE4 /* share@3x.png in Resources */,
 				04DD1D62224B6E95007CB11C /* 蓝点@3x.png in Resources */,
 				044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */,
+				04DD1D6A224B6E95007CB11C /* 椭圆 3@2x.png in Resources */,
 				6D0209E3224FB900009BCFE4 /* eliver@2x.png in Resources */,
 				048FEE382244853C001160C8 /* Main.storyboard in Resources */,
 				04DD1D50224B6E95007CB11C /* Webkey@2x.png in Resources */,
 				04A2479B224C773A00DEB8E3 /* 0000@3x.png in Resources */,
 				6D020A002250F09D009BCFE4 /* JMMyResumeViewController.xib in Resources */,
+				6D020A6822539FB0009BCFE4 /* HomeViewController.xib in Resources */,
 				044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */,
 				6D020A222250F3F9009BCFE4 /* experience@2x.png in Resources */,
 				04DD1D48224B6E95007CB11C /* WeChat_login@3x.png in Resources */,
@@ -1248,13 +1189,11 @@
 				6D0209EE224FB900009BCFE4 /* my_videos@2x.png in Resources */,
 				6D0209F3224FB900009BCFE4 /* my_videos@3x.png in Resources */,
 				6D0209E6224FB900009BCFE4 /* enshrine@2x.png in Resources */,
-				048FCFB92253086A0090EDE7 /* share2@3x.png in Resources */,
 				6D558653224B54D70037C14E /* pitch_on_home@2x.png in Resources */,
 				04DD1D54224B6E95007CB11C /* JIANMIAN_logo.png in Resources */,
 				04DD1D58224B6E95007CB11C /* 组 18@3x.png in Resources */,
 				6D020A1D2250F3F9009BCFE4 /* icon_return 拷贝 2@3x.png in Resources */,
 				04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */,
-				048FCFC7225316320090EDE7 /* Share_WeChat_friends@2x.png in Resources */,
 				04DD1D47224B6E95007CB11C /* break@3x.png in Resources */,
 				6D558654224B54D70037C14E /* Search_Home@2x.png in Resources */,
 				6D55864C224B54D70037C14E /* pitch_on_home@3x.png in Resources */,
@@ -1262,6 +1201,7 @@
 				6D020A062250F21B009BCFE4 /* JMMyResumeIconTableViewCell.xib in Resources */,
 				6D020A4C22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.xib in Resources */,
 				04DD1D52224B6E95007CB11C /* Webkey.png in Resources */,
+				6D020A7222539FB0009BCFE4 /* HomeTableViewCell.xib in Resources */,
 				6D558664224B564F0037C14E /* JMMineViewController.xib in Resources */,
 				6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */,
 				6D558652224B54D70037C14E /* site_Home@3x.png in Resources */,
@@ -1270,11 +1210,11 @@
 				6D020A1E2250F3F9009BCFE4 /* icon_return 拷贝 2@2x.png in Resources */,
 				6D020A212250F3F9009BCFE4 /* 组 54@3x.png in Resources */,
 				6D0209E0224FB900009BCFE4 /* eliver@3x.png in Resources */,
+				6D0209E4224FB900009BCFE4 /* share@2x.png in Resources */,
 				6D0209EA224FB900009BCFE4 /* burse@3x.png in Resources */,
 				6D020A202250F3F9009BCFE4 /* 组 54@2x.png in Resources */,
 				04A2479C224C773A00DEB8E3 /* 0000@2x.png in Resources */,
 				6D020A382250FF0D009BCFE4 /* JMMyResumeHeaderTableViewCell.xib in Resources */,
-				048A594922544C5E00B066D9 /* JMCompanyIntroduceViewController.xib in Resources */,
 				049A515A2248972F007A8068 /* BasicInformationViewController.xib in Resources */,
 				6D020A47225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.xib in Resources */,
 				04DD1D4C224B6E95007CB11C /* JIANMIAN_logo@3x.png in Resources */,
@@ -1360,39 +1300,37 @@
 			files = (
 				6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */,
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
+				6D020A7022539FB0009BCFE4 /* HomeTableViewCell.m in Sources */,
 				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
 				6D0209F6224FBEEC009BCFE4 /* JMMineModulesTableViewCell.m in Sources */,
-				048A594F22544C5E00B066D9 /* CompanyRequirementsView.m in Sources */,
 				6D0209FF2250F09D009BCFE4 /* JMMyResumeViewController.m in Sources */,
 				6D0209FA224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.m in Sources */,
-				048A595B22544D8C00B066D9 /* JMSendMyResumeView.m in Sources */,
-				048A595322544C5E00B066D9 /* JMIntroduceContentView.m in Sources */,
 				6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */,
+				6D020A6F22539FB0009BCFE4 /* CompanyRequirementsView.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
+				6D020A6E22539FB0009BCFE4 /* MapView.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
-				048A595522544C5E00B066D9 /* TwoButtonView.m in Sources */,
+				6D020A7122539FB0009BCFE4 /* JMIntroduceContentView.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
 				04A2479F224C7AFF00DEB8E3 /* CALayer+UIColor.m in Sources */,
-				048A595222544C5E00B066D9 /* HomeTableViewCell.m in Sources */,
 				04A247D5224CB99800DEB8E3 /* SearchView.m in Sources */,
 				6D020A3C2251031D009BCFE4 /* JMMyResumeCareerObjectiveTableViewCell.m in Sources */,
-				048A594822544C5E00B066D9 /* JobDetailsViewController.m in Sources */,
 				6D558663224B564F0037C14E /* JMMineViewController.m in Sources */,
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
 				6D020A372250FF0D009BCFE4 /* JMMyResumeHeaderTableViewCell.m in Sources */,
+				6D020A7322539FB0009BCFE4 /* TwoButtonView.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
-				048A594B22544C5E00B066D9 /* JMCompanyIntroduceHeaderView.m in Sources */,
-				048A596222544E6400B066D9 /* JMShareView.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,
+				6D020A6C22539FB0009BCFE4 /* JMCompanyIntroduceViewController.m in Sources */,
 				0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */,
 				048FEE322244853C001160C8 /* AppDelegate.m in Sources */,
-				048A594522544C5E00B066D9 /* HomeViewController.m in Sources */,
 				049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */,
 				6D020A332250F46F009BCFE4 /* JMMyResumeCellConfigures.m in Sources */,
 				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
-				048A594C22544C5E00B066D9 /* MapView.m in Sources */,
 				04A247D2224CB99800DEB8E3 /* PositionDesiredSecondViewController.m in Sources */,
+				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
+				6D020A6722539FB0009BCFE4 /* HomeViewController.m in Sources */,
 				6D020A412251186B009BCFE4 /* JMMyResumeCareerStatusTableViewCell.m in Sources */,
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
 				04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */,
@@ -1401,7 +1339,7 @@
 				6D020A052250F21B009BCFE4 /* JMMyResumeIconTableViewCell.m in Sources */,
 				6D020A46225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.m in Sources */,
 				6D558669224B58890037C14E /* JMMessageViewController.m in Sources */,
-				048A594A22544C5E00B066D9 /* JMCompanyIntroduceViewController.m in Sources */,
+				6D020A6D22539FB0009BCFE4 /* JMCompanyIntroduceHeaderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

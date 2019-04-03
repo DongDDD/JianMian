@@ -52,6 +52,11 @@
                     <constraint firstItem="hXC-Gx-g2C" firstAttribute="centerY" secondItem="T1X-AC-Lp8" secondAttribute="centerY" id="lRs-gh-N2w"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="headerArrowBtn" destination="9SG-93-cTo" id="NMO-jt-tDA"/>
+                <outlet property="headerImageView" destination="T1X-AC-Lp8" id="ff5-al-22t"/>
+                <outlet property="headerLabel" destination="hXC-Gx-g2C" id="Hrd-Fx-ntf"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

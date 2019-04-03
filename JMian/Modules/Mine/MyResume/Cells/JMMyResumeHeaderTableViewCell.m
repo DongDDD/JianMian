@@ -10,8 +10,28 @@
 
 NSString *const JMMyResumeHeaderTableViewCellIdentifier = @"JMMyResumeHeaderTableViewCellIdentifier";
 NSString *const JMMyResumeHeader2TableViewCellIdentifier = @"JMMyResumeHeader2TableViewCellIdentifier";
+NSString *const JMMyResumeHeader3TableViewCellIdentifier = @"JMMyResumeHeader3TableViewCellIdentifier";
+NSString *const JMMyResumeHeader4TableViewCellIdentifier = @"JMMyResumeHeader4TableViewCellIdentifier";
+
+@interface JMMyResumeHeaderTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
+@property (weak, nonatomic) IBOutlet UILabel *headerLabel;
+@property (weak, nonatomic) IBOutlet UIButton *headerArrowBtn;
+
+@end
 
 @implementation JMMyResumeHeaderTableViewCell
+
+- (void)cellConfigWithIdentifier:(NSString *)identifier imageViewName:(NSString *)imageViewName title:(NSString *)title {
+    self.headerImageView.image = [UIImage imageNamed:imageViewName];
+    self.headerLabel.text = title;
+    if (identifier != JMMyResumeHeader3TableViewCellIdentifier) {
+        self.headerArrowBtn.hidden = YES;
+    }else {
+        self.headerArrowBtn.hidden = NO;
+    }
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];

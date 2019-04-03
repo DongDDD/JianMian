@@ -9,7 +9,15 @@
 #import "JMIntroduceContentView.h"
 #import "Masonry.h"
 #import "DimensMacros.h"
+#import <YYText.h>
+#import "DimensMacros.h"
 
+@interface JMIntroduceContentView ()
+
+@property (assign, nonatomic) BOOL expand;
+@property (strong, nonatomic) YYTextLayout *contentLayout;
+
+@end
 @implementation JMIntroduceContentView
 
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -29,27 +37,22 @@
         }];
         
         self.contenLab =[[UILabel alloc]init];
-        self.contenLab.font = [UIFont systemFontOfSize:14];
-        self.contenLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
         self.contenLab.numberOfLines = 0;
-
-
-        NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         NSString  *testString = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互6面设计面设计面设计面设计面设计面设计面设计设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输岀优质的界果图够通过视觉元素有效把控网站的整66666666----66666666----66666666----66666666----66666666----66666666----66666666----66666666----66666666----66666666----";
         NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString];
-        [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString length])];
+        setString.yy_font = [UIFont systemFontOfSize:14];
+//        setString.yy_lineSpacing = 14;
         [self.contenLab  setAttributedText:setString];
 
-        [paragraphStyle  setLineSpacing:14];
-//        self.contenLab.text = testString;
+        YYTextContainer *container = [YYTextContainer containerWithSize:CGSizeMake(SCREEN_WIDTH - 53, MAXFLOAT)];
+        container.maximumNumberOfRows = 0;
+        self.contentLayout = [YYTextLayout layoutWithContainer:container text:setString.copy];
 
         [self addSubview:self.contenLab];
-
-
         [self.contenLab mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(titleLab.mas_left);
             make.right.mas_equalTo(self.mas_right).offset(-31);
-//            make.height.mas_equalTo(200);
+            make.height.mas_equalTo(157);
             make.top.mas_equalTo(titleLab.mas_bottom).offset(21);
         }];
         
@@ -95,7 +98,6 @@
         
         }];
         
-      
         
         UIView * xian1View = [[UIView alloc]init];
         xian1View.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
@@ -126,11 +128,16 @@
 
 
 #pragma mark - 按钮点击事件，通过代理模式响应
--(void)btnClick:(UIButton *)btn
-{
-        
-    
-    [self.delegate didClickButton:self.contenLab.frame.size.height];
+-(void)btnClick:(UIButton *)btn {
+    int maxLine = 6;
+    if (self.contentLayout.rowCount > maxLine) {
+        [self.contenLab mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(self.contentLayout.textBoundingSize.height);
+        }];
+    }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didClickButton:)]) {
+        [self.delegate didClickButton:self.contenLab.frame.size.height];
+    }
 }
 
 //

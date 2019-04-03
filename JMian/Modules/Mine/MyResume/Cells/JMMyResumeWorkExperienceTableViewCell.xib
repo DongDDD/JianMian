@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="JMMyResumeWorkExperienceTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="249.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="D3t-La-jwM">
+                        <rect key="frame" x="20" y="129" width="280" height="92.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <string key="text">1、参与营销广告、创意海报、App、专题页面设计。
+ 2、负责公司宣传物料设计（名片、宣传海报、文化
+      tee、纪念品等）。
+ 3、负责从项目目标和用户体验发展设计概念，规划
+      视觉体系，能指导设计师创意发想。
+ 4、优秀的视觉展现能力及把控力，想法独特，并能
+      用各种方式展现。
+ 5、思维灵活，有良好的团队合作能力。
+                        </string>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="项目经理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qno-6t-eCW">
+                        <rect key="frame" x="20" y="27" width="73.5" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="xVZ-eC-iYO"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州空间智能科技有限公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kQq-D5-enM">
+                        <rect key="frame" x="20" y="87" width="208" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="rKe-MK-QSr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.14117647058823529" green="0.74901960784313726" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016年7月-2019年3月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DbG-Fd-ZLj">
+                        <rect key="frame" x="20" y="57" width="135" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="cfB-EG-r0H"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WJl-hN-quN">
+                        <rect key="frame" x="283" y="27.5" width="17" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="17" id="Ln9-qg-b3h"/>
+                            <constraint firstAttribute="height" constant="17" id="O3k-xN-i4C"/>
+                        </constraints>
+                        <state key="normal" image=" copyreader.png"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="D3t-La-jwM" secondAttribute="trailing" constant="20" id="1Fr-Om-15x"/>
+                    <constraint firstItem="kQq-D5-enM" firstAttribute="top" secondItem="DbG-Fd-ZLj" secondAttribute="bottom" constant="17" id="2MG-pA-zwp"/>
+                    <constraint firstItem="D3t-La-jwM" firstAttribute="top" secondItem="kQq-D5-enM" secondAttribute="bottom" constant="25" id="6m6-BV-fpW"/>
+                    <constraint firstItem="Qno-6t-eCW" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Ade-a5-mpo"/>
+                    <constraint firstItem="D3t-La-jwM" firstAttribute="leading" secondItem="kQq-D5-enM" secondAttribute="leading" id="Mli-kY-vgF"/>
+                    <constraint firstItem="DbG-Fd-ZLj" firstAttribute="leading" secondItem="Qno-6t-eCW" secondAttribute="leading" id="OeD-XG-n70"/>
+                    <constraint firstItem="DbG-Fd-ZLj" firstAttribute="top" secondItem="Qno-6t-eCW" secondAttribute="bottom" constant="12" id="RUe-BN-kY7"/>
+                    <constraint firstAttribute="trailing" secondItem="WJl-hN-quN" secondAttribute="trailing" constant="20" id="Sap-fb-Km2"/>
+                    <constraint firstItem="WJl-hN-quN" firstAttribute="centerY" secondItem="Qno-6t-eCW" secondAttribute="centerY" id="Wxw-ib-LRz"/>
+                    <constraint firstItem="Qno-6t-eCW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="27" id="eyu-FJ-WQf"/>
+                    <constraint firstItem="kQq-D5-enM" firstAttribute="leading" secondItem="DbG-Fd-ZLj" secondAttribute="leading" id="w2V-yS-OMV"/>
+                    <constraint firstAttribute="bottom" secondItem="D3t-La-jwM" secondAttribute="bottom" constant="28" id="xWI-PI-Adk"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name=" copyreader.png" width="16.5" height="16.5"/>
+    </resources>
+</document>
