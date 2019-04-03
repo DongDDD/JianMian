@@ -183,6 +183,7 @@
 		6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558668224B58890037C14E /* JMMessageViewController.xib */; };
 		6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */; };
 		6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */; };
+		6DEA99112254A13E0029FE8A /* JMUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA99102254A13E0029FE8A /* JMUserInfoModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -430,6 +431,8 @@
 		6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPManager.m; sourceTree = "<group>"; };
 		6D629961224E1F92007E7DE4 /* JMHTTPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHTTPRequest.h; sourceTree = "<group>"; };
 		6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPRequest.m; sourceTree = "<group>"; };
+		6DEA990F2254A13E0029FE8A /* JMUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMUserInfoModel.h; sourceTree = "<group>"; };
+		6DEA99102254A13E0029FE8A /* JMUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMUserInfoModel.m; sourceTree = "<group>"; };
 		8A25EDF96D52B70C3945EBB7 /* Pods-JMian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.release.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -947,15 +950,9 @@
 		6D55865F224B56390037C14E /* Mine */ = {
 			isa = PBXGroup;
 			children = (
-				6D020A012250F0A5009BCFE4 /* MyResume */,
-				6D558660224B564F0037C14E /* JMMineViewController.h */,
-				6D558661224B564F0037C14E /* JMMineViewController.m */,
-				6D558662224B564F0037C14E /* JMMineViewController.xib */,
-				6D0209F4224FBEEC009BCFE4 /* JMMineModulesTableViewCell.h */,
-				6D0209F5224FBEEC009BCFE4 /* JMMineModulesTableViewCell.m */,
-				6D0209F7224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.h */,
-				6D0209F8224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.m */,
-				6D0209F9224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.xib */,
+				6DEA990E2254A0D90029FE8A /* Controller */,
+				6DEA990D2254A0D40029FE8A /* View */,
+				6DEA990C2254A0B60029FE8A /* Model */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -979,6 +976,38 @@
 			);
 			name = Network;
 			path = Nw;
+			sourceTree = "<group>";
+		};
+		6DEA990C2254A0B60029FE8A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6DEA990F2254A13E0029FE8A /* JMUserInfoModel.h */,
+				6DEA99102254A13E0029FE8A /* JMUserInfoModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6DEA990D2254A0D40029FE8A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6D0209F4224FBEEC009BCFE4 /* JMMineModulesTableViewCell.h */,
+				6D0209F5224FBEEC009BCFE4 /* JMMineModulesTableViewCell.m */,
+				6D0209F7224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.h */,
+				6D0209F8224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.m */,
+				6D0209F9224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6DEA990E2254A0D90029FE8A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6D020A012250F0A5009BCFE4 /* MyResume */,
+				6D558660224B564F0037C14E /* JMMineViewController.h */,
+				6D558661224B564F0037C14E /* JMMineViewController.m */,
+				6D558662224B564F0037C14E /* JMMineViewController.xib */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		FC374E4AA2E1DABFC6BF04C9 /* Pods */ = {
@@ -1328,6 +1357,7 @@
 				049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */,
 				6D020A332250F46F009BCFE4 /* JMMyResumeCellConfigures.m in Sources */,
 				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
+				6DEA99112254A13E0029FE8A /* JMUserInfoModel.m in Sources */,
 				04A247D2224CB99800DEB8E3 /* PositionDesiredSecondViewController.m in Sources */,
 				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
 				6D020A6722539FB0009BCFE4 /* HomeViewController.m in Sources */,

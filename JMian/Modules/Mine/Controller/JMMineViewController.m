@@ -11,6 +11,7 @@
 #import "JMHTTPManager+Login.h"
 #import "JMMineModulesTableViewCell.h"
 #import "JMMyResumeViewController.h"
+#import "JMUserInfoModel.h"
 
 @interface JMMineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -20,6 +21,7 @@
 @end
 
 @implementation JMMineViewController
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,6 +37,15 @@
     
     self.imageNameArr = @[@"subscribe",@"eliver",@"burse",@"autonym"];
     self.labelStrArr = @[@"网点拍摄预约",@"投递的岗位",@"我的钱包",@"实名认证"];
+    
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *model = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        NSLog(@"%@",model.phone);
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 }
 
 
