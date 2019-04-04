@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
                   nickname:(nullable NSString *)nickname
                      email:(nullable NSString *)email
                       name:(nullable NSString *)name
-                       sex:(nullable NSString *)sex
+                       sex:(nullable NSNumber *)sex
                     ethnic:(nullable NSString *)ethnic
                   birthday:(nullable NSString *)birthday
                    address:(nullable NSString *)address

@@ -12,6 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BasicInformationViewController">
             <connections>
+                <outlet property="emailText" destination="rOe-QJ-orW" id="eBw-Ba-29U"/>
+                <outlet property="nameText" destination="vqL-lE-2Xj" id="eAn-Yd-fgU"/>
+                <outlet property="numberText" destination="1iK-eb-jSQ" id="gOV-yL-mMi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -60,6 +63,9 @@
                                             <real key="value" value="12.5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="manBtn:" destination="-1" eventType="touchUpInside" id="wux-WO-E8i"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKC-aC-BuO">
                                     <rect key="frame" x="204" y="236" width="72" height="25"/>
@@ -77,6 +83,9 @@
                                             <real key="value" value="12.5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="womanBtn:" destination="-1" eventType="touchUpInside" id="dFo-98-Dzt"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpq-lF-yuU">
                                     <rect key="frame" x="20" y="311" width="29" height="14.5"/>
@@ -156,6 +165,16 @@
                                         <constraint firstAttribute="height" constant="0.5" id="O2l-rb-M1Y"/>
                                     </constraints>
                                 </view>
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1iK-eb-jSQ">
+                                    <rect key="frame" x="20" y="506" width="272" height="38"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="38" id="gJ8-Et-woe"/>
+                                        <constraint firstAttribute="width" constant="272" id="gsx-MR-l94"/>
+                                    </constraints>
+                                    <nil key="textColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -170,6 +189,7 @@
                                 <constraint firstItem="XUv-Ia-0tb" firstAttribute="top" secondItem="dD7-ED-Jwg" secondAttribute="top" constant="463" id="C8t-jh-a79"/>
                                 <constraint firstItem="XUv-Ia-0tb" firstAttribute="trailing" secondItem="UOB-pA-r3i" secondAttribute="trailing" id="CHX-vY-7fi"/>
                                 <constraint firstItem="rOe-QJ-orW" firstAttribute="leading" secondItem="dD7-ED-Jwg" secondAttribute="leading" constant="20" id="D1F-9x-AUl"/>
+                                <constraint firstItem="1iK-eb-jSQ" firstAttribute="leading" secondItem="3Wj-kQ-DKI" secondAttribute="leading" id="DWN-rJ-k8g"/>
                                 <constraint firstAttribute="trailing" secondItem="UOB-pA-r3i" secondAttribute="trailing" constant="20" id="FM6-fu-5M7"/>
                                 <constraint firstItem="3Wj-kQ-DKI" firstAttribute="top" secondItem="XUv-Ia-0tb" secondAttribute="bottom" constant="23" id="Oxy-p5-qZx"/>
                                 <constraint firstItem="3Wj-kQ-DKI" firstAttribute="top" secondItem="x1i-38-ECw" secondAttribute="bottom" constant="72" id="Pqc-3U-Iej"/>
@@ -188,6 +208,7 @@
                                 <constraint firstItem="x1i-38-ECw" firstAttribute="top" secondItem="UOB-pA-r3i" secondAttribute="bottom" constant="23" id="hZw-WX-ldq"/>
                                 <constraint firstItem="rOe-QJ-orW" firstAttribute="top" secondItem="UnZ-e8-0E1" secondAttribute="bottom" constant="8" id="iqD-jq-i5l"/>
                                 <constraint firstItem="NQ1-fX-nFI" firstAttribute="top" secondItem="dD7-ED-Jwg" secondAttribute="top" constant="236" id="jow-33-k8h"/>
+                                <constraint firstItem="1iK-eb-jSQ" firstAttribute="top" secondItem="3Wj-kQ-DKI" secondAttribute="bottom" constant="2.5" id="kzu-0p-SrY"/>
                                 <constraint firstItem="wTO-J9-uxI" firstAttribute="trailing" secondItem="XUv-Ia-0tb" secondAttribute="trailing" id="lLh-zp-vFm"/>
                                 <constraint firstItem="UOB-pA-r3i" firstAttribute="leading" secondItem="dD7-ED-Jwg" secondAttribute="leading" constant="20" id="pzi-o3-Tye"/>
                                 <constraint firstItem="xpq-lF-yuU" firstAttribute="leading" secondItem="vqL-lE-2Xj" secondAttribute="leading" id="qPn-FA-RXO"/>

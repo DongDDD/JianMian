@@ -124,18 +124,8 @@
                                     <color key="textColor" red="0.33725490200000002" green="0.33725490200000002" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tnr-dW-lz5">
-                                    <rect key="frame" x="20" y="309" width="298" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="8E6-RZ-BLX"/>
-                                        <constraint firstAttribute="width" constant="298" id="dNU-xQ-nH3"/>
-                                    </constraints>
-                                    <state key="normal" title="请选择">
-                                        <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                </button>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return 拷贝 23.png" translatesAutoresizingMaskIntoConstraints="NO" id="zvZ-wu-QwH">
-                                    <rect key="frame" x="333" y="319" width="7" height="10"/>
+                                    <rect key="frame" x="333" y="317" width="7" height="12"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lxh-VR-5Dq">
                                     <rect key="frame" x="20" y="399" width="298" height="30"/>
@@ -204,6 +194,19 @@
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return 拷贝 23.png" translatesAutoresizingMaskIntoConstraints="NO" id="6NH-dS-x8w">
                                     <rect key="frame" x="333" y="588.5" width="7" height="11"/>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sl8-VM-IW4">
+                                    <rect key="frame" x="20" y="308" width="271" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="271" id="RSi-Zg-Zuy"/>
+                                        <constraint firstAttribute="height" constant="30" id="ccU-dH-ECI"/>
+                                    </constraints>
+                                    <state key="normal" title="请选择">
+                                        <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="wantToJob:" destination="-1" eventType="touchUpInside" id="fIk-oy-fqu"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -217,13 +220,11 @@
                                 <constraint firstItem="PJI-f0-pgh" firstAttribute="leading" secondItem="XnR-C0-dOc" secondAttribute="leading" id="BYe-ij-SgD"/>
                                 <constraint firstItem="3iq-29-CHr" firstAttribute="leading" secondItem="MDb-lH-Vlk" secondAttribute="leading" id="CF3-ll-H8O"/>
                                 <constraint firstItem="XnR-C0-dOc" firstAttribute="top" secondItem="qjq-xL-eNj" secondAttribute="bottom" constant="54" id="D31-hX-mPS"/>
-                                <constraint firstItem="zvZ-wu-QwH" firstAttribute="leading" secondItem="tnr-dW-lz5" secondAttribute="trailing" constant="15" id="Eew-Y9-Hwg"/>
                                 <constraint firstItem="qjq-xL-eNj" firstAttribute="top" secondItem="dcE-o7-CqL" secondAttribute="bottom" constant="13" id="FFS-6J-h3G"/>
                                 <constraint firstItem="dcE-o7-CqL" firstAttribute="top" secondItem="jQ4-FN-MqJ" secondAttribute="top" constant="69" id="GQx-rv-nex"/>
                                 <constraint firstItem="NyQ-3f-8IB" firstAttribute="top" secondItem="MDb-lH-Vlk" secondAttribute="bottom" constant="49" id="MPn-Ep-aGf"/>
                                 <constraint firstItem="TSM-O9-lXW" firstAttribute="leading" secondItem="MDb-lH-Vlk" secondAttribute="leading" id="NqU-D3-VKh"/>
                                 <constraint firstItem="dcE-o7-CqL" firstAttribute="centerX" secondItem="jQ4-FN-MqJ" secondAttribute="centerX" id="PLT-Rz-R7G"/>
-                                <constraint firstItem="zvZ-wu-QwH" firstAttribute="centerY" secondItem="tnr-dW-lz5" secondAttribute="centerY" id="PoQ-4o-93o"/>
                                 <constraint firstItem="2zn-lg-xkg" firstAttribute="leading" secondItem="MDb-lH-Vlk" secondAttribute="leading" id="Qly-1e-TuE"/>
                                 <constraint firstItem="wVv-xL-r4E" firstAttribute="trailing" secondItem="Ofn-DH-dHI" secondAttribute="trailing" id="VEk-0H-Hbc"/>
                                 <constraint firstItem="0fg-Lc-iKw" firstAttribute="centerY" secondItem="Lxh-VR-5Dq" secondAttribute="centerY" id="VaG-mL-bJH"/>
@@ -235,18 +236,20 @@
                                 <constraint firstItem="wfV-Tm-r3i" firstAttribute="leading" secondItem="3iq-29-CHr" secondAttribute="leading" id="YhN-9P-suB"/>
                                 <constraint firstItem="wfV-Tm-r3i" firstAttribute="top" secondItem="3iq-29-CHr" secondAttribute="bottom" constant="8" id="Yxb-zM-YBf"/>
                                 <constraint firstItem="6NH-dS-x8w" firstAttribute="centerY" secondItem="wfV-Tm-r3i" secondAttribute="centerY" id="ZAm-6l-RnO"/>
+                                <constraint firstItem="Sl8-VM-IW4" firstAttribute="leading" secondItem="PJI-f0-pgh" secondAttribute="leading" id="Zpi-sR-c6b"/>
                                 <constraint firstItem="2zn-lg-xkg" firstAttribute="leading" secondItem="NyQ-3f-8IB" secondAttribute="leading" id="cfS-OK-dzW"/>
                                 <constraint firstItem="MDb-lH-Vlk" firstAttribute="top" secondItem="ukD-l7-gzE" secondAttribute="bottom" constant="73" id="dzx-Wi-yeY"/>
                                 <constraint firstItem="Ofn-DH-dHI" firstAttribute="centerX" secondItem="qjq-xL-eNj" secondAttribute="centerX" id="ekn-Wr-dMf"/>
+                                <constraint firstItem="zvZ-wu-QwH" firstAttribute="leading" secondItem="0fg-Lc-iKw" secondAttribute="leading" id="exS-PY-qMN"/>
+                                <constraint firstItem="zvZ-wu-QwH" firstAttribute="centerY" secondItem="Sl8-VM-IW4" secondAttribute="centerY" id="fLY-O4-oaC"/>
                                 <constraint firstItem="6NH-dS-x8w" firstAttribute="leading" secondItem="wfV-Tm-r3i" secondAttribute="trailing" constant="15" id="fXG-kk-Hkz"/>
                                 <constraint firstItem="wVv-xL-r4E" firstAttribute="leading" secondItem="PJI-f0-pgh" secondAttribute="leading" id="ftb-mu-NRq"/>
+                                <constraint firstItem="Sl8-VM-IW4" firstAttribute="top" secondItem="PJI-f0-pgh" secondAttribute="bottom" constant="7" id="fy7-In-fgG"/>
                                 <constraint firstItem="wVv-xL-r4E" firstAttribute="top" secondItem="XnR-C0-dOc" secondAttribute="bottom" constant="63" id="geP-eB-0yT"/>
                                 <constraint firstItem="2zn-lg-xkg" firstAttribute="trailing" secondItem="Ofn-DH-dHI" secondAttribute="trailing" id="hnZ-4Z-j4f"/>
                                 <constraint firstItem="qjq-xL-eNj" firstAttribute="centerX" secondItem="dcE-o7-CqL" secondAttribute="centerX" id="kcf-lS-ZU5"/>
                                 <constraint firstItem="rpV-pd-Fjg" firstAttribute="leading" secondItem="0fg-Lc-iKw" secondAttribute="leading" id="mcL-9p-ixP"/>
-                                <constraint firstItem="tnr-dW-lz5" firstAttribute="leading" secondItem="PJI-f0-pgh" secondAttribute="leading" id="nY5-v1-piI"/>
                                 <constraint firstItem="cge-iC-Nfq" firstAttribute="leading" secondItem="jQ4-FN-MqJ" secondAttribute="leading" constant="107" id="oHH-Wl-8mB"/>
-                                <constraint firstItem="tnr-dW-lz5" firstAttribute="top" secondItem="PJI-f0-pgh" secondAttribute="bottom" constant="8" id="q7B-Nu-fb6"/>
                                 <constraint firstItem="TSM-O9-lXW" firstAttribute="top" secondItem="MDb-lH-Vlk" secondAttribute="bottom" constant="8" id="rfg-Ux-ifS"/>
                                 <constraint firstItem="MDb-lH-Vlk" firstAttribute="leading" secondItem="ukD-l7-gzE" secondAttribute="leading" id="s9Q-pg-r9M"/>
                                 <constraint firstItem="jbY-x7-O3k" firstAttribute="leading" secondItem="cge-iC-Nfq" secondAttribute="trailing" constant="69" id="sfT-fI-9pB"/>
@@ -283,7 +286,7 @@
     </objects>
     <resources>
         <image name="icon_return 拷贝 23.png" width="7" height="11"/>
-        <image name="椭圆 3.png" width="14" height="15"/>
+        <image name="椭圆 3.png" width="15" height="15"/>
         <image name="蓝点.png" width="15" height="15"/>
     </resources>
 </document>
