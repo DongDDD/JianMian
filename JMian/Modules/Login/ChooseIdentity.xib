@@ -48,12 +48,15 @@
                     </constraints>
                     <state key="normal" image="组 18(1).png"/>
                     <connections>
-                        <action selector="lookUpBtn:" destination="-1" eventType="touchUpInside" id="Ws0-qa-gCC"/>
+                        <action selector="isSearchJob:" destination="-1" eventType="touchUpInside" id="eW0-3x-Yqd"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V4A-Xu-cs3">
                     <rect key="frame" x="116" y="392" width="143" height="143"/>
                     <state key="normal" image="组 18.png"/>
+                    <connections>
+                        <action selector="isCompanyBtn:" destination="-1" eventType="touchUpInside" id="glo-tV-TyJ"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我要招人" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ok9-MV-eJU">
                     <rect key="frame" x="136" y="532" width="103" height="21"/>

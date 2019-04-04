@@ -156,25 +156,6 @@
                                         <constraint firstAttribute="height" constant="0.5" id="O2l-rb-M1Y"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7qc-Ul-GdC">
-                                    <rect key="frame" x="20" y="691" width="335" height="50"/>
-                                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="cKB-Jm-Nef"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <state key="normal" title="下一步">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="25"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="InforBtn:" destination="-1" eventType="touchUpInside" id="XbF-cH-ukg"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -197,8 +178,6 @@
                                 <constraint firstItem="UnZ-e8-0E1" firstAttribute="leading" secondItem="dD7-ED-Jwg" secondAttribute="leading" constant="20" id="VAf-RS-hF0"/>
                                 <constraint firstItem="2PF-62-fNQ" firstAttribute="centerX" secondItem="dD7-ED-Jwg" secondAttribute="centerX" id="Vzl-P3-TdK"/>
                                 <constraint firstItem="xpq-lF-yuU" firstAttribute="top" secondItem="dD7-ED-Jwg" secondAttribute="top" constant="311" id="X9n-3a-qyT"/>
-                                <constraint firstItem="7qc-Ul-GdC" firstAttribute="leading" secondItem="dD7-ED-Jwg" secondAttribute="leading" constant="20" id="ZBh-eP-2Wv"/>
-                                <constraint firstAttribute="trailing" secondItem="7qc-Ul-GdC" secondAttribute="trailing" constant="20" id="azh-xl-SUd"/>
                                 <constraint firstItem="XUv-Ia-0tb" firstAttribute="leading" secondItem="3Wj-kQ-DKI" secondAttribute="leading" id="bau-21-OAx"/>
                                 <constraint firstItem="xz1-PU-svB" firstAttribute="top" secondItem="2PF-62-fNQ" secondAttribute="bottom" constant="30" id="c0E-mD-TT0"/>
                                 <constraint firstItem="UOB-pA-r3i" firstAttribute="top" secondItem="vqL-lE-2Xj" secondAttribute="bottom" constant="3" id="cxf-Kj-X9h"/>
@@ -214,7 +193,6 @@
                                 <constraint firstItem="xpq-lF-yuU" firstAttribute="leading" secondItem="vqL-lE-2Xj" secondAttribute="leading" id="qPn-FA-RXO"/>
                                 <constraint firstAttribute="trailing" secondItem="mKC-aC-BuO" secondAttribute="trailing" constant="99" id="tBU-Kk-h2m"/>
                                 <constraint firstItem="3Wj-kQ-DKI" firstAttribute="leading" secondItem="dD7-ED-Jwg" secondAttribute="leading" constant="20" id="tKM-8d-eJz"/>
-                                <constraint firstItem="7qc-Ul-GdC" firstAttribute="top" secondItem="NWm-LS-4BT" secondAttribute="bottom" constant="32" id="uMN-oc-7Tx"/>
                             </constraints>
                         </view>
                     </subviews>

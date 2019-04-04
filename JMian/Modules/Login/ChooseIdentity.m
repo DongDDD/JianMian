@@ -8,6 +8,9 @@
 
 #import "ChooseIdentity.h"
 #import "BasicInformationViewController.h"
+#import "JMHTTPManager+UpdateInfo.h"
+#import "JMLoginInfoModel.h"
+
 
 
 @interface ChooseIdentity ()
@@ -22,13 +25,30 @@
 
     // Do any additional setup after loading the view from its nib.
 }
-- (IBAction)lookUpBtn:(UIButton *)sender {
+- (IBAction)isSearchJob:(id)sender {
+    [[JMHTTPManager sharedInstance]updateUserInfoType:@(1) password:@"1234657955" avatar:nil nickname:nil email:@"379247101@qq.com" name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:@"1" real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
     BasicInformationViewController *basicInformation = [[BasicInformationViewController alloc]init];
     
     [self.navigationController pushViewController:basicInformation animated:YES];
     
-    
 }
+
+
+- (IBAction)isCompanyBtn:(id)sender {
+    [[JMHTTPManager sharedInstance]updateUserInfoType:@(2) password:@"1234657955" avatar:nil nickname:nil email:@"379247101@qq.com" name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:@"1" real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    NSLog(@"我要招人");
+}
+
 
 /*
 #pragma mark - Navigation

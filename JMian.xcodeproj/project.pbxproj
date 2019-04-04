@@ -149,6 +149,7 @@
 		04E17C142254AA9B00D67E47 /* JMMineModulesCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E17C112254AA9B00D67E47 /* JMMineModulesCollectionViewCell.m */; };
 		04E17C172254AAA600D67E47 /* JMUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E17C152254AAA600D67E47 /* JMUserInfoModel.m */; };
 		04E17C1C2254B97300D67E47 /* JMLoginInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E17C1B2254B97300D67E47 /* JMLoginInfoModel.m */; };
+		04EB6CA92255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6CA82255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.m */; };
 		4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */; };
 		6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D0209C7224F38E5009BCFE4 /* JMHTTPManager+Login.m */; };
 		6D0209E0224FB900009BCFE4 /* eliver@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D0209CC224FB900009BCFE4 /* eliver@3x.png */; };
@@ -425,6 +426,8 @@
 		04E17C162254AAA600D67E47 /* JMUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMUserInfoModel.h; sourceTree = "<group>"; };
 		04E17C1A2254B97300D67E47 /* JMLoginInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLoginInfoModel.h; sourceTree = "<group>"; };
 		04E17C1B2254B97300D67E47 /* JMLoginInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLoginInfoModel.m; sourceTree = "<group>"; };
+		04EB6CA72255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+UpdateInfo.h"; sourceTree = "<group>"; };
+		04EB6CA82255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+UpdateInfo.m"; sourceTree = "<group>"; };
 		1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JMian.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2010347C1D130A624B877C02 /* Pods-JMian.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.debug.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.debug.xcconfig"; sourceTree = "<group>"; };
 		6D0209C5224F217B009BCFE4 /* JMHTTPConstant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHTTPConstant.h; sourceTree = "<group>"; };
@@ -1125,6 +1128,8 @@
 				6D0209C9224F46E0009BCFE4 /* Service */,
 				6D0209C6224F38E5009BCFE4 /* JMHTTPManager+Login.h */,
 				6D0209C7224F38E5009BCFE4 /* JMHTTPManager+Login.m */,
+				04EB6CA72255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.h */,
+				04EB6CA82255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.m */,
 			);
 			name = Network;
 			path = Nw;
@@ -1543,6 +1548,7 @@
 				048A594522544C5E00B066D9 /* HomeViewController.m in Sources */,
 				04E17BFC2254AA0200D67E47 /* JMMyResumeHeaderTableViewCell.m in Sources */,
 				049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */,
+				04EB6CA92255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.m in Sources */,
 				04E17C052254AA0200D67E47 /* JMMyResumeViewController.m in Sources */,
 				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
 				048A594C22544C5E00B066D9 /* MapView.m in Sources */,

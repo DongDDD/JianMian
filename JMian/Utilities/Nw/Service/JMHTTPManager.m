@@ -76,10 +76,11 @@
     switch (request.method) {
         case JMRequestMethodGET:
             
-            [self.requestSerializer setValue:kFetchMyDefault(@"token") forHTTPHeaderField:@"Authorization"];
+            if(kFetchMyDefault(@"token")) [self.requestSerializer setValue:kFetchMyDefault(@"token") forHTTPHeaderField:@"Authorization"];
            urlRequest = [self urlRequestForMethod:@"GET" request:request];
             break;
         case JMRequestMethodPOST:
+            if(kFetchMyDefault(@"token")) [self.requestSerializer setValue:kFetchMyDefault(@"token") forHTTPHeaderField:@"Authorization"];
             urlRequest = [self urlRequestForMethod:@"POST" request:request];
             break;
             

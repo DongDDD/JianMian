@@ -19,10 +19,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
-
-    // Do any additional setup after loading the view from its nib.
+    [self setRightBtnTextName:@"下一步"];
+   // Do any additional setup after loading the view from its nib.
 }
-- (IBAction)InforBtn:(UIButton *)sender {
+-(void)rightAction{
+    
+    
+    
     JobIntensionViewController *jobIntension = [[JobIntensionViewController alloc]init];
     
     [self.navigationController pushViewController:jobIntension animated:YES];
