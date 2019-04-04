@@ -9,7 +9,7 @@
 #import "PositionDesiredViewController.h"
 #import "WSDropMenuView.h"
 #import "SearchView.h"
-#import "LoginViewController.h" //test
+#import "JMHTTPManager+PositionDesired.h"
 
 
 
@@ -19,8 +19,6 @@
 @property (nonatomic,strong) NSArray *firstNSArrays;
 
 @property(nonatomic,strong)SearchView *searchView;
-
-
 
 @end
 
@@ -48,10 +46,25 @@
     dropMenu.delegate  =self;
     [self.view addSubview:dropMenu];
     
-    
+    [self getData];
     
     
 }
+#pragma mark - 获取期望职位数据 -
+
+-(void)getData{
+    [[JMHTTPManager sharedInstance]fetchPositionLabelsWithMyId:nil mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        NSLog(@"%@",responsObject);
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+   
+    
+    
+}
+
+
 #pragma mark - WSDropMenuView DataSource -
 
 -(void)setSearchView{

@@ -10,7 +10,9 @@
 #import "PositionDesiredViewController.h"
 
 
+
 @interface JobIntensionViewController ()
+
 
 @end
 
@@ -24,14 +26,20 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+- (IBAction)wantToJob:(id)sender {
+    
+    PositionDesiredViewController *vc = [[PositionDesiredViewController alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+}
 
 -(void)rightAction{
  
     PositionDesiredViewController *Positon = [[PositionDesiredViewController alloc]init];
     [self.navigationController pushViewController:Positon animated:YES];
     
-
-
 }
 
 /*
