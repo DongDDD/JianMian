@@ -48,6 +48,14 @@
     }];
 }
 
+- (NSDictionary *)generateDicFromArray:(NSArray *)array {
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    for (id object in array) {
+        NSString *key = [NSString stringWithFormat:@"%@",object];
+        dic[key] = object;
+    }
+    return dic.copy;
+}
 
 #pragma mark - UITableViewDelegate
 
