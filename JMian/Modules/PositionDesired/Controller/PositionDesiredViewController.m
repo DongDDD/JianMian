@@ -29,13 +29,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    [self.navigationController setNavigationBarHidden:NO];
+
+    [self setTitle:@"期望职位"];
+    [self setRightBtnTextName:@"保存"];
+    
     self.firstNSArrays = @[@"产品",@"设计",@"汽车",@"运营/客服",@"实习储备",@"旅游",@"教育培训",@"酒店/餐饮 /零售",@"市场会展",@"生产制造",@"行政人事",@"医疗健康",@"财务法务",@"IT科技",@"销售",@"采购贸易",@"文化传媒",@"物流仓储",@"房地产物业",@"房地产物业",@"金融",@"咨询管理 /翻译"];
     
   
     self.view.backgroundColor = [UIColor whiteColor];
     
+    [self setSearchView];
 
-    WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,SafeAreaTopHeight, self.view.frame.size.width, SCREEN_HEIGHT)];
+    WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,self.searchView.frame.origin.y+self.searchView.frame.size.height+15, self.view.frame.size.width, SCREEN_HEIGHT)];
     
     
     dropMenu.dataSource = self;
@@ -43,7 +49,6 @@
     [self.view addSubview:dropMenu];
     
     
-    [self setSearchView];
     
     
 }
@@ -59,15 +64,7 @@
     self.searchView.searchTextField.leftView=image;
     self.searchView.searchTextField.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:self.searchView];
-    //    UITextField * searhbar = [UITextField searchBarWithTextField];
-    //     searhbar.placeholder = @"  请输入公司或职位名称";
-    //
-    //
-    //    searhbar.frame = CGRectMake(20,64,SCREEN_WIDTH-40,33);
-    //    [self.view addSubview:searhbar];
-    //
-    
-    
+  
     
     
 }

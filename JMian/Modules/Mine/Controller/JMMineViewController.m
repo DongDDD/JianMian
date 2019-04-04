@@ -46,6 +46,7 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+    
 }
 
 - (NSDictionary *)generateDicFromArray:(NSArray *)array {

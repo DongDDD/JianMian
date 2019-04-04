@@ -21,6 +21,7 @@
 
 #define Login_URL @"login"
 #define User_info_URL @"user/info"
+#define Update_info_URL @"user/update"
 //接口
 #define GET_CONTENT_DETAIL      @"channel/getContentDetail" //获取内容详情(含上一个和下一个)
 

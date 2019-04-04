@@ -27,6 +27,7 @@
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/Desktop/JMian/JMian/Modules/Home/Controller/JMCompanyIntroduceViewController.m"
                   timestampString = "576047385.268484"
+                  timestampString = "576043825.079438"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "74"
@@ -42,6 +43,7 @@
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/Desktop/JMian/JMian/Modules/Home/Controller/JMCompanyIntroduceViewController.m"
                   timestampString = "576047385.272634"
+                  timestampString = "576043825.082305"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "70"
@@ -112,6 +114,54 @@
             startingLineNumber = "159"
             endingLineNumber = "159"
             landmarkName = "-setFootOfVideoView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/Login/JobIntensionViewController.m"
+            timestampString = "575980125.846599"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "-rightAction"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Base/BaseViewController.h"
+            timestampString = "575980125.8464839"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "-rightAction"
+            landmarkType = "6">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/Home/Controller/JobDetailsViewController.m"
+            timestampString = "575955928.0832829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "-sendResumeButton"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -18,6 +18,7 @@
 
 
 
+
 @interface LoginViewController ()
 
 
@@ -29,18 +30,13 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
     // Do any additional setup after loading the view from its nib.
-//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]initWithTitle:@"" style:UIBarButtonItemStylePlain target:self action:nil];
-//    [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"蓝点"]];
-//    [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"蓝点"]];
- 
+
 }
 - (IBAction)testAction:(id)sender {
     PositionDesiredSecondViewController *postionD = [[PositionDesiredSecondViewController alloc]init];
     
     [self.navigationController pushViewController:postionD animated:YES];
-    
-    
-    
+
 }
 
 - (IBAction)phoneLogin:(id)sender {

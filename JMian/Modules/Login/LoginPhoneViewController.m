@@ -8,10 +8,15 @@
 
 #import "LoginPhoneViewController.h"
 #import "ChooseIdentity.h"
+#import "JMHTTPManager+Login.h"
+#import "JMLoginInfoModel.h"
 
 
 
 @interface LoginPhoneViewController ()
+@property (weak, nonatomic) IBOutlet UITextField *phoneNumText;
+@property (weak, nonatomic) IBOutlet UITextField *captchaText;
+
 
 @end
 
@@ -19,9 +24,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:NO];
+
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)loginPhoneBtn:(id)sender {
+    
+    [[JMHTTPManager sharedInstance]loginWithMode:@"sms" phone:self.phoneNumText.text captcha:self.captchaText.text sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMLoginInfoModel *model = [JMLoginInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        NSLog(@"用户手机号：----%@",model.phone);
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+       [alert show];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
+    
     ChooseIdentity *chooseId = [[ChooseIdentity alloc]init];
     
     [self.navigationController pushViewController:chooseId animated:YES];

@@ -39,11 +39,15 @@ static NSString *cellIdent = @"cellIdent";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self setTitleViewImageViewName:@"jianmian_home"];
+    [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
+    [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
+
     [self setTableView];
 }
+
 #pragma mark - 布局UI
 -(void)setTableView{
-    
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.headView.frame.size.height+self.headView.frame.origin.y, SCREEN_WIDTH, self.view.bounds.size.height) style:UITableViewStylePlain];
     
@@ -57,10 +61,21 @@ static NSString *cellIdent = @"cellIdent";
     
     
     [self.view addSubview:self.tableView];
-    
    
     
 }
+
+#pragma mark - 点击事件 -
+
+-(void)rightAction{
+    NSLog(@"搜索");
+    LoginViewController *vc = [[LoginViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+
 #pragma mark - 推荐职位 -
 
 - (IBAction)pushPositionAction:(UIButton *)sender {
@@ -69,6 +84,8 @@ static NSString *cellIdent = @"cellIdent";
     
     
 }
+
+
 
 
 #pragma mark - 所有职位 -

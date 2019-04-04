@@ -33,39 +33,33 @@
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pvp-xk-0yo">
-                    <rect key="frame" x="102.5" y="402" width="170" height="36"/>
-                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ldF-eC-tLY">
+                    <rect key="frame" x="139.5" y="384" width="96" height="96"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="170" id="7J2-Yf-k2S"/>
-                        <constraint firstAttribute="height" constant="36" id="JNu-pW-mtH"/>
+                        <constraint firstAttribute="height" constant="96" id="BRr-P4-tj7"/>
+                        <constraint firstAttribute="width" constant="96" id="Pns-9m-FnC"/>
                     </constraints>
-                    <state key="normal" title="刷新">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="刷新" backgroundImage="renovation.png">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <real key="value" value="17.800000000000001"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="reloadingAction:" destination="-1" eventType="touchUpInside" id="0aw-JE-gFG"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Pvp-xk-0yo" firstAttribute="top" secondItem="abu-NU-m0V" secondAttribute="bottom" constant="51" id="4le-bV-gaH"/>
                 <constraint firstItem="aTw-U5-rhh" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="204" id="FEf-dH-24X"/>
                 <constraint firstItem="abu-NU-m0V" firstAttribute="top" secondItem="aTw-U5-rhh" secondAttribute="bottom" constant="24" id="LOo-6U-cNH"/>
-                <constraint firstItem="Pvp-xk-0yo" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="XPR-sq-RAd"/>
                 <constraint firstItem="aTw-U5-rhh" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="cQO-Ss-Vlk"/>
+                <constraint firstItem="ldF-eC-tLY" firstAttribute="top" secondItem="abu-NU-m0V" secondAttribute="bottom" constant="33" id="hFf-Qq-Lyk"/>
                 <constraint firstItem="abu-NU-m0V" firstAttribute="centerX" secondItem="aTw-U5-rhh" secondAttribute="centerX" id="lVU-kQ-vTt"/>
+                <constraint firstItem="ldF-eC-tLY" firstAttribute="centerX" secondItem="abu-NU-m0V" secondAttribute="centerX" id="qJt-7O-8gT"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="40.799999999999997" y="46.326836581709152"/>
         </view>
     </objects>
     <resources>
         <image name="break.png" width="182" height="87"/>
+        <image name="renovation.png" width="96" height="96"/>
     </resources>
 </document>

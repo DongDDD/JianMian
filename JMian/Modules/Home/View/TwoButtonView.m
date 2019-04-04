@@ -35,14 +35,13 @@
             make.width.mas_equalTo(136);
             make.top.mas_equalTo(self.mas_top).offset(10);
             make.height.mas_equalTo(37);
-        
         }];
         
-//
-        //投个简历按钮
 
+        //投个简历按钮
         UIButton *btn2 = [[UIButton alloc]init];
         btn2.backgroundColor = MASTER_COLOR;
+        [btn2 addTarget:self action:@selector(sendResume) forControlEvents:UIControlEventTouchUpInside];
         [btn2 setTitle:@"投个简历" forState:UIControlStateNormal];
         btn2.layer.borderWidth = 0.5;
         btn2.layer.borderColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0].CGColor;
@@ -54,8 +53,6 @@
             make.width.mas_equalTo(186);
             make.height.mas_equalTo(btn);
             make.top.mas_equalTo(btn);
-
-
         }];
         
         
@@ -65,6 +62,11 @@
 }
 
 
+-(void)sendResume{
+
+    [self.delegate sendResumeButton];
+
+}
 
 
 

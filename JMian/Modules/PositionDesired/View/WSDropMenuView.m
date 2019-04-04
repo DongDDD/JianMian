@@ -132,6 +132,7 @@ static NSString *cellIdent = @"cellIdent";
     if (!_leftTableView) {
         
         _leftTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _leftTableView.showsVerticalScrollIndicator = NO;
         _leftTableView.delegate = self;
         _leftTableView.dataSource = self;
         [_leftTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdent];
@@ -147,6 +148,7 @@ static NSString *cellIdent = @"cellIdent";
     if (!_leftTableView_1) {
         
         _leftTableView_1 = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _leftTableView_1.showsVerticalScrollIndicator = NO;
         _leftTableView_1.delegate = self;
         _leftTableView_1.dataSource = self;
         [_leftTableView_1 registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdent];
@@ -168,6 +170,7 @@ static NSString *cellIdent = @"cellIdent";
     if (!_leftTableView_2) {
         
         _leftTableView_2 = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _leftTableView_2.showsVerticalScrollIndicator = NO;
         _leftTableView_2.delegate = self;
         _leftTableView_2.dataSource = self;
         [_leftTableView_2 registerClass:[UITableViewCell class] forCellReuseIdentifier:cellIdent];

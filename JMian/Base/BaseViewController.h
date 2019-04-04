@@ -30,14 +30,23 @@
 
 
 
-
-
-
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BaseViewController : UIViewController
 
+@property(nonatomic,strong)NSString *rightString;
+
+-(void)setRightBtnTextName:(NSString *)rightLabName;
+
+-(void)setTitleViewImageViewName:(NSString *)imageName;
+
+- (void)setBackBtnImageViewName:(NSString *)imageName textName:(NSString *)textName;
+
+- (void)setRightBtnImageViewName:(NSString *)imageName imageNameRight2:(NSString *)imageNameRight2;
+
+-(void)rightAction;
+
+-(void)right2Action;
 @end
 
 NS_ASSUME_NONNULL_END

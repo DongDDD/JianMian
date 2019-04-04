@@ -1,18 +1,16 @@
 //
-//  LoginViewController.h
+//  JMShareView.h
 //  JMian
 //
-//  Created by mac on 2019/3/22.
+//  Created by mac on 2019/4/2.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
-
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LoginViewController : BaseViewController
+@interface JMShareView : UIView
 
 @end
 

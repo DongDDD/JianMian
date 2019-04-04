@@ -18,12 +18,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:NO];
+
+    [self setRightBtnTextName:@"下一步"];
     // Do any additional setup after loading the view from its nib.
 }
-- (IBAction)jobIntensionAction:(id)sender {
+
+
+-(void)rightAction{
+ 
     PositionDesiredViewController *Positon = [[PositionDesiredViewController alloc]init];
     [self.navigationController pushViewController:Positon animated:YES];
     
+
+
 }
 
 /*

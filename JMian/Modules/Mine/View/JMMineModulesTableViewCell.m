@@ -32,7 +32,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.imageNameArr = @[@"my_videos",@"interview",@"enshrine",@"share"];
+        self.imageNameArr = @[@"my_videos",@"interview",@"enshrine",@"share2"];
         self.labelStrArr = @[@"视频简历",@"面试管理",@"职位收藏",@"分享APP"];
         
         [self.contentView addSubview:self.collectionView];

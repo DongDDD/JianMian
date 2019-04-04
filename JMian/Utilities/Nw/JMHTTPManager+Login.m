@@ -9,6 +9,8 @@
 #import "JMHTTPManager+Login.h"
 #import "APIStringMacros.h"
 
+
+
 @implementation JMHTTPManager (Login)
 
 - (void)loginWithMode:(NSString *)mode phone:(NSString *)phone captcha:(NSString *)captcha sign_id:(nullable NSString *)sign_id successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
@@ -24,4 +26,6 @@
 
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:User_info_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
+
+
 @end

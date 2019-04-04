@@ -10,7 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol TwoButtonViewDelegate <NSObject>
+
+@optional
+-(void)sendResumeButton;
+
+@end
+
+
 @interface TwoButtonView : UIView
+
+@property(nonatomic,weak) id<TwoButtonViewDelegate> delegate;
+
 
 @end
 
