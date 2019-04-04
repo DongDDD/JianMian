@@ -217,7 +217,6 @@
 		6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558668224B58890037C14E /* JMMessageViewController.xib */; };
 		6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */; };
 		6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */; };
-		6DEA99112254A13E0029FE8A /* JMUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA99102254A13E0029FE8A /* JMUserInfoModel.m */; };
 		6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA99162255ACD00029FE8A /* NSDictionary+NullSafe.m */; };
 /* End PBXBuildFile section */
 
@@ -506,8 +505,6 @@
 		6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPManager.m; sourceTree = "<group>"; };
 		6D629961224E1F92007E7DE4 /* JMHTTPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHTTPRequest.h; sourceTree = "<group>"; };
 		6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPRequest.m; sourceTree = "<group>"; };
-		6DEA990F2254A13E0029FE8A /* JMUserInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMUserInfoModel.h; sourceTree = "<group>"; };
-		6DEA99102254A13E0029FE8A /* JMUserInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMUserInfoModel.m; sourceTree = "<group>"; };
 		6DEA99152255ACD00029FE8A /* NSDictionary+NullSafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NullSafe.h"; sourceTree = "<group>"; };
 		6DEA99162255ACD00029FE8A /* NSDictionary+NullSafe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NullSafe.m"; sourceTree = "<group>"; };
 		8A25EDF96D52B70C3945EBB7 /* Pods-JMian.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JMian.release.xcconfig"; path = "Target Support Files/Pods-JMian/Pods-JMian.release.xcconfig"; sourceTree = "<group>"; };
@@ -1563,10 +1560,7 @@
 				04E17C1C2254B97300D67E47 /* JMLoginInfoModel.m in Sources */,
 				04E17C042254AA0200D67E47 /* JMMyResumeWorkExperienceTableViewCell.m in Sources */,
 				04A247D2224CB99800DEB8E3 /* PositionDesiredSecondViewController.m in Sources */,
-				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
-				6D020A6722539FB0009BCFE4 /* HomeViewController.m in Sources */,
 				6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */,
-				6D020A412251186B009BCFE4 /* JMMyResumeCareerStatusTableViewCell.m in Sources */,
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
 				04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */,
 				6D558635224B53BE0037C14E /* JMTabBarViewController.m in Sources */,
