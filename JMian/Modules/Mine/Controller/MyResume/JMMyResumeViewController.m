@@ -90,6 +90,21 @@
             [cell cellConfigWithIdentifier:JMMyResumeHeader4TableViewCellIdentifier imageViewName:@"education" title:@"教育经历"];
             return cell;
         }
+        case JMMyResumeCellTypeEducationalExperience:
+        {
+            JMEducationalExperienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMEducationalExperienceTableViewCellIdentifier forIndexPath:indexPath];
+            return cell;
+        }
+        case JMMyResumeCellTypeHeaderOnlyLabel:
+        {
+            JMMyResumeHeader2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeaderOnlyLabelTableViewCellIdentifier forIndexPath:indexPath];
+            return cell;
+        }
+        case JMMyResumeCellTypyText:
+        {
+            JMMyResumeTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeTextTableViewCellIdentifier forIndexPath:indexPath];
+            return cell;
+        }
         default:
             break;
     }
@@ -106,7 +121,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 11;
+    return 13;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -140,6 +155,9 @@
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeCareerStatusTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeCareerStatus2TableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeWorkExperienceTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeWorkExperienceTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyReSumeActionTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyReSumeActionTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMEducationalExperienceTableViewCell" bundle:nil] forCellReuseIdentifier:JMEducationalExperienceTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeHeader2TableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeHeaderOnlyLabelTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeTextTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeTextTableViewCellIdentifier];
 
     }
     return _tableView;

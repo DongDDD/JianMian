@@ -75,6 +75,21 @@
             self.footerheight = 0;
             self.height = 75;
             break;
+        case JMMyResumeCellTypeEducationalExperience:
+            self.rowsNum = 2;
+            self.footerheight = 10;
+            self.height = 83;
+            break;
+        case JMMyResumeCellTypeHeaderOnlyLabel:
+            self.rowsNum = 1;
+            self.footerheight = 0;
+            self.height = 83;
+            break;
+        case JMMyResumeCellTypyText:
+            self.rowsNum = 1;
+            self.footerheight = 0;
+            self.height = 83;
+            break;
         default:
             break;
     }
