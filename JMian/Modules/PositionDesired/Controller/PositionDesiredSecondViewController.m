@@ -10,7 +10,6 @@
 #import "SearchView.h"
 #import "LoginViewController.h"
 
-
 @interface PositionDesiredSecondViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)SearchView *searchView;
 @property(nonatomic,strong)UITableView *tableView;

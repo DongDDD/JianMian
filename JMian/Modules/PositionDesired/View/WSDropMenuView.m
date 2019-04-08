@@ -258,7 +258,10 @@ static NSString *cellIdent = @"cellIdent";
         [self.leftTableView_2 reloadData];
     }
     
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(dropMenuView:didSelectWithIndexPath:)]) {
+        WSIndexPath *twIndexPath = [self _getTwIndexPathForCellWithTableView:tableView indexPath:indexPath];
+        [self.delegate dropMenuView:self didSelectWithIndexPath:twIndexPath];
+    }
   
     
     

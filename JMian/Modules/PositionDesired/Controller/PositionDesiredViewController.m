@@ -10,15 +10,16 @@
 #import "WSDropMenuView.h"
 #import "SearchView.h"
 #import "JMHTTPManager+PositionDesired.h"
+#import "JMSystemLabelsModel.h"
 
 
 
 
 @interface PositionDesiredViewController ()<WSDropMenuViewDataSource,WSDropMenuViewDelegate,UITextFieldDelegate>
 
-@property (nonatomic,strong) NSArray *firstNSArrays;
+@property (nonatomic, strong) NSArray *firstArr,*secArr,*thirdArr;
 
-@property(nonatomic,strong)SearchView *searchView;
+@property (nonatomic, strong) SearchView *searchView;
 
 @end
 
@@ -32,30 +33,27 @@
     [self setTitle:@"期望职位"];
     [self setRightBtnTextName:@"保存"];
     
-    self.firstNSArrays = @[@"产品",@"设计",@"汽车",@"运营/客服",@"实习储备",@"旅游",@"教育培训",@"酒店/餐饮 /零售",@"市场会展",@"生产制造",@"行政人事",@"医疗健康",@"财务法务",@"IT科技",@"销售",@"采购贸易",@"文化传媒",@"物流仓储",@"房地产物业",@"房地产物业",@"金融",@"咨询管理 /翻译"];
-    
-  
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setSearchView];
 
-    WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,self.searchView.frame.origin.y+self.searchView.frame.size.height+15, self.view.frame.size.width, SCREEN_HEIGHT)];
-    
-    
-    dropMenu.dataSource = self;
-    dropMenu.delegate  =self;
-    [self.view addSubview:dropMenu];
     
     [self getData];
     
-    
 }
+
 #pragma mark - 获取期望职位数据 -
 
 -(void)getData{
-    [[JMHTTPManager sharedInstance]fetchPositionLabelsWithMyId:nil mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] fetchPositionLabelsWithMyId:nil mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        NSLog(@"%@",responsObject);
+        self.firstArr =  [JMSystemLabelsModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+        
+        WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,self.searchView.frame.origin.y+self.searchView.frame.size.height+15, self.view.frame.size.width, SCREEN_HEIGHT)];
+        dropMenu.dataSource = self;
+        dropMenu.delegate = self;
+        [self.view addSubview:dropMenu];
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -68,6 +66,7 @@
 #pragma mark - WSDropMenuView DataSource -
 
 -(void)setSearchView{
+    
     self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, SafeAreaTopHeight, SCREEN_WIDTH-40, 33)];
     self.searchView.searchTextField.placeholder = @"                                            搜索";
     self.searchView.searchTextField.returnKeyType =UIReturnKeySearch;
@@ -78,28 +77,31 @@
     self.searchView.searchTextField.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:self.searchView];
   
-    
-    
+ 
 }
 
 
 #pragma mark - WSDropMenuView DataSource -
 - (NSInteger)dropMenuView:(WSDropMenuView *)dropMenuView numberWithIndexPath:(WSIndexPath *)indexPath{
     
+    NSLog(@"---%@---",indexPath);
     //WSIndexPath 类里面有注释
     
     if (indexPath.column == 0 && indexPath.row == WSNoFound) {
         
-        return self.firstNSArrays.count;   //  一级
+        return self.firstArr.count;   //  一级
     }
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item == WSNoFound) {
         
-        return 5;                        //二级
+        JMSystemLabelsModel *firstModel = self.firstArr[indexPath.row];
+        return firstModel.children.count;                        //二级
     }
     
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item != WSNoFound && indexPath.rank == WSNoFound) {
         
-        return 20;                   //三级
+        JMSystemLabelsModel *firstModel = self.firstArr[indexPath.row];
+        JMSystemLabelsModel *secondModel = [JMSystemLabelsModel mj_objectWithKeyValues:firstModel.children[indexPath.item]];
+        return secondModel.children.count;                   //三级
     }
     
    
@@ -114,17 +116,24 @@
     //左边 第一级
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item == WSNoFound) {
         
-        return self.firstNSArrays[indexPath.row];  //一级
+        JMSystemLabelsModel *firstModel = self.firstArr[indexPath.row];
+        return firstModel.name;  //一级
     }
     
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item != WSNoFound && indexPath.rank == WSNoFound) {
         
-        return [NSString stringWithFormat:@"第二级%ld",indexPath.item];
+        JMSystemLabelsModel *firstModel = self.firstArr[indexPath.row];
+        JMSystemLabelsModel *secondModel = [JMSystemLabelsModel mj_objectWithKeyValues:firstModel.children[indexPath.item]];
+        return secondModel.name;
     }
     
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item != WSNoFound && indexPath.rank != WSNoFound) {
         
-        return [NSString stringWithFormat:@"第三级%ld",indexPath.rank];
+        JMSystemLabelsModel *firstModel = self.firstArr[indexPath.row];
+        JMSystemLabelsModel *secondModel = [JMSystemLabelsModel mj_objectWithKeyValues:firstModel.children[indexPath.item]];
+        JMSystemLabelsModel *thirdModel = [JMSystemLabelsModel mj_objectWithKeyValues:secondModel.children[indexPath.rank]];
+
+        return thirdModel.name;
     }
     
     if (indexPath.column == 1 && indexPath.row != WSNoFound ) {

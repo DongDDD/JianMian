@@ -12,7 +12,7 @@
 
 @implementation JMHTTPManager (PositionDesired)
 
-- (void)fetchPositionLabelsWithMyId:(NSString *)myId mode:(NSString *)mode successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+- (void)fetchPositionLabelsWithMyId:(nullable NSString *)myId mode:(NSString *)mode successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
 
     NSDictionary *dic = @{@"id":myId,@"mode":mode};
   
