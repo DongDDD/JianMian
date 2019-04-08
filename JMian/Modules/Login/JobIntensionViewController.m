@@ -8,6 +8,7 @@
 
 #import "JobIntensionViewController.h"
 #import "PositionDesiredViewController.h"
+#import "JMJobExperienceViewController.h"
 
 
 
@@ -35,10 +36,11 @@
     
 }
 
+
 -(void)rightAction{
  
-    PositionDesiredViewController *Positon = [[PositionDesiredViewController alloc]init];
-    [self.navigationController pushViewController:Positon animated:YES];
+    JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

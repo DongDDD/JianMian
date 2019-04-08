@@ -23,6 +23,11 @@
 #define User_info_URL @"api/user/info"
 #define Update_info_URL @"api/user/update"
 #define Position_label_URL @"labels"
+#define Create_Experience_URL @"api/user/experience/create"
+#define Update_Experience_URL @"api/user/experience/update"
+#define Delete_Experience_URL @"api/user/experience/delete"
+
+
 //接口
 
 
