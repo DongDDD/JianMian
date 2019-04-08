@@ -81,7 +81,6 @@
 		04DD1D6C224B6E95007CB11C /* 圆角矩形 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */; };
 		04DD1D6D224B6E95007CB11C /* 圆角矩形 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */; };
 		04DD1D6E224B6E95007CB11C /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D44224B6E95007CB11C /* camera.png */; };
-		04E17C012254AA0200D67E47 /* JMMyResumeCareerStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E17BEC2254AA0100D67E47 /* JMMyResumeCareerStatusTableViewCell.m */; };
 		04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6CAE2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m */; };
 		04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6CB32255FDD900CBAF79 /* Foundation+Log.m */; };
 		4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */; };
@@ -1431,7 +1430,6 @@
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
 				6D020A7022539FB0009BCFE4 /* HomeTableViewCell.m in Sources */,
 				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
-				04E17C012254AA0200D67E47 /* JMMyResumeCareerStatusTableViewCell.m in Sources */,
 				04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */,
 				6D0209F6224FBEEC009BCFE4 /* JMMineModulesTableViewCell.m in Sources */,
 				6D0209FF2250F09D009BCFE4 /* JMMyResumeViewController.m in Sources */,
