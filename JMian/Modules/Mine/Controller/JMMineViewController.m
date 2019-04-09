@@ -17,6 +17,7 @@
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *imageNameArr,*labelStrArr;
+@property (strong, nonatomic) JMUserInfoModel *userInfoModel;
 
 @end
 
@@ -38,13 +39,18 @@
     self.imageNameArr = @[@"subscribe",@"eliver",@"burse",@"autonym"];
     self.labelStrArr = @[@"网点拍摄预约",@"投递的岗位",@"我的钱包",@"实名认证"];
     
+//    [[JMHTTPManager sharedInstance] loginWithMode:@"sms" phone:@"15555555555" captcha:@"123456" sign_id:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        JMUserInfoModel *model = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-        NSLog(@"%@",model.phone);
-        
+
+        self.userInfoModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [self.tableView reloadData];
+
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
+
     }];
     
 }
@@ -64,14 +70,14 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 0) {
-        cell.textLabel.text = @"黄佩西";
+        cell.textLabel.text = self.userInfoModel.nickname;
         cell.textLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
         cell.textLabel.textColor = UIColorFromHEX(0x4d4d4d);
         
         cell.detailTextLabel.text = @"完善简历，让机遇找到你  90%";
         cell.detailTextLabel.textColor = UIColorFromHEX(0x808080);
 
-        cell.imageView.image = [UIImage imageNamed:@"default_avatar"];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     }
     if (indexPath.section == 1) {
         JMMineModulesTableViewCell *modulesCell = [[JMMineModulesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];

@@ -90,7 +90,10 @@
 		04DD1D6C224B6E95007CB11C /* 圆角矩形 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */; };
 		04DD1D6D224B6E95007CB11C /* 圆角矩形 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */; };
 		04DD1D6E224B6E95007CB11C /* camera.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D44224B6E95007CB11C /* camera.png */; };
+<<<<<<< HEAD
+=======
 		04E17C012254AA0200D67E47 /* JMMyResumeCareerStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E17BEC2254AA0100D67E47 /* JMMyResumeCareerStatusTableViewCell.m */; };
+>>>>>>> 9b4901154a95a933573a438c49b0e383bf00bd1d
 		04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6CAE2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m */; };
 		04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6CB32255FDD900CBAF79 /* Foundation+Log.m */; };
 		4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */; };
@@ -637,8 +640,11 @@
 				048FEE2E2244853C001160C8 /* Products */,
 				FC374E4AA2E1DABFC6BF04C9 /* Pods */,
 				47579204418359BAEBA6F740 /* Frameworks */,
+<<<<<<< HEAD
 				04A9DFA1225AE37800CD7CC1 /* Recovered References */,
+=======
 				6DAE236E225B8DAD005E6C01 /* Recovered References */,
+>>>>>>> 9b4901154a95a933573a438c49b0e383bf00bd1d
 			);
 			sourceTree = "<group>";
 		};
@@ -1088,10 +1094,13 @@
 		6DEA990C2254A0B60029FE8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< HEAD
 				04A9DFA3225AE3D700CD7CC1 /* JMUserInfoModel.h */,
 				04A9DFA4225AE3D800CD7CC1 /* JMUserInfoModel.m */,
+=======
 				6DAE2370225B8E0F005E6C01 /* JMUserInfoModel.h */,
 				6DAE236F225B8E0F005E6C01 /* JMUserInfoModel.m */,
+>>>>>>> 9b4901154a95a933573a438c49b0e383bf00bd1d
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1473,7 +1482,10 @@
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
 				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
+<<<<<<< HEAD
+=======
 				04E17C012254AA0200D67E47 /* JMMyResumeCareerStatusTableViewCell.m in Sources */,
+>>>>>>> 9b4901154a95a933573a438c49b0e383bf00bd1d
 				04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */,
 				6D0209F6224FBEEC009BCFE4 /* JMMineModulesTableViewCell.m in Sources */,
 				04A9DFA5225AE3D800CD7CC1 /* JMUserInfoModel.m in Sources */,
@@ -1506,7 +1518,10 @@
 				04A9DFAD225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.m in Sources */,
 				6D020A332250F46F009BCFE4 /* JMMyResumeCellConfigures.m in Sources */,
 				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
+<<<<<<< HEAD
 				04A9DFB8225B67D100CD7CC1 /* JMHTTPManager+UpdateInfo.m in Sources */,
+=======
+>>>>>>> 9b4901154a95a933573a438c49b0e383bf00bd1d
 				04A247D2224CB99800DEB8E3 /* PositionDesiredSecondViewController.m in Sources */,
 				6D020A822259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.m in Sources */,
 				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
@@ -1517,8 +1532,11 @@
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
 				04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */,
 				6DEA991E2255DF5C0029FE8A /* JMLoginInfoModel.m in Sources */,
+<<<<<<< HEAD
 				04A9DFA9225AE9B900CD7CC1 /* JMJobExperienceViewController.m in Sources */,
+=======
 				6DAE2372225B8E3B005E6C01 /* JMMyResumeCareerStatusTableViewCell.m in Sources */,
+>>>>>>> 9b4901154a95a933573a438c49b0e383bf00bd1d
 				6DEA99232255DFE40029FE8A /* JMShareView.m in Sources */,
 				6DAE2371225B8E10005E6C01 /* JMUserInfoModel.m in Sources */,
 				6D020A4B22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.m in Sources */,

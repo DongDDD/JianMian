@@ -10,7 +10,7 @@
 #define DimensMacros_h
 
 #import <MJExtension.h>
-
+#import <UIImageView+WebCache.h>
 
 
 #define STATUS_BAR_HEIGHT 20
