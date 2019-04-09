@@ -46,6 +46,9 @@
 		04A9DFB7225B35FE00CD7CC1 /* JMHomeWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9DFB6225B35FE00CD7CC1 /* JMHomeWorkModel.m */; };
 		04A9DFB8225B67D100CD7CC1 /* JMHTTPManager+UpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6CA82255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.m */; };
 		04A9DFBA225C429B00CD7CC1 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5D22539FAF009BCFE4 /* HomeTableViewCell.m */; };
+		04A9DFBF225C7B9F00CD7CC1 /* 启动图@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */; };
+		04A9DFC0225C7B9F00CD7CC1 /* 启动图@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */; };
+		04A9DFC1225C7B9F00CD7CC1 /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */; };
 		04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */; };
 		04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */; };
 		04DD1D45224B6E95007CB11C /* break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D18224B6E95007CB11C /* break@2x.png */; };
@@ -196,8 +199,6 @@
 		6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558668224B58890037C14E /* JMMessageViewController.xib */; };
 		6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */; };
 		6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */; };
-		6DAE2371225B8E10005E6C01 /* JMUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAE236F225B8E0F005E6C01 /* JMUserInfoModel.m */; };
-		6DAE2372225B8E3B005E6C01 /* JMMyResumeCareerStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A3F2251186B009BCFE4 /* JMMyResumeCareerStatusTableViewCell.m */; };
 		6DAE2376225B901E005E6C01 /* JMSystemLabelsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAE2375225B901E005E6C01 /* JMSystemLabelsModel.m */; };
 		6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA99162255ACD00029FE8A /* NSDictionary+NullSafe.m */; };
 		6DEA991E2255DF5C0029FE8A /* JMLoginInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA991D2255DF5C0029FE8A /* JMLoginInfoModel.m */; };
@@ -287,6 +288,9 @@
 		04A9DFAF225B2B5000CD7CC1 /* JMHTTPManager+Work.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+Work.m"; sourceTree = "<group>"; };
 		04A9DFB5225B35FE00CD7CC1 /* JMHomeWorkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHomeWorkModel.h; sourceTree = "<group>"; };
 		04A9DFB6225B35FE00CD7CC1 /* JMHomeWorkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHomeWorkModel.m; sourceTree = "<group>"; };
+		04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@2x.png"; sourceTree = "<group>"; };
+		04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@3x.png"; sourceTree = "<group>"; };
+		04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图.png"; sourceTree = "<group>"; };
 		04DD1D0B224B6D95007CB11C /* FailedLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedLoadingViewController.h; sourceTree = "<group>"; };
 		04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedLoadingViewController.xib; sourceTree = "<group>"; };
 		04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedLoadingViewController.m; sourceTree = "<group>"; };
@@ -475,8 +479,6 @@
 		6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPManager.m; sourceTree = "<group>"; };
 		6D629961224E1F92007E7DE4 /* JMHTTPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHTTPRequest.h; sourceTree = "<group>"; };
 		6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPRequest.m; sourceTree = "<group>"; };
-		6DAE236F225B8E0F005E6C01 /* JMUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMUserInfoModel.m; sourceTree = "<group>"; };
-		6DAE2370225B8E0F005E6C01 /* JMUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMUserInfoModel.h; sourceTree = "<group>"; };
 		6DAE2374225B901E005E6C01 /* JMSystemLabelsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JMSystemLabelsModel.h; path = JMian/Modules/Mine/Controller/MyResume/Cells/JMSystemLabelsModel.h; sourceTree = SOURCE_ROOT; };
 		6DAE2375225B901E005E6C01 /* JMSystemLabelsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = JMSystemLabelsModel.m; path = JMian/Modules/Mine/Controller/MyResume/Cells/JMSystemLabelsModel.m; sourceTree = SOURCE_ROOT; };
 		6DEA99152255ACD00029FE8A /* NSDictionary+NullSafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NullSafe.h"; sourceTree = "<group>"; };
@@ -751,6 +753,16 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		04A9DFBB225C7B9F00CD7CC1 /* 组 18_slices */ = {
+			isa = PBXGroup;
+			children = (
+				04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */,
+				04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */,
+				04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */,
+			);
+			path = "组 18_slices";
+			sourceTree = "<group>";
+		};
 		04DD1D0A224B6D95007CB11C /* FailedLoading */ = {
 			isa = PBXGroup;
 			children = (
@@ -774,6 +786,7 @@
 		04DD1D1B224B6E95007CB11C /* WeChatLogin_slices */ = {
 			isa = PBXGroup;
 			children = (
+				04A9DFBB225C7B9F00CD7CC1 /* 组 18_slices */,
 				04DD1D1C224B6E95007CB11C /* WeChat_login@3x.png */,
 				04DD1D1D224B6E95007CB11C /* verification_code@3x.png */,
 				04DD1D1E224B6E95007CB11C /* JIANMIAN_logo@2x.png */,
@@ -1275,8 +1288,10 @@
 				04DD1D53224B6E95007CB11C /* phone@2x.png in Resources */,
 				6D0209E7224FB900009BCFE4 /* subscribe@3x.png in Resources */,
 				6D020A2A2250F3F9009BCFE4 /* education@3x.png in Resources */,
+				04A9DFBF225C7B9F00CD7CC1 /* 启动图@2x.png in Resources */,
 				6D020A6B22539FB0009BCFE4 /* JMCompanyIntroduceViewController.xib in Resources */,
 				6D558655224B54D70037C14E /* home_ message_pitch_on@3x.png in Resources */,
+				04A9DFC1225C7B9F00CD7CC1 /* 启动图.png in Resources */,
 				6D020A272250F3F9009BCFE4 /* 椭圆 3@2x.png in Resources */,
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
@@ -1287,6 +1302,7 @@
 				04DD1D55224B6E95007CB11C /* WeChat_login.png in Resources */,
 				04DD1D61224B6E95007CB11C /* camera@2x.png in Resources */,
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
+				04A9DFC0225C7B9F00CD7CC1 /* 启动图@3x.png in Resources */,
 				6DEA99242255DFE40029FE8A /* JMShareView.xib in Resources */,
 				6D020A882259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib in Resources */,
 				04DD1D5C224B6E95007CB11C /* 组 18@2x(1).png in Resources */,
@@ -1690,7 +1706,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9N2SNV6VF6;
 				INFOPLIST_FILE = JMian/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1698,7 +1716,7 @@
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = "-.JMian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1708,7 +1726,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9N2SNV6VF6;
 				INFOPLIST_FILE = JMian/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1716,7 +1736,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "-.JMian";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

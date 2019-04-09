@@ -20,18 +20,31 @@
 @implementation AppDelegate
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //雕娜猩
     // Override point for customization after application launch.
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
-    JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
-//    LoginViewController *login = [[LoginViewController alloc] init];
-//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-   
-    self.window.rootViewController = tab;
-    
-    [self.window makeKeyAndVisible];
+    if(kFetchMyDefault(@"token")){
+        JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+        self.window.rootViewController = tab;
+        
+        [self.window makeKeyAndVisible];
+        
+    }else{
+        LoginViewController *login = [[LoginViewController alloc] init];
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+       
+        [_window setRootViewController:naVC];//navigation加在window上
+
+        [self.window makeKeyAndVisible];
+        
+
+
+        
+        
+    }
     
     return YES;
 }

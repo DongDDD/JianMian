@@ -60,7 +60,7 @@ static NSString *cellIdent = @"cellIdent";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 141;    
+    self.tableView.rowHeight = 141;
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
 
     [self.view addSubview:self.tableView];
@@ -80,6 +80,7 @@ static NSString *cellIdent = @"cellIdent";
 
 
 -(void)getData{
+    
     [[JMHTTPManager sharedInstance]fetchWorkPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         self.arrDate = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
@@ -89,6 +90,11 @@ static NSString *cellIdent = @"cellIdent";
         
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        if ((int)error[@"code"] == 403) {
+            NSLog(@"token过期");
+            LoginViewController *login = [[LoginViewController alloc] init];
+            [self.navigationController pushViewController:login animated:NO];
+        }
         
     }];
 
@@ -141,11 +147,12 @@ static NSString *cellIdent = @"cellIdent";
     
     HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
    
-    JMHomeWorkModel *model = self.arrDate[indexPath.row];;
+    JMHomeWorkModel *model = self.arrDate[indexPath.row];
     [cell setModel:model];
     
     
     return cell;
+    
 }
 
 
