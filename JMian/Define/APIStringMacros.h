@@ -23,13 +23,14 @@
 #define User_info_URL @"api/user/info"
 #define Update_info_URL @"api/user/update"
 #define Position_label_URL @"labels"
+//工作经历
 #define Create_Experience_URL @"api/user/experience/create"
 #define Update_Experience_URL @"api/user/experience/update"
 #define Delete_Experience_URL @"api/user/experience/delete"
 
+#define Paginate_Work_URL @"api/work/paginate"
 
 //接口
-
 
 
 #define GET_CONTENT_DETAIL      @"channel/getContentDetail" //获取内容详情(含上一个和下一个)

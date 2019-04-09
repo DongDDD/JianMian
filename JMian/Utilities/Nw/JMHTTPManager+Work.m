@@ -7,7 +7,15 @@
 //
 
 #import "JMHTTPManager+Work.h"
+#import "APIStringMacros.h"
 
 @implementation JMHTTPManager (Work)
+
+
+- (void)fetchWorkPaginateWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Paginate_Work_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+}
+
 
 @end

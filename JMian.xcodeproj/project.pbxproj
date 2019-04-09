@@ -43,6 +43,9 @@
 		04A9DFAA225AE9B900CD7CC1 /* JMJobExperienceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFA8225AE9B900CD7CC1 /* JMJobExperienceViewController.xib */; };
 		04A9DFAD225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9DFAC225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.m */; };
 		04A9DFB0225B2B5000CD7CC1 /* JMHTTPManager+Work.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9DFAF225B2B5000CD7CC1 /* JMHTTPManager+Work.m */; };
+		04A9DFB7225B35FE00CD7CC1 /* JMHomeWorkModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9DFB6225B35FE00CD7CC1 /* JMHomeWorkModel.m */; };
+		04A9DFB8225B67D100CD7CC1 /* JMHTTPManager+UpdateInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6CA82255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.m */; };
+		04A9DFBA225C429B00CD7CC1 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5D22539FAF009BCFE4 /* HomeTableViewCell.m */; };
 		04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */; };
 		04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */; };
 		04DD1D45224B6E95007CB11C /* break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D18224B6E95007CB11C /* break@2x.png */; };
@@ -155,7 +158,6 @@
 		6D020A6D22539FB0009BCFE4 /* JMCompanyIntroduceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5922539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.m */; };
 		6D020A6E22539FB0009BCFE4 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5A22539FAF009BCFE4 /* MapView.m */; };
 		6D020A6F22539FB0009BCFE4 /* CompanyRequirementsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5B22539FAF009BCFE4 /* CompanyRequirementsView.m */; };
-		6D020A7022539FB0009BCFE4 /* HomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A5D22539FAF009BCFE4 /* HomeTableViewCell.m */; };
 		6D020A7122539FB0009BCFE4 /* JMIntroduceContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A6122539FAF009BCFE4 /* JMIntroduceContentView.m */; };
 		6D020A7222539FB0009BCFE4 /* HomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A6322539FAF009BCFE4 /* HomeTableViewCell.xib */; };
 		6D020A7322539FB0009BCFE4 /* TwoButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A6522539FAF009BCFE4 /* TwoButtonView.m */; };
@@ -274,6 +276,8 @@
 		04A9DFAC225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+CreateExperience.m"; sourceTree = "<group>"; };
 		04A9DFAE225B2B5000CD7CC1 /* JMHTTPManager+Work.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+Work.h"; sourceTree = "<group>"; };
 		04A9DFAF225B2B5000CD7CC1 /* JMHTTPManager+Work.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+Work.m"; sourceTree = "<group>"; };
+		04A9DFB5225B35FE00CD7CC1 /* JMHomeWorkModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHomeWorkModel.h; sourceTree = "<group>"; };
+		04A9DFB6225B35FE00CD7CC1 /* JMHomeWorkModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHomeWorkModel.m; sourceTree = "<group>"; };
 		04DD1D0B224B6D95007CB11C /* FailedLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedLoadingViewController.h; sourceTree = "<group>"; };
 		04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedLoadingViewController.xib; sourceTree = "<group>"; };
 		04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedLoadingViewController.m; sourceTree = "<group>"; };
@@ -716,6 +720,15 @@
 			name = "Recovered References";
 			sourceTree = "<group>";
 		};
+		04A9DFB1225B354C00CD7CC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04A9DFB5225B35FE00CD7CC1 /* JMHomeWorkModel.h */,
+				04A9DFB6225B35FE00CD7CC1 /* JMHomeWorkModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		04DD1D0A224B6D95007CB11C /* FailedLoading */ = {
 			isa = PBXGroup;
 			children = (
@@ -910,6 +923,7 @@
 			isa = PBXGroup;
 			children = (
 				6D020A4E22539FAF009BCFE4 /* Controller */,
+				04A9DFB1225B354C00CD7CC1 /* Model */,
 				6D020A5822539FAF009BCFE4 /* View */,
 			);
 			path = Home;
@@ -918,15 +932,15 @@
 		6D020A4E22539FAF009BCFE4 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6D020A4F22539FAF009BCFE4 /* JobDetailsViewController.h */,
+				6D020A5522539FAF009BCFE4 /* HomeViewController.h */,
 				6D020A5022539FAF009BCFE4 /* HomeViewController.m */,
 				6D020A5222539FAF009BCFE4 /* HomeViewController.xib */,
-				6D020A5322539FAF009BCFE4 /* JobDetailsViewController.xib */,
+				6D020A4F22539FAF009BCFE4 /* JobDetailsViewController.h */,
 				6D020A5422539FAF009BCFE4 /* JobDetailsViewController.m */,
-				6D020A5522539FAF009BCFE4 /* HomeViewController.h */,
-				6D020A5622539FAF009BCFE4 /* JMCompanyIntroduceViewController.xib */,
+				6D020A5322539FAF009BCFE4 /* JobDetailsViewController.xib */,
 				6D020A5122539FAF009BCFE4 /* JMCompanyIntroduceViewController.h */,
 				6D020A5722539FAF009BCFE4 /* JMCompanyIntroduceViewController.m */,
+				6D020A5622539FAF009BCFE4 /* JMCompanyIntroduceViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -941,11 +955,11 @@
 				6D020A5A22539FAF009BCFE4 /* MapView.m */,
 				6D020A5B22539FAF009BCFE4 /* CompanyRequirementsView.m */,
 				6D020A5C22539FAF009BCFE4 /* TwoButtonView.h */,
+				6D020A6422539FAF009BCFE4 /* HomeTableViewCell.h */,
 				6D020A5D22539FAF009BCFE4 /* HomeTableViewCell.m */,
+				6D020A6322539FAF009BCFE4 /* HomeTableViewCell.xib */,
 				6D020A5E22539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.h */,
 				6D020A6222539FAF009BCFE4 /* MapView.h */,
-				6D020A6322539FAF009BCFE4 /* HomeTableViewCell.xib */,
-				6D020A6422539FAF009BCFE4 /* HomeTableViewCell.h */,
 				6D020A6522539FAF009BCFE4 /* TwoButtonView.m */,
 				6D020A6622539FAF009BCFE4 /* CompanyRequirementsView.h */,
 			);
@@ -1415,7 +1429,6 @@
 				6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */,
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
-				6D020A7022539FB0009BCFE4 /* HomeTableViewCell.m in Sources */,
 				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
 				04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */,
 				6D0209F6224FBEEC009BCFE4 /* JMMineModulesTableViewCell.m in Sources */,
@@ -1427,6 +1440,7 @@
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
 				6D020A6E22539FB0009BCFE4 /* MapView.m in Sources */,
+				04A9DFBA225C429B00CD7CC1 /* HomeTableViewCell.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
 				6D020A7122539FB0009BCFE4 /* JMIntroduceContentView.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
@@ -1447,6 +1461,7 @@
 				04A9DFAD225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.m in Sources */,
 				6D020A332250F46F009BCFE4 /* JMMyResumeCellConfigures.m in Sources */,
 				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
+				04A9DFB8225B67D100CD7CC1 /* JMHTTPManager+UpdateInfo.m in Sources */,
 				04A247D2224CB99800DEB8E3 /* PositionDesiredSecondViewController.m in Sources */,
 				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
 				6D020A6722539FB0009BCFE4 /* HomeViewController.m in Sources */,
@@ -1460,6 +1475,7 @@
 				6DEA99232255DFE40029FE8A /* JMShareView.m in Sources */,
 				6D020A4B22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.m in Sources */,
 				6D558635224B53BE0037C14E /* JMTabBarViewController.m in Sources */,
+				04A9DFB7225B35FE00CD7CC1 /* JMHomeWorkModel.m in Sources */,
 				6D020A052250F21B009BCFE4 /* JMMyResumeIconTableViewCell.m in Sources */,
 				6D020A46225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.m in Sources */,
 				6D558669224B58890037C14E /* JMMessageViewController.m in Sources */,

@@ -10,6 +10,8 @@
 #import "HometableViewCell.h"
 #import "LoginViewController.h"
 #import "JobDetailsViewController.h"
+#import "JMHTTPManager+Work.h"
+#import "JMHomeWorkModel.h"
 
 
 
@@ -23,10 +25,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *allPositionBtn;//所有职位
 @property (weak, nonatomic) IBOutlet UIButton *companyRequireBtn;//公司要求
 
+@property (nonatomic, strong) NSArray *arrDate;
 
-
-
-@property(nonatomic,strong)UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 
 
 @end
@@ -44,9 +45,13 @@ static NSString *cellIdent = @"cellIdent";
     [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
 
     [self setTableView];
+    
+    [self getData];
+
 }
 
 #pragma mark - 布局UI
+
 -(void)setTableView{
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.headView.frame.size.height+self.headView.frame.origin.y, SCREEN_WIDTH, self.view.bounds.size.height) style:UITableViewStylePlain];
@@ -55,13 +60,12 @@ static NSString *cellIdent = @"cellIdent";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.tableView.rowHeight = 141;
-    UINib *nib = [UINib nibWithNibName:NSStringFromClass([HomeTableViewCell class]) bundle:[NSBundle mainBundle]];
-    [self.tableView registerNib:nib forCellReuseIdentifier:cellIdent];
-    
-    
+    self.tableView.rowHeight = 141;    
+    [self.tableView registerNib:[UINib nibWithNibName:@"HomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
+
     [self.view addSubview:self.tableView];
-   
+    
+ 
     
 }
 
@@ -75,13 +79,26 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 
+-(void)getData{
+    [[JMHTTPManager sharedInstance]fetchWorkPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        self.arrDate = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+        
+        
+        [self.tableView reloadData];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
+}
 
 #pragma mark - 推荐职位 -
 
 - (IBAction)pushPositionAction:(UIButton *)sender {
-    
 
-    
     
 }
 
@@ -113,7 +130,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.arrDate.count;
 }
 
 
@@ -122,7 +139,11 @@ static NSString *cellIdent = @"cellIdent";
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent];
+    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
+   
+    JMHomeWorkModel *model = self.arrDate[indexPath.row];;
+    [cell setModel:model];
+    
     
     return cell;
 }
@@ -134,7 +155,7 @@ static NSString *cellIdent = @"cellIdent";
     
     [self.navigationController pushViewController:vc animated:YES];
     
-    NSLog(@"%d",indexPath.row);
+    NSLog(@"%d",(int)indexPath.row);
    
 }
 
