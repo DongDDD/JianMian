@@ -12,6 +12,7 @@
 #import "JMMineModulesTableViewCell.h"
 #import "JMMyResumeViewController.h"
 #import "JMUserInfoModel.h"
+#import "PositionDesiredViewController.h"
 
 @interface JMMineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -93,7 +94,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:[[JMMyResumeViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[PositionDesiredViewController alloc] init] animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

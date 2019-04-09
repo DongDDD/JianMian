@@ -12,8 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHTTPManager (PositionDesired)
 
-- (void)fetchPositionLabelsWithMyId:(NSString *)myId mode:(NSString *)mode successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
-
+- (void)fetchPositionLabelsWithMyId:(nullable NSString *)myId mode:(NSString *)mode successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END
