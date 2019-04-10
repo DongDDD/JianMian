@@ -49,6 +49,7 @@
 //读取duserDefault
 #define kFetchMyDefault(A) [[NSUserDefaults standardUserDefaults] objectForKey:A]
 
+#define kRemoveMyDefault(A) [[NSUserDefaults standardUserDefaults] removeObjectForKey:A]
 
 //判断设备类型
 #define IPHONE_X \

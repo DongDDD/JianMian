@@ -81,26 +81,21 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)getData{
     
-    [[JMHTTPManager sharedInstance]fetchWorkPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
  
+    [[JMHTTPManager sharedInstance]fetchWorkPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+
+
         if (responsObject[@"data"]) {
-            
+
             self.arrDate = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             [self.tableView reloadData];
         }
-    
-    
-        
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        NSLog(@"%@",error[@"code"]);
-//        if ((int)error[@"code"] == 403) {
-//            NSLog(@"token过期");
-//            LoginViewController *login = [[LoginViewController alloc] init];
-//            [self.navigationController pushViewController:login animated:NO];
-//        }
-        
+
+
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, NSError  *error) {
+
+
     }];
     
     

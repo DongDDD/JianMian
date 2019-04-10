@@ -18,9 +18,25 @@
              @"Description":@"description",
              @"cityId":@"city.city_id",
              @"cityName":@"city.city_name",
+            
              @"companyId":@"company.company_id",
              @"companyName":@"company.company_name",
-             @"companyLogo_path":@"company.logo_path"
+             @"companyLogo_path":@"company.logo_path",
+             @"companyFinancing":@"company.financing",
+             @"companyEmployee":@"company.employee",
+             @"companyCityId":@"company.city_id",
+             @"companyAddress":@"company.address",
+             @"companyLongitude":@"company.longitude",
+             @"companyLatitude":@"company.latitude",
+             @"companyAddress":@"company.address",
+             @"companyLabels":@"company.labels",
+             
+             @"companyIndustry_label":@"company.address",
+             @"companyCity":@"company.labels",
+     
+             @"videoCompanyId":@"company.company_id",
+             @"videoCompanyFile_path":@"company.file_path"
+             
              };
     
 }

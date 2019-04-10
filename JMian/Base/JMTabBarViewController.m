@@ -28,9 +28,11 @@
     [self addChildVc:home title:@"首页" image:@"home" selectedImage:@"pitch_on_home"];
 
     JMMessageViewController *message = [[JMMessageViewController alloc] init];
+
     [self addChildVc:message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
 
     JMMineViewController *mine = [[JMMineViewController alloc] init];
+
     [self addChildVc:mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on"];
     
 }

@@ -70,7 +70,7 @@
             
             NSLog(@"%@",req.code); //获得code
             
-            [[JMHTTPManager sharedInstance]loginWithMode:@"wx" phone:@"" captcha:req.code sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            [[JMHTTPManager sharedInstance] loginWithMode:@"wx" phone:@"" captcha:req.code sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
                 
                 
 //                JMLoginInfoModel *model = [JMLoginInfoModel mj_objectWithKeyValues:responsObject[@"data"]];

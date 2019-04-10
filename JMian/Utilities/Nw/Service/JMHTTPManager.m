@@ -10,6 +10,8 @@
 #import "APIStringMacros.h"
 #import "DimensMacros.h"
 #import <AFNetworkActivityIndicatorManager.h>
+#import "LoginViewController.h"
+#import "AppDelegate.h"
 @implementation JMHTTPManager
 
 + (instancetype)sharedInstance {
@@ -103,7 +105,7 @@
     return task;
 }
 
-- (NSMutableURLRequest *)urlRequestForMethod:(NSString *)method request:(JMHTTPRequest *)request {
+- (NSMutableURLRequest *)urlRequestForUploadRequest:(JMHTTPRequest *)request {
     NSError *serializationError = nil;
     NSMutableURLRequest *urlRequest = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:request.path relativeToURL:self.baseURL] absoluteString] parameters:request.parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
@@ -122,9 +124,9 @@
     return urlRequest;
 }
 
-- (NSMutableURLRequest *)urlRequestForUploadRequest:(JMHTTPRequest *)request {
+- (NSMutableURLRequest *)urlRequestForMethod:(NSString *)method request:(JMHTTPRequest *)request {
     NSError *serializationError = nil;
-    NSMutableURLRequest *urlRequest = [self.requestSerializer requestWithMethod:@"POST" URLString:[[NSURL URLWithString:request.path relativeToURL:self.baseURL] absoluteString] parameters:request.parameters error:&serializationError];
+    NSMutableURLRequest *urlRequest = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:request.path relativeToURL:self.baseURL] absoluteString] parameters:request.parameters error:&serializationError];
     if (serializationError) NSLog(@"serializationError=%@",serializationError);
     return urlRequest;
 }
@@ -136,6 +138,13 @@
         //打印错误
         [self HTTPRequestLog:task body:request.parameters responseObject:responseObject error:parseError];
         //回调
+        if(parseError.code == 403) {
+            kRemoveMyDefault(@"token");
+            //跳去登录
+            LoginViewController *login = [[LoginViewController alloc] init];
+            [UIApplication sharedApplication].delegate.window.rootViewController = login;
+        }
+        
         request.failureBlock(request, error);
         
     } else {

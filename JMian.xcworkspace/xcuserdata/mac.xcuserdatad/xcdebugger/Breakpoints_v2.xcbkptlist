@@ -9,70 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/Mine/Controller/JMMineViewController.m"
-            timestampString = "576413196.394393"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/Login/ChooseIdentity.m"
-            timestampString = "576561582.22891"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "-isSearchJob:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__30-[ChooseIdentity isSearchJob:]_block_invoke"
-                  moduleName = "JMian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/JianMian/JMian/Modules/Login/ChooseIdentity.m"
-                  timestampString = "576570510.967054"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "77">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__30-[ChooseIdentity isSearchJob:]_block_invoke_2"
-                  moduleName = "JMian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/JianMian/JMian/Modules/Login/ChooseIdentity.m"
-                  timestampString = "576570510.969992"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "77">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "JMian/Modules/Home/View/JMCompanyIntroduceHeaderView.m"
             timestampString = "576477754.667168"
             startingColumnNumber = "9223372036854775807"
@@ -80,6 +16,22 @@
             startingLineNumber = "24"
             endingLineNumber = "24"
             landmarkName = "-initWithFrame:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/Login/BasicInformationViewController.m"
+            timestampString = "576589794.008044"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "-datePickerViewChange:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

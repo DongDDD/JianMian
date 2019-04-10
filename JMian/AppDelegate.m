@@ -22,7 +22,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    //雕娜猩
+   
     // Override point for customization after application launch.
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
@@ -45,6 +45,8 @@
         
         
     }
+    
+    
     
     return YES;
 }

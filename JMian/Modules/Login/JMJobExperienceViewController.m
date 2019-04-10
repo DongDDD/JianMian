@@ -8,7 +8,8 @@
 
 #import "JMJobExperienceViewController.h"
 #import "JMHTTPManager+CreateExperience.h"
-#import "HomeViewController.h"
+#import "JMTabBarViewController.h"
+#import "AppDelegate.h"
 
 @interface JMJobExperienceViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *companyNameText;
@@ -37,10 +38,11 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];
-    
-//    HomeViewController *vc = [[HomeViewController alloc]init];
-    [self.navigationController popToRootViewControllerAnimated:YES];
-  
+   
+     JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+    [UIApplication sharedApplication].delegate.window.rootViewController=tab;
+
+
 
 
 

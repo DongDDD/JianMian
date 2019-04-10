@@ -31,6 +31,26 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *companyId;
 @property (nonatomic, copy) NSString *companyName;
 @property (nonatomic, copy) NSString *companyLogo_path;
+@property (nonatomic, copy) NSString *companyFinancing;
+@property (nonatomic, copy) NSString *companyEmployee;
+@property (nonatomic, copy) NSString *companyCityId;
+@property (nonatomic, copy) NSString *companyAddress;
+@property (nonatomic, copy) NSString *companyLongitude;
+@property (nonatomic, copy) NSString *companyLatitude;
+@property (nonatomic, strong) NSArray *companyLabels;
+@property (nonatomic, copy) NSString *companyIndustry_label;
+@property (nonatomic, copy) NSString *companyCity;
+
+@property (nonatomic, copy) NSString *videoCompanyId;
+@property (nonatomic, copy) NSString *videoCompanyFile_path;
+
+
+
+
+
+
+
+
 
 //@property (nonatomic, strong) NSArray *labels;
 

@@ -10,16 +10,19 @@
 #import "JobIntensionViewController.h"
 #import "JMHTTPManager+UpdateInfo.h"
 #import "JMHTTPManager+Uploads.h"
+#import "Masonry.h"
 
 
 
-@interface BasicInformationViewController ()
+@interface BasicInformationViewController ()<UITextFieldDelegate>
 
 @property(nonatomic,strong)NSNumber *sex;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *numberText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
 @property (weak, nonatomic) IBOutlet UIButton *headerImg;
+@property (weak, nonatomic) IBOutlet UITextField *birthDateText;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 
 
 @end
@@ -30,12 +33,24 @@
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
     [self setRightBtnTextName:@"下一步"];
-   // Do any additional setup after loading the view from its nib.
+    
+    self.birthDateText.delegate = self;
+    
+    UITapGestureRecognizer *dateTextTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showDatePickerAction)];
+    [self.view addGestureRecognizer:dateTextTap];
+    
+    UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
+    [self.view addGestureRecognizer:bgTap];
+    
+//    self.birthDateText.inputView = self.datePicker;
+    // Do any additional setup after loading the view from its nib.
 }
+
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    self.birthDateText.delegate = self;
     //从沙盒拿
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
@@ -43,6 +58,38 @@
     [_headerImg setImage:savedImage forState:UIControlStateNormal];
     //    [imge setImage:savedImage];
 }
+
+- (IBAction)datePickerViewChange:(id)sender {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    // 格式化日期格式
+    formatter.dateFormat = @"yyyy-MM-dd";
+    NSString *date = [formatter stringFromDate:self.datePicker.date];
+    // 显示时间
+    self.birthDateText.text = date;
+    
+}
+
+-(void)showDatePickerAction{
+    [self.datePicker mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.view);
+        
+    }];
+    
+    
+    
+}
+
+
+-(void)hiddenDatePickerAction{
+    [self.datePicker mas_updateConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view.mas_bottom);
+        
+    }];
+    
+
+}
+
 - (IBAction)headerAction:(id)sender {
     
     //选取照片上传
