@@ -72,16 +72,18 @@
 - (NSURLSessionTask *)sessionTaskForRequest:(JMHTTPRequest *)request {
 
     NSMutableURLRequest *urlRequest = nil;
-    
+    if(kFetchMyDefault(@"token")) [self.requestSerializer setValue:kFetchMyDefault(@"token") forHTTPHeaderField:@"Authorization"];
+
     switch (request.method) {
         case JMRequestMethodGET:
             
-            if(kFetchMyDefault(@"token")) [self.requestSerializer setValue:kFetchMyDefault(@"token") forHTTPHeaderField:@"Authorization"];
            urlRequest = [self urlRequestForMethod:@"GET" request:request];
             break;
         case JMRequestMethodPOST:
-            if(kFetchMyDefault(@"token")) [self.requestSerializer setValue:kFetchMyDefault(@"token") forHTTPHeaderField:@"Authorization"];
             urlRequest = [self urlRequestForMethod:@"POST" request:request];
+            break;
+        case JMRequestMethodUpload:
+            urlRequest = [self urlRequestForUploadRequest:request];
             break;
             
         default:
@@ -89,17 +91,40 @@
     }
     
     __block NSURLSessionDataTask *task = nil;
-    task = [self dataTaskWithRequest:urlRequest completionHandler:^(NSURLResponse *response, NSDictionary * responseObject, NSError *error) {
+
+    task = [self dataTaskWithRequest:urlRequest uploadProgress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } downloadProgress:^(NSProgress * _Nonnull downloadProgress) {
+        
+    } completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
         [self handleRequestResult:task request:request responseObject:responseObject error:error];
     }];
-
     
     return task;
 }
 
 - (NSMutableURLRequest *)urlRequestForMethod:(NSString *)method request:(JMHTTPRequest *)request {
     NSError *serializationError = nil;
-    NSMutableURLRequest *urlRequest = [self.requestSerializer requestWithMethod:method URLString:[[NSURL URLWithString:request.path relativeToURL:self.baseURL] absoluteString] parameters:request.parameters error:&serializationError];
+    NSMutableURLRequest *urlRequest = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:request.path relativeToURL:self.baseURL] absoluteString] parameters:request.parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        
+        for (int i = 0; i < [request.parameters[@"files"] count]; i++) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyyMMddHHmmss"];
+            NSString *dateString = [formatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString  stringWithFormat:@"%@.jpg", dateString];
+            NSData *data = [request.parameters objectForKey:@"files"];
+            [formData appendPartWithFileData:data name:@"files" fileName:fileName mimeType:@"image/jpg"];;//file改为后台接收的字段或参数
+        }
+        
+    } error:&serializationError];
+    
+    return urlRequest;
+}
+
+- (NSMutableURLRequest *)urlRequestForUploadRequest:(JMHTTPRequest *)request {
+    NSError *serializationError = nil;
+    NSMutableURLRequest *urlRequest = [self.requestSerializer requestWithMethod:@"POST" URLString:[[NSURL URLWithString:request.path relativeToURL:self.baseURL] absoluteString] parameters:request.parameters error:&serializationError];
     if (serializationError) NSLog(@"serializationError=%@",serializationError);
     return urlRequest;
 }
