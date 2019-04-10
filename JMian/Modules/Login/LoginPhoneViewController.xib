@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginPhoneViewController">
             <connections>
+                <outlet property="VerifyBtn" destination="BWF-oX-VHW" id="L57-E2-KBY"/>
                 <outlet property="captchaText" destination="Y8f-e0-i2e" id="qAD-Oz-x9C"/>
                 <outlet property="phoneNumText" destination="5y9-0G-IKN" id="nWY-uH-zPi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -58,16 +59,18 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWF-oX-VHW">
-                    <rect key="frame" x="232" y="275" width="87" height="33"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWF-oX-VHW">
+                    <rect key="frame" x="199" y="275" width="146" height="33"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="87" id="lip-LB-UeC"/>
+                        <constraint firstAttribute="width" constant="146" id="lip-LB-UeC"/>
                         <constraint firstAttribute="height" constant="33" id="yDS-3h-o3p"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="获取验证码">
                         <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="verifyAction:" destination="-1" eventType="touchUpInside" id="7RS-F8-HoO"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hhe-d4-UWW">
                     <rect key="frame" x="30" y="356" width="315" height="50"/>
@@ -99,7 +102,7 @@
                 <constraint firstItem="Hhe-d4-UWW" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="30" id="G8l-a4-nVH"/>
                 <constraint firstItem="Y8f-e0-i2e" firstAttribute="leading" secondItem="5y9-0G-IKN" secondAttribute="leading" id="IfL-tD-kYI"/>
                 <constraint firstItem="Y8f-e0-i2e" firstAttribute="top" secondItem="E9e-fs-icf" secondAttribute="top" id="ORB-Mu-Mn2"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="BWF-oX-VHW" secondAttribute="trailing" constant="56" id="P74-FY-QpQ"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="BWF-oX-VHW" secondAttribute="trailing" constant="30" id="P74-FY-QpQ"/>
                 <constraint firstItem="bTt-m9-7Gi" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="48" id="YAN-2W-rmT"/>
                 <constraint firstItem="Y8f-e0-i2e" firstAttribute="height" secondItem="5y9-0G-IKN" secondAttribute="height" id="c1l-Pc-G6R"/>
                 <constraint firstItem="E9e-fs-icf" firstAttribute="top" secondItem="5K3-J4-jgL" secondAttribute="bottom" constant="30" id="cUu-rM-QXh"/>

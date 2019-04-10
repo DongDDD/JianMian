@@ -83,20 +83,28 @@ static NSString *cellIdent = @"cellIdent";
     
     [[JMHTTPManager sharedInstance]fetchWorkPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        self.arrDate = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-        
-        
-        [self.tableView reloadData];
+ 
+        if (responsObject[@"data"]) {
+            
+            self.arrDate = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            [self.tableView reloadData];
+        }
+    
+    
         
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        if ((int)error[@"code"] == 403) {
-            NSLog(@"token过期");
-            LoginViewController *login = [[LoginViewController alloc] init];
-            [self.navigationController pushViewController:login animated:NO];
-        }
+        NSLog(@"%@",error[@"code"]);
+//        if ((int)error[@"code"] == 403) {
+//            NSLog(@"token过期");
+//            LoginViewController *login = [[LoginViewController alloc] init];
+//            [self.navigationController pushViewController:login animated:NO];
+//        }
         
     }];
+    
+    
+    
 
 
 }

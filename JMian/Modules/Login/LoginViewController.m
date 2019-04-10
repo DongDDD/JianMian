@@ -43,18 +43,7 @@
 
 
 - (IBAction)wechatLoginAction:(id)sender {
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"weixin://"]])
-    {
-        NSLog(@"OK weixin://");
-    }
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"wechat://"]])
-    {
-        NSLog(@"OK wechat://");
-    }
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"fb290293790992170://"]])
-    {
-        NSLog(@"OK fb290293790992170://");
-    }
+   
     if([WXApi isWXAppInstalled]){//判断用户是否已安装微信App
         
         SendAuthReq *req = [[SendAuthReq alloc] init];

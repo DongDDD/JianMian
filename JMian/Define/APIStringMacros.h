@@ -20,9 +20,17 @@
 #endif
 
 #define Login_URL @"api/login"
+//发送验证码
+#define Login_Captcha_URL @"sms/captcha"
+
 #define User_info_URL @"api/user/info"
 #define Update_info_URL @"api/user/update"
 #define Position_label_URL @"labels"
+
+//上传图片
+#define Uploads_Image_URL @"file/uploads"
+
+
 //工作经历
 #define Create_Experience_URL @"api/user/experience/create"
 #define Update_Experience_URL @"api/user/experience/update"

@@ -13,6 +13,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BasicInformationViewController">
             <connections>
                 <outlet property="emailText" destination="rOe-QJ-orW" id="eBw-Ba-29U"/>
+                <outlet property="headerImg" destination="xz1-PU-svB" id="xSJ-iC-Xl6"/>
                 <outlet property="nameText" destination="vqL-lE-2Xj" id="eAn-Yd-fgU"/>
                 <outlet property="numberText" destination="1iK-eb-jSQ" id="gOV-yL-mMi"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -46,6 +47,9 @@
                                         <constraint firstAttribute="height" constant="92" id="wPj-OJ-2YG"/>
                                     </constraints>
                                     <state key="normal" title=" " image="camera.png"/>
+                                    <connections>
+                                        <action selector="headerAction:" destination="-1" eventType="touchUpInside" id="8MU-xL-cyx"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NQ1-fX-nFI">
                                     <rect key="frame" x="99" y="236" width="72" height="25"/>
