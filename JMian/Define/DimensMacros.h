@@ -11,7 +11,8 @@
 
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
-
+#import "JMUserInfoManager.h"
+#import <TIMManager.h>
 
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
