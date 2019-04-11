@@ -56,19 +56,31 @@
 //学历数据转化
 -(NSString *)getEducationStrWithEducation:(NSNumber *)education{
     NSInteger myInt = [education integerValue];
-
+    
     switch (myInt) {
         case 0:
             return @"不限";
             break;
         case 1:
-            return @"初中";
+            return @"初中及以下";
             break;
         case 2:
-            return @"大专";
+            return @"中专/中技";
             break;
         case 3:
+            return @"高中";
+            break;
+        case 4:
+            return @"大专";
+            break;
+        case 5:
             return @"本科";
+            break;
+        case 6:
+            return @"硕士";
+            break;
+        case 7:
+            return @"博士";
             break;
             
         default:
@@ -77,6 +89,8 @@
     return @"不限";
     
 }
+
+
 
 
 

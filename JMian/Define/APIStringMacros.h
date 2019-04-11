@@ -30,14 +30,13 @@
 //上传图片
 #define Uploads_Image_URL @"file/uploads"
 
-
 //工作经历
 #define Create_Experience_URL @"api/user/experience/create"
 #define Update_Experience_URL @"api/user/experience/update"
 #define Delete_Experience_URL @"api/user/experience/delete"
 
 #define Paginate_Work_URL @"api/work/paginate"
-#define Info_Work_URL @"api/work/info/:id"
+#define Info_Work_URL @"api/work/info"
 //接口
 
 

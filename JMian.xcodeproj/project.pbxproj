@@ -7,6 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040CA834225F1EB2006D7A7F /* Share_WeChat.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA82E225F1EB2006D7A7F /* Share_WeChat.png */; };
+		040CA835225F1EB2006D7A7F /* Share_WeChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA82F225F1EB2006D7A7F /* Share_WeChat@2x.png */; };
+		040CA836225F1EB2006D7A7F /* Share_WeChat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA830225F1EB2006D7A7F /* Share_WeChat@3x.png */; };
+		040CA837225F1EB2006D7A7F /* Share_WeChat_friends.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA831225F1EB2006D7A7F /* Share_WeChat_friends.png */; };
+		040CA838225F1EB2006D7A7F /* Share_WeChat_friends@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA832225F1EB2006D7A7F /* Share_WeChat_friends@3x.png */; };
+		040CA839225F1EB2006D7A7F /* Share_WeChat_friends@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA833225F1EB2006D7A7F /* Share_WeChat_friends@2x.png */; };
+		040CA84D225F1EBF006D7A7F /* dingwei@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA83B225F1EBF006D7A7F /* dingwei@3x.png */; };
+		040CA84E225F1EBF006D7A7F /* collect@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA83C225F1EBF006D7A7F /* collect@2x.png */; };
+		040CA84F225F1EBF006D7A7F /* Collection_of_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA83D225F1EBF006D7A7F /* Collection_of_selected@2x.png */; };
+		040CA850225F1EBF006D7A7F /* Collection_of_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA83E225F1EBF006D7A7F /* Collection_of_selected@3x.png */; };
+		040CA851225F1EBF006D7A7F /* collect@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA83F225F1EBF006D7A7F /* collect@3x.png */; };
+		040CA852225F1EBF006D7A7F /* collect.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA840225F1EBF006D7A7F /* collect.png */; };
+		040CA853225F1EBF006D7A7F /* dingwei@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA841225F1EBF006D7A7F /* dingwei@2x.png */; };
+		040CA854225F1EBF006D7A7F /* share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA842225F1EBF006D7A7F /* share@2x.png */; };
+		040CA855225F1EBF006D7A7F /* icon_return 拷贝 6@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA843225F1EBF006D7A7F /* icon_return 拷贝 6@2x.png */; };
+		040CA856225F1EBF006D7A7F /* icon_return 拷贝 6@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA844225F1EBF006D7A7F /* icon_return 拷贝 6@3x.png */; };
+		040CA857225F1EBF006D7A7F /* icon_return 拷贝 6.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA845225F1EBF006D7A7F /* icon_return 拷贝 6.png */; };
+		040CA858225F1EBF006D7A7F /* share@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA846225F1EBF006D7A7F /* share@3x.png */; };
+		040CA859225F1EBF006D7A7F /* Location_of_detail_page.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA847225F1EBF006D7A7F /* Location_of_detail_page.png */; };
+		040CA85A225F1EBF006D7A7F /* dingwei.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA848225F1EBF006D7A7F /* dingwei.png */; };
+		040CA85B225F1EBF006D7A7F /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA849225F1EBF006D7A7F /* share.png */; };
+		040CA85C225F1EBF006D7A7F /* Location_of_detail_page@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA84A225F1EBF006D7A7F /* Location_of_detail_page@3x.png */; };
+		040CA85D225F1EBF006D7A7F /* Collection_of_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA84B225F1EBF006D7A7F /* Collection_of_selected.png */; };
+		040CA85E225F1EBF006D7A7F /* Location_of_detail_page@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA84C225F1EBF006D7A7F /* Location_of_detail_page@2x.png */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
 		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
@@ -228,6 +252,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040CA82E225F1EB2006D7A7F /* Share_WeChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_WeChat.png; sourceTree = "<group>"; };
+		040CA82F225F1EB2006D7A7F /* Share_WeChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat@2x.png"; sourceTree = "<group>"; };
+		040CA830225F1EB2006D7A7F /* Share_WeChat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat@3x.png"; sourceTree = "<group>"; };
+		040CA831225F1EB2006D7A7F /* Share_WeChat_friends.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_WeChat_friends.png; sourceTree = "<group>"; };
+		040CA832225F1EB2006D7A7F /* Share_WeChat_friends@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat_friends@3x.png"; sourceTree = "<group>"; };
+		040CA833225F1EB2006D7A7F /* Share_WeChat_friends@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat_friends@2x.png"; sourceTree = "<group>"; };
+		040CA83B225F1EBF006D7A7F /* dingwei@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dingwei@3x.png"; sourceTree = "<group>"; };
+		040CA83C225F1EBF006D7A7F /* collect@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect@2x.png"; sourceTree = "<group>"; };
+		040CA83D225F1EBF006D7A7F /* Collection_of_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Collection_of_selected@2x.png"; sourceTree = "<group>"; };
+		040CA83E225F1EBF006D7A7F /* Collection_of_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Collection_of_selected@3x.png"; sourceTree = "<group>"; };
+		040CA83F225F1EBF006D7A7F /* collect@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "collect@3x.png"; sourceTree = "<group>"; };
+		040CA840225F1EBF006D7A7F /* collect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = collect.png; sourceTree = "<group>"; };
+		040CA841225F1EBF006D7A7F /* dingwei@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dingwei@2x.png"; sourceTree = "<group>"; };
+		040CA842225F1EBF006D7A7F /* share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@2x.png"; sourceTree = "<group>"; };
+		040CA843225F1EBF006D7A7F /* icon_return 拷贝 6@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return 拷贝 6@2x.png"; sourceTree = "<group>"; };
+		040CA844225F1EBF006D7A7F /* icon_return 拷贝 6@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return 拷贝 6@3x.png"; sourceTree = "<group>"; };
+		040CA845225F1EBF006D7A7F /* icon_return 拷贝 6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return 拷贝 6.png"; sourceTree = "<group>"; };
+		040CA846225F1EBF006D7A7F /* share@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share@3x.png"; sourceTree = "<group>"; };
+		040CA847225F1EBF006D7A7F /* Location_of_detail_page.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Location_of_detail_page.png; sourceTree = "<group>"; };
+		040CA848225F1EBF006D7A7F /* dingwei.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dingwei.png; sourceTree = "<group>"; };
+		040CA849225F1EBF006D7A7F /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		040CA84A225F1EBF006D7A7F /* Location_of_detail_page@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location_of_detail_page@3x.png"; sourceTree = "<group>"; };
+		040CA84B225F1EBF006D7A7F /* Collection_of_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Collection_of_selected.png; sourceTree = "<group>"; };
+		040CA84C225F1EBF006D7A7F /* Location_of_detail_page@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Location_of_detail_page@2x.png"; sourceTree = "<group>"; };
 		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -526,6 +574,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		040CA82D225F1EB2006D7A7F /* 05分享_slices */ = {
+			isa = PBXGroup;
+			children = (
+				040CA82E225F1EB2006D7A7F /* Share_WeChat.png */,
+				040CA82F225F1EB2006D7A7F /* Share_WeChat@2x.png */,
+				040CA830225F1EB2006D7A7F /* Share_WeChat@3x.png */,
+				040CA831225F1EB2006D7A7F /* Share_WeChat_friends.png */,
+				040CA832225F1EB2006D7A7F /* Share_WeChat_friends@3x.png */,
+				040CA833225F1EB2006D7A7F /* Share_WeChat_friends@2x.png */,
+			);
+			path = "05分享_slices";
+			sourceTree = "<group>";
+		};
+		040CA83A225F1EBF006D7A7F /* 04职位详情_slices */ = {
+			isa = PBXGroup;
+			children = (
+				040CA83B225F1EBF006D7A7F /* dingwei@3x.png */,
+				040CA83C225F1EBF006D7A7F /* collect@2x.png */,
+				040CA83D225F1EBF006D7A7F /* Collection_of_selected@2x.png */,
+				040CA83E225F1EBF006D7A7F /* Collection_of_selected@3x.png */,
+				040CA83F225F1EBF006D7A7F /* collect@3x.png */,
+				040CA840225F1EBF006D7A7F /* collect.png */,
+				040CA841225F1EBF006D7A7F /* dingwei@2x.png */,
+				040CA842225F1EBF006D7A7F /* share@2x.png */,
+				040CA843225F1EBF006D7A7F /* icon_return 拷贝 6@2x.png */,
+				040CA844225F1EBF006D7A7F /* icon_return 拷贝 6@3x.png */,
+				040CA845225F1EBF006D7A7F /* icon_return 拷贝 6.png */,
+				040CA846225F1EBF006D7A7F /* share@3x.png */,
+				040CA847225F1EBF006D7A7F /* Location_of_detail_page.png */,
+				040CA848225F1EBF006D7A7F /* dingwei.png */,
+				040CA849225F1EBF006D7A7F /* share.png */,
+				040CA84A225F1EBF006D7A7F /* Location_of_detail_page@3x.png */,
+				040CA84B225F1EBF006D7A7F /* Collection_of_selected.png */,
+				040CA84C225F1EBF006D7A7F /* Location_of_detail_page@2x.png */,
+			);
+			path = "04职位详情_slices";
+			sourceTree = "<group>";
+		};
 		044DF23C2244C06900301243 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -611,6 +697,8 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				040CA83A225F1EBF006D7A7F /* 04职位详情_slices */,
+				040CA82D225F1EB2006D7A7F /* 05分享_slices */,
 				6D020A072250F3F8009BCFE4 /* MyResume_slices */,
 				6D0209CB224FB900009BCFE4 /* Mine_slices */,
 				04DD1D32224B6E95007CB11C /* BaseInformation_slices */,
@@ -1001,17 +1089,17 @@
 				6DEA99252255DFF50029FE8A /* SendMyResumeView */,
 				6DEA991F2255DFE40029FE8A /* ShareVIew */,
 				6D020A5F22539FAF009BCFE4 /* CompanyIntroduceView */,
-				6D020A5922539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.m */,
-				6D020A5A22539FAF009BCFE4 /* MapView.m */,
+				6D020A6622539FAF009BCFE4 /* CompanyRequirementsView.h */,
 				6D020A5B22539FAF009BCFE4 /* CompanyRequirementsView.m */,
 				6D020A5C22539FAF009BCFE4 /* TwoButtonView.h */,
+				6D020A6522539FAF009BCFE4 /* TwoButtonView.m */,
 				6D020A6422539FAF009BCFE4 /* HomeTableViewCell.h */,
 				6D020A5D22539FAF009BCFE4 /* HomeTableViewCell.m */,
 				6D020A6322539FAF009BCFE4 /* HomeTableViewCell.xib */,
 				6D020A5E22539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.h */,
+				6D020A5922539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.m */,
 				6D020A6222539FAF009BCFE4 /* MapView.h */,
-				6D020A6522539FAF009BCFE4 /* TwoButtonView.m */,
-				6D020A6622539FAF009BCFE4 /* CompanyRequirementsView.h */,
+				6D020A5A22539FAF009BCFE4 /* MapView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1278,8 +1366,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D55864F224B54D70037C14E /* home_me_pitch_on@2x.png in Resources */,
+				040CA851225F1EBF006D7A7F /* collect@3x.png in Resources */,
 				04DD1D6C224B6E95007CB11C /* 圆角矩形 5@2x.png in Resources */,
+				040CA85A225F1EBF006D7A7F /* dingwei.png in Resources */,
 				04DD1D65224B6E95007CB11C /* 椭圆 3.png in Resources */,
+				040CA836225F1EB2006D7A7F /* Share_WeChat@3x.png in Resources */,
 				04DD1D59224B6E95007CB11C /* 组 18(1).png in Resources */,
 				6D0209F2224FB900009BCFE4 /* default_avatar@3x.png in Resources */,
 				6D020A3D2251031D009BCFE4 /* JMMyResumeCareerObjectiveTableViewCell.xib in Resources */,
@@ -1293,28 +1384,36 @@
 				6D020A6922539FB0009BCFE4 /* JobDetailsViewController.xib in Resources */,
 				6D0209ED224FB900009BCFE4 /* enshrine@3x.png in Resources */,
 				04DD1D6E224B6E95007CB11C /* camera.png in Resources */,
+				040CA84F225F1EBF006D7A7F /* Collection_of_selected@2x.png in Resources */,
 				048FEE3D2244853C001160C8 /* LaunchScreen.storyboard in Resources */,
 				049A515F2248B29C007A8068 /* JobIntensionViewController.xib in Resources */,
 				04DD1D53224B6E95007CB11C /* phone@2x.png in Resources */,
 				6D0209E7224FB900009BCFE4 /* subscribe@3x.png in Resources */,
+				040CA855225F1EBF006D7A7F /* icon_return 拷贝 6@2x.png in Resources */,
 				6D020A2A2250F3F9009BCFE4 /* education@3x.png in Resources */,
 				04A9DFBF225C7B9F00CD7CC1 /* 启动图@2x.png in Resources */,
 				6D020A6B22539FB0009BCFE4 /* JMCompanyIntroduceViewController.xib in Resources */,
 				6D558655224B54D70037C14E /* home_ message_pitch_on@3x.png in Resources */,
+				040CA837225F1EB2006D7A7F /* Share_WeChat_friends.png in Resources */,
+				040CA853225F1EBF006D7A7F /* dingwei@2x.png in Resources */,
 				04A9DFC1225C7B9F00CD7CC1 /* 启动图.png in Resources */,
 				6D020A272250F3F9009BCFE4 /* 椭圆 3@2x.png in Resources */,
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
 				04DD1D69224B6E95007CB11C /* 椭圆 3@3x.png in Resources */,
 				6D020A262250F3F9009BCFE4 /* 椭圆 3@3x.png in Resources */,
+				040CA857225F1EBF006D7A7F /* icon_return 拷贝 6.png in Resources */,
+				040CA85E225F1EBF006D7A7F /* Location_of_detail_page@2x.png in Resources */,
 				6D0209E2224FB900009BCFE4 /* autonym@2x.png in Resources */,
 				04DD1D6D224B6E95007CB11C /* 圆角矩形 5.png in Resources */,
 				04DD1D55224B6E95007CB11C /* WeChat_login.png in Resources */,
+				040CA838225F1EB2006D7A7F /* Share_WeChat_friends@3x.png in Resources */,
 				04DD1D61224B6E95007CB11C /* camera@2x.png in Resources */,
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
 				04A9DFC0225C7B9F00CD7CC1 /* 启动图@3x.png in Resources */,
 				6DEA99242255DFE40029FE8A /* JMShareView.xib in Resources */,
 				6D020A882259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib in Resources */,
+				040CA854225F1EBF006D7A7F /* share@2x.png in Resources */,
 				04DD1D5C224B6E95007CB11C /* 组 18@2x(1).png in Resources */,
 				04DD1D57224B6E95007CB11C /* 组 18@2x.png in Resources */,
 				04DD1D5F224B6E95007CB11C /* icon_return@3x.png in Resources */,
@@ -1322,7 +1421,9 @@
 				6D558659224B54D70037C14E /* 组 53@2x.png in Resources */,
 				04DD1D46224B6E95007CB11C /* break.png in Resources */,
 				04DD1D51224B6E95007CB11C /* Webkey@3x.png in Resources */,
+				040CA839225F1EB2006D7A7F /* Share_WeChat_friends@2x.png in Resources */,
 				6D55864B224B54D70037C14E /* Search_Home@3x.png in Resources */,
+				040CA852225F1EBF006D7A7F /* collect.png in Resources */,
 				04DD1D6B224B6E95007CB11C /* icon_return .png in Resources */,
 				6D558656224B54D70037C14E /* home_ message_pitch_on@2x.png in Resources */,
 				04DD1D49224B6E95007CB11C /* verification_code@3x.png in Resources */,
@@ -1350,10 +1451,14 @@
 				6D020A252250F3F9009BCFE4 /* photograph@3x.png in Resources */,
 				6D0209E9224FB900009BCFE4 /* burse@2x.png in Resources */,
 				6D020A422251186B009BCFE4 /* JMMyResumeCareerStatusTableViewCell.xib in Resources */,
+				040CA84D225F1EBF006D7A7F /* dingwei@3x.png in Resources */,
 				04DD1D4D224B6E95007CB11C /* verification_code@2x.png in Resources */,
+				040CA85C225F1EBF006D7A7F /* Location_of_detail_page@3x.png in Resources */,
 				0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */,
+				040CA85B225F1EBF006D7A7F /* share.png in Resources */,
 				6D0209F1224FB900009BCFE4 /* upinstall@2x.png in Resources */,
 				04DD1D4E224B6E95007CB11C /* WeChat_login@2x.png in Resources */,
+				040CA859225F1EBF006D7A7F /* Location_of_detail_page.png in Resources */,
 				6D558650224B54D70037C14E /* home_me_pitch_on@3x.png in Resources */,
 				6D0209E1224FB900009BCFE4 /* autonym@3x.png in Resources */,
 				04DD1D62224B6E95007CB11C /* 蓝点@3x.png in Resources */,
@@ -1361,6 +1466,7 @@
 				04DD1D6A224B6E95007CB11C /* 椭圆 3@2x.png in Resources */,
 				6D0209E3224FB900009BCFE4 /* eliver@2x.png in Resources */,
 				048FEE382244853C001160C8 /* Main.storyboard in Resources */,
+				040CA856225F1EBF006D7A7F /* icon_return 拷贝 6@3x.png in Resources */,
 				04DD1D50224B6E95007CB11C /* Webkey@2x.png in Resources */,
 				04A2479B224C773A00DEB8E3 /* 0000@3x.png in Resources */,
 				6D020A792258A408009BCFE4 /* JMEducationalExperienceTableViewCell.xib in Resources */,
@@ -1391,13 +1497,18 @@
 				04DD1D52224B6E95007CB11C /* Webkey.png in Resources */,
 				6D020A7222539FB0009BCFE4 /* HomeTableViewCell.xib in Resources */,
 				6D558664224B564F0037C14E /* JMMineViewController.xib in Resources */,
+				040CA835225F1EB2006D7A7F /* Share_WeChat@2x.png in Resources */,
+				040CA834225F1EB2006D7A7F /* Share_WeChat.png in Resources */,
 				6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */,
+				040CA850225F1EBF006D7A7F /* Collection_of_selected@3x.png in Resources */,
+				040CA85D225F1EBF006D7A7F /* Collection_of_selected.png in Resources */,
 				6D558652224B54D70037C14E /* site_Home@3x.png in Resources */,
 				04A2479A224C773A00DEB8E3 /* 0000.png in Resources */,
 				6D558651224B54D70037C14E /* home@3x.png in Resources */,
 				6D020A1E2250F3F9009BCFE4 /* icon_return 拷贝 2@2x.png in Resources */,
 				6D020A212250F3F9009BCFE4 /* 组 54@3x.png in Resources */,
 				6D0209E0224FB900009BCFE4 /* eliver@3x.png in Resources */,
+				040CA858225F1EBF006D7A7F /* share@3x.png in Resources */,
 				6D0209EA224FB900009BCFE4 /* burse@3x.png in Resources */,
 				6D020A202250F3F9009BCFE4 /* 组 54@2x.png in Resources */,
 				04A2479C224C773A00DEB8E3 /* 0000@2x.png in Resources */,
@@ -1407,6 +1518,7 @@
 				6D020A47225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.xib in Resources */,
 				04DD1D4C224B6E95007CB11C /* JIANMIAN_logo@3x.png in Resources */,
 				6D020A2C2250F3F9009BCFE4 /*  copyreader@2x.png in Resources */,
+				040CA84E225F1EBF006D7A7F /* collect@2x.png in Resources */,
 				04DD1D60224B6E95007CB11C /* icon_return@2x.png in Resources */,
 				04DD1D5A224B6E95007CB11C /* 组 18.png in Resources */,
 				04A247DF224CE70E00DEB8E3 /* play@3x.png in Resources */,

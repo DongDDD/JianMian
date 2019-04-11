@@ -14,6 +14,8 @@
 #import "JMCompanyIntroduceViewController.h"
 #import "JMShareView.h"
 #import "JMSendMyResumeView.h"
+#import "JMHTTPManager+Work.h"
+#import "JMHomeWorkModel.h"
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate>
 
@@ -39,7 +41,9 @@
 @property(nonatomic,strong)JMShareView *shareView;//分享
 
 @property(nonatomic,strong)JMSendMyResumeView *sendMyResumeView;//投个简历
+@property(nonatomic,strong)JMHomeWorkModel *model;
 
+@property (nonatomic, strong) UIActivityIndicatorView * juhua;
 
 @end
 
@@ -51,29 +55,30 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    //设置透明
+//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     
-    [self.navigationController.navigationBar setTranslucent:true];
+//    [self.navigationController.navigationBar setTranslucent:true];
+    [self setJuhua];
+    
+    [self getData];
     //右上角分享 收藏按钮
-    [self setRightBtnImageViewName:@"Collection_of_selected" imageNameRight2:@"share"];
+    [self setRightBtnImageViewName:@"collect" imageNameRight2:@"share"];
+    [self setTitle:@"职位详情"];
 
-    [self setScrollView];
-    [self setVideoImgView];
-    [self setFootOfVideoView];
+   self.scrollView.contentOffset= CGPointMake(0, -70);
     
-    [self setCompanyIntroductionView];
-    [self setJobDescriptionView];
-    [self setMapView];
-    [self setHRView];
     
     
 }
+
+
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-   
     [self.view layoutIfNeeded];
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.HRView.frame.origin.y+self.HRView.frame.size.height+70);
+    self.scrollView.contentOffset= CGPointMake(0, -80);
 }
 
 #pragma mark - 懒加载
@@ -183,15 +188,55 @@
 }
 #pragma mark - 数据请求
 -(void)getData{
-    
+    [[JMHTTPManager sharedInstance]fetchWorkInfoWithWork_id:self.homeworkModel.work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+        if (responsObject[@"data"]) {
 
-
-
+            self.model = [JMHomeWorkModel mj_objectWithKeyValues:responsObject[@"data"]];
+            NSLog(@"%@",self.model.companyName);
+            [self setUI];
+            [self.juhua stopAnimating];
+         }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
 
 }
 
 
 #pragma mark - UI布局
+-(void)setJuhua{
+    self.juhua = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyleGray)];
+    [self.view addSubview:self.juhua];
+    //设置小菊花的frame
+    [self.juhua mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self.view);
+        make.width.and.height.mas_equalTo(100);
+        
+        
+    }];
+    //设置小菊花颜色
+//    self.juhua.color = [UIColor redColor];
+    //设置背景颜色
+//    self.juhua.backgroundColor = [UIColor cyanColor];
+    //刚进入这个界面会显示控件，并且停止旋转也会显示，只是没有在转动而已，没有设置或者设置为YES的时候，刚进入页面不会显示
+    self.juhua.hidesWhenStopped = NO;
+
+}
+
+
+-(void)setUI{
+    [self setScrollView];
+    //    [self setVideoImgView];
+    [self setFootOfVideoView];
+    [self setCompanyIntroductionView];
+    [self setJobDescriptionView];
+    [self setMapView];
+    [self setHRView];
+}
 
 -(void)setScrollView{
     self.scrollView = [[UIScrollView alloc]init];
@@ -209,30 +254,30 @@
 }
 
 
--(void)setVideoImgView{
-    
-    self.videoImageView = [[UIImageView alloc]init];
-    self.videoImageView.backgroundColor = [UIColor yellowColor];
-    [self.scrollView addSubview:self.videoImageView];
-    [self.videoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.scrollView.mas_top).mas_offset(-88);
-
-        make.left.and.right.equalTo(self.view);
-        make.height.mas_equalTo(self.view.mas_height).mas_offset(-160);
-
-    }];
-    
-    
-    UIButton *playBtn = [[UIButton alloc]init];
-    [playBtn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-    [playBtn addTarget:self action:@selector(playAction) forControlEvents:UIControlEventTouchUpInside];
-    [self.scrollView addSubview:playBtn];
-    [playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self.videoImageView);
-        make.centerY.mas_equalTo(self.videoImageView);
-        make.height.and.with.mas_equalTo(141);
-    }];
-}
+//-(void)setVideoImgView{
+//
+//    self.videoImageView = [[UIImageView alloc]init];
+//    self.videoImageView.backgroundColor = [UIColor yellowColor];
+//    [self.scrollView addSubview:self.videoImageView];
+//    [self.videoImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.scrollView.mas_top).mas_offset(-88);
+//
+//        make.left.and.right.equalTo(self.view);
+//        make.height.mas_equalTo(self.view.mas_height).mas_offset(-160);
+//
+//    }];
+//
+//
+//    UIButton *playBtn = [[UIButton alloc]init];
+//    [playBtn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+//    [playBtn addTarget:self action:@selector(playAction) forControlEvents:UIControlEventTouchUpInside];
+//    [self.scrollView addSubview:playBtn];
+//    [playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(self.videoImageView);
+//        make.centerY.mas_equalTo(self.videoImageView);
+//        make.height.and.with.mas_equalTo(141);
+//    }];
+//}
 
 
 #pragma mark - 职位简介
@@ -258,31 +303,52 @@
    
     [self.footOfVideoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self.view);
-        make.top.equalTo(self.videoImageView.mas_bottom);
-        make.height.mas_equalTo(172-60);
+        make.top.equalTo(self.scrollView);
+        make.height.mas_equalTo(134);
        
     }];
 
     
     //职位名称
     UILabel *jobNameLab = [[UILabel alloc]init];
-    jobNameLab.text = @"UI设计师";
+    jobNameLab.text = self.model.work_name;
     jobNameLab.font = [UIFont systemFontOfSize:20];
     jobNameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
     [self.footOfVideoView addSubview:jobNameLab];
-    
+
     [jobNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(150);
+        make.width.mas_equalTo(300);
         make.height.mas_equalTo(19);
         make.left.mas_equalTo(self.footOfVideoView.mas_left).offset(22);
-        make.bottom.mas_equalTo(self.footOfVideoView.mas_bottom).offset(-86);
+        make.top.mas_equalTo(self.footOfVideoView.mas_top).offset(30);
+
+    }];
+    
+    //工资
+    UILabel *salaryLab = [[UILabel alloc]init];
+    NSString *salaryStr = [self getSalaryStrWithMin:_model.salary_min max:_model.salary_max];
+    salaryLab.text = salaryStr;
+    salaryLab.font = [UIFont systemFontOfSize:16];
+    salaryLab.textColor = MASTER_COLOR;
+    salaryLab.textAlignment = NSTextAlignmentRight;
+    [self.footOfVideoView addSubview:salaryLab];
+    
+    [salaryLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(19);
+        make.right.mas_equalTo(self.footOfVideoView.mas_right).offset(-22);
+        make.centerY.mas_equalTo(jobNameLab);
         
     }];
+    
+    
     
     //经验 学历
     
     UILabel *yearsEduLab = [[UILabel alloc]init];
-    yearsEduLab.text = @"1-3年   大专";
+    NSString *education = [self getEducationStrWithEducation:_model.education];
+    NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年      %@ ",_model.work_experience_min,_model.work_experience_max,education];
+    yearsEduLab.text = experienceStr;
     yearsEduLab.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
     yearsEduLab.font = [UIFont systemFontOfSize:15];
     [self.footOfVideoView addSubview:yearsEduLab];
@@ -296,31 +362,91 @@
     }];
     
     //公司福利
-  
-    UILabel *fuliLab = [[UILabel alloc]init];
-    fuliLab.text = @"五险一金";
-    fuliLab.backgroundColor = [UIColor colorWithRed:245/255.0 green:246/255.0 blue:250/255.0 alpha:1.0];
-    fuliLab.textAlignment = NSTextAlignmentCenter;
-    fuliLab.font = [UIFont systemFontOfSize:12];
-    fuliLab.adjustsFontSizeToFitWidth = YES;
-    fuliLab.layer.cornerRadius = 3;
-    fuliLab.textColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1.0];
-    [self.footOfVideoView addSubview:fuliLab];
     
-    [fuliLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.mas_equalTo(22);
-        make.width.mas_equalTo(63);
-        make.left.mas_equalTo(yearsEduLab.mas_left);
-        make.top.mas_equalTo(yearsEduLab.mas_bottom).offset(10);
+    for (int i=0; i < self.model.companyLabels.count; i++) {
+        NSDictionary *dic = self.model.companyLabels[i];
+        UILabel *fuliLab = [[UILabel alloc]init];
+        fuliLab.text = dic[@"name"];
+        fuliLab.backgroundColor = [UIColor colorWithRed:245/255.0 green:246/255.0 blue:250/255.0 alpha:1.0];
+        fuliLab.textAlignment = NSTextAlignmentCenter;
+        fuliLab.font = [UIFont systemFontOfSize:12];
+        fuliLab.adjustsFontSizeToFitWidth = YES;
+        fuliLab.layer.cornerRadius = 3;
+        fuliLab.textColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1.0];
+        [self.footOfVideoView addSubview:fuliLab];
         
-    }];
+        [fuliLab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(22);
+            make.width.mas_equalTo(63);
+            make.left.mas_equalTo(yearsEduLab.mas_left).offset(87*i);
+            make.top.mas_equalTo(yearsEduLab.mas_bottom).offset(10);
+            
+        }];
+        
+        
+    }
+    
     
     
     
     
 }
-#pragma mark - 公司简介
 
+
+//工资数据转化，除以1000，转化成k
+-(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
+    NSInteger myint = [min integerValue];
+    NSInteger intMin = myint/1000;
+    
+    NSInteger myint2 = [max integerValue];
+    NSInteger intMax = myint2/1000;
+    
+    NSString *salaryStr;
+    salaryStr = [NSString stringWithFormat:@"%dk~%dk",  (int)intMin, (int)intMax];
+    
+    return salaryStr;
+}
+
+//学历数据转化
+-(NSString *)getEducationStrWithEducation:(NSNumber *)education{
+    NSInteger myInt = [education integerValue];
+    
+    switch (myInt) {
+        case 0:
+            return @"不限";
+            break;
+        case 1:
+            return @"初中及以下";
+            break;
+        case 2:
+            return @"中专/中技";
+            break;
+        case 3:
+            return @"高中";
+            break;
+        case 4:
+            return @"大专";
+            break;
+        case 5:
+            return @"本科";
+            break;
+        case 6:
+            return @"硕士";
+            break;
+        case 7:
+            return @"博士";
+            break;
+            
+        default:
+            break;
+    }
+    return @"不限";
+    
+}
+
+
+#pragma mark - 公司简介
+//点击事件
 -(void)introduceAvtion{
     JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
     
@@ -362,7 +488,7 @@
     
     
     UILabel *companyNameLab = [[UILabel alloc]init];
-    companyNameLab.text = @"空间智能科技";
+    companyNameLab.text = _model.companyName;
     companyNameLab.font = [UIFont systemFontOfSize:16];
     companyNameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
     companyNameLab.adjustsFontSizeToFitWidth = YES;
@@ -375,7 +501,8 @@
     }];
     
     UILabel * companyMessageLab = [[UILabel alloc]init];
-    companyMessageLab.text = @"移动互联网   不需要融资   20-50人";
+    
+    companyMessageLab.text = [NSString stringWithFormat:@"%@  |  %@",_model.companyFinancing,_model.companyEmployee];
     companyMessageLab.font = [UIFont systemFontOfSize:13];
     companyMessageLab.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
     companyMessageLab.adjustsFontSizeToFitWidth = YES;
@@ -473,7 +600,8 @@
     
 
     NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    NSString  *testString = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
+//    NSString  *testString = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
+    NSString  *testString = _model.Description;
     NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString];
     [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString length])];
     [self.jobDoLab  setAttributedText:setString];
@@ -644,29 +772,29 @@
 
 
 
--(void)playAction{
-   
-    NSLog(@"播放按钮");
-  
-    [UIView animateWithDuration:0.2 animations:^{
-    [self.videoImageView mas_updateConstraints:^(MASConstraintMaker *make) {
-
-        make.height.mas_equalTo(self.view.mas_height);
-        self.twoBtnView.alpha = 0.8;
-
-    }];
-
-        [self.view layoutIfNeeded];//强制绘制
-    } completion:^(BOOL finished) {
-        NSLog(@"播放视频");
-
-    }];
+//-(void)playAction{
 //
+//    NSLog(@"播放按钮");
+//
+//    [UIView animateWithDuration:0.2 animations:^{
+//    [self.videoImageView mas_updateConstraints:^(MASConstraintMaker *make) {
+//
+//        make.height.mas_equalTo(self.view.mas_height);
+//        self.twoBtnView.alpha = 0.8;
+//
+//    }];
+//
+//        [self.view layoutIfNeeded];//强制绘制
+//    } completion:^(BOOL finished) {
+//        NSLog(@"播放视频");
+//
+//    }];
+////
 
 
 
 
-}
+//}
 
 
 
