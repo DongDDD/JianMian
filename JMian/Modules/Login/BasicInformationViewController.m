@@ -14,15 +14,16 @@
 
 
 
-@interface BasicInformationViewController ()<UITextFieldDelegate>
+@interface BasicInformationViewController ()<UITextFieldDelegate,UIScrollViewDelegate>
 
 @property(nonatomic,strong)NSNumber *sex;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *numberText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
 @property (weak, nonatomic) IBOutlet UIButton *headerImg;
-@property (weak, nonatomic) IBOutlet UITextField *birthDateText;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet UIButton *birtnDateBtn;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 @end
@@ -34,11 +35,8 @@
     [self.navigationController setNavigationBarHidden:NO];
     [self setRightBtnTextName:@"下一步"];
     
-    self.birthDateText.delegate = self;
-    
-    UITapGestureRecognizer *dateTextTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(showDatePickerAction)];
-    [self.view addGestureRecognizer:dateTextTap];
-    
+    self.datePicker.backgroundColor = [UIColor whiteColor];
+    self.scrollView.delegate = self;
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
     [self.view addGestureRecognizer:bgTap];
     
@@ -50,7 +48,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.birthDateText.delegate = self;
     //从沙盒拿
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
@@ -66,26 +63,21 @@
     formatter.dateFormat = @"yyyy-MM-dd";
     NSString *date = [formatter stringFromDate:self.datePicker.date];
     // 显示时间
-    self.birthDateText.text = date;
+    [self.birtnDateBtn setTitle:date forState:UIControlStateNormal];
+    [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     
+    
+}
+- (IBAction)showDatePeckerAction:(id)sender {
+    self.datePicker.hidden = NO;
+
 }
 
--(void)showDatePickerAction{
-    [self.datePicker mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view);
-        
-    }];
-    
-    
-    
-}
+
 
 
 -(void)hiddenDatePickerAction{
-    [self.datePicker mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view.mas_bottom);
-        
-    }];
+    self.datePicker.hidden = YES;
     
 
 }
@@ -157,7 +149,12 @@
         
     }
 }
-
+#pragma mark -scrollView delegte
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    self.datePicker.hidden = YES;
+    
+}
 
 // 图片选择结束之后，走这个方法，字典存放所有图片信息
 #pragma mark - image picker delegte

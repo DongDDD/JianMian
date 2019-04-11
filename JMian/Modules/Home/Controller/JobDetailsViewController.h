@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "JMHomeWorkModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JobDetailsViewController : BaseViewController
+
+@property(nonatomic,strong)JMHomeWorkModel *homeworkModel;
 
 @end
 

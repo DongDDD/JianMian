@@ -152,8 +152,7 @@ static NSString *cellIdent = @"cellIdent";
    
     JMHomeWorkModel *model = self.arrDate[indexPath.row];
     [cell setModel:model];
-    
-    
+   
     return cell;
     
 }
@@ -162,10 +161,13 @@ static NSString *cellIdent = @"cellIdent";
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
+    JMHomeWorkModel *model = self.arrDate[indexPath.row];
+
+    vc.homeworkModel = model;
     
     [self.navigationController pushViewController:vc animated:YES];
     
-    NSLog(@"%d",(int)indexPath.row);
+   
    
 }
 

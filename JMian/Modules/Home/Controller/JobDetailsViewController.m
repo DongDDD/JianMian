@@ -181,6 +181,14 @@
     }
  
 }
+#pragma mark - 数据请求
+-(void)getData{
+    
+
+
+
+
+}
 
 
 #pragma mark - UI布局

@@ -138,13 +138,6 @@
         //打印错误
         [self HTTPRequestLog:task body:request.parameters responseObject:responseObject error:parseError];
         //回调
-        if(parseError.code == 403) {
-            kRemoveMyDefault(@"token");
-            //跳去登录
-            LoginViewController *login = [[LoginViewController alloc] init];
-            [UIApplication sharedApplication].delegate.window.rootViewController = login;
-        }
-        
         request.failureBlock(request, error);
         
     } else {
@@ -163,7 +156,14 @@
             [self HTTPRequestLog:task body:request.parameters responseObject:responseObject error:nil];
             request.successBlock(request, responseObject);
             
-        }else{
+        } else if(statusCode == JMHTTPServiceResponseCodeTokenExpired) {
+            kRemoveMyDefault(@"token");
+            //跳去登录
+            LoginViewController *login = [[LoginViewController alloc] init];
+            UINavigationController *naVC = [[UINavigationController alloc] initWithRootViewController:login];
+            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+            
+        } else{
             
             NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
             userInfo[@"statusCode"] = @(statusCode);

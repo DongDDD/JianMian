@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger,JMHTTPServiceResponseCode){
     JMHTTPServiceResponseCodeSuccess = 200,
+    JMHTTPServiceResponseCodeTokenExpired = 403,
 } ;
 
 @interface JMHTTPManager : AFHTTPSessionManager
