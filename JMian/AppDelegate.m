@@ -10,8 +10,8 @@
 #import "LoginViewController.h"
 #import "NavigationViewController.h"
 #import "JMTabBarViewController.h"
-
-
+#import <TIMManager.h>
+#import "VendorKeyMacros.h"
 
 @interface AppDelegate ()
 
@@ -19,13 +19,21 @@
 
 @implementation AppDelegate
 
-
+- (void)initTimSDK {
+    TIMSdkConfig *sdkConfig = [[TIMSdkConfig alloc] init];
+    sdkConfig.sdkAppId = TIMSdkAppid.intValue;
+    sdkConfig.accountType = TIMSdkAccountType;
+    sdkConfig.disableLogPrint = NO; // 是否允许log打印
+    sdkConfig.logLevel = TIM_LOG_DEBUG; //Log输出级别（debug级别会很多）
+    [[TIMManager sharedInstance] initSdk:sdkConfig];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     // Override point for customization after application launch.
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-    
+    [self initTimSDK];
+
     if(kFetchMyDefault(@"token")){
         JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
         self.window.rootViewController = tab;
@@ -39,9 +47,6 @@
         [_window setRootViewController:naVC];//navigation加在window上
 
         [self.window makeKeyAndVisible];
-        
-
-
         
         
     }

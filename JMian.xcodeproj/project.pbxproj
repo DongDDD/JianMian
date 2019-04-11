@@ -202,6 +202,7 @@
 		6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */; };
 		6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */; };
 		6DAE2376225B901E005E6C01 /* JMSystemLabelsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAE2375225B901E005E6C01 /* JMSystemLabelsModel.m */; };
+		6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDA717C225EF3C100A7C8F7 /* JMUserInfoManager.m */; };
 		6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA99162255ACD00029FE8A /* NSDictionary+NullSafe.m */; };
 		6DEA991E2255DF5C0029FE8A /* JMLoginInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA991D2255DF5C0029FE8A /* JMLoginInfoModel.m */; };
 		6DEA99232255DFE40029FE8A /* JMShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA99202255DFE40029FE8A /* JMShareView.m */; };
@@ -487,6 +488,9 @@
 		6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPRequest.m; sourceTree = "<group>"; };
 		6DAE2374225B901E005E6C01 /* JMSystemLabelsModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JMSystemLabelsModel.h; path = JMian/Modules/Mine/Controller/MyResume/Cells/JMSystemLabelsModel.h; sourceTree = SOURCE_ROOT; };
 		6DAE2375225B901E005E6C01 /* JMSystemLabelsModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = JMSystemLabelsModel.m; path = JMian/Modules/Mine/Controller/MyResume/Cells/JMSystemLabelsModel.m; sourceTree = SOURCE_ROOT; };
+		6DDA717B225EF3C100A7C8F7 /* JMUserInfoManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMUserInfoManager.h; sourceTree = "<group>"; };
+		6DDA717C225EF3C100A7C8F7 /* JMUserInfoManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMUserInfoManager.m; sourceTree = "<group>"; };
+		6DDA717E225F1A9A00A7C8F7 /* VendorKeyMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VendorKeyMacros.h; sourceTree = "<group>"; };
 		6DEA99152255ACD00029FE8A /* NSDictionary+NullSafe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+NullSafe.h"; sourceTree = "<group>"; };
 		6DEA99162255ACD00029FE8A /* NSDictionary+NullSafe.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+NullSafe.m"; sourceTree = "<group>"; };
 		6DEA991C2255DF5C0029FE8A /* JMLoginInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMLoginInfoModel.h; sourceTree = "<group>"; };
@@ -584,6 +588,7 @@
 			children = (
 				0472708A2248F1D0005FD1FC /* DimensMacros.h */,
 				0472708B2248F241005FD1FC /* APIStringMacros.h */,
+				6DDA717E225F1A9A00A7C8F7 /* VendorKeyMacros.h */,
 			);
 			path = Define;
 			sourceTree = "<group>";
@@ -632,6 +637,7 @@
 		0462C7222244937D003B6639 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				6DDA717A225EF3A800A7C8F7 /* UserInfo */,
 				6D62995D224E0468007E7DE4 /* Network */,
 			);
 			path = Utilities;
@@ -1101,6 +1107,15 @@
 			path = Nw;
 			sourceTree = "<group>";
 		};
+		6DDA717A225EF3A800A7C8F7 /* UserInfo */ = {
+			isa = PBXGroup;
+			children = (
+				6DDA717B225EF3C100A7C8F7 /* JMUserInfoManager.h */,
+				6DDA717C225EF3C100A7C8F7 /* JMUserInfoManager.m */,
+			);
+			path = UserInfo;
+			sourceTree = "<group>";
+		};
 		6DEA990C2254A0B60029FE8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1183,6 +1198,7 @@
 				048FEE2A2244853C001160C8 /* Frameworks */,
 				048FEE2B2244853C001160C8 /* Resources */,
 				F9696212A5B33EE9B967E2B7 /* [CP] Copy Pods Resources */,
+				12445E43A913AF9E1CBC2892 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1435,6 +1451,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		12445E43A913AF9E1CBC2892 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-frameworks.sh",
+				"${PODS_ROOT}/TXIMSDK_iOS/iOS/ImSDK.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImSDK.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7B7824ACBD1F1FF3F1486D0B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1504,6 +1542,7 @@
 				045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */,
 				6D020A6E22539FB0009BCFE4 /* MapView.m in Sources */,
 				04A9DFBA225C429B00CD7CC1 /* HomeTableViewCell.m in Sources */,
+				6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
 				6D020A7122539FB0009BCFE4 /* JMIntroduceContentView.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,

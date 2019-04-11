@@ -11,8 +11,7 @@
 #import "JMHTTPManager+Login.h"
 #import "JMLoginInfoModel.h"
 #import "JMHTTPManager+Captcha.h"
-
-
+#import "VendorKeyMacros.h"
 
 @interface LoginPhoneViewController ()<UIActionSheetDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumText;
@@ -42,8 +41,23 @@
     
     [[JMHTTPManager sharedInstance]loginWithMode:@"sms" phone:self.phoneNumText.text captcha:self.captchaText.text sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
+        [JMUserInfoManager saveUserInfo:responsObject];
+        
+
         JMLoginInfoModel *model = [JMLoginInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         NSLog(@"用户手机号：----%@",model.phone);
+        
+        TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
+        // identifier 为用户名，userSig 为用户登录凭证
+        login_param.identifier = model.user_id;
+        login_param.userSig = model.usersig;
+        [[TIMManager sharedInstance] login: login_param succ:^(){
+            NSLog(@"Login Succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"Login Failed: %d->%@", code, err);
+        }];
+        
+        
         
         ChooseIdentity *chooseId = [[ChooseIdentity alloc]init];
         [self.navigationController pushViewController:chooseId animated:YES];
@@ -56,9 +70,6 @@
         
     }];
     
-    ChooseIdentity *chooseId = [[ChooseIdentity alloc]init];
-    
-    [self.navigationController pushViewController:chooseId animated:YES];
 }
 
 
