@@ -77,7 +77,7 @@
 {
     [super viewDidAppear:animated];
     [self.view layoutIfNeeded];
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.HRView.frame.origin.y+self.HRView.frame.size.height+70);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.HRView.frame.origin.y+self.HRView.frame.size.height+134);
     
 //    self.scrollView.contentOffset= CGPointMake(0, -80);
 }
