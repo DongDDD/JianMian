@@ -8,6 +8,8 @@
 
 #import "JMAllMessageTableViewController.h"
 #import "JMAllMessageTableViewCell.h"
+#import "JMNotificationViewController.h"
+
 
 
 @interface JMAllMessageTableViewController ()
@@ -46,9 +48,17 @@ static NSString *cellIdent = @"allMessageCellIdent";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    JMAllMessageTableViewCell *cell = [[JMAllMessageTableViewCell alloc]init];
     JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
-    
+      
  
     return cell;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    JMNotificationViewController *vc = [[JMNotificationViewController alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 

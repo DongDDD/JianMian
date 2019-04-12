@@ -90,6 +90,7 @@
 		04C6015522607671000B1FE0 /* notification @2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C6015222607671000B1FE0 /* notification @2x.png */; };
 		04C6015C2260874A000B1FE0 /* JMLookMeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6015A2260874A000B1FE0 /* JMLookMeTableViewCell.m */; };
 		04C6015D2260874A000B1FE0 /* JMLookMeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C6015B2260874A000B1FE0 /* JMLookMeTableViewCell.xib */; };
+		04C60160226097B1000B1FE0 /* JMNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6015F226097B1000B1FE0 /* JMNotificationViewController.m */; };
 		04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */; };
 		04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */; };
 		04DD1D45224B6E95007CB11C /* break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D18224B6E95007CB11C /* break@2x.png */; };
@@ -382,6 +383,8 @@
 		04C601592260874A000B1FE0 /* JMLookMeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLookMeTableViewCell.h; sourceTree = "<group>"; };
 		04C6015A2260874A000B1FE0 /* JMLookMeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLookMeTableViewCell.m; sourceTree = "<group>"; };
 		04C6015B2260874A000B1FE0 /* JMLookMeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMLookMeTableViewCell.xib; sourceTree = "<group>"; };
+		04C6015E226097B1000B1FE0 /* JMNotificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMNotificationViewController.h; sourceTree = "<group>"; };
+		04C6015F226097B1000B1FE0 /* JMNotificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMNotificationViewController.m; sourceTree = "<group>"; };
 		04DD1D0B224B6D95007CB11C /* FailedLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedLoadingViewController.h; sourceTree = "<group>"; };
 		04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedLoadingViewController.xib; sourceTree = "<group>"; };
 		04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedLoadingViewController.m; sourceTree = "<group>"; };
@@ -926,6 +929,8 @@
 				04C60140226063E3000B1FE0 /* JMLookMeTableViewController.h */,
 				04C60141226063E3000B1FE0 /* JMLookMeTableViewController.m */,
 				04C60142226063E3000B1FE0 /* JMLookMeTableViewController.xib */,
+				04C6015E226097B1000B1FE0 /* JMNotificationViewController.h */,
+				04C6015F226097B1000B1FE0 /* JMNotificationViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1745,6 +1750,7 @@
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
 				045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */,
+				04C60160226097B1000B1FE0 /* JMNotificationViewController.m in Sources */,
 				6D020A6E22539FB0009BCFE4 /* MapView.m in Sources */,
 				04A9DFBA225C429B00CD7CC1 /* HomeTableViewCell.m in Sources */,
 				6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */,
