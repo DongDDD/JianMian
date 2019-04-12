@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sga-NA-PAh">
-                    <rect key="frame" x="0.0" y="92" width="375" height="44"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJE-p8-7KY" userLabel="footvVew">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
@@ -136,7 +136,7 @@
                 <constraint firstItem="kXY-bM-hPm" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="RAu-MM-W1m"/>
                 <constraint firstItem="sga-NA-PAh" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="fyA-l9-de2"/>
                 <constraint firstItem="sga-NA-PAh" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="mhm-Mo-3vg"/>
-                <constraint firstItem="sga-NA-PAh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="92" id="vBT-AE-fej"/>
+                <constraint firstItem="sga-NA-PAh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vBT-AE-fej"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="39.200000000000003" y="46.326836581709152"/>

@@ -16,8 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    self.extendedLayoutIncludesOpaqueBars = YES;
+//    self.navigationController.navigationBar.translucent = NO;
+//
+//    self.extendedLayoutIncludesOpaqueBars = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     [self setBackBtnImageViewName:@"icon_return" textName:@""];
   

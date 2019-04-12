@@ -78,7 +78,8 @@
     [super viewDidAppear:animated];
     [self.view layoutIfNeeded];
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.HRView.frame.origin.y+self.HRView.frame.size.height+70);
-    self.scrollView.contentOffset= CGPointMake(0, -80);
+    
+//    self.scrollView.contentOffset= CGPointMake(0, -80);
 }
 
 #pragma mark - 懒加载
@@ -161,31 +162,31 @@
 }
 
 //投个简历
--(void)sendResumeButton{
-    
-    [self.view addSubview:self.shareBgView];
-    
-    [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view);
-        make.left.and.right.equalTo(self.view);
-        make.height.equalTo(self.view);
-    }];
-    
-    [self.view addSubview:self.sendMyResumeView];
-    
-    [self.sendMyResumeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.view.mas_bottom);
-        make.left.and.right.equalTo(self.view);
-        make.height.mas_equalTo(234+20);
-        
-    }];
-    
-    if (self.sendMyResumeView.hidden == YES) {
-         [self.shareBgView setHidden:NO];
-        [self.sendMyResumeView setHidden:NO];
-    }
- 
-}
+//-(void)sendResumeButton{
+//    
+//    [self.view addSubview:self.shareBgView];
+//    
+//    [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view);
+//        make.left.and.right.equalTo(self.view);
+//        make.height.equalTo(self.view);
+//    }];
+//    
+//    [self.view addSubview:self.sendMyResumeView];
+//    
+//    [self.sendMyResumeView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.equalTo(self.view.mas_bottom);
+//        make.left.and.right.equalTo(self.view);
+//        make.height.mas_equalTo(234+20);
+//        
+//    }];
+//    
+//    if (self.sendMyResumeView.hidden == YES) {
+//         [self.shareBgView setHidden:NO];
+//        [self.sendMyResumeView setHidden:NO];
+//    }
+// 
+//}
 #pragma mark - 数据请求
 -(void)getData{
     [[JMHTTPManager sharedInstance]fetchWorkInfoWithWork_id:self.homeworkModel.work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -240,8 +241,7 @@
 
 -(void)setScrollView{
     self.scrollView = [[UIScrollView alloc]init];
-
-    self.scrollView.showsVerticalScrollIndicator = NO;
+     self.scrollView.showsVerticalScrollIndicator = NO;
     
     [self.view addSubview:self.scrollView];
     

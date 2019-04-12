@@ -51,20 +51,25 @@
         // identifier 为用户名，userSig 为用户登录凭证
         login_param.identifier = model.user_id;
         login_param.userSig = model.usersig;
+        login_param.appidAt3rd = @"1400193090";
         [[TIMManager sharedInstance] login: login_param succ:^(){
+           
             NSLog(@"Login Succ");
+            
         } fail:^(int code, NSString * err) {
+          
             NSLog(@"Login Failed: %d->%@", code, err);
+            
         }];
         
         
         
-        ChooseIdentity *chooseId = [[ChooseIdentity alloc]init];
-        [self.navigationController pushViewController:chooseId animated:YES];
+//        ChooseIdentity *chooseId = [[ChooseIdentity alloc]init];
+//        [self.navigationController pushViewController:chooseId animated:YES];
 
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-       [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
+//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//       [alert show];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         
