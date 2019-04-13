@@ -26,6 +26,7 @@
 #define TEXT_GRAY_COLOR [UIColor colorWithRed:166/255.0 green:166/255.0 blue:166/255.0 alpha:1.0]
 #define TITLE_COLOR [UIColor colorWithRed:70/255.0 green:70/255.0 blue:70/255.0 alpha:1.0]
 #define MASTER_COLOR [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0]
+#define BG_COLOR [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]
 //分割线颜色
 
 #define XIAN_COLOR  [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]
