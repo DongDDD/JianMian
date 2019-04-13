@@ -18,12 +18,15 @@
 
 @property(nonatomic,strong)NSNumber *sex;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
-@property (weak, nonatomic) IBOutlet UITextField *numberText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
 @property (weak, nonatomic) IBOutlet UIButton *headerImg;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIButton *birtnDateBtn;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (weak, nonatomic) IBOutlet UIButton *womanBtn;
+@property (weak, nonatomic) IBOutlet UIButton *manBtn;
+
 
 
 @end
@@ -32,6 +35,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (_isHiddenBackBtn) {
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = YES;
+        
+    }
+    
     [self.navigationController setNavigationBarHidden:NO];
     [self setRightBtnTextName:@"下一步"];
     
@@ -208,24 +217,51 @@
     
 }
 
+#pragma mark - 点击事件
 
 - (IBAction)manBtn:(id)sender {
     self.sex = @(1);
+    // 恢复上一个按钮颜色
+    [self.womanBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
+    self.womanBtn.layer.masksToBounds = YES;
+    self.womanBtn.layer.borderColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0].CGColor;
+    self.womanBtn.backgroundColor = [UIColor whiteColor];
+
+    // 设置当前选中按钮的颜色
+    [self.manBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
+    self.manBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.manBtn.backgroundColor = MASTER_COLOR;
+
+    
     
     
 }
 
 - (IBAction)womanBtn:(id)sender {
     self.sex = @(2);
+    // 恢复上一个按钮颜色
+    [self.manBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
+    self.manBtn.layer.masksToBounds = YES;
+    self.manBtn.layer.borderColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0].CGColor;
+    self.manBtn.backgroundColor = [UIColor whiteColor];
+    
+    // 设置当前选中按钮的颜色
+    [self.womanBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
+    self.womanBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.womanBtn.backgroundColor = MASTER_COLOR;
+
+ 
+    
 }
 
 
 
+#pragma mark - 数据提交到服务器
 
 
 -(void)rightAction{
     
-    [[JMHTTPManager sharedInstance]updateUserInfoType:@(1) password:nil avatar:nil nickname:nil email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:nil address:nil number:self.numberText.text image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateUserInfoType:@(1) password:nil avatar:nil nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请求成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];

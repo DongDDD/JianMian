@@ -13,6 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BasicInformationViewController : BaseViewController
 
+
+@property(nonatomic,assign)BOOL isHiddenBackBtn;
+
 @end
 
 NS_ASSUME_NONNULL_END

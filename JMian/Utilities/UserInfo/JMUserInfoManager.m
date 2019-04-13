@@ -14,7 +14,7 @@
 
 + (JMUserInfoModel *)getUserInfo {
     YYCache *yyCache = [YYCache cacheWithName:@"JMCache"];
-    id value = [yyCache objectForKey:@"userINfo"];
+    id value = [yyCache objectForKey:@"userInfo"];
     return [JMUserInfoModel mj_objectWithKeyValues:value];
 }
 

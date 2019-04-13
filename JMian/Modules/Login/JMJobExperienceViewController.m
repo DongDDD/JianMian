@@ -24,6 +24,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (_isHiddenBackBtn) {
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = YES;
+        
+    }
+    
     [self setRightBtnTextName:@"下一步"];
     // Do any additional setup after loading the view from its nib.
 }

@@ -23,6 +23,8 @@ static NSString *cellIdent = @"notificationCellIdent";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:NO];
+//    [self.navigationController ]
     [self setTitle:@"通知"];
     
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,18 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="启动图.png" translatesAutoresizingMaskIntoConstraints="NO" id="cHB-Tm-PSK">
-                                <rect key="frame" x="94" y="110" width="188" height="239"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="188" id="3Zi-rH-XHe"/>
-                                    <constraint firstAttribute="height" constant="239" id="Xhn-z9-kAE"/>
-                                </constraints>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JIANMIAN_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="fOv-zM-w5u">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="cHB-Tm-PSK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="5RI-Pg-Wjz"/>
-                            <constraint firstItem="cHB-Tm-PSK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="90" id="7tc-Vc-IAP"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fOv-zM-w5u" secondAttribute="trailing" id="Ae0-uo-Uvt"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="fOv-zM-w5u" secondAttribute="bottom" id="Y81-PW-kpu"/>
+                            <constraint firstItem="fOv-zM-w5u" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fDT-bn-1xl"/>
+                            <constraint firstItem="fOv-zM-w5u" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="mLA-s6-vSK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -40,6 +37,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="启动图.png" width="189" height="275"/>
+        <image name="JIANMIAN_logo.png" width="375" height="667.5"/>
     </resources>
 </document>

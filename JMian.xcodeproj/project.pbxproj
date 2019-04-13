@@ -37,6 +37,9 @@
 		041C07D62261891A0088FBE1 /* JMNotificationHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041C07D42261891A0088FBE1 /* JMNotificationHeaderTableViewCell.xib */; };
 		041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041C07D8226193FA0088FBE1 /* JMNotificationTableViewCell.m */; };
 		041C07DB226193FA0088FBE1 /* JMNotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041C07D9226193FA0088FBE1 /* JMNotificationTableViewCell.xib */; };
+		041C07E02261CCDC0088FBE1 /* JIANMIAN_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C07DD2261CCDB0088FBE1 /* JIANMIAN_logo@2x.png */; };
+		041C07E12261CCDC0088FBE1 /* JIANMIAN_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C07DE2261CCDB0088FBE1 /* JIANMIAN_logo@3x.png */; };
+		041C07E22261CCDC0088FBE1 /* JIANMIAN_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C07DF2261CCDB0088FBE1 /* JIANMIAN_logo.png */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
 		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
@@ -305,6 +308,9 @@
 		041C07D7226193FA0088FBE1 /* JMNotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMNotificationTableViewCell.h; sourceTree = "<group>"; };
 		041C07D8226193FA0088FBE1 /* JMNotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMNotificationTableViewCell.m; sourceTree = "<group>"; };
 		041C07D9226193FA0088FBE1 /* JMNotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMNotificationTableViewCell.xib; sourceTree = "<group>"; };
+		041C07DD2261CCDB0088FBE1 /* JIANMIAN_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_logo@2x.png"; sourceTree = "<group>"; };
+		041C07DE2261CCDB0088FBE1 /* JIANMIAN_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_logo@3x.png"; sourceTree = "<group>"; };
+		041C07DF2261CCDB0088FBE1 /* JIANMIAN_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JIANMIAN_logo.png; sourceTree = "<group>"; };
 		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -665,6 +671,16 @@
 			path = "04职位详情_slices";
 			sourceTree = "<group>";
 		};
+		041C07DC2261CCDB0088FBE1 /* JIANMIAN_logo_slices */ = {
+			isa = PBXGroup;
+			children = (
+				041C07DD2261CCDB0088FBE1 /* JIANMIAN_logo@2x.png */,
+				041C07DE2261CCDB0088FBE1 /* JIANMIAN_logo@3x.png */,
+				041C07DF2261CCDB0088FBE1 /* JIANMIAN_logo.png */,
+			);
+			path = JIANMIAN_logo_slices;
+			sourceTree = "<group>";
+		};
 		044DF23C2244C06900301243 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -751,6 +767,7 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				041C07DC2261CCDB0088FBE1 /* JIANMIAN_logo_slices */,
 				04C6014F22607671000B1FE0 /*  notification _slices */,
 				040CA83A225F1EBF006D7A7F /* 04职位详情_slices */,
 				040CA82D225F1EB2006D7A7F /* 05分享_slices */,
@@ -1531,6 +1548,7 @@
 				04DD1D61224B6E95007CB11C /* camera@2x.png in Resources */,
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
 				04A9DFC0225C7B9F00CD7CC1 /* 启动图@3x.png in Resources */,
+				041C07E12261CCDC0088FBE1 /* JIANMIAN_logo@3x.png in Resources */,
 				6DEA99242255DFE40029FE8A /* JMShareView.xib in Resources */,
 				6D020A882259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib in Resources */,
 				040CA854225F1EBF006D7A7F /* share@2x.png in Resources */,
@@ -1638,6 +1656,7 @@
 				6D0209E0224FB900009BCFE4 /* eliver@3x.png in Resources */,
 				040CA858225F1EBF006D7A7F /* share@3x.png in Resources */,
 				6D0209EA224FB900009BCFE4 /* burse@3x.png in Resources */,
+				041C07E02261CCDC0088FBE1 /* JIANMIAN_logo@2x.png in Resources */,
 				6D020A202250F3F9009BCFE4 /* 组 54@2x.png in Resources */,
 				04A2479C224C773A00DEB8E3 /* 0000@2x.png in Resources */,
 				6DEA99292255DFF50029FE8A /* JMSendMyResumeView.xib in Resources */,
@@ -1653,6 +1672,7 @@
 				04C6015522607671000B1FE0 /* notification @2x.png in Resources */,
 				04A247DF224CE70E00DEB8E3 /* play@3x.png in Resources */,
 				04DD1D63224B6E95007CB11C /* icon_return @2x.png in Resources */,
+				041C07E22261CCDC0088FBE1 /* JIANMIAN_logo.png in Resources */,
 				6D020A292250F3F9009BCFE4 /* photograph@2x.png in Resources */,
 				6D0209EC224FB900009BCFE4 /* subscribe@2x.png in Resources */,
 				6D55865E224B54D70037C14E /* home_ message@3x.png in Resources */,

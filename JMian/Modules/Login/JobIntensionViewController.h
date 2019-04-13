@@ -12,6 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JobIntensionViewController : BaseViewController
+@property(nonatomic,assign)BOOL isHiddenBackBtn;
+
 
 @end
 
