@@ -8,6 +8,13 @@
 
 #import "JMAllMessageTableViewCell.h"
 
+
+@interface JMAllMessageTableViewCell ()
+
+@property (nonatomic, strong) JMAllMessageTableViewCellData *data;
+
+@end
+
 @implementation JMAllMessageTableViewCell
 
 - (void)awakeFromNib {
@@ -20,5 +27,17 @@
 
     // Configure the view for the selected state
 }
+
+- (void)setData:(JMAllMessageTableViewCellData *)data
+{
+    _data = data;
+//    _headImageView.image = [UIImage imageNamed:_data.head];
+//    _timeLabel.text = _data.time;
+//    _titleLabel.text = _data.title;
+//    _subTitleLabel.text = _data.subTitle;
+//    [_unReadView setNum:_data.unRead];
+//    [self defaultLayout];
+}
+
 
 @end
