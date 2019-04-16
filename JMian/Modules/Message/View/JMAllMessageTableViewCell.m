@@ -9,6 +9,11 @@
 #import "JMAllMessageTableViewCell.h"
 
 
+@implementation JMAllMessageTableViewCellData
+
+
+@end
+
 @interface JMAllMessageTableViewCell ()
 
 @property (nonatomic, strong) JMAllMessageTableViewCellData *data;

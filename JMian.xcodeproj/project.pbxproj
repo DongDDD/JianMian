@@ -136,8 +136,6 @@
 		04DD1D66224B6E95007CB11C /* icon_return.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3C224B6E95007CB11C /* icon_return.png */; };
 		04DD1D67224B6E95007CB11C /* icon_return @3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3D224B6E95007CB11C /* icon_return @3x.png */; };
 		04DD1D68224B6E95007CB11C /* 圆角矩形 5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3E224B6E95007CB11C /* 圆角矩形 5@3x.png */; };
-		04DD1D69224B6E95007CB11C /* 椭圆 3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D3F224B6E95007CB11C /* 椭圆 3@3x.png */; };
-		04DD1D6A224B6E95007CB11C /* 椭圆 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D40224B6E95007CB11C /* 椭圆 3@2x.png */; };
 		04DD1D6B224B6E95007CB11C /* icon_return .png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D41224B6E95007CB11C /* icon_return .png */; };
 		04DD1D6C224B6E95007CB11C /* 圆角矩形 5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */; };
 		04DD1D6D224B6E95007CB11C /* 圆角矩形 5.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */; };
@@ -440,8 +438,6 @@
 		04DD1D3C224B6E95007CB11C /* icon_return.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_return.png; sourceTree = "<group>"; };
 		04DD1D3D224B6E95007CB11C /* icon_return @3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return @3x.png"; sourceTree = "<group>"; };
 		04DD1D3E224B6E95007CB11C /* 圆角矩形 5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5@3x.png"; sourceTree = "<group>"; };
-		04DD1D3F224B6E95007CB11C /* 椭圆 3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@3x.png"; sourceTree = "<group>"; };
-		04DD1D40224B6E95007CB11C /* 椭圆 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "椭圆 3@2x.png"; sourceTree = "<group>"; };
 		04DD1D41224B6E95007CB11C /* icon_return .png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_return .png"; sourceTree = "<group>"; };
 		04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5@2x.png"; sourceTree = "<group>"; };
 		04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "圆角矩形 5.png"; sourceTree = "<group>"; };
@@ -1050,8 +1046,6 @@
 				04DD1D3C224B6E95007CB11C /* icon_return.png */,
 				04DD1D3D224B6E95007CB11C /* icon_return @3x.png */,
 				04DD1D3E224B6E95007CB11C /* 圆角矩形 5@3x.png */,
-				04DD1D3F224B6E95007CB11C /* 椭圆 3@3x.png */,
-				04DD1D40224B6E95007CB11C /* 椭圆 3@2x.png */,
 				04DD1D41224B6E95007CB11C /* icon_return .png */,
 				04DD1D42224B6E95007CB11C /* 圆角矩形 5@2x.png */,
 				04DD1D43224B6E95007CB11C /* 圆角矩形 5.png */,
@@ -1537,7 +1531,6 @@
 				6D020A272250F3F9009BCFE4 /* 椭圆 3@2x.png in Resources */,
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
-				04DD1D69224B6E95007CB11C /* 椭圆 3@3x.png in Resources */,
 				6D020A262250F3F9009BCFE4 /* 椭圆 3@3x.png in Resources */,
 				040CA857225F1EBF006D7A7F /* icon_return 拷贝 6.png in Resources */,
 				040CA85E225F1EBF006D7A7F /* Location_of_detail_page@2x.png in Resources */,
@@ -1607,7 +1600,6 @@
 				040CA867225F683C006D7A7F /* share2@3x.png in Resources */,
 				04DD1D62224B6E95007CB11C /* 蓝点@3x.png in Resources */,
 				044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */,
-				04DD1D6A224B6E95007CB11C /* 椭圆 3@2x.png in Resources */,
 				6D0209E3224FB900009BCFE4 /* eliver@2x.png in Resources */,
 				048FEE382244853C001160C8 /* Main.storyboard in Resources */,
 				04C6013F2260639C000B1FE0 /* JMAllMessageTableViewController.xib in Resources */,
