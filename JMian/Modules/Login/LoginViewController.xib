@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -54,7 +54,7 @@
                         <action selector="phoneLogin:" destination="-1" eventType="touchUpInside" id="7fg-y5-Wq9"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JIANMIAN_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="2zX-mD-Rgr">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JIANMIAN_login.png" translatesAutoresizingMaskIntoConstraints="NO" id="2zX-mD-Rgr">
                     <rect key="frame" x="107" y="134" width="161" height="111"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="111" id="RfB-xk-Prd"/>
@@ -78,8 +78,8 @@
         </view>
     </objects>
     <resources>
-        <image name="JIANMIAN_logo.png" width="161" height="111"/>
-        <image name="WeChat_login.png" width="20" height="17"/>
-        <image name="Webkey.png" width="20" height="22"/>
+        <image name="JIANMIAN_login.png" width="161" height="111.5"/>
+        <image name="WeChat_login.png" width="20.5" height="17.5"/>
+        <image name="Webkey.png" width="20.5" height="22.5"/>
     </resources>
 </document>

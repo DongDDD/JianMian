@@ -35,12 +35,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    JMUserInfoModel *model2 = [[JMUserInfoModel alloc]init];
+//    JMUserInfoModel *model2 = [JMUserInfoManager getUserInfo];
+//    NSLog(@"用户手机号model2model2：----%@",model2.phone);
+//
+    
     if (_isHiddenBackBtn) {
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.hidesBackButton = YES;
         
     }
     
+//    [self.headerImg setImage:[UIImageView imageNamed:@"" ]forState:UIControlStateNormal];
     [self.navigationController setNavigationBarHidden:NO];
     [self setRightBtnTextName:@"下一步"];
     
@@ -267,6 +274,8 @@
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
         
+        [JMUserInfoManager saveUserInfo:responsObject[@"data"]];
+
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

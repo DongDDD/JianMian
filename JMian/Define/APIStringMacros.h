@@ -30,6 +30,11 @@
 //上传图片
 #define Uploads_Image_URL @"file/uploads"
 
+//创建个人简历
+#define Create_Vita_URL @"api/vita/create"
+
+
+
 //工作经历
 #define Create_Experience_URL @"api/user/experience/create"
 #define Update_Experience_URL @"api/user/experience/update"

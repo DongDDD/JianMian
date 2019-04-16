@@ -43,7 +43,10 @@
         
         [JMUserInfoManager saveUserInfo:responsObject[@"data"]];
         
-
+//          JMUserInfoModel *model2 = [[JMUserInfoModel alloc]init];
+//          model2 = [JMUserInfoManager getUserInfo];
+//        NSLog(@"用户手机号梁志达丢那星：----%@",model2.phone);
+//        
         JMLoginInfoModel *model = [JMLoginInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         NSLog(@"用户手机号：----%@",model.phone);
         

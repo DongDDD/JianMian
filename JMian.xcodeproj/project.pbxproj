@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040C18152264148300456C53 /* JIANMIAN_login@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C18122264148300456C53 /* JIANMIAN_login@3x.png */; };
+		040C18162264148300456C53 /* JIANMIAN_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C18132264148300456C53 /* JIANMIAN_login@2x.png */; };
+		040C18172264148300456C53 /* JIANMIAN_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C18142264148300456C53 /* JIANMIAN_login.png */; };
+		040C181D2264210500456C53 /* JMHTTPManager+Vita.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C181C2264210500456C53 /* JMHTTPManager+Vita.m */; };
 		040CA834225F1EB2006D7A7F /* Share_WeChat.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA82E225F1EB2006D7A7F /* Share_WeChat.png */; };
 		040CA835225F1EB2006D7A7F /* Share_WeChat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA82F225F1EB2006D7A7F /* Share_WeChat@2x.png */; };
 		040CA836225F1EB2006D7A7F /* Share_WeChat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040CA830225F1EB2006D7A7F /* Share_WeChat@3x.png */; };
@@ -37,9 +41,6 @@
 		041C07D62261891A0088FBE1 /* JMNotificationHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041C07D42261891A0088FBE1 /* JMNotificationHeaderTableViewCell.xib */; };
 		041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041C07D8226193FA0088FBE1 /* JMNotificationTableViewCell.m */; };
 		041C07DB226193FA0088FBE1 /* JMNotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041C07D9226193FA0088FBE1 /* JMNotificationTableViewCell.xib */; };
-		041C07E02261CCDC0088FBE1 /* JIANMIAN_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C07DD2261CCDB0088FBE1 /* JIANMIAN_logo@2x.png */; };
-		041C07E12261CCDC0088FBE1 /* JIANMIAN_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C07DE2261CCDB0088FBE1 /* JIANMIAN_logo@3x.png */; };
-		041C07E22261CCDC0088FBE1 /* JIANMIAN_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 041C07DF2261CCDB0088FBE1 /* JIANMIAN_logo.png */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
 		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
@@ -105,9 +106,7 @@
 		04DD1D47224B6E95007CB11C /* break@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D1A224B6E95007CB11C /* break@3x.png */; };
 		04DD1D48224B6E95007CB11C /* WeChat_login@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D1C224B6E95007CB11C /* WeChat_login@3x.png */; };
 		04DD1D49224B6E95007CB11C /* verification_code@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D1D224B6E95007CB11C /* verification_code@3x.png */; };
-		04DD1D4A224B6E95007CB11C /* JIANMIAN_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D1E224B6E95007CB11C /* JIANMIAN_logo@2x.png */; };
 		04DD1D4B224B6E95007CB11C /* verification_code.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D1F224B6E95007CB11C /* verification_code.png */; };
-		04DD1D4C224B6E95007CB11C /* JIANMIAN_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D20224B6E95007CB11C /* JIANMIAN_logo@3x.png */; };
 		04DD1D4D224B6E95007CB11C /* verification_code@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D21224B6E95007CB11C /* verification_code@2x.png */; };
 		04DD1D4E224B6E95007CB11C /* WeChat_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D22224B6E95007CB11C /* WeChat_login@2x.png */; };
 		04DD1D4F224B6E95007CB11C /* phone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D23224B6E95007CB11C /* phone@3x.png */; };
@@ -115,7 +114,6 @@
 		04DD1D51224B6E95007CB11C /* Webkey@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D25224B6E95007CB11C /* Webkey@3x.png */; };
 		04DD1D52224B6E95007CB11C /* Webkey.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D26224B6E95007CB11C /* Webkey.png */; };
 		04DD1D53224B6E95007CB11C /* phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D27224B6E95007CB11C /* phone@2x.png */; };
-		04DD1D54224B6E95007CB11C /* JIANMIAN_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D28224B6E95007CB11C /* JIANMIAN_logo.png */; };
 		04DD1D55224B6E95007CB11C /* WeChat_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D29224B6E95007CB11C /* WeChat_login.png */; };
 		04DD1D56224B6E95007CB11C /* phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D2A224B6E95007CB11C /* phone.png */; };
 		04DD1D57224B6E95007CB11C /* 组 18@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D2C224B6E95007CB11C /* 组 18@2x.png */; };
@@ -276,6 +274,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		040C18122264148300456C53 /* JIANMIAN_login@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_login@3x.png"; sourceTree = "<group>"; };
+		040C18132264148300456C53 /* JIANMIAN_login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_login@2x.png"; sourceTree = "<group>"; };
+		040C18142264148300456C53 /* JIANMIAN_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JIANMIAN_login.png; sourceTree = "<group>"; };
+		040C181B2264210500456C53 /* JMHTTPManager+Vita.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+Vita.h"; sourceTree = "<group>"; };
+		040C181C2264210500456C53 /* JMHTTPManager+Vita.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+Vita.m"; sourceTree = "<group>"; };
 		040CA82E225F1EB2006D7A7F /* Share_WeChat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Share_WeChat.png; sourceTree = "<group>"; };
 		040CA82F225F1EB2006D7A7F /* Share_WeChat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat@2x.png"; sourceTree = "<group>"; };
 		040CA830225F1EB2006D7A7F /* Share_WeChat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Share_WeChat@3x.png"; sourceTree = "<group>"; };
@@ -308,9 +311,6 @@
 		041C07D7226193FA0088FBE1 /* JMNotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMNotificationTableViewCell.h; sourceTree = "<group>"; };
 		041C07D8226193FA0088FBE1 /* JMNotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMNotificationTableViewCell.m; sourceTree = "<group>"; };
 		041C07D9226193FA0088FBE1 /* JMNotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMNotificationTableViewCell.xib; sourceTree = "<group>"; };
-		041C07DD2261CCDB0088FBE1 /* JIANMIAN_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_logo@2x.png"; sourceTree = "<group>"; };
-		041C07DE2261CCDB0088FBE1 /* JIANMIAN_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_logo@3x.png"; sourceTree = "<group>"; };
-		041C07DF2261CCDB0088FBE1 /* JIANMIAN_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JIANMIAN_logo.png; sourceTree = "<group>"; };
 		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -409,9 +409,7 @@
 		04DD1D1A224B6E95007CB11C /* break@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "break@3x.png"; sourceTree = "<group>"; };
 		04DD1D1C224B6E95007CB11C /* WeChat_login@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WeChat_login@3x.png"; sourceTree = "<group>"; };
 		04DD1D1D224B6E95007CB11C /* verification_code@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "verification_code@3x.png"; sourceTree = "<group>"; };
-		04DD1D1E224B6E95007CB11C /* JIANMIAN_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_logo@2x.png"; sourceTree = "<group>"; };
 		04DD1D1F224B6E95007CB11C /* verification_code.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verification_code.png; sourceTree = "<group>"; };
-		04DD1D20224B6E95007CB11C /* JIANMIAN_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "JIANMIAN_logo@3x.png"; sourceTree = "<group>"; };
 		04DD1D21224B6E95007CB11C /* verification_code@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "verification_code@2x.png"; sourceTree = "<group>"; };
 		04DD1D22224B6E95007CB11C /* WeChat_login@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WeChat_login@2x.png"; sourceTree = "<group>"; };
 		04DD1D23224B6E95007CB11C /* phone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@3x.png"; sourceTree = "<group>"; };
@@ -419,7 +417,6 @@
 		04DD1D25224B6E95007CB11C /* Webkey@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Webkey@3x.png"; sourceTree = "<group>"; };
 		04DD1D26224B6E95007CB11C /* Webkey.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Webkey.png; sourceTree = "<group>"; };
 		04DD1D27224B6E95007CB11C /* phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone@2x.png"; sourceTree = "<group>"; };
-		04DD1D28224B6E95007CB11C /* JIANMIAN_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JIANMIAN_logo.png; sourceTree = "<group>"; };
 		04DD1D29224B6E95007CB11C /* WeChat_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WeChat_login.png; sourceTree = "<group>"; };
 		04DD1D2A224B6E95007CB11C /* phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = phone.png; sourceTree = "<group>"; };
 		04DD1D2C224B6E95007CB11C /* 组 18@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组 18@2x.png"; sourceTree = "<group>"; };
@@ -671,16 +668,6 @@
 			path = "04职位详情_slices";
 			sourceTree = "<group>";
 		};
-		041C07DC2261CCDB0088FBE1 /* JIANMIAN_logo_slices */ = {
-			isa = PBXGroup;
-			children = (
-				041C07DD2261CCDB0088FBE1 /* JIANMIAN_logo@2x.png */,
-				041C07DE2261CCDB0088FBE1 /* JIANMIAN_logo@3x.png */,
-				041C07DF2261CCDB0088FBE1 /* JIANMIAN_logo.png */,
-			);
-			path = JIANMIAN_logo_slices;
-			sourceTree = "<group>";
-		};
 		044DF23C2244C06900301243 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -767,7 +754,6 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				041C07DC2261CCDB0088FBE1 /* JIANMIAN_logo_slices */,
 				04C6014F22607671000B1FE0 /*  notification _slices */,
 				040CA83A225F1EBF006D7A7F /* 04职位详情_slices */,
 				040CA82D225F1EB2006D7A7F /* 05分享_slices */,
@@ -926,6 +912,9 @@
 				04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */,
 				04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */,
 				04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */,
+				040C18142264148300456C53 /* JIANMIAN_login.png */,
+				040C18132264148300456C53 /* JIANMIAN_login@2x.png */,
+				040C18122264148300456C53 /* JIANMIAN_login@3x.png */,
 			);
 			path = "组 18_slices";
 			sourceTree = "<group>";
@@ -1005,9 +994,7 @@
 				04A9DFBB225C7B9F00CD7CC1 /* 组 18_slices */,
 				04DD1D1C224B6E95007CB11C /* WeChat_login@3x.png */,
 				04DD1D1D224B6E95007CB11C /* verification_code@3x.png */,
-				04DD1D1E224B6E95007CB11C /* JIANMIAN_logo@2x.png */,
 				04DD1D1F224B6E95007CB11C /* verification_code.png */,
-				04DD1D20224B6E95007CB11C /* JIANMIAN_logo@3x.png */,
 				04DD1D21224B6E95007CB11C /* verification_code@2x.png */,
 				04DD1D22224B6E95007CB11C /* WeChat_login@2x.png */,
 				04DD1D23224B6E95007CB11C /* phone@3x.png */,
@@ -1015,7 +1002,6 @@
 				04DD1D25224B6E95007CB11C /* Webkey@3x.png */,
 				04DD1D26224B6E95007CB11C /* Webkey.png */,
 				04DD1D27224B6E95007CB11C /* phone@2x.png */,
-				04DD1D28224B6E95007CB11C /* JIANMIAN_logo.png */,
 				04DD1D29224B6E95007CB11C /* WeChat_login.png */,
 				04DD1D2A224B6E95007CB11C /* phone.png */,
 			);
@@ -1302,6 +1288,8 @@
 				04EB6CA82255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.m */,
 				04EB6CAD2255F21700CBAF79 /* JMHTTPManager+PositionDesired.h */,
 				04EB6CAE2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m */,
+				040C181B2264210500456C53 /* JMHTTPManager+Vita.h */,
+				040C181C2264210500456C53 /* JMHTTPManager+Vita.m */,
 				04A9DFAB225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.h */,
 				04A9DFAC225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.m */,
 				04A9DFAE225B2B5000CD7CC1 /* JMHTTPManager+Work.h */,
@@ -1514,6 +1502,7 @@
 				04DD1D5E224B6E95007CB11C /* camera@3x.png in Resources */,
 				6D0209FB224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.xib in Resources */,
 				04DD1D4B224B6E95007CB11C /* verification_code.png in Resources */,
+				040C18162264148300456C53 /* JIANMIAN_login@2x.png in Resources */,
 				6D55865C224B54D70037C14E /* home_me@3x.png in Resources */,
 				6D0209E8224FB900009BCFE4 /* interview@2x.png in Resources */,
 				04DD1D5D224B6E95007CB11C /* 蓝点@2x.png in Resources */,
@@ -1548,7 +1537,6 @@
 				04DD1D61224B6E95007CB11C /* camera@2x.png in Resources */,
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
 				04A9DFC0225C7B9F00CD7CC1 /* 启动图@3x.png in Resources */,
-				041C07E12261CCDC0088FBE1 /* JIANMIAN_logo@3x.png in Resources */,
 				6DEA99242255DFE40029FE8A /* JMShareView.xib in Resources */,
 				6D020A882259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib in Resources */,
 				040CA854225F1EBF006D7A7F /* share@2x.png in Resources */,
@@ -1581,6 +1569,7 @@
 				6D020A232250F3F9009BCFE4 /* education@2x.png in Resources */,
 				6D55864D224B54D70037C14E /* site_Home@2x.png in Resources */,
 				04DD1D45224B6E95007CB11C /* break@2x.png in Resources */,
+				040C18152264148300456C53 /* JIANMIAN_login@3x.png in Resources */,
 				04A247E0224CE70E00DEB8E3 /* play.png in Resources */,
 				04A9DFAA225AE9B900CD7CC1 /* JMJobExperienceViewController.xib in Resources */,
 				6D020A2E2250F3F9009BCFE4 /*  Close@2x.png in Resources */,
@@ -1630,14 +1619,12 @@
 				6D0209F3224FB900009BCFE4 /* my_videos@3x.png in Resources */,
 				6D0209E6224FB900009BCFE4 /* enshrine@2x.png in Resources */,
 				6D558653224B54D70037C14E /* pitch_on_home@2x.png in Resources */,
-				04DD1D54224B6E95007CB11C /* JIANMIAN_logo.png in Resources */,
 				04DD1D58224B6E95007CB11C /* 组 18@3x.png in Resources */,
 				6D020A1D2250F3F9009BCFE4 /* icon_return 拷贝 2@3x.png in Resources */,
 				04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */,
 				04DD1D47224B6E95007CB11C /* break@3x.png in Resources */,
 				6D558654224B54D70037C14E /* Search_Home@2x.png in Resources */,
 				6D55864C224B54D70037C14E /* pitch_on_home@3x.png in Resources */,
-				04DD1D4A224B6E95007CB11C /* JIANMIAN_logo@2x.png in Resources */,
 				6D020A062250F21B009BCFE4 /* JMMyResumeIconTableViewCell.xib in Resources */,
 				6D020A4C22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.xib in Resources */,
 				04DD1D52224B6E95007CB11C /* Webkey.png in Resources */,
@@ -1656,14 +1643,12 @@
 				6D0209E0224FB900009BCFE4 /* eliver@3x.png in Resources */,
 				040CA858225F1EBF006D7A7F /* share@3x.png in Resources */,
 				6D0209EA224FB900009BCFE4 /* burse@3x.png in Resources */,
-				041C07E02261CCDC0088FBE1 /* JIANMIAN_logo@2x.png in Resources */,
 				6D020A202250F3F9009BCFE4 /* 组 54@2x.png in Resources */,
 				04A2479C224C773A00DEB8E3 /* 0000@2x.png in Resources */,
 				6DEA99292255DFF50029FE8A /* JMSendMyResumeView.xib in Resources */,
 				6D020A382250FF0D009BCFE4 /* JMMyResumeHeaderTableViewCell.xib in Resources */,
 				049A515A2248972F007A8068 /* BasicInformationViewController.xib in Resources */,
 				6D020A47225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.xib in Resources */,
-				04DD1D4C224B6E95007CB11C /* JIANMIAN_logo@3x.png in Resources */,
 				6D020A2C2250F3F9009BCFE4 /*  copyreader@2x.png in Resources */,
 				040CA84E225F1EBF006D7A7F /* collect@2x.png in Resources */,
 				04DD1D60224B6E95007CB11C /* icon_return@2x.png in Resources */,
@@ -1671,8 +1656,8 @@
 				04C60144226063E3000B1FE0 /* JMLookMeTableViewController.xib in Resources */,
 				04C6015522607671000B1FE0 /* notification @2x.png in Resources */,
 				04A247DF224CE70E00DEB8E3 /* play@3x.png in Resources */,
+				040C18172264148300456C53 /* JIANMIAN_login.png in Resources */,
 				04DD1D63224B6E95007CB11C /* icon_return @2x.png in Resources */,
-				041C07E22261CCDC0088FBE1 /* JIANMIAN_logo.png in Resources */,
 				6D020A292250F3F9009BCFE4 /* photograph@2x.png in Resources */,
 				6D0209EC224FB900009BCFE4 /* subscribe@2x.png in Resources */,
 				6D55865E224B54D70037C14E /* home_ message@3x.png in Resources */,
@@ -1804,6 +1789,7 @@
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
 				6D020A372250FF0D009BCFE4 /* JMMyResumeHeaderTableViewCell.m in Sources */,
 				6D020A7322539FB0009BCFE4 /* TwoButtonView.m in Sources */,
+				040C181D2264210500456C53 /* JMHTTPManager+Vita.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,
 				6D020A6C22539FB0009BCFE4 /* JMCompanyIntroduceViewController.m in Sources */,

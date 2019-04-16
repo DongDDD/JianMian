@@ -67,7 +67,7 @@
 
 -(void)setSearchView{
     
-    self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, SafeAreaTopHeight, SCREEN_WIDTH-40, 33)];
+    self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH-40, 33)];
     self.searchView.searchTextField.placeholder = @"                                            搜索";
     self.searchView.searchTextField.returnKeyType =UIReturnKeySearch;
     self.searchView.searchTextField.delegate = self;
