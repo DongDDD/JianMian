@@ -9,6 +9,8 @@
 #import "ChooseIdentity.h"
 #import "BasicInformationViewController.h"
 #import "JMHTTPManager+UpdateInfo.h"
+#import "JMCompanyBaseInfoViewController.h"
+
 
 
 
@@ -40,11 +42,16 @@
 
 
 - (IBAction)isCompanyBtn:(id)sender {
-    [[JMHTTPManager sharedInstance]updateUserInfoType:@(2) password:@"1234657955" avatar:nil nickname:nil email:@"379247101@qq.com" name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:@"1" real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+//    [[JMHTTPManager sharedInstance]updateUserInfoType:@(2) password:@"1234657955" avatar:nil nickname:nil email:@"379247101@qq.com" name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:@"1" real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//        
+//    }];
+    
+    JMCompanyBaseInfoViewController *vc = [[JMCompanyBaseInfoViewController alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
     
     NSLog(@"我要招人");
 }

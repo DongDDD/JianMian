@@ -64,6 +64,8 @@ typedef enum _PickerState_Exp {
     
 }
 
+
+
 -(void)rightAction{
     [[JMHTTPManager sharedInstance]createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
@@ -84,6 +86,8 @@ typedef enum _PickerState_Exp {
     [UIApplication sharedApplication].delegate.window.rootViewController=tab;
 
 }
+
+
 - (IBAction)startWorkAction:(UIButton *)sender {
     
     [self.datePckerView setHidden:NO];
@@ -137,6 +141,9 @@ typedef enum _PickerState_Exp {
     [self.datePckerView setHidden:YES];
     
 }
+
+
+
 /*
 #pragma mark - Navigation
 

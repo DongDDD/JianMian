@@ -67,8 +67,6 @@
         
         
         
-        ChooseIdentity *chooseId = [[ChooseIdentity alloc]init];
-        [self.navigationController pushViewController:chooseId animated:YES];
 
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -77,6 +75,8 @@
         
         
     }];
+    ChooseIdentity *chooseId = [[ChooseIdentity alloc]init];
+    [self.navigationController pushViewController:chooseId animated:YES];
     
 }
 
