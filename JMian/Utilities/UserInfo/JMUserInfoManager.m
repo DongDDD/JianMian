@@ -10,16 +10,20 @@
 #import "DimensMacros.h"
 #import <YYCache/YYCache.h>
 
+#define CacheName @"JMCache"
+
 @implementation JMUserInfoManager
 
 + (JMUserInfoModel *)getUserInfo {
-    YYCache *yyCache = [YYCache cacheWithName:@"JMCache"];
+    YYCache *yyCache = [YYCache cacheWithName:CacheName];
     id value = [yyCache objectForKey:@"userInfo"];
     return [JMUserInfoModel mj_objectWithKeyValues:value];
 }
 
-+ (void)saveUserInfo:(NSDictionary *)userInfoDic {
-    YYCache *yyCache = [YYCache cacheWithName:@"JMCache"];
-    [yyCache setObject:userInfoDic forKey:@"userInfo"];
+
++ (void)saveUserInfo:(JMUserInfoModel *)model {
+    YYCache *yyCache = [YYCache cacheWithName:CacheName];
+    [yyCache setObject:model.mj_keyValues forKey:@"userInfo"];
 }
+
 @end
