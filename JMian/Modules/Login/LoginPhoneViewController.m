@@ -41,13 +41,17 @@
     
     [[JMHTTPManager sharedInstance]loginWithMode:@"sms" phone:self.phoneNumText.text captcha:self.captchaText.text sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        [JMUserInfoManager saveUserInfo:responsObject[@"data"]];
         
 //          JMUserInfoModel *model2 = [[JMUserInfoModel alloc]init];
 //          model2 = [JMUserInfoManager getUserInfo];
 //        NSLog(@"用户手机号梁志达丢那星：----%@",model2.phone);
 //        
         JMLoginInfoModel *model = [JMLoginInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+
+        [JMUserInfoManager saveUserInfo:userInfo];
+
         NSLog(@"用户手机号：----%@",model.phone);
         
         TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
@@ -71,6 +75,7 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
        [alert show];
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         

@@ -10,6 +10,8 @@
 #import "JobIntensionViewController.h"
 #import "JMHTTPManager+UpdateInfo.h"
 #import "JMHTTPManager+Uploads.h"
+#import "JMHTTPManager+Login.h"
+
 #import "Masonry.h"
 
 
@@ -268,21 +270,27 @@
 
 -(void)rightAction{
     
-    [[JMHTTPManager sharedInstance]updateUserInfoType:@(1) password:nil avatar:nil nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] updateUserInfoType:@(1) password:nil avatar:nil nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请求成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        
-        [JMUserInfoManager saveUserInfo:responsObject[@"data"]];
 
+        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMUserInfoManager saveUserInfo:userInfo];
+
+            JobIntensionViewController *jobIntension = [[JobIntensionViewController alloc]init];
+            [self.navigationController pushViewController:jobIntension animated:YES];
+
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
    
-    JobIntensionViewController *jobIntension = [[JobIntensionViewController alloc]init];
-    
-    [self.navigationController pushViewController:jobIntension animated:YES];
     
 }
 

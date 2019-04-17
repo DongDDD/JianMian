@@ -12,7 +12,6 @@
 #import "JMAllMessageTableViewController.h"
 #import "JMLookMeTableViewController.h"
 
-
 @interface JMMessageViewController ()
 
 @property (nonatomic, strong) JMTitlesView *titleView;
@@ -34,7 +33,6 @@
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
   
-  
     
     [self setupInit];
     // Do any additional setup after loading the view from its nib.
@@ -46,6 +44,8 @@
     [self.view addSubview:self.titleView];
     [self.pageView setCurrentIndex:1];//添加子视图”谁看过我“
     [self.pageView setCurrentIndex:0];//添加子视图”全部信息“
+    
+    
 }
 
 

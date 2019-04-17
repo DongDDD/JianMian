@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMUserInfoManager : NSObject
 
 + (JMUserInfoModel *)getUserInfo; //读取用户信息
-+ (void)saveUserInfo:(NSDictionary *)userInfoDic; //保存用户信息
++ (void)saveUserInfo:(JMUserInfoModel *)model; //保存用户信息
 
 @end
 

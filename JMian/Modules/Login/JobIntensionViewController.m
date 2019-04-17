@@ -11,6 +11,7 @@
 #import "JMJobExperienceViewController.h"
 #import "JMHTTPManager+Vita.h"
 #import "Masonry.h"
+#import "JMHTTPManager+Login.h"
 
 typedef enum _PickerState {
     SalaryState,
@@ -155,20 +156,26 @@ typedef enum _PickerState {
 
 
 -(void)rightAction{
-    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusNum education:self.educationNum work_start_date:self.startWorkDate job_label_id:@"1" industry_label_id:nil city_id:@(3) salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusNum education:self.educationNum work_start_date:self.startWorkDate job_label_id:@"2" industry_label_id:nil city_id:@(3) salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:@4 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        
+        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMUserInfoManager saveUserInfo:userInfo];
+            
+            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         
     }];
-    
-    JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
     
  
 

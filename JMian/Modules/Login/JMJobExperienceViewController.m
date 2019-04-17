@@ -10,6 +10,7 @@
 #import "JMHTTPManager+CreateExperience.h"
 #import "JMTabBarViewController.h"
 #import "AppDelegate.h"
+#import "JMHTTPManager+Login.h"
 
 typedef enum _PickerState_Exp {
     startWorkState,
@@ -67,24 +68,28 @@ typedef enum _PickerState_Exp {
 
 
 -(void)rightAction{
-    [[JMHTTPManager sharedInstance]createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    
+    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:@"广州测试2有限公司" job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
-        NSLog(@"%@",responsObject);
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        
-        
+        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMUserInfoManager saveUserInfo:userInfo];
+            
+            JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+            [UIApplication sharedApplication].delegate.window.rootViewController=tab;
+
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];
    
     
-    
-     JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
-    [UIApplication sharedApplication].delegate.window.rootViewController=tab;
-
 }
 
 
