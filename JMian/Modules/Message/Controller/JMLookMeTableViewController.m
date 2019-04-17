@@ -43,8 +43,11 @@ static NSString *cellIdent = @"lookMeCellIdent";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   
-    
-    JMLookMeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
+    JMLookMeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent];
+    if (cell == nil) {
+        cell = [[JMLookMeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
+    }
+   
     
     return cell;
 }

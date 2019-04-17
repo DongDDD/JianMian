@@ -19,7 +19,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+        self.navigationController.navigationBar.translucent = NO;
     
+        self.extendedLayoutIncludesOpaqueBars = YES;
     [self setRightBtnTextName:@"下一步"];
     self.pickerView.delegate = self;
     // Do any additional setup after loading the view from its nib.

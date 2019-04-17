@@ -54,11 +54,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    //设置透明
-//    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.translucent = YES;
     
-//    [self.navigationController.navigationBar setTranslucent:true];
+    self.extendedLayoutIncludesOpaqueBars = NO;
+
     [self setJuhua];
     
     [self getData];

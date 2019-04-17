@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMCompanyHomeViewController">
             <connections>
+                <outlet property="headerView" destination="gJl-Mb-KDq" id="att-yv-UJI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -99,8 +100,8 @@
                         <constraint firstItem="Ql8-gk-KBc" firstAttribute="leading" secondItem="gJl-Mb-KDq" secondAttribute="leading" id="yhN-se-IGf"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FK-8L-hZk">
-                    <rect key="frame" x="0.0" y="83" width="414" height="813"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FK-8L-hZk">
+                    <rect key="frame" x="0.0" y="128" width="414" height="768"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="营业执照认证中。。。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5no-ev-iRj">
                             <rect key="frame" x="160.5" y="296" width="93" height="16"/>
@@ -160,11 +161,11 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="1FK-8L-hZk" secondAttribute="bottom" id="MFj-ON-CTy"/>
                 <constraint firstItem="gJl-Mb-KDq" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Sbo-l7-NMD"/>
+                <constraint firstItem="gJl-Mb-KDq" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="TN2-Dj-gfn"/>
                 <constraint firstItem="1FK-8L-hZk" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Xl1-qK-igU"/>
-                <constraint firstItem="1FK-8L-hZk" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="39" id="fJc-LI-cdm"/>
+                <constraint firstItem="1FK-8L-hZk" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="84" id="fJc-LI-cdm"/>
                 <constraint firstAttribute="trailing" secondItem="gJl-Mb-KDq" secondAttribute="trailing" id="tmB-kJ-zZJ"/>
                 <constraint firstItem="1FK-8L-hZk" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="xrf-qL-cpi"/>
-                <constraint firstItem="gJl-Mb-KDq" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="ytU-dN-Mpc"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="34.782608695652179" y="34.821428571428569"/>

@@ -10,7 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum JMType_State {
+    personState,
+    companyState
+} JMType_State;
+
+
 @interface JMTabBarViewController : UITabBarController
+
+@property(nonatomic,assign)BOOL isCompany;
 
 @end
 

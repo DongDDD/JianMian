@@ -20,15 +20,16 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6jv-AZ-LOX">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0000.png" translatesAutoresizingMaskIntoConstraints="NO" id="6jv-AZ-LOX">
                     <rect key="frame" x="10" y="84" width="193" height="108"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="108" id="ztb-iV-758"/>
                     </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="D5D-NW-6pk">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0000.png" translatesAutoresizingMaskIntoConstraints="NO" id="D5D-NW-6pk">
                     <rect key="frame" x="211" y="84" width="193" height="108"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请核对身份信息，确认无误后提交" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HMb-oL-t4V">
                     <rect key="frame" x="20" y="229" width="260" height="16"/>
@@ -111,9 +112,11 @@
                             <integer key="value" value="25"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="commitAction:" destination="-1" eventType="touchUpInside" id="hoQ-g4-vGO"/>
+                    </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="hGU-8o-WVr" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="23s-Y4-EGz"/>
                 <constraint firstItem="D5D-NW-6pk" firstAttribute="width" secondItem="6jv-AZ-LOX" secondAttribute="width" id="5Md-Mz-8a6"/>
@@ -135,4 +138,7 @@
             <point key="canvasLocation" x="131.8840579710145" y="116.51785714285714"/>
         </view>
     </objects>
+    <resources>
+        <image name="0000.png" width="90" height="59.5"/>
+    </resources>
 </document>

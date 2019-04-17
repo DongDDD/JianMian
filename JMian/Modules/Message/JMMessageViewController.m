@@ -21,7 +21,6 @@
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) NSArray *childVCs;
 @property (nonatomic, strong) UITableViewController *currentVC;
-@property (nonatomic, assign) CGFloat oldOffsetY;
 
 
 
@@ -66,7 +65,7 @@
 
 - (JMPageView *)pageView {
     if (!_pageView) {
-        _pageView = [[JMPageView alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, SCREEN_HEIGHT) childVC:self.childVCs];
+        _pageView = [[JMPageView alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, SCREEN_HEIGHT-220) childVC:self.childVCs];
         __weak JMMessageViewController *weakSelf = self;
         _pageView.didEndScrollView = ^(NSInteger index) {
             [weakSelf.titleView setCurrentTitleIndex:index];
@@ -77,10 +76,6 @@
 }
 
 - (NSArray *)childVCs {
-    if (!_childVCs) {
-        __weak JMMessageViewController *weakSelf = self;
-
-        };
         
         JMAllMessageTableViewController *allMessageVC = [[JMAllMessageTableViewController alloc] init];
 

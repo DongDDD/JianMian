@@ -18,6 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitle:@"实名认证"];
+        self.navigationController.navigationBar.translucent = NO;
+    
+        self.extendedLayoutIncludesOpaqueBars = YES;
     // Do any additional setup after loading the view from its nib.
 }
 

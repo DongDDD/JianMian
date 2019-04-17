@@ -13,6 +13,8 @@
 #import "JMMessageViewController.h"
 #import "NavigationViewController.h"
 #import "HomeViewController.h"
+#import "JMCompanyHomeViewController.h"
+#import "JMPostJobHomeViewController.h"
 
 
 @interface JMTabBarViewController ()
@@ -23,11 +25,28 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    HomeViewController *home = [[HomeViewController alloc] init];
-    [self addChildVc:home title:@"首页" image:@"home" selectedImage:@"pitch_on_home"];
+  
+    if (self.isCompany == YES) {
+        //C端
+        HomeViewController *home = [[HomeViewController alloc] init];
+        [self addChildVc:home title:@"首页" image:@"home" selectedImage:@"pitch_on_home"];
+        
+    }else if(self.isCompany == NO){
+        //B端
+        JMCompanyHomeViewController *companyHome = [[JMCompanyHomeViewController alloc]init];
+        [self addChildVc:companyHome title:@"首页" image:@"home" selectedImage:@"pitch_on_home"];
+      
+        JMPostJobHomeViewController *post = [[JMPostJobHomeViewController alloc]init];
+        [self addChildVc:post title:@"发布" image:@"post_a_job" selectedImage:@"post_a_job_pitch_up"];
 
+        
+//        [self addChildVc:message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
+
+
+    }
+   
     JMMessageViewController *message = [[JMMessageViewController alloc] init];
+
 
     [self addChildVc:message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
 

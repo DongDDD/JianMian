@@ -18,6 +18,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+        self.navigationController.navigationBar.translucent = NO;
+    
+        self.extendedLayoutIncludesOpaqueBars = YES;
     [self.navigationController setNavigationBarHidden:NO];
  
     [self setRightBtnTextName:@"下一步"];

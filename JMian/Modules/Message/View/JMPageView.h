@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setCurrentIndex:(NSInteger)index;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

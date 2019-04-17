@@ -7,17 +7,97 @@
 //
 
 #import "JMCompanyHomeViewController.h"
+#import "JMCompanyHomeTableViewCell.h"
+#import "JMPersonDetailsViewController.h"
 
-@interface JMCompanyHomeViewController ()
+
+
+@interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+
+@property(nonatomic,strong)UITableView *tableView;
 
 @end
+static NSString *cellIdent = @"cellIdent";
 
 @implementation JMCompanyHomeViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.navigationController.navigationBar.translucent = NO;
+////
+//    self.extendedLayoutIncludesOpaqueBars = YES;
+    [self setTitleViewImageViewName:@"jianmian_home"];
+    [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
+    [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
+    [self setTableView];
     // Do any additional setup after loading the view from its nib.
 }
+
+#pragma mark - 布局UI
+
+-(void)setTableView{
+    
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.headerView.frame.size.height, SCREEN_WIDTH, self.view.bounds.size.height-200) style:UITableViewStylePlain];
+    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.separatorColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+    
+//    self.tableView.sectionFooterHeight = 10.0f;
+//    self.tableView.tableFooterView.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = 141;
+    [self.tableView registerNib:[UINib nibWithNibName:@"JMCompanyHomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
+    
+    [self.view addSubview:self.tableView];
+    
+    
+    
+}
+-(NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
+    
+    return 1;
+}
+
+-(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 10;
+}
+
+
+#pragma mark - tableView Delegate -
+
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    JMCompanyHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent];
+    if (cell == nil) {
+        cell = [[JMCompanyHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
+    }
+    
+//    JMHomeWorkModel *model = self.arrDate[indexPath.row];
+//    [cell setModel:model];
+//    
+    return cell;
+    
+}
+
+
+-(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
+//    JMHomeWorkModel *model = self.arrDate[indexPath.row];
+//
+//    vc.homeworkModel = model;
+
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+
+
 
 /*
 #pragma mark - Navigation
