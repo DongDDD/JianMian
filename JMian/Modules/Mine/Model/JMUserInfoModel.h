@@ -27,6 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *realSex;
 @property (nonatomic, copy) NSString *realBirthday;
 @property (nonatomic, copy) NSString *realStatus;
+@property (nonatomic, copy) NSString *usersig;
 
 
 @end

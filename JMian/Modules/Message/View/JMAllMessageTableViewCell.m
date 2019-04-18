@@ -8,15 +8,19 @@
 
 #import "JMAllMessageTableViewCell.h"
 
-
-@implementation JMAllMessageTableViewCellData
-
+@implementation JMAllMessageTableViewCellData 
 
 @end
+
 
 @interface JMAllMessageTableViewCell ()
 
 @property (nonatomic, strong) JMAllMessageTableViewCellData *data;
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userCompanyLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastChatLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastChatTimeLbel;
 
 @end
 
@@ -36,10 +40,10 @@
 - (void)setData:(JMAllMessageTableViewCellData *)data
 {
     _data = data;
-//    _headImageView.image = [UIImage imageNamed:_data.head];
-//    _timeLabel.text = _data.time;
-//    _titleLabel.text = _data.title;
-//    _subTitleLabel.text = _data.subTitle;
+    self.iconImageView.image = [UIImage imageNamed:_data.head];
+    self.lastChatTimeLbel.text = _data.time;
+    self.lastChatLabel.text = _data.subTitle;
+    self.userNameLabel.text = _data.title;
 //    [_unReadView setNum:_data.unRead];
 //    [self defaultLayout];
 }
