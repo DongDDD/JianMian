@@ -1906,8 +1906,11 @@
 				040B837D2265D73600F1A37A /* companyCamera.png@3x.png in Resources */,
 				04DD1D62224B6E95007CB11C /* 蓝点@3x.png in Resources */,
 				044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */,
+<<<<<<< HEAD
 				04DD1D6A224B6E95007CB11C /* 椭圆 3@2x.png in Resources */,
 				040B83972265F3E700F1A37A /* IDCard1@3x.png in Resources */,
+=======
+>>>>>>> 893611a7be50a02a6f2d3faa182c42d3784bfa79
 				6D0209E3224FB900009BCFE4 /* eliver@2x.png in Resources */,
 				040B83982265F3E700F1A37A /* IDCard1.png in Resources */,
 				048FEE382244853C001160C8 /* Main.storyboard in Resources */,
