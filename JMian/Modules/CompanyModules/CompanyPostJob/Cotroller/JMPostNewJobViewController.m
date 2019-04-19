@@ -7,6 +7,10 @@
 //
 
 #import "JMPostNewJobViewController.h"
+#import "JMJobDescriptionViewController.h"
+#import "JMWelfareViewController.h"
+#import "JMManageInterviewViewController.h"
+
 
 @interface JMPostNewJobViewController ()
 
@@ -16,8 +20,41 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+    [self setTitle:@"发布新职位"];
+    
+    [self setRightBtnTextName:@"发布"];
+   
     // Do any additional setup after loading the view from its nib.
 }
+
+
+-(void)rightAction{
+    JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
+    
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+    NSLog(@"发布");
+
+}
+- (IBAction)welFareAction:(UIButton *)sender {
+    JMWelfareViewController *vc = [[JMWelfareViewController alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (IBAction)workLocationAction:(UIButton *)sender {
+    
+    
+}
+
+- (IBAction)jobDescriptionAction:(UIButton *)sender {
+    
+    JMJobDescriptionViewController *vc = [[JMJobDescriptionViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 /*
 #pragma mark - Navigation

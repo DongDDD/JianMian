@@ -46,6 +46,8 @@
 #define SafeAreaTopHeight (IPHONE_X ? 88 : 64)
 #define SafeAreaStatusHeight (IPHONE_X ? 44 : 20)
 
+#define GlobalFont(fontsize) [UIFont systemFontOfSize:fontsize]
+
 
 //存储userDefault
 #define kSaveMyDefault(A,B) [[NSUserDefaults standardUserDefaults] setObject:B forKey:A]

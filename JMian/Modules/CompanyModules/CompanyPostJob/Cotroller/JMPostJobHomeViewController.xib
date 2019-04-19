@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,10 +17,67 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NO_Data.png" translatesAutoresizingMaskIntoConstraints="NO" id="tIk-zc-2lY">
+                    <rect key="frame" x="152.5" y="403.5" width="109" height="99"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="99" id="1bh-t8-Sea"/>
+                        <constraint firstAttribute="width" constant="109" id="70a-fC-1oJ"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你还没有发布任何职位哦 快去发布职位吧" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1S-uB-THQ">
+                    <rect key="frame" x="130" y="532.5" width="154" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="154" id="BF0-sS-AMt"/>
+                        <constraint firstAttribute="height" constant="51" id="Twv-QJ-nPt"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7a-WH-NXn">
+                    <rect key="frame" x="114.5" y="637.5" width="185" height="47"/>
+                    <color key="backgroundColor" red="0.98039215690000003" green="0.99607843139999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="185" id="Xbo-UL-DfJ"/>
+                        <constraint firstAttribute="height" constant="47" id="kKs-00-gyq"/>
+                    </constraints>
+                    <state key="normal" title="去实名认证">
+                        <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <real key="value" value="23.5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                            <color key="value" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="gotoIdentify:" destination="-1" eventType="touchUpInside" id="YUS-2S-mNw"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="B1S-uB-THQ" firstAttribute="top" secondItem="tIk-zc-2lY" secondAttribute="bottom" constant="30" id="AeE-Ac-sZg"/>
+                <constraint firstItem="B1S-uB-THQ" firstAttribute="centerX" secondItem="tIk-zc-2lY" secondAttribute="centerX" id="RjH-lc-J7S"/>
+                <constraint firstItem="tIk-zc-2lY" firstAttribute="centerY" secondItem="Q5M-cg-NOt" secondAttribute="centerY" id="bC1-Cl-awu"/>
+                <constraint firstItem="tIk-zc-2lY" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="bf2-Iy-7dL"/>
+                <constraint firstItem="j7a-WH-NXn" firstAttribute="top" secondItem="B1S-uB-THQ" secondAttribute="bottom" constant="54" id="gg4-Y8-Ag7"/>
+                <constraint firstItem="j7a-WH-NXn" firstAttribute="centerX" secondItem="B1S-uB-THQ" secondAttribute="centerX" id="nTu-Tj-iwP"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="131.8840579710145" y="116.51785714285714"/>
         </view>
     </objects>
+    <resources>
+        <image name="NO_Data.png" width="107" height="98.5"/>
+    </resources>
 </document>
