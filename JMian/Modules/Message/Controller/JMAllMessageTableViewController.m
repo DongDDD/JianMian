@@ -32,6 +32,14 @@ static NSString *cellIdent = @"allMessageCellIdent";
      self.tableView.rowHeight = 79;
    self.tableView.separatorStyle = UITableViewCellAccessoryNone;
     
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self updateConversations];
+}
+- (void)updateConversations {
+    self.data = [NSMutableArray array];
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
     for (TIMConversation *conv in convs) {
@@ -64,7 +72,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
     [self.tableView reloadData];
 
 }
-
 
 - (NSString *)getLastDisplayString:(TIMConversation *)conv
 {
@@ -248,7 +255,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.data.count;
 }
 
 

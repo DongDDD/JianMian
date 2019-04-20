@@ -98,6 +98,13 @@
                 <accessibilityTraits key="traits" button="YES" image="YES"/>
             </accessibility>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="iconImageView" destination="BTe-Rf-Xjf" id="GKD-wP-p4P"/>
+                <outlet property="lastChatLabel" destination="zPy-Y3-P2Y" id="YeN-4G-4RO"/>
+                <outlet property="lastChatTimeLbel" destination="gIR-Gt-4Uc" id="FjR-Il-DDg"/>
+                <outlet property="userCompanyLabel" destination="3Jq-FL-H8P" id="Cpp-S9-bha"/>
+                <outlet property="userNameLabel" destination="VJ5-WE-752" id="AK4-Ch-fFm"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="105.46875"/>
         </tableViewCell>
     </objects>
