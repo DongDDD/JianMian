@@ -19,6 +19,7 @@
 #import "VendorKeyMacros.h"
 #import "JMUserInfoManager.h"
 #import "JMUserInfoModel.h"
+#import "JMCompanyTabBarViewController.h"
 
 
 
@@ -47,76 +48,75 @@
     if(kFetchMyDefault(@"token")){
         
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-        TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
-        // identifier 为用户名，userSig 为用户登录凭证
-        login_param.identifier = model.user_id;
-        login_param.userSig = model.usersig;
-        [[TIMManager sharedInstance] login: login_param succ:^(){
-            
-            NSLog(@"Login Succ");
-            
-        } fail:^(int code, NSString * err) {
-            
-            NSLog(@"Login Failed: %d->%@", code, err);
-            
-        }];
-        
 
-        JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
-        self.window.rootViewController = tab;
-        [self.window makeKeyAndVisible];
-//        JMUserInfoModel *model = [[JMUserInfoModel alloc]init];
-//        model = [JMUserInfoManager getUserInfo];
-//        NSString *str = model.user_step;
-//        NSInteger step = [str integerValue];
-//        if (step==0) {
-//            ChooseIdentity *vc = [[ChooseIdentity alloc]init];
-//            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-//            [_window setRootViewController:naVC];//navigation加在window上
-//
-//            [self.window makeKeyAndVisible];
-//
-//        }else if (step == 1){
-//            BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
-//            vc.isHiddenBackBtn = YES;
-//            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-//            [_window setRootViewController:naVC];//navigation加在window上
-//
-//            [self.window makeKeyAndVisible];
-//
-//
-//        }else if(step == 2){
-//            JobIntensionViewController *vc = [[JobIntensionViewController alloc]init];
-//            vc.isHiddenBackBtn = YES;
-//            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-//            [_window setRootViewController:naVC];//navigation加在window上
-//
-//            [self.window makeKeyAndVisible];
-//
-//
-//        }else if(step == 3){
-//            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
-//            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-//            vc.isHiddenBackBtn = YES;
-//
-//            [_window setRootViewController:naVC];//navigation加在window上
-//
-//            [self.window makeKeyAndVisible];
-//
-//        }
-//
-//
+        model = [JMUserInfoManager getUserInfo];
+        NSString *str = model.user_step;
+        NSInteger step = [str integerValue];
+       
+        if(step==0){         
+            ChooseIdentity *vc = [[ChooseIdentity alloc]init];
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+            [_window setRootViewController:naVC];//navigation加在window上
+            
+            [self.window makeKeyAndVisible];
+            
+        }else if (step==1) {
+            
+            BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
+            vc.isHiddenBackBtn = YES;
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+            [_window setRootViewController:naVC];//navigation加在window上
+            
+            [self.window makeKeyAndVisible];
+
+        }else if (step == 3){
+
+            JobIntensionViewController *vc = [[JobIntensionViewController alloc]init];
+            vc.isHiddenBackBtn = YES;
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+            [_window setRootViewController:naVC];//navigation加在window上
+            
+            [self.window makeKeyAndVisible];
+
+        }else if (step == 4){
+
+            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+            vc.isHiddenBackBtn = YES;
+            
+            [_window setRootViewController:naVC];//navigation加在window上
+            
+            [self.window makeKeyAndVisible];
+
+        }else if (step == 6){
+            
+            
+            JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+            self.window.rootViewController = tab;
+            [self.window makeKeyAndVisible];
+            
+            
+        }
+
+
         
     }else{
+        
         LoginViewController *login = [[LoginViewController alloc] init];
         NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
         [_window setRootViewController:naVC];//navigation加在window上
-
+        
         [self.window makeKeyAndVisible];
         
-        
     }
-    
+    //C端
+//    JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+//    self.window.rootViewController = tab;
+//    [self.window makeKeyAndVisible];
+//    B端
+//        JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc] init];
+//        self.window.rootViewController = tab;
+//        [self.window makeKeyAndVisible];
     
     
     return YES;

@@ -9,6 +9,7 @@
 #import "JMCompanyHomeViewController.h"
 #import "JMCompanyHomeTableViewCell.h"
 #import "JMPersonDetailsViewController.h"
+#import "JMHTTPManager+VitaPaginate.h"
 
 
 
@@ -31,8 +32,25 @@ static NSString *cellIdent = @"cellIdent";
     [self setTitleViewImageViewName:@"jianmian_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
     [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
+    
+    [self getData];
     [self setTableView];
     // Do any additional setup after loading the view from its nib.
+}
+#pragma mark - 获取数据
+-(void)getData{
+    [[JMHTTPManager sharedInstance]fetchVitaPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+        
+    }];
+
+
+
 }
 
 #pragma mark - 布局UI

@@ -1,46 +1,45 @@
 //
-//  JMTabBarViewController.m
+//  JMCompanyTabBarViewController.m
 //  JMian
 //
-//  Created by chitat on 2019/3/27.
+//  Created by mac on 2019/4/20.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMTabBarViewController.h"
-#import "JMMineViewController.h"
-#import "DimensMacros.h"
-#import "JMMessageViewController.h"
-#import "NavigationViewController.h"
-#import "HomeViewController.h"
+#import "JMCompanyTabBarViewController.h"
 #import "JMCompanyHomeViewController.h"
 #import "JMPostJobHomeViewController.h"
+#import "NavigationViewController.h"
+#import "JMMessageViewController.h"
+#import "JMMineViewController.h"
 
-
-@interface JMTabBarViewController ()
+@interface JMCompanyTabBarViewController ()
 
 @end
 
-@implementation JMTabBarViewController
+@implementation JMCompanyTabBarViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-   
+    // Do any additional setup after loading the view.
     
-    HomeViewController *home = [[HomeViewController alloc] init];
-    [self addChildVc:home title:@"首页" image:@"home" selectedImage:@"pitch_on_home"];
+    //B端
+    JMCompanyHomeViewController *companyHome = [[JMCompanyHomeViewController alloc]init];
+    [self addChildVc:companyHome title:@"首页" image:@"home" selectedImage:@"pitch_on_home"];
     
+    JMPostJobHomeViewController *post = [[JMPostJobHomeViewController alloc]init];
+    [self addChildVc:post title:@"发布" image:@"post_a_job" selectedImage:@"post_a_job_pitch_up"];
     
     JMMessageViewController *message = [[JMMessageViewController alloc] init];
-    
-    
+
+
     [self addChildVc:message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
-    
+
     JMMineViewController *mine = [[JMMineViewController alloc] init];
-    
+
     [self addChildVc:mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on"];
-    
 }
+
 
 - (void)addChildVc:(UIViewController *)childVc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage
 {
@@ -57,13 +56,23 @@
     NSMutableDictionary *selectedTextAttrs = [NSMutableDictionary dictionary];
     selectedTextAttrs[NSForegroundColorAttributeName] = [UIColor orangeColor];
     [childVc.tabBarItem setTitleTextAttributes:textAttrs forState:UIControlStateNormal];
-//    [childVc.tabBarItem setTitleTextAttributes:selectedTextAttrs forState:UIControlStateSelected];
+    //    [childVc.tabBarItem setTitleTextAttributes:selectedTextAttrs forState:UIControlStateSelected];
     
     //不要忘记添加到父控制器上
     NavigationViewController *nav = [[NavigationViewController alloc] initWithRootViewController:childVc];
-
+    
     [self addChildViewController:nav];
 }
 
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

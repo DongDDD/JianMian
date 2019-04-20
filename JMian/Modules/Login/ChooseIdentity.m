@@ -10,8 +10,11 @@
 #import "BasicInformationViewController.h"
 #import "JMHTTPManager+UpdateInfo.h"
 #import "JMCompanyBaseInfoViewController.h"
+#import "JMCompanyHomeViewController.h"
 
+#import "JMTabBarViewController.h"
 
+#import "JMCompanyTabBarViewController.h"
 
 
 @interface ChooseIdentity ()
@@ -44,9 +47,16 @@
 - (IBAction)isCompanyBtn:(id)sender {
     [[JMHTTPManager sharedInstance]updateUserInfoType:@(2) password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:@"1" real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        JMCompanyBaseInfoViewController *basicInformation = [[JMCompanyBaseInfoViewController alloc]init];
+//        test
+        JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc] init];
+    
+        [UIApplication sharedApplication].delegate.window.rootViewController = tab;
         
-        [self.navigationController pushViewController:basicInformation animated:YES];
+
+        
+//        JMCompanyBaseInfoViewController *basicInformation = [[JMCompanyBaseInfoViewController alloc]init];
+//
+//        [self.navigationController pushViewController:basicInformation animated:YES];
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

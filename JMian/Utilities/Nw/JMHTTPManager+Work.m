@@ -22,7 +22,6 @@
     NSString *url = [NSString stringWithFormat:@"%@/%@",Info_Work_URL,work_id];
     
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:url parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
-
 }
 
 

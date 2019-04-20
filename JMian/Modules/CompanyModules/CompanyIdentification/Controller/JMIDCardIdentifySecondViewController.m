@@ -8,6 +8,7 @@
 
 #import "JMIDCardIdentifySecondViewController.h"
 #import "JMTabBarViewController.h"
+#import "JMCompanyTabBarViewController.h"
 
 @interface JMIDCardIdentifySecondViewController ()
 
@@ -31,11 +32,11 @@
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您的信息已经提交成功， 审核结果我们会第一时间通知你" preferredStyle: UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:nil]];
     [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        //点击确认后需要做的事
-        
-        JMTabBarViewController *tab = [[JMTabBarViewController alloc]init];
-        tab.isCompany = YES;
-        [UIApplication sharedApplication].delegate.window.rootViewController=tab;
+//        //点击确认后需要做的事
+////        C端
+//        JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc]init];
+//     
+//        [UIApplication sharedApplication].delegate.window.rootViewController=tab;
 
  
     }]];

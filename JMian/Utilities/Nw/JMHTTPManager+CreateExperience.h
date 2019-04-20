@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
                               start_date:(NSDate *)start_date
                                 end_date:(nullable NSDate *)end_date
                              description:(NSString *)description
+                               user_step:(nullable NSNumber *)user_step
                             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 - (void)updateExperienceWith_experienceId:(NSNumber *)experienceId

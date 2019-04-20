@@ -18,7 +18,6 @@ typedef enum JMType_State {
 
 @interface JMTabBarViewController : UITabBarController
 
-@property(nonatomic,assign)BOOL isCompany;
 
 @end
 

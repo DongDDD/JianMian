@@ -12,7 +12,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMCompanyInfoViewController">
             <connections>
+                <outlet property="abbreviationTextField" destination="uPo-Bl-q5G" id="LP3-Oh-vlO"/>
+                <outlet property="companyNameLab" destination="Qg7-Nh-akg" id="zrA-Z1-M2d"/>
+                <outlet property="employeeBtn" destination="dII-lS-7Fe" id="xBT-rd-aEb"/>
+                <outlet property="financingBtn" destination="pj4-nO-pIz" id="BpE-pG-CxH"/>
+                <outlet property="headerImg" destination="8ua-DM-Osf" id="wlE-Cs-uWE"/>
+                <outlet property="industryBtn" destination="4YA-Gf-MVq" id="8lQ-QK-nH4"/>
                 <outlet property="pickerView" destination="NJK-gW-YIb" id="UgO-XG-qVi"/>
+                <outlet property="scrollView" destination="jwH-JF-xxn" id="mDH-BM-3sc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -31,13 +38,6 @@
                     <color key="textColor" red="0.27450980390000002" green="0.27450980390000002" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="company_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="dhX-KC-PFR">
-                    <rect key="frame" x="20" y="105" width="91" height="91"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="91" id="Ub2-er-6Ma"/>
-                        <constraint firstAttribute="height" constant="91" id="umN-e0-5qB"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上传公司logo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YM0-I7-Pdc">
                     <rect key="frame" x="131" y="126" width="103" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -120,10 +120,10 @@
                                         <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="businessAction:" destination="-1" eventType="touchUpInside" id="eQT-WK-Du1"/>
+                                        <action selector="industryAction:" destination="-1" eventType="touchUpInside" id="IPR-fC-vij"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dII-lS-7Fe">
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dII-lS-7Fe">
                                     <rect key="frame" x="128" y="72" width="249" height="47"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="47" id="Bb3-gP-6wH"/>
@@ -132,10 +132,10 @@
                                         <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="personAction:" destination="-1" eventType="touchUpInside" id="QgL-b9-bKC"/>
+                                        <action selector="employeeAction:" destination="-1" eventType="touchUpInside" id="rXH-Al-oHR"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pj4-nO-pIz">
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pj4-nO-pIz">
                                     <rect key="frame" x="128" y="136" width="249" height="47"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="47" id="l8w-4t-00a"/>
@@ -144,7 +144,7 @@
                                         <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="developStep:" destination="-1" eventType="touchUpInside" id="mAj-Dq-Zvq"/>
+                                        <action selector="financingStep:" destination="-1" eventType="touchUpInside" id="Mgf-dd-uoU"/>
                                     </connections>
                                 </button>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="ivF-Xt-ajw">
@@ -237,19 +237,30 @@
                         <constraint firstItem="1vf-4A-SlJ" firstAttribute="trailing" secondItem="bZq-7i-XfD" secondAttribute="trailing" id="y4i-kB-3Bj"/>
                     </constraints>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ua-DM-Osf">
+                    <rect key="frame" x="20" y="104" width="91" height="91"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="91" id="Fbl-P2-BaO"/>
+                        <constraint firstAttribute="height" constant="91" id="g3e-HW-UzR"/>
+                    </constraints>
+                    <state key="normal" image="camera.png"/>
+                    <connections>
+                        <action selector="headerAction:" destination="-1" eventType="touchUpInside" id="Doh-if-QsI"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fX8-KE-AoI" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="2" id="0MM-PL-Y7z"/>
-                <constraint firstItem="YM0-I7-Pdc" firstAttribute="leading" secondItem="dhX-KC-PFR" secondAttribute="trailing" constant="20" id="ASs-F8-1BS"/>
+                <constraint firstItem="YM0-I7-Pdc" firstAttribute="leading" secondItem="8ua-DM-Osf" secondAttribute="trailing" constant="20" id="AWy-Uc-6rB"/>
                 <constraint firstItem="Qg7-Nh-akg" firstAttribute="leading" secondItem="YM0-I7-Pdc" secondAttribute="leading" id="Bge-7u-PWv"/>
+                <constraint firstItem="8ua-DM-Osf" firstAttribute="top" secondItem="fX8-KE-AoI" secondAttribute="bottom" constant="30" id="Enb-15-3Sq"/>
                 <constraint firstAttribute="bottom" secondItem="jwH-JF-xxn" secondAttribute="bottom" id="FUi-cc-M1i"/>
-                <constraint firstItem="dhX-KC-PFR" firstAttribute="top" secondItem="fX8-KE-AoI" secondAttribute="bottom" constant="31" id="HFM-iN-nJX"/>
-                <constraint firstItem="dhX-KC-PFR" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="Oes-Ce-ApT"/>
                 <constraint firstItem="fX8-KE-AoI" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="YCm-e8-nTN"/>
                 <constraint firstItem="Qg7-Nh-akg" firstAttribute="top" secondItem="YM0-I7-Pdc" secondAttribute="bottom" constant="15" id="Ypp-eI-mZm"/>
                 <constraint firstItem="jwH-JF-xxn" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="bQT-LL-V6F"/>
                 <constraint firstItem="jwH-JF-xxn" firstAttribute="top" secondItem="Qg7-Nh-akg" secondAttribute="bottom" constant="47" id="dbb-z4-zgB"/>
+                <constraint firstItem="8ua-DM-Osf" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="e9L-mn-c6i"/>
                 <constraint firstItem="YM0-I7-Pdc" firstAttribute="top" secondItem="fX8-KE-AoI" secondAttribute="bottom" constant="52" id="tds-Qy-Dv5"/>
                 <constraint firstItem="jwH-JF-xxn" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="wXC-dZ-O1Q"/>
             </constraints>
@@ -258,7 +269,7 @@
         </view>
     </objects>
     <resources>
-        <image name="company_logo.png" width="91" height="91"/>
+        <image name="camera.png" width="92.5" height="92.5"/>
         <image name="icon_return .png" width="6.5" height="11"/>
     </resources>
 </document>

@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMCompanyBaseInfoViewController">
             <connections>
+                <outlet property="companyNameTextField" destination="PQW-9H-uLq" id="vcf-bN-hCE"/>
+                <outlet property="headerImg" destination="Kph-SH-Xsg" id="fdE-0u-fAb"/>
+                <outlet property="myNameTextField" destination="GUK-f5-f0x" id="e0d-1L-PJc"/>
+                <outlet property="myPositionTextField" destination="pUC-ZS-sm5" id="TyW-Ox-ITY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -49,6 +53,9 @@
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="headerAtion:" destination="-1" eventType="touchUpInside" id="Ejb-oy-oNZ"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3u-hD-LbV">
                                     <rect key="frame" x="20" y="287" width="29" height="17"/>
@@ -97,10 +104,10 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="必须与公司营业执照一致" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PQW-9H-uLq">
-                                    <rect key="frame" x="20" y="490" width="306" height="18"/>
+                                    <rect key="frame" x="20" y="481" width="306" height="35"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="306" id="Efu-0z-Np7"/>
-                                        <constraint firstAttribute="height" constant="18" id="Zkw-ks-aDl"/>
+                                        <constraint firstAttribute="width" constant="306" id="GPk-lr-YlM"/>
+                                        <constraint firstAttribute="height" constant="35" id="Iz7-Ou-yZK"/>
                                     </constraints>
                                     <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -116,11 +123,12 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="PQW-9H-uLq" firstAttribute="leading" secondItem="6c3-ac-8ll" secondAttribute="leading" id="0Rh-Jz-u0J"/>
                                 <constraint firstAttribute="trailing" secondItem="Zag-h5-7LY" secondAttribute="trailing" constant="20" id="48Y-n4-xC4"/>
                                 <constraint firstItem="jKT-lK-Pg5" firstAttribute="leading" secondItem="pca-6o-Um0" secondAttribute="leading" constant="20" id="7QM-Yi-sm7"/>
+                                <constraint firstItem="PQW-9H-uLq" firstAttribute="top" secondItem="6c3-ac-8ll" secondAttribute="bottom" constant="4" id="9AT-mu-zC4"/>
                                 <constraint firstItem="6c3-ac-8ll" firstAttribute="top" secondItem="EQv-rl-YHV" secondAttribute="bottom" constant="71" id="E7v-HU-hYv"/>
                                 <constraint firstItem="Kph-SH-Xsg" firstAttribute="top" secondItem="hX0-rb-83f" secondAttribute="bottom" constant="30" id="Iao-nt-zmh"/>
-                                <constraint firstItem="PQW-9H-uLq" firstAttribute="top" secondItem="6c3-ac-8ll" secondAttribute="bottom" constant="13" id="LUF-S8-zdo"/>
                                 <constraint firstItem="EQv-rl-YHV" firstAttribute="top" secondItem="Zag-h5-7LY" secondAttribute="bottom" constant="19" id="O7X-Cf-ksu"/>
                                 <constraint firstItem="hX0-rb-83f" firstAttribute="centerX" secondItem="pca-6o-Um0" secondAttribute="centerX" id="PLW-ut-2X2"/>
                                 <constraint firstItem="GUK-f5-f0x" firstAttribute="leading" secondItem="A3u-hD-LbV" secondAttribute="leading" id="PXd-5R-VNV"/>
@@ -130,7 +138,6 @@
                                 <constraint firstItem="EQv-rl-YHV" firstAttribute="leading" secondItem="A3u-hD-LbV" secondAttribute="leading" id="Xqr-y9-ms6"/>
                                 <constraint firstItem="GUK-f5-f0x" firstAttribute="top" secondItem="A3u-hD-LbV" secondAttribute="bottom" constant="8" id="YRd-hh-Br5"/>
                                 <constraint firstItem="A3u-hD-LbV" firstAttribute="leading" secondItem="pca-6o-Um0" secondAttribute="leading" constant="20" id="ZVd-vw-ByT"/>
-                                <constraint firstItem="PQW-9H-uLq" firstAttribute="leading" secondItem="6c3-ac-8ll" secondAttribute="leading" id="e5k-de-V46"/>
                                 <constraint firstItem="Kph-SH-Xsg" firstAttribute="centerX" secondItem="pca-6o-Um0" secondAttribute="centerX" id="erK-OX-BlO"/>
                                 <constraint firstItem="hX0-rb-83f" firstAttribute="top" secondItem="pca-6o-Um0" secondAttribute="top" constant="69" id="hp4-jA-Dbc"/>
                                 <constraint firstAttribute="trailing" secondItem="jKT-lK-Pg5" secondAttribute="trailing" constant="20" id="wE5-dR-xID"/>

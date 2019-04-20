@@ -1,22 +1,22 @@
 //
-//  JMCompanyInfoViewController.m
+//  JMCompanyInfoMineViewController.m
 //  JMian
 //
-//  Created by mac on 2019/4/19.
+//  Created by mac on 2019/4/20.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMCompanyInfoSecondViewController.h"
+#import "JMCompanyInfoMineViewController.h"
 
-@interface JMCompanyInfoSecondViewController ()
+@interface JMCompanyInfoMineViewController ()
 
 @end
 
-@implementation JMCompanyInfoSecondViewController
+@implementation JMCompanyInfoMineViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    // Do any additional setup after loading the view.
 }
 
 /*

@@ -18,7 +18,7 @@
 #define API_BASE_URL_STRING     @"http://www.companydomain.com/api/"
 
 #endif
-
+//C端接口
 #define Login_URL @"api/login"
 //发送验证码
 #define Login_Captcha_URL @"sms/captcha"
@@ -42,6 +42,16 @@
 
 #define Paginate_Work_URL @"api/work/paginate"
 #define Info_Work_URL @"api/work/info"
+
+
+//B端接口
+#define Create_Company_URL @"api/company/create"
+#define Fectch_CompanyInfo_URL @"api/company/info"
+#define Paginate_Vita_URL @"api/vita/paginate"
+
+
+
+
 //接口
 
 

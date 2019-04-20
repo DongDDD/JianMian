@@ -69,15 +69,16 @@ typedef enum _PickerState_Exp {
 
 -(void)rightAction{
     
-    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             [JMUserInfoManager saveUserInfo:userInfo];
             
-
-            
+            JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+            [UIApplication sharedApplication].delegate.window.rootViewController=tab;
+  
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -87,8 +88,6 @@ typedef enum _PickerState_Exp {
 
     }];
    
-    JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
-    [UIApplication sharedApplication].delegate.window.rootViewController=tab;
     
 }
 
