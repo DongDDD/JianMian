@@ -115,7 +115,8 @@
             [formatter setDateFormat:@"yyyyMMddHHmmss"];
             NSString *dateString = [formatter stringFromDate:[NSDate date]];
             NSString *fileName = [NSString  stringWithFormat:@"%@.jpg", dateString];
-            NSData *data = [request.parameters objectForKey:@"files"];
+            UIImage *image = request.parameters[@"files"][i];
+            NSData *data = UIImageJPEGRepresentation(image, 0.1);
             [formData appendPartWithFileData:data name:@"files" fileName:fileName mimeType:@"image/jpg"];;//file改为后台接收的字段或参数
         }
         
