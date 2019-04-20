@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
                             job_label_id:(NSNumber *)job_label_id
                               start_date:(NSDate *)start_date
                                 end_date:(nullable NSDate *)end_date
+                               user_step:(NSString *)user_step
                              description:(NSString *)description
                             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 

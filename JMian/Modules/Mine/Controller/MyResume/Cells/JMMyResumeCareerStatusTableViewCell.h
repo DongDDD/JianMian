@@ -15,8 +15,7 @@ extern NSString *const JMMyResumeCareerStatus2TableViewCellIdentifier;
 
 @interface JMMyResumeCareerStatusTableViewCell : UITableViewCell
 
-- (void)cellConfigWithIdentifier:(NSString *)identifier;
-
+- (void)setWorkStatus:(NSString *)workStatus;
 @end
 
 NS_ASSUME_NONNULL_END

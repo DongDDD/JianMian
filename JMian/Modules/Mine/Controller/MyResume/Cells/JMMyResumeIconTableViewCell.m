@@ -7,8 +7,15 @@
 //
 
 #import "JMMyResumeIconTableViewCell.h"
+#import <UIImageView+WebCache.h>
 
 NSString *const JMMyResumeIconTableViewCellIdentifier = @"JMMyResumeIconTableViewCellIdentifier";
+
+@interface JMMyResumeIconTableViewCell ()
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+
+@end
 
 @implementation JMMyResumeIconTableViewCell
 
@@ -23,4 +30,8 @@ NSString *const JMMyResumeIconTableViewCellIdentifier = @"JMMyResumeIconTableVie
     // Configure the view for the selected state
 }
 
+- (void)setUserInfo:(JMUserInfoModel *)model {
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    self.userNameLabel.text = model.nickname;
+}
 @end

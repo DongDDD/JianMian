@@ -38,17 +38,12 @@
             self.cellId = JMMyResumeCareerStatusTableViewCellIdentifier;
             break;
         case JMMyResumeCellTypeCareerObjective:
-            self.rowsNum = 3;
-            self.footerheight = 0;
+            self.rowsNum = 4;
+            self.footerheight = 10;
             self.height = 70;
             self.cellId = JMMyResumeCareerObjectiveTableViewCellIdentifier;
             break;
-        case JMMyResumeCellTypeCareerStatus2:
-            self.rowsNum = 1;
-            self.footerheight = 10;
-            self.height = 98;
-            self.cellId = JMMyResumeCareerStatus2TableViewCellIdentifier;
-            break;
+
         case JMMyResumeCellTypeHeader2:
             self.rowsNum = 1;
             self.footerheight = 0;
@@ -120,4 +115,9 @@
     
 }
 
+-(void)setModel:(JMVitaDetailModel *)model {
+    _model = model;
+    self.careerObjectiveRightArr = @[model.work_name?:@"",model.salary_max?:@"",model.city_name?:@"",model.vita_work_start_date?:@""];
+    self.careerObjectiveLeftArr = @[@"期望职位",@"薪资要求",@"工作城市",@"参加工作时间"];
+}
 @end

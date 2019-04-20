@@ -15,11 +15,13 @@
                             job_label_id:(NSNumber *)job_label_id
                               start_date:(NSDate *)start_date
                                 end_date:(nullable NSDate *)end_date
+                               user_step:(NSString *)user_step
                              description:(NSString *)description
                             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     
-    NSDictionary *dic = @{@"company_name":company_name,@"job_label_id":job_label_id,@"start_date":start_date,@"end_date":end_date,@"description":description};
+    NSDictionary *dic = @{@"company_name":company_name,@"job_label_id":job_label_id,@"start_date":start_date,@"end_date":end_date,@"description":description,@"user_step":user_step
+                          };
     
     
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Experience_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];

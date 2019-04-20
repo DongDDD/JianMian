@@ -54,6 +54,10 @@
                     <constraint firstItem="qCH-NO-Udf" firstAttribute="trailing" secondItem="iYM-65-Z0Z" secondAttribute="leading" constant="-21" id="v5Z-dO-6CP"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="leftLabel" destination="j08-zU-NaF" id="ljs-oj-hna"/>
+                <outlet property="rightLabel" destination="qCH-NO-Udf" id="GB1-u4-fWg"/>
+            </connections>
             <point key="canvasLocation" x="14" y="100"/>
         </tableViewCell>
     </objects>

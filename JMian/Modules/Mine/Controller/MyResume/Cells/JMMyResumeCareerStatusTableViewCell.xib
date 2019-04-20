@@ -18,22 +18,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="347" height="109.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="参加工作时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLN-s1-JMa">
-                        <rect key="frame" x="19" y="22" width="80" height="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="求职状态" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kLN-s1-JMa">
+                        <rect key="frame" x="19" y="22" width="53.5" height="13"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="13" id="PkK-BN-hRN"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016年7 月至2019年3月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qew-M6-CqZ">
-                        <rect key="frame" x="19" y="54" width="198" height="18"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="18" id="hTd-Sj-nvd"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JLz-Eh-n5v">
@@ -48,7 +39,7 @@
                                     <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWd-eu-lr2">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EWd-eu-lr2">
                                 <rect key="frame" x="153.5" y="0.0" width="153.5" height="30"/>
                                 <state key="normal" title="离职" image="椭圆 3.png">
                                     <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -70,10 +61,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="JLz-Eh-n5v" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="23i-ZC-ZZs"/>
-                    <constraint firstItem="qew-M6-CqZ" firstAttribute="top" secondItem="kLN-s1-JMa" secondAttribute="bottom" constant="19" id="CND-aP-wKp"/>
                     <constraint firstAttribute="trailing" secondItem="JLz-Eh-n5v" secondAttribute="trailing" constant="20" id="CNn-ce-9wq"/>
                     <constraint firstItem="kLN-s1-JMa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="RHl-9a-33y"/>
-                    <constraint firstItem="qew-M6-CqZ" firstAttribute="leading" secondItem="kLN-s1-JMa" secondAttribute="leading" id="XJG-9M-iWE"/>
                     <constraint firstItem="JLz-Eh-n5v" firstAttribute="top" secondItem="kLN-s1-JMa" secondAttribute="bottom" constant="20" id="rmQ-Bs-2bg"/>
                     <constraint firstItem="kLN-s1-JMa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="19" id="uj9-0w-2E1"/>
                 </constraints>
@@ -81,13 +70,12 @@
             <connections>
                 <outlet property="cellTitle" destination="kLN-s1-JMa" id="0rc-yg-Bxs"/>
                 <outlet property="workStutasView" destination="JLz-Eh-n5v" id="EBe-99-yfO"/>
-                <outlet property="workTimeLabel" destination="qew-M6-CqZ" id="EpX-he-On3"/>
             </connections>
             <point key="canvasLocation" x="-162" y="131"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="椭圆 3.png" width="15" height="15"/>
+        <image name="椭圆 3.png" width="14" height="15"/>
         <image name="组 54.png" width="15" height="15"/>
     </resources>
 </document>

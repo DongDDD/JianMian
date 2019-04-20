@@ -63,6 +63,10 @@
                     <constraint firstItem="Uqa-Lg-Elu" firstAttribute="centerY" secondItem="3W4-DB-eBb" secondAttribute="centerY" constant="-10" id="ti4-f8-lh5"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="iconImageView" destination="3W4-DB-eBb" id="BfV-ch-gKA"/>
+                <outlet property="userNameLabel" destination="Uqa-Lg-Elu" id="d4D-0e-FBo"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="129.24107142857142"/>
         </tableViewCell>
     </objects>

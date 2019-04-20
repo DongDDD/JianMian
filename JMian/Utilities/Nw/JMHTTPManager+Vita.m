@@ -42,5 +42,36 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Vita_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
+- (void)fetchVitPaginateWithCity_id:(nullable NSNumber *)city_id
+                          education:(nullable NSNumber *)education
+                       job_label_id:(nullable NSNumber *)job_label_id
+                        work_year_s:(nullable NSNumber *)work_year_s
+                        work_year_e:(nullable NSNumber *)work_year_e
+                         salary_min:(nullable NSNumber *)salary_min
+                         salary_max:(nullable NSNumber *)salary_max
+                               page:(nullable NSNumber *)page
+                           per_page:(nullable NSNumber *)per_page
+                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    
+    NSDictionary *dic = @{@"city_id":city_id,
+                          @"education":education,
+                          @"work_year_s":work_year_s,
+                          @"job_label_id":job_label_id,
+                          @"work_year_e":work_year_e,
+                          @"salary_min":salary_min,
+                          @"salary_max":salary_max,
+                          @"page":page,
+                          @"per_page":per_page,
+                          };
+    
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Paginate_Vita_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 
+}
+
+- (void)fetchVitaInfoWithId:(nullable NSNumber *)vitaId successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSString *urlStr = [Info_Vita_URL stringByAppendingFormat:@"/%@",vitaId];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+
+}
 @end

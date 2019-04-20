@@ -8,11 +8,14 @@
 
 #import "JMMyResumeViewController.h"
 #import "JMMyResumeCellConfigures.h"
+#import "JMHTTPManager+Vita.h"
+#import "JMVitaDetailModel.h"
 
 @interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) JMMyResumeCellConfigures *cellConfigures;
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) JMVitaDetailModel *model;
 
 @end
 
@@ -29,6 +32,25 @@
         make.left.right.bottom.equalTo(self.view);
     }];
 
+    [self sendRequest];
+}
+
+- (void)sendRequest {
+    [[JMHTTPManager sharedInstance] fetchVitPaginateWithCity_id:nil education:nil job_label_id:nil work_year_s:nil work_year_e:nil salary_min:nil salary_max:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        int jobId = [responsObject[@"data"][0][@"user_job_id"] intValue];
+        [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:@(jobId) successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            self.cellConfigures.model = self.model;
+            [self.tableView reloadData];
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -37,6 +59,7 @@
     switch (indexPath.section) {
         case JMMyResumeCellTypeIcon: {
             JMMyResumeIconTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeIconTableViewCellIdentifier forIndexPath:indexPath];
+            [cell setUserInfo:[JMUserInfoManager getUserInfo]];
             return cell;
         }
         case JMMyResumeCellTypeHeader:
@@ -48,18 +71,15 @@
         case JMMyResumeCellTypeCareerStatus:
         {
             JMMyResumeCareerStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerStatusTableViewCellIdentifier forIndexPath:indexPath];
-            [cell cellConfigWithIdentifier:JMMyResumeCareerStatusTableViewCellIdentifier];
+            [cell setWorkStatus:self.model.vita_work_status];
             return cell;
         }
         case JMMyResumeCellTypeCareerObjective:
         {
-            JMMyResumeCareerObjectiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerObjectiveTableViewCellIdentifier forIndexPath:indexPath];
-            return cell;
-        }
-        case JMMyResumeCellTypeCareerStatus2:
-        {
-            JMMyResumeCareerStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerStatus2TableViewCellIdentifier forIndexPath:indexPath];
-            [cell cellConfigWithIdentifier:JMMyResumeCareerStatus2TableViewCellIdentifier];
+            JMMyResumeCareerObjectiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerObjectiveTableViewCellIdentifier
+                                                                                           forIndexPath:indexPath];
+            [cell setCareerObjectiveWithLeftLabelText:self.cellConfigures.careerObjectiveLeftArr[indexPath.row]];
+            [cell setCareerObjectiveWithRightLabelText:self.cellConfigures.careerObjectiveRightArr[indexPath.row]];
             return cell;
         }
         case JMMyResumeCellTypeHeader2:
@@ -121,7 +141,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 13;
+    return 12;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -144,7 +164,7 @@
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
         _tableView.sectionHeaderHeight = 0;
-        
+
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeIconTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeIconTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeHeaderTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeCareerObjectiveTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeCareerObjectiveTableViewCellIdentifier];

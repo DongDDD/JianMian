@@ -27,6 +27,22 @@ NS_ASSUME_NONNULL_BEGIN
                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock ;
 
 
+- (void)fetchVitPaginateWithCity_id:(nullable NSNumber *)city_id
+                         education:(nullable NSNumber *)education
+                   job_label_id:(nullable NSNumber *)job_label_id
+                      work_year_s:(nullable NSNumber *)work_year_s
+                 work_year_e:(nullable NSNumber *)work_year_e
+                        salary_min:(nullable NSNumber *)salary_min
+                        salary_max:(nullable NSNumber *)salary_max
+                       page:(nullable NSNumber *)page
+                            per_page:(nullable NSNumber *)per_page
+                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock ;
+
+
+- (void)fetchVitaInfoWithId:(nullable NSNumber *)vitaId successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock ;
+
+
+
 @end
 
 NS_ASSUME_NONNULL_END
