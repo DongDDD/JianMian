@@ -50,6 +50,13 @@ typedef NS_ENUM(NSInteger, JMMyResumeCellType){
 @property (strong, nonatomic) NSArray *careerObjectiveLeftArr;
 @property (strong, nonatomic) NSArray *careerObjectiveRightArr;
 
+@property (strong, nonatomic) NSArray *workExperienceArr;
+
+@property (strong, nonatomic) NSArray *educationalExperienceArr;
+
+@property (copy, nonatomic) NSString *vita_description;
+
+
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 
 - (CGFloat)heightForFooterInSection:(NSInteger)section;

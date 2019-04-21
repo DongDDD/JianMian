@@ -25,15 +25,17 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"我的简历";
-    
+    [self sendRequest];
+
+}
+
+- (void)initView {
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_topLayoutGuide);
         make.left.right.bottom.equalTo(self.view);
     }];
-
-    [self sendRequest];
-}
+    }
 
 - (void)sendRequest {
     [[JMHTTPManager sharedInstance] fetchVitPaginateWithCity_id:nil education:nil job_label_id:nil work_year_s:nil work_year_e:nil salary_min:nil salary_max:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -43,6 +45,7 @@
             
             self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
             self.cellConfigures.model = self.model;
+            [self initView];
             [self.tableView reloadData];
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -91,6 +94,7 @@
         case JMMyResumeCellTypeWorkExperience:
         {
             JMMyResumeWorkExperienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeWorkExperienceTableViewCellIdentifier forIndexPath:indexPath];
+            [cell setWorkExperienceModel:self.cellConfigures.workExperienceArr[indexPath.row]];
             return cell;
         }
         case JMMyResumeCellTypeAction:
@@ -123,6 +127,7 @@
         case JMMyResumeCellTypyText:
         {
             JMMyResumeTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeTextTableViewCellIdentifier forIndexPath:indexPath];
+            [cell setVitadescription:self.cellConfigures.vita_description];
             return cell;
         }
         default:
@@ -133,6 +138,48 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case JMMyResumeCellTypeIcon: {
+            
+         }
+        case JMMyResumeCellTypeHeader:
+        {
+            ;
+        }
+        case JMMyResumeCellTypeCareerStatus:
+        {
+        }
+        case JMMyResumeCellTypeCareerObjective:
+        {
+        }
+        case JMMyResumeCellTypeHeader2:
+        {
+                    }
+        case JMMyResumeCellTypeWorkExperience:
+        {
+        }
+        case JMMyResumeCellTypeAction:
+        {
+        }
+        case JMMyResumeCellTypeHeader3:
+        {
+           
+        }
+        case JMMyResumeCellTypeHeader4:
+        {
+        }
+        case JMMyResumeCellTypeEducationalExperience:
+        {
+        }
+        case JMMyResumeCellTypeHeaderOnlyLabel:
+        {
+        }
+        case JMMyResumeCellTypyText:
+        {
+        }
+        default:
+            break;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -164,7 +211,7 @@
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
         _tableView.sectionHeaderHeight = 0;
-
+        
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeIconTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeIconTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeHeaderTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeCareerObjectiveTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeCareerObjectiveTableViewCellIdentifier];

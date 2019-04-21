@@ -13,7 +13,9 @@
 
 + (NSDictionary *)mj_objectClassInArray {
    return @{
-      @"experiences":@"JMExperiencesModel"
+      @"experiences":@"JMExperiencesModel",
+      @"shielding":@"JMShieldingModel",
+      @"education":@"JMEducationModel"
       };
 }
 
@@ -42,18 +44,43 @@
              @"company_id":@"company.company_id",
              @"company_name":@"company.company_name",
              @"work_label_id":@"work.label_id",
-             @"work_name":@"work_name",
-             @"shielding_id":@"shielding.shielding_id",
-             @"shielding_company":@"shielding.company",
-             @"shielding_company_id":@"shielding.company_id",
-             @"shielding_company_name":@"shielding.company_name",
-             @"education_id":@"education.education_id",
-             @"education":@"education.education",
-             @"education_major":@"education.major",
-             @"education_s_date":@"education.s_date",
-             @"education_e_date":@"education.e_date",
-             @"education_description":@"education.description",
+             @"work_name":@"work.name",
+             };
+    
+//    return @{
+//             @"company_id":@"company.company_id",
+//             @"company_name":@"company.company_name",
+//             @"work_label_id":@"work.label_id",
+//             @"work_name":@"work.name",
+//             @"shielding_id":@"shielding.shielding_id",
+//             @"shielding_company":@"shielding.company",
+//             @"shielding_company_id":@"shielding.company_id",
+//             @"shielding_company_name":@"shielding.company_name",
+//             @"education_id":@"education.education_id",
+//             @"education":@"education.education",
+//             @"education_major":@"education.major",
+//             @"education_s_date":@"education.s_date",
+//             @"education_e_date":@"education.e_date",
+//             @"education_description":@"education.description",
+//             @"school_name":@"school.school_name"
+//             };
+}
+
+
+@end
+
+@implementation JMShieldingModel
+
+
+@end
+
+@implementation JMEducationModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{
+             @"education_description":@"description",
              @"school_name":@"school.school_name"
              };
 }
+
 @end

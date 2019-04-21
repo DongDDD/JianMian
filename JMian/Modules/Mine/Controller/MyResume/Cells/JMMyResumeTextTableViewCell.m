@@ -8,7 +8,14 @@
 
 #import "JMMyResumeTextTableViewCell.h"
 
-extern NSString *const JMMyResumeTextTableViewCellIdentifier = @"JMMyResumeTextTableViewCellIdentifier";
+NSString *const JMMyResumeTextTableViewCellIdentifier = @"JMMyResumeTextTableViewCellIdentifier";
+
+
+@interface JMMyResumeTextTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+
+@end
 
 @implementation JMMyResumeTextTableViewCell
 
@@ -23,4 +30,7 @@ extern NSString *const JMMyResumeTextTableViewCellIdentifier = @"JMMyResumeTextT
     // Configure the view for the selected state
 }
 
+- (void)setVitadescription:(NSString *)description {
+    self.descriptionLabel.text = description;
+}
 @end

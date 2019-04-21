@@ -10,6 +10,14 @@
 
 NSString *const JMMyResumeWorkExperienceTableViewCellIdentifier = @"JMMyResumeWorkExperienceTableViewCellIdentifier";
 
+@interface JMMyResumeWorkExperienceTableViewCell ()
+@property (weak, nonatomic) IBOutlet UILabel *jobLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *companyLabel;
+@property (weak, nonatomic) IBOutlet UITextView *descriptionLabel;
+
+@end
+
 @implementation JMMyResumeWorkExperienceTableViewCell
 
 - (void)awakeFromNib {
@@ -21,6 +29,13 @@ NSString *const JMMyResumeWorkExperienceTableViewCellIdentifier = @"JMMyResumeWo
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setWorkExperienceModel:(JMExperiencesModel *)model {
+    self.jobLabel.text = model.work_name;
+    self.timeLabel.text = model.start_date;
+    self.companyLabel.text = model.company_name;
+    self.descriptionLabel.text = model.experiences_description;
 }
 
 @end

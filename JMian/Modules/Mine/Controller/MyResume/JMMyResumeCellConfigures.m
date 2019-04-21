@@ -51,7 +51,7 @@
             self.cellId = JMMyResumeHeader2TableViewCellIdentifier;
             break;
         case JMMyResumeCellTypeWorkExperience:
-            self.rowsNum = 2;
+            self.rowsNum = self.workExperienceArr.count;
             self.footerheight = 0;
             self.height = 300;
             break;
@@ -66,12 +66,13 @@
             self.height = 75;
             break;
         case JMMyResumeCellTypeHeader4:
+//            self.rowsNum = self.educationalExperienceArr.count>0?1:0;
             self.rowsNum = 1;
             self.footerheight = 0;
             self.height = 75;
             break;
         case JMMyResumeCellTypeEducationalExperience:
-            self.rowsNum = 2;
+            self.rowsNum = self.educationalExperienceArr.count;
             self.footerheight = 10;
             self.height = 83;
             break;
@@ -119,5 +120,10 @@
     _model = model;
     self.careerObjectiveRightArr = @[model.work_name?:@"",model.salary_max?:@"",model.city_name?:@"",model.vita_work_start_date?:@""];
     self.careerObjectiveLeftArr = @[@"期望职位",@"薪资要求",@"工作城市",@"参加工作时间"];
+    
+    self.workExperienceArr = model.experiences;
+    self.educationalExperienceArr = model.education;
+    
+    self.vita_description = model.vita_description;
 }
 @end

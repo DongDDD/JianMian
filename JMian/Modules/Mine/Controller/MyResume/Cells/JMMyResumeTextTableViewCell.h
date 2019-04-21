@@ -14,6 +14,8 @@ extern NSString *const JMMyResumeTextTableViewCellIdentifier;
 
 @interface JMMyResumeTextTableViewCell : UITableViewCell
 
+- (void)setVitadescription:(NSString *)description;
+
 @end
 
 NS_ASSUME_NONNULL_END

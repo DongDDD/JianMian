@@ -34,7 +34,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *city_is_hot;
 @property (copy, nonatomic) NSString *city_label_id;
 @property (strong, nonatomic) NSArray *experiences;
-
+@property (strong, nonatomic) NSArray *shielding;
+@property (strong, nonatomic) NSArray *education;
 
 @end
 
@@ -49,15 +50,28 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *company_name;
 @property (copy, nonatomic) NSString *work_label_id;
 @property (copy, nonatomic) NSString *work_name;
+
+@end
+
+@interface JMShieldingModel : NSObject
+
 @property (copy, nonatomic) NSString *shielding_id;
 @property (copy, nonatomic) NSString *company;
-@property (copy, nonatomic) NSString *shielding_company_id;
-@property (copy, nonatomic) NSString *shielding_company_name;
+@property (copy, nonatomic) NSString *company_id;
+@property (copy, nonatomic) NSString *company_name;
+
+@end
+
+@interface JMEducationModel : NSObject
+
 @property (copy, nonatomic) NSString *education_id;
 @property (copy, nonatomic) NSString *education;
-@property (copy, nonatomic) NSString *education_major;
-@property (copy, nonatomic) NSString *education_e_date;
+@property (copy, nonatomic) NSString *major;
+@property (copy, nonatomic) NSString *s_date;
+@property (copy, nonatomic) NSString *e_date;
+@property (copy, nonatomic) NSString *education_description;
 @property (copy, nonatomic) NSString *school_name;
+
 
 @end
 

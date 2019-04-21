@@ -1300,6 +1300,16 @@
 			path = Nw;
 			sourceTree = "<group>";
 		};
+		6D8C069A226B536C00F77D98 /* Mine */ = {
+			isa = PBXGroup;
+			children = (
+				6D558660224B564F0037C14E /* JMMineViewController.h */,
+				6D558661224B564F0037C14E /* JMMineViewController.m */,
+				6D558662224B564F0037C14E /* JMMineViewController.xib */,
+			);
+			path = Mine;
+			sourceTree = "<group>";
+		};
 		6DDA717A225EF3A800A7C8F7 /* UserInfo */ = {
 			isa = PBXGroup;
 			children = (
@@ -1335,10 +1345,8 @@
 		6DEA990E2254A0D90029FE8A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6D8C069A226B536C00F77D98 /* Mine */,
 				6D020A012250F0A5009BCFE4 /* MyResume */,
-				6D558660224B564F0037C14E /* JMMineViewController.h */,
-				6D558661224B564F0037C14E /* JMMineViewController.m */,
-				6D558662224B564F0037C14E /* JMMineViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

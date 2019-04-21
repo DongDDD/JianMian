@@ -85,6 +85,12 @@
                     <constraint firstAttribute="bottom" secondItem="D3t-La-jwM" secondAttribute="bottom" constant="28" id="xWI-PI-Adk"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="companyLabel" destination="kQq-D5-enM" id="uzz-9d-o1m"/>
+                <outlet property="descriptionLabel" destination="D3t-La-jwM" id="Twh-yH-nHO"/>
+                <outlet property="jobLabel" destination="Qno-6t-eCW" id="RF5-tt-OK1"/>
+                <outlet property="timeLabel" destination="DbG-Fd-ZLj" id="n26-M0-ZkB"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>
