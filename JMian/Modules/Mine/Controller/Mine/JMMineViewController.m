@@ -13,6 +13,7 @@
 #import "JMMyResumeViewController.h"
 #import "JMUserInfoModel.h"
 #import "PositionDesiredViewController.h"
+#import "JMHTTPManager+Uploads.h"
 
 @interface JMMineViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -40,11 +41,8 @@
     self.imageNameArr = @[@"subscribe",@"eliver",@"burse",@"autonym"];
     self.labelStrArr = @[@"网点拍摄预约",@"投递的岗位",@"我的钱包",@"实名认证"];
     
-//    [[JMHTTPManager sharedInstance] loginWithMode:@"sms" phone:@"15555555555" captcha:@"123456" sign_id:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-//    }];
+
+
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
         self.userInfoModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
@@ -53,7 +51,7 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];
-    
+
 }
 
 - (NSDictionary *)generateDicFromArray:(NSArray *)array {
@@ -94,7 +92,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:[[PositionDesiredViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[JMMyResumeViewController alloc] init] animated:YES];
 }
 
 #pragma mark - UITableViewDataSource

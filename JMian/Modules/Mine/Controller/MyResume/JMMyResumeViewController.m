@@ -8,11 +8,14 @@
 
 #import "JMMyResumeViewController.h"
 #import "JMMyResumeCellConfigures.h"
+#import "JMHTTPManager+Vita.h"
+#import "JMVitaDetailModel.h"
 
 @interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (strong, nonatomic) JMMyResumeCellConfigures *cellConfigures;
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) JMVitaDetailModel *model;
 
 @end
 
@@ -22,13 +25,35 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"我的简历";
-    
+    [self sendRequest];
+
+}
+
+- (void)initView {
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_topLayoutGuide);
         make.left.right.bottom.equalTo(self.view);
     }];
+    }
 
+- (void)sendRequest {
+    [[JMHTTPManager sharedInstance] fetchVitPaginateWithCity_id:nil education:nil job_label_id:nil work_year_s:nil work_year_e:nil salary_min:nil salary_max:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        int jobId = [responsObject[@"data"][0][@"user_job_id"] intValue];
+        [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:@(jobId) successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            self.cellConfigures.model = self.model;
+            [self initView];
+            [self.tableView reloadData];
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 }
 
 #pragma mark - UITableViewDelegate
@@ -37,6 +62,7 @@
     switch (indexPath.section) {
         case JMMyResumeCellTypeIcon: {
             JMMyResumeIconTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeIconTableViewCellIdentifier forIndexPath:indexPath];
+            [cell setUserInfo:[JMUserInfoManager getUserInfo]];
             return cell;
         }
         case JMMyResumeCellTypeHeader:
@@ -48,18 +74,15 @@
         case JMMyResumeCellTypeCareerStatus:
         {
             JMMyResumeCareerStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerStatusTableViewCellIdentifier forIndexPath:indexPath];
-            [cell cellConfigWithIdentifier:JMMyResumeCareerStatusTableViewCellIdentifier];
+            [cell setWorkStatus:self.model.vita_work_status];
             return cell;
         }
         case JMMyResumeCellTypeCareerObjective:
         {
-            JMMyResumeCareerObjectiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerObjectiveTableViewCellIdentifier forIndexPath:indexPath];
-            return cell;
-        }
-        case JMMyResumeCellTypeCareerStatus2:
-        {
-            JMMyResumeCareerStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerStatus2TableViewCellIdentifier forIndexPath:indexPath];
-            [cell cellConfigWithIdentifier:JMMyResumeCareerStatus2TableViewCellIdentifier];
+            JMMyResumeCareerObjectiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerObjectiveTableViewCellIdentifier
+                                                                                           forIndexPath:indexPath];
+            [cell setCareerObjectiveWithLeftLabelText:self.cellConfigures.careerObjectiveLeftArr[indexPath.row]];
+            [cell setCareerObjectiveWithRightLabelText:self.cellConfigures.careerObjectiveRightArr[indexPath.row]];
             return cell;
         }
         case JMMyResumeCellTypeHeader2:
@@ -71,6 +94,7 @@
         case JMMyResumeCellTypeWorkExperience:
         {
             JMMyResumeWorkExperienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeWorkExperienceTableViewCellIdentifier forIndexPath:indexPath];
+            [cell setWorkExperienceModel:self.cellConfigures.workExperienceArr[indexPath.row]];
             return cell;
         }
         case JMMyResumeCellTypeAction:
@@ -103,6 +127,7 @@
         case JMMyResumeCellTypyText:
         {
             JMMyResumeTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeTextTableViewCellIdentifier forIndexPath:indexPath];
+            [cell setVitadescription:self.cellConfigures.vita_description];
             return cell;
         }
         default:
@@ -113,6 +138,48 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (indexPath.section) {
+        case JMMyResumeCellTypeIcon: {
+            
+         }
+        case JMMyResumeCellTypeHeader:
+        {
+            ;
+        }
+        case JMMyResumeCellTypeCareerStatus:
+        {
+        }
+        case JMMyResumeCellTypeCareerObjective:
+        {
+        }
+        case JMMyResumeCellTypeHeader2:
+        {
+                    }
+        case JMMyResumeCellTypeWorkExperience:
+        {
+        }
+        case JMMyResumeCellTypeAction:
+        {
+        }
+        case JMMyResumeCellTypeHeader3:
+        {
+           
+        }
+        case JMMyResumeCellTypeHeader4:
+        {
+        }
+        case JMMyResumeCellTypeEducationalExperience:
+        {
+        }
+        case JMMyResumeCellTypeHeaderOnlyLabel:
+        {
+        }
+        case JMMyResumeCellTypyText:
+        {
+        }
+        default:
+            break;
+    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -121,7 +188,7 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 13;
+    return 12;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

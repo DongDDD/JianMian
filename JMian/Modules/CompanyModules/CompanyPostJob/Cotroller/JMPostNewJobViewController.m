@@ -13,6 +13,17 @@
 
 
 @interface JMPostNewJobViewController ()
+@property (weak, nonatomic) IBOutlet UIView *pickerBGView;
+@property (weak, nonatomic) IBOutlet UIButton *workPropertyBtn;
+@property (weak, nonatomic) IBOutlet UIButton *expriencesBtn;
+@property (weak, nonatomic) IBOutlet UIButton *educationBtn;
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UIButton *salaryBtn;
+@property (weak, nonatomic) IBOutlet UIButton *welfareBtn;
+@property (weak, nonatomic) IBOutlet UIButton *workLocationBtn;
+@property (weak, nonatomic) IBOutlet UIButton *jobDescriptionBtn;
+
+
 
 @end
 
@@ -54,8 +65,41 @@
     JMJobDescriptionViewController *vc = [[JMJobDescriptionViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+- (IBAction)pickerOKAction:(id)sender {
+    [self.pickerBGView setHidden:YES];
+}
+- (IBAction)pickerViewDeleteAction:(id)sender {
+    [self.pickerBGView setHidden:YES];
+}
 
 
+#pragma mark - pickerView delegate
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+
+{
+    
+    return 1;
+    
+}
+
+//返回指定列的行数
+
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//
+//{
+//    
+//    return [self.pickerArray count];
+//    
+//}
+//
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//    
+//    NSString *str = [self.pickerArray objectAtIndex:row];
+//    
+//    return str;
+//    
+//}
 /*
 #pragma mark - Navigation
 

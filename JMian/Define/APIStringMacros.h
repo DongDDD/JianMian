@@ -33,7 +33,11 @@
 //创建个人简历
 #define Create_Vita_URL @"api/vita/create"
 
+//简历分页
+#define Paginate_Vita_URL @"api/vita/paginate"
 
+//简历详情
+#define Info_Vita_URL @"api/vita/info"
 
 //工作经历
 #define Create_Experience_URL @"api/user/experience/create"

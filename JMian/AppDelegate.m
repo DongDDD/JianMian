@@ -91,10 +91,12 @@
         }else if (step == 6){
             
             
-            JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+            
+        }else{//test
+            
+            JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc] init];
             self.window.rootViewController = tab;
             [self.window makeKeyAndVisible];
-            
             
         }
 

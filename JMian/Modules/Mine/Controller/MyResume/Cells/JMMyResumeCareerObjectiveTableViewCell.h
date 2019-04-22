@@ -14,6 +14,8 @@ extern NSString *const JMMyResumeCareerObjectiveTableViewCellIdentifier;
 
 @interface JMMyResumeCareerObjectiveTableViewCell : UITableViewCell
 
+- (void)setCareerObjectiveWithLeftLabelText:(NSString *)text;
+- (void)setCareerObjectiveWithRightLabelText:(NSString *)text;
 @end
 
 NS_ASSUME_NONNULL_END

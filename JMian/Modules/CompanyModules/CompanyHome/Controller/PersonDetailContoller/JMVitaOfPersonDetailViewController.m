@@ -12,11 +12,15 @@
 #import "JMEducationView.h"
 #import "DimensMacros.h"
 #import "Masonry.h"
+#import "JMVitaDetailModel.h"
+
+
+
 
 @interface JMVitaOfPersonDetailViewController ()
 
 @property(nonatomic,assign)CGFloat decriContentH;
-
+@property(nonatomic,strong)JMWorkExperienceView *experienLastView;
 @end
 
 @implementation JMVitaOfPersonDetailViewController
@@ -39,41 +43,48 @@
     titleLab.font = [UIFont systemFontOfSize:20.0f];
     [self.view addSubview:titleLab];
     
+    //工作经历
+    UIView *experienBGView = [[UIView alloc]init];
+    [self.view addSubview:experienBGView];
     
-    JMWorkExperienceView *experienView = [[JMWorkExperienceView alloc]init];
-    [self.view addSubview:experienView];
+    if (self.experiencesArray.count > 0) {
+        
+        UIView * lastView ;
+        for (int i = 0 ; i < self.experiencesArray.count; i++) {
+            
+            JMWorkExperienceView *experienView = [[JMWorkExperienceView alloc]init];
+            experienView.model = self.experiencesArray[i];
+            [experienBGView addSubview:experienView];
+            
+            [experienView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.width.mas_equalTo(SCREEN_WIDTH);
+                make.top.equalTo(lastView ? lastView.mas_bottom: titleLab.mas_bottom).offset(30);
+                make.bottom.mas_equalTo(experienView.contentLabel.mas_bottom).offset(30);
+            }];
+            
+            lastView = experienView;
     
-    [experienView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.top.mas_equalTo(titleLab.mas_bottom).offset(30);
-        make.bottom.mas_equalTo(experienView.contentLabel.mas_bottom).offset(30);
-    }];
-    
-    
-    JMWorkExperienceView *experienView2 = [[JMWorkExperienceView alloc]init];
-    [self.view addSubview:experienView2];
+        }
+        [experienBGView mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(lastView.mas_bottom);
+        }];
+    }
 
-    [experienView2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.top.mas_equalTo(experienView.mas_bottom).offset(30);
-        make.bottom.mas_equalTo(experienView2.contentLabel.mas_bottom).offset(30);
-    }];
-    
     
 
     JMSelfDescriptionView *descriptionView = [[JMSelfDescriptionView alloc]init];
     [self.view addSubview:descriptionView];
-    
+
     [descriptionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(SCREEN_WIDTH);
-        make.top.mas_equalTo(experienView2.mas_bottom);
+        make.top.mas_equalTo(experienBGView.mas_bottom);
         make.bottom.mas_equalTo(descriptionView.contentLabel.mas_bottom).offset(30);
     }];
-    
-    
+//
+//
     JMEducationView *educationView = [[JMEducationView alloc]init];
     [self.view addSubview:educationView];
-    
+
     [educationView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.left.mas_equalTo(self.view);
         make.top.mas_equalTo(descriptionView.mas_bottom);

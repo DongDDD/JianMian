@@ -68,7 +68,7 @@ typedef enum _PickerState_Exp {
 
 
 -(void)rightAction{
-    
+   
     [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

@@ -14,6 +14,9 @@
 #import "JMPictureOfPersonDetailViewController.h"
 #import "JMHeaderOfPersonDetailView.h"
 #import "JMBottomView.h"
+#import "JMHTTPManager+Vita.h"
+#import "JMVitaDetailModel.h"
+#import "Masonry.h"
 
 
 @interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate>
@@ -30,6 +33,10 @@
 @property (nonatomic, strong) NSArray *childVCs;
 @property (nonatomic, strong) UITableViewController *currentVC;
 
+@property (nonatomic, strong) JMVitaDetailModel *model;
+
+@property (nonatomic, strong) UIActivityIndicatorView * juhua;
+
 @end
 
 @implementation JMPersonDetailsViewController
@@ -42,22 +49,27 @@
     
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"share"];
 
-    [self setScrollViewUI];
     
-    self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 772)];
-    [self.scrollView addSubview:_headerView];
+//    [self setHeaderVieUI];
+//    [self setPageUI];
+    [self setJuhua];
     
-    [self setPageUI];
-    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,_pageView.frame.origin.y+_pageView.frame.size.height+64);
+    [self getData];
+    
+    
+}
 
-    self.bottomView = [[JMBottomView alloc]init];
-    self.bottomView.delegate = self;
-    [self.view addSubview:self.bottomView];
-    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(60);
+#pragma mark - 获取数据
+-(void)getData{
+    [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:self.job_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        //
+         self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [self initView];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
     }];
+
+
 }
 
 
@@ -68,6 +80,32 @@
 }
 
 #pragma mark - 布局UI
+-(void)setJuhua{
+    self.juhua = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyleGray)];
+    [self.view addSubview:self.juhua];
+    //设置小菊花的frame
+    [self.juhua mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self.view);
+        make.width.and.height.mas_equalTo(100);
+    }];
+    //设置小菊花颜色
+    //    self.juhua.color = [UIColor redColor];
+    //设置背景颜色
+    //    self.juhua.backgroundColor = [UIColor cyanColor];
+    //刚进入这个界面会显示控件，并且停止旋转也会显示，只是没有在转动而已，没有设置或者设置为YES的时候，刚进入页面不会显示
+    self.juhua.hidesWhenStopped = NO;
+    
+}
+
+-(void)initView{
+    [self setScrollViewUI];
+    [self setHeaderVieUI];
+    [self setPageUI];
+    [self setBottomViewUI];
+    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,_pageView.frame.origin.y+_pageView.frame.size.height+64);
+
+
+}
 
 -(void)setScrollViewUI{
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -76,8 +114,22 @@
     [self.view addSubview:_scrollView];
 
 }
+-(void)setHeaderVieUI{
+    self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 772)];
+    [self.headerView setModel:self.model];
+    [self.scrollView addSubview:_headerView];
 
+}
 
+//-(NSString *)getDateString:(NSDate *)date{
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    // 格式化日期格式
+//    formatter.dateFormat = @"yyyy-MM-dd";
+//    NSString *dateStr = [formatter stringFromDate:date];
+//
+//    return dateStr;
+//
+//}
 - (void)setPageUI {
     [self.scrollView addSubview:self.titleView];
     [self.scrollView addSubview:self.pageView];
@@ -86,9 +138,18 @@
     
 }
 
+-(void)setBottomViewUI{
 
+    self.bottomView = [[JMBottomView alloc]init];
+    self.bottomView.delegate = self;
+    [self.view addSubview:self.bottomView];
+    [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.view);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo(60);
+    }];
 
-
+}
 - (JMTitlesView *)titleView {
     if (!_titleView) {
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, _headerView.frame.origin.y+_headerView.frame.size.height, SCREEN_WIDTH, 43} titles:@[@"在线简历", @"联系方式",@"图片作品"]];
@@ -106,6 +167,7 @@
 - (JMPageView *)pageView {
     if (!_pageView) {
         _pageView = [[JMPageView alloc] initWithFrame:CGRectMake(0, _titleView.frame.origin.y+_titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT+300) childVC:self.childVCs];
+        
         __weak JMPersonDetailsViewController *weakSelf = self;
         _pageView.didEndScrollView = ^(NSInteger index) {
             [weakSelf.titleView setCurrentTitleIndex:index];
@@ -120,8 +182,13 @@
 
 
     JMVitaOfPersonDetailViewController *vc1 = [[JMVitaOfPersonDetailViewController alloc] init];
+    vc1.experiencesArray = self.model.experiences;
+    vc1.educationArray = self.model.education;
+    vc1.shieldingArray = self.model.shielding;
     
     JMContactOfPersonDetailViewController *vc2 = [[JMContactOfPersonDetailViewController alloc] init];
+    vc2.phoneNumberStr = self.model.user_phone;
+    vc2.emailStr = self.model.user_email;
     
     JMPictureOfPersonDetailViewController *vc3 = [[JMPictureOfPersonDetailViewController alloc]init];
     

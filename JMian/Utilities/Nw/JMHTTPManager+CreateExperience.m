@@ -35,19 +35,21 @@
                              successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     NSParameterAssert(experienceId);
-    NSDictionary *dic =     @{@":id":experienceId,@":company_name":company_name,@"job_label_id":job_label_id,@"start_date":start_date,@"end_date":end_date,@"description":description};
+    NSString *urlStr = [Update_Experience_URL stringByAppendingFormat:@"/%@",experienceId];
+    NSDictionary *dic =     @{@":company_name":company_name,@"job_label_id":job_label_id,@"start_date":start_date,@"end_date":end_date,@"description":description};
     
     
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Update_Experience_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
 - (void)updateExperienceWith_experienceId:(NSNumber *)experienceId successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     NSParameterAssert(experienceId);
-    NSDictionary *dic = @{@":id":experienceId};
+
+    NSString *urlStr = [Delete_Experience_URL stringByAppendingFormat:@"/%@",experienceId];
     
     
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Delete_Experience_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
 

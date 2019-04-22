@@ -28,6 +28,7 @@
 
 - (void)setCurrentIndex:(NSInteger)index {
     UIViewController *VC = self.childVC[index];
+    
     if (!VC.view.superview) {
         VC.view.frame = (CGRect){index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height};
         [self.contentView addSubview:VC.view];

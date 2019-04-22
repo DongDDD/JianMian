@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMUserInfoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const JMMyResumeIconTableViewCellIdentifier;
 
 @interface JMMyResumeIconTableViewCell : UITableViewCell
+
+- (void)setUserInfo:(JMUserInfoModel *)model;
 
 @end
 

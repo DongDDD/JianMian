@@ -10,6 +10,7 @@
 #import "JMTitlesView.h"
 #import "JMPageView.h"
 #import "JMPostNewJobViewController.h"
+#import "JMHTTPManager+Work.h"
 
 @interface JMPostJobHomeViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -19,6 +20,9 @@
 @property (nonatomic, strong) NSArray *childVCs;
 @property (nonatomic, strong) UITableViewController *currentVC;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSNumber *statusNum;
+@property (nonatomic, strong) NSArray *dataArray;
+
 
 
 @end
@@ -36,18 +40,15 @@
     [self setupInit];
     
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.titleView.frame.origin.y+self.titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.rowHeight = 78.0f;
-    [self.view addSubview:self.tableView];
+    [self getData];
+    
     
     
 }
 
 - (IBAction)gotoIdentify:(id)sender {
     self.hidesBottomBarWhenPushed=YES;
-  
+
     JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -72,21 +73,45 @@
     [self.view addSubview:self.titleView];
 
 }
+#pragma mark - 获取数据
+
+-(void)getData{
+    [[JMHTTPManager sharedInstance]fetchWorkPaginateWith_city_ids:nil company_id:nil label_id:nil work_label_id:nil education:nil experience_min:nil experience_max:nil salary_min:nil salary_max:nil subway_names:nil status:_statusNum page:nil per_page:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+            
+            [self.view addSubview:self.tableView];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+        
+        
+    }];
+
+
+
+}
 
 
 - (JMTitlesView *)titleView {
     if (!_titleView) {
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"已发布", @"已下线"]];
-        __weak JMPostJobHomeViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
+            if (index==0) {
+                _statusNum = @1;//已发布职位
+                
+            }else{
+                _statusNum = @0;//已下线职位
+                
+            }
         };
     }
     
     return _titleView;
 }
-
-
 
 
 
@@ -97,7 +122,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.dataArray.count;
+    
 }
 
 
@@ -125,11 +151,7 @@
     cell.detailTextLabel.textColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1.0];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
     cell.detailTextLabel.text = @"1-3年/本科/广州";
-    
-    
-    
-    
-    
+
     return cell;
 }
 
@@ -141,6 +163,16 @@
     
 }
 
+-(UITableView *)_tableView{
+    
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.titleView.frame.origin.y+self.titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.rowHeight = 78.0f;
+    [self.view addSubview:_tableView];
+    return _tableView;
+    
+}
 /*
 #pragma mark - Navigation
 

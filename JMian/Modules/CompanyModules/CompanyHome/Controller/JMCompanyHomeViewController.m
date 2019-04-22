@@ -39,6 +39,8 @@ static NSString *cellIdent = @"cellIdent";
     [self setTableView];
     // Do any additional setup after loading the view from its nib.
 }
+
+
 #pragma mark - 获取数据
 -(void)getData{
     [[JMHTTPManager sharedInstance]fetchVitaPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -67,9 +69,7 @@ static NSString *cellIdent = @"cellIdent";
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
-    
-//    self.tableView.sectionFooterHeight = 10.0f;
-//    self.tableView.tableFooterView.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 141;
@@ -113,10 +113,9 @@ static NSString *cellIdent = @"cellIdent";
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
-//    JMHomeWorkModel *model = self.arrDate[indexPath.row];
-//
-//    vc.homeworkModel = model;
 
+   JMCompanyHomeModel *model = self.arrDate[indexPath.row];
+    vc.job_label_id = model.job_label_id;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

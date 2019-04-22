@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMContactOfPersonDetailViewController : UIViewController
 
+@property(nonatomic,copy)NSString *phoneNumberStr;
+@property(nonatomic,copy)NSString *emailStr;
+
 @end
 
 NS_ASSUME_NONNULL_END

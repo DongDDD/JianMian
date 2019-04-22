@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMVitaDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMWorkExperienceView : UIView
 
 @property (nonatomic, strong) UILabel *contentLabel;
+@property (nonatomic ,strong) JMExperiencesModel *model;
 
 @end
 

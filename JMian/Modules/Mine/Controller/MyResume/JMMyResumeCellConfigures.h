@@ -17,6 +17,7 @@
 #import "JMEducationalExperienceTableViewCell.h"
 #import "JMMyResumeHeader2TableViewCell.h"
 #import "JMMyResumeTextTableViewCell.h"
+#import "JMVitaDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,7 +26,6 @@ typedef NS_ENUM(NSInteger, JMMyResumeCellType){
     JMMyResumeCellTypeHeader,
     JMMyResumeCellTypeCareerStatus,
     JMMyResumeCellTypeCareerObjective,
-    JMMyResumeCellTypeCareerStatus2,
     JMMyResumeCellTypeHeader2,
     JMMyResumeCellTypeWorkExperience,
     JMMyResumeCellTypeAction,
@@ -44,6 +44,18 @@ typedef NS_ENUM(NSInteger, JMMyResumeCellType){
 @property (assign, nonatomic) NSInteger rowsNum;
 @property (assign, nonatomic) NSInteger section;
 @property (copy, nonatomic) NSString *cellId;
+
+@property (strong, nonatomic) JMVitaDetailModel *model;
+
+@property (strong, nonatomic) NSArray *careerObjectiveLeftArr;
+@property (strong, nonatomic) NSArray *careerObjectiveRightArr;
+
+@property (strong, nonatomic) NSArray *workExperienceArr;
+
+@property (strong, nonatomic) NSArray *educationalExperienceArr;
+
+@property (copy, nonatomic) NSString *vita_description;
+
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 

@@ -9,6 +9,8 @@
 #import "JMContactOfPersonDetailViewController.h"
 
 @interface JMContactOfPersonDetailViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *phoneNumberLab;
+@property (weak, nonatomic) IBOutlet UILabel *emailLab;
 
 @end
 
@@ -16,7 +18,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    _phoneNumberLab.text = _phoneNumberStr;
+    _emailLab.text = _emailStr;
     
     // Do any additional setup after loading the view from its nib.
 }
