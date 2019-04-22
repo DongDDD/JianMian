@@ -10,6 +10,7 @@
 #import "JMCompanyHomeTableViewCell.h"
 #import "JMPersonDetailsViewController.h"
 #import "JMHTTPManager+VitaPaginate.h"
+#import "JMCompanyHomeModel.h"
 
 
 
@@ -18,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSArray *arrDate;
 
 @end
 static NSString *cellIdent = @"cellIdent";
@@ -40,8 +42,12 @@ static NSString *cellIdent = @"cellIdent";
 #pragma mark - 获取数据
 -(void)getData{
     [[JMHTTPManager sharedInstance]fetchVitaPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        
+    
+        if (responsObject[@"data"]) {
+            
+            self.arrDate = [JMCompanyHomeModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            [self.tableView reloadData];
+        }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -82,7 +88,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return self.arrDate.count;
 }
 
 
@@ -95,9 +101,10 @@ static NSString *cellIdent = @"cellIdent";
         cell = [[JMCompanyHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
     }
     
-//    JMHomeWorkModel *model = self.arrDate[indexPath.row];
-//    [cell setModel:model];
-//    
+    
+    JMCompanyHomeModel *model = self.arrDate[indexPath.row];
+    [cell setModel:model];
+//
     return cell;
     
 }

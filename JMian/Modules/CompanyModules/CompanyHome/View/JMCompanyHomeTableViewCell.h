@@ -7,10 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMCompanyHomeModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCompanyHomeTableViewCell : UITableViewCell
+
+@property(nonatomic,strong)JMCompanyHomeModel *model;
+@property (weak, nonatomic) IBOutlet UILabel *jobNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *salaryLab;
+@property (weak, nonatomic) IBOutlet UILabel *experinenceLab;
+@property (weak, nonatomic) IBOutlet UILabel *educationLab;
+@property (weak, nonatomic) IBOutlet UILabel *jobDetailLab;
 
 @end
 

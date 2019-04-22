@@ -153,6 +153,13 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="educationLab" destination="GhD-m2-D0S" id="5Q4-as-jQS"/>
+                <outlet property="experinenceLab" destination="KgN-zm-cyq" id="Mzb-VS-nZM"/>
+                <outlet property="jobDetailLab" destination="G2B-ci-yKW" id="74B-ua-hfU"/>
+                <outlet property="jobNameLab" destination="hXg-TQ-HUf" id="L33-O5-ByO"/>
+                <outlet property="salaryLab" destination="da0-HH-tpw" id="UZp-gn-xyt"/>
+            </connections>
             <point key="canvasLocation" x="34.782608695652179" y="34.821428571428569"/>
         </tableViewCell>
     </objects>

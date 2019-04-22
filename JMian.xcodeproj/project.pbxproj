@@ -102,6 +102,7 @@
 		041C07D62261891A0088FBE1 /* JMNotificationHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041C07D42261891A0088FBE1 /* JMNotificationHeaderTableViewCell.xib */; };
 		041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041C07D8226193FA0088FBE1 /* JMNotificationTableViewCell.m */; };
 		041C07DB226193FA0088FBE1 /* JMNotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041C07D9226193FA0088FBE1 /* JMNotificationTableViewCell.xib */; };
+		041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041EB2F7226C41F2002BD54B /* JMCompanyHomeModel.m */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
 		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
@@ -474,6 +475,8 @@
 		041C07D7226193FA0088FBE1 /* JMNotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMNotificationTableViewCell.h; sourceTree = "<group>"; };
 		041C07D8226193FA0088FBE1 /* JMNotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMNotificationTableViewCell.m; sourceTree = "<group>"; };
 		041C07D9226193FA0088FBE1 /* JMNotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMNotificationTableViewCell.xib; sourceTree = "<group>"; };
+		041EB2F6226C41F2002BD54B /* JMCompanyHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCompanyHomeModel.h; sourceTree = "<group>"; };
+		041EB2F7226C41F2002BD54B /* JMCompanyHomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCompanyHomeModel.m; sourceTree = "<group>"; };
 		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -947,6 +950,8 @@
 		040B837F2265DF7100F1A37A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				041EB2F6226C41F2002BD54B /* JMCompanyHomeModel.h */,
+				041EB2F7226C41F2002BD54B /* JMCompanyHomeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2327,6 +2332,7 @@
 				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
 				04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */,
 				048348C6226983C700DE4630 /* NSString+Extension.m in Sources */,
+				041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */,
 				6D0209F6224FBEEC009BCFE4 /* JMMineModulesTableViewCell.m in Sources */,
 				04A9DFA5225AE3D800CD7CC1 /* JMUserInfoModel.m in Sources */,
 				04C6013E2260639C000B1FE0 /* JMAllMessageTableViewController.m in Sources */,
