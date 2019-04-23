@@ -21,6 +21,9 @@
 
 @property (nonatomic, strong) SearchView *searchView;
 
+@property (nonatomic, copy) NSString *labStr;
+@property (nonatomic, copy) NSString *labIDStr;
+
 @end
 
 @implementation PositionDesiredViewController
@@ -36,16 +39,27 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     [self setSearchView];
-
-    
+  
     [self getData];
     
 }
-
+#pragma mark - 获取期望职位数据 -
+-(void)rightAction{
+    if (_labIDStr && _labIDStr) {
+        
+        [self.delegate sendPositoinData:_labStr labIDStr:_labIDStr];
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择好职位再保存"
+                                                      delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+        [alert show];
+    }
+    
+}
 #pragma mark - 获取期望职位数据 -
 
 -(void)getData{
-    [[JMHTTPManager sharedInstance] fetchPositionLabelsWithMyId:nil mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] fetchPositionLabelsWithMyId:@"967" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         self.firstArr =  [JMSystemLabelsModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
         
@@ -58,8 +72,6 @@
         
     }];
    
-    
-    
 }
 
 
@@ -68,7 +80,7 @@
 -(void)setSearchView{
     
     self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH-40, 33)];
-    self.searchView.searchTextField.placeholder = @"                                            搜索";
+    self.searchView.searchTextField.placeholder = @"                                        搜索";
     self.searchView.searchTextField.returnKeyType =UIReturnKeySearch;
     self.searchView.searchTextField.delegate = self;
     UIImageView *image=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"圆角矩形 5"]];
@@ -77,7 +89,6 @@
     self.searchView.searchTextField.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:self.searchView];
   
- 
 }
 
 
@@ -94,6 +105,7 @@
     if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item == WSNoFound) {
         
         JMSystemLabelsModel *firstModel = self.firstArr[indexPath.row];
+        _secArr = firstModel.children;
         return firstModel.children.count;                        //二级
     }
     
@@ -101,6 +113,7 @@
         
         JMSystemLabelsModel *firstModel = self.firstArr[indexPath.row];
         JMSystemLabelsModel *secondModel = [JMSystemLabelsModel mj_objectWithKeyValues:firstModel.children[indexPath.item]];
+        _thirdArr = secondModel.children;
         return secondModel.children.count;                   //三级
     }
     
@@ -124,6 +137,8 @@
         
         JMSystemLabelsModel *firstModel = self.firstArr[indexPath.row];
         JMSystemLabelsModel *secondModel = [JMSystemLabelsModel mj_objectWithKeyValues:firstModel.children[indexPath.item]];
+//        _labStr = secondModel.name;
+
         return secondModel.name;
     }
     
@@ -149,6 +164,44 @@
 
 - (void)dropMenuView:(WSDropMenuView *)dropMenuView didSelectWithIndexPath:(WSIndexPath *)indexPath{
     
+    _labStr = nil;
+    _labIDStr = nil;
+
+    if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item == WSNoFound) {
+        //判断是否有第二级
+        if (_firstArr.count && _secArr == nil) {
+            JMSystemLabelsModel *firstModel = [JMSystemLabelsModel mj_objectWithKeyValues:_firstArr[indexPath.row]];
+            _labStr = firstModel.name;
+            _labIDStr = firstModel.label_id;
+            NSLog(@"%@",firstModel.name);
+            
+        }
+        
+    }
+    
+    if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item != WSNoFound && indexPath.rank == WSNoFound) {
+        //判断是否有第三级
+        if (_secArr.count && _thirdArr == nil) {
+            JMSystemLabelsModel *secondModel = [JMSystemLabelsModel mj_objectWithKeyValues:_secArr[indexPath.item]];
+            _labStr = secondModel.name;
+            _labIDStr = secondModel.label_id;
+            NSLog(@"%@",secondModel.name);
+            
+        }
+    }
+    
+    if (indexPath.column == 0 && indexPath.row != WSNoFound && indexPath.item != WSNoFound && indexPath.rank != WSNoFound) {
+        //选择第三级直接输出
+        if (_thirdArr.count) {
+            JMSystemLabelsModel *thirdModel = [JMSystemLabelsModel mj_objectWithKeyValues:_thirdArr[indexPath.rank]];
+            _labStr = thirdModel.name;
+            _labIDStr = thirdModel.label_id;
+            NSLog(@"%@",thirdModel.name);
+            
+        }
+
+    }
+
     
 }
 

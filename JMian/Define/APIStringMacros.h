@@ -45,6 +45,7 @@
 #define Delete_Experience_URL @"api/user/experience/delete"
 
 #define Paginate_Work_URL @"api/work/paginate"
+#define Create_Work_URL @"api/work/create"
 #define Info_Work_URL @"api/work/info"
 
 

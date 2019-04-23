@@ -18,9 +18,11 @@
                 <outlet property="pickerBGView" destination="erR-PC-4w3" id="PUA-Zi-dRy"/>
                 <outlet property="pickerView" destination="MXd-ms-5F4" id="dPl-GI-NpQ"/>
                 <outlet property="salaryBtn" destination="YKI-Un-e3x" id="3e2-dE-IZM"/>
+                <outlet property="scrollView" destination="UjL-FQ-c6i" id="aHM-EW-na2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="welfareBtn" destination="pLF-Af-YEC" id="x9K-gT-Gwt"/>
                 <outlet property="workLocationBtn" destination="QqV-8Q-4oS" id="kh7-st-Ply"/>
+                <outlet property="workNameBtn" destination="hWb-Pj-J6i" id="U02-pL-yQ7"/>
                 <outlet property="workPropertyBtn" destination="kAI-eT-rRD" id="0HL-Wj-4Ac"/>
             </connections>
         </placeholder>
@@ -52,15 +54,18 @@
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWb-Pj-J6i">
-                                    <rect key="frame" x="333" y="8.5" width="43" height="43"/>
+                                    <rect key="frame" x="156" y="8.5" width="220" height="43"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="43" id="JsO-ed-Eeo"/>
+                                        <constraint firstAttribute="width" constant="220" id="JsO-ed-Eeo"/>
                                         <constraint firstAttribute="height" constant="43" id="Nce-4P-r45"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <state key="normal" title="请填写">
                                         <color key="titleColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="workNameAction:" destination="-1" eventType="touchUpInside" id="LFg-pe-Rg5"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -78,7 +83,7 @@
                             <rect key="frame" x="0.0" y="95" width="414" height="60"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工作性质" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58t-Cv-nWp">
-                                    <rect key="frame" x="21" y="19.5" width="312" height="21"/>
+                                    <rect key="frame" x="21" y="19.5" width="135" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="Tfb-ai-ads"/>
                                     </constraints>
@@ -93,8 +98,8 @@
                                         <constraint firstAttribute="height" constant="11" id="oJp-uE-rvn"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAI-eT-rRD">
-                                    <rect key="frame" x="333" y="8.5" width="43" height="43"/>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAI-eT-rRD">
+                                    <rect key="frame" x="156" y="8.5" width="220" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="odE-wI-q05"/>
                                     </constraints>
@@ -102,6 +107,9 @@
                                     <state key="normal" title="请选择">
                                         <color key="titleColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="workPorpertyAction:" destination="-1" eventType="touchUpInside" id="Qzp-OT-UlZ"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -135,8 +143,8 @@
                                         <constraint firstAttribute="height" constant="11" id="a4W-pO-J23"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yww-aV-cNK">
-                                    <rect key="frame" x="333" y="8.5" width="43" height="43"/>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yww-aV-cNK">
+                                    <rect key="frame" x="156" y="8.5" width="220" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="dY8-nh-X6g"/>
                                     </constraints>
@@ -144,6 +152,9 @@
                                     <state key="normal" title="请选择">
                                         <color key="titleColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="workExpriencesAction:" destination="-1" eventType="touchUpInside" id="j1M-Ev-svJ"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -175,8 +186,8 @@
                                         <constraint firstAttribute="width" constant="7" id="5zD-dZ-vf1"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRf-Yz-TWz">
-                                    <rect key="frame" x="333" y="8.5" width="43" height="43"/>
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pRf-Yz-TWz">
+                                    <rect key="frame" x="156" y="8.5" width="220" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="Vg6-tS-kKO"/>
                                     </constraints>
@@ -184,6 +195,9 @@
                                     <state key="normal" title="请选择">
                                         <color key="titleColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="educationAction:" destination="-1" eventType="touchUpInside" id="6Lc-WQ-rtu"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -216,8 +230,8 @@
                                         <constraint firstAttribute="width" constant="7" id="TO9-mY-hBr"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKI-Un-e3x">
-                                    <rect key="frame" x="333" y="8.5" width="43" height="43"/>
+                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YKI-Un-e3x">
+                                    <rect key="frame" x="156" y="8.5" width="220" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="L9F-Nx-OwN"/>
                                     </constraints>
@@ -225,6 +239,9 @@
                                     <state key="normal" title="请选择">
                                         <color key="titleColor" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="salaryAction:" destination="-1" eventType="touchUpInside" id="9fq-F4-c7l"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -257,8 +274,8 @@
                                         <constraint firstAttribute="width" constant="7" id="m0u-tE-u1Z"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLF-Af-YEC">
-                                    <rect key="frame" x="333" y="8.5" width="43" height="43"/>
+                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pLF-Af-YEC">
+                                    <rect key="frame" x="156" y="8.5" width="220" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="tWU-VS-K0s"/>
                                     </constraints>
@@ -301,8 +318,8 @@
                                         <constraint firstAttribute="height" constant="11" id="cJr-mU-FzG"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqV-8Q-4oS">
-                                    <rect key="frame" x="333" y="8.5" width="43" height="43"/>
+                                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqV-8Q-4oS">
+                                    <rect key="frame" x="156" y="8.5" width="220" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="V43-j9-aBr"/>
                                     </constraints>
@@ -345,8 +362,8 @@
                                         <constraint firstAttribute="width" constant="7" id="A4I-tr-o5e"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPe-dX-PMY">
-                                    <rect key="frame" x="333" y="8.5" width="43" height="43"/>
+                                <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPe-dX-PMY">
+                                    <rect key="frame" x="156" y="8.5" width="220" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="vV8-q3-R0k"/>
                                     </constraints>
@@ -376,7 +393,7 @@
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erR-PC-4w3">
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="erR-PC-4w3">
                             <rect key="frame" x="0.0" y="563" width="414" height="255"/>
                             <subviews>
                                 <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MXd-ms-5F4">
@@ -401,7 +418,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="azr-N7-Bhq" firstAttribute="top" secondItem="erR-PC-4w3" secondAttribute="top" constant="20" id="185-dc-s5L"/>
                                 <constraint firstItem="aOb-lr-caE" firstAttribute="leading" secondItem="erR-PC-4w3" secondAttribute="leading" constant="20" id="5UO-Yx-MfB"/>

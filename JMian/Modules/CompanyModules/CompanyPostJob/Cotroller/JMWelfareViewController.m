@@ -13,7 +13,7 @@
 @interface JMWelfareViewController ()
 
 @property(nonatomic,strong)UIView *footView;
-@property(nonatomic,assign)NSUInteger hadChooseLabs;
+@property(nonatomic,strong)NSMutableArray *selectedBtnArray;
 @end
 
 @implementation JMWelfareViewController
@@ -21,11 +21,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.selectedBtnArray = [[NSMutableArray alloc]init];
     self.title = @"福利亮点";
+    [self setRightBtnTextName:@"保存"];
     [self setheaderUI];
     [self createLabUI];
 }
+
+
+#pragma mark - UI布局
 
 -(void)setheaderUI {
     UILabel *lab = [[UILabel alloc]init];
@@ -79,11 +83,11 @@
         }
         
         UIButton * tagBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        tagBtn.tag = 100+i;
+        tagBtn.tag = i;
         tagBtn.frame = CGRectMake(tagBtnX, tagBtnY, tagTextSize.width+50, 30);
         [tagBtn setTitle:tagArr[i] forState:UIControlStateNormal];
         [tagBtn setTitleColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0] forState:UIControlStateNormal];
-        [tagBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+//        [tagBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         tagBtn.titleLabel.font = GlobalFont(16);
         tagBtn.layer.cornerRadius = 15.3;
         tagBtn.layer.masksToBounds = YES;
@@ -96,29 +100,45 @@
         tagBtnX = CGRectGetMaxX(tagBtn.frame)+10;
     }
 }
+#pragma mark - 点击事件
+
+-(void)rightAction{
+
+    [self.delegate sendBtnLabData:self.selectedBtnArray];
+    [self.navigationController popViewControllerAnimated:YES];
+
+
+}
+
+
+
 - (void)tagBtnClick:(UIButton *)btn
 {
    
         btn.selected = !btn.selected;
         if (btn.selected)
         {
+            if (self.selectedBtnArray.count<3) {
                 [btn setBackgroundColor:MASTER_COLOR];
-                _hadChooseLabs += 1;
-            
+                [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
+                [self.selectedBtnArray addObject:btn];
+            }else{
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"只能添加3项"
+                                                              delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
+                [alert show];
+            }
         }
         if (!btn.selected)
         {
             [btn setBackgroundColor:[UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0]];
-            _hadChooseLabs -= 1;
+            [btn setTitleColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0] forState:UIControlStateNormal];
+            [self.selectedBtnArray removeObject:btn];
+
             
         }
     
-//    if(_hadChooseLabs >=2 ){
-//        NSLog(@"",);
-//
-//    }
-    
-   
+
     
 }
 

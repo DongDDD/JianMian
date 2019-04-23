@@ -49,7 +49,7 @@
         
 //        test
         JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc] init];
-    
+
         [UIApplication sharedApplication].delegate.window.rootViewController = tab;
         
 

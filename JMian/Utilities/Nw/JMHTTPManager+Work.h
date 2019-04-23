@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)fetchWorkInfoWithWork_id:(NSNumber *)work_id SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
-//发布职位列表
+//获取 发布 or 下线职位列表
 - (void)fetchWorkPaginateWith_city_ids:(nullable NSArray *)city_ids
                             company_id:(nullable NSNumber *)company_id
                               label_id:(nullable NSNumber *)label_id
@@ -31,6 +31,22 @@ NS_ASSUME_NONNULL_BEGIN
                                 status:(NSNumber * )status
                                   page:(nullable NSNumber *)page
                               per_page:(nullable NSNumber *)per_page
+                          SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+//发布职位请求
+- (void)postCreateWorkWith_city_id:(NSNumber *)city_id
+                         work_label_id:(NSNumber *)work_label_id
+                             work_name:(NSString *)work_name
+                             education:(NSNumber *)education
+                   work_experience_min:(NSNumber *)work_experience_min
+                   work_experience_max:(NSNumber *)work_experience_max
+                            salary_min:(NSNumber *)salary_min
+                            salary_max:(NSNumber *)salary_max
+                           description:(NSString *)description
+                               address:(NSString * )address
+                             longitude:(NSString *)longitude
+                              latitude:(NSString *)latitude
+                                status:(NSNumber *)status
+                             label_ids:(NSArray *)label_ids
                           SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 @end

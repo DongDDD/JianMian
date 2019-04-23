@@ -80,15 +80,14 @@
 
 
 - (IBAction)verifyAction:(id)sender {
-//    [[JMHTTPManager sharedInstance]loginCaptchaWithPhone:@"13246841721" mode:@"3" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-//    }];
+    [[JMHTTPManager sharedInstance]loginCaptchaWithPhone:self.phoneNumText.text mode:@3 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+
+    }];
     
     [self openCountdown];
-}
-
+} 
 //读秒效果
 -(void)openCountdown{
     
