@@ -23,11 +23,37 @@
 
 
 
+
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+
+-(UIViewController *)getPersonGotoWhereWithStep:(NSString *)step{
+
+    int stepInt = [step intValue];
+
+    if (stepInt==1) {
+        BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
+        vc.isHiddenBackBtn = YES;
+        return vc;
+    }else if (stepInt==3){
+        JobIntensionViewController *vc = [[JobIntensionViewController alloc]init];
+        vc.isHiddenBackBtn = YES;
+        return vc;
+    }else if (stepInt==4){
+        JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
+        vc.isHiddenBackBtn = YES;
+        return vc;
+    }else if (stepInt==6){
+        JMTabBarViewController *vc = [[JMTabBarViewController alloc] init];
+        return vc;
+    }
+    
+    return nil;
+    
+}
 
 - (void)initTimSDK {
     TIMSdkConfig *sdkConfig = [[TIMSdkConfig alloc] init];
@@ -38,71 +64,49 @@
     [[TIMManager sharedInstance] initSdk:sdkConfig];
 }
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
     // Override point for customization after application launch.
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
 
-    
+
     if(kFetchMyDefault(@"token")){
         
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
 
         model = [JMUserInfoManager getUserInfo];
-        NSString *str = model.user_step;
-        NSInteger step = [str integerValue];
-       
-        if(step==0){         
+        int type = [model.type intValue];
+        if(type==0){
             ChooseIdentity *vc = [[ChooseIdentity alloc]init];
             NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
             [_window setRootViewController:naVC];//navigation加在window上
-            
             [self.window makeKeyAndVisible];
             
-        }else if (step==1) {
-            
-            BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
-            vc.isHiddenBackBtn = YES;
+        }else if (type==1) {
+            //个人端用user_step参数判断用户填写信息步骤
+            UIViewController *vc = [self getPersonGotoWhereWithStep:model.user_step];
             NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
             [_window setRootViewController:naVC];//navigation加在window上
-            
             [self.window makeKeyAndVisible];
 
-        }else if (step == 3){
+        }else if (type==2){
 
-            JobIntensionViewController *vc = [[JobIntensionViewController alloc]init];
-            vc.isHiddenBackBtn = YES;
-            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-            [_window setRootViewController:naVC];//navigation加在window上
             
-            [self.window makeKeyAndVisible];
 
-        }else if (step == 4){
-
-            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
-            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-            vc.isHiddenBackBtn = YES;
-            
-            [_window setRootViewController:naVC];//navigation加在window上
-            
-            [self.window makeKeyAndVisible];
-
-        }else if (step == 6){
-            
-            
-            
-        }else{//test
-            
-            JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc] init];
-            self.window.rootViewController = tab;
-            [self.window makeKeyAndVisible];
-            
         }
+
+//        JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc] init];
+//        self.window.rootViewController = tab;
+//        [self.window makeKeyAndVisible];
+        
+
 
 
         
     }else{
+        //token为空执行
         
         LoginViewController *login = [[LoginViewController alloc] init];
         NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];

@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol JMMineModulesTableViewCellDelegate <NSObject>
+
+@optional
+- (void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
+
+@end
 
 @interface JMMineModulesTableViewCell : UITableViewCell
+
+@property (nonatomic,assign)id<JMMineModulesTableViewCellDelegate>delegate;
 
 @end
 

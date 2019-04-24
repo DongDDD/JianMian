@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMPersonDetailsViewController : BaseViewController
 
-@property(nonatomic,strong)NSNumber *job_label_id;
+@property(nonatomic,strong)NSNumber *user_job_id;
 @end
 
 NS_ASSUME_NONNULL_END

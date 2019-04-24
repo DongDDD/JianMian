@@ -10,4 +10,8 @@ pod 'SYWechatOpenSDK', '~> 1.7.9'
 pod 'TXIMSDK_iOS'
 pod ‘YYCache’
 pod 'PrintBeautifulLog'
+pod 'AMap2DMap'
+pod 'AMapSearch'
+pod 'AMapLocation'
+
 

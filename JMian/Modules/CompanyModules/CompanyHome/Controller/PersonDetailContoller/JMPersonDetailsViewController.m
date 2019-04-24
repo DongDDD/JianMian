@@ -61,14 +61,13 @@
 
 #pragma mark - 获取数据
 -(void)getData{
-    [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:self.job_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:self.user_job_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         //
          self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
         [self initView];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-
 
 }
 

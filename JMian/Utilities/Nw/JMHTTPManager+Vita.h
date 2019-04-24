@@ -18,13 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
                    work_start_date:(NSDate *)work_start_date
                       job_label_id:(NSString *)job_label_id
                  industry_label_id:(nullable NSNumber *)industry_label_id
-                           city_id:(NSNumber *)city_id
+                           city_id:(nullable NSNumber *)city_id
                         salary_min:(NSNumber *)salary_min
                         salary_max:(NSNumber *)salary_max
                        description:(nullable NSString *)description
                             status:(nullable NSNumber *)status
                          user_step:(nullable NSNumber *)user_step
-                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock ;
+                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 
 - (void)fetchVitPaginateWithCity_id:(nullable NSNumber *)city_id

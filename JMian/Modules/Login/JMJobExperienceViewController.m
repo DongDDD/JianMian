@@ -11,6 +11,7 @@
 #import "JMTabBarViewController.h"
 #import "AppDelegate.h"
 #import "JMHTTPManager+Login.h"
+#import "PositionDesiredViewController.h"
 
 typedef enum _PickerState_Exp {
     startWorkState,

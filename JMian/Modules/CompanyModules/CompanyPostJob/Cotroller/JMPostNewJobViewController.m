@@ -12,6 +12,7 @@
 #import "JMManageInterviewViewController.h"
 #import "JMHTTPManager+Work.h"
 #import "PositionDesiredViewController.h"
+#import "JMGetCompanyLocationViewController.h"
 
 
 
@@ -20,17 +21,29 @@
 @property (weak, nonatomic) IBOutlet UIButton *workNameBtn;
 @property (weak, nonatomic) IBOutlet UIView *pickerBGView;
 @property (weak, nonatomic) IBOutlet UIButton *workPropertyBtn;
+
 @property (weak, nonatomic) IBOutlet UIButton *expriencesBtn;
+@property (nonatomic,strong) NSNumber *expriencesMin;
+@property (nonatomic,strong) NSNumber *expriencesMax;
+
 @property (weak, nonatomic) IBOutlet UIButton *educationBtn;
+@property (nonatomic,strong) NSNumber *educationNum;
+
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+
 @property (weak, nonatomic) IBOutlet UIButton *salaryBtn;
+@property (nonatomic,strong) NSNumber *salaryMin;
+@property (nonatomic,strong) NSNumber *salaryMax;
+
 @property (weak, nonatomic) IBOutlet UIButton *welfareBtn;
+@property (nonatomic,strong)UIButton *selectedBtn;
+
 @property (weak, nonatomic) IBOutlet UIButton *workLocationBtn;
 @property (weak, nonatomic) IBOutlet UIButton *jobDescriptionBtn;
-@property (nonatomic, strong)NSArray *pickerArray;
 
-@property (nonatomic,strong)UIButton *selectedBtn;
+@property (nonatomic, strong)NSArray *pickerArray;
 @property (nonatomic,copy)NSString *pickerStr;
+
 
 
 
@@ -50,21 +63,31 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-#pragma mark - 点击事件
 
+#pragma mark - 数据提交
 -(void)rightAction{
     
-//    [JMHTTPManager sharedInstance]postCreateWorkWith_city_id:<#(nonnull NSNumber *)#> work_label_id:<#(nonnull NSNumber *)#> work_name:<#(nonnull NSString *)#> education:<#(nonnull NSNumber *)#> work_experience_min:<#(nonnull NSNumber *)#> work_experience_max:<#(nonnull NSNumber *)#> experience_max:<#(nonnull NSNumber *)#> salary_min:<#(nonnull NSNumber *)#> salary_max:<#(nonnull NSNumber *)#> description:<#(nonnull NSString *)#> address:<#(nonnull NSString *)#> longitude:<#(nonnull NSString *)#> latitude:<#(nonnull NSString *)#> status:<#(nonnull NSNumber *)#> label_ids:<#(nonnull NSArray *)#> SuccessBlock:<#^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject)successBlock#> failureBlock:<#^(JMHTTPRequest * _Nonnull request, id  _Nonnull error)failureBlock#>
+    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@3 work_label_id:@33 work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_salaryMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:@"阿斯顿发送到发" address:@"互投帮创业园" longitude:@"113.389007" latitude:@"23.044584" status:@1 label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发布成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        NSLog(@"发布");
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    //
     
     
-    JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
     
     
-    [self.navigationController pushViewController:vc animated:YES];
-
-    NSLog(@"发布");
-
 }
+
+#pragma mark - 点击事件
 
 - (IBAction)workNameAction:(UIButton *)sender {
     PositionDesiredViewController *vc = [[PositionDesiredViewController alloc]init];
@@ -72,7 +95,7 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
-
+//PositionDesiredViewController代理方法
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
     [self.workNameBtn setTitle:labStr forState:UIControlStateNormal];
     [self.workNameBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
@@ -86,12 +109,29 @@
 }
 
 - (IBAction)workExpriencesAction:(UIButton *)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"1～3年",@"3～5年",@"5～10年",nil];
+    self.pickerArray = [NSArray arrayWithObjects:@"1～3",@"3～5",@"5～10",nil];
     [self.pickerView reloadAllComponents];
     _selectedBtn = sender;
 
     [self.pickerBGView setHidden:NO];
 
+}
+-(void)setExprienceRangeWithExpStr:(NSString *)ExpStr{
+    NSArray *array = [ExpStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
+    
+    NSString *minStr = array[0];
+    NSString *maxStr = array[1];
+    
+    NSInteger minNum = [minStr integerValue];
+    NSInteger maxNum = [maxStr integerValue];
+    
+    
+    self.expriencesMin = @(minNum);
+    self.expriencesMax = @(maxNum);
+    
+    
+    
+    
 }
 
 - (IBAction)educationAction:(UIButton *)sender {
@@ -107,11 +147,27 @@
     self.pickerArray = [NSArray arrayWithObjects:@"3000~5000",@"5000~8000",@"8000~10000",@"10000~20000",nil];
     [self.pickerView reloadAllComponents];
     _selectedBtn = sender;
-
+   
     [self.pickerBGView setHidden:NO];
 
 }
-
+-(void)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
+    NSArray *array = [salaryStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
+    
+    NSString *minStr = array[0];
+    NSString *maxStr = array[1];
+    
+    NSInteger minNum = [minStr integerValue];
+    NSInteger maxNum = [maxStr integerValue];
+    
+    
+    self.salaryMin = @(minNum);
+    self.salaryMax = @(maxNum);
+    
+    
+    
+    
+}
 - (IBAction)welFareAction:(UIButton *)sender{
     
     
@@ -119,7 +175,7 @@
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
+//JMWelfareViewController代理方法
 -(void)sendBtnLabData:(NSMutableArray *)btns{
     NSMutableArray *strArray = [[NSMutableArray alloc]init];
     for (int i=0; i<btns.count; i++) {
@@ -137,6 +193,8 @@
 
 - (IBAction)workLocationAction:(UIButton *)sender {
     
+    JMGetCompanyLocationViewController *vc = [[JMGetCompanyLocationViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -172,12 +230,13 @@
         case 3:
             [self.educationBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
             [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-
+            self.educationNum = @(row);
             break;
         
         case 4:
             [self.salaryBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
             [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
 
             break;
 

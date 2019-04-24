@@ -115,7 +115,7 @@ static NSString *cellIdent = @"cellIdent";
     JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
 
    JMCompanyHomeModel *model = self.arrDate[indexPath.row];
-    vc.job_label_id = model.job_label_id;
+    vc.user_job_id = model.user_job_id;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

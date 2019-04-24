@@ -14,8 +14,13 @@
 #import "JMUserInfoModel.h"
 #import "PositionDesiredViewController.h"
 #import "JMHTTPManager+Uploads.h"
+#import "JMCompanyInfoMineViewController.h"
+#import "JMManageInterviewViewController.h"
+#import "JMHTTPManager+FetchCompanyInfo.h"
 
-@interface JMMineViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+
+@interface JMMineViewController ()<UITableViewDelegate,UITableViewDataSource,JMMineModulesTableViewCellDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *imageNameArr,*labelStrArr;
@@ -37,21 +42,47 @@
         make.top.equalTo(self.mas_topLayoutGuide);
         make.left.right.bottom.equalTo(self.view);
     }];
+    //判断当前 C端 还是 B端
+    if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
+       
+    }else if ([kFetchMyDefault(@"type") isEqualToString:@"person"]){
+        
+    }
     
-    self.imageNameArr = @[@"subscribe",@"eliver",@"burse",@"autonym"];
-    self.labelStrArr = @[@"网点拍摄预约",@"投递的岗位",@"我的钱包",@"实名认证"];
+    self.imageNameArr = @[@"subscribe",@"burse",@"autonym"];
+    self.labelStrArr = @[@"网点拍摄预约",@"我的钱包",@"实名认证"];
+    [self getUserData];
+
+}
+#pragma mark - 获取数据
+
+-(void)getUserData{
     
-
-
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-
+        
         self.userInfoModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         [self.tableView reloadData];
-
+        [self getCompanyData];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-
+        
     }];
+    
+}
 
+
+-(void)getCompanyData{
+    
+    
+    [[JMHTTPManager sharedInstance] fetchCompanyInfo_Id:self.userInfoModel.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+        
+    }];
+    
 }
 
 - (NSDictionary *)generateDicFromArray:(NSArray *)array {
@@ -69,17 +100,21 @@
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 0) {
-        cell.textLabel.text = self.userInfoModel.nickname;
+//        cell.accessoryType = UITableViewCellStyleSubtitle;
+
+        cell.textLabel.text = @"paneidong\nHR";
+        cell.textLabel.numberOfLines = 0;
         cell.textLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
         cell.textLabel.textColor = UIColorFromHEX(0x4d4d4d);
         
-        cell.detailTextLabel.text = @"完善简历，让机遇找到你  90%";
+//        cell.detailTextLabel.text = @"HR";
         cell.detailTextLabel.textColor = UIColorFromHEX(0x808080);
 
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     }
     if (indexPath.section == 1) {
         JMMineModulesTableViewCell *modulesCell = [[JMMineModulesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+        modulesCell.delegate = self;
         return modulesCell;
     }
     if (indexPath.section == 2) {
@@ -103,7 +138,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 2) {
-        return 4;
+        return _imageNameArr.count;
     }else {
         return 1;
     }
@@ -111,12 +146,30 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        return 100;
+        if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
+            return  110;
+        }else{
+            return 100;
+            
+        }
     }else if(indexPath.section == 1){
         return 118;
     }else {
         return 64;
     }
+}
+
+-(void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.row == 0) {
+        JMCompanyInfoMineViewController *vc = [[JMCompanyInfoMineViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }if (indexPath.row == 1) {
+        JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 #pragma mark - Getter

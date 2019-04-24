@@ -9,6 +9,7 @@
 #import "JMMineModulesTableViewCell.h"
 #import <Masonry.h>
 #import "JMMineModulesCollectionViewCell.h"
+#import "DimensMacros.h"
 
 @interface JMMineModulesTableViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource>
 
@@ -32,8 +33,18 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        self.imageNameArr = @[@"my_videos",@"interview",@"enshrine",@"share2"];
-        self.labelStrArr = @[@"视频简历",@"面试管理",@"职位收藏",@"分享APP"];
+        
+        if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
+            self.imageNameArr = @[@"company_information",@"interview",@"enshrine",@"share2"];
+            self.labelStrArr = @[@"公司信息",@"面试管理",@"人才收藏",@"分享APP"];
+            
+        }else if ([kFetchMyDefault(@"type") isEqualToString:@"person"]){
+        
+            self.imageNameArr = @[@"my_videos",@"interview",@"enshrine",@"share2"];
+            self.labelStrArr = @[@"视频简历",@"面试管理",@"职位收藏",@"分享APP"];
+        
+        }
+      
         
         [self.contentView addSubview:self.collectionView];
         self.collectionView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 118);
@@ -44,7 +55,7 @@
 #pragma mark ====== UICollectionViewDelegate ======
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4;
+    return _imageNameArr.count;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -55,13 +66,22 @@
     JMMineModulesCollectionViewCell *cell = (JMMineModulesCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     [cell.iconBtn setImage:[UIImage imageNamed:self.imageNameArr[indexPath.row]] forState:UIControlStateNormal];
     cell.titleLabel.text = self.labelStrArr[indexPath.row];
+    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (self.delegate) {
+        
+        [self.delegate didSelectItemAtIndexPath:indexPath];
+    }
+    
+
 //    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectItemAtIndexPath:withContent:)]) {
 //        [self.delegate didSelectItemAtIndexPath:indexPath withContent:self.dataAry[indexPath.row]];
 //    }
+    
 }
 
 - (UICollectionView *)collectionView {

@@ -34,20 +34,20 @@ NS_ASSUME_NONNULL_BEGIN
                           SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 //发布职位请求
 - (void)postCreateWorkWith_city_id:(NSNumber *)city_id
-                         work_label_id:(NSNumber *)work_label_id
-                             work_name:(NSString *)work_name
-                             education:(NSNumber *)education
-                   work_experience_min:(NSNumber *)work_experience_min
-                   work_experience_max:(NSNumber *)work_experience_max
-                            salary_min:(NSNumber *)salary_min
-                            salary_max:(NSNumber *)salary_max
-                           description:(NSString *)description
-                               address:(NSString * )address
-                             longitude:(NSString *)longitude
-                              latitude:(NSString *)latitude
-                                status:(NSNumber *)status
-                             label_ids:(NSArray *)label_ids
-                          SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+                     work_label_id:(NSNumber *)work_label_id
+                         work_name:(NSString *)work_name
+                         education:(NSNumber *)education
+               work_experience_min:(NSNumber *)work_experience_min
+               work_experience_max:(NSNumber *)work_experience_max
+                        salary_min:(NSNumber *)salary_min
+                        salary_max:(NSNumber *)salary_max
+                       description:(NSString *)description
+                           address:(NSString * )address
+                         longitude:(NSString *)longitude
+                          latitude:(NSString *)latitude
+                            status:(NSNumber *)status
+                         label_ids:(NSArray *)label_ids
+                      SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 @end
 

@@ -12,13 +12,10 @@
 @implementation JMHTTPManager (FetchCompanyInfo)
 
 
-- (void)fetchCompanyInfo_Id:(NSNumber *)companyId successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+- (void)fetchCompanyInfo_Id:(NSString *)Id successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
-    NSParameterAssert(companyId);
-    NSDictionary *dic = @{@":id":companyId};
-    
-    
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Fectch_CompanyInfo_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    NSString *urlStr = [Fectch_CompanyInfo_URL stringByAppendingFormat:@"/%@",Id];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
 @end

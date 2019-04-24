@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMUserInfoModel : NSObject
 
 @property (nonatomic, copy) NSString *user_id;
+@property (nonatomic, copy) NSString *company_id;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *phone;
 @property (nonatomic, copy) NSString *avatar;

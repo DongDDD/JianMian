@@ -19,7 +19,7 @@ typedef enum _PickerState {
     EducationState
 } _PickerState;
 
-@interface JobIntensionViewController ()<UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+@interface JobIntensionViewController ()<UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,PositionDesiredDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *statusBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *statusBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *positionBtn;
@@ -29,15 +29,16 @@ typedef enum _PickerState {
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (nonatomic, copy) NSString *job_labelID;
 @property (nonatomic, strong) NSNumber *statusNum;
-@property (nonatomic,strong) NSNumber *salaryMin;
-@property (nonatomic,strong) NSNumber *salaryMax;
-@property (nonatomic,strong) NSNumber *educationNum;
-@property (nonatomic,strong) NSDate *startWorkDate;
+@property (nonatomic, strong) NSNumber *salaryMin;
+@property (nonatomic, strong) NSNumber *salaryMax;
+@property (nonatomic, strong) NSNumber *educationNum;
+@property (nonatomic, strong) NSDate *startWorkDate;
 
 @property (strong, nonatomic) UIPickerView *pickerView;
 @property (strong, nonatomic) NSArray *salaryArray;
-@property(nonatomic,strong) NSArray *pickerArray;
+@property (nonatomic, strong) NSArray *pickerArray;
 
 @property (nonatomic,assign) _PickerState pickerState;
 
@@ -65,7 +66,9 @@ typedef enum _PickerState {
     
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
     [self.view addGestureRecognizer:bgTap];
+    
     // Do any additional setup after loading the view from its nib.
+    
 }
 
 
@@ -110,12 +113,18 @@ typedef enum _PickerState {
 - (IBAction)wantToJob:(id)sender {
     
     PositionDesiredViewController *vc = [[PositionDesiredViewController alloc]init];
-    
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
     
     
 }
-
+//PositionDesiredViewController代理方法
+-(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
+    [self.positionBtn setTitle:labStr forState:UIControlStateNormal];
+    [self.positionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    self.job_labelID = labStr;
+    
+}
 
 - (IBAction)choogseSalaryAction:(UIButton *)sender {
     self.pickerArray = [NSArray arrayWithObjects:@"3000~5000",@"5000~8000",@"8000~10000",@"10000~20000",nil];
@@ -154,9 +163,10 @@ typedef enum _PickerState {
     
 }
 
+#pragma mark - 数据提交
 
 -(void)rightAction{
-    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusNum education:self.educationNum work_start_date:self.startWorkDate job_label_id:@"2" industry_label_id:nil city_id:@(3) salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:@4 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusNum education:self.educationNum work_start_date:self.startWorkDate job_label_id:self.job_labelID industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:@4 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             

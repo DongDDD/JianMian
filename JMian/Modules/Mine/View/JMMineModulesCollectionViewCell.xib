@@ -52,6 +52,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="my_videos.png" width="25.5" height="26.5"/>
+        <image name="my_videos.png" width="79" height="82"/>
     </resources>
 </document>
