@@ -73,7 +73,6 @@
 
 
     if(kFetchMyDefault(@"token")){
-        
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
 
         model = [JMUserInfoManager getUserInfo];
@@ -83,7 +82,7 @@
             NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
             [_window setRootViewController:naVC];//navigation加在window上
             [self.window makeKeyAndVisible];
-            
+
         }else if (type==1) {
             //个人端用user_step参数判断用户填写信息步骤
             UIViewController *vc = [self getPersonGotoWhereWithStep:model.user_step];
@@ -93,7 +92,7 @@
 
         }else if (type==2){
 
-            
+
 
         }
 

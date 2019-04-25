@@ -122,7 +122,7 @@ typedef enum _PickerState {
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
     [self.positionBtn setTitle:labStr forState:UIControlStateNormal];
     [self.positionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    self.job_labelID = labStr;
+    self.job_labelID = labIDStr;
     
 }
 

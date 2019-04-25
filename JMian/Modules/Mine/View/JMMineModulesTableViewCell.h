@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMMineModulesTableViewCellDelegate <NSObject>
 
 @optional
-- (void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
+- (void)didSelectItemWithRow:(NSInteger)row;
 
 @end
 

@@ -159,18 +159,18 @@
     }
 }
 
--(void)didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    if (indexPath.row == 0) {
+- (void)didSelectItemWithRow:(NSInteger)row {
+    if (row == 0) {
         JMCompanyInfoMineViewController *vc = [[JMCompanyInfoMineViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
-
-    }if (indexPath.row == 1) {
+        
+    }if (row == 1) {
         JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
+
 }
+
 
 #pragma mark - Getter
 - (UITableView *)tableView {
