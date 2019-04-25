@@ -28,9 +28,7 @@ static NSString *cellIdent = @"cellIdent";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.navigationBar.translucent = NO;
-////
-//    self.extendedLayoutIncludesOpaqueBars = YES;
+    
     [self setTitleViewImageViewName:@"jianmian_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
     [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];

@@ -41,11 +41,7 @@ typedef enum _PickerState_Exp {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if (_isHiddenBackBtn) {
-        self.navigationItem.leftBarButtonItem = nil;
-        self.navigationItem.hidesBackButton = YES;
-        
-    }
+
     self.datePckerView.backgroundColor = [UIColor whiteColor];
     [self setRightBtnTextName:@"下一步"];
     

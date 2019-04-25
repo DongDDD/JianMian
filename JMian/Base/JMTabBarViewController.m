@@ -24,9 +24,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
-   
-    
+ 
     HomeViewController *home = [[HomeViewController alloc] init];
     [self addChildVc:home title:@"首页" image:@"home" selectedImage:@"pitch_on_home"];
     

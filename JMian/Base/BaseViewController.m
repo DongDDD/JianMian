@@ -16,6 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (_isHiddenBackBtn) {
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = YES;
+    }
 //    self.navigationController.navigationBar.translucent = NO;
 //
 //    self.extendedLayoutIncludesOpaqueBars = YES;

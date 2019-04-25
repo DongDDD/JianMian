@@ -8,10 +8,10 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-#import "ChooseIdentity.h"
-#import "BasicInformationViewController.h"
-#import "JobIntensionViewController.h"
-#import "JMJobExperienceViewController.h"
+//#import "ChooseIdentity.h"
+//#import "BasicInformationViewController.h"
+//#import "JobIntensionViewController.h"
+//#import "JMJobExperienceViewController.h"
 
 #import "NavigationViewController.h"
 #import "JMTabBarViewController.h"
@@ -30,30 +30,41 @@
 
 @implementation AppDelegate
 
--(UIViewController *)getPersonGotoWhereWithStep:(NSString *)step{
+//获取个人用户填写信息步骤
+- (NSString *)getPersonStepWhereWitnUser_step:(NSString *)user_step{
+   //因为服务器的user_step不是按顺序，但是数组是按顺序取，所以用[NSNull null]占一个位置
+    NSArray *vcArray = @[@"ChooseIdentity",
+                         @"BasicInformationViewController", //当user_step=1
+                         [NSNull null],
+                         @"JobIntensionViewController",     //当user_step=3
+                         @"JMJobExperienceViewController",  //当user_step=4
+                         [NSNull null],
+                         @"JMTabBarViewController"];        //当user_step=6
+  
+    int stepInt = [user_step intValue];
+    if (stepInt < vcArray.count) return vcArray[stepInt];
+   
+    return nil;
+}
 
-    int stepInt = [step intValue];
-
-    if (stepInt==1) {
-        BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
-        vc.isHiddenBackBtn = YES;
-        return vc;
-    }else if (stepInt==3){
-        JobIntensionViewController *vc = [[JobIntensionViewController alloc]init];
-        vc.isHiddenBackBtn = YES;
-        return vc;
-    }else if (stepInt==4){
-        JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
-        vc.isHiddenBackBtn = YES;
-        return vc;
-    }else if (stepInt==6){
-        JMTabBarViewController *vc = [[JMTabBarViewController alloc] init];
-        return vc;
-    }
+//获取公司用户填写信息步骤
+- (NSString *)getCompanyStepWhereWitnEnterprise_step:(NSString *)enterprise_step{
+    
+    NSArray *vcArray = @[@"ChooseIdentity",
+                         @"JMCompanyBaseInfoViewController",//当enterprise_step=1
+                         @"JMCompanyInfoViewController",    //当enterprise_step=2
+                         @"JMUploadLicenseViewController",  //当enterprise_step=3
+                         @"JMChangeIdentityViewController", //当enterprise_step=4
+                         @"JMCompanyTabBarViewController"           //
+                         
+                         ];
+    
+    int stepInt = [enterprise_step intValue];
+    if (stepInt < vcArray.count) return vcArray[stepInt];
     
     return nil;
-    
 }
+
 
 - (void)initTimSDK {
     TIMSdkConfig *sdkConfig = [[TIMSdkConfig alloc] init];
@@ -71,40 +82,40 @@
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
 
-
-    if(kFetchMyDefault(@"token")){
+    if (kFetchMyDefault(@"token")){
         
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-
         model = [JMUserInfoManager getUserInfo];
         int type = [model.type intValue];
-        if(type==0){
-            ChooseIdentity *vc = [[ChooseIdentity alloc]init];
+        BaseViewController *vc;
+        NSString *vcStr;
+        
+        //用户还没选择身份
+        if (type==0) vcStr = [self getPersonStepWhereWitnUser_step:@"0"];
+        
+        //用户已经选择了C端身份，user_step判断用户填写信息步骤
+        if (type==1) vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+
+       //用户选择了B端身份，enterprise_step判断用户填写信息步骤
+        if (type==2)  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
+
+//        模拟审核通过 ---Test
+        BOOL isChecked;
+        isChecked = YES;
+        if (isChecked == YES) {
+            vcStr = @"JMCompanyTabBarViewController";
+        }
+   
+        if (vcStr) {
+            vc = [[NSClassFromString(vcStr) alloc]init];
+            if (![vc isKindOfClass:[JMTabBarViewController class]]&&![vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
+                vc.isHiddenBackBtn = YES;
+            }
             NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-            [_window setRootViewController:naVC];//navigation加在window上
+            [_window setRootViewController:naVC];
             [self.window makeKeyAndVisible];
-            
-        }else if (type==1) {
-            //个人端用user_step参数判断用户填写信息步骤
-            UIViewController *vc = [self getPersonGotoWhereWithStep:model.user_step];
-            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-            [_window setRootViewController:naVC];//navigation加在window上
-            [self.window makeKeyAndVisible];
-
-        }else if (type==2){
-
-            
-
         }
 
-//        JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc] init];
-//        self.window.rootViewController = tab;
-//        [self.window makeKeyAndVisible];
-        
-
-
-
-        
     }else{
         //token为空执行
         

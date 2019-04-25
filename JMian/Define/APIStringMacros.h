@@ -18,6 +18,9 @@
 #define API_BASE_URL_STRING     @"http://www.companydomain.com/api/"
 
 #endif
+//身份切换
+#define User_Change @"api/user/change"
+
 //C端接口
 #define Login_URL @"api/login"
 //发送验证码

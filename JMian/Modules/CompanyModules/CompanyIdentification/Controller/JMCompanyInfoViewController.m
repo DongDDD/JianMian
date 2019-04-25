@@ -9,6 +9,8 @@
 #import "JMCompanyInfoViewController.h"
 #import "JMUploadLicenseViewController.h"
 #import "JMHTTPManager+CompanyCreate.h"
+#import "JMHTTPManager+Login.h"
+#import "JMUserInfoModel.h"
 
 
 @interface JMCompanyInfoViewController ()<UIPickerViewDelegate,UIScrollViewDelegate>
@@ -36,7 +38,9 @@
     self.extendedLayoutIncludesOpaqueBars = YES;
     [self setRightBtnTextName:@"下一步"];
     self.pickerView.delegate = self;
-    self.companyNameLab.text = _companyNameStr;
+    
+    
+        
     self.scrollView.delegate = self;
     // Do any additional setup after loading the view from its nib.
 }
@@ -113,15 +117,22 @@
 #pragma mark - 数据提交
 -(void)rightAction{
     
-    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:self.companyNameStr company_position:self.myPositionStr nickname:nil avatar:nil enterprise_step:nil abbreviation:self.abbreviationTextField.text logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:@"1" financing:nil employee:self.employeeBtn.titleLabel.text      city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        JMUploadLicenseViewController *vc = [[JMUploadLicenseViewController alloc]init];
-        vc.companyNameStr = self.companyNameStr;
-        vc.myPositionStr = self.myPositionStr;
-        [self.navigationController pushViewController:vc animated:YES];
+    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:kFetchMyDefault(@"company_name") company_position:kFetchMyDefault(@"company_position") nickname:nil avatar:nil enterprise_step:@"3" abbreviation:self.abbreviationTextField.text logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:@"1" financing:nil employee:self.employeeBtn.titleLabel.text      city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMUserInfoManager saveUserInfo:userInfo];
+    
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+            JMUploadLicenseViewController *vc = [[JMUploadLicenseViewController alloc]init];
+      
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 

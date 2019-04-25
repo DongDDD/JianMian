@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCompanyInfoViewController : BaseViewController
 
-@property(nonatomic,copy)NSString *companyNameStr;
-@property(nonatomic,copy)NSString *myPositionStr;
 
 
 @end

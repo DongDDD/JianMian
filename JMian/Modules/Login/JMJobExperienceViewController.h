@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMJobExperienceViewController : BaseViewController
 
-@property(nonatomic,assign)BOOL isHiddenBackBtn;
 
 @end
 

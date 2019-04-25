@@ -50,10 +50,7 @@ typedef enum _PickerState {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
-    if (_isHiddenBackBtn) {
-        self.navigationItem.leftBarButtonItem = nil;
-        self.navigationItem.hidesBackButton = YES;
-    }
+  
     [self setRightBtnTextName:@"下一步"];
     
     self.statusNum = @(1);
@@ -122,7 +119,8 @@ typedef enum _PickerState {
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
     [self.positionBtn setTitle:labStr forState:UIControlStateNormal];
     [self.positionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    self.job_labelID = labStr;
+ 
+    self.job_labelID = labIDStr;
     
 }
 

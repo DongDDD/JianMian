@@ -15,7 +15,8 @@
 #import "JMTabBarViewController.h"
 
 #import "JMCompanyTabBarViewController.h"
-
+#import "JMHTTPManager+Login.h"
+#import "JMUserInfoModel.h"
 
 @interface ChooseIdentity ()
 
@@ -47,18 +48,18 @@
 
 - (IBAction)isCompanyBtn:(id)sender {
     [[JMHTTPManager sharedInstance]updateUserInfoType:@(2) password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:@"1" real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+  
+            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMUserInfoManager saveUserInfo:userInfo];
+            
+            JMCompanyBaseInfoViewController *vc = [[JMCompanyBaseInfoViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+      
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
         
-//        test
-        JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc] init];
-
-        [UIApplication sharedApplication].delegate.window.rootViewController = tab;
-
-        kSaveMyDefault(@"type", @"company");
-        
-//        JMCompanyBaseInfoViewController *basicInformation = [[JMCompanyBaseInfoViewController alloc]init];
-//
-//        [self.navigationController pushViewController:basicInformation animated:YES];
-
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

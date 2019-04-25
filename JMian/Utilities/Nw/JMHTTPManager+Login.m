@@ -27,5 +27,12 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:User_info_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
+- (void)userChangeWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:User_Change parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
+
+
 
 @end

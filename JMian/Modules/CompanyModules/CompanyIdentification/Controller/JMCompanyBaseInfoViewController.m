@@ -9,6 +9,8 @@
 #import "JMCompanyBaseInfoViewController.h"
 #import "JMCompanyInfoViewController.h"
 #import "JMHTTPManager+CompanyCreate.h"
+#import "JMHTTPManager+Login.h"
+#import "JMUserInfoModel.h"
 
 
 @interface JMCompanyBaseInfoViewController ()
@@ -33,16 +35,27 @@
 
 #pragma mark - 数据提交
 -(void)rightAction{
-    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:self.companyNameTextField.text company_position:self.myPositionTextField.text nickname:self.myNameTextField.text avatar:nil enterprise_step:nil abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:self.companyNameTextField.text company_position:self.myPositionTextField.text nickname:self.myNameTextField.text avatar:nil enterprise_step:@"2" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        JMCompanyInfoViewController *vc = [[JMCompanyInfoViewController alloc]init];
-        vc.companyNameStr = self.companyNameTextField.text;
-        vc.myPositionStr = self.myPositionTextField.text;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
+        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMUserInfoManager saveUserInfo:userInfo];
+            kSaveMyDefault(@"company_name", self.companyNameTextField.text);
+            kSaveMyDefault(@"company_position", self.myPositionTextField.text);
+            
+            JMCompanyInfoViewController *vc = [[JMCompanyInfoViewController alloc]init];
+
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+          
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
