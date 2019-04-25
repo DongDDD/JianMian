@@ -11,10 +11,12 @@
 #import "JMChangeIdentityViewController.h"
 #import "JMHTTPManager+CompanyCreate.h"
 #import "JMHTTPManager+Login.h"
+#import "JMHTTPManager+Uploads.h"
 #import "JMUserInfoModel.h"
 
 @interface JMUploadLicenseViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *headerImg;
+@property (nonatomic,copy)NSString *imageLicenseUrl;
 
 
 @end
@@ -32,7 +34,7 @@
 #pragma mark - 点击事件
 
 - (IBAction)doneAction:(id)sender {
-    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:kFetchMyDefault(@"company_name") company_position:kFetchMyDefault(@"company_position") nickname:nil avatar:nil enterprise_step:@"4" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:kFetchMyDefault(@"company_name") company_position:kFetchMyDefault(@"company_position") nickname:nil avatar:nil enterprise_step:@"4" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:_imageLicenseUrl status:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
@@ -160,13 +162,21 @@
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
 {
     
-    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
-    // 获取沙盒目录
-    
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
-    // 将图片写入文件
-    
-    [imageData writeToFile:fullPath atomically:NO];
+    NSArray *array = @[currentImage];
+    [[JMHTTPManager sharedInstance]uploadsImageWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        _imageLicenseUrl = array[0];
+        NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+        // 获取沙盒目录
+        
+        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+        // 将图片写入文件
+        
+        [imageData writeToFile:fullPath atomically:NO];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
     
     
 }

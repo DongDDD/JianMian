@@ -17,6 +17,8 @@
 #import "JMCompanyInfoMineViewController.h"
 #import "JMManageInterviewViewController.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
+#import "JMSettingViewController.h"
+
 
 
 
@@ -36,7 +38,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"个人中心";
-    
+    [self setRightBtnImageViewName:@"upinstall" imageNameRight2:@""];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.mas_topLayoutGuide);
@@ -66,6 +68,12 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+    
+}
+
+-(void)rightAction{
+    JMSettingViewController *vc = [[JMSettingViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

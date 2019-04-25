@@ -20,6 +20,7 @@
 #import "JMUserInfoManager.h"
 #import "JMUserInfoModel.h"
 #import "JMCompanyTabBarViewController.h"
+#import "JMHTTPManager+Login.h"
 
 
 
@@ -55,7 +56,7 @@
                          @"JMCompanyInfoViewController",    //当enterprise_step=2
                          @"JMUploadLicenseViewController",  //当enterprise_step=3
                          @"JMChangeIdentityViewController", //当enterprise_step=4
-                         @"JMCompanyTabBarViewController"           //
+                         @"JMCompanyTabBarViewController"   //当enterprise_step=5
                          
                          ];
     
@@ -78,54 +79,68 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
    
-    // Override point for customization after application launch.
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
 
-    if (kFetchMyDefault(@"token")){
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-        model = [JMUserInfoManager getUserInfo];
-        int type = [model.type intValue];
-        BaseViewController *vc;
-        NSString *vcStr;
-        
-        //用户还没选择身份
-        if (type==0) vcStr = [self getPersonStepWhereWitnUser_step:@"0"];
-        
-        //用户已经选择了C端身份，user_step判断用户填写信息步骤
-        if (type==1) vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
-
-       //用户选择了B端身份，enterprise_step判断用户填写信息步骤
-        if (type==2)  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
-
-//        模拟审核通过 ---Test
-        BOOL isChecked;
-        isChecked = YES;
-        if (isChecked == YES) {
-            vcStr = @"JMCompanyTabBarViewController";
-        }
-   
-        if (vcStr) {
-            vc = [[NSClassFromString(vcStr) alloc]init];
-            if (![vc isKindOfClass:[JMTabBarViewController class]]&&![vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
-                vc.isHiddenBackBtn = YES;
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+      
+        if (kFetchMyDefault(@"token")){
+            
+            JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+            model = [JMUserInfoManager getUserInfo];
+            int type = [model.type intValue];
+            BaseViewController *vc;
+            NSString *vcStr;
+            
+            //用户还没选择身份
+            if (type==0) vcStr = [self getPersonStepWhereWitnUser_step:@"0"];
+            
+            //用户已经选择了C端身份，user_step判断用户填写信息步骤
+            if (type==1) vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+            
+            //用户选择了B端身份，enterprise_step判断用户填写信息步骤
+            if (type==2)  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
+            
+            //        模拟审核通过 ---Test
+            //        BOOL isChecked;
+            //        isChecked = YES;
+            //        if (isChecked == YES) {
+            //            vcStr = @"JMCompanyTabBarViewController";
+            //        }
+            
+            if (vcStr) {
+                vc = [[NSClassFromString(vcStr) alloc]init];
+                if (![vc isKindOfClass:[JMTabBarViewController class]]&&![vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
+                    vc.isHiddenBackBtn = YES;
+                }
+                NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+                [_window setRootViewController:naVC];
+                [self.window makeKeyAndVisible];
             }
-            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-            [_window setRootViewController:naVC];
+            
+        }else{
+            //token为空执行
+            
+            LoginViewController *login = [[LoginViewController alloc] init];
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+            [_window setRootViewController:naVC];//navigation加在window上
+            
             [self.window makeKeyAndVisible];
+            
         }
-
-    }else{
-        //token为空执行
+    
+    
+    
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
-        LoginViewController *login = [[LoginViewController alloc] init];
-        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-        [_window setRootViewController:naVC];//navigation加在window上
-        
-        [self.window makeKeyAndVisible];
-        
-    }
+    }];
+    
+    
+    // Override point for customization after application launch.
+  
     //C端
 //    JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
 //    self.window.rootViewController = tab;

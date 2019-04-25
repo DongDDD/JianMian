@@ -7,7 +7,6 @@
 //
 
 #import "JMChangeIdentityViewController.h"
-#import "JMUserChangeWindowViewController.h"
 
 @interface JMChangeIdentityViewController ()
 
@@ -24,9 +23,7 @@
 
 - (IBAction)userChangeAction:(id)sender {
     
-    JMUserChangeWindowViewController *vc = [[JMUserChangeWindowViewController alloc]init];
-    
-    [self addChildViewController:vc];
+   
     
 }
 

@@ -10,15 +10,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-//@protocol protocol name <NSObject>
-//
-//<#methods#>
-//
-//@end
+@protocol JMUserChangeWindowViewDelegate <NSObject>
+
+-(void)OKAction;
+-(void)deleteAction;
+
+@end
 
 @interface JMUserChangeWindowView : UIView
 
-
+@property (weak, nonatomic) IBOutlet UIView *windowView;
+@property (nonatomic,assign)id<JMUserChangeWindowViewDelegate>delegate;
+//+(JMUserChangeWindowView *)sharedUserChangeWindow;
 
 @end
 

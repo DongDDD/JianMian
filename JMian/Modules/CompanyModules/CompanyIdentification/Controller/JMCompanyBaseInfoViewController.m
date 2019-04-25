@@ -11,6 +11,7 @@
 #import "JMHTTPManager+CompanyCreate.h"
 #import "JMHTTPManager+Login.h"
 #import "JMUserInfoModel.h"
+#import "JMHTTPManager+Uploads.h"
 
 
 @interface JMCompanyBaseInfoViewController ()
@@ -18,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *myNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *myPositionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *companyNameTextField;
+@property (nonatomic,copy)NSString *imageUrl;
+
 
 @end
 
@@ -35,7 +38,7 @@
 
 #pragma mark - 数据提交
 -(void)rightAction{
-    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:self.companyNameTextField.text company_position:self.myPositionTextField.text nickname:self.myNameTextField.text avatar:nil enterprise_step:@"2" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:self.companyNameTextField.text company_position:self.myPositionTextField.text nickname:self.myNameTextField.text avatar:_imageUrl enterprise_step:@"2" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
@@ -168,14 +171,21 @@
 - (void) saveImage:(UIImage *)currentImage withName:(NSString *)imageName
 {
     
-    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
-    // 获取沙盒目录
-    
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
-    // 将图片写入文件
-    
-    [imageData writeToFile:fullPath atomically:NO];
-    
+    NSArray *array = @[currentImage];
+    [[JMHTTPManager sharedInstance]uploadsImageWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        _imageUrl = array[0];
+        NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+        // 获取沙盒目录
+        
+        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+        // 将图片写入文件
+        
+        [imageData writeToFile:fullPath atomically:NO];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
     
 }
 
