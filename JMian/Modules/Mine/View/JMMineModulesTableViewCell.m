@@ -72,9 +72,8 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (self.delegate) {
-        
-        [self.delegate didSelectItemAtIndexPath:indexPath];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectItemWithRow:)] ) {
+        [self.delegate didSelectItemWithRow:indexPath.row];
     }
     
 
