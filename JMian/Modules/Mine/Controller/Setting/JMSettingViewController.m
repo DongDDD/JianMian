@@ -12,11 +12,13 @@
 #import "JMHTTPManager+Login.h"
 #import "JMJudgeViewController.h"
 #import "JMHTTPManager+UpdateInfo.h"
+#import "JMUserInfoModel.h"
 @interface JMSettingViewController ()<JMUserChangeWindowViewDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *titleArray;
 @property(nonatomic,strong)JMUserChangeWindowView *windowView;
+
 
 @end
 
@@ -26,6 +28,7 @@
     [super viewDidLoad];
     self.title = @"设置";
     self.view.backgroundColor =  [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
+ 
 //    _titleArray = @[@"切换身份",@"修改手机号",@"清除缓存",@"客服热线: 159-8910-9060",@"应用版本",@"关于平台",@"反馈意见",@"退出登录"];
     // Do any additional setup after loading the view from its nib.
 //    [self setTableViewUI];
@@ -45,27 +48,29 @@
 }
 
 -(void)OKAction{
+//    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+
 //    NSString *step;
-//    if (kFetchMyDefault(@"type") isEqualToString:@"company" ) {
+//    if ([model.type isEqualToString:@"2"]) {
 //        step = @"1";
-//    }else if ((kFetchMyDefault(@"type") isEqualToString:@"person" ) ){
+//    }else if ([model.type isEqualToString:@"1"]){
 //        step = @"";
 //
 //    }
     
     
-    [[JMHTTPManager sharedInstance]updateUserInfoType:nil password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateUserInfoType:nil password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
 
-        //更改用户状态
-        if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
-             kSaveMyDefault(@"type", @"person");
-        }else if ([kFetchMyDefault(@"type") isEqualToString:@"person"]){
-            kSaveMyDefault(@"type", @"company");
-        
-        }
+//        //更改用户状态
+//        if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
+//             kSaveMyDefault(@"type", @"person");
+//        }else if ([kFetchMyDefault(@"type") isEqualToString:@"person"]){
+//            kSaveMyDefault(@"type", @"company");
+//        
+//        }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

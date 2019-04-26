@@ -33,12 +33,13 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-        
-        if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
+            JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+
+        if ([model.type isEqualToString:@"2"]) {
             self.imageNameArr = @[@"company_information",@"interview",@"enshrine",@"share2"];
             self.labelStrArr = @[@"公司信息",@"面试管理",@"人才收藏",@"分享APP"];
             
-        }else if ([kFetchMyDefault(@"type") isEqualToString:@"person"]){
+        }else if ([model.type isEqualToString:@"1"]){
         
             self.imageNameArr = @[@"my_videos",@"interview",@"enshrine",@"share2"];
             self.labelStrArr = @[@"视频简历",@"面试管理",@"职位收藏",@"分享APP"];
@@ -64,7 +65,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JMMineModulesCollectionViewCell *cell = (JMMineModulesCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    [cell.iconBtn setImage:[UIImage imageNamed:self.imageNameArr[indexPath.row]] forState:UIControlStateNormal];
+    cell.imageView.image = [UIImage imageNamed:self.imageNameArr[indexPath.row]];
+//    [cell.iconBtn setImage:[UIImage imageNamed:self.imageNameArr[indexPath.row]] forState:UIControlStateNormal];
     cell.titleLabel.text = self.labelStrArr[indexPath.row];
     
     return cell;

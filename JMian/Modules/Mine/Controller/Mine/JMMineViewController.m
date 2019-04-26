@@ -44,10 +44,15 @@
         make.top.equalTo(self.mas_topLayoutGuide);
         make.left.right.bottom.equalTo(self.view);
     }];
+    
     //判断当前 C端 还是 B端
-    if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
+    _userInfoModel = [JMUserInfoManager getUserInfo];
+    
+    
+    if ([_userInfoModel.type isEqualToString:@"2"]) {
+        
        
-    }else if ([kFetchMyDefault(@"type") isEqualToString:@"person"]){
+    }else if ([_userInfoModel.type isEqualToString:@"1"]){
         
     }
     
@@ -56,17 +61,18 @@
     [self getUserData];
 
 }
+
 #pragma mark - 获取数据
 
 -(void)getUserData{
     
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
+
         self.userInfoModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         [self.tableView reloadData];
         [self getCompanyData];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
+
     }];
     
 }
@@ -154,7 +160,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
+        if ([_userInfoModel.type isEqualToString:@"2"]) {
             return  110;
         }else{
             return 100;

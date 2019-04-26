@@ -59,6 +59,8 @@
 #define Create_Company_URL @"api/company/create"
 #define Fectch_CompanyInfo_URL @"api/company/info"
 #define Paginate_Vita_URL @"api/vita/paginate"
+#define List_Interview_URL @"api/work/interview/lists"
+
 
 
 

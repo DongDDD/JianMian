@@ -18,40 +18,36 @@
                 <rect key="frame" x="0.0" y="0.0" width="101" height="97"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OaY-As-YId">
-                        <rect key="frame" x="37.5" y="25" width="26" height="27"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="27" id="7YC-KY-DmQ"/>
-                            <constraint firstAttribute="width" constant="26" id="tV8-r7-fGy"/>
-                        </constraints>
-                        <state key="normal" image="my_videos.png"/>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="视频简历" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUF-Dm-ffy">
-                        <rect key="frame" x="26" y="62" width="49.5" height="21"/>
+                        <rect key="frame" x="25.5" y="58.5" width="50" height="14.5"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="z5y-aX-zSJ"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="11" id="MNs-pL-xHu"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yoy-F5-BHK">
+                        <rect key="frame" x="37.5" y="15.5" width="26" height="27"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="26" id="onK-8L-Xsm"/>
+                            <constraint firstAttribute="height" constant="27" id="wQq-Pr-1Ez"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="QUF-Dm-ffy" firstAttribute="centerX" secondItem="OaY-As-YId" secondAttribute="centerX" id="21k-Vn-IbX"/>
-                <constraint firstItem="OaY-As-YId" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" constant="-10" id="23V-t1-Ucd"/>
-                <constraint firstItem="OaY-As-YId" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="ZcC-W4-qii"/>
-                <constraint firstItem="QUF-Dm-ffy" firstAttribute="top" secondItem="OaY-As-YId" secondAttribute="bottom" constant="10" id="lzL-2q-Idr"/>
+                <constraint firstAttribute="bottom" secondItem="QUF-Dm-ffy" secondAttribute="bottom" constant="24" id="2qe-28-wGV"/>
+                <constraint firstItem="yoy-F5-BHK" firstAttribute="centerX" secondItem="QUF-Dm-ffy" secondAttribute="centerX" id="HS5-bZ-DHK"/>
+                <constraint firstItem="QUF-Dm-ffy" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="bwZ-3P-aaQ"/>
+                <constraint firstItem="QUF-Dm-ffy" firstAttribute="top" secondItem="yoy-F5-BHK" secondAttribute="bottom" constant="16" id="jde-6l-q8h"/>
             </constraints>
             <size key="customSize" width="101" height="97"/>
             <connections>
-                <outlet property="iconBtn" destination="OaY-As-YId" id="HGe-4U-wqc"/>
+                <outlet property="imageView" destination="yoy-F5-BHK" id="0qT-eM-MHd"/>
                 <outlet property="titleLabel" destination="QUF-Dm-ffy" id="fCu-Qc-nVF"/>
             </connections>
             <point key="canvasLocation" x="174.63768115942031" y="114.84375"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="my_videos.png" width="79" height="82"/>
-    </resources>
 </document>

@@ -129,6 +129,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="IconImage" destination="0u9-sv-zwv" id="15M-lu-Sdf"/>
+                <outlet property="detailLab" destination="boH-2l-Z6Y" id="ZEB-fS-LKw"/>
+                <outlet property="interviewTimeLab" destination="Ghg-KW-OCd" id="04G-Rn-MfX"/>
+                <outlet property="leftBtn" destination="ufc-cg-ivb" id="Uft-uU-DDr"/>
+                <outlet property="nameLab" destination="DPZ-sN-st1" id="KJV-h9-qj3"/>
+                <outlet property="rightBtn" destination="KXo-FS-27b" id="uWm-Br-4Ug"/>
+                <outlet property="salaryLab" destination="aM7-5M-phG" id="4aJ-oj-ZO9"/>
+            </connections>
             <point key="canvasLocation" x="96.376811594202906" y="39.84375"/>
         </tableViewCell>
     </objects>

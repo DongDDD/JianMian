@@ -7,6 +7,7 @@
 //
 
 #import "JMCompanyInfoMineViewController.h"
+#import "JMHTTPManager+FetchCompanyInfo.h"
 
 @interface JMCompanyInfoMineViewController ()
 
@@ -22,7 +23,19 @@
 }
 
 
+-(void)getData{
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    [[JMHTTPManager sharedInstance]fetchCompanyInfo_Id:model.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 
+
+
+}
 
 
 /*

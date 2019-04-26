@@ -36,7 +36,7 @@
         BasicInformationViewController *basicInformation = [[BasicInformationViewController alloc]init];
         
         [self.navigationController pushViewController:basicInformation animated:YES];
-        kSaveMyDefault(@"type", @"person");
+//        kSaveMyDefault(@"type", @"person");
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 

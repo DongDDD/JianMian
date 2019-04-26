@@ -15,6 +15,11 @@
     // Initialization code
 }
 
+
+-(void)setModel:(JMInterVIewModel *)model{
+    self.nameLab.text = model.interviewer_work_name;
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

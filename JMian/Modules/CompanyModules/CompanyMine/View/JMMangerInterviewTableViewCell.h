@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMInterVIewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMMangerInterviewTableViewCell : UITableViewCell
+
+@property(nonatomic,strong)JMInterVIewModel *model;
+@property (weak, nonatomic) IBOutlet UILabel *interviewTimeLab;
+@property (weak, nonatomic) IBOutlet UIImageView *IconImage;
+@property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UILabel *salaryLab;
+@property (weak, nonatomic) IBOutlet UILabel *detailLab;
+@property (weak, nonatomic) IBOutlet UIButton *rightBtn;
+@property (weak, nonatomic) IBOutlet UIButton *leftBtn;
+
 
 @end
 

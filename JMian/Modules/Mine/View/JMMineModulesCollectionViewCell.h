@@ -11,8 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMMineModulesCollectionViewCell : UICollectionViewCell
+
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
-@property (weak, nonatomic) IBOutlet UIButton *iconBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 

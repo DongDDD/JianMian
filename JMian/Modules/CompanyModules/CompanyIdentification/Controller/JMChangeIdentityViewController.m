@@ -30,13 +30,9 @@
         JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
         
-        //更改用户状态
-        if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
-            kSaveMyDefault(@"type", @"person");
-        }else if ([kFetchMyDefault(@"type") isEqualToString:@"person"]){
-            kSaveMyDefault(@"type", @"company");
-            
-        }
+        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+        model = [JMUserInfoManager getUserInfo];
+    
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

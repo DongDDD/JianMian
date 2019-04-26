@@ -68,22 +68,6 @@
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/Mine/Controller/Mine/JMMineViewController.m"
-            timestampString = "577894513.613826"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "-didSelectItemAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
@@ -118,7 +102,7 @@
                   moduleName = "JMian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMCompanyInfoViewController.m"
-                  timestampString = "577963475.0268739"
+                  timestampString = "577978647.303856"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
@@ -133,7 +117,7 @@
                   moduleName = "JMian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMCompanyInfoViewController.m"
-                  timestampString = "577963475.029168"
+                  timestampString = "577978647.3072"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "123"
@@ -150,12 +134,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/Mine/Controller/Setting/JMSettingViewController.m"
-            timestampString = "577964880.189069"
+            timestampString = "577978646.753407"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "-userChange:"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "-viewDidLoad"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -166,12 +150,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/Mine/Controller/Setting/JMSettingViewController.m"
-            timestampString = "577964880.189165"
+            timestampString = "577978646.753489"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "-OKAction"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "-userChange:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -182,7 +166,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/Mine/Controller/Setting/JMJudgeViewController.m"
-            timestampString = "577964880.189234"
+            timestampString = "577978646.753559"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
@@ -198,7 +182,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMIDCardIdentifyViewController.m"
-            timestampString = "577964880.189301"
+            timestampString = "577978646.753623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "193"
@@ -214,7 +198,7 @@
                   moduleName = "JMian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMIDCardIdentifyViewController.m"
-                  timestampString = "577963475.0492851"
+                  timestampString = "577978647.3319041"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "193"
@@ -229,7 +213,7 @@
                   moduleName = "JMian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMIDCardIdentifyViewController.m"
-                  timestampString = "577963475.0518889"
+                  timestampString = "577978647.334128"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "195"
@@ -246,7 +230,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMIDCardIdentifyViewController.m"
-            timestampString = "577964880.189504"
+            timestampString = "577978646.753718"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "207"
@@ -262,7 +246,7 @@
                   moduleName = "JMian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMIDCardIdentifyViewController.m"
-                  timestampString = "577963475.058017"
+                  timestampString = "577978647.340203"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "207"
@@ -277,7 +261,7 @@
                   moduleName = "JMian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMIDCardIdentifyViewController.m"
-                  timestampString = "577963475.0602601"
+                  timestampString = "577978647.343406"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "209"
@@ -294,7 +278,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMIDCardIdentifyViewController.m"
-            timestampString = "577964880.189621"
+            timestampString = "577978646.7538069"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "164"
@@ -310,7 +294,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/CompanyModules/CompanyIdentification/Controller/JMIDCardIdentifyViewController.m"
-            timestampString = "577964880.189719"
+            timestampString = "577978646.753889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "167"
@@ -326,7 +310,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/CompanyModules/CompanyPostJob/Cotroller/JMPostJobHomeViewController.m"
-            timestampString = "577964880.189827"
+            timestampString = "577978646.753976"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -342,7 +326,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/CompanyModules/CompanyPostJob/Cotroller/JMPostJobHomeViewController.m"
-            timestampString = "577964880.189924"
+            timestampString = "577978646.754058"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "195"
@@ -358,7 +342,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/CompanyModules/CompanyPostJob/Cotroller/JMPostNewJobViewController.m"
-            timestampString = "577964880.190009"
+            timestampString = "577978646.7541521"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "121"
@@ -374,12 +358,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/CompanyModules/CompanyPostJob/Cotroller/JMPostNewJobViewController.m"
-            timestampString = "577964880.190091"
+            timestampString = "577978646.754217"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "133"
             endingLineNumber = "133"
             landmarkName = "-setExprienceRangeWithExpStr:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/Mine/View/JMMineModulesTableViewCell.m"
+            timestampString = "577978646.75428"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "-initWithStyle:reuseIdentifier:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/Mine/View/JMMineModulesTableViewCell.m"
+            timestampString = "577978646.754347"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "-initWithStyle:reuseIdentifier:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/CompanyModules/CompanyMine/Contoller/JMManageInterviewViewController.m"
+            timestampString = "577978646.754413"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/CompanyModules/CompanyMine/View/JMMangerInterviewTableViewCell.m"
+            timestampString = "577978651.0771869"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
