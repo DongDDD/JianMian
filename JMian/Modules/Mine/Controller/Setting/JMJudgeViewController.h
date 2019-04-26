@@ -1,8 +1,8 @@
 //
-//  JMIDCardIdentifyViewController.h
+//  JMJudgeViewController.h
 //  JMian
 //
-//  Created by mac on 2019/4/16.
+//  Created by mac on 2019/4/26.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
@@ -10,10 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMIDCardIdentifyViewController : BaseViewController
-
-
-
+@interface JMJudgeViewController : BaseViewController
 
 @end
 

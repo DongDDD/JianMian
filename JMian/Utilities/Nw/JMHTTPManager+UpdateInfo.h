@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHTTPManager (UpdateInfo)
 
-- (void)updateUserInfoType:(NSNumber *)type
+- (void)updateUserInfoType:(nullable NSNumber *)type
                   password:(nullable NSString *)password
                     avatar:(nullable NSString *)avatar
                   nickname:(nullable NSString *)nickname

@@ -32,6 +32,9 @@
 
 //上传图片
 #define Uploads_Image_URL @"file/uploads"
+//身份证识别
+#define Ocr_idcard_URL @"api/tools/ocr/idcard"
+
 
 //创建个人简历
 #define Create_Vita_URL @"api/vita/create"

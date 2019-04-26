@@ -16,7 +16,7 @@
 
 
 
-@interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate>
+@interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *workNameBtn;
 @property (weak, nonatomic) IBOutlet UIView *pickerBGView;
@@ -41,11 +41,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *workLocationBtn;
 @property (weak, nonatomic) IBOutlet UIButton *jobDescriptionBtn;
 
+
 @property (nonatomic, strong)NSArray *pickerArray;
-@property (nonatomic,copy)NSString *pickerStr;
+@property (nonatomic, copy)NSString *pickerStr;
+@property (nonatomic, assign)NSUInteger pickerRow;
 
-
-
+@property (nonatomic, copy)NSString *positionLabId;
 
 @end
 
@@ -55,11 +56,12 @@
     [super viewDidLoad];
    
     [self setTitle:@"发布新职位"];
+    
     self.pickerView.delegate = self;
     self.scrollView.delegate = self;
     
     [self setRightBtnTextName:@"发布"];
-   
+   [self.pickerView selectRow:0 inComponent:0 animated:NO];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -67,16 +69,14 @@
 #pragma mark - 数据提交
 -(void)rightAction{
     
-    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@3 work_label_id:@33 work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_salaryMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:@"阿斯顿发送到发" address:@"互投帮创业园" longitude:@"113.389007" latitude:@"23.044584" status:@1 label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@3 work_label_id:_positionLabId work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:@"互投帮创业园" longitude:@"113.389007" latitude:@"23.044584" status:@1 label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发布成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
-        JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
         
-        [self.navigationController pushViewController:vc animated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
         
-        NSLog(@"发布");
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -99,6 +99,8 @@
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
     [self.workNameBtn setTitle:labStr forState:UIControlStateNormal];
     [self.workNameBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    self.positionLabId = labIDStr;
+    
 }
 
 - (IBAction)workPorpertyAction:(UIButton *)sender {
@@ -117,7 +119,7 @@
 
 }
 -(void)setExprienceRangeWithExpStr:(NSString *)ExpStr{
-    NSArray *array = [ExpStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
+    NSArray *array = [ExpStr componentsSeparatedByString:@"～"]; //从字符 ~ 中分隔成2个元素的数组
     
     NSString *minStr = array[0];
     NSString *maxStr = array[1];
@@ -201,9 +203,48 @@
 - (IBAction)jobDescriptionAction:(UIButton *)sender {
     
     JMJobDescriptionViewController *vc = [[JMJobDescriptionViewController alloc]init];
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+-(void)sendTextView_textData:(NSString *)textData{
+    
+    [_jobDescriptionBtn setTitle:textData forState:UIControlStateNormal];
+    
+}
+
+
 - (IBAction)pickerOKAction:(UIButton *)sender {
+    
+    
+    switch (_selectedBtn.tag) {
+        case 1:
+            [self.workPropertyBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+            [self.workPropertyBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            break;
+            
+        case 2:
+            [self.expriencesBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+            [self.expriencesBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            [self setExprienceRangeWithExpStr:self.pickerArray[_pickerRow]];
+            break;
+            
+        case 3:
+            [self.educationBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+            [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            self.educationNum = @(_pickerRow);
+            break;
+            
+        case 4:
+            [self.salaryBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+            [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            [self setSalaryRangeWithSalaryStr:self.pickerArray[_pickerRow]];
+            
+            break;
+            
+        default:
+            break;
+    }
     [self.pickerBGView setHidden:YES];
     
 }
@@ -215,6 +256,9 @@
 #pragma mark - pickerView delegate
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    
+    _pickerRow = row;
+    
     switch (_selectedBtn.tag) {
         case 1:
             [self.workPropertyBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
@@ -224,7 +268,7 @@
         case 2:
             [self.expriencesBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
             [self.expriencesBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-
+            [self setExprienceRangeWithExpStr:self.pickerArray[row]];
             break;
       
         case 3:

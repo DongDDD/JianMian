@@ -10,6 +10,8 @@
 #import "Masonry.h"
 #import "JMUserChangeWindowView.h"
 #import "JMHTTPManager+Login.h"
+#import "JMJudgeViewController.h"
+#import "JMHTTPManager+UpdateInfo.h"
 @interface JMSettingViewController ()<JMUserChangeWindowViewDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -43,7 +45,27 @@
 }
 
 -(void)OKAction{
-    [[JMHTTPManager sharedInstance]userChangeWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//    NSString *step;
+//    if (kFetchMyDefault(@"type") isEqualToString:@"company" ) {
+//        step = @"1";
+//    }else if ((kFetchMyDefault(@"type") isEqualToString:@"person" ) ){
+//        step = @"";
+//
+//    }
+    
+    
+    [[JMHTTPManager sharedInstance]updateUserInfoType:nil password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+
+        //更改用户状态
+        if ([kFetchMyDefault(@"type") isEqualToString:@"company"]) {
+             kSaveMyDefault(@"type", @"person");
+        }else if ([kFetchMyDefault(@"type") isEqualToString:@"person"]){
+            kSaveMyDefault(@"type", @"company");
+        
+        }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -51,6 +73,8 @@
     
     
 }
+
+
 
 
 -(void)deleteAction{

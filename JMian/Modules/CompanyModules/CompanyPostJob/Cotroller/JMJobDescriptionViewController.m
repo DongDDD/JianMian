@@ -35,6 +35,12 @@
     
 }
 
+-(void)rightAction{
+    [self.delegate sendTextView_textData:self.textView.text];
+    [self.navigationController popViewControllerAnimated:YES];
+
+}
+
 -(void)setTextFieldUI{
     self.textView = [[UITextView alloc]init];
     self.textView.delegate = self;

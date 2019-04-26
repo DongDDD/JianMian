@@ -11,7 +11,7 @@
 
 @implementation JMHTTPManager (UpdateInfo)
 
-- (void)updateUserInfoType:(NSNumber *)type
+- (void)updateUserInfoType:(nullable NSNumber *)type
                   password:(nullable NSString *)password
                     avatar:(nullable NSString *)avatar
                   nickname:(nullable NSString *)nickname
@@ -29,7 +29,6 @@
                real_status:(nullable NSString *)real_status
               successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
-    NSParameterAssert(type);
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
     
     dic[@"type"] = type;

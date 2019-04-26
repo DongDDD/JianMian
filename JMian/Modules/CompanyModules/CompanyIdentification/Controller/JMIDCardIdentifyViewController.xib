@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMIDCardIdentifyViewController">
             <connections>
+                <outlet property="imageView1" destination="Tqd-MA-jMx" id="XMe-mg-89A"/>
+                <outlet property="imageView2" destination="6wv-pj-TEy" id="99v-2h-0Jn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -67,6 +69,26 @@
                                         <action selector="nextAction:" destination="-1" eventType="touchUpInside" id="71z-Qo-a1F"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nc0-8l-6K3">
+                                    <rect key="frame" x="122.5" y="81" width="161" height="112"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="112" id="ach-dd-Y9e"/>
+                                        <constraint firstAttribute="width" constant="161" id="rtl-9u-hth"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="tapBtnAction:" destination="-1" eventType="touchUpInside" id="J5s-iE-p2i"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8n5-E5-psi">
+                                    <rect key="frame" x="122.5" y="302" width="161" height="112"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="161" id="C7w-9B-sVc"/>
+                                        <constraint firstAttribute="height" constant="112" id="MEi-Qb-soq"/>
+                                    </constraints>
+                                    <connections>
+                                        <action selector="tapBtnAction:" destination="-1" eventType="touchUpInside" id="dEi-pt-Vsw"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -76,13 +98,17 @@
                                 <constraint firstItem="6wv-pj-TEy" firstAttribute="top" secondItem="L8p-LS-ppc" secondAttribute="bottom" constant="15" id="Gif-vV-YJp"/>
                                 <constraint firstItem="Tqd-MA-jMx" firstAttribute="top" secondItem="h63-5X-61A" secondAttribute="top" constant="53" id="IXF-fF-S2I"/>
                                 <constraint firstItem="lMG-4c-8j2" firstAttribute="top" secondItem="6wv-pj-TEy" secondAttribute="bottom" constant="48" id="KMe-o2-9kZ"/>
+                                <constraint firstItem="8n5-E5-psi" firstAttribute="centerY" secondItem="6wv-pj-TEy" secondAttribute="centerY" id="KSu-UH-p6h"/>
                                 <constraint firstItem="Tqd-MA-jMx" firstAttribute="centerX" secondItem="h63-5X-61A" secondAttribute="centerX" id="Ltw-mx-fv0"/>
                                 <constraint firstItem="6wv-pj-TEy" firstAttribute="trailing" secondItem="Tqd-MA-jMx" secondAttribute="trailing" id="MLR-ki-aq5"/>
                                 <constraint firstItem="6wv-pj-TEy" firstAttribute="leading" secondItem="Tqd-MA-jMx" secondAttribute="leading" id="P8l-Ng-dhE"/>
                                 <constraint firstItem="lMG-4c-8j2" firstAttribute="centerX" secondItem="6wv-pj-TEy" secondAttribute="centerX" id="PoT-qZ-Sr2"/>
+                                <constraint firstItem="Nc0-8l-6K3" firstAttribute="centerY" secondItem="Tqd-MA-jMx" secondAttribute="centerY" id="Q93-Ha-W9z"/>
+                                <constraint firstItem="Nc0-8l-6K3" firstAttribute="centerX" secondItem="Tqd-MA-jMx" secondAttribute="centerX" id="Qn5-79-CAC"/>
                                 <constraint firstItem="6wv-pj-TEy" firstAttribute="top" secondItem="Tqd-MA-jMx" secondAttribute="bottom" constant="53" id="Sip-rS-NRG"/>
                                 <constraint firstItem="Y3V-oR-TqW" firstAttribute="leading" secondItem="Tqd-MA-jMx" secondAttribute="leading" id="UJl-pP-GxA"/>
                                 <constraint firstAttribute="trailing" secondItem="lMG-4c-8j2" secondAttribute="trailing" constant="20" id="bnG-IL-0Fs"/>
+                                <constraint firstItem="8n5-E5-psi" firstAttribute="centerX" secondItem="6wv-pj-TEy" secondAttribute="centerX" id="orv-Yz-vJ3"/>
                                 <constraint firstItem="6wv-pj-TEy" firstAttribute="height" secondItem="Tqd-MA-jMx" secondAttribute="height" id="vB1-dV-K0l"/>
                                 <constraint firstItem="Tqd-MA-jMx" firstAttribute="top" secondItem="Y3V-oR-TqW" secondAttribute="bottom" constant="8" symbolic="YES" id="vwj-VS-JLm"/>
                             </constraints>
@@ -99,6 +125,7 @@
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="6cZ-zu-f1V" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="5Y2-IZ-6h1"/>
                 <constraint firstItem="6cZ-zu-f1V" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="CxK-bq-5NT"/>

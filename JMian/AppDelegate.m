@@ -33,7 +33,7 @@
 
 //获取个人用户填写信息步骤
 - (NSString *)getPersonStepWhereWitnUser_step:(NSString *)user_step{
-   //因为服务器的user_step不是按顺序，但是数组是按顺序取，所以用[NSNull null]占一个位置
+    //因为服务器的user_step不是按顺序，但是数组是按顺序取，所以用[NSNull null]占一个位置
     NSArray *vcArray = @[@"ChooseIdentity",
                          @"BasicInformationViewController", //当user_step=1
                          [NSNull null],
@@ -41,10 +41,10 @@
                          @"JMJobExperienceViewController",  //当user_step=4
                          [NSNull null],
                          @"JMTabBarViewController"];        //当user_step=6
-  
+    
     int stepInt = [user_step intValue];
     if (stepInt < vcArray.count) return vcArray[stepInt];
-   
+    
     return nil;
 }
 
@@ -72,22 +72,22 @@
     sdkConfig.sdkAppId = TIMSdkAppid.intValue;
     sdkConfig.accountType = TIMSdkAccountType;
     sdkConfig.disableLogPrint = NO; // 是否允许log打印
-//    sdkConfig.logLevel = TIM_LOG_DEBUG; //Log输出级别（debug级别会很多）
+    //    sdkConfig.logLevel = TIM_LOG_DEBUG; //Log输出级别（debug级别会很多）
     [[TIMManager sharedInstance] initSdk:sdkConfig];
 }
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-   
+    
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
-
-    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    if (kFetchMyDefault(@"token")) {
         
-        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-        [JMUserInfoManager saveUserInfo:userInfo];
-      
-        if (kFetchMyDefault(@"token")){
+        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMUserInfoManager saveUserInfo:userInfo];
+            
             
             JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
             model = [JMUserInfoManager getUserInfo];
@@ -104,13 +104,6 @@
             //用户选择了B端身份，enterprise_step判断用户填写信息步骤
             if (type==2)  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
             
-            //        模拟审核通过 ---Test
-            //        BOOL isChecked;
-            //        isChecked = YES;
-            //        if (isChecked == YES) {
-            //            vcStr = @"JMCompanyTabBarViewController";
-            //        }
-            
             if (vcStr) {
                 vc = [[NSClassFromString(vcStr) alloc]init];
                 if (![vc isKindOfClass:[JMTabBarViewController class]]&&![vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
@@ -121,23 +114,24 @@
                 [self.window makeKeyAndVisible];
             }
             
-        }else{
-            //token为空执行
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
-            LoginViewController *login = [[LoginViewController alloc] init];
-            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-            [_window setRootViewController:naVC];//navigation加在window上
-            
-            [self.window makeKeyAndVisible];
-            
-        }
-    
-    
-    
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
-    }];
+            
+        }];
+        
+    }else {
+        
+        LoginViewController *login = [[LoginViewController alloc] init];
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+        [_window setRootViewController:naVC];//navigation加在window上
+        
+        [self.window makeKeyAndVisible];
+        
+        
+    }
     
+
     
     // Override point for customization after application launch.
   

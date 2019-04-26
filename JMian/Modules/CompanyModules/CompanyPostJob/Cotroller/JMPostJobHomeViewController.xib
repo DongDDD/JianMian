@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMPostJobHomeViewController">
             <connections>
+                <outlet property="postOrIdentityBtn" destination="j7a-WH-NXn" id="oMU-hh-rAb"/>
+                <outlet property="tipsLab" destination="B1S-uB-THQ" id="QEZ-JH-5ou"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

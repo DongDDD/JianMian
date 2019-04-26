@@ -8,10 +8,16 @@
 
 #import "BaseViewController.h"
 
+@protocol JMJobDescriptionDelegate <NSObject>
+
+-(void)sendTextView_textData:(NSString *_Nonnull)textData;
+
+@end
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMJobDescriptionViewController : BaseViewController
 
+@property(weak,nonatomic)id<JMJobDescriptionDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

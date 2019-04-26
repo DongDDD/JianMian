@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMIDCardIdentifySecondViewController : BaseViewController
 
+@property(nonatomic,copy)NSString *image_front;
+@property(nonatomic,copy)NSString *image_behind;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -58,8 +58,8 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:url parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
-- (void)postCreateWorkWith_city_id:(NSNumber *)city_id
-                     work_label_id:(NSNumber *)work_label_id
+- (void)postCreateWorkWith_city_id:(NSString *)city_id
+                     work_label_id:(NSString *)work_label_id
                          work_name:(NSString *)work_name
                          education:(NSNumber *)education
                work_experience_min:(NSNumber *)work_experience_min

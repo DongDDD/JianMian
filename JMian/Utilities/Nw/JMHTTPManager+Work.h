@@ -33,8 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
                               per_page:(nullable NSNumber *)per_page
                           SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 //发布职位请求
-- (void)postCreateWorkWith_city_id:(NSNumber *)city_id
-                     work_label_id:(NSNumber *)work_label_id
+- (void)postCreateWorkWith_city_id:(NSString *)city_id
+                     work_label_id:(NSString *)work_label_id
                          work_name:(NSString *)work_name
                          education:(NSNumber *)education
                work_experience_min:(NSNumber *)work_experience_min
