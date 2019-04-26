@@ -30,8 +30,10 @@ typedef enum _PickerState_Exp {
 @property (weak, nonatomic) IBOutlet UITextField *jobDescriptionText;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePckerView;
 
-
 @property (nonatomic,assign) _PickerState_Exp pickerState;
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+@property (weak, nonatomic) IBOutlet UIView *headerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -43,13 +45,39 @@ typedef enum _PickerState_Exp {
     [super viewDidLoad];
 
     self.datePckerView.backgroundColor = [UIColor whiteColor];
-    [self setRightBtnTextName:@"下一步"];
     
     self.scrollView.delegate = self;
-    
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
     [self.view addGestureRecognizer:bgTap];
     // Do any additional setup after loading the view from its nib.
+    
+    switch (self.viewType) {
+        case JMJobExperienceViewTypeDefault:
+            [self setRightBtnTextName:@"下一步"];
+            [self.saveBtn setTitle:@"完成" forState:UIControlStateNormal];
+            break;
+        case JMJobExperienceViewTypeEdit:
+            self.navigationItem.title = @"编辑工作经历";
+            [self setRightBtnTextName:@"删除"];
+            [self.saveBtn setTitle:@"保存" forState:UIControlStateNormal];
+            self.headerViewHeightConstraint.constant = 0;
+            self.headerView.hidden = YES;
+            self.companyNameText.text = self.model.company_name;
+            self.jobDescriptionText.text = self.model.experiences_description;
+            [self.jobLabelId setTitle:self.model.work_name forState:UIControlStateNormal];
+            [self.startDateBtn setTitle:self.model.start_date forState:UIControlStateNormal];
+            [self.endDateBtn setTitle:self.model.end_date forState:UIControlStateNormal];
+            break;
+        case JMJobExperienceViewTypeAdd:
+            self.navigationItem.title = @"新增工作经历";
+            [self setRightBtnTextName:@"保存"];
+            [self.saveBtn setTitle:@"保存" forState:UIControlStateNormal];
+            self.headerViewHeightConstraint.constant = 0;
+            self.headerView.hidden = YES;
+            break;
+        default:
+            break;
+    }
 }
 
 
@@ -72,8 +100,17 @@ typedef enum _PickerState_Exp {
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             [JMUserInfoManager saveUserInfo:userInfo];
             
-            JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
-            [UIApplication sharedApplication].delegate.window.rootViewController=tab;
+            switch (self.viewType) {
+                case JMJobExperienceViewTypeDefault:
+                {
+                    JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+                    [UIApplication sharedApplication].delegate.window.rootViewController = tab;
+                    break;
+                }
+                default:
+                    [self.navigationController popViewControllerAnimated:YES];
+                    break;
+            }
   
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             

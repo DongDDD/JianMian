@@ -11,7 +11,7 @@
 #import "JMHTTPManager+UpdateInfo.h"
 #import "JMHTTPManager+Uploads.h"
 #import "JMHTTPManager+Login.h"
-
+#import <UIButton+WebCache.h>
 #import "Masonry.h"
 
 
@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *womanBtn;
 @property (weak, nonatomic) IBOutlet UIButton *manBtn;
 
+@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 
 
 @end
@@ -39,9 +40,24 @@
     [super viewDidLoad];
     
     
-    [self.navigationController setNavigationBarHidden:NO];
-    [self setRightBtnTextName:@"下一步"];
+    if (self.model) {
+        [self setRightBtnTextName:@"保存"];
+        self.saveBtn.hidden = NO;
+        self.nameText.text = self.model.nickname;
+        [self.birtnDateBtn setTitle:self.model.card_birthday forState:UIControlStateNormal];
+        self.emailText.text = self.model.email;
+        [self.headerImg sd_setImageWithURL:[NSURL URLWithString:self.model.avatar] forState:UIControlStateNormal];
+        if ([self.model.realSex isEqualToString:@"1"]) {
+            [self.womanBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }else {
+            [self.manBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+    }else {
+        [self setRightBtnTextName:@"下一步"];
+        self.saveBtn.hidden = YES;
+    }
     
+    [self.navigationController setNavigationBarHidden:NO];
     self.datePicker.backgroundColor = [UIColor whiteColor];
     self.scrollView.delegate = self;
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
@@ -258,29 +274,32 @@
 
 
 -(void)rightAction{
-    
-    [[JMHTTPManager sharedInstance] updateUserInfoType:@(1) password:nil avatar:nil nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
 
-        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+   
+        [[JMHTTPManager sharedInstance] updateUserInfoType:@(1) password:nil avatar:nil nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
-            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-            [JMUserInfoManager saveUserInfo:userInfo];
-
-            JobIntensionViewController *jobIntension = [[JobIntensionViewController alloc]init];
-            [self.navigationController pushViewController:jobIntension animated:YES];
-
+            
+            [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                
+                JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+                [JMUserInfoManager saveUserInfo:userInfo];
+                
+                
+                if (self.model) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }else {
+                    JobIntensionViewController *jobIntension = [[JobIntensionViewController alloc]init];
+                    [self.navigationController pushViewController:jobIntension animated:YES];
+                }
+            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                
+            }];
+            
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
-
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-   
-    
+  
 }
 
 /*

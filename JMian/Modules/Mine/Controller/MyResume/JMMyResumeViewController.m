@@ -10,6 +10,8 @@
 #import "JMMyResumeCellConfigures.h"
 #import "JMHTTPManager+Vita.h"
 #import "JMVitaDetailModel.h"
+#import "BasicInformationViewController.h"
+#import "JMJobExperienceViewController.h"
 
 @interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -140,11 +142,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case JMMyResumeCellTypeIcon: {
-            
+            BasicInformationViewController *vc= [[BasicInformationViewController alloc] init];
+            vc.model = [JMUserInfoManager getUserInfo];
+            [self.navigationController pushViewController:vc animated:YES];\
+            break;
          }
         case JMMyResumeCellTypeHeader:
         {
-            ;
+            
         }
         case JMMyResumeCellTypeCareerStatus:
         {
@@ -157,9 +162,18 @@
                     }
         case JMMyResumeCellTypeWorkExperience:
         {
+            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc] init];
+            vc.viewType = JMJobExperienceViewTypeEdit;
+            vc.model = self.cellConfigures.workExperienceArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
         case JMMyResumeCellTypeAction:
         {
+            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc] init];
+            vc.viewType = JMJobExperienceViewTypeAdd;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
         case JMMyResumeCellTypeHeader3:
         {
