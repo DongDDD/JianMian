@@ -71,6 +71,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *major;
 @property (copy, nonatomic) NSString *s_date;
 @property (copy, nonatomic) NSString *e_date;
+//@property (strong, nonatomic) NSDate *s_date;
+//@property (strong, nonatomic) NSDate *e_date;
 @property (copy, nonatomic) NSString *education_description;
 @property (copy, nonatomic) NSString *school_name;
 

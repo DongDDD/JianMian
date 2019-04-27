@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMVitaDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const JMEducationalExperienceTableViewCellIdentifier;
 
 @interface JMEducationalExperienceTableViewCell : UITableViewCell
+
+- (void)setEducationExperienceModel:(JMEducationModel *)model;
 
 @end
 

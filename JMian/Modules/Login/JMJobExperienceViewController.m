@@ -89,38 +89,60 @@ typedef enum _PickerState_Exp {
     
 }
 
+- (void)deleteExperience {
+    [[JMHTTPManager sharedInstance] deleteExperienceWith_experienceId:@([self.model.experience_id integerValue]) successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
+- (void)updateExperience {
+    [[JMHTTPManager sharedInstance] updateExperienceWith_experienceId:@([self.model.experience_id integerValue]) company_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+            [self.navigationController popViewControllerAnimated:YES];
+       
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+
+}
+
+- (void)createExperience {
+    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        switch (self.viewType) {
+            case JMJobExperienceViewTypeDefault: {
+                JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+                [UIApplication sharedApplication].delegate.window.rootViewController = tab;
+                break;
+            }
+            default:
+                [self.navigationController popViewControllerAnimated:YES];
+                break;
+        }
+ 
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+
+}
 
 
 -(void)rightAction{
-   
-    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-
-        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            
-            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-            [JMUserInfoManager saveUserInfo:userInfo];
-            
-            switch (self.viewType) {
-                case JMJobExperienceViewTypeDefault:
-                {
-                    JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
-                    [UIApplication sharedApplication].delegate.window.rootViewController = tab;
-                    break;
-                }
-                default:
-                    [self.navigationController popViewControllerAnimated:YES];
-                    break;
-            }
-  
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-        }];
-
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-
-    }];
-   
+    switch (self.viewType) {
+        case JMJobExperienceViewTypeDefault:
+            [self createExperience];
+            break;
+        case JMJobExperienceViewTypeEdit:
+            [self deleteExperience];
+            break;
+        case JMJobExperienceViewTypeAdd:
+            [self createExperience];
+            break;
+    }
     
 }
 
@@ -142,9 +164,17 @@ typedef enum _PickerState_Exp {
 
 - (IBAction)finishBtn:(id)sender {
     
-    
-   
-
+    switch (self.viewType) {
+        case JMJobExperienceViewTypeDefault:
+            [self createExperience];
+            break;
+        case JMJobExperienceViewTypeEdit:
+            [self updateExperience];
+            break;
+        case JMJobExperienceViewTypeAdd:
+            [self createExperience];
+            break;
+    }
     
 }
 

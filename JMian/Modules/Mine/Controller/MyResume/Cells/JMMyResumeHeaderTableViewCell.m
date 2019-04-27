@@ -18,6 +18,7 @@ NSString *const JMMyResumeHeader4TableViewCellIdentifier = @"JMMyResumeHeader4Ta
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *headerLabel;
 @property (weak, nonatomic) IBOutlet UIButton *headerArrowBtn;
+@property (weak, nonatomic) IBOutlet UILabel *addLabel;
 
 @end
 
@@ -28,9 +29,17 @@ NSString *const JMMyResumeHeader4TableViewCellIdentifier = @"JMMyResumeHeader4Ta
     self.headerLabel.text = title;
     if (identifier != JMMyResumeHeader3TableViewCellIdentifier) {
         self.headerArrowBtn.hidden = YES;
+        if ([title isEqualToString:@"教育经历"]) {
+            self.addLabel.hidden = NO;
+        }else {
+            self.addLabel.hidden = YES;
+        }
+
     }else {
         self.headerArrowBtn.hidden = NO;
+        self.addLabel.hidden = YES;
     }
+    
 }
 
 - (void)awakeFromNib {

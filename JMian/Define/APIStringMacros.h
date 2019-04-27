@@ -36,8 +36,9 @@
 #define Ocr_idcard_URL @"api/tools/ocr/idcard"
 
 
-//创建个人简历
+//个人简历
 #define Create_Vita_URL @"api/vita/create"
+#define Update_Vita_URL @"api/vita/update"
 
 //简历分页
 #define Paginate_Vita_URL @"api/vita/paginate"
@@ -45,10 +46,18 @@
 //简历详情
 #define Info_Vita_URL @"api/vita/info"
 
+//岗位
+#define Update_job_URL @"api/user/job/update"
+
 //工作经历
 #define Create_Experience_URL @"api/user/experience/create"
 #define Update_Experience_URL @"api/user/experience/update"
 #define Delete_Experience_URL @"api/user/experience/delete"
+
+//教育经历
+#define Create_EducationExperience_URL @"api/education/create"
+#define Update_EducationExperience_URL @"api/education/update"
+#define Delete_EducationExperience_URL @"api/education/delete"
 
 #define Paginate_Work_URL @"api/work/paginate"
 #define Create_Work_URL @"api/work/create"

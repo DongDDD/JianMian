@@ -42,6 +42,27 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Vita_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
+- (void)updateVitaWith_work_status:(nullable NSNumber *)work_status
+                         education:(nullable NSNumber *)education
+                   work_start_date:(nullable NSDate *)work_start_date
+                       description:(nullable NSString *)description
+                        video_path:(nullable NSString *)video_path
+                       image_paths:(nullable NSArray *)image_paths
+                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+
+    NSDictionary *dic = @{@"work_status":work_status,
+                          @"education":education,
+                          @"work_start_date":work_start_date,
+                          @"description":description,
+                          @"video_path":video_path,
+                          @"image_paths":image_paths
+                          };
+    
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Update_Vita_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+
+}
+
 - (void)fetchVitPaginateWithCity_id:(nullable NSNumber *)city_id
                           education:(nullable NSNumber *)education
                        job_label_id:(nullable NSNumber *)job_label_id

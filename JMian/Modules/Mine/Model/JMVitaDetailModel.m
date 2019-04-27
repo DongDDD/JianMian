@@ -28,7 +28,7 @@
              @"vita_work_start_date":@"vita.work_start_date",
              @"vita_work_status":@"vita.work_status",
              @"vita_education":@"vita.education",
-             @"vita_work_descriptione":@"vita.work_descriptione",
+             @"vita_description":@"vita.description",
              @"work_label_id":@"work.label_id",
              @"work_name":@"work.name",
              @"city_city_id":@"city.city_id",

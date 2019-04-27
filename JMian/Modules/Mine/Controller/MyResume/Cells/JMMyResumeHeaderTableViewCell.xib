@@ -42,17 +42,29 @@
                         </constraints>
                         <state key="normal" image="icon_return .png"/>
                     </button>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="添加" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QhS-2t-WKJ">
+                        <rect key="frame" x="265" y="11.5" width="35" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="2NJ-6H-bGg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.40430831909999998" green="0.76971369980000004" blue="0.97996550800000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="QhS-2t-WKJ" secondAttribute="trailing" constant="20" id="752-vg-vJN"/>
                     <constraint firstItem="T1X-AC-Lp8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Chg-Gt-ZzY"/>
                     <constraint firstItem="T1X-AC-Lp8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="TzH-ZG-KQr"/>
                     <constraint firstAttribute="trailing" secondItem="9SG-93-cTo" secondAttribute="trailing" constant="20" id="XGp-NB-sTQ"/>
                     <constraint firstItem="9SG-93-cTo" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YqC-39-i5q"/>
                     <constraint firstItem="hXC-Gx-g2C" firstAttribute="leading" secondItem="T1X-AC-Lp8" secondAttribute="trailing" constant="3" id="elP-TG-hpe"/>
+                    <constraint firstItem="QhS-2t-WKJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jRu-YH-2Vu"/>
                     <constraint firstItem="hXC-Gx-g2C" firstAttribute="centerY" secondItem="T1X-AC-Lp8" secondAttribute="centerY" id="lRs-gh-N2w"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="addLabel" destination="QhS-2t-WKJ" id="g9c-Xs-4vV"/>
                 <outlet property="headerArrowBtn" destination="9SG-93-cTo" id="NMO-jt-tDA"/>
                 <outlet property="headerImageView" destination="T1X-AC-Lp8" id="ff5-al-22t"/>
                 <outlet property="headerLabel" destination="hXC-Gx-g2C" id="Hrd-Fx-ntf"/>

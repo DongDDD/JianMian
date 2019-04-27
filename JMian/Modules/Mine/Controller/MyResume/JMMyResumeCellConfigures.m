@@ -118,7 +118,7 @@
 
 -(void)setModel:(JMVitaDetailModel *)model {
     _model = model;
-    self.careerObjectiveRightArr = @[model.work_name?:@"",model.salary_max?:@"",model.city_name?:@"",model.vita_work_start_date?:@""];
+    self.careerObjectiveRightArr = @[model.work_name?:@"", model.salary_max?[NSString stringWithFormat:@"%@~%@",model.salary_min,model.salary_max]:@"",model.city_name?:@"",model.vita_work_start_date?:@""];
     self.careerObjectiveLeftArr = @[@"期望职位",@"薪资要求",@"工作城市",@"参加工作时间"];
     
     self.workExperienceArr = model.experiences;
