@@ -24,9 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *type_label_name;
 
 @property (nonatomic, copy) NSString *industry_label_id;
+@property (nonatomic, copy) NSString *industry_name;
 
-@property (nonatomic, copy) NSString *industry_label_label_id;
-@property (nonatomic, copy) NSString *industry_label_name;
+
+
 
 @property (nonatomic, copy) NSString *financing;
 

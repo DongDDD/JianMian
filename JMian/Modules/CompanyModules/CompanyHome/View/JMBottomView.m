@@ -41,7 +41,7 @@
                 UIButton *btn2 = [[UIButton alloc]init];
                 btn2.backgroundColor = MASTER_COLOR;
                 [btn2 addTarget:self action:@selector(btn2Action) forControlEvents:UIControlEventTouchUpInside];
-                [btn2 setTitle:@"投个简历" forState:UIControlStateNormal];
+                [btn2 setTitle:@"邀约视频面试" forState:UIControlStateNormal];
                 btn2.layer.borderWidth = 0.5;
                 btn2.layer.borderColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0].CGColor;
                 btn2.layer.cornerRadius = 18.5;

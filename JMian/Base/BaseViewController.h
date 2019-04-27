@@ -47,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setRightBtnImageViewName:(NSString *)imageName imageNameRight2:(NSString *)imageNameRight2;
 
+- (void)fanhui;
+
 -(void)rightAction;
 
 -(void)right2Action;

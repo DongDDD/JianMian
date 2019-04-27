@@ -72,11 +72,6 @@
 }
 
 
--(void)bottomRightButtonAction{
-
-    NSLog(@"和她聊聊");
-
-}
 
 #pragma mark - 布局UI
 -(void)setJuhua{
@@ -149,6 +144,13 @@
     }];
 
 }
+-(void)bottomRightButtonAction{
+    
+    
+    NSLog(@"y邀请面试");
+    
+}
+
 - (JMTitlesView *)titleView {
     if (!_titleView) {
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, _headerView.frame.origin.y+_headerView.frame.size.height, SCREEN_WIDTH, 43} titles:@[@"在线简历", @"联系方式",@"图片作品"]];

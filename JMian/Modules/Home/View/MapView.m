@@ -8,7 +8,8 @@
 
 #import "MapView.h"
 #import "Masonry.h"
-
+#import <MAMapKit/MAMapKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
 
 @implementation MapView
 
@@ -57,11 +58,12 @@
 //
 //
        //放地图
-        UIView *view = [[UIView alloc]init];
-        view.backgroundColor = [UIColor blueColor];
-        [bgView addSubview:view];
+        [AMapServices sharedServices].enableHTTPS = YES;
 
-        [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        MAMapView *mapView = [[MAMapView alloc]init];
+        [bgView addSubview:mapView];
+
+        [mapView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.mas_equalTo(bgView);
             make.height.mas_equalTo(224);
             make.top.mas_equalTo(iconImg.mas_bottom).offset(13);
@@ -91,9 +93,7 @@
             make.top.mas_equalTo(bgView.mas_top);
         }];
         
-      
-        
-        
+  
         
         
     }

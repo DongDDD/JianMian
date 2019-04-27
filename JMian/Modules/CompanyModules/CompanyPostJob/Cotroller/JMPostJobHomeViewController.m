@@ -15,6 +15,7 @@
 #import "JMIDCardIdentifyViewController.h"
 #import "JMHomeWorkModel.h"
 #import "JMPostJobHomeTableViewCell.h"
+#import "JobDetailsViewController.h"
 
 
 @interface JMPostJobHomeViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -25,7 +26,7 @@
 @property (nonatomic, strong) NSArray *childVCs;
 @property (nonatomic, strong) UITableViewController *currentVC;
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSNumber *statusNum;
+@property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (weak, nonatomic) IBOutlet UILabel *tipsLab;
 @property (weak, nonatomic) IBOutlet UIButton *postOrIdentityBtn;
@@ -52,7 +53,7 @@ static NSString *cellIdent = @"cellIdent";
     [self getUserStatus];
     
     [self setTableViewUI];
-    
+    _status = @"1";
   
 }
 
@@ -143,7 +144,7 @@ static NSString *cellIdent = @"cellIdent";
 #pragma mark - 获取数据
 
 -(void)getListData{
-    [[JMHTTPManager sharedInstance]fetchWorkPaginateWith_city_ids:nil company_id:nil label_id:nil work_label_id:nil education:nil experience_min:nil experience_max:nil salary_min:nil salary_max:nil subway_names:nil status:_statusNum page:nil per_page:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fetchWorkPaginateWith_city_ids:nil company_id:nil label_id:nil work_label_id:nil education:nil experience_min:nil experience_max:nil salary_min:nil salary_max:nil subway_names:nil status:_status page:nil per_page:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         
         if (responsObject[@"data"]) {
@@ -171,10 +172,10 @@ static NSString *cellIdent = @"cellIdent";
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
             if (index==0) {
-                _statusNum = @1;//已发布职位
+                _status = @"1";//已发布职位
                 [weakSelf getListData];
             }else{
-                _statusNum = @0;//已下线职位
+                _status = @"0";//已下线职位
                 [weakSelf getListData];
             }
         };
@@ -217,9 +218,10 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    //    JMNotificationViewController *vc = [[JMNotificationViewController alloc]init];
-    //
-    //    [self.navigationController pushViewController:vc animated:YES];
+    JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
+    vc.homeworkModel = self.dataArray[indexPath.row];
+    vc.status = _status;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

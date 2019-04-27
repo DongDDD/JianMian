@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHomeWorkModel : NSObject
 
-@property (nonatomic, strong) NSNumber *work_id;
+@property (nonatomic, strong) NSString *work_id;
 @property (nonatomic, strong) NSNumber *company_id;
 @property (nonatomic, strong) NSNumber *user_id;
 @property (nonatomic, copy) NSString *work_label_id;

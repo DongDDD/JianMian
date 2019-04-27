@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JobDetailsViewController : BaseViewController
 
 @property(nonatomic,strong)JMHomeWorkModel *homeworkModel;
+@property (nonatomic, strong) NSString *status;
 
 @end
 

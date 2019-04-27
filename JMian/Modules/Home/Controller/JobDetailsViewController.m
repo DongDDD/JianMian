@@ -16,6 +16,8 @@
 #import "JMSendMyResumeView.h"
 #import "JMHTTPManager+Work.h"
 #import "JMHomeWorkModel.h"
+#import "JMHTTPManager+CompanyUpdateJob.h"
+
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate>
 
@@ -160,6 +162,41 @@
 
 }
 
+-(void)btnAction{
+    if ([_status isEqualToString:@"0"]) {
+        [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.model.work_label_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位上线成功"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+        
+        
+    }else if([_status isEqualToString:@"1"]){//
+        [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.model.work_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"0" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位下线成功"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+            [self.navigationController popViewControllerAnimated:YES];
+
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+    
+    }
+
+
+}
+
+-(void)btn2Action{
+
+
+
+}
+
 //投个简历
 //-(void)sendResumeButton{
 //    
@@ -283,6 +320,7 @@
 -(void)setFootOfVideoView{
     
     self.twoBtnView = [[TwoButtonView alloc]init];
+    [self.twoBtnView setStatus:_status];
     self.twoBtnView.backgroundColor = [UIColor whiteColor];
     self.twoBtnView.delegate = self;
     [self.view addSubview:self.twoBtnView];

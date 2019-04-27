@@ -130,6 +130,9 @@
 		041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 041C07D8226193FA0088FBE1 /* JMNotificationTableViewCell.m */; };
 		041C07DB226193FA0088FBE1 /* JMNotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 041C07D9226193FA0088FBE1 /* JMNotificationTableViewCell.xib */; };
 		041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 041EB2F7226C41F2002BD54B /* JMCompanyHomeModel.m */; };
+		041F67282274654400C4F940 /* JMCompanyDesciptionOfMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041F67272274654400C4F940 /* JMCompanyDesciptionOfMineViewController.m */; };
+		041F672B22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 041F672A22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m */; };
+		041F672E22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 041F672D22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
 		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
@@ -541,6 +544,12 @@
 		041C07D9226193FA0088FBE1 /* JMNotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMNotificationTableViewCell.xib; sourceTree = "<group>"; };
 		041EB2F6226C41F2002BD54B /* JMCompanyHomeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCompanyHomeModel.h; sourceTree = "<group>"; };
 		041EB2F7226C41F2002BD54B /* JMCompanyHomeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCompanyHomeModel.m; sourceTree = "<group>"; };
+		041F67262274654400C4F940 /* JMCompanyDesciptionOfMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCompanyDesciptionOfMineViewController.h; sourceTree = "<group>"; };
+		041F67272274654400C4F940 /* JMCompanyDesciptionOfMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCompanyDesciptionOfMineViewController.m; sourceTree = "<group>"; };
+		041F672922747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+CompanyInfoUpdate.h"; sourceTree = "<group>"; };
+		041F672A22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+CompanyInfoUpdate.m"; sourceTree = "<group>"; };
+		041F672C22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+CompanyUpdateJob.h"; sourceTree = "<group>"; };
+		041F672D22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+CompanyUpdateJob.m"; sourceTree = "<group>"; };
 		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -1129,6 +1138,10 @@
 				040CD557226B230A000BB230 /* JMHTTPManager+VitaPaginate.m */,
 				040865E3227338E2005BB03E /* JMHTTPManager+InterView.h */,
 				040865E4227338E2005BB03E /* JMHTTPManager+InterView.m */,
+				041F672922747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.h */,
+				041F672A22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m */,
+				041F672C22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.h */,
+				041F672D22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m */,
 			);
 			path = CompanyHTTPManager;
 			sourceTree = "<group>";
@@ -1381,6 +1394,8 @@
 				040CD54D226AC0D1000BB230 /* JMCompanyInfoMineViewController.h */,
 				040CD54E226AC0D1000BB230 /* JMCompanyInfoMineViewController.m */,
 				048348E12269CABB00DE4630 /* JMCompanyInfoMineViewController.xib */,
+				041F67262274654400C4F940 /* JMCompanyDesciptionOfMineViewController.h */,
+				041F67272274654400C4F940 /* JMCompanyDesciptionOfMineViewController.m */,
 			);
 			path = Contoller;
 			sourceTree = "<group>";
@@ -2499,11 +2514,13 @@
 				040E366E2268531A00A7D789 /* JMEducationView.m in Sources */,
 				048348C5226983C700DE4630 /* UIView+Ext.m in Sources */,
 				6DAE2376225B901E005E6C01 /* JMSystemLabelsModel.m in Sources */,
+				041F67282274654400C4F940 /* JMCompanyDesciptionOfMineViewController.m in Sources */,
 				04A2479F224C7AFF00DEB8E3 /* CALayer+UIColor.m in Sources */,
 				04A247D5224CB99800DEB8E3 /* SearchView.m in Sources */,
 				6D020A3C2251031D009BCFE4 /* JMMyResumeCareerObjectiveTableViewCell.m in Sources */,
 				040865EB22734ADE005BB03E /* JMCompanyInfoModel.m in Sources */,
 				6D558663224B564F0037C14E /* JMMineViewController.m in Sources */,
+				041F672E22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m in Sources */,
 				040865E5227338E2005BB03E /* JMHTTPManager+InterView.m in Sources */,
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
 				6D020A372250FF0D009BCFE4 /* JMMyResumeHeaderTableViewCell.m in Sources */,
@@ -2548,6 +2565,7 @@
 				040CD552226ACD42000BB230 /* JMHTTPManager+FetchCompanyInfo.m in Sources */,
 				04C6014D226071B5000B1FE0 /* JMAllMessageTableViewCell.m in Sources */,
 				04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */,
+				041F672B22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m in Sources */,
 				040865E12272FAF1005BB03E /* JMPostJobHomeTableViewCell.m in Sources */,
 				040E365222680FF800A7D789 /* JMHeaderOfPersonDetailView.m in Sources */,
 				6DEA991E2255DF5C0029FE8A /* JMLoginInfoModel.m in Sources */,

@@ -10,6 +10,12 @@
 
 @implementation JMCompanyInfoModel
 
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{
+             @"industry_name":@"industry_label.name",
+             @"industry_label_id":@"industry_label.label_id"
+             };
+}
 
 + (NSDictionary *)mj_objectClassInArray {
     return @{

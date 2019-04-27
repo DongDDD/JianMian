@@ -14,7 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 -(void)sendResumeButton;
-
+-(void)btnAction;
+-(void)btn2Action;
 @end
 
 
@@ -22,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,weak) id<TwoButtonViewDelegate> delegate;
 
+@property (nonatomic, strong) NSString *status;
 
 @end
 
