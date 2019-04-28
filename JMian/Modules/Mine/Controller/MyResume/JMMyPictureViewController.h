@@ -7,10 +7,13 @@
 //
 
 #import "BaseViewController.h"
-
+#import "JMVitaDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMMyPictureViewController : BaseViewController
+
+@property (nonatomic, strong) NSArray *image_paths;
+
 
 @end
 

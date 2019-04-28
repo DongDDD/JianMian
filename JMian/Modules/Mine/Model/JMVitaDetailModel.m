@@ -15,7 +15,8 @@
    return @{
       @"experiences":@"JMExperiencesModel",
       @"shielding":@"JMShieldingModel",
-      @"education":@"JMEducationModel"
+      @"education":@"JMEducationModel",
+      @"files":@"JMMyFilesModel"
       };
 }
 
@@ -38,6 +39,7 @@
              };
 }
 @end
+
 
 @implementation JMExperiencesModel
 
@@ -86,5 +88,11 @@
              @"school_name":@"school.school_name"
              };
 }
+
+@end
+
+
+@implementation JMMyFilesModel
+
 
 @end

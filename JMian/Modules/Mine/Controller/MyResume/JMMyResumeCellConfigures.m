@@ -123,7 +123,7 @@
     
     self.workExperienceArr = model.experiences;
     self.educationalExperienceArr = model.education;
-    
+    self.filesArr = model.files;
     self.vita_description = model.vita_description;
 }
 @end

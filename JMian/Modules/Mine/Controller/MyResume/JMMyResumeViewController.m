@@ -15,6 +15,7 @@
 #import "JMEducationExperienceViewController.h"
 #import "JMMyDescriptionViewController.h"
 #import "PositionDesiredViewController.h"
+#import "JMMyPictureViewController.h"
 #import "JMHTTPManager+Job.h"
 
 @interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
@@ -310,6 +311,9 @@
         }
         case JMMyResumeCellTypeHeader3:
         {
+            JMMyPictureViewController *vc = [[JMMyPictureViewController alloc] init];
+            vc.image_paths = self.model.files;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
 
         }
