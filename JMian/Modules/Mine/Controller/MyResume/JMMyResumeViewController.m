@@ -25,9 +25,11 @@
 @property (strong, nonatomic) JMVitaDetailModel *model;
 @property (copy, nonatomic) NSString *job_labelID;
 @property (strong, nonatomic) UIPickerView *pickerView;
+@property (nonatomic, strong) UIDatePicker *datePicker;
 @property (nonatomic, strong) NSArray *pickerArray;
 @property (nonatomic, strong) NSNumber *salaryMin;
 @property (nonatomic, strong) NSNumber *salaryMax;
+@property (nonatomic, strong) NSDate *work_start_date;
 
 @end
 
@@ -37,6 +39,39 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"我的简历";
+}
+
+- (void)setupDateKeyPan {
+    
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    
+    //设置地区: zh-中国
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
+    
+    //设置日期模式(Displays month, day, and year depending on the locale setting)
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    // 设置当前显示时间
+    [datePicker setDate:[NSDate date] animated:YES];
+    // 设置显示最大时间（此处为当前时间）
+    [datePicker setMaximumDate:[NSDate date]];
+    
+    //设置时间格式
+    
+    //监听DataPicker的滚动
+    [datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
+    
+    self.datePicker = datePicker;
+    self.datePicker.hidden = YES;
+    self.datePicker.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
+    [self.view addSubview:self.datePicker];
+    [self.datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.view);
+        make.height.mas_equalTo(180);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
+    }];
+    
+    //设置时间输入框的键盘框样式为时间选择器
 }
 
 -(void)setPickerVIewUI{
@@ -87,6 +122,7 @@
             self.salaryMax = @([self.model.salary_max intValue]);
             [self initView];
             [self setPickerVIewUI];
+            [self setupDateKeyPan];
             [self.tableView reloadData];
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -100,12 +136,34 @@
 - (void)updateJob {
     [[JMHTTPManager sharedInstance] updateJobWithJobId:@([self.model.user_job_id intValue]) job_label_id:@([self.job_labelID intValue]) industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        
+        [self sendRequest];
+
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
 }
 
+- (void)updateVita {
+    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:nil education:nil work_start_date:self.work_start_date description:nil video_path:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        [self sendRequest];
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
+- (void)dateChange:(UIDatePicker *)datePicker {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    //设置时间格式
+    formatter.dateFormat = @"yyyy-MM-dd";
+    NSString *dateStr = [formatter  stringFromDate:datePicker.date];
+    
+    self.work_start_date = datePicker.date;
+    [self updateVita];
+
+}
 //PositionDesiredViewController代理方法
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
  
@@ -164,7 +222,8 @@
     self.salaryMin = @(minNum);
     self.salaryMax = @(maxNum);
     
-    
+    [self updateJob];
+
 }
 
 
@@ -277,14 +336,14 @@
                 [self.navigationController pushViewController:vc animated:YES];
 
             }else if (indexPath.row == 1) {
-                
+                self.datePicker.hidden = YES;
                 [self.pickerView setHidden:NO];
-                [self updateJob];
 
             }else if (indexPath.row == 2) {
                 
             }else {
-                
+                self.datePicker.hidden = NO;
+                [self.pickerView setHidden:YES];
             }
             break;
 
