@@ -51,7 +51,7 @@
 }
 
 
--(void)fetchWorkInfoWithWork_id:(NSNumber *)work_id SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+-(void)fetchWorkInfoWithWork_id:(NSString *)work_id SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     NSParameterAssert(work_id);
     NSString *url = [NSString stringWithFormat:@"%@/%@",Info_Work_URL,work_id];
     

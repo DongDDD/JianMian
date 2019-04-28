@@ -23,6 +23,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 
+
 - (IBAction)userChangeAction:(id)sender {
     
     [[JMHTTPManager sharedInstance]updateUserInfoType:nil password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -40,10 +41,14 @@
     
 }
 
+
 - (IBAction)exitAction:(id)sender {
     
     
 }
+
+
+
 
 /*
 #pragma mark - Navigation

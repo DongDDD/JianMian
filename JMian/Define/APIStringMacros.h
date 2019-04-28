@@ -59,11 +59,19 @@
 #define Create_Company_URL @"api/company/create"
 #define Fectch_CompanyInfo_URL @"api/company/info"
 #define Paginate_Vita_URL @"api/vita/paginate"
-#define List_Interview_URL @"api/work/interview/lists"
+
 #define Update_CompanyInfo_URL @"api/company/update"
-#define Update_JobInfo_URL @"api/user/job/update"
+#define Update_JobInfo_URL @"api/work/update"
 
+#define Create_Interview_URL @"api/work/interview/create"
 
+#define List_Interview_URL @"api/work/interview/lists"
+#define Update_Interview_URL @"api/work/interview/update"
+
+//收藏
+#define Create_Favorite_URL @"api/user/favorite"
+#define List_Favorite_URL @"api/user/favorite/paginate"
+#define Delete_Favorite_URL @"api/user/favorite/delete"
 
 
 //接口

@@ -18,6 +18,17 @@ NS_ASSUME_NONNULL_BEGIN
 
                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
+- (void)createInterViewWith_user_job_id:(NSString *)user_job_id
+                                   time:(NSString *)time
+
+                           successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
+
+- (void)updateInterViewWith_Id:(NSString *)Id
+                        status:(NSString *)status
+
+                  successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

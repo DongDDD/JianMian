@@ -10,13 +10,15 @@
 #import "JMMangerInterviewTableViewCell.h"
 #import "JMHTTPManager+InterView.h"
 #import "JMInterVIewModel.h"
+#import "JMChooseTimeViewController.h"
 
-@interface JMManageInterviewViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface JMManageInterviewViewController ()<UITableViewDelegate,UITableViewDataSource,JMMangerInterviewTableViewCellDelegate,JMChooseTimeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic ,strong)NSArray *listsArray;
-
+@property (nonatomic ,strong)JMChooseTimeViewController * chooseTimeVC;
+@property (nonatomic ,strong)JMInterVIewModel *model;
 
 @end
 
@@ -54,6 +56,64 @@ static NSString *cellIdent = @"managerCellIdent";
 
 
 }
+#pragma mark - 点击事件
+//代理点击事件
+-(void)cellLeftBtnActionWith_row:(NSInteger)row{
+    self.chooseTimeVC = [[JMChooseTimeViewController alloc]init];
+    self.chooseTimeVC.delegate = self;
+    [self addChildViewController:self.chooseTimeVC];
+    [self.view addSubview:self.chooseTimeVC.view];
+    self.chooseTimeVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    [self.chooseTimeVC didMoveToParentViewController:self];
+    
+    self.model = self.listsArray[row];
+    
+}
+
+-(void)cellRightBtnAction_row:(NSInteger)row{
+    
+    self.model = self.listsArray[row];
+    [[JMHTTPManager sharedInstance]updateInterViewWith_Id:self.model.interview_id status:Interview_Delete successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"取消面试成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+//修改面试时间
+
+-(void)OKInteviewTimeViewAction:(NSString *)interviewTime{
+    [self.chooseTimeVC willMoveToParentViewController:nil];
+    [self.chooseTimeVC removeFromParentViewController];
+    [self.chooseTimeVC.view removeFromSuperview];
+    self.navigationController.navigationBarHidden = NO;
+    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.model.user_job_id time:interviewTime successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+}
+
+-(void)deleteInteviewTimeViewAction{
+    
+    [self.chooseTimeVC willMoveToParentViewController:nil];
+    [self.chooseTimeVC removeFromParentViewController];
+    [self.chooseTimeVC.view removeFromSuperview];
+    
+    self.navigationController.navigationBarHidden = NO;
+}
+
+
+
 
 #pragma mark - Table view data source
 
@@ -78,6 +138,8 @@ static NSString *cellIdent = @"managerCellIdent";
     }
     
     JMInterVIewModel *model = self.listsArray[indexPath.row];
+    cell.delegate = self;
+    cell.myRow = indexPath.row;
     [cell setModel:model];
     
     return cell;
@@ -86,6 +148,8 @@ static NSString *cellIdent = @"managerCellIdent";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+//    _model = self.listsArray[indexPath.row];
+
     
 }
 

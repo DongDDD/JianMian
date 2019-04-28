@@ -44,25 +44,28 @@ static NSString *cellIdent = @"cellIdent";
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
     [self setTitle:@"职位管理"];
-    [self setRightBtnTextName:@"发布职位"];
     
+    _status = Position_Online;
     [self setupInit];
   
-    [self getListData];
     
     [self getUserStatus];
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    model = [JMUserInfoManager getUserInfo];
+    if ([model.card_status isEqualToString:Card_PassIdentify]) {//“3”代表已通过实名认证，通过才能发布职位
     
-    [self setTableViewUI];
-    _status = @"1";
+        [self getListData];
+        [self setRightBtnTextName:@"发布职位"];
+
+    }
   
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self getListData];
+    self.navigationController.navigationBar.translucent = NO;
 
-    
+    [self getListData];
 
 }
 
@@ -76,17 +79,19 @@ static NSString *cellIdent = @"cellIdent";
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         model = [JMUserInfoManager getUserInfo];
         
-        if ([model.card_status isEqualToString:@"3"]) {
-            
+        if ([model.card_status isEqualToString:Card_PassIdentify]) {
+            self.tipsLab.text = @"你还没有发布职位～\n快去发布吧！";
+
             [self.postOrIdentityBtn setTitle:@"发布职位" forState:UIControlStateNormal];
-            [self setRightBtnTextName:@"发布职位"];
             
-        }else if ([model.card_status isEqualToString:@"1"]){
+        }else if ([model.card_status isEqualToString:Card_WaitIdentify]){
+            [self.postOrIdentityBtn setHidden:YES];
+            self.tipsLab.text = @"实名认证审核中\n发布岗位需实名认证";
             
+        }else if ([model.card_status isEqualToString:Card_NOIdentify]){
             [self.postOrIdentityBtn setTitle:@"去实名认证" forState:UIControlStateNormal];
-            [self setRightBtnTextName:@""];
-            self.tipsLab.text = @"营业执照认证中...\n发布岗位需实名认证";
-            
+            self.tipsLab.text = @"你还没有实名认证 快去认证吧！\n发布岗位需实名认证";
+ 
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -101,14 +106,13 @@ static NSString *cellIdent = @"cellIdent";
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     model = [JMUserInfoManager getUserInfo];
    
-    if ([model.card_status isEqualToString:@"1"]) {
+    if ([model.card_status isEqualToString:@"0"]) {
    
         JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
         
         [self.navigationController pushViewController:vc animated:YES];
 
-        
-     
+  
     }else if ([model.card_status isEqualToString:@"3"]){
   
         self.hidesBottomBarWhenPushed=YES;
@@ -117,8 +121,7 @@ static NSString *cellIdent = @"cellIdent";
         [self.navigationController pushViewController:vc animated:YES];
         
         self.hidesBottomBarWhenPushed=NO;
-        
-    
+  
     }
     
     
@@ -143,22 +146,17 @@ static NSString *cellIdent = @"cellIdent";
 }
 #pragma mark - 获取数据
 
--(void)getListData{
+-(void) getListData{
     [[JMHTTPManager sharedInstance]fetchWorkPaginateWith_city_ids:nil company_id:nil label_id:nil work_label_id:nil education:nil experience_min:nil experience_max:nil salary_min:nil salary_max:nil subway_names:nil status:_status page:nil per_page:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        
+    
         if (responsObject[@"data"]) {
             
             self.dataArray = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             [self.tableView reloadData];
         }
-
-    
+  
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-        
-        
-        
+
     }];
 
 }
@@ -168,19 +166,19 @@ static NSString *cellIdent = @"cellIdent";
     if (!_titleView) {
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"已发布", @"已下线"]];
         __weak JMPostJobHomeViewController *weakSelf = self;
-
+        
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
             if (index==0) {
-                _status = @"1";//已发布职位
+                _status = Position_Online;//已发布职位
                 [weakSelf getListData];
             }else{
-                _status = @"0";//已下线职位
+                _status = Position_Downline;//已下线职位
                 [weakSelf getListData];
             }
         };
+   
     }
-    
     return _titleView;
 }
 
@@ -209,7 +207,7 @@ static NSString *cellIdent = @"cellIdent";
         cell = [[JMPostJobHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
         //自带有两种基础的tableView样式，UITableViewCellStyleValue1、2. 后面的文章会讲解自定义样式
     }
-    
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     JMHomeWorkModel *model = self.dataArray[indexPath.row];
     [cell setModel:model];
 
@@ -221,19 +219,24 @@ static NSString *cellIdent = @"cellIdent";
     JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
     vc.homeworkModel = self.dataArray[indexPath.row];
     vc.status = _status;
+    
     [self.navigationController pushViewController:vc animated:YES];
     
 }
 
--(void)setTableViewUI{
-    
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.titleView.frame.origin.y+self.titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    _tableView.rowHeight = 78.0f;
-    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    [self.tableView registerNib:[UINib nibWithNibName:@"JMPostJobHomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
-    [self.view addSubview:_tableView];
+-(UITableView *)tableView{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.titleView.frame.origin.y+self.titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT-200) style:UITableViewStylePlain];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.rowHeight = 78.0f;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        [self.tableView registerNib:[UINib nibWithNibName:@"JMPostJobHomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
+        [self.view addSubview:_tableView];
+        
+    }
+    return _tableView;
     
 }
 /*

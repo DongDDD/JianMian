@@ -17,6 +17,7 @@
 #import "JMHTTPManager+Work.h"
 #import "JMHomeWorkModel.h"
 #import "JMHTTPManager+CompanyUpdateJob.h"
+#import "JMPostNewJobViewController.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate>
@@ -56,9 +57,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBar.translucent = YES;
-    
-    self.extendedLayoutIncludesOpaqueBars = NO;
+//    self.navigationController.navigationBar.translucent = NO;
+//    
+//    self.extendedLayoutIncludesOpaqueBars = NO;
 
     [self setJuhua];
     
@@ -163,19 +164,13 @@
 }
 
 -(void)btnAction{
-    if ([_status isEqualToString:@"0"]) {
-        [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.model.work_label_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位上线成功"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alert show];
-            
-            [self.navigationController popViewControllerAnimated:YES];
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-        }];
-        
-        
-    }else if([_status isEqualToString:@"1"]){//
+     if ([_status isEqualToString:@"0"]) {
+         JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
+         
+         [self.navigationController pushViewController:vc animated:YES];
+     
+     
+     }else if ([_status isEqualToString:@"1"]) {//
         [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.model.work_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"0" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位下线成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -192,7 +187,25 @@
 }
 
 -(void)btn2Action{
-
+    if ([_status isEqualToString:@"0"]) {
+        [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.model.work_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位上线成功"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+        
+        
+    }else if ([_status isEqualToString:@"1"]) {
+        JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
+        
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    }
 
 
 }

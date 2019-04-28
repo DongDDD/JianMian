@@ -22,5 +22,25 @@
     
 }
 
+- (void)createInterViewWith_user_job_id:(NSString *)user_job_id
+                                time:(NSString *)time
+
+                        successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock{
+    
+    NSDictionary *dic = @{@"user_job_id":user_job_id,@"time":time};
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Interview_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+}
+
+- (void)updateInterViewWith_Id:(NSString *)Id
+                        status:(NSString *)status
+
+                           successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock{
+    
+    NSString *urlStr = [Update_Interview_URL stringByAppendingFormat:@"/%@",Id];
+    NSDictionary *dic = @{@"status":status};
+
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+}
+
 
 @end

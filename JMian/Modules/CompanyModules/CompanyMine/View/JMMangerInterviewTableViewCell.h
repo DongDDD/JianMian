@@ -11,8 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol JMMangerInterviewTableViewCellDelegate <NSObject>
+
+-(void)cellLeftBtnActionWith_row:(NSInteger)row;
+-(void)cellRightBtnAction_row:(NSInteger)row;
+
+@end
+
 @interface JMMangerInterviewTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *headerTitleLab;
 @property(nonatomic,strong)JMInterVIewModel *model;
 @property (weak, nonatomic) IBOutlet UILabel *interviewTimeLab;
 @property (weak, nonatomic) IBOutlet UIImageView *IconImage;
@@ -22,7 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 
+@property (nonatomic,assign)NSInteger myRow;
 
+@property (nonatomic, weak) id<JMMangerInterviewTableViewCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

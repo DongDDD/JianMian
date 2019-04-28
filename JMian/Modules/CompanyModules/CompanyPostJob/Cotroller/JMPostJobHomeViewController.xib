@@ -29,7 +29,7 @@
                         <constraint firstAttribute="width" constant="109" id="70a-fC-1oJ"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你还没有发布任何职位哦 快去发布职位吧" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1S-uB-THQ">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B1S-uB-THQ">
                     <rect key="frame" x="130" y="389" width="154" height="51"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="154" id="BF0-sS-AMt"/>
@@ -46,7 +46,7 @@
                         <constraint firstAttribute="width" constant="185" id="Xbo-UL-DfJ"/>
                         <constraint firstAttribute="height" constant="47" id="kKs-00-gyq"/>
                     </constraints>
-                    <state key="normal" title="发布职位">
+                    <state key="normal">
                         <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <userDefinedRuntimeAttributes>

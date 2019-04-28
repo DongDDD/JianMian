@@ -11,6 +11,12 @@
 #import "JMHomeWorkModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+//@protocol JobDetailsViewControllerDelegate <NSObject>
+//
+//-(void)sendIndex:(NSString *)
+//
+//@end
+
 
 @interface JobDetailsViewController : BaseViewController
 

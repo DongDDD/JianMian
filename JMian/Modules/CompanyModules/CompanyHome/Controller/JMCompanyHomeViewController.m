@@ -84,6 +84,7 @@ static NSString *cellIdent = @"cellIdent";
     return 1;
 }
 
+
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.arrDate.count;

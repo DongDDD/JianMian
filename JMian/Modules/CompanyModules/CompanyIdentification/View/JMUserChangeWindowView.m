@@ -20,8 +20,8 @@
 //}
 //
 //
-- (instancetype)initWithFrame:(CGRect)frame {
 
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     self = [[[NSBundle mainBundle] loadNibNamed:@"JMUserChangeWindowView" owner:self options:nil] lastObject];
     if (self) {
@@ -30,12 +30,14 @@
    
     return self;
 }
+
 - (IBAction)OKAction:(UIButton *)sender {
     [self.delegate OKAction];
 }
 - (IBAction)deleteAction:(UIButton *)sender {
     [self.delegate deleteAction];
 }
+
 
 
 /*

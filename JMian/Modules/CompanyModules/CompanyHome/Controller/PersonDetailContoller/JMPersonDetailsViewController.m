@@ -17,9 +17,11 @@
 #import "JMHTTPManager+Vita.h"
 #import "JMVitaDetailModel.h"
 #import "Masonry.h"
+#import "JMHTTPManager+InterView.h"
+#import "JMChooseTimeViewController.h"
 
 
-@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate>
+@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,JMChooseTimeViewControllerDelegate>
 
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -37,6 +39,7 @@
 
 @property (nonatomic, strong) UIActivityIndicatorView * juhua;
 
+@property (nonatomic, strong) JMChooseTimeViewController *chooseTimeVC;
 @end
 
 @implementation JMPersonDetailsViewController
@@ -144,12 +147,48 @@
     }];
 
 }
+#pragma mark - 点击事件
+
 -(void)bottomRightButtonAction{
-    
-    
+    self.chooseTimeVC = [[JMChooseTimeViewController alloc]init];
+    self.chooseTimeVC.delegate = self;
+    [self addChildViewController:self.chooseTimeVC];
+    [self.view addSubview:self.chooseTimeVC.view];
+    self.chooseTimeVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+     [self.chooseTimeVC didMoveToParentViewController:self];
     NSLog(@"y邀请面试");
     
 }
+
+-(void)deleteInteviewTimeViewAction{
+
+    [self.chooseTimeVC willMoveToParentViewController:nil];
+    [self.chooseTimeVC removeFromParentViewController];
+    [self.chooseTimeVC.view removeFromSuperview];
+ 
+   self.navigationController.navigationBarHidden = NO;
+}
+
+
+-(void)OKInteviewTimeViewAction:(NSString *)interviewTime{
+    [self.chooseTimeVC willMoveToParentViewController:nil];
+    [self.chooseTimeVC removeFromParentViewController];
+    [self.chooseTimeVC.view removeFromSuperview];
+    self.navigationController.navigationBarHidden = NO;
+    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.model.user_job_id time:interviewTime successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
+}
+
+#pragma mark - lazy
 
 - (JMTitlesView *)titleView {
     if (!_titleView) {
@@ -228,7 +267,6 @@
 }
 
 
-#pragma mark - lazy
 
 //- (UIScrollView *)scrollView {
 //    if (!_scrollView){

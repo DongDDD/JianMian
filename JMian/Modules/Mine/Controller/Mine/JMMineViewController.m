@@ -18,7 +18,7 @@
 #import "JMManageInterviewViewController.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
 #import "JMSettingViewController.h"
-
+#import "JMCompanyLikeViewController.h"
 
 
 
@@ -178,7 +178,13 @@
         JMCompanyInfoMineViewController *vc = [[JMCompanyInfoMineViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
         
-    }if (row == 1) {
+    }else if (row == 1) {
+        JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (row == 2) {
+        JMCompanyLikeViewController *vc = [[JMCompanyLikeViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (row == 3) {
         JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
     }
