@@ -9,6 +9,7 @@
 #import "AFHTTPSessionManager.h"
 #import "JMHTTPRequest.h"
 #import "JMHTTPConstant.h"
+#import "APIStringMacros.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

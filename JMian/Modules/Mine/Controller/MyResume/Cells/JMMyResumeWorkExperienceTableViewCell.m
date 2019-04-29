@@ -33,7 +33,7 @@ NSString *const JMMyResumeWorkExperienceTableViewCellIdentifier = @"JMMyResumeWo
 
 - (void)setWorkExperienceModel:(JMExperiencesModel *)model {
     self.jobLabel.text = model.work_name;
-    self.timeLabel.text = model.start_date;
+    self.timeLabel.text = [NSString stringWithFormat:@"%@-%@",model.start_date,model.end_date];
     self.companyLabel.text = model.company_name;
     self.descriptionLabel.text = model.experiences_description;
 }

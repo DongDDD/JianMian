@@ -54,6 +54,8 @@ typedef NS_ENUM(NSInteger, JMMyResumeCellType){
 
 @property (strong, nonatomic) NSArray *educationalExperienceArr;
 
+@property (strong, nonatomic) NSArray *filesArr;
+
 @property (copy, nonatomic) NSString *vita_description;
 
 

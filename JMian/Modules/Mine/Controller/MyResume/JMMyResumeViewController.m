@@ -10,12 +10,26 @@
 #import "JMMyResumeCellConfigures.h"
 #import "JMHTTPManager+Vita.h"
 #import "JMVitaDetailModel.h"
+#import "BasicInformationViewController.h"
+#import "JMJobExperienceViewController.h"
+#import "JMEducationExperienceViewController.h"
+#import "JMMyDescriptionViewController.h"
+#import "PositionDesiredViewController.h"
+#import "JMMyPictureViewController.h"
+#import "JMHTTPManager+Job.h"
 
-@interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 
 @property (strong, nonatomic) JMMyResumeCellConfigures *cellConfigures;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JMVitaDetailModel *model;
+@property (copy, nonatomic) NSString *job_labelID;
+@property (strong, nonatomic) UIPickerView *pickerView;
+@property (nonatomic, strong) UIDatePicker *datePicker;
+@property (nonatomic, strong) NSArray *pickerArray;
+@property (nonatomic, strong) NSNumber *salaryMin;
+@property (nonatomic, strong) NSNumber *salaryMax;
+@property (nonatomic, strong) NSDate *work_start_date;
 
 @end
 
@@ -25,8 +39,66 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"我的简历";
-    [self sendRequest];
+}
 
+- (void)setupDateKeyPan {
+    
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    
+    //设置地区: zh-中国
+    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
+    
+    //设置日期模式(Displays month, day, and year depending on the locale setting)
+    datePicker.datePickerMode = UIDatePickerModeDate;
+    // 设置当前显示时间
+    [datePicker setDate:[NSDate date] animated:YES];
+    // 设置显示最大时间（此处为当前时间）
+    [datePicker setMaximumDate:[NSDate date]];
+    
+    //设置时间格式
+    
+    //监听DataPicker的滚动
+    [datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
+    
+    self.datePicker = datePicker;
+    self.datePicker.hidden = YES;
+    self.datePicker.backgroundColor = [UIColor groupTableViewBackgroundColor];
+
+    [self.view addSubview:self.datePicker];
+    [self.datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.view);
+        make.height.mas_equalTo(180);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
+    }];
+    
+    //设置时间输入框的键盘框样式为时间选择器
+}
+
+-(void)setPickerVIewUI{
+    self.pickerView = [[UIPickerView alloc]init];
+    self.pickerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    self.pickerView.delegate = self;
+    
+    self.pickerView.dataSource = self;
+    
+    [self.view addSubview:self.pickerView];
+    
+    self.pickerView.hidden = YES;
+    
+    [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.view);
+        make.height.mas_equalTo(180);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
+    }];
+    
+    self.pickerArray = [NSArray arrayWithObjects:@"3000~5000",@"5000~8000",@"8000~10000",@"10000~20000",nil];
+
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self sendRequest];
 }
 
 - (void)initView {
@@ -45,7 +117,12 @@
             
             self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
             self.cellConfigures.model = self.model;
+            self.job_labelID = self.model.job_label_id;
+            self.salaryMin = @([self.model.salary_min intValue]);
+            self.salaryMax = @([self.model.salary_max intValue]);
             [self initView];
+            [self setPickerVIewUI];
+            [self setupDateKeyPan];
             [self.tableView reloadData];
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -55,6 +132,100 @@
         
     }];
 }
+
+- (void)updateJob {
+    [[JMHTTPManager sharedInstance] updateJobWithJobId:@([self.model.user_job_id intValue]) job_label_id:@([self.job_labelID intValue]) industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        [self sendRequest];
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
+- (void)updateVita {
+    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:nil education:nil work_start_date:self.work_start_date description:nil video_path:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        [self sendRequest];
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
+- (void)dateChange:(UIDatePicker *)datePicker {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    //设置时间格式
+    formatter.dateFormat = @"yyyy-MM-dd";
+    NSString *dateStr = [formatter  stringFromDate:datePicker.date];
+    
+    self.work_start_date = datePicker.date;
+    [self updateVita];
+
+}
+//PositionDesiredViewController代理方法
+-(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
+ 
+    self.job_labelID = labIDStr;
+    self.model.work_name = labStr;
+    [self updateJob];
+    
+}
+#pragma mark - PickerViewDelegate
+
+//返回有几列
+
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+
+{
+    
+    return 1;
+    
+}
+
+//返回指定列的行数
+
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+
+{
+    
+    return [self.pickerArray count];
+    
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+    
+    NSString *str = [self.pickerArray objectAtIndex:row];
+    
+    return str;
+    
+}
+
+
+-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+    
+    NSString *salaryStr =[self.pickerArray objectAtIndex:row];
+    [self setSalaryRangeWithSalaryStr:salaryStr];
+}
+
+-(void)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
+    NSArray *array = [salaryStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
+    
+    NSString *minStr = array[0];
+    NSString *maxStr = array[1];
+    
+    NSInteger minNum = [minStr integerValue];
+    NSInteger maxNum = [maxStr integerValue];
+    
+    
+    self.salaryMin = @(minNum);
+    self.salaryMax = @(maxNum);
+    
+    [self updateJob];
+
+}
+
 
 #pragma mark - UITableViewDelegate
 
@@ -117,6 +288,7 @@
         case JMMyResumeCellTypeEducationalExperience:
         {
             JMEducationalExperienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMEducationalExperienceTableViewCellIdentifier forIndexPath:indexPath];
+            [cell setEducationExperienceModel:self.cellConfigures.educationalExperienceArr[indexPath.row]];
             return cell;
         }
         case JMMyResumeCellTypeHeaderOnlyLabel:
@@ -140,42 +312,96 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case JMMyResumeCellTypeIcon: {
-            
+            BasicInformationViewController *vc= [[BasicInformationViewController alloc] init];
+            vc.model = [JMUserInfoManager getUserInfo];
+            [self.navigationController pushViewController:vc animated:YES];\
+            break;
          }
         case JMMyResumeCellTypeHeader:
         {
-            ;
+            break;
+
         }
         case JMMyResumeCellTypeCareerStatus:
         {
+            break;
+
         }
         case JMMyResumeCellTypeCareerObjective:
         {
+            if (indexPath.row == 0) {
+                
+                PositionDesiredViewController *vc = [[PositionDesiredViewController alloc]init];
+                vc.delegate = self;
+                [self.navigationController pushViewController:vc animated:YES];
+
+            }else if (indexPath.row == 1) {
+                self.datePicker.hidden = YES;
+                [self.pickerView setHidden:NO];
+
+            }else if (indexPath.row == 2) {
+                
+            }else {
+                self.datePicker.hidden = NO;
+                [self.pickerView setHidden:YES];
+            }
+            break;
+
         }
         case JMMyResumeCellTypeHeader2:
         {
-                    }
+            break;
+
+        }
         case JMMyResumeCellTypeWorkExperience:
         {
+            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc] init];
+            vc.viewType = JMJobExperienceViewTypeEdit;
+            vc.model = self.cellConfigures.workExperienceArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
         case JMMyResumeCellTypeAction:
         {
+            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc] init];
+            vc.viewType = JMJobExperienceViewTypeAdd;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
         case JMMyResumeCellTypeHeader3:
         {
-           
+            JMMyPictureViewController *vc = [[JMMyPictureViewController alloc] init];
+            vc.image_paths = self.model.files;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
+
         }
         case JMMyResumeCellTypeHeader4:
         {
+            JMEducationExperienceViewController *vc = [[JMEducationExperienceViewController alloc] init];
+            vc.viewType = JMEducationExperienceViewTypeAdd;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
         case JMMyResumeCellTypeEducationalExperience:
         {
+            JMEducationExperienceViewController *vc = [[JMEducationExperienceViewController alloc] init];
+            vc.viewType = JMEducationExperienceViewTypeEdit;
+            vc.model = self.cellConfigures.educationalExperienceArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
         case JMMyResumeCellTypeHeaderOnlyLabel:
         {
+            break;
+
         }
         case JMMyResumeCellTypyText:
         {
+            JMMyDescriptionViewController *vc = [[JMMyDescriptionViewController alloc] init];
+            vc.myDescription = self.cellConfigures.vita_description;
+            [self.navigationController pushViewController:vc animated:YES];
+            break;
         }
         default:
             break;
@@ -202,6 +428,12 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return [self.cellConfigures heightForFooterInSection:section];
 }
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    self.pickerView.hidden = YES;
+}
+
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {

@@ -10,6 +10,12 @@
 
 NSString *const JMEducationalExperienceTableViewCellIdentifier = @"JMEducationalExperienceTableViewCellIdentifier";
 
+@interface JMEducationalExperienceTableViewCell ()
+
+@property (weak, nonatomic) IBOutlet UILabel *schoolNameLabel;
+
+@end
+
 @implementation JMEducationalExperienceTableViewCell
 
 - (void)awakeFromNib {
@@ -23,4 +29,7 @@ NSString *const JMEducationalExperienceTableViewCellIdentifier = @"JMEducational
     // Configure the view for the selected state
 }
 
+- (void)setEducationExperienceModel:(JMEducationModel *)model {
+    self.schoolNameLabel.text = model.school_name;
+}
 @end

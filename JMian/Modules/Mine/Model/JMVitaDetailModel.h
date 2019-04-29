@@ -38,6 +38,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray *experiences;
 @property (strong, nonatomic) NSArray *shielding;
 @property (strong, nonatomic) NSArray *education;
+@property (strong, nonatomic) NSArray *files;
+
+@end
+
+@interface JMMyFilesModel : NSObject
+
+@property (nonatomic, copy) NSString *file_path;
+@property (nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSString *user_id;
+
 
 @end
 
@@ -71,6 +81,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *major;
 @property (copy, nonatomic) NSString *s_date;
 @property (copy, nonatomic) NSString *e_date;
+//@property (strong, nonatomic) NSDate *s_date;
+//@property (strong, nonatomic) NSDate *e_date;
 @property (copy, nonatomic) NSString *education_description;
 @property (copy, nonatomic) NSString *school_name;
 

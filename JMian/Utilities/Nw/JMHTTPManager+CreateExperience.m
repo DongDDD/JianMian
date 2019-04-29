@@ -42,16 +42,13 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
-- (void)updateExperienceWith_experienceId:(NSNumber *)experienceId successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+- (void)deleteExperienceWith_experienceId:(NSNumber *)experienceId
+                             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     NSParameterAssert(experienceId);
-
     NSString *urlStr = [Delete_Experience_URL stringByAppendingFormat:@"/%@",experienceId];
-    
-    
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodDELETE path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+
 }
-
-
 
 @end

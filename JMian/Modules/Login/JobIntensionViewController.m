@@ -89,6 +89,7 @@ typedef enum _PickerState {
     self.pickerArray = [NSArray arrayWithObjects:@"请选择",@"初中/中专",@"高中",@"大专",@"本科",@"研究生",@"博士",nil];
 
 }
+
 #pragma mark - 点击事件
 - (IBAction)status1Action:(UIButton *)sender {
     [self.statusBtn2 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
@@ -277,9 +278,6 @@ typedef enum _PickerState {
     self.salaryMin = @(minNum);
     self.salaryMax = @(maxNum);
     
-
-
-
 }
 #pragma mark - scrollViewDelegate
 

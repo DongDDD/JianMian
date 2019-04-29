@@ -26,6 +26,14 @@ NS_ASSUME_NONNULL_BEGIN
                          user_step:(nullable NSNumber *)user_step
                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
+- (void)updateVitaWith_work_status:(nullable NSNumber *)work_status
+                         education:(nullable NSNumber *)education
+                   work_start_date:(nullable NSDate *)work_start_date
+                        description:(nullable NSString *)description
+                            video_path:(nullable NSString *)video_path
+                         image_paths:(nullable NSArray *)image_paths
+                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
 
 - (void)fetchVitPaginateWithCity_id:(nullable NSNumber *)city_id
                          education:(nullable NSNumber *)education

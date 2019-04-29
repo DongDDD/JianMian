@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "JMUserInfoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BasicInformationViewController : BaseViewController
 
-
+@property (strong, nonatomic) JMUserInfoModel *model;
 
 @end
 

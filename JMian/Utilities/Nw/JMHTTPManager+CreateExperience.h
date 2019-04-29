@@ -28,6 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
                               description:(nullable NSString *)description
                              successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
+
+- (void)deleteExperienceWith_experienceId:(NSNumber *)experienceId
+                             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

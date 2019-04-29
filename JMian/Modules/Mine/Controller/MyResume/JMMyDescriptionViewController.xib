@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMMyDescriptionViewController">
+            <connections>
+                <outlet property="myDescriptionTextView" destination="eIG-aW-tsH" id="RIm-bV-M4F"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我的优势" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IzE-z4-b9u">
+                    <rect key="frame" x="20" y="63" width="70" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="1KG-cE-xu9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="请填写你的优势" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="eIG-aW-tsH">
+                    <rect key="frame" x="20" y="84" width="374" height="200"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="zQG-qn-wLs"/>
+                    </constraints>
+                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijc-Dk-BXw">
+                    <rect key="frame" x="20" y="334" width="374" height="50"/>
+                    <color key="backgroundColor" red="0.40430831909999998" green="0.76971369980000004" blue="0.97996550800000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="rC6-CK-0Bh"/>
+                    </constraints>
+                    <state key="normal" title="保存">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="saveBtn:" destination="-1" eventType="touchUpInside" id="dDZ-Mx-rWw"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="eIG-aW-tsH" firstAttribute="top" secondItem="IzE-z4-b9u" secondAttribute="bottom" id="4sH-ys-oQj"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="eIG-aW-tsH" secondAttribute="trailing" constant="20" id="FoE-YX-vmX"/>
+                <constraint firstItem="IzE-z4-b9u" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="19" id="SRl-re-LvN"/>
+                <constraint firstItem="ijc-Dk-BXw" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="T0r-iD-Mts"/>
+                <constraint firstItem="IzE-z4-b9u" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="Uud-l6-9OX"/>
+                <constraint firstItem="eIG-aW-tsH" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="cJH-Vf-gHd"/>
+                <constraint firstItem="ijc-Dk-BXw" firstAttribute="top" secondItem="eIG-aW-tsH" secondAttribute="bottom" constant="50" id="kCY-tF-W7R"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="ijc-Dk-BXw" secondAttribute="trailing" constant="20" id="zrb-MM-ir6"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="131.8840579710145" y="142.63392857142856"/>
+        </view>
+    </objects>
+</document>

@@ -87,7 +87,9 @@
         case JMRequestMethodUpload:
             urlRequest = [self urlRequestForUploadRequest:request];
             break;
-            
+        case JMRequestMethodDELETE:
+            urlRequest = [self urlRequestForMethod:@"DELETE" request:request];
+            break;
         default:
             break;
     }
