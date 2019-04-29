@@ -9,14 +9,16 @@
 #import "JMAllMessageTableViewController.h"
 #import "JMAllMessageTableViewCell.h"
 #import "JMNotificationViewController.h"
-
 #import <TIMManager.h>
 #import <TIMMessage.h>
 #import <IMMessageExt.h>
+#import "JMHTTPManager+MessageList.h"
+#import "JMMessageListModel.h"
 
 @interface JMAllMessageTableViewController ()
 
-@property (nonatomic, strong) NSMutableArray *data;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+@property (nonatomic, strong) NSArray *modelArray;
 
 @end
 
@@ -34,12 +36,36 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self updateConversations];
+    [self updateConversations]; //获取腾讯云数据
+    [self getMsgList];    //获取自己服务器数据
 }
+
+
+-(void)getMsgList{
+
+    [[JMHTTPManager sharedInstance]fecthMessageList_mode:@"array" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            
+            self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            [self.tableView reloadData];
+
+        }
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+        
+    }];
+
+
+}
+
 - (void)updateConversations {
-    self.data = [NSMutableArray array];
+    self.dataArray = [NSMutableArray array];
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
     for (TIMConversation *conv in convs) {
@@ -52,22 +78,22 @@ static NSString *cellIdent = @"allMessageCellIdent";
         data.unRead = [conv getUnReadMessageNum];
         data.time = [self getDateDisplayString:msg.timestamp];
         data.subTitle = [self getLastDisplayString:conv];
-        if([conv getType] == TIM_C2C){
-            data.head = @"";
-        }
-        else if([conv getType] == TIM_GROUP){
-            data.head = @"";
-        }
+//        if([conv getType] == TIM_C2C){
+//            data.head = @"";
+//        }
+//        else if([conv getType] == TIM_GROUP){
+//            data.head = @"";
+//        }
         data.convId = [conv getReceiver];
         data.convType = (TConvType)[conv getType];
         
         if(data.convType == TConv_Type_C2C){
             data.title = data.convId;
         }
-        else if(data.convType == TConv_Type_Group){
-            data.title = [conv getGroupName];
-        }
-        [_data addObject:data];
+//        else if(data.convType == TConv_Type_Group){
+//            data.title = [conv getGroupName];
+//        }
+        [_dataArray addObject:data];
     }
     [self.tableView reloadData];
 
@@ -255,14 +281,15 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.data.count;
+    return self.dataArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 //    JMAllMessageTableViewCell *cell = [[JMAllMessageTableViewCell alloc]init];
     JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
-    [cell setData:[_data objectAtIndex:indexPath.row]];
+    [cell setData:[_dataArray objectAtIndex:indexPath.row]];
+    [cell setModel:[_modelArray objectAtIndex:indexPath.row]];
  
     return cell;
 }

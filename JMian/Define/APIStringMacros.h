@@ -83,6 +83,10 @@
 #define Delete_Favorite_URL @"api/user/favorite/delete"
 
 
+//会话列表
+#define Chat_List_URL @"converse/lists"
+
+
 //接口
 
 

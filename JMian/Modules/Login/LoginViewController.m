@@ -10,7 +10,6 @@
 #import "LoginPhoneViewController.h"
 #import "WXApi.h"
 #import "JMHTTPManager+Login.h"
-//#import "JMLoginInfoModel.h"
 
 
 
@@ -71,11 +70,7 @@
             NSLog(@"%@",req.code); //获得code
             
             [[JMHTTPManager sharedInstance] loginWithMode:@"wx" phone:@"" captcha:req.code sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-                
-                
-//                JMLoginInfoModel *model = [JMLoginInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-               
-                
+              
                 LoginPhoneViewController *loginPhone = [[LoginPhoneViewController alloc]initWithNibName:@"LoginPhoneViewController" bundle:nil];
                 
                 [self.navigationController pushViewController:loginPhone animated:YES];

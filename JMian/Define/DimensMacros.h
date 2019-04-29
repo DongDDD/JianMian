@@ -55,6 +55,11 @@
 #define Card_WaitIdentify @"1"
 #define Card_NOIdentify @"0"
 #define Card_PassIdentify @"3"
+//用户状态type
+#define NO_Type_USER @"0" //还没选择身份
+#define C_USER @"1" //C端
+#define B_UESR @"2" //B端
+
 //职位状态
 #define Position_Online @"1" //职位在线
 #define Position_Downline @"0" //职位下线

@@ -18,8 +18,7 @@ static NSString *cellIdent = @"lookMeCellIdent";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-    
+     
     [self.tableView registerNib:[UINib nibWithNibName:@"JMLookMeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
     self.tableView.rowHeight = 79;
     self.tableView.separatorStyle = UITableViewCellAccessoryNone;

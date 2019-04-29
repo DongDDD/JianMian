@@ -12,6 +12,7 @@
 #import "JobDetailsViewController.h"
 #import "JMHTTPManager+Work.h"
 #import "JMHomeWorkModel.h"
+#import "JMUserInfoModel.h"
 
 
 
@@ -47,8 +48,10 @@ static NSString *cellIdent = @"cellIdent";
     [self setTableView];
     
     [self getData];
-
+    
+//    [self loginIM];
 }
+
 
 #pragma mark - 布局UI
 

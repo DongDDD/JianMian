@@ -39,6 +39,7 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 
+
 #pragma mark - 获取数据
 -(void)getData{
     [[JMHTTPManager sharedInstance]fetchVitaPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

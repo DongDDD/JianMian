@@ -122,10 +122,10 @@
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderwidth">
                                             <integer key="value" value="1"/>
                                         </userDefinedRuntimeAttribute>
-                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskToBounds" value="YES"/>
                                         <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
                                             <color key="value" red="0.52156862749999999" green="0.52156862749999999" blue="0.52156862749999999" alpha="1" colorSpace="calibratedRGB"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskstoBorder" value="YES"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
                             </subviews>

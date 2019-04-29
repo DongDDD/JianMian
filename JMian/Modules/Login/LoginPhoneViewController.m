@@ -9,7 +9,6 @@
 #import "LoginPhoneViewController.h"
 #import "ChooseIdentity.h"
 #import "JMHTTPManager+Login.h"
-#import "JMLoginInfoModel.h"
 #import "JMHTTPManager+Captcha.h"
 #import "VendorKeyMacros.h"
 #import "JMJudgeViewController.h"
@@ -43,15 +42,14 @@
     
     [[JMHTTPManager sharedInstance]loginWithMode:@"sms" phone:self.phoneNumText.text captcha:self.captchaText.text sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        JMUserInfoModel *model = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         
-        [JMUserInfoManager saveUserInfo:userInfo];
-   
-        JMLoginInfoModel *model = [JMLoginInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:model];
         
 
         NSLog(@"用户手机号：----%@",model.phone);
         
+      
         TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
         // identifier 为用户名，userSig 为用户登录凭证
         login_param.identifier = model.user_id;
@@ -88,6 +86,8 @@
 }
 
 
+
+
 - (IBAction)verifyAction:(id)sender {
     [[JMHTTPManager sharedInstance]loginCaptchaWithPhone:self.phoneNumText.text mode:@3 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
@@ -96,7 +96,12 @@
     }];
     
     [self openCountdown];
-} 
+}
+
+
+
+
+
 //读秒效果
 -(void)openCountdown{
     

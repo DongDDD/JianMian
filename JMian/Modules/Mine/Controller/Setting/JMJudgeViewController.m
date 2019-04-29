@@ -12,6 +12,7 @@
 #import "JMHTTPManager+Login.h"
 #import "NavigationViewController.h"
 #import "LoginViewController.h"
+#import "LoginPhoneViewController.h"
 
 @interface JMJudgeViewController ()
 
@@ -22,38 +23,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [[JMHTTPManager sharedInstance]userChangeWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-        [JMUserInfoManager saveUserInfo:userInfo];
+    if (kFetchMyDefault(@"token")){
+        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+        model = [JMUserInfoManager getUserInfo];
         
-        if (kFetchMyDefault(@"token")){
-            
-            JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-            model = [JMUserInfoManager getUserInfo];
-            int type = [model.type intValue];
-            BaseViewController *vc;
-            NSString *vcStr;
-            
-            //用户还没选择身份
-            if (type==0) vcStr = [self getPersonStepWhereWitnUser_step:@"0"];
-            
-            //用户已经选择了C端身份，user_step判断用户填写信息步骤
-            if (type==1) vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
-            
-            //用户选择了B端身份，enterprise_step判断用户填写信息步骤
-            if (type==2)  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
-            
-            if (vcStr) {
-                vc = [[NSClassFromString(vcStr) alloc]init];
-                if (![vc isKindOfClass:[JMTabBarViewController class]]&&![vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
-                    vc.isHiddenBackBtn = YES;
-                }
-                NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-                [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-        
-            }
+        if (model.usersig == nil) {
+            LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
+            loginVc.isHiddenBackBtn = YES;
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
+            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
         }else{
+            [self jugdeStepToVCWithModel:model];
+        }
+        
+    }else{
             //token为空执行
             
             LoginViewController *login = [[LoginViewController alloc] init];
@@ -61,11 +44,35 @@
             [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
             
         }
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+   
+}
+
+-(void)jugdeStepToVCWithModel:(JMUserInfoModel *)model{
+   
+    [self loginIM_tpye:model.type];
+
+    BaseViewController *vc;
+    NSString *vcStr;
+    
+    //用户还没选择身份
+    if ([model.type isEqualToString:NO_Type_USER]) vcStr = [self getPersonStepWhereWitnUser_step:@"0"];
+    
+    //用户已经选择了C端身份，user_step判断用户填写信息步骤
+    if ([model.type isEqualToString:C_USER]) vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+    
+    //用户选择了B端身份，enterprise_step判断用户填写信息步骤
+    if ([model.type isEqualToString:B_UESR])  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
+    
+    
+    if (vcStr) {
+        vc = [[NSClassFromString(vcStr) alloc]init];
+        if (![vc isKindOfClass:[JMTabBarViewController class]]&&![vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
+            vc.isHiddenBackBtn = YES;
+        }
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
         
-    }];
-    
-    
+    }
     
 }
 
@@ -105,7 +112,36 @@
 }
 
 
-
+-(void)loginIM_tpye:(NSString *)tpye{
+    
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    
+    TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
+    
+    NSString *userIDstr;
+    if ([tpye isEqualToString:C_USER]) {
+        userIDstr = [NSString stringWithFormat:@"%@a",model.user_id];
+    }else if ([tpye isEqualToString:B_UESR]){
+        userIDstr = [NSString stringWithFormat:@"%@b",model.user_id];
+        
+        
+    }
+    // identifier 为用户名，userSig 为用户登录凭证
+    login_param.identifier = userIDstr;
+    login_param.userSig = model.usersig;
+    login_param.appidAt3rd = @"1400193090";
+    [[TIMManager sharedInstance] login: login_param succ:^(){
+        
+        NSLog(@"Login Succ");
+        
+    } fail:^(int code, NSString * err) {
+        
+        NSLog(@"Login Failed: %d->%@", code, err);
+        
+    }];
+    
+    
+}
 
 /*
 #pragma mark - Navigation

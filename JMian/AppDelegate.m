@@ -21,6 +21,7 @@
 #import "JMUserInfoModel.h"
 #import "JMCompanyTabBarViewController.h"
 #import "JMHTTPManager+Login.h"
+#import "JMJudgeViewController.h"
 
 
 
@@ -31,48 +32,13 @@
 
 @implementation AppDelegate
 
-//获取个人用户填写信息步骤
-- (NSString *)getPersonStepWhereWitnUser_step:(NSString *)user_step{
-    //因为服务器的user_step不是按顺序，但是数组是按顺序取，所以用[NSNull null]占一个位置
-    NSArray *vcArray = @[@"ChooseIdentity",
-                         @"BasicInformationViewController", //当user_step=1
-                         [NSNull null],
-                         @"JobIntensionViewController",     //当user_step=3
-                         @"JMJobExperienceViewController",  //当user_step=4
-                         [NSNull null],
-                         @"JMTabBarViewController"];        //当user_step=6
-    
-    int stepInt = [user_step intValue];
-    if (stepInt < vcArray.count) return vcArray[stepInt];
-    
-    return nil;
-}
-
-//获取公司用户填写信息步骤
-- (NSString *)getCompanyStepWhereWitnEnterprise_step:(NSString *)enterprise_step{
-    
-    NSArray *vcArray = @[@"ChooseIdentity",
-                         @"JMCompanyBaseInfoViewController",//当enterprise_step=1
-                         @"JMCompanyInfoViewController",    //当enterprise_step=2
-                         @"JMUploadLicenseViewController",  //当enterprise_step=3
-                         @"JMChangeIdentityViewController", //当enterprise_step=4
-                         @"JMCompanyTabBarViewController"   //当enterprise_step=5
-                         
-                         ];
-    
-    int stepInt = [enterprise_step intValue];
-    if (stepInt < vcArray.count) return vcArray[stepInt];
-    
-    return nil;
-}
-
 
 - (void)initTimSDK {
     TIMSdkConfig *sdkConfig = [[TIMSdkConfig alloc] init];
     sdkConfig.sdkAppId = TIMSdkAppid.intValue;
     sdkConfig.accountType = TIMSdkAccountType;
     sdkConfig.disableLogPrint = NO; // 是否允许log打印
-    //    sdkConfig.logLevel = TIM_LOG_DEBUG; //Log输出级别（debug级别会很多）
+        sdkConfig.logLevel = TIM_LOG_NONE; //Log输出级别（debug级别会很多）
     [[TIMManager sharedInstance] initSdk:sdkConfig];
 }
 
@@ -81,69 +47,12 @@
     
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
-    if (kFetchMyDefault(@"token")) {
-        
-        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            
-            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-            [JMUserInfoManager saveUserInfo:userInfo];
-            
-            
-            JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-            model = [JMUserInfoManager getUserInfo];
-            int type = [model.type intValue];
-            BaseViewController *vc;
-            NSString *vcStr;
-            
-            //用户还没选择身份
-            if (type==0) vcStr = [self getPersonStepWhereWitnUser_step:@"0"];
-            
-            //用户已经选择了C端身份，user_step判断用户填写信息步骤
-            if (type==1) vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
-            
-            //用户选择了B端身份，enterprise_step判断用户填写信息步骤
-            if (type==2)  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
-            
-            if (vcStr) {
-                vc = [[NSClassFromString(vcStr) alloc]init];
-                if (![vc isKindOfClass:[JMTabBarViewController class]]&&![vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
-                    vc.isHiddenBackBtn = YES;
-                }
-                NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-                [_window setRootViewController:naVC];
-                [self.window makeKeyAndVisible];
-            }
-            
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-        
-            
-        }];
-        
-    }else {
-        
-        LoginViewController *login = [[LoginViewController alloc] init];
-        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-        [_window setRootViewController:naVC];//navigation加在window上
-        
-        [self.window makeKeyAndVisible];
-        
-        
-    }
-    
 
-    
-    // Override point for customization after application launch.
-  
-    //C端
-//    JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
-//    self.window.rootViewController = tab;
-//    [self.window makeKeyAndVisible];
-//    B端
-//        JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc] init];
-//        self.window.rootViewController = tab;
-//        [self.window makeKeyAndVisible];
-    
+    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
+    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
+    [_window setRootViewController:naVC];
+    [self.window makeKeyAndVisible];
+
     
     return YES;
 }

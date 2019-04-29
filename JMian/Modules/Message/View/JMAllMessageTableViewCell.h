@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMMessageListModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,11 +27,13 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property (nonatomic, strong) NSString *subTitle;
 @property (nonatomic, strong) NSString *time;
 @property (nonatomic, assign) int unRead;
+
 @end
 
 @interface JMAllMessageTableViewCell : UITableViewCell
 
 - (void)setData:(JMAllMessageTableViewCellData *)data;
+- (void)setModel:(JMMessageListModel *)model;
 
 @end
 
