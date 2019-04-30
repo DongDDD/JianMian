@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *sender_nickname;
 @property(nonatomic,copy)NSString *sender_company_position;
 
+@property(nonatomic,copy)NSString *sender_mark; 
+@property(nonatomic,copy)NSString *recipient_mark;
+
 
 @property(nonatomic,copy)NSString *recipient_user_id;
 @property(nonatomic,copy)NSString *recipient_type;

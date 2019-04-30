@@ -7,6 +7,7 @@
 //
 
 #import "JMCompanyHomeTableViewCell.h"
+#import "DimensMacros.h"
 
 @implementation JMCompanyHomeTableViewCell
 
@@ -17,9 +18,11 @@
 
 -(void)setModel:(JMCompanyHomeModel *)model{
     self.jobNameLab.text = model.workName;
-    
+    self.iconImage.image = GETImageFromURL(model.userAvatar);
     NSString *salaryStr = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
+    self.jobDetailLab.text = model.workName;
     self.salaryLab.text = salaryStr;
+    self.educationLab.text = [self getEducationStrWithEducation:model.vitaEducation];
     
     
 }
@@ -37,6 +40,45 @@
     
     return salaryStr;
 }
+
+//学历数据转化
+-(NSString *)getEducationStrWithEducation:(NSString *)education{
+    NSInteger myInt = [education integerValue];
+    
+    switch (myInt) {
+        case 0:
+            return @"不限";
+            break;
+        case 1:
+            return @"初中及以下";
+            break;
+        case 2:
+            return @"中专/中技";
+            break;
+        case 3:
+            return @"高中";
+            break;
+        case 4:
+            return @"大专";
+            break;
+        case 5:
+            return @"本科";
+            break;
+        case 6:
+            return @"硕士";
+            break;
+        case 7:
+            return @"博士";
+            break;
+            
+        default:
+            break;
+    }
+    return @"不限";
+    
+}
+
+
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

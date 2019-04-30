@@ -110,11 +110,11 @@
             </accessibility>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
-                <outlet property="iconImageView" destination="BTe-Rf-Xjf" id="GKD-wP-p4P"/>
-                <outlet property="lastChatLabel" destination="zPy-Y3-P2Y" id="YeN-4G-4RO"/>
-                <outlet property="lastChatTimeLbel" destination="gIR-Gt-4Uc" id="FjR-Il-DDg"/>
-                <outlet property="userLabel" destination="3Jq-FL-H8P" id="8Mg-Km-SoB"/>
-                <outlet property="userNameLabel" destination="VJ5-WE-752" id="AK4-Ch-fFm"/>
+                <outlet property="iconImageView" destination="BTe-Rf-Xjf" id="T4t-JB-pvN"/>
+                <outlet property="lastChatLabel" destination="zPy-Y3-P2Y" id="CQW-VL-Sgo"/>
+                <outlet property="lastChatTimeLbel" destination="gIR-Gt-4Uc" id="AZi-Eg-NLa"/>
+                <outlet property="userLabel" destination="3Jq-FL-H8P" id="UBE-E1-7pT"/>
+                <outlet property="userNameLabel" destination="VJ5-WE-752" id="SNi-kt-XSx"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="105.46875"/>
         </tableViewCell>

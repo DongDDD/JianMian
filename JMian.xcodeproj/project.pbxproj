@@ -50,6 +50,9 @@
 		040A40C82265B41A0005E0D7 /* company_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 040A40C52265B41A0005E0D7 /* company_logo.png */; };
 		040A40C92265B41A0005E0D7 /* company_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040A40C62265B41A0005E0D7 /* company_logo@3x.png */; };
 		040A5115226FF47B0074BD4B /* JMGetCompanyLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A5114226FF47B0074BD4B /* JMGetCompanyLocationViewController.m */; };
+		040AF59E2277F4F00027D7D8 /* JMMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AF59D2277F4F00027D7D8 /* JMMessageTableViewController.m */; };
+		040AF5AA22783E150027D7D8 /* JMMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AF5A922783E150027D7D8 /* JMMessageCell.m */; };
+		040AF5B022784BC70027D7D8 /* JMChatViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AF5962277D9350027D7D8 /* JMChatViewViewController.m */; };
 		040B83772265D01800F1A37A /* JMUploadLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040B83752265D01800F1A37A /* JMUploadLicenseViewController.m */; };
 		040B83782265D01800F1A37A /* JMUploadLicenseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040B83762265D01800F1A37A /* JMUploadLicenseViewController.xib */; };
 		040B837C2265D73600F1A37A /* companyCamera.png@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040B83792265D73600F1A37A /* companyCamera.png@2x.png */; };
@@ -463,6 +466,12 @@
 		040A40C62265B41A0005E0D7 /* company_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "company_logo@3x.png"; sourceTree = "<group>"; };
 		040A5113226FF47B0074BD4B /* JMGetCompanyLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMGetCompanyLocationViewController.h; sourceTree = "<group>"; };
 		040A5114226FF47B0074BD4B /* JMGetCompanyLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMGetCompanyLocationViewController.m; sourceTree = "<group>"; };
+		040AF5952277D9350027D7D8 /* JMChatViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMChatViewViewController.h; sourceTree = "<group>"; };
+		040AF5962277D9350027D7D8 /* JMChatViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMChatViewViewController.m; sourceTree = "<group>"; };
+		040AF59C2277F4F00027D7D8 /* JMMessageTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageTableViewController.h; sourceTree = "<group>"; };
+		040AF59D2277F4F00027D7D8 /* JMMessageTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageTableViewController.m; sourceTree = "<group>"; };
+		040AF5A822783E150027D7D8 /* JMMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageCell.h; sourceTree = "<group>"; };
+		040AF5A922783E150027D7D8 /* JMMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageCell.m; sourceTree = "<group>"; };
 		040B83742265D01800F1A37A /* JMUploadLicenseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMUploadLicenseViewController.h; sourceTree = "<group>"; };
 		040B83752265D01800F1A37A /* JMUploadLicenseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMUploadLicenseViewController.m; sourceTree = "<group>"; };
 		040B83762265D01800F1A37A /* JMUploadLicenseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMUploadLicenseViewController.xib; sourceTree = "<group>"; };
@@ -1092,6 +1101,15 @@
 			path = Identification;
 			sourceTree = "<group>";
 		};
+		040AF59F227833CF0027D7D8 /* ChatViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				040AF5A822783E150027D7D8 /* JMMessageCell.h */,
+				040AF5A922783E150027D7D8 /* JMMessageCell.m */,
+			);
+			path = ChatViewCell;
+			sourceTree = "<group>";
+		};
 		040B837F2265DF7100F1A37A /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -1220,6 +1238,10 @@
 		040E54CD2276F9FF004AB0F9 /* ChatViewController */ = {
 			isa = PBXGroup;
 			children = (
+				040AF5952277D9350027D7D8 /* JMChatViewViewController.h */,
+				040AF5962277D9350027D7D8 /* JMChatViewViewController.m */,
+				040AF59C2277F4F00027D7D8 /* JMMessageTableViewController.h */,
+				040AF59D2277F4F00027D7D8 /* JMMessageTableViewController.m */,
 			);
 			path = ChatViewController;
 			sourceTree = "<group>";
@@ -1647,6 +1669,7 @@
 		04C6013322603956000B1FE0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				040AF59F227833CF0027D7D8 /* ChatViewCell */,
 				04C6013422603967000B1FE0 /* JMTitlesView.h */,
 				04C6013522603967000B1FE0 /* JMTitlesView.m */,
 				04C6013722603F73000B1FE0 /* JMPageView.h */,
@@ -2618,6 +2641,7 @@
 				041997CE2266C75000C6C134 /* JMPostJobHomeViewController.m in Sources */,
 				040BF0852271E05D0088697D /* JMSettingViewController.m in Sources */,
 				040701BA2275DB58002BF58D /* JMCompanyLikeViewController.m in Sources */,
+				040AF5B022784BC70027D7D8 /* JMChatViewViewController.m in Sources */,
 				6D82F287227492CF00B9D2B9 /* JMEducationExperienceViewController.m in Sources */,
 				040BF06722719B6A0088697D /* JMUserChangeWindowView.m in Sources */,
 				04A9DFBA225C429B00CD7CC1 /* HomeTableViewCell.m in Sources */,
@@ -2627,6 +2651,7 @@
 				040865E822733B78005BB03E /* JMInterVIewModel.m in Sources */,
 				040E366922682E5900A7D789 /* JMSelfDescriptionView.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
+				040AF5AA22783E150027D7D8 /* JMMessageCell.m in Sources */,
 				6D020A7122539FB0009BCFE4 /* JMIntroduceContentView.m in Sources */,
 				040701BF2275DB7A002BF58D /* JMCompanyLikeTableViewCell.m in Sources */,
 				041997D32266CB3500C6C134 /* JMCompanyHomeTableViewCell.m in Sources */,
@@ -2689,6 +2714,7 @@
 				6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */,
 				040A40BB226589A50005E0D7 /* JMCompanyBaseInfoViewController.m in Sources */,
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
+				040AF59E2277F4F00027D7D8 /* JMMessageTableViewController.m in Sources */,
 				040CD552226ACD42000BB230 /* JMHTTPManager+FetchCompanyInfo.m in Sources */,
 				04C6014D226071B5000B1FE0 /* JMAllMessageTableViewCell.m in Sources */,
 				04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */,

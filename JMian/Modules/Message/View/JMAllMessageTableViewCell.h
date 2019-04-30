@@ -32,6 +32,12 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 
 @interface JMAllMessageTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastChatLabel;
+@property (weak, nonatomic) IBOutlet UILabel *lastChatTimeLbel;
+
 - (void)setData:(JMAllMessageTableViewCellData *)data;
 - (void)setModel:(JMMessageListModel *)model;
 

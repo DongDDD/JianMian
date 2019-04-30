@@ -70,10 +70,20 @@
 #define Interview_Meet @"4" //已面试
 #define Interview_Reflect @"5" //已反馈
 
-
-
 //获取网络图片
 #define GETImageFromURL(URL)  [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:URL]]]
+
+
+//cell
+#define TMessageCell_Head_Size CGSizeMake(45, 45)
+#define TMessageCell_Padding 8
+#define TMessageCell_Margin 8
+#define TMessageCell_Indicator_Size CGSizeMake(20, 20)
+#define MAXFLOAT    0x1.fffffep+127f
+//text cell
+#define TTextMessageCell_ReuseId @"TTextMessageCell"
+#define TTextMessageCell_Height_Min (TMessageCell_Head_Size.height + 2 * TMessageCell_Padding)
+#define TTextMessageCell_Margin 12
 
 
 //存储userDefault

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMCompanyHomeTableViewCell : UITableViewCell
 
 @property(nonatomic,strong)JMCompanyHomeModel *model;
+@property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (weak, nonatomic) IBOutlet UILabel *jobNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *salaryLab;
 @property (weak, nonatomic) IBOutlet UILabel *experinenceLab;

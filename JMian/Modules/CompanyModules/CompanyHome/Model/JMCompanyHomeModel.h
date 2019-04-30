@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSDate *vitaWork_start_date;
 @property (nonatomic, strong) NSNumber *vitaWork_status;
-@property (nonatomic, strong) NSNumber *vitaEducation;
+@property (nonatomic, strong) NSString *vitaEducation;
 
 @property (nonatomic, copy) NSNumber *workLabel_id;
 @property (nonatomic, copy) NSString *workName;

@@ -14,6 +14,7 @@
 #import <IMMessageExt.h>
 #import "JMHTTPManager+MessageList.h"
 #import "JMMessageListModel.h"
+#import "JMChatViewViewController.h"
 
 @interface JMAllMessageTableViewController ()
 
@@ -281,7 +282,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.dataArray.count;
+    return self.modelArray.count;
 }
 
 
@@ -296,8 +297,9 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    JMNotificationViewController *vc = [[JMNotificationViewController alloc]init];
-    
+    JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+    vc.myConvModel = [_modelArray objectAtIndex:indexPath.row];
+    vc.conversation = [_dataArray objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
