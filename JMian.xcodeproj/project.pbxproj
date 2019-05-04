@@ -58,6 +58,10 @@
 		040A392F227DAC2B00EDD9E0 /* copyreader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040A392C227DAC2B00EDD9E0 /* copyreader@3x.png */; };
 		040A3930227DAC2B00EDD9E0 /* copyreader.png in Resources */ = {isa = PBXBuildFile; fileRef = 040A392D227DAC2B00EDD9E0 /* copyreader.png */; };
 		040A3933227DBEA700EDD9E0 /* JMGreetTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A3932227DBEA700EDD9E0 /* JMGreetTableViewController.m */; };
+		040A3937227DD1B200EDD9E0 /* JMInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A3935227DD1B200EDD9E0 /* JMInputController.m */; };
+		040A3938227DD1B200EDD9E0 /* JMInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A3936227DD1B200EDD9E0 /* JMInputController.xib */; };
+		040A393B227DD1EB00EDD9E0 /* JMFaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A393A227DD1EB00EDD9E0 /* JMFaceView.m */; };
+		040A393E227DD20400EDD9E0 /* JMMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A393D227DD20400EDD9E0 /* JMMoreView.m */; };
 		040A40BB226589A50005E0D7 /* JMCompanyBaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A40B9226589A50005E0D7 /* JMCompanyBaseInfoViewController.m */; };
 		040A40BC226589A50005E0D7 /* JMCompanyBaseInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A40BA226589A50005E0D7 /* JMCompanyBaseInfoViewController.xib */; };
 		040A40C02265B2480005E0D7 /* JMCompanyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A40BE2265B2480005E0D7 /* JMCompanyInfoViewController.m */; };
@@ -493,6 +497,13 @@
 		040A392D227DAC2B00EDD9E0 /* copyreader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copyreader.png; sourceTree = "<group>"; };
 		040A3931227DBEA700EDD9E0 /* JMGreetTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMGreetTableViewController.h; sourceTree = "<group>"; };
 		040A3932227DBEA700EDD9E0 /* JMGreetTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMGreetTableViewController.m; sourceTree = "<group>"; };
+		040A3934227DD1B200EDD9E0 /* JMInputController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMInputController.h; sourceTree = "<group>"; };
+		040A3935227DD1B200EDD9E0 /* JMInputController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMInputController.m; sourceTree = "<group>"; };
+		040A3936227DD1B200EDD9E0 /* JMInputController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMInputController.xib; sourceTree = "<group>"; };
+		040A3939227DD1EB00EDD9E0 /* JMFaceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMFaceView.h; sourceTree = "<group>"; };
+		040A393A227DD1EB00EDD9E0 /* JMFaceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMFaceView.m; sourceTree = "<group>"; };
+		040A393C227DD20400EDD9E0 /* JMMoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMoreView.h; sourceTree = "<group>"; };
+		040A393D227DD20400EDD9E0 /* JMMoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMoreView.m; sourceTree = "<group>"; };
 		040A40B8226589A50005E0D7 /* JMCompanyBaseInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCompanyBaseInfoViewController.h; sourceTree = "<group>"; };
 		040A40B9226589A50005E0D7 /* JMCompanyBaseInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCompanyBaseInfoViewController.m; sourceTree = "<group>"; };
 		040A40BA226589A50005E0D7 /* JMCompanyBaseInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCompanyBaseInfoViewController.xib; sourceTree = "<group>"; };
@@ -1282,6 +1293,9 @@
 				040AF5962277D9350027D7D8 /* JMChatViewViewController.m */,
 				040AF59C2277F4F00027D7D8 /* JMMessageTableViewController.h */,
 				040AF59D2277F4F00027D7D8 /* JMMessageTableViewController.m */,
+				040A3934227DD1B200EDD9E0 /* JMInputController.h */,
+				040A3935227DD1B200EDD9E0 /* JMInputController.m */,
+				040A3936227DD1B200EDD9E0 /* JMInputController.xib */,
 				040A3931227DBEA700EDD9E0 /* JMGreetTableViewController.h */,
 				040A3932227DBEA700EDD9E0 /* JMGreetTableViewController.m */,
 			);
@@ -1756,6 +1770,10 @@
 				040A3926227DA5F900EDD9E0 /* JMGreetView.m */,
 				040A3928227DA9A600EDD9E0 /* JMGreetCell.h */,
 				040A3929227DA9A600EDD9E0 /* JMGreetCell.m */,
+				040A3939227DD1EB00EDD9E0 /* JMFaceView.h */,
+				040A393A227DD1EB00EDD9E0 /* JMFaceView.m */,
+				040A393C227DD20400EDD9E0 /* JMMoreView.h */,
+				040A393D227DD20400EDD9E0 /* JMMoreView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2483,6 +2501,7 @@
 				040CA85B225F1EBF006D7A7F /* share.png in Resources */,
 				6D82F288227492CF00B9D2B9 /* JMEducationExperienceViewController.xib in Resources */,
 				6D0209F1224FB900009BCFE4 /* upinstall@2x.png in Resources */,
+				040A3938227DD1B200EDD9E0 /* JMInputController.xib in Resources */,
 				04DD1D4E224B6E95007CB11C /* WeChat_login@2x.png in Resources */,
 				040CA859225F1EBF006D7A7F /* Location_of_detail_page.png in Resources */,
 				04C6015D2260874A000B1FE0 /* JMLookMeTableViewCell.xib in Resources */,
@@ -2701,6 +2720,7 @@
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
 				040B838A2265EC0600F1A37A /* JMCompanyHomeViewController.m in Sources */,
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
+				040A3937227DD1B200EDD9E0 /* JMInputController.m in Sources */,
 				045EDD63225D97650054C5F3 /* JMHTTPManager+Captcha.m in Sources */,
 				040CD555226B1FB5000BB230 /* JMCompanyTabBarViewController.m in Sources */,
 				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
@@ -2755,6 +2775,7 @@
 				040865EB22734ADE005BB03E /* JMCompanyInfoModel.m in Sources */,
 				6D82F28F2274BB0E00B9D2B9 /* JMMyDescriptionViewController.m in Sources */,
 				6D558663224B564F0037C14E /* JMMineViewController.m in Sources */,
+				040A393E227DD20400EDD9E0 /* JMMoreView.m in Sources */,
 				041F672E22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m in Sources */,
 				040865E5227338E2005BB03E /* JMHTTPManager+InterView.m in Sources */,
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
@@ -2791,6 +2812,7 @@
 				041997EB2267173D00C6C134 /* JMVitaOfPersonDetailViewController.m in Sources */,
 				04C6013922603F73000B1FE0 /* JMPageView.m in Sources */,
 				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
+				040A393B227DD1EB00EDD9E0 /* JMFaceView.m in Sources */,
 				040E54DC22772382004AB0F9 /* JMHTTPManager+MessageList.m in Sources */,
 				6D020A6722539FB0009BCFE4 /* HomeViewController.m in Sources */,
 				040BF05E227159B60088697D /* JMChangeIdentityViewController.m in Sources */,

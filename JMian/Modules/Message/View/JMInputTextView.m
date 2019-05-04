@@ -31,22 +31,22 @@
 }
 
 
--(void)setChildVC:(NSArray *)childVC{
-        self.contentView.contentSize = CGSizeMake(1 * self.frame.size.width, 0);
-        [self addSubview:self.contentView];
-}
+//-(void)setChildVC:(NSArray *)childVC{
+//        self.contentView.contentSize = CGSizeMake(1 * self.frame.size.width, 0);
+//        [self addSubview:self.contentView];
+//}
 
-- (void)setCurrentIndex:(NSInteger)index {
-    UIViewController *VC = self.childVC[index];
-    
-    JMGreetTableViewController *vc = [[JMGreetTableViewController alloc]init];
-    vc.view.backgroundColor = [UIColor yellowColor];
-//    if (!VC.view.superview) {
-        vc.view.frame = (CGRect){index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height};
-        [self.contentView addSubview:vc.view];
-//    }
-    [self.contentView setContentOffset:CGPointMake(index * self.frame.size.width, 0) animated:YES];
-}
+//- (void)setCurrentIndex:(NSInteger)index {
+//    UIViewController *VC = self.childVC[index];
+//
+//    JMGreetTableViewController *vc = [[JMGreetTableViewController alloc]init];
+//    vc.view.backgroundColor = [UIColor yellowColor];
+////    if (!VC.view.superview) {
+//        vc.view.frame = (CGRect){index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height};
+//        [self.contentView addSubview:vc.view];
+////    }
+//    [self.contentView setContentOffset:CGPointMake(index * self.frame.size.width, 0) animated:YES];
+//}
 -(void)initView
 {
     

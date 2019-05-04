@@ -84,7 +84,12 @@
 #define TTextMessageCell_ReuseId @"TTextMessageCell"
 #define TTextMessageCell_Height_Min (TMessageCell_Head_Size.height + 2 * TMessageCell_Padding)
 #define TTextMessageCell_Margin 12
+#define TTextView_Height (50)
 
+
+#define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define Is_IPhoneX (SCREEN_WIDTH >=375.0f && SCREEN_HEIGHT >=812.0f && Is_Iphone)
+#define Bottom_SafeHeight   (Is_IPhoneX ? (34.0):(0))
 
 //存储userDefault
 #define kSaveMyDefault(A,B) [[NSUserDefaults standardUserDefaults] setObject:B forKey:A]

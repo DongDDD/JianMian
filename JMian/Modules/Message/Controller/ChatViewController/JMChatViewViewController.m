@@ -15,11 +15,13 @@
 #import "JMMessageCell.h"
 #import "JMGreetView.h"
 #import "JMGreetTableViewController.h"
+#import "JMInputController.h"
 
 
 @interface JMChatViewViewController () <JMInputTextViewDelegate>
 
 @property (nonatomic ,strong) JMMessageTableViewController *messageController;
+@property (nonatomic ,strong) JMInputController *inputController;
 @property (nonatomic ,strong) JMInputTextView *inputView;
 
 @property (nonatomic, strong) NSArray *childVCs;
@@ -39,18 +41,20 @@
 
 
 - (void)setupViews{
-    _inputView = [[JMInputTextView alloc]init];
-    _inputView.delegate = self;
-    //    _inputView.backgroundColor = [UIColor redColor];
-    //    _inputView.frame = CGRectMake(0,self.view.frame.size.height-200, self.view.frame.size.width, 49);
-    [self.view addSubview:_inputView];
-    [_inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view);
-        make.left.mas_equalTo(self.view);
-        make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(60);
-    }];
+    //input
     
+//    _inputView = [[JMInputTextView alloc]init];
+//    _inputView.delegate = self;
+//    //    _inputView.backgroundColor = [UIColor redColor];
+//    //    _inputView.frame = CGRectMake(0,self.view.frame.size.height-200, self.view.frame.size.width, 49);
+//    [self.view addSubview:_inputView];
+//    [_inputView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.mas_equalTo(self.view);
+//        make.left.mas_equalTo(self.view);
+//        make.right.mas_equalTo(self.view);
+//        make.height.mas_equalTo(60);
+//    }];
+//
     //    //message
     _messageController = [[JMMessageTableViewController alloc] init];
 //    _messageController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
@@ -60,15 +64,23 @@
 //    [_messageController setConversation:_conversation];
     [_messageController setMyConvModel:_myConvModel];
     [_messageController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(_inputView.mas_top);
+        make.bottom.mas_equalTo(self.view.mas_bottom);
         make.left.mas_equalTo(self.view);
         make.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view);
     }];
     
-    //    [_messageController setConversation:_conversation];
-    
+    _inputController = [[JMInputController alloc] init];
 
+    //    _inputController.delegate = self;
+    [self addChildViewController:_inputController];
+    [self.view addSubview:_inputController.view];
+
+    [_inputController.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.view.mas_bottom);
+        make.left.and.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(TTextView_Height + Bottom_SafeHeight);
+    }];
 }
 
 -(void)sendMessageWithText:(NSString *)text{
@@ -107,31 +119,31 @@
 
 - (void)sendGreetAction:(NSInteger *)index{
   
-    [_inputView setChildVC:self.childVCs];
+//    [_inputView setChildVC:self.childVCs];
 
-    [_inputView setCurrentIndex:0];
+//    [_inputView setCurrentIndex:0];
 
 
-    [_inputView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.view).offset(-211);
-        make.left.mas_equalTo(self.view);
-        make.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(60);
-    }];
+//    [_inputView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.mas_equalTo(self.view).offset(-211);
+//        make.left.mas_equalTo(self.view);
+//        make.right.mas_equalTo(self.view);
+//        make.height.mas_equalTo(60);
+//    }];
 
     
 }
 
-- (NSArray *)childVCs {
- 
-    JMGreetTableViewController *vc1 = [[JMGreetTableViewController alloc] init];
-    
-    [self addChildViewController:vc1];
-    
-    _childVCs = @[vc1];
-
-    return _childVCs;
-}
+//- (NSArray *)childVCs {
+//
+//    JMGreetTableViewController *vc1 = [[JMGreetTableViewController alloc] init];
+//
+//    [self addChildViewController:vc1];
+//
+//    _childVCs = @[vc1];
+//
+//    return _childVCs;
+//}
 
 
 /*
