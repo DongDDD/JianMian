@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-typedef NS_ENUM(NSUInteger, TMsgStatus) {
-    Msg_Status_Sending,
-    Msg_Status_Sending_2,
-    Msg_Status_Succ,
-    Msg_Status_Fail,
-};
+//typedef NS_ENUM(NSUInteger, TMsgStatus) {
+//    Msg_Status_Sending,
+//    Msg_Status_Sending_2,
+//    Msg_Status_Succ,
+//    Msg_Status_Fail,
+//};
 
 
 @interface JMMessageCellData : NSObject
@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, TMsgStatus) {
 @property (nonatomic, strong) NSString *content;
 @property (nonatomic, assign) BOOL showName;
 @property (nonatomic, assign) BOOL isSelf;
-@property (nonatomic, assign) TMsgStatus status;
+//@property (nonatomic, assign) TMsgStatus status;
 @property (nonatomic, strong) id custom;
 
 @end
@@ -35,11 +35,11 @@ typedef NS_ENUM(NSUInteger, TMsgStatus) {
 @property (nonatomic, strong) UIView *container;
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic, strong) UIImageView *error;
-@property (nonatomic, strong) UILabel *content;
 
+@property (nonatomic, strong) UILabel *content;
+@property (nonatomic, strong) UIImageView *bubble;
 
 - (CGFloat)getHeight:(JMMessageCellData *)data;
-- (CGSize)getContainerSize:(JMMessageCellData *)data;
 - (void)setData:(JMMessageCellData *)data;
 - (void)setupViews;
 

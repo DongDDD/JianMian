@@ -15,10 +15,8 @@
 
 @interface JMMessageTableViewController ()
 
-@property (nonatomic, strong) JMAllMessageTableViewCellData *conv;
 @property (nonatomic, strong) JMMessageListModel *myModel;
 
-@property (nonatomic, strong) NSMutableArray *uiMsgs;
 @property (nonatomic, strong) TIMMessage *msgForGet;
 
 
@@ -28,7 +26,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -61,7 +60,7 @@
         
         TIMConversation *conv = [[TIMManager sharedInstance]
                                  getConversation:(TIMConversationType)TIM_C2C
-                                 receiver:_myModel.recipient_mark];
+                                 receiver:_myModel.sender_mark];
         [conv setReadMessage:nil succ:^{
             NSLog(@"");
         } fail:^(int code, NSString *msg) {
@@ -79,25 +78,18 @@
 
 }
 
--(void)setConversation:(JMAllMessageTableViewCellData *)conversation{
-
-    _conv = conversation;
-//    [self loadMessage];
 
 
-}
-
-
-
+//消息解释
 - (void)loadMessage
 {
     _uiMsgs = [NSMutableArray array];
     
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
-                             receiver:_myModel.recipient_mark];
+                             receiver:_myModel.sender_mark];
     __weak typeof(self) ws = self;
-    [conv getMessage:10 last:_msgForGet succ:^(NSArray *msgs) {
+    [conv getMessage:20 last:nil succ:^(NSArray *msgs) {
         if(msgs.count != 0){
             ws.msgForGet = msgs[msgs.count - 1];
             _uiMsgs =  [self transUIMsgFromIMMsg:msgs];
@@ -120,28 +112,52 @@
     for (NSInteger k = msgs.count - 1; k >= 0; --k) {
         TIMMessage *msg = msgs[k];
         
-        if(![[[msg getConversation] getReceiver] isEqualToString:_myModel.recipient_mark]){
-            continue;
-        }
-        if(msg.status == TIM_MSG_STATUS_HAS_DELETED){
-            continue;
-        }
-        
-        
-        int cnt = [msg elemCount];
-        for (int i = 0; i < cnt; i++) {
-            TIMElem * elem = [msg getElem:i];
-            JMMessageCellData *data = nil;
-            if ([elem isKindOfClass:[TIMTextElem class]]) {
-                TIMTextElem * text_elem = (TIMTextElem *)elem;
-                JMMessageCellData *textData = [[JMMessageCellData alloc]init];
-                textData.content = text_elem.text;
-                data = textData;
-                [uiMsgs addObject:data];
+//        if(![[[msg getConversation] getReceiver] isEqualToString:_myModel.sender_mark]){
+//            continue;
+//        }
+        //        if(msg.status == TIM_MSG_STATUS_HAS_DELETED){
+        //            continue;
+        //        }
+        if (!msg.isSelf) {
+            int cnt = [msg elemCount];
+            for (int i = 0; i < cnt; i++) {
+                TIMElem * elem = [msg getElem:i];
+                JMMessageCellData *data = nil;
+                if ([elem isKindOfClass:[TIMTextElem class]]) {
+                    TIMTextElem * text_elem = (TIMTextElem *)elem;
+                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
+                    textData.content = text_elem.text;
+                    textData.head = _myModel.sender_avatar;
+                    textData.isSelf = NO;
+                    data = textData;
+                    [uiMsgs addObject:data];
+                    
+                }
                 
             }
             
+        }else{
+            int cnt = [msg elemCount];
+            for (int i = 0; i < cnt; i++) {
+                TIMElem * elem = [msg getElem:i];
+                JMMessageCellData *data = nil;
+                if ([elem isKindOfClass:[TIMTextElem class]]) {
+                    TIMTextElem * text_elem = (TIMTextElem *)elem;
+                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
+                    textData.content = text_elem.text;
+                    textData.head = _myModel.recipient_avatar;
+                    textData.isSelf = YES;
+                    data = textData;
+                    [uiMsgs addObject:data];
+                    
+                }
+                
+            }
+            
+            
+            
         }
+        
         
         
     }
@@ -176,9 +192,26 @@
             cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
 //            cell.delegate = self;
         }
+        
+        
         [cell setData:_uiMsgs[indexPath.row]];
     }
     return cell;
+}
+
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0;
+    NSObject *data = _uiMsgs[indexPath.row];
+    if([data isKindOfClass:[JMMessageCellData class]]){
+        JMMessageCellData *data = _uiMsgs[indexPath.row];
+        JMMessageCell *cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
+        height = [cell getHeight:data];
+    }
+    
+    
+    return height;
 }
 
 

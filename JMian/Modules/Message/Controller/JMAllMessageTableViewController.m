@@ -40,7 +40,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self updateConversations]; //获取腾讯云数据
     [self getMsgList];    //获取自己服务器数据
 }
 
@@ -51,6 +50,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
         if (responsObject[@"data"]) {
             
             self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            [self updateConversations]; //获取腾讯云数据
+
             [self.tableView reloadData];
 
         }
@@ -73,9 +74,10 @@ static NSString *cellIdent = @"allMessageCellIdent";
         if([conv getType] == TIM_SYSTEM){
             continue;
         }
-        //[conv getMessage:[[TUIKit sharedInstance] getConfig].msgCountPerRequest last:nil succ:nil fail:nil];
+        
+  
         TIMMessage *msg = [conv getLastMsg];
-        JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
+        JMMessageListModel *data = [[JMMessageListModel alloc] init];
         data.unRead = [conv getUnReadMessageNum];
         data.time = [self getDateDisplayString:msg.timestamp];
         data.subTitle = [self getLastDisplayString:conv];

@@ -11,11 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSUInteger, TConvType) {
-    TConv_Type_C2C      = 1,
-    TConv_Type_Group    = 2,
-    TConv_Type_System   = 3,
-};
+//typedef NS_ENUM(NSUInteger, TConvType) {
+//    TConv_Type_C2C      = 1,
+//    TConv_Type_Group    = 2,
+//    TConv_Type_System   = 3,
+//};
 
 
 @interface JMAllMessageTableViewCellData : NSObject

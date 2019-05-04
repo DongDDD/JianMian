@@ -75,11 +75,11 @@
 
 
 //cell
-#define TMessageCell_Head_Size CGSizeMake(45, 45)
-#define TMessageCell_Padding 8
-#define TMessageCell_Margin 8
+#define TMessageCell_Head_Size CGSizeMake(42, 42)
+#define TMessageCell_Padding 20
+#define TMessageCell_Margin 20
 #define TMessageCell_Indicator_Size CGSizeMake(20, 20)
-#define MAXFLOAT    0x1.fffffep+127f
+//#define MAXFLOAT    0x1.fffffep+127f
 //text cell
 #define TTextMessageCell_ReuseId @"TTextMessageCell"
 #define TTextMessageCell_Height_Min (TMessageCell_Head_Size.height + 2 * TMessageCell_Padding)
