@@ -13,11 +13,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 @interface JMChatViewViewController : BaseViewController
 
 @property (nonatomic, strong)JMMessageListModel *myConvModel;
-@property (nonatomic, strong)JMAllMessageTableViewCellData *conversation;
+//@property (nonatomic, strong)JMAllMessageTableViewCellData *conversation;
 
 
 

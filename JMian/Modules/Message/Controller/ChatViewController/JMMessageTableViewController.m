@@ -12,6 +12,9 @@
 #import <IMMessageExt.h>
 #import "JMMessageCell.h"
 #import "DimensMacros.h"
+#import "JMCompanyLikeTableViewCell.h"
+#import "JMChatDetailInfoTableViewCell.h"
+#import "JMChatViewSectionView.h"
 
 @interface JMMessageTableViewController ()
 
@@ -20,14 +23,21 @@
 @property (nonatomic, strong) TIMMessage *msgForGet;
 
 
+
 @end
+static NSString *cellIdent = @"infoCellIdent";
+
 
 @implementation JMMessageTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = BG_COLOR;
+    [self.tableView registerNib:[UINib nibWithNibName:@"JMChatDetailInfoTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
 
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewController)];
+    [self.view addGestureRecognizer:tap];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -167,11 +177,29 @@
     return uiMsgs;
 }
 
+#pragma mark - 点击事件
 
-
+- (void)didTapViewController
+{
+    if(_delegate && [_delegate respondsToSelector:@selector(didTapInMessageController:)]){
+        [_delegate didTapInMessageController:self];
+    }
+}
 
 #pragma mark - Table view data source
+//section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 43;
+}
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    JMChatViewSectionView *view=[[JMChatViewSectionView alloc] init];
+    return view ;
+}
+
+//cell
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -182,36 +210,58 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
- 
-    
-    NSObject *data = _uiMsgs[indexPath.row];
-    JMMessageCell *cell = nil;
-    if([data isKindOfClass:[JMMessageCellData class]]){
-        cell = [tableView dequeueReusableCellWithIdentifier:TTextMessageCell_ReuseId];
-        if(!cell){
-            cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
-//            cell.delegate = self;
+    if (indexPath.row == 0) {
+        JMChatDetailInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
+
+        if(cell == nil)
+        {
+            cell = [[JMChatDetailInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
         }
         
-        
-        [cell setData:_uiMsgs[indexPath.row]];
+        return cell;
+
+    }else{
+    
+        NSObject *data = _uiMsgs[indexPath.row];
+        JMMessageCell *cell = nil;
+        if([data isKindOfClass:[JMMessageCellData class]]){
+            cell = [tableView dequeueReusableCellWithIdentifier:TTextMessageCell_ReuseId];
+            
+            if(cell == nil){
+                cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
+                //            cell.delegate = self;
+            }
+            
+            cell.backgroundColor = BG_COLOR;
+            [cell setData:_uiMsgs[indexPath.row - 1]];
+        }
+    
+        return cell;
+
+    
     }
-    return cell;
+    
+    return nil;
 }
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat height = 0;
-    NSObject *data = _uiMsgs[indexPath.row];
-    if([data isKindOfClass:[JMMessageCellData class]]){
-        JMMessageCellData *data = _uiMsgs[indexPath.row];
-        JMMessageCell *cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
-        height = [cell getHeight:data];
+    
+    if (indexPath.row == 0) {
+        return 200;
+    }else{
+        CGFloat height = 0;
+        NSObject *data = _uiMsgs[indexPath.row];
+        if([data isKindOfClass:[JMMessageCellData class]]){
+            JMMessageCellData *data = _uiMsgs[indexPath.row-1];
+            JMMessageCell *cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
+            height = [cell getHeight:data];
+        }
+        return height;
+
     }
-    
-    
-    return height;
+    return 0;
 }
 
 

@@ -26,7 +26,6 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if(self){
-        
         UIButton *btn = [[UIButton alloc]init];
         [btn setImage:[UIImage imageNamed:@"copyreader"] forState:UIControlStateNormal];
         [self addSubview:btn];

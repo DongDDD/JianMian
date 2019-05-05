@@ -10,7 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMMoreView : UIView
+@interface JMMoreView : UIView <UICollectionViewDelegate,UICollectionViewDataSource>
+
+@property (nonatomic, strong) UICollectionView *collectionView;
+@property (strong, nonatomic) NSArray *imageNameArr,*labelStrArr;
+
 
 @end
 

@@ -19,6 +19,8 @@
 #import "Masonry.h"
 #import "JMHTTPManager+InterView.h"
 #import "JMChooseTimeViewController.h"
+#import "JMChatViewViewController.h"
+#import "JMHTTPManager+CreateConversation.h"
 
 
 @interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,JMChooseTimeViewControllerDelegate>
@@ -156,8 +158,24 @@
     [self.view addSubview:self.chooseTimeVC.view];
     self.chooseTimeVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
      [self.chooseTimeVC didMoveToParentViewController:self];
-    NSLog(@"y邀请面试");
+    NSLog(@"邀请面试");
     
+}
+
+-(void)bottomLeftButtonAction
+{
+    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.model.user_id foreign_key:self.model.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+        vc.myConvModel.sender_mark = self.model.user_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+
 }
 
 -(void)deleteInteviewTimeViewAction{

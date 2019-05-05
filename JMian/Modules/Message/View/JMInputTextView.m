@@ -53,7 +53,7 @@
     _btn1 = [[UIButton alloc]init];
     _btn1.layer.cornerRadius = 5;
     _btn1.backgroundColor = MASTER_COLOR;
-    [_btn1 addTarget:self action:@selector(btn1Action:) forControlEvents:UIControlEventTouchUpInside];
+    [_btn1 addTarget:self action:@selector(greetUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [_btn1 setTitle:@"常用语" forState:UIControlStateNormal];
     _btn1.titleLabel.font = [UIFont systemFontOfSize:13];
     [self addSubview:_btn1];
@@ -72,6 +72,8 @@
     
     _btn3 = [[UIButton alloc]init];
     [_btn3 setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+    [_btn3 addTarget:self action:@selector(moreUpInside:) forControlEvents:UIControlEventTouchUpInside];
+
     [self addSubview:_btn3];
     
     [_btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -105,17 +107,27 @@
 //    [self greetView];
 }
 
+- (void)moreUpInside:(UIButton *)sender
+{
+    if(_delegate && [_delegate respondsToSelector:@selector(textViewDidTouchMore:)]){
+        [_delegate textViewDidTouchMore:self];
+    }
+}
+
+
 -(void)btn2Action{
 
     [self.delegate sendMessageWithText:_textView.text];
 
 }
 
--(void)btn1Action:(UIButton *)btn{
-    
-    [self.delegate sendGreetAction:btn.tag];
-    
+
+-(void)greetUpInside:(UIButton *)btn{
+    if(_delegate && [_delegate respondsToSelector:@selector(textViewDidTouchGreet:)]){
+        [_delegate textViewDidTouchGreet:self];
+    }
 }
+
 #pragma mark - lazy
 
 //-(JMGreetView *)greetView{

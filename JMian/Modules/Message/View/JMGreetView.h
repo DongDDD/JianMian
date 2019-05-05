@@ -9,10 +9,17 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol JMGreetViewDelegate <NSObject>
+
+-(void)addGreetAction;
+
+@end
 
 @interface JMGreetView : UIView <UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)UIButton *bottomBtn;
+@property(nonatomic,weak)id<JMGreetViewDelegate>delegate;
 
 @end
 

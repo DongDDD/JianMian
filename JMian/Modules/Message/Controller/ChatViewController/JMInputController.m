@@ -9,8 +9,17 @@
 #import "JMInputController.h"
 #import "DimensMacros.h"
 
-@interface JMInputController ()
+typedef NS_ENUM(NSUInteger, InputStatus) {
+    Input_Status_Input,
+    Input_Status_Input_Face,
+    Input_Status_Input_More,
+    Input_Status_Input_Keyboard,
+    Input_Status_Input_Greet,
+};
 
+
+@interface JMInputController ()<JMInputControllerDelegate>
+@property (nonatomic, assign) InputStatus status;
 @end
 
 @implementation JMInputController
@@ -23,24 +32,53 @@
 
 - (void)setupViews
 {
-    self.view.backgroundColor = [UIColor whiteColor];;
-//    _status = Input_Status_Input;
+    self.view.backgroundColor = [UIColor whiteColor];
+    _status = Input_Status_Input;
     
-    _textView = [[JMInputTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TTextView_Height)];
-//    _textView.delegate = self;
-    [self.view addSubview:_textView];
+    _inputTextView = [[JMInputTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TTextView_Height)];
+    _inputTextView.delegate = self;
+    [self.view addSubview:_inputTextView];
 }
 
-
-- (JMMoreView *)moreView
+- (void)textViewDidTouchMore:(JMInputTextView *)textView
 {
-    if(!_moreView){
-        _moreView = [[JMMoreView alloc] initWithFrame:CGRectMake(0, _textView.frame.origin.y + _textView.frame.size.height, self.faceView.frame.size.width, 0)];
-//        _moreView.delegate = self;
+//    if([[TUIKit sharedInstance] getConfig].moreMenus.count == 0){
+//        return;
+//    }
+    
+    if(_status == Input_Status_Input_More){
+        return;
     }
-    return _moreView;
+    
+    if(_status == Input_Status_Input_Greet){
+        [self hideGreetAnimation];
+    }
+    [_inputTextView.textView resignFirstResponder];
+    [self showMoreAnimation];
+    _status = Input_Status_Input_More;
+    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
+        [_delegate inputController:self didChangeHeight:_inputTextView.frame.size.height + self.moreView.frame.size.height + Bottom_SafeHeight];
+    }
 }
 
+- (void)textViewDidTouchGreet:(JMInputTextView *)index;
+{
+    if(_status == Input_Status_Input_Greet){
+        return;
+    }
+        if(_status == Input_Status_Input_More){
+            [self hideMoreAnimation];
+        }
+    
+    [_inputTextView.textView resignFirstResponder];
+    [self showGreetAnimation];
+    _status = Input_Status_Input_Greet;
+    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
+        [_delegate inputController:self didChangeHeight:_inputTextView.frame.size.height + self.greeView.frame.size.height + Bottom_SafeHeight];
+    }
+
+
+}
 
 - (void)showMoreAnimation
 {
@@ -53,10 +91,80 @@
     __weak typeof(self) ws = self;
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect newFrame = ws.moreView.frame;
-        newFrame.origin.y = ws.textView.frame.origin.y + ws.textView.frame.size.height;
+        newFrame.origin.y = ws.inputTextView.frame.origin.y + ws.inputTextView.frame.size.height;
         ws.moreView.frame = newFrame;
     } completion:nil];
 }
+
+- (void)showGreetAnimation
+{
+    [self.view addSubview:self.greeView];
+    
+    self.greeView.hidden = NO;
+    CGRect frame = self.greeView.frame;
+    frame.origin.y = SCREEN_HEIGHT;
+    self.greeView.frame = frame;
+    __weak typeof(self) ws = self;
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGRect newFrame = ws.greeView.frame;
+        newFrame.origin.y = ws.inputTextView.frame.origin.y + ws.inputTextView.frame.size.height;
+        ws.greeView.frame = newFrame;
+    } completion:nil];
+}
+
+
+-(void)hideGreetAnimation{
+
+    self.greeView.hidden = YES;
+
+}
+
+-(void)hideMoreAnimation{
+    
+    self.moreView.hidden = YES;
+    
+}
+
+- (void)reset
+{
+    if(_status == Input_Status_Input){
+        return;
+    }
+    
+    else if(_status == Input_Status_Input_More){
+        [self hideMoreAnimation];
+    }
+    
+    else if(_status == Input_Status_Input_Greet){
+        [self hideGreetAnimation];
+    }
+    
+    [_moreView setHidden:YES];
+    _status = Input_Status_Input;
+    [_inputTextView.textView resignFirstResponder];
+    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
+        [_delegate inputController:self didChangeHeight:_inputTextView.frame.size.height + Bottom_SafeHeight];
+    }
+}
+
+- (JMMoreView *)moreView
+{
+    if(!_moreView){
+        _moreView = [[JMMoreView alloc] initWithFrame:CGRectMake(0, _inputTextView.frame.origin.y + _inputTextView.frame.size.height, _inputTextView.frame.size.width, JMMoreView_Height)];
+//        _moreView.delegate = self;
+    }
+    return _moreView;
+}
+
+- (JMGreetView *)greeView
+{
+    if(!_greeView){
+        _greeView = [[JMGreetView alloc] initWithFrame:CGRectMake(0, _inputTextView.frame.origin.y + _inputTextView.frame.size.height, _inputTextView.frame.size.width, JMGreetView_Height)];
+        //        _moreView.delegate = self;
+    }
+    return _greeView;
+}
+
 
 /*
 #pragma mark - Navigation

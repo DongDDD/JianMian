@@ -85,6 +85,15 @@
 #define TTextMessageCell_Height_Min (TMessageCell_Head_Size.height + 2 * TMessageCell_Padding)
 #define TTextMessageCell_Margin 12
 #define TTextView_Height (50)
+#define JMMoreView_Height (100)
+#define JMGreetView_Height (211)
+//notification
+#define Notification_JMRefreshListener @"Notification_JMRefreshListener"
+#define Notification_JMMMessageListener @"Notification_JMMMessageListener"
+#define Notification_JMMMessageRevokeListener @"Notification_JMMMessageRevokeListener"
+#define Notification_JMMUploadProgressListener @"Notification_JMMUploadProgressListener"
+
+
 
 
 #define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)

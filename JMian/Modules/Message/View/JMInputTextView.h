@@ -10,10 +10,18 @@
 #import "JMGreetView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@class JMInputTextView;
 @protocol JMInputTextViewDelegate <NSObject>
 
--(void)sendMessageWithText:(NSString *)text;
--(void)sendGreetAction:(NSInteger *)index;
+- (void)sendMessageWithText:(NSString *)text;
+//- (void)sendGreetAction:(NSInteger *)index;
+
+- (void)textViewDidTouchMore:(JMInputTextView *)index;
+- (void)textViewDidTouchGreet:(JMInputTextView *)index;
+
+- (void)textView:(JMInputTextView *)textView didChangeInputHeight:(CGFloat)offset;
+- (void)textView:(JMInputTextView *)textView didSendMessage:(NSString *)text;
+
 
 @end
 

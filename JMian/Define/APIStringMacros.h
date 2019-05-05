@@ -85,6 +85,8 @@
 
 //会话列表
 #define Chat_List_URL @"converse/lists"
+//创建会话
+#define Create_Chat_URL @"converse/create"
 
 
 //接口

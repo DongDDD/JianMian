@@ -24,10 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMInputController : UIViewController
 
-@property (nonatomic, strong) JMInputTextView *textView;
+@property (nonatomic, strong) JMInputTextView *inputTextView;
 @property (nonatomic, strong) JMGreetView *greeView;
 @property (nonatomic, strong) JMFaceView *faceView;
 @property (nonatomic, strong) JMMoreView *moreView;
+- (void)reset;
 
 @property (nonatomic, weak) id<JMInputControllerDelegate>delegate;
 
