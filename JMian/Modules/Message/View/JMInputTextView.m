@@ -67,7 +67,7 @@
     
     _btn2 = [[UIButton alloc]init];
     [_btn2 setImage:[UIImage imageNamed:@"expression"] forState:UIControlStateNormal];
-    [_btn2 addTarget:self action:@selector(btn2Action) forControlEvents:UIControlEventTouchUpInside];
+    [_btn2 addTarget:self action:@selector(faceUpInside:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_btn2];
     
     _btn3 = [[UIButton alloc]init];
@@ -114,10 +114,20 @@
     }
 }
 
-
--(void)btn2Action{
-
-    [self.delegate sendMessageWithText:_textView.text];
+//表情按钮临时用来做发送键
+-(void)faceUpInside:(UIButton *)sender{
+    
+        if(_delegate && [_delegate respondsToSelector:@selector(textView:didSendMessage:)]){
+            if(![_textView.text isEqualToString:@""]){
+                [_delegate textView:self didSendMessage:_textView.text];
+                [self clearInput];
+            }
+        }
+//
+//    }
+//    if(_delegate && [_delegate respondsToSelector:@selector(textViewDidTouchFace:)]){
+//        [_delegate textViewDidTouchFace:self];
+//    }
 
 }
 
@@ -128,6 +138,11 @@
     }
 }
 
+
+-(void)clearInput{
+
+    _textView.text = @"";
+}
 #pragma mark - lazy
 
 //-(JMGreetView *)greetView{

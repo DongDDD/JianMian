@@ -17,8 +17,8 @@
 #import "JMCompanyInfoMineViewController.h"
 #import "JMManageInterviewViewController.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
-#import "JMSettingViewController.h"
 #import "JMCompanyLikeViewController.h"
+#import "JMMySettingViewController.h"
 
 
 
@@ -78,7 +78,7 @@
 }
 
 -(void)rightAction{
-    JMSettingViewController *vc = [[JMSettingViewController alloc]init];
+    JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

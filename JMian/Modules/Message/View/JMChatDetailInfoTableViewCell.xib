@@ -135,6 +135,12 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="bgView" destination="Ebg-Ov-OXS" id="27W-Yh-dJR"/>
+                <outlet property="education" destination="txp-Ug-bOv" id="KDI-km-g20"/>
+                <outlet property="exp" destination="JvV-7X-sU8" id="uG7-Kx-KOa"/>
+                <outlet property="myDescription" destination="sCa-Ac-q41" id="rtW-qK-lZ5"/>
+                <outlet property="name" destination="4lE-3c-sGf" id="esv-QD-pV3"/>
+                <outlet property="salary" destination="w7k-5F-deD" id="ABk-9Z-rDf"/>
+                <outlet property="workName" destination="hif-Z8-bQN" id="RkH-4M-qYw"/>
             </connections>
             <point key="canvasLocation" x="74.637681159420296" y="108.48214285714285"/>
         </tableViewCell>

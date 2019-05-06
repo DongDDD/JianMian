@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 };
 
 
-@interface JMInputController ()<JMInputControllerDelegate>
+@interface JMInputController ()<JMInputTextViewDelegate>
 @property (nonatomic, assign) InputStatus status;
 @end
 
@@ -30,6 +30,49 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     [self setupViews];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+    if(_status == Input_Status_Input_Face){
+//        [self hideFaceAnimation];
+    }
+    else if(_status == Input_Status_Input_More){
+        [self hideMoreAnimation];
+    }
+    else{
+        //[self hideFaceAnimation:NO];
+        //[self hideMoreAnimation:NO];
+    }
+    _status = Input_Status_Input_Keyboard;
+}
+
+- (void)keyboardWillChangeFrame:(NSNotification *)notification
+{
+    CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
+        [_delegate inputController:self didChangeHeight:keyboardFrame.size.height + _inputTextView.frame.size.height];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
+        [_delegate inputController:self didChangeHeight:_inputTextView.frame.size.height];
+    }
+}
+
+
 - (void)setupViews
 {
     self.view.backgroundColor = [UIColor whiteColor];
@@ -38,7 +81,64 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     _inputTextView = [[JMInputTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TTextView_Height)];
     _inputTextView.delegate = self;
     [self.view addSubview:_inputTextView];
+    
+    
 }
+
+- (void)textViewDidTouchGreet:(JMInputTextView *)textView;
+{
+    if(_status == Input_Status_Input_Greet){
+        return;
+    }
+    if(_status == Input_Status_Input_More){
+        [self hideMoreAnimation];
+    }
+    
+    [_inputTextView.textView resignFirstResponder];
+    [self showGreetAnimation];
+    _status = Input_Status_Input_Greet;
+    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
+        [_delegate inputController:self didChangeHeight:_inputTextView.frame.size.height + self.greeView.frame.size.height + Bottom_SafeHeight];
+    }
+    
+    
+}
+
+-(void)textView:(JMInputTextView *)textView didSendMessage:(NSString *)text
+{
+    
+    [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+
+    JMMessageCellData *data = [[JMMessageCellData alloc] init];
+    
+    data.content = text;
+    data.isSelf = YES;
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didSendMessage:)]){
+        [_delegate inputController:self didSendMessage:data];
+    }
+    
+}
+
+//- (void)textViewDidTouchFace:(JMInputTextView *)textView
+//{
+//    if(_status == Input_Status_Input_More){
+//        [self hideMoreAnimation];
+//    }
+//
+//    if(_status == Input_Status_Input_Greet){
+//        [self hideGreetAnimation];
+//    }
+////    if(_status == Input_Status_Input_Face){
+////    [self showFaceAnimation];
+////    }
+//    [_inputTextView.textView resignFirstResponder];
+//    _status = Input_Status_Input_Face;
+////    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didSendMessage:)]){
+////        [_delegate inputController:self didSendMessage:textView.textView.text];
+////    }
+//
+//}
 
 - (void)textViewDidTouchMore:(JMInputTextView *)textView
 {
@@ -61,24 +161,6 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     }
 }
 
-- (void)textViewDidTouchGreet:(JMInputTextView *)index;
-{
-    if(_status == Input_Status_Input_Greet){
-        return;
-    }
-        if(_status == Input_Status_Input_More){
-            [self hideMoreAnimation];
-        }
-    
-    [_inputTextView.textView resignFirstResponder];
-    [self showGreetAnimation];
-    _status = Input_Status_Input_Greet;
-    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
-        [_delegate inputController:self didChangeHeight:_inputTextView.frame.size.height + self.greeView.frame.size.height + Bottom_SafeHeight];
-    }
-
-
-}
 
 - (void)showMoreAnimation
 {
@@ -141,7 +223,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     
     [_moreView setHidden:YES];
     _status = Input_Status_Input;
-    [_inputTextView.textView resignFirstResponder];
+    [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
     if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
         [_delegate inputController:self didChangeHeight:_inputTextView.frame.size.height + Bottom_SafeHeight];
     }

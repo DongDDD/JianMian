@@ -9,15 +9,15 @@
 #import "JMAllMessageTableViewCell.h"
 #import "DimensMacros.h"
 
-@implementation JMAllMessageTableViewCellData 
-
-@end
+//@implementation JMAllMessageTableViewCellData 
+//
+//@end
 
 
 @interface JMAllMessageTableViewCell ()
 
-@property (nonatomic, strong) JMAllMessageTableViewCellData *data;
-@property (nonatomic ,strong) JMMessageListModel *model;
+//@property (nonatomic, strong) JMAllMessageTableViewCellData *data;
+@property (nonatomic ,strong) JMMessageListModel *data;
 
 
 @end
@@ -35,22 +35,22 @@
     // Configure the view for the selected state
 }
 
-- (void)setData:(JMAllMessageTableViewCellData *)data
+//- (void)setData:(JMAllMessageTableViewCellData *)data
+//{
+//    _data = data;
+////    [_unReadView setNum:_data.unRead];
+////    [self defaultLayout];
+//}
+
+- (void)setData:(JMMessageListModel *)data
 {
     _data = data;
-    self.lastChatTimeLbel.text = _data.time;
-    self.lastChatLabel.text = _data.subTitle;
+    self.userNameLabel.text = data.recipient_nickname;
+    self.iconImageView.image = GETImageFromURL(data.recipient_avatar);
+    self.userLabel.text = data.work_work_name;
     
-//    [_unReadView setNum:_data.unRead];
-//    [self defaultLayout];
-}
-
-- (void)setModel:(JMMessageListModel *)model
-{
-    _model = model;
-    self.userNameLabel.text = model.sender_nickname;
-    self.iconImageView.image = GETImageFromURL(model.sender_avatar);
-    self.userLabel.text = model.work_work_name;
+    self.lastChatTimeLbel.text = data.data.time;
+    self.lastChatLabel.text = data.data.subTitle;
     
 }
 

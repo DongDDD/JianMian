@@ -21,10 +21,9 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAD-co-Nvw">
-                    <rect key="frame" x="30" y="323" width="315" height="50"/>
+                    <rect key="frame" x="20" y="323" width="335" height="50"/>
                     <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="315" id="YIL-is-GF1"/>
                         <constraint firstAttribute="height" constant="50" id="cGG-VQ-aBT"/>
                     </constraints>
                     <state key="normal" title=" 微信登录" image="WeChat_login.png">
@@ -40,7 +39,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5O-Ib-NaR">
-                    <rect key="frame" x="30" y="398" width="315" height="50"/>
+                    <rect key="frame" x="20" y="398" width="335" height="50"/>
                     <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" title="手机登陆" image="Webkey.png">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -64,7 +63,8 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="L5O-Ib-NaR" firstAttribute="width" secondItem="uAD-co-Nvw" secondAttribute="width" id="DnK-OS-KXc"/>
+                <constraint firstItem="uAD-co-Nvw" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="35r-B6-tBa"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="uAD-co-Nvw" secondAttribute="trailing" constant="20" id="AxY-dP-Uel"/>
                 <constraint firstItem="L5O-Ib-NaR" firstAttribute="height" secondItem="uAD-co-Nvw" secondAttribute="height" id="LFa-r2-AId"/>
                 <constraint firstItem="uAD-co-Nvw" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="303" id="PiP-LH-aM5"/>
                 <constraint firstItem="2zX-mD-Rgr" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="XBW-yK-cxx"/>

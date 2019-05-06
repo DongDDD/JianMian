@@ -11,7 +11,7 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 #else
 //Release状态下的线上API
@@ -20,7 +20,8 @@
 #endif
 //身份切换
 #define User_Change @"api/user/change"
-
+//退出登录
+#define logout_URL @"api/logout"
 //C端接口
 #define Login_URL @"api/login"
 //发送验证码

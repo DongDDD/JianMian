@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,6 +15,7 @@
                 <outlet property="VerifyBtn" destination="BWF-oX-VHW" id="L57-E2-KBY"/>
                 <outlet property="captchaText" destination="Y8f-e0-i2e" id="qAD-Oz-x9C"/>
                 <outlet property="phoneNumText" destination="5y9-0G-IKN" id="nWY-uH-zPi"/>
+                <outlet property="topToView" destination="DmY-FZ-I4r" id="qQh-NI-M5h"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -23,7 +24,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JIANMIAN_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="bTt-m9-7Gi">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JIANMIAN_login.png" translatesAutoresizingMaskIntoConstraints="NO" id="bTt-m9-7Gi">
                     <rect key="frame" x="48" y="101" width="93" height="65"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="65" id="6BG-wV-8IB"/>
@@ -95,7 +96,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="E9e-fs-icf" firstAttribute="leading" secondItem="5K3-J4-jgL" secondAttribute="leading" id="532-uh-c89"/>
-                <constraint firstItem="Hhe-d4-UWW" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="336" id="8KJ-G5-uOU"/>
+                <constraint firstItem="Hhe-d4-UWW" firstAttribute="top" secondItem="Y8f-e0-i2e" secondAttribute="bottom" constant="48" id="5Cg-Sw-9xN"/>
                 <constraint firstItem="5K3-J4-jgL" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="201" id="DmY-FZ-I4r"/>
                 <constraint firstItem="BWF-oX-VHW" firstAttribute="bottom" secondItem="Y8f-e0-i2e" secondAttribute="bottom" id="E5r-Cb-GQj"/>
                 <constraint firstItem="5K3-J4-jgL" firstAttribute="leading" secondItem="bTt-m9-7Gi" secondAttribute="leading" id="FCt-zM-X54"/>
@@ -103,6 +104,7 @@
                 <constraint firstItem="Y8f-e0-i2e" firstAttribute="leading" secondItem="5y9-0G-IKN" secondAttribute="leading" id="IfL-tD-kYI"/>
                 <constraint firstItem="Y8f-e0-i2e" firstAttribute="top" secondItem="E9e-fs-icf" secondAttribute="top" id="ORB-Mu-Mn2"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="BWF-oX-VHW" secondAttribute="trailing" constant="30" id="P74-FY-QpQ"/>
+                <constraint firstItem="5K3-J4-jgL" firstAttribute="top" secondItem="bTt-m9-7Gi" secondAttribute="bottom" constant="55" id="Skg-lq-zWH"/>
                 <constraint firstItem="bTt-m9-7Gi" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="48" id="YAN-2W-rmT"/>
                 <constraint firstItem="Y8f-e0-i2e" firstAttribute="height" secondItem="5y9-0G-IKN" secondAttribute="height" id="c1l-Pc-G6R"/>
                 <constraint firstItem="E9e-fs-icf" firstAttribute="top" secondItem="5K3-J4-jgL" secondAttribute="bottom" constant="30" id="cUu-rM-QXh"/>
@@ -111,15 +113,14 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Hhe-d4-UWW" secondAttribute="trailing" constant="30" id="hr8-yG-8sW"/>
                 <constraint firstItem="E9e-fs-icf" firstAttribute="height" secondItem="5K3-J4-jgL" secondAttribute="height" id="mbk-NL-09G"/>
                 <constraint firstItem="5y9-0G-IKN" firstAttribute="bottom" secondItem="5K3-J4-jgL" secondAttribute="bottom" id="qku-G4-s8p"/>
-                <constraint firstItem="bTt-m9-7Gi" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="81" id="vjQ-U6-oHy"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="132" y="154.27286356821591"/>
         </view>
     </objects>
     <resources>
-        <image name="JIANMIAN_logo.png" width="161" height="111"/>
-        <image name="phone.png" width="20" height="26"/>
+        <image name="JIANMIAN_login.png" width="161" height="111.5"/>
+        <image name="phone.png" width="20" height="26.5"/>
         <image name="verification_code.png" width="20" height="23"/>
     </resources>
 </document>

@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumText;
 @property (weak, nonatomic) IBOutlet UITextField *captchaText;
 @property (weak, nonatomic) IBOutlet UIButton *VerifyBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topToView;//手机图片到父视图顶部约束距离，因为要上移动的控件受约束于手机图标，
+@property (nonatomic, strong)NSLayoutConstraint *originalTopToView;
+@property (nonatomic, assign)CGFloat changeHeight;
 
 
 @end
@@ -26,16 +29,66 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
-
+    _originalTopToView = _topToView;
+    
     _phoneNumText.delegate = self;
     _phoneNumText.keyboardType = UIKeyboardTypeNumberPad;
-    
+    _captchaText.keyboardType = UIKeyboardTypeNumberPad;
 
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     // Do any additional setup after loading the view from its nib.
 }
 
+- (void)keyboardWillShow:(NSNotification *)aNotification {
 
+    /* 获取键盘的高度 */
+    NSDictionary *userInfo = aNotification.userInfo;
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = aValue.CGRectValue;
+    /* 输入框上移 */
+//    CGFloat padding = 20;
+    CGRect frame = self.captchaText.frame;
+    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
+    if (self.changeHeight < 0) {
+        [UIView animateWithDuration:0.3 animations:^ {
+            
+            self.topToView.constant += self.changeHeight-10;
+                                        
+        }];
+    }
+//    CGFloat height = SCREEN_HEIGHT - frame.origin.y - frame.size.height;
+//    if (height < keyboardRect.size.height + padding) {
+//
+//        [UIView animateWithDuration:0.3 animations:^ {
+//
+//            CGRect frame = self.view.frame;
+//            frame.origin.y = -(keyboardRect.size.height - height + padding);
+//            self.view.frame = frame;
+//        }];
+//    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    if (self.changeHeight < 0) {
+        [UIView animateWithDuration:0.3 animations:^ {
+            self.topToView.constant -= self.changeHeight-10;
+            
+        }];
+  
+    }
+
+
+}
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+
+    [_phoneNumText resignFirstResponder];
+    [_captchaText resignFirstResponder];
+
+}
 #pragma mark - 数据请求
 
 - (IBAction)loginPhoneBtn:(id)sender {

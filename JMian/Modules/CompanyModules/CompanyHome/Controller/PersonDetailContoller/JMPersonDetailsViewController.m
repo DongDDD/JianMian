@@ -169,7 +169,11 @@
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
         JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-        vc.myConvModel.sender_mark = self.model.user_id;
+        JMMessageListModel *messageListModel = [[JMMessageListModel alloc]init];
+        NSString *senderId = [NSString stringWithFormat:@"%@a",self.model.user_id];
+        messageListModel.sender_mark = senderId;
+        messageListModel.sender_nickname = self.model.user_nickname;
+        vc.myConvModel = messageListModel;
         [self.navigationController pushViewController:vc animated:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

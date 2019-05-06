@@ -13,15 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class JMInputTextView;
 @protocol JMInputTextViewDelegate <NSObject>
 
-- (void)sendMessageWithText:(NSString *)text;
 //- (void)sendGreetAction:(NSInteger *)index;
 
-- (void)textViewDidTouchMore:(JMInputTextView *)index;
-- (void)textViewDidTouchGreet:(JMInputTextView *)index;
 
-- (void)textView:(JMInputTextView *)textView didChangeInputHeight:(CGFloat)offset;
+- (void)textViewDidTouchGreet:(JMInputTextView *)textView;
+- (void)textViewDidTouchFace:(JMInputTextView *)textView;
+- (void)textViewDidTouchMore:(JMInputTextView *)textView;
+
 - (void)textView:(JMInputTextView *)textView didSendMessage:(NSString *)text;
-
+//- (void)textView:(JMInputTextView *)textView didChangeInputHeight:(CGFloat)offset;
 
 @end
 

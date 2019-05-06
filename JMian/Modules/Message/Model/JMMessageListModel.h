@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JMAllMessageTableViewCellData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, TConvType) {
@@ -33,17 +34,17 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property(nonatomic,copy)NSString *recipient_nickname;
 @property(nonatomic,copy)NSString *recipient_company_position;
 
+@property(nonatomic,copy)NSString *work_description;
+@property(nonatomic,copy)NSString *work_salary_max;
+@property(nonatomic,copy)NSString *work_salary_min;
 @property(nonatomic,copy)NSString *work_work_name;
-
+@property(nonatomic,copy)NSString *work_education;
+@property(nonatomic,copy)NSString *work_work_experience_min;
+@property(nonatomic,copy)NSString *work_work_experience_max;
 
 //腾讯云数据
-@property (nonatomic, strong) NSString *convId;
-@property (nonatomic, assign) TConvType convType;
-@property (nonatomic, strong) NSString *head;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *subTitle;
-@property (nonatomic, strong) NSString *time;
-@property (nonatomic, assign) int unRead;
+@property (nonatomic, strong) JMAllMessageTableViewCellData *data;
+
 
 @end
 

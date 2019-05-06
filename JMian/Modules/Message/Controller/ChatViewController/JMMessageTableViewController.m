@@ -47,6 +47,7 @@ static NSString *cellIdent = @"infoCellIdent";
 
 }
 
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [self readedReport];
@@ -59,6 +60,13 @@ static NSString *cellIdent = @"infoCellIdent";
     [super viewWillDisappear:animated];
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+
+
+
+}
+
+
 - (NSMutableArray *)extracted:(JMMessageTableViewController *const __weak)ws {
     return ws.uiMsgs;
 }
@@ -70,7 +78,7 @@ static NSString *cellIdent = @"infoCellIdent";
         
         TIMConversation *conv = [[TIMManager sharedInstance]
                                  getConversation:(TIMConversationType)TIM_C2C
-                                 receiver:_myModel.sender_mark];
+                                 receiver:_myModel.recipient_mark];
         [conv setReadMessage:nil succ:^{
             NSLog(@"");
         } fail:^(int code, NSString *msg) {
@@ -97,7 +105,7 @@ static NSString *cellIdent = @"infoCellIdent";
     
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
-                             receiver:_myModel.sender_mark];
+                             receiver:_myModel.recipient_mark];
     __weak typeof(self) ws = self;
     [conv getMessage:20 last:nil succ:^(NSArray *msgs) {
         if(msgs.count != 0){
@@ -106,7 +114,6 @@ static NSString *cellIdent = @"infoCellIdent";
         }
     
         [self.tableView reloadData];
-    
         
     } fail:^(int code, NSString *msg) {
         
@@ -179,6 +186,39 @@ static NSString *cellIdent = @"infoCellIdent";
 
 #pragma mark - 点击事件
 
+-(void)sendMessage:(JMMessageCellData *)data{
+    
+    TIMConversation *conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:_myModel.recipient_mark];
+    
+    TIMTextElem * text_elem = [[TIMTextElem alloc] init];
+    
+    [text_elem setText:data.content];
+    
+    TIMMessage * msg = [[TIMMessage alloc] init];
+    [msg addElem:text_elem];
+    
+    [conv sendMessage:msg succ:^(){
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"测试提示" message:@"发送成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        NSLog(@"SendMsg Succ");
+    }fail:^(int code, NSString * err) {
+        NSLog(@"SendMsg Failed:%d->%@", code, err);
+    }];
+    
+    
+    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
+    textData.content = text_elem.text;
+    textData.head = _myModel.recipient_avatar;
+    textData.name = _myModel.recipient_nickname;
+    textData.isSelf = YES;
+    [self.uiMsgs addObject:textData];
+    
+    [self.tableView reloadData];
+}
+
 - (void)didTapViewController
 {
     if(_delegate && [_delegate respondsToSelector:@selector(didTapInMessageController:)]){
@@ -190,13 +230,21 @@ static NSString *cellIdent = @"infoCellIdent";
 //section
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 43;
+    if (section == 0) {
+        
+        return 43;
+    }
+    return 0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    JMChatViewSectionView *view=[[JMChatViewSectionView alloc] init];
-    return view ;
+    if (section == 0) {
+        
+        JMChatViewSectionView *view=[[JMChatViewSectionView alloc] init];
+        return view ;
+    }
+    return nil;
 }
 
 //cell
@@ -205,7 +253,8 @@ static NSString *cellIdent = @"infoCellIdent";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _uiMsgs.count;
+    
+    return _uiMsgs.count+1;
 }
 
 
@@ -218,11 +267,12 @@ static NSString *cellIdent = @"infoCellIdent";
             cell = [[JMChatDetailInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
         }
         
+        [cell setMyConModel:_myModel];
         return cell;
 
-    }else{
+    }else if (indexPath.row > 0 ) {
     
-        NSObject *data = _uiMsgs[indexPath.row];
+        NSObject *data = _uiMsgs[indexPath.row-1];
         JMMessageCell *cell = nil;
         if([data isKindOfClass:[JMMessageCellData class]]){
             cell = [tableView dequeueReusableCellWithIdentifier:TTextMessageCell_ReuseId];
@@ -233,7 +283,7 @@ static NSString *cellIdent = @"infoCellIdent";
             }
             
             cell.backgroundColor = BG_COLOR;
-            [cell setData:_uiMsgs[indexPath.row - 1]];
+            [cell setData:_uiMsgs[indexPath.row-1]];
         }
     
         return cell;
@@ -252,7 +302,7 @@ static NSString *cellIdent = @"infoCellIdent";
         return 200;
     }else{
         CGFloat height = 0;
-        NSObject *data = _uiMsgs[indexPath.row];
+        NSObject *data = _uiMsgs[indexPath.row-1];
         if([data isKindOfClass:[JMMessageCellData class]]){
             JMMessageCellData *data = _uiMsgs[indexPath.row-1];
             JMMessageCell *cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
@@ -263,6 +313,18 @@ static NSString *cellIdent = @"infoCellIdent";
     }
     return 0;
 }
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+        [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+
+
+}
+//
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
+//
+//}
 
 
 /*

@@ -18,17 +18,17 @@ NS_ASSUME_NONNULL_BEGIN
 //};
 
 
-@interface JMAllMessageTableViewCellData : NSObject
-
-@property (nonatomic, strong) NSString *convId;
-@property (nonatomic, assign) TConvType convType;
-@property (nonatomic, strong) NSString *head;
-@property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSString *subTitle;
-@property (nonatomic, strong) NSString *time;
-@property (nonatomic, assign) int unRead;
-
-@end
+//@interface JMAllMessageTableViewCellData : NSObject
+//
+//@property (nonatomic, strong) NSString *convId;
+//@property (nonatomic, assign) TConvType convType;
+//@property (nonatomic, strong) NSString *head;
+//@property (nonatomic, strong) NSString *title;
+//@property (nonatomic, strong) NSString *subTitle;
+//@property (nonatomic, strong) NSString *time;
+//@property (nonatomic, assign) int unRead;
+//
+//@end
 
 @interface JMAllMessageTableViewCell : UITableViewCell
 
@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *lastChatLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastChatTimeLbel;
 
-- (void)setData:(JMAllMessageTableViewCellData *)data;
-- (void)setModel:(JMMessageListModel *)model;
+//- (void)setData:(JMAllMessageTableViewCellData *)data;
+- (void)setData:(JMMessageListModel *)data;
 
 @end
 

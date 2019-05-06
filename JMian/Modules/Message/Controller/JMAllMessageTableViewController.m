@@ -14,6 +14,7 @@
 #import <IMMessageExt.h>
 #import "JMHTTPManager+MessageList.h"
 #import "JMMessageListModel.h"
+#import "JMAllMessageTableViewCellData.h"
 #import "JMChatViewViewController.h"
 
 @interface JMAllMessageTableViewController ()
@@ -56,9 +57,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
         }
         
-        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
         
         
     }];
@@ -67,36 +66,36 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 - (void)updateConversations {
-    self.dataArray = [NSMutableArray array];
+    _dataArray = [NSMutableArray array];
+    
+    
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
+    
     for (TIMConversation *conv in convs) {
         if([conv getType] == TIM_SYSTEM){
             continue;
         }
-        
-  
         TIMMessage *msg = [conv getLastMsg];
-        JMMessageListModel *data = [[JMMessageListModel alloc] init];
-        data.unRead = [conv getUnReadMessageNum];
-        data.time = [self getDateDisplayString:msg.timestamp];
-        data.subTitle = [self getLastDisplayString:conv];
-//        if([conv getType] == TIM_C2C){
-//            data.head = @"";
-//        }
-//        else if([conv getType] == TIM_GROUP){
-//            data.head = @"";
-//        }
-        data.convId = [conv getReceiver];
-        data.convType = (TConvType)[conv getType];
-        
-        if(data.convType == TConv_Type_C2C){
-            data.title = data.convId;
+        NSLog(@"%@",msg);
+        for (JMMessageListModel *model in self.modelArray) {
+                if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
+                    
+                    JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
+                    data.convId = [conv getReceiver];
+                    model.data = data;
+                    data.time = [self getDateDisplayString:msg.timestamp];
+                    data.subTitle = [self getLastDisplayString:conv];
+                    
+                    model.data = data;
+                    [_dataArray addObject:model];
+                  
+                    
+                }
+
+            
         }
-//        else if(data.convType == TConv_Type_Group){
-//            data.title = [conv getGroupName];
-//        }
-        [_dataArray addObject:data];
+
     }
     [self.tableView reloadData];
 
@@ -284,15 +283,13 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.modelArray.count;
+    return self.dataArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    JMAllMessageTableViewCell *cell = [[JMAllMessageTableViewCell alloc]init];
     JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
     [cell setData:[_dataArray objectAtIndex:indexPath.row]];
-    [cell setModel:[_modelArray objectAtIndex:indexPath.row]];
  
     return cell;
 }
@@ -300,8 +297,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-    vc.myConvModel = [_modelArray objectAtIndex:indexPath.row];
-    vc.conversation = [_dataArray objectAtIndex:indexPath.row];
+    vc.myConvModel = [_dataArray objectAtIndex:indexPath.row];
+//    vc.conversation = [_dataArray objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

@@ -15,21 +15,14 @@
 #import "JMUserInfoModel.h"
 
 
-
-
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate>
-
-
 
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIButton *pushPositionBtn; //j推荐职位
 @property (weak, nonatomic) IBOutlet UIButton *allPositionBtn;//所有职位
 @property (weak, nonatomic) IBOutlet UIButton *companyRequireBtn;//公司要求
-
 @property (nonatomic, strong) NSArray *arrDate;
-
 @property (nonatomic, strong) UITableView *tableView;
-
 
 @end
 
@@ -68,7 +61,6 @@ static NSString *cellIdent = @"cellIdent";
 
     [self.view addSubview:self.tableView];
     
- 
     
 }
 
@@ -84,9 +76,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)getData{
     
- 
     [[JMHTTPManager sharedInstance]fetchWorkPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-
 
         if (responsObject[@"data"]) {
 
@@ -94,16 +84,11 @@ static NSString *cellIdent = @"cellIdent";
             [self.tableView reloadData];
         }
 
-
-
     } failureBlock:^(JMHTTPRequest * _Nonnull request, NSError  *error) {
 
 
     }];
     
-    
-    
-
 
 }
 

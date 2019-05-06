@@ -10,6 +10,7 @@
 #import "JMAllMessageTableViewCell.h"
 #import "JMMessageListModel.h"
 #import "BaseViewController.h"
+#import "JMMessageCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @class JMMessageTableViewController;
@@ -25,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *uiMsgs;
 @property (nonatomic, weak) id<JMMessageTableViewControllerDelegate> delegate;
-
+-(void)sendMessage:(JMMessageCellData *)data;
 
 @end
 

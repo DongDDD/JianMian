@@ -20,6 +20,7 @@
 
 @interface JMPostJobHomeViewController ()<UITableViewDataSource,UITableViewDelegate>
 
+@property (weak, nonatomic) IBOutlet UIView *breakBGView;
 @property (nonatomic, strong) JMTitlesView *titleView;
 
 @property (nonatomic, assign) NSInteger index;
@@ -47,27 +48,58 @@ static NSString *cellIdent = @"cellIdent";
     
     _status = Position_Online;
     [self setupInit];
-  
     
-    [self getUserStatus];
-    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-    model = [JMUserInfoManager getUserInfo];
-    if ([model.card_status isEqualToString:Card_PassIdentify]) {//“3”代表已通过实名认证，通过才能发布职位
-    
-        [self getListData];
-        [self setRightBtnTextName:@"发布职位"];
-
-    }
+//    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+//    model = [JMUserInfoManager getUserInfo];
+//    if ([model.card_status isEqualToString:Card_PassIdentify]) {//“3”代表已通过实名认证，通过才能发布职位
+//
+//        [self getListData];
+//        [self setRightBtnTextName:@"发布职位"];
+//        self.tableView.hidden = YES;
+//
+//    }else if ([model.card_status isEqualToString:Card_NOIdentify]){
+//
+//        self.breakBGView.hidden = NO;
+//        self.tableView.hidden = YES;
+//    }
   
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = NO;
+    self.tableView.hidden = YES;
 
-    [self getListData];
+    [self getUserStatus];
+//    [self jugdeCard_status];
+
+//    [self getUserInfo];
+    
 
 }
+
+//-(void)jugdeCard_status{
+//
+//    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+//    model = [JMUserInfoManager getUserInfo];
+//    if ([model.card_status isEqualToString:Card_PassIdentify]) {//“3”代表已通过实名认证，通过才能发布职位
+//
+//        [self getListData];
+//        [self setRightBtnTextName:@"发布职位"];
+//
+//    }else if ([model.card_status isEqualToString:Card_NOIdentify]){
+//
+//        self.breakBGView.hidden = NO;
+//    }
+//    if (self.dataArray.count == 0) {
+//        self.tableView.hidden = YES;
+//
+//    }
+//
+//
+//}
+
+
 
 -(void)getUserStatus{
 
@@ -80,18 +112,28 @@ static NSString *cellIdent = @"cellIdent";
         model = [JMUserInfoManager getUserInfo];
         
         if ([model.card_status isEqualToString:Card_PassIdentify]) {
-            self.tipsLab.text = @"你还没有发布职位～\n快去发布吧！";
+            [self setRightBtnTextName:@"发布职位"];
 
-            [self.postOrIdentityBtn setTitle:@"发布职位" forState:UIControlStateNormal];
-            
+            [self getListData];
+          
         }else if ([model.card_status isEqualToString:Card_WaitIdentify]){
-            [self.postOrIdentityBtn setHidden:YES];
-            self.tipsLab.text = @"实名认证审核中\n发布岗位需实名认证";
             
+            self.breakBGView.hidden = NO;
+            [self.postOrIdentityBtn setHidden:YES];
+
+            self.tipsLab.text = @"实名认证审核中\n发布岗位需实名认证";
+
         }else if ([model.card_status isEqualToString:Card_NOIdentify]){
             [self.postOrIdentityBtn setTitle:@"去实名认证" forState:UIControlStateNormal];
+            self.breakBGView.hidden = NO;
             self.tipsLab.text = @"你还没有实名认证 快去认证吧！\n发布岗位需实名认证";
  
+        }else{
+            if (self.dataArray.count == 0) {
+                self.tableView.hidden = YES;
+                
+            }
+            
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -152,9 +194,23 @@ static NSString *cellIdent = @"cellIdent";
         if (responsObject[@"data"]) {
             
             self.dataArray = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            
+            if (self.dataArray.count > 0) {
+                self.tableView.hidden  = NO;
+
+            }else{
+            
+                self.tipsLab.text = @"你还没有发布职位～\n快去发布吧！";
+                self.breakBGView.hidden = NO;
+                self.postOrIdentityBtn.hidden = NO;
+                [self.postOrIdentityBtn setTitle:@"发布职位" forState:UIControlStateNormal];
+
+            
+            }
             [self.tableView reloadData];
         }
   
+      
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];

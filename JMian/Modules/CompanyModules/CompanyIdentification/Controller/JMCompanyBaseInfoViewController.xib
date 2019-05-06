@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GFy-iq-CbD">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="1318"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pca-6o-Um0">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="539"/>
@@ -172,7 +172,8 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="GFy-iq-CbD" secondAttribute="trailing" id="AoB-zN-zzt"/>
-                <constraint firstItem="GFy-iq-CbD" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="UqZ-3i-WK6"/>
+                <constraint firstItem="GFy-iq-CbD" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" constant="500" id="UqZ-3i-WK6"/>
+                <constraint firstItem="GFy-iq-CbD" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ldf-nU-N5u"/>
                 <constraint firstItem="GFy-iq-CbD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pdi-Qc-Zpn"/>
                 <constraint firstItem="GFy-iq-CbD" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="ro6-nR-4kk"/>
             </constraints>

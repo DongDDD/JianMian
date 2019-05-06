@@ -27,8 +27,13 @@
              @"recipient_nickname":@"recipient.nickname",
              @"recipient_company_position":@"recipient.company_position",
              
-             @"work_work_name":@"work.work_name"
-
+             @"work_description":@"work.description",
+             @"work_salary_max":@"work.salary_max",
+             @"work_salary_min":@"work.salary_min",
+             @"work_work_name":@"work.work_name",
+             @"work_work_experience_max":@"work.work_education",
+             @"work_work_experience_min":@"work.work_experience_min",
+             @"work_work_experience_max":@"work.work_experience_max"
              };
     
 }

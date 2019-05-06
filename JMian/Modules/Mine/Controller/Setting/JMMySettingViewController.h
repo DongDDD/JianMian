@@ -1,16 +1,17 @@
 //
-//  JMSettingViewController.h
+//  JMMySettingViewController.h
 //  JMian
 //
-//  Created by mac on 2019/4/25.
+//  Created by mac on 2019/5/6.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMSettingViewController : BaseViewController
+@interface JMMySettingViewController : BaseViewController
 
 @end
 
