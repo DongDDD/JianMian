@@ -18,9 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *captchaText;
 @property (weak, nonatomic) IBOutlet UIButton *VerifyBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topToView;//手机图片到父视图顶部约束距离，因为要上移动的控件受约束于手机图标，
-@property (nonatomic, strong)NSLayoutConstraint *originalTopToView;
 @property (nonatomic, assign)CGFloat changeHeight;
-
 
 @end
 
@@ -29,7 +27,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
-    _originalTopToView = _topToView;
     
     _phoneNumText.delegate = self;
     _phoneNumText.keyboardType = UIKeyboardTypeNumberPad;
@@ -70,6 +67,7 @@
 //    }
 }
 
+
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     if (self.changeHeight < 0) {
         [UIView animateWithDuration:0.3 animations:^ {
@@ -81,6 +79,12 @@
 
 
 }
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
@@ -122,9 +126,9 @@
         JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-       [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
+//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//       [alert show];
         
         
         

@@ -165,14 +165,12 @@
 -(void)bottomLeftButtonAction
 {
     [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.model.user_id foreign_key:self.model.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
+        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+        //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
+        //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        //        [alert show];
         JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-        JMMessageListModel *messageListModel = [[JMMessageListModel alloc]init];
-        NSString *senderId = [NSString stringWithFormat:@"%@a",self.model.user_id];
-        messageListModel.sender_mark = senderId;
-        messageListModel.sender_nickname = self.model.user_nickname;
+        
         vc.myConvModel = messageListModel;
         [self.navigationController pushViewController:vc animated:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {

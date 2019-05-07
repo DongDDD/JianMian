@@ -18,6 +18,9 @@
 #import "JMHomeWorkModel.h"
 #import "JMHTTPManager+CompanyUpdateJob.h"
 #import "JMPostNewJobViewController.h"
+#import "JMHTTPManager+CreateConversation.h"
+#import "JMChatViewViewController.h"
+#import "JMMessageListModel.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate>
@@ -68,7 +71,6 @@
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"share"];
     [self setTitle:@"职位详情"];
 
-   self.scrollView.contentOffset= CGPointMake(0, -70);
     
     
     
@@ -121,6 +123,26 @@
     [self.shareView setHidden:YES];
     [self.sendMyResumeView setHidden:YES];
     
+}
+
+-(void)chatAction{
+
+
+    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.model.user_id foreign_key:self.model.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
+//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//        [alert show];
+        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+
+        vc.myConvModel = messageListModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
 }
 
 -(void)rightAction{
@@ -183,6 +205,8 @@
     
     }
 
+    
+    
 
 }
 
@@ -545,7 +569,6 @@
     [self.companyIntroductionView addSubview:companyNameLab];
     
     [companyNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-       
         make.left.mas_equalTo(iconImage.mas_right).offset(14);
         make.top.mas_equalTo(self.companyIntroductionView.mas_top).offset(26);
     }];

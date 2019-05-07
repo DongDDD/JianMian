@@ -163,16 +163,16 @@
 {
     
     NSArray *array = @[currentImage];
+    NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
+    // 获取沙盒目录
+    
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
+    // 将图片写入文件
+    
+    [imageData writeToFile:fullPath atomically:NO];
+    
     [[JMHTTPManager sharedInstance]uploadsImageWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         _imageLicenseUrl = array[0];
-        NSData *imageData = UIImageJPEGRepresentation(currentImage, 0.5);
-        // 获取沙盒目录
-        
-        NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:imageName];
-        // 将图片写入文件
-        
-        [imageData writeToFile:fullPath atomically:NO];
-        
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

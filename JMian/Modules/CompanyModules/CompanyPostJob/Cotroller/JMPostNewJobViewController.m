@@ -18,6 +18,7 @@
 
 @interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITextField *workNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *workNameBtn;
 @property (weak, nonatomic) IBOutlet UIView *pickerBGView;
 @property (weak, nonatomic) IBOutlet UIButton *workPropertyBtn;
@@ -320,7 +321,7 @@
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
+    [_workNameTextField resignFirstResponder];
     [self.pickerBGView setHidden:YES];
 
 }

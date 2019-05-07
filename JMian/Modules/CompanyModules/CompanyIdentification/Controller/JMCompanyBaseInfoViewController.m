@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *myPositionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *companyNameTextField;
 @property (nonatomic,copy)NSString *imageUrl;
+@property (nonatomic, assign)CGFloat changeHeight;
 
 
 @end
@@ -34,6 +35,65 @@
  
     [self setRightBtnTextName:@"下一步"];
     // Do any additional setup after loading the view from its nib.
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];//设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。tapGestureRecognizer.cancelsTouchesInView = NO;//将触摸事件添加到当前view
+    [self.view addGestureRecognizer:tapGestureRecognizer];
+    
+    
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+    [_myNameTextField resignFirstResponder];
+    [_myPositionTextField resignFirstResponder];
+    [_companyNameTextField resignFirstResponder];
+
+    
+}
+
+
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+    
+    NSDictionary *userInfo = aNotification.userInfo;
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = aValue.CGRectValue;
+    CGRect frame = _companyNameTextField.frame;
+    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
+    CGRect rect= CGRectMake(0,_changeHeight-10,SCREEN_WIDTH,SCREEN_HEIGHT);
+    if (_changeHeight < 0) {
+        
+        [UIView animateWithDuration:0.3 animations:^ {
+            self.view.frame = rect;
+            
+        }];
+    }
+  
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    float width = SCREEN_WIDTH;
+    float height = SCREEN_HEIGHT;
+    //上移n个单位，按实际情况设置
+    if (_changeHeight < 0) {
+        CGRect rect=CGRectMake(0,0,width,height);
+        self.view.frame=rect;
+        
+    }
+    
 }
 
 #pragma mark - 数据提交
@@ -67,6 +127,7 @@
     
 
 }
+
 
 - (IBAction)headerAtion:(id)sender {
     

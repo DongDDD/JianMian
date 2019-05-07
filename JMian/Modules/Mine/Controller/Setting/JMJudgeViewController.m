@@ -23,6 +23,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+//    CGFloat navigationBarAndStatusBarHeight = self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height;
+//    CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
     if (kFetchMyDefault(@"token")){
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         model = [JMUserInfoManager getUserInfo];

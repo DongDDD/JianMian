@@ -29,7 +29,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *womanBtn;
 @property (weak, nonatomic) IBOutlet UIButton *manBtn;
 
-@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+@property (nonatomic, assign)CGRect keyboardRect;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topToView;
+@property (nonatomic, assign)CGFloat changeHeight;
+
 
 
 @end
@@ -38,11 +41,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
+    self.view.backgroundColor = [UIColor whiteColor];
     if (self.model) {
         [self setRightBtnTextName:@"保存"];
-        self.saveBtn.hidden = NO;
         self.nameText.text = self.model.nickname;
         [self.birtnDateBtn setTitle:self.model.card_birthday forState:UIControlStateNormal];
         self.emailText.text = self.model.email;
@@ -54,18 +55,24 @@
         }
     }else {
         [self setRightBtnTextName:@"下一步"];
-        self.saveBtn.hidden = YES;
     }
     
     [self.navigationController setNavigationBarHidden:NO];
     self.datePicker.backgroundColor = [UIColor whiteColor];
+    self.emailText.delegate = self;
+    self.emailText.keyboardType = UIKeyboardTypeEmailAddress;
+    self.nameText.delegate = self;
     self.scrollView.delegate = self;
+
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
     [self.view addGestureRecognizer:bgTap];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 //    self.birthDateText.inputView = self.datePicker;
     // Do any additional setup after loading the view from its nib.
 }
+
 
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -77,7 +84,106 @@
     
     [_headerImg setImage:savedImage forState:UIControlStateNormal];
     //    [imge setImage:savedImage];
+    
+    
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, _emailText.frame.origin.y+_emailText.frame.size.height+50);
+
+
+
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+    
+    NSDictionary *userInfo = aNotification.userInfo;
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    _keyboardRect = aValue.CGRectValue;
+    
+    CGRect keyboardRect = aValue.CGRectValue;
+    CGRect frame = self.emailText.frame;
+    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
+    CGRect rect= CGRectMake(0,_changeHeight+30,SCREEN_WIDTH,SCREEN_HEIGHT);
+    [UIView animateWithDuration:0.3 animations:^ {
+        self.view.frame = rect;
+        
+    }];
+    
+    
+    /* 输入框上移 */
+    //    CGFloat padding = 20;
+//    CGRect frame = self.nameText.frame;
+//    self.changeHeight = _keyboardRect.size.height - (frame.origin.y+frame.size.height);
+//    if (self.changeHeight < 0) {
+//        [UIView animateWithDuration:0.3 animations:^ {
+//
+//            self.topToView.constant += self.changeHeight-10;
+//
+//        }];
+//    }
+ 
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    [UIView animateWithDuration:0.3 animations:^ {
+        self.view.frame = CGRectMake(0,64,SCREEN_WIDTH,SCREEN_HEIGHT);
+        
+    }];
+
+}
+//
+//
+//-(void)textFieldDidEndEditing:(UITextField *)textField
+//{
+//    float width = SCREEN_WIDTH;
+//    float height = SCREEN_HEIGHT;
+//    self.scrollView.frame= CGRectMake(0,0,width,height);
+//}
+//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+//{
+//    if (textField == _nameText) {
+//        CGRect frame = self.nameText.frame;
+//        self.changeHeight = _keyboardRect.size.height - (frame.origin.y+frame.size.height);
+//        float width = SCREEN_WIDTH;
+//        float height = SCREEN_HEIGHT;
+//        //上移n个单位，按实际情况设置
+//
+//        CGRect rect= CGRectMake(0,_changeHeight,width,height);
+//        [UIView animateWithDuration:0.3 animations:^ {
+//            self.scrollView.frame = rect;
+//
+//        }];
+//
+//    }else if (textField == _emailText){
+//
+//        CGRect frame = _emailText.frame;
+//        self.changeHeight = _keyboardRect.size.height - (frame.origin.y+frame.size.height);
+//        float width = SCREEN_WIDTH;
+//        float height = SCREEN_HEIGHT;
+//        //上移n个单位，按实际情况设置
+//
+//        CGRect rect= CGRectMake(0,_changeHeight,width,height);
+//        [UIView animateWithDuration:0.3 animations:^ {
+//            self.scrollView.frame = rect;
+//
+//        }];
+//
+//    }
+//
+//
+//    return YES;
+//
+//
+//}
+//
+//
 
 - (IBAction)datePickerViewChange:(id)sender {
     
@@ -91,18 +197,18 @@
     
     
 }
+
 - (IBAction)showDatePeckerAction:(id)sender {
     self.datePicker.hidden = NO;
 
 }
 
 
-
-
 -(void)hiddenDatePickerAction{
     self.datePicker.hidden = YES;
+    [_nameText resignFirstResponder];
+    [_emailText resignFirstResponder];
     
-
 }
 
 - (IBAction)headerAction:(id)sender {
@@ -172,6 +278,8 @@
         
     }
 }
+
+
 #pragma mark -scrollView delegte
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     

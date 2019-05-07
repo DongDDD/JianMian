@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @optional
 -(void)sendResumeButton;
+-(void)chatAction;
+
 -(void)btnAction;
 -(void)btn2Action;
 @end

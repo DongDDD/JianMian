@@ -158,8 +158,7 @@ typedef enum _PickerState {
 -(void)hiddenDatePickerAction{
     self.datePicker.hidden = YES;
     self.pickerView.hidden = YES;
-    
-    
+  
 }
 
 #pragma mark - 数据提交

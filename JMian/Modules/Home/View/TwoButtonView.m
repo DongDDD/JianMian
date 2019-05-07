@@ -35,6 +35,7 @@
     btn.backgroundColor = MASTER_COLOR;
     
     [btn setTitle:@"和他聊聊" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(chatAction) forControlEvents:UIControlEventTouchUpInside];
     btn.layer.borderWidth = 0.5;
     btn.layer.borderColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0].CGColor;
     btn.layer.cornerRadius = 18.5;
@@ -107,6 +108,14 @@
 
 
 }
+
+-(void)chatAction{
+
+    [self.delegate chatAction];
+
+
+}
+
 -(void)leftBtnAction{
     
     [self.delegate btnAction];

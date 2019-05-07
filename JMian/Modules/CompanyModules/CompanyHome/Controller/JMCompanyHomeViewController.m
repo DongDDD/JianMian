@@ -64,10 +64,10 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)setTableView{
     
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0,self.headerView.frame.size.height, SCREEN_WIDTH, self.view.bounds.size.height-200) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]init];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.separatorColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
+    self.tableView.separatorColor = BG_COLOR;
 
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -76,6 +76,11 @@ static NSString *cellIdent = @"cellIdent";
     
     [self.view addSubview:self.tableView];
     
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.headerView.mas_bottom);
+        make.bottom.mas_equalTo(self.view);
+    }];
     
     
 }

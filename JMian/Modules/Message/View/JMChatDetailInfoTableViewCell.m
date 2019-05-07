@@ -7,6 +7,9 @@
 //
 
 #import "JMChatDetailInfoTableViewCell.h"
+#import "JMUserInfoModel.h"
+#import "JMUserInfoManager.h"
+
 
 
 @implementation JMChatDetailInfoTableViewCell
@@ -19,7 +22,14 @@
 
 -(void)setMyConModel:(JMMessageListModel *)myConModel
 {
-    self.name.text = myConModel.recipient_nickname;
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    //判断senderid是不是自己
+    if (model.user_id == myConModel.sender_user_id) {
+        
+        self.name.text = myConModel.recipient_nickname;
+    }else{
+        self.name.text = myConModel.sender_nickname;
+    }
     self.education.text = [self getEducationStrWithEducation:myConModel.work_education];
     self.salary.text = [self getSalaryStrWithMin:_myConModel.work_salary_min max:myConModel.work_salary_max];
     self.myDescription.text = myConModel.work_description;

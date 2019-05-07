@@ -36,7 +36,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.view.backgroundColor = [UIColor redColor];
-    self.title = _myConvModel.recipient_nickname;
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    if (model.user_id == _myConvModel.sender_user_id) {
+        self.title = _myConvModel.recipient_nickname;
+        
+    }else{
+        self.title = _myConvModel.sender_nickname;
+
+    
+    }
     [self setupViews];
 
 //
@@ -44,7 +52,7 @@
 
 - (void)setupViews{
     //input
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
     
     _messageController = [[JMMessageTableViewController alloc] init];
     _messageController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - TTextView_Height - Bottom_SafeHeight);;
@@ -70,10 +78,8 @@
 }
 
 
-- (void)onNewMessage:(NSNotification *)notification
-{
-    
-}
+
+
 
 
 //-(void)sendMessageWithText:(NSString *)text{

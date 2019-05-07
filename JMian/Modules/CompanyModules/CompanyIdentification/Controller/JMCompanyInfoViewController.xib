@@ -211,32 +211,29 @@
                                 <constraint firstItem="pj4-nO-pIz" firstAttribute="leading" secondItem="dII-lS-7Fe" secondAttribute="leading" id="zWU-2i-6q4"/>
                             </constraints>
                         </view>
-                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJK-gW-YIb">
-                            <rect key="frame" x="0.0" y="317" width="414" height="286"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="286" id="a9h-Px-ocj"/>
-                            </constraints>
-                        </pickerView>
                     </subviews>
                     <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="uPo-Bl-q5G" secondAttribute="trailing" constant="20" id="6oR-Va-prM"/>
                         <constraint firstItem="uPo-Bl-q5G" firstAttribute="top" secondItem="VOG-mr-Loa" secondAttribute="bottom" constant="3" id="7Ge-Fh-FQU"/>
-                        <constraint firstItem="NJK-gW-YIb" firstAttribute="leading" secondItem="jwH-JF-xxn" secondAttribute="leading" id="7Qt-de-gMi"/>
                         <constraint firstItem="1vf-4A-SlJ" firstAttribute="leading" secondItem="bZq-7i-XfD" secondAttribute="leading" id="J2P-fW-cu7"/>
-                        <constraint firstAttribute="trailing" secondItem="NJK-gW-YIb" secondAttribute="trailing" id="ODm-pC-7EA"/>
                         <constraint firstAttribute="trailing" secondItem="bZq-7i-XfD" secondAttribute="trailing" id="PnG-xU-cJS"/>
                         <constraint firstItem="bZq-7i-XfD" firstAttribute="centerX" secondItem="jwH-JF-xxn" secondAttribute="centerX" id="SDe-Zb-kLa"/>
                         <constraint firstItem="bZq-7i-XfD" firstAttribute="top" secondItem="jwH-JF-xxn" secondAttribute="top" constant="8" id="W9r-nn-oUA"/>
-                        <constraint firstAttribute="bottom" secondItem="NJK-gW-YIb" secondAttribute="bottom" id="fWp-7z-SZ8"/>
                         <constraint firstItem="bZq-7i-XfD" firstAttribute="leading" secondItem="jwH-JF-xxn" secondAttribute="leading" id="mDh-39-kLc"/>
                         <constraint firstItem="1vf-4A-SlJ" firstAttribute="top" secondItem="bZq-7i-XfD" secondAttribute="bottom" constant="8" id="neG-0R-ofr"/>
-                        <constraint firstAttribute="bottom" secondItem="1vf-4A-SlJ" secondAttribute="bottom" constant="311" id="oaO-U2-fQ6"/>
+                        <constraint firstAttribute="bottom" secondItem="1vf-4A-SlJ" secondAttribute="bottom" id="oaO-U2-fQ6"/>
                         <constraint firstItem="uPo-Bl-q5G" firstAttribute="leading" secondItem="VOG-mr-Loa" secondAttribute="leading" id="xBP-60-53r"/>
                         <constraint firstItem="1vf-4A-SlJ" firstAttribute="trailing" secondItem="bZq-7i-XfD" secondAttribute="trailing" id="y4i-kB-3Bj"/>
                     </constraints>
                 </scrollView>
+                <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJK-gW-YIb">
+                    <rect key="frame" x="0.0" y="576" width="414" height="286"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="286" id="cg7-Iq-md6"/>
+                    </constraints>
+                </pickerView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ua-DM-Osf">
                     <rect key="frame" x="20" y="104" width="91" height="91"/>
                     <constraints>
@@ -256,11 +253,14 @@
                 <constraint firstItem="Qg7-Nh-akg" firstAttribute="leading" secondItem="YM0-I7-Pdc" secondAttribute="leading" id="Bge-7u-PWv"/>
                 <constraint firstItem="8ua-DM-Osf" firstAttribute="top" secondItem="fX8-KE-AoI" secondAttribute="bottom" constant="30" id="Enb-15-3Sq"/>
                 <constraint firstAttribute="bottom" secondItem="jwH-JF-xxn" secondAttribute="bottom" id="FUi-cc-M1i"/>
+                <constraint firstItem="NJK-gW-YIb" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="OXU-Po-Dn4"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="NJK-gW-YIb" secondAttribute="bottom" id="OgG-zH-qJc"/>
                 <constraint firstItem="fX8-KE-AoI" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="YCm-e8-nTN"/>
                 <constraint firstItem="Qg7-Nh-akg" firstAttribute="top" secondItem="YM0-I7-Pdc" secondAttribute="bottom" constant="15" id="Ypp-eI-mZm"/>
                 <constraint firstItem="jwH-JF-xxn" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="bQT-LL-V6F"/>
                 <constraint firstItem="jwH-JF-xxn" firstAttribute="top" secondItem="Qg7-Nh-akg" secondAttribute="bottom" constant="47" id="dbb-z4-zgB"/>
                 <constraint firstItem="8ua-DM-Osf" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="e9L-mn-c6i"/>
+                <constraint firstItem="NJK-gW-YIb" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="tYr-Jn-ZQR"/>
                 <constraint firstItem="YM0-I7-Pdc" firstAttribute="top" secondItem="fX8-KE-AoI" secondAttribute="bottom" constant="52" id="tds-Qy-Dv5"/>
                 <constraint firstItem="jwH-JF-xxn" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="wXC-dZ-O1Q"/>
             </constraints>

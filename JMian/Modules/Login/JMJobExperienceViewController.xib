@@ -138,10 +138,9 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ksp-Pc-zf0">
-                                    <rect key="frame" x="21" y="244" width="100" height="33"/>
+                                    <rect key="frame" x="21" y="244" width="74" height="33"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="33" id="azr-ps-qsr"/>
-                                        <constraint firstAttribute="width" constant="100" id="tvE-PY-nMT"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <state key="normal" title="开始时间">
@@ -152,15 +151,14 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="至" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oL3-kO-1Hp">
-                                    <rect key="frame" x="124" y="250" width="17.5" height="21.5"/>
+                                    <rect key="frame" x="98" y="250" width="17.5" height="21.5"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGl-rC-7JW">
-                                    <rect key="frame" x="150" y="246.5" width="101" height="31"/>
+                                    <rect key="frame" x="124" y="246.5" width="74" height="31"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="101" id="PIA-jr-oMw"/>
                                         <constraint firstAttribute="height" constant="31" id="zg2-lZ-hpq"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -270,7 +268,6 @@
                                 <constraint firstItem="MU4-N0-HTl" firstAttribute="top" secondItem="8rM-tf-D1A" secondAttribute="bottom" constant="14" id="ufC-JT-Mbw"/>
                                 <constraint firstItem="Thh-IG-hw5" firstAttribute="top" secondItem="Pck-mO-sDS" secondAttribute="bottom" constant="7.5" id="v9m-FS-R2C"/>
                                 <constraint firstItem="m0J-zT-CbZ" firstAttribute="leading" secondItem="xR5-CE-9gu" secondAttribute="leading" constant="20" id="wed-MJ-sWg"/>
-                                <constraint firstAttribute="trailing" secondItem="XGl-rC-7JW" secondAttribute="trailing" constant="124" id="xk2-Ho-RGn"/>
                                 <constraint firstItem="wAE-3j-nEM" firstAttribute="leading" secondItem="ema-Hd-lK9" secondAttribute="leading" id="zXV-ZE-Bua"/>
                             </constraints>
                         </view>

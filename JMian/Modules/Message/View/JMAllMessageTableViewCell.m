@@ -8,6 +8,7 @@
 
 #import "JMAllMessageTableViewCell.h"
 #import "DimensMacros.h"
+#import "JMUserInfoModel.h"
 
 //@implementation JMAllMessageTableViewCellData 
 //
@@ -44,10 +45,21 @@
 
 - (void)setData:(JMMessageListModel *)data
 {
+    
     _data = data;
-    self.userNameLabel.text = data.recipient_nickname;
-    self.iconImageView.image = GETImageFromURL(data.recipient_avatar);
-    self.userLabel.text = data.work_work_name;
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    if (model.user_id == data.sender_user_id) {
+        self.userNameLabel.text = data.recipient_nickname;
+        self.iconImageView.image = GETImageFromURL(data.recipient_avatar);
+        self.userLabel.text = data.work_work_name;
+        
+    }else{
+        self.userNameLabel.text = data.sender_nickname;
+        self.iconImageView.image = GETImageFromURL(data.sender_avatar);
+        self.userLabel.text = data.work_work_name;
+        
+        
+    }
     
     self.lastChatTimeLbel.text = data.data.time;
     self.lastChatLabel.text = data.data.subTitle;

@@ -13,6 +13,7 @@
 #import "JMHTTPManager+Work.h"
 #import "JMHomeWorkModel.h"
 #import "JMUserInfoModel.h"
+#import "Masonry.h"
 
 
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate>
@@ -49,8 +50,8 @@ static NSString *cellIdent = @"cellIdent";
 #pragma mark - 布局UI
 
 -(void)setTableView{
-    
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.headView.frame.size.height+self.headView.frame.origin.y, SCREEN_WIDTH, self.view.bounds.size.height) style:UITableViewStylePlain];
+
+    self.tableView = [[UITableView alloc]init];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
@@ -61,6 +62,11 @@ static NSString *cellIdent = @"cellIdent";
 
     [self.view addSubview:self.tableView];
     
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.headView.mas_bottom);
+        make.bottom.mas_equalTo(self.view);
+    }];
     
 }
 

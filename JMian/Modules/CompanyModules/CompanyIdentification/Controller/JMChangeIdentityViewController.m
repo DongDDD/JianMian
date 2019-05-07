@@ -9,6 +9,9 @@
 #import "JMChangeIdentityViewController.h"
 #import "JMJudgeViewController.h"
 #import "JMHTTPManager+UpdateInfo.h"
+#import "JMHTTPManager+Login.h"
+#import "NavigationViewController.h"
+#import "LoginViewController.h"
 
 @interface JMChangeIdentityViewController ()
 
@@ -26,24 +29,46 @@
 
 - (IBAction)userChangeAction:(id)sender {
     
-    [[JMHTTPManager sharedInstance]updateUserInfoType:nil password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]userChangeWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
         JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
-        
-        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-        model = [JMUserInfoManager getUserInfo];
-    
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
     
+//    [[JMHTTPManager sharedInstance]updateUserInfoType:nil password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        
+//        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+//        model = [JMUserInfoManager getUserInfo];
+//    
+//        
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//        
+//    }];
+    
 }
 
 
 - (IBAction)exitAction:(id)sender {
-    
+    [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        kRemoveMyDefault(@"token");
+        //token为空执行
+        
+        LoginViewController *login = [[LoginViewController alloc] init];
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
     
 }
 

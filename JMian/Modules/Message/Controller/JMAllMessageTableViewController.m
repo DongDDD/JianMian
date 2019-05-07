@@ -66,8 +66,9 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 - (void)updateConversations {
-    _dataArray = [NSMutableArray array];
+    JMUserInfoModel *userInfomodel = [JMUserInfoManager getUserInfo];
     
+    _dataArray = [NSMutableArray array];
     
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
@@ -79,6 +80,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
         TIMMessage *msg = [conv getLastMsg];
         NSLog(@"%@",msg);
         for (JMMessageListModel *model in self.modelArray) {
+            //判断sender是不是自己
+            if (model.sender_user_id == userInfomodel.user_id) {
                 if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
                     
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
@@ -89,14 +92,36 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     
                     model.data = data;
                     [_dataArray addObject:model];
-                  
+                    
                     
                 }
+            }else if(model.recipient_user_id == userInfomodel.user_id){
+                if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
+                    
+                    JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
+                    data.convId = [conv getReceiver];
+                    model.data = data;
+                    data.time = [self getDateDisplayString:msg.timestamp];
+                    data.subTitle = [self getLastDisplayString:conv];
+                    
+                    model.data = data;
+                    [_dataArray addObject:model];
+                    
+                    
+                }
+            
+            
+            }
+
+
 
             
         }
 
     }
+  
+    
+    
     [self.tableView reloadData];
 
 }

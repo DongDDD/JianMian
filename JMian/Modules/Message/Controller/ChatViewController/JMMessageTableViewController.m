@@ -16,12 +16,13 @@
 #import "JMChatDetailInfoTableViewCell.h"
 #import "JMChatViewSectionView.h"
 
-@interface JMMessageTableViewController ()
+@interface JMMessageTableViewController ()<TIMMessageListener,>
 
 @property (nonatomic, strong) JMMessageListModel *myModel;
 
 @property (nonatomic, strong) TIMMessage *msgForGet;
 
+@property (nonatomic, copy)NSString *receiverID;
 
 
 @end
@@ -31,6 +32,8 @@ static NSString *cellIdent = @"infoCellIdent";
 @implementation JMMessageTableViewController
 
 - (void)viewDidLoad {
+    
+//    TIMMessageListenerImpl * impl = [[TIMMessageListenerImpl alloc] init];
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = BG_COLOR;
@@ -44,6 +47,8 @@ static NSString *cellIdent = @"infoCellIdent";
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 //    [self readedReport];
+  
+    
 
 }
 
@@ -61,9 +66,44 @@ static NSString *cellIdent = @"infoCellIdent";
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRevokeMessage:) name:Notification_JMMMessageRevokeListener object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUploadMessage:) name:Notification_JMMUploadProgressListener object:nil];
 
 
+}
+//-(void)onNewMessage:(NSArray *)msgs
+//{
+//
+//
+//}
 
+
+-(void)onNewMessage:(NSArray *)msgs{
+
+
+}
+//- (void)onNewMessage:(NSNotification *)notification
+//{
+//
+//    NSLog(@"onNewMessage接受消息成功-------");
+//
+//}
+
+- (void)onRevokeMessage:(NSNotification *)notification
+{
+    
+    NSLog(@"onRevokeMessage接受消息成功-------");
+    
+}
+
+- (void)onUploadMessage:(NSNotification *)notification
+{
+    
+    NSLog(@"onUploadMessage接受消息成功-------");
+    
 }
 
 
@@ -74,11 +114,14 @@ static NSString *cellIdent = @"infoCellIdent";
 
 - (void)readedReport
 {
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+
     if (_myModel) {
+        
         
         TIMConversation *conv = [[TIMManager sharedInstance]
                                  getConversation:(TIMConversationType)TIM_C2C
-                                 receiver:_myModel.recipient_mark];
+                                 receiver:_receiverID];
         [conv setReadMessage:nil succ:^{
             NSLog(@"");
         } fail:^(int code, NSString *msg) {
@@ -91,6 +134,15 @@ static NSString *cellIdent = @"infoCellIdent";
 {
 
     _myModel = myConvModel;
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    //判断senderid是不是自己
+    if (model.user_id == _myModel.sender_user_id) {
+        
+        _receiverID = _myModel.recipient_mark;
+    }else{
+        
+        _receiverID = _myModel.sender_mark;
+    }
     [self loadMessage];
 
 
@@ -105,7 +157,7 @@ static NSString *cellIdent = @"infoCellIdent";
     
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
-                             receiver:_myModel.recipient_mark];
+                             receiver:_receiverID];
     __weak typeof(self) ws = self;
     [conv getMessage:20 last:nil succ:^(NSArray *msgs) {
         if(msgs.count != 0){
@@ -187,10 +239,12 @@ static NSString *cellIdent = @"infoCellIdent";
 #pragma mark - 点击事件
 
 -(void)sendMessage:(JMMessageCellData *)data{
+   
+    
     
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
-                             receiver:_myModel.recipient_mark];
+                             receiver:_receiverID];
     
     TIMTextElem * text_elem = [[TIMTextElem alloc] init];
     
