@@ -50,12 +50,13 @@
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     if (model.user_id == data.sender_user_id) {
         self.userNameLabel.text = data.recipient_nickname;
+        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.recipient_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         self.iconImageView.image = GETImageFromURL(data.recipient_avatar);
         self.userLabel.text = data.work_work_name;
         
     }else{
         self.userNameLabel.text = data.sender_nickname;
-        self.iconImageView.image = GETImageFromURL(data.sender_avatar);
+        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.sender_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         self.userLabel.text = data.work_work_name;
         
         

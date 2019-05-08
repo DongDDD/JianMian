@@ -94,7 +94,7 @@
 #define Notification_JMMUploadProgressListener @"Notification_JMMUploadProgressListener"
 
 
-
+#define AMapAPIKey @"3226a67b997e0c6d25b38614a86ff5e0"
 
 #define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define Is_IPhoneX (SCREEN_WIDTH >=375.0f && SCREEN_HEIGHT >=812.0f && Is_Iphone)

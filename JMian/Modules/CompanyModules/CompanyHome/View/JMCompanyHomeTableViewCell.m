@@ -18,7 +18,8 @@
 
 -(void)setModel:(JMCompanyHomeModel *)model{
     self.jobNameLab.text = model.workName;
-    self.iconImage.image = GETImageFromURL(model.userAvatar);
+     [self.iconImage sd_setImageWithURL:[NSURL URLWithString:model.userAvatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+  
     NSString *salaryStr = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
     self.jobDetailLab.text = model.workName;
     self.salaryLab.text = salaryStr;

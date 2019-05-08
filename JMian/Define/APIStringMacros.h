@@ -88,7 +88,10 @@
 #define Chat_List_URL @"converse/lists"
 //创建会话
 #define Create_Chat_URL @"converse/create"
-
+//银行卡
+#define Fetch_BankCardList_URL @"api/bank/card/lists"
+#define Create_BankCard_URL @"api/bank/card/create"
+#define Delete_BankCard_URL @"api/bank/card/delete"
 
 //接口
 

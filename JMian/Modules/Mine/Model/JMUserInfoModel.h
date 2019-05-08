@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *user_id;
 @property (nonatomic, copy) NSString *company_id;
+@property (nonatomic, copy) NSString *company_position;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *phone;
 @property (nonatomic, copy) NSString *avatar;

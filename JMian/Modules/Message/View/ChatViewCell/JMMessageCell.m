@@ -95,7 +95,8 @@
 //    _data = data;
     
    
-    _head.image = GETImageFromURL(data.head);
+//    _head.image = GETImageFromURL(data.head);
+      [_head sd_setImageWithURL:[NSURL URLWithString:data.head] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     _content.text = data.content;
   //行距
     NSString  *testString = _content.text;
@@ -123,13 +124,13 @@
         CGFloat headx = SCREEN_WIDTH - TMessageCell_Margin - headSize.width;
         CGSize contentSize = [self getlabelRectWith:_content.text];
         _head.frame = CGRectMake(headx, TMessageCell_Margin, headSize.width, headSize.height);
-        CGFloat contentx = _head.frame.origin.x -TMessageCell_Margin - contentSize.width;
+        CGFloat contentx = _head.frame.origin.x -TMessageCell_Margin - contentSize.width-10;
         CGFloat contenty = _head.frame.origin.y+10;
         CGSize size = [_content sizeThatFits:CGSizeMake(SCREEN_WIDTH*0.6, MAXFLOAT)];
         _content.frame = CGRectMake(contentx, contenty, size.width, size.height);
        
         //气泡
-        _bubble.image = [self getBubbleImgWithImgName:@"me_bubble" rectMoveX:13];
+        _bubble.image = [self getBubbleImgWithImgName:@"me_bubble" rectMoveX:8];
       
     }
     
@@ -148,7 +149,7 @@
     rect.size.height = rect.size.height + 26;
     _bubble.frame = rect;
     UIImage* img=[UIImage imageNamed:imgName];//原图
-    UIEdgeInsets edge=UIEdgeInsetsMake(40, 10, 18,0);
+    UIEdgeInsets edge=UIEdgeInsetsMake(40, 18, 18,20);
     img= [img resizableImageWithCapInsets:edge resizingMode:UIImageResizingModeStretch];
   
     return img;

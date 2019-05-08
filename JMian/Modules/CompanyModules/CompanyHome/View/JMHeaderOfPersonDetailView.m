@@ -22,7 +22,7 @@
 }
 
 -(void)setModel:(JMVitaDetailModel *)model{
-    
+
     self.headerImageView.image = [self getImageFromURL:model.user_avatar];
     self.realNameLab.text = model.user_nickname;
 //    self.sexImageView =

@@ -101,7 +101,7 @@ static NSString *cellIdent = @"cellIdent";
 #pragma mark - 推荐职位 -
 
 - (IBAction)pushPositionAction:(UIButton *)sender {
-
+   
     
 }
 
@@ -145,6 +145,7 @@ static NSString *cellIdent = @"cellIdent";
     HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
    
     JMHomeWorkModel *model = self.arrDate[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     [cell setModel:model];
    
     return cell;

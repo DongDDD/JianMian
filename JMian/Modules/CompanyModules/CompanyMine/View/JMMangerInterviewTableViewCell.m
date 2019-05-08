@@ -30,7 +30,8 @@
     self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@（等待同意）",model.time];
     
     self.nameLab.text = model.candidate_nickname;
-    self.IconImage.image = GETImageFromURL(model.candidate_avatar);
+     [self.IconImage sd_setImageWithURL:[NSURL URLWithString:model.candidate_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+//    self.IconImage.image = GETImageFromURL(model.candidate_avatar);
     self.salaryLab.text = [self getSalaryStrWithMin:model.work_salary_min max:model.work_salary_max];
 
     //工作经验

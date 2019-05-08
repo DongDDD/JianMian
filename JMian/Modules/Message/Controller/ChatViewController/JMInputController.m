@@ -8,6 +8,7 @@
 
 #import "JMInputController.h"
 #import "DimensMacros.h"
+#import "Masonry.h"
 
 typedef NS_ENUM(NSUInteger, InputStatus) {
     Input_Status_Input,
@@ -26,6 +27,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.view.backgroundColor = [UIColor redColor];
     // Do any additional setup after loading the view from its nib.
     [self setupViews];
 }
@@ -61,7 +63,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 {
     CGRect keyboardFrame = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
-        [_delegate inputController:self didChangeHeight:keyboardFrame.size.height + _inputTextView.frame.size.height];
+        [_delegate inputController:self didChangeHeight:keyboardFrame.size.height + _inputTextView.frame.size.height + Bottom_SafeHeight];
     }
 }
 
@@ -78,10 +80,15 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     self.view.backgroundColor = [UIColor whiteColor];
     _status = Input_Status_Input;
     
-    _inputTextView = [[JMInputTextView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, TTextView_Height)];
+    _inputTextView = [[JMInputTextView alloc] init];
     _inputTextView.delegate = self;
     [self.view addSubview:_inputTextView];
     
+    [_inputTextView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(TTextView_Height);
+        make.top.mas_equalTo(self.view);
+    }];
     
 }
 

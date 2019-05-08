@@ -63,7 +63,7 @@
     [_messageController setMyConvModel:_myConvModel];
 
     _inputController = [[JMInputController alloc] init];
-    _inputController.view.frame = CGRectMake(0, _messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight-50, self.view.frame.size.width,_messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight);
+    _inputController.view.frame = CGRectMake(0, _messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight-55, self.view.frame.size.width,_messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight);
     _inputController.delegate = self;
     NSLog(@"*******%f",Bottom_SafeHeight);
     [self addChildViewController:_inputController];
@@ -129,7 +129,6 @@
         CGRect msgFrame = ws.messageController.view.frame;
         msgFrame.size.height = ws.view.frame.size.height - height;
         ws.messageController.view.frame = msgFrame;
-//        [self loadViewIfNeeded];
         CGRect inputFrame = ws.inputController.view.frame;
         inputFrame.origin.y = msgFrame.origin.y + msgFrame.size.height;
         inputFrame.size.height = height;

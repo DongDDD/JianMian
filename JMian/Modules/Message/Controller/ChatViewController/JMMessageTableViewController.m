@@ -16,13 +16,19 @@
 #import "JMChatDetailInfoTableViewCell.h"
 #import "JMChatViewSectionView.h"
 
-@interface JMMessageTableViewController ()<TIMMessageListener,>
+@interface JMMessageTableViewController ()<TIMMessageListener>
+
+@property (nonatomic, strong) NSMutableArray *uiMsgs;
+
 
 @property (nonatomic, strong) JMMessageListModel *myModel;
 
 @property (nonatomic, strong) TIMMessage *msgForGet;
 
+@property (nonatomic, assign)BOOL isSelfIsSender;
 @property (nonatomic, copy)NSString *receiverID;
+
+@property (nonatomic, assign) BOOL isScrollBottom;
 
 
 @end
@@ -68,44 +74,66 @@ static NSString *cellIdent = @"infoCellIdent";
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRevokeMessage:) name:Notification_JMMMessageRevokeListener object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUploadMessage:) name:Notification_JMMUploadProgressListener object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRevokeMessage:) name:Notification_JMMMessageRevokeListener object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUploadMessage:) name:Notification_JMMUploadProgressListener object:nil];
 
 
 }
-//-(void)onNewMessage:(NSArray *)msgs
-//{
+
+
+//-(void)onNewMessage:(NSArray *)msgs{
 //
+//    NSLog(@"onNewMessage接受消息成功-------");
 //
 //}
-
-
--(void)onNewMessage:(NSArray *)msgs{
-
-
-}
 //- (void)onNewMessage:(NSNotification *)notification
 //{
 //
 //    NSLog(@"onNewMessage接受消息成功-------");
 //
 //}
+//
+//- (void)onRevokeMessage:(NSNotification *)notification
+//{
+//
+//    NSLog(@"onRevokeMessage接受消息成功-------");
+//
+//}
+//
+//- (void)onUploadMessage:(NSNotification *)notification
+//{
+//
+//    NSLog(@"onUploadMessage接受消息成功-------");
+//
+//}
 
-- (void)onRevokeMessage:(NSNotification *)notification
+- (void)onRefreshConversations:(NSArray *)conversations
 {
     
-    NSLog(@"onRevokeMessage接受消息成功-------");
+        NSLog(@"onRefreshConversations-------");
+
+}
+
+- (void)onNewMessage:(NSArray *)msgs
+{
+    NSMutableArray *uiMsgs = [self transUIMsgFromIMMsg:msgs];
+    [_uiMsgs addObjectsFromArray:uiMsgs];
+    __weak typeof(self) ws = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [ws.tableView reloadData];
+        [ws scrollToBottom:YES];
+    });
+    
     
 }
 
-- (void)onUploadMessage:(NSNotification *)notification
+- (void)scrollToBottom:(BOOL)animate
 {
-    
-    NSLog(@"onUploadMessage接受消息成功-------");
-    
+    if (_uiMsgs.count > 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_uiMsgs.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:animate];
+    }
 }
-
 
 - (NSMutableArray *)extracted:(JMMessageTableViewController *const __weak)ws {
     return ws.uiMsgs;
@@ -114,7 +142,7 @@ static NSString *cellIdent = @"infoCellIdent";
 
 - (void)readedReport
 {
-    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    [[TIMManager sharedInstance] addMessageListener:self];
 
     if (_myModel) {
         
@@ -122,6 +150,7 @@ static NSString *cellIdent = @"infoCellIdent";
         TIMConversation *conv = [[TIMManager sharedInstance]
                                  getConversation:(TIMConversationType)TIM_C2C
                                  receiver:_receiverID];
+        
         [conv setReadMessage:nil succ:^{
             NSLog(@"");
         } fail:^(int code, NSString *msg) {
@@ -136,7 +165,8 @@ static NSString *cellIdent = @"infoCellIdent";
     _myModel = myConvModel;
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     //判断senderid是不是自己
-    if (model.user_id == _myModel.sender_user_id) {
+    _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
+    if (_isSelfIsSender) {
         
         _receiverID = _myModel.recipient_mark;
     }else{
@@ -144,7 +174,6 @@ static NSString *cellIdent = @"infoCellIdent";
         _receiverID = _myModel.sender_mark;
     }
     [self loadMessage];
-
 
 }
 
@@ -196,7 +225,13 @@ static NSString *cellIdent = @"infoCellIdent";
                     TIMTextElem * text_elem = (TIMTextElem *)elem;
                     JMMessageCellData *textData = [[JMMessageCellData alloc]init];
                     textData.content = text_elem.text;
-                    textData.head = _myModel.sender_avatar;
+                    if (_isSelfIsSender) {
+                        
+                        textData.head = _myModel.recipient_avatar;
+                    }else{
+                    
+                        textData.head = _myModel.sender_avatar;
+                    }
                     textData.isSelf = NO;
                     data = textData;
                     [uiMsgs addObject:data];
@@ -214,7 +249,13 @@ static NSString *cellIdent = @"infoCellIdent";
                     TIMTextElem * text_elem = (TIMTextElem *)elem;
                     JMMessageCellData *textData = [[JMMessageCellData alloc]init];
                     textData.content = text_elem.text;
-                    textData.head = _myModel.recipient_avatar;
+                    if (_isSelfIsSender) {
+                        
+                        textData.head = _myModel.sender_avatar;
+                    }else{
+                        textData.head = _myModel.recipient_avatar;
+                        
+                    }
                     textData.isSelf = YES;
                     data = textData;
                     [uiMsgs addObject:data];
@@ -224,9 +265,7 @@ static NSString *cellIdent = @"infoCellIdent";
             }
             
             
-            
         }
-        
         
         
     }
@@ -254,9 +293,9 @@ static NSString *cellIdent = @"infoCellIdent";
     [msg addElem:text_elem];
     
     [conv sendMessage:msg succ:^(){
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"测试提示" message:@"发送成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"测试提示" message:@"发送成功"
+//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//        [alert show];
         NSLog(@"SendMsg Succ");
     }fail:^(int code, NSString * err) {
         NSLog(@"SendMsg Failed:%d->%@", code, err);
@@ -271,6 +310,9 @@ static NSString *cellIdent = @"infoCellIdent";
     [self.uiMsgs addObject:textData];
     
     [self.tableView reloadData];
+    
+    [self scrollToBottom:YES];
+
 }
 
 - (void)didTapViewController
@@ -281,6 +323,15 @@ static NSString *cellIdent = @"infoCellIdent";
 }
 
 #pragma mark - Table view data source
+-(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (_isScrollBottom == NO) {
+        [self scrollToBottom:NO];
+        if (indexPath.row == _uiMsgs.count-1) {
+            _isScrollBottom = YES;
+        }
+    }
+}
+
 //section
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

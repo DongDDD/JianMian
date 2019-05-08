@@ -24,9 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setMyConvModel:(JMMessageListModel *)myConvModel;
 
-@property (nonatomic, strong) NSMutableArray *uiMsgs;
 @property (nonatomic, weak) id<JMMessageTableViewControllerDelegate> delegate;
 -(void)sendMessage:(JMMessageCellData *)data;
+- (void)scrollToBottom:(BOOL)animate;
 
 @end
 

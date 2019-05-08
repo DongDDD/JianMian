@@ -19,6 +19,7 @@
 #import "JMHTTPManager+FetchCompanyInfo.h"
 #import "JMCompanyLikeViewController.h"
 #import "JMMySettingViewController.h"
+#import "JMWalletViewController.h"
 
 
 
@@ -61,6 +62,10 @@
     [self getUserData];
 
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+//    [self getCompanyData];
+}
 
 #pragma mark - 获取数据
 
@@ -70,7 +75,7 @@
 
         self.userInfoModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         [self.tableView reloadData];
-        [self getCompanyData];
+//        [self getCompanyData];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];
@@ -84,20 +89,20 @@
 }
 
 
--(void)getCompanyData{
-    
-    
-    [[JMHTTPManager sharedInstance] fetchCompanyInfo_Id:self.userInfoModel.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-        
-        
-    }];
-    
-}
+//-(void)getCompanyData{
+//
+//
+//    [[JMHTTPManager sharedInstance] fetchCompanyInfo_Id:self.userInfoModel.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//
+//
+//    }];
+//
+//}
 
 - (NSDictionary *)generateDicFromArray:(NSArray *)array {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -116,7 +121,7 @@
     if (indexPath.section == 0) {
 //        cell.accessoryType = UITableViewCellStyleSubtitle;
 
-        cell.textLabel.text = @"paneidong\nHR";
+        cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@",self.userInfoModel.nickname,self.userInfoModel.company_position];
         cell.textLabel.numberOfLines = 0;
         cell.textLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
         cell.textLabel.textColor = UIColorFromHEX(0x4d4d4d);
@@ -141,7 +146,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:[[JMMyResumeViewController alloc] init] animated:YES];
+    [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
 }
 
 #pragma mark - UITableViewDataSource
