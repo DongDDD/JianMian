@@ -10,7 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol JMGetCompanyLocationViewControllerDelegate <NSObject>
+
+-(void)sendAdress_Data:(AMapPOI *)data ;
+
+@end
+
 @interface JMGetCompanyLocationViewController : BaseViewController
+
+@property(nonatomic,weak)id<JMGetCompanyLocationViewControllerDelegate>delegate;
 
 @end
 

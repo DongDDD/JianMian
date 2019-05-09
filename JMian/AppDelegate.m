@@ -44,7 +44,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    
+    [AMapServices sharedServices].apiKey = AMapAPIKey;
+    [AMapServices sharedServices].enableHTTPS = YES;
+
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
 

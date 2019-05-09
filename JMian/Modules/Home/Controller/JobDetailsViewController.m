@@ -745,7 +745,7 @@
 -(void)setMapView{
 //
      self.mapView = [[MapView alloc] init];
-    
+    [self.mapView setModel:self.model];
     [self.scrollView addSubview:self.mapView];
     
     [self.mapView mas_makeConstraints:^(MASConstraintMaker *make) {

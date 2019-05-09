@@ -16,7 +16,7 @@
 
 
 
-@interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate>
+@interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate,JMGetCompanyLocationViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *workNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *workNameBtn;
@@ -40,6 +40,8 @@
 @property (nonatomic,strong)UIButton *selectedBtn;
 
 @property (weak, nonatomic) IBOutlet UIButton *workLocationBtn;
+@property (nonatomic, strong)AMapPOI *POIModel;
+
 @property (weak, nonatomic) IBOutlet UIButton *jobDescriptionBtn;
 
 
@@ -48,6 +50,7 @@
 @property (nonatomic, assign)NSUInteger pickerRow;
 
 @property (nonatomic, copy)NSString *positionLabId;
+
 
 @end
 
@@ -69,8 +72,11 @@
 
 #pragma mark - 数据提交
 -(void)rightAction{
+    NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
+    NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
+
     
-    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@3 work_label_id:_positionLabId work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:@"互投帮创业园" longitude:@"113.389007" latitude:@"23.044584" status:@1 label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_positionLabId work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发布成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -173,8 +179,7 @@
     
 }
 - (IBAction)welFareAction:(UIButton *)sender{
-    
-    
+ 
     JMWelfareViewController *vc = [[JMWelfareViewController alloc]init];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
@@ -198,8 +203,18 @@
 - (IBAction)workLocationAction:(UIButton *)sender {
     
     JMGetCompanyLocationViewController *vc = [[JMGetCompanyLocationViewController alloc]init];
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+-(void)sendAdress_Data:(AMapPOI *)data
+{
+    self.POIModel = data;
+    NSString *adr = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
+    [self.workLocationBtn setTitle:adr forState:UIControlStateNormal];
+
+
 }
 
 - (IBAction)jobDescriptionAction:(UIButton *)sender {

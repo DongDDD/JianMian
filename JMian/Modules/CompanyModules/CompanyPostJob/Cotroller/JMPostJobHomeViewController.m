@@ -69,7 +69,7 @@ static NSString *cellIdent = @"cellIdent";
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.hidden = YES;
-
+    self.breakBGView.hidden = YES;
     [self getUserStatus];
 //    [self jugdeCard_status];
 

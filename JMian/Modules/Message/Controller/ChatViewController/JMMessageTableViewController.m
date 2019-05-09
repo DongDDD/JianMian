@@ -15,8 +15,9 @@
 #import "JMCompanyLikeTableViewCell.h"
 #import "JMChatDetailInfoTableViewCell.h"
 #import "JMChatViewSectionView.h"
+#import "JMVideoChatViewController.h"
 
-@interface JMMessageTableViewController ()<TIMMessageListener>
+@interface JMMessageTableViewController ()<TIMMessageListener,JMChatViewSectionViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *uiMsgs;
 
@@ -277,6 +278,15 @@ static NSString *cellIdent = @"infoCellIdent";
 
 #pragma mark - 点击事件
 
+-(void)videoInterviewAction
+{
+    JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+
+
+}
+
+
 -(void)sendMessage:(JMMessageCellData *)data{
    
     
@@ -347,6 +357,7 @@ static NSString *cellIdent = @"infoCellIdent";
     if (section == 0) {
         
         JMChatViewSectionView *view=[[JMChatViewSectionView alloc] init];
+        view.delegate = self;
         return view ;
     }
     return nil;

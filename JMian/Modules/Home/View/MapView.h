@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMHomeWorkModel.h"
+#import <MAMapKit/MAMapKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MapView : UIView
+@interface MapView : UIView <MAMapViewDelegate>
 
-
+@property(nonatomic,strong)JMHomeWorkModel *model;
 
 @end
 

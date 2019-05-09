@@ -227,6 +227,8 @@
 		041F67282274654400C4F940 /* JMCompanyDesciptionOfMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 041F67272274654400C4F940 /* JMCompanyDesciptionOfMineViewController.m */; };
 		041F672B22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m in Sources */ = {isa = PBXBuildFile; fileRef = 041F672A22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m */; };
 		041F672E22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m in Sources */ = {isa = PBXBuildFile; fileRef = 041F672D22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m */; };
+		0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0425CB56228449D600E08587 /* JMVideoChatViewController.m */; };
+		0425CB59228449D600E08587 /* JMVideoChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0425CB57228449D600E08587 /* JMVideoChatViewController.xib */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
 		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
@@ -769,6 +771,9 @@
 		041F672A22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+CompanyInfoUpdate.m"; sourceTree = "<group>"; };
 		041F672C22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+CompanyUpdateJob.h"; sourceTree = "<group>"; };
 		041F672D22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+CompanyUpdateJob.m"; sourceTree = "<group>"; };
+		0425CB55228449D600E08587 /* JMVideoChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoChatViewController.h; sourceTree = "<group>"; };
+		0425CB56228449D600E08587 /* JMVideoChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoChatViewController.m; sourceTree = "<group>"; };
+		0425CB57228449D600E08587 /* JMVideoChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVideoChatViewController.xib; sourceTree = "<group>"; };
 		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -1551,6 +1556,16 @@
 			path = PersonDetailContoller;
 			sourceTree = "<group>";
 		};
+		0425CB54228449A000E08587 /* VideoChatViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0425CB55228449D600E08587 /* JMVideoChatViewController.h */,
+				0425CB56228449D600E08587 /* JMVideoChatViewController.m */,
+				0425CB57228449D600E08587 /* JMVideoChatViewController.xib */,
+			);
+			path = VideoChatViewController;
+			sourceTree = "<group>";
+		};
 		044DF23C2244C06900301243 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1960,6 +1975,7 @@
 		04C6013A22604108000B1FE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0425CB54228449A000E08587 /* VideoChatViewController */,
 				040E54CD2276F9FF004AB0F9 /* ChatViewController */,
 				04C6013B2260639C000B1FE0 /* JMAllMessageTableViewController.h */,
 				04C6013C2260639C000B1FE0 /* JMAllMessageTableViewController.m */,
@@ -2748,6 +2764,7 @@
 				040701BB2275DB58002BF58D /* JMCompanyLikeViewController.xib in Resources */,
 				041997F82267181A00C6C134 /* JMPictureOfPersonDetailViewController.xib in Resources */,
 				040BF05F227159B60088697D /* JMChangeIdentityViewController.xib in Resources */,
+				0425CB59228449D600E08587 /* JMVideoChatViewController.xib in Resources */,
 				040714A0227C6CC70026C368 /* more@3x.png in Resources */,
 				04DD1D66224B6E95007CB11C /* icon_return.png in Resources */,
 				6D55865A224B54D70037C14E /* jianmian_home@2x.png in Resources */,
@@ -3048,6 +3065,7 @@
 				04A9DFB0225B2B5000CD7CC1 /* JMHTTPManager+Work.m in Sources */,
 				048348D32269BE4100DE4630 /* JMManageInterviewViewController.m in Sources */,
 				040A5115226FF47B0074BD4B /* JMGetCompanyLocationViewController.m in Sources */,
+				0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */,
 				6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */,
 				040A40BB226589A50005E0D7 /* JMCompanyBaseInfoViewController.m in Sources */,
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,

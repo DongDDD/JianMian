@@ -25,6 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *Description;
 @property (nonatomic, strong) NSString *status;
 
+@property (nonatomic, strong) NSString *address;
+@property (nonatomic, strong) NSString *latitude;
+@property (nonatomic, strong) NSString *longitude;
+
+
 @property (nonatomic, copy) NSString *cityId;
 @property (nonatomic, copy) NSString *cityName;
 
@@ -34,9 +39,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *companyFinancing;
 @property (nonatomic, copy) NSString *companyEmployee;
 @property (nonatomic, copy) NSString *companyCityId;
-@property (nonatomic, copy) NSString *companyAddress;
-@property (nonatomic, copy) NSString *companyLongitude;
-@property (nonatomic, copy) NSString *companyLatitude;
 @property (nonatomic, strong) NSArray *companyLabels;
 @property (nonatomic, copy) NSString *companyIndustry_label;
 @property (nonatomic, copy) NSString *companyCity;

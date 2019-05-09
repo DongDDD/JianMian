@@ -25,7 +25,8 @@
         self.searchTextField.clearButtonMode=UITextFieldViewModeAlways;
         self.searchTextField.textColor = [UIColor colorWithRed:101/255.0 green:101/255.0 blue:101/255.0 alpha:1.0];
         self.searchTextField.font = [UIFont systemFontOfSize:13];
-        
+        self.searchTextField.returnKeyType = UIReturnKeySearch;
+        self.searchTextField.placeholder = @"🔍   搜索";
         [self addSubview: self.searchTextField];
     }
     return self;

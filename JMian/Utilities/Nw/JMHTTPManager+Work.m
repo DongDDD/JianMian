@@ -70,8 +70,8 @@
                            address:(NSString * )address
                          longitude:(NSString *)longitude
                           latitude:(NSString *)latitude
-                            status:(NSNumber *)status
-                         label_ids:(NSArray *)label_ids
+                            status:(NSString *)status
+                         label_ids:(nullable NSArray *)label_ids
                       SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     NSDictionary *dic =     @{

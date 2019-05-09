@@ -13,6 +13,7 @@ pod 'PrintBeautifulLog'
 pod 'AMap2DMap'
 pod 'AMapSearch'
 pod 'AMapLocation'
+pod 'AgoraRtcEngine_iOS'
 
 
 

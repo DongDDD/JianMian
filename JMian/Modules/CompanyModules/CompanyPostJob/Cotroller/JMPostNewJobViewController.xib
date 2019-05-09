@@ -79,6 +79,7 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工作性质" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58t-Cv-nWp">
                                     <rect key="frame" x="21" y="19.5" width="69.5" height="21"/>
                                     <constraints>
+                                        <constraint firstAttribute="width" constant="69.5" id="0KS-T4-VPS"/>
                                         <constraint firstAttribute="height" constant="21" id="Tfb-ai-ads"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
