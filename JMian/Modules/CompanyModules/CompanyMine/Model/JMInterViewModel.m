@@ -6,10 +6,10 @@
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMInterVIewModel.h"
+#import "JMInterViewModel.h"
 #import <MJExtension.h>
 
-@implementation JMInterVIewModel
+@implementation JMInterViewModel
 
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     

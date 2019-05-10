@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMManageInterviewViewController">
             <connections>
+                <outlet property="invitedBtn" destination="9Zv-IF-G8c" id="kHZ-8V-6m2"/>
+                <outlet property="isInterviewBtn" destination="PBR-sB-lt3" id="2PL-XY-8hw"/>
                 <outlet property="tableView" destination="8rf-Eu-c9n" id="VG9-BZ-fMS"/>
                 <outlet property="titleView" destination="fLS-JO-2TA" id="LLl-ol-EDE"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -50,6 +52,9 @@
                                     <integer key="value" value="11"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="invitedBtnAction:" destination="-1" eventType="touchUpInside" id="1WE-Nb-tGT"/>
+                            </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gh0-UW-t50" userLabel="竖 分割线1">
                             <rect key="frame" x="206.5" y="16" width="1" height="12"/>
@@ -60,7 +65,7 @@
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBR-sB-lt3">
-                            <rect key="frame" x="263.5" y="7" width="94.5" height="30"/>
+                            <rect key="frame" x="263.5" y="11" width="94.5" height="22"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="已面试">
                                 <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -70,6 +75,9 @@
                                     <integer key="value" value="11"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="isInterviewBtnAction:" destination="-1" eventType="touchUpInside" id="OCm-18-KAp"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -83,6 +91,7 @@
                         <constraint firstItem="96m-tb-Nft" firstAttribute="leading" secondItem="fLS-JO-2TA" secondAttribute="leading" id="PTW-P2-52Q"/>
                         <constraint firstItem="KcW-oT-Q4q" firstAttribute="top" secondItem="9Zv-IF-G8c" secondAttribute="bottom" constant="9" id="Tma-qt-5Eq"/>
                         <constraint firstAttribute="trailing" secondItem="KcW-oT-Q4q" secondAttribute="trailing" id="adQ-NP-OPV"/>
+                        <constraint firstItem="PBR-sB-lt3" firstAttribute="height" secondItem="9Zv-IF-G8c" secondAttribute="height" id="bQm-y2-z69"/>
                         <constraint firstAttribute="trailing" secondItem="PBR-sB-lt3" secondAttribute="trailing" constant="56" id="h5F-dS-Il5"/>
                         <constraint firstItem="PBR-sB-lt3" firstAttribute="centerY" secondItem="9Zv-IF-G8c" secondAttribute="centerY" constant="-1.5" id="kGW-2g-DIz"/>
                         <constraint firstItem="Gh0-UW-t50" firstAttribute="centerX" secondItem="fLS-JO-2TA" secondAttribute="centerX" id="pFG-th-EW6"/>

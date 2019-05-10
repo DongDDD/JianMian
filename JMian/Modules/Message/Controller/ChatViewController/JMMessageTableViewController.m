@@ -270,9 +270,7 @@ static NSString *cellIdent = @"infoCellIdent";
         
         
     }
-    
-    
-    
+
     return uiMsgs;
 }
 
@@ -281,16 +279,13 @@ static NSString *cellIdent = @"infoCellIdent";
 -(void)videoInterviewAction
 {
     JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
+    vc.model = self.myModel;
     [self.navigationController pushViewController:vc animated:YES];
-
-
 }
 
 
 -(void)sendMessage:(JMMessageCellData *)data{
-   
-    
-    
+  
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:_receiverID];

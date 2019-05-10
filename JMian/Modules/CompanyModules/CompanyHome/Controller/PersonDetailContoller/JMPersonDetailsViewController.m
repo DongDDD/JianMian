@@ -18,12 +18,13 @@
 #import "JMVitaDetailModel.h"
 #import "Masonry.h"
 #import "JMHTTPManager+InterView.h"
-#import "JMChooseTimeViewController.h"
+//#import "JMChooseTimeViewController.h"
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+CreateConversation.h"
+#import "THDatePickerView.h"
 
 
-@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,JMChooseTimeViewControllerDelegate>
+@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate>
 
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -41,7 +42,12 @@
 
 @property (nonatomic, strong) UIActivityIndicatorView * juhua;
 
-@property (nonatomic, strong) JMChooseTimeViewController *chooseTimeVC;
+//@property (nonatomic, strong) JMChooseTimeViewController *chooseTimeVC;
+
+@property (weak, nonatomic) THDatePickerView *dateView;
+@property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
+
+
 @end
 
 @implementation JMPersonDetailsViewController
@@ -60,7 +66,6 @@
     [self setJuhua];
     
     [self getData];
-    
     
 }
 
@@ -101,6 +106,8 @@
     [self setHeaderVieUI];
     [self setPageUI];
     [self setBottomViewUI];
+    [self initDatePickerView];
+
     _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,_pageView.frame.origin.y+_pageView.frame.size.height+64);
 
 
@@ -149,19 +156,83 @@
     }];
 
 }
-#pragma mark - 点击事件
 
+//时间选择器
+-(void)initDatePickerView
+{
+    self.BgBtn = [[UIButton alloc] initWithFrame:self.view.bounds];
+    self.BgBtn.backgroundColor = [UIColor blackColor];
+    self.BgBtn.hidden = YES;
+    self.BgBtn.alpha = 0.3;
+    [self.view addSubview:self.BgBtn];
+    
+    THDatePickerView *dateView = [[THDatePickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300)];
+    dateView.delegate = self;
+    dateView.title = @"请选择时间";
+    //    dateView.isSlide = NO;
+    //    dateView.date = @"2017-03-23 12:43";
+    //    dateView.minuteInterval = 1;
+    [self.view addSubview:dateView];
+    self.dateView = dateView;
+
+}
+#pragma mark - THDatePickerViewDelegate
+/**
+ 保存按钮代理方法
+ 
+ @param timer 选择的数据
+ */
+- (void)datePickerViewSaveBtnClickDelegate:(NSString *)timer {
+    NSLog(@"保存点击");
+//    self.timerLbl.text = timer;
+    
+    self.BgBtn.hidden = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
+    }];
+    
+    
+    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.model.user_job_id time:timer successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+/**
+ 取消按钮代理方法
+ */
+- (void)datePickerViewCancelBtnClickDelegate {
+    NSLog(@"取消点击");
+    self.BgBtn.hidden = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
+    }];
+}
+#pragma mark - 点击事件
+//显示时间选择器
 -(void)bottomRightButtonAction{
-    self.chooseTimeVC = [[JMChooseTimeViewController alloc]init];
-    self.chooseTimeVC.delegate = self;
-    [self addChildViewController:self.chooseTimeVC];
-    [self.view addSubview:self.chooseTimeVC.view];
-    self.chooseTimeVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-     [self.chooseTimeVC didMoveToParentViewController:self];
-    NSLog(@"邀请面试");
+    self.BgBtn.hidden = NO;
+
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
+        [self.dateView show];
+    }];
+//    self.chooseTimeVC = [[JMChooseTimeViewController alloc]init];
+//    self.chooseTimeVC.delegate = self;
+//    [self addChildViewController:self.chooseTimeVC];
+//    [self.view addSubview:self.chooseTimeVC.view];
+//    self.chooseTimeVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//     [self.chooseTimeVC didMoveToParentViewController:self];
+//    NSLog(@"邀请面试");
     
 }
 
+//和他聊聊
 -(void)bottomLeftButtonAction
 {
     [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.model.user_id foreign_key:self.model.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -180,33 +251,34 @@
 
 }
 
--(void)deleteInteviewTimeViewAction{
 
-    [self.chooseTimeVC willMoveToParentViewController:nil];
-    [self.chooseTimeVC removeFromParentViewController];
-    [self.chooseTimeVC.view removeFromSuperview];
- 
-   self.navigationController.navigationBarHidden = NO;
-}
-
-
--(void)OKInteviewTimeViewAction:(NSString *)interviewTime{
-    [self.chooseTimeVC willMoveToParentViewController:nil];
-    [self.chooseTimeVC removeFromParentViewController];
-    [self.chooseTimeVC.view removeFromSuperview];
-    self.navigationController.navigationBarHidden = NO;
-    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.model.user_job_id time:interviewTime successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+//-(void)deleteInteviewTimeViewAction{
+//
+//    [self.chooseTimeVC willMoveToParentViewController:nil];
+//    [self.chooseTimeVC removeFromParentViewController];
+//    [self.chooseTimeVC.view removeFromSuperview];
+//
+//   self.navigationController.navigationBarHidden = NO;
+//}
 
 
-}
+//-(void)OKInteviewTimeViewAction:(NSString *)interviewTime{
+//    [self.chooseTimeVC willMoveToParentViewController:nil];
+//    [self.chooseTimeVC removeFromParentViewController];
+//    [self.chooseTimeVC.view removeFromSuperview];
+//    self.navigationController.navigationBarHidden = NO;
+//    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.model.user_job_id time:interviewTime successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
+//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//        [alert show];
+//
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//
+//}
 
 #pragma mark - lazy
 

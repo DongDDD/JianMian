@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMInterVIewModel : NSObject
+@interface JMInterViewModel : NSObject
 
 @property (nonatomic, copy) NSString *user_job_id;
 @property (nonatomic, copy) NSString *interview_id;

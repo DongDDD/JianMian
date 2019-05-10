@@ -7,21 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JMInterVIewModel.h"
+#import "JMInterViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol JMMangerInterviewTableViewCellDelegate <NSObject>
 
--(void)cellLeftBtnActionWith_row:(NSInteger)row;
--(void)cellRightBtnAction_row:(NSInteger)row;
+-(void)cellLeftBtnActionWith_model:(JMInterViewModel *)model;
+-(void)cellRightBtnAction_model:(JMInterViewModel *)model;
 
 @end
 
 @interface JMMangerInterviewTableViewCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *headerTitleLab;
-@property(nonatomic,strong)JMInterVIewModel *model;
+@property(nonatomic,strong)JMInterViewModel *model;
 @property (weak, nonatomic) IBOutlet UILabel *interviewTimeLab;
 @property (weak, nonatomic) IBOutlet UIImageView *IconImage;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *deleteImg;
 
 @property (nonatomic,assign)NSInteger myRow;
 

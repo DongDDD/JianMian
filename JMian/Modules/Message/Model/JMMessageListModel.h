@@ -42,6 +42,7 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property(nonatomic,copy)NSString *work_work_experience_min;
 @property(nonatomic,copy)NSString *work_work_experience_max;
 
+@property(nonatomic,copy)NSString *chat_id;
 //腾讯云数据
 @property (nonatomic, strong) JMAllMessageTableViewCellData *data;
 

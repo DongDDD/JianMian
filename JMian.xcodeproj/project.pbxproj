@@ -81,7 +81,7 @@
 		040865E12272FAF1005BB03E /* JMPostJobHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040865DF2272FAF1005BB03E /* JMPostJobHomeTableViewCell.m */; };
 		040865E22272FAF1005BB03E /* JMPostJobHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040865E02272FAF1005BB03E /* JMPostJobHomeTableViewCell.xib */; };
 		040865E5227338E2005BB03E /* JMHTTPManager+InterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040865E4227338E2005BB03E /* JMHTTPManager+InterView.m */; };
-		040865E822733B78005BB03E /* JMInterVIewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 040865E722733B78005BB03E /* JMInterVIewModel.m */; };
+		040865E822733B78005BB03E /* JMInterViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 040865E722733B78005BB03E /* JMInterViewModel.m */; };
 		040865EB22734ADE005BB03E /* JMCompanyInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 040865EA22734ADE005BB03E /* JMCompanyInfoModel.m */; };
 		04088F3F227012B9007EB236 /* company_information@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04088F33227012B8007EB236 /* company_information@2x.png */; };
 		04088F47227012B9007EB236 /* company_information@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04088F3B227012B9007EB236 /* company_information@3x.png */; };
@@ -254,6 +254,10 @@
 		048348E82269CF9200DE4630 /* my_videos.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348E52269CF9200DE4630 /* my_videos.png */; };
 		048348E92269CF9200DE4630 /* my_videos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348E62269CF9200DE4630 /* my_videos@2x.png */; };
 		048348EA2269CF9200DE4630 /* my_videos@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348E72269CF9200DE4630 /* my_videos@3x.png */; };
+		048E662E22850EE900694D86 /* THDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E662C22850EE900694D86 /* THDatePickerView.m */; };
+		048E6632228574BE00694D86 /* peer_countermand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E662F228574BD00694D86 /* peer_countermand@2x.png */; };
+		048E6633228574BE00694D86 /* peer_countermand.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E6630228574BD00694D86 /* peer_countermand.png */; };
+		048E6634228574BE00694D86 /* peer_countermand@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E6631228574BD00694D86 /* peer_countermand@3x.png */; };
 		048FEE322244853C001160C8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE312244853C001160C8 /* AppDelegate.m */; };
 		048FEE352244853C001160C8 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE342244853C001160C8 /* ViewController.m */; };
 		048FEE382244853C001160C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048FEE362244853C001160C8 /* Main.storyboard */; };
@@ -573,8 +577,8 @@
 		040865E02272FAF1005BB03E /* JMPostJobHomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPostJobHomeTableViewCell.xib; sourceTree = "<group>"; };
 		040865E3227338E2005BB03E /* JMHTTPManager+InterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+InterView.h"; sourceTree = "<group>"; };
 		040865E4227338E2005BB03E /* JMHTTPManager+InterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+InterView.m"; sourceTree = "<group>"; };
-		040865E622733B78005BB03E /* JMInterVIewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMInterVIewModel.h; sourceTree = "<group>"; };
-		040865E722733B78005BB03E /* JMInterVIewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMInterVIewModel.m; sourceTree = "<group>"; };
+		040865E622733B78005BB03E /* JMInterViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMInterViewModel.h; sourceTree = "<group>"; };
+		040865E722733B78005BB03E /* JMInterViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMInterViewModel.m; sourceTree = "<group>"; };
 		040865E922734ADE005BB03E /* JMCompanyInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCompanyInfoModel.h; sourceTree = "<group>"; };
 		040865EA22734ADE005BB03E /* JMCompanyInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCompanyInfoModel.m; sourceTree = "<group>"; };
 		04088F33227012B8007EB236 /* company_information@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "company_information@2x.png"; sourceTree = "<group>"; };
@@ -813,6 +817,11 @@
 		048348E52269CF9200DE4630 /* my_videos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_videos.png; sourceTree = "<group>"; };
 		048348E62269CF9200DE4630 /* my_videos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_videos@2x.png"; sourceTree = "<group>"; };
 		048348E72269CF9200DE4630 /* my_videos@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_videos@3x.png"; sourceTree = "<group>"; };
+		048E662C22850EE900694D86 /* THDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDatePickerView.m; sourceTree = "<group>"; };
+		048E662D22850EE900694D86 /* THDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDatePickerView.h; sourceTree = "<group>"; };
+		048E662F228574BD00694D86 /* peer_countermand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peer_countermand@2x.png"; sourceTree = "<group>"; };
+		048E6630228574BD00694D86 /* peer_countermand.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = peer_countermand.png; sourceTree = "<group>"; };
+		048E6631228574BD00694D86 /* peer_countermand@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peer_countermand@3x.png"; sourceTree = "<group>"; };
 		048FEE2D2244853C001160C8 /* JMian.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JMian.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		048FEE302244853C001160C8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		048FEE312244853C001160C8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -1682,6 +1691,7 @@
 		0462C7212244936F003B6639 /* ThridParty */ = {
 			isa = PBXGroup;
 			children = (
+				048E662B22850EE900694D86 /* TimeChoose */,
 			);
 			path = ThridParty;
 			sourceTree = "<group>";
@@ -1716,8 +1726,8 @@
 		048348CA2269BD5F00DE4630 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				040865E622733B78005BB03E /* JMInterVIewModel.h */,
-				040865E722733B78005BB03E /* JMInterVIewModel.m */,
+				040865E622733B78005BB03E /* JMInterViewModel.h */,
+				040865E722733B78005BB03E /* JMInterViewModel.m */,
 				040865E922734ADE005BB03E /* JMCompanyInfoModel.h */,
 				040865EA22734ADE005BB03E /* JMCompanyInfoModel.m */,
 			);
@@ -1758,6 +1768,9 @@
 		048348E42269CF9200DE4630 /* Mine */ = {
 			isa = PBXGroup;
 			children = (
+				048E6630228574BD00694D86 /* peer_countermand.png */,
+				048E662F228574BD00694D86 /* peer_countermand@2x.png */,
+				048E6631228574BD00694D86 /* peer_countermand@3x.png */,
 				04088F3C227012B9007EB236 /* company_information.png */,
 				04088F33227012B8007EB236 /* company_information@2x.png */,
 				04088F3B227012B9007EB236 /* company_information@3x.png */,
@@ -1766,6 +1779,15 @@
 				048348E72269CF9200DE4630 /* my_videos@3x.png */,
 			);
 			path = Mine;
+			sourceTree = "<group>";
+		};
+		048E662B22850EE900694D86 /* TimeChoose */ = {
+			isa = PBXGroup;
+			children = (
+				048E662D22850EE900694D86 /* THDatePickerView.h */,
+				048E662C22850EE900694D86 /* THDatePickerView.m */,
+			);
+			path = TimeChoose;
 			sourceTree = "<group>";
 		};
 		048FEE242244853B001160C8 = {
@@ -2599,6 +2621,7 @@
 				041997CF2266C75000C6C134 /* JMPostJobHomeViewController.xib in Resources */,
 				6D020A2A2250F3F9009BCFE4 /* education@3x.png in Resources */,
 				040C8655227E8F4A00993490 /* photograph@3x.png in Resources */,
+				048E6632228574BE00694D86 /* peer_countermand@2x.png in Resources */,
 				04A9DFBF225C7B9F00CD7CC1 /* 启动图@2x.png in Resources */,
 				6D020A6B22539FB0009BCFE4 /* JMCompanyIntroduceViewController.xib in Resources */,
 				6D558655224B54D70037C14E /* home_ message_pitch_on@3x.png in Resources */,
@@ -2631,6 +2654,7 @@
 				040C865B227ED71100993490 /* JMChatDetailInfoTableViewCell.xib in Resources */,
 				04072F252282949D0067A05D /* particulars.png in Resources */,
 				040BF07522719E4E0088697D /* switchover@3x.png in Resources */,
+				048E6633228574BE00694D86 /* peer_countermand.png in Resources */,
 				04DD1D5C224B6E95007CB11C /* 组 18@2x(1).png in Resources */,
 				040714A5227C6CC70026C368 /* more.png in Resources */,
 				04072F3A2282B47C0067A05D /* redlining.png in Resources */,
@@ -2646,6 +2670,7 @@
 				6D82F2952274C07200B9D2B9 /* JMMyPictureViewController.xib in Resources */,
 				04DD1D51224B6E95007CB11C /* Webkey@3x.png in Resources */,
 				040CA839225F1EB2006D7A7F /* Share_WeChat_friends@2x.png in Resources */,
+				048E6634228574BE00694D86 /* peer_countermand@3x.png in Resources */,
 				04072F452282BA650067A05D /* redlining_2@2x.png in Resources */,
 				04072F2C2282949D0067A05D /* withdraw_deposit@3x.png in Resources */,
 				6D55864B224B54D70037C14E /* Search_Home@3x.png in Resources */,
@@ -2992,7 +3017,7 @@
 				041997EE2267173D00C6C134 /* JMPersonDetailsViewController.m in Sources */,
 				6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */,
 				040865DD2272E898005BB03E /* JMIDCardModel.m in Sources */,
-				040865E822733B78005BB03E /* JMInterVIewModel.m in Sources */,
+				040865E822733B78005BB03E /* JMInterViewModel.m in Sources */,
 				040E366922682E5900A7D789 /* JMSelfDescriptionView.m in Sources */,
 				04072F702282DBE40067A05D /* JMBankCardData.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
@@ -3055,6 +3080,7 @@
 				6D020A822259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.m in Sources */,
 				04196DA5227FE1190000A6AA /* JMAllMessageTableViewCellData.m in Sources */,
 				041997EB2267173D00C6C134 /* JMVitaOfPersonDetailViewController.m in Sources */,
+				048E662E22850EE900694D86 /* THDatePickerView.m in Sources */,
 				04C6013922603F73000B1FE0 /* JMPageView.m in Sources */,
 				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
 				040A393B227DD1EB00EDD9E0 /* JMFaceView.m in Sources */,

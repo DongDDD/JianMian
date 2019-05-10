@@ -35,7 +35,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor redColor];
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     if (model.user_id == _myConvModel.sender_user_id) {
         self.title = _myConvModel.recipient_nickname;
@@ -50,6 +49,13 @@
 //
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+
+
+}
 - (void)setupViews{
     //input
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];

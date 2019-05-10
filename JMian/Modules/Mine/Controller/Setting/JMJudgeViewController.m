@@ -61,10 +61,10 @@
     if ([model.type isEqualToString:NO_Type_USER]) vcStr = [self getPersonStepWhereWitnUser_step:@"0"];
     
     //用户已经选择了C端身份，user_step判断用户填写信息步骤
-    if ([model.type isEqualToString:C_USER]) vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+    if ([model.type isEqualToString:C_Type_USER]) vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
     
     //用户选择了B端身份，enterprise_step判断用户填写信息步骤
-    if ([model.type isEqualToString:B_UESR])  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
+    if ([model.type isEqualToString:B_Type_UESR])  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
     
     
     if (vcStr) {
@@ -122,9 +122,9 @@
     TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
     
     NSString *userIDstr;
-    if ([tpye isEqualToString:C_USER]) {
+    if ([tpye isEqualToString:C_Type_USER]) {
         userIDstr = [NSString stringWithFormat:@"%@a",model.user_id];
-    }else if ([tpye isEqualToString:B_UESR]){
+    }else if ([tpye isEqualToString:B_Type_UESR]){
         userIDstr = [NSString stringWithFormat:@"%@b",model.user_id];
         
         

@@ -7,10 +7,15 @@
 //
 
 #import "BaseViewController.h"
+#import "JMMessageListModel.h"
+#import "JMInterViewModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMVideoChatViewController : BaseViewController
+
+@property(nonatomic, strong)JMMessageListModel *model;
+@property(nonatomic, strong)JMInterViewModel *interviewModel;
 
 @end
 

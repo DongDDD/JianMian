@@ -74,7 +74,7 @@
                         <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXo-FS-27b">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KXo-FS-27b">
                         <rect key="frame" x="20" y="139.5" width="185" height="35"/>
                         <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -82,7 +82,7 @@
                             <constraint firstAttribute="height" constant="35" id="Xuj-dj-Hv9"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="修改时间">
+                        <state key="normal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <userDefinedRuntimeAttributes>
@@ -91,14 +91,14 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
-                            <action selector="leftBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="3pk-jm-tjU"/>
+                            <action selector="leftBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Xr1-Az-lb4"/>
                         </connections>
                     </button>
-                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufc-cg-ivb">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufc-cg-ivb">
                         <rect key="frame" x="225" y="139.5" width="130" height="35"/>
                         <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <state key="normal" title="取消面试">
+                        <state key="normal">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <userDefinedRuntimeAttributes>
@@ -107,9 +107,16 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
-                            <action selector="RightBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CuJ-cH-HMh"/>
+                            <action selector="rightBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HBh-sd-o9q"/>
                         </connections>
                     </button>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peer_countermand.png" translatesAutoresizingMaskIntoConstraints="NO" id="X1i-rg-F2C" userLabel="deleteImg">
+                        <rect key="frame" x="301" y="114.5" width="54" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="54" id="ZBQ-OX-v5V"/>
+                            <constraint firstAttribute="height" constant="54" id="gXz-Ca-wJ5"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="KXo-FS-27b" firstAttribute="top" secondItem="0u9-sv-zwv" secondAttribute="bottom" constant="20.5" id="071-OW-BMZ"/>
@@ -118,6 +125,7 @@
                     <constraint firstItem="AtY-NW-saw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="8Pu-wp-5iN"/>
                     <constraint firstItem="AtY-NW-saw" firstAttribute="top" secondItem="Ghg-KW-OCd" secondAttribute="bottom" constant="10" id="9z6-W7-y1M"/>
                     <constraint firstItem="DPZ-sN-st1" firstAttribute="top" secondItem="0u9-sv-zwv" secondAttribute="top" id="AXw-WH-hdL"/>
+                    <constraint firstAttribute="bottom" secondItem="X1i-rg-F2C" secondAttribute="bottom" constant="20" id="CrW-Zk-0IG"/>
                     <constraint firstItem="Ghg-KW-OCd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="FME-fc-Ocx"/>
                     <constraint firstItem="boH-2l-Z6Y" firstAttribute="leading" secondItem="DPZ-sN-st1" secondAttribute="leading" id="FbR-1X-R3O"/>
                     <constraint firstItem="DPZ-sN-st1" firstAttribute="leading" secondItem="0u9-sv-zwv" secondAttribute="trailing" constant="15" id="FeB-EO-1vm"/>
@@ -129,6 +137,7 @@
                     <constraint firstItem="ufc-cg-ivb" firstAttribute="leading" secondItem="KXo-FS-27b" secondAttribute="trailing" constant="20" id="UNA-gs-Tws"/>
                     <constraint firstItem="aM7-5M-phG" firstAttribute="centerY" secondItem="DPZ-sN-st1" secondAttribute="centerY" id="Z2f-3f-HHE"/>
                     <constraint firstItem="0u9-sv-zwv" firstAttribute="leading" secondItem="Ghg-KW-OCd" secondAttribute="leading" id="bAN-yI-396"/>
+                    <constraint firstAttribute="trailing" secondItem="X1i-rg-F2C" secondAttribute="trailing" constant="20" id="cpV-9j-gk0"/>
                     <constraint firstItem="0u9-sv-zwv" firstAttribute="top" secondItem="Ghg-KW-OCd" secondAttribute="bottom" constant="27" id="jJZ-Go-Dwg"/>
                     <constraint firstItem="ufc-cg-ivb" firstAttribute="height" secondItem="KXo-FS-27b" secondAttribute="height" id="k4B-h9-pAD"/>
                     <constraint firstAttribute="trailing" secondItem="aM7-5M-phG" secondAttribute="trailing" constant="20" id="kkN-0b-b0q"/>
@@ -139,15 +148,19 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="IconImage" destination="0u9-sv-zwv" id="15M-lu-Sdf"/>
+                <outlet property="deleteImg" destination="X1i-rg-F2C" id="Q6F-PT-r8v"/>
                 <outlet property="detailLab" destination="boH-2l-Z6Y" id="ZEB-fS-LKw"/>
                 <outlet property="headerTitleLab" destination="Ghg-KW-OCd" id="vOM-xu-7Np"/>
                 <outlet property="interviewTimeLab" destination="Ghg-KW-OCd" id="04G-Rn-MfX"/>
-                <outlet property="leftBtn" destination="ufc-cg-ivb" id="Uft-uU-DDr"/>
+                <outlet property="leftBtn" destination="KXo-FS-27b" id="5mZ-lS-vQC"/>
                 <outlet property="nameLab" destination="DPZ-sN-st1" id="KJV-h9-qj3"/>
-                <outlet property="rightBtn" destination="KXo-FS-27b" id="uWm-Br-4Ug"/>
+                <outlet property="rightBtn" destination="ufc-cg-ivb" id="n7b-k7-GKn"/>
                 <outlet property="salaryLab" destination="aM7-5M-phG" id="4aJ-oj-ZO9"/>
             </connections>
             <point key="canvasLocation" x="96.376811594202906" y="39.84375"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="peer_countermand.png" width="54" height="54"/>
+    </resources>
 </document>
