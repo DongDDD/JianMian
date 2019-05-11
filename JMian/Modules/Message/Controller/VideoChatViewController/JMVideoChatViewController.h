@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMVideoChatViewController : BaseViewController
 
-@property(nonatomic, strong)JMMessageListModel *model;
+@property(nonatomic, strong)JMMessageListModel *chatViewModel;
 @property(nonatomic, strong)JMInterViewModel *interviewModel;
 
 @end

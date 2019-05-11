@@ -33,9 +33,19 @@
              @"work_work_name":@"work.work_name",
              @"work_work_experience_max":@"work.work_education",
              @"work_work_experience_min":@"work.work_experience_min",
-             @"work_work_experience_max":@"work.work_experience_max"
+             @"work_work_experience_max":@"work.work_experience_max",
+             
+             @"workInfo_company_name":@"work.info.company_name",
+             @"workInfo_financing":@"work.info.financing",
+             @"workInfo_company_id":@"work.info.company_id",
+             @"workInfo_logo_path":@"work.info.logo_path",
+             @"workInfo_industry":@"work.info.industry",
+             @"workInfo_employee":@"work.info.employee",
+             @"workInfo_industry_label_id":@"work.info.industry_label_id"
              };
     
 }
 
 @end
+
+

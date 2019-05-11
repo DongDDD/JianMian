@@ -16,7 +16,7 @@ typedef enum JMType_State {
 } JMType_State;
 
 
-@interface JMTabBarViewController : UITabBarController
+@interface JMPersonTabBarViewController : UITabBarController
 
 
 @end

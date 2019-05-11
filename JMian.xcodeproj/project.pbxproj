@@ -266,6 +266,8 @@
 		048FEE402244853C001160C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE3F2244853C001160C8 /* main.m */; };
 		048FEE4A2244853C001160C8 /* JMianTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE492244853C001160C8 /* JMianTests.m */; };
 		048FEE552244853C001160C8 /* JMianUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE542244853C001160C8 /* JMianUITests.m */; };
+		0491B25E2286794600F1FD3A /* JMLabsScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491B25D2286794600F1FD3A /* JMLabsScreenView.m */; };
+		0491B2612286A07800F1FD3A /* JMLabsChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */; };
 		0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */; };
 		0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */; };
 		049555E8227B25C50008AF1C /* other_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 049555E6227B25C50008AF1C /* other_bubble.png */; };
@@ -421,7 +423,7 @@
 		6D020A882259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A862259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib */; };
 		6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */; };
 		6D558632224B4E340037C14E /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558631224B4E330037C14E /* NavigationViewController.m */; };
-		6D558635224B53BE0037C14E /* JMTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558634224B53BE0037C14E /* JMTabBarViewController.m */; };
+		6D558635224B53BE0037C14E /* JMPersonTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558634224B53BE0037C14E /* JMPersonTabBarViewController.m */; };
 		6D55864B224B54D70037C14E /* Search_Home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558637224B54D70037C14E /* Search_Home@3x.png */; };
 		6D55864C224B54D70037C14E /* pitch_on_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558638224B54D70037C14E /* pitch_on_home@3x.png */; };
 		6D55864D224B54D70037C14E /* site_Home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558639224B54D70037C14E /* site_Home@2x.png */; };
@@ -838,6 +840,10 @@
 		048FEE502244853C001160C8 /* JMianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JMianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		048FEE542244853C001160C8 /* JMianUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMianUITests.m; sourceTree = "<group>"; };
 		048FEE562244853C001160C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0491B25C2286794600F1FD3A /* JMLabsScreenView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabsScreenView.h; sourceTree = "<group>"; };
+		0491B25D2286794600F1FD3A /* JMLabsScreenView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabsScreenView.m; sourceTree = "<group>"; };
+		0491B25F2286A07800F1FD3A /* JMLabsChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabsChooseViewController.h; sourceTree = "<group>"; };
+		0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabsChooseViewController.m; sourceTree = "<group>"; };
 		0494691B2244EEDA00A5BEB7 /* ChooseIdentity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseIdentity.h; sourceTree = "<group>"; };
 		0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseIdentity.m; sourceTree = "<group>"; };
 		0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseIdentity.xib; sourceTree = "<group>"; };
@@ -1043,8 +1049,8 @@
 		6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+addGradualLayer.m"; sourceTree = "<group>"; };
 		6D558630224B4E330037C14E /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
 		6D558631224B4E330037C14E /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
-		6D558633224B53BE0037C14E /* JMTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTabBarViewController.h; sourceTree = "<group>"; };
-		6D558634224B53BE0037C14E /* JMTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTabBarViewController.m; sourceTree = "<group>"; };
+		6D558633224B53BE0037C14E /* JMPersonTabBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPersonTabBarViewController.h; sourceTree = "<group>"; };
+		6D558634224B53BE0037C14E /* JMPersonTabBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPersonTabBarViewController.m; sourceTree = "<group>"; };
 		6D558637224B54D70037C14E /* Search_Home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Search_Home@3x.png"; sourceTree = "<group>"; };
 		6D558638224B54D70037C14E /* pitch_on_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pitch_on_home@3x.png"; sourceTree = "<group>"; };
 		6D558639224B54D70037C14E /* site_Home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "site_Home@2x.png"; sourceTree = "<group>"; };
@@ -1611,8 +1617,8 @@
 				6D558631224B4E330037C14E /* NavigationViewController.m */,
 				047270802248D078005FD1FC /* BaseViewController.h */,
 				047270812248D078005FD1FC /* BaseViewController.m */,
-				6D558633224B53BE0037C14E /* JMTabBarViewController.h */,
-				6D558634224B53BE0037C14E /* JMTabBarViewController.m */,
+				6D558633224B53BE0037C14E /* JMPersonTabBarViewController.h */,
+				6D558634224B53BE0037C14E /* JMPersonTabBarViewController.m */,
 				040CD553226B1FB5000BB230 /* JMCompanyTabBarViewController.h */,
 				040CD554226B1FB5000BB230 /* JMCompanyTabBarViewController.m */,
 			);
@@ -2251,6 +2257,8 @@
 				6D020A5122539FAF009BCFE4 /* JMCompanyIntroduceViewController.h */,
 				6D020A5722539FAF009BCFE4 /* JMCompanyIntroduceViewController.m */,
 				6D020A5622539FAF009BCFE4 /* JMCompanyIntroduceViewController.xib */,
+				0491B25F2286A07800F1FD3A /* JMLabsChooseViewController.h */,
+				0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2272,6 +2280,8 @@
 				6D020A5922539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.m */,
 				6D020A6222539FAF009BCFE4 /* MapView.h */,
 				6D020A5A22539FAF009BCFE4 /* MapView.m */,
+				0491B25C2286794600F1FD3A /* JMLabsScreenView.h */,
+				0491B25D2286794600F1FD3A /* JMLabsScreenView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3013,6 +3023,7 @@
 				6D82F287227492CF00B9D2B9 /* JMEducationExperienceViewController.m in Sources */,
 				040C8649227E8B8100993490 /* JMMoreCollectionViewCell.m in Sources */,
 				040BF06722719B6A0088697D /* JMUserChangeWindowView.m in Sources */,
+				0491B2612286A07800F1FD3A /* JMLabsChooseViewController.m in Sources */,
 				04A9DFBA225C429B00CD7CC1 /* HomeTableViewCell.m in Sources */,
 				041997EE2267173D00C6C134 /* JMPersonDetailsViewController.m in Sources */,
 				6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */,
@@ -3088,6 +3099,7 @@
 				6D020A6722539FB0009BCFE4 /* HomeViewController.m in Sources */,
 				040BF05E227159B60088697D /* JMChangeIdentityViewController.m in Sources */,
 				6DEA992A2255DFF50029FE8A /* JMSendMyResumeView.m in Sources */,
+				0491B25E2286794600F1FD3A /* JMLabsScreenView.m in Sources */,
 				04A9DFB0225B2B5000CD7CC1 /* JMHTTPManager+Work.m in Sources */,
 				048348D32269BE4100DE4630 /* JMManageInterviewViewController.m in Sources */,
 				040A5115226FF47B0074BD4B /* JMGetCompanyLocationViewController.m in Sources */,
@@ -3116,7 +3128,7 @@
 				040E36642268205700A7D789 /* JMWorkExperienceView.m in Sources */,
 				6D020A4B22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.m in Sources */,
 				048348BF226979CA00DE4630 /* JMWorkLocationViewController.m in Sources */,
-				6D558635224B53BE0037C14E /* JMTabBarViewController.m in Sources */,
+				6D558635224B53BE0037C14E /* JMPersonTabBarViewController.m in Sources */,
 				04A9DFB7225B35FE00CD7CC1 /* JMHomeWorkModel.m in Sources */,
 				04196DAF22805C450000A6AA /* JMMySettingViewController.m in Sources */,
 				6D020A052250F21B009BCFE4 /* JMMyResumeIconTableViewCell.m in Sources */,

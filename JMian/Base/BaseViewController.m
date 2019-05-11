@@ -17,16 +17,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if (_isHiddenBackBtn) {
-        self.navigationItem.leftBarButtonItem = nil;
-        self.navigationItem.hidesBackButton = YES;
-    }
+   
 //    self.navigationController.navigationBar.translucent = NO;
 //
 //    self.extendedLayoutIncludesOpaqueBars = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     [self setBackBtnImageViewName:@"icon_return" textName:@""];
   
+}
+
+-(void)setIsHiddenBackBtn:(BOOL)isHiddenBackBtn
+{
+    if (isHiddenBackBtn) {
+        self.navigationItem.leftBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = YES;
+    }
+    
 }
 
 -(void)setTitleViewImageViewName:(NSString *)imageName{

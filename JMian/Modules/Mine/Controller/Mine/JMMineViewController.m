@@ -36,7 +36,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self setIsHiddenBackBtn:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"个人中心";
     [self setRightBtnImageViewName:@"upinstall" imageNameRight2:@""];
@@ -50,10 +50,10 @@
     _userInfoModel = [JMUserInfoManager getUserInfo];
     
     
-    if ([_userInfoModel.type isEqualToString:@"2"]) {
+    if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
         
        
-    }else if ([_userInfoModel.type isEqualToString:@"1"]){
+    }else if ([_userInfoModel.type isEqualToString:C_Type_USER]){
         
     }
     

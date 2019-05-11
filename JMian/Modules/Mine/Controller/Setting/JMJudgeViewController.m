@@ -8,7 +8,7 @@
 
 #import "JMJudgeViewController.h"
 #import "JMCompanyTabBarViewController.h"
-#import "JMTabBarViewController.h"
+#import "JMPersonTabBarViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "NavigationViewController.h"
 #import "LoginViewController.h"
@@ -29,13 +29,16 @@
     if (kFetchMyDefault(@"token")){
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         model = [JMUserInfoManager getUserInfo];
-        
-        if (model.usersig == nil) {
+        //腾讯云返回的usersig是否为空
+        if (kFetchMyDefault(@"usersig") == nil) {
+            //腾讯云的usersig为空执行，跳转登录界面获取
             LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
-            loginVc.isHiddenBackBtn = YES;
+            
             NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
             [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
         }else{
+            [self loginIM_tpye:model.type];//根据用户类型登录腾讯云腾讯云登录
+
             [self jugdeStepToVCWithModel:model];
         }
         
@@ -52,7 +55,6 @@
 
 -(void)jugdeStepToVCWithModel:(JMUserInfoModel *)model{
    
-    [self loginIM_tpye:model.type];
 
     BaseViewController *vc;
     NSString *vcStr;
@@ -69,11 +71,16 @@
     
     if (vcStr) {
         vc = [[NSClassFromString(vcStr) alloc]init];
-        if (![vc isKindOfClass:[JMTabBarViewController class]]&&![vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
-            vc.isHiddenBackBtn = YES;
+        if ([vc isKindOfClass:[JMPersonTabBarViewController class]] || [vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
+
+            [UIApplication sharedApplication].delegate.window.rootViewController = vc;
+            
+        }else
+        {
+            [vc setIsHiddenBackBtn:YES];
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
         }
-        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
         
     }
     
@@ -106,7 +113,7 @@
                          @"JobIntensionViewController",     //当user_step=3
                          @"JMJobExperienceViewController",  //当user_step=4
                          [NSNull null],
-                         @"JMTabBarViewController"];        //当user_step=6
+                         @"JMPersonTabBarViewController"];        //当user_step=6
     
     int stepInt = [user_step intValue];
     if (stepInt < vcArray.count) return vcArray[stepInt];
@@ -132,7 +139,7 @@
     if (userIDstr) {
         // identifier 为用户名，userSig 为用户登录凭证
         login_param.identifier = userIDstr;
-        login_param.userSig = model.usersig;
+        login_param.userSig = kFetchMyDefault(@"usersig");
         login_param.appidAt3rd = @"1400193090";
         [[TIMManager sharedInstance] login: login_param succ:^(){
             

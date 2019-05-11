@@ -279,7 +279,7 @@ static NSString *cellIdent = @"infoCellIdent";
 -(void)videoInterviewAction
 {
     JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
-    vc.model = self.myModel;
+    vc.chatViewModel = self.myModel;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -309,8 +309,15 @@ static NSString *cellIdent = @"infoCellIdent";
     
     JMMessageCellData *textData = [[JMMessageCellData alloc]init];
     textData.content = text_elem.text;
-    textData.head = _myModel.recipient_avatar;
-    textData.name = _myModel.recipient_nickname;
+    if (_isSelfIsSender) {
+        textData.head = _myModel.sender_avatar;
+        textData.name = _myModel.sender_nickname;
+        
+    }else
+    {
+        textData.head = _myModel.recipient_avatar;
+        textData.name = _myModel.recipient_nickname;
+    }
     textData.isSelf = YES;
     [self.uiMsgs addObject:textData];
     

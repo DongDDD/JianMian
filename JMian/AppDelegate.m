@@ -14,7 +14,7 @@
 //#import "JMJobExperienceViewController.h"
 
 #import "NavigationViewController.h"
-#import "JMTabBarViewController.h"
+#import "JMPersonTabBarViewController.h"
 #import <TIMManager.h>
 #import "VendorKeyMacros.h"
 #import "JMUserInfoManager.h"

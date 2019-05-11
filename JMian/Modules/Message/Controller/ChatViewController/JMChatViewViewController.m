@@ -75,51 +75,8 @@
     [self addChildViewController:_inputController];
     [self.view addSubview:_inputController.view];
 
-//    [_inputController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.and.right.mas_equalTo(_messageController.view);
-//        make.height.mas_equalTo(TTextView_Height);
-//        make.bottom.mas_equalTo(self.view.mas_bottom).offset(-Bottom_SafeHeight);
-//    }];
-
 }
 
-
-
-
-
-
-//-(void)sendMessageWithText:(NSString *)text{
-//
-//    TIMConversation *conv = [[TIMManager sharedInstance]
-//                             getConversation:(TIMConversationType)TIM_C2C
-//                             receiver:_myConvModel.recipient_mark];
-//
-//    TIMTextElem * text_elem = [[TIMTextElem alloc] init];
-//
-//    [text_elem setText:text];
-//
-//    TIMMessage * msg = [[TIMMessage alloc] init];
-//    [msg addElem:text_elem];
-//
-//    [conv sendMessage:msg succ:^(){
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"测试提示" message:@"发送成功"
-//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-//        [alert show];
-//        NSLog(@"SendMsg Succ");
-//    }fail:^(int code, NSString * err) {
-//        NSLog(@"SendMsg Failed:%d->%@", code, err);
-//    }];
-//
-//
-//    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
-//    textData.content = text_elem.text;
-//    textData.head = _myConvModel.recipient_avatar;
-//    textData.name = _myConvModel.recipient_nickname;
-//    textData.isSelf = YES;
-//    [_messageController.uiMsgs addObject:textData];
-//
-//    [_messageController.tableView reloadData];
-//}
 
 - (void)inputController:(JMInputController *)inputController didSendMessage:(JMMessageCellData *)msg
 {
@@ -139,15 +96,7 @@
         inputFrame.origin.y = msgFrame.origin.y + msgFrame.size.height;
         inputFrame.size.height = height;
         ws.inputController.view.frame = inputFrame;
-//
-//        [ws.inputController.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.bottom.mas_equalTo(self.view.mas_bottom).offset(-height);
-//            make.left.and.right.mas_equalTo(self.view);
-//            make.height.mas_equalTo(TTextView_Height + Bottom_SafeHeight);
-//        }];
-        
-        
-//        [ws.messageController scrollToBottom:NO];
+
     } completion:nil];
     
 }
@@ -175,16 +124,6 @@
     
 }
 
-//- (NSArray *)childVCs {
-//
-//    JMGreetTableViewController *vc1 = [[JMGreetTableViewController alloc] init];
-//
-//    [self addChildViewController:vc1];
-//
-//    _childVCs = @[vc1];
-//
-//    return _childVCs;
-//}
 
 
 /*

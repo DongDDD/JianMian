@@ -21,7 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *localVideoMutedBg;
 @property (weak, nonatomic) IBOutlet UIImageView *localVideoMutedIndicator;
 
-
 @end
 
 @implementation JMVideoChatViewController
@@ -56,61 +55,58 @@
     NSString *title;
     NSString *subTitle;
     if ([userInfoModel.type isEqualToString:B_Type_UESR]) {
-        if (self.model)//从聊天界面进来
+        if (self.chatViewModel)//从聊天界面进来
         {
-            if ([self.model.sender_user_id isEqualToString:userInfoModel.user_id]) {//逻辑和聊天界面一样
-                imgUrl = self.model.recipient_avatar;
-                title = self.model.recipient_nickname;
-          
+            if ([self.chatViewModel.sender_user_id isEqualToString:userInfoModel.user_id]) {//逻辑和聊天界面一样
+                imgUrl = self.chatViewModel.recipient_avatar;
+                title = self.chatViewModel.recipient_nickname;
             }else
             {
-                imgUrl = self.model.sender_avatar;
-                title = self.model.sender_nickname;
-            
+                imgUrl = self.chatViewModel.sender_avatar;
+                title = self.chatViewModel.sender_nickname;
             }
             
-            subTitle = self.model.work_work_name;
-            
+            subTitle = self.chatViewModel.work_work_name;
             
         }
         if (self.interviewModel)//从面试管理进来
         {
             imgUrl = self.interviewModel.candidate_avatar;
             title = self.interviewModel.candidate_nickname;
-            subTitle = self.interviewModel.work_work_name;
+            subTitle = self.interviewModel.company_company_name;
             
         }
     }else if([userInfoModel.type isEqualToString:C_Type_USER]) {
-        if (self.model)//从聊天界面进来
+        if (self.chatViewModel)//从聊天界面进来
         {
-            if ([self.model.sender_user_id isEqualToString:userInfoModel.user_id]) {//逻辑和聊天界面一样
-                imgUrl = self.model.recipient_avatar;
-                title = self.model.recipient_nickname;
+            if ([self.chatViewModel.sender_user_id isEqualToString:userInfoModel.user_id]) {//逻辑和聊天界面一样
+                imgUrl = self.chatViewModel.recipient_avatar;
+                title = self.chatViewModel.recipient_nickname;
                 
             }else
             {
-                imgUrl = self.model.sender_avatar;
-                title = self.model.sender_nickname;
+                imgUrl = self.chatViewModel.sender_avatar;
+                title = self.chatViewModel.sender_nickname;
                 
             }
             
-            subTitle = self.model.work_work_name;
+            subTitle = self.chatViewModel.workInfo_company_name;
             
             
         }
+        
         if (self.interviewModel)//从面试管理进来
         {
             imgUrl = self.interviewModel.interviewer_avatar;
             title = self.interviewModel.interviewer_nickname;
-            subTitle = self.interviewModel.work_work_name;
+            subTitle = self.interviewModel.company_company_name;
             
         }
         
         
     }
 
-    
-    
+
     UIView *bgView = [[UIView alloc]init];
     bgView.backgroundColor = [UIColor blackColor];
     bgView.alpha = 0.3;
@@ -188,7 +184,7 @@
     //有两种状态可以进入视频聊天
     NSString *channelId;
     //    1： 在聊天界面进入，用chat_id做房间id
-    if (self.model) channelId = self.model.chat_id;
+    if (self.chatViewModel) channelId = self.chatViewModel.chat_id;
     //    2 ：在面试管理进入，时间到了就会有进入房间按钮 用面试interview_id做房间ID
     if (self.interviewModel) channelId = self.interviewModel.interview_id;
 

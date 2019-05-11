@@ -173,10 +173,7 @@
     
     self.salaryMin = @(minNum);
     self.salaryMax = @(maxNum);
-    
-    
-    
-    
+      
 }
 - (IBAction)welFareAction:(UIButton *)sender{
  

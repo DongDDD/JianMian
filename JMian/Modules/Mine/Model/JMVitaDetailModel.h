@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray *education;
 @property (strong, nonatomic) NSArray *files;
 
+
 @end
 
 @interface JMMyFilesModel : NSObject

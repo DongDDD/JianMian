@@ -8,7 +8,7 @@
 
 #import "JMJobExperienceViewController.h"
 #import "JMHTTPManager+CreateExperience.h"
-#import "JMTabBarViewController.h"
+#import "JMPersonTabBarViewController.h"
 #import "AppDelegate.h"
 #import "JMHTTPManager+Login.h"
 #import "PositionDesiredViewController.h"
@@ -167,7 +167,7 @@ typedef enum _PickerState_Exp {
         
         switch (self.viewType) {
             case JMJobExperienceViewTypeDefault: {
-                JMTabBarViewController *tab = [[JMTabBarViewController alloc] init];
+                JMPersonTabBarViewController *tab = [[JMPersonTabBarViewController alloc] init];
                 [UIApplication sharedApplication].delegate.window.rootViewController = tab;
                 break;
             }

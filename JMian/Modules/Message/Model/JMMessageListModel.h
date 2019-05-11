@@ -42,11 +42,23 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property(nonatomic,copy)NSString *work_work_experience_min;
 @property(nonatomic,copy)NSString *work_work_experience_max;
 
+//workInfo是一个对象
+@property (copy, nonatomic) NSString *workInfo_company_name;
+@property (copy, nonatomic) NSString *workInfo_financing;
+@property (copy, nonatomic) NSString *workInfo_company_id;
+@property (copy, nonatomic) NSString *workInfo_logo_path;
+@property (copy, nonatomic) NSString *workInfo_industry;
+@property (copy, nonatomic) NSString *workInfo_employee;
+@property (copy, nonatomic) NSString *workInfo_industry_label_id;
+
+
 @property(nonatomic,copy)NSString *chat_id;
 //腾讯云数据
 @property (nonatomic, strong) JMAllMessageTableViewCellData *data;
 
 
 @end
+
+
 
 NS_ASSUME_NONNULL_END

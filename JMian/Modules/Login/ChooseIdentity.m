@@ -12,7 +12,7 @@
 #import "JMCompanyBaseInfoViewController.h"
 #import "JMCompanyHomeViewController.h"
 
-#import "JMTabBarViewController.h"
+#import "JMPersonTabBarViewController.h"
 
 #import "JMCompanyTabBarViewController.h"
 #import "JMHTTPManager+Login.h"

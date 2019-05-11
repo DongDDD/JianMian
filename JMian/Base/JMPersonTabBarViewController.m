@@ -6,7 +6,7 @@
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMTabBarViewController.h"
+#import "JMPersonTabBarViewController.h"
 #import "JMMineViewController.h"
 #import "DimensMacros.h"
 #import "JMMessageViewController.h"
@@ -16,11 +16,11 @@
 #import "JMPostJobHomeViewController.h"
 
 
-@interface JMTabBarViewController ()
+@interface JMPersonTabBarViewController ()
 
 @end
 
-@implementation JMTabBarViewController
+@implementation JMPersonTabBarViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
-    
+    [self setIsHiddenBackBtn:YES];
     _phoneNumText.delegate = self;
     _phoneNumText.keyboardType = UIKeyboardTypeNumberPad;
     _captchaText.keyboardType = UIKeyboardTypeNumberPad;
@@ -106,21 +106,21 @@
 
         NSLog(@"用户手机号：----%@",model.phone);
         
-      
-        TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
-        // identifier 为用户名，userSig 为用户登录凭证
-        login_param.identifier = model.user_id;
-        login_param.userSig = model.usersig;
-        login_param.appidAt3rd = @"1400193090";
-        [[TIMManager sharedInstance] login: login_param succ:^(){
-           
-            NSLog(@"Login Succ");
-            
-        } fail:^(int code, NSString * err) {
-          
-            NSLog(@"Login Failed: %d->%@", code, err);
-            
-        }];
+        kSaveMyDefault(@"usersig", model.usersig);
+//        TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
+//        // identifier 为用户名，userSig 为用户登录凭证
+//        login_param.identifier = kFetchMyDefault(@"usersig");
+//        login_param.userSig = model.usersig;
+//        login_param.appidAt3rd = @"1400193090";
+//        [[TIMManager sharedInstance] login: login_param succ:^(){
+//
+//            NSLog(@"Login Succ");
+//
+//        } fail:^(int code, NSString * err) {
+//
+//            NSLog(@"Login Failed: %d->%@", code, err);
+//
+//        }];
         
         
         JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];

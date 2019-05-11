@@ -734,10 +734,7 @@
         make.bottom.mas_equalTo(self.jobRequireLab.mas_bottom).offset(30);
     }];
 
-    
 
-    
-    
 
 }
 #pragma mark - d地图
