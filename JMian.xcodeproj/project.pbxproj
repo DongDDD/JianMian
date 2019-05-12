@@ -299,6 +299,11 @@
 		04A9DFBF225C7B9F00CD7CC1 /* 启动图@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */; };
 		04A9DFC0225C7B9F00CD7CC1 /* 启动图@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */; };
 		04A9DFC1225C7B9F00CD7CC1 /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */; };
+		04C120D822882B5F001BDEBC /* JMUploadVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C120D622882B5F001BDEBC /* JMUploadVideoViewController.m */; };
+		04C120D922882B5F001BDEBC /* JMUploadVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C120D722882B5F001BDEBC /* JMUploadVideoViewController.xib */; };
+		04C120DD22882E97001BDEBC /* my_videos_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C120DA22882E97001BDEBC /* my_videos_2@3x.png */; };
+		04C120DE22882E97001BDEBC /* my_videos_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C120DB22882E97001BDEBC /* my_videos_2@2x.png */; };
+		04C120DF22882E97001BDEBC /* my_videos_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C120DC22882E97001BDEBC /* my_videos_2.png */; };
 		04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013522603967000B1FE0 /* JMTitlesView.m */; };
 		04C6013922603F73000B1FE0 /* JMPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013822603F73000B1FE0 /* JMPageView.m */; };
 		04C6013E2260639C000B1FE0 /* JMAllMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013C2260639C000B1FE0 /* JMAllMessageTableViewController.m */; };
@@ -885,6 +890,12 @@
 		04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@2x.png"; sourceTree = "<group>"; };
 		04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@3x.png"; sourceTree = "<group>"; };
 		04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图.png"; sourceTree = "<group>"; };
+		04C120D522882B5F001BDEBC /* JMUploadVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMUploadVideoViewController.h; sourceTree = "<group>"; };
+		04C120D622882B5F001BDEBC /* JMUploadVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMUploadVideoViewController.m; sourceTree = "<group>"; };
+		04C120D722882B5F001BDEBC /* JMUploadVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMUploadVideoViewController.xib; sourceTree = "<group>"; };
+		04C120DA22882E97001BDEBC /* my_videos_2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_videos_2@3x.png"; sourceTree = "<group>"; };
+		04C120DB22882E97001BDEBC /* my_videos_2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_videos_2@2x.png"; sourceTree = "<group>"; };
+		04C120DC22882E97001BDEBC /* my_videos_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_videos_2.png; sourceTree = "<group>"; };
 		04C6013422603967000B1FE0 /* JMTitlesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMTitlesView.h; sourceTree = "<group>"; };
 		04C6013522603967000B1FE0 /* JMTitlesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMTitlesView.m; sourceTree = "<group>"; };
 		04C6013722603F73000B1FE0 /* JMPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPageView.h; sourceTree = "<group>"; };
@@ -1697,6 +1708,7 @@
 		0462C7212244936F003B6639 /* ThridParty */ = {
 			isa = PBXGroup;
 			children = (
+				04C120E0228839EA001BDEBC /* Video */,
 				048E662B22850EE900694D86 /* TimeChoose */,
 			);
 			path = ThridParty;
@@ -1958,6 +1970,23 @@
 			path = "组 18_slices";
 			sourceTree = "<group>";
 		};
+		04C120D422882B1D001BDEBC /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				04C120D522882B5F001BDEBC /* JMUploadVideoViewController.h */,
+				04C120D622882B5F001BDEBC /* JMUploadVideoViewController.m */,
+				04C120D722882B5F001BDEBC /* JMUploadVideoViewController.xib */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
+		04C120E0228839EA001BDEBC /* Video */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		04C6013322603956000B1FE0 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2127,6 +2156,9 @@
 		6D0209CB224FB900009BCFE4 /* Mine_slices */ = {
 			isa = PBXGroup;
 			children = (
+				04C120DC22882E97001BDEBC /* my_videos_2.png */,
+				04C120DB22882E97001BDEBC /* my_videos_2@2x.png */,
+				04C120DA22882E97001BDEBC /* my_videos_2@3x.png */,
 				0407019722753753002BF58D /* autonym.png */,
 				040701A322753754002BF58D /* autonym@2x.png */,
 				0407019C22753754002BF58D /* autonym@3x.png */,
@@ -2442,6 +2474,7 @@
 				6D8C069A226B536C00F77D98 /* Mine */,
 				6D020A012250F0A5009BCFE4 /* MyResume */,
 				04072F1522828FF10067A05D /* Wallet */,
+				04C120D422882B1D001BDEBC /* Video */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2652,6 +2685,7 @@
 				04DD1D61224B6E95007CB11C /* camera@2x.png in Resources */,
 				04072F2B2282949D0067A05D /* withdraw_deposit@2x.png in Resources */,
 				040BF07422719E4E0088697D /* syndicate.png in Resources */,
+				04C120DE22882E97001BDEBC /* my_videos_2@2x.png in Resources */,
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
 				048348AA22695EC000DE4630 /* NO_Data@3x.png in Resources */,
 				041997C52266C5DC00C6C134 /* post_a_job_pitch_up@2x.png in Resources */,
@@ -2687,6 +2721,7 @@
 				040E365C22681C9A00A7D789 /* boy@3x.png in Resources */,
 				048348BB22696DC800DE4630 /* JMJobDescriptionViewController.xib in Resources */,
 				04072F462282BA650067A05D /* redlining_2@3x.png in Resources */,
+				04C120DF22882E97001BDEBC /* my_videos_2.png in Resources */,
 				040CA852225F1EBF006D7A7F /* collect.png in Resources */,
 				04070193227536D8002BF58D /* my_videos@2x.png in Resources */,
 				04DD1D6B224B6E95007CB11C /* icon_return .png in Resources */,
@@ -2843,6 +2878,7 @@
 				6D020A212250F3F9009BCFE4 /* 组 54@3x.png in Resources */,
 				048348E82269CF9200DE4630 /* my_videos.png in Resources */,
 				040A40BC226589A50005E0D7 /* JMCompanyBaseInfoViewController.xib in Resources */,
+				04C120DD22882E97001BDEBC /* my_videos_2@3x.png in Resources */,
 				040701A922753755002BF58D /* share2.png in Resources */,
 				040CA858225F1EBF006D7A7F /* share@3x.png in Resources */,
 				040A40C82265B41A0005E0D7 /* company_logo.png in Resources */,
@@ -2877,6 +2913,7 @@
 				040B839C2265F3E700F1A37A /* IDCard1@2x.png in Resources */,
 				04C6015522607671000B1FE0 /* notification @2x.png in Resources */,
 				04A247DF224CE70E00DEB8E3 /* play@3x.png in Resources */,
+				04C120D922882B5F001BDEBC /* JMUploadVideoViewController.xib in Resources */,
 				040A3930227DAC2B00EDD9E0 /* copyreader.png in Resources */,
 				040701B6227556A4002BF58D /* JMChooseTimeViewController.xib in Resources */,
 				040C18172264148300456C53 /* JIANMIAN_login.png in Resources */,
@@ -3111,6 +3148,7 @@
 				040CD552226ACD42000BB230 /* JMHTTPManager+FetchCompanyInfo.m in Sources */,
 				04072F302282978A0067A05D /* JMWalletHeaderView.m in Sources */,
 				04C6014D226071B5000B1FE0 /* JMAllMessageTableViewCell.m in Sources */,
+				04C120D822882B5F001BDEBC /* JMUploadVideoViewController.m in Sources */,
 				04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */,
 				041F672B22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m in Sources */,
 				040865E12272FAF1005BB03E /* JMPostJobHomeTableViewCell.m in Sources */,

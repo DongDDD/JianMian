@@ -133,7 +133,7 @@
     }];
     [imageView.superview layoutIfNeeded];
     
-    [[JMHTTPManager sharedInstance] uploadsImageWithFiles:@[image] successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] uploadsWithFiles:@[image] successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         NSString *filePath = responsObject[@"data"][0];
         if (filePath) {

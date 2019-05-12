@@ -182,9 +182,22 @@
     [imageData writeToFile:fullPath atomically:NO];
     
     NSArray *array = @[currentImage];
-    [[JMHTTPManager sharedInstance]uploadsImageWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        _imageUrl = array[0];
-        _imgUrlArrl = @[_imageUrl];
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+            _imageUrl = responsObject[@"data"][0];
+            _imgUrlArrl = @[_imageUrl];
+            
+        }
+        
+        
+//        if(responsObject[@"data"]){
+//            NSArray *urlArray = responsObject[@"data"];
+//            _imageUrl = urlArray[0];
+//            _imgUrlArrl = @[_imageUrl];
+//        }
+//
+//        _imageUrl = array[0];
         
         
         //图片赋值显示

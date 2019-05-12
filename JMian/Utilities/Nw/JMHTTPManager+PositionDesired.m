@@ -21,5 +21,15 @@
 }
 
 
+- (void)fetchCityListWithMyId:(nullable NSString *)myId mode:(NSString *)mode successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    
+    
+    NSDictionary *dic = @{@"id":myId,@"mode":mode};
+    
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:City_List_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+}
+
+
 
 @end

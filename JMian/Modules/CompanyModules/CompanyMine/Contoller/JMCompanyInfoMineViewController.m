@@ -333,8 +333,19 @@
     [imageData writeToFile:fullPath atomically:NO];
     
     NSArray *array = @[currentImage];
-    [[JMHTTPManager sharedInstance]uploadsImageWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        _imageUrl = array[0];
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+            _imageUrl = responsObject[@"data"][0];
+            
+        }
+        
+        
+//        if(responsObject[@"data"]){
+//            NSArray *urlArray = responsObject[@"data"];
+//            _imageUrl = urlArray[0];
+//        }
+        
         
         _isChange = YES;
 

@@ -14,6 +14,7 @@
 #import "JMUserInfoManager.h"
 #import <TIMManager.h>
 
+
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
 #define NAVIGATION_BAR_HEIGHT 44
@@ -33,6 +34,8 @@
 #define XIAN_COLOR  [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0]
 
 //屏幕 rect
+
+
 #define SCREEN_RECT ([UIScreen mainScreen].bounds)
 
 #define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
@@ -116,6 +119,11 @@ if (@available(iOS 11.0, *)) {\
 isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bottom > 0.0;\
 }\
 (isPhoneX);})
+
+//video
+#define RECORD_MAX_TIME 8.0           //最长录制时间
+#define TIMER_INTERVAL 0.05         //计时器刷新频率
+#define VIDEO_FOLDER @"videoFolder" //视频录制存放文件夹
 
 
 

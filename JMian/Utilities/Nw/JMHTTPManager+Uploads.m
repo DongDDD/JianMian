@@ -12,10 +12,10 @@
 
 @implementation JMHTTPManager (Uploads)
 
-- (void)uploadsImageWithFiles:(NSArray *)files successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+- (void)uploadsWithFiles:(NSArray *)files successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     NSDictionary *dic = @{@"files":files};
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodUpload path:Uploads_Image_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Uploads_Image_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
 

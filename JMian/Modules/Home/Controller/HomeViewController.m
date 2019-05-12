@@ -13,8 +13,10 @@
 #import "JMHTTPManager+Work.h"
 #import "JMHomeWorkModel.h"
 #import "JMUserInfoModel.h"
+#import "JMUserInfoManager.h"
 #import "Masonry.h"
 #import "JMLabsChooseViewController.h"
+#import "JMHTTPManager+PositionDesired.h"
 
 
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate>
@@ -73,6 +75,18 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 #pragma mark - 点击事件 -
+
+-(void)fanhui{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    
+    [[JMHTTPManager sharedInstance]fetchCityListWithMyId:userModel.user_id mode:@"lists" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
 
 -(void)rightAction{
     NSLog(@"搜索");

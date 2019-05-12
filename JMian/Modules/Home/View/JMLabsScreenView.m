@@ -55,12 +55,13 @@
         _tagBtn.backgroundColor = [UIColor whiteColor];
         [_tagBtn setTitle:tagArr[i] forState:UIControlStateNormal];
         if (i == 0) {
-            [_tagBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-
+//            [_tagBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            _tagBtn.selected = YES;
         }else{
-            [_tagBtn setTitleColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0] forState:UIControlStateNormal];
+            _tagBtn.selected = NO;
         
         }
+        [_tagBtn setTitleColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0] forState:UIControlStateNormal];
         [_tagBtn setTitleColor:MASTER_COLOR forState:UIControlStateSelected];
         _tagBtn.titleLabel.font = GlobalFont(16);
         _tagBtn.layer.cornerRadius = 15.3;

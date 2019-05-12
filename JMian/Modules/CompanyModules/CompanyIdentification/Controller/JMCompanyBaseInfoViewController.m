@@ -240,8 +240,11 @@
     [imageData writeToFile:fullPath atomically:NO];
     
     NSArray *array = @[currentImage];
-    [[JMHTTPManager sharedInstance]uploadsImageWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        _imageUrl = array[0];
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+          
+            _imageUrl = responsObject[@"data"][0];
+        }
         
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -249,6 +252,9 @@
     }];
     
 }
+
+
+
 
 /*
 #pragma mark - Navigation

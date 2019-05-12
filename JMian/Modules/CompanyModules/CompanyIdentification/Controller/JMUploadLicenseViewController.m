@@ -171,9 +171,14 @@
     
     [imageData writeToFile:fullPath atomically:NO];
     
-    [[JMHTTPManager sharedInstance]uploadsImageWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        _imageLicenseUrl = array[0];
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        _imageLicenseUrl = array[0];
+        if (responsObject[@"data"]) {
+            
+            _imageLicenseUrl = responsObject[@"data"][0];
+        }
         
+       
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

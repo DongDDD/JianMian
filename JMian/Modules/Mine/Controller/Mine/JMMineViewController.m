@@ -20,6 +20,7 @@
 #import "JMCompanyLikeViewController.h"
 #import "JMMySettingViewController.h"
 #import "JMWalletViewController.h"
+#import "JMUploadVideoViewController.h"
 
 
 
@@ -180,7 +181,7 @@
 
 - (void)didSelectItemWithRow:(NSInteger)row {
     if (row == 0) {
-        JMCompanyInfoMineViewController *vc = [[JMCompanyInfoMineViewController alloc]init];
+        JMUploadVideoViewController *vc = [[JMUploadVideoViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (row == 1) {

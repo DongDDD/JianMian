@@ -30,11 +30,12 @@
 #define User_info_URL @"api/user/info"
 #define Update_info_URL @"api/user/update"
 #define Position_label_URL @"labels"
+#define City_List_URL @"city/lists"
 
 //上传图片
 #define Uploads_Image_URL @"file/uploads"
 //身份证识别
-#define Ocr_idcard_URL @"api/tools/ocr/idcard"
+#define Ocr_idcard_URL @"city/lists"
 
 
 //个人简历

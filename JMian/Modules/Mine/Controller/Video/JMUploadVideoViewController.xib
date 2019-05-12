@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMUploadVideoViewController">
+            <connections>
+                <outlet property="FrameImageView" destination="NJQ-6u-Ddz" id="JcI-RN-e9g"/>
+                <outlet property="bottomLab" destination="w4f-vv-eqP" id="KNt-kg-IqT"/>
+                <outlet property="scrollView" destination="cxa-JP-Jvm" id="esj-Jx-uJ4"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cxa-JP-Jvm">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TIE-VJ-OrX">
+                            <rect key="frame" x="27" y="92" width="360" height="484"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_videos_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="NJQ-6u-Ddz">
+                                    <rect key="frame" x="31" y="67" width="298" height="139"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="139" id="aF3-eh-hEx"/>
+                                    </constraints>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                            <integer key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCQ-dF-PYJ">
+                                    <rect key="frame" x="13" y="298" width="327" height="50"/>
+                                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="AXR-IQ-Dv7"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <state key="normal" title="立即拍摄">
+                                        <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="25"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="recordVideo:" destination="-1" eventType="touchUpInside" id="ern-7j-hjv"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OsU-9C-Pea">
+                                    <rect key="frame" x="13" y="228" width="327" height="50"/>
+                                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="kFc-Te-6ye"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <state key="normal" title="上传视频">
+                                        <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                            <integer key="value" value="25"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="chooseVideoFromPhoto:" destination="-1" eventType="touchUpInside" id="8XW-FS-nRJ"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="OsU-9C-Pea" firstAttribute="leading" secondItem="TIE-VJ-OrX" secondAttribute="leading" constant="13" id="2OC-BQ-lul"/>
+                                <constraint firstItem="yCQ-dF-PYJ" firstAttribute="top" secondItem="OsU-9C-Pea" secondAttribute="bottom" constant="20" id="47V-Un-to0"/>
+                                <constraint firstAttribute="trailing" secondItem="NJQ-6u-Ddz" secondAttribute="trailing" constant="31" id="67p-l7-c4V"/>
+                                <constraint firstAttribute="height" constant="484" id="A7n-O0-Hmy"/>
+                                <constraint firstItem="yCQ-dF-PYJ" firstAttribute="trailing" secondItem="OsU-9C-Pea" secondAttribute="trailing" id="D5J-bg-Toc"/>
+                                <constraint firstItem="OsU-9C-Pea" firstAttribute="top" secondItem="NJQ-6u-Ddz" secondAttribute="bottom" constant="22" id="Nvd-i6-fc4"/>
+                                <constraint firstItem="NJQ-6u-Ddz" firstAttribute="leading" secondItem="TIE-VJ-OrX" secondAttribute="leading" constant="31" id="U8O-Du-RxL"/>
+                                <constraint firstItem="NJQ-6u-Ddz" firstAttribute="top" secondItem="TIE-VJ-OrX" secondAttribute="top" constant="67" id="VBA-md-cIu"/>
+                                <constraint firstAttribute="trailing" secondItem="OsU-9C-Pea" secondAttribute="trailing" constant="20" id="tC9-bH-oS8"/>
+                                <constraint firstItem="yCQ-dF-PYJ" firstAttribute="leading" secondItem="OsU-9C-Pea" secondAttribute="leading" id="xmY-N7-N9u"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                    <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亲，只能上传一个视频哦" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vlp-ru-IlY">
+                            <rect key="frame" x="139.5" y="596" width="135" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="为了给你更好的体验强烈建议竖屏拍摄！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4f-vv-eqP">
+                            <rect key="frame" x="96.5" y="620" width="221" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="TIE-VJ-OrX" firstAttribute="centerX" secondItem="cxa-JP-Jvm" secondAttribute="centerX" id="20I-sw-jiU"/>
+                        <constraint firstItem="Vlp-ru-IlY" firstAttribute="top" secondItem="TIE-VJ-OrX" secondAttribute="bottom" constant="20" id="2gh-ip-Njq"/>
+                        <constraint firstItem="TIE-VJ-OrX" firstAttribute="leading" secondItem="cxa-JP-Jvm" secondAttribute="leading" constant="27" id="Gxa-Bp-uJH"/>
+                        <constraint firstItem="w4f-vv-eqP" firstAttribute="centerX" secondItem="Vlp-ru-IlY" secondAttribute="centerX" id="V2c-Zp-e0H"/>
+                        <constraint firstItem="Vlp-ru-IlY" firstAttribute="centerX" secondItem="cxa-JP-Jvm" secondAttribute="centerX" id="X2i-UY-Y8E"/>
+                        <constraint firstAttribute="trailing" secondItem="TIE-VJ-OrX" secondAttribute="trailing" constant="27" id="ZGs-Lx-pKK"/>
+                        <constraint firstItem="w4f-vv-eqP" firstAttribute="top" secondItem="Vlp-ru-IlY" secondAttribute="bottom" constant="9" id="cun-9o-4kH"/>
+                        <constraint firstAttribute="bottom" secondItem="w4f-vv-eqP" secondAttribute="bottom" constant="183" id="hHf-SD-dK3"/>
+                        <constraint firstItem="TIE-VJ-OrX" firstAttribute="top" secondItem="cxa-JP-Jvm" secondAttribute="top" constant="92" id="oSc-16-QgD"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="cxa-JP-Jvm" secondAttribute="trailing" id="8AO-Rq-HIQ"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="cxa-JP-Jvm" secondAttribute="bottom" id="D25-Bv-Y3w"/>
+                <constraint firstItem="cxa-JP-Jvm" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Zqf-La-jOQ"/>
+                <constraint firstItem="cxa-JP-Jvm" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="ogD-pt-E6j"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="131.8840579710145" y="90.401785714285708"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="my_videos_2.png" width="259" height="139"/>
+    </resources>
+</document>
