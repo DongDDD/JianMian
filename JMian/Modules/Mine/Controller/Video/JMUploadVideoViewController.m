@@ -8,20 +8,26 @@
 
 #import "JMUploadVideoViewController.h"
 #import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <AVKit/AVKit.h>
 #import "JMHTTPManager+Uploads.h"
+#import "JMDidUploadVideoView.h"
+#import "JMHTTPManager+Vita.h"
+//#import "JMUserInfoModel.h"
+//#import "JMUserInfoManager.h"
 
 //#import "FMImagePicker.h"
 
-@interface JMUploadVideoViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface JMUploadVideoViewController () <UIImagePickerControllerDelegate,UINavigationControllerDelegate,JMDidUploadVideoViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UILabel *bottomLab;
 @property (weak, nonatomic) IBOutlet UIImageView *FrameImageView;
+@property (strong, nonatomic) AVPlayerViewController *playerVC;
 @property (nonatomic, strong) NSURL *finalURL;
 
-
+@property (nonatomic, strong)JMDidUploadVideoView *didUploadVideoView;
 @end
 
 @implementation JMUploadVideoViewController
@@ -29,6 +35,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"视频简历";
+    [self didUploadVideoView];
+    if (kFetchMyDefault(@"video_path")) {
+//        //创建URL
+//        NSURL *url = [NSURL URLWithString:@"https://jmsp-1258537318.picgz.myqcloud.com//storage//images//2019//05//13//K7xxhMIVfIbCgHGOHFqmIN8cGMh9QRw32luiKRJ3.mp4"];
+//        //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+//        AVPlayer *player = [AVPlayer playerWithURL:url];
+//        //创建AVPlayerViewController控制器
+//        AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
+//        playerVC.player = player;
+//        playerVC.view.frame = self.view.frame;
+//        [self.view addSubview:playerVC.view];
+//        self.playerVC = playerVC;
+//        //调用控制器的属性player的开始播放方法
+//        [self.playerVC.player play];
+        
+    }
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -39,7 +61,38 @@
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.bottomLab.frame.origin.y+self.bottomLab.frame.size.height+30);
 
 }
+
+#pragma mark - 点击事件
+//选择视频上传
 - (IBAction)chooseVideoFromPhoto:(UIButton *)sender {
+//    FMImagePicker *picker = [[FMImagePicker alloc] init];
+//    [self presentViewController:picker animated:YES completion:nil];
+    [self uploadVideo];
+}
+
+/**
+ 视频录制
+ 
+ @param sender btn
+ */
+- (IBAction)recordVideo:(id)sender {
+    [self filmVideo];
+}
+//重新上传
+-(void)leftAction{
+    [self uploadVideo];
+
+    
+}
+//重新拍摄
+-(void)rightAction{
+    [self filmVideo];
+
+
+}
+
+-(void)uploadVideo{
+
     UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
     ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;//sourcetype有三种分别是camera，photoLibrary和photoAlbum
     //    NSArray *availableMedia = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeCamera];//Camera所支持的Media格式都有哪些,共有两个分别是@"public.image",@"public.movie"
@@ -51,17 +104,12 @@
     [self presentViewController:ipc animated:YES completion:nil];
     ipc.delegate = self;//设置委托
     
-//    FMImagePicker *picker = [[FMImagePicker alloc] init];
-//    [self presentViewController:picker animated:YES completion:nil];
-    
+
+
 }
 
-/**
- 视频录制
- 
- @param sender btn
- */
-- (IBAction)recordVideo:(id)sender {
+-(void)filmVideo{
+    
     AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
     //检测是否开通权限
     if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied) {
@@ -92,8 +140,11 @@
     [self presentViewController:picker animated:YES completion:^{
         
     }];
+    
+    
 }
 
+#pragma mark - 处理视频
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
@@ -103,6 +154,7 @@
         [picker dismissViewControllerAnimated:YES completion:nil];
         
     }else{
+        
         //会以MOV格式存储在tmp目录下
         NSURL *source = [info objectForKey:UIImagePickerControllerMediaURL];
         //计算视频大小
@@ -111,6 +163,11 @@
         NSLog(@"视频的时长为%lf s \n 视频的大小为%.2f M",length,size);
         
         [picker dismissViewControllerAnimated:YES completion:nil];
+        
+        
+        // 将图片写入文件
+        
+        
         //        压缩
         [self compressVideo:source];
     }
@@ -161,7 +218,7 @@
     NSDateFormatter *formater = [[NSDateFormatter alloc] init];//用时间给文件全名，以免重复，在测试的时候其实可以判断文件是否存在若存在，则删除，重新生成文件即可
     [formater setDateFormat:@"yyyy-MM-dd-HH:mm:ss"];
     newVideoUrl = [NSURL fileURLWithPath:[NSHomeDirectory() stringByAppendingFormat:@"/Documents/output-%@.mp4", [formater stringFromDate:[NSDate date]]]] ;//这个是保存在app自己的沙盒路径里，后面可以选择是否在上传后删除掉，减少空间。
-    
+  
     [self convertVideoQuailtyWithInputURL:url outputURL:newVideoUrl completeHandler:nil];
     
 }
@@ -211,15 +268,22 @@
                      
                      dispatch_async(dispatch_get_main_queue(), ^{
                          self.bottomLab.text = [NSString stringWithFormat:@"%.2f s, 压缩后大小为：%.2f M",length,size];
-                         
                      });
                  });
                  
                  
-                 __weak __typeof(self) weakSelf = self;
+                 //                 __weak __typeof(self) weakSelf = self;
                  // Get center frame image asyncly
                  [self centerFrameImageWithVideoURL:outputURL completion:^(UIImage *image) {
-                     weakSelf.FrameImageView.image = image;
+                  
+//                     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频已保存在你的相册" preferredStyle:UIAlertControllerStyleAlert];
+//                     UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+//                     [alert addAction:cancel];
+//                     [self presentViewController:alert animated:YES completion:nil];
+                     
+                     [self.didUploadVideoView setHidden:NO];
+                     self.didUploadVideoView.imgView.image = image;
+                     //                     weakSelf.FrameImageView.image = image;
                  }];
                  
                  self.finalURL = outputURL;
@@ -236,6 +300,7 @@
     
 }
 
+#pragma mark - 视频上传
 
 /**
  视频上传
@@ -243,25 +308,37 @@
  @param url url
  */
 - (void)uploadVideo:(NSURL *)url{
-    NSArray *array = @[url];
-    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        if (responsObject[@"data"]) {
-//            _imageUrl = responsObject[@"data"][0];
-            NSLog(@"%@",responsObject[@"data"]);
-        }
-        
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+//        上传data
+        NSArray *array = @[url];
+        [[JMHTTPManager sharedInstance]uploadsWithMP4Files:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+
+            if (responsObject[@"data"]) {
+    //            _imageUrl = responsObject[@"data"][0];
+                NSLog(@"%@",responsObject[@"data"][0]);
+                NSString *url = responsObject[@"data"][0];
+                [[JMHTTPManager sharedInstance]updateVitaWith_work_status:nil education:nil work_start_date:nil description:nil video_path:url image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频上传成功！" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+                    [alert addAction:cancel];
+                    [self presentViewController:alert animated:YES completion:nil];
+                    kSaveMyDefault(@"video_path",url);
+//                    kSaveMyDefault(@"videoImg",self.didUploadVideoView.imgView);
+
+                    
+                } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                    
+                }];
+                
+            }
+
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+
+        }];
     
-    //    上传data
-    //    NSData *data = [NSData dataWithContentsOfURL:url];
-    //    NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    
+//    NSData *data = [NSData dataWithContentsOfURL:url];
+//    NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     //    上传成功可以选择删除
-    //    [[NSFileManager defaultManager] removeItemAtPath:[url path] error:nil];
+//        [[NSFileManager defaultManager] removeItemAtPath:[url path] error:nil];
     
     
 }
@@ -452,6 +529,22 @@
     }
 }
 
+#pragma mark - lazy
+-(JMDidUploadVideoView *)didUploadVideoView
+{
+    if (_didUploadVideoView == nil) {
+        _didUploadVideoView = [[JMDidUploadVideoView alloc]init];
+        _didUploadVideoView.hidden = YES;
+        _didUploadVideoView.delegate = self;
+        [self.view addSubview:self.didUploadVideoView];
+        
+        [self.didUploadVideoView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.and.right.mas_equalTo(self.view);
+            make.top.and.bottom.mas_equalTo(self.view);
+        }];
+    }
+    return _didUploadVideoView;
+}
 
 
 /*

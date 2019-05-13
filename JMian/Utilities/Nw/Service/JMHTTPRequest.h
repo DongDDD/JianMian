@@ -18,6 +18,8 @@ typedef NS_ENUM(NSInteger, JMRequestMethod) {
     JMRequestMethodDELETE,
     JMRequestMethodPATCH,
     JMRequestMethodUpload,
+    JMRequestMethodUploadMP4,
+
 };
 
 

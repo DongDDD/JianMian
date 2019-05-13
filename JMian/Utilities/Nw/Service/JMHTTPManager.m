@@ -87,6 +87,9 @@
         case JMRequestMethodUpload:
             urlRequest = [self urlRequestForUploadRequest:request];
             break;
+        case JMRequestMethodUploadMP4:
+            urlRequest = [self urlRequestForUploadMP4Request:request];
+            break;
         case JMRequestMethodDELETE:
             urlRequest = [self urlRequestForMethod:@"DELETE" request:request];
             break;
@@ -120,6 +123,27 @@
             UIImage *image = request.parameters[@"files"][i];
             NSData *data = UIImageJPEGRepresentation(image, 0.1);
             [formData appendPartWithFileData:data name:@"files" fileName:fileName mimeType:@"image/jpg"];;//file改为后台接收的字段或参数
+        }
+        
+    } error:&serializationError];
+    
+    return urlRequest;
+}
+
+- (NSMutableURLRequest *)urlRequestForUploadMP4Request:(JMHTTPRequest *)request {
+    NSError *serializationError = nil;
+    NSMutableURLRequest *urlRequest = [self.requestSerializer multipartFormRequestWithMethod:@"POST" URLString:[[NSURL URLWithString:request.path relativeToURL:self.baseURL] absoluteString] parameters:request.parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        
+        
+        for (int i = 0; i < [request.parameters[@"files"] count]; i++) {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyyMMddHHmmss"];
+            NSString *dateString = [formatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString  stringWithFormat:@"%@.jpg", dateString];
+            NSURL *url = request.parameters[@"files"][i];
+//            NSData *data = [NSData dataWithContentsOfURL:url];
+            [formData appendPartWithFileURL:url name:@"files" fileName:fileName mimeType:@"video/mpeg4" error:(nil)];
+//            [formData appendPartWithFileData:data name:@"files" fileName:fileName mimeType:@"video/mp4"];;//file改为后台接收的字段或参数
         }
         
     } error:&serializationError];

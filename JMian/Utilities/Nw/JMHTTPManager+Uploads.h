@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMHTTPManager (Uploads)
 
 - (void)uploadsWithFiles:(NSArray *)files successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
+- (void)uploadsWithMP4Files:(NSArray *)files successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

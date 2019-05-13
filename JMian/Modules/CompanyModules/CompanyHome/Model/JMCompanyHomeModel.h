@@ -36,6 +36,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *cityCity_name;
 @property (nonatomic, strong) NSNumber *cityIs_hot;
 
+@property (nonatomic, strong) NSString *video_file_path;
+@property (nonatomic, strong) NSString *video_status;
+
+
 
 
 @end

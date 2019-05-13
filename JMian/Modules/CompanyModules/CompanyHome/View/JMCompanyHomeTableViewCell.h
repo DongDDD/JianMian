@@ -8,8 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "JMCompanyHomeModel.h"
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@class JMCompanyHomeTableViewCell;
+@protocol JMCompanyHomeTableViewCellDelegate <NSObject>
+
+-(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell;
+
+@end
+
 
 @interface JMCompanyHomeTableViewCell : UITableViewCell
 
@@ -20,7 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *experinenceLab;
 @property (weak, nonatomic) IBOutlet UILabel *educationLab;
 @property (weak, nonatomic) IBOutlet UILabel *jobDetailLab;
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (strong, nonatomic) AVPlayer *player;
 
+@property (weak, nonatomic)id<JMCompanyHomeTableViewCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

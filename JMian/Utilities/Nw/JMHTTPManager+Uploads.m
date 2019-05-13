@@ -15,7 +15,15 @@
 - (void)uploadsWithFiles:(NSArray *)files successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     NSDictionary *dic = @{@"files":files};
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Uploads_Image_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodUpload path:Uploads_Image_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
+
+
+- (void)uploadsWithMP4Files:(NSArray *)files successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    
+    NSDictionary *dic = @{@"files":files};
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodUploadMP4 path:Uploads_Image_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
 

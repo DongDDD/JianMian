@@ -11,15 +11,16 @@
 #import "JMPersonDetailsViewController.h"
 #import "JMHTTPManager+VitaPaginate.h"
 #import "JMCompanyHomeModel.h"
+#import "JMPlayerViewController.h"
 
 
-
-@interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *arrDate;
+//@property (strong, nonatomic) AVPlayerViewController *playerVC;
 
 @end
 static NSString *cellIdent = @"cellIdent";
@@ -106,7 +107,7 @@ static NSString *cellIdent = @"cellIdent";
         cell = [[JMCompanyHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
     }
     
-    
+    cell.delegate = self;
     JMCompanyHomeModel *model = self.arrDate[indexPath.row];
     [cell setModel:model];
 //
@@ -125,7 +126,14 @@ static NSString *cellIdent = @"cellIdent";
     
 }
 
+#pragma mark - 点击事件
 
+-(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell{
+    JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
+    vc.player = cell.player;
+//    vc.model = cell;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 /*

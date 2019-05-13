@@ -123,16 +123,26 @@
                             <constraint firstAttribute="height" constant="10" id="bHk-Kj-W8u"/>
                         </constraints>
                     </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCE-3K-Cjv">
+                        <rect key="frame" x="21" y="25" width="53" height="54"/>
+                        <state key="normal" image="play.png"/>
+                        <connections>
+                            <action selector="playAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1W8-LA-lmC"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="I3W-uw-Vkn" firstAttribute="trailing" secondItem="GhD-m2-D0S" secondAttribute="trailing" id="0cO-im-8Vp"/>
                     <constraint firstItem="GhD-m2-D0S" firstAttribute="centerY" secondItem="KgN-zm-cyq" secondAttribute="centerY" id="4PE-7l-RDQ"/>
                     <constraint firstItem="KgN-zm-cyq" firstAttribute="leading" secondItem="hXg-TQ-HUf" secondAttribute="leading" id="6Pc-0a-SFd"/>
+                    <constraint firstItem="gCE-3K-Cjv" firstAttribute="centerY" secondItem="457-Ah-6zj" secondAttribute="centerY" id="7Js-FA-tsi"/>
                     <constraint firstItem="hXg-TQ-HUf" firstAttribute="leading" secondItem="457-Ah-6zj" secondAttribute="trailing" constant="17" id="BU5-gl-LN4"/>
                     <constraint firstItem="KgN-zm-cyq" firstAttribute="top" secondItem="hXg-TQ-HUf" secondAttribute="bottom" constant="10" id="Bmu-kz-W5t"/>
                     <constraint firstItem="I3W-uw-Vkn" firstAttribute="centerY" secondItem="GhD-m2-D0S" secondAttribute="centerY" id="Kwh-LZ-hAi"/>
                     <constraint firstAttribute="trailing" secondItem="LTw-Iw-qjs" secondAttribute="trailing" id="LZ9-uK-RRe"/>
+                    <constraint firstItem="gCE-3K-Cjv" firstAttribute="height" secondItem="457-Ah-6zj" secondAttribute="height" id="NWJ-Ke-SPN"/>
                     <constraint firstItem="457-Ah-6zj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="Qzv-MJ-Lwa"/>
+                    <constraint firstItem="gCE-3K-Cjv" firstAttribute="width" secondItem="457-Ah-6zj" secondAttribute="width" id="RO9-eT-KNp"/>
                     <constraint firstItem="G2B-ci-yKW" firstAttribute="centerY" secondItem="GhD-m2-D0S" secondAttribute="centerY" id="RQE-jX-7b8"/>
                     <constraint firstItem="LTw-Iw-qjs" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Slk-NG-5UV"/>
                     <constraint firstItem="mHp-xm-1Sr" firstAttribute="leading" secondItem="KgN-zm-cyq" secondAttribute="leading" id="Wcq-Eo-nMS"/>
@@ -140,6 +150,7 @@
                     <constraint firstItem="G2B-ci-yKW" firstAttribute="leading" secondItem="GhD-m2-D0S" secondAttribute="trailing" constant="23" id="ZRq-yR-kJD"/>
                     <constraint firstItem="GhD-m2-D0S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="145" id="ZaY-lW-GW9"/>
                     <constraint firstItem="zqm-cS-SU5" firstAttribute="centerY" secondItem="KgN-zm-cyq" secondAttribute="centerY" id="Zya-BX-v8c"/>
+                    <constraint firstItem="gCE-3K-Cjv" firstAttribute="centerX" secondItem="457-Ah-6zj" secondAttribute="centerX" id="aAU-3H-Jq1"/>
                     <constraint firstAttribute="trailing" secondItem="da0-HH-tpw" secondAttribute="trailing" constant="16" id="aZf-LR-5Kq"/>
                     <constraint firstAttribute="trailing" secondItem="CZn-o5-ZEi" secondAttribute="trailing" constant="20" id="cE0-t8-Ibk"/>
                     <constraint firstItem="zqm-cS-SU5" firstAttribute="leading" secondItem="GhD-m2-D0S" secondAttribute="leading" id="jsZ-F7-LrJ"/>
@@ -159,6 +170,7 @@
                 <outlet property="iconImage" destination="457-Ah-6zj" id="Utt-VF-KGM"/>
                 <outlet property="jobDetailLab" destination="G2B-ci-yKW" id="74B-ua-hfU"/>
                 <outlet property="jobNameLab" destination="hXg-TQ-HUf" id="L33-O5-ByO"/>
+                <outlet property="playBtn" destination="gCE-3K-Cjv" id="REU-sP-jgf"/>
                 <outlet property="salaryLab" destination="da0-HH-tpw" id="UZp-gn-xyt"/>
             </connections>
             <point key="canvasLocation" x="34.782608695652179" y="34.821428571428569"/>
@@ -166,5 +178,6 @@
     </objects>
     <resources>
         <image name="Share_WeChat_friends.png" width="38" height="38"/>
+        <image name="play.png" width="141" height="141"/>
     </resources>
 </document>

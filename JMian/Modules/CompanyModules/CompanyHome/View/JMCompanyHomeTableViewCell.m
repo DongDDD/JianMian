@@ -9,6 +9,13 @@
 #import "JMCompanyHomeTableViewCell.h"
 #import "DimensMacros.h"
 
+@interface JMCompanyHomeTableViewCell ()
+
+@property(nonatomic,strong)JMCompanyHomeModel *myModel;
+
+@end
+
+
 @implementation JMCompanyHomeTableViewCell
 
 - (void)awakeFromNib {
@@ -16,7 +23,10 @@
     // Initialization code
 }
 
+
+
 -(void)setModel:(JMCompanyHomeModel *)model{
+    _myModel = model;
     self.jobNameLab.text = model.workName;
      [self.iconImage sd_setImageWithURL:[NSURL URLWithString:model.userAvatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
   
@@ -25,8 +35,40 @@
     self.salaryLab.text = salaryStr;
     self.educationLab.text = [self getEducationStrWithEducation:model.vitaEducation];
     
+    if (model.video_file_path == nil) {
+        [self.playBtn setHidden:YES];
+    }else{
+         [self.playBtn setHidden:NO];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            NSURL *url = [NSURL URLWithString:model.video_file_path];
+            //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+            AVPlayer *player = [AVPlayer playerWithURL:url];
+            self.player = player;
+        });
+        
+    }
+    
     
 }
+
+//-(void)loadPlayer{
+//    NSURL *url = [NSURL URLWithString:@"https://jmsp-1258537318.picgz.myqcloud.com//storage//images//2019//05//13//K7xxhMIVfIbCgHGOHFqmIN8cGMh9QRw32luiKRJ3.mp4"];
+//    //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+//    AVPlayer *player = [AVPlayer playerWithURL:url];
+//    self.player = player;
+////    //创建AVPlayerViewController控制器
+////    AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
+////    playerVC.player = player;
+////
+//////    playerVC.view.frame = self.view.frame;
+//////    [self.view addSubview:playerVC.view];
+////    self.playerVC = playerVC;
+//    //调用控制器的属性player的开始播放方法
+////    [self.playerVC.player play];
+//
+//
+//}
 
 //工资数据转化，除以1000，转化成k
 -(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
@@ -80,6 +122,14 @@
 }
 
 
+- (IBAction)playAction:(UIButton *)sender {
+ 
+    if (_delegate && [_delegate respondsToSelector:@selector(playAction_cell:)] && self.player) {
+        
+        [_delegate playAction_cell:self];
+    }
+    
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

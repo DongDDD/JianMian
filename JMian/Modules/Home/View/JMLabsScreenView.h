@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray *selectedBtnArray;
 @property(nonatomic,strong)UIButton * tagBtn;
 @property(nonatomic,assign)NSInteger selectIndex;
+@property(nonatomic,assign)NSInteger index;
 
 @end
 

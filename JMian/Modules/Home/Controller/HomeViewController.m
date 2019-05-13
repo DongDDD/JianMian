@@ -17,7 +17,8 @@
 #import "Masonry.h"
 #import "JMLabsChooseViewController.h"
 #import "JMHTTPManager+PositionDesired.h"
-
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate>
 
@@ -45,11 +46,16 @@ static NSString *cellIdent = @"cellIdent";
 
     [self setTableView];
     
-    [self getData];
     
 //    [self loginIM];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getData];
+    
+}
 
 #pragma mark - 布局UI
 
@@ -73,6 +79,7 @@ static NSString *cellIdent = @"cellIdent";
     }];
     
 }
+
 
 #pragma mark - 点击事件 -
 

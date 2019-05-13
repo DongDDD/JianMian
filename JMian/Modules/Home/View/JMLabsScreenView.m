@@ -11,6 +11,13 @@
 #import "NSString+Extension.h"
 #import "DimensMacros.h"
 #define ChooseCount 1  //可以选择多少个成员
+#define GreyTitle [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0]
+@interface JMLabsScreenView()
+
+@property(nonatomic,strong)NSArray *allSubviews;
+
+@end
+
 
 @implementation JMLabsScreenView
 
@@ -30,6 +37,7 @@
 
 - (void)createLabUI_title:(NSString *)title labsArray:(NSArray *)labsArray
 {
+    _allSubviews = labsArray;
     UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(20, 34, 100, 14)];
     titleLab.text = title;
     titleLab.font = [UIFont systemFontOfSize:14];
@@ -50,18 +58,20 @@
         }
         
         _tagBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _tagBtn.tag = i;
+        _tagBtn.tag = 1000+i;
         _tagBtn.frame = CGRectMake(tagBtnX, tagBtnY, tagTextSize.width+50, 30);
         _tagBtn.backgroundColor = [UIColor whiteColor];
         [_tagBtn setTitle:tagArr[i] forState:UIControlStateNormal];
         if (i == 0) {
 //            [_tagBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
             _tagBtn.selected = YES;
+            _tagBtn.layer.borderColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:0.41].CGColor;
+
         }else{
             _tagBtn.selected = NO;
         
         }
-        [_tagBtn setTitleColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0] forState:UIControlStateNormal];
+        [_tagBtn setTitleColor:GreyTitle forState:UIControlStateNormal];
         [_tagBtn setTitleColor:MASTER_COLOR forState:UIControlStateSelected];
         _tagBtn.titleLabel.font = GlobalFont(16);
         _tagBtn.layer.cornerRadius = 15.3;
@@ -101,20 +111,24 @@
 //        [sender setTitleColor:[UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0] forState:UIControlStateNormal];
 //        [_selectedBtnArray removeObject:sender];
 //    }
-    //单选
-    if (_tagBtn == nil){
-        sender.selected = YES;
-        _tagBtn = sender;
+
+    for (int i = 0; i < _allSubviews.count; i++) {
+        if (sender.tag == 1000+i) {
+            sender.selected = YES;
+            [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            sender.layer.borderColor = MASTER_COLOR.CGColor;
+            NSLog(@"%@",_allSubviews[i]);
+            continue;
+        }
+        UIButton *btn =[(UIButton *)self viewWithTag:i+1000];
+        btn.selected = NO;
+        [btn setTitleColor:GreyTitle forState:UIControlStateNormal];
+        btn.layer.borderColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:0.41].CGColor;
     }
-    else  if (_tagBtn !=nil &&_tagBtn == sender){
-        sender.selected = YES;
-    } else if (_tagBtn!= sender && _tagBtn!=nil){
-        _tagBtn.selected = NO;
-        sender.selected = YES;
-        _tagBtn = sender;
-    }
-    _selectIndex = sender.tag;
+
+  
 }
+
 
 
 //-(NSMutableArray *)selectedBtnArray{

@@ -25,11 +25,12 @@
              
              @"cityCity_id":@"city.city_id",
              @"cityCity_name":@"city.city_name",
-             @"cityIs_hot":@"city.is_hot"
+             @"cityIs_hot":@"city.is_hot",
              
+             @"video_file_path":@"video.file_path",
+             @"video_status":@"video.status"
              };
 
-    
 }
 
 @end

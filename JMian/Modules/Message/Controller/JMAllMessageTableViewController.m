@@ -72,7 +72,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 //    15011331133
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
-    
+    NSLog(@"腾讯云数据%@",convs);
     for (TIMConversation *conv in convs) {
         if([conv getType] == TIM_SYSTEM){
             continue;

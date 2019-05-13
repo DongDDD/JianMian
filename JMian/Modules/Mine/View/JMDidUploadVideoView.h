@@ -1,0 +1,25 @@
+//
+//  JMDidUploadVideoView.h
+//  JMian
+//
+//  Created by mac on 2019/5/13.
+//  Copyright © 2019 mac. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+@protocol JMDidUploadVideoViewDelegate <NSObject>
+
+-(void)leftAction;
+-(void)rightAction;
+
+@end
+
+@interface JMDidUploadVideoView : UIView
+
+@property(nonatomic,strong)UIImageView *imgView;
+@property(nonatomic,weak)id<JMDidUploadVideoViewDelegate>delegate;
+@end
+
+NS_ASSUME_NONNULL_END
