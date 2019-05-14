@@ -31,6 +31,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *jobDetailLab;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (strong, nonatomic) AVPlayer *player;
+@property (strong, nonatomic) AVPlayerViewController *playerVC;
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath;
+@property(nonatomic,strong)NSIndexPath *indexPath;
 
 @property (weak, nonatomic)id<JMCompanyHomeTableViewCellDelegate>delegate;
 @end

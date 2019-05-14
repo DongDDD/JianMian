@@ -22,9 +22,10 @@
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+CreateConversation.h"
 #import "THDatePickerView.h"
+#import "JMPlayerViewController.h"
 
 
-@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate>
+@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate,JMHeaderOfPersonDetailViewDelegate>
 
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -38,7 +39,10 @@
 @property (nonatomic, strong) NSArray *childVCs;
 @property (nonatomic, strong) UITableViewController *currentVC;
 
-@property (nonatomic, strong) JMVitaDetailModel *model;
+@property (nonatomic, strong) JMVitaDetailModel *vitaModel;
+@property (nonatomic, strong)JMVitaOfPersonDetailViewController *vitaVc;
+@property (nonatomic, strong)JMContactOfPersonDetailViewController *contactVc;
+@property (nonatomic, strong)JMPictureOfPersonDetailViewController *pictureVc;
 
 @property (nonatomic, strong) UIActivityIndicatorView * juhua;
 
@@ -69,11 +73,18 @@
     
 }
 
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.vitaVc.view.frame.origin.y+self.vitaVc.view.frame.size.height-200);
+
+
+}
 #pragma mark - 获取数据
 -(void)getData{
-    [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:self.user_job_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:self.companyModel.user_job_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         //
-         self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+         self.vitaModel = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
         [self initView];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -105,10 +116,10 @@
     [self setScrollViewUI];
     [self setHeaderVieUI];
     [self setPageUI];
+
     [self setBottomViewUI];
     [self initDatePickerView];
 
-    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,_pageView.frame.origin.y+_pageView.frame.size.height+64);
 
 
 }
@@ -121,26 +132,28 @@
 
 }
 -(void)setHeaderVieUI{
-    self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 772)];
-    [self.headerView setModel:self.model];
+    CGFloat H = 0.0;
+    if (self.companyModel.video_file_path) {
+        H = 772;
+    }else{
+        H = 350;
+    
+    }
+    self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, H)];
+    self.headerView.delegate = self;
+    [self.headerView setModel:self.vitaModel];
+    [self.headerView setCompanyHomeModel:self.companyModel];
     [self.scrollView addSubview:_headerView];
-
 }
 
-//-(NSString *)getDateString:(NSDate *)date{
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    // 格式化日期格式
-//    formatter.dateFormat = @"yyyy-MM-dd";
-//    NSString *dateStr = [formatter stringFromDate:date];
-//
-//    return dateStr;
-//
-//}
+
 - (void)setPageUI {
     [self.scrollView addSubview:self.titleView];
-    [self.scrollView addSubview:self.pageView];
+    [self.scrollView addSubview:self.vitaVc.view];
+//    [self.scrollView addSubview:self.contactVc.view];
+//    [self.scrollView addSubview:self.pageView];
 //    [self.pageView setCurrentIndex:1];//添加子视图”谁看过我“
-    [self.pageView setCurrentIndex:0];//添加子视图”全部信息“
+//    [self.pageView setCurrentIndex:0];//添加子视图”全部信息“
     
 }
 
@@ -192,7 +205,7 @@
     }];
     
     
-    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.model.user_job_id time:timer successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.vitaModel.user_job_id time:timer successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
@@ -214,6 +227,16 @@
     }];
 }
 #pragma mark - 点击事件
+//播放视频
+-(void)playAction
+{
+    JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
+    vc.player = self.player;
+    vc.topTitle = self.companyModel.userNickname;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
 //显示时间选择器
 -(void)bottomRightButtonAction{
     self.BgBtn.hidden = NO;
@@ -235,7 +258,7 @@
 //和他聊聊
 -(void)bottomLeftButtonAction
 {
-    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.model.user_id foreign_key:self.model.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
         //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -252,89 +275,6 @@
 }
 
 
-//-(void)deleteInteviewTimeViewAction{
-//
-//    [self.chooseTimeVC willMoveToParentViewController:nil];
-//    [self.chooseTimeVC removeFromParentViewController];
-//    [self.chooseTimeVC.view removeFromSuperview];
-//
-//   self.navigationController.navigationBarHidden = NO;
-//}
-
-
-//-(void)OKInteviewTimeViewAction:(NSString *)interviewTime{
-//    [self.chooseTimeVC willMoveToParentViewController:nil];
-//    [self.chooseTimeVC removeFromParentViewController];
-//    [self.chooseTimeVC.view removeFromSuperview];
-//    self.navigationController.navigationBarHidden = NO;
-//    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.model.user_job_id time:interviewTime successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
-//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-//        [alert show];
-//
-//
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-//    }];
-//
-//
-//}
-
-#pragma mark - lazy
-
-- (JMTitlesView *)titleView {
-    if (!_titleView) {
-        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, _headerView.frame.origin.y+_headerView.frame.size.height, SCREEN_WIDTH, 43} titles:@[@"在线简历", @"联系方式",@"图片作品"]];
-        __weak JMPersonDetailsViewController *weakSelf = self;
-        _titleView.didTitleClick = ^(NSInteger index) {
-            [weakSelf.pageView setCurrentIndex:index];
-            _index = index;
-        };
-    }
-    
-    return _titleView;
-}
-
-
-- (JMPageView *)pageView {
-    if (!_pageView) {
-        _pageView = [[JMPageView alloc] initWithFrame:CGRectMake(0, _titleView.frame.origin.y+_titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT+300) childVC:self.childVCs];
-        
-        __weak JMPersonDetailsViewController *weakSelf = self;
-        _pageView.didEndScrollView = ^(NSInteger index) {
-            [weakSelf.titleView setCurrentTitleIndex:index];
-            _index = index;
-           
-        };
-    }
-    return _pageView;
-}
-
-- (NSArray *)childVCs {
-
-
-    JMVitaOfPersonDetailViewController *vc1 = [[JMVitaOfPersonDetailViewController alloc] init];
-    vc1.experiencesArray = self.model.experiences;
-    vc1.educationArray = self.model.education;
-    vc1.shieldingArray = self.model.shielding;
-    
-    JMContactOfPersonDetailViewController *vc2 = [[JMContactOfPersonDetailViewController alloc] init];
-    vc2.phoneNumberStr = self.model.user_phone;
-    vc2.emailStr = self.model.user_email;
-    
-    JMPictureOfPersonDetailViewController *vc3 = [[JMPictureOfPersonDetailViewController alloc]init];
-    
-    
-    [self addChildViewController:vc1];
-    [self addChildViewController:vc2];
-    [self addChildViewController:vc3];
-
-    
-    
-    _childVCs = @[vc1, vc2, vc3];
-    //    }
-    return _childVCs;
-}
 
 
 #pragma mark - scrollViewDelegate
@@ -358,8 +298,98 @@
     
 }
 
+#pragma mark - lazy
+
+- (JMTitlesView *)titleView {
+    if (!_titleView) {
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, _headerView.frame.origin.y+_headerView.frame.size.height, SCREEN_WIDTH, 43} titles:@[@"在线简历", @"联系方式",@"图片作品"]];
+        __weak JMPersonDetailsViewController *weakSelf = self;
+        _titleView.didTitleClick = ^(NSInteger index) {
+            _index = index;
+            [weakSelf setCurrenView];
+        };
+    }
+    
+    return _titleView;
+}
 
 
+-(void)setCurrenView{
+    
+    switch (_index) {
+        case 0:
+            self.vitaVc.view.hidden = NO;
+            break;
+        case 1:
+            self.contactVc.view.hidden = NO;
+            break;
+        case 2:
+//            self.contactVc.view.hidden = NO;
+            break;
+        default:
+            break;
+    }
+    
+ 
+
+}
+
+//- (JMPageView *)pageView {
+//    if (!_pageView) {
+//        _pageView = [[JMPageView alloc] initWithFrame:CGRectMake(0, _titleView.frame.origin.y+_titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT) childVC:self.childVCs];
+//
+//        __weak JMPersonDetailsViewController *weakSelf = self;
+//        _pageView.didEndScrollView = ^(NSInteger index) {
+//            [weakSelf.titleView setCurrentTitleIndex:index];
+//            _index = index;
+//
+//        };
+//    }
+//    return _pageView;
+//}
+
+
+-(JMVitaOfPersonDetailViewController *)vitaVc{
+    if (_vitaVc == nil) {
+        _vitaVc = [[JMVitaOfPersonDetailViewController alloc] init];
+//        _vitaVc.view.hidden = NO;
+        _vitaVc.experiencesArray = self.vitaModel.experiences;
+        _vitaVc.educationArray = self.vitaModel.education;
+        _vitaVc.shieldingArray = self.vitaModel.shielding;
+        __weak JMVitaOfPersonDetailViewController *weakSelf = _vitaVc;
+        
+        _vitaVc.didLoadView = ^(CGFloat H) {
+            
+            weakSelf.view.frame = CGRectMake(0, self.headerView.frame.origin.y+self.headerView.frame.size.height, SCREEN_WIDTH, H);
+        };
+        
+        _vitaVc.view.frame = weakSelf.view.frame;
+        [self addChildViewController:_vitaVc];
+        
+    }
+//    [self.scrollView addSubview:_vitaVc.view];
+    
+    return _vitaVc;
+}
+
+
+-(JMContactOfPersonDetailViewController *)contactVc{
+    if (_contactVc == nil) {
+        _contactVc = [[JMContactOfPersonDetailViewController alloc] init];
+        _contactVc.view.hidden = YES;
+        _contactVc.view.frame = CGRectMake(0, self.headerView.frame.origin.y + self.headerView.frame.size.height, SCREEN_WIDTH, 300);
+        [self addChildViewController:_contactVc];
+        
+    }
+    
+    return _contactVc;
+}
+
+
+
+//@property (nonatomic, strong)JMContactOfPersonDetailViewController *contactVc;
+//@property (nonatomic, strong)JMPictureOfPersonDetailViewController *pictureVc;
+//JMContactOfPersonDetailViewController *vc2 = [[JMContactOfPersonDetailViewController alloc] init];
 //- (UIScrollView *)scrollView {
 //    if (!_scrollView){
 //        _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];

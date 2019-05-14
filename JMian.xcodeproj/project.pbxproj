@@ -236,6 +236,13 @@
 		045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */ = {isa = PBXBuildFile; fileRef = 045EDD5E225D8A210054C5F3 /* JMHTTPManager+Uploads.m */; };
 		045EDD63225D97650054C5F3 /* JMHTTPManager+Captcha.m in Sources */ = {isa = PBXBuildFile; fileRef = 045EDD62225D97650054C5F3 /* JMHTTPManager+Captcha.m */; };
 		047270822248D078005FD1FC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047270812248D078005FD1FC /* BaseViewController.m */; };
+		047F8EAB228A6672005E81FA /* JMVideoPlayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 047F8EAA228A6672005E81FA /* JMVideoPlayManager.m */; };
+		047F8EAF228AC11B005E81FA /* transmit.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F8EAC228AC11B005E81FA /* transmit.png */; };
+		047F8EB0228AC11B005E81FA /* transmit@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F8EAD228AC11B005E81FA /* transmit@3x.png */; };
+		047F8EB1228AC11B005E81FA /* transmit@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F8EAE228AC11B005E81FA /* transmit@2x.png */; };
+		047F8EB5228AC552005E81FA /* C_play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F8EB2228AC551005E81FA /* C_play@2x.png */; };
+		047F8EB6228AC552005E81FA /* C_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F8EB3228AC551005E81FA /* C_play.png */; };
+		047F8EB7228AC552005E81FA /* C_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F8EB4228AC552005E81FA /* C_play@3x.png */; };
 		048348AA22695EC000DE4630 /* NO_Data@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348A722695EC000DE4630 /* NO_Data@3x.png */; };
 		048348AB22695EC000DE4630 /* NO_Data.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348A822695EC000DE4630 /* NO_Data.png */; };
 		048348AC22695EC000DE4630 /* NO_Data@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348A922695EC000DE4630 /* NO_Data@2x.png */; };
@@ -801,6 +808,14 @@
 		047270812248D078005FD1FC /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		0472708A2248F1D0005FD1FC /* DimensMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DimensMacros.h; sourceTree = "<group>"; };
 		0472708B2248F241005FD1FC /* APIStringMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIStringMacros.h; sourceTree = "<group>"; };
+		047F8EA9228A6672005E81FA /* JMVideoPlayManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoPlayManager.h; sourceTree = "<group>"; };
+		047F8EAA228A6672005E81FA /* JMVideoPlayManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoPlayManager.m; sourceTree = "<group>"; };
+		047F8EAC228AC11B005E81FA /* transmit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = transmit.png; path = JMian/Resource/Company_slice/home/transmit.png; sourceTree = SOURCE_ROOT; };
+		047F8EAD228AC11B005E81FA /* transmit@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "transmit@3x.png"; path = "JMian/Resource/Company_slice/home/transmit@3x.png"; sourceTree = SOURCE_ROOT; };
+		047F8EAE228AC11B005E81FA /* transmit@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "transmit@2x.png"; path = "JMian/Resource/Company_slice/home/transmit@2x.png"; sourceTree = SOURCE_ROOT; };
+		047F8EB2228AC551005E81FA /* C_play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C_play@2x.png"; sourceTree = "<group>"; };
+		047F8EB3228AC551005E81FA /* C_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C_play.png; sourceTree = "<group>"; };
+		047F8EB4228AC552005E81FA /* C_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C_play@3x.png"; sourceTree = "<group>"; };
 		048348A722695EC000DE4630 /* NO_Data@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NO_Data@3x.png"; sourceTree = "<group>"; };
 		048348A822695EC000DE4630 /* NO_Data.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NO_Data.png; sourceTree = "<group>"; };
 		048348A922695EC000DE4630 /* NO_Data@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NO_Data@2x.png"; sourceTree = "<group>"; };
@@ -1520,6 +1535,9 @@
 				041997BD2266C5DC00C6C134 /* post_a_job_pitch_up.png */,
 				041997BF2266C5DC00C6C134 /* post_a_job_pitch_up@2x.png */,
 				041997C02266C5DC00C6C134 /* post_a_job_pitch_up@3x.png */,
+				047F8EAC228AC11B005E81FA /* transmit.png */,
+				047F8EAE228AC11B005E81FA /* transmit@2x.png */,
+				047F8EAD228AC11B005E81FA /* transmit@3x.png */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -1723,10 +1741,20 @@
 		0462C7222244937D003B6639 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				047F8EA8228A6535005E81FA /* Video */,
 				6DDA717A225EF3A800A7C8F7 /* UserInfo */,
 				6D62995D224E0468007E7DE4 /* Network */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		047F8EA8228A6535005E81FA /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				047F8EA9228A6672005E81FA /* JMVideoPlayManager.h */,
+				047F8EAA228A6672005E81FA /* JMVideoPlayManager.m */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		048348A522695EC000DE4630 /* Post */ = {
@@ -2338,6 +2366,9 @@
 		6D558636224B54D70037C14E /* home_slices */ = {
 			isa = PBXGroup;
 			children = (
+				047F8EB3228AC551005E81FA /* C_play.png */,
+				047F8EB2228AC551005E81FA /* C_play@2x.png */,
+				047F8EB4228AC552005E81FA /* C_play@3x.png */,
 				04A247DD224CE70E00DEB8E3 /* play.png */,
 				04A247DB224CE70E00DEB8E3 /* play@2x.png */,
 				04A247DC224CE70E00DEB8E3 /* play@3x.png */,
@@ -2633,6 +2664,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6D55864F224B54D70037C14E /* home_me_pitch_on@2x.png in Resources */,
+				047F8EAF228AC11B005E81FA /* transmit.png in Resources */,
+				047F8EB0228AC11B005E81FA /* transmit@3x.png in Resources */,
 				040CA851225F1EBF006D7A7F /* collect@3x.png in Resources */,
 				04DD1D6C224B6E95007CB11C /* 圆角矩形 5@2x.png in Resources */,
 				040CA85A225F1EBF006D7A7F /* dingwei.png in Resources */,
@@ -2761,6 +2794,7 @@
 				04DD1D4F224B6E95007CB11C /* phone@3x.png in Resources */,
 				040701AD22753755002BF58D /* enshrine.png in Resources */,
 				04072F272282949D0067A05D /* peijing@2x.png in Resources */,
+				047F8EB7228AC552005E81FA /* C_play@3x.png in Resources */,
 				041997C72266C5DC00C6C134 /* post_a_job.png in Resources */,
 				6D55864E224B54D70037C14E /* home@2x.png in Resources */,
 				040BF07822719E4E0088697D /* switchover.png in Resources */,
@@ -2768,6 +2802,7 @@
 				040865E22272FAF1005BB03E /* JMPostJobHomeTableViewCell.xib in Resources */,
 				6D020A232250F3F9009BCFE4 /* education@2x.png in Resources */,
 				6D55864D224B54D70037C14E /* site_Home@2x.png in Resources */,
+				047F8EB1228AC11B005E81FA /* transmit@2x.png in Resources */,
 				040B83782265D01800F1A37A /* JMUploadLicenseViewController.xib in Resources */,
 				04DD1D45224B6E95007CB11C /* break@2x.png in Resources */,
 				040701B122753755002BF58D /* autonym@2x.png in Resources */,
@@ -2873,6 +2908,8 @@
 				040CA850225F1EBF006D7A7F /* Collection_of_selected@3x.png in Resources */,
 				040CA85D225F1EBF006D7A7F /* Collection_of_selected.png in Resources */,
 				040E365E22681C9A00A7D789 /* girl .png in Resources */,
+				047F8EB5228AC552005E81FA /* C_play@2x.png in Resources */,
+				047F8EB6228AC552005E81FA /* C_play.png in Resources */,
 				6D558652224B54D70037C14E /* site_Home@3x.png in Resources */,
 				04A2479A224C773A00DEB8E3 /* 0000.png in Resources */,
 				04072F262282949D0067A05D /* withdraw_deposit.png in Resources */,
@@ -3076,6 +3113,7 @@
 				6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */,
 				040865DD2272E898005BB03E /* JMIDCardModel.m in Sources */,
 				040865E822733B78005BB03E /* JMInterViewModel.m in Sources */,
+				047F8EAB228A6672005E81FA /* JMVideoPlayManager.m in Sources */,
 				040E366922682E5900A7D789 /* JMSelfDescriptionView.m in Sources */,
 				04072F702282DBE40067A05D /* JMBankCardData.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "JMHeaderOfPersonDetailView.h"
+#import "DimensMacros.h"
 
 @implementation JMHeaderOfPersonDetailView
 
@@ -22,11 +23,10 @@
 }
 
 -(void)setModel:(JMVitaDetailModel *)model{
-
-    self.headerImageView.image = [self getImageFromURL:model.user_avatar];
+    [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:model.user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.realNameLab.text = model.user_nickname;
-//    self.sexImageView =
-//    self.experiencesLab.text
+    //    self.sexImageView =
+    //    self.experiencesLab.text
     self.educationLab.text = [self getEducationStrWithEducation:model.vita_education];
 //    self.cityLab.text
     self.workNameLab.text = model.work_name;
@@ -36,18 +36,23 @@
 
 }
 
-
-
--(UIImage *) getImageFromURL:(NSString *)fileURL
-
+-(void)setCompanyHomeModel:(JMCompanyHomeModel *)companyHomeModel
 {
-    UIImage * result;
     
-    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
-    
-    result = [UIImage imageWithData:data];
-    
-    return result;
+    if (companyHomeModel.video_file_path == nil) {
+        self.labToheaderTop.constant = 21;
+        [self.videoImg setHidden:YES];
+        [self.playBtn setHidden:YES];
+        
+    }
+
+
+}
+
+- (IBAction)playAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(playAction)]) {
+        [_delegate playAction];
+    }
     
 }
 

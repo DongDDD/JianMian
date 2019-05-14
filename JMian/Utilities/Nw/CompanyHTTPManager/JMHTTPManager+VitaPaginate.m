@@ -11,9 +11,14 @@
 
 @implementation JMHTTPManager (VitaPaginate)
 
-- (void)fetchVitaPaginateWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+- (void)fetchVitaPaginateWithKeyword:(nullable NSString *)keyword
+                                page:(nullable NSString *)page
+                            per_page:(nullable NSString *)per_page
+                        SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+
+    NSDictionary *dic = @{@"keyword":keyword,@"page":page,@"per_page":per_page};
     
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Paginate_Vita_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Paginate_Vita_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
 

@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = self.model.userNickname;
+    self.title = self.topTitle;
     [self initPlayerView];
     // Do any additional setup after loading the view.
 }

@@ -12,7 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHTTPManager (VitaPaginate)
 
-- (void)fetchVitaPaginateWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+- (void)fetchVitaPaginateWithKeyword:(nullable NSString *)keyword
+                                page:(nullable NSString *)page
+                            per_page:(nullable NSString *)per_page
+                        SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 @end
 

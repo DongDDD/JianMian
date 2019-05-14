@@ -44,7 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *companyCity;
 
 @property (nonatomic, copy) NSString *videoCompanyId;
-@property (nonatomic, copy) NSString *videoCompanyFile_path;
+@property (nonatomic, copy) NSString *videoFile_path;
+@property (nonatomic, copy) NSString *videoStatus;
+@property (nonatomic, copy) NSString *videoDenial_reason;
 
 
 

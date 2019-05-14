@@ -51,12 +51,24 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Share_WeChat_friends.png" translatesAutoresizingMaskIntoConstraints="NO" id="457-Ah-6zj">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="457-Ah-6zj">
                         <rect key="frame" x="21" y="25" width="53" height="54"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="54" id="afH-x5-2pH"/>
                             <constraint firstAttribute="width" constant="53" id="igW-Cp-AU4"/>
                         </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="27"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                <color key="value" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I3W-uw-Vkn" userLabel="竖 分割线2">
                         <rect key="frame" x="209" y="61" width="1" height="5"/>
@@ -125,7 +137,7 @@
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gCE-3K-Cjv">
                         <rect key="frame" x="21" y="25" width="53" height="54"/>
-                        <state key="normal" image="play.png"/>
+                        <state key="normal" image="transmit.png"/>
                         <connections>
                             <action selector="playAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1W8-LA-lmC"/>
                         </connections>
@@ -177,7 +189,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Share_WeChat_friends.png" width="38" height="38"/>
-        <image name="play.png" width="141" height="141"/>
+        <image name="default_avatar.png" width="23" height="39"/>
+        <image name="transmit.png" width="34" height="34"/>
     </resources>
 </document>

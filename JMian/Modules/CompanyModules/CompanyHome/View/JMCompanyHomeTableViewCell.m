@@ -23,11 +23,18 @@
     // Initialization code
 }
 
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+
+    }
+    return self;
+}
 
 
 -(void)setModel:(JMCompanyHomeModel *)model{
     _myModel = model;
-    self.jobNameLab.text = model.workName;
+    self.jobNameLab.text = model.userNickname;
      [self.iconImage sd_setImageWithURL:[NSURL URLWithString:model.userAvatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
   
     NSString *salaryStr = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
@@ -39,16 +46,16 @@
         [self.playBtn setHidden:YES];
     }else{
          [self.playBtn setHidden:NO];
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            
-            NSURL *url = [NSURL URLWithString:model.video_file_path];
-            //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
-            AVPlayer *player = [AVPlayer playerWithURL:url];
-            self.player = player;
-        });
+//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//            
+//            NSURL *url = [NSURL URLWithString:model.video_file_path];
+//            //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+//            AVPlayer *player = [AVPlayer playerWithURL:url];
+//            self.player = player;
+//        });
         
     }
-    
+
     
 }
 
@@ -124,7 +131,7 @@
 
 - (IBAction)playAction:(UIButton *)sender {
  
-    if (_delegate && [_delegate respondsToSelector:@selector(playAction_cell:)] && self.player) {
+    if (_delegate && [_delegate respondsToSelector:@selector(playAction_cell:)]) {
         
         [_delegate playAction_cell:self];
     }

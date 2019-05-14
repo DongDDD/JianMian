@@ -34,9 +34,10 @@
              @"companyIndustry_label":@"company.address",
              @"companyCity":@"company.labels",
      
-             @"videoCompanyId":@"company.company_id",
-             @"videoCompanyFile_path":@"company.file_path"
-             
+             @"videoCompanyId":@"video.company_id",
+             @"videoFile_path":@"video.file_path",
+             @"videoStatus":@"video.status",
+             @"videoDenial_reason":@"video.denial_reason"
              };
     
 }

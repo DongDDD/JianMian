@@ -90,9 +90,11 @@
         make.top.mas_equalTo(descriptionView.mas_bottom);
         make.height.mas_equalTo(248);
     }];
-    
-//    scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, 1500);
-    
+
+    [self.view layoutIfNeeded];
+    //    scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, 1500);
+    !self.didLoadView ? : self.didLoadView(educationView.frame.origin.y+educationView.frame.size.height+300);
+
 }
 
 

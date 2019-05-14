@@ -7,6 +7,7 @@
 //
 
 #import "JMPageView.h"
+#import "JMVitaOfPersonDetailViewController.h"
 
 @interface JMPageView()  <UIScrollViewDelegate>
 
@@ -30,8 +31,18 @@
     UIViewController *VC = self.childVC[index];
     
     if (!VC.view.superview) {
-        VC.view.frame = (CGRect){index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height};
-        [self.contentView addSubview:VC.view];
+        if ([self.childVC[index] isKindOfClass:[JMVitaOfPersonDetailViewController class]]) {
+            JMVitaOfPersonDetailViewController *vitaVC = self.childVC[index];
+            vitaVC.view.frame = (CGRect){index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height+600};
+            [self.contentView addSubview:vitaVC.view];
+
+        }else{
+        
+            VC.view.frame = (CGRect){index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height};
+            [self.contentView addSubview:VC.view];
+        }
+        
+        
     }
     [self.contentView setContentOffset:CGPointMake(index * self.frame.size.width, 0) animated:YES];
 }

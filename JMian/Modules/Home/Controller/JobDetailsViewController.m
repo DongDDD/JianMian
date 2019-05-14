@@ -482,7 +482,7 @@
 }
 
 //学历数据转化
--(NSString *)getEducationStrWithEducation:(NSNumber *)education{
+-(NSString *)getEducationStrWithEducation:(NSString *)education{
     NSInteger myInt = [education integerValue];
     
     switch (myInt) {

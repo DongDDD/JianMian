@@ -19,8 +19,10 @@
 #import "JMHTTPManager+PositionDesired.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+#import "JMVideoPlayManager.h"
+#import "JMPlayerViewController.h"
 
-@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate>
+@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIButton *pushPositionBtn; //j推荐职位
@@ -29,6 +31,7 @@
 @property (nonatomic, strong) NSArray *arrDate;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) JMLabsChooseViewController *labschooseVC;
+@property(nonatomic,strong)NSMutableArray *playerArray;
 
 @end
 
@@ -46,6 +49,7 @@ static NSString *cellIdent = @"cellIdent";
 
     [self setTableView];
     
+//    [self getData];
     
 //    [self loginIM];
 }
@@ -53,7 +57,6 @@ static NSString *cellIdent = @"cellIdent";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self getData];
     
 }
 
@@ -61,6 +64,15 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)setTableView{
 
+//    MJRefreshGifHeader *header = [MJRefreshGifHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    // 设置普通状态的动画图片
+//    [header setImages:idleImages forState:MJRefreshStateIdle];
+//    // 设置即将刷新状态的动画图片（一松开就会刷新的状态）
+//    [header setImages:pullingImages forState:MJRefreshStatePulling];
+    // 设置正在刷新状态的动画图片
+//    [header setImages:UIImage imageNamed:@"refresh" forState:MJRefreshStateRefreshing];
+    
+    
     self.tableView = [[UITableView alloc]init];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -71,16 +83,31 @@ static NSString *cellIdent = @"cellIdent";
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
 
     [self.view addSubview:self.tableView];
-    
+//    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        [self getData];
+//
+//    }];
+
+    // 马上进入刷新状态
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.headView.mas_bottom);
         make.bottom.mas_equalTo(self.view);
     }];
     
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.tableView.mj_header beginRefreshing];
 }
+#pragma mark - 下拉刷新 -
 
+-(void)loadNewData
+{
 
+    [self getData];
+}
 #pragma mark - 点击事件 -
 
 -(void)fanhui{
@@ -110,7 +137,13 @@ static NSString *cellIdent = @"cellIdent";
         if (responsObject[@"data"]) {
 
             self.arrDate = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            [[JMVideoPlayManager sharedInstance].C_User_playArray removeAllObjects];
+            
+            [self getPlayerArray];
+            [self.tableView.mj_header endRefreshing];
             [self.tableView reloadData];
+            [self.tableView.mj_footer endRefreshing];
+
         }
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, NSError  *error) {
@@ -118,6 +151,29 @@ static NSString *cellIdent = @"cellIdent";
 
     }];
     
+
+}
+
+-(void)getPlayerArray
+{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        for (JMHomeWorkModel *model in self.arrDate) {
+            if (model.videoFile_path) {
+                NSURL *url = [NSURL URLWithString:model.videoFile_path];
+                //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+                AVPlayer *player = [AVPlayer playerWithURL:url];
+
+                [[JMVideoPlayManager sharedInstance].C_User_playArray addObject:player];
+            }else{
+                [[JMVideoPlayManager sharedInstance].C_User_playArray addObject:[NSNull null]];
+
+            }
+            
+        }
+        
+        self.playerArray = [JMVideoPlayManager sharedInstance].C_User_playArray;
+    });
 
 }
 
@@ -175,7 +231,16 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 
-
+-(void)playAction_cell:(HomeTableViewCell *)cell{
+    if (self.playerArray) {
+        JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
+        vc.player = self.playerArray[cell.indexpath.row];
+        //    vc.player = cell.player;
+        //    vc.model = cell;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+}
 
 
 
@@ -196,11 +261,18 @@ static NSString *cellIdent = @"cellIdent";
 
 -(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent];
+    if (cell == nil) {
+        cell = [[HomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
+    }
     
-    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
-   
-    JMHomeWorkModel *model = self.arrDate[indexPath.row];
+    
+    
+//    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
+    cell.indexpath = indexPath;
+    cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    JMHomeWorkModel *model = self.arrDate[indexPath.row];
     [cell setModel:model];
    
     return cell;
@@ -220,7 +292,15 @@ static NSString *cellIdent = @"cellIdent";
 
 }
 #pragma mark - lazy
+#pragma mark - lazy
 
+-(NSMutableArray *)playerArray
+{
+    if (_playerArray == nil) {
+        _playerArray = [NSMutableArray array];
+    }
+    return _playerArray;
+}
 
 -(JMLabsChooseViewController *)labschooseVC{
     if (_labschooseVC == nil) {

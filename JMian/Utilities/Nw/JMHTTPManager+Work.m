@@ -16,6 +16,7 @@
     
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Paginate_Work_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
+
 - (void)fetchWorkPaginateWith_city_ids:(nullable NSArray *)city_ids
                             company_id:(nullable NSNumber *)company_id
                               label_id:(nullable NSNumber *)label_id

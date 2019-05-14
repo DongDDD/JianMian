@@ -7,6 +7,7 @@
 //
 
 #import "HomeTableViewCell.h"
+#import "DimensMacros.h"
 
 @implementation HomeTableViewCell
 
@@ -34,8 +35,23 @@
     
     NSString *company = [NSString stringWithFormat:@"%@",model.companyName];
     self.companyNameLab.text = company;
+    
+    [self.headerImg sd_setImageWithURL:[NSURL URLWithString:model.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    if (model.videoFile_path == nil) {
+        [self.playBtn setHidden:YES];
+    }else{
+        [self.playBtn setHidden:NO];
+    }
+    
 }
 
+- (IBAction)playAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(playAction_cell:)]) {
+        
+        [_delegate playAction_cell:self];
+    }
+    
+}
 
 
 
@@ -54,7 +70,7 @@
 }
 
 //学历数据转化
--(NSString *)getEducationStrWithEducation:(NSNumber *)education{
+-(NSString *)getEducationStrWithEducation:(NSString *)education{
     NSInteger myInt = [education integerValue];
     
     switch (myInt) {

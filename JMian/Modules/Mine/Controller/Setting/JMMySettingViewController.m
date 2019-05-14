@@ -12,6 +12,7 @@
 #import "JMHTTPManager+Login.h"
 #import "NavigationViewController.h"
 #import "JMJudgeViewController.h"
+#import "JMVideoPlayManager.h"
 
 @interface JMMySettingViewController ()<UITableViewDelegate,UITableViewDataSource,JMUserChangeWindowViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,6 +32,7 @@
     self.tableView.sectionIndexColor = BG_COLOR;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     _titleArray = @[@"修改手机号",@"清除缓存",@"客服热线: 159-8910-9060",@"应用版本"];
+    
     // Do any additional setup after loading the view from its nib.
 }
 

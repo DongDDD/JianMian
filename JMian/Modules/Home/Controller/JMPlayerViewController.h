@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMPlayerViewController : BaseViewController
 
-@property(nonatomic,strong)JMCompanyHomeModel *model;
+@property(nonatomic,copy)NSString *topTitle;
 @property (strong, nonatomic) AVPlayer *player;
 
 @end

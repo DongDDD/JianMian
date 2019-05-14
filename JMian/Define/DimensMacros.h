@@ -13,7 +13,7 @@
 #import <UIImageView+WebCache.h>
 #import "JMUserInfoManager.h"
 #import <TIMManager.h>
-
+#import "MJRefresh.h"
 
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
@@ -73,6 +73,9 @@
 #define Interview_WaitInterview @"3" //待面试 （已同意，等待面试）
 #define Interview_AlreadyInterview @"4" //已面试
 #define Interview_Reflect @"5" //已反馈
+//面试状态
+#define Video_Pass @"1" //通过
+#define Video_Wait @"0" //等待审核
 
 //获取网络图片
 #define GETImageFromURL(URL)  [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:URL]]]

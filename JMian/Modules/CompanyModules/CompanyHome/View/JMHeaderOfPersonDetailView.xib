@@ -10,7 +10,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMHeaderOfPersonDetailView"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMHeaderOfPersonDetailView">
+            <connections>
+                <outlet property="labToheaderTop" destination="KXy-I7-8os" id="Wdm-C0-oiO"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JMHeaderOfPersonDetailView">
             <rect key="frame" x="0.0" y="0.0" width="414" height="772"/>
@@ -18,7 +22,7 @@
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E6m-dj-9zl">
                     <rect key="frame" x="20" y="65" width="58" height="58"/>
-                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="58" id="1kb-Fc-5db"/>
                         <constraint firstAttribute="height" constant="58" id="LVT-nH-TY1"/>
@@ -77,7 +81,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3年工作经验" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mPd-gP-Pik">
-                    <rect key="frame" x="96" y="106" width="81" height="16"/>
+                    <rect key="frame" x="96" y="106" width="74.5" height="16"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="f4N-1U-nO8"/>
                     </constraints>
@@ -99,6 +103,9 @@
                         <constraint firstAttribute="width" constant="124" id="H4J-uD-ZfD"/>
                     </constraints>
                     <state key="normal" title="Button" image="play.png"/>
+                    <connections>
+                        <action selector="playAction:" destination="-1" eventType="touchUpInside" id="4p1-mR-cZj"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UI设计师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwB-uT-Ysz">
                     <rect key="frame" x="151" y="625.5" width="61" height="18"/>
@@ -128,7 +135,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本科" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igf-6w-jDu">
-                    <rect key="frame" x="183" y="106" width="50" height="16"/>
+                    <rect key="frame" x="190.5" y="106" width="50" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="50" id="MtD-Hk-gBL"/>
                         <constraint firstAttribute="height" constant="16" id="hZO-dT-8ym"/>
@@ -138,9 +145,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyK-2M-vw1">
-                    <rect key="frame" x="236" y="106" width="44" height="16"/>
+                    <rect key="frame" x="253" y="106" width="27" height="16"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="44" id="9oL-ui-Mvp"/>
                         <constraint firstAttribute="height" constant="16" id="SR9-tw-eZc"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -158,8 +164,8 @@
                 <constraint firstItem="uRA-iU-K86" firstAttribute="leading" secondItem="oq9-OH-x8q" secondAttribute="leading" id="Bd4-Bg-VTa"/>
                 <constraint firstItem="VZM-CA-KtE" firstAttribute="centerY" secondItem="VEH-SL-CzS" secondAttribute="centerY" id="CoC-E7-ctK"/>
                 <constraint firstItem="dTP-bI-wCl" firstAttribute="leading" secondItem="nfO-aP-CDQ" secondAttribute="leading" id="Ebq-MB-OxJ"/>
-                <constraint firstItem="nTs-HD-QHz" firstAttribute="top" secondItem="VEH-SL-CzS" secondAttribute="bottom" constant="30" id="Ik8-iz-5BX"/>
                 <constraint firstItem="F9z-aw-qaC" firstAttribute="centerY" secondItem="oq9-OH-x8q" secondAttribute="centerY" id="JCc-9A-IJF"/>
+                <constraint firstItem="nTs-HD-QHz" firstAttribute="top" secondItem="E6m-dj-9zl" secondAttribute="bottom" constant="452" id="KXy-I7-8os"/>
                 <constraint firstItem="oq9-OH-x8q" firstAttribute="top" secondItem="dTP-bI-wCl" secondAttribute="bottom" constant="19" id="L5x-9h-VX3"/>
                 <constraint firstItem="nTs-HD-QHz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="MVN-Li-kw3"/>
                 <constraint firstItem="dTP-bI-wCl" firstAttribute="top" secondItem="nfO-aP-CDQ" secondAttribute="bottom" constant="19" id="NH1-jo-2Bl"/>
@@ -177,12 +183,11 @@
                 <constraint firstItem="oq9-OH-x8q" firstAttribute="leading" secondItem="dTP-bI-wCl" secondAttribute="leading" id="hca-H6-Pm8"/>
                 <constraint firstItem="qCK-Mf-1xB" firstAttribute="leading" secondItem="F9z-aw-qaC" secondAttribute="leading" id="k9Q-ja-PAp"/>
                 <constraint firstItem="Yan-2C-7Nc" firstAttribute="leading" secondItem="krg-Qt-8XE" secondAttribute="trailing" constant="12" id="l7J-he-KR1"/>
-                <constraint firstItem="QyK-2M-vw1" firstAttribute="leading" secondItem="mPd-gP-Pik" secondAttribute="trailing" constant="59" id="mVL-fD-Rj1"/>
                 <constraint firstItem="zwB-uT-Ysz" firstAttribute="centerY" secondItem="nfO-aP-CDQ" secondAttribute="centerY" id="ptI-OP-IT3"/>
                 <constraint firstItem="VEH-SL-CzS" firstAttribute="top" secondItem="E6m-dj-9zl" secondAttribute="bottom" constant="21" id="qlA-gd-d8a"/>
                 <constraint firstItem="mPd-gP-Pik" firstAttribute="top" secondItem="krg-Qt-8XE" secondAttribute="bottom" constant="11" id="su8-Hd-coV"/>
                 <constraint firstItem="nfO-aP-CDQ" firstAttribute="top" secondItem="nTs-HD-QHz" secondAttribute="bottom" constant="30" id="ud4-XC-ha3"/>
-                <constraint firstItem="igf-6w-jDu" firstAttribute="leading" secondItem="mPd-gP-Pik" secondAttribute="trailing" constant="6" id="voF-tM-JYh"/>
+                <constraint firstItem="igf-6w-jDu" firstAttribute="leading" secondItem="mPd-gP-Pik" secondAttribute="trailing" constant="20" id="voF-tM-JYh"/>
                 <constraint firstItem="krg-Qt-8XE" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="wlV-Qw-7ra"/>
                 <constraint firstItem="uRA-iU-K86" firstAttribute="top" secondItem="oq9-OH-x8q" secondAttribute="bottom" constant="19" id="xcD-14-rNQ"/>
                 <constraint firstItem="VEH-SL-CzS" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="yp4-zC-8Km"/>
@@ -194,9 +199,12 @@
                 <outlet property="educationLab" destination="igf-6w-jDu" id="QtF-jp-8DZ"/>
                 <outlet property="experiencesLab" destination="mPd-gP-Pik" id="Rc9-FI-t0h"/>
                 <outlet property="headerImageView" destination="E6m-dj-9zl" id="HMK-yL-He3"/>
+                <outlet property="labToheaderTop" destination="KXy-I7-8os" id="U8a-Ec-hcR"/>
+                <outlet property="playBtn" destination="VZM-CA-KtE" id="TzH-gs-4rv"/>
                 <outlet property="realNameLab" destination="krg-Qt-8XE" id="usb-Yt-V5A"/>
                 <outlet property="salaryLab" destination="qCK-Mf-1xB" id="jFW-08-5cj"/>
                 <outlet property="sexImageView" destination="Yan-2C-7Nc" id="69q-9x-hio"/>
+                <outlet property="videoImg" destination="VEH-SL-CzS" id="IAN-iS-Rbh"/>
                 <outlet property="workNameLab" destination="zwB-uT-Ysz" id="6aY-yD-skD"/>
                 <outlet property="workStartDate" destination="F9z-aw-qaC" id="FNb-pJ-pfQ"/>
                 <outlet property="workStatusLab" destination="tUv-Xb-jcc" id="Eed-aO-xd4"/>

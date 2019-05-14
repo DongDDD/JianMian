@@ -366,6 +366,9 @@
 
 // 异步获取帧图片，可以一次获取多帧图片
 - (void)centerFrameImageWithVideoURL:(NSURL *)videoURL completion:(void (^)(UIImage *image))completion {
+//    NSString *str = @"https://jmsp-1258537318.cos.ap-guangzhou.myqcloud.com//storage//images//2019//05//10//GUXrsshVLHgwdcu8QmwPdeyneFykEsKlFGaCq0bI.mp4";
+//
+//    NSURL *URL = [NSURL URLWithString:str];
     // AVAssetImageGenerator
     AVAsset *asset = [AVAsset assetWithURL:videoURL];
     AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
