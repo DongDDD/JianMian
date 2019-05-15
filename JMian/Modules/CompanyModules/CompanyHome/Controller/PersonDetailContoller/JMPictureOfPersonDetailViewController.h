@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMPictureOfPersonDetailViewController : UIViewController
 
 
+@property(nonatomic,strong)NSArray *picArry;
 
 @end
 

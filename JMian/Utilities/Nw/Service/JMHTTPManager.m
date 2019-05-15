@@ -8,7 +8,6 @@
 
 #import "JMHTTPManager.h"
 #import "APIStringMacros.h"
-#import "DimensMacros.h"
 #import <AFNetworkActivityIndicatorManager.h>
 #import "LoginViewController.h"
 #import "AppDelegate.h"
@@ -215,6 +214,8 @@
     NSLog(@"response=========>:%@", responseObject);
     NSLog(@"error============>:%@", error);
     NSLog(@"<<<<<<<<<<<<<<<<<<<<<👆 REQUEST FINISH 👆<<<<<<<<<<<<<<<<<<<<<<<<<<");
+
+  
 }
 
 - (NSError *)_errorFromRequestWithTask:(NSURLSessionTask *)task httpResponse:(NSHTTPURLResponse *)httpResponse responseObject:(NSDictionary *)responseObject error:(NSError *)error {
@@ -228,4 +229,17 @@
 }
 
 
+//#pragma mark - 菊花
+//-(MBProgressHUD *)progressHUD{
+//    if (!_progressHUD) {
+//        _progressHUD = [[MBProgressHUD alloc] initWithView: [UIApplication sharedApplication].keyWindow.maskView];
+//        _progressHUD.progress = 0.6;
+//        _progressHUD.dimBackground = YES; //设置有遮罩
+//        _progressHUD.label.text = @"视频上传中"; //设置进度框中的提示文字
+//        _progressHUD.detailsLabel.text = @"请耐心等待...";
+//        [_progressHUD showAnimated:YES]; //显示进度框
+////        [ [UIApplication sharedApplication].keyWindow.maskView addSubview:_progressHUD];
+//    }
+//    return _progressHUD;
+//}
 @end

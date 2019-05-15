@@ -33,7 +33,6 @@
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
   
-    
     [self setupInit];
     // Do any additional setup after loading the view from its nib.
 }

@@ -50,6 +50,7 @@
 @property(nonatomic,strong)JMHomeWorkModel *model;
 
 @property (nonatomic, strong) UIActivityIndicatorView * juhua;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @end
 
@@ -130,16 +131,22 @@
 
     [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.model.user_id foreign_key:self.model.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
-//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-//        [alert show];
-        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-
-        vc.myConvModel = messageListModel;
-        [self.navigationController pushViewController:vc animated:YES];
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        if(responsObject[@"data"]){
         
+            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+ 
+            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+            
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        
+        }
+        NSLog(@"messagemessagemessage%@",responsObject[@"message"]);
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//        NSLog(@"messagemessagemessage%@",responsObject[@"message"]);
+        NSLog(@"messagemessagemessage%@",error);
+
+      
     }];
 
 
@@ -282,23 +289,21 @@
 
 
 #pragma mark - UI布局
+#pragma mark - 菊花
 -(void)setJuhua{
-    self.juhua = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyleGray)];
-    [self.view addSubview:self.juhua];
-    //设置小菊花的frame
-    [self.juhua mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(self.view);
-        make.width.and.height.mas_equalTo(100);
-        
-        
-    }];
-    //设置小菊花颜色
-//    self.juhua.color = [UIColor redColor];
-    //设置背景颜色
-//    self.juhua.backgroundColor = [UIColor cyanColor];
-    //刚进入这个界面会显示控件，并且停止旋转也会显示，只是没有在转动而已，没有设置或者设置为YES的时候，刚进入页面不会显示
-    self.juhua.hidesWhenStopped = NO;
-
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+    self.progressHUD.mode = MBProgressHUDModeCustomView;
+    self.progressHUD.progress = 0.0;
+    //    self.progressHUD.dimBackground = NO; //设置有遮罩
+    //    self.progressHUD.label.text = @"加载中..."; //设置进度框中的提示文字
+    [self.progressHUD showAnimated:YES]; //显示进度框
+    
+    UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"minloading"]];
+    //    imgView.frame = CGRectMake(0, 0, 68, 99);
+    self.progressHUD.customView = imgView;
+    
+    [self.view addSubview:self.progressHUD];
+    
 }
 
 

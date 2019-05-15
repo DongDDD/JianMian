@@ -26,7 +26,7 @@
 
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<TIMMessageListener>
 
 @end
 
@@ -43,10 +43,13 @@
 }
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AMapServices sharedServices].apiKey = AMapAPIKey;
     [AMapServices sharedServices].enableHTTPS = YES;
-//    [[TIMManager sharedInstance] addMessageListener:self];
+    
+    [[TIMManager sharedInstance] addMessageListener:self];
+    
     
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
@@ -60,8 +63,11 @@
     return YES;
 }
 
-//- (void)onNewMessage:(NSArray *)msgs
-//{
+- (void)onNewMessage:(NSArray *)msgs
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMMessageListener object:msgs];
+
+    NSLog(@"onNewMessage");
 //    NSMutableArray *uiMsgs = [self transUIMsgFromIMMsg:msgs];
 //    [_uiMsgs addObjectsFromArray:uiMsgs];
 //    __weak typeof(self) ws = self;
@@ -71,7 +77,7 @@
 //    });
 //
     
-//}
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

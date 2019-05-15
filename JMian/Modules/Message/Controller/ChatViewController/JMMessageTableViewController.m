@@ -7,9 +7,6 @@
 //
 
 #import "JMMessageTableViewController.h"
-#import <TIMManager.h>
-#import <TIMMessage.h>
-#import <IMMessageExt.h>
 #import "JMMessageCell.h"
 #import "DimensMacros.h"
 #import "JMCompanyLikeTableViewCell.h"
@@ -40,7 +37,6 @@ static NSString *cellIdent = @"infoCellIdent";
 
 - (void)viewDidLoad {
     
-//    TIMMessageListenerImpl * impl = [[TIMMessageListenerImpl alloc] init];
     [super viewDidLoad];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = BG_COLOR;
@@ -74,6 +70,7 @@ static NSString *cellIdent = @"infoCellIdent";
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+//     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setReadMessage:) name:Notification_JMRefreshListener object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
 //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRevokeMessage:) name:Notification_JMMMessageRevokeListener object:nil];
@@ -118,6 +115,8 @@ static NSString *cellIdent = @"infoCellIdent";
 
 - (void)onNewMessage:(NSArray *)msgs
 {
+    
+
     NSMutableArray *uiMsgs = [self transUIMsgFromIMMsg:msgs];
     [_uiMsgs addObjectsFromArray:uiMsgs];
     __weak typeof(self) ws = self;
@@ -188,6 +187,13 @@ static NSString *cellIdent = @"infoCellIdent";
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:_receiverID];
+    [conv setReadMessage:nil succ:^{
+        NSLog(@"已读上报");
+      [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMRefreshListener object:nil];
+    } fail:^(int code, NSString *msg) {
+        NSLog(@"已读上报失败");
+        
+    }];
     __weak typeof(self) ws = self;
     [conv getMessage:20 last:nil succ:^(NSArray *msgs) {
         if(msgs.count != 0){

@@ -22,16 +22,19 @@
 
 -(void)initView{
     _imgView = [[UIImageView alloc]init];
-    _imgView.backgroundColor = [UIColor yellowColor];
     _imgView.layer.masksToBounds = YES;
     _imgView.layer.cornerRadius = 12.5;
     _imgView.layer.borderWidth = 0.5;
     _imgView.layer.borderColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0].CGColor;
     [self addSubview:_imgView];
     
-    UIImageView *playImg = [[UIImageView alloc]init];
-    playImg.layer.cornerRadius = 34;
-    [self addSubview:playImg];
+    UIButton *playBtn = [[UIButton alloc]init];
+    playBtn.layer.cornerRadius = 34;
+    [playBtn setImage:[UIImage imageNamed:@"bofang"]forState:UIControlStateNormal];
+    [playBtn addTarget:self action:@selector(playClick) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:playBtn];
+    
+    
     
     UIButton *left = [[UIButton alloc]init];
     [left setTitle:@"重新上传" forState:UIControlStateNormal];
@@ -58,7 +61,7 @@
         make.bottom.mas_equalTo(self).offset(-92);
     }];
     
-    [playImg mas_makeConstraints:^(MASConstraintMaker *make) {
+    [playBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.and.centerY.mas_equalTo(_imgView);
         make.width.and.height.mas_equalTo(68);
     }];
@@ -94,6 +97,13 @@
 -(void)leftClick{
     if (_delegate && [_delegate respondsToSelector:@selector(leftAction)]) {
         [_delegate leftAction];
+    }
+    
+}
+
+-(void)playClick{
+    if (_delegate && [_delegate respondsToSelector:@selector(playAction)]) {
+        [_delegate playAction];
     }
     
 }

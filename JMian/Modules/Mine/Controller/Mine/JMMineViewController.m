@@ -180,9 +180,18 @@
 }
 
 - (void)didSelectItemWithRow:(NSInteger)row {
+    
     if (row == 0) {
-        JMUploadVideoViewController *vc = [[JMUploadVideoViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([_userInfoModel.type isEqualToString:C_Type_USER]) {
+            JMUploadVideoViewController *vc = [[JMUploadVideoViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if ([_userInfoModel.type isEqualToString:B_Type_UESR]){
+            JMCompanyInfoMineViewController *vc = [[JMCompanyInfoMineViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        
         
     }else if (row == 1) {
         JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];

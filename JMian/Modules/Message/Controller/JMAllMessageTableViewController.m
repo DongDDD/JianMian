@@ -42,7 +42,27 @@ static NSString *cellIdent = @"allMessageCellIdent";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self getMsgList];    //获取自己服务器数据
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
 }
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+}
+- (void)onNewMessage:(NSNotification *)notification
+{
+    [self getMsgList];    //获取自己服务器数据
+
+//    NSArray *msgs = notification.object;
+//    NSMutableArray *uiMsgs = [self transUIMsgFromIMMsg:msgs];
+//    [_uiMsgs addObjectsFromArray:uiMsgs];
+//    __weak typeof(self) ws = self;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [ws.tableView reloadData];
+//        [ws scrollToBottom:YES];
+//    });
+}
+
 
 
 -(void)getMsgList{
@@ -85,6 +105,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
                 if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
                     
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
+                    data.unRead = [conv getUnReadMessageNum];
                     data.convId = [conv getReceiver];
                     model.data = data;
                     data.time = [self getDateDisplayString:msg.timestamp];
@@ -108,6 +129,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
                     data.convId = [conv getReceiver];
+                    data.unRead = [conv getUnReadMessageNum];
                     model.data = data;
                     data.time = [self getDateDisplayString:msg.timestamp];
                     data.subTitle = [self getLastDisplayString:conv];

@@ -13,7 +13,10 @@
 #import <UIImageView+WebCache.h>
 #import "JMUserInfoManager.h"
 #import <TIMManager.h>
+#import <TIMMessage.h>
+#import <IMMessageExt.h>
 #import "MJRefresh.h"
+#import "MBProgressHUD.h"
 
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度

@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMMessageViewController : BaseViewController
+@property(nonatomic,assign)int unReadNum;
 
 @end
 

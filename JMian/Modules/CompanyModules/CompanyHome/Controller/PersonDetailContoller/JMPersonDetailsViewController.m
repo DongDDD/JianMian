@@ -45,7 +45,8 @@
 @property (nonatomic, strong)JMPictureOfPersonDetailViewController *pictureVc;
 
 @property (nonatomic, strong) UIActivityIndicatorView * juhua;
-
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
+@property (nonatomic, strong) UIView *pageContentView;
 //@property (nonatomic, strong) JMChooseTimeViewController *chooseTimeVC;
 
 @property (weak, nonatomic) THDatePickerView *dateView;
@@ -76,10 +77,15 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.vitaVc.view.frame.origin.y+self.vitaVc.view.frame.size.height-200);
+    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.pageContentView.frame.origin.y+self.vitaVc.view.frame.size.height-250);
 
 
 }
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 #pragma mark - 获取数据
 -(void)getData{
     [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:self.companyModel.user_job_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -92,25 +98,47 @@
 
 }
 
+#pragma mark - 同步获取
 
 
-#pragma mark - 布局UI
+- (UIImage*) thumbnailImageForVideo:(NSURL *)videoURL atTime:(NSTimeInterval)time {
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
+    NSParameterAssert(asset);
+    AVAssetImageGenerator *assetImageGenerator =[[AVAssetImageGenerator alloc] initWithAsset:asset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    
+    CGImageRef thumbnailImageRef = NULL;
+    CFTimeInterval thumbnailImageTime = time;
+    NSError *thumbnailImageGenerationError = nil;
+    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60)actualTime:NULL error:&thumbnailImageGenerationError];
+    
+    if(!thumbnailImageRef)
+        NSLog(@"thumbnailImageGenerationError %@",thumbnailImageGenerationError);
+    
+    UIImage*thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage: thumbnailImageRef] : nil;
+    
+    return thumbnailImage;
+}
+
+#pragma mark - 菊花
 -(void)setJuhua{
-    self.juhua = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:(UIActivityIndicatorViewStyleGray)];
-    [self.view addSubview:self.juhua];
-    //设置小菊花的frame
-    [self.juhua mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.mas_equalTo(self.view);
-        make.width.and.height.mas_equalTo(100);
-    }];
-    //设置小菊花颜色
-    //    self.juhua.color = [UIColor redColor];
-    //设置背景颜色
-    //    self.juhua.backgroundColor = [UIColor cyanColor];
-    //刚进入这个界面会显示控件，并且停止旋转也会显示，只是没有在转动而已，没有设置或者设置为YES的时候，刚进入页面不会显示
-    self.juhua.hidesWhenStopped = NO;
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+    self.progressHUD.mode = MBProgressHUDModeCustomView;
+    self.progressHUD.progress = 0.0;
+    //    self.progressHUD.dimBackground = NO; //设置有遮罩
+    //    self.progressHUD.label.text = @"加载中..."; //设置进度框中的提示文字
+    [self.progressHUD showAnimated:YES]; //显示进度框
+    
+    UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"minloading"]];
+    //    imgView.frame = CGRectMake(0, 0, 68, 99);
+    self.progressHUD.customView = imgView;
+    
+    [self.view addSubview:self.progressHUD];    
     
 }
+#pragma mark - 布局UI
 
 -(void)initView{
     [self setScrollViewUI];
@@ -140,6 +168,24 @@
     
     }
     self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, H)];
+    if (self.companyModel.video_file_path) {
+    
+        self.headerView.videoImg.image = [UIImage imageNamed:@"loading"];
+        
+        NSString *str = self.companyModel.video_file_path;
+        
+        NSURL *URL = [NSURL URLWithString:str];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            UIImage *image = [self thumbnailImageForVideo:URL atTime:1];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.headerView.videoImg.image = image;
+                self.headerView.playBtn.hidden = NO;
+
+            });
+        });
+    }
     self.headerView.delegate = self;
     [self.headerView setModel:self.vitaModel];
     [self.headerView setCompanyHomeModel:self.companyModel];
@@ -149,13 +195,18 @@
 
 - (void)setPageUI {
     [self.scrollView addSubview:self.titleView];
-    [self.scrollView addSubview:self.vitaVc.view];
+    [self.scrollView addSubview:self.pageContentView];
+    [self.pageContentView addSubview:self.vitaVc.view];
+    [self.pageContentView addSubview:self.contactVc.view];
+    [self.pageContentView addSubview:self.pictureVc.view];
+
 //    [self.scrollView addSubview:self.contactVc.view];
 //    [self.scrollView addSubview:self.pageView];
 //    [self.pageView setCurrentIndex:1];//添加子视图”谁看过我“
 //    [self.pageView setCurrentIndex:0];//添加子视图”全部信息“
     
 }
+
 
 -(void)setBottomViewUI{
 
@@ -216,8 +267,9 @@
     }];
     
 }
+#pragma mark - 点击事件
 /**
- 取消按钮代理方法
+时间选择取消
  */
 - (void)datePickerViewCancelBtnClickDelegate {
     NSLog(@"取消点击");
@@ -226,7 +278,6 @@
         self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
     }];
 }
-#pragma mark - 点击事件
 //播放视频
 -(void)playAction
 {
@@ -237,6 +288,59 @@
     
 }
 
+//展示在线简历 联系方式 图片作品视图交互
+-(void)movePageContentView{
+    
+    __weak typeof(self) ws = self;
+
+    
+ 
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGRect vitaFrame = ws.pageContentView.frame;
+        vitaFrame.origin.x = -_index*SCREEN_WIDTH ;
+        ws.pageContentView.frame = vitaFrame;
+//        CGRect inputFrame = ws.inputController.view.frame;
+//        inputFrame.origin.y = msgFrame.origin.y + msgFrame.size.height;
+//        inputFrame.size.height = height;
+//        ws.inputController.view.frame = inputFrame;
+        
+    } completion:nil];
+    
+    switch (_index) {
+        case 0:
+            _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.pageContentView.frame.origin.y+self.vitaVc.view.frame.size.height-250);
+            break;
+        case 1:
+            _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.pageContentView.frame.origin.y+self.contactVc.view.frame.size.height);
+            break;
+        case 2:
+            _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.pageContentView.frame.origin.y+self.pictureVc.view.frame.size.height);
+            break;
+        default:
+            break;
+    }
+//    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.pageContentView.frame.origin.y+self.vitaVc.view.frame.size.height-200);
+    
+//    switch (_index) {
+//        case 0:
+//            self.vitaVc.view.hidden = NO;
+//            break;
+//        case 1:
+//            self.contactVc.view.hidden = NO;
+//            break;
+//        case 2:
+//
+//            break;
+//        default:
+//            break;
+//    }
+    
+    
+    
+}
+
+
+
 //显示时间选择器
 -(void)bottomRightButtonAction{
     self.BgBtn.hidden = NO;
@@ -245,13 +349,7 @@
         self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
         [self.dateView show];
     }];
-//    self.chooseTimeVC = [[JMChooseTimeViewController alloc]init];
-//    self.chooseTimeVC.delegate = self;
-//    [self addChildViewController:self.chooseTimeVC];
-//    [self.view addSubview:self.chooseTimeVC.view];
-//    self.chooseTimeVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-//     [self.chooseTimeVC didMoveToParentViewController:self];
-//    NSLog(@"邀请面试");
+
     
 }
 
@@ -306,7 +404,7 @@
         __weak JMPersonDetailsViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
-            [weakSelf setCurrenView];
+            [weakSelf movePageContentView];
         };
     }
     
@@ -314,25 +412,6 @@
 }
 
 
--(void)setCurrenView{
-    
-    switch (_index) {
-        case 0:
-            self.vitaVc.view.hidden = NO;
-            break;
-        case 1:
-            self.contactVc.view.hidden = NO;
-            break;
-        case 2:
-//            self.contactVc.view.hidden = NO;
-            break;
-        default:
-            break;
-    }
-    
- 
-
-}
 
 //- (JMPageView *)pageView {
 //    if (!_pageView) {
@@ -360,7 +439,7 @@
         
         _vitaVc.didLoadView = ^(CGFloat H) {
             
-            weakSelf.view.frame = CGRectMake(0, self.headerView.frame.origin.y+self.headerView.frame.size.height, SCREEN_WIDTH, H);
+            weakSelf.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, H);
         };
         
         _vitaVc.view.frame = weakSelf.view.frame;
@@ -376,8 +455,9 @@
 -(JMContactOfPersonDetailViewController *)contactVc{
     if (_contactVc == nil) {
         _contactVc = [[JMContactOfPersonDetailViewController alloc] init];
-        _contactVc.view.hidden = YES;
-        _contactVc.view.frame = CGRectMake(0, self.headerView.frame.origin.y + self.headerView.frame.size.height, SCREEN_WIDTH, 300);
+        _contactVc.phoneNumberStr = self.vitaModel.user_phone;
+        _contactVc.emailStr = self.vitaModel.user_email;
+        _contactVc.view.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT-self.titleView.frame.size.height);
         [self addChildViewController:_contactVc];
         
     }
@@ -386,6 +466,26 @@
 }
 
 
+-(JMPictureOfPersonDetailViewController *)pictureVc{
+    if (_pictureVc == nil) {
+        _pictureVc = [[JMPictureOfPersonDetailViewController alloc] init];
+        _pictureVc.view.frame = CGRectMake(SCREEN_WIDTH*2, 0, SCREEN_WIDTH, SCREEN_HEIGHT+50);
+        [self addChildViewController:_pictureVc];
+        
+    }
+    
+    return _pictureVc;
+}
+
+-(UIView *)pageContentView{
+    if (_pageContentView == nil) {
+        _pageContentView = [[UIView alloc]initWithFrame:CGRectMake(0, self.headerView.frame.origin.y + self.headerView.frame.size.height, SCREEN_WIDTH, 300)];
+        _pageContentView.backgroundColor = [UIColor redColor];
+    }
+    return _pageContentView;
+}
+
+//JMPictureOfPersonDetailViewController
 
 //@property (nonatomic, strong)JMContactOfPersonDetailViewController *contactVc;
 //@property (nonatomic, strong)JMPictureOfPersonDetailViewController *pictureVc;

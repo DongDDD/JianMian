@@ -32,6 +32,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) JMLabsChooseViewController *labschooseVC;
 @property(nonatomic,strong)NSMutableArray *playerArray;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @end
 
@@ -48,7 +49,7 @@ static NSString *cellIdent = @"cellIdent";
     [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
 
     [self setTableView];
-    
+    [self setJuhua];
 //    [self getData];
     
 //    [self loginIM];
@@ -101,6 +102,23 @@ static NSString *cellIdent = @"cellIdent";
     self.tableView.mj_header = header;
     [self.tableView.mj_header beginRefreshing];
 }
+
+#pragma mark - 菊花
+-(void)setJuhua{
+    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//    self.progressHUD.mode = MBProgressHUDModeCustomView;
+    self.progressHUD.progress = 0.0;
+        self.progressHUD.dimBackground = NO; //设置有遮罩
+        self.progressHUD.label.text = @"加载中..."; //设置进度框中的提示文字
+    [self.progressHUD showAnimated:YES]; //显示进度框
+    
+//    UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"minloading"]];
+    //    imgView.frame = CGRectMake(0, 0, 68, 99);
+//    self.progressHUD.customView = imgView;
+    
+    [self.view addSubview:self.progressHUD];
+    
+}
 #pragma mark - 下拉刷新 -
 
 -(void)loadNewData
@@ -143,7 +161,7 @@ static NSString *cellIdent = @"cellIdent";
             [self.tableView.mj_header endRefreshing];
             [self.tableView reloadData];
             [self.tableView.mj_footer endRefreshing];
-
+            [self.progressHUD setHidden:YES];
         }
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, NSError  *error) {

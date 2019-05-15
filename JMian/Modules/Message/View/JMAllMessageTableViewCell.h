@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *userLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastChatLabel;
 @property (weak, nonatomic) IBOutlet UILabel *lastChatTimeLbel;
+@property (weak, nonatomic) IBOutlet UILabel *unReadLab;
 
 //- (void)setData:(JMAllMessageTableViewCellData *)data;
 - (void)setData:(JMMessageListModel *)data;

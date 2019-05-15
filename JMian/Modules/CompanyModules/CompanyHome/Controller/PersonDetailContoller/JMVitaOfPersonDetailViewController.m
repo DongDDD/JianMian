@@ -86,8 +86,8 @@
     [self.view addSubview:educationView];
 
     [educationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.left.mas_equalTo(self.view);
         make.top.mas_equalTo(descriptionView.mas_bottom);
+        make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(248);
     }];
 

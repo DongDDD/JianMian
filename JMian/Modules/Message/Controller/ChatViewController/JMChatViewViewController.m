@@ -53,9 +53,15 @@
 {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:NO];
-
+//     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
 
 }
+
+//-(void)onNewMessage:(NSArray *)msgs{
+//
+//
+//
+//}
 - (void)setupViews{
     //input
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];

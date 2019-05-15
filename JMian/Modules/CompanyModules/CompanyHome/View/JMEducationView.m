@@ -62,16 +62,14 @@
         label3.textAlignment = NSTextAlignmentRight;
         
         [self addSubview:label3];
-       
         [label3 mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.width.mas_equalTo(100);
-            make.left.mas_equalTo(label2.mas_right).offset(155);
+//            make.width.mas_equalTo(100);
+//            make.left.mas_equalTo(label2.mas_right).offset(155);
+            make.right.mas_equalTo(self).offset(-20);
             make.top.mas_equalTo(label2.mas_top);
         }];
         
-       
-        
-        
+ 
     }
     return self;
 }

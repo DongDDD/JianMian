@@ -56,6 +56,9 @@
     
 }
 
+
+
+
 //工资数据转化，除以1000，转化成k
 -(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
     NSInteger myint = [min integerValue];

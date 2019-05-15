@@ -70,6 +70,7 @@
         //自己是senderID ,那你要显示的信息就在recipient里面
         self.userNameLabel.text = data.recipient_nickname;
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.recipient_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+
         
     }else if (model.user_id == data.recipient_user_id){
         //自己是recipientID ,那你要显示的信息就在sender里面
@@ -78,6 +79,13 @@
         
     }
     
+    if (data.data.unRead == 0) {
+        [self.unReadLab setHidden:YES];
+    }else{
+        [self.unReadLab setHidden:NO];
+        
+        self.unReadLab.text =  [NSString stringWithFormat:@"%d",data.data.unRead];
+    }
     
     
 //

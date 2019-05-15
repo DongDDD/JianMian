@@ -34,6 +34,9 @@
                                 <integer key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskstoBorder" value="NO"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小美" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VJ5-WE-752">
@@ -60,7 +63,6 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3月15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIR-Gt-4Uc">
                         <rect key="frame" x="267" y="19.5" width="33" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="33" id="lsz-ss-9TG"/>
                             <constraint firstAttribute="height" constant="21" id="vwP-kR-48D"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -82,6 +84,23 @@
                             <constraint firstAttribute="height" constant="0.5" id="2gT-Im-5j4"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WYc-DA-HzY">
+                        <rect key="frame" x="56" y="12" width="16" height="16"/>
+                        <color key="backgroundColor" red="0.90196078430000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="16" id="pXd-NC-BwK"/>
+                            <constraint firstAttribute="width" constant="16" id="wcU-On-wL8"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="BTe-Rf-Xjf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="4Gc-m2-QCb"/>
@@ -89,6 +108,7 @@
                     <constraint firstItem="VJ5-WE-752" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="5p9-5A-XaV"/>
                     <constraint firstItem="ftN-EQ-KEb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="7ex-Jd-A2x"/>
                     <constraint firstItem="VJ5-WE-752" firstAttribute="leading" secondItem="BTe-Rf-Xjf" secondAttribute="trailing" constant="14" id="84S-xn-Ivm"/>
+                    <constraint firstItem="WYc-DA-HzY" firstAttribute="leading" secondItem="BTe-Rf-Xjf" secondAttribute="leading" constant="36" id="DLg-jl-qXv"/>
                     <constraint firstAttribute="trailing" secondItem="s3P-2k-TEK" secondAttribute="trailing" constant="21" id="FIH-pL-vFw"/>
                     <constraint firstItem="zPy-Y3-P2Y" firstAttribute="top" secondItem="VJ5-WE-752" secondAttribute="bottom" constant="10" id="G4T-wf-TK9"/>
                     <constraint firstItem="s3P-2k-TEK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="21" id="GI2-Ax-BwZ"/>
@@ -97,6 +117,7 @@
                     <constraint firstAttribute="trailing" secondItem="ftN-EQ-KEb" secondAttribute="trailing" constant="21" id="VA2-5J-kpK"/>
                     <constraint firstItem="BTe-Rf-Xjf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="aXB-e5-LDM"/>
                     <constraint firstItem="gIR-Gt-4Uc" firstAttribute="leading" secondItem="3Jq-FL-H8P" secondAttribute="trailing" constant="3" id="atY-eM-3oi"/>
+                    <constraint firstItem="WYc-DA-HzY" firstAttribute="bottom" secondItem="BTe-Rf-Xjf" secondAttribute="bottom" constant="-35" id="dfv-KK-yHg"/>
                     <constraint firstItem="3Jq-FL-H8P" firstAttribute="leading" secondItem="VJ5-WE-752" secondAttribute="trailing" constant="10" id="ezQ-j8-DWA"/>
                     <constraint firstAttribute="trailing" secondItem="zPy-Y3-P2Y" secondAttribute="trailing" constant="44" id="fUG-w8-SSQ"/>
                     <constraint firstItem="3Jq-FL-H8P" firstAttribute="centerY" secondItem="VJ5-WE-752" secondAttribute="centerY" id="gSy-8w-FGJ"/>
@@ -111,7 +132,8 @@
             <connections>
                 <outlet property="iconImageView" destination="BTe-Rf-Xjf" id="T4t-JB-pvN"/>
                 <outlet property="lastChatLabel" destination="zPy-Y3-P2Y" id="CQW-VL-Sgo"/>
-                <outlet property="lastChatTimeLbel" destination="gIR-Gt-4Uc" id="AZi-Eg-NLa"/>
+                <outlet property="lastChatTimeLbel" destination="gIR-Gt-4Uc" id="tnk-y8-wtn"/>
+                <outlet property="unReadLab" destination="WYc-DA-HzY" id="sW5-Kc-cqf"/>
                 <outlet property="userLabel" destination="3Jq-FL-H8P" id="UBE-E1-7pT"/>
                 <outlet property="userNameLabel" destination="VJ5-WE-752" id="SNi-kt-XSx"/>
             </connections>

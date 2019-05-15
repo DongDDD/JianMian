@@ -57,7 +57,6 @@ static NSString *cellIdent = @"cellIdent";
 -(void)getData{
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-
     [[JMHTTPManager sharedInstance]fetchVitaPaginateWithKeyword:@"" page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
   
         if (responsObject[@"data"]) {

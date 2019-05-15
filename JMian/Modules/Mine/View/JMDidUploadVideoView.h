@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)leftAction;
 -(void)rightAction;
+-(void)playAction;
 
 @end
 

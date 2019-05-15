@@ -10,6 +10,7 @@
 #import "JMHTTPRequest.h"
 #import "JMHTTPConstant.h"
 #import "APIStringMacros.h"
+#import "DimensMacros.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -24,6 +25,8 @@ typedef NS_ENUM(NSInteger,JMHTTPServiceResponseCode){
 + (instancetype)sharedInstance;
 //发起请求
 - (void)sendRequest:(JMHTTPRequest *)request;
+
+//@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @end
 
