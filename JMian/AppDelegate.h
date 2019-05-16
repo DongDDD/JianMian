@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DimensMacros.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSMutableArray *playArray;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
+@property(nonatomic,strong)NSDictionary *videoChatDic;
 
 @end
 

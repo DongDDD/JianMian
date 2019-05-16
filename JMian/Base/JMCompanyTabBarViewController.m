@@ -48,17 +48,13 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readMessage:) name:Notification_JMRefreshListener object:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
-- (void)readMessage:(NSNotification *)notification
-{
-    NSLog(@"readMessagereadMessagereadMessagereadMessagereadMessage");
-}
+
 - (void)onNewMessage:(NSNotification *)notification
 {
     _unReadNum = 0;

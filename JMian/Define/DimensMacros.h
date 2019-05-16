@@ -102,6 +102,16 @@
 #define Notification_JMMMessageListener @"Notification_JMMMessageListener"
 #define Notification_JMMMessageRevokeListener @"Notification_JMMMessageRevokeListener"
 #define Notification_JMMUploadProgressListener @"Notification_JMMUploadProgressListener"
+//发起视频
+#define Channel_ID @"Channel_ID"
+#define Mark_ID @"Mark_ID"
+#define Avatar_URL @"Avatar_URL"
+#define User_Id @"User_Id"
+#define TITLE @"TITLE"
+#define Sub_TITLE @"Sub_TITLE"
+#define ReceiverID @"ReceiverID"
+
+
 
 
 #define AMapAPIKey @"3226a67b997e0c6d25b38614a86ff5e0"

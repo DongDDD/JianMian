@@ -64,7 +64,7 @@
 
 - (JMPageView *)pageView {
     if (!_pageView) {
-        _pageView = [[JMPageView alloc] initWithFrame:CGRectMake(0, 43, SCREEN_WIDTH, SCREEN_HEIGHT-220) childVC:self.childVCs];
+        _pageView = [[JMPageView alloc] initWithFrame:CGRectMake(0, self.titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT-self.titleView.frame.size.height) childVC:self.childVCs];
         __weak JMMessageViewController *weakSelf = self;
         _pageView.didEndScrollView = ^(NSInteger index) {
             [weakSelf.titleView setCurrentTitleIndex:index];
@@ -77,10 +77,18 @@
 - (NSArray *)childVCs {
         
         JMAllMessageTableViewController *allMessageVC = [[JMAllMessageTableViewController alloc] init];
-
+        allMessageVC.didReadMessage = ^(int setReadNum) {
+              self.unReadNum -= setReadNum;
+            if (self.unReadNum != 0) {
+                
+                self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
+            }else{
+               self.tabBarItem.badgeValue = nil;
+            }
+            
+        };
         JMLookMeTableViewController *lookMeVC = [[JMLookMeTableViewController alloc] init];
 
-    
         [self addChildViewController:allMessageVC];
         [self addChildViewController:lookMeVC];
         

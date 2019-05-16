@@ -60,7 +60,7 @@
         [self.leftBtn setHidden:NO];
         [self.rightBtn setHidden:NO];
         
-    }else if ([model.status isEqualToString:Interview_WaitInterview]){//C端接受邀约了
+    }else if ([model.status isEqualToString:@""]){//C端接受邀约了
         self.headerTitleLab.textColor = MASTER_COLOR;
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
         [self.rightBtn setTitle:@"等待面试" forState:UIControlStateNormal];
@@ -75,7 +75,7 @@
         [self.rightBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
         [self.leftBtn setHidden:YES];
         [self.rightBtn setHidden:NO];
-    }else if ([model.status isEqualToString:Interview_AlreadyInterview]){//面试时间过了 或者 面试时间前5分钟的状态
+    }else if ([model.status isEqualToString:Interview_WaitInterview]){//面试时间过了 或者 面试时间前5分钟的状态
         [self.leftBtn setHidden:YES];
         [self.rightBtn setHidden:YES];
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
@@ -123,21 +123,26 @@
     
     //职位名称
     NSString *workName = model.work_work_name;
+    //-----status------状态判断,布局下方按钮UI
     self.detailLab.text = [NSString stringWithFormat:@"%@年 / %@ / %@",expStr,eduStr,workName];
     
     if ([model.status isEqualToString:Interview_WaitAgree]) {//你邀请了C端面试，正在等待C端同意
         self.headerTitleLab.textColor = MASTER_COLOR;
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@（等待同意）",model.time];
-        [self.leftBtn setTitle:@"修改时间" forState:UIControlStateNormal];
-        [self.leftBtn setHidden:NO];
-        [self.rightBtn setHidden:YES];
+        [self.rightBtn setTitle:@"取消面试" forState:UIControlStateNormal];
+//        [self.leftBtn setTitle:@"取消面试" forState:UIControlStateNormal];
+        [self.leftBtn setHidden:YES];
+        [self.rightBtn setHidden:NO];
+        [self.deleteImg setHidden:YES];
 
-    }else if ([model.status isEqualToString:Interview_WaitInterview]){//C端接受邀约了
-        self.headerTitleLab.textColor = MASTER_COLOR;
+    }else if ([model.status isEqualToString:@""]){//C端接受邀约了
+        self.headerTitleLab.textColor = [UIColor redColor];
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@（已同意）",model.time];
-        [self.leftBtn setTitle:@"修改时间" forState:UIControlStateNormal];
-        [self.leftBtn setHidden:NO];
-        [self.rightBtn setHidden:YES];
+        [self.rightBtn setTitle:@"取消面试" forState:UIControlStateNormal];
+        //        [self.leftBtn setTitle:@"取消面试" forState:UIControlStateNormal];
+        [self.leftBtn setHidden:YES];
+        [self.rightBtn setHidden:NO];
+        [self.deleteImg setHidden:YES];
 
     }else if ([model.status isEqualToString:Interview_Delete]){//C端已拒绝
         [self.leftBtn setHidden:YES];
@@ -145,9 +150,7 @@
         [self.deleteImg setHidden:NO];
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
         self.headerTitleLab.textColor = TEXT_GRAY_COLOR;
-    }else if ([model.status isEqualToString:Interview_AlreadyInterview]){//面试时间过了 或者 面试时间前5分钟的状态
-        [self.leftBtn setHidden:YES];
-        [self.rightBtn setHidden:YES];
+    }else if ([model.status isEqualToString:Interview_WaitInterview]){//面试时间过了 或者 面试时间前5分钟的状态
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
         self.headerTitleLab.textColor = MASTER_COLOR;
         [self.leftBtn setTitle:@"面试结束" forState:UIControlStateNormal];
@@ -164,6 +167,8 @@
     
     
 }
+
+
 
 //-(NSString*)getCurrentTimes{
 //

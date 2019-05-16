@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMVideoChatViewController">
             <connections>
-                <outlet property="controlButtons" destination="pGl-Xy-ujA" id="rnl-LC-6LB"/>
+                <outlet property="controlButtons" destination="pGl-Xy-ujA" id="YsP-Qc-GfX"/>
                 <outlet property="localVideo" destination="qfX-4B-sjT" id="zyF-Q6-A9a"/>
                 <outlet property="localVideoMutedBg" destination="qQi-4N-SYH" id="gYe-XR-pTT"/>
                 <outlet property="localVideoMutedIndicator" destination="a9e-EM-xyA" id="PMR-3k-9ml"/>
@@ -32,7 +32,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FxM-Rk-gTr" userLabel="remoteVideo">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
                             <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGl-Xy-ujA" userLabel="controlButtons">
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGl-Xy-ujA" userLabel="controlButtons">
                                     <rect key="frame" x="0.0" y="690" width="414" height="128"/>
                                     <subviews>
                                         <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="6dZ-CP-9IE" userLabel="B_default_avatar.png">
@@ -44,7 +44,7 @@
                                             </constraints>
                                         </imageView>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="项目总监" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1h-Di-IWI" userLabel="HR">
-                                            <rect key="frame" x="69" y="-76.5" width="69.5" height="21"/>
+                                            <rect key="frame" x="69" y="-76.5" width="70" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -70,7 +70,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="经验/学历/职位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtp-ZH-Mgd" userLabel="exp_edu_work">
-                                            <rect key="frame" x="147" y="98" width="114.5" height="21"/>
+                                            <rect key="frame" x="147" y="98" width="115" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -155,6 +155,7 @@
                                     </constraints>
                                 </view>
                             </subviews>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="pGl-Xy-ujA" secondAttribute="trailing" id="Ayc-dH-5FZ"/>
                                 <constraint firstItem="6dZ-CP-9IE" firstAttribute="leading" secondItem="FxM-Rk-gTr" secondAttribute="leading" constant="31" id="XQk-U4-48g"/>
@@ -163,11 +164,11 @@
                                 <constraint firstAttribute="bottom" secondItem="pGl-Xy-ujA" secondAttribute="bottom" id="p6p-UG-KoR"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="videoMutedIndicator" translatesAutoresizingMaskIntoConstraints="NO" id="HCd-V1-eSq" userLabel="remoteVideoMutedIndicator">
-                            <rect key="frame" x="147" y="359" width="120" height="100"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minloading.png" translatesAutoresizingMaskIntoConstraints="NO" id="HCd-V1-eSq" userLabel="remoteVideoMutedIndicator">
+                            <rect key="frame" x="136.5" y="284" width="130" height="175"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="100" id="8v3-XV-A1B"/>
-                                <constraint firstAttribute="width" constant="120" id="dRb-xf-tTl"/>
+                                <constraint firstAttribute="height" constant="175" id="8v3-XV-A1B"/>
+                                <constraint firstAttribute="width" constant="130" id="dRb-xf-tTl"/>
                             </constraints>
                         </imageView>
                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="localVideoMutedBg" translatesAutoresizingMaskIntoConstraints="NO" id="qQi-4N-SYH" userLabel="localVideoMutedBg">
@@ -187,20 +188,37 @@
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="m6n-KU-R3d"/>
                             </constraints>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等待对方接受..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MN6-ga-geC">
+                            <rect key="frame" x="142" y="438" width="118" height="21"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVs-2i-YHW">
+                            <rect key="frame" x="177" y="609" width="60" height="60"/>
+                            <state key="normal" image="hangUpButton"/>
+                        </button>
                     </subviews>
                     <constraints>
                         <constraint firstItem="FxM-Rk-gTr" firstAttribute="centerY" secondItem="7Xw-ie-uiM" secondAttribute="centerY" id="0zh-rv-DV9"/>
                         <constraint firstItem="a9e-EM-xyA" firstAttribute="centerY" secondItem="qQi-4N-SYH" secondAttribute="centerY" id="1g5-CM-O0b"/>
                         <constraint firstItem="FxM-Rk-gTr" firstAttribute="width" secondItem="7Xw-ie-uiM" secondAttribute="width" id="6I2-hk-Ktc"/>
+                        <constraint firstItem="MN6-ga-geC" firstAttribute="bottom" secondItem="HCd-V1-eSq" secondAttribute="bottom" id="Cmz-F1-xlP"/>
                         <constraint firstItem="qQi-4N-SYH" firstAttribute="centerY" secondItem="qfX-4B-sjT" secondAttribute="centerY" id="IXF-yt-kPe"/>
                         <constraint firstItem="FxM-Rk-gTr" firstAttribute="centerX" secondItem="7Xw-ie-uiM" secondAttribute="centerX" id="KyG-tz-A4t"/>
-                        <constraint firstItem="HCd-V1-eSq" firstAttribute="centerX" secondItem="7Xw-ie-uiM" secondAttribute="centerX" id="XAf-NT-XaX"/>
+                        <constraint firstItem="eVs-2i-YHW" firstAttribute="centerX" secondItem="FxM-Rk-gTr" secondAttribute="centerX" id="NzY-lc-nYk"/>
+                        <constraint firstItem="MN6-ga-geC" firstAttribute="centerX" secondItem="7Xw-ie-uiM" secondAttribute="centerX" constant="-6" id="VPl-yW-6sX"/>
+                        <constraint firstItem="HCd-V1-eSq" firstAttribute="centerX" secondItem="7Xw-ie-uiM" secondAttribute="centerX" constant="-5.5" id="XAf-NT-XaX"/>
                         <constraint firstItem="a9e-EM-xyA" firstAttribute="centerX" secondItem="qQi-4N-SYH" secondAttribute="centerX" id="XUe-wA-vQf"/>
                         <constraint firstItem="FxM-Rk-gTr" firstAttribute="top" secondItem="7Xw-ie-uiM" secondAttribute="top" id="chG-53-7Ym"/>
                         <constraint firstAttribute="trailing" secondItem="qfX-4B-sjT" secondAttribute="trailing" constant="3" id="daS-zq-Xji"/>
+                        <constraint firstItem="eVs-2i-YHW" firstAttribute="height" secondItem="g9Y-Dn-zwh" secondAttribute="height" id="es6-en-amF"/>
                         <constraint firstItem="qQi-4N-SYH" firstAttribute="width" secondItem="qfX-4B-sjT" secondAttribute="width" id="ipF-61-bQV"/>
-                        <constraint firstItem="HCd-V1-eSq" firstAttribute="centerY" secondItem="7Xw-ie-uiM" secondAttribute="centerY" id="lZJ-dQ-XMi"/>
+                        <constraint firstItem="HCd-V1-eSq" firstAttribute="centerY" secondItem="7Xw-ie-uiM" secondAttribute="centerY" constant="-37.5" id="lZJ-dQ-XMi"/>
                         <constraint firstItem="qQi-4N-SYH" firstAttribute="centerX" secondItem="qfX-4B-sjT" secondAttribute="centerX" id="mVT-zm-t6a"/>
+                        <constraint firstItem="pGl-Xy-ujA" firstAttribute="top" secondItem="eVs-2i-YHW" secondAttribute="bottom" constant="21" id="pcq-8N-BhR"/>
+                        <constraint firstItem="eVs-2i-YHW" firstAttribute="width" secondItem="g9Y-Dn-zwh" secondAttribute="width" id="vdq-XK-G9V"/>
                         <constraint firstItem="qfX-4B-sjT" firstAttribute="top" secondItem="7Xw-ie-uiM" secondAttribute="top" constant="20" id="wVG-Jo-TGH"/>
                         <constraint firstItem="qQi-4N-SYH" firstAttribute="height" secondItem="qfX-4B-sjT" secondAttribute="height" id="wyj-08-YTm"/>
                     </constraints>
@@ -221,6 +239,7 @@
         <image name="default_avatar.png" width="23" height="39"/>
         <image name="hangUpButton" width="372" height="372"/>
         <image name="localVideoMutedBg" width="90" height="120"/>
+        <image name="minloading.png" width="67.5" height="98.5"/>
         <image name="switchCameraButton" width="372" height="372"/>
         <image name="switchCameraButtonSelected" width="372" height="372"/>
         <image name="videoMutedIndicator" width="153.5" height="129"/>

@@ -187,13 +187,12 @@ static NSString *cellIdent = @"infoCellIdent";
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:_receiverID];
-    [conv setReadMessage:nil succ:^{
-        NSLog(@"已读上报");
-      [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMRefreshListener object:nil];
-    } fail:^(int code, NSString *msg) {
-        NSLog(@"已读上报失败");
-        
-    }];
+//    [conv setReadMessage:nil succ:^{
+//        NSLog(@"已读上报");
+//    } fail:^(int code, NSString *msg) {
+//        NSLog(@"已读上报失败");
+//
+//    }];
     __weak typeof(self) ws = self;
     [conv getMessage:20 last:nil succ:^(NSArray *msgs) {
         if(msgs.count != 0){
@@ -286,7 +285,9 @@ static NSString *cellIdent = @"infoCellIdent";
 {
     JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
     vc.chatViewModel = self.myModel;
+    vc.receiverID = _receiverID;
     [self.navigationController pushViewController:vc animated:YES];
+    
 }
 
 

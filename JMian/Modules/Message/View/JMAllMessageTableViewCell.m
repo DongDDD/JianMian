@@ -43,12 +43,6 @@
     return self;
 }
 
-//- (void)setData:(JMAllMessageTableViewCellData *)data
-//{
-//    _data = data;
-////    [_unReadView setNum:_data.unRead];
-////    [self defaultLayout];
-//}
 
 - (void)setData:(JMMessageListModel *)data
 {
@@ -87,34 +81,6 @@
         self.unReadLab.text =  [NSString stringWithFormat:@"%d",data.data.unRead];
     }
     
-    
-//
-//    if (model.user_id == data.sender_user_id) {
-//        self.iconImageView.image = GETImageFromURL(data.recipient_avatar);
-//        if ([model.type isEqualToString:B_Type_UESR]) {
-//            self.userLabel.text = data.work_work_name;
-//
-//        }else if  ([model.type isEqualToString:C_Type_USER])
-//        {
-//            self.userLabel.text = [NSString stringWithFormat:@"%@-%@",data.workInfo_company_name,data.recipient_company_position];
-//
-//        }
-//
-//    }else{
-//        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.sender_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-//        self.userNameLabel.text = data.sender_nickname;
-//        if ([model.type isEqualToString:B_Type_UESR]) {
-//            self.userLabel.text = data.work_work_name;
-//
-//        }else if  ([model.type isEqualToString:C_Type_USER])
-//        {
-//            self.userLabel.text = [NSString stringWithFormat:@"%@-%@",data.workInfo_company_name,data.sender_company_position];
-//
-//        }
-//
-//    }
-//
-//
     self.lastChatTimeLbel.text = data.data.time;
     self.lastChatLabel.text = data.data.subTitle;
     

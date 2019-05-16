@@ -49,6 +49,12 @@
 //
 }
 
+-(void)fanhui{
+    [super fanhui];
+    
+
+}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -64,8 +70,7 @@
 //}
 - (void)setupViews{
     //input
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
-    
+ 
     _messageController = [[JMMessageTableViewController alloc] init];
     _messageController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - TTextView_Height - Bottom_SafeHeight);;
     _messageController.delegate = self;

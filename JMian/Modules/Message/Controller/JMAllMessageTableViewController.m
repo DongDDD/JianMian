@@ -21,6 +21,7 @@
 
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSArray *modelArray;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @end
 
@@ -35,8 +36,11 @@ static NSString *cellIdent = @"allMessageCellIdent";
     [self.tableView registerNib:[UINib nibWithNibName:@"JMAllMessageTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
      self.tableView.rowHeight = 79;
    self.tableView.separatorStyle = UITableViewCellAccessoryNone;
-    
+    [self.view addSubview:self.progressHUD];
+  
+    [self initRefresh];
 }
+
 
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,6 +53,21 @@ static NSString *cellIdent = @"allMessageCellIdent";
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
 }
+
+-(void)initRefresh{
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+
+
+}
+
+-(void)loadNewData{
+    [self getMsgList];    //获取自己服务器数据
+
+}
+
 - (void)onNewMessage:(NSNotification *)notification
 {
     [self getMsgList];    //获取自己服务器数据
@@ -73,7 +92,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
             self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             [self updateConversations]; //获取腾讯云数据
 
-            [self.tableView reloadData];
 
         }
         
@@ -153,8 +171,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
         }
 
     }
-  
-   
+    [self.progressHUD hideAnimated:YES];
+    [self.tableView.mj_header endRefreshing];
     [self.tableView reloadData];
 
 }
@@ -358,43 +376,51 @@ static NSString *cellIdent = @"allMessageCellIdent";
     vc.myConvModel = [_dataArray objectAtIndex:indexPath.row];
 //    vc.conversation = [_dataArray objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
+    [self setReadMessageAction_model:[_dataArray objectAtIndex:indexPath.row]];
+}
+
+-(void)setReadMessageAction_model:(JMMessageListModel *)_myModel{
+
+
+        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+        //判断senderid是不是自己
+       BOOL _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
+       NSString *_receiverID;
+
+        if (_isSelfIsSender) {
+    
+            _receiverID = _myModel.recipient_mark;
+        }else{
+    
+            _receiverID = _myModel.sender_mark;
+        }
+    
+        TIMConversation *conv = [[TIMManager sharedInstance]
+                                 getConversation:(TIMConversationType)TIM_C2C
+                                 receiver:_receiverID];
+        [conv setReadMessage:nil succ:^{
+            NSLog(@"已读上报");
+            
+            !_didReadMessage ? : _didReadMessage(_myModel.data.unRead);
+            
+        } fail:^(int code, NSString *msg) {
+            NSLog(@"已读上报失败");
+    
+        }];
+    
     
 }
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(MBProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        _progressHUD.progress = 0.6;
+        _progressHUD.dimBackground = NO; //设置有遮罩
+        _progressHUD.label.text = @"获取消息列表中..."; //设置进度框中的提示文字
+        [_progressHUD showAnimated:YES]; //显示进度框
+    }
+    return _progressHUD;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Table view delegate

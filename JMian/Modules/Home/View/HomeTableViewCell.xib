@@ -131,7 +131,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州空间智能科技有限公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBh-FO-Wdx">
-                        <rect key="frame" x="131" y="103.5" width="160" height="5"/>
+                        <rect key="frame" x="131" y="103.5" width="160" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -173,7 +173,6 @@
                     <constraint firstAttribute="trailing" secondItem="obc-kb-NJS" secondAttribute="trailing" constant="21" id="wz3-z5-0Wh"/>
                     <constraint firstItem="Lpj-ci-Bdi" firstAttribute="centerY" secondItem="S6G-DK-vbX" secondAttribute="centerY" id="xkT-aY-YLj"/>
                     <constraint firstItem="b6V-YV-np5" firstAttribute="centerY" secondItem="S6G-DK-vbX" secondAttribute="centerY" id="y0d-io-NkA"/>
-                    <constraint firstItem="sd1-L6-MHL" firstAttribute="top" secondItem="HBh-FO-Wdx" secondAttribute="bottom" constant="22" id="z5Z-7z-e53"/>
                     <constraint firstItem="RTG-ST-Bvu" firstAttribute="leading" secondItem="xbj-IG-grN" secondAttribute="trailing" constant="20" id="zMl-Oe-npM"/>
                 </constraints>
             </tableViewCellContentView>

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHTTPManager (InterView)
 
-- (void)fetchInterViewListWithStatus:(NSString *)status
+- (void)fetchInterViewListWithStatus:(NSArray *)status
                             page:(NSString *)page
                         per_page:(NSString *)per_page
 

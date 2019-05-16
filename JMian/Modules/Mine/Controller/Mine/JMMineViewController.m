@@ -147,7 +147,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
+    if (indexPath.section == 0 && indexPath.row == 0 && [_userInfoModel.type isEqualToString:C_Type_USER]) {
+        [self.navigationController pushViewController:[[JMMyResumeViewController alloc] init] animated:YES];
+
+    }else if (indexPath.section == 2 && indexPath.row == 1){
+        
+        [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
+    }
 }
 
 #pragma mark - UITableViewDataSource

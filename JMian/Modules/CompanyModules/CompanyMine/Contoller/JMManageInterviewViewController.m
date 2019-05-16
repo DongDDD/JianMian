@@ -26,6 +26,7 @@
 
 @property (weak, nonatomic) THDatePickerView *dateView;
 @property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
+@property (nonatomic, strong)NSArray *statusArray;
 
 @end
 
@@ -37,12 +38,9 @@ static NSString *cellIdent = @"managerCellIdent";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"面试管理";
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    self.tableView.rowHeight = 189;
-    [self.tableView registerNib:[UINib nibWithNibName:@"JMMangerInterviewTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
+    [self setTableViewUI];
     [self initDatePickerView];
-    [self getListData_Status:@"0"];//请求已邀请的数据
+    _statusArray = @[@"0",@"1",@"2",@"3"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -51,13 +49,36 @@ static NSString *cellIdent = @"managerCellIdent";
 
 }
 
--(void)getListData_Status:(NSString *)status{
+-(void)setTableViewUI{
+
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.tableView.rowHeight = 189;
+    [self.tableView registerNib:[UINib nibWithNibName:@"JMMangerInterviewTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.tableView.mj_header beginRefreshing];
+
+
+}
+
+-(void)loadNewData
+{
+    
+     [self getListData_Status:_statusArray];//请求已邀请的数据
+}
+
+
+-(void)getListData_Status:(NSArray *)status{
     [[JMHTTPManager sharedInstance]fetchInterViewListWithStatus:status page:@"1" per_page:@"7" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         if (responsObject[@"data"]) {
             
             self.listsArray = [JMInterViewModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -74,7 +95,7 @@ static NSString *cellIdent = @"managerCellIdent";
     [self.invitedBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.isInterviewBtn setBackgroundColor:[UIColor whiteColor]];
     [self.isInterviewBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    [self getListData_Status:@"0"];//请求已邀请的数据
+    [self getListData_Status:_statusArray];//请求已邀请的数据
 
 }
 
@@ -83,9 +104,9 @@ static NSString *cellIdent = @"managerCellIdent";
     [self.isInterviewBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.invitedBtn setBackgroundColor:[UIColor whiteColor]];
     [self.invitedBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    [self getListData_Status:@"4"];//请求已面试的数据
+    NSArray *status = @[@"4",@"5"];
+    [self getListData_Status:status];//请求已面试的数据
 
-    
 }
 
 
@@ -104,7 +125,7 @@ static NSString *cellIdent = @"managerCellIdent";
                                                               delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
                 [alert show];
                 
-                [self getListData_Status:@"0"];//请求已邀请的数据
+                [self getListData_Status:_statusArray];//请求已邀请的数据
             } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
                 
             }];
@@ -131,10 +152,11 @@ static NSString *cellIdent = @"managerCellIdent";
 {
     
     //因为B端和C端都只有这个status才有“进入房间”按钮，所以一个判断就可以了
-        if ([model.status isEqualToString:Interview_AlreadyInterview]) {//进入房间
+        if ([model.status isEqualToString:Interview_WaitInterview]) {//进入房间
          
             JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
             vc.interviewModel = model;
+            vc.videoChatViewType = JMJMVideoChatViewFromInterview;
             [self.navigationController pushViewController:vc animated:YES];
         }
     
@@ -188,6 +210,23 @@ static NSString *cellIdent = @"managerCellIdent";
     self.dateView = dateView;
     
 }
+//显示时间选择器
+-(void)bottomRightButtonAction{
+    self.BgBtn.hidden = NO;
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
+        [self.dateView show];
+    }];
+    //    self.chooseTimeVC = [[JMChooseTimeViewController alloc]init];
+    //    self.chooseTimeVC.delegate = self;
+    //    [self addChildViewController:self.chooseTimeVC];
+    //    [self.view addSubview:self.chooseTimeVC.view];
+    //    self.chooseTimeVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    //     [self.chooseTimeVC didMoveToParentViewController:self];
+    //    NSLog(@"邀请面试");
+    
+}
 #pragma mark - THDatePickerViewDelegate
 /**
  保存按钮代理方法
@@ -225,24 +264,7 @@ static NSString *cellIdent = @"managerCellIdent";
         self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
     }];
 }
-#pragma mark - 点击事件
-//显示时间选择器
--(void)bottomRightButtonAction{
-    self.BgBtn.hidden = NO;
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
-        [self.dateView show];
-    }];
-    //    self.chooseTimeVC = [[JMChooseTimeViewController alloc]init];
-    //    self.chooseTimeVC.delegate = self;
-    //    [self addChildViewController:self.chooseTimeVC];
-    //    [self.view addSubview:self.chooseTimeVC.view];
-    //    self.chooseTimeVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    //     [self.chooseTimeVC didMoveToParentViewController:self];
-    //    NSLog(@"邀请面试");
-    
-}
+
 //-(void)OKInteviewTimeViewAction:(NSString *)interviewTime{
 //    [self.chooseTimeVC willMoveToParentViewController:nil];
 //    [self.chooseTimeVC removeFromParentViewController];

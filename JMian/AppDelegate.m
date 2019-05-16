@@ -22,11 +22,12 @@
 #import "JMCompanyTabBarViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "JMJudgeViewController.h"
+#import "JMVideoChatViewController.h"
 
 
 
 
-@interface AppDelegate ()<TIMMessageListener>
+@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate>
 
 @end
 
@@ -50,7 +51,6 @@
     
     [[TIMManager sharedInstance] addMessageListener:self];
     
-    
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
 
@@ -68,15 +68,41 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMMessageListener object:msgs];
 
     NSLog(@"onNewMessage");
-//    NSMutableArray *uiMsgs = [self transUIMsgFromIMMsg:msgs];
-//    [_uiMsgs addObjectsFromArray:uiMsgs];
-//    __weak typeof(self) ws = self;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [ws.tableView reloadData];
-//        [ws scrollToBottom:YES];
-//    });
-//
+
+    TIMMessage *msg = msgs[0];
+    TIMElem * elem = [msg getElem:0];
+    if ([elem isKindOfClass:[TIMCustomElem class]]) {
+        TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
+        self.videoChatDic = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:custom_elem.data];
+        NSLog(@"视频自定义消息%@",self.videoChatDic);
+        NSString *title = [NSString stringWithFormat:@" %@ 邀请你视频面试",self.videoChatDic[TITLE]];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:self.videoChatDic[Sub_TITLE]
+                                                      delegate:self cancelButtonTitle:@"接受" otherButtonTitles: @"拒绝", nil];
+        [alert show];
+    }
     
+    
+    
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *btnTitle = [alertView buttonTitleAtIndex:buttonIndex];
+    if ([btnTitle isEqualToString:@"不方便"]) {
+        NSLog(@"你点击了取消");
+    }else if ([btnTitle isEqualToString:@"接受"] ) {
+        NSLog(@"你点击了确定");
+        JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
+        vc.view.frame = CGRectMake(0, 0, _window.frame.size.width, _window.frame.size.height);
+        vc.videoChatDic = self.videoChatDic;
+        vc.view.tag = 754;
+        [_window addSubview:vc.view];
+    
+//        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+//        [_window setRootViewController:naVC];
+
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -104,6 +130,15 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
+-(MBProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[MBProgressHUD alloc] initWithView:self.window];
+        _progressHUD.progress = 0.6;
+        _progressHUD.dimBackground = NO; //设置有遮罩
+        _progressHUD.label.text = @"加载中..."; //设置进度框中的提示文字
+        [_progressHUD showAnimated:YES]; //显示进度框
+    }
+    return _progressHUD;
+}
 
 @end

@@ -21,6 +21,19 @@
 @property (weak, nonatomic) IBOutlet UIImageView *localVideoMutedBg;
 @property (weak, nonatomic) IBOutlet UIImageView *localVideoMutedIndicator;
 
+@property(nonatomic,copy)NSString *imgUrl;
+@property(nonatomic,copy)NSString *myTitle;
+@property(nonatomic,copy)NSString *subTitle;
+
+@property(nonatomic,copy)NSString *channel_Id;
+@property(nonatomic,copy)NSString *HR_MarkId;
+@property(nonatomic,copy)NSString *sendSubTitle;
+@property(nonatomic,copy)NSString *sendTitle;
+@property(nonatomic,copy)NSString *sendAvart;
+//@property(nonatomic,copy)NSString *sendMarkID;
+
+
+
 @end
 
 @implementation JMVideoChatViewController
@@ -34,10 +47,16 @@
     [self setupVideo];
     [self setupLocalVideo];
     [self joinChannel];
-    //有两种状态可以进入视频聊天
+    //有两种种状态可以进入视频聊天
 
     [self initInfoView];
-    
+//    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+
+    //发送自定义消息 videoChatDic不为空代表是从弹窗进来
+    if (self.videoChatViewType == JMJMVideoChatViewFromInterview) {
+        [self setVideoInvite];
+        
+    }
     
 }
 
@@ -47,65 +66,90 @@
 
 }
 
+
+
 -(void)initInfoView
 {
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
-    
-    NSString *imgUrl;
-    NSString *title;
-    NSString *subTitle;
+
     if ([userInfoModel.type isEqualToString:B_Type_UESR]) {
-        if (self.chatViewModel)//从聊天界面进来
+//        if (self.chatViewModel)//从聊天界面进来 【取消】
+//        {
+//            if ([self.chatViewModel.sender_user_id isEqualToString:userInfoModel.user_id]) {//逻辑和聊天界面一样
+//                _imgUrl = self.chatViewModel.recipient_avatar;
+//                _myTitle = self.chatViewModel.recipient_nickname;
+//                _HRName = self.chatViewModel.sender_nickname;
+//                _HRAvart = self.chatViewModel.sender_avatar;
+//            }else
+//            {
+//                _imgUrl = self.chatViewModel.sender_avatar;
+//                _myTitle = self.chatViewModel.sender_nickname;
+//                _HRName = self.chatViewModel.recipient_nickname;
+//                _HRAvart = self.chatViewModel.recipient_avatar;
+//
+//            }
+//
+//            _company_name = self.chatViewModel.workInfo_company_name;
+//            _subTitle = self.chatViewModel.work_work_name;
+//
+//        }
+        //------------B端从面试管理进来视频聊天---------------
+
+        if (self.interviewModel)
         {
-            if ([self.chatViewModel.sender_user_id isEqualToString:userInfoModel.user_id]) {//逻辑和聊天界面一样
-                imgUrl = self.chatViewModel.recipient_avatar;
-                title = self.chatViewModel.recipient_nickname;
-            }else
-            {
-                imgUrl = self.chatViewModel.sender_avatar;
-                title = self.chatViewModel.sender_nickname;
-            }
-            
-            subTitle = self.chatViewModel.work_work_name;
-            
-        }
-        if (self.interviewModel)//从面试管理进来
-        {
-            imgUrl = self.interviewModel.candidate_avatar;
-            title = self.interviewModel.candidate_nickname;
-            subTitle = self.interviewModel.company_company_name;
-            
-        }
-    }else if([userInfoModel.type isEqualToString:C_Type_USER]) {
-        if (self.chatViewModel)//从聊天界面进来
-        {
-            if ([self.chatViewModel.sender_user_id isEqualToString:userInfoModel.user_id]) {//逻辑和聊天界面一样
-                imgUrl = self.chatViewModel.recipient_avatar;
-                title = self.chatViewModel.recipient_nickname;
-                
-            }else
-            {
-                imgUrl = self.chatViewModel.sender_avatar;
-                title = self.chatViewModel.sender_nickname;
-                
-            }
-            
-            subTitle = self.chatViewModel.workInfo_company_name;
-            
+            _imgUrl = self.interviewModel.candidate_avatar;
+            _myTitle = self.interviewModel.candidate_nickname;
+            _subTitle = self.interviewModel.company_company_name;
+            _sendSubTitle = self.interviewModel.company_company_name;
+            _sendTitle = self.interviewModel.interviewer_nickname;
+//            _sendMarkID = [NSString stringWithFormat:@"%@b",self.interviewModel.interviewer_id];
+            self.receiverID =[NSString stringWithFormat:@"%@a",self.interviewModel.candidate_id];
             
         }
         
-        if (self.interviewModel)//从面试管理进来
+        
+    
+    }else if([userInfoModel.type isEqualToString:C_Type_USER]) {
+//        if (self.chatViewModel)//C端从聊天界面进来
+//        {
+//            if ([self.chatViewModel.sender_user_id isEqualToString:userInfoModel.user_id]) {//逻辑和聊天界面一样
+//                _imgUrl = self.chatViewModel.recipient_avatar;
+//                _myTitle = self.chatViewModel.recipient_nickname;
+//
+//            }else
+//            {
+//                _imgUrl = self.chatViewModel.sender_avatar;
+//                _myTitle = self.chatViewModel.sender_nickname;
+//
+//            }
+//
+//            _subTitle = self.chatViewModel.workInfo_company_name;
+//
+//
+//        }
+        //------------C端从面试管理进来视频聊天---------------
+        if (self.interviewModel)
         {
-            imgUrl = self.interviewModel.interviewer_avatar;
-            title = self.interviewModel.interviewer_nickname;
-            subTitle = self.interviewModel.company_company_name;
-            
+            _imgUrl = self.interviewModel.interviewer_avatar;
+            _myTitle = self.interviewModel.interviewer_nickname;
+            _subTitle = self.interviewModel.company_company_name;
+            //赋值用于发送自定义消息
+            _sendSubTitle = self.interviewModel.work_work_name;
+            _sendTitle = self.interviewModel.candidate_nickname;
+//            _sendMarkID = [NSString stringWithFormat:@"%@a",self.interviewModel.candidate_id];
+            self.receiverID = [NSString stringWithFormat:@"%@b",self.interviewModel.interviewer_id];
+
         }
         
         
     }
-
+//------------B端或者C端从弹窗进来视频聊天-------------------
+    if (self.videoChatDic) {
+        _imgUrl = self.videoChatDic[Avatar_URL];
+        _myTitle = self.videoChatDic[TITLE];
+        _subTitle = self.videoChatDic[Sub_TITLE];
+//        _receiverID = self.videoChatDic[ReceiverID];
+    }
 
     UIView *bgView = [[UIView alloc]init];
     bgView.backgroundColor = [UIColor blackColor];
@@ -126,7 +170,7 @@
     
     UIImageView *iconImg = [[UIImageView alloc]init];
     iconImg.layer.cornerRadius = 12.5;
-    [iconImg sd_setImageWithURL:[NSURL URLWithString:imgUrl] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [iconImg sd_setImageWithURL:[NSURL URLWithString:_imgUrl] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     [self.controlButtons addSubview:iconImg];
     [iconImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.view).offset(36);
@@ -136,7 +180,7 @@
     }];
     
     UILabel *lab = [[UILabel alloc]init];
-    lab.text = [NSString stringWithFormat:@"%@    %@",title,subTitle];
+    lab.text = [NSString stringWithFormat:@"%@    %@",_myTitle,_subTitle];
     lab.textColor = [UIColor whiteColor];
     lab.font = [UIFont systemFontOfSize:15];
     [self.controlButtons addSubview:lab];
@@ -146,6 +190,43 @@
     }];
     
     
+}
+
+#pragma mark - 发送自定义视频面试消息
+
+-(void)setVideoInvite{
+    
+    TIMConversation *conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:self.receiverID];
+    NSDictionary *dic;
+        dic = @{
+                TITLE:_sendTitle,
+                Sub_TITLE:_sendSubTitle,
+                Avatar_URL:_imgUrl,
+                Channel_ID:_channel_Id
+                };
+
+    
+    // 转换为 NSData
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+    
+    
+    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
+    [custom_elem setData:data];
+    [custom_elem setDesc:@"你有一个视频邀请"];
+    TIMMessage * msg = [[TIMMessage alloc] init];
+    [msg addElem:custom_elem];
+    [conv sendMessage:msg succ:^(){
+        NSLog(@"SendMsg Succ");
+    }fail:^(int code, NSString * err) {
+        NSLog(@"SendMsg Failed:%d->%@", code, err);
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发送失败"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    }];
+
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -182,13 +263,12 @@
 
 - (void)joinChannel {
     //有两种状态可以进入视频聊天
-    NSString *channelId;
     //    1： 在聊天界面进入，用chat_id做房间id
-    if (self.chatViewModel) channelId = self.chatViewModel.chat_id;
+    if (self.chatViewModel) _channel_Id = self.chatViewModel.chat_id;
     //    2 ：在面试管理进入，时间到了就会有进入房间按钮 用面试interview_id做房间ID
-    if (self.interviewModel) channelId = self.interviewModel.interview_id;
+    if (self.interviewModel) _channel_Id = self.interviewModel.interview_id;
 
-   [self.agoraKit joinChannelByToken:nil channelId:channelId info:nil uid:0 joinSuccess:^(NSString *channel, NSUInteger uid, NSInteger elapsed) {
+   [self.agoraKit joinChannelByToken:nil channelId:_channel_Id info:nil uid:0 joinSuccess:^(NSString *channel, NSUInteger uid, NSInteger elapsed) {
         // Join channel "demoChannel1"
     }];
     // The UID database is maintained by your app to track which users joined which channels. If not assigned (or set to 0), the SDK will allocate one and returns it in joinSuccessBlock callback. The App needs to record and maintain the returned value as the SDK does not maintain it.
@@ -214,6 +294,10 @@
 
 - (IBAction)hangUpButton:(UIButton *)sender {
     [self leaveChannel];
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:754] removeFromSuperview];
+//    self.didCloseVideo = ^{
+//
+//    };
 }
 
 - (void)leaveChannel {
@@ -250,7 +334,7 @@
 
 - (void)resetHideButtonsTimer {
     [JMVideoChatViewController cancelPreviousPerformRequestsWithTarget:self];
-    [self performSelector:@selector(hideControlButtons) withObject:nil afterDelay:3];
+    [self performSelector:@selector(hideControlButtons) withObject:nil afterDelay:1000];
 }
 
 - (IBAction)didClickMuteButton:(UIButton *)sender {

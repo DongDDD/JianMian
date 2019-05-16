@@ -153,21 +153,22 @@
     //应该在提交成功后再保存到沙盒，下次进来直接去沙盒路径取
     
     // 保存图片至本地，方法见下文
+    
     [self saveImage:image withName:@"currentImage.png"];
-    //读取路径进行上传
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    
+    //读取路径进行上传
     if (_isImage1==YES) {
         
-    
         _imageView1.image = savedImage;
+    
     }else{
 
         _imageView2.image = savedImage;
     }
    
 }
+
 
 //图频上传
 
@@ -190,44 +191,36 @@
             
         }
         
-        
-//        if(responsObject[@"data"]){
-//            NSArray *urlArray = responsObject[@"data"];
-//            _imageUrl = urlArray[0];
-//            _imgUrlArrl = @[_imageUrl];
-//        }
-//
-//        _imageUrl = array[0];
-        
+
         
         //图片赋值显示
         if (_isImage1==YES) {
             
             [[JMHTTPManager sharedInstance]identifyIDcardWithFiles:_imgUrlArrl card_side:@"FRONT" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-                
-                if (responsObject[@"data"]) {
-                    self.IDCardModel =  [JMIDCardModel mj_objectWithKeyValues:responsObject[@"data"]];
-                    _imagefontUrl = self.IDCardModel.file_path;
-                }
-                
+//
+////                if (responsObject[@"data"]) {
+////                    self.IDCardModel =  [JMIDCardModel mj_objectWithKeyValues:responsObject[@"data"]];
+////                    _imagefontUrl = self.IDCardModel.file_path;
+////                }
+//
             } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-                
+
             }];
-            
+        
     
         }else{
             
-            [[JMHTTPManager sharedInstance]identifyIDcardWithFiles:_imgUrlArrl card_side:@"BACK" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-                
-                if (responsObject[@"data"]) {
-                    self.IDCardModel =  [JMIDCardModel mj_objectWithKeyValues:responsObject[@"data"]];
-                    
-                    _imagebehindUrl = self.IDCardModel.file_path;
-                }
-                
-            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-                
-            }];
+//            [[JMHTTPManager sharedInstance]identifyIDcardWithFiles:_imgUrlArrl card_side:@"BACK" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//                if (responsObject[@"data"]) {
+//                    self.IDCardModel =  [JMIDCardModel mj_objectWithKeyValues:responsObject[@"data"]];
+//
+//                    _imagebehindUrl = self.IDCardModel.file_path;
+//                }
+//
+//            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//            }];
             
     
         }

@@ -35,7 +35,7 @@
 //上传图片
 #define Uploads_Image_URL @"file/uploads"
 //身份证识别
-#define Ocr_idcard_URL @"city/lists"
+#define Ocr_idcard_URL @"api/tools/ocr/idcard"
 
 
 //个人简历

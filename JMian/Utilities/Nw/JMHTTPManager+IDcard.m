@@ -15,7 +15,7 @@
 successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock{
    
     NSDictionary *dic = @{@"files":files,@"card_side":card_side};
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodUpload path:Ocr_idcard_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Ocr_idcard_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
 
