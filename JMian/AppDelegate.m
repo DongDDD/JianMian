@@ -27,7 +27,9 @@
 
 
 
-@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate>
+@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate>
+
+
 
 @end
 
@@ -74,36 +76,143 @@
     if ([elem isKindOfClass:[TIMCustomElem class]]) {
         TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
         self.videoChatDic = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:custom_elem.data];
-        NSLog(@"视频自定义消息%@",self.videoChatDic);
-        NSString *title = [NSString stringWithFormat:@" %@ 邀请你视频面试",self.videoChatDic[TITLE]];
+        if (self.videoChatDic == nil) {
+            self.videoChatDic =[NSJSONSerialization JSONObjectWithData:custom_elem.data options:NSJSONReadingMutableLeaves error:nil];
+            
+        }
+        if (self.videoChatDic == nil) {
+            self.videoChatDic = [NSJSONSerialization JSONObjectWithData:custom_elem.data options:NSJSONReadingMutableLeaves error:nil];
+            
+        }
+        if (self.videoChatDic == nil) {
+            self.videoChatDic = [NSJSONSerialization JSONObjectWithData:custom_elem.data options:NSJSONReadingMutableContainers error:nil];
+        }
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:self.videoChatDic[Sub_TITLE]
-                                                      delegate:self cancelButtonTitle:@"接受" otherButtonTitles: @"拒绝", nil];
+        if (self.videoChatDic == nil) {
+            self.videoChatDic = [NSJSONSerialization JSONObjectWithData:custom_elem.data options:NSJSONReadingAllowFragments error:nil];
+        }
+        
+        if (self.videoChatDic == nil) {
+            NSString *receiveStr = [[NSString alloc]initWithData:custom_elem.data encoding:NSUTF8StringEncoding];
+            NSData * data = [receiveStr dataUsingEncoding:NSUTF8StringEncoding];
+            self.videoChatDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+        }
+        
+    
+        
+        
+        NSLog(@"视频自定义消息%@",self.videoChatDic);
+        if (self.videoChatDic && [custom_elem.desc isEqualToString:@"我发起了视频聊天"]) {
+            
+            [_window addSubview:self.answerOrHangUpView];
+        }
+        if ([custom_elem.desc isEqualToString:@"自己发起了视频聊天又调皮关闭了"]) {
+            [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
+            [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
+        }
+        
+//        NSString *title = [NSString stringWithFormat:@" %@ 邀请你视频面试",self.videoChatDic[TITLE]];
+//
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:self.videoChatDic[Sub_TITLE]
+//                                                      delegate:self cancelButtonTitle:@"接受" otherButtonTitles: @"拒绝", nil];
+//        [alert show];
+    }
+    
+    
+    
+}
+#pragma mark - 接听视频聊天
+
+-(void)answerAction{
+    [self.answerOrHangUpView setHidden:YES];
+//    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+//    JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
+//    vc.view.frame = self.answerOrHangUpView.bounds;
+//    vc.videoChatDic = self.videoChatDic;
+//    vc.view.tag = 754;
+//    [self.answerOrHangUpView addSubview:vc.view];
+//    [_window addSubview:vc.controlButtons];
+    
+//    [vc.controlButtons mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.mas_equalTo(_window);
+//        make.height.mas_equalTo(200);
+//        make.left.and.right.mas_equalTo(_window);
+//    }];
+//    [_window makeKeyAndVisible];
+    [_window addSubview:self.videoChatView];
+    [self.videoChatView setVideoChatDic:self.videoChatDic];
+    
+    
+}
+
+
+
+-(void)hangupAction{
+    
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
+//   JMUserInfoModel *
+    //谁发出的就挂掉谁的视频界面
+    [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"对方已拒绝"];
+}
+
+
+
+#pragma mark - 发送拒绝接听视频自定义消息
+
+-(void)setVideoInvite_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
+    
+    TIMConversation *conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:receiverID];
+    
+    // 转换为 NSData
+    
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+    
+    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
+//    [custom_elem setData:data];
+    if (dic) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+        [custom_elem setData:data];
+        
+    }
+    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+    
+    [custom_elem setDesc:title];
+    TIMMessage * msg = [[TIMMessage alloc] init];
+    [conv sendMessage:msg succ:^(){
+        NSLog(@"SendMsg Succ");
+    }fail:^(int code, NSString * err) {
+        NSLog(@"SendMsg Failed:%d->%@", code, err);
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发送失败"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
-    }
-    
+    }];
     
     
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    NSString *btnTitle = [alertView buttonTitleAtIndex:buttonIndex];
-    if ([btnTitle isEqualToString:@"不方便"]) {
-        NSLog(@"你点击了取消");
-    }else if ([btnTitle isEqualToString:@"接受"] ) {
-        NSLog(@"你点击了确定");
-        JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
-        vc.view.frame = CGRectMake(0, 0, _window.frame.size.width, _window.frame.size.height);
-        vc.videoChatDic = self.videoChatDic;
-        vc.view.tag = 754;
-        [_window addSubview:vc.view];
-    
-//        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-//        [_window setRootViewController:naVC];
 
-    }
-}
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    NSString *btnTitle = [alertView buttonTitleAtIndex:buttonIndex];
+//    if ([btnTitle isEqualToString:@"不方便"]) {
+//        NSLog(@"你点击了取消");
+//    }else if ([btnTitle isEqualToString:@"接受"]) {
+//        NSLog(@"你点击了接受");
+//        JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
+//        vc.view.frame = CGRectMake(0, 0, _window.frame.size.width, _window.frame.size.height);
+//        vc.videoChatDic = self.videoChatDic;
+//        vc.view.tag = 754;
+//        [_window addSubview:vc.view];
+//
+////        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+////        [_window setRootViewController:naVC];
+//
+//    }
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -139,6 +248,30 @@
         [_progressHUD showAnimated:YES]; //显示进度框
     }
     return _progressHUD;
+}
+
+#pragma mark - lazy
+
+//对方邀请你视频，可以接听或者挂断
+-(JMAnswerOrHangUpView *)answerOrHangUpView{
+    if (_answerOrHangUpView == nil) {
+        _answerOrHangUpView = [[JMAnswerOrHangUpView alloc]initWithFrame:_window.bounds];
+        _answerOrHangUpView.delegate = self;
+        _answerOrHangUpView.tag = 221;
+        
+    }
+    return _answerOrHangUpView;
+}
+
+-(JMVideoChatView *)videoChatView{
+    if (_videoChatView== nil) {
+        _videoChatView = [[JMVideoChatView alloc]initWithFrame:_window.bounds];
+        _videoChatView.delegate = self;
+        _videoChatView.tag = 222;
+        
+        
+    }
+    return _videoChatView;
 }
 
 @end

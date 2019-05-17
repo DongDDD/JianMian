@@ -14,7 +14,6 @@
 #import <AMapFoundationKit/AMapFoundationKit.h>
 #import <AMapSearchKit/AMapSearchKit.h>
 #import <AMapLocationKit/AMapLocationKit.h>
-#import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
 
 //屏幕 rect
 #define SCREEN_RECT ([UIScreen mainScreen].bounds)

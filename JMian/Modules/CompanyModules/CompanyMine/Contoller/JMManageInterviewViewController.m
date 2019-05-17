@@ -13,8 +13,9 @@
 #import "JMChooseTimeViewController.h"
 #import "THDatePickerView.h"
 #import "JMVideoChatViewController.h"
+#import "JMVideoChatView.h"
 
-@interface JMManageInterviewViewController ()<UITableViewDelegate,UITableViewDataSource,JMMangerInterviewTableViewCellDelegate,JMChooseTimeViewControllerDelegate>
+@interface JMManageInterviewViewController ()<UITableViewDelegate,UITableViewDataSource,JMMangerInterviewTableViewCellDelegate,JMChooseTimeViewControllerDelegate,JMVideoChatViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -154,14 +155,20 @@ static NSString *cellIdent = @"managerCellIdent";
     //因为B端和C端都只有这个status才有“进入房间”按钮，所以一个判断就可以了
         if ([model.status isEqualToString:Interview_WaitInterview]) {//进入房间
          
-            JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
-            vc.interviewModel = model;
-            vc.videoChatViewType = JMJMVideoChatViewFromInterview;
-            [self.navigationController pushViewController:vc animated:YES];
+//            JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
+//            [vc setInterviewModel:model];
+//            [self.navigationController pushViewController:vc animated:YES];
+            
+            JMVideoChatView *videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+            videoChatView.delegate = self;
+            videoChatView.tag = 222;
+            [videoChatView setInterviewModel:model];
+            [self.view addSubview:videoChatView];
+//            [[UIApplication sharedApplication].keyWindow addSubview:videoChatView];
+            [self.navigationController setNavigationBarHidden:YES];
+
         }
     
-    
-
 
 }
 
@@ -218,6 +225,7 @@ static NSString *cellIdent = @"managerCellIdent";
         self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
         [self.dateView show];
     }];
+    
     //    self.chooseTimeVC = [[JMChooseTimeViewController alloc]init];
     //    self.chooseTimeVC.delegate = self;
     //    [self addChildViewController:self.chooseTimeVC];
@@ -226,6 +234,13 @@ static NSString *cellIdent = @"managerCellIdent";
     //     [self.chooseTimeVC didMoveToParentViewController:self];
     //    NSLog(@"邀请面试");
     
+}
+
+-(void)hangupAction{
+    [[self.view viewWithTag:222] removeFromSuperview];
+    [self.navigationController setNavigationBarHidden:NO];
+
+
 }
 #pragma mark - THDatePickerViewDelegate
 /**

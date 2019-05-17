@@ -243,6 +243,36 @@ static NSString *cellIdent = @"infoCellIdent";
                     [uiMsgs addObject:data];
                     
                 }
+                else if ([elem isKindOfClass:[TIMCustomElem class]]){
+
+                    TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
+                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
+                    if ([custom_elem.desc isEqualToString:@"我发起了视频聊天"]){
+                        textData.content = @"对方发起了视频聊天";
+                    }else{
+                        textData.content = @"对方拒绝了你的视频邀请";
+
+                    
+                    }
+//                    else if ([custom_elem.desc isEqualToString:@"[我发起了视频聊天]"]){
+//                        textData.content = @"对方发起了视频聊天";
+//
+//
+//                    }
+                    if (_isSelfIsSender) {
+
+                        textData.head = _myModel.recipient_avatar;
+                    }else{
+
+                        textData.head = _myModel.sender_avatar;
+                    }
+
+                    textData.isSelf = NO;
+                    data = textData;
+                    [uiMsgs addObject:data];
+
+
+                }
                 
             }
             
@@ -267,6 +297,31 @@ static NSString *cellIdent = @"infoCellIdent";
                     [uiMsgs addObject:data];
                     
                 }
+                else if ([elem isKindOfClass:[TIMCustomElem class]]){
+
+                    TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
+                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
+                    if ([custom_elem.desc isEqualToString:@"我发起了视频聊天"]){
+                        textData.content = @"我发起了视频聊天";
+                    }else{
+                        textData.content = @"我拒绝了对方的视频邀请";
+                        
+                        
+                    }
+
+                    if (_isSelfIsSender) {
+
+                        textData.head = _myModel.sender_avatar;
+                    }else{
+                        textData.head = _myModel.recipient_avatar;
+
+                    }
+                    textData.isSelf = YES;
+                    data = textData;
+                    [uiMsgs addObject:data];
+
+
+                }
                 
             }
             
@@ -283,11 +338,11 @@ static NSString *cellIdent = @"infoCellIdent";
 
 -(void)videoInterviewAction
 {
-    JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
-    vc.chatViewModel = self.myModel;
-    vc.receiverID = _receiverID;
-    [self.navigationController pushViewController:vc animated:YES];
-    
+//    JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
+////    vc.chatViewModel = self.myModel;
+//    vc.receiverID = _receiverID;
+//    [self.navigationController pushViewController:vc animated:YES];
+//
 }
 
 

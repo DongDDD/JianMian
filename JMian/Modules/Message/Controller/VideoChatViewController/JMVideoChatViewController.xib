@@ -12,12 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMVideoChatViewController">
             <connections>
-                <outlet property="controlButtons" destination="pGl-Xy-ujA" id="YsP-Qc-GfX"/>
+                <outlet property="controlButtons" destination="pGl-Xy-ujA" id="Dxx-95-3ed"/>
                 <outlet property="localVideo" destination="qfX-4B-sjT" id="zyF-Q6-A9a"/>
                 <outlet property="localVideoMutedBg" destination="qQi-4N-SYH" id="gYe-XR-pTT"/>
                 <outlet property="localVideoMutedIndicator" destination="a9e-EM-xyA" id="PMR-3k-9ml"/>
                 <outlet property="remoteVideo" destination="FxM-Rk-gTr" id="kii-FN-kag"/>
-                <outlet property="remoteVideoMutedIndicator" destination="HCd-V1-eSq" id="yvC-kK-Eg3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,147 +29,9 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FxM-Rk-gTr" userLabel="remoteVideo">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
-                            <subviews>
-                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGl-Xy-ujA" userLabel="controlButtons">
-                                    <rect key="frame" x="0.0" y="690" width="414" height="128"/>
-                                    <subviews>
-                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="6dZ-CP-9IE" userLabel="B_default_avatar.png">
-                                            <rect key="frame" x="31" y="-78" width="26" height="24"/>
-                                            <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="HRd-LD-E1M"/>
-                                                <constraint firstAttribute="width" constant="26" id="YKP-tJ-qEg"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="项目总监" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1h-Di-IWI" userLabel="HR">
-                                            <rect key="frame" x="69" y="-76.5" width="70" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="百度有限公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7YF-Qy-ATs" userLabel="companyName">
-                                            <rect key="frame" x="208" y="-76.5" width="104" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="WQP-rb-ON8" userLabel="C_default_avatar.png">
-                                            <rect key="frame" x="31" y="96.5" width="26" height="24"/>
-                                            <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="24" id="6JI-ma-1Vn"/>
-                                                <constraint firstAttribute="width" constant="26" id="xFL-kB-dmx"/>
-                                            </constraints>
-                                        </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="戴小美" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36N-Lp-h7E" userLabel="name">
-                                            <rect key="frame" x="69" y="98" width="52" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="经验/学历/职位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtp-ZH-Mgd" userLabel="exp_edu_work">
-                                            <rect key="frame" x="147" y="98" width="115" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9Y-Dn-zwh" userLabel="hangUpButton">
-                                            <rect key="frame" x="268" y="10" width="60" height="60"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="60" id="ALs-eb-ODO"/>
-                                                <constraint firstAttribute="width" constant="60" id="sSI-ro-Vz5"/>
-                                            </constraints>
-                                            <state key="normal" image="hangUpButton"/>
-                                            <connections>
-                                                <action selector="hangUpButton:" destination="-1" eventType="touchUpInside" id="R1Q-wU-hQ5"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WX0-a0-2H0" userLabel="switchCameraButton">
-                                            <rect key="frame" x="86" y="10" width="60" height="60"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="A2d-T9-e6M"/>
-                                                <constraint firstAttribute="height" constant="60" id="Cs0-TG-tV9"/>
-                                            </constraints>
-                                            <state key="normal" title="Button" image="switchCameraButton"/>
-                                            <state key="selected" image="switchCameraButtonSelected"/>
-                                            <connections>
-                                                <action selector="didClickSwitchCameraButton:" destination="-1" eventType="touchUpInside" id="5uG-Bt-UG8"/>
-                                            </connections>
-                                        </button>
-                                        <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjC-tL-60o" userLabel="C-Info">
-                                            <rect key="frame" x="0.0" y="89" width="414" height="39"/>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsx-hk-sWO">
-                                            <rect key="frame" x="0.0" y="0.0" width="86" height="81"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="86" id="6ts-Ef-hf3"/>
-                                            </constraints>
-                                        </view>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cp7-d4-CEk">
-                                            <rect key="frame" x="328" y="0.0" width="86" height="81"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="86" id="QLF-ja-FRz"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="86" id="gUk-M8-VEZ"/>
-                                                <constraint firstAttribute="height" constant="81" id="hIO-bD-dTB"/>
-                                            </constraints>
-                                        </view>
-                                        <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e75-8c-qz5" userLabel="B-info">
-                                            <rect key="frame" x="0.0" y="-84" width="414" height="36"/>
-                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="36" id="h6U-d9-uci"/>
-                                            </constraints>
-                                        </view>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="fsx-hk-sWO" firstAttribute="top" secondItem="pGl-Xy-ujA" secondAttribute="top" id="4Jb-ZY-try"/>
-                                        <constraint firstAttribute="trailing" secondItem="Cp7-d4-CEk" secondAttribute="trailing" id="5Qg-0k-7b4"/>
-                                        <constraint firstItem="gjC-tL-60o" firstAttribute="top" secondItem="g9Y-Dn-zwh" secondAttribute="bottom" constant="19" id="5wT-jD-s0a"/>
-                                        <constraint firstItem="H1h-Di-IWI" firstAttribute="leading" secondItem="6dZ-CP-9IE" secondAttribute="trailing" constant="12" id="D3g-Wd-Gv3"/>
-                                        <constraint firstItem="gjC-tL-60o" firstAttribute="leading" secondItem="pGl-Xy-ujA" secondAttribute="leading" id="GGf-Gr-bCz"/>
-                                        <constraint firstItem="Cp7-d4-CEk" firstAttribute="top" secondItem="pGl-Xy-ujA" secondAttribute="top" id="Ilu-zN-pWC"/>
-                                        <constraint firstItem="Cp7-d4-CEk" firstAttribute="leading" secondItem="g9Y-Dn-zwh" secondAttribute="trailing" id="KN2-Ct-tw7"/>
-                                        <constraint firstItem="36N-Lp-h7E" firstAttribute="leading" secondItem="WQP-rb-ON8" secondAttribute="trailing" constant="12" id="Kh4-DL-DNA"/>
-                                        <constraint firstItem="Rtp-ZH-Mgd" firstAttribute="centerY" secondItem="WQP-rb-ON8" secondAttribute="centerY" id="TT7-4p-6NV"/>
-                                        <constraint firstAttribute="bottom" secondItem="gjC-tL-60o" secondAttribute="bottom" id="VtA-On-pSL"/>
-                                        <constraint firstAttribute="trailing" secondItem="e75-8c-qz5" secondAttribute="trailing" id="YxX-HC-Pjh"/>
-                                        <constraint firstItem="fsx-hk-sWO" firstAttribute="leading" secondItem="pGl-Xy-ujA" secondAttribute="leading" id="akE-dk-yag"/>
-                                        <constraint firstAttribute="height" constant="128" id="apr-BA-C6g"/>
-                                        <constraint firstAttribute="trailing" secondItem="gjC-tL-60o" secondAttribute="trailing" id="bAF-S9-JwS"/>
-                                        <constraint firstItem="7YF-Qy-ATs" firstAttribute="centerY" secondItem="6dZ-CP-9IE" secondAttribute="centerY" id="bZN-9a-P17"/>
-                                        <constraint firstItem="e75-8c-qz5" firstAttribute="leading" secondItem="pGl-Xy-ujA" secondAttribute="leading" id="cPR-HB-vQE"/>
-                                        <constraint firstItem="WQP-rb-ON8" firstAttribute="leading" secondItem="6dZ-CP-9IE" secondAttribute="leading" id="e8T-l5-1EC"/>
-                                        <constraint firstItem="H1h-Di-IWI" firstAttribute="centerY" secondItem="6dZ-CP-9IE" secondAttribute="centerY" id="f5Z-tC-Fnd"/>
-                                        <constraint firstItem="36N-Lp-h7E" firstAttribute="centerY" secondItem="WQP-rb-ON8" secondAttribute="centerY" id="f8v-A8-WmV"/>
-                                        <constraint firstAttribute="bottom" secondItem="e75-8c-qz5" secondAttribute="bottom" constant="176" id="iFw-cM-aBj"/>
-                                        <constraint firstItem="Rtp-ZH-Mgd" firstAttribute="leading" secondItem="36N-Lp-h7E" secondAttribute="trailing" constant="26" id="lAc-TO-1w8"/>
-                                        <constraint firstItem="WX0-a0-2H0" firstAttribute="leading" secondItem="fsx-hk-sWO" secondAttribute="trailing" id="m7P-ND-c6q"/>
-                                        <constraint firstItem="gjC-tL-60o" firstAttribute="top" secondItem="fsx-hk-sWO" secondAttribute="bottom" constant="8" id="nmk-pc-725"/>
-                                        <constraint firstItem="WQP-rb-ON8" firstAttribute="centerY" secondItem="gjC-tL-60o" secondAttribute="centerY" id="pmW-Du-dQ6"/>
-                                        <constraint firstItem="6dZ-CP-9IE" firstAttribute="centerY" secondItem="e75-8c-qz5" secondAttribute="centerY" id="s6M-w2-vwz"/>
-                                        <constraint firstItem="gjC-tL-60o" firstAttribute="top" secondItem="WX0-a0-2H0" secondAttribute="bottom" constant="19" id="tPy-de-pfB"/>
-                                        <constraint firstItem="gjC-tL-60o" firstAttribute="top" secondItem="Cp7-d4-CEk" secondAttribute="bottom" constant="8" id="yer-Le-ZlW"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="pGl-Xy-ujA" secondAttribute="trailing" id="Ayc-dH-5FZ"/>
-                                <constraint firstItem="6dZ-CP-9IE" firstAttribute="leading" secondItem="FxM-Rk-gTr" secondAttribute="leading" constant="31" id="XQk-U4-48g"/>
-                                <constraint firstAttribute="trailing" secondItem="7YF-Qy-ATs" secondAttribute="trailing" constant="102" id="aMq-sQ-x6W"/>
-                                <constraint firstItem="pGl-Xy-ujA" firstAttribute="leading" secondItem="FxM-Rk-gTr" secondAttribute="leading" id="ePI-uO-1kR"/>
-                                <constraint firstAttribute="bottom" secondItem="pGl-Xy-ujA" secondAttribute="bottom" id="p6p-UG-KoR"/>
-                            </constraints>
+                            <rect key="frame" x="0.0" y="0.0" width="411" height="838"/>
+                            <color key="backgroundColor" red="0.90196078430000004" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="minloading.png" translatesAutoresizingMaskIntoConstraints="NO" id="HCd-V1-eSq" userLabel="remoteVideoMutedIndicator">
-                            <rect key="frame" x="136.5" y="284" width="130" height="175"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="175" id="8v3-XV-A1B"/>
-                                <constraint firstAttribute="width" constant="130" id="dRb-xf-tTl"/>
-                            </constraints>
-                        </imageView>
                         <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="localVideoMutedBg" translatesAutoresizingMaskIntoConstraints="NO" id="qQi-4N-SYH" userLabel="localVideoMutedBg">
                             <rect key="frame" x="319" y="20" width="92" height="167"/>
                         </imageView>
@@ -181,6 +42,132 @@
                                 <constraint firstAttribute="width" constant="36" id="e5e-Pn-dFM"/>
                             </constraints>
                         </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGl-Xy-ujA" userLabel="controlButtons">
+                            <rect key="frame" x="0.0" y="690" width="414" height="128"/>
+                            <subviews>
+                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:6dZ-CP-9IE:image" translatesAutoresizingMaskIntoConstraints="NO" id="6dZ-CP-9IE" userLabel="B_default_avatar.png">
+                                    <rect key="frame" x="31" y="-78" width="26" height="24"/>
+                                    <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="HRd-LD-E1M"/>
+                                        <constraint firstAttribute="width" constant="26" id="YKP-tJ-qEg"/>
+                                    </constraints>
+                                </imageView>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="项目总监" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1h-Di-IWI" userLabel="HR">
+                                    <rect key="frame" x="69" y="-76" width="70" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="百度有限公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7YF-Qy-ATs" userLabel="companyName">
+                                    <rect key="frame" x="208" y="-76" width="104" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:6dZ-CP-9IE:image" translatesAutoresizingMaskIntoConstraints="NO" id="WQP-rb-ON8" userLabel="C_default_avatar.png">
+                                    <rect key="frame" x="31" y="96.5" width="26" height="24"/>
+                                    <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="6JI-ma-1Vn"/>
+                                        <constraint firstAttribute="width" constant="26" id="xFL-kB-dmx"/>
+                                    </constraints>
+                                </imageView>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="戴小美" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36N-Lp-h7E" userLabel="name">
+                                    <rect key="frame" x="69" y="98" width="52" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="经验/学历/职位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rtp-ZH-Mgd" userLabel="exp_edu_work">
+                                    <rect key="frame" x="147" y="98" width="115" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9Y-Dn-zwh" userLabel="hangUpButton">
+                                    <rect key="frame" x="268" y="10" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="ALs-eb-ODO"/>
+                                        <constraint firstAttribute="width" constant="60" id="sSI-ro-Vz5"/>
+                                    </constraints>
+                                    <state key="normal" image="hangUpButton"/>
+                                    <connections>
+                                        <action selector="hangUpButton:" destination="-1" eventType="touchUpInside" id="R1Q-wU-hQ5"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WX0-a0-2H0" userLabel="switchCameraButton">
+                                    <rect key="frame" x="86" y="10" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="A2d-T9-e6M"/>
+                                        <constraint firstAttribute="height" constant="60" id="Cs0-TG-tV9"/>
+                                    </constraints>
+                                    <state key="normal" title="Button" image="switchCameraButton"/>
+                                    <state key="selected" image="switchCameraButtonSelected"/>
+                                    <connections>
+                                        <action selector="didClickSwitchCameraButton:" destination="-1" eventType="touchUpInside" id="5uG-Bt-UG8"/>
+                                    </connections>
+                                </button>
+                                <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gjC-tL-60o" userLabel="C-Info">
+                                    <rect key="frame" x="0.0" y="89" width="414" height="39"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fsx-hk-sWO">
+                                    <rect key="frame" x="0.0" y="0.0" width="86" height="81"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="86" id="6ts-Ef-hf3"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cp7-d4-CEk">
+                                    <rect key="frame" x="328" y="0.0" width="86" height="81"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="86" id="QLF-ja-FRz"/>
+                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="86" id="gUk-M8-VEZ"/>
+                                        <constraint firstAttribute="height" constant="81" id="hIO-bD-dTB"/>
+                                    </constraints>
+                                </view>
+                                <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e75-8c-qz5" userLabel="B-info">
+                                    <rect key="frame" x="0.0" y="-84" width="414" height="36"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="h6U-d9-uci"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="7YF-Qy-ATs" firstAttribute="baseline" secondItem="H1h-Di-IWI" secondAttribute="baseline" id="1XT-gP-HC5"/>
+                                <constraint firstItem="7YF-Qy-ATs" firstAttribute="leading" secondItem="pGl-Xy-ujA" secondAttribute="leading" constant="208" id="3QN-Q6-ZzF"/>
+                                <constraint firstItem="fsx-hk-sWO" firstAttribute="top" secondItem="pGl-Xy-ujA" secondAttribute="top" id="4Jb-ZY-try"/>
+                                <constraint firstAttribute="trailing" secondItem="Cp7-d4-CEk" secondAttribute="trailing" id="5Qg-0k-7b4"/>
+                                <constraint firstItem="gjC-tL-60o" firstAttribute="top" secondItem="g9Y-Dn-zwh" secondAttribute="bottom" constant="19" id="5wT-jD-s0a"/>
+                                <constraint firstItem="H1h-Di-IWI" firstAttribute="leading" secondItem="6dZ-CP-9IE" secondAttribute="trailing" constant="12" id="D3g-Wd-Gv3"/>
+                                <constraint firstItem="gjC-tL-60o" firstAttribute="leading" secondItem="pGl-Xy-ujA" secondAttribute="leading" id="GGf-Gr-bCz"/>
+                                <constraint firstItem="Cp7-d4-CEk" firstAttribute="top" secondItem="pGl-Xy-ujA" secondAttribute="top" id="Ilu-zN-pWC"/>
+                                <constraint firstItem="Cp7-d4-CEk" firstAttribute="leading" secondItem="g9Y-Dn-zwh" secondAttribute="trailing" id="KN2-Ct-tw7"/>
+                                <constraint firstItem="36N-Lp-h7E" firstAttribute="leading" secondItem="WQP-rb-ON8" secondAttribute="trailing" constant="12" id="Kh4-DL-DNA"/>
+                                <constraint firstItem="Rtp-ZH-Mgd" firstAttribute="centerY" secondItem="WQP-rb-ON8" secondAttribute="centerY" id="TT7-4p-6NV"/>
+                                <constraint firstAttribute="bottom" secondItem="gjC-tL-60o" secondAttribute="bottom" id="VtA-On-pSL"/>
+                                <constraint firstAttribute="trailing" secondItem="e75-8c-qz5" secondAttribute="trailing" id="YxX-HC-Pjh"/>
+                                <constraint firstItem="fsx-hk-sWO" firstAttribute="leading" secondItem="pGl-Xy-ujA" secondAttribute="leading" id="akE-dk-yag"/>
+                                <constraint firstAttribute="height" constant="128" id="apr-BA-C6g"/>
+                                <constraint firstAttribute="trailing" secondItem="gjC-tL-60o" secondAttribute="trailing" id="bAF-S9-JwS"/>
+                                <constraint firstItem="7YF-Qy-ATs" firstAttribute="centerY" secondItem="6dZ-CP-9IE" secondAttribute="centerY" id="bZN-9a-P17"/>
+                                <constraint firstItem="e75-8c-qz5" firstAttribute="leading" secondItem="pGl-Xy-ujA" secondAttribute="leading" id="cPR-HB-vQE"/>
+                                <constraint firstItem="WQP-rb-ON8" firstAttribute="leading" secondItem="6dZ-CP-9IE" secondAttribute="leading" id="e8T-l5-1EC"/>
+                                <constraint firstItem="g9Y-Dn-zwh" firstAttribute="top" secondItem="7YF-Qy-ATs" secondAttribute="bottom" constant="66" id="eRh-GG-Lte"/>
+                                <constraint firstItem="H1h-Di-IWI" firstAttribute="centerY" secondItem="6dZ-CP-9IE" secondAttribute="centerY" id="f5Z-tC-Fnd"/>
+                                <constraint firstItem="36N-Lp-h7E" firstAttribute="centerY" secondItem="WQP-rb-ON8" secondAttribute="centerY" id="f8v-A8-WmV"/>
+                                <constraint firstAttribute="bottom" secondItem="e75-8c-qz5" secondAttribute="bottom" constant="176" id="iFw-cM-aBj"/>
+                                <constraint firstItem="7YF-Qy-ATs" firstAttribute="leading" secondItem="H1h-Di-IWI" secondAttribute="trailing" constant="69" id="juQ-FN-pXH"/>
+                                <constraint firstItem="Rtp-ZH-Mgd" firstAttribute="leading" secondItem="36N-Lp-h7E" secondAttribute="trailing" constant="26" id="lAc-TO-1w8"/>
+                                <constraint firstItem="WX0-a0-2H0" firstAttribute="leading" secondItem="fsx-hk-sWO" secondAttribute="trailing" id="m7P-ND-c6q"/>
+                                <constraint firstItem="gjC-tL-60o" firstAttribute="top" secondItem="fsx-hk-sWO" secondAttribute="bottom" constant="8" id="nmk-pc-725"/>
+                                <constraint firstItem="WQP-rb-ON8" firstAttribute="centerY" secondItem="gjC-tL-60o" secondAttribute="centerY" id="pmW-Du-dQ6"/>
+                                <constraint firstItem="6dZ-CP-9IE" firstAttribute="centerY" secondItem="e75-8c-qz5" secondAttribute="centerY" id="s6M-w2-vwz"/>
+                                <constraint firstItem="gjC-tL-60o" firstAttribute="top" secondItem="WX0-a0-2H0" secondAttribute="bottom" constant="19" id="tPy-de-pfB"/>
+                                <constraint firstItem="gjC-tL-60o" firstAttribute="top" secondItem="Cp7-d4-CEk" secondAttribute="bottom" constant="8" id="yer-Le-ZlW"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qfX-4B-sjT" userLabel="localVideo">
                             <rect key="frame" x="319" y="20" width="92" height="167"/>
                             <constraints>
@@ -188,37 +175,21 @@
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="92" id="m6n-KU-R3d"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="等待对方接受..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MN6-ga-geC">
-                            <rect key="frame" x="142" y="438" width="118" height="21"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eVs-2i-YHW">
-                            <rect key="frame" x="177" y="609" width="60" height="60"/>
-                            <state key="normal" image="hangUpButton"/>
-                        </button>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="FxM-Rk-gTr" firstAttribute="centerY" secondItem="7Xw-ie-uiM" secondAttribute="centerY" id="0zh-rv-DV9"/>
                         <constraint firstItem="a9e-EM-xyA" firstAttribute="centerY" secondItem="qQi-4N-SYH" secondAttribute="centerY" id="1g5-CM-O0b"/>
-                        <constraint firstItem="FxM-Rk-gTr" firstAttribute="width" secondItem="7Xw-ie-uiM" secondAttribute="width" id="6I2-hk-Ktc"/>
-                        <constraint firstItem="MN6-ga-geC" firstAttribute="bottom" secondItem="HCd-V1-eSq" secondAttribute="bottom" id="Cmz-F1-xlP"/>
+                        <constraint firstAttribute="bottom" secondItem="pGl-Xy-ujA" secondAttribute="bottom" id="2R1-Mb-jpH"/>
+                        <constraint firstItem="FxM-Rk-gTr" firstAttribute="top" secondItem="7Xw-ie-uiM" secondAttribute="top" id="43j-WB-xCD"/>
+                        <constraint firstAttribute="bottom" secondItem="FxM-Rk-gTr" secondAttribute="bottom" constant="-20" id="HmS-0n-so4"/>
                         <constraint firstItem="qQi-4N-SYH" firstAttribute="centerY" secondItem="qfX-4B-sjT" secondAttribute="centerY" id="IXF-yt-kPe"/>
-                        <constraint firstItem="FxM-Rk-gTr" firstAttribute="centerX" secondItem="7Xw-ie-uiM" secondAttribute="centerX" id="KyG-tz-A4t"/>
-                        <constraint firstItem="eVs-2i-YHW" firstAttribute="centerX" secondItem="FxM-Rk-gTr" secondAttribute="centerX" id="NzY-lc-nYk"/>
-                        <constraint firstItem="MN6-ga-geC" firstAttribute="centerX" secondItem="7Xw-ie-uiM" secondAttribute="centerX" constant="-6" id="VPl-yW-6sX"/>
-                        <constraint firstItem="HCd-V1-eSq" firstAttribute="centerX" secondItem="7Xw-ie-uiM" secondAttribute="centerX" constant="-5.5" id="XAf-NT-XaX"/>
+                        <constraint firstItem="FxM-Rk-gTr" firstAttribute="leading" secondItem="7Xw-ie-uiM" secondAttribute="leading" id="RdR-qX-3IQ"/>
                         <constraint firstItem="a9e-EM-xyA" firstAttribute="centerX" secondItem="qQi-4N-SYH" secondAttribute="centerX" id="XUe-wA-vQf"/>
-                        <constraint firstItem="FxM-Rk-gTr" firstAttribute="top" secondItem="7Xw-ie-uiM" secondAttribute="top" id="chG-53-7Ym"/>
                         <constraint firstAttribute="trailing" secondItem="qfX-4B-sjT" secondAttribute="trailing" constant="3" id="daS-zq-Xji"/>
-                        <constraint firstItem="eVs-2i-YHW" firstAttribute="height" secondItem="g9Y-Dn-zwh" secondAttribute="height" id="es6-en-amF"/>
+                        <constraint firstAttribute="trailing" secondItem="pGl-Xy-ujA" secondAttribute="trailing" id="etc-Dj-GHj"/>
                         <constraint firstItem="qQi-4N-SYH" firstAttribute="width" secondItem="qfX-4B-sjT" secondAttribute="width" id="ipF-61-bQV"/>
-                        <constraint firstItem="HCd-V1-eSq" firstAttribute="centerY" secondItem="7Xw-ie-uiM" secondAttribute="centerY" constant="-37.5" id="lZJ-dQ-XMi"/>
                         <constraint firstItem="qQi-4N-SYH" firstAttribute="centerX" secondItem="qfX-4B-sjT" secondAttribute="centerX" id="mVT-zm-t6a"/>
-                        <constraint firstItem="pGl-Xy-ujA" firstAttribute="top" secondItem="eVs-2i-YHW" secondAttribute="bottom" constant="21" id="pcq-8N-BhR"/>
-                        <constraint firstItem="eVs-2i-YHW" firstAttribute="width" secondItem="g9Y-Dn-zwh" secondAttribute="width" id="vdq-XK-G9V"/>
+                        <constraint firstItem="pGl-Xy-ujA" firstAttribute="leading" secondItem="7Xw-ie-uiM" secondAttribute="leading" id="mbO-OS-0ie"/>
+                        <constraint firstItem="FxM-Rk-gTr" firstAttribute="trailing" secondItem="qfX-4B-sjT" secondAttribute="trailing" id="n4m-zf-K87"/>
                         <constraint firstItem="qfX-4B-sjT" firstAttribute="top" secondItem="7Xw-ie-uiM" secondAttribute="top" constant="20" id="wVG-Jo-TGH"/>
                         <constraint firstItem="qQi-4N-SYH" firstAttribute="height" secondItem="qfX-4B-sjT" secondAttribute="height" id="wyj-08-YTm"/>
                     </constraints>
@@ -236,10 +207,396 @@
         </view>
     </objects>
     <resources>
-        <image name="default_avatar.png" width="23" height="39"/>
         <image name="hangUpButton" width="372" height="372"/>
+        <image name="imageView:6dZ-CP-9IE:image" width="23" height="39">
+            <mutableData key="keyedArchiveRepresentation">
+YnBsaXN0MDDUAQIDBAUGUlNYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK8QEQcI
+ERYbHCAhKCsuOEBESExPVSRudWxs1AkKCwwNDg8QViRjbGFzc1xOU0ltYWdlRmxhZ3NWTlNSZXBzV05T
+Q29sb3KAEBIAwAAAgAKACtISCRMVWk5TLm9iamVjdHOhFIADgAnSEgkXGqIYGYAEgAWACBAA0h0JHh9f
+EBROU1RJRkZSZXByZXNlbnRhdGlvboAGgAdPEUVeTU0AKgAAOBgAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAzMzMCtDQ0BsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADV1dUGysrKP6qqqgMAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAMzMzLTMzMz+y8vLrdHR0RYAAAAAzMzMBcrKyjoAAAAAzc3NhMzMzP/MzMzJzMzMGQAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANHR
+0QvMzMyNzMzMRgAAAADLy8uyzMzM/8zMzP/MzMznysrKNc7OzkPMzMz/zMzMtMvLy5TMzMz/zMzM/8zM
+zN/Ly8snAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AADLy8s2zMzM/8zMzP/MzMy0zMzMbszMzP/MzMz/zMzM/8zMzPTMzMyGzMzM/8zMzP/MzMzyzMzM/8zM
+zP/MzMz/zMzM6MzMzCgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzc3NhMzM
+zMPMzMyNy8vLQMzMzP7MzMz/zMzM/8zMzOrMzMzvzMzM/8zMzP/MzMz/zMzM/szMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMzmysrKKwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzM
+zN7MzMz/zMzM/8zMzPvMzMz5zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzPbMzMzMzMzMv8zMzLnMzMyqzMzMocvLy5nLy8uKzMzMg8zM
+zHfLy8tnzc3NV83NzUjOzs45zc3NKc7OzhrR0dELAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AADNzc22zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzPrMzMzrzc3Nts7Ozj4AAAAAAAAAAAAA
+AAAAAAAAy8vLT8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz+zMzMaQAA
+AAAAAAAAAAAAAAAAAADMzMy0zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP7Ozs5DAAAAAAAAAAAAAAAAzc3NM8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM1v///wEAAAAAAAAAAAAAAADLy8u8zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/Ly8s7AAAAAAAAAAAAAAAAzc3NUszMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/y8vLgAAAAAAAAAAAAAAAAMbGxgnMzMz9zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8vLy6MAAAAAAAAAAAAAAAAAAAAAzMzM7MzMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMy4AAAAAAAAAAAAAAAAAAAAAMzMzOHMzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzMxwAAAAAAAAAAAAAAAAAAAADMzMzhzMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzNYAAAAAAAAAAAAAAAAAAAAAzMzM2czM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMzlAAAAAAAAAAAAAAAAAAAAAMzM
+zNLMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM9AAAAAAAAAAAAAAAAAAA
+AADMzMzbzMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP////8BAAAAAAAA
+AAAAAAAAzMzM4czMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzMDwAA
+AAAAAAAAAAAAAMzMzOHMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/9DQ
+0BsAAAAAAAAAAAAAAADMzMzhzMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMweAAAAAAAAAAAAAAAAzMzM48zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zc3NKQAAAAAAAAAAAAAAAMzMzPDMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzC0AAAAAAAAAAAAAAADMzMzwzMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMwtAAAAAAAAAAAAAAAAzMzM/szMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/z8/PIAAAAAAAAAAAz8/PEMzMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/9HR0RYAAAAA1dXVBszMzMzMzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzPv///8BAAAAAMzMzFDMzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zs7OOQAAAADMzMxQzMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzG4AAAAAv7+/CMzMzNrMzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/Nzc11AAAAAAAAAADNzc0kzMzMpszM
+zNbMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz5zc3NKQAAAAAAAAAAAAAAAAAA
+AADMzMxyzMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzN3MzMy0ysrKNQAAAAAAAAAAAAAAAAAA
+AAAAAAAAzc3NZszMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMxaAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAMzMzFDMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zc3NUQAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAADKysowzMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/83NzUgAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAA0dHRC8zMzP3MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/Kyso1AAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMzMzYzMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/yMjIFwAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzMzMnMzMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM7QAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzFXMzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8vL
+y7cAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADR0dELzMzM8szMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/Ly8t2AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzJXMzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz+zMzMIwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADKysodzMzM9MzM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/y8vLsgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzM
+zG7MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM+c3NzS4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAzMzMlszMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzG0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAKqqqgPMzMyXzMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/MzMzHIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzFXMzMzjzMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzMzcrKyjoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA29vbB83NzWDMzMywzMzM5MzMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/czMzO7MzMzuzMzM583N
+zcrMzMySysrKPwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8B0tLSEdLS
+0hHKysoYzMzM/szMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzNsAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAv7+/CMzM
+zHfLy8uyzc3Nu8zMzPfMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMzvzc3Nu8zM
+zLDLy8txzMzMBQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzMzMCszM
+zMfMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8vLy7zV1dUGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzM
+zIjMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zc3NegAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzM
+zA/MzMz0zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzO2/v78IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AADLy8tezMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/y8vLTwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAy8vLnszMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8vLy48AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAMzMzNbMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMzIAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAANXV1QzMzMz9zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM9r+/vwQAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAADKyso/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/KysowAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAzMzMcszMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/y8vLYwAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzKbMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zJcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMzMzazMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/Ly8vLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADPz88QzMzM/szMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM+dXV1QYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzc3NQszMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/Nzc0zAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM3NzXXMzMz/zMzM/8zMzP/MzMzmzMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMzyzMzM/8zMzP/MzMz/zc3NZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADMzMyrzMzM/8zMzP/MzMz3zMzMuMzM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zc3NwMzMzP3MzMz/zMzM/8zMzJwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzMzM4MzMzP/MzMz/zMzMx8zM
+zLTMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzLTMzMzVzMzM/8zMzP/MzMzUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAysrKGMzMzP/MzMz/zMzM/8zM
+zJHMzMy0zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMy0zMzMn8zMzP/MzMz/zMzM/NXV1QwAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMzMzFDMzMz/zMzM/8zM
+zP/Ly8tdzMzMtMzMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzMtM3NzWvMzMz/zMzM/8zMzP/Nzc1CAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADLy8uFzMzM/8zM
+zP/MzMz/y8vLJ8zMzLTMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzLTLy8s2zMzM/8zMzP/MzMz/y8vLdgAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzMzMvczM
+zP/MzMz/zMzM8P///wLMzMy0zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMy029vbB8zMzPnMzMz/zMzM/8zMzK4AAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA////AszM
+zPDMzMz/zMzM/8vLy7wAAAAAzMzMv8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzMtAAAAADLy8vLzMzM/8zMzP/MzMzkAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMrK
+yivMzMz/zMzM/8zMzP/MzMyHAAAAAMzMzMPMzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzLQAAAAAzMzMlszMzP/MzMz/zMzM/8jI
+yBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AADNzc1gzMzM/8zMzP/MzMz/zc3NUgAAAADMzMzVzMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMzHAAAAAM3NzWHMzMz/zMzM/8zM
+zP/Nzc1RAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAzc3NmMzMzP/MzMz/zMzM/8rKyh0AAAAAzMzM7czMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM3wAAAADLy8sszMzM/8zM
+zP/MzMz/zc3NiQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAMzMzM3MzMz/zMzM/8zMzOcAAAAAzMzMFMzMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP3b29sHqqqqA8zM
+zPPMzMz/zMzM1czMzEYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAADLy8s2zc3NnczMzPDLy8uyAAAAAMzMzDfMzMz/zMzM/8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zc3NKQAA
+AADMzMyVzc3NXL+/vwQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADb29sHycnJIQAAAADNzc1MzMzM+8zMzP/MzMz/zMzM/8zM
+zP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM/8zMzP/MzMz/zMzM1szM
+zC0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL+/vwjOzs40y8vLXszM
+zHzLy8uZzMzMrszMzL3MzMzMzMzM1MzMzN3MzMzdzMzM28zMzMzLy8vBzMzMpMzMzH7MzMxQ0NDQGwAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgEAAAMAAAAB
+AC4AAAEBAAMAAAABAE4AAAECAAMAAAAEAAA5BgEDAAMAAAABAAEAAAEGAAMAAAABAAIAAAEKAAMAAAAB
+AAEAAAERAAQAAAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAQAAAEWAAMAAAABAE4AAAEXAAQAAAAB
+AAA4EAEaAAUAAAABAAA49gEbAAUAAAABAAA4/gEcAAMAAAABAAEAAAEoAAMAAAABAAIAAAFSAAMAAAAB
+AAIAAAFTAAMAAAAEAAA5DodzAAcAAAxIAAA5FgAAAAAAAACQAAAAAQAAAJAAAAABAAgACAAIAAgAAQAB
+AAEAAQAADEhMaW5vAhAAAG1udHJSR0IgWFlaIAfOAAIACQAGADEAAGFjc3BNU0ZUAAAAAElFQyBzUkdC
+AAAAAAAAAAAAAAAAAAD21gABAAAAANMtSFAgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAEWNwcnQAAAFQAAAAM2Rlc2MAAAGEAAAAbHd0cHQAAAHwAAAAFGJrcHQAAAIE
+AAAAFHJYWVoAAAIYAAAAFGdYWVoAAAIsAAAAFGJYWVoAAAJAAAAAFGRtbmQAAAJUAAAAcGRtZGQAAALE
+AAAAiHZ1ZWQAAANMAAAAhnZpZXcAAAPUAAAAJGx1bWkAAAP4AAAAFG1lYXMAAAQMAAAAJHRlY2gAAAQw
+AAAADHJUUkMAAAQ8AAAIDGdUUkMAAAQ8AAAIDGJUUkMAAAQ8AAAIDHRleHQAAAAAQ29weXJpZ2h0IChj
+KSAxOTk4IEhld2xldHQtUGFja2FyZCBDb21wYW55AABkZXNjAAAAAAAAABJzUkdCIElFQzYxOTY2LTIu
+MQAAAAAAAAAAAAAAEnNSR0IgSUVDNjE5NjYtMi4xAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAABYWVogAAAAAAAA81EAAQAAAAEWzFhZWiAAAAAAAAAAAAAAAAAAAAAA
+WFlaIAAAAAAAAG+iAAA49QAAA5BYWVogAAAAAAAAYpkAALeFAAAY2lhZWiAAAAAAAAAkoAAAD4QAALbP
+ZGVzYwAAAAAAAAAWSUVDIGh0dHA6Ly93d3cuaWVjLmNoAAAAAAAAAAAAAAAWSUVDIGh0dHA6Ly93d3cu
+aWVjLmNoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGRlc2MAAAAA
+AAAALklFQyA2MTk2Ni0yLjEgRGVmYXVsdCBSR0IgY29sb3VyIHNwYWNlIC0gc1JHQgAAAAAAAAAAAAAA
+LklFQyA2MTk2Ni0yLjEgRGVmYXVsdCBSR0IgY29sb3VyIHNwYWNlIC0gc1JHQgAAAAAAAAAAAAAAAAAA
+AAAAAAAAAABkZXNjAAAAAAAAACxSZWZlcmVuY2UgVmlld2luZyBDb25kaXRpb24gaW4gSUVDNjE5NjYt
+Mi4xAAAAAAAAAAAAAAAsUmVmZXJlbmNlIFZpZXdpbmcgQ29uZGl0aW9uIGluIElFQzYxOTY2LTIuMQAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdmlldwAAAAAAE6T+ABRfLgAQzxQAA+3MAAQTCwADXJ4AAAAB
+WFlaIAAAAAAATAlWAFAAAABXH+dtZWFzAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAACjwAAAAJzaWcg
+AAAAAENSVCBjdXJ2AAAAAAAABAAAAAAFAAoADwAUABkAHgAjACgALQAyADcAOwBAAEUASgBPAFQAWQBe
+AGMAaABtAHIAdwB8AIEAhgCLAJAAlQCaAJ8ApACpAK4AsgC3ALwAwQDGAMsA0ADVANsA4ADlAOsA8AD2
+APsBAQEHAQ0BEwEZAR8BJQErATIBOAE+AUUBTAFSAVkBYAFnAW4BdQF8AYMBiwGSAZoBoQGpAbEBuQHB
+AckB0QHZAeEB6QHyAfoCAwIMAhQCHQImAi8COAJBAksCVAJdAmcCcQJ6AoQCjgKYAqICrAK2AsECywLV
+AuAC6wL1AwADCwMWAyEDLQM4A0MDTwNaA2YDcgN+A4oDlgOiA64DugPHA9MD4APsA/kEBgQTBCAELQQ7
+BEgEVQRjBHEEfgSMBJoEqAS2BMQE0wThBPAE/gUNBRwFKwU6BUkFWAVnBXcFhgWWBaYFtQXFBdUF5QX2
+BgYGFgYnBjcGSAZZBmoGewaMBp0GrwbABtEG4wb1BwcHGQcrBz0HTwdhB3QHhgeZB6wHvwfSB+UH+AgL
+CB8IMghGCFoIbgiCCJYIqgi+CNII5wj7CRAJJQk6CU8JZAl5CY8JpAm6Cc8J5Qn7ChEKJwo9ClQKagqB
+CpgKrgrFCtwK8wsLCyILOQtRC2kLgAuYC7ALyAvhC/kMEgwqDEMMXAx1DI4MpwzADNkM8w0NDSYNQA1a
+DXQNjg2pDcMN3g34DhMOLg5JDmQOfw6bDrYO0g7uDwkPJQ9BD14Peg+WD7MPzw/sEAkQJhBDEGEQfhCb
+ELkQ1xD1ERMRMRFPEW0RjBGqEckR6BIHEiYSRRJkEoQSoxLDEuMTAxMjE0MTYxODE6QTxRPlFAYUJxRJ
+FGoUixStFM4U8BUSFTQVVhV4FZsVvRXgFgMWJhZJFmwWjxayFtYW+hcdF0EXZReJF64X0hf3GBsYQBhl
+GIoYrxjVGPoZIBlFGWsZkRm3Gd0aBBoqGlEadxqeGsUa7BsUGzsbYxuKG7Ib2hwCHCocUhx7HKMczBz1
+HR4dRx1wHZkdwx3sHhYeQB5qHpQevh7pHxMfPh9pH5Qfvx/qIBUgQSBsIJggxCDwIRwhSCF1IaEhziH7
+IiciVSKCIq8i3SMKIzgjZiOUI8Ij8CQfJE0kfCSrJNolCSU4JWgllyXHJfcmJyZXJocmtyboJxgnSSd6
+J6sn3CgNKD8ocSiiKNQpBik4KWspnSnQKgIqNSpoKpsqzysCKzYraSudK9EsBSw5LG4soizXLQwtQS12
+Last4S4WLkwugi63Lu4vJC9aL5Evxy/+MDUwbDCkMNsxEjFKMYIxujHyMioyYzKbMtQzDTNGM38zuDPx
+NCs0ZTSeNNg1EzVNNYc1wjX9Njc2cjauNuk3JDdgN5w31zgUOFA4jDjIOQU5Qjl/Obw5+To2OnQ6sjrv
+Oy07azuqO+g8JzxlPKQ84z0iPWE9oT3gPiA+YD6gPuA/IT9hP6I/4kAjQGRApkDnQSlBakGsQe5CMEJy
+QrVC90M6Q31DwEQDREdEikTORRJFVUWaRd5GIkZnRqtG8Ec1R3tHwEgFSEtIkUjXSR1JY0mpSfBKN0p9
+SsRLDEtTS5pL4kwqTHJMuk0CTUpNk03cTiVObk63TwBPSU+TT91QJ1BxULtRBlFQUZtR5lIxUnxSx1MT
+U19TqlP2VEJUj1TbVShVdVXCVg9WXFapVvdXRFeSV+BYL1h9WMtZGllpWbhaB1pWWqZa9VtFW5Vb5Vw1
+XIZc1l0nXXhdyV4aXmxevV8PX2Ffs2AFYFdgqmD8YU9homH1YklinGLwY0Njl2PrZEBklGTpZT1lkmXn
+Zj1mkmboZz1nk2fpaD9olmjsaUNpmmnxakhqn2r3a09rp2v/bFdsr20IbWBtuW4SbmtuxG8eb3hv0XAr
+cIZw4HE6cZVx8HJLcqZzAXNdc7h0FHRwdMx1KHWFdeF2Pnabdvh3VnezeBF4bnjMeSp5iXnnekZ6pXsE
+e2N7wnwhfIF84X1BfaF+AX5ifsJ/I3+Ef+WAR4CogQqBa4HNgjCCkoL0g1eDuoQdhICE44VHhauGDoZy
+hteHO4efiASIaYjOiTOJmYn+imSKyoswi5aL/IxjjMqNMY2Yjf+OZo7OjzaPnpAGkG6Q1pE/kaiSEZJ6
+kuOTTZO2lCCUipT0lV+VyZY0lp+XCpd1l+CYTJi4mSSZkJn8mmia1ZtCm6+cHJyJnPedZJ3SnkCerp8d
+n4uf+qBpoNihR6G2oiailqMGo3aj5qRWpMelOKWpphqmi6b9p26n4KhSqMSpN6mpqhyqj6sCq3Wr6axc
+rNCtRK24ri2uoa8Wr4uwALB1sOqxYLHWskuywrM4s660JbSctRO1irYBtnm28Ldot+C4WbjRuUq5wro7
+urW7LrunvCG8m70VvY++Cr6Evv+/er/1wHDA7MFnwePCX8Lbw1jD1MRRxM7FS8XIxkbGw8dBx7/IPci8
+yTrJuco4yrfLNsu2zDXMtc01zbXONs62zzfPuNA50LrRPNG+0j/SwdNE08bUSdTL1U7V0dZV1tjXXNfg
+2GTY6Nls2fHadtr724DcBdyK3RDdlt4c3qLfKd+v4DbgveFE4cziU+Lb42Pj6+Rz5PzlhOYN5pbnH+ep
+6DLovOlG6dDqW+rl63Dr++yG7RHtnO4o7rTvQO/M8Fjw5fFy8f/yjPMZ86f0NPTC9VD13vZt9vv3ivgZ
++Kj5OPnH+lf65/t3/Af8mP0p/br+S/7c/23//9IiIyQlWiRjbGFzc25hbWVYJGNsYXNzZXNfEBBOU0Jp
+dG1hcEltYWdlUmVwoyQmJ1pOU0ltYWdlUmVwWE5TT2JqZWN00iIjKSpXTlNBcnJheaIpJ9IiIywtXk5T
+TXV0YWJsZUFycmF5oywpJ9UvMDEyCTM0NTY3V05TV2hpdGVcTlNDb21wb25lbnRzXE5TQ29sb3JTcGFj
+ZV8QEk5TQ3VzdG9tQ29sb3JTcGFjZUQwIDAAQzAgMBADgAuAD9Q5OjsJPD0+P1ROU0lEVU5TSUNDV05T
+TW9kZWwQCYAMEACADtJBCUJDV05TLmRhdGFPERFoAAARaGFwcGwCAAAAbW50ckdSQVlYWVogB9wACAAX
+AA8ALgAPYWNzcEFQUEwAAAAAbm9uZQAAAAAAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1hcHBsAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFZGVzYwAAAMAAAAB5ZHNjbQAA
+ATwAAAfoY3BydAAACSQAAAAjd3RwdAAACUgAAAAUa1RSQwAACVwAAAgMZGVzYwAAAAAAAAAfR2VuZXJp
+YyBHcmF5IEdhbW1hIDIuMiBQcm9maWxlAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAG1sdWMAAAAAAAAAHwAA
+AAxza1NLAAAALgAAAYRkYURLAAAAOAAAAbJjYUVTAAAAOAAAAep2aVZOAAAAQAAAAiJwdEJSAAAASgAA
+AmJ1a1VBAAAALAAAAqxmckZVAAAAPgAAAthodUhVAAAANAAAAxZ6aFRXAAAAHgAAA0puYk5PAAAAOgAA
+A2hjc0NaAAAAKAAAA6JoZUlMAAAAJAAAA8ppdElUAAAATgAAA+5yb1JPAAAAKgAABDxkZURFAAAATgAA
+BGZrb0tSAAAAIgAABLRzdlNFAAAAOAAAAbJ6aENOAAAAHgAABNZqYUpQAAAAJgAABPRlbEdSAAAAKgAA
+BRpwdFBPAAAAUgAABURubE5MAAAAQAAABZZlc0VTAAAATAAABdZ0aFRIAAAAMgAABiJ0clRSAAAAJAAA
+BlRmaUZJAAAARgAABnhockhSAAAAPgAABr5wbFBMAAAASgAABvxydVJVAAAAOgAAB0ZlblVTAAAAPAAA
+B4BhckVHAAAALAAAB7wAVgFhAGUAbwBiAGUAYwBuAOEAIABzAGkAdgDhACAAZwBhAG0AYQAgADIALAAy
+AEcAZQBuAGUAcgBpAHMAawAgAGcAcgDlACAAMgAsADIAIABnAGEAbQBtAGEAcAByAG8AZgBpAGwARwBh
+AG0AbQBhACAAZABlACAAZwByAGkAcwBvAHMAIABnAGUAbgDoAHIAaQBjAGEAIAAyAC4AMgBDHqUAdQAg
+AGgA7ABuAGgAIABNAOAAdQAgAHgA4QBtACAAQwBoAHUAbgBnACAARwBhAG0AbQBhACAAMgAuADIAUABl
+AHIAZgBpAGwAIABHAGUAbgDpAHIAaQBjAG8AIABkAGEAIABHAGEAbQBhACAAZABlACAAQwBpAG4AegBh
+AHMAIAAyACwAMgQXBDAEMwQwBDsETAQ9BDAAIABHAHIAYQB5AC0EMwQwBDwEMAAgADIALgAyAFAAcgBv
+AGYAaQBsACAAZwDpAG4A6QByAGkAcQB1AGUAIABnAHIAaQBzACAAZwBhAG0AbQBhACAAMgAsADIAwQBs
+AHQAYQBsAOEAbgBvAHMAIABzAHoA/AByAGsAZQAgAGcAYQBtAG0AYQAgADIALgAykBp1KHBwlo5RSV6m
+ACAAMgAuADIAIIJyX2ljz4/wAEcAZQBuAGUAcgBpAHMAawAgAGcAcgDlACAAZwBhAG0AbQBhACAAMgAs
+ADIALQBwAHIAbwBmAGkAbABPAGIAZQBjAG4A4QAgAWEAZQBkAOEAIABnAGEAbQBhACAAMgAuADIF0gXQ
+Bd4F1AAgBdAF5AXVBegAIAXbBdwF3AXZACAAMgAuADIAUAByAG8AZgBpAGwAbwAgAGcAcgBpAGcAaQBv
+ACAAZwBlAG4AZQByAGkAYwBvACAAZABlAGwAbABhACAAZwBhAG0AbQBhACAAMgAsADIARwBhAG0AYQAg
+AGcAcgBpACAAZwBlAG4AZQByAGkAYwEDACAAMgAsADIAQQBsAGwAZwBlAG0AZQBpAG4AZQBzACAARwBy
+AGEAdQBzAHQAdQBmAGUAbgAtAFAAcgBvAGYAaQBsACAARwBhAG0AbQBhACAAMgAsADLHfLwYACDWjMDJ
+ACCsELnIACAAMgAuADIAINUEuFzTDMd8Zm6QGnBwXqZ8+2VwACAAMgAuADIAIGPPj/Blh072TgCCLDCw
+MOwwpDCsMPMw3gAgADIALgAyACAw1zDtMNUwoTCkMOsDkwO1A70DuQO6A8wAIAOTA7oDwQO5ACADkwOs
+A7wDvAOxACAAMgAuADIAUABlAHIAZgBpAGwAIABnAGUAbgDpAHIAaQBjAG8AIABkAGUAIABjAGkAbgB6
+AGUAbgB0AG8AcwAgAGQAYQAgAEcAYQBtAG0AYQAgADIALAAyAEEAbABnAGUAbQBlAGUAbgAgAGcAcgBp
+AGoAcwAgAGcAYQBtAG0AYQAgADIALAAyAC0AcAByAG8AZgBpAGUAbABQAGUAcgBmAGkAbAAgAGcAZQBu
+AOkAcgBpAGMAbwAgAGQAZQAgAGcAYQBtAG0AYQAgAGQAZQAgAGcAcgBpAHMAZQBzACAAMgAsADIOIw4x
+DgcOKg41DkEOAQ4hDiEOMg5ADgEOIw4iDkwOFw4xDkgOJw5EDhsAIAAyAC4AMgBHAGUAbgBlAGwAIABH
+AHIAaQAgAEcAYQBtAGEAIAAyACwAMgBZAGwAZQBpAG4AZQBuACAAaABhAHIAbQBhAGEAbgAgAGcAYQBt
+AG0AYQAgADIALAAyACAALQBwAHIAbwBmAGkAaQBsAGkARwBlAG4AZQByAGkBDQBrAGkAIABHAHIAYQB5
+ACAARwBhAG0AbQBhACAAMgAuADIAIABwAHIAbwBmAGkAbABVAG4AaQB3AGUAcgBzAGEAbABuAHkAIABw
+AHIAbwBmAGkAbAAgAHMAegBhAHIAbwFbAGMAaQAgAGcAYQBtAG0AYQAgADIALAAyBB4EMQRJBDAETwAg
+BEEENQRABDAETwAgBDMEMAQ8BDwEMAAgADIALAAyAC0EPwRABD4ERAQ4BDsETABHAGUAbgBlAHIAaQBj
+ACAARwByAGEAeQAgAEcAYQBtAG0AYQAgADIALgAyACAAUAByAG8AZgBpAGwAZQY6BicGRQYnACAAMgAu
+ADIAIAZEBkgGRgAgBjEGRQYnBi8GSgAgBjkGJwZFdGV4dAAAAABDb3B5cmlnaHQgQXBwbGUgSW5jLiwg
+MjAxMgAAWFlaIAAAAAAAAPNRAAEAAAABFsxjdXJ2AAAAAAAABAAAAAAFAAoADwAUABkAHgAjACgALQAy
+ADcAOwBAAEUASgBPAFQAWQBeAGMAaABtAHIAdwB8AIEAhgCLAJAAlQCaAJ8ApACpAK4AsgC3ALwAwQDG
+AMsA0ADVANsA4ADlAOsA8AD2APsBAQEHAQ0BEwEZAR8BJQErATIBOAE+AUUBTAFSAVkBYAFnAW4BdQF8
+AYMBiwGSAZoBoQGpAbEBuQHBAckB0QHZAeEB6QHyAfoCAwIMAhQCHQImAi8COAJBAksCVAJdAmcCcQJ6
+AoQCjgKYAqICrAK2AsECywLVAuAC6wL1AwADCwMWAyEDLQM4A0MDTwNaA2YDcgN+A4oDlgOiA64DugPH
+A9MD4APsA/kEBgQTBCAELQQ7BEgEVQRjBHEEfgSMBJoEqAS2BMQE0wThBPAE/gUNBRwFKwU6BUkFWAVn
+BXcFhgWWBaYFtQXFBdUF5QX2BgYGFgYnBjcGSAZZBmoGewaMBp0GrwbABtEG4wb1BwcHGQcrBz0HTwdh
+B3QHhgeZB6wHvwfSB+UH+AgLCB8IMghGCFoIbgiCCJYIqgi+CNII5wj7CRAJJQk6CU8JZAl5CY8JpAm6
+Cc8J5Qn7ChEKJwo9ClQKagqBCpgKrgrFCtwK8wsLCyILOQtRC2kLgAuYC7ALyAvhC/kMEgwqDEMMXAx1
+DI4MpwzADNkM8w0NDSYNQA1aDXQNjg2pDcMN3g34DhMOLg5JDmQOfw6bDrYO0g7uDwkPJQ9BD14Peg+W
+D7MPzw/sEAkQJhBDEGEQfhCbELkQ1xD1ERMRMRFPEW0RjBGqEckR6BIHEiYSRRJkEoQSoxLDEuMTAxMj
+E0MTYxODE6QTxRPlFAYUJxRJFGoUixStFM4U8BUSFTQVVhV4FZsVvRXgFgMWJhZJFmwWjxayFtYW+hcd
+F0EXZReJF64X0hf3GBsYQBhlGIoYrxjVGPoZIBlFGWsZkRm3Gd0aBBoqGlEadxqeGsUa7BsUGzsbYxuK
+G7Ib2hwCHCocUhx7HKMczBz1HR4dRx1wHZkdwx3sHhYeQB5qHpQevh7pHxMfPh9pH5Qfvx/qIBUgQSBs
+IJggxCDwIRwhSCF1IaEhziH7IiciVSKCIq8i3SMKIzgjZiOUI8Ij8CQfJE0kfCSrJNolCSU4JWgllyXH
+JfcmJyZXJocmtyboJxgnSSd6J6sn3CgNKD8ocSiiKNQpBik4KWspnSnQKgIqNSpoKpsqzysCKzYraSud
+K9EsBSw5LG4soizXLQwtQS12Last4S4WLkwugi63Lu4vJC9aL5Evxy/+MDUwbDCkMNsxEjFKMYIxujHy
+MioyYzKbMtQzDTNGM38zuDPxNCs0ZTSeNNg1EzVNNYc1wjX9Njc2cjauNuk3JDdgN5w31zgUOFA4jDjI
+OQU5Qjl/Obw5+To2OnQ6sjrvOy07azuqO+g8JzxlPKQ84z0iPWE9oT3gPiA+YD6gPuA/IT9hP6I/4kAj
+QGRApkDnQSlBakGsQe5CMEJyQrVC90M6Q31DwEQDREdEikTORRJFVUWaRd5GIkZnRqtG8Ec1R3tHwEgF
+SEtIkUjXSR1JY0mpSfBKN0p9SsRLDEtTS5pL4kwqTHJMuk0CTUpNk03cTiVObk63TwBPSU+TT91QJ1Bx
+ULtRBlFQUZtR5lIxUnxSx1MTU19TqlP2VEJUj1TbVShVdVXCVg9WXFapVvdXRFeSV+BYL1h9WMtZGllp
+WbhaB1pWWqZa9VtFW5Vb5Vw1XIZc1l0nXXhdyV4aXmxevV8PX2Ffs2AFYFdgqmD8YU9homH1YklinGLw
+Y0Njl2PrZEBklGTpZT1lkmXnZj1mkmboZz1nk2fpaD9olmjsaUNpmmnxakhqn2r3a09rp2v/bFdsr20I
+bWBtuW4SbmtuxG8eb3hv0XArcIZw4HE6cZVx8HJLcqZzAXNdc7h0FHRwdMx1KHWFdeF2Pnabdvh3Vnez
+eBF4bnjMeSp5iXnnekZ6pXsEe2N7wnwhfIF84X1BfaF+AX5ifsJ/I3+Ef+WAR4CogQqBa4HNgjCCkoL0
+g1eDuoQdhICE44VHhauGDoZyhteHO4efiASIaYjOiTOJmYn+imSKyoswi5aL/IxjjMqNMY2Yjf+OZo7O
+jzaPnpAGkG6Q1pE/kaiSEZJ6kuOTTZO2lCCUipT0lV+VyZY0lp+XCpd1l+CYTJi4mSSZkJn8mmia1ZtC
+m6+cHJyJnPedZJ3SnkCerp8dn4uf+qBpoNihR6G2oiailqMGo3aj5qRWpMelOKWpphqmi6b9p26n4KhS
+qMSpN6mpqhyqj6sCq3Wr6axcrNCtRK24ri2uoa8Wr4uwALB1sOqxYLHWskuywrM4s660JbSctRO1irYB
+tnm28Ldot+C4WbjRuUq5wro7urW7LrunvCG8m70VvY++Cr6Evv+/er/1wHDA7MFnwePCX8Lbw1jD1MRR
+xM7FS8XIxkbGw8dBx7/IPci8yTrJuco4yrfLNsu2zDXMtc01zbXONs62zzfPuNA50LrRPNG+0j/SwdNE
+08bUSdTL1U7V0dZV1tjXXNfg2GTY6Nls2fHadtr724DcBdyK3RDdlt4c3qLfKd+v4DbgveFE4cziU+Lb
+42Pj6+Rz5PzlhOYN5pbnH+ep6DLovOlG6dDqW+rl63Dr++yG7RHtnO4o7rTvQO/M8Fjw5fFy8f/yjPMZ
+86f0NPTC9VD13vZt9vv3ivgZ+Kj5OPnH+lf65/t3/Af8mP0p/br+S/7c/23//4AN0iIjRUZdTlNNdXRh
+YmxlRGF0YaNFRydWTlNEYXRh0iIjSUpcTlNDb2xvclNwYWNloksnXE5TQ29sb3JTcGFjZdIiI01OV05T
+Q29sb3KiTSfSIiNQUVdOU0ltYWdlolAnXxAPTlNLZXllZEFyY2hpdmVy0VRVVHJvb3SAAQAIABEAGgAj
+AC0AMgA3AEsAUQBaAGEAbgB1AH0AfwCEAIYAiACNAJgAmgCcAJ4AowCmAKgAqgCsAK4AswDKAMwAzkYw
+RjVGQEZJRlxGYEZrRnRGeUaBRoRGiUaYRpxGp0avRrxGyUbeRuNG50bpRutG7Ub2RvtHAUcJRwtHDUcP
+RxFHFkceWIpYjFiRWJ9Yo1iqWK9YvFi/WMxY0VjZWNxY4VjpWOxY/lkBWQYAAAAAAAACAQAAAAAAAABW
+AAAAAAAAAAAAAAAAAABZCA
+</mutableData>
+        </image>
         <image name="localVideoMutedBg" width="90" height="120"/>
-        <image name="minloading.png" width="67.5" height="98.5"/>
         <image name="switchCameraButton" width="372" height="372"/>
         <image name="switchCameraButtonSelected" width="372" height="372"/>
         <image name="videoMutedIndicator" width="153.5" height="129"/>

@@ -308,6 +308,12 @@
 		04A9DFBF225C7B9F00CD7CC1 /* 启动图@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */; };
 		04A9DFC0225C7B9F00CD7CC1 /* 启动图@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */; };
 		04A9DFC1225C7B9F00CD7CC1 /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */; };
+		04BBF296228E57C50068A9B1 /* JMWaitForAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF295228E57C50068A9B1 /* JMWaitForAnswerView.m */; };
+		04BBF299228E67600068A9B1 /* JMAnswerOrHangUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF298228E67600068A9B1 /* JMAnswerOrHangUpView.m */; };
+		04BBF29E228E90BA0068A9B1 /* answer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF29B228E90B90068A9B1 /* answer@2x.png */; };
+		04BBF29F228E90BA0068A9B1 /* answer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF29C228E90BA0068A9B1 /* answer@3x.png */; };
+		04BBF2A0228E90BA0068A9B1 /* answer.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF29D228E90BA0068A9B1 /* answer.png */; };
+		04BBF2A3228EC6790068A9B1 /* JMVideoChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF2A2228EC6790068A9B1 /* JMVideoChatView.m */; };
 		04C120D822882B5F001BDEBC /* JMUploadVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C120D622882B5F001BDEBC /* JMUploadVideoViewController.m */; };
 		04C120D922882B5F001BDEBC /* JMUploadVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C120D722882B5F001BDEBC /* JMUploadVideoViewController.xib */; };
 		04C120DD22882E97001BDEBC /* my_videos_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C120DA22882E97001BDEBC /* my_videos_2@3x.png */; };
@@ -920,6 +926,15 @@
 		04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@2x.png"; sourceTree = "<group>"; };
 		04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@3x.png"; sourceTree = "<group>"; };
 		04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图.png"; sourceTree = "<group>"; };
+		04BBF294228E57C50068A9B1 /* JMWaitForAnswerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMWaitForAnswerView.h; sourceTree = "<group>"; };
+		04BBF295228E57C50068A9B1 /* JMWaitForAnswerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMWaitForAnswerView.m; sourceTree = "<group>"; };
+		04BBF297228E67600068A9B1 /* JMAnswerOrHangUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAnswerOrHangUpView.h; sourceTree = "<group>"; };
+		04BBF298228E67600068A9B1 /* JMAnswerOrHangUpView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAnswerOrHangUpView.m; sourceTree = "<group>"; };
+		04BBF29B228E90B90068A9B1 /* answer@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "answer@2x.png"; sourceTree = "<group>"; };
+		04BBF29C228E90BA0068A9B1 /* answer@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "answer@3x.png"; sourceTree = "<group>"; };
+		04BBF29D228E90BA0068A9B1 /* answer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = answer.png; sourceTree = "<group>"; };
+		04BBF2A1228EC6790068A9B1 /* JMVideoChatView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoChatView.h; sourceTree = "<group>"; };
+		04BBF2A2228EC6790068A9B1 /* JMVideoChatView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoChatView.m; sourceTree = "<group>"; };
 		04C120D522882B5F001BDEBC /* JMUploadVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMUploadVideoViewController.h; sourceTree = "<group>"; };
 		04C120D622882B5F001BDEBC /* JMUploadVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMUploadVideoViewController.m; sourceTree = "<group>"; };
 		04C120D722882B5F001BDEBC /* JMUploadVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMUploadVideoViewController.xib; sourceTree = "<group>"; };
@@ -1934,6 +1949,9 @@
 		049555E5227B25A30008AF1C /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				04BBF29D228E90BA0068A9B1 /* answer.png */,
+				04BBF29B228E90B90068A9B1 /* answer@2x.png */,
+				04BBF29C228E90BA0068A9B1 /* answer@3x.png */,
 				040C864E227E8F4A00993490 /* Photo.png */,
 				040C8650227E8F4A00993490 /* Photo@2x.png */,
 				040C864B227E8F4A00993490 /* Photo@3x.png */,
@@ -2083,6 +2101,12 @@
 				040C8657227ED71100993490 /* JMChatDetailInfoTableViewCell.h */,
 				040C8658227ED71100993490 /* JMChatDetailInfoTableViewCell.m */,
 				040C8659227ED71100993490 /* JMChatDetailInfoTableViewCell.xib */,
+				04BBF294228E57C50068A9B1 /* JMWaitForAnswerView.h */,
+				04BBF295228E57C50068A9B1 /* JMWaitForAnswerView.m */,
+				04BBF297228E67600068A9B1 /* JMAnswerOrHangUpView.h */,
+				04BBF298228E67600068A9B1 /* JMAnswerOrHangUpView.m */,
+				04BBF2A1228EC6790068A9B1 /* JMVideoChatView.h */,
+				04BBF2A2228EC6790068A9B1 /* JMVideoChatView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2731,6 +2755,7 @@
 				04DD1D53224B6E95007CB11C /* phone@2x.png in Resources */,
 				6D0209E7224FB900009BCFE4 /* subscribe@3x.png in Resources */,
 				041C07D62261891A0088FBE1 /* JMNotificationHeaderTableViewCell.xib in Resources */,
+				04BBF29E228E90BA0068A9B1 /* answer@2x.png in Resources */,
 				040CA855225F1EBF006D7A7F /* icon_return 拷贝 6@2x.png in Resources */,
 				04072F4B2282BA650067A05D /* delete@3x.png in Resources */,
 				041997CF2266C75000C6C134 /* JMPostJobHomeViewController.xib in Resources */,
@@ -2818,6 +2843,7 @@
 				6D020A832259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.xib in Resources */,
 				04E02E75228BF4BF00924130 /* minloading@2x.png in Resources */,
 				048348C0226979CA00DE4630 /* JMWorkLocationViewController.xib in Resources */,
+				04BBF29F228E90BA0068A9B1 /* answer@3x.png in Resources */,
 				040A40C72265B41A0005E0D7 /* company_logo@2x.png in Resources */,
 				040714A4227C6CC70026C368 /* default_avatar@2x.png in Resources */,
 				6D020A242250F3F9009BCFE4 /* job_wanted@3x.png in Resources */,
@@ -2834,6 +2860,7 @@
 				040BF07822719E4E0088697D /* switchover.png in Resources */,
 				6D55865D224B54D70037C14E /* home_ message@2x.png in Resources */,
 				040865E22272FAF1005BB03E /* JMPostJobHomeTableViewCell.xib in Resources */,
+				04BBF2A0228E90BA0068A9B1 /* answer.png in Resources */,
 				6D020A232250F3F9009BCFE4 /* education@2x.png in Resources */,
 				6D55864D224B54D70037C14E /* site_Home@2x.png in Resources */,
 				047F8EB1228AC11B005E81FA /* transmit@2x.png in Resources */,
@@ -3118,10 +3145,13 @@
 				048348C6226983C700DE4630 /* NSString+Extension.m in Sources */,
 				041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */,
 				040A392A227DA9A600EDD9E0 /* JMGreetCell.m in Sources */,
+				04BBF2A3228EC6790068A9B1 /* JMVideoChatView.m in Sources */,
 				6D0209F6224FBEEC009BCFE4 /* JMMineModulesTableViewCell.m in Sources */,
+				04BBF296228E57C50068A9B1 /* JMWaitForAnswerView.m in Sources */,
 				04A9DFA5225AE3D800CD7CC1 /* JMUserInfoModel.m in Sources */,
 				04C6013E2260639C000B1FE0 /* JMAllMessageTableViewController.m in Sources */,
 				04072F6A2282D3680067A05D /* JMDeleteBankCardViewController.m in Sources */,
+				04BBF299228E67600068A9B1 /* JMAnswerOrHangUpView.m in Sources */,
 				041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */,
 				04C6015C2260874A000B1FE0 /* JMLookMeTableViewCell.m in Sources */,
 				6D0209FF2250F09D009BCFE4 /* JMMyResumeViewController.m in Sources */,

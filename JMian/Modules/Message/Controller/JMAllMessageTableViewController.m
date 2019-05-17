@@ -415,7 +415,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
         _progressHUD.progress = 0.6;
         _progressHUD.dimBackground = NO; //设置有遮罩
-        _progressHUD.label.text = @"获取消息列表中..."; //设置进度框中的提示文字
         [_progressHUD showAnimated:YES]; //显示进度框
     }
     return _progressHUD;

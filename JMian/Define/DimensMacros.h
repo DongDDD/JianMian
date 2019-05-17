@@ -17,6 +17,7 @@
 #import <IMMessageExt.h>
 #import "MJRefresh.h"
 #import "MBProgressHUD.h"
+#import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
 
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
@@ -109,7 +110,7 @@
 #define User_Id @"User_Id"
 #define TITLE @"TITLE"
 #define Sub_TITLE @"Sub_TITLE"
-#define ReceiverID @"ReceiverID"
+#define SendMarkID @"SendMarkID"
 
 
 
