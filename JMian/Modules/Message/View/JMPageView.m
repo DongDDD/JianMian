@@ -38,7 +38,7 @@
 
         }else{
         
-            VC.view.frame = (CGRect){index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height};
+            VC.view.frame = (CGRect){index * self.frame.size.width, 0, self.frame.size.width, self.frame.size.height-120};
             [self.contentView addSubview:VC.view];
         }
         

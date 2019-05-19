@@ -21,9 +21,11 @@
 #import "JMHTTPManager+CreateConversation.h"
 #import "JMChatViewViewController.h"
 #import "JMMessageListModel.h"
+#import "JMMapViewController.h"
+#import "JMCustomAnnotationView.h"
 
 
-@interface JobDetailsViewController ()<TwoButtonViewDelegate>
+@interface JobDetailsViewController ()<TwoButtonViewDelegate,MAMapViewDelegate>
 
 @property(nonatomic,strong)UIScrollView *scrollView;
 
@@ -37,7 +39,10 @@
 @property(nonatomic,strong)UILabel *jobDoLab;//岗位职责
 @property(nonatomic,strong)UILabel *jobRequireLab;//任职要求
 
-@property(nonatomic,strong)MapView *mapView;//地图模块----
+@property(nonatomic,strong)MapView *mapBGView;//地图模块----
+@property(nonatomic,strong)MAMapView *mapView;
+@property (nonatomic,assign)CLLocationCoordinate2D locationCoordinate;
+
 
 @property(nonatomic,strong)UIView *HRView;//职位发布者模块---
 
@@ -154,6 +159,7 @@
 
 -(void)rightAction{
     NSLog(@"收藏");
+   
 }
 
 
@@ -269,7 +275,7 @@
 //}
 #pragma mark - 数据请求
 -(void)getData{
-    [[JMHTTPManager sharedInstance]fetchWorkInfoWithWork_id:self.homeworkModel.work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fetchWorkInfoWith_Id:self.homeworkModel.work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         
         if (responsObject[@"data"]) {
@@ -528,7 +534,7 @@
 //点击事件
 -(void)introduceAvtion{
     JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
-    
+    vc.model = self.model;
     [self.navigationController pushViewController:vc animated:YES];
 
 
@@ -554,7 +560,7 @@
     
     UIImageView *iconImage = [[UIImageView alloc]init];
  
-    iconImage.image = [UIImage imageNamed:@"play"];
+    [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     iconImage.layer.borderWidth = 0.5;
     iconImage.layer.borderColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0].CGColor;
     [self.companyIntroductionView addSubview:iconImage];
@@ -742,21 +748,65 @@
 
 
 }
-#pragma mark - d地图
+#pragma mark - 高德地图
 
 -(void)setMapView{
 //
-     self.mapView = [[MapView alloc] init];
-    [self.mapView setModel:self.model];
-    [self.scrollView addSubview:self.mapView];
+     self.mapBGView = [[MapView alloc] init];
+    [self.mapBGView setModel:self.model];
+    [self.scrollView addSubview:self.mapBGView];
     
-    [self.mapView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.mapBGView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.and.right.mas_equalTo(self.jobDescriptionView);
             make.height.mas_equalTo(346);
             make.top.mas_equalTo(self.jobDescriptionView.mas_bottom);
     }];
+    
+    [self.view addSubview:self.mapView];
+    CLLocationDegrees latitude = [self.model.latitude doubleValue];
+    CLLocationDegrees longitude = [self.model.longitude doubleValue];
+    CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
+    [self.mapView setCenterCoordinate:locationCoordinate animated:NO];
+    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+    pointAnnotation.coordinate = locationCoordinate;//设置地图的定位中心点坐标self.mapView.centerCoordinate = coor;//将点添加到地图上，即所谓的大头针
+    [_mapView addAnnotation:pointAnnotation];
+    [self.mapView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.mapBGView);
+        make.height.mas_equalTo(224);
+        make.bottom.mas_equalTo(self.mapBGView);
+    }];
 
+    
+}
 
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id)annotation {
+    //大头针标注
+    if ([annotation isKindOfClass:[MAPointAnnotation class]]) {
+        //判断是否是自己的定位气泡，如果是自己的定位气泡，不做任何设置，显示为蓝点，如果不是自己的定位气泡，比如大头针就会进入
+        static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
+        MAAnnotationView *annotationView = (MAAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
+        if ( annotationView == nil) {
+            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
+            
+            
+            JMCustomAnnotationView *cusView = [[JMCustomAnnotationView alloc]init];
+            cusView.adressName.text = self.model.address;
+            cusView.companyName.text = self.model.companyName;
+            [annotationView addSubview:cusView];
+            [cusView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.mas_equalTo(annotationView);
+                make.centerY.mas_equalTo(annotationView);
+                make.width.mas_equalTo(SCREEN_WIDTH*0.8);
+                make.height.mas_equalTo(86);
+            }];
+            
+            return annotationView;
+        }
+        
+    }
+    return nil;
+    
+    
     
 }
 #pragma mark - 职位发布者
@@ -770,7 +820,7 @@
     [self.HRView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
         make.height.mas_equalTo(166);
-        make.top.mas_equalTo(self.mapView.mas_bottom);
+        make.top.mas_equalTo(self.mapBGView.mas_bottom);
     }];
 
     UILabel *label = [[UILabel alloc]init];
@@ -789,7 +839,8 @@
     UIImageView *iconImg = [[UIImageView alloc]init];
     iconImg.backgroundColor = [UIColor redColor];
     iconImg.image = [UIImage imageNamed:@""];
-   
+    [iconImg sd_setImageWithURL:[NSURL URLWithString:self.model] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    
     
     [self.HRView addSubview:iconImg];
     
@@ -845,6 +896,28 @@
 
 }
 
+
+#pragma mark - lazy
+
+///初始化地图
+-(MAMapView *)mapView{
+
+    if (_mapView == nil) {
+        _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 300)];
+        _mapView.delegate = self;
+        
+        [self.view addSubview:_mapView];
+        
+//        [_mapView setCenterCoordinate:locationCoordinate animated:NO];
+        
+//        MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+//        pointAnnotation.coordinate = locationCoordinate;//设置地图的定位中心点坐标self.mapView.centerCoordinate = coor;//将点添加到地图上，即所谓的大头针
+//        [_mapView addAnnotation:pointAnnotation];
+        
+    }
+    return _mapView;
+
+}
 
 
 //-(void)playAction{

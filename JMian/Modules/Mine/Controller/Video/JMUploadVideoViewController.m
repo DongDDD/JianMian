@@ -16,6 +16,7 @@
 #import "JMDidUploadVideoView.h"
 #import "JMHTTPManager+Vita.h"
 #import "JMPlayerViewController.h"
+#import "JMVideoPlayManager.h"
 //#import "JMUserInfoModel.h"
 //#import "JMUserInfoManager.h"
 
@@ -240,20 +241,29 @@
 
     if (kFetchMyDefault(@"videoPath")) {
         [self.didUploadVideoView setHidden:NO];
-        JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
-        vc.topTitle = @"你的视频简历";
+        
+
+        
+        
+//        JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
+//        vc.topTitle = @"你的视频简历";
         NSString * path = [NSString stringWithFormat:@"https://jmsp-1258537318.cos.ap-guangzhou.myqcloud.com%@",kFetchMyDefault(@"videoPath") ];
-        NSURL *url = [NSURL URLWithString:path];
         //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
-        AVPlayer *player = [AVPlayer playerWithURL:url];
-        vc.player = player;
-        [self.navigationController pushViewController:vc animated:YES];
+//        AVPlayer *player = [AVPlayer playerWithURL:url];
+        [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path];
+        [[JMVideoPlayManager sharedInstance] play];
+        AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+        self.tabBarController.tabBar.hidden = YES;
+        [self.navigationController pushViewController:playVC animated:NO];
+//        vc.player = player;
+//        [self.navigationController pushViewController:vc animated:YES];
         
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
           
             dispatch_async(dispatch_get_main_queue(), ^{
 
+                NSURL *url = [NSURL URLWithString:path];
                 [self centerFrameImageWithVideoURL:url completion:^(UIImage *image) {
                     self.didUploadVideoView.imgView.image = image;
                     

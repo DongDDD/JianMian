@@ -12,10 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
-                <outlet property="allPositionBtn" destination="kXY-bM-hPm" id="Onm-hS-qMG"/>
+                <outlet property="allOfPositionBtn" destination="5MJ-YR-D67" id="mho-xF-Qim"/>
+                <outlet property="choosePositionBtn" destination="kXY-bM-hPm" id="BDe-NC-Pak"/>
                 <outlet property="companyRequireBtn" destination="bHz-sO-2z9" id="8ZJ-aj-DNV"/>
                 <outlet property="headView" destination="sga-NA-PAh" id="zYn-uy-eo3"/>
-                <outlet property="pushPositionBtn" destination="5MJ-YR-D67" id="3au-2t-G5y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -47,7 +47,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="76" id="FGv-Me-kt2"/>
                             </constraints>
-                            <state key="normal" title="推荐职位">
+                            <state key="normal" title="所有职位">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -56,7 +56,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="pushPositionAction:" destination="-1" eventType="touchDown" id="2Yn-Qs-UOI"/>
+                                <action selector="allPositionAction:" destination="-1" eventType="touchDown" id="2Yn-Qs-UOI"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kXY-bM-hPm">
@@ -65,7 +65,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="76" id="dN1-zM-xqN"/>
                             </constraints>
-                            <state key="normal" title="所有职位">
+                            <state key="normal" title="职位筛选">
                                 <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -74,7 +74,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="allPosition:" destination="-1" eventType="touchDown" id="gpV-9A-dUu"/>
+                                <action selector="choosePosition:" destination="-1" eventType="touchDown" id="gpV-9A-dUu"/>
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bQg-YM-DBW" userLabel="竖 分割线1">

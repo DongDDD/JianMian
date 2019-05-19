@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "SearchView.h"
 
 @protocol PositionDesiredDelegate <NSObject>
 
@@ -14,21 +15,13 @@
 
 @end
 
-//屏幕 rect
-#define SCREEN_RECT ([UIScreen mainScreen].bounds)
-
-#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
-
-#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
-
-#define CONTENT_HEIGHT (SCREEN_HEIGHT - NAVIGATION_BAR_HEIGHT - STATUS_BAR_HEIGHT)
-
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface PositionDesiredViewController : BaseViewController
 
 @property(nonatomic,weak)id<PositionDesiredDelegate>delegate;
+@property (nonatomic, strong) SearchView *searchView;
 
 @end
 

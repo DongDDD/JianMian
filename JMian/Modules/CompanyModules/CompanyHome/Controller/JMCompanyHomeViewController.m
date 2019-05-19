@@ -25,6 +25,13 @@
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,assign)NSInteger per_page;
 
+//
+//@property (nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
+//@property (nonatomic, strong) AVPlayer *player;
+//@property (nonatomic, strong) AVPlayerItem *playerItem;
+//@property (nonatomic, strong) VIMediaDownloader *downloader;
+//
+
 
 //@property (strong, nonatomic) AVPlayerViewController *playerVC;
 
@@ -64,7 +71,7 @@ static NSString *cellIdent = @"cellIdent";
             self.arrDate = [JMCompanyHomeModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             if (self.arrDate) {
                 
-                [self getPlayerArray];
+//                [self getPlayerArray];
                 [self.tableView reloadData];
                 [self.tableView.mj_header endRefreshing];
                 [self.tableView.mj_footer endRefreshing];
@@ -80,31 +87,31 @@ static NSString *cellIdent = @"cellIdent";
 
 
 }
-
-
--(void)getPlayerArray{
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [[JMVideoPlayManager sharedInstance].B_User_playArray removeAllObjects];
-
-        for (JMCompanyHomeModel *model in self.arrDate) {
-            if (model.video_file_path) {
-                NSURL *url = [NSURL URLWithString:model.video_file_path];
-                //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
-                AVPlayer *player = [AVPlayer playerWithURL:url];
-                
-                [[JMVideoPlayManager sharedInstance].B_User_playArray addObject:player];
-            }else{
-                [[JMVideoPlayManager sharedInstance].B_User_playArray addObject:[NSNull null]];
-                
-            }
-            
-        }
-        
-        self.playerArray = [JMVideoPlayManager sharedInstance].B_User_playArray;
-    });
-    
-
-}
+//弃用这个方法 太消耗性能
+//
+//-(void)getPlayerArray{
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        [[JMVideoPlayManager sharedInstance].B_User_playArray removeAllObjects];
+//
+//        for (JMCompanyHomeModel *model in self.arrDate) {
+//            if (model.video_file_path) {
+//                NSURL *url = [NSURL URLWithString:model.video_file_path];
+//                //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+//                AVPlayer *player = [AVPlayer playerWithURL:url];
+//
+//                [[JMVideoPlayManager sharedInstance].B_User_playArray addObject:player];
+//            }else{
+//                [[JMVideoPlayManager sharedInstance].B_User_playArray addObject:[NSNull null]];
+//
+//            }
+//
+//        }
+//
+//        self.playerArray = [JMVideoPlayManager sharedInstance].B_User_playArray;
+//    });
+//
+//
+//}
 #pragma mark - 布局UI
 
 -(void)setTableView{
@@ -207,16 +214,13 @@ static NSString *cellIdent = @"cellIdent";
 #pragma mark - 点击事件
 
 -(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell{
-    if (self.playerArray) {
-        JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
-        vc.player = self.playerArray[cell.indexPath.row];
-        JMCompanyHomeModel *model = self.arrDate[cell.indexPath.row];
-        vc.topTitle = model.userNickname;
-        //    vc.player = cell.player;
-        //    vc.model = cell;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
+    
+        [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:cell.model.video_file_path];
+        [[JMVideoPlayManager sharedInstance] play];
+        AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+        self.tabBarController.tabBar.hidden = YES;
+        [self.navigationController pushViewController:playVC animated:NO];
+
 }
 #pragma mark - lazy
 

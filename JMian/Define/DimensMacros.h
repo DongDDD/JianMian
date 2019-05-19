@@ -18,6 +18,12 @@
 #import "MJRefresh.h"
 #import "MBProgressHUD.h"
 #import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>
+#import <MAMapKit/MAMapKit.h>
+#import <AMapFoundationKit/AMapFoundationKit.h>
+#import <AMapSearchKit/AMapSearchKit.h>
+#import <AMapLocationKit/AMapLocationKit.h>
+#import "VIMediaCache.h"
+#import "Masonry.h"
 
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
@@ -103,6 +109,8 @@
 #define Notification_JMMMessageListener @"Notification_JMMMessageListener"
 #define Notification_JMMMessageRevokeListener @"Notification_JMMMessageRevokeListener"
 #define Notification_JMMUploadProgressListener @"Notification_JMMUploadProgressListener"
+#define Notification_JMMUHangUpListener @"Notification_JMMUHangUpListener"
+
 //发起视频
 #define Channel_ID @"Channel_ID"
 #define Mark_ID @"Mark_ID"

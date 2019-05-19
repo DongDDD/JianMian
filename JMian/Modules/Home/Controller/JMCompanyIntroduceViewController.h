@@ -7,10 +7,12 @@
 //
 
 #import "BaseViewController.h"
-
+#import "JMHomeWorkModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCompanyIntroduceViewController : BaseViewController
+@property(nonatomic,strong)JMHomeWorkModel *model;
+
 
 @end
 

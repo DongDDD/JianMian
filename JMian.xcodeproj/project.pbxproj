@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04070193227536D8002BF58D /* my_videos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04070190227536D7002BF58D /* my_videos@2x.png */; };
-		04070194227536D8002BF58D /* my_videos.png in Resources */ = {isa = PBXBuildFile; fileRef = 04070191227536D8002BF58D /* my_videos.png */; };
-		04070195227536D8002BF58D /* my_videos@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04070192227536D8002BF58D /* my_videos@3x.png */; };
 		040701A422753755002BF58D /* share2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0407019622753753002BF58D /* share2@3x.png */; };
 		040701A522753755002BF58D /* autonym.png in Resources */ = {isa = PBXBuildFile; fileRef = 0407019722753753002BF58D /* autonym.png */; };
 		040701A822753755002BF58D /* upinstall.png in Resources */ = {isa = PBXBuildFile; fileRef = 0407019A22753754002BF58D /* upinstall.png */; };
@@ -144,10 +141,7 @@
 		040C8649227E8B8100993490 /* JMMoreCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C8647227E8B8100993490 /* JMMoreCollectionViewCell.m */; };
 		040C864A227E8B8100993490 /* JMMoreCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040C8648227E8B8100993490 /* JMMoreCollectionViewCell.xib */; };
 		040C8651227E8F4A00993490 /* Photo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C864B227E8F4A00993490 /* Photo@3x.png */; };
-		040C8652227E8F4A00993490 /* photograph.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C864C227E8F4A00993490 /* photograph.png */; };
-		040C8653227E8F4A00993490 /* photograph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C864D227E8F4A00993490 /* photograph@2x.png */; };
 		040C8654227E8F4A00993490 /* Photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C864E227E8F4A00993490 /* Photo.png */; };
-		040C8655227E8F4A00993490 /* photograph@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C864F227E8F4A00993490 /* photograph@3x.png */; };
 		040C8656227E8F4A00993490 /* Photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C8650227E8F4A00993490 /* Photo@2x.png */; };
 		040C865A227ED71100993490 /* JMChatDetailInfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C8658227ED71100993490 /* JMChatDetailInfoTableViewCell.m */; };
 		040C865B227ED71100993490 /* JMChatDetailInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040C8659227ED71100993490 /* JMChatDetailInfoTableViewCell.xib */; };
@@ -258,9 +252,6 @@
 		048348D82269C01200DE4630 /* JMMangerInterviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048348D62269C01200DE4630 /* JMMangerInterviewTableViewCell.m */; };
 		048348D92269C01200DE4630 /* JMMangerInterviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048348D72269C01200DE4630 /* JMMangerInterviewTableViewCell.xib */; };
 		048348E32269CABB00DE4630 /* JMCompanyInfoMineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048348E12269CABB00DE4630 /* JMCompanyInfoMineViewController.xib */; };
-		048348E82269CF9200DE4630 /* my_videos.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348E52269CF9200DE4630 /* my_videos.png */; };
-		048348E92269CF9200DE4630 /* my_videos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348E62269CF9200DE4630 /* my_videos@2x.png */; };
-		048348EA2269CF9200DE4630 /* my_videos@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348E72269CF9200DE4630 /* my_videos@3x.png */; };
 		048E662E22850EE900694D86 /* THDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E662C22850EE900694D86 /* THDatePickerView.m */; };
 		048E6632228574BE00694D86 /* peer_countermand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E662F228574BD00694D86 /* peer_countermand@2x.png */; };
 		048E6633228574BE00694D86 /* peer_countermand.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E6630228574BD00694D86 /* peer_countermand.png */; };
@@ -314,6 +305,18 @@
 		04BBF29F228E90BA0068A9B1 /* answer@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF29C228E90BA0068A9B1 /* answer@3x.png */; };
 		04BBF2A0228E90BA0068A9B1 /* answer.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF29D228E90BA0068A9B1 /* answer.png */; };
 		04BBF2A3228EC6790068A9B1 /* JMVideoChatView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF2A2228EC6790068A9B1 /* JMVideoChatView.m */; };
+		04BBF2A7228FFFDE0068A9B1 /* JMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF2A5228FFFDE0068A9B1 /* JMMapViewController.m */; };
+		04BBF2A8228FFFDE0068A9B1 /* JMMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF2A6228FFFDE0068A9B1 /* JMMapViewController.xib */; };
+		04BBF2AB22901E3F0068A9B1 /* JMCustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF2AA22901E3F0068A9B1 /* JMCustomAnnotationView.m */; };
+		04BBF2AD22901E530068A9B1 /* JMCustomAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF2AC22901E530068A9B1 /* JMCustomAnnotationView.xib */; };
+		04BBF2B022903D090068A9B1 /* JMCompanyVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF2AF22903D090068A9B1 /* JMCompanyVideoView.m */; };
+		04BBF2B222903D2D0068A9B1 /* JMCompanyVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF2B122903D2D0068A9B1 /* JMCompanyVideoView.xib */; };
+		04BBF2B622918BE40068A9B1 /* photograph.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF2B322918BE30068A9B1 /* photograph.png */; };
+		04BBF2B722918BE40068A9B1 /* photograph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF2B422918BE30068A9B1 /* photograph@2x.png */; };
+		04BBF2B822918BE40068A9B1 /* photograph@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF2B522918BE40068A9B1 /* photograph@3x.png */; };
+		04BBF2C222918E7C0068A9B1 /* C_videos@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF2BF22918E7B0068A9B1 /* C_videos@3x.png */; };
+		04BBF2C322918E7C0068A9B1 /* C_videos.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF2C022918E7B0068A9B1 /* C_videos.png */; };
+		04BBF2C422918E7C0068A9B1 /* C_videos@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF2C122918E7B0068A9B1 /* C_videos@2x.png */; };
 		04C120D822882B5F001BDEBC /* JMUploadVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C120D622882B5F001BDEBC /* JMUploadVideoViewController.m */; };
 		04C120D922882B5F001BDEBC /* JMUploadVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C120D722882B5F001BDEBC /* JMUploadVideoViewController.xib */; };
 		04C120DD22882E97001BDEBC /* my_videos_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C120DA22882E97001BDEBC /* my_videos_2@3x.png */; };
@@ -515,9 +518,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		04070190227536D7002BF58D /* my_videos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_videos@2x.png"; sourceTree = "<group>"; };
-		04070191227536D8002BF58D /* my_videos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_videos.png; sourceTree = "<group>"; };
-		04070192227536D8002BF58D /* my_videos@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_videos@3x.png"; sourceTree = "<group>"; };
 		0407019622753753002BF58D /* share2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "share2@3x.png"; sourceTree = "<group>"; };
 		0407019722753753002BF58D /* autonym.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = autonym.png; sourceTree = "<group>"; };
 		0407019A22753754002BF58D /* upinstall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upinstall.png; sourceTree = "<group>"; };
@@ -693,10 +693,7 @@
 		040C8647227E8B8100993490 /* JMMoreCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMoreCollectionViewCell.m; sourceTree = "<group>"; };
 		040C8648227E8B8100993490 /* JMMoreCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMoreCollectionViewCell.xib; sourceTree = "<group>"; };
 		040C864B227E8F4A00993490 /* Photo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Photo@3x.png"; sourceTree = "<group>"; };
-		040C864C227E8F4A00993490 /* photograph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photograph.png; sourceTree = "<group>"; };
-		040C864D227E8F4A00993490 /* photograph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photograph@2x.png"; sourceTree = "<group>"; };
 		040C864E227E8F4A00993490 /* Photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Photo.png; sourceTree = "<group>"; };
-		040C864F227E8F4A00993490 /* photograph@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photograph@3x.png"; sourceTree = "<group>"; };
 		040C8650227E8F4A00993490 /* Photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Photo@2x.png"; sourceTree = "<group>"; };
 		040C8657227ED71100993490 /* JMChatDetailInfoTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMChatDetailInfoTableViewCell.h; sourceTree = "<group>"; };
 		040C8658227ED71100993490 /* JMChatDetailInfoTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMChatDetailInfoTableViewCell.m; sourceTree = "<group>"; };
@@ -853,9 +850,6 @@
 		048348D62269C01200DE4630 /* JMMangerInterviewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMangerInterviewTableViewCell.m; sourceTree = "<group>"; };
 		048348D72269C01200DE4630 /* JMMangerInterviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMangerInterviewTableViewCell.xib; sourceTree = "<group>"; };
 		048348E12269CABB00DE4630 /* JMCompanyInfoMineViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCompanyInfoMineViewController.xib; sourceTree = "<group>"; };
-		048348E52269CF9200DE4630 /* my_videos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = my_videos.png; sourceTree = "<group>"; };
-		048348E62269CF9200DE4630 /* my_videos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_videos@2x.png"; sourceTree = "<group>"; };
-		048348E72269CF9200DE4630 /* my_videos@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_videos@3x.png"; sourceTree = "<group>"; };
 		048E662C22850EE900694D86 /* THDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDatePickerView.m; sourceTree = "<group>"; };
 		048E662D22850EE900694D86 /* THDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDatePickerView.h; sourceTree = "<group>"; };
 		048E662F228574BD00694D86 /* peer_countermand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peer_countermand@2x.png"; sourceTree = "<group>"; };
@@ -935,6 +929,21 @@
 		04BBF29D228E90BA0068A9B1 /* answer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = answer.png; sourceTree = "<group>"; };
 		04BBF2A1228EC6790068A9B1 /* JMVideoChatView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoChatView.h; sourceTree = "<group>"; };
 		04BBF2A2228EC6790068A9B1 /* JMVideoChatView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoChatView.m; sourceTree = "<group>"; };
+		04BBF2A4228FFFDE0068A9B1 /* JMMapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMapViewController.h; sourceTree = "<group>"; };
+		04BBF2A5228FFFDE0068A9B1 /* JMMapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMapViewController.m; sourceTree = "<group>"; };
+		04BBF2A6228FFFDE0068A9B1 /* JMMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMapViewController.xib; sourceTree = "<group>"; };
+		04BBF2A922901E3F0068A9B1 /* JMCustomAnnotationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCustomAnnotationView.h; sourceTree = "<group>"; };
+		04BBF2AA22901E3F0068A9B1 /* JMCustomAnnotationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCustomAnnotationView.m; sourceTree = "<group>"; };
+		04BBF2AC22901E530068A9B1 /* JMCustomAnnotationView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCustomAnnotationView.xib; sourceTree = "<group>"; };
+		04BBF2AE22903D090068A9B1 /* JMCompanyVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCompanyVideoView.h; sourceTree = "<group>"; };
+		04BBF2AF22903D090068A9B1 /* JMCompanyVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCompanyVideoView.m; sourceTree = "<group>"; };
+		04BBF2B122903D2D0068A9B1 /* JMCompanyVideoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCompanyVideoView.xib; sourceTree = "<group>"; };
+		04BBF2B322918BE30068A9B1 /* photograph.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photograph.png; sourceTree = "<group>"; };
+		04BBF2B422918BE30068A9B1 /* photograph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photograph@2x.png"; sourceTree = "<group>"; };
+		04BBF2B522918BE40068A9B1 /* photograph@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photograph@3x.png"; sourceTree = "<group>"; };
+		04BBF2BF22918E7B0068A9B1 /* C_videos@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C_videos@3x.png"; sourceTree = "<group>"; };
+		04BBF2C022918E7B0068A9B1 /* C_videos.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = C_videos.png; sourceTree = "<group>"; };
+		04BBF2C122918E7B0068A9B1 /* C_videos@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C_videos@2x.png"; sourceTree = "<group>"; };
 		04C120D522882B5F001BDEBC /* JMUploadVideoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMUploadVideoViewController.h; sourceTree = "<group>"; };
 		04C120D622882B5F001BDEBC /* JMUploadVideoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMUploadVideoViewController.m; sourceTree = "<group>"; };
 		04C120D722882B5F001BDEBC /* JMUploadVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMUploadVideoViewController.xib; sourceTree = "<group>"; };
@@ -1865,9 +1874,6 @@
 				04088F3C227012B9007EB236 /* company_information.png */,
 				04088F33227012B8007EB236 /* company_information@2x.png */,
 				04088F3B227012B9007EB236 /* company_information@3x.png */,
-				048348E52269CF9200DE4630 /* my_videos.png */,
-				048348E62269CF9200DE4630 /* my_videos@2x.png */,
-				048348E72269CF9200DE4630 /* my_videos@3x.png */,
 			);
 			path = Mine;
 			sourceTree = "<group>";
@@ -1949,15 +1955,15 @@
 		049555E5227B25A30008AF1C /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				04BBF2B322918BE30068A9B1 /* photograph.png */,
+				04BBF2B422918BE30068A9B1 /* photograph@2x.png */,
+				04BBF2B522918BE40068A9B1 /* photograph@3x.png */,
 				04BBF29D228E90BA0068A9B1 /* answer.png */,
 				04BBF29B228E90B90068A9B1 /* answer@2x.png */,
 				04BBF29C228E90BA0068A9B1 /* answer@3x.png */,
 				040C864E227E8F4A00993490 /* Photo.png */,
 				040C8650227E8F4A00993490 /* Photo@2x.png */,
 				040C864B227E8F4A00993490 /* Photo@3x.png */,
-				040C864C227E8F4A00993490 /* photograph.png */,
-				040C864D227E8F4A00993490 /* photograph@2x.png */,
-				040C864F227E8F4A00993490 /* photograph@3x.png */,
 				040A392D227DAC2B00EDD9E0 /* copyreader.png */,
 				040A392B227DAC2B00EDD9E0 /* copyreader@2x.png */,
 				040A392C227DAC2B00EDD9E0 /* copyreader@3x.png */,
@@ -2238,6 +2244,9 @@
 		6D0209CB224FB900009BCFE4 /* Mine_slices */ = {
 			isa = PBXGroup;
 			children = (
+				04BBF2C022918E7B0068A9B1 /* C_videos.png */,
+				04BBF2C122918E7B0068A9B1 /* C_videos@2x.png */,
+				04BBF2BF22918E7B0068A9B1 /* C_videos@3x.png */,
 				04C120DC22882E97001BDEBC /* my_videos_2.png */,
 				04C120DB22882E97001BDEBC /* my_videos_2@2x.png */,
 				04C120DA22882E97001BDEBC /* my_videos_2@3x.png */,
@@ -2265,9 +2274,6 @@
 				6D0209D9224FB900009BCFE4 /* enshrine@3x.png */,
 				6D0209DC224FB900009BCFE4 /* upinstall@3x.png */,
 				6D0209DD224FB900009BCFE4 /* upinstall@2x.png */,
-				04070191227536D8002BF58D /* my_videos.png */,
-				04070190227536D7002BF58D /* my_videos@2x.png */,
-				04070192227536D8002BF58D /* my_videos@3x.png */,
 			);
 			path = Mine_slices;
 			sourceTree = "<group>";
@@ -2378,6 +2384,9 @@
 				0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */,
 				049FDBA52289A3C000E9BC25 /* JMPlayerViewController.h */,
 				049FDBA62289A3C000E9BC25 /* JMPlayerViewController.m */,
+				04BBF2A4228FFFDE0068A9B1 /* JMMapViewController.h */,
+				04BBF2A5228FFFDE0068A9B1 /* JMMapViewController.m */,
+				04BBF2A6228FFFDE0068A9B1 /* JMMapViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -2397,10 +2406,16 @@
 				6D020A6322539FAF009BCFE4 /* HomeTableViewCell.xib */,
 				6D020A5E22539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.h */,
 				6D020A5922539FAF009BCFE4 /* JMCompanyIntroduceHeaderView.m */,
+				04BBF2AE22903D090068A9B1 /* JMCompanyVideoView.h */,
+				04BBF2AF22903D090068A9B1 /* JMCompanyVideoView.m */,
+				04BBF2B122903D2D0068A9B1 /* JMCompanyVideoView.xib */,
 				6D020A6222539FAF009BCFE4 /* MapView.h */,
 				6D020A5A22539FAF009BCFE4 /* MapView.m */,
 				0491B25C2286794600F1FD3A /* JMLabsScreenView.h */,
 				0491B25D2286794600F1FD3A /* JMLabsScreenView.m */,
+				04BBF2A922901E3F0068A9B1 /* JMCustomAnnotationView.h */,
+				04BBF2AA22901E3F0068A9B1 /* JMCustomAnnotationView.m */,
+				04BBF2AC22901E530068A9B1 /* JMCustomAnnotationView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2723,6 +2738,7 @@
 				040B83902265EF6A00F1A37A /* JMIDCardIdentifyViewController.xib in Resources */,
 				04E02E77228BF4BF00924130 /* minloading.png in Resources */,
 				04072F482282BA650067A05D /* more.png in Resources */,
+				04BBF2B222903D2D0068A9B1 /* JMCompanyVideoView.xib in Resources */,
 				048348AC22695EC000DE4630 /* NO_Data@2x.png in Resources */,
 				04DD1D65224B6E95007CB11C /* 椭圆 3.png in Resources */,
 				04E02E7C228C145300924130 /* bofang@2x.png in Resources */,
@@ -2745,7 +2761,6 @@
 				04072F3B2282B47C0067A05D /* redlining@2x.png in Resources */,
 				040B83A12265F62300F1A37A /* JMIDCardIdentifySecondViewController.xib in Resources */,
 				6D020A6922539FB0009BCFE4 /* JobDetailsViewController.xib in Resources */,
-				048348EA2269CF9200DE4630 /* my_videos@3x.png in Resources */,
 				6D0209ED224FB900009BCFE4 /* enshrine@3x.png in Resources */,
 				04DD1D6E224B6E95007CB11C /* camera.png in Resources */,
 				040CA84F225F1EBF006D7A7F /* Collection_of_selected@2x.png in Resources */,
@@ -2759,13 +2774,14 @@
 				040CA855225F1EBF006D7A7F /* icon_return 拷贝 6@2x.png in Resources */,
 				04072F4B2282BA650067A05D /* delete@3x.png in Resources */,
 				041997CF2266C75000C6C134 /* JMPostJobHomeViewController.xib in Resources */,
+				04BBF2AD22901E530068A9B1 /* JMCustomAnnotationView.xib in Resources */,
 				6D020A2A2250F3F9009BCFE4 /* education@3x.png in Resources */,
-				040C8655227E8F4A00993490 /* photograph@3x.png in Resources */,
 				048E6632228574BE00694D86 /* peer_countermand@2x.png in Resources */,
 				04A9DFBF225C7B9F00CD7CC1 /* 启动图@2x.png in Resources */,
 				6D020A6B22539FB0009BCFE4 /* JMCompanyIntroduceViewController.xib in Resources */,
 				6D558655224B54D70037C14E /* home_ message_pitch_on@3x.png in Resources */,
 				040BF07B22719E4E0088697D /* me.png in Resources */,
+				04BBF2B822918BE40068A9B1 /* photograph@3x.png in Resources */,
 				040CA837225F1EB2006D7A7F /* Share_WeChat_friends.png in Resources */,
 				040CA853225F1EBF006D7A7F /* dingwei@2x.png in Resources */,
 				04E02E7B228C145300924130 /* bofang.png in Resources */,
@@ -2774,6 +2790,7 @@
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
 				6D020A262250F3F9009BCFE4 /* 椭圆 3@3x.png in Resources */,
+				04BBF2C322918E7C0068A9B1 /* C_videos.png in Resources */,
 				04E02E71228BF38900924130 /* loading.png in Resources */,
 				040CA857225F1EBF006D7A7F /* icon_return 拷贝 6.png in Resources */,
 				040CA85E225F1EBF006D7A7F /* Location_of_detail_page@2x.png in Resources */,
@@ -2823,7 +2840,6 @@
 				04072F462282BA650067A05D /* redlining_2@3x.png in Resources */,
 				04C120DF22882E97001BDEBC /* my_videos_2.png in Resources */,
 				040CA852225F1EBF006D7A7F /* collect.png in Resources */,
-				04070193227536D8002BF58D /* my_videos@2x.png in Resources */,
 				04DD1D6B224B6E95007CB11C /* icon_return .png in Resources */,
 				6D558656224B54D70037C14E /* home_ message_pitch_on@2x.png in Resources */,
 				04E02E6F228BF38900924130 /* loading@3x.png in Resources */,
@@ -2850,12 +2866,12 @@
 				04072F292282949D0067A05D /* peijing@3x.png in Resources */,
 				041997C32266C5DC00C6C134 /* post_a_job_pitch_up.png in Resources */,
 				6D0209EB224FB900009BCFE4 /* interview@3x.png in Resources */,
-				040C8652227E8F4A00993490 /* photograph.png in Resources */,
 				04DD1D4F224B6E95007CB11C /* phone@3x.png in Resources */,
 				040701AD22753755002BF58D /* enshrine.png in Resources */,
 				04072F272282949D0067A05D /* peijing@2x.png in Resources */,
 				047F8EB7228AC552005E81FA /* C_play@3x.png in Resources */,
 				041997C72266C5DC00C6C134 /* post_a_job.png in Resources */,
+				04BBF2B722918BE40068A9B1 /* photograph@2x.png in Resources */,
 				6D55864E224B54D70037C14E /* home@2x.png in Resources */,
 				040BF07822719E4E0088697D /* switchover.png in Resources */,
 				6D55865D224B54D70037C14E /* home_ message@2x.png in Resources */,
@@ -2934,6 +2950,7 @@
 				04072F4D2282BA650067A05D /* delete@2x.png in Resources */,
 				04DD1D48224B6E95007CB11C /* WeChat_login@3x.png in Resources */,
 				04DD1D68224B6E95007CB11C /* 圆角矩形 5@3x.png in Resources */,
+				04BBF2A8228FFFDE0068A9B1 /* JMMapViewController.xib in Resources */,
 				6D55865B224B54D70037C14E /* 组 53@3x.png in Resources */,
 				040701AF22753755002BF58D /* interview.png in Resources */,
 				04DD1D67224B6E95007CB11C /* icon_return @3x.png in Resources */,
@@ -2981,11 +2998,9 @@
 				040714A1227C6CC70026C368 /* expression.png in Resources */,
 				04072F392282B47C0067A05D /* redlining@3x.png in Resources */,
 				040701A822753755002BF58D /* upinstall.png in Resources */,
-				04070194227536D8002BF58D /* my_videos.png in Resources */,
 				040701B022753755002BF58D /* share2@2x.png in Resources */,
 				0407149F227C6CC70026C368 /* more@2x.png in Resources */,
 				6D020A212250F3F9009BCFE4 /* 组 54@3x.png in Resources */,
-				048348E82269CF9200DE4630 /* my_videos.png in Resources */,
 				040A40BC226589A50005E0D7 /* JMCompanyBaseInfoViewController.xib in Resources */,
 				04C120DD22882E97001BDEBC /* my_videos_2@3x.png in Resources */,
 				040701A922753755002BF58D /* share2.png in Resources */,
@@ -3001,12 +3016,12 @@
 				040B83992265F3E700F1A37A /* IDCard2.png in Resources */,
 				040E366022681C9A00A7D789 /* boy.png in Resources */,
 				6D020A382250FF0D009BCFE4 /* JMMyResumeHeaderTableViewCell.xib in Resources */,
-				040C8653227E8F4A00993490 /* photograph@2x.png in Resources */,
 				040714A3227C6CC70026C368 /* default_avatar@3x.png in Resources */,
 				040C8656227E8F4A00993490 /* Photo@2x.png in Resources */,
 				049A515A2248972F007A8068 /* BasicInformationViewController.xib in Resources */,
 				6D020A47225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.xib in Resources */,
 				6D020A2C2250F3F9009BCFE4 /*  copyreader@2x.png in Resources */,
+				04BBF2B622918BE40068A9B1 /* photograph.png in Resources */,
 				040C8654227E8F4A00993490 /* Photo.png in Resources */,
 				040CA84E225F1EBF006D7A7F /* collect@2x.png in Resources */,
 				040A392E227DAC2B00EDD9E0 /* copyreader@2x.png in Resources */,
@@ -3018,20 +3033,20 @@
 				04072F2A2282949D0067A05D /* particulars@2x.png in Resources */,
 				040BF06922719B920088697D /* JMUserChangeWindowView.xib in Resources */,
 				040701A422753755002BF58D /* share2@3x.png in Resources */,
-				04070195227536D8002BF58D /* my_videos@3x.png in Resources */,
 				04072F492282BA650067A05D /* redlining_2.png in Resources */,
 				040B839C2265F3E700F1A37A /* IDCard1@2x.png in Resources */,
 				04C6015522607671000B1FE0 /* notification @2x.png in Resources */,
 				04A247DF224CE70E00DEB8E3 /* play@3x.png in Resources */,
 				04C120D922882B5F001BDEBC /* JMUploadVideoViewController.xib in Resources */,
+				04BBF2C422918E7C0068A9B1 /* C_videos@2x.png in Resources */,
 				040A3930227DAC2B00EDD9E0 /* copyreader.png in Resources */,
 				040701B6227556A4002BF58D /* JMChooseTimeViewController.xib in Resources */,
 				040C18172264148300456C53 /* JIANMIAN_login.png in Resources */,
 				04DD1D63224B6E95007CB11C /* icon_return @2x.png in Resources */,
-				048348E92269CF9200DE4630 /* my_videos@2x.png in Resources */,
 				6D020A292250F3F9009BCFE4 /* photograph@2x.png in Resources */,
 				6D0209EC224FB900009BCFE4 /* subscribe@2x.png in Resources */,
 				040A40C12265B2480005E0D7 /* JMCompanyInfoViewController.xib in Resources */,
+				04BBF2C222918E7C0068A9B1 /* C_videos@3x.png in Resources */,
 				040B839A2265F3E700F1A37A /* IDCard2@3x.png in Resources */,
 				041997C42266C5DC00C6C134 /* post_a_job@3x.png in Resources */,
 				04072F352282B2440067A05D /* JMWithdrawViewController.xib in Resources */,
@@ -3136,6 +3151,7 @@
 				6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */,
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
 				040B838A2265EC0600F1A37A /* JMCompanyHomeViewController.m in Sources */,
+				04BBF2B022903D090068A9B1 /* JMCompanyVideoView.m in Sources */,
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
 				040A3937227DD1B200EDD9E0 /* JMInputController.m in Sources */,
 				045EDD63225D97650054C5F3 /* JMHTTPManager+Captcha.m in Sources */,
@@ -3247,6 +3263,7 @@
 				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
 				040A393B227DD1EB00EDD9E0 /* JMFaceView.m in Sources */,
 				040E54DC22772382004AB0F9 /* JMHTTPManager+MessageList.m in Sources */,
+				04BBF2AB22901E3F0068A9B1 /* JMCustomAnnotationView.m in Sources */,
 				6D020A6722539FB0009BCFE4 /* HomeViewController.m in Sources */,
 				040BF05E227159B60088697D /* JMChangeIdentityViewController.m in Sources */,
 				6DEA992A2255DFF50029FE8A /* JMSendMyResumeView.m in Sources */,
@@ -3285,6 +3302,7 @@
 				6D558635224B53BE0037C14E /* JMPersonTabBarViewController.m in Sources */,
 				04A9DFB7225B35FE00CD7CC1 /* JMHomeWorkModel.m in Sources */,
 				04196DAF22805C450000A6AA /* JMMySettingViewController.m in Sources */,
+				04BBF2A7228FFFDE0068A9B1 /* JMMapViewController.m in Sources */,
 				6D020A052250F21B009BCFE4 /* JMMyResumeIconTableViewCell.m in Sources */,
 				04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */,
 				040A3933227DBEA700EDD9E0 /* JMGreetTableViewController.m in Sources */,

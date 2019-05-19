@@ -8,7 +8,6 @@
 
 #import "PositionDesiredViewController.h"
 #import "WSDropMenuView.h"
-#import "SearchView.h"
 #import "JMHTTPManager+PositionDesired.h"
 #import "JMSystemLabelsModel.h"
 
@@ -19,7 +18,6 @@
 
 @property (nonatomic, strong) NSArray *firstArr,*secArr,*thirdArr;
 
-@property (nonatomic, strong) SearchView *searchView;
 
 @property (nonatomic, copy) NSString *labStr;
 @property (nonatomic, copy) NSString *labIDStr;

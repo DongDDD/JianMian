@@ -7,18 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
+#import "DimensMacros.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMVideoPlayManager : NSObject
+
+@interface JMVideoPlayManager : AVPlayerViewController
 
 @property(nonatomic,strong)NSMutableArray *B_User_playArray;
 @property(nonatomic,strong)NSMutableArray *C_User_playArray;
-//
-//-(void)setB_User_playArray:(NSMutableArray * _Nonnull)B_User_playArray;
-//-(void)setC_User_playArray:(NSMutableArray * _Nonnull)C_User_playArray;
-
-
+@property (strong, nonatomic) AVPlayer *player;
+@property (nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
+- (void)setupPlayer_UrlStr:(NSString *)urlStr;
+-(void)play;
 + (instancetype)sharedInstance;
 @end
 

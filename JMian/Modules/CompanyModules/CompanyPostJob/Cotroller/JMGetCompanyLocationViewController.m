@@ -48,7 +48,6 @@
     self.request.sortrule = 0;
     self.request.offset = 50;
     self.request.requireExtension = YES;
-    
     [self configLocationManager];
     [self.view addSubview:self.tableView];
     [self setCenterPoint];
@@ -69,7 +68,6 @@
     [self.view addSubview:_searchView];
     
 }
-
 
 -(void)initMapView{
     _search = [[AMapSearchAPI alloc] init];
@@ -244,7 +242,6 @@
 {
     if (self.dataArray) {
         
-  
     self.POIModel = self.dataArray[indexPath.row];
     CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(self.POIModel.location.latitude, self.POIModel.location.longitude);
     [_mapView setCenterCoordinate:locationCoordinate animated:YES];

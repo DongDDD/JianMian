@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)fetchWorkPaginateWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 
--(void)fetchWorkInfoWithWork_id:(NSString *)work_id SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+-(void)fetchWorkInfoWith_Id:(NSString *)Id SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 //获取 发布 or 下线职位列表
 - (void)fetchWorkPaginateWith_city_ids:(nullable NSArray *)city_ids

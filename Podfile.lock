@@ -34,6 +34,7 @@ PODS:
   - SDWebImage/Core (4.4.3)
   - SYWechatOpenSDK (1.7.9)
   - TXIMSDK_iOS (4.2.1)
+  - VIMediaCache (0.4)
   - YYCache (1.0.4)
   - YYText (1.0.7)
 
@@ -52,6 +53,7 @@ DEPENDENCIES:
   - SDWebImage
   - SYWechatOpenSDK (~> 1.7.9)
   - TXIMSDK_iOS
+  - VIMediaCache
   - YYCache
   - YYText
 
@@ -72,6 +74,7 @@ SPEC REPOS:
     - SDWebImage
     - SYWechatOpenSDK
     - TXIMSDK_iOS
+    - VIMediaCache
     - YYCache
     - YYText
 
@@ -91,9 +94,10 @@ SPEC CHECKSUMS:
   SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
   SYWechatOpenSDK: f93b2e77a3ea8cdb70d535ec1605a5612bac72d6
   TXIMSDK_iOS: d1d71f1997c2ca8264284c1af14225a482b487ff
+  VIMediaCache: aa650f82cb114c68a343beb4e67416cf5eb2f3a2
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: af6e118693bdb80c6f878cd1c8ca008c61e6170e
+PODFILE CHECKSUM: bf8c29342c1d4c467f8b26d93efd05331499f63d
 
 COCOAPODS: 1.6.1

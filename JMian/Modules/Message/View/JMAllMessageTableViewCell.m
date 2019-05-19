@@ -48,6 +48,13 @@
 {
     _data = data;
     self.userLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;    //中间的内容以……方式省略，显示头尾的文字内容
+    if ([data.data.convId isEqualToString:@"dominator"]) {
+        self.userNameLabel.text = @"系统消息";
+        [self.iconImageView setImage:[UIImage imageNamed:@"notification "]];
+        [self.userLabel setHidden:YES];
+    }
+    
+    
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
 /*****这里思路是假设一种情况先，我登录了B端账号，判断自己是不是sender就行，是的话我要去n哪边的值才是合理的，！！否则相反！！，！！否则相反！！！！否则相反！！没可能我是B端我把B端的东西赋值上去吧*****/
     if([model.type isEqualToString:B_Type_UESR]){
@@ -73,7 +80,7 @@
         
     }
     
-    if (data.data.unRead == 0) {
+    if (data.data.unRead <= 0) {
         [self.unReadLab setHidden:YES];
     }else{
         [self.unReadLab setHidden:NO];

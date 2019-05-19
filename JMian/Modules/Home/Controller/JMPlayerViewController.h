@@ -16,6 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,copy)NSString *topTitle;
 @property (strong, nonatomic) AVPlayer *player;
+@property (nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
+@property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, strong) VIMediaDownloader *downloader;
 
 @end
 

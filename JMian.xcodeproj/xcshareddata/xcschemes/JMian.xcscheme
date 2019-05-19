@@ -37,16 +37,11 @@
                BlueprintName = "JMianTests"
                ReferencedContainer = "container:JMian.xcodeproj">
             </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "048FEE4F2244853C001160C8"
-               BuildableName = "JMianUITests.xctest"
-               BlueprintName = "JMianUITests"
-               ReferencedContainer = "container:JMian.xcodeproj">
-            </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "JMianTests">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>

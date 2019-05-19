@@ -63,7 +63,7 @@
 
 #define Paginate_Work_URL @"api/work/paginate"
 #define Create_Work_URL @"api/work/create"
-#define Info_Work_URL @"api/work/info"
+#define Info_Work_URL @"api/job/info"
 
 
 //B端接口

@@ -121,16 +121,30 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 0) {
 //        cell.accessoryType = UITableViewCellStyleSubtitle;
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        if ([userModel.type isEqualToString:B_Type_UESR]) {
+            cell.detailTextLabel.text = self.userInfoModel.company_position;
+        }else{
+            cell.detailTextLabel.text = @"完善简历，让机遇找到你  90%";
 
-        cell.textLabel.text = [NSString stringWithFormat:@"%@\n%@",self.userInfoModel.nickname,self.userInfoModel.company_position];
+        }
+            cell.textLabel.text = [NSString stringWithFormat:@"%@",self.userInfoModel.nickname];
+
         cell.textLabel.numberOfLines = 0;
-        cell.textLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
+        cell.textLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:18];
         cell.textLabel.textColor = UIColorFromHEX(0x4d4d4d);
         
-//        cell.detailTextLabel.text = @"HR";
         cell.detailTextLabel.textColor = UIColorFromHEX(0x808080);
-
+        //改变头像大小
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        CGSize itemSize = CGSizeMake(74, 74);
+        cell.imageView.layer.cornerRadius = 37;
+        cell.imageView.layer.masksToBounds = YES;
+        UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
+        CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
+        [cell.imageView.image drawInRect:imageRect];
+        cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
     }
     if (indexPath.section == 1) {
         JMMineModulesTableViewCell *modulesCell = [[JMMineModulesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
@@ -172,7 +186,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if ([_userInfoModel.type isEqualToString:@"2"]) {
+        if ([_userInfoModel.type isEqualToString:C_Type_USER]) {
             return  110;
         }else{
             return 100;

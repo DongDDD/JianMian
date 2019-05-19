@@ -28,7 +28,7 @@
 @property (weak, nonatomic) THDatePickerView *dateView;
 @property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
 @property (nonatomic, strong)NSArray *statusArray;
-
+@property (nonatomic, strong)JMVideoChatView *videoChatView;
 @end
 
 static NSString *cellIdent = @"managerCellIdent";
@@ -159,11 +159,11 @@ static NSString *cellIdent = @"managerCellIdent";
 //            [vc setInterviewModel:model];
 //            [self.navigationController pushViewController:vc animated:YES];
             
-            JMVideoChatView *videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
-            videoChatView.delegate = self;
-            videoChatView.tag = 222;
-            [videoChatView setInterviewModel:model];
-            [self.view addSubview:videoChatView];
+            _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+            _videoChatView.delegate = self;
+            _videoChatView.tag = 222;
+            [_videoChatView setInterviewModel:model];
+            [self.view addSubview:_videoChatView];
 //            [[UIApplication sharedApplication].keyWindow addSubview:videoChatView];
             [self.navigationController setNavigationBarHidden:YES];
 
@@ -236,10 +236,11 @@ static NSString *cellIdent = @"managerCellIdent";
     
 }
 
+//挂断
 -(void)hangupAction{
-    [[self.view viewWithTag:222] removeFromSuperview];
+  
+    [_videoChatView removeFromSuperview];
     [self.navigationController setNavigationBarHidden:NO];
-
 
 }
 #pragma mark - THDatePickerViewDelegate

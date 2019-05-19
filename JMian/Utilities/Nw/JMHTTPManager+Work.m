@@ -52,11 +52,10 @@
 }
 
 
--(void)fetchWorkInfoWithWork_id:(NSString *)work_id SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
-    NSParameterAssert(work_id);
-    NSString *url = [NSString stringWithFormat:@"%@/%@",Info_Work_URL,work_id];
-    
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:url parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+-(void)fetchWorkInfoWith_Id:(NSString *)Id SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSString *urlStr = [Info_Work_URL stringByAppendingFormat:@"/%@",Id];
+
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
 - (void)postCreateWorkWith_city_id:(NSString *)city_id

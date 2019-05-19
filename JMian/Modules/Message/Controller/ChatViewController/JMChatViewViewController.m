@@ -28,6 +28,7 @@
 @property (nonatomic, strong) NSArray *childVCs;
 
 //@property (nonatomic ,strong) JMGreetView *greetView;
+@property (nonatomic, assign)BOOL isDominator;
 
 @end
 
@@ -78,14 +79,20 @@
     [self addChildViewController:_messageController];
     [self.view addSubview:_messageController.view];
     [_messageController setMyConvModel:_myConvModel];
-
-    _inputController = [[JMInputController alloc] init];
-    _inputController.view.frame = CGRectMake(0, _messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight-55, self.view.frame.size.width,_messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight);
-    _inputController.delegate = self;
-    NSLog(@"*******%f",Bottom_SafeHeight);
-    [self addChildViewController:_inputController];
-    [self.view addSubview:_inputController.view];
-
+    
+    if (!_isDominator) {
+        //        不是系统消息才有输入框
+        _inputController = [[JMInputController alloc] init];
+        _inputController.view.frame = CGRectMake(0, _messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight-55, self.view.frame.size.width,_messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight);
+        _inputController.delegate = self;
+        NSLog(@"*******%f",Bottom_SafeHeight);
+        [self addChildViewController:_inputController];
+        [self.view addSubview:_inputController.view];
+    }else{
+        self.title = @"系统消息";
+        _messageController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    }
+    
 }
 
 
@@ -114,8 +121,11 @@
 
 - (void)didTapInMessageController:(JMMessageTableViewController *)controller
 {
-
     [_inputController reset];
+}
+
+- (void)isDominatorController:(JMMessageTableViewController *)controller{
+    _isDominator = YES;
 }
 
 - (void)sendGreetAction:(NSInteger *)index{

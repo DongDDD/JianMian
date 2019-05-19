@@ -91,13 +91,13 @@
 //    CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
 //    [mapView setCenterCoordinate:locationCoordinate animated:YES];
     
-    [bgView addSubview:mapView];
-    
-    [mapView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(bgView);
-        make.height.mas_equalTo(224);
-        make.top.mas_equalTo(adrContentLab.mas_bottom).offset(13);
-    }];
+//    [bgView addSubview:mapView];
+//    
+//    [mapView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.and.right.mas_equalTo(bgView);
+//        make.height.mas_equalTo(224);
+//        make.top.mas_equalTo(adrContentLab.mas_bottom).offset(13);
+//    }];
     
     UIView * xian1View = [[UIView alloc]init];
     xian1View.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];

@@ -41,6 +41,7 @@
 - (void)setupInit {
     [self.view addSubview:self.pageView];
     [self.view addSubview:self.titleView];
+    
     [self.pageView setCurrentIndex:1];//添加子视图”谁看过我“
     [self.pageView setCurrentIndex:0];//添加子视图”全部信息“
     
@@ -64,7 +65,7 @@
 
 - (JMPageView *)pageView {
     if (!_pageView) {
-        _pageView = [[JMPageView alloc] initWithFrame:CGRectMake(0, self.titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT-self.titleView.frame.size.height) childVC:self.childVCs];
+        _pageView = [[JMPageView alloc] initWithFrame:CGRectMake(0, self.titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT-self.titleView.frame.size.height-self.titleView.frame.origin.y) childVC:self.childVCs];
         __weak JMMessageViewController *weakSelf = self;
         _pageView.didEndScrollView = ^(NSInteger index) {
             [weakSelf.titleView setCurrentTitleIndex:index];

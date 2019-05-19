@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class JMMessageTableViewController;
 @protocol JMMessageTableViewControllerDelegate <NSObject>
 - (void)didTapInMessageController:(JMMessageTableViewController *)controller;
+- (void)isDominatorController:(JMMessageTableViewController *)controller;
+
 //- (void)didHideMenuInMessageController:(JMMessageTableViewController *)controller;
 //- (BOOL)messageController:(JMMessageTableViewController *)controller willShowMenuInView:(UIView *)view;
 //- (void)messageController:(JMMessageTableViewController *)controller didSelectMessages:(NSMutableArray *)msgs atIndex:(NSInteger)index;

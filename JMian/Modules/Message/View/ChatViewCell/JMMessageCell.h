@@ -38,6 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) UILabel *content;
 @property (nonatomic, strong) UIImageView *bubble;
+@property (nonatomic, assign)BOOL isDominator;
+
 
 - (CGFloat)getHeight:(JMMessageCellData *)data;
 - (void)setData:(JMMessageCellData *)data;

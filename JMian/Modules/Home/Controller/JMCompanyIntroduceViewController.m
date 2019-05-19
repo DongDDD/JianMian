@@ -9,18 +9,26 @@
 #import "JMCompanyIntroduceViewController.h"
 #import "JMIntroduceContentView.h"
 #import "SDCycleScrollView.h"
-#import "Masonry.h"
 #import "MapView.h"
+#import "JMCustomAnnotationView.h"
+#import "JMCompanyVideoView.h"
+#import "DimensMacros.h"
+#import "JMTitlesView.h"
 
-
-@interface JMCompanyIntroduceViewController ()<SDCycleScrollViewDelegate,JMIntroduceContentViewDelegate>
+@interface JMCompanyIntroduceViewController ()<SDCycleScrollViewDelegate,JMIntroduceContentViewDelegate,MAMapViewDelegate,UIScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
-@property(nonatomic,strong)JMIntroduceContentView *contentView;
+@property(nonatomic,strong)JMCompanyVideoView *companyVideoView;
+@property(nonatomic,strong)JMIntroduceContentView *introducetView;
+@property(nonatomic,strong)UIView *pageContentView;
+
+@property(nonatomic,strong)JMTitlesView *titleView;
+
 @property(nonatomic,strong)UIView *SDCScrollView;
 @property(nonatomic,strong)JMIntroduceContentView *advantageView;
 @property(nonatomic,strong)JMIntroduceContentView *brightSpoView;
-@property(nonatomic,strong)MapView *mapView;
+@property(nonatomic,strong)MapView *mapBGView;
+@property(nonatomic,strong)MAMapView *mapView;
 
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -32,90 +40,103 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-
+    self.scrollView.delegate = self;
+    self.title = @"公司介绍";
+    [self.scrollView addSubview:self.pageContentView];
+    [self.scrollView addSubview:self.titleView];
+    [self.pageContentView addSubview:self.companyVideoView];
     [self setIntroduceView];
     [self setSDCScrollView];
     [self setAdvantageView];
-//    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,0);
     [self setBrightSpoView];
     [self setMapView];
     // Do any additional setup after loading the view from its nib.
 }
 
-
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.mapView.frame.origin.y+self.mapView.frame.size.height);
+    CGRect pageFrame = self.pageContentView.frame;
+    pageFrame.size.height = self.introducetView.frame.size.height + self.SDCScrollView.frame.size.height +self.advantageView.frame.size.height+self.brightSpoView.frame.size.height+self.mapView.frame.size.height;
+    self.pageContentView.frame = pageFrame ;
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.pageContentView.frame.size.height+self.headerView.frame.origin.y+self.headerView.frame.size.height);
+
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+}
 
 #pragma mark - 点击事件
 
 -(void)didClickButton:(CGFloat)contentHeight{
 
-   
-//    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.and.right.mas_equalTo(self.scrollView);
-//        make.width.mas_equalTo(200);
-//
-//        make.bottom.mas_equalTo(self.contentView.contenLab.mas_bottom).offset(30);
-//        make.top.mas_equalTo(self.headerView.mas_bottom);
-//    }];
-        [self.contentView.contenLab mas_updateConstraints:^(MASConstraintMaker *make) {
-             make.bottom.mas_equalTo(self.contentView.contenLab.mas_bottom).offset(30);
+        [self.introducetView.contenLab mas_updateConstraints:^(MASConstraintMaker *make) {
+             make.bottom.mas_equalTo(self.introducetView.contenLab.mas_bottom).offset(30);
          
     
         }];
     
-//
-//    [self.contentView mas_updateConstraints:^(MASConstraintMaker *make) {
-//
-//       make.height.mas_equalTo(contentHeight+64);
-//
-//    }];
-
 
 }
+- (void)setCurrentIndex:(NSInteger)index {
+   
+//    [self.companyVideoView setContentOffset:CGPointMake(index * SCREEN_WIDTH, 0) animated:YES];
+    
+}
+
+
+-(void)movePageContentView:(NSInteger)_index{
+    
+    __weak typeof(self) ws = self;
+    
+    
+    
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGRect Frame = ws.pageContentView.frame;
+        Frame.origin.x = -_index*SCREEN_WIDTH ;
+        ws.pageContentView.frame = Frame;
+  
+    } completion:nil];
+    
+    switch (_index) {
+        case 0:
+              self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.pageContentView.frame.size.height+self.headerView.frame.origin.y+self.headerView.frame.size.height);
+            break;
+        case 1:
+            self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.headerView.frame.size.height + SCREEN_HEIGHT);
+            break;
+
+            break;
+        default:
+            break;
+    }
+    
+    
+}
+
 //
 #pragma mark - 公司介绍
 -(void)setIntroduceView{
     
     
-    self.contentView = [[JMIntroduceContentView alloc]init];
-//    self.contentView.frame = CGRectMake(0, self.headerView.frame.origin.y+self.headerView.frame.size.height,SCREEN_WIDTH, self.contentView.contenLab.frame.origin.y+self.contentView.contenLab.frame.size.height);
-    
-    self.contentView.delegate = self;
+    self.introducetView = [[JMIntroduceContentView alloc]init];
+
+    self.introducetView.delegate = self;
     [self.view layoutIfNeeded];
     
-    [self.scrollView addSubview:self.contentView];
+    [self.scrollView addSubview:self.introducetView];
     
-    
-//    [self.contentView.contenLab mas_updateConstraints:^(MASConstraintMaker *make) {
-//
-//        make.height.mas_equalTo(93);
-//
-//    }];
-//
-    
-    [self.contentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(self.scrollView);
-//        make.width.mas_equalTo(200);
-//        make.height.mas_equalTo(194);
-        make.bottom.mas_equalTo(self.contentView.contenLab.mas_bottom).offset(30);
-        make.top.mas_equalTo(self.headerView.mas_bottom);
+ 
+    [self.introducetView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.left.mas_equalTo(self.pageContentView);
+        make.bottom.mas_equalTo(self.introducetView.contenLab.mas_bottom).offset(30);
+        make.top.mas_equalTo(self.headerView.mas_bottom).mas_offset(self.titleView.frame.size.height);
     }];
     
     
-//    UITapGestureRecognizer *spreadTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(spreadAction:)];
-//
-//
-//    [self.scrollView addGestureRecognizer:spreadTap];
-//
-//
-    
+
 
 }
 
@@ -129,13 +150,13 @@
 -(void)setSDCScrollView{
     self.SDCScrollView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 211)];
 //    containerView.contentSize = CGSizeMake(self.view.frame.size.width, 0);
-    [self.scrollView addSubview:self.SDCScrollView];
+    [self.pageContentView addSubview:self.SDCScrollView];
     
     [self.SDCScrollView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(self.scrollView);
-        make.width.mas_equalTo(self.scrollView);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.left.mas_equalTo(self.pageContentView);
         make.height.mas_equalTo(211);
-         make.top.mas_equalTo(self.contentView.mas_bottom);
+         make.top.mas_equalTo(self.introducetView.mas_bottom);
     }];
     
     
@@ -156,10 +177,7 @@
     cycleScrollView2.currentPageDotColor = [UIColor whiteColor]; // 自定义分页控件小圆标颜色
     [self.SDCScrollView addSubview:cycleScrollView2];
   
-    
-    
-    
-    
+  
     
     //         --- 模拟加载延迟
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -181,12 +199,12 @@
 -(void)setAdvantageView{
     self.advantageView = [[JMIntroduceContentView alloc]init];
     
-    [self.scrollView addSubview:self.advantageView];
+    [self.pageContentView addSubview:self.advantageView];
     
     [self.advantageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.SDCScrollView.mas_bottom);
-        make.left.and.right.mas_equalTo(self.scrollView);
-        make.width.mas_equalTo(self.scrollView);
+        make.left.mas_equalTo(self.pageContentView);
+        make.width.mas_equalTo(SCREEN_WIDTH);
         make.bottom.mas_equalTo(self.advantageView.contenLab.mas_bottom).offset(30);
     }];
 
@@ -195,35 +213,146 @@
 -(void)setBrightSpoView{
     self.brightSpoView = [[JMIntroduceContentView alloc]init];
     
-    [self.scrollView addSubview:self.brightSpoView];
+    [self.pageContentView addSubview:self.brightSpoView];
     
     [self.brightSpoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.advantageView.mas_bottom);
-        make.left.and.right.mas_equalTo(self.scrollView);
-        make.width.mas_equalTo(self.scrollView);
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.left.mas_equalTo(self.pageContentView);
         make.bottom.mas_equalTo(self.brightSpoView.contenLab.mas_bottom).offset(30);
     }];
     
 }
 
+#pragma mark - 高德地图
+
 -(void)setMapView{
-    self.mapView  = [[MapView alloc]init];
-    [self.scrollView addSubview:self.mapView];
+    //
+    self.mapBGView = [[MapView alloc] init];
+    [self.mapBGView setModel:self.model];
+    [self.pageContentView addSubview:self.mapBGView];
     
+    [self.mapBGView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.width.mas_equalTo(SCREEN_WIDTH);
+        make.height.mas_equalTo(346);
+        make.left.mas_equalTo(self.pageContentView);
+        make.top.mas_equalTo(self.brightSpoView);
+    }];
     
+    [self.pageContentView addSubview:self.mapView];
+    CLLocationDegrees latitude = [self.model.latitude doubleValue];
+    CLLocationDegrees longitude = [self.model.longitude doubleValue];
+    CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
+    [self.mapView setCenterCoordinate:locationCoordinate animated:NO];
+    MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+    pointAnnotation.coordinate = locationCoordinate;//设置地图的定位中心点坐标self.mapView.centerCoordinate = coor;//将点添加到地图上，即所谓的大头针
+    [_mapView addAnnotation:pointAnnotation];
     [self.mapView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.brightSpoView.mas_bottom);
-        make.height.mas_equalTo(316);
-        make.left.and.right.mas_equalTo(self.scrollView);
-        make.width.mas_equalTo(self.scrollView);
+        make.left.and.right.mas_equalTo(self.mapBGView);
+        make.height.mas_equalTo(224);
+        make.bottom.mas_equalTo(self.mapBGView);
     }];
     
     
-
-
-
 }
 
+- (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id)annotation {
+    //大头针标注
+    if ([annotation isKindOfClass:[MAPointAnnotation class]]) {
+        //判断是否是自己的定位气泡，如果是自己的定位气泡，不做任何设置，显示为蓝点，如果不是自己的定位气泡，比如大头针就会进入
+        static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
+        MAAnnotationView *annotationView = (MAAnnotationView *) [mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
+        if ( annotationView == nil) {
+            annotationView = [[MAAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
+            
+            
+            JMCustomAnnotationView *cusView = [[JMCustomAnnotationView alloc]init];
+            cusView.adressName.text = self.model.address;
+            cusView.companyName.text = self.model.companyName;
+            [annotationView addSubview:cusView];
+            [cusView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.mas_equalTo(annotationView);
+                make.centerY.mas_equalTo(annotationView);
+                make.width.mas_equalTo(SCREEN_WIDTH*0.8);
+                make.height.mas_equalTo(86);
+            }];
+            
+            return annotationView;
+        }
+        
+    }
+    return nil;
+    
+    
+    
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    CGFloat offsetY = scrollView.contentOffset.y;
+    
+    if (offsetY >= _headerView.frame.origin.y+_headerView.frame.size.height){
+        //只修改Y值
+        self.titleView.frame = CGRectMake(self.titleView.frame.origin.x, 0, self.titleView.frame.size.width, self.titleView.frame.size.height);
+        [self.view addSubview:self.titleView];
+        
+    }else{
+        
+        self.titleView.frame = CGRectMake(self.titleView.frame.origin.x, _headerView.frame.origin.y+_headerView.frame.size.height, self.titleView.frame.size.width, self.titleView.frame.size.height);
+//        _pageView.frame = CGRectMake(_pageView.frame.origin.x,_titleView.frame.origin.y+_titleView.frame.size.height, _pageView.frame.size.width, _pageView.frame.size.height);
+        [self.scrollView addSubview:self.titleView];
+    }
+    
+    
+    
+}
+
+#pragma mark - lazy
+
+///初始化地图
+-(MAMapView *)mapView{
+    
+    if (_mapView == nil) {
+        _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 300)];
+        _mapView.delegate = self;
+        
+        [self.view addSubview:_mapView];
+ 
+        
+    }
+    return _mapView;
+    
+}
+
+
+- (JMTitlesView *)titleView {
+    if (!_titleView) {
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0,self.headerView.frame.origin.y+self.headerView.frame.size.height, SCREEN_WIDTH, 43} titles:@[@"公司详情", @"公司视频"]];
+        __weak JMCompanyIntroduceViewController *weakSelf = self;
+        _titleView.didTitleClick = ^(NSInteger index) {
+            [weakSelf movePageContentView:index];
+
+//            _index = index;
+        };
+    }
+    
+    return _titleView;
+}
+
+-(UIView *)pageContentView{
+    if (_pageContentView == nil) {
+        _pageContentView = [[UIView alloc]initWithFrame:CGRectMake(0, self.headerView.frame.origin.y + self.headerView.frame.size.height+self.titleView.frame.size.height, SCREEN_WIDTH, 300)];
+    }
+    return _pageContentView;
+}
+
+- (JMCompanyVideoView *)companyVideoView {
+    if (!_companyVideoView) {
+        _companyVideoView = [[JMCompanyVideoView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, 460)];
+     
+    }
+    
+    return _companyVideoView;
+}
 
 
 /*

@@ -21,16 +21,20 @@
 #import <AVKit/AVKit.h>
 #import "JMVideoPlayManager.h"
 #import "JMPlayerViewController.h"
+#import "PositionDesiredViewController.h"
 
-@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate>
+@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headView;
-@property (weak, nonatomic) IBOutlet UIButton *pushPositionBtn; //j推荐职位
-@property (weak, nonatomic) IBOutlet UIButton *allPositionBtn;//所有职位
+@property (weak, nonatomic) IBOutlet UIButton *allOfPositionBtn; //所有职位
+@property (weak, nonatomic) IBOutlet UIButton *choosePositionBtn;//职位筛选
 @property (weak, nonatomic) IBOutlet UIButton *companyRequireBtn;//公司要求
 @property (nonatomic, strong) NSArray *arrDate;
 @property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, strong) PositionDesiredViewController *choosePositionVC;
 @property (nonatomic, strong) JMLabsChooseViewController *labschooseVC;
+
 @property(nonatomic,strong)NSMutableArray *playerArray;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 
@@ -155,9 +159,9 @@ static NSString *cellIdent = @"cellIdent";
         if (responsObject[@"data"]) {
 
             self.arrDate = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            [[JMVideoPlayManager sharedInstance].C_User_playArray removeAllObjects];
+//            [[JMVideoPlayManager sharedInstance].C_User_playArray removeAllObjects];
             
-            [self getPlayerArray];
+//            [self getPlayerArray];
             [self.tableView.mj_header endRefreshing];
             [self.tableView reloadData];
             [self.tableView.mj_footer endRefreshing];
@@ -172,54 +176,72 @@ static NSString *cellIdent = @"cellIdent";
 
 }
 
--(void)getPlayerArray
+
+-(void)resetAction{
+}
+
+-(void)OKAction
 {
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        
-        for (JMHomeWorkModel *model in self.arrDate) {
-            if (model.videoFile_path) {
-                NSURL *url = [NSURL URLWithString:model.videoFile_path];
-                //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
-                AVPlayer *player = [AVPlayer playerWithURL:url];
-
-                [[JMVideoPlayManager sharedInstance].C_User_playArray addObject:player];
-            }else{
-                [[JMVideoPlayManager sharedInstance].C_User_playArray addObject:[NSNull null]];
-
-            }
-            
-        }
-        
-        self.playerArray = [JMVideoPlayManager sharedInstance].C_User_playArray;
-    });
-
-}
-
-#pragma mark - 推荐职位 -
-
-- (IBAction)pushPositionAction:(UIButton *)sender {
-    [self.pushPositionBtn setBackgroundColor:MASTER_COLOR];
-    [self.pushPositionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.allPositionBtn setBackgroundColor:[UIColor whiteColor]];
-    [self.allPositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    [self.companyRequireBtn setBackgroundColor:[UIColor whiteColor]];
-    [self.companyRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:YES];
+    
+    
+}
+
+
+-(void)closeVideoAction{
+
+  
 
 }
 
+//-(void)getPlayerArray
+//{
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//
+//        for (JMHomeWorkModel *model in self.arrDate) {
+//            if (model.videoFile_path) {
+//                NSURL *url = [NSURL URLWithString:model.videoFile_path];
+//                //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+//                AVPlayer *player = [AVPlayer playerWithURL:url];
+//
+//                [[JMVideoPlayManager sharedInstance].C_User_playArray addObject:player];
+//            }else{
+//                [[JMVideoPlayManager sharedInstance].C_User_playArray addObject:[NSNull null]];
+//
+//            }
+//
+//        }
+//
+//        self.playerArray = [JMVideoPlayManager sharedInstance].C_User_playArray;
+//    });
+//
+//}
 
 #pragma mark - 所有职位 -
 
-- (IBAction)allPosition:(UIButton *)sender {
-    [self.pushPositionBtn setBackgroundColor:[UIColor whiteColor]];
-    [self.pushPositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    [self.allPositionBtn setBackgroundColor:MASTER_COLOR];
-    [self.allPositionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+- (IBAction)allPositionAction:(UIButton *)sender {
+    [self.allOfPositionBtn setBackgroundColor:MASTER_COLOR];
+    [self.allOfPositionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.choosePositionBtn setBackgroundColor:[UIColor whiteColor]];
+    [self.choosePositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.companyRequireBtn setBackgroundColor:[UIColor whiteColor]];
     [self.companyRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:YES];
 
+}
+
+
+#pragma mark - 职位筛选 -
+
+- (IBAction)choosePosition:(UIButton *)sender {
+    [self.allOfPositionBtn setBackgroundColor:[UIColor whiteColor]];
+    [self.allOfPositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.choosePositionBtn setBackgroundColor:MASTER_COLOR];
+    [self.choosePositionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.companyRequireBtn setBackgroundColor:[UIColor whiteColor]];
+    [self.companyRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.labschooseVC.view setHidden:YES];
+    [self.choosePositionVC.view setHidden:NO];
    
 }
 
@@ -229,37 +251,32 @@ static NSString *cellIdent = @"cellIdent";
 - (IBAction)companyRequire:(UIButton *)sender {
     [self.companyRequireBtn setBackgroundColor:MASTER_COLOR];
     [self.companyRequireBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.pushPositionBtn setBackgroundColor:[UIColor whiteColor]];
-    [self.pushPositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    [self.allPositionBtn setBackgroundColor:[UIColor whiteColor]];
-    [self.allPositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.allOfPositionBtn setBackgroundColor:[UIColor whiteColor]];
+    [self.allOfPositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.choosePositionBtn setBackgroundColor:[UIColor whiteColor]];
+    [self.choosePositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:NO];
 
  
 }
 
--(void)resetAction{
-}
-
--(void)OKAction
-{
-    [self.labschooseVC.view setHidden:YES];
-  
-    
-}
-
 
 -(void)playAction_cell:(HomeTableViewCell *)cell{
-    if (self.playerArray) {
-        JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
-        vc.player = self.playerArray[cell.indexpath.row];
-        //    vc.player = cell.player;
-        //    vc.model = cell;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:cell.model.videoFile_path];
+    [[JMVideoPlayManager sharedInstance] play];
+    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+     self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController pushViewController:playVC animated:NO];
+    
+//    if (self.playerArray) {
+//        JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
+//        vc.player = self.playerArray[cell.indexpath.row];
+//        //    vc.player = cell.player;
+//        //    vc.model = cell;
+//        [self.navigationController pushViewController:vc animated:YES];
+//
+//    }
 }
-
 
 
 #pragma mark - tableView DataSource -
@@ -283,8 +300,6 @@ static NSString *cellIdent = @"cellIdent";
     if (cell == nil) {
         cell = [[HomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
     }
-    
-    
     
 //    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
     cell.indexpath = indexPath;
@@ -310,7 +325,6 @@ static NSString *cellIdent = @"cellIdent";
 
 }
 #pragma mark - lazy
-#pragma mark - lazy
 
 -(NSMutableArray *)playerArray
 {
@@ -319,6 +333,30 @@ static NSString *cellIdent = @"cellIdent";
     }
     return _playerArray;
 }
+
+
+-(PositionDesiredViewController *)choosePositionVC{
+    if (_choosePositionVC == nil) {
+        _choosePositionVC = [[PositionDesiredViewController alloc]init];
+        _choosePositionVC.searchView.hidden = YES;
+        _choosePositionVC.delegate = self;
+//        _choosePositionVC.view.hidden = YES;
+        [self addChildViewController:_choosePositionVC];
+        [self.view addSubview:_choosePositionVC.view];
+        [_choosePositionVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headView.mas_bottom);
+            make.left.and.right.mas_equalTo(self.view);
+            make.height.mas_equalTo(self.view).mas_offset(100);
+        }];
+        
+    }
+
+    return _choosePositionVC;
+
+}
+
+    
+    
 
 -(JMLabsChooseViewController *)labschooseVC{
     if (_labschooseVC == nil) {

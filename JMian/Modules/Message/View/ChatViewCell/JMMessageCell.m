@@ -53,6 +53,7 @@
     _head = [[UIImageView alloc] init];
     _head.backgroundColor = [UIColor grayColor];
     _head.contentMode = UIViewContentModeScaleAspectFit;
+   
     [self addSubview:_head];
 
     //container
@@ -88,6 +89,15 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 
     
+}
+
+-(void)setIsDominator:(BOOL)isDominator{
+    
+    if (isDominator) {
+//         [_head sd_setImageWithURL:[NSURL URLWithString:nil] placeholderImage:[UIImage imageNamed:@"notification "]];
+        [_head setImage:[UIImage imageNamed:@"notification "]];
+        [_head setBackgroundColor:MASTER_COLOR];
+    }
 }
 
 -(void)setData:(JMMessageCellData *)data{

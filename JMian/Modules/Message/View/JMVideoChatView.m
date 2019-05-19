@@ -29,7 +29,7 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hangupMessage) name:Notification_JMMUHangUpListener object:nil];
         self.backgroundColor = [UIColor blackColor];
         [self initView];
         [self initializeAgoraEngine];
@@ -148,7 +148,7 @@
         [_delegate hangupAction];
         [self leaveChannel];
         if ((self.receiverID)) {
-            [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"自己发起了视频聊天又调皮关闭了"];
+            [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"leaveAction"];
         }
     }
 
@@ -345,28 +345,50 @@
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine didJoinedOfUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
     
     NSLog(@"有人进入");
-    [self.waitForAnswerView removeFromSuperview];
+//    [self.waitForAnswerView removeFromSuperview];
 
 //    [self.waitForAnswerView setHidden:YES];
     
 }
+#pragma mark -用来接收对方丢出的挂断命令
+-(void)hangupMessage{
 
+    if (_delegate && [_delegate respondsToSelector:@selector(hangupAction)]) {
+        [_delegate hangupAction];
+        [self leaveChannel];
+    }
+
+}
 - (void)onNewMessage:(NSNotification *)notification
 {
+//    NSArray *msgs = notification.object;
+//    for (TIMMessage *msg in msgs) {
+//        int cnt = [msg elemCount];
+//        for (int i = 0; i < cnt; i++) {
+//            TIMElem * elem = [msg getElem:i];
+//            if ([elem isKindOfClass:[TIMCustomElem class]]) {
+//                TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
+//                if ([custom_elem.desc isEqualToString:@"leaveAction"]){
+//                    if (_delegate && [_delegate respondsToSelector:@selector(hangupAction)]) {
+//                        [_delegate hangupAction];
+//                        [self leaveChannel];
+//                    }
+//                }
+//            }
+//
+//
+//        }
+//
+//    }
     NSArray *msgs = notification.object;
     TIMMessage *msg = msgs[0];
     TIMElem * elem = [msg getElem:0];
     if ([elem isKindOfClass:[TIMCustomElem class]]) {
         TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
-        if ([custom_elem.desc isEqualToString:@"对方已拒绝"]){
-            if (_delegate && [_delegate respondsToSelector:@selector(hangupAction)]) {
-                [_delegate hangupAction];
-                [self leaveChannel];
-            }
+        if ([custom_elem.desc isEqualToString:@"leaveAction"]) {
+            NSLog(@"6leaveActionleaveActionleaveAction");
         }
     }
-    
-
     
             
             

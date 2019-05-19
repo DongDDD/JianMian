@@ -12,13 +12,15 @@
 #import "JMHTTPManager+Uploads.h"
 #import "JMCompanyDesciptionOfMineViewController.h"
 #import "JMHTTPManager+CompanyInfoUpdate.h"
+#import "DimensMacros.h"
 
 @interface JMCompanyInfoMineViewController ()<UIImagePickerControllerDelegate,UIPickerViewDelegate,JMCompanyDesciptionOfMineViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property(nonatomic,strong)JMCompanyInfoModel *model;
 
-@property (weak, nonatomic) IBOutlet UIButton *headerImage;
+@property (weak, nonatomic) IBOutlet UIImageView *headerImg;
+@property (weak, nonatomic) IBOutlet UIView *topView;
 
 
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLab;
@@ -53,15 +55,18 @@
     [self getData];
     self.pickerView.delegate = self;
     [self.pickerView selectRow:0 inComponent:0 animated:NO];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(headerImgAction)];
+    [self.topView addGestureRecognizer:tap];
 
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.facingView.frame.origin.y+self.facingView.frame.size.height);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.facingView.frame.origin.y+self.facingView.frame.size.height+50);
     
     
-
+    
 }
 
 
@@ -69,13 +74,13 @@
 -(void)getData{
     _userInfoModel = [JMUserInfoManager getUserInfo];
     [[JMHTTPManager sharedInstance]fetchCompanyInfo_Id:_userInfoModel.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-         self.model = [JMCompanyInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-   
+        self.model = [JMCompanyInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        
         [self initView];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-
+    
 }
 
 
@@ -90,19 +95,15 @@
         
     }];
     
-
-
+    
+    
 }
 
 
 
 
 -(void)initView{
-    NSURL *photourl = [NSURL URLWithString:[NSString stringWithFormat:@"http://%@",self.model.logo_path]];
-    //url请求实在UI主线程中进行的
-    UIImage *images = [UIImage imageWithData:[NSData dataWithContentsOfURL:photourl]];//通过网络url获取uiimage
-    [self.headerImage setImage:images forState:UIControlStateNormal];
-    
+    [self.headerImg sd_setImageWithURL:[NSURL URLWithString:self.model.logo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.companyNameLab.text = self.model.company_name;
     [self.industryBtn setTitle:self.model.industry_name forState:UIControlStateNormal];
     [self.employBtn setTitle:self.model.employee forState:UIControlStateNormal];
@@ -117,7 +118,7 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     if(_isChange){
-    [self updateInfoData];
+        [self updateInfoData];
     }
 }
 
@@ -137,8 +138,8 @@
         [self.companyDecriptionBtn setTitle:textData forState:UIControlStateNormal];
         
     }
-
-
+    
+    
 }
 
 - (IBAction)industryAction:(UIButton *)sender {
@@ -175,7 +176,7 @@
         case 2:
             [self.facingBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
             break;
-         
+            
         default:
             break;
     }
@@ -222,7 +223,7 @@
 }
 #pragma mark - 上传图片
 
-- (IBAction)headerAtion:(id)sender {
+- (void)headerImgAction {
     
     //选取照片上传
     UIActionSheet *sheet;
@@ -241,6 +242,7 @@
     sheet.tag = 255;
     
     [sheet showInView:self.view];
+    
 }
 
 -(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -314,7 +316,7 @@
     
     
     //图片赋值显示
-    [_headerImage setImage:savedImage forState:UIControlStateNormal];
+    self.headerImg.image = savedImage;
     
     
 }
@@ -341,14 +343,14 @@
         }
         
         
-//        if(responsObject[@"data"]){
-//            NSArray *urlArray = responsObject[@"data"];
-//            _imageUrl = urlArray[0];
-//        }
+        //        if(responsObject[@"data"]){
+        //            NSArray *urlArray = responsObject[@"data"];
+        //            _imageUrl = urlArray[0];
+        //        }
         
         
         _isChange = YES;
-
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -357,13 +359,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

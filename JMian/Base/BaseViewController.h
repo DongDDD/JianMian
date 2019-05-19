@@ -7,13 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-//#import <AFNetworking.h>
 #import "DimensMacros.h"
-#import <Masonry.h>
-#import <MAMapKit/MAMapKit.h>
-#import <AMapFoundationKit/AMapFoundationKit.h>
-#import <AMapSearchKit/AMapSearchKit.h>
-#import <AMapLocationKit/AMapLocationKit.h>
+
 
 //屏幕 rect
 #define SCREEN_RECT ([UIScreen mainScreen].bounds)

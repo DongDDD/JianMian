@@ -23,6 +23,7 @@
 #import "JMHTTPManager+CreateConversation.h"
 #import "THDatePickerView.h"
 #import "JMPlayerViewController.h"
+#import "JMVideoPlayManager.h"
 
 
 @interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate,JMHeaderOfPersonDetailViewDelegate>
@@ -281,10 +282,17 @@
 //播放视频
 -(void)playAction
 {
-    JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
-    vc.player = self.player;
-    vc.topTitle = self.companyModel.userNickname;
-    [self.navigationController pushViewController:vc animated:YES];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.companyModel.video_file_path];
+    [[JMVideoPlayManager sharedInstance] play];
+    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController pushViewController:playVC animated:NO];
+
+    
+//    JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
+//    vc.player = self.player;
+//    vc.topTitle = self.companyModel.userNickname;
+//    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -319,23 +327,7 @@
         default:
             break;
     }
-//    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.pageContentView.frame.origin.y+self.vitaVc.view.frame.size.height-200);
-    
-//    switch (_index) {
-//        case 0:
-//            self.vitaVc.view.hidden = NO;
-//            break;
-//        case 1:
-//            self.contactVc.view.hidden = NO;
-//            break;
-//        case 2:
-//
-//            break;
-//        default:
-//            break;
-//    }
-    
-    
+
     
 }
 

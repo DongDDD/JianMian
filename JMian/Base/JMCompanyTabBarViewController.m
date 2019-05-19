@@ -72,8 +72,6 @@
             self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             [self updateConversations]; //获取腾讯云数据
             
-//            [self.tableView reloadData];
-            
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -86,9 +84,7 @@
 
 - (void)updateConversations {
     JMUserInfoModel *userInfomodel = [JMUserInfoManager getUserInfo];
-    
-//    _dataArray = [NSMutableArray array];
-    //    15011331133
+
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
     NSLog(@"腾讯云数据%@",convs);
@@ -102,60 +98,33 @@
             if (model.sender_user_id == userInfomodel.user_id) {
                 //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
                 if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
-
-                    JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
-                    data.unRead = [conv getUnReadMessageNum];
-                    data.convId = [conv getReceiver];
-//                    model.data = data;
-//                    data.time = [self getDateDisplayString:msg.timestamp];
-//                    data.subTitle = [self getLastDisplayString:conv];
-
-                    model.data = data;
-//                    [_dataArray addObject:model];
-
                     _unReadNum += [conv getUnReadMessageNum];
                 }
-                //                else{
-                //                    JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
-                //                    model.data = data;
-                //                    [_dataArray addObject:model];
-                //
-                //                }
+
             }else if(model.recipient_user_id == userInfomodel.user_id){
                 //判断recipient是自己的话，拿sender_mark去跟腾讯云的ReceiverID配对接收者
 
                 if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
 
-                    JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
-                    data.convId = [conv getReceiver];
-                    data.unRead = [conv getUnReadMessageNum];
-                    model.data = data;
-//                    data.time = [self getDateDisplayString:msg.timestamp];
-//                    data.subTitle = [self getLastDisplayString:conv];
-
-                    model.data = data;
-//                    [_dataArray addObject:model];
                     _unReadNum += [conv getUnReadMessageNum];
 
 
                 }
-                //                else{
-                //                    JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
-                //                    model.data = data;
-                //                    [_dataArray addObject:model];
-                //
-                //                }
-
-
+                
+                //服务器系统消息
             }
-
-
+            
+            
         }
-
+        
+        if ([[conv getReceiver] isEqualToString:@"dominator"]) {
+            _unReadNum += [conv getUnReadMessageNum];
+            
+        }
     }
 
     NSLog(@"未读消息数量%d",_unReadNum);
-    if (_unReadNum != 0) {
+    if (_unReadNum > 0) {
         self.message.unReadNum = _unReadNum;
         self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.message.unReadNum];
     }

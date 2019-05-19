@@ -233,6 +233,7 @@
     switch (indexPath.section) {
         case JMMyResumeCellTypeIcon: {
             JMMyResumeIconTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeIconTableViewCellIdentifier forIndexPath:indexPath];
+            
             [cell setUserInfo:[JMUserInfoManager getUserInfo]];
             return cell;
         }

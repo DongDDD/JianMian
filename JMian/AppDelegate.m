@@ -67,6 +67,7 @@
 
 - (void)onNewMessage:(NSArray *)msgs
 {
+
     [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMMessageListener object:msgs];
 
     NSLog(@"onNewMessage");
@@ -103,12 +104,14 @@
         
         NSLog(@"视频自定义消息%@",self.videoChatDic);
         if (self.videoChatDic && [custom_elem.desc isEqualToString:@"我发起了视频聊天"]) {
-            
+            [self.answerOrHangUpView setHidden:NO];
             [_window addSubview:self.answerOrHangUpView];
         }
-        if ([custom_elem.desc isEqualToString:@"自己发起了视频聊天又调皮关闭了"]) {
+        if ([custom_elem.desc isEqualToString:@"leaveAction"]) {
             [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
             [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
+            [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMUHangUpListener object:nil];
+
         }
         
 //        NSString *title = [NSString stringWithFormat:@" %@ 邀请你视频面试",self.videoChatDic[TITLE]];
@@ -146,19 +149,19 @@
 }
 
 
-
+#pragma mark - 关闭视频聊天界面
 -(void)hangupAction{
-    
+    //关闭自己的界面并向对方videoChatView丢出一个leaveAction 挂断命令
     [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
     [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
 //   JMUserInfoModel *
     //谁发出的就挂掉谁的视频界面
-    [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"对方已拒绝"];
+    [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"leaveAction"];
 }
 
 
 
-#pragma mark - 发送拒绝接听视频自定义消息
+#pragma mark - 发送拒绝接听视频命令（自定义消息）
 
 -(void)setVideoInvite_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
     
@@ -167,10 +170,7 @@
                              receiver:receiverID];
     
     // 转换为 NSData
-    
-//    NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
-    
+
     TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
 //    [custom_elem setData:data];
     if (dic) {

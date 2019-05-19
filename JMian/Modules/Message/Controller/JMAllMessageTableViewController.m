@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSArray *modelArray;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
+@property (nonatomic, strong)JMMessageListModel *dominatorModel;
 
 @end
 
@@ -72,16 +73,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 {
     [self getMsgList];    //获取自己服务器数据
 
-//    NSArray *msgs = notification.object;
-//    NSMutableArray *uiMsgs = [self transUIMsgFromIMMsg:msgs];
-//    [_uiMsgs addObjectsFromArray:uiMsgs];
-//    __weak typeof(self) ws = self;
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//        [ws.tableView reloadData];
-//        [ws scrollToBottom:YES];
-//    });
 }
-
 
 
 -(void)getMsgList{
@@ -90,7 +82,10 @@ static NSString *cellIdent = @"allMessageCellIdent";
         if (responsObject[@"data"]) {
             
             self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            [self updateConversations]; //获取腾讯云数据
+            if (self.modelArray) {
+                
+                [self updateConversations]; //获取腾讯云数据
+            }
 
 
         }
@@ -107,6 +102,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
     JMUserInfoModel *userInfomodel = [JMUserInfoManager getUserInfo];
     
     _dataArray = [NSMutableArray array];
+    NSMutableArray *converArray = [NSMutableArray array];
+
 //    15011331133
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
@@ -130,16 +127,11 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     data.subTitle = [self getLastDisplayString:conv];
                     
                     model.data = data;
-                    [_dataArray addObject:model];
+                    [converArray addObject:model];
                     
                     
                 }
-//                else{
-//                    JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
-//                    model.data = data;
-//                    [_dataArray addObject:model];
-//
-//                }
+
             }else if(model.recipient_user_id == userInfomodel.user_id){
                 //判断recipient是自己的话，拿sender_mark去跟腾讯云的ReceiverID配对接收者
                 
@@ -153,24 +145,39 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     data.subTitle = [self getLastDisplayString:conv];
                     
                     model.data = data;
-                    [_dataArray addObject:model];
+                    [converArray addObject:model];
                     
                     
                 }
-//                else{
-//                    JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
-//                    model.data = data;
-//                    [_dataArray addObject:model];
-//                
-//                }
-            
-            
+
             }
 
             
         }
 
+        if ([[conv getReceiver] isEqualToString:@"dominator"]) {
+            JMMessageListModel *model = [[JMMessageListModel alloc]init];
+            JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
+            data.convId = [conv getReceiver];
+            data.unRead = [conv getUnReadMessageNum];
+            data.time = [self getDateDisplayString:msg.timestamp];
+            data.subTitle = [self getLastDisplayString:conv];
+            
+            model.data = data;
+            self.dominatorModel = model;
+        }
+        
     }
+    //把系统消息置顶
+    if (self.dominatorModel) {
+        
+        [self.dataArray addObject:self.dominatorModel];
+    }
+    if (converArray) {
+        [self.dataArray addObjectsFromArray:converArray];
+        
+    }
+    
     [self.progressHUD hideAnimated:YES];
     [self.tableView.mj_header endRefreshing];
     [self.tableView reloadData];
@@ -366,7 +373,10 @@ static NSString *cellIdent = @"allMessageCellIdent";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
     [cell setData:[_dataArray objectAtIndex:indexPath.row]];
- 
+    if (indexPath.row == 0) {
+        cell.backgroundColor = BG_COLOR;
+    }
+    
     return cell;
 }
 
@@ -386,7 +396,11 @@ static NSString *cellIdent = @"allMessageCellIdent";
         //判断senderid是不是自己
        BOOL _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
        NSString *_receiverID;
-
+    //先判断是否系统消息
+    if ([_myModel.data.convId isEqualToString:@"dominator"]) {
+        _receiverID = _myModel.data.convId;
+    }else{
+    
         if (_isSelfIsSender) {
     
             _receiverID = _myModel.recipient_mark;
@@ -394,6 +408,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
             _receiverID = _myModel.sender_mark;
         }
+    }
     
         TIMConversation *conv = [[TIMManager sharedInstance]
                                  getConversation:(TIMConversationType)TIM_C2C

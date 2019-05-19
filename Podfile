@@ -15,6 +15,6 @@ pod 'AMapSearch'
 pod 'AMapLocation'
 pod 'AgoraRtcEngine_iOS'
 pod 'MBProgressHUD', '~> 1.1.0'
-
+pod 'VIMediaCache'
 
 

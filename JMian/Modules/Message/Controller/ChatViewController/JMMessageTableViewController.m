@@ -18,15 +18,17 @@
 
 @property (nonatomic, strong) NSMutableArray *uiMsgs;
 
-
 @property (nonatomic, strong) JMMessageListModel *myModel;
 
 @property (nonatomic, strong) TIMMessage *msgForGet;
 
 @property (nonatomic, assign)BOOL isSelfIsSender;
+
+
 @property (nonatomic, copy)NSString *receiverID;
 
 @property (nonatomic, assign) BOOL isScrollBottom;
+@property (nonatomic, assign)BOOL isDominator;
 
 
 @end
@@ -164,14 +166,25 @@ static NSString *cellIdent = @"infoCellIdent";
 
     _myModel = myConvModel;
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-    //判断senderid是不是自己
     _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
-    if (_isSelfIsSender) {
+    //判断系统消息
+    if ([_myModel.data.convId isEqualToString:@"dominator"]) {
+        _receiverID = _myModel.data.convId;
+        _isDominator = YES;
+        if (_delegate && [_delegate respondsToSelector:@selector(isDominatorController:)]) {
+            [_delegate isDominatorController:self];
+        }
         
-        _receiverID = _myModel.recipient_mark;
     }else{
         
-        _receiverID = _myModel.sender_mark;
+        //判断senderid是不是自己
+        if (_isSelfIsSender) {
+            
+            _receiverID = _myModel.recipient_mark;
+        }else{
+            
+            _receiverID = _myModel.sender_mark;
+        }
     }
     [self loadMessage];
 
@@ -215,7 +228,7 @@ static NSString *cellIdent = @"infoCellIdent";
     NSMutableArray *uiMsgs = [NSMutableArray array];
     for (NSInteger k = msgs.count - 1; k >= 0; --k) {
         TIMMessage *msg = msgs[k];
-        
+    
 //        if(![[[msg getConversation] getReceiver] isEqualToString:_myModel.sender_mark]){
 //            continue;
 //        }
@@ -409,9 +422,14 @@ static NSString *cellIdent = @"infoCellIdent";
 //section
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
+    
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if (!_isDominator && [userModel.type isEqualToString:B_Type_UESR]) {
         
-        return 43;
+        if (section == 0) {
+            
+            return 43;
+        }
     }
     return 0;
 }
@@ -446,6 +464,9 @@ static NSString *cellIdent = @"infoCellIdent";
         {
             cell = [[JMChatDetailInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
         }
+        if (_isDominator) {
+            [cell setHidden:YES];
+        }
         
         [cell setMyConModel:_myModel];
         return cell;
@@ -461,9 +482,9 @@ static NSString *cellIdent = @"infoCellIdent";
                 cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
                 //            cell.delegate = self;
             }
-            
             cell.backgroundColor = BG_COLOR;
             [cell setData:_uiMsgs[indexPath.row-1]];
+            [cell setIsDominator:_isDominator];//系统消息
         }
     
         return cell;
@@ -479,7 +500,13 @@ static NSString *cellIdent = @"infoCellIdent";
 {
     
     if (indexPath.row == 0) {
-        return 200;
+        
+        if (_isDominator) {
+            return 0;
+            
+        }else{
+            return 200;
+        }
     }else{
         CGFloat height = 0;
         NSObject *data = _uiMsgs[indexPath.row-1];

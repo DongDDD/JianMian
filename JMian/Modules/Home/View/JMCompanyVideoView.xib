@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JMCompanyVideoView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="公司视频介绍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwN-8h-bMX">
+                    <rect key="frame" x="20" y="74" width="104" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nf7-GI-EoJ">
+                    <rect key="frame" x="20" y="125" width="374" height="401"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="401" id="2Ct-yA-2pq"/>
+                        <constraint firstAttribute="height" constant="401" id="OEn-fa-kdR"/>
+                        <constraint firstAttribute="width" constant="374" id="bwx-kg-mZI"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="10"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                            <color key="value" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yhf-XJ-7Bw">
+                    <rect key="frame" x="145" y="263.5" width="124" height="124"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="124" id="8zf-PN-lge"/>
+                        <constraint firstAttribute="height" constant="124" id="PaQ-Hm-NS1"/>
+                    </constraints>
+                    <state key="normal" title="Button" image="play.png"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="nf7-GI-EoJ" firstAttribute="top" secondItem="qwN-8h-bMX" secondAttribute="bottom" constant="30" id="Gfx-xy-BfH"/>
+                <constraint firstItem="Yhf-XJ-7Bw" firstAttribute="centerY" secondItem="nf7-GI-EoJ" secondAttribute="centerY" id="Vbm-rD-Ne1"/>
+                <constraint firstItem="Yhf-XJ-7Bw" firstAttribute="centerX" secondItem="nf7-GI-EoJ" secondAttribute="centerX" id="Wk3-Zz-HeO"/>
+                <constraint firstItem="qwN-8h-bMX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="gEI-3C-0lZ"/>
+                <constraint firstItem="nf7-GI-EoJ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="hyE-fE-vD9"/>
+                <constraint firstItem="qwN-8h-bMX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="q5H-vx-7xP"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nf7-GI-EoJ" secondAttribute="trailing" constant="20" id="qQx-pi-VzS"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="play.png" width="141" height="141"/>
+    </resources>
+</document>
