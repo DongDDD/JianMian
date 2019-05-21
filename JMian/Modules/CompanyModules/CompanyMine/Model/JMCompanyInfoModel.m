@@ -19,9 +19,9 @@
 
 + (NSDictionary *)mj_objectClassInArray {
     return @{
+             @"files":@"JMFilesModel",
              @"labels":@"JMlabelsModel",
-             @"subways":@"JMShieldingModel",
-             @"subways":@"JMSubwaysModel"
+             @"subways":@"JMShieldingModel"
              };
 }
 
@@ -45,6 +45,8 @@
     return @{
              @"files_type":@"type",
              @"files_file_path":@"file_path",
+             @"file_id":@"file_id"
+
              };
 }
 @end

@@ -162,7 +162,7 @@
                                         <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="companyImgAction:" destination="-1" eventType="touchUpInside" id="O7U-8i-SqL"/>
+                                        <action selector="upLoadPicture:" destination="-1" eventType="touchUpInside" id="KZd-l5-5ZO"/>
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nwn-7N-IYs" userLabel="foot">

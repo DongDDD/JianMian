@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
                    longitude:(nullable NSString *)longitude
                     latitude:(nullable NSString *)latitude
                  description:(nullable NSString *)description
-                  image_path:(nullable NSString *)image_path
+                  image_path:(nullable NSArray *)image_path
                     label_id:(nullable NSString *)label_id
                       subway:(nullable NSArray *)subway
                    corporate:(nullable NSString *)corporate

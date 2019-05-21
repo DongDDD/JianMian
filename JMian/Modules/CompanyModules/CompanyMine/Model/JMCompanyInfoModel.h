@@ -27,8 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *industry_name;
 
 
-
-
 @property (nonatomic, copy) NSString *financing;
 
 @property (nonatomic, copy) NSString *city;
@@ -67,6 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *files_type;
 @property (nonatomic, copy) NSString *files_file_path;
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *file_id;
 
 
 @end

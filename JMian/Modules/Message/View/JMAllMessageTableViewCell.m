@@ -50,7 +50,7 @@
     self.userLabel.lineBreakMode = NSLineBreakByTruncatingMiddle;    //中间的内容以……方式省略，显示头尾的文字内容
     if ([data.data.convId isEqualToString:@"dominator"]) {
         self.userNameLabel.text = @"系统消息";
-        [self.iconImageView setImage:[UIImage imageNamed:@"notification "]];
+        [self.iconImageView setImage:[UIImage imageNamed:@"notification"]];
         [self.userLabel setHidden:YES];
     }
     

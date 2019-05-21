@@ -82,12 +82,11 @@
 //    [AMapServices sharedServices].enableHTTPS = YES;
     ///把地图添加至view
     UIButton *localButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    localButton.backgroundColor = MASTER_COLOR;
-    localButton.frame = CGRectMake(SCREEN_WIDTH - 60, 240, 50, 50);
+    localButton.frame = CGRectMake(SCREEN_WIDTH - 60, 235, 50, 50);
     [localButton addTarget:self action:@selector(locateAction) forControlEvents:UIControlEventTouchUpInside];
     localButton.layer.cornerRadius = 25;
     localButton.clipsToBounds = YES;
-    [localButton setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
+    [localButton setImage:[UIImage imageNamed:@"my_location"] forState:UIControlStateNormal];
     [self.mapView addSubview:localButton];
 
 }
@@ -96,11 +95,11 @@
     UIImageView *dingweiImg = [[UIImageView alloc]init];
     dingweiImg.image = [UIImage imageNamed:@"dingwei"];
     dingweiImg.layer.cornerRadius = 5;
-    
+    dingweiImg.contentMode = UIViewContentModeScaleAspectFit;
     [self.mapView addSubview:dingweiImg];//添加注解
     [dingweiImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(_mapView);
-        make.centerY.mas_equalTo(_mapView);
+        make.centerY.mas_equalTo(_mapView).mas_offset(-10);
         make.width.mas_equalTo(20);
         make.height.mas_equalTo(30);
     }];

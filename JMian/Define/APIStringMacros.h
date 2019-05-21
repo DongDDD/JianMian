@@ -73,6 +73,9 @@
 
 #define Update_CompanyInfo_URL @"api/company/update"
 #define Update_JobInfo_URL @"api/work/update"
+//删除公司文件
+#define CompanyFile_Delete_URL @"api/company/file/delete"
+
 
 #define Create_Interview_URL @"api/work/interview/create"
 
