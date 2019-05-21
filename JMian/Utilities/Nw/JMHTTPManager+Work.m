@@ -27,7 +27,7 @@
                             salary_min:(nullable NSNumber *)salary_min
                             salary_max:(nullable NSNumber *)salary_max
                           subway_names:(nullable NSArray *)subway_names
-                                status:(NSNumber * )status
+                                status:(NSString * )status
                                   page:(nullable NSNumber *)page
                               per_page:(nullable NSNumber *)per_page
                           SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {

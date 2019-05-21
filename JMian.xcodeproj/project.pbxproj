@@ -252,6 +252,8 @@
 		048348D82269C01200DE4630 /* JMMangerInterviewTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048348D62269C01200DE4630 /* JMMangerInterviewTableViewCell.m */; };
 		048348D92269C01200DE4630 /* JMMangerInterviewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048348D72269C01200DE4630 /* JMMangerInterviewTableViewCell.xib */; };
 		048348E32269CABB00DE4630 /* JMCompanyInfoMineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048348E12269CABB00DE4630 /* JMCompanyInfoMineViewController.xib */; };
+		0486F7792293917900114A22 /* Demo3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486F7772293917900114A22 /* Demo3ViewController.m */; };
+		0486F77C22943CC200114A22 /* JMChoosePositionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486F77B22943CC200114A22 /* JMChoosePositionTableViewController.m */; };
 		048E662E22850EE900694D86 /* THDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E662C22850EE900694D86 /* THDatePickerView.m */; };
 		048E6632228574BE00694D86 /* peer_countermand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E662F228574BD00694D86 /* peer_countermand@2x.png */; };
 		048E6633228574BE00694D86 /* peer_countermand.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E6630228574BD00694D86 /* peer_countermand.png */; };
@@ -863,6 +865,10 @@
 		048348D62269C01200DE4630 /* JMMangerInterviewTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMangerInterviewTableViewCell.m; sourceTree = "<group>"; };
 		048348D72269C01200DE4630 /* JMMangerInterviewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMangerInterviewTableViewCell.xib; sourceTree = "<group>"; };
 		048348E12269CABB00DE4630 /* JMCompanyInfoMineViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCompanyInfoMineViewController.xib; sourceTree = "<group>"; };
+		0486F7772293917900114A22 /* Demo3ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Demo3ViewController.m; sourceTree = "<group>"; };
+		0486F7782293917900114A22 /* Demo3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo3ViewController.h; sourceTree = "<group>"; };
+		0486F77A22943CC200114A22 /* JMChoosePositionTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMChoosePositionTableViewController.h; sourceTree = "<group>"; };
+		0486F77B22943CC200114A22 /* JMChoosePositionTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMChoosePositionTableViewController.m; sourceTree = "<group>"; };
 		048E662C22850EE900694D86 /* THDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDatePickerView.m; sourceTree = "<group>"; };
 		048E662D22850EE900694D86 /* THDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDatePickerView.h; sourceTree = "<group>"; };
 		048E662F228574BD00694D86 /* peer_countermand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peer_countermand@2x.png"; sourceTree = "<group>"; };
@@ -1457,6 +1463,8 @@
 				040B83872265EC0600F1A37A /* JMCompanyHomeViewController.h */,
 				040B83882265EC0600F1A37A /* JMCompanyHomeViewController.m */,
 				040B83892265EC0600F1A37A /* JMCompanyHomeViewController.xib */,
+				0486F77A22943CC200114A22 /* JMChoosePositionTableViewController.h */,
+				0486F77B22943CC200114A22 /* JMChoosePositionTableViewController.m */,
 				041997E42267173D00C6C134 /* PersonDetailContoller */,
 			);
 			path = Controller;
@@ -1809,6 +1817,7 @@
 		0462C7212244936F003B6639 /* ThridParty */ = {
 			isa = PBXGroup;
 			children = (
+				0486F7762293917300114A22 /* Picture */,
 				04C120E0228839EA001BDEBC /* Video */,
 				048E662B22850EE900694D86 /* TimeChoose */,
 			);
@@ -1917,6 +1926,15 @@
 				04088F3B227012B9007EB236 /* company_information@3x.png */,
 			);
 			path = Mine;
+			sourceTree = "<group>";
+		};
+		0486F7762293917300114A22 /* Picture */ = {
+			isa = PBXGroup;
+			children = (
+				0486F7782293917900114A22 /* Demo3ViewController.h */,
+				0486F7772293917900114A22 /* Demo3ViewController.m */,
+			);
+			path = Picture;
 			sourceTree = "<group>";
 		};
 		048E662B22850EE900694D86 /* TimeChoose */ = {
@@ -3179,6 +3197,7 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-resources.sh",
 				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
+				"${PODS_ROOT}/HXWeiboPhotoPicker/微博照片选择/HXWeiboPhotoPicker/HXWeiboPhotoPicker.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -3186,6 +3205,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HXWeiboPhotoPicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3356,8 +3376,10 @@
 				6D558635224B53BE0037C14E /* JMPersonTabBarViewController.m in Sources */,
 				04A9DFB7225B35FE00CD7CC1 /* JMHomeWorkModel.m in Sources */,
 				04196DAF22805C450000A6AA /* JMMySettingViewController.m in Sources */,
+				0486F77C22943CC200114A22 /* JMChoosePositionTableViewController.m in Sources */,
 				04BBF2A7228FFFDE0068A9B1 /* JMMapViewController.m in Sources */,
 				6D020A052250F21B009BCFE4 /* JMMyResumeIconTableViewCell.m in Sources */,
+				0486F7792293917900114A22 /* Demo3ViewController.m in Sources */,
 				04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */,
 				040A3933227DBEA700EDD9E0 /* JMGreetTableViewController.m in Sources */,
 				04072F512282BAA60067A05D /* JMChooseCardViewController.m in Sources */,

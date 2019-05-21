@@ -14,14 +14,20 @@
 #import "JMHTTPManager+CompanyInfoUpdate.h"
 #import "DimensMacros.h"
 #import "JMMyPictureViewController.h"
+#import "Demo3ViewController.h"
+#import "JMVideoPlayManager.h"
 
-@interface JMCompanyInfoMineViewController ()<UIImagePickerControllerDelegate,UIPickerViewDelegate,JMCompanyDesciptionOfMineViewDelegate,JMMyPictureViewControllerDelegate>
+
+@interface JMCompanyInfoMineViewController ()<UIImagePickerControllerDelegate,UIPickerViewDelegate,JMCompanyDesciptionOfMineViewDelegate,Demo3ViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property(nonatomic,strong)JMCompanyInfoModel *model;
 
 @property (weak, nonatomic) IBOutlet UIImageView *headerImg;
 @property (weak, nonatomic) IBOutlet UIView *topView;
+@property (weak, nonatomic) IBOutlet UIImageView *videoImg;
+@property(nonatomic,copy) NSString *videoUrl;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLab;
 @property (nonatomic, strong) NSMutableArray *addImage_paths;//公司图片数组
@@ -63,6 +69,11 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(headerImgAction)];
     [self.topView addGestureRecognizer:tap];
 
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -113,15 +124,27 @@
     [self.headerImg sd_setImageWithURL:[NSURL URLWithString:self.model.logo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.companyNameLab.text = self.model.company_name;
     //公司图片赋值
-//    if (self.model.files) {
-//        self.image_paths = [NSMutableArray array];
-//        for (JMFilesModel *filesModel in self.model.files) {
-//            if ([filesModel.files_type isEqualToString:@"2"]) {
-//                [self.image_paths addObject:filesModel.files_file_path];
-//            }
-//        }
-//    }
+   
+    if (self.model.files) {
+        for (JMFilesModel *filesModel in self.model.files) {
+            if ([filesModel.files_type isEqualToString:@"1"]) {
+                self.imageUrl = filesModel.files_file_path;
+                continue;
+            }
+        }
+    }
+        NSURL *URL = [NSURL URLWithString:self.imageUrl];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
 
+            UIImage *image = [self thumbnailImageForVideo:URL atTime:1];
+
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.videoImg.image = image;
+    //    self.headerView.playBtn.hidden = NO;
+
+            });
+        });
+   
     [self.industryBtn setTitle:self.model.industry_name forState:UIControlStateNormal];
     [self.employBtn setTitle:self.model.employee forState:UIControlStateNormal];
     [self.facingBtn setTitle:self.model.financing forState:UIControlStateNormal];
@@ -141,21 +164,25 @@
 
 //上传公司图片
 - (IBAction)upLoadPicture:(UIButton *)sender {
-    JMMyPictureViewController *vc = [[JMMyPictureViewController alloc]init];
     
-    if (self.model.files) {
-//        self.image_paths = [NSMutableArray array];
-        for (JMFilesModel *filesModel in self.model.files) {
-            if ([filesModel.files_type isEqualToString:@"2"]) {//过滤视频走 只要图片
-                [self.filesModelArray addObject:filesModel];
-            }
-        }
-    }
 
-    vc.filesModelArray = self.filesModelArray;
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+//    JMMyPictureViewController *vc = [[JMMyPictureViewController alloc]init];
+//
+//    vc.delegate = self;
+//    [self.navigationController pushViewController:vc animated:YES];
     
+    Demo3ViewController *vc = [[Demo3ViewController alloc]init];
+//    if (self.model.files.count > 0) {
+//        //        self.image_paths = [NSMutableArray array];
+//        for (JMFilesModel *filesModel in self.model.files) {
+//            if ([filesModel.files_type isEqualToString:@"2"]) {//过滤视频走 只要图片
+//                [self.filesModelArray addObject:filesModel];
+//            }
+//        }
+//    }
+//
+//    vc.filesModelArray = self.filesModelArray;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -186,6 +213,15 @@
         
     }
     
+    
+}
+- (IBAction)playAction:(UIButton *)sender {
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.imageUrl];
+    [[JMVideoPlayManager sharedInstance] play];
+    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController pushViewController:playVC animated:NO];
+
     
 }
 
@@ -269,6 +305,31 @@
     return str;
     
 }
+
+#pragma mark - 获取图片
+
+
+- (UIImage*) thumbnailImageForVideo:(NSURL *)videoURL atTime:(NSTimeInterval)time {
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
+    NSParameterAssert(asset);
+    AVAssetImageGenerator *assetImageGenerator =[[AVAssetImageGenerator alloc] initWithAsset:asset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    
+    CGImageRef thumbnailImageRef = NULL;
+    CFTimeInterval thumbnailImageTime = time;
+    NSError *thumbnailImageGenerationError = nil;
+    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60)actualTime:NULL error:&thumbnailImageGenerationError];
+    
+    if(!thumbnailImageRef)
+        NSLog(@"thumbnailImageGenerationError %@",thumbnailImageGenerationError);
+    
+    UIImage*thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage: thumbnailImageRef] : nil;
+    
+    return thumbnailImage;
+}
+
 #pragma mark - 上传图片
 
 - (void)headerImgAction {

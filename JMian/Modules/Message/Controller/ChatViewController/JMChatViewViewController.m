@@ -17,9 +17,12 @@
 #import "JMGreetTableViewController.h"
 #import "JMInputController.h"
 #import "DimensMacros.h"
+#import "THDatePickerView.h"
+#import "JMHTTPManager+InterView.h"
 
 
-@interface JMChatViewViewController () <JMInputTextViewDelegate,JMMessageTableViewControllerDelegate,JMInputControllerDelegate>
+
+@interface JMChatViewViewController () <JMInputTextViewDelegate,JMMessageTableViewControllerDelegate,JMInputControllerDelegate,THDatePickerViewDelegate>
 
 @property (nonatomic ,strong) JMMessageTableViewController *messageController;
 @property (nonatomic ,strong) JMInputController *inputController;
@@ -29,6 +32,10 @@
 
 //@property (nonatomic ,strong) JMGreetView *greetView;
 @property (nonatomic, assign)BOOL isDominator;
+
+@property (weak, nonatomic) THDatePickerView *dateView;
+@property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
+
 
 @end
 
@@ -46,6 +53,7 @@
     
     }
     [self setupViews];
+    [self initDatePickerView];
 
 //
 }
@@ -95,6 +103,66 @@
     
 }
 
+-(void)initDatePickerView
+{
+    self.BgBtn = [[UIButton alloc] initWithFrame:self.view.bounds];
+    self.BgBtn.backgroundColor = [UIColor blackColor];
+    self.BgBtn.hidden = YES;
+    self.BgBtn.alpha = 0.3;
+    [self.view addSubview:self.BgBtn];
+    
+    THDatePickerView *dateView = [[THDatePickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, SCREEN_WIDTH, 300)];
+    dateView.delegate = self;
+    dateView.title = @"请选择时间";
+    //    dateView.isSlide = NO;
+    //    dateView.date = @"2017-03-23 12:43";
+    //    dateView.minuteInterval = 1;
+    [self.view addSubview:dateView];
+    self.dateView = dateView;
+    
+}
+#pragma mark - THDatePickerViewDelegate
+/**
+ 保存按钮代理方法
+ 
+ @param timer 选择的数据
+ */
+- (void)datePickerViewSaveBtnClickDelegate:(NSString *)timer {
+    NSLog(@"保存点击");
+    //    self.timerLbl.text = timer;
+    
+    self.BgBtn.hidden = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
+    }];
+    NSString *userId;
+    if (self.messageController.isSelfIsSender) {
+        userId = self.myConvModel.recipient_user_id;
+    }else{
+        userId = self.myConvModel.sender_user_id;
+    }
+    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:userId time:timer successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+/**
+ 时间选择取消
+ */
+- (void)datePickerViewCancelBtnClickDelegate {
+    NSLog(@"取消点击");
+    self.BgBtn.hidden = YES;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
+    }];
+}
+#pragma mark - JMInputControllerDelegate
 
 - (void)inputController:(JMInputController *)inputController didSendMessage:(JMMessageCellData *)msg
 {
@@ -118,6 +186,21 @@
     } completion:nil];
     
 }
+#pragma mark - JMMessageTableViewControllerDelegate
+
+//视频面试邀请
+-(void)videoInterviewController:(JMMessageTableViewController *)controller{
+
+        self.BgBtn.hidden = NO;
+    
+        [UIView animateWithDuration:0.3 animations:^{
+            self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
+            [self.dateView show];
+        }];
+    
+    
+
+}
 
 - (void)didTapInMessageController:(JMMessageTableViewController *)controller
 {
@@ -127,6 +210,8 @@
 - (void)isDominatorController:(JMMessageTableViewController *)controller{
     _isDominator = YES;
 }
+
+
 
 - (void)sendGreetAction:(NSInteger *)index{
   

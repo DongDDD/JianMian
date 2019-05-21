@@ -90,9 +90,16 @@
 
 }
 
-- (void)fetchVitaInfoWithId:(nullable NSNumber *)vitaId successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
-//    NSString *urlStr = [Info_Vita_URL stringByAppendingFormat:@"/%@",vitaId];
+- (void)fetchVitaInfoWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Info_Vita_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 
+}
+
+- (void)fetchJobInfoWithId:(nullable NSString *)Id successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSString *urlStr = [Info_Job_URL stringByAppendingFormat:@"/%@",Id];
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
 }
 @end

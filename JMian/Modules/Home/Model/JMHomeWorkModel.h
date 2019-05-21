@@ -29,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *latitude;
 @property (nonatomic, strong) NSString *longitude;
 
+@property (nonatomic, copy) NSString *user_avatar;
+@property (nonatomic, copy) NSString *user_nickname;
+
 
 @property (nonatomic, copy) NSString *cityId;
 @property (nonatomic, copy) NSString *cityName;

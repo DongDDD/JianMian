@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMPersonDetailsViewController : BaseViewController
 
 @property(nonatomic,strong)JMCompanyHomeModel *companyModel;
-@property (strong, nonatomic) AVPlayer *player;
+//@property (strong, nonatomic) AVPlayer *player;
 @property(nonatomic,strong)NSNumber *user_job_id;
 @end
 

@@ -321,6 +321,7 @@
     [self setJobDescriptionView];
     [self setMapView];
     [self setHRView];
+    [self setBottomView];
 }
 
 -(void)setScrollView{
@@ -367,18 +368,6 @@
 #pragma mark - 职位简介
 -(void)setFootOfVideoView{
     
-    self.twoBtnView = [[TwoButtonView alloc]init];
-    [self.twoBtnView setStatus:_status];
-    self.twoBtnView.backgroundColor = [UIColor whiteColor];
-    self.twoBtnView.delegate = self;
-    [self.view addSubview:self.twoBtnView];
-    
-    [self.twoBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.equalTo(self.view);
-        make.bottom.equalTo(self.view.mas_bottom);
-        make.height.mas_equalTo(70);
-        
-    }];
     
     
   
@@ -839,7 +828,7 @@
     UIImageView *iconImg = [[UIImageView alloc]init];
     iconImg.backgroundColor = [UIColor redColor];
     iconImg.image = [UIImage imageNamed:@""];
-    [iconImg sd_setImageWithURL:[NSURL URLWithString:self.model] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [iconImg sd_setImageWithURL:[NSURL URLWithString:self.model.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     
     [self.HRView addSubview:iconImg];
@@ -852,7 +841,7 @@
     }];
     
     UILabel *nameLab = [[UILabel alloc]init];
-    nameLab.text = @"小美";
+    nameLab.text = self.model.user_nickname;
     nameLab.font = [UIFont systemFontOfSize:17];
     nameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
     [self.HRView addSubview:nameLab];
@@ -866,7 +855,7 @@
     
     UILabel *nameLab2 = [[UILabel alloc]init];
     nameLab2.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
-    nameLab2.text = @"空间智能科技 ： HR";
+    nameLab2.text = self.model.companyName;
     nameLab2.font = [UIFont systemFontOfSize:13];
     [self.HRView addSubview:nameLab2];
     
@@ -896,6 +885,20 @@
 
 }
 
+-(void)setBottomView{
+    self.twoBtnView = [[TwoButtonView alloc]init];
+    [self.twoBtnView setStatus:_status];
+    self.twoBtnView.backgroundColor = [UIColor whiteColor];
+    self.twoBtnView.delegate = self;
+    [self.view addSubview:self.twoBtnView];
+    
+    [self.twoBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.view);
+        make.bottom.equalTo(self.view.mas_bottom);
+        make.height.mas_equalTo(70);
+        
+    }];
+}
 
 #pragma mark - lazy
 

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMMessageTableViewControllerDelegate <NSObject>
 - (void)didTapInMessageController:(JMMessageTableViewController *)controller;
 - (void)isDominatorController:(JMMessageTableViewController *)controller;
-
+- (void)videoInterviewController:(JMMessageTableViewController *)controller;
 //- (void)didHideMenuInMessageController:(JMMessageTableViewController *)controller;
 //- (BOOL)messageController:(JMMessageTableViewController *)controller willShowMenuInView:(UIView *)view;
 //- (void)messageController:(JMMessageTableViewController *)controller didSelectMessages:(NSMutableArray *)msgs atIndex:(NSInteger)index;
@@ -27,6 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setMyConvModel:(JMMessageListModel *)myConvModel;
 
 @property (nonatomic, weak) id<JMMessageTableViewControllerDelegate> delegate;
+@property (nonatomic, assign)BOOL isSelfIsSender;
+
 -(void)sendMessage:(JMMessageCellData *)data;
 - (void)scrollToBottom:(BOOL)animate;
 

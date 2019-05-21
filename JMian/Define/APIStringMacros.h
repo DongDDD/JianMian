@@ -12,7 +12,9 @@
 #ifdef DEBUG
 //Debug状态下的测试API
 #define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
+//app
 #else
 //Release状态下的线上API
 #define API_BASE_URL_STRING     @"http://www.companydomain.com/api/"
@@ -47,6 +49,7 @@
 
 //简历详情
 #define Info_Vita_URL @"api/vita/info"
+#define Info_Job_URL @"api/job/info"
 
 //岗位
 #define Update_job_URL @"api/user/job/update"
@@ -63,7 +66,8 @@
 
 #define Paginate_Work_URL @"api/work/paginate"
 #define Create_Work_URL @"api/work/create"
-#define Info_Work_URL @"api/job/info"
+//C端看公司的职位详情
+#define Info_Work_URL @"api/work/info"
 
 
 //B端接口

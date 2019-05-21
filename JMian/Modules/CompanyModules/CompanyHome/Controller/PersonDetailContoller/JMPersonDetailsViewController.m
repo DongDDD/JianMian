@@ -40,7 +40,7 @@
 @property (nonatomic, strong) NSArray *childVCs;
 @property (nonatomic, strong) UITableViewController *currentVC;
 
-@property (nonatomic, strong) JMVitaDetailModel *vitaModel;
+@property (nonatomic, strong)JMVitaDetailModel *vitaModel;
 @property (nonatomic, strong)JMVitaOfPersonDetailViewController *vitaVc;
 @property (nonatomic, strong)JMContactOfPersonDetailViewController *contactVc;
 @property (nonatomic, strong)JMPictureOfPersonDetailViewController *pictureVc;
@@ -89,10 +89,13 @@
 
 #pragma mark - 获取数据
 -(void)getData{
-    [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:self.companyModel.user_job_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] fetchJobInfoWithId:self.companyModel.user_job_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         //
-         self.vitaModel = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
-        [self initView];
+        if (responsObject[@"data"]) {
+            
+            self.vitaModel = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [self initView];
+        }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -330,7 +333,6 @@
 
     
 }
-
 
 
 //显示时间选择器

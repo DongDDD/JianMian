@@ -119,8 +119,18 @@
             [formatter setDateFormat:@"yyyyMMddHHmmss"];
             NSString *dateString = [formatter stringFromDate:[NSDate date]];
             NSString *fileName = [NSString  stringWithFormat:@"%@.jpg", dateString];
-            UIImage *image = request.parameters[@"files"][i];
-            NSData *data = UIImageJPEGRepresentation(image, 0.1);
+            NSData *data;
+            if ([request.parameters[@"files"][i] isKindOfClass:[UIImage class]]) {
+                UIImage *image = request.parameters[@"files"][i];
+                
+                data = UIImageJPEGRepresentation(image, 0.1);
+            }else{
+                
+                NSString *url = request.parameters[@"files"][i];
+                data =[url dataUsingEncoding:NSUTF8StringEncoding];
+//                NSData *data = [NSJSONSerialization dataWithJSONObject:url options:NSJSONWritingPrettyPrinted error:nil];
+
+            }
             [formData appendPartWithFileData:data name:@"files" fileName:fileName mimeType:@"image/jpg"];;//file改为后台接收的字段或参数
         }
         

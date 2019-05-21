@@ -37,7 +37,10 @@
              @"videoCompanyId":@"video.company_id",
              @"videoFile_path":@"video.file_path",
              @"videoStatus":@"video.status",
-             @"videoDenial_reason":@"video.denial_reason"
+             @"videoDenial_reason":@"video.denial_reason",
+             
+             @"user_avatar":@"user.avatar",
+             @"user_nickname":@"user.nickname"
              };
     
 }

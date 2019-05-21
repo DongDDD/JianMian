@@ -367,7 +367,7 @@ static NSString *cellIdent = @"cellIdent";
         [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.headView.mas_bottom);
             make.left.and.right.mas_equalTo(self.view);
-            make.height.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view).offset(-71);
         }];
     }
     return  _labschooseVC;

@@ -13,8 +13,11 @@
 #import "JMChatDetailInfoTableViewCell.h"
 #import "JMChatViewSectionView.h"
 #import "JMVideoChatViewController.h"
+#import "THDatePickerView.h"
+#import "JMHTTPManager+InterView.h"
 
-@interface JMMessageTableViewController ()<TIMMessageListener,JMChatViewSectionViewDelegate>
+
+@interface JMMessageTableViewController ()<TIMMessageListener,JMChatViewSectionViewDelegate,THDatePickerViewDelegate>
 
 @property (nonatomic, strong) NSMutableArray *uiMsgs;
 
@@ -22,7 +25,6 @@
 
 @property (nonatomic, strong) TIMMessage *msgForGet;
 
-@property (nonatomic, assign)BOOL isSelfIsSender;
 
 
 @property (nonatomic, copy)NSString *receiverID;
@@ -351,6 +353,11 @@ static NSString *cellIdent = @"infoCellIdent";
 
 -(void)videoInterviewAction
 {
+
+    if (_delegate && [_delegate respondsToSelector:@selector(videoInterviewController:)]) {
+        [_delegate videoInterviewController:self];
+    }
+    
 //    JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
 ////    vc.chatViewModel = self.myModel;
 //    vc.receiverID = _receiverID;

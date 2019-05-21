@@ -112,19 +112,21 @@
 - (void)sendRequest {
     [[JMHTTPManager sharedInstance] fetchVitPaginateWithCity_id:nil education:nil job_label_id:nil work_year_s:nil work_year_e:nil salary_min:nil salary_max:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        int jobId = [responsObject[@"data"][0][@"user_job_id"] intValue];
-        [[JMHTTPManager sharedInstance] fetchVitaInfoWithId:@(jobId) successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            
-            self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
-            self.cellConfigures.model = self.model;
-            self.job_labelID = self.model.job_label_id;
-            self.salaryMin = @([self.model.salary_min intValue]);
-            self.salaryMax = @([self.model.salary_max intValue]);
-            [self initView];
-            [self setPickerVIewUI];
-            [self setupDateKeyPan];
-            [self.tableView reloadData];
-            
+//        int jobId = [responsObject[@"data"][0][@"user_job_id"] intValue];
+        [[JMHTTPManager sharedInstance] fetchVitaInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            if (responsObject[@"data"]) {
+                self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+                self.cellConfigures.model = self.model;
+                self.job_labelID = self.model.job_label_id;
+                self.salaryMin = @([self.model.salary_min intValue]);
+                self.salaryMax = @([self.model.salary_max intValue]);
+                [self initView];
+                [self setPickerVIewUI];
+                [self setupDateKeyPan];
+                [self.tableView reloadData];
+                
+                
+            }
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -372,7 +374,7 @@
         case JMMyResumeCellTypeHeader3:
         {
             JMMyPictureViewController *vc = [[JMMyPictureViewController alloc] init];
-            vc.image_paths = self.model.files;
+//            vc.image_paths = self.model.files;
             [self.navigationController pushViewController:vc animated:YES];
             break;
 

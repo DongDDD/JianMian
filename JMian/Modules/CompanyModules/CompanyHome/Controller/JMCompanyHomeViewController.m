@@ -13,17 +13,27 @@
 #import "JMCompanyHomeModel.h"
 #import "JMPlayerViewController.h"
 #import "JMVideoPlayManager.h"
+#import "JMLabsChooseViewController.h"
+#import "JMChoosePositionTableViewController.h"
+#import "JMHTTPManager+Work.h"
+#import "JMHomeWorkModel.h"
 
-
-@interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate>
+@interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate,JMLabsChooseViewControllerDelegate,JMChoosePositionTableViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSArray *arrDate;
 @property(nonatomic,strong)NSMutableArray *playerArray;
+
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,assign)NSInteger per_page;
+
+@property (nonatomic, strong) JMChoosePositionTableViewController *choosePositionVC;
+@property (nonatomic, strong) JMLabsChooseViewController *labschooseVC;
+@property (weak, nonatomic) IBOutlet UIButton *choosePositionBtn;
+@property (weak, nonatomic) IBOutlet UIButton *chooseRequireBtn;
+@property(nonatomic,strong)NSMutableArray *choosePositionArray;
 
 //
 //@property (nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
@@ -87,6 +97,37 @@ static NSString *cellIdent = @"cellIdent";
 
 
 }
+
+//获取发布了的职位列表
+-(void) getPositionListData{
+    
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    model = [JMUserInfoManager getUserInfo];
+    
+    
+    [[JMHTTPManager sharedInstance]fetchWorkPaginateWith_city_ids:nil company_id:nil label_id:nil work_label_id:nil education:nil experience_min:nil experience_max:nil salary_min:nil salary_max:nil subway_names:nil status:model.status page:nil per_page:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+
+            self.choosePositionArray = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+
+            if (self.choosePositionArray.count > 0) {
+                self.tableView.hidden  = NO;
+
+            }
+            
+            [self.choosePositionVC setChoosePositionArray:self.choosePositionArray];
+            [self.choosePositionVC.tableView reloadData];
+        }
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+
 //弃用这个方法 太消耗性能
 //
 //-(void)getPlayerArray{
@@ -154,11 +195,13 @@ static NSString *cellIdent = @"cellIdent";
 {
 //     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
 }
+
 -(void)loadNewData
 {
     
     [self getData];
 }
+
 -(void)loadMoreBills
 {
   
@@ -200,11 +243,10 @@ static NSString *cellIdent = @"cellIdent";
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
-    
     JMCompanyHomeModel *model = self.arrDate[indexPath.row];
-    if (self.playerArray) {
-        vc.player = self.playerArray[indexPath.row];
-    }
+//    if (self.playerArray) {
+//        vc.player = self.playerArray[indexPath.row];
+//    }
     //    vc.user_job_id = model.user_job_id;
     vc.companyModel = model;
     [self.navigationController pushViewController:vc animated:YES];
@@ -222,6 +264,46 @@ static NSString *cellIdent = @"cellIdent";
         [self.navigationController pushViewController:playVC animated:NO];
 
 }
+
+- (IBAction)choosePositionAction:(UIButton *)sender {
+    [self.choosePositionBtn setBackgroundColor:MASTER_COLOR];
+    [self.choosePositionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.chooseRequireBtn setBackgroundColor:[UIColor whiteColor]];
+    [self.chooseRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.choosePositionVC.view setHidden:NO];
+    [self.labschooseVC.view setHidden:YES];
+    [self getPositionListData];
+    //    self.choosePositionVC
+}
+
+- (IBAction)requireChooseAction:(UIButton *)sender {
+    [self.chooseRequireBtn setBackgroundColor:MASTER_COLOR];
+    [self.chooseRequireBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.choosePositionBtn setBackgroundColor:[UIColor whiteColor]];
+    [self.choosePositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.labschooseVC.view setHidden:NO];
+    [self.choosePositionVC.view setHidden:YES];
+
+   
+
+}
+
+
+
+
+//要求筛选
+-(void)resetAction{
+}
+//职位选择
+-(void)OKAction
+{
+    [self.labschooseVC.view setHidden:YES];
+    
+    
+}
+
+
+
 #pragma mark - lazy
 
 -(NSMutableArray *)playerArray
@@ -230,6 +312,39 @@ static NSString *cellIdent = @"cellIdent";
         _playerArray = [NSMutableArray array];
     }
     return _playerArray;
+}
+
+-(JMChoosePositionTableViewController *)choosePositionVC{
+    if (_choosePositionVC == nil) {
+        _choosePositionVC = [[JMChoosePositionTableViewController alloc]init];
+        _choosePositionVC.delegate = self;
+        [self addChildViewController:_choosePositionVC];
+        [self.view addSubview:_choosePositionVC.view];
+        [_choosePositionVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headerView.mas_bottom);
+            make.left.and.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view).offset(-66);
+        }];
+    }
+    return  _choosePositionVC;
+    
+}
+
+
+-(JMLabsChooseViewController *)labschooseVC{
+    if (_labschooseVC == nil) {
+        _labschooseVC = [[JMLabsChooseViewController alloc]init];
+        _labschooseVC.delegate = self;
+        [self addChildViewController:_labschooseVC];
+        [self.view addSubview:_labschooseVC.view];
+        [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headerView.mas_bottom);
+            make.left.and.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view).offset(-71);
+        }];
+    }
+    return  _labschooseVC;
+    
 }
 
 /*

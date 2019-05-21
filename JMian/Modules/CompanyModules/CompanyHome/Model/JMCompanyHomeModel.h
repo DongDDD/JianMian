@@ -12,12 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCompanyHomeModel : NSObject
 
-@property (nonatomic, strong) NSNumber *user_job_id;
-@property (nonatomic, strong) NSNumber *user_id;
+@property (nonatomic, strong) NSString *user_job_id;
+@property (nonatomic, strong) NSString *user_id;
 
-@property (nonatomic, strong) NSNumber *job_label_id;
-@property (nonatomic, strong) NSNumber *industry_label_id;
-@property (nonatomic, strong) NSNumber *city_id;
+@property (nonatomic, strong) NSString *job_label_id;
+@property (nonatomic, strong) NSString *industry_label_id;
+@property (nonatomic, strong) NSString *city_id;
 @property (nonatomic, strong) NSNumber *salary_min;
 @property (nonatomic, strong) NSNumber *salary_max;
 
