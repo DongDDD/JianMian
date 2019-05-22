@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,weak)id<PositionDesiredDelegate>delegate;
 @property (nonatomic, strong) SearchView *searchView;
-
+@property(nonatomic, assign)BOOL isHomeViewVC;
 @end
 
 NS_ASSUME_NONNULL_END

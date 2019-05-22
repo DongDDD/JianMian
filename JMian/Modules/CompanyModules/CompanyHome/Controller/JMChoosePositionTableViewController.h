@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JMHomeWorkModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @class JMChoosePositionTableViewController;
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,weak)id<JMChoosePositionTableViewControllerDelegate>delegate;
 @property(nonatomic,strong)NSMutableArray *choosePositionArray;
-
+@property(nonatomic,strong)JMHomeWorkModel *homeModel;
 @end
 
 NS_ASSUME_NONNULL_END

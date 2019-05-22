@@ -35,18 +35,22 @@
     [self setRightBtnTextName:@"保存"];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    [self setSearchView];
+    if (!_isHomeViewVC) {
+        [self setSearchView];
+    }
   
     [self getData];
     
 }
 #pragma mark - 获取期望职位数据 -
 -(void)rightAction{
-    if (_labIDStr && _labIDStr) {
+    if (_labIDStr && _labStr) {
+        if (_delegate && [_delegate respondsToSelector:@selector(sendPositoinData:labIDStr:)]){
+            
+            [self.delegate sendPositoinData:_labStr labIDStr:_labIDStr];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
         
-        [self.delegate sendPositoinData:_labStr labIDStr:_labIDStr];
-        [self.navigationController popViewControllerAnimated:YES];
     }else{
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请选择好职位再保存"
                                                       delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles: nil];
@@ -61,7 +65,7 @@
         
         self.firstArr =  [JMSystemLabelsModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
         
-        WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,self.searchView.frame.origin.y+self.searchView.frame.size.height+15, self.view.frame.size.width, SCREEN_HEIGHT)];
+        WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,self.searchView.frame.origin.y+self.searchView.frame.size.height+15, self.view.frame.size.width,SCREEN_HEIGHT)];
         dropMenu.dataSource = self;
         dropMenu.delegate = self;
         [self.view addSubview:dropMenu];

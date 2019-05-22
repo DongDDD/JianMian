@@ -31,6 +31,7 @@
 @property (nonatomic, strong) NSArray *dataArray;
 @property (weak, nonatomic) IBOutlet UILabel *tipsLab;
 @property (weak, nonatomic) IBOutlet UIButton *postOrIdentityBtn;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @end
 
@@ -45,10 +46,11 @@ static NSString *cellIdent = @"cellIdent";
     self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.hidesBackButton = YES;
     [self setTitle:@"职位管理"];
-    
+//    [self.view addSubview:self.progressHUD];
     _status = Position_Online;
+    [self getUserStatus];
     [self setupInit];
-    
+    [self setupDownRefresh];
 //    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
 //    model = [JMUserInfoManager getUserInfo];
 //    if ([model.card_status isEqualToString:Card_PassIdentify]) {//“3”代表已通过实名认证，通过才能发布职位
@@ -70,7 +72,7 @@ static NSString *cellIdent = @"cellIdent";
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.hidden = YES;
     self.breakBGView.hidden = YES;
-    [self getUserStatus];
+    [self.tableView.mj_header beginRefreshing];
 //    [self jugdeCard_status];
 
 //    [self getUserInfo];
@@ -186,7 +188,18 @@ static NSString *cellIdent = @"cellIdent";
     [self.view addSubview:self.titleView];
 
 }
+-(void)setupDownRefresh
+{
+    
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getListData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.tableView.mj_header beginRefreshing];
+    
+}
 #pragma mark - 获取数据
+
 
 -(void) getListData{
     [[JMHTTPManager sharedInstance]fetchWorkPaginateWith_city_ids:nil company_id:nil label_id:nil work_label_id:nil education:nil experience_min:nil experience_max:nil salary_min:nil salary_max:nil subway_names:nil status:_status page:nil per_page:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -208,6 +221,8 @@ static NSString *cellIdent = @"cellIdent";
             
             }
             [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+            
         }
   
       
@@ -295,6 +310,17 @@ static NSString *cellIdent = @"cellIdent";
     return _tableView;
     
 }
+
+//-(MBProgressHUD *)progressHUD{
+//    if (!_progressHUD) {
+//        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//        _progressHUD.progress = 0.6;
+//        _progressHUD.dimBackground = NO; //设置有遮罩
+//        [_progressHUD showAnimated:YES]; //显示进度框
+//    }
+//    return _progressHUD;
+//}
+
 /*
 #pragma mark - Navigation
 

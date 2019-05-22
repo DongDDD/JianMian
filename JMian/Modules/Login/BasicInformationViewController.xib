@@ -80,6 +80,10 @@
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                             <real key="value" value="0.5"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                            <color key="value" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskstoBorder" value="NO"/>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="manBtn:" destination="-1" eventType="touchUpInside" id="wux-WO-E8i"/>
@@ -168,15 +172,12 @@
                                     </connections>
                                 </button>
                                 <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="jO4-h6-hOg">
-                                    <rect key="frame" x="0.0" y="561" width="375" height="200"/>
+                                    <rect key="frame" x="0.0" y="533" width="375" height="228"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="200" id="wMA-EQ-wM1"/>
+                                        <constraint firstAttribute="height" constant="228" id="wMA-EQ-wM1"/>
                                     </constraints>
                                     <date key="date" timeIntervalSinceReferenceDate="-22952509.19695282">
                                         <!--2000-04-10 08:18:10 +0000-->
-                                    </date>
-                                    <date key="minimumDate" timeIntervalSinceReferenceDate="284036400">
-                                        <!--2010-01-01 11:00:00 +0000-->
                                     </date>
                                     <date key="maximumDate" timeIntervalSinceReferenceDate="599482800">
                                         <!--2019-12-31 11:00:00 +0000-->
@@ -199,6 +200,10 @@
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
                                             <real key="value" value="0.5"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                            <color key="value" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskstoBorder" value="NO"/>
                                     </userDefinedRuntimeAttributes>
                                     <connections>
                                         <action selector="womanBtn:" destination="-1" eventType="touchUpInside" id="dFo-98-Dzt"/>

@@ -22,7 +22,6 @@ static NSString *cellIdent = @"CellIdent";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title =@"人才收藏";
     [self setRightBtnTextName:@"清空"];
     
     self.tableView.delegate = self;

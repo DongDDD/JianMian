@@ -254,6 +254,9 @@
 		048348E32269CABB00DE4630 /* JMCompanyInfoMineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048348E12269CABB00DE4630 /* JMCompanyInfoMineViewController.xib */; };
 		0486F7792293917900114A22 /* Demo3ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486F7772293917900114A22 /* Demo3ViewController.m */; };
 		0486F77C22943CC200114A22 /* JMChoosePositionTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0486F77B22943CC200114A22 /* JMChoosePositionTableViewController.m */; };
+		0488E59922953B6700C2E398 /* JMCityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0488E59722953B6700C2E398 /* JMCityListViewController.m */; };
+		0488E59A22953B6700C2E398 /* JMCityListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0488E59822953B6700C2E398 /* JMCityListViewController.xib */; };
+		0488E59D2295438100C2E398 /* JMCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0488E59C2295438100C2E398 /* JMCityModel.m */; };
 		048E662E22850EE900694D86 /* THDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E662C22850EE900694D86 /* THDatePickerView.m */; };
 		048E6632228574BE00694D86 /* peer_countermand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E662F228574BD00694D86 /* peer_countermand@2x.png */; };
 		048E6633228574BE00694D86 /* peer_countermand.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E6630228574BD00694D86 /* peer_countermand.png */; };
@@ -869,6 +872,11 @@
 		0486F7782293917900114A22 /* Demo3ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo3ViewController.h; sourceTree = "<group>"; };
 		0486F77A22943CC200114A22 /* JMChoosePositionTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMChoosePositionTableViewController.h; sourceTree = "<group>"; };
 		0486F77B22943CC200114A22 /* JMChoosePositionTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMChoosePositionTableViewController.m; sourceTree = "<group>"; };
+		0488E59622953B6700C2E398 /* JMCityListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCityListViewController.h; sourceTree = "<group>"; };
+		0488E59722953B6700C2E398 /* JMCityListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCityListViewController.m; sourceTree = "<group>"; };
+		0488E59822953B6700C2E398 /* JMCityListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCityListViewController.xib; sourceTree = "<group>"; };
+		0488E59B2295438100C2E398 /* JMCityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCityModel.h; sourceTree = "<group>"; };
+		0488E59C2295438100C2E398 /* JMCityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCityModel.m; sourceTree = "<group>"; };
 		048E662C22850EE900694D86 /* THDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDatePickerView.m; sourceTree = "<group>"; };
 		048E662D22850EE900694D86 /* THDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDatePickerView.h; sourceTree = "<group>"; };
 		048E662F228574BD00694D86 /* peer_countermand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peer_countermand@2x.png"; sourceTree = "<group>"; };
@@ -2097,6 +2105,8 @@
 			children = (
 				04A9DFB5225B35FE00CD7CC1 /* JMHomeWorkModel.h */,
 				04A9DFB6225B35FE00CD7CC1 /* JMHomeWorkModel.m */,
+				0488E59B2295438100C2E398 /* JMCityModel.h */,
+				0488E59C2295438100C2E398 /* JMCityModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2446,6 +2456,9 @@
 				04BBF2A4228FFFDE0068A9B1 /* JMMapViewController.h */,
 				04BBF2A5228FFFDE0068A9B1 /* JMMapViewController.m */,
 				04BBF2A6228FFFDE0068A9B1 /* JMMapViewController.xib */,
+				0488E59622953B6700C2E398 /* JMCityListViewController.h */,
+				0488E59722953B6700C2E398 /* JMCityListViewController.m */,
+				0488E59822953B6700C2E398 /* JMCityListViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3036,6 +3049,7 @@
 				6D0209E6224FB900009BCFE4 /* enshrine@2x.png in Resources */,
 				6D558653224B54D70037C14E /* pitch_on_home@2x.png in Resources */,
 				040714A6227C6CC70026C368 /* default_avatar.png in Resources */,
+				0488E59A22953B6700C2E398 /* JMCityListViewController.xib in Resources */,
 				04DD1D58224B6E95007CB11C /* 组 18@3x.png in Resources */,
 				041997C22266C5DC00C6C134 /* post_a_job@2x.png in Resources */,
 				04072F282282949D0067A05D /* peijing.png in Resources */,
@@ -3255,6 +3269,7 @@
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
 				045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */,
 				04C60160226097B1000B1FE0 /* JMNotificationViewController.m in Sources */,
+				0488E59D2295438100C2E398 /* JMCityModel.m in Sources */,
 				6D020A6E22539FB0009BCFE4 /* MapView.m in Sources */,
 				041997CE2266C75000C6C134 /* JMPostJobHomeViewController.m in Sources */,
 				040701BA2275DB58002BF58D /* JMCompanyLikeViewController.m in Sources */,
@@ -3344,6 +3359,7 @@
 				0491B25E2286794600F1FD3A /* JMLabsScreenView.m in Sources */,
 				04A9DFB0225B2B5000CD7CC1 /* JMHTTPManager+Work.m in Sources */,
 				048348D32269BE4100DE4630 /* JMManageInterviewViewController.m in Sources */,
+				0488E59922953B6700C2E398 /* JMCityListViewController.m in Sources */,
 				040A5115226FF47B0074BD4B /* JMGetCompanyLocationViewController.m in Sources */,
 				0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */,
 				6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */,

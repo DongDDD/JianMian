@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)resetAction;
 -(void)OKAction;
+-(void)sendKeyWord_education:(NSString *)education exprience:(NSString *)exprience;
+- (void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index;
 
 @end
 

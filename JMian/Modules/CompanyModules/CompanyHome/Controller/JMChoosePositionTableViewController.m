@@ -8,6 +8,7 @@
 
 #import "JMChoosePositionTableViewController.h"
 #import "JMHomeWorkModel.h"
+#import "DimensMacros.h"
 
 @interface JMChoosePositionTableViewController ()
 
@@ -18,12 +19,32 @@ static NSString *cellIdent = @"cellIdent";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
+    self.tableView.backgroundColor = BG_COLOR;
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+//section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    
+    return 38;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel *headerLab = [[UILabel alloc]init];
+    headerLab.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
+    headerLab.textColor = TEXT_GRAY_COLOR;
+    headerLab.font = [UIFont systemFontOfSize:13];
+    headerLab.text = @"———   选择已发布的职位，淘人才   ———";
+    headerLab.textAlignment = NSTextAlignmentCenter;
+    
+    return headerLab;
 }
 
 #pragma mark - Table view data source
@@ -41,21 +62,44 @@ static NSString *cellIdent = @"cellIdent";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdent];
     }
     JMHomeWorkModel *model = self.choosePositionArray[indexPath.row];
+    cell.textLabel.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+    cell.textLabel.font = [UIFont systemFontOfSize:16];
     cell.textLabel.text = model.work_name;
+    cell.detailTextLabel.text = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
+    cell.detailTextLabel.textColor = TEXT_GRAY_COLOR;
+    cell.detailTextLabel.font = [UIFont systemFontOfSize:16];
+
     // Configure the cell...
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
     if (_delegate && [_delegate respondsToSelector:@selector(didSelectCellActionController:)]) {
+        self.homeModel = self.choosePositionArray[indexPath.row];
         [_delegate didSelectCellActionController:self];
     }
 
 }
+
+//工资数据转化，除以1000，转化成k
+-(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
+    NSInteger myint = [min integerValue];
+    NSInteger intMin = myint/1000;
+    
+    NSInteger myint2 = [max integerValue];
+    NSInteger intMax = myint2/1000;
+    
+    NSString *salaryStr;
+    salaryStr = [NSString stringWithFormat:@"%dk~%dk",  (int)intMin, (int)intMax];
+    
+    return salaryStr;
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol JMLabsScreenViewDelegate <NSObject>
+
+- (void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index;
+
+@end
+
 
 @interface JMLabsScreenView : UIView
 
@@ -19,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UIButton * tagBtn;
 @property(nonatomic,assign)NSInteger selectIndex;
 @property(nonatomic,assign)NSInteger index;
+@property(nonatomic,weak)id<JMLabsScreenViewDelegate>delegate;
 
 @end
 

@@ -35,6 +35,19 @@
     
 }
 
+-(void)setIsHiddenRightBtn:(BOOL)isHiddenBackBtn
+{
+    if (isHiddenBackBtn) {
+        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.hidesBackButton = YES;
+    }else{
+        self.navigationItem.hidesBackButton = NO;
+
+    }
+    
+}
+
+
 -(void)setTitleViewImageViewName:(NSString *)imageName{
   
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imageName]];

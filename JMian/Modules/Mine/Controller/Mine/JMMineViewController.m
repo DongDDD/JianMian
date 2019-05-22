@@ -218,6 +218,7 @@
         [self.navigationController pushViewController:vc animated:YES];
     }else if (row == 2) {
         JMCompanyLikeViewController *vc = [[JMCompanyLikeViewController alloc]init];
+        vc.title = @"职位收藏";
         [self.navigationController pushViewController:vc animated:YES];
     }else if (row == 3) {
         JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];

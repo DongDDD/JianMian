@@ -16,14 +16,14 @@
 #import "JMUserInfoManager.h"
 #import "Masonry.h"
 #import "JMLabsChooseViewController.h"
-#import "JMHTTPManager+PositionDesired.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #import "JMVideoPlayManager.h"
 #import "JMPlayerViewController.h"
 #import "PositionDesiredViewController.h"
+#import "JMCityListViewController.h"
 
-@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate>
+@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate,JMCityListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIButton *allOfPositionBtn; //所有职位
@@ -37,6 +37,8 @@
 
 @property(nonatomic,strong)NSMutableArray *playerArray;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
+
+//@property (nonatomic, copy)NSString *job_lab_id;
 
 @end
 
@@ -110,16 +112,9 @@ static NSString *cellIdent = @"cellIdent";
 #pragma mark - 菊花
 -(void)setJuhua{
     self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-//    self.progressHUD.mode = MBProgressHUDModeCustomView;
     self.progressHUD.progress = 0.0;
-        self.progressHUD.dimBackground = NO; //设置有遮罩
-        self.progressHUD.label.text = @"加载中..."; //设置进度框中的提示文字
+    self.progressHUD.dimBackground = NO; //设置有遮罩
     [self.progressHUD showAnimated:YES]; //显示进度框
-    
-//    UIImageView *imgView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"minloading"]];
-    //    imgView.frame = CGRectMake(0, 0, 68, 99);
-//    self.progressHUD.customView = imgView;
-    
     [self.view addSubview:self.progressHUD];
     
 }
@@ -130,17 +125,17 @@ static NSString *cellIdent = @"cellIdent";
 
     [self getData];
 }
+
 #pragma mark - 点击事件 -
 
 -(void)fanhui{
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    JMCityListViewController *vc = [[JMCityListViewController alloc]init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)didSelectedCity_id:(NSString *)city_id{
     
-    [[JMHTTPManager sharedInstance]fetchCityListWithMyId:userModel.user_id mode:@"lists" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+    
 
 }
 
@@ -148,12 +143,9 @@ static NSString *cellIdent = @"cellIdent";
     NSLog(@"搜索");
     LoginViewController *vc = [[LoginViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
 
-
 -(void)getData{
-    
     [[JMHTTPManager sharedInstance]fetchWorkPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
         if (responsObject[@"data"]) {
@@ -183,7 +175,8 @@ static NSString *cellIdent = @"cellIdent";
 -(void)OKAction
 {
     [self.labschooseVC.view setHidden:YES];
-    
+    [self.tableView.mj_header beginRefreshing];
+
     
 }
 
@@ -227,12 +220,9 @@ static NSString *cellIdent = @"cellIdent";
     [self.companyRequireBtn setBackgroundColor:[UIColor whiteColor]];
     [self.companyRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:YES];
-
 }
 
-
 #pragma mark - 职位筛选 -
-
 - (IBAction)choosePosition:(UIButton *)sender {
     [self.allOfPositionBtn setBackgroundColor:[UIColor whiteColor]];
     [self.allOfPositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
@@ -241,10 +231,14 @@ static NSString *cellIdent = @"cellIdent";
     [self.companyRequireBtn setBackgroundColor:[UIColor whiteColor]];
     [self.companyRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:YES];
-    [self.choosePositionVC.view setHidden:NO];
+    [self.navigationController pushViewController:self.choosePositionVC animated:YES];
+//    [self.choosePositionVC.view setHidden:NO];
    
 }
 
+-(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
+    [self.tableView.mj_header beginRefreshing];
+}
 
 #pragma mark - 公司要求 -
 
@@ -300,7 +294,6 @@ static NSString *cellIdent = @"cellIdent";
     if (cell == nil) {
         cell = [[HomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
     }
-    
 //    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
     cell.indexpath = indexPath;
     cell.delegate = self;
@@ -340,14 +333,15 @@ static NSString *cellIdent = @"cellIdent";
         _choosePositionVC = [[PositionDesiredViewController alloc]init];
         _choosePositionVC.searchView.hidden = YES;
         _choosePositionVC.delegate = self;
+        [_choosePositionVC setIsHomeViewVC:YES];
 //        _choosePositionVC.view.hidden = YES;
-        [self addChildViewController:_choosePositionVC];
-        [self.view addSubview:_choosePositionVC.view];
-        [_choosePositionVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.headView.mas_bottom);
-            make.left.and.right.mas_equalTo(self.view);
-            make.height.mas_equalTo(self.view).mas_offset(100);
-        }];
+//        [self addChildViewController:_choosePositionVC];
+//        [self.view addSubview:_choosePositionVC.view];
+//        [_choosePositionVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(self.headView.mas_bottom);
+//            make.left.and.right.mas_equalTo(self.view);
+//            make.bottom.mas_equalTo(self.view).mas_offset(-500);
+//        }];
         
     }
 
@@ -355,8 +349,6 @@ static NSString *cellIdent = @"cellIdent";
 
 }
 
-    
-    
 
 -(JMLabsChooseViewController *)labschooseVC{
     if (_labschooseVC == nil) {

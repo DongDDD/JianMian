@@ -23,6 +23,7 @@
 #import "JMMessageListModel.h"
 #import "JMMapViewController.h"
 #import "JMCustomAnnotationView.h"
+#import "JMHTTPManager+CompanyLike.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate,MAMapViewDelegate>
@@ -160,6 +161,16 @@
 -(void)rightAction{
     NSLog(@"收藏");
    
+    [[JMHTTPManager sharedInstance]createLikeWith_type:@"1" Id:self.model.work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"招聘职位主键不能为空"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    }];
+    
 }
 
 

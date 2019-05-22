@@ -13,7 +13,7 @@
 
 #define BottomBtnH 42
 
-@interface JMLabsChooseViewController ()
+@interface JMLabsChooseViewController ()<JMLabsScreenViewDelegate>
 @property(nonatomic,strong)NSArray *array1;
 @property(nonatomic,strong)NSArray *array2;
 @property(nonatomic,strong)NSArray *array3;
@@ -66,14 +66,15 @@
 {
     NSArray *titleArray = @[@"最低学历",@"工作经验",@"薪资要求"];
     UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height-300)];
-    scrollView.backgroundColor = [UIColor whiteColor];
-//    scrollView.backgroundColor = BG_COLOR;
+    scrollView.alwaysBounceVertical = YES; //垂直
+    scrollView.backgroundColor = BG_COLOR;
     [self.view addSubview:scrollView];
     CGFloat Y = 0.0;
     JMLabsScreenView *labsView;
     for (int i=0; i<3; i++) {
         
         labsView = [[JMLabsScreenView alloc]init];
+        labsView.delegate = self;
         __weak JMLabsScreenView *weakLabsView = labsView;
         //labs标签决定最终高度，高度通过闭包传出来
         labsView.didCreateLabs = ^(CGFloat lastLabsY) {
@@ -90,6 +91,17 @@
     
 }
 
+-(void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index{
+    if (_delegate && [_delegate respondsToSelector:@selector(didChooseLabsTitle_str:index:)]) {
+        [_delegate didChooseLabsTitle_str:str index:index];
+    }
+    
+    NSLog(@"-------%@%ld",str,(long)(index-1));
+
+}
+
+
+
 -(void)leftAction:(UIButton *)btn
 {
     if (_delegate && [_delegate respondsToSelector:@selector(resetAction)]) {
@@ -105,6 +117,12 @@
     }
     
 }
+
+
+
+
+
+
 
 -(NSArray *)getArray_index:(NSInteger )index
 {

@@ -38,16 +38,16 @@
 //    UIScrollView *self.view = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 //    [self.view addSubview:self.view];
     
-    UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(20, 35, 100, 20)];
-    titleLab.text = @"工作经历";
-    titleLab.font = [UIFont systemFontOfSize:20.0f];
-    [self.view addSubview:titleLab];
     
     //工作经历
     UIView *experienBGView = [[UIView alloc]init];
     [self.view addSubview:experienBGView];
     
     if (self.experiencesArray.count > 0) {
+        UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(20, 35, 100, 20)];
+        titleLab.text = @"工作经历";
+        titleLab.font = [UIFont systemFontOfSize:20.0f];
+        [self.view addSubview:titleLab];
         
         UIView * lastView ;
         for (int i = 0 ; i < self.experiencesArray.count; i++) {

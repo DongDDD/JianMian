@@ -10,6 +10,7 @@
 #import "JMCompanyHomeTableViewCell.h"
 #import "JMPersonDetailsViewController.h"
 #import "JMHTTPManager+VitaPaginate.h"
+#import "JMHTTPManager+PositionDesired.h"
 #import "JMCompanyHomeModel.h"
 #import "JMPlayerViewController.h"
 #import "JMVideoPlayManager.h"
@@ -17,8 +18,9 @@
 #import "JMChoosePositionTableViewController.h"
 #import "JMHTTPManager+Work.h"
 #import "JMHomeWorkModel.h"
+#import "JMCityListViewController.h"
 
-@interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate,JMLabsChooseViewControllerDelegate,JMChoosePositionTableViewControllerDelegate>
+@interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate,JMLabsChooseViewControllerDelegate,JMChoosePositionTableViewControllerDelegate,JMCityListViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
@@ -26,14 +28,26 @@
 @property(nonatomic,strong)NSArray *arrDate;
 @property(nonatomic,strong)NSMutableArray *playerArray;
 
-@property(nonatomic,assign)NSInteger page;
-@property(nonatomic,assign)NSInteger per_page;
 
 @property (nonatomic, strong) JMChoosePositionTableViewController *choosePositionVC;
+@property (nonatomic, strong) UIButton *bgBtn;
+
 @property (nonatomic, strong) JMLabsChooseViewController *labschooseVC;
 @property (weak, nonatomic) IBOutlet UIButton *choosePositionBtn;
 @property (weak, nonatomic) IBOutlet UIButton *chooseRequireBtn;
 @property(nonatomic,strong)NSMutableArray *choosePositionArray;
+// -----------筛选------------
+@property(nonatomic,copy)NSString *job_label_id;
+@property(nonatomic,copy)NSString *city_id;
+@property(nonatomic,copy)NSString *education;
+@property(nonatomic,copy)NSString *work_year_s;
+@property(nonatomic,copy)NSString *work_year_e;
+@property(nonatomic,copy)NSString *salary_min;
+@property(nonatomic,copy)NSString *salary_max;
+@property(nonatomic,assign)NSInteger page;
+@property(nonatomic,assign)NSInteger per_page;
+
+
 
 //
 //@property (nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
@@ -67,30 +81,24 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self getData];
 }
 
 #pragma mark - 获取数据
 -(void)getData{
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-    [[JMHTTPManager sharedInstance]fetchVitaPaginateWithKeyword:@"" page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-  
+    [[JMHTTPManager sharedInstance]fetchVitaPaginateWith_city_id:self.city_id job_label_id:self.job_label_id education:self.education work_year_s:self.work_year_s work_year_e:self.work_year_e salary_min:self.salary_min salary_max:self.salary_max page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            
             self.arrDate = [JMCompanyHomeModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             if (self.arrDate) {
                 
-//                [self getPlayerArray];
+                //                [self getPlayerArray];
                 [self.tableView reloadData];
                 [self.tableView.mj_header endRefreshing];
                 [self.tableView.mj_footer endRefreshing];
             }
         }
-        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-        
         
     }];
 
@@ -255,6 +263,19 @@ static NSString *cellIdent = @"cellIdent";
 
 #pragma mark - 点击事件
 
+-(void)fanhui{
+    JMCityListViewController *vc = [[JMCityListViewController alloc]init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+-(void)didSelectedCity_id:(NSString *)city_id{
+
+    _city_id = city_id;
+    [self.tableView.mj_header beginRefreshing];
+}
+
 -(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell{
     
         [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:cell.model.video_file_path];
@@ -273,6 +294,7 @@ static NSString *cellIdent = @"cellIdent";
     [self.choosePositionVC.view setHidden:NO];
     [self.labschooseVC.view setHidden:YES];
     [self getPositionListData];
+    [self.bgBtn setHidden:NO];
     //    self.choosePositionVC
 }
 
@@ -283,25 +305,88 @@ static NSString *cellIdent = @"cellIdent";
     [self.choosePositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:NO];
     [self.choosePositionVC.view setHidden:YES];
+    [self.bgBtn setHidden:YES];
 
    
 
 }
 
 
+-(void)bgBtnAction{
+    [self.choosePositionVC.view setHidden:YES];
+    [self.labschooseVC.view setHidden:YES];
+    [_bgBtn setHidden:YES];
 
+}
 
 //要求筛选
 -(void)resetAction{
+//    [self.labschooseVC.view removeFromSuperview];
+//    [self.labschooseVC.view setHidden:NO];
+    [self.labschooseVC.view setHidden:YES];
+    [_bgBtn setHidden:YES];
+    
 }
 //职位选择
 -(void)OKAction
 {
     [self.labschooseVC.view setHidden:YES];
-    
+    [_bgBtn setHidden:YES];
+    [self.tableView.mj_header beginRefreshing];
+
     
 }
+//职位选择
+-(void)didSelectCellActionController:(JMChoosePositionTableViewController *)controller{
+    [self.choosePositionVC.view setHidden:YES];
+    [_bgBtn setHidden:YES];
+    
+    self.job_label_id = controller.homeModel.work_label_id;
+    [self.tableView.mj_header beginRefreshing];
 
+
+}
+
+//人才要求
+-(void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index{
+    if ([str isEqualToString:@"最低学历"]) {
+        if (index >= 1) {
+            self.education = [NSString stringWithFormat:@"%ld",(long)(index-1)];
+        }else{
+            
+            self.education = nil;
+        }
+        
+    }else if ([str isEqualToString:@"工作经历"]) {
+        NSString *exp = [self getArray_index:index];
+        if (![exp isEqualToString:@"全部"] && ![exp isEqualToString:@"应届生"]) {
+            self.work_year_e = [exp substringToIndex:0];
+            self.work_year_s = [exp substringToIndex:3];
+
+        }else if([exp isEqualToString:@"应届生"]){
+        
+          
+        
+        }
+//        self.work_year_s
+    }
+
+}
+
+
+
+
+-(NSString *)getArray_index:(NSInteger )index
+{
+    NSArray *array;
+  
+    array = @[@"全部",@"应届生",@"1年",@"1～3年",@"3～5年",@"5～10年",@"10年以上"];
+
+    
+    
+    return array[index];
+    
+}
 
 
 #pragma mark - lazy
@@ -320,10 +405,21 @@ static NSString *cellIdent = @"cellIdent";
         _choosePositionVC.delegate = self;
         [self addChildViewController:_choosePositionVC];
         [self.view addSubview:_choosePositionVC.view];
+        _bgBtn = [[UIButton alloc]init];
+        _bgBtn.backgroundColor = [UIColor blackColor];
+        _bgBtn.alpha = 0.3;
+        [_bgBtn addTarget:self action:@selector(bgBtnAction) forControlEvents:UIControlEventTouchDown];
+        [self.view addSubview:_bgBtn];
         [_choosePositionVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.headerView.mas_bottom);
             make.left.and.right.mas_equalTo(self.view);
-            make.bottom.mas_equalTo(self.view).offset(-66);
+            make.bottom.mas_equalTo(self.view).offset(-200);
+        }];
+        
+        [_bgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_choosePositionVC.view.mas_bottom);
+            make.left.and.right.mas_equalTo(_choosePositionVC.view);
+            make.bottom.mas_equalTo(self.view);
         }];
     }
     return  _choosePositionVC;

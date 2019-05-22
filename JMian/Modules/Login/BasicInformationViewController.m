@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topToView;
 @property (nonatomic, assign)CGFloat changeHeight;
 
+@property(nonatomic,strong) UIView *bgView;
 
 
 @end
@@ -64,8 +65,24 @@
     self.nameText.delegate = self;
     self.scrollView.delegate = self;
 
+    
+    _bgView = [[UIView alloc]init];
+    _bgView.backgroundColor = [UIColor grayColor];
+    _bgView.hidden = YES;
+    _bgView.alpha = 0.8;
+    [self.view addSubview:_bgView];
+    
+    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.datePicker.mas_top);
+        make.right.and.left.mas_equalTo(self.view);
+    }];
+    
+    
+    
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
     [self.view addGestureRecognizer:bgTap];
+    [_bgView addGestureRecognizer:bgTap];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -102,7 +119,7 @@
 }
 
 - (void)keyboardWillShow:(NSNotification *)aNotification {
-    
+    self.datePicker.hidden = YES;
     NSDictionary *userInfo = aNotification.userInfo;
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
 //    _keyboardRect = aValue.CGRectValue;
@@ -200,12 +217,15 @@
 
 - (IBAction)showDatePeckerAction:(id)sender {
     self.datePicker.hidden = NO;
-
+    [_bgView setHidden:NO];
+    [_nameText resignFirstResponder];
+    [_emailText resignFirstResponder];
 }
 
 
 -(void)hiddenDatePickerAction{
     self.datePicker.hidden = YES;
+    [_bgView setHidden:YES];
     [_nameText resignFirstResponder];
     [_emailText resignFirstResponder];
     

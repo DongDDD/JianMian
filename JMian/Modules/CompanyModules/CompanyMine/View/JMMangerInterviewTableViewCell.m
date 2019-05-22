@@ -75,7 +75,7 @@
         [self.rightBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
         [self.leftBtn setHidden:YES];
         [self.rightBtn setHidden:NO];
-    }else if ([model.status isEqualToString:Interview_WaitInterview]){//面试时间过了 或者 面试时间前5分钟的状态
+    }else if ([model.status isEqualToString:Interview_AlreadyInterview]){//面试时间过了 或者 面试时间前5分钟的状态
         [self.leftBtn setHidden:YES];
         [self.rightBtn setHidden:YES];
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];

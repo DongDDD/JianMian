@@ -69,7 +69,6 @@
 //C端看公司的职位详情
 #define Info_Work_URL @"api/work/info"
 
-
 //B端接口
 #define Create_Company_URL @"api/company/create"
 #define Fectch_CompanyInfo_URL @"api/company/info"
@@ -79,7 +78,6 @@
 #define Update_JobInfo_URL @"api/work/update"
 //删除公司文件
 #define CompanyFile_Delete_URL @"api/company/file/delete"
-
 
 #define Create_Interview_URL @"api/work/interview/create"
 
