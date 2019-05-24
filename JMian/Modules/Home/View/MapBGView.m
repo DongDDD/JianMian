@@ -6,11 +6,11 @@
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "MapView.h"
+#import "MapBGView.h"
 #import "Masonry.h"
 
 
-@implementation MapView
+@implementation MapBGView
 
 
 
@@ -79,26 +79,7 @@
         make.top.mas_equalTo(adrLab.mas_bottom).offset(10);
     }];
     
-    MAMapView *mapView = [[MAMapView alloc]init];
-    mapView.showsUserLocation = YES;
-    mapView.userTrackingMode = MAUserTrackingModeFollow;
-    mapView.delegate = self;
-    mapView.maxZoomLevel = 3;
 
-//    [mapView setZoomLevel:15.1 animated:YES];
-//    CLLocationDegrees latitude = [model.latitude doubleValue];
-//    CLLocationDegrees longitude = [model.longitude doubleValue];
-//    CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
-//    [mapView setCenterCoordinate:locationCoordinate animated:YES];
-    
-//    [bgView addSubview:mapView];
-//    
-//    [mapView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.and.right.mas_equalTo(bgView);
-//        make.height.mas_equalTo(224);
-//        make.top.mas_equalTo(adrContentLab.mas_bottom).offset(13);
-//    }];
-    
     UIView * xian1View = [[UIView alloc]init];
     xian1View.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
     [self addSubview:xian1View];

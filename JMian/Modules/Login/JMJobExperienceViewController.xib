@@ -133,7 +133,7 @@
                                         <constraint firstAttribute="height" constant="30" id="6QP-tE-eCM"/>
                                         <constraint firstAttribute="width" constant="255" id="8jG-dT-T2R"/>
                                     </constraints>
-                                    <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
@@ -177,7 +177,7 @@
                                         <constraint firstAttribute="height" constant="34" id="j6z-rQ-0eq"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <state key="normal" title="请选择">
+                                    <state key="normal" title="暂无选择">
                                         <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                 </button>
@@ -211,14 +211,14 @@
                                         <constraint firstAttribute="height" constant="0.5" id="A8c-O8-jeg"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UiC-pq-MpP">
+                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UiC-pq-MpP">
                                     <rect key="frame" x="20" y="426.5" width="255" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="WbQ-Za-iRY"/>
                                         <constraint firstAttribute="width" constant="255" id="cpg-xf-gN8"/>
                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="255" id="h83-yN-9Tm"/>
                                     </constraints>
-                                    <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>

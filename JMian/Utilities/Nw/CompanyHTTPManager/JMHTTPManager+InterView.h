@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 
                   successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
+- (void)feedbackInterViewWith_interview_id:(NSString *)interview_id
+                                 label_ids:(NSArray *)label_ids
+
+                              successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

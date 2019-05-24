@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class JMCompanyHomeTableViewCell;
 @protocol JMCompanyHomeTableViewCellDelegate <NSObject>
 
--(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell;
+-(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model;
 
 @end
 
@@ -32,7 +32,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) AVPlayerViewController *playerVC;
--(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier indexPath:(NSIndexPath *)indexPath;
 @property(nonatomic,strong)NSIndexPath *indexPath;
 
 @property (weak, nonatomic)id<JMCompanyHomeTableViewCellDelegate>delegate;

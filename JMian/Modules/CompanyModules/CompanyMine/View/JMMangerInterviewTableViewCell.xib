@@ -110,11 +110,18 @@
                             <action selector="rightBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="HBh-sd-o9q"/>
                         </connections>
                     </button>
-                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peer_countermand.png" translatesAutoresizingMaskIntoConstraints="NO" id="X1i-rg-F2C" userLabel="deleteImg">
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="countermand.png" translatesAutoresizingMaskIntoConstraints="NO" id="X1i-rg-F2C" userLabel="deleteImg">
                         <rect key="frame" x="301" y="114.5" width="54" height="54"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="54" id="ZBQ-OX-v5V"/>
                             <constraint firstAttribute="height" constant="54" id="gXz-Ca-wJ5"/>
+                        </constraints>
+                    </imageView>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="employ.png" translatesAutoresizingMaskIntoConstraints="NO" id="YIb-Om-N37">
+                        <rect key="frame" x="330" y="10" width="45" height="45"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="45" id="QmX-SZ-W3o"/>
+                            <constraint firstAttribute="width" constant="45" id="uKp-Kc-zzD"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -134,6 +141,7 @@
                     <constraint firstAttribute="trailing" secondItem="Spc-sJ-2F1" secondAttribute="trailing" id="O5D-Pn-S03"/>
                     <constraint firstItem="Ghg-KW-OCd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="30" id="PgT-UE-WUu"/>
                     <constraint firstItem="KXo-FS-27b" firstAttribute="leading" secondItem="0u9-sv-zwv" secondAttribute="leading" id="SGA-1a-SdE"/>
+                    <constraint firstItem="YIb-Om-N37" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="SSU-9Q-hXC"/>
                     <constraint firstItem="ufc-cg-ivb" firstAttribute="leading" secondItem="KXo-FS-27b" secondAttribute="trailing" constant="20" id="UNA-gs-Tws"/>
                     <constraint firstItem="aM7-5M-phG" firstAttribute="centerY" secondItem="DPZ-sN-st1" secondAttribute="centerY" id="Z2f-3f-HHE"/>
                     <constraint firstItem="0u9-sv-zwv" firstAttribute="leading" secondItem="Ghg-KW-OCd" secondAttribute="leading" id="bAN-yI-396"/>
@@ -143,6 +151,7 @@
                     <constraint firstAttribute="trailing" secondItem="aM7-5M-phG" secondAttribute="trailing" constant="20" id="kkN-0b-b0q"/>
                     <constraint firstAttribute="trailing" secondItem="ufc-cg-ivb" secondAttribute="trailing" constant="20" id="s7R-se-3cP"/>
                     <constraint firstItem="ufc-cg-ivb" firstAttribute="top" secondItem="KXo-FS-27b" secondAttribute="top" id="sQt-DQ-b4x"/>
+                    <constraint firstAttribute="trailing" secondItem="YIb-Om-N37" secondAttribute="trailing" id="uvu-Vk-CnS"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
@@ -154,6 +163,7 @@
                 <outlet property="interviewTimeLab" destination="Ghg-KW-OCd" id="04G-Rn-MfX"/>
                 <outlet property="leftBtn" destination="KXo-FS-27b" id="5mZ-lS-vQC"/>
                 <outlet property="nameLab" destination="DPZ-sN-st1" id="KJV-h9-qj3"/>
+                <outlet property="passImg" destination="YIb-Om-N37" id="DZM-43-hCN"/>
                 <outlet property="rightBtn" destination="ufc-cg-ivb" id="n7b-k7-GKn"/>
                 <outlet property="salaryLab" destination="aM7-5M-phG" id="4aJ-oj-ZO9"/>
             </connections>
@@ -161,6 +171,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="peer_countermand.png" width="54" height="54"/>
+        <image name="countermand.png" width="54" height="54"/>
+        <image name="employ.png" width="45" height="44.5"/>
     </resources>
 </document>

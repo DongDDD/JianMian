@@ -9,7 +9,7 @@
 #import "JobDetailsViewController.h"
 
 #import "Masonry.h"
-#import "MapView.h"
+#import "MapBGView.h"
 #import "TwoButtonView.h"
 #import "JMCompanyIntroduceViewController.h"
 #import "JMShareView.h"
@@ -40,7 +40,7 @@
 @property(nonatomic,strong)UILabel *jobDoLab;//岗位职责
 @property(nonatomic,strong)UILabel *jobRequireLab;//任职要求
 
-@property(nonatomic,strong)MapView *mapBGView;//地图模块----
+@property(nonatomic,strong)MapBGView *mapBGView;//地图模块----
 @property(nonatomic,strong)MAMapView *mapView;
 @property (nonatomic,assign)CLLocationCoordinate2D locationCoordinate;
 
@@ -752,7 +752,7 @@
 
 -(void)setMapView{
 //
-     self.mapBGView = [[MapView alloc] init];
+     self.mapBGView = [[MapBGView alloc] init];
     [self.mapBGView setModel:self.model];
     [self.scrollView addSubview:self.mapBGView];
     
@@ -837,10 +837,7 @@
     }];
     
     UIImageView *iconImg = [[UIImageView alloc]init];
-    iconImg.backgroundColor = [UIColor redColor];
-    iconImg.image = [UIImage imageNamed:@""];
-    [iconImg sd_setImageWithURL:[NSURL URLWithString:self.model.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    
+    [iconImg sd_setImageWithURL:[NSURL URLWithString:self.model.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];   
     
     [self.HRView addSubview:iconImg];
     

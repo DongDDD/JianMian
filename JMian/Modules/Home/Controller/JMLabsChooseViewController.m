@@ -31,14 +31,41 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    self.view.backgroundColor = [UIColor whiteColor];
-    UIView *bgView = [[UIView alloc]initWithFrame:self.view.bounds];
-    bgView.backgroundColor = [UIColor blackColor];
-    bgView.alpha = 0.3;
-    [self.view addSubview:bgView];
-    [self initBtnView];
+    if (_labsChooseViewType != JMLabsChooseViewTypeFeedBack) {
+        UIView *bgView = [[UIView alloc]initWithFrame:self.view.bounds];
+        bgView.backgroundColor = [UIColor blackColor];
+        bgView.alpha = 0.3;
+        [self.view addSubview:bgView];
+        [self initBtnView];
+        
+    }else{
+        [self initFeedBackBtn];
+        self.view.backgroundColor = BG_COLOR;
+    }
     [self initLabsView];
     
     
+    
+}
+
+-(void)initFeedBackBtn{
+    UIButton *btn = [[UIButton alloc]init];
+    [btn setTitle:@"确认提交" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btn.layer.cornerRadius = 23.5;
+    [btn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+    btn.titleLabel.font = [UIFont systemFontOfSize:16];
+    btn.backgroundColor = MASTER_COLOR;
+    [self.view addSubview:btn];
+    
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).offset(20);
+        make.right.mas_equalTo(self.view).offset(-20);
+        make.bottom.mas_equalTo(self.view).offset(-57);
+        make.height.mas_equalTo(47);
+    }];
+
+
 }
 
 -(void)initBtnView{
@@ -64,7 +91,14 @@
 
 -(void)initLabsView
 {
-    NSArray *titleArray = @[@"最低学历",@"工作经验",@"薪资要求"];
+    NSArray *titleArray;
+    if (_labsChooseViewType == JMLabsChooseViewTypeFeedBack) {
+        titleArray = @[@"面试过程",@"岗位描述",@"我的意向"];
+
+    }else{
+        titleArray = @[@"最低学历",@"工作经验",@"薪资要求"];
+    }
+    
     UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height-300)];
     scrollView.alwaysBounceVertical = YES; //垂直
     scrollView.backgroundColor = BG_COLOR;
@@ -129,13 +163,28 @@
     NSArray *array;
     switch (index) {
         case 0:
-            array = @[@"全部",@"初中",@"高中",@"中专",@"大专",@"本科",@"硕士",@"博士"];
+            if (_labsChooseViewType == JMLabsChooseViewTypeFeedBack) {
+                array = @[@"很轻松",@"正常",@"一般",@"有点难",@"很困难"];
+            }else{
+                
+                array = @[@"全部",@"初中",@"高中",@"中专",@"大专",@"本科",@"硕士",@"博士"];
+            }
             break;
         case 1:
-            array = @[@"全部",@"应届生",@"1年",@"1～3年",@"3～5年",@"5～10年",@"10年以上"];
+            if (_labsChooseViewType == JMLabsChooseViewTypeFeedBack) {
+                array = @[@"一致",@"大致一样",@"有偏差",@"不一样",@"牛头马嘴"];
+                
+            }else{
+                array = @[@"全部",@"应届生",@"1年",@"1～3年",@"3～5年",@"5～10年",@"10年以上"];
+            }
             break;
         case 2:
-            array = @[@"全部",@"3k",@"3-5k",@"5-8k",@"8-12k",@"12-20k",@"20-50k",@"50k以上"];
+            if (_labsChooseViewType == JMLabsChooseViewTypeFeedBack) {
+                array = @[@"志在必得",@"期待加入",@"想加入",@"没兴趣"];
+
+            }else{
+                array = @[@"全部",@"3k",@"3-5k",@"5-8k",@"8-12k",@"12-20k",@"20-50k",@"50k以上"];
+            }
             break;
         default:
             break;

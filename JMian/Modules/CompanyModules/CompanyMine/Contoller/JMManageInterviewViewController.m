@@ -14,7 +14,14 @@
 #import "THDatePickerView.h"
 #import "JMVideoChatViewController.h"
 #import "JMVideoChatView.h"
-
+#import "JMFeedBackChooseViewController.h"
+////面试状态
+//#define Interview_WaitAgree @"0" //等待同意
+//#define Interview_Delete @"1" //已取消
+//#define Interview_Refuse @"2" //已拒绝
+//#define Interview_WaitInterview @"3" //待面试 （已同意，等待面试）
+//#define Interview_AlreadyInterview @"4" //未反馈
+//#define Interview_Reflect @"5" //已反馈
 @interface JMManageInterviewViewController ()<UITableViewDelegate,UITableViewDataSource,JMMangerInterviewTableViewCellDelegate,JMChooseTimeViewControllerDelegate,JMVideoChatViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *titleView;
@@ -41,7 +48,6 @@ static NSString *cellIdent = @"managerCellIdent";
     self.title = @"面试管理";
     [self setTableViewUI];
     [self initDatePickerView];
-    _statusArray = @[@"0",@"1",@"2",@"3"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -51,7 +57,7 @@ static NSString *cellIdent = @"managerCellIdent";
 }
 
 -(void)setTableViewUI{
-
+    _statusArray = @[@"0",@"1",@"2",@"3"];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 189;
@@ -61,14 +67,11 @@ static NSString *cellIdent = @"managerCellIdent";
     header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
     [self.tableView.mj_header beginRefreshing];
-
-
 }
 
 -(void)loadNewData
 {
-    
-     [self getListData_Status:_statusArray];//请求已邀请的数据
+    [self getListData_Status:_statusArray];//请求已邀请的数据
 }
 
 
@@ -90,23 +93,27 @@ static NSString *cellIdent = @"managerCellIdent";
 }
 
 #pragma mark - 点击事件
-
+//已邀请
 - (IBAction)invitedBtnAction:(UIButton *)sender {
     [self.invitedBtn setBackgroundColor:MASTER_COLOR];
     [self.invitedBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.isInterviewBtn setBackgroundColor:[UIColor whiteColor]];
     [self.isInterviewBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    [self getListData_Status:_statusArray];//请求已邀请的数据
+    _statusArray = @[@"0",@"1",@"2",@"3"];
+    [self.tableView.mj_header beginRefreshing];
+//    [self getListData_Status:_statusArray];//请求已邀请的数据
 
 }
-
+//已面试
 - (IBAction)isInterviewBtnAction:(UIButton *)sender {
     [self.isInterviewBtn setBackgroundColor:MASTER_COLOR];
     [self.isInterviewBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.invitedBtn setBackgroundColor:[UIColor whiteColor]];
     [self.invitedBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    NSArray *status = @[@"4",@"5"];
-    [self getListData_Status:status];//请求已面试的数据
+    _statusArray =  @[@"4",@"5"];
+    [self.tableView.mj_header beginRefreshing];
+
+//    [self getListData_Status:_statusArray];//请求已面试的数据
 
 }
 
@@ -120,58 +127,90 @@ static NSString *cellIdent = @"managerCellIdent";
     if ([userinfoModel.type isEqualToString:C_Type_USER]) {
         
         if ([model.status isEqualToString:Interview_WaitAgree]) {//接受邀约按钮
-            
-            [[JMHTTPManager sharedInstance]updateInterViewWith_Id:model.interview_id status:Interview_WaitInterview successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"接受面试成功"
-                                                              delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-                [alert show];
-                
-                [self getListData_Status:_statusArray];//请求已邀请的数据
-            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-                
-            }];
+            [self updateInterviewStatus_interviewID:model.interview_id status:model.status];
         }
         
     }else if ([userinfoModel.type isEqualToString:B_Type_UESR]){
      
-        if ([model.status isEqualToString:Interview_WaitAgree]) {//修改时间
-            self.BgBtn.hidden = NO;
-            
-            [UIView animateWithDuration:0.3 animations:^{
-                self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300,SCREEN_WIDTH, 300);
-                [self.dateView show];
-            }];
-            self.model = model;
-            
+        if ([model.hire isEqualToString:@"0"] && ([model.status isEqualToString:@"4"] || [model.status isEqualToString:@"5"])) {//修改时间
+//            self.BgBtn.hidden = NO;
+//
+//            [UIView animateWithDuration:0.3 animations:^{
+//                self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300,SCREEN_WIDTH, 300);
+//                [self.dateView show];
+//            }];
+//            self.model = model;
+//            0:未确定 1:不合适 2:已录用
+            //确认录用
+            [self updateInterviewHire_interviewID:model.interview_id label_ids:@[@"2"]];
         }
         
     }
     
 }
 
--(void)cellRightBtnAction_model:(JMInterViewModel *)model
+-(void)cellRightBtnAction_model:(JMInterViewModel *)model isInterviewTime:(BOOL)isInterviewTime
 {
-    
-    //因为B端和C端都只有这个status才有“进入房间”按钮，所以一个判断就可以了
-        if ([model.status isEqualToString:Interview_WaitInterview]) {//进入房间
-         
-//            JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
-//            [vc setInterviewModel:model];
-//            [self.navigationController pushViewController:vc animated:YES];
+    JMUserInfoModel *userinfoModel = [JMUserInfoManager getUserInfo];
+    if ([userinfoModel.type isEqualToString:B_Type_UESR]) {
+        if ([model.status isEqualToString:@"3"] && isInterviewTime) {//进入房间
             
             _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
             _videoChatView.delegate = self;
             _videoChatView.tag = 222;
             [_videoChatView setInterviewModel:model];
             [self.view addSubview:_videoChatView];
-//            [[UIApplication sharedApplication].keyWindow addSubview:videoChatView];
             [self.navigationController setNavigationBarHidden:YES];
+            
+        }else if ([model.status isEqualToString:@"0"]) {//这个状态可以 取消面试
+            
+            [self updateInterviewStatus_interviewID:model.interview_id status:@"2"];
+            
+        }else if ([model.hire isEqualToString:@"0"] && ([model.status isEqualToString:@"4"] || [model.status isEqualToString:@"5"])) {
 
+            //0:未确定 1:不合适 2:已录用
+            //不适合录用
+            [self updateInterviewHire_interviewID:model.interview_id label_ids:@[@"1"]];
         }
+        
+    }else{
+        if ([model.status isEqualToString:@"4"]) {//这个状态可以 面试反馈
+            JMFeedBackChooseViewController *vc = [[JMFeedBackChooseViewController alloc]init];
+            vc.interview_id = model.interview_id;
+            [self.navigationController pushViewController:vc animated:YES];
+            //            [self updateInterviewStatus_interviewID:model.interview_id status:@"2"];
+            
+        }
+    }
+    
+}
+
+-(void)updateInterviewHire_interviewID:(NSString *)interviewID label_ids:(NSArray *)label_ids{
+    [[JMHTTPManager sharedInstance]feedbackInterViewWith_interview_id:interviewID label_ids:label_ids successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已更新面试列表"
+                                                                                                                                                                                                                                  delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        [self.tableView.mj_header beginRefreshing];
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
     
 
 }
 
+
+
+-(void)updateInterviewStatus_interviewID:(NSString *)interviewID status:(NSString *)status{
+    [[JMHTTPManager sharedInstance]updateInterViewWith_Id:interviewID status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已更新面试列表"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        [self.tableView.mj_header beginRefreshing];
+//        [self getListData_Status:_statusArray];//请求已邀请的数据
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
 //-(void)cellLeftBtnActionWith_row:(NSInteger)row{
 //    self.chooseTimeVC = [[JMChooseTimeViewController alloc]init];
 //    self.chooseTimeVC.delegate = self;

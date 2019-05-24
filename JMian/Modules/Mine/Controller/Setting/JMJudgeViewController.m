@@ -98,6 +98,9 @@
                          ];
     
     int stepInt = [enterprise_step intValue];
+    if (stepInt > vcArray.count ) {
+        return vcArray[5];
+    }
     if (stepInt < vcArray.count) return vcArray[stepInt];
     
     return nil;
@@ -114,8 +117,10 @@
                          @"JMJobExperienceViewController",  //当user_step=4
                          [NSNull null],
                          @"JMPersonTabBarViewController"];        //当user_step=6
-    
     int stepInt = [user_step intValue];
+    if (stepInt > vcArray.count ) {
+        return vcArray[6];
+    }
     if (stepInt < vcArray.count) return vcArray[stepInt];
     
     return nil;

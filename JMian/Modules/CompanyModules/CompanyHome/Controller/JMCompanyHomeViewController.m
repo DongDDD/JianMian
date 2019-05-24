@@ -25,7 +25,10 @@
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *arrDate;
+@property(nonatomic,strong)NSMutableArray *arrDate;
+@property(nonatomic,assign)BOOL isShowAllData;
+
+
 @property(nonatomic,strong)NSMutableArray *playerArray;
 
 
@@ -36,6 +39,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *choosePositionBtn;
 @property (weak, nonatomic) IBOutlet UIButton *chooseRequireBtn;
 @property(nonatomic,strong)NSMutableArray *choosePositionArray;
+
 // -----------筛选------------
 @property(nonatomic,copy)NSString *job_label_id;
 @property(nonatomic,copy)NSString *city_id;
@@ -71,10 +75,11 @@ static NSString *cellIdent = @"cellIdent";
     [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
     [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
     
-//    self.per_page = 7;
-//    self.page = 1;
-    [self getData];
+    self.per_page = 15;
+    self.page = 1;
+//    [self getData];
     [self setTableView];
+//    [self ]
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -84,19 +89,26 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 #pragma mark - 获取数据
--(void)getData{
+-(void)getCompanyHomeListData{
+ 
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
     [[JMHTTPManager sharedInstance]fetchVitaPaginateWith_city_id:self.city_id job_label_id:self.job_label_id education:self.education work_year_s:self.work_year_s work_year_e:self.work_year_e salary_min:self.salary_min salary_max:self.salary_max page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            self.arrDate = [JMCompanyHomeModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            if (self.arrDate) {
+            NSMutableArray *modelArray = [JMCompanyHomeModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            
+            if (modelArray.count > 0) {
                 
+                [self.arrDate addObjectsFromArray:modelArray];
                 //                [self getPlayerArray];
                 [self.tableView reloadData];
-                [self.tableView.mj_header endRefreshing];
-                [self.tableView.mj_footer endRefreshing];
+            }else{
+                _isShowAllData = YES;
+                [self.tableView.mj_footer setHidden:YES];
+
             }
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -183,7 +195,7 @@ static NSString *cellIdent = @"cellIdent";
         make.bottom.mas_equalTo(self.view);
     }];
     [self setupDownRefresh];//添加下拉刷新
-    [self setupUpRefresh];
+    [self setupUpRefresh];//下拉加载更多
 
 }
 
@@ -191,7 +203,7 @@ static NSString *cellIdent = @"cellIdent";
 -(void)setupDownRefresh
 {
     
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getCompanyHomeListData)];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
@@ -201,20 +213,21 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)setupUpRefresh
 {
-//     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
 }
 
--(void)loadNewData
-{
-    
-    [self getData];
-}
+//-(void)loadNewData
+//{
+//
+//    [self getData];
+//}
 
 -(void)loadMoreBills
 {
-  
-//    self.per_page = self.per_page + 3;
-    [self getData];
+    if (_isShowAllData == NO) {
+        self.page += 1;
+        [self getCompanyHomeListData];
+    }
 }
 
 
@@ -276,9 +289,9 @@ static NSString *cellIdent = @"cellIdent";
     [self.tableView.mj_header beginRefreshing];
 }
 
--(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell{
+-(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model{
     
-        [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:cell.model.video_file_path];
+        [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path];
         [[JMVideoPlayManager sharedInstance] play];
         AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
         self.tabBarController.tabBar.hidden = YES;
@@ -442,6 +455,14 @@ static NSString *cellIdent = @"cellIdent";
     return  _labschooseVC;
     
 }
+
+-(NSMutableArray *)arrDate{
+    if (!_arrDate) {
+        _arrDate = [NSMutableArray array];
+    }
+    return _arrDate;
+}
+
 
 /*
 #pragma mark - Navigation

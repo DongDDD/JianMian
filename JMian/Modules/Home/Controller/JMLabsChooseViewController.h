@@ -7,6 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+typedef NS_ENUM(NSInteger, JMLabsChooseViewType) {
+    JMLabsChooseViewTypeDefault,
+    JMLabsChooseViewTypeFeedBack,
+};
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol JMLabsChooseViewControllerDelegate <NSObject>
@@ -22,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,weak)id<JMLabsChooseViewControllerDelegate>delegate;
 
-
+@property(nonatomic,assign)JMLabsChooseViewType labsChooseViewType;
 
 @end
 

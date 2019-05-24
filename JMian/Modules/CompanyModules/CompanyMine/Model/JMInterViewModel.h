@@ -46,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *interviewer_avatar;
 
 @property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *hire;
 
 
 

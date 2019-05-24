@@ -131,9 +131,9 @@
 
 - (IBAction)playAction:(UIButton *)sender {
  
-    if (_delegate && [_delegate respondsToSelector:@selector(playAction_cell:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(playAction_cell:model:)]) {
         
-        [_delegate playAction_cell:self];
+        [_delegate playAction_cell:self model:_myModel];
     }
     
 }

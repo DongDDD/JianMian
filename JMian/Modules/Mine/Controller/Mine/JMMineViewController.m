@@ -21,6 +21,8 @@
 #import "JMMySettingViewController.h"
 #import "JMWalletViewController.h"
 #import "JMUploadVideoViewController.h"
+#import "JMIDCardIdentifyViewController.h"
+
 
 
 
@@ -167,7 +169,23 @@
     }else if (indexPath.section == 2 && indexPath.row == 1){
         
         [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
+    }else if (indexPath.section == 2 && indexPath.row == 2){
+        
+        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+        if ([model.card_status isEqualToString:Card_PassIdentify]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"你已通过实名认证"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+        }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"审核实名认证中"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+        }else{
+
+            [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
+        }
     }
+    
 }
 
 #pragma mark - UITableViewDataSource

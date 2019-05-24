@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMMangerInterviewTableViewCellDelegate <NSObject>
 
 -(void)cellLeftBtnActionWith_model:(JMInterViewModel *)model;
--(void)cellRightBtnAction_model:(JMInterViewModel *)model;
+-(void)cellRightBtnAction_model:(JMInterViewModel *)model isInterviewTime:(BOOL)isInterviewTime;
 
 @end
 

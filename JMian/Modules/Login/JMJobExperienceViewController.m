@@ -93,7 +93,7 @@ typedef enum _PickerState_Exp {
 
 
 - (void)keyboardWillShow:(NSNotification *)aNotification {
-    
+    [self.datePckerView setHidden:YES];
     NSDictionary *userInfo = aNotification.userInfo;
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardRect = aValue.CGRectValue;
@@ -165,6 +165,7 @@ typedef enum _PickerState_Exp {
 - (void)createExperience {
     [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
+
         switch (self.viewType) {
             case JMJobExperienceViewTypeDefault: {
                 JMPersonTabBarViewController *tab = [[JMPersonTabBarViewController alloc] init];
@@ -201,14 +202,16 @@ typedef enum _PickerState_Exp {
 
 
 - (IBAction)startWorkAction:(UIButton *)sender {
-    
+    [_companyNameText resignFirstResponder];
+    [_jobDescriptionText resignFirstResponder];
     [self.datePckerView setHidden:NO];
      self.pickerState = startWorkState;
 }
 
 
 - (IBAction)endWorkAction:(UIButton *)sender {
-    
+    [_companyNameText resignFirstResponder];
+    [_jobDescriptionText resignFirstResponder];
     [self.datePckerView setHidden:NO];
     self.pickerState = endWorkstate;
 }

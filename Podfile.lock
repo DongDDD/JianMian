@@ -26,16 +26,16 @@ PODS:
     - SDWebImage (~> 4.0)
   - Masonry (1.0.2)
   - MBProgressHUD (1.1.0)
-  - MJExtension (3.0.15.1)
-  - MJRefresh (3.1.15.7)
+  - MJExtension (3.0.17)
+  - MJRefresh (3.2.0)
   - PrintBeautifulLog (1.0.0)
   - SDCycleScrollView (1.75):
     - SDWebImage (>= 4.0.0)
-  - SDWebImage (4.4.3):
-    - SDWebImage/Core (= 4.4.3)
-  - SDWebImage/Core (4.4.3)
+  - SDWebImage (4.4.6):
+    - SDWebImage/Core (= 4.4.6)
+  - SDWebImage/Core (4.4.6)
   - SYWechatOpenSDK (1.7.9)
-  - TXIMSDK_iOS (4.2.1)
+  - TXIMSDK_iOS (4.2.52)
   - VIMediaCache (0.4)
   - YYCache (1.0.4)
   - YYText (1.0.7)
@@ -55,7 +55,7 @@ DEPENDENCIES:
   - SDCycleScrollView
   - SDWebImage
   - SYWechatOpenSDK (~> 1.7.9)
-  - TXIMSDK_iOS
+  - TXIMSDK_iOS (~> 4.2.1)
   - VIMediaCache
   - YYCache
   - YYText
@@ -92,17 +92,17 @@ SPEC CHECKSUMS:
   HXWeiboPhotoPicker: b389ed6a2f854270aa391c55591d0616a519c881
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
-  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
+  MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
   PrintBeautifulLog: ae1edcf7af92ffcb1de3726d1545d043e861d2e0
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
-  SDWebImage: c5594f1a19c48d526d321e548902b56b479cd508
+  SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   SYWechatOpenSDK: f93b2e77a3ea8cdb70d535ec1605a5612bac72d6
-  TXIMSDK_iOS: d1d71f1997c2ca8264284c1af14225a482b487ff
+  TXIMSDK_iOS: 298bb7420e5d540cb54644075e85b5e21fbf1213
   VIMediaCache: aa650f82cb114c68a343beb4e67416cf5eb2f3a2
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: ad9b8499bfd5f71bcb2d325efbbc1ebcc78c466f
+PODFILE CHECKSUM: 9e33e91458f06c86d76f5bd631348aceded6ebd0
 
 COCOAPODS: 1.6.1

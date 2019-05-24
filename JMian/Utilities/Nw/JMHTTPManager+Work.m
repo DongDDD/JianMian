@@ -18,18 +18,18 @@
 }
 
 - (void)fetchWorkPaginateWith_city_ids:(nullable NSArray *)city_ids
-                            company_id:(nullable NSNumber *)company_id
-                              label_id:(nullable NSNumber *)label_id
-                         work_label_id:(nullable NSNumber *)work_label_id
-                             education:(nullable NSNumber *)education
-                        experience_min:(nullable NSNumber *)experience_min
-                        experience_max:(nullable NSNumber *)experience_max
-                            salary_min:(nullable NSNumber *)salary_min
-                            salary_max:(nullable NSNumber *)salary_max
+                            company_id:(nullable NSString *)company_id
+                              label_id:(nullable NSString *)label_id
+                         work_label_id:(nullable NSString *)work_label_id
+                             education:(nullable NSString *)education
+                        experience_min:(nullable NSString *)experience_min
+                        experience_max:(nullable NSString *)experience_max
+                            salary_min:(nullable NSString *)salary_min
+                            salary_max:(nullable NSString *)salary_max
                           subway_names:(nullable NSArray *)subway_names
                                 status:(NSString * )status
-                                  page:(nullable NSNumber *)page
-                              per_page:(nullable NSNumber *)per_page
+                                  page:(nullable NSString *)page
+                              per_page:(nullable NSString *)per_page
                           SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
        NSDictionary *dic =     @{

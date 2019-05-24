@@ -139,7 +139,7 @@
                         <rect key="frame" x="21" y="25" width="53" height="54"/>
                         <state key="normal" image="transmit.png"/>
                         <connections>
-                            <action selector="playAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1W8-LA-lmC"/>
+                            <action selector="playAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="wHd-hY-Cs3"/>
                         </connections>
                     </button>
                 </subviews>

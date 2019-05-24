@@ -9,7 +9,7 @@
 #import "JMCompanyIntroduceViewController.h"
 #import "JMIntroduceContentView.h"
 #import "SDCycleScrollView.h"
-#import "MapView.h"
+#import "MapBGView.h"
 #import "JMCustomAnnotationView.h"
 #import "JMCompanyVideoView.h"
 #import "DimensMacros.h"
@@ -27,7 +27,7 @@
 @property(nonatomic,strong)UIView *SDCScrollView;
 @property(nonatomic,strong)JMIntroduceContentView *advantageView;
 @property(nonatomic,strong)JMIntroduceContentView *brightSpoView;
-@property(nonatomic,strong)MapView *mapBGView;
+@property(nonatomic,strong)MapBGView *mapBGView;
 @property(nonatomic,strong)MAMapView *mapView;
 
 
@@ -228,7 +228,7 @@
 
 -(void)setMapView{
     //
-    self.mapBGView = [[MapView alloc] init];
+    self.mapBGView = [[MapBGView alloc] init];
     [self.mapBGView setModel:self.model];
     [self.pageContentView addSubview:self.mapBGView];
     

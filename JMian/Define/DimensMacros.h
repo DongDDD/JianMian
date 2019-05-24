@@ -65,14 +65,15 @@
 #define Company_PassIdentify @"1"
 #define Company_NOIdentify @"0"
 //实名认证
-#define Card_WaitIdentify @"1"
+// 0:未认证 1:申请认证 2:拒绝认证 3:已认证
 #define Card_NOIdentify @"0"
+#define Card_WaitIdentify @"1"
+#define Card_RefuseIdentify @"2"
 #define Card_PassIdentify @"3"
 //用户状态type
 #define NO_Type_USER @"0" //还没选择身份
 #define C_Type_USER @"1" //C端
 #define B_Type_UESR @"2" //B端
-
 //职位状态
 #define Position_Online @"1" //职位在线
 #define Position_Downline @"0" //职位下线
@@ -81,7 +82,7 @@
 #define Interview_Delete @"1" //已取消
 #define Interview_Refuse @"2" //已拒绝
 #define Interview_WaitInterview @"3" //待面试 （已同意，等待面试）
-#define Interview_AlreadyInterview @"4" //已面试
+#define Interview_AlreadyInterview @"4" //C端面试完还没反馈
 #define Interview_Reflect @"5" //已反馈
 //面试状态
 #define Video_Pass @"1" //通过

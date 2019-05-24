@@ -42,5 +42,15 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
+- (void)feedbackInterViewWith_interview_id:(NSString *)interview_id
+                        label_ids:(NSArray *)label_ids
+                  successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock{
+    
+    NSDictionary *dic = @{@"interview_id":interview_id,@"label_ids":label_ids};
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Feedback_Interview_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+}
+
+
 
 @end

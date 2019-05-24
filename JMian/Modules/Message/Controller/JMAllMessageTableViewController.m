@@ -56,7 +56,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 -(void)initRefresh{
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getData)];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
@@ -82,7 +82,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         if (responsObject[@"data"]) {
             
             self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            if (self.modelArray) {
+            if (self.modelArray.count > 0) {
                 
                 [self updateConversations]; //获取腾讯云数据
             }

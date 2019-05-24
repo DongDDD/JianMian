@@ -11,8 +11,8 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 //app
 #else
@@ -83,6 +83,8 @@
 
 #define List_Interview_URL @"api/work/interview/lists"
 #define Update_Interview_URL @"api/work/interview/update"
+#define Feedback_Interview_URL @"api/work/interview/feedback"
+
 
 //收藏
 #define Create_Favorite_URL @"api/user/favorite"

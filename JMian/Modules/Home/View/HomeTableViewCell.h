@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class HomeTableViewCell;
 @protocol HomeTableViewCellDelegate <NSObject>
 
--(void)playAction_cell:(HomeTableViewCell *)cell;
+-(void)playAction_cell:(HomeTableViewCell *)cell model:(JMHomeWorkModel *)model;
 
 @end
 

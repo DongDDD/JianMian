@@ -148,7 +148,7 @@
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
             [formatter setDateFormat:@"yyyyMMddHHmmss"];
             NSString *dateString = [formatter stringFromDate:[NSDate date]];
-            NSString *fileName = [NSString  stringWithFormat:@"%@.jpg", dateString];
+            NSString *fileName = [NSString  stringWithFormat:@"%@.mp4", dateString];
             NSURL *url = request.parameters[@"files"][i];
 //            NSData *data = [NSData dataWithContentsOfURL:url];
             [formData appendPartWithFileURL:url name:@"files" fileName:fileName mimeType:@"video/mpeg4" error:(nil)];
