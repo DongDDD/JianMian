@@ -17,6 +17,8 @@
 #import "JMHTTPManager+MessageList.h"
 #import "JMMessageListModel.h"
 #import "JMAllMessageTableViewCellData.h"
+#import "JMSquareViewController.h"
+#import "JMDiscoverHomeViewController.h"
 
 @interface JMPersonTabBarViewController ()
 @property (nonatomic, strong) NSArray *modelArray;
@@ -40,6 +42,13 @@
     
     [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
     
+    JMSquareViewController *square = [[JMSquareViewController alloc]init];
+    [self addChildVc:square title:@"任务广场" image:@"mission" selectedImage:@"garden_pich_on"];
+
+    JMDiscoverHomeViewController *discover = [[JMDiscoverHomeViewController alloc]init];
+    [self addChildVc:discover title:@"发现" image:@"discovery" selectedImage:@"discovery_pitch_on"];
+
+  
     JMMineViewController *mine = [[JMMineViewController alloc] init];
     
     [self addChildVc:mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on"];
@@ -139,9 +148,11 @@
 
 - (void)addChildVc:(UIViewController *)childVc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage
 {
-
     //设置标题
+    
     childVc.tabBarItem.title = title;
+
+
     childVc.tabBarItem.image = [UIImage imageNamed:image];
     
     //需要设置照片的模式，用照片原图，默认是蓝色的
