@@ -53,7 +53,7 @@ static NSString *cellIdent = @"cellIdent";
         [self setRightBtnTextName:@"保存"];
     
     }
-    [self setBackBtnImageViewName:@"icon_return" textName:@""];
+    [self setBackBtnImageViewName:@"icon_return_nav" textName:@""];
 //    [self.view addSubview:self.twoButtonView];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;

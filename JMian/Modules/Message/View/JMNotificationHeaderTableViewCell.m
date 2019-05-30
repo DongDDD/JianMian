@@ -31,7 +31,7 @@
         [self.contentView addSubview:iconView];
         
         
-        UIImageView *iconImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"share"] ];
+        UIImageView *iconImg = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"jobDetailShare"] ];
         [iconView addSubview:iconImg];
         
         [iconView mas_makeConstraints:^(MASConstraintMaker *make) {

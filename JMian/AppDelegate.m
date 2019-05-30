@@ -64,11 +64,11 @@
     //记录下 Apple 返回的 deviceToken
 //    _deviceToken = deviceToken;
     NSLog(@"deviceTokendeviceToken---%@",deviceToken);
-    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
-    judgevc.deviceToken = deviceToken;
-    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
-    [_window setRootViewController:naVC];
-    [self.window makeKeyAndVisible];
+//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
+//    judgevc.deviceToken = deviceToken;
+//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
+//    [_window setRootViewController:naVC];
+//    [self.window makeKeyAndVisible];
     
 }
 
@@ -93,10 +93,10 @@
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
     
-//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
-//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
-//    [_window setRootViewController:naVC];
-//    [self.window makeKeyAndVisible];//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
+    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
+    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
+    [_window setRootViewController:naVC];
+    [self.window makeKeyAndVisible];//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
 //    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
 //    [_window setRootViewController:naVC];
 //    [self.window makeKeyAndVisible];

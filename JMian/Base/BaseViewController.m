@@ -22,7 +22,7 @@
 //
 //    self.extendedLayoutIncludesOpaqueBars = YES;
     self.view.backgroundColor = [UIColor whiteColor];
-    [self setBackBtnImageViewName:@"icon_return" textName:@""];
+    [self setBackBtnImageViewName:@"icon_return_nav" textName:@""];
   
 }
 

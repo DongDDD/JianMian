@@ -182,7 +182,7 @@
 -(void)initView{
    
     self.favorite_id = self.vitaModel.favorites_favorite_id;
-    [self setRightBtnImageViewName:@"collect" imageNameRight2:@"share"];
+    [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self setScrollViewUI];
     [self setHeaderVieUI];
     [self setPageUI];

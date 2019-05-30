@@ -78,7 +78,7 @@
     [self getData];
     if (_viewType != JobDetailsViewTypeEdit) {
         
-        [self setRightBtnImageViewName:@"collect" imageNameRight2:@"share"];
+        [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     }
     [self setTitle:@"职位详情"];
 }

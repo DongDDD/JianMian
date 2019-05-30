@@ -18,7 +18,7 @@
         _manager = [[JMVideoPlayManager alloc] init];
 //        _manager.B_User_playArray = [NSMutableArray array];
 //        _manager.C_User_playArray = [NSMutableArray array];
-        [_manager setBackBtnImageViewName:@"icon_return" textName:@""];
+        [_manager setBackBtnImageViewName:@"icon_return_nav" textName:@""];
 
 //        [_manager initCloseBtn];
     });
