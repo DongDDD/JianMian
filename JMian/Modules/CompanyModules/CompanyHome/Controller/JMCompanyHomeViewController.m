@@ -88,6 +88,7 @@ static NSString *cellIdent = @"cellIdent";
     [super viewWillAppear:animated];
 }
 
+
 #pragma mark - 获取数据
 -(void)getCompanyHomeListData{
  
@@ -101,12 +102,10 @@ static NSString *cellIdent = @"cellIdent";
                 
                 [self.arrDate addObjectsFromArray:modelArray];
                 //                [self getPlayerArray];
-                [self.tableView reloadData];
             }else{
                 _isShowAllData = YES;
-                [self.tableView.mj_footer setHidden:YES];
-
             }
+            [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
             [self.tableView.mj_footer endRefreshing];
         }
@@ -181,7 +180,9 @@ static NSString *cellIdent = @"cellIdent";
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = BG_COLOR;
-
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 141;
@@ -194,26 +195,39 @@ static NSString *cellIdent = @"cellIdent";
         make.top.mas_equalTo(self.headerView.mas_bottom);
         make.bottom.mas_equalTo(self.view);
     }];
-    [self setupDownRefresh];//添加下拉刷新
-    [self setupUpRefresh];//下拉加载更多
+    [self setupHeaderRefresh];//添加下拉刷新
+    [self setupFooterRefresh];//下拉加载更多
 
 }
 
 #pragma mark - 下拉刷新 -
--(void)setupDownRefresh
+-(void)setupHeaderRefresh
 {
-    
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getCompanyHomeListData)];
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
-    [self.tableView.mj_header beginRefreshing];
-    
+    [self.tableView.mj_header beginRefreshing];  
 }
 
--(void)setupUpRefresh
+-(void)setupFooterRefresh
 {
-     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+    
+    // 设置文字
+    [footer setTitle:@"上拉加载更多" forState:MJRefreshStateIdle];
+    [footer setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
+    [footer setTitle:@"没有更多数据了" forState:MJRefreshStateNoMoreData];
+    
+    // 设置字体
+    footer.stateLabel.font = [UIFont systemFontOfSize:14];
+    
+    // 设置颜色
+    footer.stateLabel.textColor = MASTER_COLOR;
+    
+    // 设置footer
+    self.tableView.mj_footer = footer;
+//     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
 }
 
 //-(void)loadNewData
@@ -224,10 +238,16 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)loadMoreBills
 {
-    if (_isShowAllData == NO) {
         self.page += 1;
         [self getCompanyHomeListData];
-    }
+  
+}
+-(void)refreshData
+{
+    [self.arrDate removeAllObjects];
+    _page = 1;
+    [self getCompanyHomeListData];
+    
 }
 
 
@@ -253,8 +273,10 @@ static NSString *cellIdent = @"cellIdent";
     
     cell.indexPath = indexPath;
     cell.delegate = self;
-    JMCompanyHomeModel *model = self.arrDate[indexPath.row];
-    [cell setModel:model];
+    if (self.arrDate.count > 0) {
+        JMCompanyHomeModel *model = self.arrDate[indexPath.row];
+        [cell setModel:model];
+    }
 //
     return cell;
     
@@ -264,12 +286,12 @@ static NSString *cellIdent = @"cellIdent";
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
-    JMCompanyHomeModel *model = self.arrDate[indexPath.row];
-//    if (self.playerArray) {
-//        vc.player = self.playerArray[indexPath.row];
-//    }
-    //    vc.user_job_id = model.user_job_id;
-    vc.companyModel = model;
+    if(self.arrDate.count > 0 ){
+        JMCompanyHomeModel *model = self.arrDate[indexPath.row];
+        vc.companyModel = model;
+    
+    }
+
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -280,23 +302,23 @@ static NSString *cellIdent = @"cellIdent";
     JMCityListViewController *vc = [[JMCityListViewController alloc]init];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
 
--(void)didSelectedCity_id:(NSString *)city_id{
+-(void)didSelectedCity_id:(NSString *)city_id city_name:(nonnull NSString *)city_name{
 
     _city_id = city_id;
+    self.arrDate = [NSMutableArray array];
     [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model{
     
-        [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path];
-        [[JMVideoPlayManager sharedInstance] play];
-        AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-        self.tabBarController.tabBar.hidden = YES;
-        [self.navigationController pushViewController:playVC animated:NO];
-
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path];
+    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController pushViewController:playVC animated:NO];
+    [[JMVideoPlayManager sharedInstance] play];
+    
 }
 
 - (IBAction)choosePositionAction:(UIButton *)sender {
@@ -334,15 +356,26 @@ static NSString *cellIdent = @"cellIdent";
 
 //要求筛选
 -(void)resetAction{
-//    [self.labschooseVC.view removeFromSuperview];
-//    [self.labschooseVC.view setHidden:NO];
+    self.arrDate = [NSMutableArray array];
     [self.labschooseVC.view setHidden:YES];
     [_bgBtn setHidden:YES];
+    _page = 1;
+    _city_id = nil;
+    _work_year_e = nil;
+    _work_year_s = nil;
+    _job_label_id = nil;
+    _education = nil;
+    _salary_max = nil;
+    _salary_min = nil;
+    [self.tableView.mj_header beginRefreshing];
+//    [self.labschooseVC.view setHidden:YES];
+//    [_bgBtn setHidden:YES];
     
 }
 //职位选择
 -(void)OKAction
 {
+    self.arrDate = [NSMutableArray array];
     [self.labschooseVC.view setHidden:YES];
     [_bgBtn setHidden:YES];
     [self.tableView.mj_header beginRefreshing];
@@ -353,7 +386,7 @@ static NSString *cellIdent = @"cellIdent";
 -(void)didSelectCellActionController:(JMChoosePositionTableViewController *)controller{
     [self.choosePositionVC.view setHidden:YES];
     [_bgBtn setHidden:YES];
-    
+    [self.arrDate removeAllObjects];
     self.job_label_id = controller.homeModel.work_label_id;
     [self.tableView.mj_header beginRefreshing];
 
@@ -363,18 +396,16 @@ static NSString *cellIdent = @"cellIdent";
 //人才要求
 -(void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index{
     if ([str isEqualToString:@"最低学历"]) {
-        if (index >= 1) {
-            self.education = [NSString stringWithFormat:@"%ld",(long)(index-1)];
-        }else{
-            
-            self.education = nil;
-        }
-        
+    
+        self.education = [NSString stringWithFormat:@"%ld",(long)(index)];
+   
+        NSLog(@"学历---%@",self.education);
     }else if ([str isEqualToString:@"工作经历"]) {
         NSString *exp = [self getArray_index:index];
         if (![exp isEqualToString:@"全部"] && ![exp isEqualToString:@"应届生"]) {
             self.work_year_e = [exp substringToIndex:0];
             self.work_year_s = [exp substringToIndex:3];
+            NSLog(@"工作经验--: %@~~%@",self.work_year_e,self.work_year_s);
 
         }else if([exp isEqualToString:@"应届生"]){
         
@@ -443,14 +474,16 @@ static NSString *cellIdent = @"cellIdent";
 -(JMLabsChooseViewController *)labschooseVC{
     if (_labschooseVC == nil) {
         _labschooseVC = [[JMLabsChooseViewController alloc]init];
+        _labschooseVC.view.frame = CGRectMake(0, self.headerView.frame.origin.y+self.headerView.frame.size.height, SCREEN_WIDTH, self.view.frame.size.height-100);
         _labschooseVC.delegate = self;
+        _labschooseVC.view.tag = 556;
         [self addChildViewController:_labschooseVC];
         [self.view addSubview:_labschooseVC.view];
-        [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.headerView.mas_bottom);
-            make.left.and.right.mas_equalTo(self.view);
-            make.bottom.mas_equalTo(self.view).offset(-71);
-        }];
+//        [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(self.headerView.mas_bottom);
+//            make.left.and.right.mas_equalTo(self.view);
+//            make.bottom.mas_equalTo(self.view).offset(-71);
+//        }];
     }
     return  _labschooseVC;
     

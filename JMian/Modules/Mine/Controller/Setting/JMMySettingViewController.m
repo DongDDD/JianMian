@@ -144,8 +144,14 @@
         [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             kRemoveMyDefault(@"token");
+            kRemoveMyDefault(@"usersig");
             //token为空执行
             
+            [[TIMManager sharedInstance] logout:^() {
+                NSLog(@"logout succ");
+            } fail:^(int code, NSString * err) {
+                NSLog(@"logout fail: code=%d err=%@", code, err);
+            }];
             LoginViewController *login = [[LoginViewController alloc] init];
             NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
             [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
@@ -167,13 +173,20 @@
         
         JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         [JMUserInfoManager saveUserInfo:userInfo];
+        kSaveMyDefault(@"usersig", userInfo.usersig);
+        NSLog(@"usersig-----:%@",userInfo.usersig);
         JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
+        
+        [[TIMManager sharedInstance] logout:^() {
+            NSLog(@"logout succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"logout fail: code=%d err=%@", code, err);
+        }];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-    
     
 }
 

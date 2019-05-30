@@ -26,12 +26,12 @@ NSString *const JMMyResumeIconTableViewCellIdentifier = @"JMMyResumeIconTableVie
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
 - (void)setUserInfo:(JMUserInfoModel *)model {
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.userNameLabel.text = model.nickname;
+    
 }
 @end

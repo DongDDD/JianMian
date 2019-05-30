@@ -12,7 +12,8 @@
 
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     
-    return @{
+    return @{             
+             @"vita_description":@"vita.description",
              @"userNickname":@"user.nickname",
              @"userAvatar":@"user.avatar",
              

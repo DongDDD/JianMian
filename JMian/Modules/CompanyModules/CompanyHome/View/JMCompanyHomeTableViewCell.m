@@ -41,7 +41,7 @@
     self.jobDetailLab.text = model.workName;
     self.salaryLab.text = salaryStr;
     self.educationLab.text = [self getEducationStrWithEducation:model.vitaEducation];
-    
+    self.subDecription.text = model.vita_description;
     if (model.video_file_path == nil) {
         [self.playBtn setHidden:YES];
     }else{

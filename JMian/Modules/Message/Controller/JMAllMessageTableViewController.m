@@ -16,6 +16,7 @@
 #import "JMMessageListModel.h"
 #import "JMAllMessageTableViewCellData.h"
 #import "JMChatViewViewController.h"
+#import "JMHTTPManager+Login.h"
 
 @interface JMAllMessageTableViewController ()
 
@@ -39,7 +40,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
    self.tableView.separatorStyle = UITableViewCellAccessoryNone;
     [self.view addSubview:self.progressHUD];
   
-    [self initRefresh];
+//    [self initRefresh];
 }
 
 
@@ -55,14 +56,14 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 }
 
--(void)initRefresh{
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    header.stateLabel.hidden = YES;
-    self.tableView.mj_header = header;
-
-
-}
+//-(void)initRefresh{
+//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getData)];
+//    header.lastUpdatedTimeLabel.hidden = YES;
+//    header.stateLabel.hidden = YES;
+//    self.tableView.mj_header = header;
+//
+//
+//}
 
 -(void)loadNewData{
     [self getMsgList];    //获取自己服务器数据
@@ -82,14 +83,10 @@ static NSString *cellIdent = @"allMessageCellIdent";
         if (responsObject[@"data"]) {
             
             self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            if (self.modelArray.count > 0) {
-                
                 [self updateConversations]; //获取腾讯云数据
-            }
-
-
         }
-        
+        [self.progressHUD setHidden:YES];
+//        [self.tableView.mj_header endRefreshing];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         
@@ -118,7 +115,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
             if (model.sender_user_id == userInfomodel.user_id) {
                 //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
                 if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
-                    
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
                     data.unRead = [conv getUnReadMessageNum];
                     data.convId = [conv getReceiver];
@@ -179,10 +175,16 @@ static NSString *cellIdent = @"allMessageCellIdent";
     }
     
     [self.progressHUD hideAnimated:YES];
-    [self.tableView.mj_header endRefreshing];
+//    [self.tableView.mj_header endRefreshing];
     [self.tableView reloadData];
 
 }
+
+//-(void)getDominator{
+//
+//
+//
+//}
 
 - (NSString *)getLastDisplayString:(TIMConversation *)conv
 {
@@ -221,7 +223,10 @@ static NSString *cellIdent = @"allMessageCellIdent";
         }
         else if([elem isKindOfClass:[TIMCustomElem class]]){
             TIMCustomElem *custom = (TIMCustomElem *)elem;
-            str = custom.ext;
+            str = custom.desc;
+            if ([str isEqualToString:@"leaveAction"]) {
+                str = @"取消了视频";
+            }
             break;
         }
         else if([elem isKindOfClass:[TIMImageElem class]]){
@@ -381,16 +386,36 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     
-    JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-    vc.myConvModel = [_dataArray objectAtIndex:indexPath.row];
-//    vc.conversation = [_dataArray objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:vc animated:YES];
-    [self setReadMessageAction_model:[_dataArray objectAtIndex:indexPath.row]];
+    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+        vc.myConvModel = [_dataArray objectAtIndex:indexPath.row];
+        //    vc.conversation = [_dataArray objectAtIndex:indexPath.row];
+        [self setReadMessageAction_model:[_dataArray objectAtIndex:indexPath.row]];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请先进行实名认证"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        
+        
+    }
+}
+-(void)getUserInfo{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
 }
 
 -(void)setReadMessageAction_model:(JMMessageListModel *)_myModel{
-
 
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         //判断senderid是不是自己
@@ -398,7 +423,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
        NSString *_receiverID;
     //先判断是否系统消息
     if ([_myModel.data.convId isEqualToString:@"dominator"]) {
-        _receiverID = _myModel.data.convId;
+        _receiverID = @"dominator";
     }else{
     
         if (_isSelfIsSender) {

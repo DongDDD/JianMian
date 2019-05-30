@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
                          user_step:(nullable NSNumber *)user_step
                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
-- (void)updateVitaWith_work_status:(nullable NSNumber *)work_status
+- (void)updateVitaWith_work_status:(nullable NSString *)work_status
                          education:(nullable NSNumber *)education
                    work_start_date:(nullable NSDate *)work_start_date
                         description:(nullable NSString *)description
@@ -51,6 +51,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)fetchJobInfoWithId:(nullable NSString *)Id successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
+- (void)addJobInfoWithJob_label_id:(NSString *)job_label_id
+                 industry_label_id:(nullable NSString *)industry_label_id
+                           city_id:(NSString *)city_id
+                        salary_min:(NSString *)salary_min
+                        salary_max:(NSString *)salary_max
+                            status:(nullable NSString *)status
+                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

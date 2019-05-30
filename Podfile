@@ -7,8 +7,7 @@ pod 'MJRefresh'
 pod 'SDCycleScrollView'
 pod 'YYText'
 pod 'SYWechatOpenSDK', '~> 1.7.9'
-pod 'TXIMSDK_iOS',  '~> 4.2.1'
-
+pod 'TXIMSDK_iOS',  '~> 4.2.52'
 pod ‘YYCache’
 pod 'PrintBeautifulLog'
 pod 'AMap2DMap'

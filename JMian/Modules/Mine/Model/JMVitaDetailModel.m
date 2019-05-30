@@ -15,6 +15,8 @@
    return @{
       @"experiences":@"JMExperiencesModel",
       @"shielding":@"JMShieldingModel",
+      @"learning":@"JMLearningModel",
+      @"jobs":@"JMMyJobsModel",
       @"education":@"JMEducationModel",
       @"files":@"JMMyFilesModel"
       };
@@ -27,19 +29,34 @@
              @"user_email":@"user.email",
              @"user_phone":@"user.phone",
              @"vita_work_start_date":@"vita.work_start_date",
-             @"vita_work_status":@"vita.work_status",
              @"vita_education":@"vita.education",
              @"vita_description":@"vita.description",
              @"work_label_id":@"work.label_id",
              @"work_name":@"work.name",
              @"city_city_id":@"city.city_id",
              @"city_city_name":@"city.city_name",
-             @"city_label_id":@"city.label_id",
+             @"city_label_id":@"city.label_id",             
+             @"video_file_path":@"video.file_path",
+             @"video_status":@"video.status",
+             @"video_type":@"video.type",
+             @"favorites_favorite_id":@"favorites.favorite_id",
              @"city_is_hot":@"city.is_hot"
              };
 }
+
 @end
 
+@implementation JMMyJobsModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{
+             @"work_name":@"work.name",
+             @"city_city_name":@"city.city_name",
+
+             };
+}
+
+@end
 
 @implementation JMExperiencesModel
 
@@ -80,7 +97,7 @@
 
 @end
 
-@implementation JMEducationModel
+@implementation JMLearningModel
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
@@ -94,5 +111,16 @@
 
 @implementation JMMyFilesModel
 
+
+@end
+
+
+@implementation JMEducationModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{
+             @"school_school_name":@"school.school_name"
+             };
+}
 
 @end

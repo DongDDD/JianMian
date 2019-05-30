@@ -38,7 +38,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"公司地址";
-    [self setRightBtnTextName:@"保存"];
     [self initSearchView];
     [self initMapView];
     
@@ -55,8 +54,11 @@
 
 -(void)rightAction
 {
+    
     if(_delegate && [_delegate respondsToSelector:@selector(sendAdress_Data:)]){
-        [_delegate sendAdress_Data:self.POIModel];
+        if (self.POIModel != nil) {
+            [_delegate sendAdress_Data:self.POIModel];
+        }
     }
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -240,7 +242,8 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.dataArray) {
-        
+    [self setRightBtnTextName:@"保存"];
+
     self.POIModel = self.dataArray[indexPath.row];
     CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(self.POIModel.location.latitude, self.POIModel.location.longitude);
     [_mapView setCenterCoordinate:locationCoordinate animated:YES];

@@ -14,6 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,copy)NSString *image_front;
 @property(nonatomic,copy)NSString *image_behind;
+//-(void)setImg1:(UIImageView *)img1;
+//-(void)setImg2:(UIImageView *)img2;
+
 
 @end
 

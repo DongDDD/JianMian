@@ -24,6 +24,9 @@
 #import "THDatePickerView.h"
 #import "JMPlayerViewController.h"
 #import "JMVideoPlayManager.h"
+#import "JMHTTPManager+CompanyLike.h"
+#import "JMHTTPManager+Login.h"
+
 
 
 @interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate,JMHeaderOfPersonDetailViewDelegate>
@@ -52,7 +55,7 @@
 
 @property (weak, nonatomic) THDatePickerView *dateView;
 @property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
-
+@property (copy, nonatomic) NSString *favorite_id;
 
 @end
 
@@ -64,13 +67,12 @@
     
     [self setTitle:@"个人详情"];
     
-    [self setRightBtnImageViewName:@"collect" imageNameRight2:@"share"];
-
-    
 //    [self setHeaderVieUI];
 //    [self setPageUI];
     [self setJuhua];
-    
+    //获取用户信息
+    [self getUserInfo];
+
     [self getData];
     
 }
@@ -144,7 +146,43 @@
 }
 #pragma mark - 布局UI
 
+- (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
+    
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    colectBtn.frame = CGRectMake(45, 0, 25, 25);
+    if (self.vitaModel.favorites_favorite_id) {
+        colectBtn.selected = YES;
+    }else{
+        colectBtn.selected = NO;
+
+    }
+    [colectBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+    [colectBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
+    
+    [bgView addSubview:colectBtn];
+    if (imageNameRight2 != nil) {
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(0, 0, 25, 25);
+        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
+        [bgView addSubview:shareBtn];
+        
+    }
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    
+}
+
 -(void)initView{
+   
+    self.favorite_id = self.vitaModel.favorites_favorite_id;
+    [self setRightBtnImageViewName:@"collect" imageNameRight2:@"share"];
     [self setScrollViewUI];
     [self setHeaderVieUI];
     [self setPageUI];
@@ -244,6 +282,8 @@
     self.dateView = dateView;
 
 }
+
+
 #pragma mark - THDatePickerViewDelegate
 /**
  保存按钮代理方法
@@ -280,6 +320,43 @@
     
 }
 #pragma mark - 点击事件
+
+-(void)rightAction:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    [self.progressHUD showAnimated:YES];
+    if (sender.selected == YES) {
+        [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.vitaModel.user_job_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+            if ([responsObject objectForKey:@"data"]) {
+                self.favorite_id = [responsObject objectForKey:@"data"][@"favorite_id"];
+                
+            }
+            [self.progressHUD showAnimated:NO];
+
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+        
+    }else{
+        if (self.favorite_id !=nil) {
+            [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.favorite_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"取消收藏成功"
+                                                              delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+                [alert show];
+                [self.progressHUD showAnimated:NO];
+
+            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                
+            }];
+            
+        }
+    }
+    
+}
+
+
 /**
 时间选择取消
  */
@@ -355,25 +432,51 @@
     
 }
 
-//和他聊聊
--(void)bottomLeftButtonAction
-{
-    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-        //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
-        //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        //        [alert show];
-        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+
+-(void)getUserInfo{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        vc.myConvModel = messageListModel;
-        [self.navigationController pushViewController:vc animated:YES];
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
     
-
 }
 
+
+//和他聊聊
+-(void)bottomLeftButtonAction
+{
+    
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    
+    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+    
+        [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+            //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
+            //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            //        [alert show];
+            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+            
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+    
+    }else{
+    
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后才能进行聊天"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        
+    }
+    
+
+}
 
 
 
@@ -437,6 +540,7 @@
         _vitaVc.experiencesArray = self.vitaModel.experiences;
         _vitaVc.educationArray = self.vitaModel.education;
         _vitaVc.shieldingArray = self.vitaModel.shielding;
+        _vitaVc.vitaDescription = self.vitaModel.vita_description;
         __weak JMVitaOfPersonDetailViewController *weakSelf = _vitaVc;
         
         _vitaVc.didLoadView = ^(CGFloat H) {
@@ -486,6 +590,8 @@
     }
     return _pageContentView;
 }
+
+
 
 //JMPictureOfPersonDetailViewController
 

@@ -42,7 +42,7 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Vita_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
-- (void)updateVitaWith_work_status:(nullable NSNumber *)work_status
+- (void)updateVitaWith_work_status:(nullable NSString *)work_status
                          education:(nullable NSNumber *)education
                    work_start_date:(nullable NSDate *)work_start_date
                        description:(nullable NSString *)description
@@ -102,4 +102,25 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
+
+- (void)addJobInfoWithJob_label_id:(NSString *)job_label_id
+                      industry_label_id:(nullable NSString *)industry_label_id
+                      city_id:(NSString *)city_id
+                      salary_min:(NSString *)salary_min
+                      salary_max:(NSString *)salary_max
+                      status:(nullable NSString *)status
+            successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSDictionary *dic = @{@"job_label_id":job_label_id,
+                          @"industry_label_id":industry_label_id,
+                          @"city_id":city_id,
+                          @"salary_min":salary_min,
+                          @"salary_max":salary_max,
+                          @"status":status
+                          };
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Add_Job_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
+
+
 @end

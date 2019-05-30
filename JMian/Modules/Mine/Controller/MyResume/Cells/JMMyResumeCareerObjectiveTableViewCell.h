@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMVitaDetailModel.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,8 +16,10 @@ extern NSString *const JMMyResumeCareerObjectiveTableViewCellIdentifier;
 
 @interface JMMyResumeCareerObjectiveTableViewCell : UITableViewCell
 
-- (void)setCareerObjectiveWithLeftLabelText:(NSString *)text;
-- (void)setCareerObjectiveWithRightLabelText:(NSString *)text;
+- (void)setCareerObjectiveWithModel:(JMMyJobsModel *)model;
+//- (void)setCareerObjectiveWithRightLabelText:(NSString *)text;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

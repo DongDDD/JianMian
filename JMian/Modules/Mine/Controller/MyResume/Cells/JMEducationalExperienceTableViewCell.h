@@ -15,7 +15,7 @@ extern NSString *const JMEducationalExperienceTableViewCellIdentifier;
 
 @interface JMEducationalExperienceTableViewCell : UITableViewCell
 
-- (void)setEducationExperienceModel:(JMEducationModel *)model;
+- (void)setEducationExperienceModel:(JMLearningModel *)model;
 
 @end
 

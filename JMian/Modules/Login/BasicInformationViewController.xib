@@ -45,7 +45,7 @@
                                     <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xz1-PU-svB">
+                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xz1-PU-svB">
                                     <rect key="frame" x="139" y="78" width="97" height="92"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="97" id="r9t-cI-Mwi"/>

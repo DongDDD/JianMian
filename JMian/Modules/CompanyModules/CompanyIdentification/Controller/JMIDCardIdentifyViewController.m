@@ -84,6 +84,8 @@
     JMIDCardIdentifySecondViewController *vc = [[JMIDCardIdentifySecondViewController alloc]init];
     vc.image_front = _imagefontUrl;
     vc.image_behind = _imagebehindUrl;
+//    [vc setImg1:_imageView1];
+//    [vc setImg2:_imageView2];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

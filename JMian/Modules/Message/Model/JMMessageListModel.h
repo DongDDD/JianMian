@@ -34,6 +34,7 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property(nonatomic,copy)NSString *recipient_nickname;
 @property(nonatomic,copy)NSString *recipient_company_position;
 
+@property(nonatomic,copy)NSString *work_work_id;
 @property(nonatomic,copy)NSString *work_description;
 @property(nonatomic,copy)NSString *work_salary_max;
 @property(nonatomic,copy)NSString *work_salary_min;
@@ -52,6 +53,7 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property (copy, nonatomic) NSString *workInfo_industry_label_id;
 
 
+@property(nonatomic,copy)NSString *job_user_job_id;
 @property(nonatomic,copy)NSString *chat_id;
 //腾讯云数据
 @property (nonatomic, strong) JMAllMessageTableViewCellData *data;

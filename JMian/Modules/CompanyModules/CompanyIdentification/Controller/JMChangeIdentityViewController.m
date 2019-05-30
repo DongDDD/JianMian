@@ -33,6 +33,8 @@
         
         JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         [JMUserInfoManager saveUserInfo:userInfo];
+        kSaveMyDefault(@"usersig", userInfo.usersig);
+        NSLog(@"usersig-----:%@",userInfo.usersig);
         JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -60,6 +62,8 @@
     [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         kRemoveMyDefault(@"token");
+        kRemoveMyDefault(@"usersig");
+
         //token为空执行
         
         LoginViewController *login = [[LoginViewController alloc] init];

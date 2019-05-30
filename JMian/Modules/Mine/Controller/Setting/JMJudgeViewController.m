@@ -14,7 +14,9 @@
 #import "LoginViewController.h"
 #import "LoginPhoneViewController.h"
 
+
 @interface JMJudgeViewController ()
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @end
 
@@ -22,26 +24,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.progressHUD];
+    self.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     
 //    CGFloat navigationBarAndStatusBarHeight = self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height;
 //    CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
     if (kFetchMyDefault(@"token")){
-        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-        model = [JMUserInfoManager getUserInfo];
-        //腾讯云返回的usersig是否为空
-        if (kFetchMyDefault(@"usersig") == nil) {
-            //腾讯云的usersig为空执行，跳转登录界面获取
-            LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
-            
-            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
-            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-        }else{
-            [self loginIM_tpye:model.type];//根据用户类型登录腾讯云腾讯云登录
-
-            [self jugdeStepToVCWithModel:model];
-        }
-        
+        [self getUserInfo];
     }else{
             //token为空执行
             
@@ -53,9 +43,41 @@
    
 }
 
+-(void)getUserInfo{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        [self judeAction];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+-(void)judeAction{
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    model = [JMUserInfoManager getUserInfo];
+    //腾讯云返回的usersig是否为空
+    if (kFetchMyDefault(@"usersig") == nil) {
+        //腾讯云的usersig为空执行，跳转登录界面获取
+        LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
+        
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
+        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+    }else{
+        //根据用户类型登录腾讯云腾讯云登录。先登录腾讯云再登录账号
+        [self loginIM_tpye:model.type];
+        
+    }
+    
+}
+
+
+
 -(void)jugdeStepToVCWithModel:(JMUserInfoModel *)model{
    
-
     BaseViewController *vc;
     NSString *vcStr;
     
@@ -67,7 +89,6 @@
     
     //用户选择了B端身份，enterprise_step判断用户填写信息步骤
     if ([model.type isEqualToString:B_Type_UESR])  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
-    
     
     if (vcStr) {
         vc = [[NSClassFromString(vcStr) alloc]init];
@@ -126,11 +147,15 @@
     return nil;
 }
 
+#pragma mark - 登录腾讯云
 
 -(void)loginIM_tpye:(NSString *)tpye{
-    
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-    
+    if ([tpye isEqualToString:NO_Type_USER]){//还没选择身份不用其他判断直接跳选择身份界面
+        [self jugdeStepToVCWithModel:model];
+        return;
+    }
+//
     TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
     
     NSString *userIDstr;
@@ -138,27 +163,80 @@
         userIDstr = [NSString stringWithFormat:@"%@a",model.user_id];
     }else if ([tpye isEqualToString:B_Type_UESR]){
         userIDstr = [NSString stringWithFormat:@"%@b",model.user_id];
-        
-        
     }
+    
+    
+    
     if (userIDstr) {
         // identifier 为用户名，userSig 为用户登录凭证
         login_param.identifier = userIDstr;
         login_param.userSig = kFetchMyDefault(@"usersig");
         login_param.appidAt3rd = @"1400193090";
         [[TIMManager sharedInstance] login: login_param succ:^(){
-            
             NSLog(@"Login Succ");
-            
+            [self.progressHUD setHidden:YES];
+            [self jugdeStepToVCWithModel:model];//根据step跳页面
+            [self upLoadDeviceToken];//申请离线推送
         } fail:^(int code, NSString * err) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"IM登录失败请重新登录"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+            
             
             NSLog(@"Login Failed: %d->%@", code, err);
-            
+            [self gotoLoginViewVC];
         }];
         
     }
     
     
+}
+
+-(void)gotoLoginViewVC{
+
+    LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
+    
+    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
+    [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+
+}
+
+#pragma mark - 申请离线推送
+
+-(void)upLoadDeviceToken{
+    TIMTokenParam *param = [[TIMTokenParam alloc] init];
+    /* 用户自己到苹果注册开发者证书，在开发者帐号中下载并生成证书(p12 文件)，将生成的 p12 文件传到腾讯证书管理控制台，控制台会自动生成一个证书 ID，将证书 ID 传入一下 busiId 参数中。*/
+#if kAppStoreVersion
+    // App Store 版本
+#if DEBUG
+    param.busiId = 13888;
+#else
+    param.busiId = 13888;
+#endif
+#else
+    //企业证书 ID
+    param.busiId = 13888;
+#endif
+    [param setToken:self.deviceToken];
+    //            [UIApplication sharedApplication]
+    [[TIMManager sharedInstance] setToken:param succ:^{
+        NSLog(@"-----> 上传 token 成功 ");
+    } fail:^(int code, NSString *msg) {
+        NSLog(@"-----> 上传 token 失败 ");
+    }];
+
+
+
+}
+
+-(MBProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        _progressHUD.progress = 0.6;
+        _progressHUD.dimBackground = YES; //设置有遮罩
+        [_progressHUD showAnimated:YES]; //显示进度框
+    }
+    return _progressHUD;
 }
 
 /*

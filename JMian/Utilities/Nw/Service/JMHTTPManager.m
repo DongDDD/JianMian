@@ -224,7 +224,22 @@
     NSLog(@"response=========>:%@", responseObject);
     NSLog(@"error============>:%@", error);
     NSLog(@"<<<<<<<<<<<<<<<<<<<<<👆 REQUEST FINISH 👆<<<<<<<<<<<<<<<<<<<<<<<<<<");
-
+    if (responseObject[@"message"]) {
+        
+        NSString *code = [responseObject objectForKey:@"code"];
+        NSString *title = [responseObject objectForKey:@"message"];
+        
+        NSString *codeStr = [NSString stringWithFormat:@"%@",code];
+        BOOL ok = [codeStr isEqualToString:@"200"];
+        if (!ok) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:title
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+        }
+        
+    }
+    
+    
   
 }
 

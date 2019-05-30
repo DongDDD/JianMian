@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property(weak,nonatomic)id<JMCompanyDesciptionOfMineViewDelegate>delegate;
-
+@property(nonatomic, copy)NSString *comDesc;
 @end
 
 NS_ASSUME_NONNULL_END

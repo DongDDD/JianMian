@@ -11,7 +11,7 @@
 #import "Masonry.h"
 #import "JMGreetTableViewController.h"
 
-@interface JMInputTextView()
+@interface JMInputTextView()<UITextViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *contentView;
 
@@ -59,7 +59,7 @@
     [self addSubview:_btn1];
     
     _textView = [[UITextView alloc]init];
-//    _textView.delegate = self;
+    _textView.delegate = self;
     _textView.font = GlobalFont(13);
     _textView.returnKeyType = UIReturnKeySend;//返回键类型
     _textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
@@ -114,6 +114,41 @@
     }
 }
 
+- (BOOL)textViewShouldReturn:(UITextField *)textField
+
+{
+    if(_delegate && [_delegate respondsToSelector:@selector(textView:didSendMessage:)]){
+        if(![_textView.text isEqualToString:@""]){
+            [_delegate textView:self didSendMessage:_textView.text];
+            [self clearInput];
+        }
+    }
+    NSLog(@"点击了搜索");
+    
+    return YES;
+    
+}
+//-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)rangereplacementText:(NSString *)text{ //如果为回车则将键盘收起
+//    if ([text isEqualToString:@"\n"]) {           [textView resignFirstResponder];             return NO;
+//    
+//}
+//return YES;
+//
+//}
+
+-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    if ([text isEqualToString:@"\n"]) {
+        if(_delegate && [_delegate respondsToSelector:@selector(textView:didSendMessage:)]){
+            if(![_textView.text isEqualToString:@""]){
+                [_delegate textView:self didSendMessage:_textView.text];
+                [self clearInput];
+            }
+        }
+     [textView resignFirstResponder];             return NO;
+    }
+    return YES;
+}
+ 
 //表情按钮临时用来做发送键
 -(void)faceUpInside:(UIButton *)sender{
     

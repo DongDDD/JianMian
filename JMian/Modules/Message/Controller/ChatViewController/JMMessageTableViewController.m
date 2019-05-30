@@ -197,11 +197,16 @@ static NSString *cellIdent = @"infoCellIdent";
 //消息解释
 - (void)loadMessage
 {
+    
     _uiMsgs = [NSMutableArray array];
+    
+    
+    
     
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:_receiverID];
+    
 //    [conv setReadMessage:nil succ:^{
 //        NSLog(@"已读上报");
 //    } fail:^(int code, NSString *msg) {
@@ -263,9 +268,9 @@ static NSString *cellIdent = @"infoCellIdent";
                     TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
                     JMMessageCellData *textData = [[JMMessageCellData alloc]init];
                     if ([custom_elem.desc isEqualToString:@"我发起了视频聊天"]){
-                        textData.content = @"对方发起了视频聊天";
+                        textData.content = @"发起了视频";
                     }else{
-                        textData.content = @"对方拒绝了你的视频邀请";
+                        textData.content = @"结束了视频";
 
                     
                     }
@@ -317,9 +322,9 @@ static NSString *cellIdent = @"infoCellIdent";
                     TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
                     JMMessageCellData *textData = [[JMMessageCellData alloc]init];
                     if ([custom_elem.desc isEqualToString:@"我发起了视频聊天"]){
-                        textData.content = @"我发起了视频聊天";
+                        textData.content = @"发起视频";
                     }else{
-                        textData.content = @"我拒绝了对方的视频邀请";
+                        textData.content = @"结束了视频";
                         
                         
                     }

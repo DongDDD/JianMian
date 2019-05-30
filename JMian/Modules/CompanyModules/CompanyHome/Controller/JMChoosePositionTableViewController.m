@@ -41,7 +41,13 @@ static NSString *cellIdent = @"cellIdent";
     headerLab.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
     headerLab.textColor = TEXT_GRAY_COLOR;
     headerLab.font = [UIFont systemFontOfSize:13];
-    headerLab.text = @"———   选择已发布的职位，淘人才   ———";
+    if (self.choosePositionArray.count > 0) {
+        
+        headerLab.text = @"———   选择已发布的职位，淘人才   ———";
+    }else{
+        headerLab.text = @"———   你还没有发布职位，列表空空如也～   ———";
+
+    };
     headerLab.textAlignment = NSTextAlignmentCenter;
     
     return headerLab;

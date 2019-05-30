@@ -95,7 +95,7 @@
     
     if (isDominator) {
 //         [_head sd_setImageWithURL:[NSURL URLWithString:nil] placeholderImage:[UIImage imageNamed:@"notification "]];
-        [_head setImage:[UIImage imageNamed:@"notification "]];
+        [_head setImage:[UIImage imageNamed:@"notification"]];
         [_head setBackgroundColor:MASTER_COLOR];
     }
 }
@@ -128,7 +128,7 @@
         //气泡
         _bubble.image = [self getBubbleImgWithImgName:@"other_bubble" rectMoveX:20];
         
-    }else{
+    }else{ 
         
         CGSize headSize = TMessageCell_Head_Size;
         CGFloat headx = SCREEN_WIDTH - TMessageCell_Margin - headSize.width;

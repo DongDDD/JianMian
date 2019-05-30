@@ -34,7 +34,7 @@
     
     UIButton *hangupBtn = [[UIButton alloc]init];
     [hangupBtn setImage:[UIImage imageNamed:@"hangUpButton"] forState:UIControlStateNormal];
-    [hangupBtn addTarget: self action:@selector(hangupBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [hangupBtn addTarget: self action:@selector(waitforAnswerViewHangupActionwaitforAnswerViewHangupActionwaitforAnswerViewHangupAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:hangupBtn];
     
     [hangupBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -57,8 +57,8 @@
 
 
 -(void)hangupBtnAction{
-    if (_delegate && [_delegate respondsToSelector:@selector(hangupBtnAction)]) {
-        [_delegate hangupBtnAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(waitforAnswerViewHangupActionwaitforAnswerViewHangupActionwaitforAnswerViewHangupAction)]) {
+        [_delegate waitforAnswerViewHangupAction];
     }
 
 }

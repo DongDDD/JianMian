@@ -13,6 +13,7 @@
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
              @"industry_name":@"industry_label.name",
+             @"comDescription":@"description",
              @"industry_label_id":@"industry_label.label_id"
              };
 }

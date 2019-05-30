@@ -14,12 +14,16 @@ NSString *const JMMyResumeCareerStatus2TableViewCellIdentifier = @"JMMyResumeCar
 @interface JMMyResumeCareerStatusTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIView *workStutasView;
 @property (weak, nonatomic) IBOutlet UILabel *cellTitle;
+@property (weak, nonatomic) IBOutlet UIButton *leftBtn;
+@property (weak, nonatomic) IBOutlet UIButton *rightBtn;
+@property (weak, nonatomic) IBOutlet UIButton *freshGraduate;
 
 @end
 @implementation JMMyResumeCareerStatusTableViewCell
 
 
 - (void)setWorkStatus:(NSString *)workStatus {
+
     for (id sub in self.workStutasView.subviews) {
         if ([sub isKindOfClass:[UIButton class]]) {
             int status = [workStatus intValue];
@@ -41,5 +45,37 @@ NSString *const JMMyResumeCareerStatus2TableViewCellIdentifier = @"JMMyResumeCar
 
     // Configure the view for the selected state
 }
+
+- (IBAction)freshGradute:(UIButton *)sender {
+    [self.freshGraduate setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
+    [self.leftBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+    [self.rightBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+    if (_delegate && [_delegate respondsToSelector:@selector(upDateInfo_status:)]) {
+        NSString *status = [NSString stringWithFormat:@"%ld",sender.tag];
+        [_delegate upDateInfo_status:status];
+    }
+}
+
+
+- (IBAction)leftAction:(UIButton *)sender {
+    [self.leftBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
+    [self.rightBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+    [self.freshGraduate setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+    if (_delegate && [_delegate respondsToSelector:@selector(upDateInfo_status:)]) {
+        NSString *status = [NSString stringWithFormat:@"%ld",sender.tag];
+        [_delegate upDateInfo_status:status];
+    }
+}
+- (IBAction)rightAction:(UIButton *)sender {
+    [self.leftBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+    [self.rightBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
+    [self.freshGraduate setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+    if (_delegate && [_delegate respondsToSelector:@selector(upDateInfo_status:)]) {
+        NSString *status = [NSString stringWithFormat:@"%ld",sender.tag];
+        [_delegate upDateInfo_status:status];
+    }
+}
+
+
 
 @end

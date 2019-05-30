@@ -42,6 +42,8 @@ NSString *const JMMyResumeHeader4TableViewCellIdentifier = @"JMMyResumeHeader4Ta
     
 }
 
+ 
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

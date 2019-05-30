@@ -284,43 +284,43 @@
                                 <constraint firstItem="2zn-lg-xkg" firstAttribute="trailing" secondItem="NyQ-3f-8IB" secondAttribute="trailing" id="zpj-74-wLl"/>
                             </constraints>
                         </view>
-                        <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="7PP-2E-jP3">
-                            <rect key="frame" x="0.0" y="580" width="375" height="200"/>
-                            <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="200" id="3t8-5g-cgq"/>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="WqT-su-YwF"/>
-                            </constraints>
-                            <date key="date" timeIntervalSinceReferenceDate="-22952509.19695282">
-                                <!--2000-04-10 08:18:10 +0000-->
-                            </date>
-                            <date key="maximumDate" timeIntervalSinceReferenceDate="599482800">
-                                <!--2019-12-31 11:00:00 +0000-->
-                            </date>
-                            <locale key="locale" localeIdentifier="zh_CN"/>
-                            <connections>
-                                <action selector="datePickerViewChange:" destination="-1" eventType="valueChanged" id="Agd-RJ-X3t"/>
-                            </connections>
-                        </datePicker>
                     </subviews>
                     <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="jQ4-FN-MqJ" firstAttribute="centerX" secondItem="Ppz-7V-USb" secondAttribute="centerX" id="7sA-bg-bGg"/>
-                        <constraint firstItem="7PP-2E-jP3" firstAttribute="leading" secondItem="Ppz-7V-USb" secondAttribute="leading" id="AWR-fb-XFc"/>
                         <constraint firstAttribute="bottom" secondItem="jQ4-FN-MqJ" secondAttribute="bottom" constant="151" id="Lfq-ll-OzZ"/>
-                        <constraint firstAttribute="bottom" secondItem="7PP-2E-jP3" secondAttribute="bottom" id="O1q-zL-XPD"/>
                         <constraint firstAttribute="trailing" secondItem="jQ4-FN-MqJ" secondAttribute="trailing" id="SND-IA-oSg"/>
                         <constraint firstItem="jQ4-FN-MqJ" firstAttribute="leading" secondItem="Ppz-7V-USb" secondAttribute="leading" id="Vcc-8x-GhI"/>
                         <constraint firstItem="jQ4-FN-MqJ" firstAttribute="top" secondItem="Ppz-7V-USb" secondAttribute="top" id="dRi-63-bBh"/>
-                        <constraint firstAttribute="trailing" secondItem="7PP-2E-jP3" secondAttribute="trailing" id="ebg-o0-bX2"/>
                     </constraints>
                 </scrollView>
+                <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="7PP-2E-jP3">
+                    <rect key="frame" x="0.0" y="600" width="375" height="200"/>
+                    <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="3t8-5g-cgq"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="WqT-su-YwF"/>
+                    </constraints>
+                    <date key="date" timeIntervalSinceReferenceDate="-22952509.19695282">
+                        <!--2000-04-10 08:18:10 +0000-->
+                    </date>
+                    <date key="maximumDate" timeIntervalSinceReferenceDate="599482800">
+                        <!--2019-12-31 11:00:00 +0000-->
+                    </date>
+                    <locale key="locale" localeIdentifier="zh_CN"/>
+                    <connections>
+                        <action selector="datePickerViewChange:" destination="-1" eventType="valueChanged" id="Agd-RJ-X3t"/>
+                    </connections>
+                </datePicker>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="Ppz-7V-USb" secondAttribute="bottom" id="30W-3P-dwU"/>
                 <constraint firstItem="Ppz-7V-USb" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="B8S-Z7-acx"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Ppz-7V-USb" secondAttribute="trailing" id="Bj8-Ow-oU2"/>
+                <constraint firstItem="7PP-2E-jP3" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Rg4-9z-OR8"/>
+                <constraint firstItem="7PP-2E-jP3" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Wn6-6t-CSZ"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="7PP-2E-jP3" secondAttribute="bottom" id="fHq-n9-Kti"/>
                 <constraint firstItem="Ppz-7V-USb" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="poO-Qu-8Mk"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

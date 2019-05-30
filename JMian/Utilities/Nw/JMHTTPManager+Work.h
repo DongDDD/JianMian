@@ -49,6 +49,24 @@ NS_ASSUME_NONNULL_BEGIN
                          label_ids:(nullable NSArray *)label_ids
                       SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
+
+- (void)updateWorkWith_Id:(NSString *)Id
+                  city_id:(NSString *)city_id
+            work_label_id:(NSString *)work_label_id
+                work_name:(NSString *)work_name
+                education:(NSNumber *)education
+      work_experience_min:(NSNumber *)work_experience_min
+      work_experience_max:(NSNumber *)work_experience_max
+               salary_min:(NSNumber *)salary_min
+               salary_max:(NSNumber *)salary_max
+              description:(NSString *)description
+                  address:(NSString * )address
+                longitude:(NSString *)longitude
+                 latitude:(NSString *)latitude
+                   status:(NSString *)status
+                label_ids:(nullable NSArray *)label_ids
+             SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

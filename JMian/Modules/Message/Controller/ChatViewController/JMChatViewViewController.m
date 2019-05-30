@@ -58,11 +58,6 @@
 //
 }
 
--(void)fanhui{
-    [super fanhui];
-    
-
-}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -91,7 +86,7 @@
     if (!_isDominator) {
         //        不是系统消息才有输入框
         _inputController = [[JMInputController alloc] init];
-        _inputController.view.frame = CGRectMake(0, _messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight-55, self.view.frame.size.width,_messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight);
+        _inputController.view.frame = CGRectMake(0, _messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight-20, self.view.frame.size.width,_messageController.view.frame.size.height - TTextView_Height - Bottom_SafeHeight);
         _inputController.delegate = self;
         NSLog(@"*******%f",Bottom_SafeHeight);
         [self addChildViewController:_inputController];
@@ -136,12 +131,12 @@
         self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
     }];
     NSString *userId;
-    if (self.messageController.isSelfIsSender) {
-        userId = self.myConvModel.recipient_user_id;
-    }else{
-        userId = self.myConvModel.sender_user_id;
-    }
-    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:userId time:timer successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//    if (self.messageController.isSelfIsSender) {
+//        userId = self.myConvModel.recipient_user_id;
+//    }else{
+//        userId = self.myConvModel.sender_user_id;
+//    }
+    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.myConvModel.job_user_job_id time:timer successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];

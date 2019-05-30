@@ -49,6 +49,9 @@
                         <constraint firstAttribute="height" constant="124" id="PaQ-Hm-NS1"/>
                     </constraints>
                     <state key="normal" title="Button" image="play.png"/>
+                    <connections>
+                        <action selector="playAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="gqa-Ny-czr"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,6 +65,10 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="nf7-GI-EoJ" secondAttribute="trailing" constant="20" id="qQx-pi-VzS"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="playBtn" destination="Yhf-XJ-7Bw" id="wAe-Mv-RQB"/>
+                <outlet property="videoImg" destination="nf7-GI-EoJ" id="5ZD-XG-J3y"/>
+            </connections>
         </view>
     </objects>
     <resources>

@@ -13,7 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol JMCityListViewControllerDelegate <NSObject>
 
--(void)didSelectedCity_id:(NSString *)city_id;
+-(void)didSelectedCity_id:(NSString *)city_id city_name:(NSString *)city_name;
 
 @end
 

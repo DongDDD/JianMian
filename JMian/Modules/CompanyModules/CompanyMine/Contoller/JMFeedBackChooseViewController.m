@@ -24,10 +24,29 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"面试反馈";
+    [self setRightBtnTextName:@"提交"];
     [self labschooseVC];
 }
 
+-(void)rightAction{
 
+    [self.navigationController popViewControllerAnimated:YES];
+    NSString *str1 = [NSString stringWithFormat:@"%ld",(long)_index1];
+    NSString *str2 = [NSString stringWithFormat:@"%ld",(long)_index2];
+    NSString *str3 = [NSString stringWithFormat:@"%ld",(long)_index3];
+    
+    
+    NSArray *labs = @[str1,str2,str3];
+    [[JMHTTPManager sharedInstance]feedbackInterViewWith_interview_id:self.interview_id label_ids:labs successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"反馈提交成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 
 - (void)OKAction {
     [super fanhui];

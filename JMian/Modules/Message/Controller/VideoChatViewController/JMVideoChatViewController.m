@@ -386,7 +386,7 @@
 }
 #pragma mark - 点击事件
 //--等待对方接听界面的关闭按钮--
--(void)hangupBtnAction{
+-(void)waitforAnswerViewHangupAction{
     
     [self leaveChannel];
 //    [[[UIApplication sharedApplication].keyWindow viewWithTag:754] removeFromSuperview];

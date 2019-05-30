@@ -29,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     [self getMsgList];
  
     HomeViewController *home = [[HomeViewController alloc] init];
@@ -57,9 +58,9 @@
 
 - (void)onNewMessage:(NSNotification *)notification
 {
-    _unReadNum = 0;
     [self getMsgList];
 }
+
 #pragma mark - 获取未读消息
 
 
@@ -91,36 +92,39 @@
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
     NSLog(@"腾讯云数据%@",convs);
+    _unReadNum = 0;
+
     for (TIMConversation *conv in convs) {
         if([conv getType] == TIM_SYSTEM){
             continue;
         }
         TIMMessage *msg = [conv getLastMsg];
         NSLog(@"%@",msg);
-        for (JMMessageListModel *model in self.modelArray) {
-            if (model.sender_user_id == userInfomodel.user_id) {
-                //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
-                if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
-                    
-                    _unReadNum += [conv getUnReadMessageNum];
-                }
-                
-            }else if(model.recipient_user_id == userInfomodel.user_id){
-                
-                if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
-              
-                    _unReadNum += [conv getUnReadMessageNum];
-    
-                }
-               
-            }
-           
-        }
+        _unReadNum += [conv getUnReadMessageNum];
+//        for (JMMessageListModel *model in self.modelArray) {
+//            if (model.sender_user_id == userInfomodel.user_id) {
+//                //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
+//                if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
+//
+//                    _unReadNum += [conv getUnReadMessageNum];
+//                }
+//
+//            }else if(model.recipient_user_id == userInfomodel.user_id){
+//
+//                if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
+//
+//                    _unReadNum += [conv getUnReadMessageNum];
+//
+//                }
+//
+//            }
+//
+//        }
 //        加上系统消息的未读
-        if ([[conv getReceiver] isEqualToString:@"dominator"]) {
-            _unReadNum += [conv getUnReadMessageNum];
-            
-        }
+//        if ([[conv getReceiver] isEqualToString:@"dominator"]) {
+//            _unReadNum += [conv getUnReadMessageNum];
+//
+//        }
     }
     
     NSLog(@"未读消息数量%d",_unReadNum);

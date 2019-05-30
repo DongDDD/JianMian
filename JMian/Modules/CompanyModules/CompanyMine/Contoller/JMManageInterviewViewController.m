@@ -52,6 +52,7 @@ static NSString *cellIdent = @"managerCellIdent";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self.tableView.mj_header beginRefreshing];
     [self.navigationController setNavigationBarHidden:NO];
 
 }
@@ -114,7 +115,6 @@ static NSString *cellIdent = @"managerCellIdent";
     [self.tableView.mj_header beginRefreshing];
 
 //    [self getListData_Status:_statusArray];//请求已面试的数据
-
 }
 
 
@@ -127,7 +127,7 @@ static NSString *cellIdent = @"managerCellIdent";
     if ([userinfoModel.type isEqualToString:C_Type_USER]) {
         
         if ([model.status isEqualToString:Interview_WaitAgree]) {//接受邀约按钮
-            [self updateInterviewStatus_interviewID:model.interview_id status:model.status];
+            [self updateInterviewStatus_interviewID:model.interview_id status:Interview_WaitInterview];
         }
         
     }else if ([userinfoModel.type isEqualToString:B_Type_UESR]){
@@ -159,7 +159,7 @@ static NSString *cellIdent = @"managerCellIdent";
             _videoChatView.delegate = self;
             _videoChatView.tag = 222;
             [_videoChatView setInterviewModel:model];
-            [self.view addSubview:_videoChatView];
+            [self.view addSubview:_videoChatView];  
             [self.navigationController setNavigationBarHidden:YES];
             
         }else if ([model.status isEqualToString:@"0"]) {//这个状态可以 取消面试
@@ -174,6 +174,17 @@ static NSString *cellIdent = @"managerCellIdent";
         }
         
     }else{
+        if ([model.status isEqualToString:@"3"] && isInterviewTime){
+            _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+            _videoChatView.delegate = self;
+            _videoChatView.tag = 222;
+            [_videoChatView setInterviewModel:model];
+            [self.view addSubview:_videoChatView];
+            [self.navigationController setNavigationBarHidden:YES];
+        
+        }
+        
+        
         if ([model.status isEqualToString:@"4"]) {//这个状态可以 面试反馈
             JMFeedBackChooseViewController *vc = [[JMFeedBackChooseViewController alloc]init];
             vc.interview_id = model.interview_id;
@@ -276,12 +287,52 @@ static NSString *cellIdent = @"managerCellIdent";
 }
 
 //挂断
--(void)hangupAction{
+-(void)hangupAction_model:(JMInterViewModel *)model{
   
     [_videoChatView removeFromSuperview];
     [self.navigationController setNavigationBarHidden:NO];
+    
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    //挂断后如果是C端就跳去面试反馈
+    if ([userModel.type isEqualToString:C_Type_USER]) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"面试结束了吗？按确认后将会标记已“面试”" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            //        //点击确认后需要做的事
+            ////        C端
+            JMFeedBackChooseViewController *vc = [[JMFeedBackChooseViewController alloc]init];
+            vc.interview_id = model.interview_id;
+            [self.navigationController pushViewController:vc animated:YES];
+      
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        
+        
+        
+    }else{
+    //挂断后如果是B端改变面试状态，改成面试完status=4 hire=0
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"面试结束了吗？按确认后将会标记已“面试”" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            //        //点击确认后需要做的事
+            ////        C端
+            
+            [self updateInterviewStatus_interviewID:model.interview_id status:@"4"];
+      
+            
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
 
+    }
 }
+
+//-(void)hangupAction_model:
 #pragma mark - THDatePickerViewDelegate
 /**
  保存按钮代理方法

@@ -20,11 +20,14 @@
                 <outlet property="facingView" destination="cDd-WP-WlE" id="G6g-Xs-neE"/>
                 <outlet property="headerImg" destination="KIU-BZ-MdH" id="ent-FH-Rxa"/>
                 <outlet property="industryBtn" destination="5UA-2r-I7m" id="xAL-mI-FTe"/>
+                <outlet property="leftBtn" destination="4nG-Pu-yKH" id="dkU-1p-KM8"/>
                 <outlet property="pickerBGView" destination="XVW-qn-Ufw" id="w2d-bH-mZm"/>
                 <outlet property="pickerView" destination="sXA-dX-bYm" id="HZR-DA-w7p"/>
+                <outlet property="playBtn" destination="MAn-hY-D8F" id="nix-Zp-uEa"/>
+                <outlet property="rightBtn" destination="6jh-bw-voh" id="lbb-fL-lzX"/>
                 <outlet property="scrollView" destination="npc-ff-X5C" id="xB6-HF-ISr"/>
                 <outlet property="topView" destination="nZJ-fo-Vvm" id="JWX-qX-2XV"/>
-                <outlet property="videoImg" destination="5S1-jr-cqt" id="tc3-ZK-rMu"/>
+                <outlet property="videoImg" destination="5S1-jr-cqt" id="7hK-QI-hT8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -99,9 +102,8 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GNa-Fl-3cY">
                                     <rect key="frame" x="20" y="76" width="374" height="224"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5S1-jr-cqt">
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5S1-jr-cqt">
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="224"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         </imageView>
                                         <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bOv-fh-Zgi">
                                             <rect key="frame" x="0.0" y="174" width="374" height="50"/>
@@ -122,7 +124,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4nG-Pu-yKH" userLabel="leftBtn">
-                                            <rect key="frame" x="20" y="181" width="114" height="33"/>
+                                            <rect key="frame" x="15" y="181" width="114" height="33"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="114" id="0dx-wh-4Tt"/>
@@ -144,9 +146,12 @@
                                                     <real key="value" value="16.5"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="videoLeftAction:" destination="-1" eventType="touchUpInside" id="Wju-ce-qR0"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6jh-bw-voh" userLabel="rightBtn">
-                                            <rect key="frame" x="188" y="181" width="166" height="33"/>
+                                            <rect key="frame" x="193" y="181" width="166" height="33"/>
                                             <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="33" id="nOE-gJ-y16"/>
@@ -168,19 +173,26 @@
                                                     <real key="value" value="16.5"/>
                                                 </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
+                                            <connections>
+                                                <action selector="videoRightAction:" destination="-1" eventType="touchUpInside" id="T4H-ot-c8u"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="5S1-jr-cqt" firstAttribute="top" secondItem="GNa-Fl-3cY" secondAttribute="top" id="5PS-Zv-2YV"/>
                                         <constraint firstAttribute="trailing" secondItem="bOv-fh-Zgi" secondAttribute="trailing" id="7E1-Wg-afo"/>
                                         <constraint firstAttribute="bottom" secondItem="6jh-bw-voh" secondAttribute="bottom" constant="10" id="BZg-a0-faA"/>
+                                        <constraint firstAttribute="bottom" secondItem="5S1-jr-cqt" secondAttribute="bottom" id="HYp-Vq-s7a"/>
                                         <constraint firstAttribute="height" constant="224" id="K1p-Bx-I8A"/>
-                                        <constraint firstItem="4nG-Pu-yKH" firstAttribute="leading" secondItem="GNa-Fl-3cY" secondAttribute="leading" constant="20" id="M3I-gm-gVK"/>
+                                        <constraint firstItem="4nG-Pu-yKH" firstAttribute="leading" secondItem="GNa-Fl-3cY" secondAttribute="leading" constant="15" id="M3I-gm-gVK"/>
                                         <constraint firstItem="MAn-hY-D8F" firstAttribute="centerX" secondItem="GNa-Fl-3cY" secondAttribute="centerX" id="QX3-vP-VpZ"/>
-                                        <constraint firstAttribute="trailing" secondItem="6jh-bw-voh" secondAttribute="trailing" constant="20" id="XbV-xS-Pfb"/>
+                                        <constraint firstAttribute="trailing" secondItem="6jh-bw-voh" secondAttribute="trailing" constant="15" id="XbV-xS-Pfb"/>
+                                        <constraint firstAttribute="trailing" secondItem="5S1-jr-cqt" secondAttribute="trailing" id="YS3-Zc-dR7"/>
                                         <constraint firstItem="bOv-fh-Zgi" firstAttribute="leading" secondItem="GNa-Fl-3cY" secondAttribute="leading" id="aBG-Lh-uwB"/>
                                         <constraint firstItem="MAn-hY-D8F" firstAttribute="centerY" secondItem="GNa-Fl-3cY" secondAttribute="centerY" constant="-25" id="exx-9T-Fwh"/>
                                         <constraint firstAttribute="bottom" secondItem="4nG-Pu-yKH" secondAttribute="bottom" constant="10" id="fYv-3d-blO"/>
                                         <constraint firstAttribute="bottom" secondItem="bOv-fh-Zgi" secondAttribute="bottom" id="u7S-Ux-jf3"/>
+                                        <constraint firstItem="5S1-jr-cqt" firstAttribute="leading" secondItem="GNa-Fl-3cY" secondAttribute="leading" id="w2h-AH-ELS"/>
                                     </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadiues">

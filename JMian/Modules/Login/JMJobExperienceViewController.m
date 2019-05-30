@@ -12,6 +12,9 @@
 #import "AppDelegate.h"
 #import "JMHTTPManager+Login.h"
 #import "PositionDesiredViewController.h"
+#import "JMJudgeViewController.h"
+#import "NavigationViewController.h"
+#import "LoginViewController.h"
 
 typedef enum _PickerState_Exp {
     startWorkState,
@@ -37,6 +40,7 @@ typedef enum _PickerState_Exp {
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, assign)CGFloat changeHeight;
+@property(nonatomic,strong)UIButton *moreBtn;
 
 @end
 
@@ -44,10 +48,11 @@ typedef enum _PickerState_Exp {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.datePckerView.backgroundColor = [UIColor whiteColor];
-    
+    self.datePckerView.backgroundColor = BG_COLOR;
     self.scrollView.delegate = self;
+    [self.scrollView addSubview:self.moreBtn];
+    [self.view addSubview:_datePckerView];
+
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
     [self.view addGestureRecognizer:bgTap];
     // Do any additional setup after loading the view from its nib.
@@ -55,6 +60,7 @@ typedef enum _PickerState_Exp {
     switch (self.viewType) {
         case JMJobExperienceViewTypeDefault:
             [self setRightBtnTextName:@"下一步"];
+            [self setIsHiddenBackBtn:YES];
             [self.saveBtn setTitle:@"完成" forState:UIControlStateNormal];
             break;
         case JMJobExperienceViewTypeEdit:
@@ -80,58 +86,66 @@ typedef enum _PickerState_Exp {
             break;
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT*1.2);
     
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
-- (void)keyboardWillShow:(NSNotification *)aNotification {
-    [self.datePckerView setHidden:YES];
-    NSDictionary *userInfo = aNotification.userInfo;
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect = aValue.CGRectValue;
-    CGRect frame = self.jobDescriptionText.frame;
-    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-    CGRect rect= CGRectMake(0,_changeHeight,SCREEN_WIDTH,SCREEN_HEIGHT);
-    if (_changeHeight < 0) {
-        
-        [UIView animateWithDuration:0.3 animations:^ {
-            self.scrollView.frame = rect;
-            
-        }];
-    }
-    /* 输入框上移 */
-    //    CGFloat padding = 20;
-    //    CGRect frame = self.nameText.frame;
-    //    self.changeHeight = _keyboardRect.size.height - (frame.origin.y+frame.size.height);
-    //    if (self.changeHeight < 0) {
-    //        [UIView animateWithDuration:0.3 animations:^ {
-    //
-    //            self.topToView.constant += self.changeHeight-10;
-    //
-    //        }];
-    //    }
-    
-}
+//- (void)keyboardWillShow:(NSNotification *)aNotification {
+//    [self.datePckerView setHidden:YES];
+//    NSDictionary *userInfo = aNotification.userInfo;
+//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    CGRect keyboardRect = aValue.CGRectValue;
+//    CGRect frame = self.jobDescriptionText.frame;
+//    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
+//    CGRect rect= CGRectMake(0,_changeHeight,SCREEN_WIDTH,SCREEN_HEIGHT);
+//    if (_changeHeight < 0) {
+//
+//        [UIView animateWithDuration:0.3 animations:^ {
+//            self.scrollView.frame = rect;
+//
+//        }];
+//    }
+//    /* 输入框上移 */
+//    //    CGFloat padding = 20;
+//    //    CGRect frame = self.nameText.frame;
+//    //    self.changeHeight = _keyboardRect.size.height - (frame.origin.y+frame.size.height);
+//    //    if (self.changeHeight < 0) {
+//    //        [UIView animateWithDuration:0.3 animations:^ {
+//    //
+//    //            self.topToView.constant += self.changeHeight-10;
+//    //
+//    //        }];
+//    //    }
+//
+//}
+//
+//- (void)keyboardWillHide:(NSNotification *)aNotification {
+//    float width = SCREEN_WIDTH;
+//    float height = SCREEN_HEIGHT;
+//    //上移n个单位，按实际情况设置
+//    if (_changeHeight < 0) {
+//        CGRect rect=CGRectMake(0,-_changeHeight,width,height);
+//        self.scrollView.frame=rect;
+//
+//    }
+//
+//}
 
-- (void)keyboardWillHide:(NSNotification *)aNotification {
-    float width = SCREEN_WIDTH;
-    float height = SCREEN_HEIGHT;
-    //上移n个单位，按实际情况设置
-    if (_changeHeight < 0) {
-        CGRect rect=CGRectMake(0,-_changeHeight,width,height);
-        self.scrollView.frame=rect;
-        
-    }
 
-}
 #pragma mark - 点击事件
 
 
@@ -165,7 +179,6 @@ typedef enum _PickerState_Exp {
 - (void)createExperience {
     [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-
         switch (self.viewType) {
             case JMJobExperienceViewTypeDefault: {
                 JMPersonTabBarViewController *tab = [[JMPersonTabBarViewController alloc] init];
@@ -265,6 +278,97 @@ typedef enum _PickerState_Exp {
     
 }
 
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(actionSheet.tag == 254){
+        switch (buttonIndex) {
+            case 0:
+                // 取消
+                return;
+            case 1:
+                // 切换身份
+                //                sourceType = UIImagePickerControllerSourceTypeCamera;
+                [self changeIdentify];
+                break;
+                
+            case 2:
+                // 退出登录
+                [self logout];
+                //                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                break;
+        }
+        
+        
+    }
+}
+
+-(void)changeIdentify{
+    [[JMHTTPManager sharedInstance]userChangeWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        kSaveMyDefault(@"usersig", userInfo.usersig);
+        NSLog(@"usersig-----:%@",userInfo.usersig);
+        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        [[TIMManager sharedInstance] logout:^() {
+            NSLog(@"logout succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"logout fail: code=%d err=%@", code, err);
+        }];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+-(void)logout{
+    [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        kRemoveMyDefault(@"token");
+        kRemoveMyDefault(@"usersig");
+        //token为空执行
+        
+        [[TIMManager sharedInstance] logout:^() {
+            NSLog(@"logout succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"logout fail: code=%d err=%@", code, err);
+        }];
+        LoginViewController *login = [[LoginViewController alloc] init];
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
+    
+    
+}
+
+
+-(void)moreAction{
+    
+    UIActionSheet *sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"切换身份",@"退出登录", nil];
+    sheet.tag = 254;
+    
+    [sheet showInView:self.view];
+    
+}
+
+
+-(UIButton *)moreBtn{
+    if (_moreBtn == nil) {
+        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.jobDescriptionText.frame.origin.y+self.jobDescriptionText.frame.size.height+10, SCREEN_WIDTH, 40)];
+        
+        [_moreBtn setTitle:@"更多操作" forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [_moreBtn addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    }
+    return _moreBtn;
+}
 
 
 /*

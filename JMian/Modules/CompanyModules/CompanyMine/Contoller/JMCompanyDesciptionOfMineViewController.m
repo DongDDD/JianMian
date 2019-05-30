@@ -37,6 +37,7 @@
 
 -(void)setTextFieldUI{
     self.textView = [[UITextView alloc]init];
+    self.textView.text = self.comDesc;
     self.textView.delegate = self;
     self.textView.font = GlobalFont(14);
     
@@ -68,20 +69,23 @@
 
     }];
 //
-    self.lab = [[UILabel alloc]init];
-    self.lab.textColor = TEXT_GRAYmin_COLOR;
-    self.lab.font = GlobalFont(14);
-    self.lab.text = @"例如：\n 企业类型...\n 建立时间... \n从事哪方面的产品... \n以什么为重点... \n企业文化...";
-    self.lab.numberOfLines = 0;
-    [self.lab sizeToFit];
-    [self.view addSubview:self.lab];
-
-    [self.lab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.view.mas_left).offset(20);
-        make.right.mas_equalTo(self.view.mas_right).offset(-20);
-        make.top.mas_equalTo(titLab.mas_bottom).offset(20);
-        //        make.height.mas_equalTo(33);
-    }];
+    if ([self.comDesc isEqualToString:@"请填写"]) {
+        self.lab = [[UILabel alloc]init];
+        self.lab.textColor = TEXT_GRAYmin_COLOR;
+        self.lab.font = GlobalFont(14);
+        self.lab.text = @"例如：\n 企业类型...\n 建立时间... \n从事哪方面的产品... \n以什么为重点... \n企业文化...";
+        self.lab.numberOfLines = 0;
+        [self.lab sizeToFit];
+        [self.view addSubview:self.lab];
+        
+        [self.lab mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.view.mas_left).offset(20);
+            make.right.mas_equalTo(self.view.mas_right).offset(-20);
+            make.top.mas_equalTo(titLab.mas_bottom).offset(20);
+            //        make.height.mas_equalTo(33);
+        }];
+        
+    }
 
     
 }

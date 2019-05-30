@@ -36,11 +36,11 @@
 }
 
 - (void)createLikeWith_type:(nullable NSString *)type
-                       Id:(nullable NSString *)Id
+                       Id:(NSString *)Id
              SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     NSDictionary *dic =     @{
                               @"type":type,
-                              @"Id":Id
+                              @"id":Id
                               };
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Favorite_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }

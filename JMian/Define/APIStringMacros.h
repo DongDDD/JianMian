@@ -53,6 +53,7 @@
 
 //岗位
 #define Update_job_URL @"api/user/job/update"
+#define Add_Job_URL @"api/user/job/create"
 
 //工作经历
 #define Create_Experience_URL @"api/user/experience/create"
@@ -66,6 +67,8 @@
 
 #define Paginate_Work_URL @"api/work/paginate"
 #define Create_Work_URL @"api/work/create"
+#define Update_Work_URL @"api/work/update"
+
 //C端看公司的职位详情
 #define Info_Work_URL @"api/work/info"
 

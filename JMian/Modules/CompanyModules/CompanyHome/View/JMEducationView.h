@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMVitaDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMEducationView : UIView
+
+@property(nonatomic,strong)JMEducationModel *model;
 
 @end
 

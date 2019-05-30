@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol JMWaitForAnswerViewDelegate <NSObject>
 
--(void)hangupBtnAction;
+-(void)waitforAnswerViewHangupAction;
 
 @end
 

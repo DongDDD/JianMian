@@ -16,13 +16,17 @@ NS_ASSUME_NONNULL_BEGIN
 //-(void)sendIndex:(NSString *)
 //
 //@end
+typedef NS_ENUM(NSInteger, JobDetailsViewType) {
+    JobDetailsViewTypeDefault,
+    JobDetailsViewTypeEdit,
+};
 
 
 @interface JobDetailsViewController : BaseViewController
 
 @property(nonatomic,strong)JMHomeWorkModel *homeworkModel;
 @property (nonatomic, strong) NSString *status;
-
+@property(nonatomic, assign)JobDetailsViewType viewType;
 @end
 
 NS_ASSUME_NONNULL_END

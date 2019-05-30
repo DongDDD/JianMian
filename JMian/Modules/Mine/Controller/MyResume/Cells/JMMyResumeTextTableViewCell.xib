@@ -11,15 +11,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="JMMyResumeTextTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="148" id="KGk-i7-Jjw" customClass="JMMyResumeTextTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="148"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="147.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcj-hb-5o0">
-                        <rect key="frame" x="20" y="1" width="280" height="108.5"/>
+                        <rect key="frame" x="20" y="10" width="280" height="132.5"/>
                         <string key="text">本人性格热情开朗，待人友好，为人诚实谦虚。工作勤
 奋认真负责，能吃苦耐劳，尽职尽责，有耐心。具有亲
 和力，平易近人，善于与人沟通。 学习刻苦认真，成
@@ -31,15 +31,16 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="qcj-hb-5o0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="1" id="3Qn-m0-jAQ"/>
-                    <constraint firstAttribute="bottom" secondItem="qcj-hb-5o0" secondAttribute="bottom" constant="-30" id="BM0-3G-Z9c"/>
+                    <constraint firstAttribute="bottom" secondItem="qcj-hb-5o0" secondAttribute="bottom" constant="5" id="WcW-ei-Tf1"/>
                     <constraint firstItem="qcj-hb-5o0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="b9X-FU-0GN"/>
                     <constraint firstAttribute="trailing" secondItem="qcj-hb-5o0" secondAttribute="trailing" constant="20" id="maY-Z6-ceX"/>
+                    <constraint firstItem="qcj-hb-5o0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="rGJ-We-HZg"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="qcj-hb-5o0" id="hix-oR-Nsj"/>
             </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="112.5"/>
         </tableViewCell>
     </objects>
 </document>

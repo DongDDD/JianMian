@@ -13,6 +13,9 @@
 #import "JMHTTPManager+Login.h"
 #import <UIButton+WebCache.h>
 #import "Masonry.h"
+#import "LoginViewController.h"
+#import "NavigationViewController.h"
+#import "JMJudgeViewController.h"
 
 
 
@@ -21,6 +24,7 @@
 @property(nonatomic,strong)NSNumber *sex;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
+@property (nonatomic,copy)NSString *imageUrl;
 @property (weak, nonatomic) IBOutlet UIButton *headerImg;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIButton *birtnDateBtn;
@@ -34,8 +38,7 @@
 @property (nonatomic, assign)CGFloat changeHeight;
 
 @property(nonatomic,strong) UIView *bgView;
-
-
+@property(nonatomic,strong)UIButton *moreBtn;
 @end
 
 @implementation BasicInformationViewController
@@ -43,12 +46,93 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    if (self.viewType == BasicInformationViewTypeEdit) {
+        [self setIsHiddenBackBtn:NO];
+    }else{
+        [self setIsHiddenBackBtn:YES];
+    }
+    [self.scrollView addSubview:self.moreBtn];
+    [self.view addSubview:_datePicker];
+    [self getNewUserInfo];
+    self.nameText.delegate = self;
+//    self.birthDateText.inputView = self.datePicker;
+    // Do any additional setup after loading the view from its nib.
+}
+
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //从沙盒拿
+    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+    
+    [_headerImg setImage:savedImage forState:UIControlStateNormal];
+    //    [imge setImage:savedImage];
+    
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT*1.5);
+
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)getNewUserInfo{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        [self initView];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+    self.datePicker.hidden = YES;
+    NSDictionary *userInfo = aNotification.userInfo;
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    _keyboardRect = aValue.CGRectValue;
+    
+    CGRect keyboardRect = aValue.CGRectValue;
+    CGRect frame = self.emailText.frame;
+    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
+    CGRect rect= CGRectMake(0,_changeHeight+30,SCREEN_WIDTH,SCREEN_HEIGHT);
+    [UIView animateWithDuration:0.3 animations:^ {
+        self.view.frame = rect;
+        
+    }];
+    
+
+ 
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    [UIView animateWithDuration:0.3 animations:^ {
+        self.view.frame = CGRectMake(0,64,SCREEN_WIDTH,SCREEN_HEIGHT);
+        
+    }];
+
+}
+
+
+-(void)initView{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//    self.model = userModel;
     if (self.model) {
         [self setRightBtnTextName:@"保存"];
-        self.nameText.text = self.model.nickname;
-        [self.birtnDateBtn setTitle:self.model.card_birthday forState:UIControlStateNormal];
-        self.emailText.text = self.model.email;
-        [self.headerImg sd_setImageWithURL:[NSURL URLWithString:self.model.avatar] forState:UIControlStateNormal];
+        self.nameText.text = userModel.nickname;
+        [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+        [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
+        self.emailText.text = userModel.email;
+        [self.headerImg sd_setImageWithURL:[NSURL URLWithString:userModel.avatar] forState:UIControlStateNormal];
         if ([self.model.realSex isEqualToString:@"1"]) {
             [self.womanBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
         }else {
@@ -64,7 +148,7 @@
     self.emailText.keyboardType = UIKeyboardTypeEmailAddress;
     self.nameText.delegate = self;
     self.scrollView.delegate = self;
-
+    
     
     _bgView = [[UIView alloc]init];
     _bgView.backgroundColor = [UIColor grayColor];
@@ -86,121 +170,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-//    self.birthDateText.inputView = self.datePicker;
-    // Do any additional setup after loading the view from its nib.
-}
-
-
-
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
-    //从沙盒拿
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
-    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    
-    [_headerImg setImage:savedImage forState:UIControlStateNormal];
-    //    [imge setImage:savedImage];
-    
-    
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, _emailText.frame.origin.y+_emailText.frame.size.height+50);
-
-
 
 }
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)keyboardWillShow:(NSNotification *)aNotification {
-    self.datePicker.hidden = YES;
-    NSDictionary *userInfo = aNotification.userInfo;
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-//    _keyboardRect = aValue.CGRectValue;
-    
-    CGRect keyboardRect = aValue.CGRectValue;
-    CGRect frame = self.emailText.frame;
-    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-    CGRect rect= CGRectMake(0,_changeHeight+30,SCREEN_WIDTH,SCREEN_HEIGHT);
-    [UIView animateWithDuration:0.3 animations:^ {
-        self.view.frame = rect;
-        
-    }];
-    
-    
-    /* 输入框上移 */
-    //    CGFloat padding = 20;
-//    CGRect frame = self.nameText.frame;
-//    self.changeHeight = _keyboardRect.size.height - (frame.origin.y+frame.size.height);
-//    if (self.changeHeight < 0) {
-//        [UIView animateWithDuration:0.3 animations:^ {
-//
-//            self.topToView.constant += self.changeHeight-10;
-//
-//        }];
-//    }
- 
-}
-
-- (void)keyboardWillHide:(NSNotification *)aNotification {
-    [UIView animateWithDuration:0.3 animations:^ {
-        self.view.frame = CGRectMake(0,64,SCREEN_WIDTH,SCREEN_HEIGHT);
-        
-    }];
-
-}
-//
-//
-//-(void)textFieldDidEndEditing:(UITextField *)textField
-//{
-//    float width = SCREEN_WIDTH;
-//    float height = SCREEN_HEIGHT;
-//    self.scrollView.frame= CGRectMake(0,0,width,height);
-//}
-//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-//{
-//    if (textField == _nameText) {
-//        CGRect frame = self.nameText.frame;
-//        self.changeHeight = _keyboardRect.size.height - (frame.origin.y+frame.size.height);
-//        float width = SCREEN_WIDTH;
-//        float height = SCREEN_HEIGHT;
-//        //上移n个单位，按实际情况设置
-//
-//        CGRect rect= CGRectMake(0,_changeHeight,width,height);
-//        [UIView animateWithDuration:0.3 animations:^ {
-//            self.scrollView.frame = rect;
-//
-//        }];
-//
-//    }else if (textField == _emailText){
-//
-//        CGRect frame = _emailText.frame;
-//        self.changeHeight = _keyboardRect.size.height - (frame.origin.y+frame.size.height);
-//        float width = SCREEN_WIDTH;
-//        float height = SCREEN_HEIGHT;
-//        //上移n个单位，按实际情况设置
-//
-//        CGRect rect= CGRectMake(0,_changeHeight,width,height);
-//        [UIView animateWithDuration:0.3 animations:^ {
-//            self.scrollView.frame = rect;
-//
-//        }];
-//
-//    }
-//
-//
-//    return YES;
-//
-//
-//}
-//
-//
 
 - (IBAction)datePickerViewChange:(id)sender {
     
@@ -215,7 +186,17 @@
     
 }
 
+
+
 - (IBAction)showDatePeckerAction:(id)sender {
+    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+    if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改出生年月"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    
     self.datePicker.hidden = NO;
     [_bgView setHidden:NO];
     [_nameText resignFirstResponder];
@@ -296,16 +277,100 @@
         
         [self presentViewController:imagePickerController animated:YES completion:^{}];
         
+    }else if(actionSheet.tag == 254){
+        switch (buttonIndex) {
+            case 0:
+                // 取消
+                return;
+            case 1:
+                // 切换身份
+//                sourceType = UIImagePickerControllerSourceTypeCamera;
+                [self changeIdentify];
+                break;
+                
+            case 2:
+                // 退出登录
+                [self logout];
+//                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                break;
+        }
+   
     }
 }
 
+-(void)changeIdentify{
+    [[JMHTTPManager sharedInstance]userChangeWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        kSaveMyDefault(@"usersig", userInfo.usersig);
+        NSLog(@"usersig-----:%@",userInfo.usersig);
+        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        [[TIMManager sharedInstance] logout:^() {
+            NSLog(@"logout succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"logout fail: code=%d err=%@", code, err);
+        }];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
+-(void)logout{
+    [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        kRemoveMyDefault(@"token");
+        kRemoveMyDefault(@"usersig");
+        //token为空执行
+        
+        [[TIMManager sharedInstance] logout:^() {
+            NSLog(@"logout succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"logout fail: code=%d err=%@", code, err);
+        }];
+        LoginViewController *login = [[LoginViewController alloc] init];
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
+
+
+}
+
+#pragma mark -textField delegte
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if (textField == self.nameText) {
+        JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+        if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改名字"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+            
+            return NO;
+        }
+        
+        
+    }
+    return YES;
+}
 
 #pragma mark -scrollView delegte
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     self.datePicker.hidden = YES;
-    
+    [self.nameText resignFirstResponder];
+    [self.emailText resignFirstResponder];
 }
+
+
+
 
 // 图片选择结束之后，走这个方法，字典存放所有图片信息
 #pragma mark - image picker delegte
@@ -356,12 +421,26 @@
     
     [imageData writeToFile:fullPath atomically:NO];
     
+    NSArray *array = @[currentImage];
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            
+            _imageUrl = responsObject[@"data"][0];
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
     
 }
 
 #pragma mark - 点击事件
 
 - (IBAction)manBtn:(id)sender {
+    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+    if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
+     
+        return;
+    }
     self.sex = @(1);
     // 恢复上一个按钮颜色
     [self.womanBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
@@ -380,6 +459,11 @@
 }
 
 - (IBAction)womanBtn:(id)sender {
+    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+    if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
+      
+        return;
+    }
     self.sex = @(2);
     // 恢复上一个按钮颜色
     [self.manBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
@@ -398,13 +482,14 @@
 
 
 
+
 #pragma mark - 数据提交到服务器
 
 
 -(void)rightAction{
 
    
-        [[JMHTTPManager sharedInstance] updateUserInfoType:@(1) password:nil avatar:nil nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance] updateUserInfoType:@(1) password:nil avatar:_imageUrl nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             
             [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -428,6 +513,29 @@
             
         }];
   
+}
+
+-(void)moreAction{
+
+    UIActionSheet *sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"切换身份",@"退出登录", nil];
+    sheet.tag = 254;
+    
+    [sheet showInView:self.view];
+    
+}
+
+#pragma mark - lazy
+
+-(UIButton *)moreBtn{
+    if (_moreBtn == nil) {
+        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.emailText.frame.origin.y+self.emailText.frame.size.height+20, SCREEN_WIDTH, 40)];
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+
+        [_moreBtn setTitle:@"更多操作" forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [_moreBtn addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _moreBtn;
 }
 
 /*

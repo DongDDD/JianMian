@@ -12,14 +12,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHTTPManager (Job)
 
-- (void)updateJobWithJobId:(NSNumber *)jobId
-              job_label_id:(nullable NSNumber *)job_label_id
-         industry_label_id:(nullable NSNumber *)industry_label_id
-                   city_id:(nullable NSNumber *)city_id
-                salary_min:(nullable NSNumber *)salary_min
-                salary_max:(nullable NSNumber *)salary_max
-                status:(nullable NSNumber *)status
-                                    successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+- (void)updateJobWith_user_job_id:(NSString *)user_job_id
+                     job_label_id:(nullable NSString *)job_label_id
+                industry_label_id:(nullable NSString *)industry_label_id
+                          city_id:(nullable NSString *)city_id
+                       salary_min:(nullable NSString *)salary_min
+                       salary_max:(nullable NSString *)salary_max
+                           status:(nullable NSString *)status
+                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBloc;
 
 
 @end

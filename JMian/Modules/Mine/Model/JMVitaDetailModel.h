@@ -13,8 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMVitaDetailModel : NSObject
 
 @property (copy, nonatomic) NSString *user_job_id;
-
 @property (copy, nonatomic) NSString *user_id;
+
+@property (copy, nonatomic) NSString *favorites_favorite_id;
 @property (copy, nonatomic) NSString *job_label_id;
 @property (copy, nonatomic) NSString *industry_label_id;
 @property (copy, nonatomic) NSString *city_id;
@@ -25,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *user_nickname;
 @property (copy, nonatomic) NSString *user_avatar;
 @property (copy, nonatomic) NSString *vita_work_start_date;
-@property (copy, nonatomic) NSString *vita_work_status;
+@property (copy, nonatomic) NSString *work_status;
 @property (copy, nonatomic) NSString *vita_education;
 @property (copy, nonatomic) NSString *vita_description;
 @property (copy, nonatomic) NSString *work_start_date;
@@ -35,10 +36,34 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *city_name;
 @property (copy, nonatomic) NSString *city_is_hot;
 @property (copy, nonatomic) NSString *city_label_id;
+
+@property (copy, nonatomic) NSString *video_file_path;
+@property (copy, nonatomic) NSString *video_status;
+@property (copy, nonatomic) NSString *video_type;
+
 @property (strong, nonatomic) NSArray *experiences;
 @property (strong, nonatomic) NSArray *shielding;
-@property (strong, nonatomic) NSArray *education;
+@property (strong, nonatomic) NSArray *learning;//C我的简历 的
 @property (strong, nonatomic) NSArray *files;
+@property (strong, nonatomic) NSArray *jobs;
+@property (strong, nonatomic) NSArray *education;//B看个人详情 的
+
+
+
+
+@end
+
+
+@interface JMMyJobsModel : NSObject
+
+@property (nonatomic, copy) NSString *salary_max;
+@property (nonatomic, copy) NSString *salary_min;
+@property (nonatomic, copy) NSString *work_name;
+@property (nonatomic, copy) NSString *job_label_id;
+@property (nonatomic, copy) NSString *city_city_name;
+@property (nonatomic, copy) NSString *city_id;
+@property (nonatomic, copy) NSString *user_job_id;
+
 
 
 @end
@@ -75,7 +100,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface JMEducationModel : NSObject
+@interface JMLearningModel : NSObject
 
 @property (copy, nonatomic) NSString *education_id;
 @property (copy, nonatomic) NSString *education;
@@ -87,6 +112,20 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *education_description;
 @property (copy, nonatomic) NSString *school_name;
 
+@end
+
+//B端的model，个人详情页面
+@interface JMEducationModel : NSObject
+
+@property (copy, nonatomic) NSString *s_date;
+@property (copy, nonatomic) NSString *major;
+@property (copy, nonatomic) NSString *e_date;
+@property (copy, nonatomic) NSString *education_id;
+@property (copy, nonatomic) NSString *school_school_name;
+//@property (strong, nonatomic) NSDate *s_date;
+//@property (strong, nonatomic) NSDate *e_date;
+@property (copy, nonatomic) NSString *education;
+@property (copy, nonatomic) NSString *description;
 
 @end
 

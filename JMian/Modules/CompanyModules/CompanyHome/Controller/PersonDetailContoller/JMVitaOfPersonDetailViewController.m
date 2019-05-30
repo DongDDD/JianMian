@@ -14,9 +14,6 @@
 #import "Masonry.h"
 #import "JMVitaDetailModel.h"
 
-
-
-
 @interface JMVitaOfPersonDetailViewController ()
 
 @property(nonatomic,assign)CGFloat decriContentH;
@@ -28,9 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
  
-    
+
     [self setUI];
-    
     
 }
 
@@ -70,9 +66,8 @@
         }];
     }
 
-    
-
     JMSelfDescriptionView *descriptionView = [[JMSelfDescriptionView alloc]init];
+    descriptionView.content = self.vitaDescription;
     [self.view addSubview:descriptionView];
 
     [descriptionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,19 +76,34 @@
         make.bottom.mas_equalTo(descriptionView.contentLabel.mas_bottom).offset(30);
     }];
 //
-//
-    JMEducationView *educationView = [[JMEducationView alloc]init];
-    [self.view addSubview:educationView];
-
-    [educationView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(descriptionView.mas_bottom);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.height.mas_equalTo(248);
-    }];
-
+//(0,descriptionView.frame.origin.y+descriptionView.frame.size.height,lastView.frame.origin.y+lastView.frame.size.height, SCREEN_WIDTH, 248)
     [self.view layoutIfNeeded];
-    //    scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, 1500);
-    !self.didLoadView ? : self.didLoadView(educationView.frame.origin.y+educationView.frame.size.height+300);
+
+    if (self.educationArray.count > 0) {
+        UIView * lastView ;
+        for (int i=0; i<self.educationArray.count; i++) {
+            CGFloat Y = descriptionView.frame.origin.y+descriptionView.frame.size.height + lastView.frame.origin.y+lastView.frame.size.height;
+            JMEducationView *educationView = [[JMEducationView alloc]initWithFrame:CGRectMake(0, Y,SCREEN_WIDTH, 248)];
+            educationView.model = self.educationArray[i];
+            [self.view addSubview:educationView];
+//            [educationView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.top.mas_equalTo(descriptionView.mas_bottom);
+//                make.width.mas_equalTo(SCREEN_WIDTH);
+//                make.height.mas_equalTo(248);
+//            }];
+            lastView = educationView;
+            
+        }
+        !self.didLoadView ? : self.didLoadView(lastView.frame.origin.y+lastView.frame.size.height+300);
+        
+    }else{
+        
+        !self.didLoadView ? : self.didLoadView(descriptionView.frame.origin.y+descriptionView.frame.size.height+400);
+
+    
+    }
+    
+    
 
 }
 

@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMVideoChatViewDelegate <NSObject>
 
 -(void)swicthCameraAction;//切换镜头
--(void)hangupAction;
+-(void)hangupAction_model:(JMInterViewModel *)model;
 @end
 
 

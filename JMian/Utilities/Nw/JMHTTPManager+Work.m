@@ -94,6 +94,43 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Work_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
+- (void)updateWorkWith_Id:(NSString *)Id
+                 city_id:(NSString *)city_id
+            work_label_id:(NSString *)work_label_id
+                work_name:(NSString *)work_name
+                education:(NSNumber *)education
+      work_experience_min:(NSNumber *)work_experience_min
+      work_experience_max:(NSNumber *)work_experience_max
+               salary_min:(NSNumber *)salary_min
+               salary_max:(NSNumber *)salary_max
+              description:(NSString *)description
+                  address:(NSString * )address
+                longitude:(NSString *)longitude
+                 latitude:(NSString *)latitude
+                   status:(NSString *)status
+                label_ids:(nullable NSArray *)label_ids
+             SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSString *urlStr = [Update_Work_URL stringByAppendingFormat:@"/%@",Id];
+
+    NSDictionary *dic =     @{
+                              @"city_id":city_id,
+                              @"work_label_id":work_label_id,
+                              @"work_name":work_name,
+                              @"education":education,
+                              @"work_experience_min":work_experience_min,
+                              @"work_experience_max":work_experience_max,
+                              @"salary_min":salary_min,
+                              @"salary_max":salary_max,
+                              @"description":description,
+                              @"address":address,
+                              @"longitude":longitude,
+                              @"latitude":latitude,
+                              @"status":status,
+                              @"label_ids":label_ids
+                              
+                              };
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+}
 
 
 @end

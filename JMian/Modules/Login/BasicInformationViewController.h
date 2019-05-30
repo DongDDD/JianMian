@@ -11,11 +11,16 @@
 #import "JMUserInfoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, BasicInformationViewType) {
+    BasicInformationViewTypeDefault,
+    BasicInformationViewTypeEdit,
+};
+
 
 @interface BasicInformationViewController : BaseViewController
 
-@property (strong, nonatomic) JMUserInfoModel *model;
-
+@property (strong, nonatomic)JMUserInfoModel *model;
+@property (assign, nonatomic)BasicInformationViewType viewType;
 @end
 
 NS_ASSUME_NONNULL_END

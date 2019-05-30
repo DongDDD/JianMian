@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCompanyHomeModel : NSObject
 
+@property (nonatomic, strong) NSString *vita_description;
 @property (nonatomic, strong) NSString *user_job_id;
 @property (nonatomic, strong) NSString *user_id;
 

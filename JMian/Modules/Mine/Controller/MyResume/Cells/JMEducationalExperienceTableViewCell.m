@@ -29,7 +29,7 @@ NSString *const JMEducationalExperienceTableViewCellIdentifier = @"JMEducational
     // Configure the view for the selected state
 }
 
-- (void)setEducationExperienceModel:(JMEducationModel *)model {
+- (void)setEducationExperienceModel:(JMLearningModel *)model {
     self.schoolNameLabel.text = model.school_name;
 }
 @end

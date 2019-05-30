@@ -19,7 +19,7 @@ typedef NS_ENUM(NSInteger, JMEducationExperienceViewType) {
 @interface JMEducationExperienceViewController : BaseViewController
 
 @property (assign, nonatomic) JMEducationExperienceViewType viewType;
-@property (strong, nonatomic) JMEducationModel *model;
+@property (strong, nonatomic) JMLearningModel *model;
 
 @end
 

@@ -12,6 +12,10 @@
 #import "JMHTTPManager+Vita.h"
 #import "Masonry.h"
 #import "JMHTTPManager+Login.h"
+#import "JMJudgeViewController.h"
+#import "NavigationViewController.h"
+#import "LoginViewController.h"
+
 
 typedef enum _PickerState {
     SalaryState,
@@ -42,6 +46,7 @@ typedef enum _PickerState {
 
 @property (nonatomic,assign) _PickerState pickerState;
 
+@property(nonatomic,strong)UIButton *moreBtn;
 
 @end
 
@@ -50,15 +55,18 @@ typedef enum _PickerState {
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
-  
+    [self setIsHiddenBackBtn:YES];
+    [self.scrollView addSubview:self.moreBtn];
+
     [self setRightBtnTextName:@"下一步"];
     
     self.statusNum = @(1);
     
-    self.datePicker.backgroundColor = [UIColor whiteColor];
+    self.datePicker.backgroundColor = BG_COLOR;
     
     [self setPickerVIewUI];
-    
+    [self.view addSubview:_datePicker];
+
     self.scrollView.delegate = self;
     
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
@@ -71,7 +79,7 @@ typedef enum _PickerState {
 
 -(void)setPickerVIewUI{
      self.pickerView = [[UIPickerView alloc]init];
-    
+    self.pickerView.backgroundColor = BG_COLOR;
     self.pickerView.delegate = self;
     
     self.pickerView.dataSource = self;
@@ -86,7 +94,7 @@ typedef enum _PickerState {
         make.bottom.mas_equalTo(self.view.mas_bottom);
     }];
 
-    self.pickerArray = [NSArray arrayWithObjects:@"请选择",@"初中/中专",@"高中",@"大专",@"本科",@"研究生",@"博士",nil];
+    self.pickerArray = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
 
 }
 
@@ -144,7 +152,7 @@ typedef enum _PickerState {
 
 
 - (IBAction)chooseEducationAction:(UIButton *)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+    self.pickerArray = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
     
     [self.pickerView setHidden:NO];
     [self.datePicker setHidden:YES];
@@ -285,6 +293,98 @@ typedef enum _PickerState {
     [self.datePicker setHidden:YES];
     [self.pickerView setHidden:YES];
     
+}
+
+-(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if(actionSheet.tag == 254){
+        switch (buttonIndex) {
+            case 0:
+                // 取消
+                return;
+            case 1:
+                // 切换身份
+                //                sourceType = UIImagePickerControllerSourceTypeCamera;
+                [self changeIdentify];
+                break;
+                
+            case 2:
+                // 退出登录
+                [self logout];
+                //                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                break;
+        }
+        
+        
+    }
+}
+
+-(void)changeIdentify{
+    [[JMHTTPManager sharedInstance]userChangeWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        kSaveMyDefault(@"usersig", userInfo.usersig);
+        NSLog(@"usersig-----:%@",userInfo.usersig);
+        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        [[TIMManager sharedInstance] logout:^() {
+            NSLog(@"logout succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"logout fail: code=%d err=%@", code, err);
+        }];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+-(void)logout{
+    [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        kRemoveMyDefault(@"token");
+        kRemoveMyDefault(@"usersig");
+        //token为空执行
+        
+        [[TIMManager sharedInstance] logout:^() {
+            NSLog(@"logout succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"logout fail: code=%d err=%@", code, err);
+        }];
+        LoginViewController *login = [[LoginViewController alloc] init];
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
+    
+    
+}
+
+
+-(void)moreAction{
+    
+    UIActionSheet *sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"切换身份",@"退出登录", nil];
+    sheet.tag = 254;
+    
+    [sheet showInView:self.view];
+    
+}
+
+
+-(UIButton *)moreBtn{
+    if (_moreBtn == nil) {
+        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.educationBtn.frame.origin.y+self.educationBtn.frame.size.height+30, SCREEN_WIDTH, 40)];
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+
+        [_moreBtn setTitle:@"更多操作" forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [_moreBtn addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _moreBtn;
 }
 
 //- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component{

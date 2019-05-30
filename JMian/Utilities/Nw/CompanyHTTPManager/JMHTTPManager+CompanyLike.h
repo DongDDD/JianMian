@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)createLikeWith_type:(nullable NSString *)type
-                         Id:(nullable NSString *)Id
+                         Id:(NSString *)Id
                SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 @end

@@ -31,6 +31,13 @@
 @property (weak, nonatomic) IBOutlet UIButton *companyRequireBtn;//公司要求
 
 @property (nonatomic, strong) NSMutableArray *arrDate;
+@property(nonatomic,copy)NSString *city_id;
+@property(nonatomic,copy)NSString *work_lab_id;
+@property(nonatomic,copy)NSString *education;
+@property(nonatomic,copy)NSString *work_year_s;
+@property(nonatomic,copy)NSString *work_year_e;
+@property(nonatomic,copy)NSString *salary_min;
+@property(nonatomic,copy)NSString *salary_max;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,assign)NSInteger per_page;
 @property(nonatomic,assign)BOOL isShowAllData;
@@ -80,7 +87,9 @@ static NSString *cellIdent = @"cellIdent";
     self.tableView = [[UITableView alloc]init];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
+    self.tableView.estimatedRowHeight = 0;
+    self.tableView.estimatedSectionHeaderHeight = 0;
+    self.tableView.estimatedSectionFooterHeight = 0;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 141;
@@ -99,7 +108,7 @@ static NSString *cellIdent = @"cellIdent";
         make.bottom.mas_equalTo(self.view);
     }];
     
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getHomeListData)];
+    MJRefreshNormalHeader *header =  [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
@@ -114,28 +123,53 @@ static NSString *cellIdent = @"cellIdent";
     self.progressHUD.dimBackground = NO; //设置有遮罩
     [self.progressHUD showAnimated:YES]; //显示进度框
     [self.view addSubview:self.progressHUD];
-    
 }
-
 -(void)setupUpRefresh
 {
-    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+    
+    // 设置文字
+    [footer setTitle:@"上拉加载更多" forState:MJRefreshStateIdle];
+    [footer setTitle:@"加载更多 ..." forState:MJRefreshStateRefreshing];
+    [footer setTitle:@"没有更多数据了" forState:MJRefreshStateNoMoreData];
+    // 设置字体
+    footer.stateLabel.font = [UIFont systemFontOfSize:14];
+    // 设置颜色
+    footer.stateLabel.textColor = MASTER_COLOR;
+    
+    // 设置footer
+    self.tableView.mj_footer = footer;
+    //     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
 }
-#pragma mark - 下拉刷新 -
+//-(void)setupUpRefresh
+//{
+//
+//
+//
+//    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+//}
+#pragma mark - 刷新数据 -
 
 //-(void)loadNewData
 //{
 //
 //    [self getHomeListData];
 //}
+
 -(void)loadMoreBills
 {
-    if (_isShowAllData == NO) {
-        self.page += 1;
-        [self getHomeListData];
-    }
+    self.page += 1;
+    [self getHomeListData];
+    
 }
 
+-(void)refreshData
+{
+    [self.arrDate removeAllObjects];
+    _page = 1;
+    [self getHomeListData];
+  
+}
 
 #pragma mark - 点击事件 -
 
@@ -152,15 +186,21 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)rightAction{
     NSLog(@"搜索");
-    LoginViewController *vc = [[LoginViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+   
+  
 }
 
 -(void)getHomeListData{
 
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-    [[JMHTTPManager sharedInstance]fetchWorkPaginateWith_city_ids:nil company_id:nil label_id:nil work_label_id:nil education:nil experience_min:nil experience_max:nil salary_min:nil salary_max:nil subway_names:nil status:@"1" page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    NSArray *citys = [NSArray array];
+    if (_city_id!=nil) {
+        citys = @[_city_id];
+    }else{
+        citys = @[];
+    }
+    [[JMHTTPManager sharedInstance]fetchWorkPaginateWith_city_ids:citys company_id:nil label_id:nil work_label_id:_work_lab_id education:self.education experience_min:_work_year_s experience_max:_work_year_e salary_min:self.salary_min salary_max:self.salary_max subway_names:nil status:@"1" page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         if (responsObject[@"data"]) {
             NSMutableArray *modelArray = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
@@ -168,17 +208,15 @@ static NSString *cellIdent = @"cellIdent";
                 
                 [self.arrDate addObjectsFromArray:modelArray];
                 //                [self getPlayerArray];
-                [self.tableView reloadData];
-                [self.tableView.mj_header endRefreshing];
-                [self.tableView.mj_footer endRefreshing];
             }else{
                 _isShowAllData = YES;
-                [self.tableView.mj_footer setHidden:YES];
-
             }
         }
+        [self.tableView reloadData];
         [self.progressHUD setHidden:YES];
-        
+
+        [self.tableView.mj_footer endRefreshing];
+        [self.tableView.mj_header endRefreshing];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -227,10 +265,14 @@ static NSString *cellIdent = @"cellIdent";
 
 
 -(void)resetAction{
+    [self.labschooseVC.view setHidden:YES];
+    [self.tableView.mj_header beginRefreshing];
+
 }
 
 -(void)OKAction
 {
+    self.arrDate = [NSMutableArray array];
     [self.labschooseVC.view setHidden:YES];
     [self.tableView.mj_header beginRefreshing];
 
@@ -277,6 +319,15 @@ static NSString *cellIdent = @"cellIdent";
     [self.companyRequireBtn setBackgroundColor:[UIColor whiteColor]];
     [self.companyRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:YES];
+    _page = 1;
+    _city_id = nil;
+    _work_year_e = nil;
+    _work_year_s = nil;
+    _work_lab_id = nil;
+    _education = nil;
+    _salary_max = nil;
+    _salary_min = nil;
+    [self.tableView.mj_header beginRefreshing];
 }
 
 #pragma mark - 职位筛选 -
@@ -294,6 +345,8 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
+    _work_lab_id = labIDStr;
+    [self.arrDate removeAllObjects];
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -309,6 +362,47 @@ static NSString *cellIdent = @"cellIdent";
     [self.labschooseVC.view setHidden:NO];
 
  
+}
+
+-(void)didSelectedCity_id:(NSString *)city_id city_name:(NSString *)city_name{
+    _city_id = city_id;
+    _page = 1;
+    [self.arrDate removeAllObjects];
+    [self.tableView.mj_header beginRefreshing];
+}
+
+//人才要求
+-(void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index{
+    
+    if ([str isEqualToString:@"最低学历"]) {
+            self.education = [NSString stringWithFormat:@"%ld",(long)(index)];
+   
+        NSLog(@"学历：%@",self.education);
+    
+        
+    }else if ([str isEqualToString:@"工作经历"]) {
+        NSString *exp = [self getArray_index:index];
+        if (![exp isEqualToString:@"全部"] && ![exp isEqualToString:@"应届生"]) {
+            self.work_year_e = [exp substringToIndex:0];
+            self.work_year_s = [exp substringToIndex:3];
+            
+        }else if([exp isEqualToString:@"应届生"]){
+            
+            
+            
+        }
+        //        self.work_year_s
+    }
+    
+}
+-(NSString *)getArray_index:(NSInteger )index
+{
+    NSArray *array;
+    
+    array = @[@"全部",@"应届生",@"1年",@"1～3年",@"3～5年",@"5～10年",@"10年以上"];
+    
+    return array[index];
+    
 }
 
 -(void)playAction_cell:(HomeTableViewCell *)cell model:(JMHomeWorkModel *)model{
@@ -347,8 +441,11 @@ static NSString *cellIdent = @"cellIdent";
     cell.indexpath = indexPath;
     cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    JMHomeWorkModel *model = self.arrDate[indexPath.row];
-    [cell setModel:model];
+    if (self.arrDate.count > 0) {
+        JMHomeWorkModel *model = self.arrDate[indexPath.row];
+        
+        [cell setModel:model];
+    }
    
     return cell;
     

@@ -18,6 +18,8 @@
         
         self.backgroundColor = [UIColor blackColor];
         [self initView];
+//        [self playSounds];
+//        [_player play];
     }
     return self;
 }
@@ -57,7 +59,7 @@
     
     UIButton *hangupBtn = [[UIButton alloc]init];
     [hangupBtn setImage:[UIImage imageNamed:@"hangUpButton"] forState:UIControlStateNormal];
-    [hangupBtn addTarget: self action:@selector(hangupBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [hangupBtn addTarget: self action:@selector(closeBtnAction) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:hangupBtn];
     
     [hangupBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -84,17 +86,30 @@
     if (_delegate && [_delegate respondsToSelector:@selector(answerAction)]) {
         [_delegate answerAction];
     }
+}
 
-
+-(void)closeBtnAction{
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickClose)]) {
+        [_delegate didClickClose];
+    }
+   
 }
 
 
--(void)hangupBtnAction{
-    if (_delegate && [_delegate respondsToSelector:@selector(hangupAction)]) {
-        [_delegate hangupAction];
-    }
+-(void)playSounds{
+    NSError *err;
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"Crystal" withExtension:@"mp3"];
+    //    初始化播放器
+    _player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&err];
+    //    设置播放器声音
+    //    设置播放速率
+    _player.rate = 1.0;
+    //    设置播放次数 负数代表无限循环
+    _player.numberOfLoops = -1;
+    //    准备播放
+    [_player prepareToPlay];
     
-    
+    //    _timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(change) userInfo:nil repeats:YES];
 }
 /*
 // Only override drawRect: if you perform custom drawing.

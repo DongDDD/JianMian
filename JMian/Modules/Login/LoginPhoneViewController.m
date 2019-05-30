@@ -12,6 +12,7 @@
 #import "JMHTTPManager+Captcha.h"
 #import "VendorKeyMacros.h"
 #import "JMJudgeViewController.h"
+#import "NavigationViewController.h"
 
 @interface LoginPhoneViewController ()<UIActionSheetDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumText;
@@ -19,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *VerifyBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topToView;//手机图片到父视图顶部约束距离，因为要上移动的控件受约束于手机图标，
 @property (nonatomic, assign)CGFloat changeHeight;
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
+
 
 @end
 
@@ -38,50 +41,37 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-- (void)keyboardWillShow:(NSNotification *)aNotification {
 
-    /* 获取键盘的高度 */
+- (void)keyboardWillShow:(NSNotification *)aNotification {
     NSDictionary *userInfo = aNotification.userInfo;
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    //    _keyboardRect = aValue.CGRectValue;
+    
     CGRect keyboardRect = aValue.CGRectValue;
-    /* 输入框上移 */
-//    CGFloat padding = 20;
     CGRect frame = self.captchaText.frame;
     self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-    if (self.changeHeight < 0) {
-        [UIView animateWithDuration:0.3 animations:^ {
-            
-            self.topToView.constant += self.changeHeight-10;
-                                        
-        }];
-    }
-//    CGFloat height = SCREEN_HEIGHT - frame.origin.y - frame.size.height;
-//    if (height < keyboardRect.size.height + padding) {
-//
-//        [UIView animateWithDuration:0.3 animations:^ {
-//
-//            CGRect frame = self.view.frame;
-//            frame.origin.y = -(keyboardRect.size.height - height + padding);
-//            self.view.frame = frame;
-//        }];
-//    }
+    CGRect rect= CGRectMake(0,_changeHeight+30,SCREEN_WIDTH,SCREEN_HEIGHT);
+    [UIView animateWithDuration:0.3 animations:^ {
+        self.view.frame = rect;
+        
+    }];
+    
+    
+    
 }
 
 
 - (void)keyboardWillHide:(NSNotification *)aNotification {
-    if (self.changeHeight < 0) {
-        [UIView animateWithDuration:0.3 animations:^ {
-            self.topToView.constant -= self.changeHeight-10;
-            
-        }];
-  
-    }
-
-
+    [UIView animateWithDuration:0.3 animations:^ {
+        self.view.frame = CGRectMake(0,64,SCREEN_WIDTH,SCREEN_HEIGHT);
+        
+    }];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -96,47 +86,27 @@
 #pragma mark - 数据请求
 
 - (IBAction)loginPhoneBtn:(id)sender {
-    
+//    [self.view addSubview:self.progressHUD];
     [[JMHTTPManager sharedInstance]loginWithMode:@"sms" phone:self.phoneNumText.text captcha:self.captchaText.text sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         JMUserInfoModel *model = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         
         [JMUserInfoManager saveUserInfo:model];
         
-
         NSLog(@"用户手机号：----%@",model.phone);
         
         kSaveMyDefault(@"usersig", model.usersig);
-//        TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
-//        // identifier 为用户名，userSig 为用户登录凭证
-//        login_param.identifier = kFetchMyDefault(@"usersig");
-//        login_param.userSig = model.usersig;
-//        login_param.appidAt3rd = @"1400193090";
-//        [[TIMManager sharedInstance] login: login_param succ:^(){
-//
-//            NSLog(@"Login Succ");
-//
-//        } fail:^(int code, NSString * err) {
-//
-//            NSLog(@"Login Failed: %d->%@", code, err);
-//
-//        }];
-        
-        
+    
         JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+
         [self.navigationController pushViewController:vc animated:YES];
-        
+//        [self.progressHUD setHidden:YES];
 //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
 //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
 //       [alert show];
-        
-        
-        
-        
-        
+     
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-        
+     
     }];
     
     
@@ -147,7 +117,11 @@
 
 - (IBAction)verifyAction:(id)sender {
     [[JMHTTPManager sharedInstance]loginCaptchaWithPhone:self.phoneNumText.text mode:@3 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发送成功"
+//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//        [alert show];
+//        
+//        [self.view addSubview:self.progressHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];
@@ -199,28 +173,18 @@
 }
 
 
-#pragma mark - image picker delegte
-//- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-//{
-//    [picker dismissViewControllerAnimated:YES completion:^{}];
-//
-//    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-//
-//    //01.21 应该在提交成功后再保存到沙盒，下次进来直接去沙盒路径取
-//    // 保存图片至本地，方法见下文
-//    [self saveImage:image withName:@"currentImage.png"];
-//    //读取路径进行上传
-//    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
-//    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-//
-//    isFullScreen = NO;
-//    self.headImgV.tag = 100;
-//    [self.headImgV setImage:savedImage];//图片赋值显示
-//
-//    //进到次方法时 调 UploadImage 方法上传服务端
-//    **NSDictionary *dic = @{@"image":fullPath}; //重点再次 fullPath 为路径
-//    [memberMan UploadImage:dic];
-//}
+-(MBProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        _progressHUD.progress = 0.4;
+        _progressHUD.dimBackground = NO; //设置有遮罩
+        _progressHUD.mode = MBProgressHUDModeText;
+        _progressHUD.label.text = @"登录中..."; //设置进度框中的提示文字
+//        [_progressHUD hideAnimated:YES afterDelay:1.5];
+        [_progressHUD showAnimated:YES]; //显示进度框
+    }
+    return _progressHUD;
+}
 
 /*
 #pragma mark - Navigation

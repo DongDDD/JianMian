@@ -7,10 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DimensMacros.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol JMCompanyVideoViewDelegate <NSObject>
+
+-(void)playAction;
+
+@end
+
 @interface JMCompanyVideoView : UIView
+
+@property(nonatomic,copy)NSString *videoUrl;
+@property (weak, nonatomic) IBOutlet UIImageView *videoImg;
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (weak, nonatomic)id<JMCompanyVideoViewDelegate>delegate;
 
 @end
 

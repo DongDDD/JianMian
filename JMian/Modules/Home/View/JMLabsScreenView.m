@@ -118,7 +118,7 @@
             sender.selected = YES;
             [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             sender.layer.borderColor = MASTER_COLOR.CGColor;
-//            NSLog(@"%@",_allSubviews[i]);
+            NSLog(@"%@",_allSubviews[i]);
             if (_delegate && [_delegate respondsToSelector:@selector(didChooseLabsTitle_str:index:)]) {
                 [_delegate didChooseLabsTitle_str:_labTitle index:i];
             }

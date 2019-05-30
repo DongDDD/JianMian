@@ -12,7 +12,7 @@
 #import "JMVideoChatView.h"
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,AVAudioPlayerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSMutableArray *playArray;
@@ -20,6 +20,9 @@
 @property(nonatomic,strong)NSDictionary *videoChatDic;
 @property (strong, nonatomic)JMAnswerOrHangUpView *answerOrHangUpView;
 @property (strong, nonatomic)JMVideoChatView *videoChatView;
+@property (nonatomic, assign)BOOL isBackgroundTask;
+//@property (strong, nonatomic) NSData *deviceToken;
+
 
 @end
 

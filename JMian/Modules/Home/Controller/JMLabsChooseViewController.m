@@ -19,18 +19,19 @@
 @property(nonatomic,strong)NSArray *array3;
 @property(nonatomic,strong)NSArray *array4;
 
-//@property(nonatomic,strong)JMLabsScreenView *labsView;
-//@property(nonatomic,strong)JMLabsScreenView *labsView;
-//@property(nonatomic,strong)JMLabsScreenView *labsView;
 
-//@property(nonatomic,strong)JMLabsScreenView *labsView;
+@property(nonatomic,strong)JMLabsScreenView *labsView;
 @end
 
 @implementation JMLabsChooseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self initView];
+}
+
+-(void)initView{
     if (_labsChooseViewType != JMLabsChooseViewTypeFeedBack) {
         UIView *bgView = [[UIView alloc]initWithFrame:self.view.bounds];
         bgView.backgroundColor = [UIColor blackColor];
@@ -42,12 +43,19 @@
         [self initFeedBackBtn];
         self.view.backgroundColor = BG_COLOR;
     }
+    
     [self initLabsView];
     
-    
-    
+
+
 }
 
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+
+}
 -(void)initFeedBackBtn{
     UIButton *btn = [[UIButton alloc]init];
     [btn setTitle:@"确认提交" forState:UIControlStateNormal];
@@ -72,7 +80,7 @@
 
     UIButton *leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,SCREEN_HEIGHT-300, self.view.frame.size.width/2, BottomBtnH)];
     [leftBtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
-    [leftBtn setTitle:@"重置" forState:UIControlStateNormal];
+    [leftBtn setTitle:@"全部" forState:UIControlStateNormal];
     [leftBtn setBackgroundColor:[UIColor whiteColor]];
     [leftBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     leftBtn.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -92,33 +100,35 @@
 -(void)initLabsView
 {
     NSArray *titleArray;
+    CGFloat bottomPadding;
     if (_labsChooseViewType == JMLabsChooseViewTypeFeedBack) {
         titleArray = @[@"面试过程",@"岗位描述",@"我的意向"];
-
+        bottomPadding = 0;
     }else{
         titleArray = @[@"最低学历",@"工作经验",@"薪资要求"];
+        bottomPadding = 300;
+
     }
     
-    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height-300)];
+    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height-bottomPadding)];
     scrollView.alwaysBounceVertical = YES; //垂直
     scrollView.backgroundColor = BG_COLOR;
     [self.view addSubview:scrollView];
     CGFloat Y = 0.0;
-    JMLabsScreenView *labsView;
     for (int i=0; i<3; i++) {
         
-        labsView = [[JMLabsScreenView alloc]init];
-        labsView.delegate = self;
-        __weak JMLabsScreenView *weakLabsView = labsView;
+        _labsView = [[JMLabsScreenView alloc]init];
+        _labsView.delegate = self;
+        __weak JMLabsScreenView *weakLabsView = _labsView;
         //labs标签决定最终高度，高度通过闭包传出来
-        labsView.didCreateLabs = ^(CGFloat lastLabsY) {
+        _labsView.didCreateLabs = ^(CGFloat lastLabsY) {
             weakLabsView.frame = CGRectMake(0, Y, SCREEN_WIDTH, lastLabsY+36);
             NSLog(@"Y=------%f",lastLabsY);
         };
-        labsView = weakLabsView;
-        [labsView createLabUI_title:titleArray[i] labsArray:[self getArray_index:i]];
-        [scrollView addSubview:labsView];
-        Y = labsView.frame.origin.y + labsView.frame.size.height;
+        _labsView = weakLabsView;
+        [_labsView createLabUI_title:titleArray[i] labsArray:[self getArray_index:i]];
+        [scrollView addSubview:_labsView];
+        Y = _labsView.frame.origin.y + _labsView.frame.size.height;
     }
     
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, Y+20);
@@ -167,7 +177,7 @@
                 array = @[@"很轻松",@"正常",@"一般",@"有点难",@"很困难"];
             }else{
                 
-                array = @[@"全部",@"初中",@"高中",@"中专",@"大专",@"本科",@"硕士",@"博士"];
+                array = @[@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士"];
             }
             break;
         case 1:

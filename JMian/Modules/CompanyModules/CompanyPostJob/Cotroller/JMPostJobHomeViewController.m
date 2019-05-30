@@ -48,9 +48,9 @@ static NSString *cellIdent = @"cellIdent";
     [self setTitle:@"职位管理"];
 //    [self.view addSubview:self.progressHUD];
     _status = Position_Online;
-    [self getUserStatus];
     [self setupInit];
     [self setupDownRefresh];
+
 //    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
 //    model = [JMUserInfoManager getUserInfo];
 //    if ([model.card_status isEqualToString:Card_PassIdentify]) {//“3”代表已通过实名认证，通过才能发布职位
@@ -74,6 +74,7 @@ static NSString *cellIdent = @"cellIdent";
     self.breakBGView.hidden = YES;
     [self.tableView.mj_header beginRefreshing];
 //    [self jugdeCard_status];
+    [self getUserStatus];
 
 //    [self getUserInfo];
     
@@ -102,7 +103,6 @@ static NSString *cellIdent = @"cellIdent";
 //}
 
 
-
 -(void)getUserStatus{
 
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -115,8 +115,8 @@ static NSString *cellIdent = @"cellIdent";
         
         if ([model.card_status isEqualToString:Card_PassIdentify]) {
             [self setRightBtnTextName:@"发布职位"];
-
-            [self getListData];
+            [self.tableView.mj_header beginRefreshing];
+//            [self getListData];
           
         }else if ([model.card_status isEqualToString:Card_WaitIdentify]){
             
@@ -180,7 +180,6 @@ static NSString *cellIdent = @"cellIdent";
     
     self.hidesBottomBarWhenPushed=NO;
     
-  
 
 }
 
@@ -195,7 +194,6 @@ static NSString *cellIdent = @"cellIdent";
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
-    [self.tableView.mj_header beginRefreshing];
     
 }
 #pragma mark - 获取数据
@@ -290,7 +288,7 @@ static NSString *cellIdent = @"cellIdent";
     JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
     vc.homeworkModel = self.dataArray[indexPath.row];
     vc.status = _status;
-    
+    vc.viewType = JobDetailsViewTypeEdit;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

@@ -80,7 +80,7 @@
         JMAllMessageTableViewController *allMessageVC = [[JMAllMessageTableViewController alloc] init];
         allMessageVC.didReadMessage = ^(int setReadNum) {
               self.unReadNum -= setReadNum;
-            if (self.unReadNum != 0) {
+            if (self.unReadNum > 0) {
                 
                 self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
             }else{

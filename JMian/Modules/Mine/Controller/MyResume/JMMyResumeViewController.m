@@ -17,8 +17,10 @@
 #import "PositionDesiredViewController.h"
 #import "JMMyPictureViewController.h"
 #import "JMHTTPManager+Job.h"
+#import "JMAddMyJobTableViewController.h"
+#import "JMMyResumeFooterView.h"
 
-@interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
+@interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMMyResumeFooterViewDelegate,JMMyResumeCareerStatusTableViewCellDelegate>
 
 @property (strong, nonatomic) JMMyResumeCellConfigures *cellConfigures;
 @property (strong, nonatomic) UITableView *tableView;
@@ -30,6 +32,9 @@
 @property (nonatomic, strong) NSNumber *salaryMin;
 @property (nonatomic, strong) NSNumber *salaryMax;
 @property (nonatomic, strong) NSDate *work_start_date;
+@property (nonatomic, copy) NSString *work_status;
+
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @end
 
@@ -38,7 +43,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"我的简历";
+    self.title = @"我的简历";
+    [self.view addSubview:self.progressHUD];
+
 }
 
 - (void)setupDateKeyPan {
@@ -72,6 +79,8 @@
     }];
     
     //设置时间输入框的键盘框样式为时间选择器
+    
+
 }
 
 -(void)setPickerVIewUI{
@@ -110,6 +119,7 @@
     }
 
 - (void)sendRequest {
+
     [[JMHTTPManager sharedInstance] fetchVitPaginateWithCity_id:nil education:nil job_label_id:nil work_year_s:nil work_year_e:nil salary_min:nil salary_max:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
 //        int jobId = [responsObject[@"data"][0][@"user_job_id"] intValue];
@@ -125,7 +135,8 @@
                 [self setupDateKeyPan];
                 [self.tableView reloadData];
                 
-                
+                [self.progressHUD showAnimated:NO]; //显示进度框
+
             }
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
@@ -135,15 +146,15 @@
     }];
 }
 
-- (void)updateJob {
-    [[JMHTTPManager sharedInstance] updateJobWithJobId:@([self.model.user_job_id intValue]) job_label_id:@([self.job_labelID intValue]) industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        [self sendRequest];
-
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-}
+//- (void)updateJob {
+//    [[JMHTTPManager sharedInstance] updateJobWith_user_job_id:self.model.user_job_id job_label_id:self.job_labelID industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//        [self sendRequest];
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//}
 
 - (void)updateVita {
     [[JMHTTPManager sharedInstance] updateVitaWith_work_status:nil education:nil work_start_date:self.work_start_date description:nil video_path:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -155,25 +166,44 @@
     }];
 }
 
+-(void)upDateInfo_status:(NSString *)status{
+    _work_status = status;
+    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:status education:nil work_start_date:self.work_start_date description:nil video_path:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+//        [self sendRequest];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
 - (void)dateChange:(UIDatePicker *)datePicker {
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     //设置时间格式
     formatter.dateFormat = @"yyyy-MM-dd";
-    NSString *dateStr = [formatter  stringFromDate:datePicker.date];
+//    NSString *dateStr = [formatter  stringFromDate:datePicker.date];
     
     self.work_start_date = datePicker.date;
     [self updateVita];
 
 }
 //PositionDesiredViewController代理方法
--(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
- 
-    self.job_labelID = labIDStr;
-    self.model.work_name = labStr;
-    [self updateJob];
-    
+//-(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
+//
+//    self.job_labelID = labIDStr;
+//    self.model.work_name = labStr;
+//    [self updateJob];
+//
+//}
+
+-(void)addJobAction{
+    JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
+    vc.viewType = JMAddMyJobTableViewTypeAdd;
+    [self.navigationController pushViewController:vc animated:YES];
 }
+
 #pragma mark - PickerViewDelegate
 
 //返回有几列
@@ -224,10 +254,9 @@
     self.salaryMin = @(minNum);
     self.salaryMax = @(maxNum);
     
-    [self updateJob];
+//    [self updateJob];
 
 }
-
 
 #pragma mark - UITableViewDelegate
 
@@ -235,56 +264,65 @@
     switch (indexPath.section) {
         case JMMyResumeCellTypeIcon: {
             JMMyResumeIconTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeIconTableViewCellIdentifier forIndexPath:indexPath];
-            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell setUserInfo:[JMUserInfoManager getUserInfo]];
             return cell;
         }
         case JMMyResumeCellTypeHeader:
         {
             JMMyResumeHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeaderTableViewCellIdentifier forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell cellConfigWithIdentifier:JMMyResumeHeaderTableViewCellIdentifier imageViewName:@"job_wanted" title:@"求职意向"];
             return cell;
         }
         case JMMyResumeCellTypeCareerStatus:
         {
             JMMyResumeCareerStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerStatusTableViewCellIdentifier forIndexPath:indexPath];
-            [cell setWorkStatus:self.model.vita_work_status];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
+            [cell setWorkStatus:self.model.work_status];
             return cell;
         }
         case JMMyResumeCellTypeCareerObjective:
         {
             JMMyResumeCareerObjectiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerObjectiveTableViewCellIdentifier
                                                                                            forIndexPath:indexPath];
-            [cell setCareerObjectiveWithLeftLabelText:self.cellConfigures.careerObjectiveLeftArr[indexPath.row]];
-            [cell setCareerObjectiveWithRightLabelText:self.cellConfigures.careerObjectiveRightArr[indexPath.row]];
+            [cell setCareerObjectiveWithModel:self.cellConfigures.jobstArr[indexPath.row]];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            [cell setCareerObjectiveWithRightLabelText:self.cellConfigures.careerObjectiveRightArr[indexPath.row]];
             return cell;
         }
         case JMMyResumeCellTypeHeader2:
         {
             JMMyResumeHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeader2TableViewCellIdentifier forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell cellConfigWithIdentifier:JMMyResumeHeader2TableViewCellIdentifier imageViewName:@"experience" title:@"工作经历"];
             return cell;
         }
         case JMMyResumeCellTypeWorkExperience:
         {
             JMMyResumeWorkExperienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeWorkExperienceTableViewCellIdentifier forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell setWorkExperienceModel:self.cellConfigures.workExperienceArr[indexPath.row]];
             return cell;
         }
         case JMMyResumeCellTypeAction:
         {
             JMMyReSumeActionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyReSumeActionTableViewCellIdentifier forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         case JMMyResumeCellTypeHeader3:
         {
             JMMyResumeHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeader3TableViewCellIdentifier forIndexPath:indexPath];
-            [cell cellConfigWithIdentifier:JMMyResumeHeader3TableViewCellIdentifier imageViewName:@"photograph" title:@"图片作品"];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            [cell cellConfigWithIdentifier:JMMyResumeHeader3TableViewCellIdentifier imageViewName:@"resumePic" title:@"图片作品"];
             return cell;
         }
         case JMMyResumeCellTypeHeader4:
         {
             JMMyResumeHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeader4TableViewCellIdentifier forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell cellConfigWithIdentifier:JMMyResumeHeader4TableViewCellIdentifier imageViewName:@"education" title:@"教育经历"];
             return cell;
         }
@@ -292,17 +330,21 @@
         {
             JMEducationalExperienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMEducationalExperienceTableViewCellIdentifier forIndexPath:indexPath];
             [cell setEducationExperienceModel:self.cellConfigures.educationalExperienceArr[indexPath.row]];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         case JMMyResumeCellTypeHeaderOnlyLabel:
         {
             JMMyResumeHeader2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeaderOnlyLabelTableViewCellIdentifier forIndexPath:indexPath];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         case JMMyResumeCellTypyText:
         {
             JMMyResumeTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeTextTableViewCellIdentifier forIndexPath:indexPath];
-            [cell setVitadescription:self.cellConfigures.vita_description];
+            [cell setVitadescription:self.cellConfigures.model.vita_description];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         default:
@@ -317,6 +359,7 @@
         case JMMyResumeCellTypeIcon: {
             BasicInformationViewController *vc= [[BasicInformationViewController alloc] init];
             vc.model = [JMUserInfoManager getUserInfo];
+            vc.viewType = BasicInformationViewTypeEdit;
             [self.navigationController pushViewController:vc animated:YES];\
             break;
          }
@@ -328,26 +371,27 @@
         case JMMyResumeCellTypeCareerStatus:
         {
             break;
-
+            
         }
         case JMMyResumeCellTypeCareerObjective:
         {
-            if (indexPath.row == 0) {
-                
-                PositionDesiredViewController *vc = [[PositionDesiredViewController alloc]init];
-                vc.delegate = self;
-                [self.navigationController pushViewController:vc animated:YES];
+            
+            JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
+            vc.model = self.cellConfigures.jobstArr[indexPath.row];
+            vc.viewType = JMAddMyJobTableViewTypeEdit;
+            [self.navigationController pushViewController:vc animated:YES];
 
-            }else if (indexPath.row == 1) {
-                self.datePicker.hidden = YES;
-                [self.pickerView setHidden:NO];
-
-            }else if (indexPath.row == 2) {
-                
-            }else {
-                self.datePicker.hidden = NO;
-                [self.pickerView setHidden:YES];
-            }
+           
+//            else if (indexPath.row == 1) {
+//                self.datePicker.hidden = YES;
+//                [self.pickerView setHidden:NO];
+//
+//            }else if (indexPath.row == 2) {
+//
+//            }else {
+//                self.datePicker.hidden = NO;
+//                [self.pickerView setHidden:YES];
+//            }
             break;
 
         }
@@ -396,14 +440,15 @@
         }
         case JMMyResumeCellTypeHeaderOnlyLabel:
         {
+            JMMyDescriptionViewController *vc = [[JMMyDescriptionViewController alloc] init];
+            vc.myDescription = self.cellConfigures.vita_description;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
 
         }
         case JMMyResumeCellTypyText:
         {
-            JMMyDescriptionViewController *vc = [[JMMyDescriptionViewController alloc] init];
-            vc.myDescription = self.cellConfigures.vita_description;
-            [self.navigationController pushViewController:vc animated:YES];
+            
             break;
         }
         default:
@@ -412,12 +457,19 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (section == JMMyResumeCellTypeCareerObjective) {
+        JMMyResumeFooterView *footerView = [[JMMyResumeFooterView alloc]init];
+        footerView.delegate = self;
+        
+        return footerView;
+        
+    }
     return [UIView new];
 }
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 12;
+    return 13;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -442,6 +494,7 @@
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
+        _tableView.separatorStyle = NO;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
@@ -470,5 +523,14 @@
         _cellConfigures = [[JMMyResumeCellConfigures alloc] init];
     }
     return _cellConfigures;
+}
+-(MBProgressHUD *)progressHUD{
+    if (!_progressHUD) {
+        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+        _progressHUD.progress = 0.6;
+        _progressHUD.dimBackground = NO; //设置有遮罩
+        [_progressHUD showAnimated:YES]; //显示进度框
+    }
+    return _progressHUD;
 }
 @end

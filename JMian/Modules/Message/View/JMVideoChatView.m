@@ -19,7 +19,7 @@
 @property(nonatomic,copy)NSString *myTitle;
 @property(nonatomic,copy)NSString *subTitle;
 @property(nonatomic,copy)NSString *channel_Id;
-
+@property(nonatomic,strong)JMInterViewModel *myInterviewModel;
 @property(nonatomic,strong)JMWaitForAnswerView *waitForAnswerView;
 @end
 
@@ -63,7 +63,6 @@
     }];
     
     self.localVideo = [[UIView alloc]init];
-    self.localVideo.backgroundColor = [UIColor redColor];
     [self addSubview:self.localVideo];
     
     [self.localVideo mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -143,11 +142,12 @@
 }
 //
 //
+
 -(void)hangupBtnAction{
-    if (_delegate && [_delegate respondsToSelector:@selector(hangupAction)]) {
-        [_delegate hangupAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(hangupAction_model:)]) {
+        [_delegate hangupAction_model:_myInterviewModel];
         [self leaveChannel];
-        if ((self.receiverID)) {
+        if (self.receiverID) {
             [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"leaveAction"];
         }
     }
@@ -168,7 +168,7 @@
 -(void)setInterviewModel:(JMInterViewModel *)interviewModel{
     
 //    [self addSubview:self.waitForAnswerView];
-    
+    _myInterviewModel = interviewModel;
     NSString *_sendSubTitle;
     NSString *_sendTitle;
     NSString *_sendMarkID;
@@ -334,8 +334,8 @@
 }
 
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine didOfflineOfUid:(NSUInteger)uid reason:(AgoraUserOfflineReason)reason {
-    if (_delegate && [_delegate respondsToSelector:@selector(hangupAction)]) {
-        [_delegate hangupAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(hangupAction_model:)]) {
+        [_delegate hangupAction_model:_myInterviewModel];
         [self leaveChannel];
     }
     NSLog(@"有人离线");
@@ -353,8 +353,8 @@
 #pragma mark -用来接收对方丢出的挂断命令
 -(void)hangupMessage{
 
-    if (_delegate && [_delegate respondsToSelector:@selector(hangupAction)]) {
-        [_delegate hangupAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(hangupAction_model:)]) {
+        [_delegate hangupAction_model:_myInterviewModel];
         [self leaveChannel];
     }
 
@@ -397,15 +397,15 @@
 
 }
 //等待对方接听 只有关闭按钮
--(JMWaitForAnswerView *)waitForAnswerView{
-    if (_waitForAnswerView == nil) {
-        _waitForAnswerView = [[JMWaitForAnswerView alloc]initWithFrame:self.bounds];
-        _waitForAnswerView.delegate = self;
-        
-    }
-    return _waitForAnswerView;
-    
-}
+//-(JMWaitForAnswerView *)waitForAnswerView{
+//    if (_waitForAnswerView == nil) {
+//        _waitForAnswerView = [[JMWaitForAnswerView alloc]initWithFrame:self.bounds];
+//        _waitForAnswerView.delegate = self;
+//
+//    }
+//    return _waitForAnswerView;
+//
+//}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

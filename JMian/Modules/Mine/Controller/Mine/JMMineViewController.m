@@ -22,6 +22,7 @@
 #import "JMWalletViewController.h"
 #import "JMUploadVideoViewController.h"
 #import "JMIDCardIdentifyViewController.h"
+#import "JMBUserInfoViewController.h"
 
 
 
@@ -60,14 +61,13 @@
         
     }
     
-    self.imageNameArr = @[@"subscribe",@"burse",@"autonym"];
-    self.labelStrArr = @[@"网点拍摄预约",@"我的钱包",@"实名认证"];
-    [self getUserData];
+    self.imageNameArr = @[@"burse",@"autonym"];
+    self.labelStrArr = @[@"我的钱包",@"实名认证"];
 
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-//    [self getCompanyData];
+    [self getUserData];//    [self getCompanyData];
 }
 
 #pragma mark - 获取数据
@@ -116,10 +116,12 @@
     return dic.copy;
 }
 
+
 #pragma mark - UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     if (indexPath.section == 0) {
 //        cell.accessoryType = UITableViewCellStyleSubtitle;
@@ -139,6 +141,7 @@
         cell.detailTextLabel.textColor = UIColorFromHEX(0x808080);
         //改变头像大小
         [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        
         CGSize itemSize = CGSizeMake(74, 74);
         cell.imageView.layer.cornerRadius = 37;
         cell.imageView.layer.masksToBounds = YES;
@@ -163,13 +166,22 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0 && indexPath.row == 0 && [_userInfoModel.type isEqualToString:C_Type_USER]) {
-        [self.navigationController pushViewController:[[JMMyResumeViewController alloc] init] animated:YES];
+    if (indexPath.section == 0 && indexPath.row == 0) {
+        
+        if ([_userInfoModel.type isEqualToString:C_Type_USER]) {
+            [self.navigationController pushViewController:[[JMMyResumeViewController alloc] init] animated:YES];
+  
+        }else{
+            JMBUserInfoViewController *vc = [[JMBUserInfoViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        
 
-    }else if (indexPath.section == 2 && indexPath.row == 1){
+    }else if (indexPath.section == 2 && indexPath.row == 0){
         
         [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
-    }else if (indexPath.section == 2 && indexPath.row == 2){
+    }else if (indexPath.section == 2 && indexPath.row == 1){
         
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         if ([model.card_status isEqualToString:Card_PassIdentify]) {
@@ -233,10 +245,11 @@
         
     }else if (row == 1) {
         JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
+        vc.title = @"职位收藏";
         [self.navigationController pushViewController:vc animated:YES];
     }else if (row == 2) {
         JMCompanyLikeViewController *vc = [[JMCompanyLikeViewController alloc]init];
-        vc.title = @"职位收藏";
+        vc.title = @"人才收藏";
         [self.navigationController pushViewController:vc animated:YES];
     }else if (row == 3) {
         JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
@@ -254,6 +267,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+
         _tableView.sectionFooterHeight = 0;
         _tableView.sectionHeaderHeight = 0;
 

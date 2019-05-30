@@ -17,6 +17,7 @@
 #import "JMHTTPManager+Vita.h"
 #import "JMPlayerViewController.h"
 #import "JMVideoPlayManager.h"
+#import "JMVitaDetailModel.h"
 //#import "JMUserInfoModel.h"
 //#import "JMUserInfoManager.h"
 
@@ -31,6 +32,7 @@
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 @property (nonatomic, strong)JMDidUploadVideoView *didUploadVideoView;
+@property (nonatomic, strong)JMVitaDetailModel *model;
 @end
 
 @implementation JMUploadVideoViewController
@@ -39,22 +41,24 @@
     [super viewDidLoad];
     self.title = @"视频简历";
     [self didUploadVideoView];
-    if (kFetchMyDefault(@"videoPath")) {
-        [self.didUploadVideoView setHidden:NO];
-        NSString * path = [NSString stringWithFormat:@"https://jmsp-1258537318.cos.ap-guangzhou.myqcloud.com%@",kFetchMyDefault(@"videoPath") ];
-        NSURL *url = [NSURL URLWithString:path];
-        
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
-                [self centerFrameImageWithVideoURL:url completion:^(UIImage *image) {
-                    self.didUploadVideoView.imgView.image = image;
-                    
-                }];
-            });
-        });
-    }
+//    if (kFetchMyDefault(@"videoPath")) {
+//        [self.didUploadVideoView setHidden:NO];
+//        NSString * path = [NSString stringWithFormat:@"https://jmsp-1258537318.cos.ap-guangzhou.myqcloud.com%@",kFetchMyDefault(@"videoPath") ];
+//        NSURL *url = [NSURL URLWithString:path];
+//
+//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                [self centerFrameImageWithVideoURL:url completion:^(UIImage *image) {
+//                    self.didUploadVideoView.imgView.image = image;
+//
+//                }];
+//            });
+//        });
+//    }
+    
+    [self getData];
    
 }
 
@@ -66,7 +70,39 @@
 
 }
 
+-(void)getData{
+   
+        //        int jobId = [responsObject[@"data"][0][@"user_job_id"] intValue];
+        [[JMHTTPManager sharedInstance] fetchVitaInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            if (responsObject[@"data"]) {
+                self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+                if (self.model.video_file_path!=nil) {
+                    
+                    [self.didUploadVideoView setHidden:NO];
+                    NSURL *url = [NSURL URLWithString:self.model.video_file_path];
+                    
+                    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            
+                            [self centerFrameImageWithVideoURL:url completion:^(UIImage *image) {
+                                self.didUploadVideoView.imgView.image = image;
+                                
+                            }];
+                        });
+                    });
 
+                }
+                
+                
+            }
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+  
+    
+
+}
 
 #pragma mark - 点击事件
 //选择视频上传
@@ -239,15 +275,7 @@
 
 -(void)fetchmyVideo{
 
-    if (kFetchMyDefault(@"videoPath")) {
-        [self.didUploadVideoView setHidden:NO];
-        
-
-        
-        
-//        JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
-//        vc.topTitle = @"你的视频简历";
-        NSString * path = [NSString stringWithFormat:@"https://jmsp-1258537318.cos.ap-guangzhou.myqcloud.com%@",kFetchMyDefault(@"videoPath") ];
+        NSString * path = [NSString stringWithFormat:@"%@", self.model.video_file_path ];
         //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
 //        AVPlayer *player = [AVPlayer playerWithURL:url];
         [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path];
@@ -255,23 +283,7 @@
         AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
         self.tabBarController.tabBar.hidden = YES;
         [self.navigationController pushViewController:playVC animated:NO];
-//        vc.player = player;
-//        [self.navigationController pushViewController:vc animated:YES];
-        
-        
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-          
-            dispatch_async(dispatch_get_main_queue(), ^{
-
-                NSURL *url = [NSURL URLWithString:path];
-                [self centerFrameImageWithVideoURL:url completion:^(UIImage *image) {
-                    self.didUploadVideoView.imgView.image = image;
-                    
-                }];
-            });
-        });
-        
-    }
+  
    
 
 }
@@ -429,7 +441,7 @@
     // 24 frames per second (fps) for film, 30 fps for NTSC (used for TV in North America and
     // Japan), and 25 fps for PAL (used for TV in Europe).
     // Using a timescale of 600, you can exactly represent any number of frames in these systems
-    CMTime midpoint = CMTimeMakeWithSeconds(duration / 2.0, 600);
+    CMTime midpoint = CMTimeMakeWithSeconds(duration / 3.0, 600);
     
     // 异步获取多帧图片
     NSValue *midTime = [NSValue valueWithCMTime:midpoint];

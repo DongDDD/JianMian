@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *experinenceLab;
 @property (weak, nonatomic) IBOutlet UILabel *educationLab;
 @property (weak, nonatomic) IBOutlet UILabel *jobDetailLab;
+@property (weak, nonatomic) IBOutlet UILabel *subDecription;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 @property (strong, nonatomic) AVPlayer *player;
 @property (strong, nonatomic) AVPlayerViewController *playerVC;

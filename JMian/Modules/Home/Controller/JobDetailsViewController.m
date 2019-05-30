@@ -24,6 +24,7 @@
 #import "JMMapViewController.h"
 #import "JMCustomAnnotationView.h"
 #import "JMHTTPManager+CompanyLike.h"
+#import "JMHTTPManager+Login.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate,MAMapViewDelegate>
@@ -53,7 +54,7 @@
 @property(nonatomic,strong)JMShareView *shareView;//分享
 
 @property(nonatomic,strong)JMSendMyResumeView *sendMyResumeView;//投个简历
-@property(nonatomic,strong)JMHomeWorkModel *model;
+@property(nonatomic,strong)JMHomeWorkModel *myModel;
 
 @property (nonatomic, strong) UIActivityIndicatorView * juhua;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
@@ -72,17 +73,45 @@
 //    self.extendedLayoutIncludesOpaqueBars = NO;
 
     [self setJuhua];
-    
-    [self getData];
+    [self getUserInfo];
     //右上角分享 收藏按钮
-    [self setRightBtnImageViewName:@"collect" imageNameRight2:@"share"];
+    [self getData];
+    if (_viewType != JobDetailsViewTypeEdit) {
+        
+        [self setRightBtnImageViewName:@"collect" imageNameRight2:@"share"];
+    }
     [self setTitle:@"职位详情"];
+}
 
+- (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
     
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    colectBtn.frame = CGRectMake(45, 0, 25, 25);
+    [colectBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+    [colectBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
+
+    [bgView addSubview:colectBtn];
+    if (imageNameRight2 != nil) {
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(0, 0, 25, 25);
+        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
+        [bgView addSubview:shareBtn];
+        
+    }
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+    self.navigationItem.rightBarButtonItem = rightItem;
     
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
 
 -(void)viewDidAppear:(BOOL)animated
 {
@@ -132,43 +161,65 @@
     
 }
 
--(void)chatAction{
-
-
-    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.model.user_id foreign_key:self.model.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+-(void)getUserInfo{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        if(responsObject[@"data"]){
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
         
-            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
- 
-            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-            
-            vc.myConvModel = messageListModel;
-            [self.navigationController pushViewController:vc animated:YES];
-        
-        }
-        NSLog(@"messagemessagemessage%@",responsObject[@"message"]);
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//        NSLog(@"messagemessagemessage%@",responsObject[@"message"]);
-        NSLog(@"messagemessagemessage%@",error);
-
-      
+        
     }];
+    
+}
+
+
+
+-(void)chatAction{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    
+    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+  
+        [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.myModel.user_id foreign_key:self.myModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            if(responsObject[@"data"]){
+                
+                JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+                
+                JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+                
+                vc.myConvModel = messageListModel;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+            
+        }];
+    
+
+    }else{
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后才能进行聊天"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    
+    }
+    
+    
 
 
 }
 
--(void)rightAction{
+-(void)rightAction:(UIButton *)sender{
     NSLog(@"收藏");
-   
-    [[JMHTTPManager sharedInstance]createLikeWith_type:@"1" Id:self.model.work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    sender.selected = !sender.selected;
+    [[JMHTTPManager sharedInstance]createLikeWith_type:@"1" Id:self.myModel.work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"招聘职位主键不能为空"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
+
     }];
     
 }
@@ -212,12 +263,12 @@
 -(void)btnAction{
      if ([_status isEqualToString:@"0"]) {
          JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
-         
+         vc.homeworkModel = self.myModel;
+         vc.viewType = JMPostNewJobViewTypeEdit;
          [self.navigationController pushViewController:vc animated:YES];
-     
-     
+         
      }else if ([_status isEqualToString:@"1"]) {//
-        [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.model.work_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"0" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.myModel.work_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"0" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位下线成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
             [alert show];
@@ -236,7 +287,7 @@
 
 -(void)btn2Action{
     if ([_status isEqualToString:@"0"]) {
-        [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.model.work_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.myModel.work_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位上线成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
             [alert show];
@@ -249,7 +300,8 @@
         
     }else if ([_status isEqualToString:@"1"]) {
         JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
-        
+        vc.homeworkModel = self.myModel;
+        vc.viewType = JMPostNewJobViewTypeEdit;
         [self.navigationController pushViewController:vc animated:YES];
         
         
@@ -291,8 +343,8 @@
         
         if (responsObject[@"data"]) {
 
-            self.model = [JMHomeWorkModel mj_objectWithKeyValues:responsObject[@"data"]];
-            NSLog(@"%@",self.model.companyName);
+            self.myModel = [JMHomeWorkModel mj_objectWithKeyValues:responsObject[@"data"]];
+            NSLog(@"%@",self.myModel.companyName);
             [self setUI];
             [self.juhua stopAnimating];
          }
@@ -379,9 +431,7 @@
 #pragma mark - 职位简介
 -(void)setFootOfVideoView{
     
-    
-    
-  
+ 
     self.footOfVideoView = [[UIView alloc]init];
     self.footOfVideoView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.footOfVideoView];
@@ -396,7 +446,7 @@
     
     //职位名称
     UILabel *jobNameLab = [[UILabel alloc]init];
-    jobNameLab.text = self.model.work_name;
+    jobNameLab.text = self.myModel.work_name;
     jobNameLab.font = [UIFont systemFontOfSize:20];
     jobNameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
     [self.footOfVideoView addSubview:jobNameLab];
@@ -411,7 +461,7 @@
     
     //工资
     UILabel *salaryLab = [[UILabel alloc]init];
-    NSString *salaryStr = [self getSalaryStrWithMin:_model.salary_min max:_model.salary_max];
+    NSString *salaryStr = [self getSalaryStrWithMin:_myModel.salary_min max:_myModel.salary_max];
     salaryLab.text = salaryStr;
     salaryLab.font = [UIFont systemFontOfSize:16];
     salaryLab.textColor = MASTER_COLOR;
@@ -426,20 +476,18 @@
         
     }];
     
-    
-    
     //经验 学历
     
     UILabel *yearsEduLab = [[UILabel alloc]init];
-    NSString *education = [self getEducationStrWithEducation:_model.education];
-    NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年      %@ ",_model.work_experience_min,_model.work_experience_max,education];
+    NSString *education = [self getEducationStrWithEducation:_myModel.education];
+    NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年      %@ ",_myModel.work_experience_min,_myModel.work_experience_max,education];
     yearsEduLab.text = experienceStr;
     yearsEduLab.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
     yearsEduLab.font = [UIFont systemFontOfSize:15];
     [self.footOfVideoView addSubview:yearsEduLab];
     
     [yearsEduLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(150);
+        make.width.mas_equalTo(400);
         make.height.mas_equalTo(15);
         make.left.mas_equalTo(jobNameLab.mas_left);
         make.top.mas_equalTo(jobNameLab.mas_bottom).offset(11);
@@ -448,8 +496,8 @@
     
     //公司福利
     
-    for (int i=0; i < self.model.companyLabels.count; i++) {
-        NSDictionary *dic = self.model.companyLabels[i];
+    for (int i=0; i < _myModel.companyLabels.count; i++) {
+        NSDictionary *dic = _myModel.companyLabels[i];
         UILabel *fuliLab = [[UILabel alloc]init];
         fuliLab.text = dic[@"name"];
         fuliLab.backgroundColor = [UIColor colorWithRed:245/255.0 green:246/255.0 blue:250/255.0 alpha:1.0];
@@ -467,14 +515,9 @@
             make.top.mas_equalTo(yearsEduLab.mas_bottom).offset(10);
             
         }];
-        
-        
+     
     }
-    
-    
-    
-    
-    
+
 }
 
 
@@ -529,15 +572,14 @@
     
 }
 
-
 #pragma mark - 公司简介
+
 //点击事件
 -(void)introduceAvtion{
     JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
-    vc.model = self.model;
+    vc.model = _myModel;
+    vc.videoUrl = self.homeworkModel.videoFile_path;
     [self.navigationController pushViewController:vc animated:YES];
-
-
 }
 
 
@@ -548,8 +590,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(introduceAvtion)];
     
     [self.companyIntroductionView addGestureRecognizer:tap];
-    
-    
+        
     [self.scrollView addSubview:self.companyIntroductionView];
     
     [self.companyIntroductionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -560,7 +601,7 @@
     
     UIImageView *iconImage = [[UIImageView alloc]init];
  
-    [iconImage sd_setImageWithURL:[NSURL URLWithString:self.model.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [iconImage sd_setImageWithURL:[NSURL URLWithString:_myModel.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     iconImage.layer.borderWidth = 0.5;
     iconImage.layer.borderColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0].CGColor;
     [self.companyIntroductionView addSubview:iconImage];
@@ -573,7 +614,7 @@
     
     
     UILabel *companyNameLab = [[UILabel alloc]init];
-    companyNameLab.text = _model.companyName;
+    companyNameLab.text = _myModel.companyName;
     companyNameLab.font = [UIFont systemFontOfSize:16];
     companyNameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
     companyNameLab.adjustsFontSizeToFitWidth = YES;
@@ -586,7 +627,7 @@
     
     UILabel * companyMessageLab = [[UILabel alloc]init];
     
-    companyMessageLab.text = [NSString stringWithFormat:@"%@  |  %@",_model.companyFinancing,_model.companyEmployee];
+    companyMessageLab.text = [NSString stringWithFormat:@"%@  |  %@",_myModel.companyFinancing,_myModel.companyEmployee];
     companyMessageLab.font = [UIFont systemFontOfSize:13];
     companyMessageLab.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
     companyMessageLab.adjustsFontSizeToFitWidth = YES;
@@ -630,9 +671,6 @@
         make.bottom.mas_equalTo(self.companyIntroductionView.mas_bottom);
     }];
     
-    
-    
-
 }
 
 
@@ -685,7 +723,7 @@
 
     NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
 //    NSString  *testString = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
-    NSString  *testString = _model.Description;
+    NSString  *testString = _myModel.Description;
     NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString];
     [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString length])];
     [self.jobDoLab  setAttributedText:setString];
@@ -753,7 +791,7 @@
 -(void)setMapView{
 //
      self.mapBGView = [[MapBGView alloc] init];
-    [self.mapBGView setModel:self.model];
+    [self.mapBGView setModel:_myModel];
     [self.scrollView addSubview:self.mapBGView];
     
     [self.mapBGView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -763,8 +801,8 @@
     }];
     
     [self.view addSubview:self.mapView];
-    CLLocationDegrees latitude = [self.model.latitude doubleValue];
-    CLLocationDegrees longitude = [self.model.longitude doubleValue];
+    CLLocationDegrees latitude = [_myModel.latitude doubleValue];
+    CLLocationDegrees longitude = [_myModel.longitude doubleValue];
     CLLocationCoordinate2D locationCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
     [self.mapView setCenterCoordinate:locationCoordinate animated:NO];
     MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
@@ -790,8 +828,8 @@
             
             
             JMCustomAnnotationView *cusView = [[JMCustomAnnotationView alloc]init];
-            cusView.adressName.text = self.model.address;
-            cusView.companyName.text = self.model.companyName;
+            cusView.adressName.text = _myModel.address;
+            cusView.companyName.text = _myModel.companyName;
             [annotationView addSubview:cusView];
             [cusView mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.centerX.mas_equalTo(annotationView);
@@ -837,7 +875,7 @@
     }];
     
     UIImageView *iconImg = [[UIImageView alloc]init];
-    [iconImg sd_setImageWithURL:[NSURL URLWithString:self.model.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];   
+    [iconImg sd_setImageWithURL:[NSURL URLWithString:_myModel.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     [self.HRView addSubview:iconImg];
     
@@ -849,7 +887,7 @@
     }];
     
     UILabel *nameLab = [[UILabel alloc]init];
-    nameLab.text = self.model.user_nickname;
+    nameLab.text = _myModel.user_nickname;
     nameLab.font = [UIFont systemFontOfSize:17];
     nameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
     [self.HRView addSubview:nameLab];
@@ -863,7 +901,7 @@
     
     UILabel *nameLab2 = [[UILabel alloc]init];
     nameLab2.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
-    nameLab2.text = self.model.companyName;
+    nameLab2.text = _myModel.companyName;
     nameLab2.font = [UIFont systemFontOfSize:13];
     [self.HRView addSubview:nameLab2];
     
@@ -885,12 +923,6 @@
         make.top.mas_equalTo(self.HRView.mas_top);
     }];
     
-    
-    
-    
-
-
-
 }
 
 -(void)setBottomView{

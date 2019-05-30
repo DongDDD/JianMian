@@ -12,6 +12,9 @@
 #import "JMHTTPManager+Login.h"
 #import "JMUserInfoModel.h"
 #import "JMHTTPManager+Uploads.h"
+#import "JMJudgeViewController.h"
+#import "NavigationViewController.h"
+#import "LoginViewController.h"
 
 
 @interface JMCompanyInfoViewController ()<UIPickerViewDelegate,UIScrollViewDelegate>
@@ -35,6 +38,7 @@
 @property (nonatomic,copy)NSString *imageUrl;
 
 @property (nonatomic, assign)CGFloat changeHeight;
+@property(nonatomic,strong)UIButton *moreBtn;
 
 
 @end
@@ -45,17 +49,17 @@
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;    
     self.extendedLayoutIncludesOpaqueBars = YES;
+    [self setIsHiddenBackBtn:YES];
     [self setRightBtnTextName:@"下一步"];
     self.pickerView.delegate = self;
-    
+    [self.scrollView addSubview:self.moreBtn];
+    [self.view addSubview:self.pickerView];
     self.companyNameLab.text = kFetchMyDefault(@"company_name");
         
     self.scrollView.delegate = self;
     
     // Do any additional setup after loading the view from its nib.
-  
-    
-    
+
     _bgView = [[UIView alloc]init];
     _bgView.backgroundColor = [UIColor grayColor];
     _bgView.hidden = YES;
@@ -313,6 +317,25 @@
         
         [self presentViewController:imagePickerController animated:YES completion:^{}];
         
+    }else if(actionSheet.tag == 254){
+        switch (buttonIndex) {
+            case 0:
+                // 取消
+                return;
+            case 1:
+                // 切换身份
+                //                sourceType = UIImagePickerControllerSourceTypeCamera;
+                [self changeIdentify];
+                break;
+                
+            case 2:
+                // 退出登录
+                [self logout];
+                //                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                break;
+        }
+        
+        
     }
 }
 #pragma mark -scrollView delegte
@@ -371,6 +394,76 @@
     
     
 }
+
+
+-(void)changeIdentify{
+    [[JMHTTPManager sharedInstance]userChangeWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        kSaveMyDefault(@"usersig", userInfo.usersig);
+        NSLog(@"usersig-----:%@",userInfo.usersig);
+        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        [[TIMManager sharedInstance] logout:^() {
+            NSLog(@"logout succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"logout fail: code=%d err=%@", code, err);
+        }];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+-(void)logout{
+    [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        kRemoveMyDefault(@"token");
+        kRemoveMyDefault(@"usersig");
+        //token为空执行
+        
+        [[TIMManager sharedInstance] logout:^() {
+            NSLog(@"logout succ");
+        } fail:^(int code, NSString * err) {
+            NSLog(@"logout fail: code=%d err=%@", code, err);
+        }];
+        LoginViewController *login = [[LoginViewController alloc] init];
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
+    
+    
+}
+
+
+-(void)moreAction{
+    
+    UIActionSheet *sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"切换身份",@"退出登录", nil];
+    sheet.tag = 254;
+    
+    [sheet showInView:self.view];
+    
+}
+
+
+-(UIButton *)moreBtn{
+    if (_moreBtn == nil) {
+        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.financingBtn.frame.origin.y+self.financingBtn.frame.size.height+150, SCREEN_WIDTH, 40)];
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+
+        [_moreBtn setTitle:@"更多操作" forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [_moreBtn addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _moreBtn;
+}
+
 
 /*
 #pragma mark - Navigation

@@ -23,13 +23,15 @@
 
 -(void)initView
 {
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    
     UIImageView *BGImgView = [[UIImageView alloc]init];
     BGImgView.image = [UIImage imageNamed:@"peijing"];
     [self addSubview:BGImgView];
     
     UIImageView *iconImg = [[UIImageView alloc]init];
-//    iconImg.backgroundColor = MASTER_COLOR;
-    [iconImg sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    iconImg.backgroundColor = BG_COLOR;
+    [iconImg sd_setImageWithURL:[NSURL URLWithString:userModel.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     iconImg.layer.cornerRadius = 27.5;
     iconImg.layer.borderWidth = 1;
     iconImg.layer.borderColor = MASTER_COLOR.CGColor;
@@ -37,7 +39,7 @@
     [self addSubview:iconImg];
     
     UILabel *money = [[UILabel alloc]init];
-    money.text = @"188.00";
+    money.text = @"00.00";
     money.textColor = [UIColor whiteColor];
     money.font = [UIFont systemFontOfSize:45];
     [self addSubview:money];

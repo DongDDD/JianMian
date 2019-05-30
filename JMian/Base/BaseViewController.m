@@ -108,7 +108,7 @@
 }
 
 
-- (void)setRightBtnImageViewName:(NSString *)imageName imageNameRight2:(NSString *)imageNameRight2{
+- (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
 
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];

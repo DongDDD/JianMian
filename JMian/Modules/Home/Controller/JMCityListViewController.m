@@ -20,6 +20,7 @@
 @property (nonatomic, strong)NSMutableArray *leve2ModelArray;
 @property (nonatomic, strong)NSMutableArray *leve3ModelArray;
 @property (nonatomic, copy)NSString *city_id;
+@property (nonatomic, copy)NSString *city_name;
 
 
 
@@ -85,8 +86,8 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)rightAction{
     [self.navigationController popViewControllerAnimated:YES];
-    if (_delegate && [_delegate respondsToSelector:@selector(didSelectedCity_id:)]) {
-        [_delegate didSelectedCity_id:_city_id];
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectedCity_id:city_name:)]) {
+        [_delegate didSelectedCity_id:_city_id city_name:_city_name];
     }
 }
 
@@ -140,16 +141,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    if (tableView == _tableView1) {
-//        self.leve3ModelArray = [NSMutableArray array];
-//        JMCityModel *cityModel = self.leve2ModelArray[indexPath.row];
-//        if ([cityModel.city_name isEqualToString:@"全部"]) {
-//            _city_id = nil;
-//        }
-//    }
-////    _city_id = nil;
-////    [self setRightBtnTextName:@"保存"];
-    
+ 
     if (tableView == _tableView1) {
         //选择城市一级
         [self setRightBtnTextName:@""];
@@ -162,9 +154,10 @@ static NSString *cellIdent = @"cellIdent";
                 [self.leve3ModelArray addObject:model];
             }
         }else{
-            //选择全部，清空第二层级的数组
+            //--------选择全部---------，清空第二层级的数组
             self.leve3ModelArray = [NSMutableArray array];
             _city_id = nil;
+            _city_name = @"全部";
             [self setRightBtnTextName:@"保存"];
         }
         
@@ -175,6 +168,7 @@ static NSString *cellIdent = @"cellIdent";
         if (self.leve3ModelArray.count > 0) {
             JMCityModel *model = self.leve3ModelArray[indexPath.row];
             _city_id = model.city_id;
+            _city_name = model.city_name;
         }
     }
 }
@@ -198,7 +192,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(UITableView *)tableView2{
     if (!_tableView2) {
-        _tableView2 = [[UITableView alloc]initWithFrame:CGRectMake(_tableView1.frame.size.width, 0, SCREEN_WIDTH-_tableView1.frame.size.width, SCREEN_HEIGHT) style:UITableViewStylePlain];
+        _tableView2 = [[UITableView alloc]initWithFrame:CGRectMake(_tableView1.frame.size.width, 0, SCREEN_WIDTH-_tableView1.frame.size.width, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
         _tableView2.delegate = self;
         _tableView2.dataSource = self;
         _tableView2.rowHeight = 78.0f;

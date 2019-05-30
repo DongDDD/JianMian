@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSArray *experiencesArray;
 @property(nonatomic,strong)NSArray *educationArray;
 @property(nonatomic,strong)NSArray *shieldingArray;
+@property(nonatomic,copy)NSString *vitaDescription;
 @property (nonatomic, strong) void(^didLoadView)(CGFloat);
 
 @end

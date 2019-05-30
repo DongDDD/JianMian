@@ -34,15 +34,15 @@
     return self;
 }
 
+#pragma mark - //C端面试列表状态
 
-//C端面试列表状态
+
 -(void)init_C_TypeViewWith:(JMInterViewModel *)model
 {
     self.nameLab.text = model.work_work_name;
     [self.IconImage sd_setImageWithURL:[NSURL URLWithString:model.company_logo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     //    self.IconImage.image = GETImageFromURL(model.candidate_avatar);
     self.salaryLab.text = [self getSalaryStrWithMin:model.work_salary_min max:model.work_salary_max];
-    
     
     //公司名称
     self.detailLab.text = model.company_company_name;
@@ -86,7 +86,7 @@
         
         
         
-    }else if ([model.status isEqualToString:Interview_Delete]){//你 C端已拒绝
+    }else if ([model.status isEqualToString:Interview_Refuse]){//你 C端已拒绝
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
         self.headerTitleLab.textColor = TEXT_GRAY_COLOR;
         [self.rightBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
@@ -100,6 +100,7 @@
         [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     }else if ([model.status isEqualToString:@"5"]){
+        self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
         [self.leftBtn setHidden:YES];
         [self.rightBtn setHidden:NO];
         [self.rightBtn setTitle:@"已反馈" forState:UIControlStateNormal];
@@ -133,6 +134,7 @@
     NSDate *datestr = [dateFormatter dateFromString:dateStr];
     return datestr;
 }
+#pragma mark - //B端面试列表状态
 //B端面试列表状态。录用状态：0:未确定 1:不合适 2:已录用
 -(void)init_B_TypeViewWith:(JMInterViewModel *)model
 {
@@ -203,12 +205,13 @@
         [self.leftBtn setHidden:YES];
         [self.rightBtn setHidden:YES];
         [self.deleteImg setHidden:NO];
+        [self.deleteImg setImage:[UIImage imageNamed:@"countermand"]];
         [self.passImg setHidden:YES];
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
         self.headerTitleLab.textColor = TEXT_GRAY_COLOR;
     }
 //录用状态：点击已面试返回的状态 录用状态：0:未确定 1:不合适 2:已录用
-    else if ([model.hire isEqualToString:@"0"]){//0:未确定
+    else if ([model.hire isEqualToString:@"0"] && [model.status isEqualToString:@"4"]){//0:未确定
         
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
         self.headerTitleLab.textColor = MASTER_COLOR;
@@ -245,7 +248,7 @@
         [self.rightBtn setHidden:YES];
         [self.deleteImg setHidden:NO];
         [self.passImg setHidden:YES];
-
+        
         self.deleteImg.image = [UIImage imageNamed:@"no_pass"];
         
     }

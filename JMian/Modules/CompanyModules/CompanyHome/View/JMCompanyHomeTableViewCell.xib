@@ -184,6 +184,7 @@
                 <outlet property="jobNameLab" destination="hXg-TQ-HUf" id="L33-O5-ByO"/>
                 <outlet property="playBtn" destination="gCE-3K-Cjv" id="REU-sP-jgf"/>
                 <outlet property="salaryLab" destination="da0-HH-tpw" id="UZp-gn-xyt"/>
+                <outlet property="subDecription" destination="CZn-o5-ZEi" id="nMF-uj-9vR"/>
             </connections>
             <point key="canvasLocation" x="34.782608695652179" y="34.821428571428569"/>
         </tableViewCell>

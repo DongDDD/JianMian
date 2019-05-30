@@ -30,7 +30,7 @@
     self.educationLab.text = [self getEducationStrWithEducation:model.vita_education];
 //    self.cityLab.text
     self.workNameLab.text = model.work_name;
-    self.workStatusLab.text = [self getWorkStatusStrWithEducation:model.vita_work_status];
+    self.workStatusLab.text = [self getWorkStatusStrWithEducation:model.work_status];
     self.workStartDate.text = model.vita_work_start_date;
     self.salaryLab.text = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
 

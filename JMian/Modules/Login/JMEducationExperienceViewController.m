@@ -29,7 +29,8 @@ typedef enum _PickerState_Exp {
 
 @property (strong, nonatomic) UIPickerView *pickerView;
 @property (nonatomic, strong) NSArray *pickerArray;
-@property (nonatomic, strong) NSNumber *educationNum;
+@property (nonatomic, copy) NSString *educationNum;
+
 
 @end
 
@@ -38,17 +39,20 @@ typedef enum _PickerState_Exp {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.datePicker.backgroundColor = BG_COLOR;
     [self setPickerVIewUI];
     
-    NSArray *educationArr = [NSArray arrayWithObjects:@"请选择",@"初中/中专",@"高中",@"大专",@"本科",@"研究生",@"博士",nil];
+//    [self setIsHiddenBackBtn:YES];
+
+    NSArray *educationArr = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
     switch (self.viewType) {
         case JMEducationExperienceViewTypeAdd:
-            self.navigationItem.title = @"新增教育经历";
+            self.title = @"新增教育经历";
             [self setRightBtnTextName:@"保存"];
             break;
         case JMEducationExperienceViewTypeEdit:
-            self.navigationItem.title = @"编辑教育经历";
+            self.title = @"编辑教育经历";
+            self.educationNum = self.model.education;
             self.schoolNameField.text = self.model.school_name;
             self.majorField.text = self.model.major;
             [self.startTimeBtn setTitle:self.model.s_date forState:UIControlStateNormal];
@@ -61,7 +65,7 @@ typedef enum _PickerState_Exp {
 
 -(void)setPickerVIewUI{
     self.pickerView = [[UIPickerView alloc]init];
-    
+    self.pickerView.backgroundColor = BG_COLOR;
     self.pickerView.delegate = self;
     
     self.pickerView.dataSource = self;
@@ -76,7 +80,7 @@ typedef enum _PickerState_Exp {
         make.bottom.mas_equalTo(self.view.mas_bottom);
     }];
     
-    self.pickerArray = [NSArray arrayWithObjects:@"请选择",@"初中/中专",@"高中",@"大专",@"本科",@"研究生",@"博士",nil];
+    self.pickerArray = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
     
 }
 #pragma mark - PickerViewDelegate
@@ -84,7 +88,6 @@ typedef enum _PickerState_Exp {
 //返回有几列
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-
 {
     return 1;
     
@@ -113,7 +116,8 @@ typedef enum _PickerState_Exp {
     
     [self.selectEducationBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
     [self.selectEducationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    self.educationNum = [NSNumber numberWithInteger:row];
+    NSString *eduStr = [NSString stringWithFormat:@"%ld",row];
+    self.educationNum = eduStr;
 
 }
     
@@ -164,7 +168,7 @@ typedef enum _PickerState_Exp {
     }
 }
 - (IBAction)selectEducation:(id)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+    self.pickerArray = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
     
     [self.pickerView setHidden:NO];
     [self.datePicker setHidden:YES];
@@ -220,6 +224,9 @@ typedef enum _PickerState_Exp {
     
     [self.datePicker setHidden:YES];
     self.pickerView.hidden = YES;
+    [self.majorField resignFirstResponder];
+    [self.schoolNameField resignFirstResponder];
+
 }
 
 @end

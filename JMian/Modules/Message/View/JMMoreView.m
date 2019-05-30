@@ -12,7 +12,7 @@
 @implementation JMMoreView
 - (instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        self.imageNameArr = @[@"photograph",@"Photo"];
+        self.imageNameArr = @[@"paizhao",@"Photo"];
         self.labelStrArr = @[@"拍照",@"相册"];
         [self addSubview:self.collectionView];
         self.collectionView.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);

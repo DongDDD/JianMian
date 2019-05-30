@@ -14,13 +14,16 @@
 #import "JMCompanyVideoView.h"
 #import "DimensMacros.h"
 #import "JMTitlesView.h"
+#import "JMVideoPlayManager.h"
 
-@interface JMCompanyIntroduceViewController ()<SDCycleScrollViewDelegate,JMIntroduceContentViewDelegate,MAMapViewDelegate,UIScrollViewDelegate>
+@interface JMCompanyIntroduceViewController ()<SDCycleScrollViewDelegate,JMIntroduceContentViewDelegate,MAMapViewDelegate,UIScrollViewDelegate,JMCompanyVideoViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property(nonatomic,strong)JMCompanyVideoView *companyVideoView;
 @property(nonatomic,strong)JMIntroduceContentView *introducetView;
 @property(nonatomic,strong)UIView *pageContentView;
+
+@property (weak, nonatomic) IBOutlet UIImageView *headerImg;
 
 @property(nonatomic,strong)JMTitlesView *titleView;
 
@@ -30,9 +33,9 @@
 @property(nonatomic,strong)MapBGView *mapBGView;
 @property(nonatomic,strong)MAMapView *mapView;
 
-
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
+@property (weak, nonatomic) IBOutlet UILabel *companyNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLab;
 
 @end
 
@@ -42,14 +45,7 @@
     [super viewDidLoad];
     self.scrollView.delegate = self;
     self.title = @"公司介绍";
-    [self.scrollView addSubview:self.pageContentView];
-    [self.scrollView addSubview:self.titleView];
-    [self.pageContentView addSubview:self.companyVideoView];
-    [self setIntroduceView];
-    [self setSDCScrollView];
-    [self setAdvantageView];
-    [self setBrightSpoView];
-    [self setMapView];
+    [self initView];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -65,6 +61,23 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+}
+
+-(void)initView{
+    NSURL *url = [NSURL URLWithString:self.model.companyLogo_path];
+    [self.headerImg sd_setImageWithURL:url];
+    self.companyNameLab.text = self.model.companyName;
+    NSString *subStr = [NSString stringWithFormat:@"%@",self.model.companyEmployee];
+    self.subTitleLab.text = subStr;
+    [self.scrollView addSubview:self.pageContentView];
+    [self.scrollView addSubview:self.titleView];
+    [self.pageContentView addSubview:self.companyVideoView];
+    [self setIntroduceView];
+    [self setSDCScrollView];
+    [self setAdvantageView];
+    [self setBrightSpoView];
+    [self setMapView];
+
 }
 
 #pragma mark - 点击事件
@@ -118,7 +131,6 @@
 //
 #pragma mark - 公司介绍
 -(void)setIntroduceView{
-    
     
     self.introducetView = [[JMIntroduceContentView alloc]init];
 
@@ -224,6 +236,29 @@
     
 }
 
+#pragma mark - 获取视频图片
+
+- (UIImage*) thumbnailImageForVideo:(NSURL *)videoURL atTime:(NSTimeInterval)time {
+    
+    AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:videoURL options:nil];
+    NSParameterAssert(asset);
+    AVAssetImageGenerator *assetImageGenerator =[[AVAssetImageGenerator alloc] initWithAsset:asset];
+    assetImageGenerator.appliesPreferredTrackTransform = YES;
+    assetImageGenerator.apertureMode = AVAssetImageGeneratorApertureModeEncodedPixels;
+    
+    CGImageRef thumbnailImageRef = NULL;
+    CFTimeInterval thumbnailImageTime = time;
+    NSError *thumbnailImageGenerationError = nil;
+    thumbnailImageRef = [assetImageGenerator copyCGImageAtTime:CMTimeMake(thumbnailImageTime, 60)actualTime:NULL error:&thumbnailImageGenerationError];
+    
+    if(!thumbnailImageRef)
+        NSLog(@"thumbnailImageGenerationError %@",thumbnailImageGenerationError);
+    
+    UIImage*thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage: thumbnailImageRef] : nil;
+    
+    return thumbnailImage;
+}
+
 #pragma mark - 高德地图
 
 -(void)setMapView{
@@ -302,8 +337,15 @@
         [self.scrollView addSubview:self.titleView];
     }
     
-    
-    
+}
+
+#pragma mark - 播放
+-(void)playAction{
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.videoUrl];
+    [[JMVideoPlayManager sharedInstance] play];
+    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    self.tabBarController.tabBar.hidden = YES;
+    [self.navigationController pushViewController:playVC animated:NO];
 }
 
 #pragma mark - lazy
@@ -340,7 +382,7 @@
 
 -(UIView *)pageContentView{
     if (_pageContentView == nil) {
-        _pageContentView = [[UIView alloc]initWithFrame:CGRectMake(0, self.headerView.frame.origin.y + self.headerView.frame.size.height+self.titleView.frame.size.height, SCREEN_WIDTH, 300)];
+        _pageContentView = [[UIView alloc]initWithFrame:CGRectMake(0, self.headerView.frame.origin.y + self.headerView.frame.size.height+self.titleView.frame.size.height, SCREEN_WIDTH*2, 300)];
     }
     return _pageContentView;
 }
@@ -348,7 +390,11 @@
 - (JMCompanyVideoView *)companyVideoView {
     if (!_companyVideoView) {
         _companyVideoView = [[JMCompanyVideoView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, 460)];
-     
+        _companyVideoView.delegate = self;
+        
+        _companyVideoView.videoUrl = self.videoUrl;
+        
+        
     }
     
     return _companyVideoView;

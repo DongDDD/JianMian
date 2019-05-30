@@ -12,8 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMCompanyIntroduceViewController">
             <connections>
+                <outlet property="companyNameLab" destination="tFT-9b-c7s" id="SSu-f0-WBi"/>
+                <outlet property="headerImg" destination="xxV-36-RsO" id="exa-j3-G8R"/>
                 <outlet property="headerView" destination="eMl-tM-qO1" id="Mrc-DZ-5lM"/>
                 <outlet property="scrollView" destination="fd8-1k-2aV" id="lKh-4G-WFX"/>
+                <outlet property="subTitleLab" destination="oAn-0B-2kc" id="qIu-x8-ha7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -28,14 +31,6 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eMl-tM-qO1">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x1W-TS-Ryt">
-                                    <rect key="frame" x="139.5" y="87" width="96" height="96"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="96" id="WIm-wt-2Tp"/>
-                                        <constraint firstAttribute="width" constant="96" id="tD7-cg-pHC"/>
-                                    </constraints>
-                                    <state key="normal" title="Button" image="JIANMIAN_logo.png"/>
-                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空间智能科技" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tFT-9b-c7s">
                                     <rect key="frame" x="132" y="206" width="111" height="18"/>
                                     <constraints>
@@ -60,19 +55,26 @@
                                         <constraint firstAttribute="height" constant="1" id="Zeo-J5-s5D"/>
                                     </constraints>
                                 </view>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xxV-36-RsO">
+                                    <rect key="frame" x="139.5" y="86" width="96" height="96"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="96" id="Exu-i4-qXC"/>
+                                        <constraint firstAttribute="height" constant="96" id="Wmp-fG-Y1o"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="oAn-0B-2kc" firstAttribute="top" secondItem="tFT-9b-c7s" secondAttribute="bottom" constant="15" id="7or-tD-aoX"/>
                                 <constraint firstItem="oAn-0B-2kc" firstAttribute="centerX" secondItem="eMl-tM-qO1" secondAttribute="centerX" id="B9n-fX-05P"/>
-                                <constraint firstAttribute="bottom" secondItem="x1W-TS-Ryt" secondAttribute="bottom" constant="97" id="KeH-x4-eAY"/>
                                 <constraint firstItem="zCK-Kf-U6Y" firstAttribute="leading" secondItem="eMl-tM-qO1" secondAttribute="leading" constant="22" id="OOa-9L-bkb"/>
-                                <constraint firstItem="tFT-9b-c7s" firstAttribute="centerX" secondItem="x1W-TS-Ryt" secondAttribute="centerX" id="Pwv-Gw-63M"/>
                                 <constraint firstAttribute="bottom" secondItem="zCK-Kf-U6Y" secondAttribute="bottom" id="QKY-ek-t1R"/>
                                 <constraint firstAttribute="trailing" secondItem="zCK-Kf-U6Y" secondAttribute="trailing" constant="22" id="Xu4-rs-3Ns"/>
                                 <constraint firstItem="oAn-0B-2kc" firstAttribute="centerX" secondItem="tFT-9b-c7s" secondAttribute="centerX" id="kBT-rR-M7j"/>
+                                <constraint firstAttribute="bottom" secondItem="xxV-36-RsO" secondAttribute="bottom" constant="98" id="nvg-oZ-NaK"/>
                                 <constraint firstAttribute="height" constant="280" id="oHF-tK-Beo"/>
-                                <constraint firstItem="tFT-9b-c7s" firstAttribute="top" secondItem="x1W-TS-Ryt" secondAttribute="bottom" constant="23" id="sh0-pS-gGr"/>
+                                <constraint firstItem="tFT-9b-c7s" firstAttribute="top" secondItem="xxV-36-RsO" secondAttribute="bottom" constant="24" id="z2T-Iu-yLf"/>
+                                <constraint firstItem="xxV-36-RsO" firstAttribute="centerX" secondItem="eMl-tM-qO1" secondAttribute="centerX" id="z7Q-1t-vbD"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -96,7 +98,4 @@
             <point key="canvasLocation" x="40.799999999999997" y="46.326836581709152"/>
         </view>
     </objects>
-    <resources>
-        <image name="JIANMIAN_logo.png" width="161" height="111"/>
-    </resources>
 </document>

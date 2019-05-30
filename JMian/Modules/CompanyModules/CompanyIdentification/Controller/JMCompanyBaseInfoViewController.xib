@@ -16,6 +16,7 @@
                 <outlet property="headerImg" destination="Kph-SH-Xsg" id="fdE-0u-fAb"/>
                 <outlet property="myNameTextField" destination="GUK-f5-f0x" id="e0d-1L-PJc"/>
                 <outlet property="myPositionTextField" destination="pUC-ZS-sm5" id="TyW-Ox-ITY"/>
+                <outlet property="scrollView" destination="GFy-iq-CbD" id="uTT-WA-7ta"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

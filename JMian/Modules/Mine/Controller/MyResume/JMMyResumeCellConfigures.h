@@ -34,7 +34,6 @@ typedef NS_ENUM(NSInteger, JMMyResumeCellType){
     JMMyResumeCellTypeEducationalExperience,
     JMMyResumeCellTypeHeaderOnlyLabel,
     JMMyResumeCellTypyText,
-
 };
 
 @interface JMMyResumeCellConfigures : NSObject
@@ -44,11 +43,12 @@ typedef NS_ENUM(NSInteger, JMMyResumeCellType){
 @property (assign, nonatomic) NSInteger rowsNum;
 @property (assign, nonatomic) NSInteger section;
 @property (copy, nonatomic) NSString *cellId;
+//@property (assign, nonatomic) UIView *footerView;
 
 @property (strong, nonatomic) JMVitaDetailModel *model;
 
-@property (strong, nonatomic) NSArray *careerObjectiveLeftArr;
 @property (strong, nonatomic) NSArray *careerObjectiveRightArr;
+@property (strong, nonatomic) NSArray *jobstArr;
 
 @property (strong, nonatomic) NSArray *workExperienceArr;
 
@@ -63,9 +63,12 @@ typedef NS_ENUM(NSInteger, JMMyResumeCellType){
 
 - (CGFloat)heightForFooterInSection:(NSInteger)section;
 
+//- (UIView *)footerViewInSection:(NSInteger)section;
+
 - (CGFloat)heightForRowsInSection:(NSInteger)section;
 
 - (NSString *)cellIdForSection:(NSInteger)section;
+
 
 - (void)didSelectedRowAtSection:(NSInteger)section;
 

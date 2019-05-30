@@ -26,7 +26,8 @@
              @"recipient_avatar":@"recipient.avatar",
              @"recipient_nickname":@"recipient.nickname",
              @"recipient_company_position":@"recipient.company_position",
-             
+        
+             @"work_work_id":@"work.work_id",
              @"work_description":@"work.description",
              @"work_salary_max":@"work.salary_max",
              @"work_salary_min":@"work.salary_min",
@@ -41,7 +42,9 @@
              @"workInfo_logo_path":@"work.info.logo_path",
              @"workInfo_industry":@"work.info.industry",
              @"workInfo_employee":@"work.info.employee",
-             @"workInfo_industry_label_id":@"work.info.industry_label_id"
+             @"workInfo_industry_label_id":@"work.info.industry_label_id",
+             @"job_user_job_id":@"job.user_job_id"
+
              };
     
 }
