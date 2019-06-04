@@ -16,9 +16,9 @@
 @property (nonatomic, strong) UITableView *tableView2;
 
 @property (nonatomic, strong)NSArray *firstArray;
-
-@property (nonatomic, strong)NSMutableArray *leve2ModelArray;
-@property (nonatomic, strong)NSMutableArray *leve3ModelArray;
+@property (nonatomic, strong)NSMutableArray *leve1ModelArray;
+@property (nonatomic, strong)NSMutableArray *leve2ModelArray;//第一列表
+@property (nonatomic, strong)NSMutableArray *leve3ModelArray;//第二列表
 @property (nonatomic, copy)NSString *city_id;
 @property (nonatomic, copy)NSString *city_name;
 
@@ -47,31 +47,12 @@ static NSString *cellIdent = @"cellIdent";
         if (responsObject[@"data"]) {
             self.firstArray = [JMCityModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
         }
-        
-        for (JMCityModel *cityModel in self.firstArray) {
-            if ([cityModel.level isEqualToString:@"1"]) {
-                //省级别，去到第二层获取城市列表
-                for (JMCityModel *leve2model in cityModel.children) {
-                    JMCityModel *model = [JMCityModel mj_objectWithKeyValues:leve2model];
-                    [self.leve2ModelArray addObject:model];
-                }
-            }else{
-                //第一层就城市级别，不用去第二层
-                [self.leve2ModelArray addObject:cityModel];
-            }
+        if (_viewType == JMCityListViewPartTime) {
+            [self getPartTimeCityList];
+        }else{
+            [self getHomeCityList];
+
         }
-        
-        JMCityModel *allchooseModel = [[JMCityModel alloc]init];
-        allchooseModel.city_name = @"全部";
-        [self.leve2ModelArray addObject:allchooseModel];
-        
-//        for (int i = 0; i < self.leve2ModelArray.count; i++) {
-            JMCityModel *cityModel = self.leve2ModelArray[0];
-            for (NSDictionary *dic in cityModel.children) {
-                JMCityModel *model = [JMCityModel mj_objectWithKeyValues:dic];
-                [self.leve3ModelArray addObject:model];
-            }
-//        }
         
         
         [_tableView1 reloadData];
@@ -83,6 +64,62 @@ static NSString *cellIdent = @"cellIdent";
 
 }
 
+//首页筛选数据
+-(void)getHomeCityList{
+
+    for (JMCityModel *cityModel in self.firstArray) {
+        if ([cityModel.level isEqualToString:@"1"]) {
+            //省级别，去到第二层获取城市列表
+            for (JMCityModel *leve2model in cityModel.children) {
+                JMCityModel *model = [JMCityModel mj_objectWithKeyValues:leve2model];
+                [self.leve2ModelArray addObject:model];
+            }
+        }else{
+            //第一层就城市级别，不用去第二层
+            [self.leve2ModelArray addObject:cityModel];
+        }
+    }
+    
+    JMCityModel *allchooseModel = [[JMCityModel alloc]init];
+    allchooseModel.city_name = @"全部";
+    [self.leve2ModelArray addObject:allchooseModel];
+    
+    //        for (int i = 0; i < self.leve2ModelArray.count; i++) {
+    JMCityModel *cityModel = self.leve2ModelArray[0];
+    for (NSDictionary *dic in cityModel.children) {
+        JMCityModel *model = [JMCityModel mj_objectWithKeyValues:dic];
+        [self.leve3ModelArray addObject:model];
+    }
+}
+
+//发布兼职数据
+-(void)getPartTimeCityList{
+    for (JMCityModel *cityModel in self.firstArray) {
+        if ([cityModel.level isEqualToString:@"1"]) {
+             [self.leve2ModelArray addObject:cityModel];
+            //省级别，去到第二层获取城市列表
+//            for (JMCityModel *leve2model in cityModel.children) {
+//                JMCityModel *model = [JMCityModel mj_objectWithKeyValues:leve2model];
+//                [self.leve2ModelArray addObject:model];
+//            }
+        }else{
+            //第一层就城市级别，不用去第二层
+            [self.leve2ModelArray addObject:cityModel];
+        }
+    }
+    
+    JMCityModel *allchooseModel = [[JMCityModel alloc]init];
+    allchooseModel.city_name = @"全国";
+    [self.leve2ModelArray addObject:allchooseModel];
+    
+    //        for (int i = 0; i < self.leve2ModelArray.count; i++) {
+    JMCityModel *cityModel = self.leve2ModelArray[0];
+    for (NSDictionary *dic in cityModel.children) {
+        JMCityModel *model = [JMCityModel mj_objectWithKeyValues:dic];
+        [self.leve3ModelArray addObject:model];
+    }
+    
+}
 
 -(void)rightAction{
     [self.navigationController popViewControllerAnimated:YES];
@@ -128,7 +165,6 @@ static NSString *cellIdent = @"cellIdent";
         cell.backgroundColor = BG_COLOR;
         
     }else if (tableView == _tableView2){
-    
         JMCityModel *model = self.leve3ModelArray[indexPath.row];
         cell.textLabel.text = model.city_name;
     }
@@ -203,6 +239,12 @@ static NSString *cellIdent = @"cellIdent";
     
 }
 
+-(NSMutableArray *)leve1ModelArray{
+    if (_leve1ModelArray == nil) {
+        _leve1ModelArray = [NSMutableArray array];
+    }
+    return _leve1ModelArray;
+}
 -(NSMutableArray *)leve2ModelArray{
     if (_leve2ModelArray == nil) {
         _leve2ModelArray = [NSMutableArray array];

@@ -40,7 +40,7 @@
             break;
         case JMMyResumeCellTypeCareerObjective:
             self.rowsNum = self.jobstArr.count;
-            self.footerheight = 100;
+            self.footerheight = 10;
             self.height = 96;
             self.cellId = JMMyResumeCareerObjectiveTableViewCellIdentifier;
 //            self.footerView = [self getFooterView_title:@"添加期望职位"];
@@ -55,10 +55,10 @@
         case JMMyResumeCellTypeWorkExperience:
             self.rowsNum = self.workExperienceArr.count;
             self.footerheight = 0;
-            self.height = 300;
+            self.height = 79;
             break;
-        case JMMyResumeCellTypeAction:
-            self.rowsNum = 1;
+        case JMMyResumeCellTypeAction://添加工作经历按钮  第二版不要了
+            self.rowsNum = 0;
             self.footerheight = 10;
             self.height = 99;
             break;

@@ -10,9 +10,22 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef enum : NSUInteger {
+    JMUploadVideoViewTypeDefault,
+    JMUploadVideoViewTypePartTime,
+} JMUploadVideoViewType;
+
+@protocol JMUploadVideoViewDelegate <NSObject>
+
+-(void)isUploadVideo:(BOOL)isUploadVideo;
+
+@end
+
 @interface JMUploadVideoViewController : BaseViewController
 
-
+@property(nonatomic,assign)JMUploadVideoViewType viewType;
+@property(nonatomic,strong)NSString *ability_id;//兼职简历主键
+@property(nonatomic,weak)id<JMUploadVideoViewDelegate>delegate;
 
 @end
 

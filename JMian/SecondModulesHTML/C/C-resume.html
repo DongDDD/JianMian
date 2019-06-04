@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/muse-ui.css">
+    <link rel="stylesheet" href="../css/material-icons.css">
+    <script src="../js/flexible.debug.js"></script>
+    <script src="../js/flexible_css.debug.js"></script>
+    <style lang="less" type="text/less">
+        .line {
+            border-top: 0.024rem solid #E6E6E6;
+        }
+        #wrapper{
+            font-family: PingFang-SC-Medium;
+            background: #fff;
+            .main{
+                width: 100%;
+                .form{
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0.72rem 0.53rem;
+                    p{
+                        color: #999999;
+                        font-size: 0.37rem;
+                        font-family: MicrosoftYaHei;
+                        align-self: center;
+                    }
+                    div{
+                        align-self: center;
+                        span{
+                            color: #333333;
+                            font-size: 0.45rem;
+                        }
+                        img{
+                            margin-left: 0.45rem;
+                            width: 0.18rem;
+                        }
+                    }
+                }
+            }
+            .describeList{
+                padding: 0.72rem 0.53rem;
+                p{
+                    color: #999999;
+                    font-size: 0.37rem;
+                    font-family: MicrosoftYaHei;
+                }
+                .container{
+                    margin: 0;
+                    padding: 0;
+                    max-width:100%;
+                    height: 4.58rem;
+                    .mu-input{
+                        height: 100%;
+                        .mu-text-field-multiline{
+                            height: 100%;
+                            .mu-text-field-input{
+                                height: 100%!important;
+                                font-size: 0.37rem;
+                            }
+                            .mu-text-field-textarea{
+                                height: 100%;
+                            }
+                        }
+                        .mu-input-help{
+                            bottom: 0.44rem;
+                            font-size: 0.34rem;
+                        }
+                    }
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper" v-show="initialize">
+        <div class="line"></div>
+        <div class="main" @click="handleCity">
+            <div class="form">
+                <p>城市地域</p>
+                <div><span v-text="form.city ? form.city.city_name : '选择城市'"></span><img src="../images/icon_return@2x.png" alt=""></div>
+            </div>
+            <div class="line" style="margin:0 0.53rem"></div>
+        </div>
+        <div class="main" @click="handleJob">
+            <div class="form">
+                <p>职位标签</p>
+                <div><span v-text="form.type_label ? form.type_label.name: '选择职位标签'"></span><img src="../images/icon_return@2x.png" alt=""></div>
+            </div>
+            <div class="line" style="margin:0 0.53rem"></div>
+        </div>
+        <div class="main" @click="handleHy">
+            <div class="form">
+                <p>理想行业</p>
+                <div><span v-text="have ? '': '选择行业'"></span><img src="../images/icon_return@2x.png" alt=""></div>
+            </div>
+            <div class="line" style="margin:0 0.53rem"></div>
+        </div>
+        <div class="main" @click="handlePhoto">
+            <div class="form">
+                <p>图片作品（选填）</p>
+                <div><span v-text="form.images.length > 0  ? '已上传': '上传图片作品'"></span><img src="../images/icon_return@2x.png" alt=""></div>
+            </div>
+            <div class="line" style="margin:0 0.53rem"></div>
+        </div>
+        <div class="main" @click="handleVideo">
+            <div class="form">
+                <p>视频简历（选填）</p>
+                <div><span v-text="form.video? '已上传': '上传视频简历'"></span><img src="../images/icon_return@2x.png" alt=""></div>
+            </div>
+            <div class="line" style="margin:0 0.53rem"></div>
+        </div>
+        <div>
+            <div class="describeList">
+                <p>工作描述</p>
+                <mu-container>
+                    <mu-text-field v-model="value10" multi-line :rows="4" full-width placeholder="可描述你的工作技能、岗位职责、特长等等.." :max-length="500" v-text="form.description"></mu-text-field><br/>
+                </mu-container>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/muse-ui.js"></script>
+<script src="../js/less.min.js"></script>
+<script>
+
+    var vue = new Vue({
+        el: '#wrapper',
+        data: {
+            initialize: false,
+            token: '',
+            // avator: '',
+            loading: false,
+            value10: '',
+            have:false,
+            form: {
+                city:null,
+                type_label:null,
+                industry:[],
+                video:null,
+                images:[],
+                status:null,
+                description:''
+            },
+        },
+        mounted(){
+            /*window.onload=function(){
+
+            };
+            window['scanQRCallBack'] = (result) => {
+                this.subscanQRCallBack(result)
+            }*/
+            setTimeout(function () {
+                this.initialize = true;
+            }.bind(this));
+        },
+        /*mounted() {
+            this.token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcHAuam16aGlwaW4uY29tXC9kb21pbmF0b3JcL2xvZ2luIiwiaWF0IjoxNTU3MjA5NTYyLCJleHAiOjE1NTcyNjk1NjIsIm5iZiI6MTU1NzIwOTU2MiwianRpIjoiTVl5U2ZrVGcybDY1N3pxTiIsInN1YiI6MSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.3bK9rCdHQ3WSOZKYx22_y8vuWjquLvqSwe5iqayCmWM"
+            axios.get('http://app.jmzhipin.com/api/user/info', {
+                headers: {
+                    'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                    'Authorization': this.token
+                }
+            })
+                .then(function (res) {
+                    this.load = true;
+                    this.money_amount = res.data.data.money_amount;
+                    this.money_freeze = res.data.data.money_freeze;
+                    this.avator = res.data.data.avator;
+                }.bind(this))
+                .catch(function (error) {
+                    console.log('调用用户数据失败');
+                    console.log(error);
+                });
+        },*/
+        methods: {
+            handleCity(){
+                alert("跳转任务详情页")
+            },
+            handleJob(){
+                alert("跳转任务详情页")
+            },
+            handleHy(){
+                alert("跳转任务详情页")
+            },
+            handlePhoto(){
+                alert("跳转任务详情页")
+            },
+            handleVideo(){
+                alert("跳转任务详情页")
+            },
+            load() {
+                this.loading = true;
+                setTimeout(() => {
+                    this.loading = false;
+                    /*this.num += 10;
+                    this.show = false;*/
+                }, 2000)
+            }
+        }
+    });
+</script>
+</html>

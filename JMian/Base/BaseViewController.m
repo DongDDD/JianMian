@@ -9,6 +9,8 @@
 #import "BaseViewController.h"
 #import "UIView+addGradualLayer.h"
 @interface BaseViewController ()
+@property (nonatomic, strong) MBProgressHUD *progressHUD;
+@property (nonatomic, strong) UIView *HUDbackgroundView;
 
 @end
 
@@ -170,4 +172,61 @@
     self.tabBarController.tabBar.hidden = self.navigationController.viewControllers.count > 1 ? YES : NO;
 
 }
+//-(void)showHUDWithView:(UIView *)view{
+//    [_myProgressHUD setHidden:NO];
+//    [_HUDbackgroundView setHidden:NO];
+//
+//}
+
+-(void)hiddenHUD{
+    [self.myProgressHUD setHidden:YES];
+    [_HUDbackgroundView setHidden:YES];
+
+    
+}
+
+-(void)showProgressHUD_view:(UIView *)view{
+    _HUDbackgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    _HUDbackgroundView.backgroundColor = [UIColor whiteColor];
+    [view addSubview:_HUDbackgroundView];
+    _myProgressHUD = [[MBProgressHUD alloc] initWithView:view];
+//    _progressHUD.progress = 0.6;
+    //        _progressHUD.dimBackground = NO; //设置有遮罩
+//    _progressHUD.label.text = @"加载中..."; //设置进度框中的提示文字
+    _myProgressHUD.alpha = 0.5;//设置遮罩透明度 = 1;
+    _myProgressHUD.dimBackground = NO; //设置有遮罩
+    [_myProgressHUD showAnimated:YES]; //显示进度框
+    [view addSubview:_myProgressHUD];
+    
+}
+
+
+- (id)toArrayOrNSDictionary:(NSData *)jsonData{
+    
+    NSError *error = nil;
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                    options:NSJSONReadingAllowFragments
+                                                      error:nil];
+    
+    if (jsonObject != nil && error == nil){
+        return jsonObject;
+    }else{
+        // 解析错误
+        return nil;
+    }
+    
+}
+//-(MBProgressHUD *)progressHUD{
+//    if (!_progressHUD) {
+//        _progressHUD = [[MBProgressHUD alloc] init];
+//        _progressHUD.progress = 0.6;
+////        _progressHUD.dimBackground = NO; //设置有遮罩
+//        _progressHUD.label.text = @"加载中..."; //设置进度框中的提示文字
+////        _progressHUD.alpha = 1;//设置遮罩透明度 = 1;
+//        _progressHUD.dimBackground = YES; //设置有遮罩
+//        [_progressHUD showAnimated:YES]; //显示进度框
+//    }
+//    return _progressHUD;
+//}
+
     @end

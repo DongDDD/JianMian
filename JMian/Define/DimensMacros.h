@@ -24,6 +24,7 @@
 #import <AMapLocationKit/AMapLocationKit.h>
 #import "VIMediaCache.h"
 #import "Masonry.h"
+#import <WebKit/WebKit.h>
 
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
@@ -126,11 +127,13 @@
 
 #define AMapAPIKey @"3226a67b997e0c6d25b38614a86ff5e0"
 #define VideoAgoraAPIKey @"a529ef85c7354d57aefd91a53325253b"
-
 #define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define Is_IPhoneX (SCREEN_WIDTH >=375.0f && SCREEN_HEIGHT >=812.0f && Is_Iphone)
 #define Bottom_SafeHeight   (Is_IPhoneX ? (34.0):(0))
-
+//存储字体样式
+#define kBoldFont(x) [UIFont boldSystemFontOfSize:x]
+#define kFont(x) [UIFont systemFontOfSize:x]
+#define kNameFont(x) [UIFont fontWithName:@"Heiti SC" size:x]
 //存储userDefault
 #define kSaveMyDefault(A,B) [[NSUserDefaults standardUserDefaults] setObject:B forKey:A]
 //读取duserDefault

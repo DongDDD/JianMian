@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--主要I是强制让文档的宽度与设备宽度保持1:1，最大宽度1.0，禁止屏幕缩放。-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <!--这个也是iphone私有标签，允许全屏浏览。-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <!--iphone的私有标签，iphone顶端状态条的样式。-->
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <!--禁止数字自动识别为电话号码，这个比较有用，因为一串数字在iphone上会显示成蓝色，样式加成别的颜色也是不生效的。-->
+    <meta content="telephone=no" name="format-detection">
+    <!--禁止email识别-->
+    <meta content="email=no" name="format-detection">
+    <meta content="initial-dpr=2" name="flexible"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/muse-ui.css">
+    <link rel="stylesheet" href="../css/material-icons.css">
+    <script src="../js/flexible.debug.js"></script>
+    <script src="../js/flexible_css.debug.js"></script>
+    <style lang="less" type="text/less">
+        .dialog-open {
+            position: fixed;
+            width: 100%;
+        }
+        body {
+            font-family: PingFang-SC-Medium;
+            font-weight: 500;
+        }
+        .line {
+            border-top: 0.03rem solid rgba(230, 230, 230, 1);
+        }
+        .container {
+            padding: 0;
+        }
+        #wrapper{
+            background: #ffffff;
+            color: #999999;
+            #searchBar{
+                display: flex;
+                text-align: center;
+                height: 1.22rem;
+                font-size:0.4rem;
+                .isFixed{
+                    position:fixed;
+                    top:0;
+                    height: 1.22rem;
+                    z-index:100;
+                    color: #666666;
+                    background:#F7F7F7;
+                    border-bottom: 1px solid rgba(230, 230, 230, 1);
+                }
+                .nav-light{
+                    display: flex;
+                    justify-content: space-around;
+                    text-align: center;
+                    width: 100%;
+                    div{
+                        width: 0.37rem;
+                        border-top: 1px solid #24BFFF;
+                    }
+                    span{
+                        width: 0.37rem;
+                    }
+                }
+                ul {
+                    display: flex;
+                    width: 100%;
+                    height: 1.22rem;
+                    .toggle{
+                        color: #FFFFFF;
+                        background: #3BC7FF;
+                    }
+                    .toggle1{
+                        color: #24BFFF;
+                    }
+                    li {
+                        display: flex;
+                        justify-content:center;
+                        align-items:center;
+                        width: 50%;
+                        height:100%;
+                        background: #FFFFFF;
+                    }
+                }
+            }
+            #task{
+                .start{
+                    .open-left-enter-active, .open-left-leave-active {
+                        transform: translate3d(0,0,0);
+                        transition: all 0.3s;
+                    }
+                    .open-left-enter, .open-left-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                        transform: translate3d(-100%,0,0);
+                    }
+
+                }
+                .doing{
+                    .open-left-enter-active, .open-left-leave-active {
+                        transform: translate3d(0,0,0);
+                        transition: all 0.3s;
+                    }
+                    .open-left-enter, .open-left-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                        transform: translate3d(-100%,0,0);
+                    }
+
+                }
+                .over{
+                    .open-right-enter-active, .open-right-leave-active {
+                        transform: translate3d(0,0,0);
+                        transition: all 0.3s 0.06s;
+                    }
+                    .open-right-enter, .open-right-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                        transform: translate3d(100%,0,0);
+                    }
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <div v-show="initialize">
+        <div class="line"></div>
+        <div id="searchBar" >
+            <div style="width: 100%" :class="searchBarFixed == true ? 'isFixed' :''">
+                <ul>
+                    <li :class="start == true ? 'toggle1' :''" @click="handleStart">待处理</li>
+                    <li :class="doing == true ? 'toggle1' :''" @click="handleDoing">进行中</li>
+                    <li :class="over == true ? 'toggle1' :''" @click="handleOver">已结束</li>
+                </ul>
+                <div class="nav-light" style="background: #fff;">
+                    <div v-show="start"></div>
+                    <span v-show="start || doing || over"></span>
+                    <div v-show="doing"></div>
+                    <span v-show="start || doing || over"></span>
+                    <div v-show="over"></div>
+                </div>
+                <div class="line" style="height: 10px;background: #F7F7F7;"><br/></div>
+            </div>
+        </div>
+
+        <div id="task">
+            <div class="start" style="display: none;background: #F7F7F7;" v-show="initialize">
+                <transition name="open-left">
+                    <div v-show="start" style="padding: 0.26rem 0.21rem;">
+                        <div v-for="item in num">
+                            <a href="../agent.html">
+                                <img src="../images/start.png" alt="" style="width: 9.6rem;margin-bottom: 0.26rem">
+                            </a>
+                            <a href="../Part-time-job-detail.html">
+                                <img src="../images/start1.png" alt="" style="width: 9.6rem;margin-bottom: 0.26rem">
+                            </a>
+                        </div>
+                    </div>
+                </transition>
+            </div>
+            <div class="doing" style="display: none;background: #F7F7F7;" v-show="initialize">
+                <transition name="open-right">
+                    <div v-show="doing" style="padding: 0.26rem 0.21rem;">
+                        <div v-for="item in num">
+                            <a href="../detail.html">
+                                <img src="../images/doing.png" alt="" style="width: 9.6rem;margin-bottom: 0.26rem">
+                            </a>
+                            <a href="../Part-time-job-detail.html">
+                                <img src="../images/doing1.png" alt="" style="width: 9.6rem;margin-bottom: 0.26rem">
+                            </a>
+                        </div>
+                    </div>
+                </transition>
+            </div>
+            <div class="over" style="display: none;background: #F7F7F7;" v-show="initialize">
+                <transition name="open-right">
+                    <div v-show="over" style="padding: 0.26rem 0.21rem;">
+                        <div v-for="item in num">
+                            <a href="../assess.html"><img src="../images/over.png" alt="" style="width: 9.6rem;margin-bottom: 0.26rem"></a>
+                            <img src="../images/over1.png" alt="" style="width: 9.6rem;margin-bottom: 0.26rem">
+                        </div>
+                    </div>
+                </transition>
+            </div>
+        </div>
+    </div>
+</div>
+    
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/muse-ui.js"></script>
+<script src="../js/less.min.js"></script>
+<script>
+    new Vue({
+        el: '#wrapper',
+        data:{
+            describeList: [
+                {label: "日结",id:'1'},
+                {label: "有定金",id:'2'},
+                {label: "签合同",id:'3'},
+            ],
+            describeList1: [
+                {label: "停车净化",id:'1'},
+                {label: "氧分子捕捉",id:'2'},
+                {label: "离子风换气",id:'3'},
+                {label: "金属机身",id:'4'},
+                {label: "高速充电",id:'5'},
+            ],
+            loading: false,
+            num:5,
+            initialize: false,
+            searchBarFixed:false,
+            start:true,
+            doing:false,
+            over:false,
+        },
+        mounted(){
+            setTimeout(function () {
+                this.initialize = true;
+            }.bind(this));
+            document.addEventListener('scroll', this.handleScroll)
+        },
+        methods:{
+            handleScroll () {
+                var obj = document.getElementById('searchBar');
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                let offsetTop = obj.offsetTop;
+                scrollTop > offsetTop ? this.searchBarFixed = true : this.searchBarFixed = false;
+            },
+            destroyed () {
+                window.removeEventListener('scroll', this.handleScroll); // 离开页面 关闭监听 不然会报错
+            },
+            handleStart(){
+                this.start = true;
+                this.doing = false;
+                this.over = false;
+            },
+            handleDoing(){
+                this.start = false;
+                this.doing = true;
+                this.over = false;
+            },
+            handleOver(){
+                this.start = false;
+                this.doing = false;
+                this.over = true;
+            },
+        }
+    })
+</script>
+</html>

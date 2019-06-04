@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--主要I是强制让文档的宽度与设备宽度保持1:1，最大宽度1.0，禁止屏幕缩放。-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <!--这个也是iphone私有标签，允许全屏浏览。-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <!--iphone的私有标签，iphone顶端状态条的样式。-->
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <!--禁止数字自动识别为电话号码，这个比较有用，因为一串数字在iphone上会显示成蓝色，样式加成别的颜色也是不生效的。-->
+    <meta content="telephone=no" name="format-detection">
+    <!--禁止email识别-->
+    <meta content="email=no" name="format-detection">
+    <meta content="initial-dpr=2" name="flexible"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/muse-ui.css">
+    <link rel="stylesheet" href="../css/material-icons.css">
+    <link rel="stylesheet" href="../css/video-js.css">
+    <script src="../js/flexible.debug.js"></script>
+    <script src="../js/flexible_css.debug.js"></script>
+    <script src="../js/video.js"></script>
+    <style lang="less" type="text/less">
+        html {
+            -webkit-text-size-adjust: none;
+            height: 100%;
+            touch-action: pan-y;
+        }
+        #wrapper {
+            width: 100%;
+            font-family: MicrosoftYaHei;
+            color:#999999;
+            .video{
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 13.2rem;
+                z-index: -1000;
+                width: 100%;
+                background-color: #000000;
+                .video-wrapper{
+                    width: 100%;
+                    height: 11rem;
+                    video{
+                    }
+                    .example_video_1-dimensions{
+                        width: 100%;
+                        height: 100%;
+                    }
+                    .video-js .vjs-control-bar{
+                        bottom: 0.05rem                    }
+                    .video-js .vjs-big-play-button{
+                        top:50%;
+                        left: 50%;
+                        width: 2.7rem;
+                        height: 2.7rem;
+                        line-height: 2.6rem;
+                        font-size: 1.3rem;
+                        border-radius: 50%;
+                        transform: translate3d(-50%, -50%, 0);
+                    }
+                    .video-js{
+
+                    }
+                    .vjs-poster{
+                        background-color: transparent;
+                        background-size: unset;
+                    }
+                    /*#output {
+                        position: absolute;
+                        top:0;
+                        left:0;
+                        width: 100%;
+                        height: 13.2rem;
+                        text-align: center;
+                        img{
+                            position: absolute;
+                            top:calc(50% - 1rem);
+                            left: 50%;
+                            transform: translate3d(-50%,-50%,0);
+                            z-index: 100;
+                            width: 100%;
+                            height: auto;
+                        }
+                    }
+                    .main{
+                        display: table-cell;
+                        vertical-align: middle;
+                        width: 100%;
+                        height: 13rem;
+                        z-index: 1;
+                        font-size:0;
+                    }*/
+                }
+            }
+            .contain{
+                margin-top: 11rem;
+                width: 100%;
+                border-top-left-radius:0.33rem;
+                border-top-right-radius:0.33rem;
+                -webkit-background-clip: padding-box;
+                background-clip: padding-box;
+                background: #fff;
+                .user_info{
+                    padding: 0.8rem 0.61rem;
+                    div{
+                        display: flex;
+                        justify-content: space-between;
+                    }
+                    p{
+                        margin-top: 0.34rem;
+                        font-size: 0.4rem;
+                    }
+                }
+                .main{
+                    padding: 0.8rem 0.61rem;
+                    span{
+                        color:#484848;
+                        font-family: PingFang-SC-Bold;
+                        font-size: 0.45rem;
+                    }
+                    p{
+                        margin-top: 0.66rem;
+                        color:#6B6B6B;
+                        font-size: 0.37rem;
+                        line-height:0.68rem;
+                    }
+                }
+            }
+        }
+        .demo-loadmore-wrap {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            box-shadow:0 0 0 0 white;
+            .demo-loadmore-content {
+                flex: 1;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+        .line {
+            border-bottom: 1px solid #E6E6E6
+        }
+    </style>
+</head>
+<body style="background: no-repeat;">
+<div id="wrapper" v-show="initialize">
+    <div class="video">
+        <div class="video-wrapper">
+            <!--<div id="output" v-if="d" @click="kai">
+                <img src="../images/pofang@2x.png" alt="" style="width: 1.81rem;z-index: 101">
+            </div>
+            <div class="main">
+                <video id="video" webkit-playsinline="true" controls playsinline width="100%" x5-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" >
+                    <source src="../images/cs.mkv">
+                </video>
+            </div>-->
+            <video id="example_video_1" class="video-js vjs-default-skin" preload="auto" webkit-playsinline="true" playsinline x5-video-player-type="h5" x5-video-player-fullscreen="true">
+                <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+    <div class="contain">
+        <div class="user_info">
+            <div>
+                <span style="font-size: 0.53rem;color:#484848;font-family: PingFang-SC-Heavy">戴小美<img src="../images/mission@2x.png" alt="" style="margin-left: 0.32rem;width: 0.58rem;margin-top: 0.1rem"></span>
+                <span style="color:#3BC7FF;font-size: 0.42rem">广州</span>
+            </div>
+            <p>IT互联网/电子/通讯</p>
+        </div>
+        <div class="line" style="margin: 0 0.53rem;"></div>
+        <div class="main">
+            <span>工作描述</span>
+            <p>
+                1.负责线上产品的界面设计、视觉交互设计、并为
+                新功能、新产品提供创意及设计方案等；
+                2.淮准确理解产品需求和交互原型，输岀优质的界面
+                效果图
+                3.能够通过视觉元素，有效把控网站的整体设计风格
+                4.有3年设计工作经验，懂交互，熟悉掌握相关设计
+                软件.
+                5.善于分析用户群体、理解需求，结合行业属性，
+                定位并把控产品的整体视觉风格
+
+            </p>
+        </div>
+        <div class="line" style="margin: 0 0.53rem;"></div>
+        <div class="main">
+            <span>图片作品</span>
+            <ul style="width: 100%;margin-top: 0.66rem;">
+                <li style="display: inline-block" v-for="item in describeList2"><img :src="item.label" alt="" style="width: 2.76rem;margin-right: 0.16rem"></li>
+            </ul>
+        </div>
+        <div class="line" style="margin: 0 0.53rem;"></div>
+        <div class="main">
+            <span>接单记录</span>
+            <mu-paper :z-depth="1" class="demo-loadmore-wrap">
+                <mu-container ref="container" class="demo-loadmore-content">
+                    <mu-load-more :loading="loading" @load="load">
+                        <div v-for="item in num" style="font-family: PingFang-SC-Medium">
+                            <div style="width: 100%;margin-top: 0.8rem;margin-bottom: 0.37rem;display: flex;justify-content: space-between;">
+                                <div style="width: 0.88rem;"><img src="../images/1.jpeg" alt="" width="100%" style="border-radius: 50%"></div>
+                                <div style="width:6rem;margin-left: 0.34rem">
+                                    <span style="font-size: 0.4rem;color: #333333">广州翰阅网络科技</span>
+                                    <p style="font-size: 0.32rem;margin-top: 0.29rem">任务：区域销售代理</p>
+                                </div>
+                                <p style="color:#3BC7FF;font-size: 0.42rem;margin-top: 0">5.0分</p>
+                            </div>
+                            <p style="margin-left: 1.2rem;color:#333333;font-size: 0.37rem;line-height: 0.56rem;margin-bottom: 0.8rem;">
+                                小女孩太态度很好，工作也很迅速。给她点赞，
+                                期望下次继续合作。
+                            </p>
+                            <div class="line"></div>
+                        </div>
+                    </mu-load-more>
+                </mu-container>
+            </mu-paper>
+            <div style="height: 1rem"><br/></div>
+        </div>
+    </div>
+    <div style="position: fixed;bottom: 0;left: 0;width: 100%;background: #fff;font-size: 0.37rem;padding: 0.32rem 0.48rem">
+        <div style="display: flex;height: 1rem">
+            <button style="color: #24BFFF;border: 1px solid #24BFFF;background:#ffffff;border-radius: 0.48rem;margin-right: 0.53rem;width: 3.62rem;">和他聊聊</button>
+            <button style="color: #ffffff;background: #3BC7FF;border-radius: 0.48rem;border: 1px solid #24BFFF;width: 4.96rem;">视频邀约</button>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/muse-ui.js"></script>
+<script src="../js/less.min.js"></script>
+<script>
+    /*(function(){
+        var video, output;
+        var scale = 0.8;
+        function captureImage() {
+            output = document.getElementById("output");
+            // video = document.getElementById("video");
+            var canvas = document.createElement("canvas");
+            canvas.width = video.videoWidth * scale;
+            canvas.height = video.videoHeight * scale;
+            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+            var img = document.createElement("img");
+            img.setAttribute('crossOrigin', 'anonymous');
+            img.src = canvas.toDataURL("image/png");
+            output.appendChild(img);
+            // video.setAttribute("crossOrigin",'anonymous');
+            // img.setAttribute('crossOrigin', 'anonymous');
+            // video.poster = canvas.toDataURL("image/png");
+            console.log(img.src);
+        };
+        var initialize = function() {
+            output = document.getElementById("output");
+            video = document.getElementById("video");
+            video.addEventListener('loadeddata',captureImage);
+        };
+        initialize();
+    })();*/
+    /*var dom = document.getElementById('output');
+    function preload() {
+        document.getElementById('video').play();
+        setTimeout(function () {
+            document.getElementById('video').pause();
+        }, 200);
+    }
+    document.addEventListener("WeixinJSBridgeReady", preload, false);*/
+
+    var vm = new Vue({
+        el: '#wrapper',
+        data: {
+            describeList2: [
+                {label: "../images/avator.jpg",id:'1'},
+                {label: "../images/avator.jpg",id:'2'},
+                {label: "../images/avator.jpg",id:'3'},
+                {label: "../images/avator.jpg",id:'4'},
+                {label: "../images/avator.jpg",id:'5'},
+                {label: "../images/avator.jpg",id:'6'},
+                {label: "../images/avator.jpg",id:'7'},
+                {label: "../images/avator.jpg",id:'8'},
+                {label: "../images/avator.jpg",id:'9'},
+            ],
+            d:true,
+            num:5,
+            loading: false,
+            initialize: false,
+        },
+        mounted() {
+            setTimeout(function () {
+                this.initialize = true;
+
+            }.bind(this));
+            videojs('example_video_1',{
+                muted:true,
+                controls : true/false,
+                height:800,
+                width:300,
+                fluid: true,
+                userActions: {
+                    doubleClick: true
+                },
+
+                // techOrder: ["html5", "flash", "other supported tech"],
+                // 更多配置.....
+            });
+        },
+
+        methods:{
+            load() {
+                this.loading = true;
+                setTimeout(() => {
+                    this.loading = false;
+                }, 2000)
+            },
+        }
+
+    })
+</script>
+</html>

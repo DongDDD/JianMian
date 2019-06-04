@@ -1,0 +1,627 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!--主要I是强制让文档的宽度与设备宽度保持1:1，最大宽度1.0，禁止屏幕缩放。-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <!--这个也是iphone私有标签，允许全屏浏览。-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <!--iphone的私有标签，iphone顶端状态条的样式。-->
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <!--禁止数字自动识别为电话号码，这个比较有用，因为一串数字在iphone上会显示成蓝色，样式加成别的颜色也是不生效的。-->
+    <meta content="telephone=no" name="format-detection">
+    <!--禁止email识别-->
+    <meta content="email=no" name="format-detection">
+    <meta content="initial-dpr=2" name="flexible"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/muse-ui.css">
+    <link rel="stylesheet" href="../css/material-icons.css">
+    <script src="../js/flexible.debug.js"></script>
+    <script src="../js/flexible_css.debug.js"></script>
+    <style lang="less" type="text/less">
+        html{
+            position: relative;
+        }
+        body {
+            font-family: PingFang-SC-Medium;
+            font-weight: 500;
+        }
+        .dialog-open {
+            position: absolute;
+            z-index: 9999999;
+            width: 100%;
+        }
+        .line {
+            border-top: 0.024rem solid rgba(230, 230, 230, 1);
+        }
+        .container {
+            padding: 0;
+        }
+        #wrapper {
+            background: rgba(245, 245, 246, 1);
+            .demo-loadmore-wrap{
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                background: #F5F5F6;
+                .demo-loadmore-content {
+                    flex: 1;
+                    /*overflow: auto;*/
+                    -webkit-overflow-scrolling: touch;
+                    header{
+                        position: relative;
+                        padding: 0.26rem;
+                        color: #FFFFFF;
+                        background:#fff;
+                        .header-task{
+                            position: absolute;
+                            top: 0.7rem;
+                            left: 0;
+                            margin:0 1.06rem;
+                            text-align: left;
+                            .header-money{
+                                display: flex;
+                                margin-bottom: 0.6rem;
+                                height: 0.74rem;
+                                .sum-money{
+                                    margin-right: 0.24rem;
+                                    font-family:MicrosoftYaHeiLight;
+                                    font-size: 0.94rem;
+                                    line-height: 0.55rem;
+                                }
+                                .unit{
+                                    align-self: flex-end;
+                                    font-size: 0.32rem;
+                                    line-height: 0.55rem;
+                                }
+                            }
+                            .task{
+                                display: flex;
+                                width: 100%;
+                                text-align: left;
+                                font-size: 0.32rem;
+                                .suming-task{
+                                    margin-right: 0.77rem;
+                                    width: 4.12rem;
+                                    border-right: 1px solid #fff;
+                                }
+                                .sumed-task{
+                                    width: 3.34rem;
+                                    border-right:none;
+                                }
+                            }
+                        }
+                    }
+                    #searchBar{
+                        display: flex;
+                        width: 100%;
+                        height: 1.17rem;
+                        text-align:center;
+                        color: #999999;
+                        background:#fff;
+                        .isFixed{
+                            position:fixed;
+                            top:0;
+                            height: 1.17rem;
+                            z-index:100;
+                            color: #999999;
+                            background:#fff;
+                            border-bottom: 1px solid rgba(230, 230, 230, 1);
+                        }
+                        ul {
+                            width:100%;
+                            display: flex;
+                            li {
+                                flex: 1;
+                                align-self: center;
+                                width: 33%;
+                                border-right: 1px solid rgba(235,235,235,1);
+                                span{
+                                    font-size: 0.346rem;
+                                    .toggle{
+                                        color: #24BFFF;
+                                    }
+                                    div{
+                                        display: table-cell;
+                                        img{
+                                            margin-left: 0.1rem;
+                                            vertical-align: middle;
+                                            width: 0.16rem;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .lists{
+                        margin:0.26rem 0.2rem;
+                        border: 1px solid rgba(230,230,230,1);
+                        background:#fff;
+                        border-radius: 0.26rem;
+                        .list-wrapper{
+                            padding: 0.37rem;
+                            color:rgba(77,77,77,1);
+                            .list-contain{
+                                display: flex;
+                                .logo{
+                                    margin-top: 0.34rem;
+                                    width: 25%;
+                                    img{
+                                        margin-right: 0.37rem;
+                                        width: 1.68rem;
+                                    }
+                                }
+                                .list-main{
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: space-around;
+                                    margin-top: 0.3rem;
+                                    .list-money{
+                                        display: flex;
+                                        justify-content: space-between;
+                                        width: 6.64rem
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .open-left{
+                position: fixed;
+                top:0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background:rgba(0,0,0,1);
+                opacity:0.5;
+                z-index:150;
+            }
+            .open-right-enter-active, .open-right-leave-active {
+                transform: translateX(0);
+                opacity: 1;
+                transition: all 0.3s;
+            }
+            .open-right-enter, .open-right-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            .open-right{
+                position:fixed;
+                top:0;
+                right:0;
+                width: 85%;
+                height: 100%;
+                padding: 0.66rem;
+                background: #ffffff;
+                z-index:200;
+                overflow: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <div v-show="initialize">
+        <mu-paper :z-depth="1" class="demo-loadmore-wrap">
+            <mu-container ref="container" class="demo-loadmore-content">
+                <mu-load-more :loading="loading" @load="load">
+                    <div class="line"></div>
+                    <header style="display: none" v-show="initialize">
+                        <img src="../images/peijing@2x.png" alt="" style="width: 100%">
+                        <div class="header-task">
+                            <p style="font-size: 0.32rem;margin-bottom: 0.58rem;">累计收入</p>
+                            <div class="header-money">
+                                <p class="sum-money">
+                                    8888.00</p>
+                                <p class="unit">RMB</p>
+                            </div>
+                            <div class="task">
+                                <p class="suming-task">
+                                    进行中的任务：24</p>
+                                <p class="sumed-task">已完成的任务：12</p>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="line"></div>
+                    <div id='searchBar'>
+                        <ul :class="searchBarFixed || !openFix == true ? 'isFixed' :''">
+                            <li @click="recommend">
+                                <span>
+					        	    <div :class="!First == true ? 'toggle' :''">
+					        		    推荐兼职
+					        		    <img v-if="First" src="../images/option2@2x.png">
+                                        <img v-if="!First" src="../images/option@2x.png">
+					        	    </div>
+					            </span>
+                            </li>
+                            <li style="width: 34%;" @click="sort">
+                                <span>
+					        	    <div :class="!Second == true ? 'toggle' :''">
+					        		    兼职分类
+					        		    <img v-if="Second" src="../images/option2@2x.png">
+                                        <img v-if="!Second" src="../images/option@2x.png">
+					        	    </div>
+					            </span>
+                            </li>
+                            <li @click="match">
+					        <span>
+					        	<div :class="!Three == true ? 'toggle' :''">
+					        		与我匹配
+					        		<img v-if="Three" src="../images/option2@2x.png">
+                                    <img v-if="!Three" src="../images/option@2x.png">
+					        	</div>
+					        </span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="line"></div>
+                    <div class="lists" style="display: none" v-show="initialize" v-for="item in lists" @click="handleDetail">
+                        <div class="list-wrapper">
+                            <p style="font-size: 0.42rem">{{item.work_name}}</p>
+                            <div class="list-contain">
+                                <div class="logo">
+                                    <img src="../images/icon@2x.png" alt="">
+                                </div>
+                                <div class="list-main">
+                                    <div class="list-money">
+                                        <div>
+                                            <img src="../images/mission@2x.png" alt="" style="width: 0.58rem">
+                                        </div>
+                                        <div style="text-align: right;margin-top: -0.2rem">
+                                            <p style="font-size: 0.53rem;color:rgba(77,77,77,1);">{{item.money}}<span
+                                                    style="color:rgba(153,153,153,1);font-size:0.32rem;margin-left: 0.26rem">提成/单</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <p style="border:1px solid rgba(204, 204, 204, 1);border-radius:0.06rem;width: 1.09rem;text-align: center;color: #24B2FF;margin-top:-0.1rem;">
+                                        {{item.work_place}}</p>
+                                    <ul style="display: flex;flex-direction: row;font-size: 0.32rem;color:rgba(153,153,153,1);text-align: center">
+                                        <li v-for="list in item.describeList" style="width: 1.46rem;">{{list.label}}
+                                            <div style="display:inline-block;margin: 0 0.1rem;border-right: 1px solid rgba(204,204,204,1);height: 0.18rem"></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mu-load-more>
+            </mu-container>
+        </mu-paper>
+        <div @click='recommend' v-show="!Second || !Three">
+            <div class='open-left'></div>
+        </div>
+        <transition name='open-right'>
+            <div class='open-right' v-show="!Second">
+                <p style='font-size: 0.53rem;font-family: PingFang-SC-Bold;color: #333333;margin-bottom: 0.52rem'>选择职位</p>
+                <div v-for='item in describeList2'>
+                    <p style='font-size: 0.34rem;color: #B3B3B3;margin-bottom: 0.4rem'>{{item.label}}</p>
+                    <ul style="color:rgba(153,153,153,1);width: 100%;font-size: 0.32rem">
+                        <li v-for="list in item.describeList" style="color: #4D4D4D;display:inline-block;border:1px solid #CCCCCC;border-radius: 0.42rem;padding:0.1rem 0.26rem;margin-right: 0.26rem;margin-bottom: 0.4rem">{{list.label}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </transition>
+        <div v-if="have">
+            <transition name='open-right'>
+                <div class='open-right' v-show="!Three" style="text-align: center">
+                    <div style="margin-top: 2.75rem;padding: 0 1.44rem;font-size: 0.37rem;color: #999999;margin-bottom: 2.21rem">
+                        <img src="../images/none@2x.png" alt="" style="margin-bottom: 0.50rem;width: 2.85rem">
+                        <p>你还没有发布兼职简历哦</p>
+                        <p>快去发布吧</p>
+                    </div>
+                    <div style="padding: 0 1.02rem">
+                        <button style="width: 100%;color: #24BFFF;font-size: 0.42rem;border-radius: 0.61rem;border: 1px solid #24BFFF;padding: 0.22rem 1.2rem;background:rgba(250,254,255,1);">发布兼职简历</button>
+                    </div>
+                </div>
+            </transition>
+        </div>
+        <div v-if="!have">
+            <transition name='open-right'>
+                <div class='open-right' v-show="!Three" style="text-align: center;padding: 0">
+                    <div style="height: 1.01rem;background: #F5F5F6;padding: 0 0.72rem;color:#CCCCCC;display: flex;justify-content: space-around">
+                        <p style="border-top: 1px solid #CCCCCC;width: 0.5rem;align-self: center"></p>
+                        <p style="font-size: 0.32rem;align-self: center">选择已发布的简历，匹配职位</p>
+                        <p style="border-top: 1px solid #CCCCCC;width: 0.5rem;align-self: center"></p>
+                    </div>
+                    <div style="padding-left: 0.53rem" v-for="item in describeList3">
+                        <div style="padding: 0.53rem 0.53rem 0.53rem 0;font-size: 0.37rem;color:#999999;">
+                            <div style="display: flex;justify-content: space-between;margin-bottom: 0.26rem">
+                                <p style="font-size: 0.42rem;color:#333333;">{{item.label}}</p>
+                                <p>{{item.area}}</p>
+                            </div>
+                            <ul style="width: 100%;text-align: left;">
+                                <li v-for="list in item.child" style="display: inline-block;margin-right: 0.3rem">
+                                    {{list.label}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </transition>
+        </div>
+
+    </div>
+</div>
+
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/muse-ui.js"></script>
+<script src="../js/less.min.js"></script>
+<script>
+    function showInfoFromJava(token){
+        alert(token)
+    };
+    new Vue({
+        el: '#wrapper',
+        data: {
+            initialize: false,
+            have:true,
+            token: '',
+            // avator: '',
+            First:false,
+            Second:true,
+            Three:true,
+            lists: [
+                {
+                    work_name: "asdsad",
+                    work_place: "sadsad",
+                    describeList: [
+                        {label: "日结"},
+                        {label: "有定金"},
+                        {label: "签合同"}
+                    ],
+                    money: 111,
+                },
+                {
+                    work_name: "asdsad",
+                    work_place: "sadsad",
+                    describeList: [
+                        {label: "日结"},
+                        {label: "有定金"},
+                        {label: "签合同"}
+                    ],
+                    money: 111,
+                },
+                {
+                    work_name: "asdsad",
+                    work_place: "sadsad",
+                    describeList: [
+                        {label: "日结"},
+                        {label: "有定金"},
+                        {label: "签合同"}
+                    ],
+                    money: 111,
+                },
+                {
+                    work_name: "asdsad",
+                    work_place: "sadsad",
+                    describeList: [
+                        {label: "日结"},
+                        {label: "有定金"},
+                        {label: "签合同"}
+                    ],
+                    money: 111,
+                },
+                {
+                    work_name: "asdsad",
+                    work_place: "sadsad",
+                    describeList: [
+                        {label: "日结"},
+                        {label: "有定金"},
+                        {label: "签合同"}
+                    ],
+                    money: 111,
+                },
+                {
+                    work_name: "asdsad",
+                    work_place: "sadsad",
+                    describeList: [
+                        {label: "日结"},
+                        {label: "有定金"},
+                        {label: "签合同"}
+                    ],
+                    money: 111,
+                },
+            ],
+            loading: false,
+            searchBarFixed:false,
+            openFix:true,
+            describeList2: [
+                {label: "市场",
+                    describeList: [
+                        {label: "wqewq日结"},
+                        {label: "有定金"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                    ],
+                },
+                {label: "服务",describeList: [
+                        {label: "wqewq日结"},
+                        {label: "有定金"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                    ],},
+                {label: "演艺",describeList: [
+                        {label: "wqewq日结"},
+                        {label: "有定金"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                    ],},
+                {label: "IT",describeList: [
+                        {label: "wqewq日结"},
+                        {label: "有定金"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                    ],},
+                {label: "餐饮",describeList: [
+                        {label: "wqewq日结"},
+                        {label: "有定金"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                    ],},
+                {label: "设计",describeList: [
+                        {label: "wqewq日结"},
+                        {label: "有定金"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                        {label: "签合同"},
+                    ],},
+            ],
+            describeList: [
+                {label: "wqewq日结"},
+                {label: "有定金"},
+                {label: "签合同"},
+                {label: "签合同"},
+                {label: "签合同"},
+                {label: "签合同"},
+            ],
+            describeList3: [
+                {label: "互联网/IT",
+                    area:"广州",child:[
+                        {label : "电子商务游戏" },
+                        {label : "游戏" },
+                        {label : "媒体" },
+                    ]},
+                {label: "互联网/IT",
+                    area:"广州",child:[
+                        {label : "电子商务游戏" },
+                        {label : "游戏" },
+                        {label : "媒体" },
+                    ]},
+                {label: "互联网/IT",
+                    area:"广州",child:[
+                        {label : "电子商务游戏" },
+                        {label : "游戏" },
+                        {label : "媒体" },
+                    ]},
+                {label: "互联网/IT",
+                    area:"广州",child:[
+                        {label : "电子商务游戏" },
+                        {label : "游戏" },
+                        {label : "媒体" },
+                    ]},
+            ],
+        },
+        mounted(){
+            /*window.onload=function(){
+
+            };
+            window['scanQRCallBack'] = (result) => {
+                this.subscanQRCallBack(result)
+            }*/
+            setTimeout(function () {
+                this.initialize = true;
+            }.bind(this));
+            console.log(this.token);
+            document.addEventListener('scroll', this.handleScroll);
+            ModalHelper = ((bodyCls) =>{
+                let scrollTop;
+                return {
+                    afterOpen: function () {
+                        scrollTop = document.scrollingElement.scrollTop;
+                        document.body.classList.add(bodyCls);
+                        document.body.style.top = -scrollTop + 'px';
+                    },
+                    beforeClose: function () {
+                        document.body.classList.remove(bodyCls);
+                        document.scrollingElement.scrollTop = scrollTop;
+                    },
+                };
+            })('dialog-open');
+        },
+        /*mounted() {
+            this.token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcHAuam16aGlwaW4uY29tXC9kb21pbmF0b3JcL2xvZ2luIiwiaWF0IjoxNTU3MjA5NTYyLCJleHAiOjE1NTcyNjk1NjIsIm5iZiI6MTU1NzIwOTU2MiwianRpIjoiTVl5U2ZrVGcybDY1N3pxTiIsInN1YiI6MSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.3bK9rCdHQ3WSOZKYx22_y8vuWjquLvqSwe5iqayCmWM"
+            axios.get('http://app.jmzhipin.com/api/user/info', {
+                headers: {
+                    'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                    'Authorization': this.token
+                }
+            })
+                .then(function (res) {
+                    this.load = true;
+                    this.money_amount = res.data.data.money_amount;
+                    this.money_freeze = res.data.data.money_freeze;
+                    this.avator = res.data.data.avator;
+                }.bind(this))
+                .catch(function (error) {
+                    console.log('调用用户数据失败');
+                    console.log(error);
+                });
+        },*/
+        methods: {
+            ss(){
+                this.aa = 1;
+                console.log(this.aa)
+            },
+            handleScroll () {
+                var obj = document.getElementById('searchBar');
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                let offsetTop = obj.offsetTop;
+                scrollTop > offsetTop ? this.searchBarFixed = true : this.searchBarFixed = false;
+            },
+            destroyed () {
+                window.removeEventListener('scroll', this.handleScroll);
+            },
+            recommend(){
+                this.First = false;
+                this.Second = true;
+                this.Three = true;
+                this.openFix = true;
+                ModalHelper.beforeClose();
+            },
+            sort(){
+                this.Second = false;
+                this.First = true;
+                this.Three = true;
+                ModalHelper.afterOpen();
+                if(this.searchBarFixed === false){
+                    this.openFix = !this.Second;
+                }else{
+                    this.openFix = this.Second;
+                }
+            },
+            match(){
+                this.Three = false;
+                this.First = true;
+                this.Second = true;
+                ModalHelper.afterOpen();
+                if(this.searchBarFixed === false){
+                    this.openFix = !this.Three;
+                }else{
+                    this.openFix = this.Three;
+                }
+            },
+            handleDetail(){
+                alert("跳转任务详情页")
+            },
+            load() {
+                this.loading = true;
+                setTimeout(() => {
+                    this.loading = false;
+                    /*this.num += 10;
+                    this.show = false;*/
+                }, 2000)
+            }
+        }
+    })
+
+</script>
+
+</html>

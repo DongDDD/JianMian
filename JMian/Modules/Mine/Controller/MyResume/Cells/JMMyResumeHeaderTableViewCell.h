@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const JMMyResumeHeaderTableViewCellIdentifier;
+extern NSString *const JMMyResumeHeaderSecondTableViewCellIdentifier;
 extern NSString *const JMMyResumeHeader2TableViewCellIdentifier;
 extern NSString *const JMMyResumeHeader3TableViewCellIdentifier;
 extern NSString *const JMMyResumeHeader4TableViewCellIdentifier;

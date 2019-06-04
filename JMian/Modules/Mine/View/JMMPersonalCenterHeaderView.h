@@ -1,0 +1,25 @@
+//
+//  JMMPersonalCenterHeaderView.h
+//  JMian
+//
+//  Created by mac on 2019/5/31.
+//  Copyright © 2019 mac. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+NS_ASSUME_NONNULL_BEGIN
+@protocol JMMPersonalCenterHeaderViewDelegate <NSObject>
+
+-(void)didClickSetting;
+-(void)didClickMyAssignment;
+-(void)didClickMyOrder;
+
+
+
+@end
+@interface JMMPersonalCenterHeaderView : UIView
+@property(nonatomic,weak)id<JMMPersonalCenterHeaderViewDelegate>delegate;
+@end
+
+NS_ASSUME_NONNULL_END

@@ -11,8 +11,8 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 //app
 #else
@@ -93,6 +93,11 @@
 #define Create_Favorite_URL @"api/user/favorite"
 #define List_Favorite_URL @"api/user/favorite/paginate"
 #define Delete_Favorite_URL @"api/user/favorite/delete"
+//创建兼职简历
+#define Create_Ability_URL @"api/ability/create"
+#define Fectch_Ability_URL @"api/ability/paginate"
+#define Update_Ability_URL @"api/ability/update"
+#define Fectch_AbilityInfo_URL @"api/ability/info"
 
 
 //会话列表
@@ -103,8 +108,11 @@
 #define Fetch_BankCardList_URL @"api/bank/card/lists"
 #define Create_BankCard_URL @"api/bank/card/create"
 #define Delete_BankCard_URL @"api/bank/card/delete"
+//获取系统标签
+#define Delete_BankCard_URL @"api/bank/card/delete"
 
 //接口
+#define Get_Labels_URL @"/labels"
 
 
 #define GET_CONTENT_DETAIL      @"channel/getContentDetail" //获取内容详情(含上一个和下一个)

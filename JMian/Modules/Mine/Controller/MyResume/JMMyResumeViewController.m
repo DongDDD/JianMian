@@ -19,10 +19,17 @@
 #import "JMHTTPManager+Job.h"
 #import "JMAddMyJobTableViewController.h"
 #import "JMMyResumeFooterView.h"
+#import "JMMPersonalCenterHeaderView.h"
+#import "JMMyResumeHeaderSecondTableViewCell.h"
+#import "JMTitlesView.h"
+#import "JMPartTimeJobResumeViewController.h"
 
 @interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMMyResumeFooterViewDelegate,JMMyResumeCareerStatusTableViewCellDelegate>
 
 @property (strong, nonatomic) JMMyResumeCellConfigures *cellConfigures;
+@property (strong, nonatomic) JMTitlesView *titleView;
+@property (strong, nonatomic) JMPartTimeJobResumeViewController *partTimeJobVC;
+@property (strong, nonatomic) UIView *BGView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JMVitaDetailModel *model;
 @property (copy, nonatomic) NSString *job_labelID;
@@ -35,6 +42,7 @@
 @property (nonatomic, copy) NSString *work_status;
 
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
+@property (nonatomic, assign) NSInteger index;
 
 @end
 
@@ -45,62 +53,7 @@
     
     self.title = @"我的简历";
     [self.view addSubview:self.progressHUD];
-
-}
-
-- (void)setupDateKeyPan {
-    
-    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    
-    //设置地区: zh-中国
-    datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"zh"];
-    
-    //设置日期模式(Displays month, day, and year depending on the locale setting)
-    datePicker.datePickerMode = UIDatePickerModeDate;
-    // 设置当前显示时间
-    [datePicker setDate:[NSDate date] animated:YES];
-    // 设置显示最大时间（此处为当前时间）
-    [datePicker setMaximumDate:[NSDate date]];
-    
-    //设置时间格式
-    
-    //监听DataPicker的滚动
-    [datePicker addTarget:self action:@selector(dateChange:) forControlEvents:UIControlEventValueChanged];
-    
-    self.datePicker = datePicker;
-    self.datePicker.hidden = YES;
-    self.datePicker.backgroundColor = [UIColor groupTableViewBackgroundColor];
-
-    [self.view addSubview:self.datePicker];
-    [self.datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.equalTo(self.view);
-        make.height.mas_equalTo(180);
-        make.bottom.mas_equalTo(self.view.mas_bottom);
-    }];
-    
-    //设置时间输入框的键盘框样式为时间选择器
-    
-
-}
-
--(void)setPickerVIewUI{
-    self.pickerView = [[UIPickerView alloc]init];
-    self.pickerView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-    self.pickerView.delegate = self;
-    
-    self.pickerView.dataSource = self;
-    
-    [self.view addSubview:self.pickerView];
-    
-    self.pickerView.hidden = YES;
-    
-    [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.equalTo(self.view);
-        make.height.mas_equalTo(180);
-        make.bottom.mas_equalTo(self.view.mas_bottom);
-    }];
-    
-    self.pickerArray = [NSArray arrayWithObjects:@"3000~5000",@"5000~8000",@"8000~10000",@"10000~20000",nil];
+//    [self.view addSubview:self.BGView];
 
 }
 
@@ -111,12 +64,22 @@
 }
 
 - (void)initView {
-    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.BGView];
+    [self.view addSubview:self.titleView];
+    [self.BGView addSubview:self.tableView];
+    [self.BGView addSubview:self.partTimeJobVC.view];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_topLayoutGuide);
-        make.left.right.bottom.equalTo(self.view);
+        make.top.equalTo(self.mas_topLayoutGuide).mas_offset(self.titleView.frame.origin.y+self.titleView.frame.size.height);
+        make.width.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view);
     }];
-    }
+    [self.partTimeJobVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.tableView);
+        make.width.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view);
+        make.left.mas_equalTo(self.tableView.mas_right);
+    }];
+}
 
 - (void)sendRequest {
 
@@ -131,11 +94,11 @@
                 self.salaryMin = @([self.model.salary_min intValue]);
                 self.salaryMax = @([self.model.salary_max intValue]);
                 [self initView];
-                [self setPickerVIewUI];
-                [self setupDateKeyPan];
+//                [self setPickerVIewUI];
+//                [self setupDateKeyPan];
                 [self.tableView reloadData];
                 
-                [self.progressHUD showAnimated:NO]; //显示进度框
+                [self.progressHUD setHidden:YES]; //显示进度框
 
             }
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -189,6 +152,26 @@
     [self updateVita];
 
 }
+
+-(void)setCurrentIndex{
+    __weak typeof(self) ws = self;
+    
+    
+    
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGRect Frame = ws.BGView.frame;
+        Frame.origin.x = -_index * SCREEN_WIDTH;
+        ws.BGView.frame = Frame;
+//        CGRect Frame2 = ws.partTimeJobVC.view.frame;
+//        Frame2.origin.x = -_index * SCREEN_WIDTH;
+//        ws.partTimeJobVC.view.frame = Frame2;
+
+        
+    } completion:nil];
+    
+    
+    
+}
 //PositionDesiredViewController代理方法
 //-(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
 //
@@ -209,9 +192,7 @@
 //返回有几列
 
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-
 {
-    
     return 1;
     
 }
@@ -254,8 +235,6 @@
     self.salaryMin = @(minNum);
     self.salaryMax = @(maxNum);
     
-//    [self updateJob];
-
 }
 
 #pragma mark - UITableViewDelegate
@@ -270,17 +249,17 @@
         }
         case JMMyResumeCellTypeHeader:
         {
-            JMMyResumeHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeaderTableViewCellIdentifier forIndexPath:indexPath];
+            JMMyResumeHeaderSecondTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeaderSecondTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell cellConfigWithIdentifier:JMMyResumeHeaderTableViewCellIdentifier imageViewName:@"job_wanted" title:@"求职意向"];
+//            cell.delegate = self;
+//            [cell setWorkStatus:self.model.work_status];
             return cell;
         }
         case JMMyResumeCellTypeCareerStatus:
         {
-            JMMyResumeCareerStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeCareerStatusTableViewCellIdentifier forIndexPath:indexPath];
+            JMMyResumeHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeaderTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.delegate = self;
-            [cell setWorkStatus:self.model.work_status];
+            [cell cellConfigWithIdentifier:JMMyResumeHeaderTableViewCellIdentifier imageViewName:@"job_wanted" title:@"求职意向"];
             return cell;
         }
         case JMMyResumeCellTypeCareerObjective:
@@ -301,9 +280,12 @@
         }
         case JMMyResumeCellTypeWorkExperience:
         {
-            JMMyResumeWorkExperienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeWorkExperienceTableViewCellIdentifier forIndexPath:indexPath];
+//            JMMyResumeWorkExperienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeWorkExperienceTableViewCellIdentifier forIndexPath:indexPath];
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//            [cell setWorkExperienceModel:self.cellConfigures.workExperienceArr[indexPath.row]];
+            JMEducationalExperienceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMEducationalExperienceTableViewCellIdentifier forIndexPath:indexPath];
+            [cell setExperiencesModel:self.cellConfigures.workExperienceArr[indexPath.row]];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell setWorkExperienceModel:self.cellConfigures.workExperienceArr[indexPath.row]];
             return cell;
         }
         case JMMyResumeCellTypeAction:
@@ -360,11 +342,17 @@
             BasicInformationViewController *vc= [[BasicInformationViewController alloc] init];
             vc.model = [JMUserInfoManager getUserInfo];
             vc.viewType = BasicInformationViewTypeEdit;
-            [self.navigationController pushViewController:vc animated:YES];\
+            [self.navigationController pushViewController:vc animated:YES];
             break;
          }
         case JMMyResumeCellTypeHeader:
         {
+            
+            JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
+            vc.model = self.cellConfigures.jobstArr[indexPath.row];
+            vc.viewType = JMAddMyJobTableViewTypeEdit;
+            [self.navigationController pushViewController:vc animated:YES];
+            
             break;
 
         }
@@ -376,10 +364,6 @@
         case JMMyResumeCellTypeCareerObjective:
         {
             
-            JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
-            vc.model = self.cellConfigures.jobstArr[indexPath.row];
-            vc.viewType = JMAddMyJobTableViewTypeEdit;
-            [self.navigationController pushViewController:vc animated:YES];
 
            
 //            else if (indexPath.row == 1) {
@@ -395,12 +379,16 @@
             break;
 
         }
-        case JMMyResumeCellTypeHeader2:
+        case JMMyResumeCellTypeHeader2://添加工作经历
         {
+            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc] init];
+            vc.viewType = JMJobExperienceViewTypeAdd;
+            vc.model = self.cellConfigures.workExperienceArr[indexPath.row];
+            [self.navigationController pushViewController:vc animated:YES];
             break;
 
         }
-        case JMMyResumeCellTypeWorkExperience:
+        case JMMyResumeCellTypeWorkExperience://编辑工作经历
         {
             JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc] init];
             vc.viewType = JMJobExperienceViewTypeEdit;
@@ -410,9 +398,9 @@
         }
         case JMMyResumeCellTypeAction:
         {
-            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc] init];
-            vc.viewType = JMJobExperienceViewTypeAdd;
-            [self.navigationController pushViewController:vc animated:YES];
+//            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc] init];
+//            vc.viewType = JMJobExperienceViewTypeAdd;
+//            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case JMMyResumeCellTypeHeader3:
@@ -457,13 +445,13 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-    if (section == JMMyResumeCellTypeCareerObjective) {
-        JMMyResumeFooterView *footerView = [[JMMyResumeFooterView alloc]init];
-        footerView.delegate = self;
-        
-        return footerView;
-        
-    }
+//    if (section == JMMyResumeCellTypeHeader) {
+//        JMMyResumeFooterView *footerView = [[JMMyResumeFooterView alloc]init];
+//        footerView.delegate = self;
+//
+//        return footerView;
+//
+//    }
     return [UIView new];
 }
 #pragma mark - UITableViewDataSource
@@ -492,7 +480,7 @@
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;
@@ -503,6 +491,7 @@
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeIconTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeIconTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeHeaderTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeCareerObjectiveTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeCareerObjectiveTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeHeaderSecondTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeHeaderSecondTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeHeader2TableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeHeader3TableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMyResumeHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:JMMyResumeHeader4TableViewCellIdentifier];
@@ -524,6 +513,29 @@
     }
     return _cellConfigures;
 }
+- (JMTitlesView *)titleView {
+    if (!_titleView) {
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全职简历", @"兼职简历"]];
+        __weak JMMyResumeViewController *weakSelf = self;
+        _titleView.didTitleClick = ^(NSInteger index) {
+            _index = index;
+            [weakSelf setCurrentIndex];
+        };
+    }
+    
+    return _titleView;
+}
+
+-(UIView *)BGView{
+    if (!_BGView) {
+        _BGView = [[UIView alloc]initWithFrame:CGRectMake(0,0, SCREEN_WIDTH*2, self.view.frame.size.height)];
+
+    }
+    return _BGView;
+}
+
+
+
 -(MBProgressHUD *)progressHUD{
     if (!_progressHUD) {
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -533,4 +545,17 @@
     }
     return _progressHUD;
 }
+
+-(JMPartTimeJobResumeViewController *)partTimeJobVC{
+    if (!_partTimeJobVC) {
+        _partTimeJobVC = [[JMPartTimeJobResumeViewController alloc]init];
+        _partTimeJobVC.view.frame = CGRectMake(SCREEN_WIDTH,0, SCREEN_WIDTH, self.view.frame.size.height);
+        [self addChildViewController:_partTimeJobVC];
+        
+    }
+    return _partTimeJobVC;
+}
+
+
+
 @end

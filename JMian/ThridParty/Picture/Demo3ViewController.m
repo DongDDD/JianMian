@@ -16,6 +16,8 @@
 #import "JMUserInfoManager.h"
 #import "JMHTTPManager+Uploads.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
+#import "JMHTTPManager+UpdateAbility.h"
+#import "JMPartTimeJobModel.h"
 static const CGFloat kPhotoViewMargin = 12.0;
 
 @interface Demo3ViewController ()<HXPhotoViewDelegate>
@@ -29,6 +31,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
 @property (strong, nonatomic)NSMutableArray *addImgArray;//UIImage类型
 
 @property (strong, nonatomic)JMCompanyInfoModel *companyInfoModel;
+@property (strong, nonatomic)JMPartTimeJobModel *partTimeJobModel;
+
 
 @end
 
@@ -126,17 +130,18 @@ static const CGFloat kPhotoViewMargin = 12.0;
     //    self.manager.networkPhotoUrls = ;
     
     //    photoView.manager = self.manager;
-    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"添加网络" style:UIBarButtonItemStylePlain target:self action:@selector(addNetworkPhoto)];
+//    UIBarButtonItem *item1 = [[UIBarButtonItem alloc] initWithTitle:@"添加网络" style:UIBarButtonItemStylePlain target:self action:@selector(addNetworkPhoto)];
     
-    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"清空缓存" style:UIBarButtonItemStylePlain target:self action:@selector(lookClick)];
+//    UIBarButtonItem *item2 = [[UIBarButtonItem alloc] initWithTitle:@"清空缓存" style:UIBarButtonItemStylePlain target:self action:@selector(lookClick)];
     
-    self.navigationItem.rightBarButtonItems = @[item1,item2];
+//    self.navigationItem.rightBarButtonItems = @[item1,item2];
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"公司图片";
+    [self setRightBtnTextName:@"保存"];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
 //    self.navigationController.navigationBar.translucent = NO;
@@ -148,7 +153,12 @@ static const CGFloat kPhotoViewMargin = 12.0;
         }
     }
 //    [self initView];
-    [self getData];//获取服务器最新图片数组
+    if (_viewType == Demo3ViewPartTime) {
+         [self initView];
+    }else{
+        
+        [self getData];//获取服务器最新图片数组
+    }
    
     
 //    NSMutableArray *array = [NSMutableArray arrayWithObjects:@"http://oss-cn-hangzhou.aliyuncs.com/tsnrhapp/shop/photos/857980fd0acd3caf9e258e42788e38f5_0.gif",@"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0034821a-6815-4d64-b0f2-09103d62630d.jpg",@"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0be5118d-f550-403e-8e5c-6d0badb53648.jpg",@"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/1466408576222.jpg", nil];
@@ -179,26 +189,69 @@ static const CGFloat kPhotoViewMargin = 12.0;
 //}
 
 #pragma mark -上传图片并返回
+-(void)rightAction{
+    [self.navigationController popViewControllerAnimated:YES];
+    [self lookClick];
+    if (self.addImgArray.count>0) {
+  
+        [self sendRequst];
+      
+    }
+    
+}
+//兼职上传图片
+-(void)uploadPartTimePicWithImages:(NSArray *)images{
+    [[JMHTTPManager sharedInstance]updateAbility_Id:self.ability_id city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:images status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片上传成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+//公司上传图片
+-(void)uploadCompanyWithImages:(NSArray *)images{
+    
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:userModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:images label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片上传成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+}
+
+
+//获取网络链接
+-(void)sendRequst{
+    
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:self.addImgArray successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            NSLog(@"------%@",responsObject[@"data"]);
+            NSArray *array = responsObject[@"data"];
+            //            上传图片
+            if (_viewType == Demo3ViewPartTime) {
+                [self uploadPartTimePicWithImages:array];
+            }else{
+                //公司上传图片
+                [self uploadCompanyWithImages:array];
+            }
+            //            if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
+            //                [_delegate sendArray_addImageUrls:array];
+            //            }
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 
 -(void)fanhui{
     [super fanhui];
-    [self lookClick];
-    if (self.addImgArray.count>0) {
-        [[JMHTTPManager sharedInstance]uploadsWithFiles:self.addImgArray successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            if (responsObject[@"data"]) {
-                NSLog(@"------%@",responsObject[@"data"]);
-                NSArray *array = responsObject[@"data"];
-                //            上传图片
-                [self uploadPics:array];
-                //            if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
-                //                [_delegate sendArray_addImageUrls:array];
-                //            }
-            }
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-        }];
-        
-    }
     
 }
 
@@ -214,23 +267,23 @@ static const CGFloat kPhotoViewMargin = 12.0;
 //#endif
     return;
 }
-- (void)addNetworkPhoto {
-    if (self.manager.afterSelectPhotoCountIsMaximum) {
-//        [self.view hx_showImageHUDText:@"图片已达到最大数"];
-        return;
-    }
-    int x = arc4random() % 4;
-    NSString *url;
-    if (x == 0) {
-        url = @"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0034821a-6815-4d64-b0f2-09103d62630d.jpg";
-    }else if (x == 1) {
-        url = @"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0be5118d-f550-403e-8e5c-6d0badb53648.jpg";
-    }else {
-        url = @"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/1466408576222.jpg";
-    }
-    [self.manager addNetworkingImageToAlbum:@[url] selected:YES];
-    [self.photoView refreshView];
-}
+//- (void)addNetworkPhoto {
+//    if (self.manager.afterSelectPhotoCountIsMaximum) {
+////        [self.view hx_showImageHUDText:@"图片已达到最大数"];
+//        return;
+//    }
+//    int x = arc4random() % 4;
+//    NSString *url;
+//    if (x == 0) {
+//        url = @"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0034821a-6815-4d64-b0f2-09103d62630d.jpg";
+//    }else if (x == 1) {
+//        url = @"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0be5118d-f550-403e-8e5c-6d0badb53648.jpg";
+//    }else {
+//        url = @"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/1466408576222.jpg";
+//    }
+//    [self.manager addNetworkingImageToAlbum:@[url] selected:YES];
+//    [self.photoView refreshView];
+//}
 
 
 
@@ -301,20 +354,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
 }
 
--(void)uploadPics:(NSArray *)urls{
-    
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-        [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:userModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:urls label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-    
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片上传成功"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alert show];
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-    
-        }];
-    
-    
-}
 
 
 

@@ -20,7 +20,7 @@
 #import "JMSquareViewController.h"
 #import "JMDiscoverHomeViewController.h"
 
-@interface JMPersonTabBarViewController ()
+@interface JMPersonTabBarViewController () <MCTabBarControllerDelegate>
 @property (nonatomic, strong) NSArray *modelArray;
 @property (nonatomic, assign)int unReadNum;
 @property (nonatomic ,strong)JMMessageViewController *message;
@@ -32,6 +32,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    
+    //选中时的颜色
+    //透明设置为NO，显示白色，view的高度到tabbar顶部截止，YES的话到底部
+//    self.mcTabbar.translucent = NO;
+//
+//    self.mcTabbar.position = MCTabBarCenterButtonPositionBulge;
+//    self.mcTabbar.centerImage = [UIImage imageNamed:@"garden"];
+//    self.mcTabbar.centerSelectedImage = [UIImage imageNamed:@"garden_pich_on"];
+//    self.mcDelegate = self;
+//
     [self getMsgList];
  
     HomeViewController *home = [[HomeViewController alloc] init];
@@ -52,7 +62,8 @@
     JMMineViewController *mine = [[JMMineViewController alloc] init];
     
     [self addChildVc:mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on"];
-    
+    [self setSelectedIndex:2];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -94,7 +105,6 @@
 }
 
 - (void)updateConversations {
-    JMUserInfoModel *userInfomodel = [JMUserInfoManager getUserInfo];
     
     //    _dataArray = [NSMutableArray array];
     //    15011331133
@@ -151,10 +161,8 @@
     //设置标题
     
     childVc.tabBarItem.title = title;
-
-
     childVc.tabBarItem.image = [UIImage imageNamed:image];
-    
+//    [childVc.tabBarItem setImage:[[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     //需要设置照片的模式，用照片原图，默认是蓝色的
     childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     
@@ -172,5 +180,26 @@
     [self addChildViewController:nav];
 }
 
+//// 使用MCTabBarController 自定义的 选中代理
+//- (void)mcTabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+//    if (tabBarController.selectedIndex == 2){
+//        [self rotationAnimation];
+//    }else {
+//        [self.mcTabbar.centerBtn.layer removeAllAnimations];
+//    }
+//}
+//
+//
+////旋转动画
+//- (void)rotationAnimation{
+//    if ([@"key" isEqualToString:[self.mcTabbar.centerBtn.layer animationKeys].firstObject]){
+//        return;
+//    }
+//    CABasicAnimation *rotationAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.z"];
+//    rotationAnimation.toValue = [NSNumber numberWithFloat:M_PI*2.0];
+//    rotationAnimation.duration = 3.0;
+//    rotationAnimation.repeatCount = HUGE;
+//    [self.mcTabbar.centerBtn.layer addAnimation:rotationAnimation forKey:@"key"];
+//}
 
 @end

@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 #import "JMCompanyInfoModel.h"
+
+typedef enum : NSUInteger {
+    Demo3ViewDefault,
+    Demo3ViewPartTime,
+} Demo3ViewType;
+
+
 @protocol Demo3ViewControllerDelegate <NSObject>
 
 -(void)sendArray_addImageUrls:(NSArray *)addImageUrls;
@@ -21,5 +28,6 @@
 @property (nonatomic, strong) NSMutableArray *filesModelArray;//用来提取公司图片的数组
 @property (nonatomic, strong)JMFilesModel *filesModel;
 @property (nonatomic, weak)id<Demo3ViewControllerDelegate>delegate;
-
+@property (nonatomic, assign)Demo3ViewType viewType;
+@property (nonatomic, copy)NSString *ability_id;//兼职简历主键
 @end

@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--主要I是强制让文档的宽度与设备宽度保持1:1，最大宽度1.0，禁止屏幕缩放。-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <!--这个也是iphone私有标签，允许全屏浏览。-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <!--iphone的私有标签，iphone顶端状态条的样式。-->
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <!--禁止数字自动识别为电话号码，这个比较有用，因为一串数字在iphone上会显示成蓝色，样式加成别的颜色也是不生效的。-->
+    <meta content="telephone=no" name="format-detection">
+    <!--禁止email识别-->
+    <meta content="email=no" name="format-detection">
+    <meta content="initial-dpr=2" name="flexible"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/muse-ui.css">
+    <link rel="stylesheet" href="../css/material-icons.css">
+    <script src="../js/flexible.debug.js"></script>
+    <script src="../js/flexible_css.debug.js"></script>
+    <style lang="less" type="text/less">
+        body {
+            font-family: PingFang-SC-Medium;
+            font-weight: 500;
+        }
+        .line {
+            border-top: 0.03rem solid rgba(230, 230, 230, 1);
+        }
+        .container {
+            padding: 0;
+        }
+        .aa{
+            font-size: 0.42rem;
+            text-align: center;
+            border-radius: 0.26rem;
+            min-width: 90%!important;
+            .mu-dialog-title{
+                font-size: 0.4rem;
+                color: #666666;
+                font-family: MicrosoftYaHei;
+            }
+            .mu-dialog-body{
+                padding-bottom: 0.42rem;
+            }
+        }
+        #wrapper{
+            background: #ffffff;
+            color: #999999;
+            header{
+                display: flex;
+                justify-content: space-between;
+                padding: 0.48rem 0.56rem;
+                .avatar{
+                    margin-right: 0.4rem;
+                    width: 1.6rem;
+                    img{
+                        width: 100%;
+                    }
+                }
+                .contain{
+                    display: flex;
+                    flex-direction: column;
+                    align-self: center;
+                    justify-content: space-between;
+                    width: 6.5rem;
+                    font-size: 0.37rem;
+                    .c-name{
+                        margin-bottom: 0.1rem;
+                        font-family: MicrosoftYaHei;
+                        color:#333333;
+                    }
+                    .credit{
+                        display: flex;
+                        span{
+                            margin-right: 0.4rem;
+                        }
+                        img{
+                            width: 0.58rem;
+                        }
+                    }
+                }
+                .icon-footer{
+                    align-self: center;
+                    width: 0.18rem;
+                    img{
+                        width: 100%
+                    }
+                }
+            }
+            #searchBar{
+                display: flex;
+                text-align: center;
+                height: 1.22rem;
+                font-size:0.4rem;
+                .isFixed{
+                    position:fixed;
+                    top:0;
+                    height: 1.22rem;
+                    z-index:100;
+                    color: #999999;
+                    background:#fff;
+                    border-bottom: 1px solid rgba(230, 230, 230, 1);
+                }
+                ul {
+                    display: flex;
+                    width: 100%;
+                    .toggle{
+                        color: #24BFFF;
+                    }
+                    li {
+                        display: flex;
+                        justify-content:center;
+                        align-items:center;
+                        width: 50%;
+                        height:100%;
+                    }
+                }
+
+            }
+            .nav-light{
+                display: flex;
+                justify-content: space-around;
+                text-align: center;
+                width: 100%;
+                div{
+                    width: 0.37rem;
+                    border-top: 1px solid #24BFFF;
+                }
+                span{
+                    width: 0.37rem;
+                }
+            }
+            #task{
+                .open-left-enter-active, .open-left-leave-active {
+                    transform: translate3d(0,0,0);
+                    transition: all 0.3s;
+                }
+                .open-left-enter, .open-left-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                    transform: translate3d(-100%,0,0);
+                }
+                .task{
+                    display: flex;
+                    flex-direction: column;
+                    padding: 0.66rem 0.53rem;
+                    .task-name{
+                        margin-bottom: 0.3rem;
+                        font-family: PingFang-SC-Bold;
+                        color:#333333;
+                        font-size: 0.48rem;
+                    }
+                    .unit{
+                        margin-bottom: 0.1rem;
+                        color:#FF5150;
+                        font-size: 0.66rem;
+                        span{
+                            margin-left: 0.26rem;
+                            color: #999999;
+                            font-size: 0.32rem;
+                        }
+                    }
+                    .label{
+                        ul{
+                            display: flex;
+                            color: #999999;
+                            font-size: 0.32rem;
+                            li{
+                                margin-right: 0.26rem;
+                                padding:0 0.24rem;
+                                border:1px solid #CCCCCC;
+                                border-radius: 0.1rem
+                            }
+                        }
+                    }
+                }
+                .require{
+                    padding: 0.66rem 0.53rem;
+                    font-size: 0.37rem;
+                    p{
+                        margin-bottom: 0.48rem;
+                        span{
+                            margin-left: 0.4rem;
+                            color: #333333;
+                        }
+                    }
+                }
+                .product{
+                    padding: 0.66rem 0.53rem 0 0.53rem;
+                    color:#333333;
+                    span{
+                        font-family: PingFang-SC-Bold;
+                        font-size: 0.42rem;
+                        color: #333333;
+                    }
+                    div{
+                        margin: 0.6rem 0;
+                        font-size: 0.37rem;
+                    }
+                    p{
+                        font-size: 0.37rem;
+                        margin-bottom: 0.1rem;
+                    }
+                }
+                .describe{
+                    padding: 0.66rem 0.53rem;
+                    span{
+                        font-family: PingFang-SC-Bold;
+                        font-size: 0.42rem;
+                        color: #333333;
+                    }
+                    p{
+                        margin-top: 0.66rem;
+                    }
+                }
+                .bottom{
+                    display: flex;
+                    justify-content: center;
+                    height: 1.2rem;
+                    margin-bottom: 1.33rem;
+                    text-align: center;
+                    color:#999999;
+                    font-size: 0.26rem;
+                    span{
+                        align-self: center;
+                        width: 1.73rem;
+                        border-top: 1px solid #D9D9D9;
+                    }
+                }
+                .footer{
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    height: 1.33rem;
+                    width: 100%;
+                    z-index: 200;
+                    div{
+                        display: flex;
+                        height: 100%;
+                        button{
+                            width: 50%;
+                            border: 1px solid #3BC7FF;
+                            background: #F7FDFF;
+                            color: #24BFFF;
+                            font-size: 0.4rem;
+                            p{
+                                font-family: MicrosoftYaHei;
+                                font-size: 0.26rem;
+                            }
+                        }
+                    }
+                }
+            }
+            #credit{
+                .open-right-enter-active, .open-right-leave-active {
+                    transform: translate3d(0,0,0);
+                    transition: all 0.3s 0.06s;
+                }
+                .open-right-enter, .open-right-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                    transform: translate3d(100%,0,0);
+                }
+                .credit-lists{
+                    padding: 0.66rem 0.53rem 0 0.53rem;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    -webkit-overflow-scrolling: touch;
+                    .contain{
+                        display: flex;
+                        margin-bottom: 0.37rem;
+                        font-size: 0.4rem;
+                        .avator{
+                            margin-right: 0.34rem;
+                            width: 0.88rem;
+                            img{
+                                width: 100%;
+                                border-radius: 50%;
+                            }
+                        }
+                        .user-name{
+                            align-self: flex-start;
+                            width: 6.56rem;
+                            color: #333333;
+                            p{
+                                font-size: 0.32rem;
+                                color: #999999;
+                            }
+                        }
+                        .num{
+                            align-self: flex-start;
+                            color:#24BFFF;
+                        }
+                    }
+                    .remark{
+                        margin-bottom: 0.66rem;
+                        color: #333333;
+                        font-size: 0.37rem;
+                        margin-left: 1.23rem;
+                    }
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <div v-show="initialize">
+        <div class="line"></div>
+        <header style="display: none" v-show="initialize" @click="handleCdetail">
+        <span class="avatar">
+            <img src="../images/avator.jpg" alt="">
+        </span>
+            <span class="contain">
+            <p class="c-name">空间智能科技</p>
+            <span class="credit">
+                <span>信用等级</span>
+                <div>
+                    <img src="../images/mission@2x.png" alt="">
+                </div>
+            </span>
+        </span>
+            <span class="icon-footer">
+            <img src="../images/icon_return@2x.png" alt="">
+        </span>
+        </header>
+        <div style="height: 0.24rem;background: #F5F5F6;"><br/></div>
+        <div id="searchBar" >
+            <ul :class="searchBarFixed == true ? 'isFixed' :''">
+                <li :class="task == true ? 'toggle' :''" style="border-right: 1px solid rgba(235,235,235,1);" @click="handleTask">任务描述</li>
+                <li :class="credit == true ? 'toggle' :''" @click="handleCredit">雇佣记录</li>
+            </ul>
+        </div>
+        <div class="nav-light">
+            <div v-show="task"></div>
+            <span v-show="credit || task"></span>
+            <div v-show="credit"></div>
+        </div>
+        <div class="line"></div>
+        <div id="task" style="display: none" v-show="initialize">
+            <transition name="open-left">
+                <div v-show="task">
+                    <div class="task">
+                        <span class="task-name">产品区域销售代理/销售助理</span>
+                        <span class="unit">10%<span>提成/单</span></span>
+                        <span class="label">
+                        <ul>
+                            <li v-for="item in describeList" :key="item.id">{{item.label}}</li>
+                        </ul>
+                    </span>
+                    </div>
+                    <div class="line" style="margin: 0 0.53rem;"></div>
+                    <div class="require">
+                        <p>招募人数：<span>10人</span></p>
+                        <p>适合行业：<span>2019-2300</span></p>
+                        <p style="margin-bottom: 0">销售目标：<span>8000件</span></p>
+                    </div>
+                    <div class="line" style="margin:0 0.53rem;"></div>
+                    <div class="product">
+                        <span>产品描述</span>
+                        <div>品牌名称：MOPOER/魔板车载充电器</div>
+                        <p>产品参数：</p>
+                        <p>品牌:MOPOER/魔棒</p>
+                        <p>型号:QK518</p>
+                        <p>颜色分类:QK518 黑色 、QK516 白色</p>
+                        <p>生产企业:深圳市爱派数码有限公司</p>
+                        <p>USB接口数量:2个</p>
+                        <p>输出电流:4A</p>
+                        <div>产品卖点：</div>
+                        <div style="display: inline-block;margin: 0 1.01rem 0.72rem 0" v-for="item in describeList1">
+                            {{item.label}}
+                        </div>
+                    </div>
+                    <div class="line" style="margin:0 0.53rem;"></div>
+                    <div class="describe">
+                        <span>产品视频</span>
+                        <p>
+                            <video controls width="100%" style="border-radius: 0.33rem">
+                                <source src="">
+                            </video>
+                        </p>
+                    </div>
+                    <div class="line" style="margin:0 0.53rem;"></div>
+                    <div class="describe">
+                        <span>产品图片</span>
+                        <ul style="width: 100%;margin-top: 0.66rem;">
+                            <li style="display: inline-block" v-for="item in describeList2"><img :src="item.label" alt="" style="width: 2.8rem;margin-right: 0.16rem"></li>
+                        </ul>
+                    </div>
+                    <div class="bottom">
+                        <span></span>
+                        <p style="display:inline-block;vertical-align:middle;align-self: center;margin: 0 0.34rem">已经到底啦，再往上逛逛吧</p>
+                        <span></span>
+                    </div>
+                    <div class="footer">
+                        <div>
+                            <button @click="handleContact">咨询雇主</button>
+                            <button @click="handleApply" style="background:#3BC7FF;color: #ffffff">立即申请<p>（5人已报名）</p></button>
+                        </div>
+                    </div>
+                    <mu-dialog title="确认申请" width='98%' :open.sync="openSimple" dialog-class="aa">
+                        <div class="line" style="margin:-0.5rem 0 0 0;"></div>
+                        <div style="margin: 1.06rem 0;color: #24BFFF;font-family: MicrosoftYaHei">《平台服务协议》</div>
+                        <div style="text-align: left;"><input type="radio"><span style="color: #808080;font-size: 0.34rem;margin-left: 0.18rem">我同意并遵守平台服务协议</span></div>
+                        <div class="line" style="margin: 0.4rem 0"></div>
+                        <div style="display:flex;font-size: 0.37rem">
+                            <mu-button slot="actions" flat @click="closeSimpleDialog" style="width: 50%;color: #666666;border-right: 1px solid #EBEBEB">取消</mu-button>
+                            <mu-button slot="actions" flat style="color: #3BC7FF">确认</mu-button>
+                        </div>
+                    </mu-dialog>
+                </div>
+            </transition>
+        </div>
+        <div id="credit" style="display: none" v-show="initialize">
+            <transition name="open-right">
+                <mu-paper v-show="credit" :z-depth="1" class="demo-loadmore-wrap">
+                    <mu-container ref="container" class="demo-loadmore-content">
+                        <mu-load-more :loading="loading" @load="load">
+                            <div class="credit-lists" v-for="item in num" :key="item">
+                                <div class="list">
+                                    <div class="contain">
+                                        <span class="avator"><img src="../images/avator.jpg" alt=""></span>
+                                        <span class="user-name">戴小美<p>任务：区域销售代理</p></span>
+                                        <span class="num">5.0分</span>
+                                    </div>
+                                    <div class="remark">
+                                        <p>雇主太态度很好，结款也很迅速。给雇主点赞， 期望下次继续合作。</p>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                            </div>
+                        </mu-load-more>
+                    </mu-container>
+                </mu-paper>
+            </transition>
+        </div>
+    </div>
+
+</div>
+    
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/muse-ui.js"></script>
+<script src="../js/less.min.js"></script>
+<script>
+    new Vue({
+        el: '#wrapper',
+        data:{
+            describeList: [
+                {label: "日结",id:'1'},
+                {label: "有定金",id:'2'},
+                {label: "签合同",id:'3'},
+            ],
+            describeList1: [
+                {label: "停车净化",id:'1'},
+                {label: "氧分子捕捉",id:'2'},
+                {label: "离子风换气",id:'3'},
+                {label: "金属机身",id:'4'},
+                {label: "高速充电",id:'5'},
+            ],
+            describeList2: [
+                {label: "../images/avator.jpg",id:'1'},
+                {label: "../images/avator.jpg",id:'2'},
+                {label: "../images/avator.jpg",id:'3'},
+                {label: "../images/avator.jpg",id:'4'},
+                {label: "../images/avator.jpg",id:'5'},
+                {label: "../images/avator.jpg",id:'6'},
+                {label: "../images/avator.jpg",id:'7'},
+                {label: "../images/avator.jpg",id:'8'},
+                {label: "../images/avator.jpg",id:'9'},
+            ],
+            loading: false,
+            num:10,
+            task:true,
+            credit:false,
+            initialize: false,
+            searchBarFixed:false,
+            openSimple: false
+        },
+        mounted(){
+            setTimeout(function () {
+                this.initialize = true;
+            }.bind(this));
+            document.addEventListener('scroll', this.handleScroll)
+        },
+        methods:{
+            handleScroll () {
+                var obj = document.getElementById('searchBar');
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                let offsetTop = obj.offsetTop;
+                scrollTop > offsetTop ? this.searchBarFixed = true : this.searchBarFixed = false;
+            },
+            destroyed () {
+                window.removeEventListener('scroll', this.handleScroll); // 离开页面 关闭监听 不然会报错
+            },
+            handleTask() {
+                this.task = true;
+                this.credit = false;
+            },
+            handleCredit(){
+                this.task = false;
+                this.credit = true;
+            },
+            handleContact(){
+                alert("联系我")
+            },
+            handleApply(){
+                this.openSimple  = true;
+            },
+            handleCdetail(){
+                alert("是否跳转公司详情？")
+            },
+            load() {
+                this.loading = true;
+                setTimeout(() => {
+                    this.loading = false;
+                    /*this.num += 10;
+                    this.show = false;*/
+                }, 2000)
+            },
+            openSimpleDialog () {
+                this.openSimple  = true;
+            },
+            closeSimpleDialog () {
+                this.openSimple  = false;
+            },
+        }
+    })
+</script>
+</html>

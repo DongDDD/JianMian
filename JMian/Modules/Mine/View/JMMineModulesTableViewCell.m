@@ -41,8 +41,8 @@
             
         }else if ([model.type isEqualToString:@"1"]){
         
-            self.imageNameArr = @[@"C_videos",@"interview",@"enshrine",@"share2"];
-            self.labelStrArr = @[@"视频简历",@"面试管理",@"职位收藏",@"分享APP"];
+            self.imageNameArr = @[@"myResume",@"C_videos",@"interview",@"enshrine"];
+            self.labelStrArr = @[@"我的简历",@"视频简历",@"面试管理",@"职位收藏"];
         
         }
       

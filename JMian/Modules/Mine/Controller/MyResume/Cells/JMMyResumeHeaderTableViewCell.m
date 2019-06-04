@@ -27,19 +27,19 @@ NSString *const JMMyResumeHeader4TableViewCellIdentifier = @"JMMyResumeHeader4Ta
 - (void)cellConfigWithIdentifier:(NSString *)identifier imageViewName:(NSString *)imageViewName title:(NSString *)title {
     self.headerImageView.image = [UIImage imageNamed:imageViewName];
     self.headerLabel.text = title;
-    if (identifier != JMMyResumeHeader3TableViewCellIdentifier) {
-        self.headerArrowBtn.hidden = YES;
-        if ([title isEqualToString:@"教育经历"]) {
-            self.addLabel.hidden = NO;
-        }else {
-            self.addLabel.hidden = YES;
-        }
-
-    }else {
-        self.headerArrowBtn.hidden = NO;
-        self.addLabel.hidden = YES;
-    }
-    
+//    if (identifier != JMMyResumeHeader3TableViewCellIdentifier) {
+//        self.headerArrowBtn.hidden = YES;
+//        if ([title isEqualToString:@"求职期望"] || [title isEqualToString:@"工作经历"] || [title isEqualToString:@"教育经历"] ) {
+//            self.addLabel.hidden = NO;
+//        }else {
+//            self.addLabel.hidden = YES;
+//        }
+//
+//    }else {
+//        self.headerArrowBtn.hidden = NO;
+//        self.addLabel.hidden = YES;
+//    }
+//    }
 }
 
  

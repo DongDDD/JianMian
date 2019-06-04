@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/muse-ui.css">
+    <link rel="stylesheet" href="../css/material-icons.css">
+    <script src="../js/flexible.debug.js"></script>
+    <script src="../js/flexible_css.debug.js"></script>
+    <style lang="less" type="text/less">
+        .line {
+            border-top: 0.024rem solid #E6E6E6;
+        }
+        #wrapper{
+            font-family: PingFang-SC-Medium;
+            background: #fff;
+            header{
+                padding: 0.53rem 0 0.42rem 0.53rem;
+                p:nth-child(1){
+                    margin-bottom: 0.42rem;
+                    color: #4D4D4D;
+                    font-size: 0.45rem;
+                }
+                p{
+                    color: #B3B3B3;
+                    font-size: 0.34rem;
+                    margin-bottom: 0.42rem;
+                }
+                ul{
+                    li{
+                        display: inline-block;
+                        margin-right: 0.26rem;
+                        padding: 0.2rem 0.42rem;
+                        color: #24BFFF;
+                        border-radius: 0.42rem;
+                        border: 1px solid #24BFFF;
+                        font-size: 0.32rem;
+                    }
+                }
+            }
+            .option{
+                padding: 0.53rem;
+                .main{
+                    margin-bottom: 0.4rem;
+                    p{
+                        margin-bottom: 0.53rem;
+                        color: #B3B3B3;
+                        font-size: 0.34rem;
+                    }
+                    ul{
+                        width: 100%;
+                        color: #4D4D4D;
+                        font-size: 0.32rem;
+                        li{
+                            display: inline-block;
+                            padding: 0.18rem 0.42rem;
+                            margin-right: 0.26rem;
+                            margin-bottom: 0.4rem;
+                            border-radius: 0.42rem;
+                            border: 1px solid #CCCCCC;
+                        }
+                    }
+                }
+            }
+        }
+        .active{
+            background: #3BC7FF;
+            color: #fff;
+            border: 1px solid #3BC7FF!important;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper" v-show="initialize">
+        <div class="line"></div>
+        <header>
+            <p>已选行业</p>
+            <p v-if="option">请选择，最多可选3个行业</p>
+            <ul v-if="!option">
+                <li v-for="item in sumbit_option">{{item.name}}</li>
+            </ul>
+        </header>
+        <div style="height: 0.26rem;width: 100%;background: #F7F7F7;"></div>
+        <div class="option">
+            <div class="main" v-for="item in option_job">
+                <p>{{item.name}}</p>
+                <ul class="show">
+                    <li v-for="(list,index) in item.children" :id="list.label_id" @click="handleOption(index,list.label_id,list.name)">{{list.name}}</li>
+                </ul>
+            </div>
+        </div>
+        <div v-if="select" style="position: fixed;top: 50%;left: 50%;transform: translate3d(-50%,-100%,0);background:rgba(0,0,0,.5);font-size: 0.35rem;color: white;padding: 0.18rem 0.42rem">
+            <p>最多选3个</p>
+        </div>
+    </div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/muse-ui.js"></script>
+<script src="../js/less.min.js"></script>
+<script>
+    var vue = new Vue({
+        el: '#wrapper',
+        data: {
+            initialize: false,
+            loading: false,
+            option:true,
+            option_job:[
+            ],
+            sumbit_option:[],
+            select:false,
+            edit_option:[
+            ],
+            p:{}
+        },
+        mounted(){
+            setTimeout(function (){
+                this.initialize = true;
+            }.bind(this));
+            if(this.edit_option.length > 0){
+                this.edit();
+            }
+        },
+        methods: {
+            handleOption(index,label_id,item){
+                var label = document.getElementById(label_id);
+                if(label.classList.length < 1){
+                    if(this.sumbit_option.length < 3){
+                        label.classList.add('active');
+                        this.p.label_id = label_id;
+                        this.p.name = item;
+                        this.sumbit_option.push(this.p);
+                        this.p = {};
+                        this.option = false;
+                        console.log(this.sumbit_option);
+                        this.selectIndustry();
+                    }else{
+                        this.select = true;
+                        setTimeout(() => {
+                            this.select = false;
+                        }, 1000)
+                    }
+                }else {
+                    for (var i = 0; i < this.sumbit_option.length; i++) {
+                        if (this.sumbit_option[i].label_id === label_id){
+                            this.sumbit_option.splice(i, 1)
+                        }
+                    }
+                    if(this.sumbit_option.length === 0){
+                        this.option = true
+                    }
+                    label.classList.remove('active');
+                    this.selectIndustry();
+                }
+            },
+            edit(){
+                if(this.edit_option.length > 0){
+                    this.sumbit_option = this.edit_option;
+                    this.option = false;
+                    var label = document.getElementsByClassName('show');
+                    for(var j = 0;j < this.sumbit_option.length;j++){
+                        for(var k = 0;k < label.length;k++){
+                            var v = label[k].getElementsByTagName('li');
+                            for(var c = 0;c < v.length;c++){
+                                if(this.sumbit_option[j].name === v[c].innerHTML){
+                                    v[c].classList.add('active');
+                                }
+                            }
+                        }
+                    }
+                    this.selectIndustry();
+                }
+            },
+            load() {
+                this.loading = true;
+                setTimeout(() => {
+                    this.loading = false;
+                }, 2000)
+            },
+            selectIndustry(){
+                window.webkit.messageHandlers.aaa.postMessage(JSON.stringify(this.sumbit_option));
+            }
+        },
+        watch:{
+            option_job: function() {
+                this.$nextTick(function(){
+                    this.edit();
+                });
+            }
+        },
+    });
+    function showInfoFromJava(item,edit) {
+        vue.option_job = JSON.parse(item);
+        vue.edit_option = JSON.parse(edit);
+        // vue.edit();
+    }
+</script>
+</html>

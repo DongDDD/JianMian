@@ -32,4 +32,8 @@ NSString *const JMEducationalExperienceTableViewCellIdentifier = @"JMEducational
 - (void)setEducationExperienceModel:(JMLearningModel *)model {
     self.schoolNameLabel.text = model.school_name;
 }
+
+-(void)setExperiencesModel:(JMExperiencesModel *)experiencesModel{
+    self.schoolNameLabel.text = experiencesModel.company_name;
+}
 @end

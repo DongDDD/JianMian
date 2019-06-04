@@ -18,6 +18,9 @@
 #import "JMPlayerViewController.h"
 #import "JMVideoPlayManager.h"
 #import "JMVitaDetailModel.h"
+#import "JMHTTPManager+UpdateAbility.h"
+#import "JMHTTPManager+FectchAbilityInfo.h"
+#import "JMPartTimeJobModel.h"
 //#import "JMUserInfoModel.h"
 //#import "JMUserInfoManager.h"
 
@@ -33,6 +36,8 @@
 
 @property (nonatomic, strong)JMDidUploadVideoView *didUploadVideoView;
 @property (nonatomic, strong)JMVitaDetailModel *model;
+@property (nonatomic, strong)JMPartTimeJobModel *partTimeJobModel;
+
 @end
 
 @implementation JMUploadVideoViewController
@@ -41,24 +46,11 @@
     [super viewDidLoad];
     self.title = @"视频简历";
     [self didUploadVideoView];
-//    if (kFetchMyDefault(@"videoPath")) {
-//        [self.didUploadVideoView setHidden:NO];
-//        NSString * path = [NSString stringWithFormat:@"https://jmsp-1258537318.cos.ap-guangzhou.myqcloud.com%@",kFetchMyDefault(@"videoPath") ];
-//        NSURL *url = [NSURL URLWithString:path];
-//
-//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//
-//                [self centerFrameImageWithVideoURL:url completion:^(UIImage *image) {
-//                    self.didUploadVideoView.imgView.image = image;
-//
-//                }];
-//            });
-//        });
-//    }
-    
-    [self getData];
+    if (_viewType == JMUploadVideoViewTypePartTime) {
+        [self getPartTimeInfoData];
+    }else{
+        [self getData];
+    }
    
 }
 
@@ -66,10 +58,43 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.bottomLab.frame.origin.y+self.bottomLab.frame.size.height+30);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.bottomLab.frame.origin.y+self.bottomLab.frame.size.height+30);
 
 }
+//第二版：C端 获取个人兼职简历
+-(void)getPartTimeInfoData{
+    [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.partTimeJobModel = [JMPartTimeJobModel mj_objectWithKeyValues:responsObject[@"data"]];
+            if (self.partTimeJobModel.video_file_path!=nil) {
+                
+                [self.didUploadVideoView setHidden:NO];
+                NSURL *url = [NSURL URLWithString:self.partTimeJobModel.video_file_path];
+                
+                dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        
+                        [self centerFrameImageWithVideoURL:url completion:^(UIImage *image) {
+                            self.didUploadVideoView.imgView.image = image;
+                            
+                        }];
+                    });
+                });
+                
+            }
+            
+            
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 
+
+//第一版：C端 获取个人全职简历
 -(void)getData{
    
         //        int jobId = [responsObject[@"data"][0][@"user_job_id"] intValue];
@@ -370,23 +395,18 @@
         [[JMHTTPManager sharedInstance]uploadsWithMP4Files:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
             if (responsObject[@"data"]) {
-    //            _imageUrl = responsObject[@"data"][0];
                 NSLog(@"%@",responsObject[@"data"][0]);
                 NSString *url = responsObject[@"data"][0];
                 NSLog(@"urlurlurlurl--%@",url);
-                kSaveMyDefault(@"videoPath", url);
-                [[JMHTTPManager sharedInstance]updateVitaWith_work_status:nil education:nil work_start_date:nil description:nil video_path:url image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-                    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频上传成功！" preferredStyle:UIAlertControllerStyleAlert];
-                    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
-                    [alert addAction:cancel];
-                    [self presentViewController:alert animated:YES completion:nil];
-//                    kSaveMyDefault(@"videoImg",self.didUploadVideoView.imgView);
-                    [self.progressHUD setHidden:YES];
-
+//                kSaveMyDefault(@"videoPath", url);
+                if (_viewType == JMUploadVideoViewTypePartTime) {
+                    [self postPartTimeVideo_url:url];
                     
-                } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-                    
-                }];
+                }else{
+                
+                    [self postVideo_url:url];
+                }
+                
                 
             }
 
@@ -402,6 +422,44 @@
     
 }
 
+//第二版兼职上传视频
+-(void)postPartTimeVideo_url:(NSString *)url{
+    [[JMHTTPManager sharedInstance]updateAbility_Id:self.ability_id city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频上传成功！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
+        [self.progressHUD setHidden:YES];
+
+//        if (_delegate && [_delegate respondsToSelector:@selector(isUploadVideo:)]) {
+//            [_delegate isUploadVideo:YES];
+//        }
+//
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
+}
+
+//第一版个人上传全职视频
+-(void)postVideo_url:(NSString *)url{
+    
+    [[JMHTTPManager sharedInstance]updateVitaWith_work_status:nil education:nil work_start_date:nil description:nil video_path:url image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频上传成功！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
+        //                    kSaveMyDefault(@"videoImg",self.didUploadVideoView.imgView);
+        [self.progressHUD setHidden:YES];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 
 /**
  从相册选择视频

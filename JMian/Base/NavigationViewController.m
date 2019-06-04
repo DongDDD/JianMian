@@ -21,6 +21,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self setNavgationBarColor:[UIColor whiteColor]];
+//    [self multiColorBg];
     
 }
     
@@ -55,6 +56,7 @@
                                                     (__bridge id)UIColorFromHEX(0x4AA2FB).CGColor,
                                                     (__bridge id)UIColorFromHEX(0x7061F8).CGColor
                                                     ]];
+    
     
     UIImage *backImage = [self convertViewToImage:_barBackgroundView];
     [self.navigationBar setBackgroundImage:backImage forBarMetrics:UIBarMetricsDefault];

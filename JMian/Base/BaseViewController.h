@@ -52,6 +52,13 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)rightAction;
 
 -(void)right2Action;
+
+@property (nonatomic, strong) MBProgressHUD *myProgressHUD;
+-(void)showProgressHUD_view:(UIView *)view;
+-(void)hiddenHUD;
+
+// 将JSON串转化为字典或者数组
+- (id)toArrayOrNSDictionary:(NSData *)jsonData;
 @end
 
 NS_ASSUME_NONNULL_END

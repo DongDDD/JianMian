@@ -11,6 +11,11 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef enum : NSUInteger {
+    JMCityListViewDefault,
+    JMCityListViewPartTime,
+} JMCityListViewType;
+
 @protocol JMCityListViewControllerDelegate <NSObject>
 
 -(void)didSelectedCity_id:(NSString *)city_id city_name:(NSString *)city_name;
@@ -20,6 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCityListViewController : BaseViewController
 @property(nonatomic,weak)id<JMCityListViewControllerDelegate>delegate;
+@property(nonatomic,assign)JMCityListViewType  viewType;
 @end
 
 NS_ASSUME_NONNULL_END

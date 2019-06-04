@@ -30,7 +30,24 @@
 
 }
 
-
+-(void)setPartTimeJobModel:(JMPartTimeJobModel *)partTimeJobModel{
+    self.workNameLab.text = partTimeJobModel.type_name;
+    self.salaryLab.text = partTimeJobModel.city_cityName;
+    
+    NSMutableArray *industryNameArray = [NSMutableArray array];
+    for (JMIndustryModel *model in partTimeJobModel.industry) {
+        [industryNameArray addObject:model.name];
+    }
+    NSString *industry = [industryNameArray componentsJoinedByString:@"/"];
+    self.detailLab.text = industry;
+ 
+//    self.detailLab.text = [NSString stringWithFormat:@"%@ / %@ / %@",experienceStr,educationStr,cityStr];
+//
+//    NSString *salary = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
+//
+//    self.salaryLab.text = salary;
+    
+}
 //工资数据转化，除以1000，转化成k
 -(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
     NSInteger myint = [min integerValue];

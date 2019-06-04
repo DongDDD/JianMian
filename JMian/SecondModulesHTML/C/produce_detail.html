@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--主要I是强制让文档的宽度与设备宽度保持1:1，最大宽度1.0，禁止屏幕缩放。-->
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <!--这个也是iphone私有标签，允许全屏浏览。-->
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <!--iphone的私有标签，iphone顶端状态条的样式。-->
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <!--禁止数字自动识别为电话号码，这个比较有用，因为一串数字在iphone上会显示成蓝色，样式加成别的颜色也是不生效的。-->
+    <meta content="telephone=no" name="format-detection">
+    <!--禁止email识别-->
+    <meta content="email=no" name="format-detection">
+    <meta content="initial-dpr=2" name="flexible"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../css/muse-ui.css">
+    <link rel="stylesheet" href="../css/material-icons.css">
+    <script src="../js/flexible.debug.js"></script>
+    <script src="../js/flexible_css.debug.js"></script>
+    <style type="text/less" lang="less">
+        html {
+            -webkit-text-size-adjust: none;
+        }
+        #wrapper {
+            width: 100%;
+            font-family: PingFang-SC-Bold;
+            .carousel{
+                width: 100%;
+                background: #fff;
+                .mu-carousel{
+                    height: 5.09rem;
+                    img{
+                        width: 100%
+                    }
+                }
+            }
+            .money{
+                padding: 0.72rem 0.53rem 0.66rem 0.53rem;
+                background: #fff;
+                img{
+                    margin-right: 0.32rem;
+                    width: 0.32rem;
+                }
+                span{
+                    font-size: 0.8rem;
+                    color: #FF5150;
+                    font-family: PingFang-SC-Medium;
+                }
+                p{
+                    color: #262626;
+                    font-size: 0.4rem;
+                }
+            }
+            .address{
+                padding: 0.8rem 0.53rem;
+                background: #fff;
+            }
+            .detail{
+                padding: 0.53rem;
+                background: #fff;
+                p{
+                    margin-bottom: 0.53rem;
+                    font-size: 0.37rem;
+                    color: #333333;
+                }
+            }
+            .photo_title{
+                padding: 0.53rem;
+                background: #fff;
+                color: #262626;
+            }
+            .photo{
+                width: 100%;
+                img{
+                    width: 100%;
+                }
+            }
+            .note{
+                padding: 0.64rem 0.53rem;
+                color: #999999;
+                font-size: 0.26rem;
+            }
+            .bottom{
+                display: flex;
+                justify-content: center;
+                height: 1.2rem;
+                margin-bottom: 1.33rem;
+                text-align: center;
+                color:#999999;
+                font-size: 0.26rem;
+                background: #F7F7F7;
+                span{
+                    align-self: center;
+                    width: 1.73rem;
+                    border-top: 1px solid #D9D9D9;
+                }
+            }
+        }
+
+        .line {
+            border-bottom: 1px solid rgba(247,247,247,1);
+            height: 0.3rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="wrapper" v-show="initialize">
+    <div v-if="!buy">
+        <div class="carousel">
+            <mu-carousel hide-controls>
+                <mu-carousel-item>
+                    <img :src="carouselImg1">
+                </mu-carousel-item>
+                <mu-carousel-item>
+                    <img :src="carouselImg2">
+                </mu-carousel-item>
+                <mu-carousel-item>
+                    <img :src="carouselImg3">
+                </mu-carousel-item>
+                <mu-carousel-item>
+                    <img :src="carouselImg4">
+                </mu-carousel-item>
+            </mu-carousel>
+        </div>
+        <div class="money">
+            <img src="../images/¥@2x.png" alt="">
+            <span style="margin-bottom: 0.37rem">28.<span style="font-size: 0.61rem">00</span></span>
+            <p>
+                MOBANG魔棒 支持OPPO手机VOOC闪充车载充
+                电器快充R15 R11 R9 R9S R17 PLUS闪冲车充一
+                拖二通用插头
+            </p>
+        </div>
+        <div class="line"></div>
+        <div class="address">
+            <span style="margin-right: 0.34rem;font-size: 0.4rem">配送至</span>
+            <span style="margin-right: 0.18rem;font-size: 0.34rem;color:#999999;">请选择收货地址</span>
+            <img src="../images/site_Home@2x.png" alt="" style="width: 0.26rem;">
+        </div>
+        <div class="line"></div>
+        <div class="detail">
+            <p>商品介绍</p>
+            <p style="font-size: 0.34rem;margin-bottom: 0">
+                MOPOER/迈珀
+                QK518
+                QK518 黑色、QK516 白色
+                深圳市爱派数码有限公司
+                2个
+                4A
+            </p>
+        </div>
+        <div class="line"></div>
+        <div class="photo_title">商品详情<span style="color:#999999;font-size: 0.34rem">（点击图片可放大）</span></div>
+        <div class="line"></div>
+        <div class="photo">
+            <img src="../images/e.jpg" alt="">
+            <img src="../images/f.jpg" alt="">
+            <img src="../images/g.jpg" alt="">
+        </div>
+        <div class="line"></div>
+        <div class="note">
+            <p>价格说明</p>
+            <p>商品的专柜价、吊牌价、正品零售价、厂商指导价或该商品的曾经展示过的
+            销售价等，并非原价，仅供参考</p>
+            <p>未划线价格</p>
+            <p>商品的实时标价，不因表述的差异改变性质。具体成交价格根据商品参加活
+            动，或会员使用优惠券、积分等发生变化，最终以订单结算页价格为准</p>
+            <p>商家详情页</p>
+            <p>此说明仅当出现价格比较时有效，具体请参见《淘宝价格发卬规范》。若商
+            家单独对划线价格进行说明的，以商家的表述为准。</p>
+        </div>
+        <div class="bottom">
+            <span></span>
+            <p style="display:inline-block;vertical-align:middle;align-self: center;margin: 0 0.34rem">已经到底啦，再往上逛逛吧</p>
+            <span></span>
+        </div>
+        <div style="position: fixed;bottom: 0;left: 0;">
+            <div style="height: 1.33rem;width: 100%;display: flex;font-size: 0.4rem;">
+                <button style="width: 4.34rem;background: #FF5150;border: none;color: #FFFFFF;height: 100%">联系客服</button>
+                <button style="background: #FFBC00;width: 5.65rem;border: none;color: #FFFFFF" @click="handleBuy">立即购买</button>
+            </div>
+        </div>
+    </div>
+
+    <div v-if="buy">
+
+    </div>
+</div>
+</body>
+<script src="../js/vue.js"></script>
+<script src="../js/axios.min.js"></script>
+<script src="../js/muse-ui.js"></script>
+<script src="../js/less.min.js"></script>
+<script>
+    var vm = new Vue({
+        el: '#wrapper',
+        data: {
+            load: false,
+            token: '',
+            avator: '',
+            initialize:false,
+            buy:false,
+            carouselImg1:"../images/a.jpg",
+            carouselImg2:"../images/b.jpg",
+            carouselImg3:"../images/c.jpg",
+            carouselImg4:"../images/d.jpg",
+        },
+        mounted() {
+            this.token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9hcHAuam16aGlwaW4uY29tXC9kb21pbmF0b3JcL2xvZ2luIiwiaWF0IjoxNTU3MjA5NTYyLCJleHAiOjE1NTcyNjk1NjIsIm5iZiI6MTU1NzIwOTU2MiwianRpIjoiTVl5U2ZrVGcybDY1N3pxTiIsInN1YiI6MSwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.3bK9rCdHQ3WSOZKYx22_y8vuWjquLvqSwe5iqayCmWM"
+            axios.get('http://app.jmzhipin.com/api/user/info', {
+                headers: {
+                    'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                    'Authorization': this.token
+                }
+            })
+                .then(function (res) {
+                    this.load = true;
+                    this.money_amount = res.data.data.money_amount;
+                    this.money_freeze = res.data.data.money_freeze;
+                    this.avator = res.data.data.avator;
+                }.bind(this))
+                .catch(function (error) {
+                    console.log('调用用户数据失败');
+                    console.log(error);
+                });
+            setTimeout(function () {
+                this.initialize = true;
+            }.bind(this));
+        },
+        methods: {
+            handleBuy(){
+              this.buy = true
+            },
+            withdraw() {
+                console.log("asdsad")
+            },
+            consume() {
+                console.log("asdsad")
+            }
+        }
+    })
+</script>
+</html>

@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "JMHomeWorkModel.h"
+#import "JMPartTimeJobModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMPostJobHomeTableViewCell : UITableViewCell
 
 @property (nonatomic, strong)JMHomeWorkModel *model;
+@property (nonatomic, strong)JMPartTimeJobModel *partTimeJobModel;
+
 @property (weak, nonatomic) IBOutlet UILabel *workNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;
 @property (weak, nonatomic) IBOutlet UILabel *salaryLab;

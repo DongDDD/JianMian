@@ -266,8 +266,6 @@ static NSString *cellIdent = @"cellIdent";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-  
     //重用单元格
     JMPostJobHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent];
     //初始化单元格
