@@ -50,6 +50,7 @@ static NSString *cellIdent = @"PostJobCellID";
 
 -(void)addPartTimeJobResume{
     JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
+    vc.viewType = JMPostPartTimeResumeViewAdd;
     [self.navigationController pushViewController:vc animated:YES];
 
 }
@@ -68,6 +69,7 @@ static NSString *cellIdent = @"PostJobCellID";
     JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
     JMPartTimeJobModel *model = self.dataArray[indexPath.row];
     vc.ability_id = model.ability_id;
+    vc.viewType = JMPostPartTimeResumeVieweEdit;
     [self.navigationController pushViewController:vc animated:YES];
 
 }

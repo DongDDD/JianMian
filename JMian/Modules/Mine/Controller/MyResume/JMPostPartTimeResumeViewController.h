@@ -11,11 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NS_ENUM(NSInteger, JMPostPartTimeResumeViewType) {
+    JMPostPartTimeResumeVieweEdit,
+    JMPostPartTimeResumeViewAdd,
+};
+
 @interface JMPostPartTimeResumeViewController : BaseViewController
 
 //@property(nonatomic, strong)JMPartTimeJobModel *partTimeVitaModel;
 @property(nonatomic,copy)NSString *ability_id;
-
+@property(nonatomic,assign)JMPostPartTimeResumeViewType viewType;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -212,16 +212,7 @@
 //    [self.navigationController pushViewController:vc animated:YES];
     
     Demo3ViewController *vc = [[Demo3ViewController alloc]init];
-//    if (self.model.files.count > 0) {
-//        //        self.image_paths = [NSMutableArray array];
-//        for (JMFilesModel *filesModel in self.model.files) {
-//            if ([filesModel.files_type isEqualToString:@"2"]) {//过滤视频走 只要图片
-//                [self.filesModelArray addObject:filesModel];
-//            }
-//        }
-//    }
-//
-//    vc.filesModelArray = self.filesModelArray;
+    vc.viewType = Demo3ViewDefault;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

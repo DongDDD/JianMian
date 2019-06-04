@@ -26,7 +26,14 @@
 -(void)rightAction{
     if (_delegate && [_delegate respondsToSelector:@selector(sendlabsWithJson:)]) {
         [_delegate sendlabsWithJson:_labsJson];
-        [self.navigationController popViewControllerAnimated:YES];
+        if (self.labsJson) {
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"你没选择好"
+                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            [alert show];
+        }
     }
 }
 

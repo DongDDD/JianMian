@@ -16,6 +16,7 @@
 #import "JMHTTPManager+CreateAbility.h"
 #import "JMUploadVideoViewController.h"//上传视频
 #import "JMHTTPManager+FectchAbilityInfo.h"//获取兼职简历
+#import "JMHTTPManager+UpdateAbility.h"//G更新兼职简历
 
 @interface JMPostPartTimeResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMIndustryWebViewControllerDelegate,JMCityListViewControllerDelegate,PositionDesiredDelegate,Demo3ViewControllerDelegate,JMPartTimeJobResumeFooterViewDelegate,JMUploadVideoViewDelegate>
 
@@ -47,7 +48,13 @@ static NSString *cellIdent = @"cellIdent";
     [super viewDidLoad];
     self.title = @"发布兼职简历";
     self.view.backgroundColor = BG_COLOR;
-    [self setRightBtnTextName:@"发布"];
+    if (_viewType == JMPostPartTimeResumeVieweEdit) {
+        [self setRightBtnTextName:@"保存"];
+
+    }else if (_viewType == JMPostPartTimeResumeViewAdd){
+        [self setRightBtnTextName:@"发布"];
+
+    }
     [self.view addSubview:self.tableView];
     
 
@@ -57,12 +64,17 @@ static NSString *cellIdent = @"cellIdent";
     // Do any additional setup after loading the view from its nib.
 }
 
+
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     //第二版：C端 获取个人兼职简历
-    [self getPartTimeInfoData];
+    if (_viewType == JMPostPartTimeResumeVieweEdit) {
+        
+        [self getPartTimeInfoData];
+    }
     
 }
 
@@ -106,7 +118,8 @@ static NSString *cellIdent = @"cellIdent";
 //
 //
 //            }
-            
+            [self setRightText_model:self.myPartTimeVitaModel];
+            [self.tableView reloadData];
             
         }
         
@@ -115,6 +128,33 @@ static NSString *cellIdent = @"cellIdent";
     }];
     
 }
+
+-(void)setRightText_model:(JMPartTimeJobModel *)model{
+        NSString *city = model.city_cityName;
+        NSString *type_name = model.type_name;
+        NSMutableArray *industryNameArray = [NSMutableArray array];
+        for (JMIndustryModel *data in model.industry) {
+            [industryNameArray addObject:data.name];
+        }
+        NSString *insdutry = [industryNameArray componentsJoinedByString:@","];
+        NSString *videoStr;
+        NSString *imgsStr;
+        if (model.images.count > 0) {
+            imgsStr = @"已上传";
+        }else{
+            imgsStr = @"上传图片作品";
+            
+        }
+        if (model.video_file_path) {
+            videoStr = @"已上传";
+        }else{
+            videoStr = @"上传视频作品";
+            
+        }
+        self.rightArray = [NSMutableArray arrayWithObjects:city,type_name,insdutry,imgsStr,videoStr, nil];
+   
+}
+
 #pragma mark - 点击事件
 
 -(void)hideTap{
@@ -125,8 +165,40 @@ static NSString *cellIdent = @"cellIdent";
 -(void)rightAction{
     [self.footerView.contentTextView resignFirstResponder];
 
+    if (_viewType == JMPostPartTimeResumeVieweEdit) {
+        [self updateJobInfo];
+    }else{
+        [self createJob];
+    }
+    
+
+}
+
+-(void)updateJobInfo{
+    [[JMHTTPManager sharedInstance]updateAbility_Id:self.ability_id city_id:_city_id type_label_id:_type_label_id industry_arr:_industry_arr myDescription:_myDescription video_path:nil video_cover:nil image_arr:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"保存成功！" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
+//        [self.progressHUD setHidden:YES];
+        
+        //        if (_delegate && [_delegate respondsToSelector:@selector(isUploadVideo:)]) {
+        //            [_delegate isUploadVideo:YES];
+        //        }
+        //
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
+}
+
+-(void)createJob{
+
+    
     [[JMHTTPManager sharedInstance]createAbility_city_id:_city_id type_label_id:_type_label_id industry_arr:_industry_arr myDescription:_myDescription video_path:nil video_cover:nil image_arr:_image_arr status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
         [self.navigationController popViewControllerAnimated:YES];
@@ -193,7 +265,6 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 
-
 #pragma mark - UITextViewDelegate
 -(void)sendContent:(NSString *)content{
     _myDescription = content;
@@ -243,6 +314,13 @@ static NSString *cellIdent = @"cellIdent";
         Demo3ViewController *vc = [[Demo3ViewController alloc]init];
         vc.delegate = self;
         vc.ability_id = self.ability_id;
+        NSMutableArray *imagPathArray = [NSMutableArray array];
+        
+        for (JMImageModel *data in self.myPartTimeVitaModel.images) {
+            [imagPathArray addObject:data.file_path];
+        }
+        
+        vc.image_paths = imagPathArray;
         vc.viewType = Demo3ViewPartTime;
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -312,34 +390,8 @@ static NSString *cellIdent = @"cellIdent";
 
 - (NSMutableArray *)rightArray{
     if (_rightArray == nil) {
-        if (self.myPartTimeVitaModel) {
-            NSString *city = self.myPartTimeVitaModel.city_cityName;
-            NSString *type_name = self.myPartTimeVitaModel.type_name;
-            NSMutableArray *industryNameArray = [NSMutableArray array];
-            for (JMIndustryModel *model in self.myPartTimeVitaModel.industry) {
-                [industryNameArray addObject:model.name];
-            }
-            NSString *insdutry = [industryNameArray componentsJoinedByString:@","];
-            NSString *videoStr;
-            NSString *imgsStr;
-            if (self.myPartTimeVitaModel.images.count > 0) {
-                imgsStr = @"已上传";
-            }else{
-                imgsStr = @"上传图片作品";
-                
-            }
-            if (self.myPartTimeVitaModel.video_file_path) {
-                videoStr = @"已上传";
-            }else{
-                videoStr = @"上传视频作品";
-
-            }
-             _rightArray = [NSMutableArray arrayWithObjects:city,type_name,insdutry,imgsStr,videoStr, nil];
-            [self.footerView setContent:self.myPartTimeVitaModel.myDescription];
-        }else{
-            _rightArray = [NSMutableArray arrayWithObjects:@"选择城市",@"选择职位类型",@"选择行业",@"上传图片作品",@"上传视频简历", nil];
+        _rightArray = [NSMutableArray arrayWithObjects:@"选择城市",@"选择职位类型",@"选择行业",@"上传图片作品",@"上传视频简历", nil];
         
-        }
     }
     return _rightArray;
 }

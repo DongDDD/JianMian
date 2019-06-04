@@ -90,9 +90,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
             
         }
         
-        
-        
-        
         if (self.filesModelArray.count > 0) {
             self.image_paths = [NSMutableArray array];
             for (JMFilesModel *filesModel in self.filesModelArray) {
@@ -233,7 +230,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
         if (responsObject[@"data"]) {
             NSLog(@"------%@",responsObject[@"data"]);
             NSArray *array = responsObject[@"data"];
-            //            上传图片
+            //            上传partTimeJob图片
             if (_viewType == Demo3ViewPartTime) {
                 [self uploadPartTimePicWithImages:array];
             }else{
