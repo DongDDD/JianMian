@@ -368,6 +368,7 @@
 		048FEE402244853C001160C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE3F2244853C001160C8 /* main.m */; };
 		048FEE4A2244853C001160C8 /* JMianTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE492244853C001160C8 /* JMianTests.m */; };
 		048FEE552244853C001160C8 /* JMianUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE542244853C001160C8 /* JMianUITests.m */; };
+		04908ACD22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04908ACC22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m */; };
 		0491B25E2286794600F1FD3A /* JMLabsScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491B25D2286794600F1FD3A /* JMLabsScreenView.m */; };
 		0491B2612286A07800F1FD3A /* JMLabsChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */; };
 		0492715C22982878008D6E0D /* JMBTypeLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492715B22982878008D6E0D /* JMBTypeLikeModel.m */; };
@@ -1115,6 +1116,8 @@
 		048FEE502244853C001160C8 /* JMianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JMianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		048FEE542244853C001160C8 /* JMianUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMianUITests.m; sourceTree = "<group>"; };
 		048FEE562244853C001160C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		04908ACB22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+DeleteAbilityImage.h"; sourceTree = "<group>"; };
+		04908ACC22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+DeleteAbilityImage.m"; sourceTree = "<group>"; };
 		0491B25C2286794600F1FD3A /* JMLabsScreenView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabsScreenView.h; sourceTree = "<group>"; };
 		0491B25D2286794600F1FD3A /* JMLabsScreenView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabsScreenView.m; sourceTree = "<group>"; };
 		0491B25F2286A07800F1FD3A /* JMLabsChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabsChooseViewController.h; sourceTree = "<group>"; };
@@ -2148,6 +2151,8 @@
 				04731DEC22A6A1C90013D7CE /* JMHTTPManager+UpdateAbility.m */,
 				04731DEE22A6A3BA0013D7CE /* JMHTTPManager+FectchAbilityInfo.h */,
 				04731DEF22A6A3BA0013D7CE /* JMHTTPManager+FectchAbilityInfo.m */,
+				04908ACB22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.h */,
+				04908ACC22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m */,
 			);
 			path = Ability;
 			sourceTree = "<group>";
@@ -2324,7 +2329,6 @@
 				048FEE2F2244853C001160C8 /* JMian */,
 				048FEE482244853C001160C8 /* JMianTests */,
 				048FEE532244853C001160C8 /* JMianUITests */,
-				048FEE2E2244853C001160C8 /* Products */,
 				FC374E4AA2E1DABFC6BF04C9 /* Pods */,
 				47579204418359BAEBA6F740 /* Frameworks */,
 				04A9DFA1225AE37800CD7CC1 /* Recovered References */,
@@ -2358,8 +2362,8 @@
 				048FEE312244853C001160C8 /* AppDelegate.m */,
 				048FEE332244853C001160C8 /* ViewController.h */,
 				048FEE342244853C001160C8 /* ViewController.m */,
-				048FEE362244853C001160C8 /* Main.storyboard */,
 				048FEE392244853C001160C8 /* Assets.xcassets */,
+				048FEE362244853C001160C8 /* Main.storyboard */,
 				048FEE3B2244853C001160C8 /* LaunchScreen.storyboard */,
 				0425656A229E91A8000614E7 /* Crystal.mp3 */,
 				048FEE3E2244853C001160C8 /* Info.plist */,
@@ -2463,6 +2467,7 @@
 		04A9DFA1225AE37800CD7CC1 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
+				048FEE2E2244853C001160C8 /* Products */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -3791,6 +3796,7 @@
 				040A3927227DA5F900EDD9E0 /* JMGreetView.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				040C865A227ED71100993490 /* JMChatDetailInfoTableViewCell.m in Sources */,
+				04908ACD22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m in Sources */,
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
 				045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */,
 				04C60160226097B1000B1FE0 /* JMNotificationViewController.m in Sources */,

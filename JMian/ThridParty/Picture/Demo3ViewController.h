@@ -24,8 +24,8 @@ typedef enum : NSUInteger {
 
 @interface Demo3ViewController : BaseViewController;
 
-@property (nonatomic, strong) NSMutableArray *image_paths;//公司图片数组
-@property (nonatomic, strong) NSMutableArray *filesModelArray;//用来提取公司图片的数组
+@property (nonatomic, strong) NSMutableArray *image_paths;//根据图片数组布局
+@property (nonatomic, strong) NSMutableArray *filesModelArray;//用来提取图片的数组
 @property (nonatomic, strong)JMFilesModel *filesModel;
 @property (nonatomic, weak)id<Demo3ViewControllerDelegate>delegate;
 @property (nonatomic, assign)Demo3ViewType viewType;

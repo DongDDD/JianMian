@@ -314,13 +314,14 @@ static NSString *cellIdent = @"cellIdent";
         Demo3ViewController *vc = [[Demo3ViewController alloc]init];
         vc.delegate = self;
         vc.ability_id = self.ability_id;
-        NSMutableArray *imagPathArray = [NSMutableArray array];
+//        NSMutableArray *imagPathArray = [NSMutableArray arrayWithObject:self.myPartTimeVitaModel.images];
         
-        for (JMImageModel *data in self.myPartTimeVitaModel.images) {
-            [imagPathArray addObject:data.file_path];
-        }
+//        for (JMImageModel *data in self.myPartTimeVitaModel.images) {
+//            [imagPathArray addObject:data.file_path];
+//        }
         
-        vc.image_paths = imagPathArray;
+        vc.filesModelArray = self.myPartTimeVitaModel.images;
+//        vc.image_paths = imagPathArray;
         vc.viewType = Demo3ViewPartTime;
         [self.navigationController pushViewController:vc animated:YES];
         

@@ -98,6 +98,7 @@
 #define Fectch_Ability_URL @"api/ability/paginate"
 #define Update_Ability_URL @"api/ability/update"
 #define Fectch_AbilityInfo_URL @"api/ability/info"
+#define Delete_AbilityImage_URL @"api/ability/delete/file"
 
 
 //会话列表
