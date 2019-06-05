@@ -37,6 +37,8 @@
 @property (nonatomic, strong) NSMutableArray *filesModelArray;//用来提取公司图片的数组
 
 
+@property (weak, nonatomic) IBOutlet UITextField *myPositionTextField;
+@property (weak, nonatomic) IBOutlet UIButton *companyAdress;
 @property (weak, nonatomic) IBOutlet UIButton *companyDecriptionBtn;
 @property (weak, nonatomic) IBOutlet UILabel *abbrLab;
 @property (weak, nonatomic) IBOutlet UIButton *industryBtn;
@@ -200,6 +202,11 @@
 - (IBAction)videoRightAction:(UIButton *)sender {
     
     [self uploadVideo];
+}
+- (IBAction)chooseCompanyAdress:(UIButton *)sender {
+    
+    
+    
 }
 
 //上传公司图片

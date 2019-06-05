@@ -319,8 +319,8 @@ static NSString *cellIdent = @"cellIdent";
 //        for (JMImageModel *data in self.myPartTimeVitaModel.images) {
 //            [imagPathArray addObject:data.file_path];
 //        }
-        
-        vc.filesModelArray = self.myPartTimeVitaModel.images;
+//        self.photos.mutableCopy
+        vc.filesModelArray = self.myPartTimeVitaModel.images.mutableCopy;
 //        vc.image_paths = imagPathArray;
         vc.viewType = Demo3ViewPartTime;
         [self.navigationController pushViewController:vc animated:YES];

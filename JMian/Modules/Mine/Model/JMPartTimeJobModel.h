@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property (copy, nonatomic) NSArray *industry;
-@property (copy, nonatomic) NSMutableArray *images;
+@property (copy, nonatomic) NSArray *images;
 
 @end
 

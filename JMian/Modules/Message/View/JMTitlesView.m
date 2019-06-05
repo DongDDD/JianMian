@@ -24,8 +24,7 @@
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles {
     if (self = [super initWithFrame:frame]) {
         self.titles = titles;
-        self.backgroundColor = [UIColor whiteColor];
-        
+        self.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
         [self setupInit];
     }
     return self;
@@ -47,9 +46,18 @@
 - (void)selectTitleButton:(UIButton *)btn {
     // 恢复上一个按钮颜色
     [_selectButton setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
-    
+    [_selectButton setBackgroundColor:[UIColor whiteColor]];
+
     // 设置当前选中按钮的颜色
-    [btn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    if (_viewType == JMTitlesViewPositionManage) {
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn setBackgroundColor:MASTER_COLOR];
+
+    }else{
+        
+        [btn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    }
+    
     
     // 记录当前选中的按钮
     _selectButton = btn;

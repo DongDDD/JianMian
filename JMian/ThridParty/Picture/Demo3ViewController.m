@@ -169,6 +169,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAddImg:) name:@"Notification_addImg" object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAddImgArray:) name:@"Notification_addImgArray" object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImage:) name:@"SendImageNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteImage:) name:@"DeleteImgNotification" object:nil];
+
     
 }
 
@@ -183,6 +185,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
     UIImage * img = notification.object;
     [self sendRequst_img:img];
 }
+
+
 
 #pragma mark -上传图片并返回
 -(void)rightAction{
@@ -329,6 +333,10 @@ static const CGFloat kPhotoViewMargin = 12.0;
 }
 
 #pragma mark -删除图片
+-(void)deleteImage:(NSNotification *)notification{
+    NSIndexPath *indexPath = notification.object;
+    [self deleteSend_index:indexPath.item];
+}
 
 - (void)deleteSend_index:(NSInteger)index{
     NSSLog(@"删除图片下标%ld",(long)index);
@@ -342,8 +350,8 @@ static const CGFloat kPhotoViewMargin = 12.0;
             
         }
         
-  
         
+//        [self.filesModelArray removeObject:fileModel];
         [self.filesModelArray removeObjectAtIndex:index];
         
     }else{

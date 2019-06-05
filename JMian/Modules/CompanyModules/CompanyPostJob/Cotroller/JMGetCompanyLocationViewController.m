@@ -14,8 +14,6 @@
 #import "SearchView.h"
 #import <AMapLocationKit/AMapLocationKit.h>
 
-
-
 @interface JMGetCompanyLocationViewController ()<AMapSearchDelegate,MAMapViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,AMapLocationManagerDelegate>
 
 @property(nonatomic,strong)MAMapView *mapView;

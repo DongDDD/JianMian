@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "DimensMacros.h"
+typedef NS_ENUM(NSInteger, JMTitlesViewType) {
+    JMTitlesViewDefault,
+    JMTitlesViewPositionManage,
+};
+
 
 @interface JMTitlesView : UIView
 
@@ -16,5 +21,7 @@
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles;
 
 - (void)setCurrentTitleIndex:(NSInteger)index;
+
+@property(nonatomic, assign)JMTitlesViewType viewType;
 
 @end

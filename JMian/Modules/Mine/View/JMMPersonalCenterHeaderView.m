@@ -71,7 +71,7 @@
     
     _rightBtn = [[UIButton alloc]init];
     [_rightBtn addTarget:self action:@selector(orderBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_rightBtn setImage:[UIImage imageNamed:@"indent"] forState:UIControlStateNormal];
+    [_rightBtn setImage:[UIImage imageNamed:@"C_indent"] forState:UIControlStateNormal];
     [self addSubview:_rightBtn];
     _rightLab = [[UILabel alloc]init];
     _rightLab.textColor = [UIColor whiteColor];

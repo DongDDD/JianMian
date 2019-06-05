@@ -26,16 +26,23 @@
 #import "JMMPersonalCenterHeaderView.h"
 #import "UIView+addGradualLayer.h"
 #import "JMMyOrderListViewController.h"
+#import "JMBUserCenterHeaderView.h"
+#import "JMBUserCenterHeaderSubView.h"
+#import "JMBUserMineSectionView.h"
+#import "JMPositionManageViewController.h"
 
 
 
 
-@interface JMMineViewController ()<UITableViewDelegate,UITableViewDataSource,JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate>
+@interface JMMineViewController ()<UITableViewDelegate,UITableViewDataSource,JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *imageNameArr,*labelStrArr;
 @property (strong, nonatomic) JMUserInfoModel *userInfoModel;
 @property (strong, nonatomic) JMMPersonalCenterHeaderView *personalCenterHeaderView;
+@property (strong, nonatomic) JMBUserCenterHeaderView *BUserCenterHeaderView;
+@property (strong, nonatomic) JMBUserCenterHeaderSubView *BUserCenterHeaderSubView;
+
 
 @end
 
@@ -46,26 +53,36 @@
     [super viewDidLoad];
     [self setIsHiddenBackBtn:YES];
     self.view.backgroundColor = [UIColor whiteColor];
+    _userInfoModel = [JMUserInfoManager getUserInfo];
+    if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
+        
+        [[UIApplication sharedApplication].keyWindow addSubview:self.BUserCenterHeaderView];
+//        [[UIApplication sharedApplication].keyWindow addSubview:self.BUserCenterHeaderSubView];
+
+    }else if ([_userInfoModel.type isEqualToString:C_Type_USER]){
+        
+        [[UIApplication sharedApplication].keyWindow addSubview:self.personalCenterHeaderView];
+    }
 
     self.navigationItem.title = @"个人中心";
     [self setRightBtnImageViewName:@"upinstall" imageNameRight2:@""];
-    [[UIApplication sharedApplication].keyWindow addSubview:self.personalCenterHeaderView];
+ 
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_topLayoutGuide);
+        
+        if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
+            
+            make.top.mas_equalTo(self.mas_topLayoutGuide).offset(105);
+        }else{
+            make.top.mas_equalTo(self.mas_topLayoutGuide).mas_offset(60);
+
+        }
+        
         make.left.right.bottom.equalTo(self.view);
     }];
    
-    //判断当前 C端 还是 B端
-    _userInfoModel = [JMUserInfoManager getUserInfo];
     
     
-    if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
-        
-       
-    }else if ([_userInfoModel.type isEqualToString:C_Type_USER]){
-        
-    }
     
     self.imageNameArr = @[@"mine_share",@"subscribe",@"burse",@"autonym"];
     self.labelStrArr = @[@"分享APP",@"网点预约拍摄",@"我的钱包",@"实名认证"];
@@ -79,12 +96,21 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    [_personalCenterHeaderView setHidden:NO];
+    if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
+        [self.BUserCenterHeaderView setHidden:NO];
+//        [self.BUserCenterHeaderSubView setHidden:NO];
+
+    }else{
+        
+        [self.personalCenterHeaderView setHidden:NO];
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [_personalCenterHeaderView setHidden:YES];
+    [self.BUserCenterHeaderView setHidden:YES];
+//    [self.BUserCenterHeaderSubView setHidden:YES];
+    [self.personalCenterHeaderView setHidden:YES];
 }
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -109,6 +135,7 @@
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+#pragma mark - My delegate
 
 -(void)didClickSetting{
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];
@@ -119,6 +146,16 @@
     JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 
+}
+
+-(void)BTaskClick{
+    
+}
+-(void)BOrderClick{
+    
+}
+-(void)BVIPClick{
+    
 }
 //-(void)getCompanyData{
 //
@@ -148,9 +185,7 @@
 #pragma mark - UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  
 //    if (indexPath.section == 0) {
 //        cell.accessoryType = UITableViewCellStyleSubtitle;
 //        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
@@ -185,17 +220,23 @@
         modulesCell.delegate = self;
         return modulesCell;
     }
+    
     if (indexPath.section == 1) {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = self.labelStrArr[indexPath.row];
         cell.textLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
         cell.textLabel.textColor = UIColorFromHEX(0x4d4d4d);
         cell.imageView.image = [UIImage imageNamed:self.imageNameArr[indexPath.row]];
+        return cell;
     }
-    return cell;
+    
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1) {
+    if (indexPath.section == 0) {
         //我的钱包
         if (indexPath.row == 2) {
             [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
@@ -230,31 +271,32 @@
     return image;
 }
 
-//用于颜色渐变
--(UIView *)getBackImg{
-    UIView *barBackgroundView = [[UIView alloc]init];
-    [barBackgroundView addGradualLayerWithColors:@[(__bridge id)UIColorFromHEX(0x00E4FC).CGColor,
-                                                    (__bridge id)UIColorFromHEX(0x4AA2FB).CGColor,
-                                                    (__bridge id)UIColorFromHEX(0x7061F8).CGColor
-                                                    ]];
-    
-    UIImage *backImage = [self convertViewToImage:barBackgroundView];
-    
-    return backImage;
-}
+
 #pragma mark - UITableViewDataSource
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
+        
+        JMBUserMineSectionView *view = [JMBUserMineSectionView new];
+        if (section == 0) {
+            [view setTitleStr:@"公司信息"];
+        }else if (section == 1) {
+            [view setTitleStr:@"更多功能"];
+        }
+        return view;
+    }
+    
+    return [UIView new];
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 2;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    if (section == 0) {
-        return 106;
-        
+    if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
+        return 53;
     }
-    
     return 0;
 }
 
@@ -277,18 +319,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        if ([_userInfoModel.type isEqualToString:C_Type_USER]) {
-            return  120;
-        }else{
-            return 100;
-            
-        }
+        return 120;
     }else if(indexPath.section == 1){
         return 69;
     }
-//    else {
-//        return 64;
-//    }
     return 0;
 }
 
@@ -300,22 +334,34 @@
             [self.navigationController pushViewController:vc animated:YES];
             
         }else if ([_userInfoModel.type isEqualToString:B_Type_UESR]){
+            //职位管理
+            JMPositionManageViewController *vc = [[JMPositionManageViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    
+    }else if (row == 1) {
+        if ([_userInfoModel.type isEqualToString:C_Type_USER]) {
+            JMUploadVideoViewController *vc = [[JMUploadVideoViewController alloc]init];
+            vc.title = @"视频简历";
+            vc.viewType = JMUploadVideoViewTypeDefault;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if ([_userInfoModel.type isEqualToString:B_Type_UESR]){
             JMCompanyInfoMineViewController *vc = [[JMCompanyInfoMineViewController alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
             
         }
         
-        
-    }else if (row == 1) {
-        JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
-        vc.title = @"职位收藏";
-        [self.navigationController pushViewController:vc animated:YES];
     }else if (row == 2) {
-        JMCompanyLikeViewController *vc = [[JMCompanyLikeViewController alloc]init];
-        vc.title = @"人才收藏";
+        JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
     }else if (row == 3) {
-        JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
+        JMCompanyLikeViewController *vc = [[JMCompanyLikeViewController alloc]init];
+        if (([_userInfoModel.type isEqualToString:B_Type_UESR])) {
+            vc.title = @"人才收藏";
+        }else{
+            vc.title = @"职位收藏";
+        }
         [self.navigationController pushViewController:vc animated:YES];
     }
 
@@ -325,7 +371,10 @@
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
+
+        
+        
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -351,5 +400,50 @@
     }
     return _personalCenterHeaderView;
 }
+
+-(JMBUserCenterHeaderView *)BUserCenterHeaderView{
+    if (!_BUserCenterHeaderView) {
+        _BUserCenterHeaderView =  [[JMBUserCenterHeaderView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 135)];
+        _BUserCenterHeaderView.delegate = self;
+        [_BUserCenterHeaderView addGradualLayerWithColors:@[(__bridge id)UIColorFromHEX(0x00E4FC).CGColor,
+                                                            (__bridge id)UIColorFromHEX(0x4AA2FB).CGColor,
+                                                            (__bridge id)UIColorFromHEX(0x258ff2).CGColor
+                                                            ]];
+   
+        JMBUserCenterHeaderSubView *_BUserCenterHeaderSubView = [[JMBUserCenterHeaderSubView alloc]initWithFrame:CGRectMake(13, 85, SCREEN_WIDTH-26, 105)];
+
+        _BUserCenterHeaderSubView.delegate = self;
+        _BUserCenterHeaderSubView.layer.shadowColor = [UIColor colorWithRed:20/255.0 green:31/255.0 blue:87/255.0 alpha:0.1].CGColor;
+        _BUserCenterHeaderSubView.layer.shadowOffset = CGSizeMake(0,1);
+        _BUserCenterHeaderSubView.layer.shadowOpacity = 1;
+        _BUserCenterHeaderSubView.layer.shadowRadius = 6;
+        _BUserCenterHeaderSubView.layer.cornerRadius = 10;
+        _BUserCenterHeaderSubView.backgroundColor = [UIColor whiteColor];
+
+
+        [_BUserCenterHeaderView addSubview:_BUserCenterHeaderSubView];
+//
+        
+        
+    }
+    return _BUserCenterHeaderView;
+}
+
+//-(JMBUserCenterHeaderSubView *)BUserCenterHeaderSubView{
+//    if (!_BUserCenterHeaderSubView) {
+//        _BUserCenterHeaderSubView = [[JMBUserCenterHeaderSubView alloc]initWithFrame:CGRectMake(13, 85, SCREEN_WIDTH-26, 105)];
+//
+//        _BUserCenterHeaderSubView.delegate = self;
+//        _BUserCenterHeaderSubView.layer.shadowColor = [UIColor colorWithRed:20/255.0 green:31/255.0 blue:87/255.0 alpha:0.1].CGColor;
+//        _BUserCenterHeaderSubView.layer.shadowOffset = CGSizeMake(0,1);
+//        _BUserCenterHeaderSubView.layer.shadowOpacity = 1;
+//        _BUserCenterHeaderSubView.layer.shadowRadius = 6;
+//        _BUserCenterHeaderSubView.layer.cornerRadius = 10;
+//        _BUserCenterHeaderSubView.backgroundColor = [UIColor whiteColor];
+//
+//    }
+//    return _BUserCenterHeaderSubView;
+//}
+
 
 @end

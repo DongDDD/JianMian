@@ -16,6 +16,9 @@
 #import "JMMessageListModel.h"
 #import "JMAllMessageTableViewCellData.h"
 #import "DimensMacros.h"
+#import "JMSquareViewController.h"
+#import "JMDiscoverHomeViewController.h"
+#import "JMAssignmentSquareViewController.h"
 
 @interface JMCompanyTabBarViewController ()
 @property (nonatomic, strong) NSArray *modelArray;
@@ -33,17 +36,22 @@
     JMCompanyHomeViewController *companyHome = [[JMCompanyHomeViewController alloc]init];
     [self addChildVc:companyHome title:@"首页" image:@"home" selectedImage:@"pitch_on_home" ];
     
-    JMPostJobHomeViewController *post = [[JMPostJobHomeViewController alloc]init];
-    [self addChildVc:post title:@"发布" image:@"post_a_job" selectedImage:@"post_a_job_pitch_up" ];
-    
     self.message = [[JMMessageViewController alloc] init];
-    [self getMsgList];
+    
+    [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
+    
+    JMAssignmentSquareViewController *square = [[JMAssignmentSquareViewController alloc]init];
+    [self addChildVc:square title:@"任务广场" image:@"mission" selectedImage:@"garden_pich_on"];
+    
+    JMDiscoverHomeViewController *discover = [[JMDiscoverHomeViewController alloc]init];
+    [self addChildVc:discover title:@"发现" image:@"discovery" selectedImage:@"discovery_pitch_on"];
 
-    [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on" ];
 
     JMMineViewController *mine = [[JMMineViewController alloc] init];
 
     [self addChildVc:mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on" ];
+    [self setSelectedIndex:2];
+
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];

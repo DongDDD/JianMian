@@ -19,6 +19,8 @@
 #import "JMAllMessageTableViewCellData.h"
 #import "JMSquareViewController.h"
 #import "JMDiscoverHomeViewController.h"
+#import "JMAssignmentSquareViewController.h"
+
 
 @interface JMPersonTabBarViewController () <MCTabBarControllerDelegate>
 @property (nonatomic, strong) NSArray *modelArray;
@@ -52,7 +54,7 @@
     
     [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
     
-    JMSquareViewController *square = [[JMSquareViewController alloc]init];
+    JMAssignmentSquareViewController *square = [[JMAssignmentSquareViewController alloc]init];
     [self addChildVc:square title:@"任务广场" image:@"mission" selectedImage:@"garden_pich_on"];
 
     JMDiscoverHomeViewController *discover = [[JMDiscoverHomeViewController alloc]init];

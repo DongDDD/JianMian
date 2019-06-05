@@ -36,8 +36,8 @@
             JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
 
         if ([model.type isEqualToString:@"2"]) {
-            self.imageNameArr = @[@"company_information",@"interview",@"enshrine",@"share2"];
-            self.labelStrArr = @[@"公司信息",@"面试管理",@"人才收藏",@"分享APP"];
+            self.imageNameArr = @[@"post_a_job_pitch_up",@"company_information",@"interview",@"enshrine"];
+            self.labelStrArr = @[@"职位管理",@"公司信息",@"面试管理",@"人才收藏"];
             
         }else if ([model.type isEqualToString:@"1"]){
         
