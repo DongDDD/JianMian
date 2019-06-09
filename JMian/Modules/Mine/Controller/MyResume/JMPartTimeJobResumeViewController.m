@@ -11,13 +11,18 @@
 #import "JMHTTPManager+FectchAbility.h"
 #import "JMPostJobHomeTableViewCell.h"
 #import "JMPartTimeJobModel.h"
+#import "JMTitlesView.h"
 
 @interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *dataArray;
+@property(nonatomic, strong)JMTitlesView *titleView;
+@property(nonatomic, assign)NSUInteger index;
 
+//@property (nonatomic, assign)NSInteger page;
+//@property (nonatomic, assign)NSInteger per_page;
 @end
-static NSString *cellIdent = @"PostJobCellID";
+static NSString *cellIdent = @"PartTimePostJobCellID";
 @implementation JMPartTimeJobResumeViewController
 
 - (void)viewDidLoad {
@@ -30,8 +35,11 @@ static NSString *cellIdent = @"PostJobCellID";
     [self getData];
     
 }
+
 -(void)getData{
-    [[JMHTTPManager sharedInstance]fectchAbilityList_city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//    NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
+//    NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
+    [[JMHTTPManager sharedInstance]fectchAbilityList_city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.dataArray = [JMPartTimeJobModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
         }
@@ -89,14 +97,19 @@ static NSString *cellIdent = @"PostJobCellID";
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    UIButton *headerBtn = [[UIButton alloc]init];
-    headerBtn.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
-    [headerBtn setTitle:@"再发一份兼职简历 + " forState:UIControlStateNormal];
-    [headerBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-    headerBtn.titleLabel.font = [UIFont systemFontOfSize:13];
-    [headerBtn addTarget:self action:@selector(addPartTimeJobResume) forControlEvents:UIControlEventTouchUpInside];
-    
-    return headerBtn;
+    if (_viewType == JMPartTimeJobTypeManage) {
+        return self.titleView;
+
+    }else{
+        UIButton *headerBtn = [[UIButton alloc]init];
+        headerBtn.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
+        [headerBtn setTitle:@"再发一份兼职简历 + " forState:UIControlStateNormal];
+        [headerBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        headerBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+        [headerBtn addTarget:self action:@selector(addPartTimeJobResume) forControlEvents:UIControlEventTouchUpInside];
+        
+        return headerBtn;
+    }
 }
 
 
@@ -118,6 +131,25 @@ static NSString *cellIdent = @"PostJobCellID";
     return _tableView;
 }
 
+- (JMTitlesView *)titleView {
+    if (!_titleView) {
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"已发布", @"已下线"]];
+        __weak JMPartTimeJobResumeViewController *weakSelf = self;
+        
+        _titleView.didTitleClick = ^(NSInteger index) {
+            _index = index;
+//            if (index==0) {
+//                _status = Position_Online;//已发布职位
+//                [weakSelf getListData];
+//            }else{
+//                _status = Position_Downline;//已下线职位
+//                [weakSelf getListData];
+//            }
+        };
+        
+    }
+    return _titleView;
+}
 /*
 #pragma mark - Navigation
 

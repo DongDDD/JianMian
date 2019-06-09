@@ -9,8 +9,13 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef enum : NSUInteger {
+    JMPartTimeJobTypeDefault,
+    JMPartTimeJobTypeManage,
+} JMPartTimeJobViewType;
 
 @interface JMPartTimeJobResumeViewController : BaseViewController
+@property (nonatomic, assign)JMPartTimeJobViewType viewType;
 
 @end
 

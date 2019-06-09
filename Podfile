@@ -18,5 +18,6 @@ pod 'MBProgressHUD', '~> 1.1.0'
 pod 'VIMediaCache'
 pod 'HXWeiboPhotoPicker', '~> 2.1.5'
 pod 'MCTabBarController'
+pod 'IQKeyboardManager', '3.3.7'
 
 

@@ -11,6 +11,13 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class JMChoosePositionTableViewController;
+typedef enum : NSUInteger {
+    JMChoosePositionViewTypeDefault,
+    JMChoosePositionViewTypeSquare,
+} JMChoosePositionViewType;
+
+
+
 @protocol JMChoosePositionTableViewControllerDelegate <NSObject>
 
 -(void)didSelectCellActionController:(JMChoosePositionTableViewController *)controller;
@@ -22,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,weak)id<JMChoosePositionTableViewControllerDelegate>delegate;
 @property(nonatomic,strong)NSMutableArray *choosePositionArray;
 @property(nonatomic,strong)JMHomeWorkModel *homeModel;
+@property(nonatomic,assign)JMChoosePositionViewType viewType;
 @end
 
 NS_ASSUME_NONNULL_END

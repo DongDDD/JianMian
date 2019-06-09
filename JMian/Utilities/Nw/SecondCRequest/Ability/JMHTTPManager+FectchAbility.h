@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
                       video_cover:(nullable NSString *)video_cover
                         image_arr:(nullable NSArray *)image_arr
                            status:(nullable NSString *)status
+                             page:(nullable NSString *)page
+                         per_page:(nullable NSString *)per_page
                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 

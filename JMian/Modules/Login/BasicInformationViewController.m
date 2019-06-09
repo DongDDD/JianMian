@@ -16,6 +16,7 @@
 #import "LoginViewController.h"
 #import "NavigationViewController.h"
 #import "JMJudgeViewController.h"
+#import "IQKeyboardManager.h"
 
 
 
@@ -69,7 +70,7 @@
     
     [_headerImg setImage:savedImage forState:UIControlStateNormal];
     //    [imge setImage:savedImage];
-    
+    [IQKeyboardManager sharedManager].enable = NO;//试过用enable这个属性，但是没有效果；改成enableAutoToolbar就可以了
     
 }
 
@@ -79,9 +80,15 @@
 
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enable = YES;
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)getNewUserInfo{
@@ -95,32 +102,32 @@
     }];
     
 }
-- (void)keyboardWillShow:(NSNotification *)aNotification {
-    self.datePicker.hidden = YES;
-    NSDictionary *userInfo = aNotification.userInfo;
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-//    _keyboardRect = aValue.CGRectValue;
-    
-    CGRect keyboardRect = aValue.CGRectValue;
-    CGRect frame = self.emailText.frame;
-    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-    CGRect rect= CGRectMake(0,_changeHeight+30,SCREEN_WIDTH,SCREEN_HEIGHT);
-    [UIView animateWithDuration:0.3 animations:^ {
-        self.view.frame = rect;
-        
-    }];
-    
-
- 
-}
-
-- (void)keyboardWillHide:(NSNotification *)aNotification {
-    [UIView animateWithDuration:0.3 animations:^ {
-        self.view.frame = CGRectMake(0,64,SCREEN_WIDTH,SCREEN_HEIGHT);
-        
-    }];
-
-}
+//- (void)keyboardWillShow:(NSNotification *)aNotification {
+//    self.datePicker.hidden = YES;
+//    NSDictionary *userInfo = aNotification.userInfo;
+//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+////    _keyboardRect = aValue.CGRectValue;
+//
+//    CGRect keyboardRect = aValue.CGRectValue;
+//    CGRect frame = self.emailText.frame;
+//    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
+//    CGRect rect= CGRectMake(0,_changeHeight+30,SCREEN_WIDTH,SCREEN_HEIGHT);
+//    [UIView animateWithDuration:0.3 animations:^ {
+//        self.view.frame = rect;
+//
+//    }];
+//
+//
+//
+//}
+//
+//- (void)keyboardWillHide:(NSNotification *)aNotification {
+//    [UIView animateWithDuration:0.3 animations:^ {
+//        self.view.frame = CGRectMake(0,64,SCREEN_WIDTH,SCREEN_HEIGHT);
+//
+//    }];
+//
+//}
 
 
 -(void)initView{
@@ -167,9 +174,9 @@
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
     [self.view addGestureRecognizer:bgTap];
     [_bgView addGestureRecognizer:bgTap];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
 }
 

@@ -9,8 +9,16 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+//typedef enum : NSUInteger {
+//    JMPostJobHomeViewTypeDefault,
+//    JMPostJobHomeViewTypePartTime,
+//} JMPostJobHomeViewType;
+
 
 @interface JMPostJobHomeViewController : BaseViewController
+
+@property (nonatomic, strong) UITableView *tableView;
+//@property (nonatomic, assign)JMPostJobHomeViewType viewType;
 
 @end
 

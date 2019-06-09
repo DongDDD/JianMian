@@ -17,6 +17,7 @@
 #import "JMUploadVideoViewController.h"//上传视频
 #import "JMHTTPManager+FectchAbilityInfo.h"//获取兼职简历
 #import "JMHTTPManager+UpdateAbility.h"//G更新兼职简历
+#import "IQKeyboardManager.h"
 
 @interface JMPostPartTimeResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMIndustryWebViewControllerDelegate,JMCityListViewControllerDelegate,PositionDesiredDelegate,Demo3ViewControllerDelegate,JMPartTimeJobResumeFooterViewDelegate,JMUploadVideoViewDelegate>
 
@@ -26,7 +27,7 @@
 @property (nonatomic,strong)NSString *labsJson;
 @property (nonatomic,strong)JMPartTimeJobResumeFooterView *footerView;
 @property (nonatomic, assign)CGFloat changeHeight;
-@property (nonatomic,assign)CGRect tableViewFrame;
+@property (nonatomic,assign)CGRect Frame;
 @property (nonatomic,strong)JMPartTimeJobModel *myPartTimeVitaModel;
 
 //提交请求参数
@@ -56,6 +57,7 @@ static NSString *cellIdent = @"cellIdent";
 
     }
     [self.view addSubview:self.tableView];
+    [self.tableView addSubview:self.footerView];
     
 
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideTap)];
@@ -68,6 +70,8 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [IQKeyboardManager sharedManager].enable = NO;
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     //第二版：C端 获取个人兼职简历
@@ -80,6 +84,8 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [IQKeyboardManager sharedManager].enable = YES;
+
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
@@ -88,21 +94,25 @@ static NSString *cellIdent = @"cellIdent";
 - (void)keyboardWillShow:(NSNotification *)aNotification {
     NSDictionary *userInfo = aNotification.userInfo;
     NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    
+
     CGRect keyboardRect = aValue.CGRectValue;
-    _tableViewFrame = self.tableView.frame;
-    self.changeHeight = keyboardRect.size.height - (_tableViewFrame.origin.y+_tableViewFrame.size.height);
-    CGRect rect= CGRectMake(0, _changeHeight,SCREEN_WIDTH,self.view.frame.size.height);
-    [UIView animateWithDuration:0.3 animations:^ {
-        self.tableView.frame = rect;
-    }];
+    CGRect frame = self.footerView.frame;
+    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
+    CGRect rect= CGRectMake(0,_changeHeight+100,SCREEN_WIDTH,SCREEN_HEIGHT);
+    if (_changeHeight < 0) {
+        
+        [UIView animateWithDuration:0.3 animations:^ {
+            self.view.frame = rect;
+            
+        }];
+    }
 
 }
 
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     [UIView animateWithDuration:0.3 animations:^ {
-        self.tableView.frame = _tableViewFrame;
-        
+        self.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
     }];
 }
 #pragma mark - 获取兼职简历
@@ -355,14 +365,14 @@ static NSString *cellIdent = @"cellIdent";
     return 70;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    return 229;
-}
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+//    return 229;
+//}
 
--(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-
-    return self.footerView;
-}
+//-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+//
+//    return self.footerView;
+//}
 
 
 
@@ -400,6 +410,7 @@ static NSString *cellIdent = @"cellIdent";
 - (JMPartTimeJobResumeFooterView *)footerView{
     if (_footerView == nil) {
         _footerView = [JMPartTimeJobResumeFooterView new];
+        _footerView.frame = CGRectMake(0, 350 , SCREEN_WIDTH, 229);
         _footerView.delegate = self;
 //        _footerView.contentTextView.delegate = self;
         

@@ -93,12 +93,20 @@
 #define Create_Favorite_URL @"api/user/favorite"
 #define List_Favorite_URL @"api/user/favorite/paginate"
 #define Delete_Favorite_URL @"api/user/favorite/delete"
-//创建兼职简历
+//兼职简历增删改查
 #define Create_Ability_URL @"api/ability/create"
 #define Fectch_Ability_URL @"api/ability/paginate"
 #define Update_Ability_URL @"api/ability/update"
 #define Fectch_AbilityInfo_URL @"api/ability/info"
 #define Delete_AbilityImage_URL @"api/ability/delete/file"
+//第二版任务
+#define Fectch_TaskList_URL @"api/task/paginate"
+//招募任务增删改查
+#define Create_Task_URL @"api/task/create"
+#define Delete_Task_URL @"api/task/delete"
+#define Update_Task_URL @"api/task/update"
+#define Fectch_TaskInfo_URL @"api/task/info"
+
 
 
 //会话列表

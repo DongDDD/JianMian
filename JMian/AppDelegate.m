@@ -23,6 +23,8 @@
 #import "JMHTTPManager+Login.h"
 #import "JMJudgeViewController.h"
 #import "JMVideoChatViewController.h"
+#import "IQKeyboardManager.h"
+
 
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate>
@@ -87,8 +89,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [AMapServices sharedServices].apiKey = AMapAPIKey;
     [AMapServices sharedServices].enableHTTPS = YES;
-    
     [[TIMManager sharedInstance] addMessageListener:self];
+    //坚决键盘遮挡问题
+//    [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition]; //输入框自动上移
+    [IQKeyboardManager sharedManager].enable = YES;
+    [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;//不显示工具条
+    [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10.0f;
     [self registNotification];
     self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];

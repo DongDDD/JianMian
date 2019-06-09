@@ -28,8 +28,6 @@
     [super viewDidLoad];
     self.title = @"基本信息";
     [self setRightBtnTextName:@"保存"];
-    
-    
     [self getUserInfo];
     // Do any additional setup after loading the view from its nib.
 }
@@ -162,8 +160,6 @@
 }
 
 -(void)rightAction{
-
-    
     [[JMHTTPManager sharedInstance]updateUserInfoType:@2 password:nil avatar:_imagUrl nickname:self.nameText.text email:nil name:self.nameText.text sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [self.navigationController popViewControllerAnimated:YES];

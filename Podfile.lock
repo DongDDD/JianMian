@@ -24,6 +24,7 @@ PODS:
     - AMapFoundation (~> 1.4)
   - HXWeiboPhotoPicker (2.1.5):
     - SDWebImage (~> 4.0)
+  - IQKeyboardManager (3.3.7)
   - Masonry (1.0.2)
   - MBProgressHUD (1.1.0)
   - MCTabBarController (1.0.2)
@@ -48,6 +49,7 @@ DEPENDENCIES:
   - AMapLocation
   - AMapSearch
   - HXWeiboPhotoPicker (~> 2.1.5)
+  - IQKeyboardManager (= 3.3.7)
   - Masonry (~> 1.0.1)
   - MBProgressHUD (~> 1.1.0)
   - MCTabBarController
@@ -71,6 +73,7 @@ SPEC REPOS:
     - AMapLocation
     - AMapSearch
     - HXWeiboPhotoPicker
+    - IQKeyboardManager
     - Masonry
     - MBProgressHUD
     - MCTabBarController
@@ -93,6 +96,7 @@ SPEC CHECKSUMS:
   AMapLocation: 89a7e4eb6040d32ba73c77a4966ecc66e46aa7c3
   AMapSearch: def5983c8ca1a6d7430970046dc814f6e337621d
   HXWeiboPhotoPicker: b389ed6a2f854270aa391c55591d0616a519c881
+  IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MCTabBarController: 96b67360b8012d2194169c450b3167d30dac8cac
@@ -107,6 +111,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 39b5948c25642b13b3b7ec7db73bbe4ec39879ca
+PODFILE CHECKSUM: dc697174ba4682b63c49abf744d89b79eb28794b
 
 COCOAPODS: 1.6.1

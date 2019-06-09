@@ -35,54 +35,16 @@
     _phoneNumText.keyboardType = UIKeyboardTypeNumberPad;
     _captchaText.keyboardType = UIKeyboardTypeNumberPad;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-   
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     // Do any additional setup after loading the view from its nib.
 }
 
 
-- (void)keyboardWillShow:(NSNotification *)aNotification {
-    NSDictionary *userInfo = aNotification.userInfo;
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    //    _keyboardRect = aValue.CGRectValue;
-    
-    CGRect keyboardRect = aValue.CGRectValue;
-    CGRect frame = self.captchaText.frame;
-    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-    CGRect rect= CGRectMake(0,_changeHeight+30,SCREEN_WIDTH,SCREEN_HEIGHT);
-    [UIView animateWithDuration:0.3 animations:^ {
-        self.view.frame = rect;
-        
-    }];
-    
-    
-    
-}
-
-
-- (void)keyboardWillHide:(NSNotification *)aNotification {
-    [UIView animateWithDuration:0.3 animations:^ {
-        self.view.frame = CGRectMake(0,64,SCREEN_WIDTH,SCREEN_HEIGHT);
-        
-    }];
-    
-}
-
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-{
-
-    [_phoneNumText resignFirstResponder];
-    [_captchaText resignFirstResponder];
-
-}
 #pragma mark - 数据请求
 
 - (IBAction)loginPhoneBtn:(id)sender {

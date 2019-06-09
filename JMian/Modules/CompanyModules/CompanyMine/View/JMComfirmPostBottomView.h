@@ -1,8 +1,8 @@
 //
-//  JMSquareHomeTableViewCell.h
+//  JMComfirmPostBottomView.h
 //  JMian
 //
-//  Created by mac on 2019/6/5.
+//  Created by mac on 2019/6/9.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMSquareHomeTableViewCell : UITableViewCell
+@interface JMComfirmPostBottomView : UIView
 
 @end
 

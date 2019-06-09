@@ -86,9 +86,7 @@ typedef enum _PickerState_Exp {
             break;
     }
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
     
 }
 
@@ -100,50 +98,7 @@ typedef enum _PickerState_Exp {
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
-
-//- (void)keyboardWillShow:(NSNotification *)aNotification {
-//    [self.datePckerView setHidden:YES];
-//    NSDictionary *userInfo = aNotification.userInfo;
-//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-//    CGRect keyboardRect = aValue.CGRectValue;
-//    CGRect frame = self.jobDescriptionText.frame;
-//    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-//    CGRect rect= CGRectMake(0,_changeHeight,SCREEN_WIDTH,SCREEN_HEIGHT);
-//    if (_changeHeight < 0) {
-//
-//        [UIView animateWithDuration:0.3 animations:^ {
-//            self.scrollView.frame = rect;
-//
-//        }];
-//    }
-//    /* 输入框上移 */
-//    //    CGFloat padding = 20;
-//    //    CGRect frame = self.nameText.frame;
-//    //    self.changeHeight = _keyboardRect.size.height - (frame.origin.y+frame.size.height);
-//    //    if (self.changeHeight < 0) {
-//    //        [UIView animateWithDuration:0.3 animations:^ {
-//    //
-//    //            self.topToView.constant += self.changeHeight-10;
-//    //
-//    //        }];
-//    //    }
-//
-//}
-//
-//- (void)keyboardWillHide:(NSNotification *)aNotification {
-//    float width = SCREEN_WIDTH;
-//    float height = SCREEN_HEIGHT;
-//    //上移n个单位，按实际情况设置
-//    if (_changeHeight < 0) {
-//        CGRect rect=CGRectMake(0,-_changeHeight,width,height);
-//        self.scrollView.frame=rect;
-//
-//    }
-//
-//}
 
 
 #pragma mark - 点击事件

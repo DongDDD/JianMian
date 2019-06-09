@@ -26,7 +26,6 @@
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) NSArray *childVCs;
 @property (nonatomic, strong) UITableViewController *currentVC;
-@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSString *status;
 @property (nonatomic, strong) NSArray *dataArray;
 @property (weak, nonatomic) IBOutlet UILabel *tipsLab;
