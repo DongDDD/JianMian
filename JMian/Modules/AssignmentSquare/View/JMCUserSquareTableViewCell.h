@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JMPartTimeJobModel.h"
+#import "JMTaskListCellData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCUserSquareTableViewCell : UITableViewCell
-@property(nonatomic,strong)JMPartTimeJobModel *model;
+@property(nonatomic,strong)JMTaskListCellData *model;
 
 @end
 

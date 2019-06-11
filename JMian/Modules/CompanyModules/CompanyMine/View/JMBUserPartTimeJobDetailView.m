@@ -17,6 +17,7 @@
     }
     return self;
 }
+
 - (IBAction)rightBtnAction:(UIButton *)sender {
     if (_delegate && [_delegate respondsToSelector:@selector(didClickRightBtnWithTag:)]) {
         [_delegate didClickRightBtnWithTag:sender.tag];

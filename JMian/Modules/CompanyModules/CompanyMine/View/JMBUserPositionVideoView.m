@@ -19,6 +19,24 @@
     return self;
 }
 
+- (IBAction)leftBtnAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(videoLeftBtnAction)]) {
+        [_delegate videoLeftBtnAction];
+    }
+}
+
+- (IBAction)rightBtnAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(videoRightBtnAction)]) {
+        [_delegate videoRightBtnAction];
+    }
+}
+- (IBAction)playAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(playBtnAction)]) {
+        [_delegate playBtnAction];
+    }
+}
+
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

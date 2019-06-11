@@ -8,10 +8,13 @@
 
 #import "JMPartTimeJobTypeLabsViewController.h"
 #import "JMPartTimeJobLabsCollectionViewCell.h"
-
+#import "JMHTTPManager+GetLabels.h"
 @interface JMPartTimeJobTypeLabsViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic ,strong) NSArray *labsArray;
+@property (nonatomic ,strong) NSString *didChooseLab;
+
+
 @end
 static CGFloat kMagin = 10.f;
 
@@ -21,9 +24,25 @@ static CGFloat kMagin = 10.f;
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"选择兼职类型";
-    _labsArray = @[@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"家庭导师",@"家庭导师",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"家庭导师",@"家庭导师",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师",@"家庭导师",@"家庭导师",@"设计",@"模特",@"设计",@"模特",@"家庭导师"];
     [self.view addSubview:self.collectionView];
+    [self getData];
     // Do any additional setup after loading the view from its nib.
+}
+
+
+-(void)getData{
+    [[JMHTTPManager sharedInstance]getLabels_Id:@"1021" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            _labsArray = [JMPartTimeJobLabsCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            
+            [_collectionView reloadData];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
 }
 
 #pragma mark ====== UICollectionViewDelegate ======
@@ -38,22 +57,24 @@ static CGFloat kMagin = 10.f;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JMPartTimeJobLabsCollectionViewCell *cell = (JMPartTimeJobLabsCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
-    cell.labName.text = _labsArray[indexPath.row];
     
+    [cell setLabData:_labsArray[indexPath.row]];
     return cell;
 }
 
 
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+    JMPartTimeJobLabsCellData *data = _labsArray[indexPath.row];
+    if (_delegate && [_delegate respondsToSelector:@selector(didChooseWithType_id:typeName:)]) {
+        [_delegate didChooseWithType_id:data.label_id typeName:data.name];
+        [super fanhui];
+    }
+    
+}
+
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-//        UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-//        layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-//        CGFloat width = ([UIScreen mainScreen].bounds.size.width - 50) / 4;
-//        layout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 10);
-//        layout.itemSize = CGSizeMake(width, 100);
-//        layout.minimumInteritemSpacing = 0;
-//        layout.minimumLineSpacing = 10;
-        
+
         //自动网格布局
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc]init];
         
@@ -65,7 +86,7 @@ static CGFloat kMagin = 10.f;
         flowLayout.minimumLineSpacing = 10;
         //最小item间距（默认为10）
         flowLayout.minimumInteritemSpacing = 10;
-        //设置senction的内边距
+        //设置senction的内边距@
         flowLayout.sectionInset = UIEdgeInsetsMake(kMagin, kMagin, kMagin, kMagin);
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
@@ -78,6 +99,7 @@ static CGFloat kMagin = 10.f;
     }
     return _collectionView;
 }
+
 
 /*
 #pragma mark - Navigation

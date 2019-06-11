@@ -20,7 +20,7 @@
 #import "JMVitaDetailModel.h"
 #import "JMHTTPManager+UpdateAbility.h"
 #import "JMHTTPManager+FectchAbilityInfo.h"
-#import "JMPartTimeJobModel.h"
+#import "JMAbilityCellData.h"
 //#import "JMUserInfoModel.h"
 //#import "JMUserInfoManager.h"
 
@@ -36,7 +36,7 @@
 
 @property (nonatomic, strong)JMDidUploadVideoView *didUploadVideoView;
 @property (nonatomic, strong)JMVitaDetailModel *model;
-@property (nonatomic, strong)JMPartTimeJobModel *partTimeJobModel;
+@property (nonatomic, strong)JMAbilityCellData *partTimeJobModel;
 
 @end
 
@@ -65,7 +65,7 @@
 -(void)getPartTimeInfoData{
     [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            self.partTimeJobModel = [JMPartTimeJobModel mj_objectWithKeyValues:responsObject[@"data"]];
+            self.partTimeJobModel = [JMAbilityCellData mj_objectWithKeyValues:responsObject[@"data"]];
             if (self.partTimeJobModel.video_file_path!=nil) {
                 
                 [self.didUploadVideoView setHidden:NO];

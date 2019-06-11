@@ -7,7 +7,7 @@
 //
 
 #import "BaseViewController.h"
-#import "JMPartTimeJobModel.h"
+#import "JMAbilityCellData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

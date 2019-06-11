@@ -110,7 +110,7 @@
     
     return _titleView;
 }
-
+//全职职位
 -(JMPostJobHomeViewController *)jobHomeListVC{
     if (!_jobHomeListVC) {
         _jobHomeListVC = [[JMPostJobHomeViewController alloc]init];
@@ -119,7 +119,7 @@
     }
     return _jobHomeListVC;
 }
-
+//兼职职位
 -(JMPartTimeJobResumeViewController *)partTimeJobHomeListVC{
     if (!_partTimeJobHomeListVC) {
         _partTimeJobHomeListVC = [[JMPartTimeJobResumeViewController alloc]init];

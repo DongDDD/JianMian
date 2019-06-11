@@ -147,14 +147,14 @@
 }
 
 -(void)assignBtnAction{
-    if (_delegate && [_delegate respondsToSelector:@selector(didClickMyOrder)]) {
-        [_delegate didClickMyOrder];
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickMyTask)]) {
+        [_delegate didClickMyTask];
     }
 }
 
 -(void)orderBtnAction{
-    if (_delegate && [_delegate respondsToSelector:@selector(didClickMyAssignment)]) {
-        [_delegate didClickMyAssignment];
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickMyOrder)]) {
+        [_delegate didClickMyOrder];
     }
 }
 

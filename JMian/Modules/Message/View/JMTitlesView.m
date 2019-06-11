@@ -24,7 +24,7 @@
 - (instancetype)initWithFrame:(CGRect)frame titles:(NSArray *)titles {
     if (self = [super initWithFrame:frame]) {
         self.titles = titles;
-        self.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
+        self.backgroundColor = [UIColor whiteColor];
         [self setupInit];
     }
     return self;

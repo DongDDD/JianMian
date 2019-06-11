@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMMPersonalCenterHeaderViewDelegate <NSObject>
 
 -(void)didClickSetting;
--(void)didClickMyAssignment;
+-(void)didClickMyTask;
 -(void)didClickMyOrder;
 
 

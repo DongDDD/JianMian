@@ -13,9 +13,11 @@
 #import "JMUserInfoManager.h"
 #import "JMBTypeLikeModel.h"
 #import "JMCTypeLikeModel.h"
+#import "JMTitlesView.h"
 
 
 @interface JMCompanyLikeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyLikeTableViewCellDelegate>
+@property (nonatomic, strong) JMTitlesView *titleView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic ,strong)NSArray *listsArray;
 
@@ -34,7 +36,7 @@ static NSString *cellIdent = @"CellIdent";
     self.tableView.rowHeight = 212;
     [self.tableView registerNib:[UINib nibWithNibName:@"JMCompanyLikeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
 //    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    
+    [self.view addSubview:self.titleView];
     [self getListData];
     
     // Do any additional setup after loading the view from its nib.
@@ -114,6 +116,23 @@ static NSString *cellIdent = @"CellIdent";
 -(void)chatAction{
 
 
+}
+
+
+
+#pragma mark - Getter
+
+- (JMTitlesView *)titleView {
+    if (!_titleView) {
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全职人才",@"兼职人才"]];
+        __weak JMCompanyLikeViewController *weakSelf = self;
+        _titleView.didTitleClick = ^(NSInteger index) {
+//            _index = index;
+//            [weakSelf movePageContentView];
+        };
+    }
+    
+    return _titleView;
 }
 
 /*

@@ -10,19 +10,19 @@
 
 @implementation JMHTTPManager (UpdateTask)
 - (void)updateTaskWithId:(nullable NSString *)Id
-          payment_method:(nullable NSMutableArray *)payment_method
+          payment_method:(nullable NSString *)payment_method
                     unit:(nullable NSString *)unit
            payment_money:(nullable NSString *)payment_money
              front_money:(nullable NSString *)front_money
-            quantity_max:(nullable NSArray *)quantity_max
+            quantity_max:(nullable NSString *)quantity_max
            myDescription:(nullable NSString *)myDescription
             industry_arr:(nullable NSMutableArray *)industry_arr
                  city_id:(nullable NSString *)city_id
                longitude:(nullable NSString *)longitude
                 latitude:(nullable NSString *)latitude
-                 address:(nullable NSArray *)address
+                 address:(nullable NSString *)address
              goods_title:(nullable NSString *)goods_title
-             goods_price:(nullable NSMutableArray *)goods_price
+             goods_price:(nullable NSString *)goods_price
               goods_desc:(nullable NSString *)goods_desc
               video_path:(nullable NSString *)video_path
              video_cover:(nullable NSString *)video_cover

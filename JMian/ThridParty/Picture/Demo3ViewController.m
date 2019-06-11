@@ -17,7 +17,7 @@
 #import "JMHTTPManager+Uploads.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
 #import "JMHTTPManager+UpdateAbility.h"
-#import "JMPartTimeJobModel.h"
+#import "JMAbilityCellData.h"
 #import "JMHTTPManager+DeleteAbilityImage.h"
 static const CGFloat kPhotoViewMargin = 12.0;
 
@@ -32,7 +32,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
 //@property (strong, nonatomic)NSMutableArray *addImgArray;//UIImage类型
 
 @property (strong, nonatomic)JMCompanyInfoModel *companyInfoModel;
-@property (strong, nonatomic)JMPartTimeJobModel *partTimeJobModel;
+@property (strong, nonatomic)JMAbilityCellData *partTimeJobModel;
 
 @property (nonatomic, strong) NSMutableArray *addImage_paths;//添加的图片（服务器返回的链接数组）
 

@@ -8,7 +8,6 @@
 
 #import "JMComfirmPostBottomView.h"
 @interface JMComfirmPostBottomView ()
-@property (weak, nonatomic) IBOutlet UIButton *didReadBtn;
 
 
 @end
@@ -17,7 +16,6 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
         self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] lastObject];
-        _didReadBtn.selected = YES;
         [_didReadBtn setImage:[UIImage imageNamed:@"YES_Post"] forState:UIControlStateSelected];
         [_didReadBtn setImage:[UIImage imageNamed:@"gou_partTime"] forState:UIControlStateNormal];
     }
@@ -27,6 +25,15 @@
 
 - (IBAction)didReadAction:(UIButton *)sender {
     sender.selected = !sender.selected;
+    if (_delegate && [_delegate respondsToSelector:@selector(isReadProtocol:)]) {
+        [_delegate isReadProtocol:sender.selected];
+    }
+}
+
+- (IBAction)OKAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(OKAction)]) {
+        [_delegate OKAction];
+    }
     
 }
 

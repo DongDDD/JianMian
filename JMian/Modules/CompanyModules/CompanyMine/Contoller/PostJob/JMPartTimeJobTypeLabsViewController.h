@@ -9,8 +9,15 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol JMPartTimeJobTypeLabsViewControllerDelegate <NSObject>
+
+-(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName;
+
+@end
 
 @interface JMPartTimeJobTypeLabsViewController : BaseViewController
+
+@property(nonatomic,weak)id<JMPartTimeJobTypeLabsViewControllerDelegate>delegate;
 
 @end
 

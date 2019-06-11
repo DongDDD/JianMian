@@ -34,7 +34,7 @@
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Wt-T2-1g1">
                     <rect key="frame" x="20" y="72" width="374" height="37"/>
-                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="gLz-Ne-nji"/>
                     </constraints>
@@ -47,6 +47,9 @@
                             <real key="value" value="18.5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="OKAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="mzQ-7e-yzi"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -62,6 +65,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="OKBtn" destination="4Wt-T2-1g1" id="LaF-RW-yeq"/>
                 <outlet property="didReadBtn" destination="0va-E6-4iB" id="iGf-gi-nQ6"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="-36.830357142857139"/>

@@ -30,7 +30,7 @@
 
 }
 
--(void)setPartTimeJobModel:(JMPartTimeJobModel *)partTimeJobModel{
+-(void)setPartTimeJobModel:(JMAbilityCellData *)partTimeJobModel{
     self.workNameLab.text = partTimeJobModel.type_name;
     self.salaryLab.text = partTimeJobModel.city_cityName;
     
@@ -47,6 +47,13 @@
 //
 //    self.salaryLab.text = salary;
     
+}
+
+-(void)setTaskListCellData:(JMTaskListCellData *)taskListCellData{
+    self.workNameLab.text = taskListCellData.type_labelName;
+    self.salaryLab.text = taskListCellData.payment_money;
+    self.detailLab.text = taskListCellData.cityName;
+     
 }
 //工资数据转化，除以1000，转化成k
 -(NSString *)getSalaryStrWithMin:(id)min max:(id)max{

@@ -36,6 +36,9 @@
                                 <constraint firstAttribute="width" constant="79" id="O5V-WO-mi4"/>
                             </constraints>
                             <state key="normal" image="play.png"/>
+                            <connections>
+                                <action selector="playAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="jez-Ia-GlF"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="75p-Zm-eI4" userLabel="leftBtn">
                             <rect key="frame" x="15" y="181" width="114" height="33"/>
@@ -60,6 +63,9 @@
                                     <real key="value" value="16.5"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="leftBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="ANJ-8s-k4O"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rpf-KH-j9n" userLabel="rightBtn">
                             <rect key="frame" x="193" y="181" width="166" height="33"/>
@@ -84,6 +90,9 @@
                                     <real key="value" value="16.5"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="rightBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="oG9-wN-jUK"/>
+                            </connections>
                         </button>
                     </subviews>
                     <constraints>
@@ -132,6 +141,12 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="playBtn" destination="eph-A4-qse" id="o4z-vb-2Ek"/>
+                <outlet property="videoImg" destination="h20-E1-f1V" id="BzO-3P-Ir7"/>
+                <outlet property="videoLeftBtn" destination="75p-Zm-eI4" id="8dP-Ga-IKN"/>
+                <outlet property="videoRightBtn" destination="Rpf-KH-j9n" id="dg4-u4-ZI8"/>
+            </connections>
             <point key="canvasLocation" x="47.826086956521742" y="-122.54464285714285"/>
         </view>
     </objects>

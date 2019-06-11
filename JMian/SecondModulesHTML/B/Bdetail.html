@@ -17,10 +17,10 @@
     <title>Title</title>
     <link rel="stylesheet" href="../css/muse-ui.css">
     <link rel="stylesheet" href="../css/material-icons.css">
-    <link rel="stylesheet" href="../css/video-js.css">
+    <!--<link rel="stylesheet" href="../css/video-js.css">-->
     <script src="../js/flexible.debug.js"></script>
     <script src="../js/flexible_css.debug.js"></script>
-    <script src="../js/video.js"></script>
+    <!--<script src="../js/video.js"></script>-->
     <style lang="less" type="text/less">
         html {
             -webkit-text-size-adjust: none;
@@ -41,16 +41,18 @@
                 background-color: #000000;
                 .video-wrapper{
                     width: 100%;
-                    height: 11rem;
+                    height: 13rem;
                     video{
+                        width: 100%;
                     }
-                    .example_video_1-dimensions{
+                   /* .example_video_1-dimensions{
                         width: 100%;
                         height: 100%;
-                    }
-                    .video-js .vjs-control-bar{
+                    }*/
+                    /*.video-js .vjs-control-bar{
                         bottom: 0.05rem                    }
                     .video-js .vjs-big-play-button{
+                        display: none;
                         top:50%;
                         left: 50%;
                         width: 2.7rem;
@@ -60,23 +62,20 @@
                         border-radius: 50%;
                         transform: translate3d(-50%, -50%, 0);
                     }
-                    .video-js{
-
-                    }
                     .vjs-poster{
                         background-color: transparent;
                         background-size: unset;
-                    }
-                    /*#output {
+                    }*/
+                    #output {
                         position: absolute;
                         top:0;
                         left:0;
                         width: 100%;
-                        height: 13.2rem;
+                        height: 13rem;
                         text-align: center;
                         img{
                             position: absolute;
-                            top:calc(50% - 1rem);
+                            top:50%;
                             left: 50%;
                             transform: translate3d(-50%,-50%,0);
                             z-index: 100;
@@ -84,18 +83,68 @@
                             height: auto;
                         }
                     }
-                    .main{
-                        display: table-cell;
-                        vertical-align: middle;
+                    .control{
+                        position: absolute;
+                        bottom: 0.2rem;
+                        left: 0;
+                        background-color: #999999;
                         width: 100%;
-                        height: 13rem;
-                        z-index: 1;
-                        font-size:0;
-                    }*/
+                        height: 0.8rem;
+                        div{
+                            display: flex;
+                            justify-content: space-between;
+                            height: 100%;
+                            width: 100%;
+                        }
+                        .pause{
+                            align-self: center;
+                            margin-left: 0.3rem;
+                            width: 0.3rem;
+                            span{
+                                margin-left: 0.05rem;
+                                border-left: 0.1rem solid #fff;
+                            }
+                        }
+                        .play{
+                            align-self: center;
+                            margin-left: 0.3rem;
+                            width: 0.3rem;
+                            div{
+                                border: 0.2rem solid transparent;
+                                border-left: 0.25rem solid #fff;
+                            }
+                        }
+                        .progress{
+                            align-self: center;
+                            position: relative;
+                            width: 50%;
+                            height: 25%;
+                            border-radius: 0.1rem;
+                            background: rgba(0,0,0,.6);
+                            .bar{
+                                position: absolute;
+                                top:0;
+                                left:0;
+                                width: 0;
+                                height: 100%;
+                                background-color:#F7F5F5;
+                                border-radius: 0.1rem;
+                            }
+                        }
+                        .times{
+                            align-self: center;
+                            color: white;
+                            margin-right: 0.3rem;
+                        }
+                        .full{
+                            align-self: center;
+                            color: white;
+                            margin-right: 0.3rem;
+                        }
+                    }
                 }
             }
             .contain{
-                margin-top: 11rem;
                 width: 100%;
                 border-top-left-radius:0.33rem;
                 border-top-right-radius:0.33rem;
@@ -108,9 +157,16 @@
                         display: flex;
                         justify-content: space-between;
                     }
-                    p{
-                        margin-top: 0.34rem;
-                        font-size: 0.4rem;
+                    ul{
+                        display: flex;
+                        li{
+                            margin-top: 0.34rem;
+                            padding:0.13rem 0.53rem;
+                            margin-right: 0.26rem;
+                            font-size: 0.4rem;
+                            border-radius: 0.08rem;
+                            background:rgba(245,246,250,1);
+                        }
                     }
                 }
                 .main{
@@ -148,48 +204,55 @@
 <div id="wrapper" v-show="initialize">
     <div class="video">
         <div class="video-wrapper">
-            <!--<div id="output" v-if="d" @click="kai">
-                <img src="../images/pofang@2x.png" alt="" style="width: 1.81rem;z-index: 101">
+            <div id="output" v-if="play" @click="videoPlay">
+                <img src="../images/pofang@2x.png" alt="" style="width: 2rem;">
             </div>
-            <div class="main">
-                <video id="video" webkit-playsinline="true" controls playsinline width="100%" x5-playsinline="true" x5-video-player-type="h5" x5-video-player-fullscreen="true" >
-                    <source src="../images/cs.mkv">
-                </video>
-            </div>-->
-            <video id="example_video_1" class="video-js vjs-default-skin" preload="auto" webkit-playsinline="true" playsinline x5-video-player-type="h5" x5-video-player-fullscreen="true">
-                <source src="http://vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+            <video id="video" preload="auto" x5-video-player-type="h5" :poster="this.detail.video.cover">
+                <source :src="this.detail.video" type="video/mp4">
             </video>
+            <div class="control">
+                <div>
+                    <span class="pause" v-if="!play" @click="videoPause($event)"><span></span><span></span></span>
+                    <span class="play" v-if="play" @click="videoPlay"><div></div></span>
+                    <span class="progress" @click="drop($event)">
+                        <span class="bar" v-show="!play || pause"></span>
+                    </span>
+                    <span class="times">
+                        <span class="current">00:00:00</span>/
+                        <span class="totalTime">00:00:00</span>
+                    </span>
+                    <!--<span class="full" @click="goFullScreen" v-if="q">
+                        F
+                    </span>
+                    <span class="full" @click="exitFullscreen" v-if="!q">
+                        E
+                    </span>-->
+                </div>
+            </div>
         </div>
     </div>
     <div class="contain">
         <div class="user_info">
             <div>
-                <span style="font-size: 0.53rem;color:#484848;font-family: PingFang-SC-Heavy">戴小美<img src="../images/mission@2x.png" alt="" style="margin-left: 0.32rem;width: 0.58rem;margin-top: 0.1rem"></span>
-                <span style="color:#3BC7FF;font-size: 0.42rem">广州</span>
+                <span style="font-size: 0.53rem;color:#484848;font-family: PingFang-SC-Heavy">{{this.detail.user.nickname}}<img src="../images/mission@2x.png" alt="" style="margin-left: 0.32rem;width: 0.58rem;margin-top: 0.1rem"></span>
+                <span style="color:#3BC7FF;font-size: 0.42rem">{{this.detail.city.city_name}}</span>
             </div>
-            <p>IT互联网/电子/通讯</p>
+            <ul>
+                <li v-for="item in this.detail.industry">{{item.name}}</li>
+            </ul>
         </div>
         <div class="line" style="margin: 0 0.53rem;"></div>
         <div class="main">
             <span>工作描述</span>
             <p>
-                1.负责线上产品的界面设计、视觉交互设计、并为
-                新功能、新产品提供创意及设计方案等；
-                2.淮准确理解产品需求和交互原型，输岀优质的界面
-                效果图
-                3.能够通过视觉元素，有效把控网站的整体设计风格
-                4.有3年设计工作经验，懂交互，熟悉掌握相关设计
-                软件.
-                5.善于分析用户群体、理解需求，结合行业属性，
-                定位并把控产品的整体视觉风格
-
+                {{this.detail.description}}
             </p>
         </div>
         <div class="line" style="margin: 0 0.53rem;"></div>
         <div class="main">
             <span>图片作品</span>
             <ul style="width: 100%;margin-top: 0.66rem;">
-                <li style="display: inline-block" v-for="item in describeList2"><img :src="item.label" alt="" style="width: 2.76rem;margin-right: 0.16rem"></li>
+                <li style="display: inline-block" v-for="item in this.detail.images"><img :src="item.file_path" alt="" style="width: 2.76rem;margin-right: 0.16rem"></li>
             </ul>
         </div>
         <div class="line" style="margin: 0 0.53rem;"></div>
@@ -219,12 +282,6 @@
             <div style="height: 1rem"><br/></div>
         </div>
     </div>
-    <div style="position: fixed;bottom: 0;left: 0;width: 100%;background: #fff;font-size: 0.37rem;padding: 0.32rem 0.48rem">
-        <div style="display: flex;height: 1rem">
-            <button style="color: #24BFFF;border: 1px solid #24BFFF;background:#ffffff;border-radius: 0.48rem;margin-right: 0.53rem;width: 3.62rem;">和他聊聊</button>
-            <button style="color: #ffffff;background: #3BC7FF;border-radius: 0.48rem;border: 1px solid #24BFFF;width: 4.96rem;">视频邀约</button>
-        </div>
-    </div>
 </div>
 </body>
 <script src="../js/vue.js"></script>
@@ -232,89 +289,172 @@
 <script src="../js/muse-ui.js"></script>
 <script src="../js/less.min.js"></script>
 <script>
-    /*(function(){
-        var video, output;
-        var scale = 0.8;
-        function captureImage() {
-            output = document.getElementById("output");
-            // video = document.getElementById("video");
-            var canvas = document.createElement("canvas");
-            canvas.width = video.videoWidth * scale;
-            canvas.height = video.videoHeight * scale;
-            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
-            var img = document.createElement("img");
-            img.setAttribute('crossOrigin', 'anonymous');
-            img.src = canvas.toDataURL("image/png");
-            output.appendChild(img);
-            // video.setAttribute("crossOrigin",'anonymous');
-            // img.setAttribute('crossOrigin', 'anonymous');
-            // video.poster = canvas.toDataURL("image/png");
-            console.log(img.src);
-        };
-        var initialize = function() {
-            output = document.getElementById("output");
-            video = document.getElementById("video");
-            video.addEventListener('loadeddata',captureImage);
-        };
-        initialize();
-    })();*/
-    /*var dom = document.getElementById('output');
-    function preload() {
-        document.getElementById('video').play();
-        setTimeout(function () {
-            document.getElementById('video').pause();
-        }, 200);
-    }
-    document.addEventListener("WeixinJSBridgeReady", preload, false);*/
-
-    var vm = new Vue({
+    var vue = new Vue({
         el: '#wrapper',
         data: {
-            describeList2: [
-                {label: "../images/avator.jpg",id:'1'},
-                {label: "../images/avator.jpg",id:'2'},
-                {label: "../images/avator.jpg",id:'3'},
-                {label: "../images/avator.jpg",id:'4'},
-                {label: "../images/avator.jpg",id:'5'},
-                {label: "../images/avator.jpg",id:'6'},
-                {label: "../images/avator.jpg",id:'7'},
-                {label: "../images/avator.jpg",id:'8'},
-                {label: "../images/avator.jpg",id:'9'},
-            ],
-            d:true,
+            detail:{
+                user: {
+                    user_id: 5,
+                    company_id: 5,
+                    nickname: "郭良",
+                    avatar: "https://jmsp-images-1257721067.picgz.myqcloud.com/storage/images/2019/04/28/ka9L1K2sY0hdvOwbIjUgo9hDRfLT8HIAFTk9yU6p.jpeg"
+                },
+                description: "Rrttrrrttyy day would work best as well",
+                city: {
+                    city_id: 2,
+                    city_name: "广州市"
+                },
+                type_label: {
+                    label_id: 144,
+                    name: "产品经理"
+                },
+                video: '../images/ce.mp4',
+                images: [],
+                industry: [
+                    {
+                        label_id: 1020,
+                        name: "打字员"
+                    },
+                    {
+                        label_id: 1018,
+                        name: "整容"
+                    },
+                    {
+                        label_id: 1017,
+                        name: "化妆品"
+                    }
+                ]
+            },
             num:5,
             loading: false,
             initialize: false,
+            play:true,
+            pause:false,
+            q:true,
         },
         mounted() {
             setTimeout(function () {
                 this.initialize = true;
-
             }.bind(this));
-            videojs('example_video_1',{
-                muted:true,
-                controls : true/false,
-                height:800,
-                width:300,
-                fluid: true,
-                userActions: {
-                    doubleClick: true
-                },
-
-                // techOrder: ["html5", "flash", "other supported tech"],
-                // 更多配置.....
-            });
+            this.initVideo();
+            var video = document.getElementById('video');
+            video.addEventListener("loadedmetadata",function(){
+                document.querySelector(".totalTime").innerText = this.getTimeBySecond(video.duration);
+            }.bind(this));
+            video.addEventListener("ended",function(){
+                document.getElementsByClassName('bar')[0].style.width = '0';
+                video.currentTime = 0;
+                this.play = true;
+            }.bind(this));
         },
-
         methods:{
             load() {
                 this.loading = true;
                 setTimeout(() => {
                     this.loading = false;
-                }, 2000)
-            },
-        }
+                }, 2000);
 
-    })
+            },
+            initVideo(){
+                if(this.detail.video != null){
+                    var video = document.getElementsByClassName('contain')[0];
+                    video.style.marginTop = '13rem';
+                }else{
+                    var video = document.getElementsByClassName('contain')[0];
+                    video.style.marginTop = '-0.3rem';
+                }
+            },
+            videoPause(e){
+                var video = document.getElementById('video');
+                video.pause();
+                var pValue = (video.currentTime/video.duration)*100;
+                var bar = document.getElementsByClassName('bar')[0];
+                bar.style.width = pValue+"%";
+                //显示当前播放进度的时间
+                document.querySelector(".current").innerText = this.getTimeBySecond(video.currentTime);
+                this.play = true;
+                this.pause = true
+            },
+            videoPlay(){
+                var video = document.getElementById('video');
+                video.play();
+                setInterval(function () {
+                    var pValue = (video.currentTime/video.duration)*100;
+                    var bar = document.getElementsByClassName('bar')[0];
+                    bar.style.width = pValue+"%";
+                    //显示当前播放进度的时间
+                    document.querySelector(".current").innerText = this.getTimeBySecond(video.currentTime);
+                }.bind(this));
+                this.play = false;
+            },
+            drop(e){
+                var video = document.getElementById('video');
+                var progress = document.getElementsByClassName('progress')[0];
+                this.pause = true;
+                var bar = document.getElementsByClassName('bar')[0];
+                bar.style.width = e.offsetX + "px";
+                var time = video.duration / progress.clientWidth * e.offsetX;
+                video.currentTime = time;
+                console.log(video.currentTime);
+                console.log(time);
+                document.querySelector(".current").innerText = this.getTimeBySecond(time);
+            },
+            /*goFullScreen() {
+                element = document.getElementById('video');
+                if (element.requestFullscreen) { //w3c
+                    element.requestFullscreen();
+                } else if (element.mozRequestFullScreen) { //moz Firefox
+                    element.mozRequestFullScreen();
+                } else if (element.msRequestFullscreen) { //IE
+                    element.msRequestFullscreen();
+                } else if (element.oRequestFullscreen) { //Opera
+                    element.oRequestFullscreen();
+                } else if (element.webkitRequestFullscreen) { //webkit内核 Chrome Safari
+                    element.webkitRequestFullScreen();
+                } else {
+                    var docHtml = document.documentElement;
+                    var docBody = document.body;
+                    var cssText = 'width:100%;height:100%;overflow:hidden;';
+                    docHtml.style.cssText = cssText;
+                    docBody.style.cssText = cssText;
+                    element.style.cssText = cssText + ';' + 'margin:0px;padding:0px;';
+                    document.IsFullScreen = true;
+                }
+                this.q=false
+            },
+            //退出全屏
+            exitFullscreen() {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.oCancelFullScreen) {
+                    document.oCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else {
+                    var docHtml = document.documentElement;
+                    var docBody = document.body;
+                    var videobox = document.getElementById('video');
+                    docHtml.style.cssText = "";
+                    docBody.style.cssText = "";
+                    videobox.style.cssText = "";
+                    document.IsFullScreen = false;
+                }
+                this.q=true
+            },*/
+            getTimeBySecond(second){
+                var hour = parseInt(second / (60* 60));
+                var minute = parseInt((second/60) % 60);
+                var second = parseInt(second % 60);
+                return (hour < 10 ? "0" + hour:hour) + ":" + (minute < 10 ? "0" + minute:minute) + ":" + (second < 10 ? "0" + second:second);
+            }
+        },
+    });
+    function showInfoFromJava(item) {
+        vue.detail = JSON.parse(item);
+    }
 </script>
 </html>

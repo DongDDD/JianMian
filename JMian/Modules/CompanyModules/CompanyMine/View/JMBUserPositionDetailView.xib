@@ -27,13 +27,13 @@
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="ldy-0n-VTJ"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="位置名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0v-9P-WZl">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="职位名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0v-9P-WZl">
                             <rect key="frame" x="20" y="15" width="61.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入职位名称" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eqe-Ke-2rZ">
+                        <textField opaque="NO" tag="100" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="销售分成" placeholder="请输入职位名称" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eqe-Ke-2rZ">
                             <rect key="frame" x="239" y="15" width="129" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="129" id="ion-GX-sJ2"/>
@@ -41,6 +41,9 @@
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="textFieldEndEditing:" destination="iN0-l3-epB" eventType="editingDidEnd" id="MuT-ny-B01"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -72,14 +75,17 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入佣金" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7eE-NA-kIu">
+                        <textField opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入佣金" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7eE-NA-kIu">
                             <rect key="frame" x="239" y="15" width="129" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="129" id="k60-C2-a11"/>
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <connections>
+                                <action selector="textFieldEndEditing:" destination="iN0-l3-epB" eventType="editingDidEnd" id="s13-Gw-2Zx"/>
+                            </connections>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="git-h7-GSu">
                             <rect key="frame" x="378.5" y="15" width="15.5" height="18"/>
@@ -156,7 +162,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7c-op-NcW">
+                        <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s7c-op-NcW">
                             <rect key="frame" x="287" y="9" width="81" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="81" id="zYY-9R-Pow"/>
@@ -164,6 +170,9 @@
                             <state key="normal" title="请选择">
                                 <color key="titleColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="rightBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="djy-qY-I1h"/>
+                            </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="QEA-2i-ILq">
                             <rect key="frame" x="387" y="18.5" width="7" height="11"/>
@@ -203,14 +212,17 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8x-yy-Jeh">
-                            <rect key="frame" x="287" y="9" width="81" height="30"/>
+                        <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8x-yy-Jeh">
+                            <rect key="frame" x="168" y="9" width="200" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="81" id="8d1-cK-Ohq"/>
+                                <constraint firstAttribute="width" constant="200" id="8d1-cK-Ohq"/>
                             </constraints>
                             <state key="normal" title="请选择">
                                 <color key="titleColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="rightBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="sKR-it-WOl"/>
+                            </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="YpV-b1-A7M">
                             <rect key="frame" x="387" y="18.5" width="7" height="11"/>
@@ -250,14 +262,17 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入人数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aed-7o-Xye">
+                        <textField opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入人数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aed-7o-Xye">
                             <rect key="frame" x="239" y="15" width="129" height="18"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="129" id="8UL-Gb-AMF"/>
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <connections>
+                                <action selector="textFieldEndEditing:" destination="iN0-l3-epB" eventType="editingDidEnd" id="kSW-sZ-Luk"/>
+                            </connections>
                         </textField>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="whJ-PG-xRh">
                             <rect key="frame" x="378.5" y="15" width="15.5" height="18"/>
@@ -296,14 +311,17 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifj-lT-9ec">
-                            <rect key="frame" x="287" y="9" width="81" height="30"/>
+                        <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ifj-lT-9ec">
+                            <rect key="frame" x="168" y="9" width="200" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="81" id="ff3-Nr-Q2Y"/>
+                                <constraint firstAttribute="width" constant="200" id="ff3-Nr-Q2Y"/>
                             </constraints>
                             <state key="normal" title="请选择">
                                 <color key="titleColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="rightBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="kI4-ru-Iug"/>
+                            </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="2Iy-02-5l8">
                             <rect key="frame" x="387" y="18.5" width="7" height="11"/>
@@ -337,39 +355,42 @@
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="r7P-7D-e5K"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="招募人数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Let-pU-WE2">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Let-pU-WE2">
                             <rect key="frame" x="20" y="15" width="61.5" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Vc-vj-qDG">
-                            <rect key="frame" x="378.5" y="15" width="15.5" height="18"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0bL-GR-TAN">
-                            <rect key="frame" x="287" y="9" width="81" height="30"/>
+                        <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LwO-bb-lnG">
+                            <rect key="frame" x="168" y="9" width="200" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="81" id="hDK-xD-qgK"/>
+                                <constraint firstAttribute="width" constant="200" id="Pom-pw-Os7"/>
                             </constraints>
                             <state key="normal" title="请输入">
                                 <color key="titleColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="rightBtnAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="9LK-sg-gj6"/>
+                            </connections>
                         </button>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="b1U-o5-9MZ">
+                            <rect key="frame" x="387" y="18.5" width="7" height="11"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="11" id="3WP-zL-Ugb"/>
+                                <constraint firstAttribute="width" constant="7" id="iHh-4V-rOz"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="b1U-o5-9MZ" firstAttribute="centerY" secondItem="LwO-bb-lnG" secondAttribute="centerY" id="0a2-DX-4Pd"/>
                         <constraint firstItem="Let-pU-WE2" firstAttribute="centerY" secondItem="Fhm-LA-iHW" secondAttribute="centerY" id="Hbv-3x-H3W"/>
                         <constraint firstAttribute="height" constant="48" id="N0b-Jh-SvZ"/>
                         <constraint firstAttribute="trailing" secondItem="4pA-h5-Z4K" secondAttribute="trailing" constant="20" id="S9e-rk-mhm"/>
-                        <constraint firstItem="9Vc-vj-qDG" firstAttribute="centerY" secondItem="Fhm-LA-iHW" secondAttribute="centerY" id="Wij-dD-iuH"/>
                         <constraint firstItem="Let-pU-WE2" firstAttribute="leading" secondItem="Fhm-LA-iHW" secondAttribute="leading" constant="20" id="fT8-uI-zfc"/>
-                        <constraint firstItem="0bL-GR-TAN" firstAttribute="centerY" secondItem="Fhm-LA-iHW" secondAttribute="centerY" id="kml-nL-Q3Y"/>
+                        <constraint firstItem="LwO-bb-lnG" firstAttribute="centerY" secondItem="Fhm-LA-iHW" secondAttribute="centerY" id="hGY-eJ-xZR"/>
                         <constraint firstAttribute="bottom" secondItem="4pA-h5-Z4K" secondAttribute="bottom" id="okB-dC-BRv"/>
                         <constraint firstItem="4pA-h5-Z4K" firstAttribute="leading" secondItem="Fhm-LA-iHW" secondAttribute="leading" constant="20" id="rd9-Rf-9gL"/>
-                        <constraint firstAttribute="trailing" secondItem="9Vc-vj-qDG" secondAttribute="trailing" constant="20" id="xKc-wB-cWX"/>
                     </constraints>
                 </view>
             </subviews>
@@ -377,6 +398,7 @@
             <constraints>
                 <constraint firstItem="z9g-Ef-h9c" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="052-dh-h3Q"/>
                 <constraint firstItem="TGT-VS-oge" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="0Sv-b6-dW5"/>
+                <constraint firstItem="b1U-o5-9MZ" firstAttribute="trailing" secondItem="2Iy-02-5l8" secondAttribute="trailing" id="66F-Gr-KfV"/>
                 <constraint firstItem="XV7-oL-8a3" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6rC-GA-AX8"/>
                 <constraint firstItem="KLb-e1-he0" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="72L-7j-Tyc"/>
                 <constraint firstItem="muZ-WK-urw" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="81f-fS-iMc"/>
@@ -394,7 +416,7 @@
                 <constraint firstItem="QnA-f4-BGt" firstAttribute="height" secondItem="JGH-av-JWv" secondAttribute="height" id="Mhk-ln-az8"/>
                 <constraint firstItem="TGT-VS-oge" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Okz-3n-XSg"/>
                 <constraint firstItem="Aed-7o-Xye" firstAttribute="trailing" secondItem="M8x-yy-Jeh" secondAttribute="trailing" id="Rc2-a7-JaR"/>
-                <constraint firstItem="0bL-GR-TAN" firstAttribute="trailing" secondItem="Ifj-lT-9ec" secondAttribute="trailing" id="T3p-Pc-9Y4"/>
+                <constraint firstItem="LwO-bb-lnG" firstAttribute="trailing" secondItem="Ifj-lT-9ec" secondAttribute="trailing" id="RqC-BO-UMr"/>
                 <constraint firstItem="TGT-VS-oge" firstAttribute="height" secondItem="QnA-f4-BGt" secondAttribute="height" id="VMo-aQ-0tm"/>
                 <constraint firstItem="KLb-e1-he0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="X4I-pX-2bc"/>
                 <constraint firstItem="XV7-oL-8a3" firstAttribute="height" secondItem="KLb-e1-he0" secondAttribute="height" id="bLy-A9-P6V"/>
@@ -412,6 +434,15 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="cityBtn" destination="s7c-op-NcW" id="gVP-kD-U0E"/>
+                <outlet property="deadLineBtn" destination="M8x-yy-Jeh" id="uWD-uv-Qwh"/>
+                <outlet property="goodsDescrptionBtn" destination="LwO-bb-lnG" id="r9V-Gn-fyR"/>
+                <outlet property="industryBtn" destination="Ifj-lT-9ec" id="bGO-QQ-ZhE"/>
+                <outlet property="paymentMoneyTextField" destination="7eE-NA-kIu" id="Wts-S3-zBg"/>
+                <outlet property="positionNameTextField" destination="eqe-Ke-2rZ" id="2c9-2j-FVk"/>
+                <outlet property="quantityMaxTextField" destination="Aed-7o-Xye" id="agg-7O-F5c"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="25.111607142857142"/>
         </view>
     </objects>

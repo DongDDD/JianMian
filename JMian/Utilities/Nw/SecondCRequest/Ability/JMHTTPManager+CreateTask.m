@@ -12,11 +12,11 @@
 
 - (void)createTask_task_title:(nullable NSString *)task_title
                 type_label_id:(nullable NSString *)type_label_id
-               payment_method:(nullable NSMutableArray *)payment_method
+               payment_method:(nullable NSString *)payment_method
                          unit:(nullable NSString *)unit
                 payment_money:(nullable NSString *)payment_money
                   front_money:(nullable NSString *)front_money
-                 quantity_max:(nullable NSArray *)quantity_max
+                 quantity_max:(nullable NSString *)quantity_max
                 myDescription:(nullable NSString *)myDescription
                  industry_arr:(nullable NSMutableArray *)industry_arr
                       city_id:(nullable NSString *)city_id
@@ -24,11 +24,12 @@
                      latitude:(nullable NSString *)latitude
                       address:(nullable NSArray *)address
                   goods_title:(nullable NSString *)goods_title
-                  goods_price:(nullable NSMutableArray *)goods_price
+                  goods_price:(nullable NSString *)goods_price
                    goods_desc:(nullable NSString *)goods_desc
                    video_path:(nullable NSString *)video_path
                   video_cover:(nullable NSString *)video_cover
                     image_arr:(nullable NSArray *)image_arr
+                    deadline:(nullable NSString *)deadline
                        status:(nullable NSString *)status
                  successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
 
@@ -45,6 +46,7 @@
                            @"longitude":longitude,
                            @"latitude":latitude,
                            @"address":address,
+                           @"deadline":deadline,
                            @"goods_title":goods_title,
                            @"goods_price":goods_price,
                            @"goods_desc":goods_desc,
@@ -54,7 +56,7 @@
                            @"status":status
                            };
     
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Ability_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Task_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
 

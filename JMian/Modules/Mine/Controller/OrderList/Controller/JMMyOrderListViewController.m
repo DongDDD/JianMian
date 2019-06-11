@@ -10,6 +10,7 @@
 #import "JMTitlesView.h"
 #import "JMOrderStatusTableViewCell.h"
 #import "JMOrderCellData.h"
+#import "JMHTTPManager+FectchMyTaskOrderList.h"
 
 @interface JMMyOrderListViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,JMOrderStatusTableViewCellDelegate>
 @property (strong, nonatomic) JMTitlesView *titleView;
@@ -33,7 +34,17 @@ static NSString *cellID = @"statusCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
+    [self getData];
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)getData{
+    [[JMHTTPManager sharedInstance]fectchTaskList_status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{

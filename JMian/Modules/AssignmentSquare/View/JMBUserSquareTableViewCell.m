@@ -27,7 +27,7 @@
     // Initialization code
 }
 
--(void)setModel:(JMPartTimeJobModel *)model{
+-(void)setModel:(JMAbilityCellData *)model{
     
     self.titleLab.text = model.type_name;
     self.nameLab.text = model.user_nickname;

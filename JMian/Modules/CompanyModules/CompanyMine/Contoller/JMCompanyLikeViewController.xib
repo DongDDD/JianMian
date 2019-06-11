@@ -22,18 +22,19 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5GR-sz-LFy">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="5GR-sz-LFy" secondAttribute="trailing" id="56i-hm-rL1"/>
-                <constraint firstItem="5GR-sz-LFy" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="WpT-3s-IUw"/>
-                <constraint firstItem="5GR-sz-LFy" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="ZoA-YH-f1u"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="5GR-sz-LFy" secondAttribute="bottom" id="iHj-nZ-Fgq"/>
+                <constraint firstItem="5GR-sz-LFy" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="Nct-DI-pNC"/>
+                <constraint firstItem="5GR-sz-LFy" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="OTA-ov-2TG"/>
+                <constraint firstItem="5GR-sz-LFy" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="44" id="VgS-b9-O7b"/>
+                <constraint firstItem="5GR-sz-LFy" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="t1y-vf-LMX"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="131.8840579710145" y="105.80357142857143"/>
         </view>
     </objects>
 </document>

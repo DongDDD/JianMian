@@ -56,7 +56,7 @@
     //OC调用JS
     NSString *jsonLabs;
     if (arrayData.count > 0) {
-        jsonLabs = [self arrayToJSON:arrayData];
+        jsonLabs = [self arrayToJSONWithArr:arrayData];
     }
     
 

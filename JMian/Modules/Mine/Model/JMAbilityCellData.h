@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMPartTimeJobModel : NSObject
+@interface JMAbilityCellData : NSObject
 
 @property (copy, nonatomic) NSString *ability_id;
 @property (copy, nonatomic) NSString *myDescription;

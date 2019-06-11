@@ -38,7 +38,7 @@
 
 
 //去斜杠 不然JS解释不到
--(NSString *)arrayToJSON:(NSArray *)arr {
+-(NSString *)arrayToJSONWithArr:(NSArray *)arr {
     NSData *data=[NSJSONSerialization dataWithJSONObject:arr options:NSJSONWritingPrettyPrinted error:nil];
     NSString *jsonStr=[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding];
     //去除空格和回车：
@@ -49,9 +49,18 @@
     
     return jsonStr;
 }
-
-
-
+//字典转json
+-(NSString *)dicToJSONWithDic:(NSDictionary *)dic {
+    NSError *parseError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:&parseError];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    //去除空格和回车：
+    jsonStr = [jsonStr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    jsonStr = [jsonStr stringByReplacingOccurrencesOfString:@" " withString:@""];
+    jsonStr = [jsonStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    return jsonStr;
+}
 
 #pragma mark -- WKUIDelegate
 

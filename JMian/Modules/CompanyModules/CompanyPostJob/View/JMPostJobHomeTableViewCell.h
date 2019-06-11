@@ -8,14 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "JMHomeWorkModel.h"
-#import "JMPartTimeJobModel.h"
-
+#import "JMAbilityCellData.h"
+#import "JMTaskListCellData.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMPostJobHomeTableViewCell : UITableViewCell
 
 @property (nonatomic, strong)JMHomeWorkModel *model;
-@property (nonatomic, strong)JMPartTimeJobModel *partTimeJobModel;
+@property (nonatomic, strong)JMAbilityCellData *partTimeJobModel;
+@property (nonatomic, strong)JMTaskListCellData *taskListCellData;
 
 @property (weak, nonatomic) IBOutlet UILabel *workNameLab;
 @property (weak, nonatomic) IBOutlet UILabel *detailLab;

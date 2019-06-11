@@ -156,7 +156,7 @@
         
     }else{
         [self.playBtn setHidden:YES];
-        self.videoImg.image = [UIImage imageNamed:@"break"];
+        self.videoImg.image = [UIImage imageNamed:@"NOvideos"];
         [self.leftBtn setTitle:@"拍摄视频" forState:UIControlStateNormal];
          [self.rightBtn setTitle:@"上传视频" forState:UIControlStateNormal];
     }

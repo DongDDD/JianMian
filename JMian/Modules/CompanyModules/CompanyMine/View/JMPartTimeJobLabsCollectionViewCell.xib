@@ -48,9 +48,9 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="76" height="50"/>
             <connections>
-                <outlet property="labName" destination="w0c-d0-heB" id="bkH-UN-Uc5"/>
+                <outlet property="labName" destination="w0c-d0-heB" id="t8J-Vu-tD1"/>
             </connections>
-            <point key="canvasLocation" x="150.72463768115944" y="127.90178571428571"/>
+            <point key="canvasLocation" x="150.72463768115944" y="127.56696428571428"/>
         </collectionViewCell>
     </objects>
 </document>

@@ -89,7 +89,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="129" id="Wpv-gY-KJh"/>
                             </constraints>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -168,7 +168,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="129" id="J2A-OO-3aJ"/>
                             </constraints>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -216,7 +216,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="129" id="vrN-kQ-tq8"/>
                             </constraints>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
@@ -490,6 +490,8 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
                 <outlet property="cityBtn" destination="z2l-s6-IgZ" id="XS1-SJ-eqP"/>
+                <outlet property="deadLineBtn" destination="UMn-qc-BeD" id="TW8-OJ-quE"/>
+                <outlet property="downPaymentTextField" destination="pXL-cc-NJA" id="2gs-KR-uOf"/>
                 <outlet property="industryBtn" destination="zbE-UX-PV6" id="CJt-Cu-rtf"/>
                 <outlet property="jobNameTextField" destination="2yU-U9-De1" id="oFb-pD-Y95"/>
                 <outlet property="jobTypeBtn" destination="UgY-Ao-Yat" id="3MY-aY-FkA"/>

@@ -15,7 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong) WKWebView *webView;
 - (void)setHTMLPath:(NSString *)path;
 //- (void)ocToJs_arrayData:(NSArray *)arrayData selectedLabs:(NSArray *)selectedLabs;//选择行业
-- (NSString *)arrayToJSON:(NSArray *)arr;
+-(NSString *)arrayToJSONWithArr:(NSArray *)arr;//数组转JSON
+-(NSString *)dicToJSONWithDic:(NSDictionary *)dic;//字典转JSON
 @end
 
 NS_ASSUME_NONNULL_END

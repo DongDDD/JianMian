@@ -107,6 +107,9 @@
 #define Update_Task_URL @"api/task/update"
 #define Fectch_TaskInfo_URL @"api/task/info"
 
+//C端我的任务
+#define Fectch_TaskOrderList_URL @"api/task/order/paginate"
+#define Fectch_TaskOrderInfo_URL @"api/task/order/info"
 
 
 //会话列表

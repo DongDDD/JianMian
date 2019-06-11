@@ -6,9 +6,9 @@
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMPartTimeJobModel.h"
+#import "JMAbilityCellData.h"
 
-@implementation JMPartTimeJobModel
+@implementation JMAbilityCellData
 + (NSDictionary *)mj_objectClassInArray {
     return @{
              @"industry":@"JMIndustryModel",

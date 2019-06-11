@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHTTPManager (FectchTaskInfo)
+- (void)fectchTaskInfo_taskID:(NSString *)taskID
+                 successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 @end
 

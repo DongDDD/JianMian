@@ -18,6 +18,18 @@
     return self;
 }
 
+- (IBAction)textFieldEndEditing:(UITextField *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(didWriteTextFieldWithTag:text:)]) {
+        [_delegate didWriteTextFieldWithTag:sender.tag text:sender.text];
+    }
+}
+
+- (IBAction)rightBtnAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickRightBtnWithTag:)]) {
+        [_delegate didClickRightBtnWithTag:sender.tag];
+    }
+}
+
 
 /*
 // Only override drawRect: if you perform custom drawing.

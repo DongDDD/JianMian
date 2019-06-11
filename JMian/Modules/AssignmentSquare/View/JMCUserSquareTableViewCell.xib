@@ -46,9 +46,9 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="番禺区" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MvE-zp-i4o">
-                                <rect key="frame" x="91" y="66.5" width="41" height="16"/>
+                                <rect key="frame" x="91" y="66.5" width="58" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="41" id="Z71-1p-zcC"/>
+                                    <constraint firstAttribute="width" constant="58" id="Z71-1p-zcC"/>
                                     <constraint firstAttribute="height" constant="16" id="j67-rz-gT6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
@@ -117,6 +117,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
+                <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="tZK-4v-tRN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="0bu-uC-huD"/>
                     <constraint firstItem="tZK-4v-tRN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="DfY-Va-T9b"/>
@@ -128,7 +129,9 @@
             <connections>
                 <outlet property="adress" destination="MvE-zp-i4o" id="IXW-Kv-AtZ"/>
                 <outlet property="jobLabs" destination="ps3-lc-jCv" id="lBk-Z2-kaD"/>
+                <outlet property="paymentLab" destination="Be8-8A-Y8U" id="dMO-al-ckB"/>
                 <outlet property="titleLab" destination="mKV-b8-h8G" id="T3b-Jo-J8G"/>
+                <outlet property="unitLab" destination="MP5-m5-cZb" id="l7h-J8-vtJ"/>
             </connections>
             <point key="canvasLocation" x="169.56521739130437" y="79.6875"/>
         </tableViewCell>

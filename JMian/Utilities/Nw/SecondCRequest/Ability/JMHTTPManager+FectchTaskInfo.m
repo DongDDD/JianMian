@@ -9,10 +9,10 @@
 #import "JMHTTPManager+FectchTaskInfo.h"
 
 @implementation JMHTTPManager (FectchTaskInfo)
-- (void)fectchTaskInfo_Id:(NSString *)Id
+- (void)fectchTaskInfo_taskID:(NSString *)taskID
          successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
-    NSString *urlStr = [Fectch_TaskInfo_URL stringByAppendingFormat:@"/%@",Id];
+    NSString *urlStr = [Fectch_TaskInfo_URL stringByAppendingFormat:@"/%@",taskID];
     
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     

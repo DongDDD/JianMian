@@ -13,6 +13,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *adress;
 @property (weak, nonatomic) IBOutlet UILabel *jobLabs;
+@property (weak, nonatomic) IBOutlet UILabel *paymentLab;
+@property (weak, nonatomic) IBOutlet UILabel *unitLab;
 
 
 
@@ -25,17 +27,24 @@
     // Initialization code
 }
 
--(void)setModel:(JMPartTimeJobModel *)model{
+-(void)setModel:(JMTaskListCellData *)model{
     
-    self.titleLab.text = model.type_name;
-    self.adress.text = model.city_cityName;
-    [self.headerIconImg sd_setImageWithURL:[NSURL URLWithString:model.user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    NSMutableArray *industryNameArray = [NSMutableArray array];
-    for (JMIndustryModel *data in model.industry) {
-        [industryNameArray addObject:data.name];
+    self.titleLab.text = model.type_labelName;
+    if (model.address == nil) {
+        self.adress.text = @"不限地区";
+    }else{
+        self.adress.text = model.cityName;
     }
-    NSString *industryStr = [industryNameArray componentsJoinedByString:@"/"];
-    self.jobLabs.text = industryStr;
+    self.paymentLab.text = model.payment_money;
+    self.unitLab.text = model.unit;
+    
+//    [self.headerIconImg sd_setImageWithURL:[NSURL URLWithString:model] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+//    NSMutableArray *industryNameArray = [NSMutableArray array];
+//    for (JMIndustryModel *data in model.industry) {
+//        [industryNameArray addObject:data.name];
+//    }
+//    NSString *industryStr = [industryNameArray componentsJoinedByString:@"/"];
+//    self.jobLabs.text = industryStr;
 }
 
 

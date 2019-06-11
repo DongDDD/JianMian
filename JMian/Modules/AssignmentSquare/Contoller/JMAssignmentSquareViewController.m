@@ -12,8 +12,12 @@
 #import "JMCUserSquareTableViewCell.h"
 #import "JMChoosePositionTableViewController.h"
 #import "JMHTTPManager+FectchAbility.h"
-#import "JMPartTimeJobModel.h"
+#import "JMHTTPManager+FectchTaskList.h"
+#import "JMAbilityCellData.h"
+#import "JMTaskListCellData.h"
 #import "JMBUserSquareTableViewCell.h"
+#import "JMBDetailWebViewController.h"
+#import "JMCDetailWebViewController.h"
 
 
 
@@ -51,13 +55,28 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self.tapView addGestureRecognizer:tap];
     
     [self initTableView];
-    [self BToGetData];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+       
+        [self BToGetData];
+        
+    }else{
+        [self CToGetData];
+
+    
+    }
     // Do any additional setup after loading the view from its nib.
 }
 #pragma mark - setUI -
 
 -(void)initTableView{
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+        make.top.mas_equalTo(self.mas_topLayoutGuideTop);
+        make.left.and.right.mas_equalTo(self.view);
+    }];
+    
     [self.view addSubview:self.tapView];
     [self.view addSubview:self.choosePositionVC.view];
     [self setupHeaderRefresh];
@@ -99,15 +118,32 @@ static NSString *C_cellIdent = @"CSquareCellID";
 -(void)loadMoreBills
 {
     self.page += 1;
-    [self BToGetData];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        
+        [self BToGetData];
+        
+    }else{
+        [self CToGetData];
+        
+        
+    }
     
 }
 -(void)refreshData
 {
     self.dataArray = [NSMutableArray array];
     _page = 1;
-    [self BToGetData];
-    
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        
+        [self BToGetData];
+        
+    }else{
+        [self CToGetData];
+        
+        
+    }
 }
 
 -(void)handleTapFrom{
@@ -154,7 +190,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [[JMHTTPManager sharedInstance]fectchAbilityList_city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSMutableArray *array = [NSMutableArray array];
-            array = [JMPartTimeJobModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            array = [JMAbilityCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
             [self.dataArray addObjectsFromArray:array];
         }
@@ -167,18 +203,25 @@ static NSString *C_cellIdent = @"CSquareCellID";
     
 }
 
+-(void)CToGetData{
+    NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
+    NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
+    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:nil type_label_id:nil industry_arr:nil status:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+            NSMutableArray *array = [NSMutableArray array];
+            array = [JMTaskListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            
+            [self.dataArray addObjectsFromArray:array];
+        }
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 
-//-(void)getData{
-
-//    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:nil type_label_id:nil industry_arr:nil status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//        
-//        
-//        [self.tableView reloadData];
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//        
-//    }];
-
-//}
+}
 
 #pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -211,7 +254,21 @@ static NSString *C_cellIdent = @"CSquareCellID";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
- 
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        JMAbilityCellData *model = self.dataArray[indexPath.row];
+        JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+        vc.ability_id = model.ability_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    
+    }else{
+        JMTaskListCellData *model = self.dataArray[indexPath.row];
+        JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
+        vc.task_id = model.task_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    
+    }
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -235,7 +292,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     if (indexPath.section == 0) {
         return  0;
     }
-    return 135;
+    return 137;
 }
 
 //-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -313,11 +370,11 @@ static NSString *C_cellIdent = @"CSquareCellID";
 - (UITableView *)tableView {
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStylePlain];
-        _tableView.backgroundColor = MASTER_COLOR;
-        _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
+        _tableView.backgroundColor = BG_COLOR;
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.showsVerticalScrollIndicator = NO;
 //        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
 //        _tableView.sectionHeaderHeight = 43;
 //        _tableView.sectionFooterHeight = 0;

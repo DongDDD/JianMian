@@ -28,7 +28,7 @@
 @property (nonatomic,strong)JMPartTimeJobResumeFooterView *footerView;
 @property (nonatomic, assign)CGFloat changeHeight;
 @property (nonatomic,assign)CGRect Frame;
-@property (nonatomic,strong)JMPartTimeJobModel *myPartTimeVitaModel;
+@property (nonatomic,strong)JMAbilityCellData *myPartTimeVitaModel;
 
 //提交请求参数
 @property (nonatomic,strong)NSString *city_id;
@@ -120,7 +120,7 @@ static NSString *cellIdent = @"cellIdent";
 -(void)getPartTimeInfoData{
     [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            self.myPartTimeVitaModel = [JMPartTimeJobModel mj_objectWithKeyValues:responsObject[@"data"]];
+            self.myPartTimeVitaModel = [JMAbilityCellData mj_objectWithKeyValues:responsObject[@"data"]];
 //            if (self.partTimeVitaModel.video_file_path!=nil) {
 //
 //                NSURL *url = [NSURL URLWithString:self.partTimeVitaModel.video_file_path];
@@ -139,7 +139,7 @@ static NSString *cellIdent = @"cellIdent";
     
 }
 
--(void)setRightText_model:(JMPartTimeJobModel *)model{
+-(void)setRightText_model:(JMAbilityCellData *)model{
         NSString *city = model.city_cityName;
         NSString *type_name = model.type_name;
         NSMutableArray *industryNameArray = [NSMutableArray array];
@@ -411,6 +411,7 @@ static NSString *cellIdent = @"cellIdent";
     if (_footerView == nil) {
         _footerView = [JMPartTimeJobResumeFooterView new];
         _footerView.frame = CGRectMake(0, 350 , SCREEN_WIDTH, 229);
+        _footerView.viewType = JMPartTimeJobResumeFooterViewTypeDefault;
         _footerView.delegate = self;
 //        _footerView.contentTextView.delegate = self;
         

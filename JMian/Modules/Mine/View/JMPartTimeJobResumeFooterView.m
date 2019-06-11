@@ -30,9 +30,8 @@
 
 -(void)initView{
     _titleLab = [[UILabel alloc]init];
-    _titleLab.textColor = TEXT_GRAY_COLOR;
+    _titleLab.textColor = TITLE_COLOR;
     _titleLab.font = kFont(14);
-    _titleLab.text = @"工作描述";
     [self addSubview:_titleLab];
 
     _contentTextView = [[UITextView alloc]init];
@@ -44,7 +43,7 @@
     _placeHolder = [[UILabel alloc]init];
     _placeHolder.textColor = TEXT_GRAY_COLOR;
     _placeHolder.font = kFont(14);
-    _placeHolder.text = @"可描述你的工作技能、岗位职责、特长等等.. ";
+    _placeHolder.numberOfLines = 0;
     [self addSubview:_placeHolder];
     
     _wordsLenghLabel = [[UILabel alloc]init];
@@ -76,6 +75,37 @@
         make.bottom.mas_equalTo(self).offset(-10);
     }];
     
+}
+
+-(void)setViewType:(JMPartTimeJobResumeFooterViewType)viewType{
+    switch (viewType) {
+        case JMPartTimeJobResumeFooterViewTypeDefault:
+            _titleLab.text = @"工作描述";
+            _placeHolder.text = @"可描述你的工作技能、岗位职责、特长等等.. ";
+            
+            break;
+            
+        case JMPartTimeJobResumeFooterViewTypePartTimeJob:
+            _titleLab.text = @"职位描述";
+            _placeHolder.text = @"例如\n职位要求、\n性别要求、\n工作时段等等   ";
+            break;
+        case JMPartTimeJobResumeFooterViewTypeGoodsDesc:
+            _placeHolder.text = @"例如\n品牌名称:\n品牌型号:\n产品颜色:\n生产企业等等";
+
+            break;
+        default:
+            break;
+    }
+    
+    
+    if (viewType == JMPartTimeJobResumeFooterViewTypeGoodsDesc) {
+//        _titleLab.text = @"例如";
+        _placeHolder.text = @"例如\n品牌名称:\n品牌型号:\n产品颜色:\n生产企业等等";
+    }else{
+        _titleLab.text = @"工作描述";
+        _placeHolder.text = @"可描述你的工作技能、岗位职责、特长等等.. ";
+    
+    }
 }
 
 

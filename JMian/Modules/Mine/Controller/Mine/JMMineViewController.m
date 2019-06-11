@@ -30,6 +30,10 @@
 #import "JMBUserCenterHeaderSubView.h"
 #import "JMBUserMineSectionView.h"
 #import "JMPositionManageViewController.h"
+#import "JMTaskManageViewController.h"
+#import "JMVIPViewController.h"
+#import "JMTaskManageViewController.h"
+
 
 
 
@@ -72,9 +76,9 @@
         
         if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
             
-            make.top.mas_equalTo(self.mas_topLayoutGuide).offset(105);
+            make.top.mas_equalTo(self.mas_topLayoutGuide).offset(130);
         }else{
-            make.top.mas_equalTo(self.mas_topLayoutGuide).mas_offset(60);
+            make.top.mas_equalTo(self.mas_topLayoutGuide).mas_offset(80);
 
         }
         
@@ -136,7 +140,7 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - My delegate
-
+#pragma mark - C端个人的中心
 -(void)didClickSetting{
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
@@ -145,17 +149,26 @@
 -(void)didClickMyOrder{
     JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+    
 
 }
+-(void)didClickMyTask{
+    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+#pragma mark - B端个人的中心
 
 -(void)BTaskClick{
-    
+    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)BOrderClick{
     
 }
 -(void)BVIPClick{
-    
+    JMVIPViewController *vc = [[JMVIPViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 //-(void)getCompanyData{
 //
@@ -236,7 +249,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == 1) {
         //我的钱包
         if (indexPath.row == 2) {
             [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
@@ -374,7 +387,7 @@
 
         
         
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.delegate = self;
         _tableView.dataSource = self;
