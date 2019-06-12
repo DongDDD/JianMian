@@ -7,27 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JMTaskOrderListCellData.h"
 
 NS_ASSUME_NONNULL_BEGIN
-typedef enum : NSUInteger {
-    JMTaskManageTableViewCellTypeNoPass,//待通过11
-    JMTaskManageTableViewCellTypeDoing,
-    JMTaskManageTableViewCellTypeFinish,
-} JMTaskManageTableViewCellType;
+@protocol JMTaskManageTableViewCellDelegate <NSObject>
 
-
-@interface JMTaskManageCellData : NSObject
-
-//@property(nonatomic, copy)NSString *
+-(void)leftActionWithData:(JMTaskOrderListCellData *)data;
+-(void)rightActionWithData:(JMTaskOrderListCellData *)data;
 
 @end
 
+
 @interface JMTaskManageTableViewCell : UITableViewCell
 
--(void)setTaskCellView_viewType:(JMTaskManageTableViewCellType)viewType data:(JMTaskManageCellData *)data;
-//@property(nonatomic, assign)JMTaskManageTableViewCellType viewType;
+@property(nonatomic,strong)JMTaskOrderListCellData *data;
 
+@property(nonatomic,weak)id<JMTaskManageTableViewCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,12 +10,16 @@
 #import "JMTitlesView.h"
 #import "JMTaskManageTableViewCell.h"
 #import "JMHTTPManager+FectchMyTaskOrderList.h"
-@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "JMHTTPManager+TaskOrderStatus.h"
+#import "JMHTTPManager+CreateTaskComment.h"
+
+@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate>
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) NSUInteger index;
 @property (strong, nonatomic) NSArray *listsArray;
 
+@property (strong, nonatomic)NSArray *currentStatus;
 
 @end
 
@@ -23,17 +27,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"任务管理";
     [self initView];
-    [self getData];
+    self.currentStatus = @[Task_WaitDealWith];
+    [self getDataWitnStatus:self.currentStatus];
     // Do any additional setup after loading the view from its nib.
 }
 
 #pragma mark - 获取数据
 
--(void)getData{
-    [[JMHTTPManager sharedInstance]fectchTaskList_status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
+-(void)getDataWitnStatus:(NSArray *)status{
+    [[JMHTTPManager sharedInstance]fectchTaskList_status:status page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.listsArray = [JMTaskOrderListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+        }
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -47,9 +56,94 @@
 -(void)initView{
     [self.view addSubview:self.titleView];
     [self.view addSubview:self.tableView];
-//    [self setupHeaderRefresh];
-//    [self setupFooterRefresh];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.mas_topLayoutGuideTop).mas_offset(44);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+        make.left.and.right.mas_equalTo(self.view);
+    }];
+    [self setupHeaderRefresh];
+    [self setupFooterRefresh];
     
+}
+
+#pragma mark - myDelegate
+
+-(void)leftActionWithData:(JMTaskOrderListCellData *)data{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    //待通过状态的该操作只能在B端出现-----
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        if ([data.status isEqualToString:Task_WaitDealWith]) {
+            //拒绝
+            [self changeTaskStatusRequestWithStatus:Task_Refuse task_order_id:data.task_order_id];
+        }
+    }
+}
+
+-(void)rightActionWithData:(JMTaskOrderListCellData *)data{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+            //现在状态：待处理or待通过
+        if ([data.status isEqualToString:Task_WaitDealWith]) {
+             //改状态------B端通过任务申请
+            [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
+            return;
+        }else if([data.status isEqualToString:Task_Finish]) {
+             //改状态------B端确认完成任务
+            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
+            return;
+        }else if([data.status isEqualToString:Task_Pass]) {
+            //改状态------销售分成点击结束任务按钮
+            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
+            return;
+        }else if([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_boss isEqualToString:@"0"]) {
+            //B——创建评价
+            [self createTaskCommentRequestWithTask_order_id:data.task_order_id reputation:Comment_VeryGood commentDescription:@"很好很好，下次继续合作"];
+            return;
+        }
+    }else{
+        //----进行中----
+        if ([data.status isEqualToString:Task_Pass]) {
+            if (![data.snapshot_type_label_id isEqualToString:@"1043"]) {
+                //进行中状态的该操作只能在C端出现-----点击已完成 把状态改成 3
+                [self changeTaskStatusRequestWithStatus:Task_Finish task_order_id:data.task_order_id];
+                return;
+            }
+        }else if([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_user isEqualToString:@"0"]) {
+            //B——创建评价
+            [self createTaskCommentRequestWithTask_order_id:data.task_order_id reputation:Comment_VeryGood commentDescription:@"很好很好，下次继续合作"];
+            return;
+        }
+    }
+    
+   
+    
+}
+
+
+-(void)setCurrentIndex{
+    switch (_index) {
+        case 0:
+            //待处理
+            self.currentStatus = @[Task_WaitDealWith];
+            break;
+        case 1:
+            //进行中
+            self.currentStatus = @[Task_Pass,Task_Finish];
+
+            break;
+        case 2:
+            //已结束
+            self.currentStatus = @[Task_Refuse,Task_DidComfirm];
+
+            break;
+            
+        default:
+            break;
+    }
+    [self.tableView.mj_header beginRefreshing];
+    [self getDataWitnStatus:self.currentStatus];
+
+
 }
 #pragma mark - Table view data source
 
@@ -60,20 +154,19 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.listsArray.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     JMTaskManageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
     if(cell == nil)
     {
         cell = [[JMTaskManageTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
+    [cell setData:self.listsArray[indexPath.row]];
+    cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//    cell.delegate = self;
     
     return cell;
 }
@@ -87,11 +180,19 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    JMTaskOrderListCellData *data = self.listsArray[indexPath.row];
+    //C端待处理且是0状态
+    if ([data.status isEqualToString:Task_WaitDealWith] && [userModel.type isEqualToString:C_Type_USER]) {
+        return 130;
+    }else{
+        return 177;
 
-    return 177;
+    }
+    
 }
 
-#pragma mark - 刷新 -
+#pragma mark - 数据请求
 -(void)setupHeaderRefresh
 {
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
@@ -120,6 +221,41 @@
     self.tableView.mj_footer = footer;
     //     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
 }
+
+
+-(void)refreshData{
+    [self getDataWitnStatus:self.currentStatus];
+
+}
+
+-(void)loadMoreBills{
+    [self getDataWitnStatus:self.currentStatus];
+
+}
+
+-(void)changeTaskStatusRequestWithStatus:(NSString *)status task_order_id:(NSString *)task_order_id {
+    
+    [[JMHTTPManager sharedInstance]changeTaskOrderStatusWithTask_order_id:task_order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.tableView.mj_header beginRefreshing];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
+//创建评价
+-(void)createTaskCommentRequestWithTask_order_id:(NSString *)task_order_id reputation:(NSString *)reputation commentDescription:(NSString *)commentDescription{
+    [[JMHTTPManager sharedInstance]createTaskCommentWithForeign_key:task_order_id reputation:reputation commentDescription:commentDescription successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        [self.tableView.mj_header beginRefreshing];
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
 #pragma mark - Getter
 
 - (JMTitlesView *)titleView {
@@ -130,7 +266,7 @@
         __weak JMTaskManageViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
-//            [weakSelf setCurrentIndex];
+            [weakSelf setCurrentIndex];
         };
     }
     

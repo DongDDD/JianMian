@@ -154,6 +154,7 @@
 }
 -(void)didClickMyTask{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    vc.title = @"我的任务";
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -161,6 +162,7 @@
 
 -(void)BTaskClick{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    vc.title = @"任务管理";
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)BOrderClick{

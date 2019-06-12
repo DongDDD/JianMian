@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHTTPManager (FectchMyTaskOrderList)
 
-- (void)fectchTaskList_status:(nullable NSString *)status
+- (void)fectchTaskList_status:(nullable NSArray *)status
                          page:(nullable NSString *)page
                      per_page:(nullable NSString *)per_page
                  successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;

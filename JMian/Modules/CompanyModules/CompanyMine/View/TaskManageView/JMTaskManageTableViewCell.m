@@ -7,6 +7,7 @@
 //
 
 #import "JMTaskManageTableViewCell.h"
+#import "DimensMacros.h"
 @interface JMTaskManageTableViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *headerLab;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLab;
@@ -19,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 
+@property (nonatomic, strong)JMTaskOrderListCellData *myData;
+
 @end
 
 @implementation JMTaskManageTableViewCell
@@ -28,77 +31,242 @@
     // Initialization code
 }
 
--(void)setTaskCellView_viewType:(JMTaskManageTableViewCellType)viewType data:(JMTaskManageCellData *)data{
-    switch (viewType) {
-        case JMTaskManageTableViewCellTypeNoPass:
+-(void)setData:(JMTaskOrderListCellData *)data{
+    _myData = data;
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        
+        [self setBHeaderView_data:data];
+        [self setBButton_data:data];
+        
+    }else{
+        
+        [self setCHeaderView_data:data];
+        [self setCButton_data:data];
+        
+    }
+    
+}
+
+-(void)setBHeaderView_data:(JMTaskOrderListCellData *)data{
+    NSURL *url = [NSURL URLWithString:data.user_avatar];
+    [self.iconImgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    self.headerLab.text = data.task_title;
+    self.moneyLab.text = [NSString stringWithFormat:@"%@%@",data.payment_money,data.unit];
+    self.infoLab1.text = data.user_nickname;
+    self.infoLab2.text = data.snapshot_cityName;
+    //职位标签
+    NSMutableArray *industryNameArray = [NSMutableArray array];
+    for (JMTaskOrderIndustryModel *IndustryData in data.industry) {
+        [industryNameArray addObject:IndustryData.name];
+    }
+    NSString *industryStr = [industryNameArray componentsJoinedByString:@"/"];
+    self.infoLab3.text = [NSString stringWithFormat:@" %@   ",industryStr];
+ 
+}
+
+-(void)setBButton_data:(JMTaskOrderListCellData *)data{
+    [self.leftBtn setHidden:NO];
+    [self.rightBtn setHidden:NO];
+    //------待处理
+    if ([data.status isEqualToString:Task_WaitDealWith]) {
+        [self.leftBtn setTitle:@"拒绝" forState:UIControlStateNormal];
+        [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.leftBtn.backgroundColor = TEXT_GRAYmin_COLOR;
+        self.leftBtn.layer.borderWidth = 0;
+
+        
+        if ([data.snapshot_type_label_id isEqualToString:@"1043"] ) {
+        
+            [self.rightBtn setTitle:@"通过&发送产品链接" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.rightBtn.backgroundColor = MASTER_COLOR;
+        }else{
+            [self.rightBtn setTitle:@"通过&支付定金" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.rightBtn.backgroundColor = MASTER_COLOR;
+        }
+        //进行中: 已通过
+    }else if ([data.status isEqualToString:Task_Pass]){
+
+        if ([data.snapshot_type_label_id isEqualToString:@"1043"] ) {
             
-            break;
-        case JMTaskManageTableViewCellTypeDoing:
+            [self.leftBtn setTitle:@"结束任务" forState:UIControlStateNormal];
+            [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.leftBtn.backgroundColor = TEXT_GRAYmin_COLOR;
+            self.leftBtn.layer.borderWidth = 0;
+
+            [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.rightBtn.backgroundColor = MASTER_COLOR;
             
-            break;
-        case JMTaskManageTableViewCellTypeFinish:
             
-            break;
+        }else{
+            [self.leftBtn setHidden:YES];
+
+            [self.rightBtn setTitle:@"进行中" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+            self.rightBtn.layer.borderWidth = 0.5;
+            self.rightBtn.layer.borderColor = MASTER_COLOR.CGColor;
             
-        default:
-            break;
+        }
+        
+         //进行中: 对方已完成
+    }else if([data.status isEqualToString:Task_Finish]){
+        [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
+        [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+        self.leftBtn.layer.borderWidth = 0.5;
+        self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
+
+        [self.rightBtn setTitle:@"确认对方完成&支付尾款" forState:UIControlStateNormal];
+        [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.rightBtn.backgroundColor = MASTER_COLOR;
+        
+        
+        //已结束
+    }else if([data.status isEqualToString:Task_DidComfirm]){
+        if (![data.snapshot_type_label_id isEqualToString:@"1043"]) {
+            [self.leftBtn setTitle:@"发票申请中..." forState:UIControlStateNormal];
+            [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+            self.leftBtn.layer.borderWidth = 0.5;
+            self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
+        }else{
+            [self.leftBtn setHidden:YES];
+
+        }
+        //雇员是否评价：0:否 1:是
+        if ([data.is_comment_boss isEqualToString:@"0"]) {
+            [self.rightBtn setTitle:@"去评价" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.rightBtn.backgroundColor = MASTER_COLOR;
+            
+        }else{
+            [self.rightBtn setTitle:@"已评价" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+            self.rightBtn.layer.borderWidth = 0.5;
+            self.rightBtn.layer.borderColor = MASTER_COLOR.CGColor;
+        }
+        
+        
+    }
+    
+}
+
+
+
+//C端上部分赋值
+-(void)setCHeaderView_data:(JMTaskOrderListCellData *)data{
+    
+    NSURL *url = [NSURL URLWithString:data.snapshot_companyLogo_path];
+    [self.iconImgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    self.headerLab.text = data.task_title;
+    self.moneyLab.text = [NSString stringWithFormat:@"%@%@",data.payment_money,data.unit];
+    if ([data.snapshot_type_label_id isEqualToString:@"1043"] ) {
+        //销售分成
+        self.infoLab1.text = data.goodsTitle;
+        self.infoLab2.text = @"即结";
+        self.infoLab3.text = data.snapshot_cityName;
+    }else{
+        //其他兼职
+        self.infoLab1.text = data.snapshot_companyName;
+        self.infoLab2.text = data.snapshot_cityName;
+        self.infoLab3.text = @"完工结";
+    }
+    
+
+}
+
+
+//C端下部分按钮状态
+
+-(void)setCButton_data:(JMTaskOrderListCellData *)data{
+    
+    //------待处理
+    if ([data.status isEqualToString:Task_WaitDealWith]) {
+        [self.leftBtn setHidden:YES];
+        [self.rightBtn setHidden:YES];
+    //进行中：已通过
+    }else if (([data.status isEqualToString:Task_Pass])){
+
+        [self.leftBtn setHidden:YES];
+        [self.rightBtn setHidden:NO];
+        if ([data.snapshot_type_label_id isEqualToString:@"1043"] ) {
+
+            [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+
+            self.rightBtn.backgroundColor = MASTER_COLOR;
+            
+        }else{
+            
+            [self.rightBtn setTitle:@"已完成(任务ing)" forState:UIControlStateNormal];
+            
+            self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+            self.rightBtn.layer.borderWidth = 0.5;
+            [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            
+            self.rightBtn.layer.borderColor = MASTER_COLOR.CGColor;
+            
+        }
+        
+        
+
+        //进行中：已完成
+    } else if ([data.status isEqualToString:Task_Finish]) {
+        [self.leftBtn setHidden:YES];
+        [self.rightBtn setHidden:NO];
+        [self.rightBtn setTitle:@"等待对方确认付尾款" forState:UIControlStateNormal];
+        self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+        self.rightBtn.layer.borderWidth = 0.5;
+        [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        self.rightBtn.layer.borderColor = MASTER_COLOR.CGColor;
+        self.rightBtn.enabled = NO;
+        
+        //已结束
+    }else if([data.status isEqualToString:Task_DidComfirm]){
+        [self.leftBtn setHidden:NO];
+        [self.rightBtn setHidden:NO];
+
+        [self.leftBtn setTitle:@"佣金已入账" forState:UIControlStateNormal];
+        [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+        self.leftBtn.layer.borderWidth = 0.5;
+        self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
+        if ([data.is_comment_user isEqualToString:@"0"]) {
+            [self.rightBtn setTitle:@"去评价" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.rightBtn.backgroundColor = MASTER_COLOR;
+            
+        }else{
+            [self.rightBtn setTitle:@"已评价" forState:UIControlStateNormal];
+            [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+            self.rightBtn.layer.borderWidth = 0.5;
+            self.rightBtn.layer.borderColor = MASTER_COLOR.CGColor;
+        }
+        
+ 
     }
     
     
 }
 
--(void)setNoPassStatusButtons_data:(JMTaskManageCellData *)data{
-    [self.leftBtn setTitle:@"拒绝" forState:UIControlStateNormal];
-    switch (0) {
-        case 0:
-            [self.rightBtn setTitle:@"通过并发送产品链接" forState:UIControlStateNormal];
-            
-            break;
-        case 1:
-            [self.rightBtn setTitle:@"通过" forState:UIControlStateNormal];
-
-            break;
-        default:
-            break;
-    }
-
-    
-}
--(void)setDoingStatusButtons_data:(JMTaskManageCellData *)data{
-    [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
-    switch (0) {
-        case 0:
-            [self.rightBtn setTitle:@"结束任务" forState:UIControlStateNormal];
-            
-            break;
-        case 1:
-            [self.rightBtn setTitle:@"任务完成&支付尾款" forState:UIControlStateNormal];
-            
-            break;
-        default:
-            break;
-    }
-    
-}
--(void)setFinishStatusButtons_data:(JMTaskManageCellData *)data{
-    
-    [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
-    switch (0) {
-        case 0:
-            [self.rightBtn setTitle:@"结束任务" forState:UIControlStateNormal];
-            self.headerRightImgView.image = [UIImage imageNamed:@"stale_dated"];
-            break;
-        case 1:
-            [self.rightBtn setTitle:@"任务完成&支付尾款" forState:UIControlStateNormal];
-            self.headerRightImgView.image = [UIImage imageNamed:@"Timeout"];
-
-            break;
-        default:
-            break;
+- (IBAction)leftBtnAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(leftActionWithData:)]) {
+        [_delegate leftActionWithData:_myData];
     }
 }
 
 
+- (IBAction)rightBtnAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(rightActionWithData:)]) {
+         [_delegate rightActionWithData:_myData];
+    }
+}
 
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

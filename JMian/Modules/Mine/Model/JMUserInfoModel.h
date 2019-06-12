@@ -38,6 +38,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *card_birthday;
 @property (nonatomic, copy) NSString *card_denial_reason;
 
+@property (nonatomic, copy) NSString *companyReg_address;
+@property (nonatomic, copy) NSString *companyPosition;
+@property (nonatomic, copy) NSString *companyReal_id;
+@property (nonatomic, copy) NSString *companyId;
+@property (nonatomic, copy) NSString *companyCorporate;
+@property (nonatomic, copy) NSString *companyUser_id;
+@property (nonatomic, copy) NSString *companyName;
+
+
+
 
 @end
 

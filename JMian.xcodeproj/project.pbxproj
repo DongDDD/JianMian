@@ -501,6 +501,9 @@
 		04A9DFBF225C7B9F00CD7CC1 /* 启动图@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */; };
 		04A9DFC0225C7B9F00CD7CC1 /* 启动图@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */; };
 		04A9DFC1225C7B9F00CD7CC1 /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */; };
+		04ABB78A22B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABB78922B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m */; };
+		04ABB78D22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABB78C22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.m */; };
+		04ABB79022B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABB78F22B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.m */; };
 		04BBF296228E57C50068A9B1 /* JMWaitForAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF295228E57C50068A9B1 /* JMWaitForAnswerView.m */; };
 		04BBF299228E67600068A9B1 /* JMAnswerOrHangUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF298228E67600068A9B1 /* JMAnswerOrHangUpView.m */; };
 		04BBF29E228E90BA0068A9B1 /* answer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF29B228E90B90068A9B1 /* answer@2x.png */; };
@@ -1402,6 +1405,12 @@
 		04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@2x.png"; sourceTree = "<group>"; };
 		04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@3x.png"; sourceTree = "<group>"; };
 		04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图.png"; sourceTree = "<group>"; };
+		04ABB78822B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+CreateTaskOrder.h"; sourceTree = "<group>"; };
+		04ABB78922B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+CreateTaskOrder.m"; sourceTree = "<group>"; };
+		04ABB78B22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+TaskOrderStatus.h"; sourceTree = "<group>"; };
+		04ABB78C22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+TaskOrderStatus.m"; sourceTree = "<group>"; };
+		04ABB78E22B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+CreateTaskComment.h"; sourceTree = "<group>"; };
+		04ABB78F22B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+CreateTaskComment.m"; sourceTree = "<group>"; };
 		04BBF294228E57C50068A9B1 /* JMWaitForAnswerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMWaitForAnswerView.h; sourceTree = "<group>"; };
 		04BBF295228E57C50068A9B1 /* JMWaitForAnswerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMWaitForAnswerView.m; sourceTree = "<group>"; };
 		04BBF297228E67600068A9B1 /* JMAnswerOrHangUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAnswerOrHangUpView.h; sourceTree = "<group>"; };
@@ -2820,6 +2829,12 @@
 				04908B2D22A8AEE0000B5AB4 /* JMHTTPManager+FectchTaskList.m */,
 				04EA211F22AFEC390035C398 /* JMHTTPManager+FectchMyTaskOrderList.h */,
 				04EA212022AFEC390035C398 /* JMHTTPManager+FectchMyTaskOrderList.m */,
+				04ABB78822B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.h */,
+				04ABB78922B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m */,
+				04ABB78B22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.h */,
+				04ABB78C22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.m */,
+				04ABB78E22B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.h */,
+				04ABB78F22B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.m */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -4379,6 +4394,7 @@
 				04FB1A2222A3A70800A8F02C /* JMPartTimeJobResumeFooterView.m in Sources */,
 				6D020A6E22539FB0009BCFE4 /* MapBGView.m in Sources */,
 				041997CE2266C75000C6C134 /* JMPostJobHomeViewController.m in Sources */,
+				04ABB78A22B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m in Sources */,
 				040701BA2275DB58002BF58D /* JMCompanyLikeViewController.m in Sources */,
 				040AF5B022784BC70027D7D8 /* JMChatViewViewController.m in Sources */,
 				6D82F287227492CF00B9D2B9 /* JMEducationExperienceViewController.m in Sources */,
@@ -4426,6 +4442,7 @@
 				040C8661227F243A00993490 /* JMHTTPManager+CreateConversation.m in Sources */,
 				04A2479F224C7AFF00DEB8E3 /* CALayer+UIColor.m in Sources */,
 				04A247D5224CB99800DEB8E3 /* SearchView.m in Sources */,
+				04ABB78D22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.m in Sources */,
 				04908B3F22A8CDA5000B5AB4 /* JMBUserSquareTableViewCell.m in Sources */,
 				6D020A3C2251031D009BCFE4 /* JMMyResumeCareerObjectiveTableViewCell.m in Sources */,
 				04072F6D2282D6150067A05D /* JMHTTPManager+BankCark.m in Sources */,
@@ -4560,6 +4577,7 @@
 				6D020A46225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.m in Sources */,
 				6D558669224B58890037C14E /* JMMessageViewController.m in Sources */,
 				6D020A6D22539FB0009BCFE4 /* JMCompanyIntroduceHeaderView.m in Sources */,
+				04ABB79022B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.m in Sources */,
 				049C654022AD709900A93DFE /* JMHTTPManager+FectchTaskInfo.m in Sources */,
 				04908B1B22A7F7D1000B5AB4 /* JMSquareHeaderView.m in Sources */,
 			);

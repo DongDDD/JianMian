@@ -29,13 +29,39 @@
              @"user_avatar":@"user.avatar",
              @"snapshot_change":@"snapshot.snapshot_change",
 
+   
              @"goodsTitle":@"goods.goods_title",
              @"goodsPrice":@"goods.goods_price",
              @"goodsDescription":@"goods.description",
-             
+
+             @"snapshot_task_id":@"snapshot.task_id",
+             @"snapshot_type_label_id":@"snapshot.type_label_id",
+             @"snapshot_user_id":@"snapshot.user_id",
+             @"snapshot_task_title":@"snapshot.task_title",
+             @"snapshot_payment_method":@"snapshot.payment_method",
+             @"snapshot_unit":@"snapshot.unit",
+             @"snapshot_payment_money":@"snapshot.payment_money",
+             @"snapshot_front_money":@"snapshot.front_money",
+             @"snapshot_quantity_max":@"snapshot.quantity_max",
+             @"snapshot_deadline":@"snapshot.deadline",
+             @"snapshot_deadline":@"snapshot.description",
+             @"snapshot_deadline":@"snapshot.address",
+             @"snapshot_deadline":@"snapshot.longitude",
+             @"snapshot_deadline":@"snapshot.latitude",
+             @"snapshot_status":@"snapshot.status",
+             @"snapshot_cityId":@"snapshot.city.city_id",
+             @"snapshot_cityName":@"snapshot.city.city_name",
+
+             @"snapshot_companyID":@"snapshot.company.company_id",
+             @"snapshot_companyName":@"snapshot.company.company_name",
+             @"snapshot_companyLogo_path":@"snapshot.company.logo_path",
+             @"snapshot_reputation":@"snapshot.company.reputation",
+             @"snapshot_user_nickname":@"snapshot.user.nickname",
+             @"snapshot_user_avatar":@"snapshot.user.avatar",
+
+
              };
 }
-
 
 @end
 

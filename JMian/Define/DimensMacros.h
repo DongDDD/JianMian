@@ -88,6 +88,19 @@
 //面试状态
 #define Video_Pass @"1" //通过
 #define Video_Wait @"0" //等待审核
+//任务状态
+#define Task_WaitDealWith @"0" //待处理
+#define Task_Pass @"1" //已通过
+#define Task_Refuse @"2" //已拒绝
+#define Task_Finish @"3" //已完成
+#define Task_DidComfirm @"4" //已经确认
+//任务完成信用评分
+
+#define Comment_SoBad @"1" //非常差
+#define Comment_Bad @"2" //差
+#define Comment_SoSo @"3" //一般
+#define Comment_Good @"4" //好
+#define Comment_VeryGood @"5" //非常好
 
 //获取网络图片
 #define GETImageFromURL(URL)  [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:URL]]]

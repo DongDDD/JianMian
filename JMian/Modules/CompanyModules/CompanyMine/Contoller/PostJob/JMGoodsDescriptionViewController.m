@@ -25,35 +25,46 @@
     [super viewDidLoad];
     self.title = @"产品描述";
     [self setRightBtnTextName:@"保存"];
+ 
+    [self.goodsNameTextfield setText:_goods_title];
+    [self.goodsPriceTextField setText:_goods_price];
     [self.view addSubview:self.decriptionTextView];
-    
-    if (self.goods_title) {
-        [self.goodsNameTextfield setText:self.goods_title];
-    }
-    
-    if (self.goods_price) {
-        [self.goodsPriceTextField setText:self.goods_title];
-
-    }
-    
-    if (self.goods_desc) {
-        [self.decriptionTextView.contentTextView setText:self.goods_desc];
-
-    }
-    
+    self.decriptionTextView.contentTextView.text = _goods_desc;
+        if (_goods_desc.length > 0) {
+            self.decriptionTextView.placeHolder.hidden = YES;
+        }
     // Do any additional setup after loading the view from its nib.
 }
+
+
+//-(void)setGoodsWithDesc:(NSString *)goods_desc{
+//
+//
+//    if (goods_desc.length > 0) {
+//        self.decriptionTextView.placeHolder.hidden = YES;
+//    }
+//
+//}
+
 #pragma mark - myDelegate
 
-- (void)sendContent:(nonnull NSString *)content {
+ - (void)sendContent:(nonnull NSString *)content {
     self.goods_desc = content;
 }
 
 -(void)rightAction{
-    if(_delegate && [_delegate respondsToSelector:@selector(didWriteGoodsDescWithGoodsName:price:goodsDetaolInfo:)]){
-        [_delegate didWriteGoodsDescWithGoodsName:self.goods_title price:self.goods_price goodsDetaolInfo:self.goods_desc];
-        [self.navigationController popViewControllerAnimated:YES];
+    [self.goodsNameTextfield resignFirstResponder];
+    [self.goodsPriceTextField resignFirstResponder];
+    [self.decriptionTextView resignFirstResponder];
+    
+    if (_goods_title.length > 0 || _goods_price.length > 0 || _goods_desc.length > 0) {
+        if(_delegate && [_delegate respondsToSelector:@selector(didWriteGoodsDescWithGoodsName:price:goodsDetaolInfo:)]){
+            [_delegate didWriteGoodsDescWithGoodsName:self.goods_title price:self.goods_price goodsDetaolInfo:self.goods_desc];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+        
     }
+    
 
 }
 

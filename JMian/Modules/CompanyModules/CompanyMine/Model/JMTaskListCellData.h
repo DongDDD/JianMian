@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *goodsDescription;
 
 
+
 @end
 
 NS_ASSUME_NONNULL_END

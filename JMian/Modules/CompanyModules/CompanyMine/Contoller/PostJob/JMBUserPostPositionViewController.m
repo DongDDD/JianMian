@@ -238,6 +238,9 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 -(void)gotoGoodsdescVC{
     JMGoodsDescriptionViewController *vc =  [[JMGoodsDescriptionViewController alloc]init];
     vc.delegate = self;
+    [vc setGoods_desc:_goods_desc];
+    vc.goods_price = _goods_price;
+    vc.goods_title = _goods_title;
     [self.navigationController pushViewController:vc animated:YES];
 
 }
@@ -634,16 +637,17 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     _goods_price = model.goodsPrice;
     _goods_title = model.goodsTitle;
     _goods_desc = model.goodsDescription;
+    if (_goods_price && _goods_title && _goods_desc) {
+        [self.detailView.goodsDescrptionBtn setTitle:@"已完善" forState:UIControlStateNormal];
+        [self.detailView.goodsDescrptionBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+        
+    }
+    
     _video_path = model.video_file_path;
     _video_cover = model.video_cover;
     NSURL *url = [NSURL URLWithString:model.video_cover];
     [self.videoView.videoImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"NoVideos"]];
 }
-
-
-
-
-
 
 
 #pragma mark -  提交数据
@@ -682,6 +686,9 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 }
 
 - (IBAction)saveUpdateAction:(UIButton *)sender {
+    [self.detailView.quantityMaxTextField resignFirstResponder];
+    [self.detailView.paymentMoneyTextField resignFirstResponder];
+    [self.detailView.positionNameTextField resignFirstResponder];
     [self updateTaskInfoRequest];
 }
 
@@ -690,9 +697,9 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
+            [self.navigationController popViewControllerAnimated:YES];
         }])];
         [self presentViewController:alertController animated:YES completion:nil];
-        [self.navigationController popViewControllerAnimated:YES];
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -718,10 +725,10 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude address:_address goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:_image_arr status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"任务更新成功" preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                [self.navigationController popViewControllerAnimated:YES];
 
             }])];
             [self presentViewController:alertController animated:YES completion:nil];
-            [self.navigationController popViewControllerAnimated:YES];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];

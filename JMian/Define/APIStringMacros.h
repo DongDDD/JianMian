@@ -110,7 +110,12 @@
 //C端我的任务
 #define Fectch_TaskOrderList_URL @"api/task/order/paginate"
 #define Fectch_TaskOrderInfo_URL @"api/task/order/info"
-
+//C端申请兼职任务
+#define Create_TaskOrder_URL @"api/task/order/create"
+//改变任务状态
+#define Change_TaskOrderStatus_URL @"api/task/order/status"
+//创建任务评价
+#define Create_TaskComment_URL @"api/task/comment/create"
 
 //会话列表
 #define Chat_List_URL @"converse/lists"

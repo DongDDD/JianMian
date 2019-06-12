@@ -42,6 +42,7 @@
                 .video-wrapper{
                     width: 100%;
                     height: 13rem;
+                    text-align: center;
                     video{
                         width: 100%;
                     }
@@ -203,11 +204,11 @@
 <body style="background: no-repeat;">
 <div id="wrapper" v-show="initialize">
     <div class="video">
-        <div class="video-wrapper">
+        <div class="video-wrapper" v-if="this.detail.video">
             <div id="output" v-if="play" @click="videoPlay">
                 <img src="../images/pofang@2x.png" alt="" style="width: 2rem;">
             </div>
-            <video id="video" preload="auto" x5-video-player-type="h5" :poster="this.detail.video.cover">
+            <video  id="video" preload="auto" x5-video-player-type="h5" webkit-playsinline="true" playsinline :poster="this.detail.video.cover">
                 <source :src="this.detail.video" type="video/mp4">
             </video>
             <div class="control">
@@ -292,39 +293,7 @@
     var vue = new Vue({
         el: '#wrapper',
         data: {
-            detail:{
-                user: {
-                    user_id: 5,
-                    company_id: 5,
-                    nickname: "郭良",
-                    avatar: "https://jmsp-images-1257721067.picgz.myqcloud.com/storage/images/2019/04/28/ka9L1K2sY0hdvOwbIjUgo9hDRfLT8HIAFTk9yU6p.jpeg"
-                },
-                description: "Rrttrrrttyy day would work best as well",
-                city: {
-                    city_id: 2,
-                    city_name: "广州市"
-                },
-                type_label: {
-                    label_id: 144,
-                    name: "产品经理"
-                },
-                video: '../images/ce.mp4',
-                images: [],
-                industry: [
-                    {
-                        label_id: 1020,
-                        name: "打字员"
-                    },
-                    {
-                        label_id: 1018,
-                        name: "整容"
-                    },
-                    {
-                        label_id: 1017,
-                        name: "化妆品"
-                    }
-                ]
-            },
+            detail:{},
             num:5,
             loading: false,
             initialize: false,
@@ -353,7 +322,6 @@
                 setTimeout(() => {
                     this.loading = false;
                 }, 2000);
-
             },
             initVideo(){
                 if(this.detail.video != null){
