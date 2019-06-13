@@ -20,6 +20,28 @@
     }
     return self;
 }
+
+- (IBAction)cancel:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(cancelAction)]) {
+        [_delegate cancelAction];
+    }
+    
+}
+
+
+- (IBAction)leftAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(leftAction)]) {
+        [_delegate leftAction];
+    }
+    
+}
+
+- (IBAction)rightAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(rightAction)]) {
+        [_delegate rightAction];
+    }
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

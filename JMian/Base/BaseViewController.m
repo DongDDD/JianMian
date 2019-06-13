@@ -188,7 +188,7 @@
 -(void)showProgressHUD_view:(UIView *)view{
     _HUDbackgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     _HUDbackgroundView.backgroundColor = [UIColor whiteColor];
-    [view addSubview:_HUDbackgroundView];
+//    [view addSubview:_HUDbackgroundView];
     _myProgressHUD = [[MBProgressHUD alloc] initWithView:view];
 //    _progressHUD.progress = 0.6;
     //        _progressHUD.dimBackground = NO; //设置有遮罩

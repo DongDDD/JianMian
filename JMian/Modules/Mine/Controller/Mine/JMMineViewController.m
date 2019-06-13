@@ -96,18 +96,17 @@
     [super viewWillAppear:animated];
 
     [self getUserData];//    [self getCompanyData];
-}
-
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
     if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
         [self.BUserCenterHeaderView setHidden:NO];
-//        [self.BUserCenterHeaderSubView setHidden:NO];
-
+        
     }else{
         
         [self.personalCenterHeaderView setHidden:NO];
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{

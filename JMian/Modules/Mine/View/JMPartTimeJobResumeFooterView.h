@@ -14,6 +14,8 @@ typedef NS_ENUM(NSInteger, JMPartTimeJobResumeFooterViewType) {
     JMPartTimeJobResumeFooterViewTypeDefault,
     JMPartTimeJobResumeFooterViewTypePartTimeJob,
     JMPartTimeJobResumeFooterViewTypeGoodsDesc,
+    JMPartTimeJobResumeFooterViewTypeCommentDesc,
+
 };
 
 

@@ -10,9 +10,11 @@
 #import "DimensMacros.h"
 #import "JMAnswerOrHangUpView.h"
 #import "JMVideoChatView.h"
+#import "WXApi.h"
+#import <AlipaySDK/AlipaySDK.h>
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,AVAudioPlayerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,AVAudioPlayerDelegate, WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSMutableArray *playArray;

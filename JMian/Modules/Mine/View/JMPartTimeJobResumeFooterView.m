@@ -93,19 +93,23 @@
             _placeHolder.text = @"例如\n品牌名称:\n品牌型号:\n产品颜色:\n生产企业等等";
 
             break;
+        case JMPartTimeJobResumeFooterViewTypeCommentDesc:
+            _placeHolder.text = @"请填写评价";
+            
+            break;
         default:
             break;
     }
     
     
-    if (viewType == JMPartTimeJobResumeFooterViewTypeGoodsDesc) {
-//        _titleLab.text = @"例如";
-        _placeHolder.text = @"例如\n品牌名称:\n品牌型号:\n产品颜色:\n生产企业等等";
-    }else{
-        _titleLab.text = @"工作描述";
-        _placeHolder.text = @"可描述你的工作技能、岗位职责、特长等等.. ";
-    
-    }
+//    if (viewType == JMPartTimeJobResumeFooterViewTypeGoodsDesc) {
+////        _titleLab.text = @"例如";
+//        _placeHolder.text = @"例如\n品牌名称:\n品牌型号:\n产品颜色:\n生产企业等等";
+//    }else{
+//        _titleLab.text = @"工作描述";
+//        _placeHolder.text = @"可描述你的工作技能、岗位职责、特长等等.. ";
+//    
+//    }
 }
 
 

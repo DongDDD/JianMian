@@ -694,6 +694,8 @@
                 this.detail.payment_method = '完工结';
             }
             this.init();
+            this.likeDetail()
+                      
             /*var video = document.getElementById('video');
             video.addEventListener("pause",function(){
                 this.playing = true;
@@ -726,6 +728,11 @@
             handleCredit(){
                 this.task = false;
                 this.credit = true;
+            },
+            likeDetail(){
+                window.webkit.messageHandlers.aaa.postMessage(this.detail.favorites)
+
+                //window.webkit.messageHandlers.aaa.likeDetail(this.detail.favorites)
             },
             clickCompanyDetails(){
                 Javascript:aaa.clickCompanyDetails(this.detail.company.company_id);
@@ -802,6 +809,7 @@
             detail:function () {
                 this.$nextTick(function(){
                     this.init();
+                    this.likeDetail()
                     if(this.detail.payment_method === 2){
                         this.detail.payment_method = '日结';
                     }else if(this.detail.payment_method === 3){

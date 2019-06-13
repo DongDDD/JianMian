@@ -14,7 +14,7 @@
 
 @interface JMCDetailWebViewController ()
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
-
+@property (nonatomic, strong) NSDictionary *favorites;
 @end
 
 @implementation JMCDetailWebViewController
@@ -22,7 +22,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"职位详情";
-    [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self setHTMLPath:@"SecondModulesHTML/C/Cdetail.html"];
     
     // Do any additional setup after loading the view from its nib.
@@ -40,12 +39,12 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     colectBtn.frame = CGRectMake(45, 0, 25, 25);
-//    if (self.vitaModel.favorites_favorite_id) {
-//        colectBtn.selected = YES;
-//    }else{
-//        colectBtn.selected = NO;
-//
-//    }
+    if (self.favorites) {
+        colectBtn.selected = YES;
+    }else{
+        colectBtn.selected = NO;
+
+    }
     [colectBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
     [colectBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
@@ -151,6 +150,30 @@
     [self getData];
     //    [self ocToJs];
 }
+
+
+//被自定义的WKScriptMessageHandler在回调方法里通过代理回调回来，绕了一圈就是为了解决内存不释放的问题
+//通过接收JS传出消息的name进行捕捉的回调方法
+- (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
+    NSLog(@"name:%@\\\\n body:%@\\\\n frameInfo:%@\\\\n",message.name,message.body,message.frameInfo);
+    //用message.body获得JS传出的参数体
+    // NSDictionary * parameter = message.body;
+    //JS调用OC
+    if([message.name isEqualToString:@"aaa"]){
+        NSLog(@"%@",message.body);
+        self.favorites = message.body;
+        [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+
+//        self.labsJson = message.body;
+        //        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"js调用到了oc" message:message.body preferredStyle:UIAlertControllerStyleAlert];
+        //        [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //        }])];
+        //        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    
+}
+
+
 /*
 #pragma mark - Navigation
 

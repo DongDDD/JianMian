@@ -21,13 +21,18 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view addSubview:self.webView];
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.mas_topLayoutGuide);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+    }];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     // 用完移除
     [[self.webView configuration].userContentController removeScriptMessageHandlerForName:@"jsToOcNoPrams"];
-    [[self.webView configuration].userContentController removeScriptMessageHandlerForName:@"jsToOcWithPrams"];
+    [[self.webView configuration].userContentController removeScriptMessageHandlerForName:@"aaa"];
 }
 
 
@@ -242,7 +247,8 @@
         //注册一个name为jsToOcNoPrams的js方法 设置处理接收JS方法的对象
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"jsToOcNoPrams"];
         [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"aaa"];
-        
+//        [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"likeDetail"];
+
         config.userContentController = wkUController;
         
         //以下代码适配文本大小
@@ -252,7 +258,7 @@
         [config.userContentController addUserScript:wkUScript];
         //
         //        CGFloat padding = self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height +  self.tabBarController.tabBar.bounds.size.height;
-        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) configuration:config];
+        _webView = [[WKWebView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) configuration:config];
         // UI代理
         _webView.UIDelegate = self;
         // 导航代理

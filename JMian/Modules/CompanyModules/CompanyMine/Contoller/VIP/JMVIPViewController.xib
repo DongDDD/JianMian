@@ -118,6 +118,9 @@
                                 <constraint firstAttribute="width" constant="145" id="uGR-Qh-lbw"/>
                             </constraints>
                             <state key="normal" title="Button" image="jianbian.png"/>
+                            <connections>
+                                <action selector="payAction:" destination="-1" eventType="touchUpInside" id="vSs-WB-MXB"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="立即开通" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CoP-Ey-ZaS">
                             <rect key="frame" x="312.5" y="16.5" width="58" height="17"/>

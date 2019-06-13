@@ -81,7 +81,7 @@
 - (void)userContentController:(WKUserContentController *)userContentController didReceiveScriptMessage:(WKScriptMessage *)message{
     NSLog(@"name:%@\\\\n body:%@\\\\n frameInfo:%@\\\\n",message.name,message.body,message.frameInfo);
     //用message.body获得JS传出的参数体
-//    NSDictionary * parameter = message.body;
+    // NSDictionary * parameter = message.body;
     //JS调用OC
    if([message.name isEqualToString:@"aaa"]){
         self.labsJson = message.body;

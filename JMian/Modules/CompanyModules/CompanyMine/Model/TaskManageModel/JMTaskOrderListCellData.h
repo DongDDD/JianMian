@@ -66,8 +66,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *boss_avatar;
 
 
-@property (nonatomic, copy) NSString *companyID;
-@property (nonatomic, copy) NSString *companyName;
+//@property (nonatomic, copy) NSString *companyID;
+//@property (nonatomic, copy) NSString *companyName;
 
 @property (nonatomic, copy) NSString *goodsTitle;
 @property (nonatomic, copy) NSString *goodsPrice;

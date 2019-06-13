@@ -116,6 +116,8 @@
 #define Change_TaskOrderStatus_URL @"api/task/order/status"
 //创建任务评价
 #define Create_TaskComment_URL @"api/task/comment/create"
+//付款信息
+#define Fectch_OrderPayment_URL @"api/order/payment"
 
 //会话列表
 #define Chat_List_URL @"converse/lists"

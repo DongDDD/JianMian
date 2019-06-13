@@ -6,7 +6,6 @@ pod 'SDWebImage'
 pod 'MJRefresh'
 pod 'SDCycleScrollView'
 pod 'YYText'
-pod 'SYWechatOpenSDK', '~> 1.7.9'
 pod 'TXIMSDK_iOS',  '~> 4.2.52'
 pod ‘YYCache’
 pod 'PrintBeautifulLog'
@@ -19,5 +18,6 @@ pod 'VIMediaCache'
 pod 'HXWeiboPhotoPicker', '~> 2.1.5'
 pod 'MCTabBarController'
 pod 'IQKeyboardManager', '3.3.7'
-
+pod 'WechatOpenSDK'
+pod 'AlipaySDK-iOS'
 
