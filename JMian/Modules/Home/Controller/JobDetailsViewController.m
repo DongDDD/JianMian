@@ -579,6 +579,7 @@
 -(void)introduceAvtion{
     JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
     vc.model = _myModel;
+    vc.viewType = JMCompanyIntroduceViewControllerDefault;
     vc.videoUrl = self.homeworkModel.videoFile_path;
     [self.navigationController pushViewController:vc animated:YES];
 }

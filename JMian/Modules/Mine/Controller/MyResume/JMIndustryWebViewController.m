@@ -63,7 +63,8 @@
     NSString *showInfoFromJava = [NSString stringWithFormat:@"showInfoFromJava('%@','%@')",jsonLabs,selectedLabs];
     [self.webView evaluateJavaScript:showInfoFromJava completionHandler:^(id _Nullable data, NSError * _Nullable error) {
         //显示对话框
-        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(hiddenHUD) userInfo:nil repeats:YES];
+//        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(hiddenHUD) userInfo:nil repeats:YES];
+        [self hiddenHUD];
         //延迟
         NSLog(@"OC调用JS方法 showInfoFromJava ");
     }];

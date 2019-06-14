@@ -735,10 +735,10 @@
                 //window.webkit.messageHandlers.aaa.likeDetail(this.detail.favorites)
             },
             clickCompanyDetails(){
-                Javascript:aaa.clickCompanyDetails(this.detail.company.company_id);
+                window.webkit.messageHandlers.bbb.postMessage(this.detail.company.company_id);
             },
             clickCompanyToAMap(){
-                Javascript:aaa.clickCompanyToAMap()
+                window.webkit.messageHandlers.ccc.postMessage()
             },
             load() {
                 this.loading = true;

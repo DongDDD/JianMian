@@ -118,6 +118,10 @@
 #define Create_TaskComment_URL @"api/task/comment/create"
 //付款信息
 #define Fectch_OrderPayment_URL @"api/order/payment"
+//订单
+#define Fectch_OrderList_URL @"api/order/paginate"
+//视频列表
+#define Fectch_VideoList_URL @"api/video/lists"
 
 //会话列表
 #define Chat_List_URL @"converse/lists"

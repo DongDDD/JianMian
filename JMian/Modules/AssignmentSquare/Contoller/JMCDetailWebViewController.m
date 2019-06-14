@@ -11,6 +11,7 @@
 #import "JMHTTPManager+FectchTaskInfo.h"
 #import "JMHTTPManager+CreateTaskOrder.h"
 #import "JMHTTPManager+CompanyLike.h"
+#import "JMCompanyIntroduceViewController.h"
 
 @interface JMCDetailWebViewController ()
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -23,14 +24,33 @@
     [super viewDidLoad];
     self.title = @"职位详情";
     [self setHTMLPath:@"SecondModulesHTML/C/Cdetail.html"];
-    
+    [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"bbb"];
+    [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"ccc"];
+
     // Do any additional setup after loading the view from its nib.
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.view addSubview:self.bottomView];
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.mas_topLayoutGuide);
+        make.bottom.mas_equalTo(self.view).offset(-self.bottomView.frame.size.height);
+    }];
 }
 
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
+}
+-(void)fanhui{
+    [super fanhui];
+    // 用完移除
+    [[self.webView configuration].userContentController removeScriptMessageHandlerForName:@"bbb"];
+    [[self.webView configuration].userContentController removeScriptMessageHandlerForName:@"ccc"];
+
+}
 
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
 
@@ -163,12 +183,19 @@
         NSLog(@"%@",message.body);
         self.favorites = message.body;
         [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-
 //        self.labsJson = message.body;
         //        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"js调用到了oc" message:message.body preferredStyle:UIAlertControllerStyleAlert];
         //        [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //        }])];
         //        [self presentViewController:alertController animated:YES completion:nil];
+    }else if([message.name isEqualToString:@"bbb"]){
+        
+        JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
+        vc.viewType = JMCompanyIntroduceViewControllerCDetail;
+        vc.company_id = message.body;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    
     }
     
 }

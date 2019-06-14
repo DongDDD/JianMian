@@ -147,6 +147,7 @@
 
 -(void)didClickMyOrder{
     JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
+    vc.viewType = JMMyOrderListViewControllerCUser;
     [self.navigationController pushViewController:vc animated:YES];
     
 
@@ -164,9 +165,14 @@
     vc.title = @"任务管理";
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 -(void)BOrderClick{
+    JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
+    vc.viewType = JMMyOrderListViewControllerBUser;
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 -(void)BVIPClick{
     JMVIPViewController *vc = [[JMVIPViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];

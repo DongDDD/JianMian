@@ -15,6 +15,10 @@
 #import "DimensMacros.h"
 #import "JMTitlesView.h"
 #import "JMVideoPlayManager.h"
+#import "JMHTTPManager+Work.h"
+#import "JMHTTPManager+FetchCompanyInfo.h"
+#import "JMCompanyInfoModel.h"
+
 
 @interface JMCompanyIntroduceViewController ()<SDCycleScrollViewDelegate,JMIntroduceContentViewDelegate,MAMapViewDelegate,UIScrollViewDelegate,JMCompanyVideoViewDelegate>
 
@@ -45,7 +49,13 @@
     [super viewDidLoad];
     self.scrollView.delegate = self;
     self.title = @"公司介绍";
-    [self initView];
+    
+    if (_viewType == JMCompanyIntroduceViewControllerCDetail) {
+        [self getData];
+    }else{
+        [self initView];
+    
+    }
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -77,9 +87,58 @@
     [self setAdvantageView];
     [self setBrightSpoView];
     [self setMapView];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,1800);
+}
+
+
+-(void)getData{
+    [self showProgressHUD_view:self.view];
+    [[JMHTTPManager sharedInstance]fetchCompanyInfo_Id:self.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            //因为这页面用homemodel赋值，现在不改变布局逻辑，建设好homeModel再布局
+            JMCompanyInfoModel *comModel = [JMCompanyInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            self.model = [[JMHomeWorkModel alloc]init];
+            self.model.companyName = comModel.company_name;
+            self.model.companyLogo_path = comModel.logo_path;
+            self.model.latitude = comModel.latitude;
+            self.model.longitude = comModel.longitude;
+            self.model.address = comModel.address;
+            self.model.videoFile_path = [self getVideoPath_comModel:comModel];
+            self.model.companyEmployee = comModel.employee;
+            
+            [self initView];
+            
+        }
+                [self hiddenHUD];
+
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
+    
+    
+//    [[JMHTTPManager sharedInstance]fetchWorkInfoWith_Id:self.company_id  SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//
+//        [self hiddenHUD];
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//
+//    }];
 
 }
 
+-(NSString *)getVideoPath_comModel:(JMCompanyInfoModel *)comModel{
+    if (comModel.files.count > 0) {
+        for (JMFilesModel *filesModel in comModel.files) {
+            if ([filesModel.files_type isEqualToString:@"1"]) {
+                return filesModel.files_file_path;
+            }
+        }
+    }
+    return nil;
+}
 #pragma mark - 点击事件
 
 -(void)didClickButton:(CGFloat)contentHeight{

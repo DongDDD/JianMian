@@ -9,8 +9,14 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef enum : NSUInteger {
+    JMMyOrderListViewControllerCUser,
+    JMMyOrderListViewControllerBUser,
+} JMMyOrderListViewType;
+
 
 @interface JMMyOrderListViewController : BaseViewController
+@property(nonatomic, assign)JMMyOrderListViewType viewType;
 
 @end
 

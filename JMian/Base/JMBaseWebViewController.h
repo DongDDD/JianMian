@@ -7,12 +7,16 @@
 //
 
 #import "BaseViewController.h"
+#import "JMWeakWebViewScriptMessageDelegate.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMBaseWebViewController : BaseViewController
 
 @property(nonatomic, strong) WKWebView *webView;
+@property(nonatomic, strong) WKUserContentController *wkUController;
+@property(nonatomic, strong) JMWeakWebViewScriptMessageDelegate *weakScriptMessageDelegate;
+
 - (void)setHTMLPath:(NSString *)path;
 //- (void)ocToJs_arrayData:(NSArray *)arrayData selectedLabs:(NSArray *)selectedLabs;//选择行业
 -(NSString *)arrayToJSONWithArr:(NSArray *)arr;//数组转JSON
