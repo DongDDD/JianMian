@@ -41,7 +41,15 @@
         [self.iconImagView sd_setImageWithURL:[NSURL URLWithString:data.user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         self.infoLab.text = data.work_name;
     }else{
+        self.nameLab.text = data.company_name;
+        [self.iconImagView sd_setImageWithURL:[NSURL URLWithString:data.logo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         
+        NSMutableArray *industryNameArray = [NSMutableArray array];
+        for (JMCVideoLabsModel *LabsData in data.labels) {
+            [industryNameArray addObject:LabsData.name];
+        }
+        NSString *industryStr = [industryNameArray componentsJoinedByString:@"/"];
+        self.infoLab.text = industryStr;
         
     }
     

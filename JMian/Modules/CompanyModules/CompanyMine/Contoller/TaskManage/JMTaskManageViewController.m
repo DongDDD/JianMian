@@ -19,6 +19,10 @@
 #import "JMOrderPaymentModel.h"
 #import "JMShareView.h"
 #import "JMSnapshotWebViewController.h"
+#import "JMHTTPManager+CreateConversation.h"
+#import "JMMessageListModel.h"
+#import "JMChatViewViewController.h"
+
 
 @interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate>
 @property (nonatomic, strong) JMTitlesView *titleView;
@@ -30,6 +34,9 @@
 @property (nonatomic ,strong) UIView *BGPayView;
 
 @property (strong, nonatomic)NSArray *currentStatus;
+@property (copy, nonatomic)NSString *task_order_id;
+@property (copy, nonatomic)NSString *user_id;
+
 @end
 
 @implementation JMTaskManageViewController
@@ -42,22 +49,7 @@
     // Do any additional setup after loading the view from its nib.
 }
 
-#pragma mark - 获取数据
 
--(void)getDataWitnStatus:(NSArray *)status{
-    [[JMHTTPManager sharedInstance]fectchTaskList_status:status page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        if (responsObject[@"data"]) {
-            self.listsArray = [JMTaskOrderListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-        }
-        [self.tableView reloadData];
-        [self.tableView.mj_header endRefreshing];
-        [self.tableView.mj_footer endRefreshing];
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-    
-}
 
 
 #pragma mark - setUI -
@@ -102,16 +94,17 @@
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         //B现在状态：待处理or待通过
         if ([data.status isEqualToString:Task_WaitDealWith]) {
-            //B改状态------B端通过任务申请
+            //B改状态------B端通过任务申请&&支付定金
+            _task_order_id = data.task_order_id;
+            _user_id = data.user_user_id;
             [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
             return;
         }else if([data.status isEqualToString:Task_Finish]) {
             //B改状态------B端确认完成任务&支付尾款
             [self payWithData:data];
-            //            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
             return;
         }else if([data.status isEqualToString:Task_Pass]) {
-            //B改状态------销售分成点击结束任务按钮
+            //B改状态------销售分成任务的 点击结束任务按钮
             [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
             return;
         }else if([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_boss isEqualToString:@"0"]) {
@@ -148,6 +141,8 @@
     
 }
 
+
+
 -(void)showChoosePayView{
     
 
@@ -172,23 +167,135 @@
     }];
     
 }
-
+//取消
 -(void)cancelAction{
     [self hiddenChoosePayView];
 
 }
 
-
--(void)leftAction{
+//微信支付
+-(void)shareViewLeftAction{
     [self wechatPayWithModel:self.orderPaymentModel];
     
 }
-
--(void)rightAction{
+//支付宝支付
+-(void)shareViewRightAction{
     [self alipayWithModel:self.orderPaymentModel];
+    
+}
+
+//和他聊聊
+-(void)iconAlertRightAction{
+    
+    [self createChatRequstWithTask_order_id:_task_order_id user_id:_user_id];
+
+    
+}
+
+//已评价回调
+-(void)didComment{
+    [self.tableView.mj_header beginRefreshing];
     
     
 }
+
+
+#pragma mark - 数据请求
+
+-(void)getDataWitnStatus:(NSArray *)status{
+    [[JMHTTPManager sharedInstance]fectchTaskList_status:status page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.listsArray = [JMTaskOrderListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+        }
+        [self.tableView reloadData];
+        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_footer endRefreshing];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+}
+-(void)setupHeaderRefresh
+{
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.tableView.mj_header beginRefreshing];
+}
+
+-(void)setupFooterRefresh
+{
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+    
+    // 设置文字
+    [footer setTitle:@"上拉加载更多" forState:MJRefreshStateIdle];
+    [footer setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
+    [footer setTitle:@"没有更多数据了" forState:MJRefreshStateNoMoreData];
+    
+    // 设置字体
+    footer.stateLabel.font = [UIFont systemFontOfSize:14];
+    
+    // 设置颜色
+    footer.stateLabel.textColor = MASTER_COLOR;
+    
+    // 设置footer
+    self.tableView.mj_footer = footer;
+    //     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+}
+
+//刷新
+-(void)refreshData{
+    [self getDataWitnStatus:self.currentStatus];
+    
+}
+//上拉更多
+-(void)loadMoreBills{
+    [self getDataWitnStatus:self.currentStatus];
+    
+}
+//改变任务状态
+-(void)changeTaskStatusRequestWithStatus:(NSString *)status task_order_id:(NSString *)task_order_id {
+    
+    [[JMHTTPManager sharedInstance]changeTaskOrderStatusWithTask_order_id:task_order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.tableView.mj_header beginRefreshing];
+        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"审批通过\n 建议联系对方以便开始任务" leftTitle:@"朕知道了" rightTitle:@"和他聊聊"];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+//创建评价
+-(void)createTaskCommentRequestWithTask_order_id:(NSString *)task_order_id reputation:(NSString *)reputation commentDescription:(NSString *)commentDescription{
+    [[JMHTTPManager sharedInstance]createTaskCommentWithForeign_key:task_order_id reputation:reputation commentDescription:commentDescription successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        [self.tableView.mj_header beginRefreshing];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+//创建聊天
+-(void)createChatRequstWithTask_order_id:(NSString *)task_order_id user_id:(NSString *)user_id{
+    
+    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:user_id foreign_key:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+        //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
+        //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        //        [alert show];
+        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+        
+        vc.myConvModel = messageListModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
 #pragma mark - 支付
 - (void)payWithData:(JMTaskOrderListCellData *)data
 {
@@ -209,9 +316,7 @@
     
 }
 
-
-
-
+//拉起微信支付
 - (void)wechatPayWithModel:(JMOrderPaymentModel *)model{
     PayReq* req = [[PayReq alloc] init];
     req.partnerId = model.wx_partnerid;
@@ -226,7 +331,7 @@
 }
 
 
-//支付宝支付
+//拉起支付宝支付
 -(void)alipayWithModel:(JMOrderPaymentModel *)model{
     // 发起支付
     [[AlipaySDK defaultService] payOrder:model.alipay fromScheme:@"alisdkdemo" callback:^(NSDictionary *resultDic) {
@@ -234,10 +339,6 @@
     }];
     
 }
-
-
-
-
 
 -(void)setCurrentIndex{
     switch (_index) {
@@ -265,11 +366,9 @@
     
 }
 
--(void)didComment{
-    [self.tableView.mj_header beginRefreshing];
-    
-    
-}
+
+
+
 #pragma mark - Table view data source
 
 
@@ -321,70 +420,6 @@
 }
 
 
-
-#pragma mark - 数据请求
--(void)setupHeaderRefresh
-{
-    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
-    header.lastUpdatedTimeLabel.hidden = YES;
-    header.stateLabel.hidden = YES;
-    self.tableView.mj_header = header;
-    [self.tableView.mj_header beginRefreshing];
-}
-
--(void)setupFooterRefresh
-{
-    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
-    
-    // 设置文字
-    [footer setTitle:@"上拉加载更多" forState:MJRefreshStateIdle];
-    [footer setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
-    [footer setTitle:@"没有更多数据了" forState:MJRefreshStateNoMoreData];
-    
-    // 设置字体
-    footer.stateLabel.font = [UIFont systemFontOfSize:14];
-    
-    // 设置颜色
-    footer.stateLabel.textColor = MASTER_COLOR;
-    
-    // 设置footer
-    self.tableView.mj_footer = footer;
-    //     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
-}
-
-
--(void)refreshData{
-    [self getDataWitnStatus:self.currentStatus];
-    
-}
-
--(void)loadMoreBills{
-    [self getDataWitnStatus:self.currentStatus];
-    
-}
-
--(void)changeTaskStatusRequestWithStatus:(NSString *)status task_order_id:(NSString *)task_order_id {
-    
-    [[JMHTTPManager sharedInstance]changeTaskOrderStatusWithTask_order_id:task_order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        [self.tableView.mj_header beginRefreshing];
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-}
-
-//创建评价
--(void)createTaskCommentRequestWithTask_order_id:(NSString *)task_order_id reputation:(NSString *)reputation commentDescription:(NSString *)commentDescription{
-    [[JMHTTPManager sharedInstance]createTaskCommentWithForeign_key:task_order_id reputation:reputation commentDescription:commentDescription successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        [self.tableView.mj_header beginRefreshing];
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-}
 
 #pragma mark - Getter
 

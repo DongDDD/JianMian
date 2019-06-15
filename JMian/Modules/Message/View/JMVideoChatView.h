@@ -10,6 +10,8 @@
 #import "DimensMacros.h"
 #import "JMInterViewModel.h"
 #import "JMWaitForAnswerView.h"
+#import "JMHTTPManager+CreateConversation.h"
+#import "JMMessageListModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol JMVideoChatViewDelegate <NSObject>
@@ -28,6 +30,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,weak)id<JMVideoChatViewDelegate>delegate;
 
+// ---------创建聊天需要的参数---------
+//对话类型 1:求职招聘 2:灵活就业
+@property(nonatomic,copy)NSString *chatType;
+// type=1时:(work_label_id|job_label_id)  type=2时 ability_id |  task_order_id
+@property(nonatomic,copy)NSString *foreign_key;
+
+@property(nonatomic,copy)NSString *recipient;
+//创建聊天
+-(void)createChatRequstWithForeign_key:(NSString *)foreign_key recipient:(NSString *)recipient chatType:(NSString *)chatType;
 @end
 
 NS_ASSUME_NONNULL_END

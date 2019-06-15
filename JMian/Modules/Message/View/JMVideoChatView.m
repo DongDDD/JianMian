@@ -20,6 +20,8 @@
 @property(nonatomic,copy)NSString *subTitle;
 @property(nonatomic,copy)NSString *channel_Id;
 @property(nonatomic,strong)JMInterViewModel *myInterviewModel;
+@property(nonatomic,strong)JMMessageListModel *messageListModel;
+
 @property(nonatomic,strong)JMWaitForAnswerView *waitForAnswerView;
 @end
 
@@ -162,28 +164,91 @@
 
     }];
 }
+#pragma mark -创建聊天
 
-#pragma mark - C/B 从面试管理进来视频聊天
+-(void)createChatRequstWithForeign_key:(NSString *)foreign_key recipient:(NSString *)recipient chatType:(NSString *)chatType{
+    
+    [[JMHTTPManager sharedInstance]createChat_type:chatType recipient:recipient foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+        //后期优化这个页面直接用messageListModel赋值,
+        [self setMessageListModel:messageListModel];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
+#pragma mark - B端从兼职人才进来视频聊天
+-(void)setMessageListModel:(JMMessageListModel *)messageListModel{
+    //用于发送自定义消息
+    NSString *sendSubTitle;
+    NSString *sendTitle;
+    NSString *sendMarkID;
+    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+    //------------B端从兼职人才进来视频聊天---------------
+    if ([userInfoModel.type isEqualToString:B_Type_UESR]) {
+        if (userInfoModel.user_id == messageListModel.sender_user_id) {
+            _imgUrl = messageListModel.sender_avatar;
+            _myTitle = messageListModel.sender_nickname;
+            _subTitle = messageListModel.workInfo_company_name;
+            //赋值用于发送自定义消息
+            sendSubTitle = _subTitle;
+            sendTitle = _myTitle;
+            sendMarkID = messageListModel.sender_mark;
+            self.receiverID = messageListModel.recipient_mark;
+        }else if (userInfoModel.user_id == messageListModel.recipient_user_id){
+            _imgUrl = messageListModel.recipient_avatar;
+            _myTitle = messageListModel.recipient_nickname;
+            _subTitle = messageListModel.work_work_name;
+            // 赋值用于发送自定义消息
+            sendSubTitle = _subTitle;
+            sendTitle = _myTitle;
+            sendMarkID = messageListModel.recipient_mark;
+            self.receiverID = messageListModel.sender_mark;
+            
+        }
+       
+    }
+    _channel_Id = messageListModel.chat_id;
+    
+    NSDictionary *dic;
+    dic = @{
+            TITLE:sendTitle,
+            Sub_TITLE:sendSubTitle,
+            Avatar_URL:_imgUrl,
+            Channel_ID:_channel_Id,
+            SendMarkID:sendMarkID
+            
+            };
+    
+    //发送面试邀请1
+    if ((self.receiverID)) {
+        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"我发起了视频聊天"];
+    }
+    //加入视频聊天频道
+    if (_channel_Id) {
+        [self joinChannel_channelId:_channel_Id];
+    }
+
+}
+
 
 -(void)setInterviewModel:(JMInterViewModel *)interviewModel{
-    
-//    [self addSubview:self.waitForAnswerView];
     _myInterviewModel = interviewModel;
-    NSString *_sendSubTitle;
-    NSString *_sendTitle;
-    NSString *_sendMarkID;
-
-
-    
+    NSString *sendSubTitle;
+    NSString *sendTitle;
+    NSString *sendMarkID;
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
     if ([userInfoModel.type isEqualToString:B_Type_UESR]) {
         //------------B端从面试管理进来视频聊天---------------
         _imgUrl = interviewModel.candidate_avatar;
         _myTitle = interviewModel.candidate_nickname;
         _subTitle = interviewModel.company_company_name;
-        _sendSubTitle = interviewModel.company_company_name;
-        _sendTitle = interviewModel.interviewer_nickname;
-        _sendMarkID = [NSString stringWithFormat:@"%@b",interviewModel.interviewer_id];
+        //赋值用于发送自定义消息
+        sendSubTitle = interviewModel.company_company_name;
+        sendTitle = interviewModel.interviewer_nickname;
+        sendMarkID = [NSString stringWithFormat:@"%@b",interviewModel.interviewer_id];
         self.receiverID =[NSString stringWithFormat:@"%@a",interviewModel.candidate_id];
     }else if([userInfoModel.type isEqualToString:C_Type_USER]) {
         //------------C端从面试管理进来视频聊天---------------
@@ -191,9 +256,9 @@
         _myTitle = interviewModel.interviewer_nickname;
         _subTitle = interviewModel.company_company_name;
         //赋值用于发送自定义消息
-        _sendSubTitle = interviewModel.work_work_name;
-        _sendTitle = interviewModel.candidate_nickname;
-        _sendMarkID = [NSString stringWithFormat:@"%@a",interviewModel.candidate_id];
+        sendSubTitle = interviewModel.work_work_name;
+        sendTitle = interviewModel.candidate_nickname;
+        sendMarkID = [NSString stringWithFormat:@"%@a",interviewModel.candidate_id];
         self.receiverID = [NSString stringWithFormat:@"%@b",interviewModel.interviewer_id];
         
     }
@@ -201,11 +266,11 @@
     
     NSDictionary *dic;
     dic = @{
-            TITLE:_sendTitle,
-            Sub_TITLE:_sendSubTitle,
+            TITLE:sendTitle,
+            Sub_TITLE:sendSubTitle,
             Avatar_URL:_imgUrl,
             Channel_ID:_channel_Id,
-            SendMarkID:_sendMarkID
+            SendMarkID:sendMarkID
 
             };
     

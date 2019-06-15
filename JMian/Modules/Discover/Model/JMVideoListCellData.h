@@ -30,12 +30,33 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *work_name;
 
 @property(nonatomic, copy)NSString *video_user_id;
+@property(nonatomic, copy)NSString *video_file_id;
 @property(nonatomic, copy)NSString *video_type;
 @property(nonatomic, copy)NSString *video_file_path;
 @property(nonatomic, copy)NSString *video_status;
 @property(nonatomic, copy)NSString *video_denial_reason;
 
 
+
+//C端视频data
+@property(nonatomic, copy)NSString *company_id;
+@property(nonatomic, copy)NSString *company_name;
+@property(nonatomic, copy)NSString *city_id;
+@property(nonatomic, copy)NSString *logo_path;
+
+@property(nonatomic, copy)NSString *city_city_id;
+@property(nonatomic, copy)NSString *city_city_name;
+
+@property(nonatomic, copy)NSArray *labels;
+
+@end
+
+@interface JMCVideoLabsModel : NSObject
+
+@property(nonatomic, copy)NSString *company_id;
+@property(nonatomic, copy)NSString *name;
+@property(nonatomic, copy)NSString *pivot_company_id;
+@property(nonatomic, copy)NSString *pivot_label_id;
 
 @end
 

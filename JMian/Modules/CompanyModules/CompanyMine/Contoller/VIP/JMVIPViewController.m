@@ -79,7 +79,7 @@
 }
 
 
--(void)leftAction{
+-(void)shareViewLeftAction{
     [self wechatPayWithModel:self.orderPaymentModel];
 }
 

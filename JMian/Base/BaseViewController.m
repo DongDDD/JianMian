@@ -200,6 +200,67 @@
     
 }
 
+-(void)showAlertVCWithHeaderIcon:(NSString *)headerIcon
+                         message:(NSString *)message
+                       leftTitle:(NSString *)leftTitle
+                      rightTitle:(NSString *)rightTitle
+
+{
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n" message:message preferredStyle: UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:leftTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self iconAlertLeftAction];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:rightTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self iconAlertRightAction];
+    }]];
+    UIImageView *icon = [[UIImageView alloc] init];
+    icon.image = [UIImage imageNamed:headerIcon];
+    [alert.view addSubview:icon];
+    [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(alert.view).mas_offset(23);
+        make.centerX.mas_equalTo(alert.view);
+        make.size.mas_equalTo(CGSizeMake(75, 64));
+        
+    }];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
+-(void)iconAlertLeftAction{
+    
+}
+
+-(void)iconAlertRightAction{
+    
+    
+}
+
+-(void)alerLeftAction{
+    
+}
+
+-(void)alertRightAction{
+    
+    
+}
+
+
+-(void)showAlertWithTitle:(NSString *)title message:(NSString *)message leftTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle{
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle: UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:leftTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self alerLeftAction];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:rightTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self alertRightAction];
+    }]];
+
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 - (id)toArrayOrNSDictionary:(NSData *)jsonData{
     

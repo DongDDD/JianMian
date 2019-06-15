@@ -9,10 +9,21 @@
 #import "JMBDetailWebViewController.h"
 #import "JMHTTPManager+FectchAbilityInfo.h"
 #import "JMHTTPManager+CompanyLike.h"
+#import "JMHTTPManager+CreateConversation.h"
+#import "JMMessageListModel.h"
+#import "JMChatViewViewController.h"
+#import "JMVideoChatView.h"
+#import "JMInterViewModel.h"
 
-@interface JMBDetailWebViewController ()
+@interface JMBDetailWebViewController ()<JMVideoChatViewDelegate>
 
 @property (nonatomic, strong) NSDictionary *favorites;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (copy, nonatomic)NSString *task_order_id;
+@property (copy, nonatomic)NSString *user_id;
+@property (nonatomic, strong) JMVideoChatView *videoChatView;
+@property (nonatomic, strong) JMInterViewModel *interViewModel;
+
 
 @end
 
@@ -23,6 +34,7 @@
     self.title = @"兼职人才详情";
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self setHTMLPath:@"SecondModulesHTML/B/Bdetail.html"];
+    [self.view addSubview:self.bottomView];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -59,6 +71,33 @@
     
 }
 
+- (IBAction)bottomLeftAction:(UIButton *)sender {
+    [self createChatRequstWithForeign_key:self.ability_id user_id:_user_id];
+}
+
+- (IBAction)bottomRightAction:(UIButton *)sender {
+    [self gotoVideoChatViewWithForeign_key:self.ability_id recipient:_user_id chatType:@"2"];
+}
+
+-(void)gotoVideoChatViewWithForeign_key:(NSString *)foreign_key
+                              recipient:(NSString *)recipient
+                               chatType:(NSString *)chatType{
+    _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+    _videoChatView.delegate = self;
+    _videoChatView.tag = 222;
+    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
+//    [_videoChatView setInterviewModel:nil];
+    [self.view addSubview:_videoChatView];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+//JMVideoChatViewDelegate 挂断
+-(void)hangupAction_model:(JMInterViewModel *)model{
+    
+    [_videoChatView removeFromSuperview];
+    [self.navigationController setNavigationBarHidden:NO];
+
+}
+#pragma mark - 数据请求
 
 -(void)rightAction:(UIButton *)sender{
     NSLog(@"收藏");
@@ -86,12 +125,31 @@
     
 }
 
+//创建聊天
+-(void)createChatRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
+    
+    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+        //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
+        //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        //        [alert show];
+        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+        
+        vc.myConvModel = messageListModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
 
 -(void)getData{
     [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSDictionary *dic = responsObject[@"data"];
             [self ocToJs_dicData:dic];
+            
+            
+            _user_id = dic[@"user"][@"user_id"];
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

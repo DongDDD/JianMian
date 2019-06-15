@@ -18,8 +18,10 @@
 #import "JMHTTPManager+FectchAbilityInfo.h"//获取兼职简历
 #import "JMHTTPManager+UpdateAbility.h"//G更新兼职简历
 #import "IQKeyboardManager.h"
+#import "JMPartTimeJobTypeLabsViewController.h"
 
-@interface JMPostPartTimeResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMIndustryWebViewControllerDelegate,JMCityListViewControllerDelegate,PositionDesiredDelegate,Demo3ViewControllerDelegate,JMPartTimeJobResumeFooterViewDelegate,JMUploadVideoViewDelegate>
+
+@interface JMPostPartTimeResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMIndustryWebViewControllerDelegate,JMCityListViewControllerDelegate,PositionDesiredDelegate,Demo3ViewControllerDelegate,JMPartTimeJobResumeFooterViewDelegate,JMUploadVideoViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic,strong)NSMutableArray *leftArray;
@@ -219,6 +221,8 @@ static NSString *cellIdent = @"cellIdent";
 
 }
 
+
+
 #pragma mark - delegate
 
 - (void)didSelectedCity_id:(nonnull NSString *)city_id city_name:(nonnull NSString *)city_name {
@@ -228,13 +232,21 @@ static NSString *cellIdent = @"cellIdent";
     NSLog(@"%@%@",city_id,city_name);
 }
 
-- (void)sendPositoinData:(NSString * _Nullable)labStr labIDStr:(NSString * _Nullable)labIDStr {
-    [self.rightArray replaceObjectAtIndex:1 withObject:labStr];
+-(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName{
+    _type_label_id = type_id;
+    [self.rightArray replaceObjectAtIndex:1 withObject:typeName];
     [self.tableView reloadData];
-    _type_label_id = labIDStr;
-    NSLog(@"%@%@",labStr,labIDStr);
-
+    
+    NSLog(@"%@%@",typeName,type_id);
+    
 }
+//- (void)sendPositoinData:(NSString * _Nullable)labStr labIDStr:(NSString * _Nullable)labIDStr {
+//    [self.rightArray replaceObjectAtIndex:1 withObject:labStr];
+//    [self.tableView reloadData];
+//    _type_label_id = labIDStr;
+//    NSLog(@"%@%@",labStr,labIDStr);
+//
+//}
 
 //H5交互数据
 -(void)sendlabsWithJson:(NSString *)json{
@@ -310,7 +322,7 @@ static NSString *cellIdent = @"cellIdent";
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.row == 1) {
-        PositionDesiredViewController *vc =  [[PositionDesiredViewController alloc]init];
+        JMPartTimeJobTypeLabsViewController *vc =  [[JMPartTimeJobTypeLabsViewController alloc]init];
         vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
         

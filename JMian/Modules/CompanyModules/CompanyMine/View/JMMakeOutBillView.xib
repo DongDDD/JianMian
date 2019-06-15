@@ -69,7 +69,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入抬头" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YX3-Lt-AyZ">
+                        <textField opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入抬头" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YX3-Lt-AyZ">
                             <rect key="frame" x="136.5" y="1.5" width="257.5" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="SUo-3F-LcM"/>
@@ -77,6 +77,9 @@
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <action selector="invoiceTextFieldEditingDidEnd:" destination="iN0-l3-epB" eventType="editingDidEnd" id="qcK-Ox-oDN"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -109,11 +112,14 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入税号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fwt-E4-dnK">
+                        <textField opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入税号" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fwt-E4-dnK">
                             <rect key="frame" x="136.5" y="1.5" width="257.5" height="60"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <connections>
+                                <action selector="invoiceTextFieldEditingDidEnd:" destination="iN0-l3-epB" eventType="editingDidEnd" id="3qK-Oh-s5s"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -146,11 +152,14 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入接收发票的邮箱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2y-dc-7lo">
+                        <textField opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入接收发票的邮箱" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2y-dc-7lo">
                             <rect key="frame" x="138" y="1.5" width="256" height="60"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                            <connections>
+                                <action selector="invoiceTextFieldEditingDidEnd:" destination="iN0-l3-epB" eventType="editingDidEnd" id="CyQ-vO-ATb"/>
+                            </connections>
                         </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -229,6 +238,9 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
+                <outlet property="invoiceEmailTextField" destination="h2y-dc-7lo" id="vmf-DK-eKW"/>
+                <outlet property="invoiceTaxNumTextField" destination="fwt-E4-dnK" id="xnN-Kf-adO"/>
+                <outlet property="invoiceTitleTextField" destination="YX3-Lt-AyZ" id="64l-Zg-wax"/>
                 <outlet property="taitouImg" destination="Ib8-Sl-687" id="Y4J-go-z0V"/>
                 <outlet property="taitouView" destination="zW2-YA-TEC" id="AIN-x8-9Zc"/>
             </connections>

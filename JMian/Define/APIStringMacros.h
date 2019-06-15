@@ -106,6 +106,9 @@
 #define Delete_Task_URL @"api/task/delete"
 #define Update_Task_URL @"api/task/update"
 #define Fectch_TaskInfo_URL @"api/task/info"
+//发票信息
+#define Fectch_InvoiceInfo_URL @"api/user/invoice"
+
 
 //C端我的任务
 #define Fectch_TaskOrderList_URL @"api/task/order/paginate"

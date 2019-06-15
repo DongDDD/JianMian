@@ -59,6 +59,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 // 将JSON串转化为字典或者数组
 - (id)toArrayOrNSDictionary:(NSData *)jsonData;
+
+//弹窗带图标
+-(void)showAlertVCWithHeaderIcon:(NSString *)headerIcon
+                         message:(NSString *)message
+                       leftTitle:(NSString *)leftTitle
+                      rightTitle:(NSString *)rightTitle;
+-(void)iconAlertLeftAction;
+-(void)iconAlertRightAction;
+//弹窗不带图标
+-(void)showAlertWithTitle:(NSString *)title
+                  message:(NSString *)message
+                leftTitle:(NSString *)leftTitle
+               rightTitle:(NSString *)rightTitle;
+-(void)alerLeftAction;
+-(void)alertRightAction;
 @end
 
 NS_ASSUME_NONNULL_END

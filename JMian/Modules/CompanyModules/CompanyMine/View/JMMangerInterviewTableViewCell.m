@@ -161,11 +161,15 @@
     if ([model.status isEqualToString:Interview_WaitAgree]) {//你邀请了C端面试，正在等待C端同意
         self.headerTitleLab.textColor = MASTER_COLOR;
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@（等待同意）",model.time];
+        self.rightBtn.layer.borderWidth = 0;
         [self.rightBtn setTitle:@"取消面试" forState:UIControlStateNormal];
-//        [self.leftBtn setTitle:@"取消面试" forState:UIControlStateNormal];
+        [self.rightBtn setBackgroundColor:TEXT_GRAYmin_COLOR];
+        [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.passImg setHidden:YES];
         [self.leftBtn setHidden:YES];
         [self.rightBtn setHidden:NO];
-        [self.passImg setHidden:YES];
+        [self.deleteImg setHidden:YES];
+
 
 
     }else if ([model.status isEqualToString:@"3"] ){//C端接受邀约了
@@ -174,6 +178,8 @@
         if ([self isTimeToInterview_time:model.time]){//面试时间到了 或者迟到
             self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
             self.headerTitleLab.textColor = MASTER_COLOR;
+            self.rightBtn.layer.borderWidth = 0.5;
+
             [self.leftBtn setTitle:@"面试结束" forState:UIControlStateNormal];
             [self.rightBtn setTitle:@"进入房间" forState:UIControlStateNormal];
             [self.rightBtn setBackgroundColor:[UIColor colorWithRed:250/255.0 green:254/255.0 blue:255/255.0 alpha:1.0]];
@@ -190,6 +196,8 @@
             //面试时间还没到
             self.headerTitleLab.textColor = MASTER_COLOR;
             self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@（已同意）",model.time];
+            self.rightBtn.layer.borderWidth = 0.5;
+
             [self.rightBtn setTitle:@"等待面试" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [self.rightBtn setBackgroundColor:MASTER_COLOR];
@@ -218,6 +226,7 @@
         [self.leftBtn setTitle:@"确认录用" forState:UIControlStateNormal];
         [self.rightBtn setTitle:@"不合适" forState:UIControlStateNormal];
         [self.rightBtn setBackgroundColor:[UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0]];
+        self.rightBtn.layer.borderWidth = 0;
         [self.leftBtn setBackgroundColor:MASTER_COLOR];
         [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];

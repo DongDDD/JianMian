@@ -11,9 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol JMShareViewDelegate <NSObject>
 
--(void)cancelAction;
--(void)leftAction;
--(void)rightAction;
+-(void)shareViewCancelAction;
+-(void)shareViewLeftAction;
+-(void)shareViewRightAction;
 
 @end
 @interface JMShareView : UIView

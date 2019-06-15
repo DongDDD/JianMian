@@ -22,23 +22,23 @@
 }
 
 - (IBAction)cancel:(UIButton *)sender {
-    if (_delegate && [_delegate respondsToSelector:@selector(cancelAction)]) {
-        [_delegate cancelAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(shareViewCancelAction)]) {
+        [_delegate shareViewCancelAction];
     }
     
 }
 
 
 - (IBAction)leftAction:(UIButton *)sender {
-    if (_delegate && [_delegate respondsToSelector:@selector(leftAction)]) {
-        [_delegate leftAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(shareViewLeftAction)]) {
+        [_delegate shareViewLeftAction];
     }
     
 }
 
 - (IBAction)rightAction:(UIButton *)sender {
-    if (_delegate && [_delegate respondsToSelector:@selector(rightAction)]) {
-        [_delegate rightAction];
+    if (_delegate && [_delegate respondsToSelector:@selector(shareViewRightAction)]) {
+        [_delegate shareViewRightAction];
     }
 }
 

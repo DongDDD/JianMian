@@ -34,13 +34,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3ih-fc-xlg">
-                            <rect key="frame" x="287" y="9" width="81" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="81" id="apA-XY-v5A"/>
-                            </constraints>
+                            <rect key="frame" x="102" y="9" width="266" height="30"/>
                             <state key="normal" title="请选择">
                                 <color key="titleColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <connections>
+                                <action selector="adressAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="9iV-en-Vll"/>
+                            </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="d8a-tc-fI0">
                             <rect key="frame" x="387" y="18.5" width="7" height="11"/>
@@ -53,6 +53,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="agc-tZ-o5u" firstAttribute="leading" secondItem="xAE-YT-ZvC" secondAttribute="leading" constant="20" id="29t-Pj-U08"/>
+                        <constraint firstItem="3ih-fc-xlg" firstAttribute="leading" secondItem="Lc7-AV-nta" secondAttribute="trailing" constant="20" id="2B7-Zz-00u"/>
                         <constraint firstAttribute="trailing" secondItem="3ih-fc-xlg" secondAttribute="trailing" constant="46" id="Hkh-Ix-Zap"/>
                         <constraint firstItem="3ih-fc-xlg" firstAttribute="centerY" secondItem="xAE-YT-ZvC" secondAttribute="centerY" id="QVc-hS-RCh"/>
                         <constraint firstItem="d8a-tc-fI0" firstAttribute="centerY" secondItem="3ih-fc-xlg" secondAttribute="centerY" id="R4e-hi-hSk"/>
@@ -136,6 +137,7 @@
             <connections>
                 <outlet property="NOBtn" destination="r5x-4y-I4N" id="gVH-Sx-WUU"/>
                 <outlet property="YESBtn" destination="n3t-Cf-OQB" id="ABm-iW-fav"/>
+                <outlet property="adressBtn" destination="3ih-fc-xlg" id="nZe-wc-6E4"/>
             </connections>
             <point key="canvasLocation" x="18.840579710144929" y="141.62946428571428"/>
         </view>

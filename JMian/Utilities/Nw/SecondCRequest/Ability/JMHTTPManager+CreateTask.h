@@ -32,6 +32,11 @@ NS_ASSUME_NONNULL_BEGIN
                     image_arr:(nullable NSArray *)image_arr
                      deadline:(nullable NSString *)deadline
                        status:(nullable NSString *)status
+                   is_invoice:(nullable NSString *)is_invoice
+                invoice_title:(nullable NSString *)invoice_title
+           invoice_tax_number:(nullable NSString *)invoice_tax_number
+                invoice_email:(nullable NSString *)invoice_email
+
                  successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 

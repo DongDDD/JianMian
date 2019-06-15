@@ -9,8 +9,6 @@
 #import "JMMakeOutBillHeaderView.h"
 @interface JMMakeOutBillHeaderView ()
 
-@property (weak, nonatomic) IBOutlet UIButton *YESBtn;
-@property (weak, nonatomic) IBOutlet UIButton *NOBtn;
 
 @end
 
@@ -41,6 +39,11 @@
 
     if (_delegate && [_delegate respondsToSelector:@selector(didClickBillActionWithTag:) ]) {
         [_delegate didClickBillActionWithTag:sender.tag];
+    }
+}
+- (IBAction)adressAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(chooseAdressAction) ]) {
+        [_delegate chooseAdressAction];
     }
 }
 

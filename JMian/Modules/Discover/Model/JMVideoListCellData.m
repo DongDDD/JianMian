@@ -9,6 +9,14 @@
 #import "JMVideoListCellData.h"
 
 @implementation JMVideoListCellData
+
++ (NSDictionary *)mj_objectClassInArray {
+    return @{
+             @"labels":@"JMCVideoLabsModel"
+             };
+}
+
+
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     
     return @{
@@ -33,11 +41,27 @@
              @"video_status":@"video.status",
              @"video_denial_reason":@"video.denial_reason",
 
-             
+             @"city_city_id":@"city.city_id",
+             @"city_city_name":@"city.city_name",
+
              
              };
     
 }
 
+
+@end
+
+@implementation JMCVideoLabsModel
+
++(NSDictionary *)mj_replacedKeyFromPropertyName{
+    
+    return @{
+             @"pivot_company_id":@"pivot.company_id",
+             @"pivot_label_id":@"pivot.label_id",
+             
+             };
+    
+}
 
 @end

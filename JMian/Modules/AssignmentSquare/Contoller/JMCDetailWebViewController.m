@@ -92,6 +92,7 @@
         [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.task_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+       
             [alert show];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             

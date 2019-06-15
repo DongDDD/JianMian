@@ -12,9 +12,13 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMMakeOutBillHeaderViewDelegate <NSObject>
 
 -(void)didClickBillActionWithTag:(NSInteger)tag;
-
+-(void)chooseAdressAction;
 @end
 @interface JMMakeOutBillHeaderView : UIView
+@property (weak, nonatomic) IBOutlet UIButton *adressBtn;
+@property (weak, nonatomic) IBOutlet UIButton *YESBtn;
+@property (weak, nonatomic) IBOutlet UIButton *NOBtn;
+
 @property(nonatomic,weak)id<JMMakeOutBillHeaderViewDelegate>delegate;
 @end
 

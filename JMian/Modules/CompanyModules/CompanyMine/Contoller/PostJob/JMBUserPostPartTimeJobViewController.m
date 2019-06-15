@@ -21,9 +21,11 @@
 #import "JMTaskGoodsDetailModel.h"
 #import "JMHTTPManager+UpdateTask.h"
 #import "JMHTTPManager+DeleteTask.h"
+#import "JMGetCompanyLocationViewController.h"
+#import "JMHTTPManager+FectchInvoiceInfo.h"
 
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
-@interface JMBUserPostPartTimeJobViewController ()<JMPartTimeJobResumeFooterViewDelegate,JMMakeOutBillHeaderViewDelegate,JMBUserPartTimeJobDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate>
+@interface JMBUserPostPartTimeJobViewController ()<JMPartTimeJobResumeFooterViewDelegate,JMMakeOutBillHeaderViewDelegate,JMBUserPartTimeJobDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMMakeOutBillHeaderViewDelegate,JMMakeOutBillViewDelegate>
 @property(nonatomic, strong)JMBUserPartTimeJobDetailView *partTimeJobDetailView;
 @property (strong, nonatomic)NSArray *leftTextArray;
 @property (strong, nonatomic)UIScrollView *scrollView;
@@ -36,6 +38,7 @@
 @property (nonatomic,strong)UIDatePicker *dataPickerView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic ,assign)BOOL isChange;
+@property (nonatomic, strong)AMapPOI *POIModel;
 
 //请求参数
 @property (copy, nonatomic)NSString *type_label_id;//职位ID
@@ -47,6 +50,11 @@
 @property (copy, nonatomic)NSString *city_id;//地区
 @property (copy, nonatomic)NSString *myDecription;//职位描述
 @property (copy, nonatomic)NSString *deadline;//有效日期
+@property (copy, nonatomic)NSString *is_invoice;//是否有发票
+@property (copy, nonatomic)NSString *invoice_title;//发票抬头
+@property (copy, nonatomic)NSString *invoice_tax_number;//税务编号
+@property (copy, nonatomic)NSString *invoice_email;//邮箱
+
 
 //
 @property (copy, nonatomic)NSString *cityName;//地区
@@ -66,6 +74,7 @@
     self.title = @"发布兼职";
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
+    [self getInvoiceInfo];//获取发票信息
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -99,7 +108,7 @@
 }
 
 
-#pragma mark - Delegate
+#pragma mark - MyDelegate
 -(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName{
     _isChange = YES;
     _type_label_id = type_id;
@@ -188,16 +197,34 @@
     
 }
 
+-(void)chooseAdressAction{
+    JMGetCompanyLocationViewController *vc = [[JMGetCompanyLocationViewController alloc]init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+
+
+}
+
+-(void)sendAdress_Data:(AMapPOI *)data
+{
+    self.POIModel = data;
+    NSString *adress = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
+    [self.makeOutBillHeaderView.adressBtn setTitle:adress forState:UIControlStateNormal];
+    
+    
+}
 //是否需要开发票
 -(void)didClickBillActionWithTag:(NSInteger)tag{
     
     switch (tag) {
         case 1000://需要
+            _is_invoice = @"1";
             [self.makeOutBillView setHidden:NO];
             [self changeMakeOutBillViewNeed];
             
             break;
         case 1001://不需要
+            _is_invoice = @"0";
             [self.makeOutBillView setHidden:YES];
             
             [self changeMakeOutBillViewNONeed];
@@ -206,6 +233,25 @@
             break;
     }
     
+}
+
+-(void)invoiceTextFieldDidEditingEndWithTextField:(UITextField *)textField{
+
+    switch (textField.tag) {
+        case 100:
+            _invoice_title = textField.text;
+            break;
+        case 101:
+            _invoice_tax_number = textField.text;
+            break;
+        case 102:
+            _invoice_email = textField.text;
+            break;
+
+        default:
+            break;
+    }
+
 }
 
 -(void)gotoLabsVC{
@@ -259,8 +305,6 @@
     [self.partTimeJobDetailView.deadLineBtn setTitle:dateStr forState:UIControlStateNormal];
     [self.partTimeJobDetailView.deadLineBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
     
-   
-
  }
 
 ////字符串转时间
@@ -317,12 +361,33 @@
     }
 
 }
-#pragma mark - ScrollViewdelegate
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+-(void)OKAction{
     [self.partTimeJobDetailView.jobNameTextField resignFirstResponder];
     [self.partTimeJobDetailView.paymentMoneyTextField resignFirstResponder];
     [self.partTimeJobDetailView.downPaymentTextField resignFirstResponder];
     [self.decriptionTextView.contentTextView resignFirstResponder];
+    [self.makeOutBillView.invoiceTitleTextField resignFirstResponder];
+    [self.makeOutBillView.invoiceTaxNumTextField resignFirstResponder];
+    [self.makeOutBillView.invoiceEmailTextField resignFirstResponder];
+
+    if (self.isReadProtocol == YES) {
+        [self sendRequest];
+        
+    }else{
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请阅读并同意《平台服务协议》" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+    }
+    
+}
+
+#pragma mark - ScrollViewdelegate
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
     [self hidePickView];
 }
 
@@ -353,26 +418,26 @@
 
 }
 
-#pragma mark - 确认发布 提交数据
+#pragma mark - 提交数据
 
--(void)OKAction{
-    if (self.isReadProtocol == YES) {
-        [self.decriptionTextView.contentTextView resignFirstResponder];
-        [self sendRequest];
+-(void)getInvoiceInfo{
+    [[JMHTTPManager sharedInstance]fectchInvoiceInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            
+        }else{
+          
+        }
         
-    }else{
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请阅读并同意《平台服务协议》" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-  
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
     
-    }
-
+    
 }
 
+
 -(void)sendRequest{
-    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil deadline:_deadline status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil deadline:_deadline status:nil is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -398,6 +463,8 @@
     [self updateTaskInfoRequest];
 }
 
+
+
 -(void)deleteTaskRequest{
     [[JMHTTPManager sharedInstance]deleteTask_Id:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
@@ -410,6 +477,7 @@
         
     }];
 }
+
 //更新任务请求
 -(void)updateTaskInfoRequest{
     if (_isChange) {
@@ -436,7 +504,6 @@
 }
 
 
-#pragma mark - 获取数据
 -(void)getData{
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
@@ -452,7 +519,6 @@
     }];
     
 }
-
 
 
 #pragma mark pickerview function
@@ -543,8 +609,7 @@
 - (JMMakeOutBillView *)makeOutBillView{
     if (_makeOutBillView == nil) {
         _makeOutBillView = [JMMakeOutBillView new];
-//        _makeOutBillView.frame = CGRectMake(0, _makeOutBillHeaderView.frame.origin.y+_makeOutBillHeaderView.frame.size.height, SCREEN_WIDTH, 314);
-
+        _makeOutBillView.delegate = self;
     }
     return _makeOutBillView;
 }

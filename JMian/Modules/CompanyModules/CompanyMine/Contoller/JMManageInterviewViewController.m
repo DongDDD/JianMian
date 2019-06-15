@@ -178,9 +178,17 @@ static NSString *cellIdent = @"managerCellIdent";
             _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
             _videoChatView.delegate = self;
             _videoChatView.tag = 222;
+//            [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
             [_videoChatView setInterviewModel:model];
             [self.view addSubview:_videoChatView];
             [self.navigationController setNavigationBarHidden:YES];
+////            candidate应聘者 interviewer面试官 Foreign_key关系主键 recipient接收者
+//            if ([userinfoModel.type isEqualToString:B_Type_UESR]) {
+//
+//                [self gotoVideoChatViewWithForeign_key:model.interview_id recipient:model.candidate_user_id chatType:@"1"];
+//            }else{
+//                 [self gotoVideoChatViewWithForeign_key:model.interview_id recipient:model.interviewer_id chatType:@"1"];
+//            }
         
         }
         
@@ -196,10 +204,21 @@ static NSString *cellIdent = @"managerCellIdent";
     
 }
 
+-(void)gotoVideoChatViewWithForeign_key:(NSString *)foreign_key
+                              recipient:(NSString *)recipient
+                               chatType:(NSString *)chatType{
+    _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+    _videoChatView.delegate = self;
+    _videoChatView.tag = 222;
+    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
+    //    [_videoChatView setInterviewModel:nil];
+    [self.view addSubview:_videoChatView];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 -(void)updateInterviewHire_interviewID:(NSString *)interviewID label_ids:(NSArray *)label_ids{
-    [[JMHTTPManager sharedInstance]feedbackInterViewWith_interview_id:interviewID label_ids:label_ids successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已更新面试列表"
-                                                                                                                                                                                                                                  delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
+    [[JMHTTPManager sharedInstance]feedbackInterViewWith_interview_id:interviewID label_ids:label_ids successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+      
         [self.tableView.mj_header beginRefreshing];
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
