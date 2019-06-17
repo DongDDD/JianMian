@@ -15,7 +15,8 @@
 
 @interface JMCDetailWebViewController ()
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
-@property (nonatomic, strong) NSDictionary *favorites;
+@property (nonatomic, copy) NSString *favorites_id;
+
 @end
 
 @implementation JMCDetailWebViewController
@@ -26,6 +27,7 @@
     [self setHTMLPath:@"SecondModulesHTML/C/Cdetail.html"];
     [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"bbb"];
     [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"ccc"];
+    [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -59,7 +61,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     colectBtn.frame = CGRectMake(45, 0, 25, 25);
-    if (self.favorites) {
+    if (self.favorites_id) {
         colectBtn.selected = YES;
     }else{
         colectBtn.selected = NO;
@@ -89,7 +91,7 @@
     NSLog(@"收藏");
     sender.selected = !sender.selected;
     if (sender.selected) {
-        [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.task_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.task_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
        
@@ -100,7 +102,7 @@
         
     }else{
     
-        [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.task_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.favorites_id  mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"取消收藏成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
             [alert show];
@@ -128,6 +130,13 @@
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSDictionary *dic = responsObject[@"data"];
+            //判断是否有被收藏过
+            if (![dic[@"favorites"] isEqual:[NSNull null]]) {
+                self.favorites_id = dic[@"favorites"][@"favorite_id"];
+                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+
+            }
+          
             [self ocToJs_dicData:dic];
         }
 
@@ -181,10 +190,9 @@
     // NSDictionary * parameter = message.body;
     //JS调用OC
     if([message.name isEqualToString:@"aaa"]){
-        NSLog(@"%@",message.body);
-        self.favorites = message.body;
-        [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-//        self.labsJson = message.body;
+        NSLog(@"message.body---%@",message.body);
+//        self.favorites = message.body;
+ //        self.labsJson = message.body;
         //        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"js调用到了oc" message:message.body preferredStyle:UIAlertControllerStyleAlert];
         //        [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //        }])];

@@ -39,9 +39,18 @@
     [self.view addSubview:self.BGView];
     [self.BGView addSubview:self.partTimeJobHomeListVC.view];
     [self.BGView addSubview:self.jobHomeListVC.view];
-    self.BGView.backgroundColor = MASTER_COLOR;
-    self.partTimeJobHomeListVC.view.backgroundColor = TITLE_COLOR;
 
+    [self.BGView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.titleView.mas_bottom);
+        make.bottom.mas_equalTo(self.view);
+        make.left.and.right.mas_equalTo(self.view);
+    }];
+    [self.partTimeJobHomeListVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.BGView);
+        make.bottom.mas_equalTo(self.BGView);
+        make.left.and.right.mas_equalTo(self.view);
+    }];
+    
 
 }
 

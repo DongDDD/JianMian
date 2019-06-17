@@ -12,7 +12,8 @@
 
 + (NSDictionary *)mj_objectClassInArray {
     return @{
-             @"labels":@"JMCVideoLabsModel"
+             @"labels":@"JMCVideoLabsModel",
+             @"video":@"JMCVideoModel"
              };
 }
 
@@ -65,3 +66,8 @@
 }
 
 @end
+
+@implementation JMCVideoModel
+
+@end
+

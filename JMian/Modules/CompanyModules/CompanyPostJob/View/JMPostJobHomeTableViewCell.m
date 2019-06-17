@@ -50,8 +50,8 @@
 }
 
 -(void)setTaskListCellData:(JMTaskListCellData *)taskListCellData{
-    self.workNameLab.text = taskListCellData.type_labelName;
-    self.salaryLab.text = taskListCellData.payment_money;
+    self.workNameLab.text = taskListCellData.task_title;
+    self.salaryLab.text = [NSString stringWithFormat:@"%@ 元",taskListCellData.payment_money];
     self.detailLab.text = taskListCellData.cityName;
      
 }

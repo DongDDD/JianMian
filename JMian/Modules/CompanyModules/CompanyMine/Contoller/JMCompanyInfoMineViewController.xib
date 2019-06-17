@@ -22,7 +22,7 @@
                 <outlet property="headerImg" destination="KIU-BZ-MdH" id="ent-FH-Rxa"/>
                 <outlet property="industryBtn" destination="5UA-2r-I7m" id="xAL-mI-FTe"/>
                 <outlet property="leftBtn" destination="4nG-Pu-yKH" id="dkU-1p-KM8"/>
-                <outlet property="myPositionTextField" destination="sLX-0E-TUm" id="Qbf-Vl-Ndk"/>
+                <outlet property="myPositionBtn" destination="FDU-8Q-k1n" id="32S-se-auy"/>
                 <outlet property="pickerBGView" destination="XVW-qn-Ufw" id="w2d-bH-mZm"/>
                 <outlet property="pickerView" destination="sXA-dX-bYm" id="HZR-DA-w7p"/>
                 <outlet property="playBtn" destination="MAn-hY-D8F" id="nix-Zp-uEa"/>
@@ -529,16 +529,18 @@
                                         <constraint firstAttribute="height" constant="1" id="Z5d-oK-D8N"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sLX-0E-TUm">
-                                    <rect key="frame" x="280" y="17" width="97" height="30"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FDU-8Q-k1n">
+                                    <rect key="frame" x="242" y="8" width="135" height="48"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="97" id="Sa3-ZS-Vn9"/>
-                                        <constraint firstAttribute="height" constant="30" id="ho8-rj-7sm"/>
+                                        <constraint firstAttribute="width" constant="135" id="bVb-Yu-HuZ"/>
                                     </constraints>
-                                    <nil key="textColor"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
+                                    <state key="normal" title="待完善">
+                                        <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="myPositionActoin:" destination="-1" eventType="touchUpInside" id="EmF-wW-Tmb"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -548,10 +550,9 @@
                                 <constraint firstAttribute="trailing" secondItem="U6p-Wv-Uen" secondAttribute="trailing" constant="20" id="HdG-7z-kk5"/>
                                 <constraint firstAttribute="height" constant="64" id="X74-zP-GN0"/>
                                 <constraint firstItem="U6p-Wv-Uen" firstAttribute="centerY" secondItem="SNK-6Q-giT" secondAttribute="centerY" constant="-1" id="joo-CA-Ewe"/>
+                                <constraint firstItem="FDU-8Q-k1n" firstAttribute="centerY" secondItem="cRv-Yf-pyC" secondAttribute="centerY" id="ovQ-vk-ida"/>
                                 <constraint firstAttribute="bottom" secondItem="3rx-Ji-o8d" secondAttribute="bottom" id="t97-CM-FFe"/>
                                 <constraint firstItem="SNK-6Q-giT" firstAttribute="leading" secondItem="cRv-Yf-pyC" secondAttribute="leading" constant="20" id="uaQ-MC-PjY"/>
-                                <constraint firstItem="U6p-Wv-Uen" firstAttribute="leading" secondItem="sLX-0E-TUm" secondAttribute="trailing" constant="10" id="yM6-wS-ZYC"/>
-                                <constraint firstItem="sLX-0E-TUm" firstAttribute="centerY" secondItem="cRv-Yf-pyC" secondAttribute="centerY" id="ztG-DM-eB6"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hLc-t4-VCb" userLabel="公司图片View">
@@ -628,10 +629,12 @@
                         <constraint firstItem="Uu3-KS-ifZ" firstAttribute="top" secondItem="QJu-zB-leb" secondAttribute="bottom" id="QW2-rW-TxA"/>
                         <constraint firstItem="cDd-WP-WlE" firstAttribute="top" secondItem="Uu3-KS-ifZ" secondAttribute="bottom" id="RyA-rR-eYq"/>
                         <constraint firstAttribute="trailing" secondItem="k0F-HH-XTJ" secondAttribute="trailing" id="TfD-vV-s8H"/>
+                        <constraint firstItem="FDU-8Q-k1n" firstAttribute="trailing" secondItem="2TZ-46-oFf" secondAttribute="trailing" id="WbA-Dj-5Tw"/>
                         <constraint firstAttribute="trailing" secondItem="Uu3-KS-ifZ" secondAttribute="trailing" id="WfA-EE-Sc4"/>
                         <constraint firstItem="hLc-t4-VCb" firstAttribute="leading" secondItem="npc-ff-X5C" secondAttribute="leading" id="Xk0-Cq-BSK"/>
                         <constraint firstItem="QJu-zB-leb" firstAttribute="leading" secondItem="npc-ff-X5C" secondAttribute="leading" id="Yzc-aj-qCq"/>
                         <constraint firstItem="enK-bp-JW2" firstAttribute="top" secondItem="k0F-HH-XTJ" secondAttribute="bottom" id="Zqz-zc-ZH4"/>
+                        <constraint firstItem="FDU-8Q-k1n" firstAttribute="height" secondItem="2TZ-46-oFf" secondAttribute="height" id="cX3-dQ-yZt"/>
                         <constraint firstAttribute="trailing" secondItem="enK-bp-JW2" secondAttribute="trailing" id="cj6-Vd-xfL"/>
                         <constraint firstAttribute="trailing" secondItem="O1Y-zH-Il4" secondAttribute="trailing" id="e0a-a5-sIj"/>
                         <constraint firstItem="cRv-Yf-pyC" firstAttribute="top" secondItem="C9s-gQ-pTo" secondAttribute="bottom" constant="10" id="eHW-DQ-t3m"/>

@@ -215,7 +215,7 @@
 -(void)rightAction:(UIButton *)sender{
     NSLog(@"收藏");
     sender.selected = !sender.selected;
-    [[JMHTTPManager sharedInstance]createLikeWith_type:@"1" Id:self.myModel.work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createLikeWith_type:@"1" Id:self.myModel.work_id mode:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];

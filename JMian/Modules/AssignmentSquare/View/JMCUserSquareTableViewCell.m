@@ -16,8 +16,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *paymentLab;
 @property (weak, nonatomic) IBOutlet UILabel *unitLab;
 
-
-
 @end
 
 @implementation JMCUserSquareTableViewCell
@@ -29,7 +27,7 @@
 
 -(void)setModel:(JMTaskListCellData *)model{
     
-    self.titleLab.text = model.type_labelName;
+    self.titleLab.text = model.task_title;
     if (model.address == nil) {
         self.adress.text = @"不限地区";
     }else{

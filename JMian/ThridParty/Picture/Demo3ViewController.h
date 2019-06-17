@@ -13,12 +13,14 @@
 typedef enum : NSUInteger {
     Demo3ViewDefault,
     Demo3ViewPartTime,
+    Demo3ViewPostGoodsPositionAdd,
+    Demo3ViewPostGoodsPositionEditing
 } Demo3ViewType;
 
 
 @protocol Demo3ViewControllerDelegate <NSObject>
 
--(void)sendArray_addImageUrls:(NSArray *)addImageUrls;
+-(void)sendArray_addImageUrls:(NSMutableArray *)addImageUrls;
 
 @end
 
@@ -30,4 +32,6 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak)id<Demo3ViewControllerDelegate>delegate;
 @property (nonatomic, assign)Demo3ViewType viewType;
 @property (nonatomic, copy)NSString *ability_id;//兼职简历主键
+@property (nonatomic, copy)NSString *task_id;//任务主键
+
 @end

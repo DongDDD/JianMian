@@ -48,6 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *city_city_name;
 
 @property(nonatomic, copy)NSArray *labels;
+@property(nonatomic, copy)NSArray *video;
 
 @end
 
@@ -57,6 +58,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *name;
 @property(nonatomic, copy)NSString *pivot_company_id;
 @property(nonatomic, copy)NSString *pivot_label_id;
+
+@end
+
+@interface JMCVideoModel : NSObject
+
+@property(nonatomic, copy)NSString *file_path;
+@property(nonatomic, copy)NSString *status;
+@property(nonatomic, copy)NSString *denial_reason;
+@property(nonatomic, copy)NSString *file_id;
+@property(nonatomic, copy)NSString *company_id;
 
 @end
 

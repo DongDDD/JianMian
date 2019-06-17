@@ -19,7 +19,12 @@
              @"job_user_avatar":@"job.user.avatar",
              @"job_vita_education":@"job.vita.education",
              @"job_vita_description":@"job.vita.description",
-             @"job_work_name":@"job.work.name"
+             @"job_work_name":@"job.work.name",
+             @"user_user_id":@"user.user_id",
+             @"user_email":@"user.email",
+             @"user_phone":@"user.phone",
+             @"user_nickname":@"user.nickname",
+             @"user_avatar":@"user.avatar"
              };
 }
 

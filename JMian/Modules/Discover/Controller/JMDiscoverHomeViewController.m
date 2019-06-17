@@ -23,6 +23,7 @@ static CGFloat kMagin = 10.f;
 @property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, copy)NSString *mode;
 @property (nonatomic, assign)BOOL isShowAllData;
+@property (nonatomic, strong)NSMutableArray *imageArray;
 @end
 
 @implementation JMDiscoverHomeViewController
@@ -100,12 +101,14 @@ static CGFloat kMagin = 10.f;
 -(void)refreshData
 {
     [self.videoDataList removeAllObjects];
+    [self.imageArray removeAllObjects];
     [self getData_mode:self.mode];;//全职
 
 }
 
 -(void)setCurrentIndex{
     [self.videoDataList removeAllObjects];
+    [self.imageArray removeAllObjects];
     switch (_index) {
         case 0:
             self.mode = @"2";
@@ -136,6 +139,7 @@ static CGFloat kMagin = 10.f;
             
             [self.videoDataList addObjectsFromArray:array];
             [self.collectionView reloadData];
+ 
 
         }
         [self.collectionView.mj_header endRefreshing];
@@ -151,7 +155,19 @@ static CGFloat kMagin = 10.f;
 
 #pragma mark ====== MyDelegate ======
 -(void)didClickPlayAction_data:(JMVideoListCellData *)data{
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:data.video_file_path];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    NSString *videoUrl;
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        videoUrl = data.video_file_path;
+    }else{
+        JMCVideoModel *CVideoModel = data.video[0];
+ 
+        videoUrl = CVideoModel.file_path;
+        
+    
+    }
+
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:videoUrl];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     self.tabBarController.tabBar.hidden = YES;
     self.navigationController.navigationBarHidden = NO;
@@ -177,9 +193,13 @@ static CGFloat kMagin = 10.f;
     JMDiscoverCollectionViewCell *cell = (JMDiscoverCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
     [cell setData:self.videoDataList[indexPath.row]];
+//    if (self.imageArray.count > 0) {
+//        [cell setVideoImage:self.imageArray[indexPath.row]];
+//    }
    
      return cell;
 }
+
 
 
 
@@ -253,6 +273,15 @@ static CGFloat kMagin = 10.f;
     return _videoDataList;
 
 }
+
+-(NSMutableArray *)imageArray{
+    if (_imageArray.count == 0) {
+        _imageArray = [NSMutableArray array];
+    }
+    return _imageArray;
+    
+}
+
 /*
 #pragma mark - Navigation
 

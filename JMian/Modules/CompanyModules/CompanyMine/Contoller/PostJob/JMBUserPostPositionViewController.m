@@ -24,16 +24,18 @@
 #import "JMTaskPartTimejobDetailModel.h"
 #import "JMHTTPManager+UpdateTask.h"
 #import "JMHTTPManager+DeleteTask.h"
+#import "JMPostGoodsImagesView.h"
 
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
 
-@interface JMBUserPostPositionViewController ()<JMBUserPositionDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMGoodsDescriptionViewControllerDelegate,JMBUserPositionVideoViewDelegate,UIImagePickerControllerDelegate>
+@interface JMBUserPostPositionViewController ()<JMBUserPositionDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMGoodsDescriptionViewControllerDelegate,JMBUserPositionVideoViewDelegate,UIImagePickerControllerDelegate,JMPostGoodsImagesViewDelegate,Demo3ViewControllerDelegate>
 
 @property (strong, nonatomic)UIScrollView *scrollView;
 
 @property (strong, nonatomic)JMBUserPositionDetailView *detailView;
 @property (strong, nonatomic)JMBUserPositionVideoView *videoView;
 @property (strong, nonatomic)Demo3ViewController *demo3ViewVC;
+@property (strong, nonatomic)JMPostGoodsImagesView *postGoodsImagesView;
 @property (strong, nonatomic)JMComfirmPostBottomView *comfirmPostBottomView;
 @property (nonatomic,strong)NSArray *quantityArray;;
 @property (nonatomic,strong)UIDatePicker *dataPickerView;
@@ -59,7 +61,7 @@
 
 @property (copy, nonatomic)NSString *video_path;
 @property (copy, nonatomic)NSString *video_cover;
-@property (copy, nonatomic)NSArray *image_arr;
+@property (copy, nonatomic)NSMutableArray *image_arr;
 
 //--------------------------------------------------
 @property (copy, nonatomic)NSString *cityName;//地区
@@ -92,8 +94,11 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.detailView];
     [self.scrollView addSubview:self.videoView];
-    [self.scrollView addSubview:self.demo3ViewVC.view];
+    [self.scrollView addSubview:self.postGoodsImagesView];
+//    [self.scrollView addSubview:self.demo3ViewVC.view];
     [self.scrollView addSubview:self.comfirmPostBottomView];
+    
+    
     //编辑模式
     if (self.task_id) {
         [self getData];
@@ -122,14 +127,21 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         make.top.mas_equalTo(self.detailView.mas_bottom).mas_offset(1);
         make.height.mas_equalTo(304);
     }];
-    [self.demo3ViewVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//    self.demo3ViewVC.view.backgroundColor = [UIColor redColor];
+//    [self.demo3ViewVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.and.right.mas_equalTo(self.view);
+//        make.top.mas_equalTo(self.videoView.mas_bottom).mas_offset(1);
+//        make.height.mas_equalTo(408);
+//    }];
+    
+    [self.postGoodsImagesView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.videoView.mas_bottom).mas_offset(1);
-        make.height.mas_equalTo(408);
+        make.height.mas_equalTo(86);
     }];
     [self.comfirmPostBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.demo3ViewVC.view.mas_bottom).mas_offset(10);
+        make.top.mas_equalTo(self.postGoodsImagesView.mas_bottom).mas_offset(10);
         make.height.mas_equalTo(127);
     }];
     
@@ -214,6 +226,16 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 }
 
+
+- (void)sendArray_addImageUrls:(NSMutableArray *)addImageUrls {
+     self.image_arr = addImageUrls;
+    NSLog(@"addImageUrls%@",addImageUrls);
+    [self.postGoodsImagesView.goodsImageBtn setTitle:@"已上传" forState:UIControlStateNormal];
+    [self.postGoodsImagesView.goodsImageBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+    
+}
+
+
 -(void)gotoLabsVC{
     JMPartTimeJobTypeLabsViewController *vc =  [[JMPartTimeJobTypeLabsViewController alloc]init];
     vc.delegate = self;
@@ -242,6 +264,37 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     vc.goods_price = _goods_price;
     vc.goods_title = _goods_title;
     [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+-(void)gotoUploadImageAction{
+ 
+    _demo3ViewVC = [[Demo3ViewController alloc]init];
+    _demo3ViewVC.task_id = self.task_id;//进入界面重新调用接口获得最新图片
+    _demo3ViewVC.delegate = self;
+    if (self.task_id) {
+        //编辑状态
+        _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionEditing;
+
+    }else{
+        //添加状态
+        _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionAdd;
+    
+    }
+    
+//    if (_image_arr.count > 0) {
+//        NSMutableArray *array = [NSMutableArray array];
+//        for (NSString *url in _image_arr) {
+//            NSString *imgUrl = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
+//            [array addObject:imgUrl];
+//        }
+//        _demo3ViewVC.image_paths = array;
+//
+//    }
+    
+    [self.navigationController pushViewController:_demo3ViewVC animated:YES];
+ 
+   
 
 }
 
@@ -647,6 +700,14 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     _video_cover = model.video_cover;
     NSURL *url = [NSURL URLWithString:model.video_cover];
     [self.videoView.videoImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"NoVideos"]];
+    
+    if (model.images.count > 0) {
+        [self.postGoodsImagesView.goodsImageBtn setTitle:@"已上传" forState:UIControlStateNormal];
+        [self.postGoodsImagesView.goodsImageBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+        
+        
+    }
+    
 }
 
 
@@ -695,7 +756,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 -(void)sendRequest{
     
     
-    [[JMHTTPManager sharedInstance]createTask_task_title:@"销售分成" type_label_id:@"1043" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:nil deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createTask_task_title:@"销售分成" type_label_id:@"1043" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:_image_arr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -776,6 +837,15 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 }
 
 #pragma mark - Getter
+-(NSMutableArray *)image_arr{
+    if (_image_arr == nil) {
+        _image_arr = [NSMutableArray array];
+ 
+    }
+    return _image_arr;
+}
+
+
 -(JMBUserPositionDetailView *)detailView{
     if (_detailView == nil) {
         _detailView = [[JMBUserPositionDetailView alloc]init];
@@ -792,13 +862,23 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     }
     return _videoView;
 }
--(Demo3ViewController *)demo3ViewVC{
-    if (!_demo3ViewVC) {
-        _demo3ViewVC = [[Demo3ViewController alloc]init];
-        [self addChildViewController:_demo3ViewVC];
+//-(Demo3ViewController *)demo3ViewVC{
+//    if (!_demo3ViewVC) {
+//        _demo3ViewVC = [[Demo3ViewController alloc]init];
+//        _demo3ViewVC.viewType = Demo3ViewPostGoodsPosition;
+//        [self addChildViewController:_demo3ViewVC];
+//    }
+//    return _demo3ViewVC;
+//}
+
+-(JMPostGoodsImagesView *)postGoodsImagesView{
+    if (!_postGoodsImagesView) {
+        _postGoodsImagesView = [[JMPostGoodsImagesView alloc]init];
+        _postGoodsImagesView.delegate = self;
     }
-    return _demo3ViewVC;
+    return _postGoodsImagesView;
 }
+
 
 -(JMComfirmPostBottomView *)comfirmPostBottomView{
     if (_comfirmPostBottomView == nil) {

@@ -23,6 +23,7 @@
 #import "JMHTTPManager+DeleteTask.h"
 #import "JMGetCompanyLocationViewController.h"
 #import "JMHTTPManager+FectchInvoiceInfo.h"
+#import "JMInvoiceModel.h"
 
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
 @interface JMBUserPostPartTimeJobViewController ()<JMPartTimeJobResumeFooterViewDelegate,JMMakeOutBillHeaderViewDelegate,JMBUserPartTimeJobDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMMakeOutBillHeaderViewDelegate,JMMakeOutBillViewDelegate>
@@ -36,7 +37,7 @@
 @property (nonatomic,strong)UIPickerView *pickerView;
 @property (nonatomic,strong)NSArray *quantityArray;;
 @property (nonatomic,strong)UIDatePicker *dataPickerView;
-@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (weak, nonatomic) IBOutlet UIView *twoBtnBottomView;
 @property (nonatomic ,assign)BOOL isChange;
 @property (nonatomic, strong)AMapPOI *POIModel;
 
@@ -69,17 +70,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self getInvoiceInfo];//获取发票信息
     [self initView];
     [self initLayout];
     self.title = @"发布兼职";
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
-    [self getInvoiceInfo];//获取发票信息
+    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyBoard)];
+    [self.view addGestureRecognizer:tap2];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.comfirmPostBottomView.frame.origin.y+self.comfirmPostBottomView.frame.size.height+100);
+//    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.comfirmPostBottomView.frame.origin.y+self.comfirmPostBottomView.frame.size.height+100);
 }
 
 -(void)initView{
@@ -91,11 +95,10 @@
     [self.scrollView addSubview:self.comfirmPostBottomView];//确认发布
     if (self.task_id) {
         [self getData];
-        self.bottomView.hidden = NO;
-        [self.view addSubview:self.bottomView];
+        self.twoBtnBottomView.hidden = NO;
+        [self.view addSubview:self.twoBtnBottomView];
         [self.comfirmPostBottomView setHidden:YES];
     }
-
 }
 
 -(void)initLayout{
@@ -105,6 +108,7 @@
     self.makeOutBillHeaderView.frame = CGRectMake(0, _decriptionTextView.frame.origin.y+_decriptionTextView.frame.size.height, SCREEN_WIDTH, 106);
     self.makeOutBillView.frame = CGRectMake(0, _makeOutBillHeaderView.frame.origin.y+_makeOutBillHeaderView.frame.size.height, SCREEN_WIDTH, 314);
     self.comfirmPostBottomView.frame = CGRectMake(0, _makeOutBillView.frame.origin.y+_makeOutBillView.frame.size.height, SCREEN_WIDTH, 127);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.comfirmPostBottomView.frame.origin.y+self.comfirmPostBottomView.frame.size.height+100);
 }
 
 
@@ -207,6 +211,7 @@
 
 -(void)sendAdress_Data:(AMapPOI *)data
 {
+    _isChange = YES;
     self.POIModel = data;
     NSString *adress = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
     [self.makeOutBillHeaderView.adressBtn setTitle:adress forState:UIControlStateNormal];
@@ -218,16 +223,22 @@
     
     switch (tag) {
         case 1000://需要
-            _is_invoice = @"1";
             [self.makeOutBillView setHidden:NO];
             [self changeMakeOutBillViewNeed];
+            [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+            [_makeOutBillHeaderView.YESBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
+           self.is_invoice = @"1";
+
             
             break;
         case 1001://不需要
-            _is_invoice = @"0";
             [self.makeOutBillView setHidden:YES];
             
             [self changeMakeOutBillViewNONeed];
+            [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
+            [_makeOutBillHeaderView.YESBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+            self.is_invoice = @"0";
+         
             break;
         default:
             break;
@@ -236,6 +247,7 @@
 }
 
 -(void)invoiceTextFieldDidEditingEndWithTextField:(UITextField *)textField{
+    _isChange = YES;
 
     switch (textField.tag) {
         case 100:
@@ -281,6 +293,7 @@
     
     [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
       ws.comfirmPostBottomView.frame = CGRectMake(0, ws.makeOutBillHeaderView.frame.origin.y+ws.makeOutBillHeaderView.frame.size.height, SCREEN_WIDTH, 127);
+        self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.comfirmPostBottomView.frame.origin.y+self.comfirmPostBottomView.frame.size.height+100);
     } completion:nil];
 
 }
@@ -289,6 +302,7 @@
     __weak typeof(self) ws = self;
     [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         ws.comfirmPostBottomView.frame = CGRectMake(0, ws.makeOutBillView.frame.origin.y+ws.makeOutBillView.frame.size.height, SCREEN_WIDTH, 127);
+        self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.comfirmPostBottomView.frame.origin.y+self.comfirmPostBottomView.frame.size.height+100);
     } completion:nil];
   
 }
@@ -317,6 +331,7 @@
 //}
 
 -(void)showDataPickView{
+    [self hideKeyBoard];
     [self.view addSubview:self.dataPickerView];
     __weak typeof(self) ws = self;
     [UIView animateWithDuration:0.15 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -326,8 +341,19 @@
     
 }
 
+-(void)hideKeyBoard{
+    [self.partTimeJobDetailView.jobNameTextField resignFirstResponder];
+    [self.partTimeJobDetailView.paymentMoneyTextField resignFirstResponder];
+    [self.partTimeJobDetailView.downPaymentTextField resignFirstResponder];
+    [self.decriptionTextView.contentTextView resignFirstResponder];
+    [self.makeOutBillView.invoiceTitleTextField resignFirstResponder];
+    [self.makeOutBillView.invoiceTaxNumTextField resignFirstResponder];
+    [self.makeOutBillView.invoiceEmailTextField resignFirstResponder];
+}
+
+
 -(void)hidePickView{
-    
+
     __weak typeof(self) ws = self;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         ws.dataPickerView.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 350);
@@ -340,6 +366,7 @@
 
 
 -(void)showPickView{
+    [self hideKeyBoard];
     [self.view addSubview:self.pickerView];
     __weak typeof(self) ws = self;
     [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
@@ -418,16 +445,29 @@
 
 }
 
+-(void)setInvoiceValuesWithModel:(JMInvoiceModel *)model{
+    self.makeOutBillView.invoiceTitleTextField.text = model.title;
+    self.makeOutBillView.invoiceTaxNumTextField.text = model.tax_number;
+    self.makeOutBillView.invoiceEmailTextField.text = model.email;
+    
+
+}
+
 #pragma mark - 提交数据
 
 -(void)getInvoiceInfo{
+
+
     [[JMHTTPManager sharedInstance]fectchInvoiceInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        if (responsObject[@"data"]) {
-            
+
+        if (![responsObject[@"data"] isEqual:[NSNull null]]) {
+            JMInvoiceModel *model = [JMInvoiceModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [self setInvoiceValuesWithModel:model];
         }else{
-          
-        }
+            [self didClickBillActionWithTag:1001];
         
+        }
+      
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

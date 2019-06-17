@@ -31,7 +31,19 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.tableView];
+    if (_viewType == JMPartTimeJobTypeManage) {
+        [self.view addSubview:self.titleView];
+        [self.view addSubview:self.tableView];
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.titleView.mas_bottom);
+            make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+            make.left.and.right.mas_equalTo(self.view);
+        }];
+
+    }else{
+        [self.view addSubview:self.tableView];
+    
+    }
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -190,10 +202,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (_viewType == JMPartTimeJobTypeManage) {
-        return self.titleView;
-
-    }else{
+    if (_viewType == JMPartTimeJobTypeDefault) {
         UIButton *headerBtn = [[UIButton alloc]init];
         headerBtn.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
         [headerBtn setTitle:@"再发一份兼职简历 + " forState:UIControlStateNormal];
@@ -202,6 +211,8 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         [headerBtn addTarget:self action:@selector(addPartTimeJobResume) forControlEvents:UIControlEventTouchUpInside];
         
         return headerBtn;
+    }else{
+        return [UIView new];
     }
 }
 
@@ -209,14 +220,18 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _titleView.frame.size.height, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = MASTER_COLOR;
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
-        _tableView.sectionHeaderHeight = 43;
+        if (_viewType == JMPartTimeJobTypeManage) {
+            _tableView.sectionHeaderHeight = 0;
+        }else{
+            _tableView.sectionHeaderHeight = 43;
+        }
         _tableView.sectionFooterHeight = 0;
         [_tableView registerNib:[UINib nibWithNibName:@"JMPostJobHomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
 

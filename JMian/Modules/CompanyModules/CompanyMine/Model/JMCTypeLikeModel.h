@@ -17,11 +17,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *work_salary_min;
 @property (nonatomic, copy) NSString *work_salary_max;
 @property (nonatomic, copy) NSString *work_description;
+@property (nonatomic, copy) NSString *work_user_id;
+
 @property (nonatomic, copy) NSString *work_work_name;
 @property (nonatomic, copy) NSString *work_address;
 @property (nonatomic, copy) NSString *work_company_logo_path;
 @property (nonatomic, copy) NSString *work_company_company_name;
 
+@property (nonatomic, copy) NSString *user_user_id;
+@property (nonatomic, copy) NSString *user_email;
+@property (nonatomic, copy) NSString *user_phone;
+@property (nonatomic, copy) NSString *user_nickname;
+@property (nonatomic, copy) NSString *user_avatar;
+@property (nonatomic, copy) NSString *foreign_key;
 
 @end
 

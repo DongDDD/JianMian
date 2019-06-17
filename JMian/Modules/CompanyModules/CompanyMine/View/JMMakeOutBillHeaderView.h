@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)didClickBillActionWithTag:(NSInteger)tag;
 -(void)chooseAdressAction;
 @end
+
 @interface JMMakeOutBillHeaderView : UIView
 @property (weak, nonatomic) IBOutlet UIButton *adressBtn;
 @property (weak, nonatomic) IBOutlet UIButton *YESBtn;

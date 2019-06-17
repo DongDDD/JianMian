@@ -17,7 +17,7 @@
 
 @interface JMBDetailWebViewController ()<JMVideoChatViewDelegate>
 
-@property (nonatomic, strong) NSDictionary *favorites;
+@property (nonatomic, copy) NSString *favorites_id;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (copy, nonatomic)NSString *task_order_id;
 @property (copy, nonatomic)NSString *user_id;
@@ -45,7 +45,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     colectBtn.frame = CGRectMake(45, 0, 25, 25);
-    if (self.favorites) {
+    if (self.favorites_id) {
         colectBtn.selected = YES;
     }else{
         colectBtn.selected = NO;
@@ -103,7 +103,7 @@
     NSLog(@"收藏");
     sender.selected = !sender.selected;
     if (sender.selected) {
-        [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.ability_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]createLikeWith_type:@"2" Id:self.ability_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
             [alert show];
@@ -113,7 +113,7 @@
         
     }else{
         
-        [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.ability_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.ability_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"取消收藏成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
             [alert show];
@@ -146,6 +146,12 @@
     [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSDictionary *dic = responsObject[@"data"];
+            //判断是否有被收藏过
+            if (![dic[@"favorites"] isEqual:[NSNull null]]) {
+                self.favorites_id = dic[@"favorites"][@"favorite_id"];
+                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+                
+            }
             [self ocToJs_dicData:dic];
             
             
@@ -191,7 +197,7 @@
     //JS调用OC
     if([message.name isEqualToString:@"aaa"]){
         NSLog(@"%@",message.body);
-        self.favorites = message.body;
+        self.favorites_id = message.body;
         [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
         
         //        self.labsJson = message.body;

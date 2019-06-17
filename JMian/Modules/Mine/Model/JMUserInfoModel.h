@@ -38,13 +38,22 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *card_birthday;
 @property (nonatomic, copy) NSString *card_denial_reason;
 
-@property (nonatomic, copy) NSString *companyReg_address;
-@property (nonatomic, copy) NSString *companyPosition;
-@property (nonatomic, copy) NSString *companyReal_id;
-@property (nonatomic, copy) NSString *companyId;
-@property (nonatomic, copy) NSString *companyCorporate;
-@property (nonatomic, copy) NSString *companyUser_id;
-@property (nonatomic, copy) NSString *companyName;
+@property (nonatomic, copy) NSString *company_real_reg_address;
+@property (nonatomic, copy) NSString *company_real_company_position;
+@property (nonatomic, copy) NSString *company_real_company_real_id;
+@property (nonatomic, copy) NSString *company_real_company_id;
+@property (nonatomic, copy) NSString *company_real_corporate;
+@property (nonatomic, copy) NSString *company_user_id;
+@property (nonatomic, copy) NSString *company_company_name;
+@property (nonatomic, copy) NSString *company_business_scope;
+@property (nonatomic, copy) NSString *company_reg_date;
+@property (nonatomic, copy) NSString *company_denial_reason;
+@property (nonatomic, copy) NSString *company_unified_credit_code;
+@property (nonatomic, copy) NSString *company_license_path;
+@property (nonatomic, copy) NSString *company_status;
+@property (nonatomic, copy) NSString *company_reg_capital;
+
+@property (nonatomic, copy) NSString *share;
 
 
 

@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "UIView+addGradualLayer.h"
+#import "JMHTTPManager+Login.h"
 @interface BaseViewController ()
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 @property (nonatomic, strong) UIView *HUDbackgroundView;
@@ -184,6 +185,7 @@
 
     
 }
+
 
 -(void)showProgressHUD_view:(UIView *)view{
     _HUDbackgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];

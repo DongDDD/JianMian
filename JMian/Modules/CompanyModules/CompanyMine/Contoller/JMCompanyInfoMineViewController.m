@@ -17,9 +17,13 @@
 #import "Demo3ViewController.h"
 #import "JMVideoPlayManager.h"
 #import "JMHTTPManager+Uploads.h"
+#import "JMBUserInfoViewController.h"
+#import "JMGetCompanyLocationViewController.h"
+#import "JMHTTPManager+Login.h"
 
 
-@interface JMCompanyInfoMineViewController ()<UIImagePickerControllerDelegate,UIPickerViewDelegate,JMCompanyDesciptionOfMineViewDelegate,Demo3ViewControllerDelegate,UINavigationControllerDelegate>
+
+@interface JMCompanyInfoMineViewController ()<UIImagePickerControllerDelegate,UIPickerViewDelegate,JMCompanyDesciptionOfMineViewDelegate,Demo3ViewControllerDelegate,UINavigationControllerDelegate,JMGetCompanyLocationViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property(nonatomic,strong)JMCompanyInfoModel *model;
@@ -37,7 +41,8 @@
 @property (nonatomic, strong) NSMutableArray *filesModelArray;//用来提取公司图片的数组
 
 
-@property (weak, nonatomic) IBOutlet UITextField *myPositionTextField;
+@property (weak, nonatomic) IBOutlet UIButton *myPositionBtn;
+
 @property (weak, nonatomic) IBOutlet UIButton *companyAdress;
 @property (weak, nonatomic) IBOutlet UIButton *companyDecriptionBtn;
 @property (weak, nonatomic) IBOutlet UILabel *abbrLab;
@@ -47,6 +52,7 @@
 @property (weak, nonatomic) IBOutlet UIView *facingView;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 
+@property (nonatomic, strong)AMapPOI *POIModel;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property(nonatomic,strong) NSArray *pickerArray;
 @property (nonatomic,strong)UIButton *selectedBtn;
@@ -77,12 +83,13 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(headerImgAction)];
     [self.topView addGestureRecognizer:tap];
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [self getNewUserInfo];
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -93,6 +100,20 @@
     
 }
 
+-(void)getNewUserInfo{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        [self.myPositionBtn setTitle:userModel.company_position forState:UIControlStateNormal];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 
 
 -(void)getData{
@@ -203,11 +224,30 @@
     
     [self uploadVideo];
 }
+
+- (IBAction)myPositionActoin:(UIButton *)sender {
+    
+    JMBUserInfoViewController *vc = [[JMBUserInfoViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 - (IBAction)chooseCompanyAdress:(UIButton *)sender {
     
+    JMGetCompanyLocationViewController *vc = [[JMGetCompanyLocationViewController alloc]init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+-(void)sendAdress_Data:(AMapPOI *)data
+{
+    self.POIModel = data;
+    NSString *adr = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
+    [self.companyAdress setTitle:adr forState:UIControlStateNormal];
     
     
 }
+
 
 //上传公司图片
 - (IBAction)upLoadPicture:(UIButton *)sender {

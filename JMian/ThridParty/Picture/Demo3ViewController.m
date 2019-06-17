@@ -19,6 +19,10 @@
 #import "JMHTTPManager+UpdateAbility.h"
 #import "JMAbilityCellData.h"
 #import "JMHTTPManager+DeleteAbilityImage.h"
+#import "JMHTTPManager+FectchTaskInfo.h"
+#import "JMTaskPartTimejobDetailModel.h"
+
+
 static const CGFloat kPhotoViewMargin = 12.0;
 
 @interface Demo3ViewController ()<HXPhotoViewDelegate>
@@ -116,6 +120,32 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
 }
 
+#pragma mark - 获取数据
+-(void)getGoodsImageData{
+    [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMTaskPartTimejobDetailModel *model = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+//            //赋值
+//            [self setRightBtnValues_model:model];
+            for (JMImageModel *data in model.images) {
+                
+                [self.image_paths addObject:data.file_path];
+            }
+            
+            [self initView];
+
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
+    
+}
+
+
+
+
 -(void)initView{
     
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
@@ -141,19 +171,31 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [self setRightBtnTextName:@"保存"];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
-//    self.navigationController.navigationBar.translucent = NO;
+    //    self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = YES;
-//    [self initView];
+    //    [self initView];
     if (_viewType == Demo3ViewPartTime) {
-         // 获得图片数组布局
+        // 获得图片数组布局
         if (self.filesModelArray.count > 0) {
             for (JMImageModel *imageModel in self.filesModelArray) {
                 [self.image_paths addObject:imageModel.file_path];
             }
         }
         [self initView];
-
-    }else{
+        
+    }else if (_viewType == Demo3ViewPostGoodsPositionAdd) {
+        for (NSString *url in self.image_paths) {
+            NSString *imgUrl = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
+            [self.image_paths addObject:imgUrl];
+        }
+        
+        
+        [self initView];
+        
+    }else if (_viewType == Demo3ViewPostGoodsPositionEditing) {
+        
+        [self getGoodsImageData];
+    }else if (_viewType == Demo3ViewDefault) {
         //拿公司信息传过来的filesModelArray里面的图片，获得图片数组布局
         if (self.filesModelArray.count > 0) {
             self.image_paths = [NSMutableArray array];
@@ -163,11 +205,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
         }
         [self getData];//获取服务器最新图片数组
     }
-   
     
-//    NSMutableArray *array = [NSMutableArray arrayWithObjects:@"http://oss-cn-hangzhou.aliyuncs.com/tsnrhapp/shop/photos/857980fd0acd3caf9e258e42788e38f5_0.gif",@"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0034821a-6815-4d64-b0f2-09103d62630d.jpg",@"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/0be5118d-f550-403e-8e5c-6d0badb53648.jpg",@"http://tsnrhapp.oss-cn-hangzhou.aliyuncs.com/1466408576222.jpg", nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAddImg:) name:@"Notification_addImg" object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getAddImgArray:) name:@"Notification_addImgArray" object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImage:) name:@"SendImageNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteImage:) name:@"DeleteImgNotification" object:nil];
 
@@ -193,13 +231,20 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [self.navigationController popViewControllerAnimated:YES];
     [self lookClick];
     NSLog(@"上传图片---：%@",_addImage_paths);
-    if (_addImage_paths.count>0) {
-        //            上传partTimeJob图片
+    if ( _addImage_paths.count > 0 ) {
         if (_viewType == Demo3ViewPartTime) {
+            //            上传partTimeJob图片
             [self uploadPartTimePicWithImages:_addImage_paths];
-        }else{
+        }else if (_viewType == Demo3ViewDefault) {
             //公司上传图片
             [self uploadCompanyWithImages:_addImage_paths];
+        }else if (_viewType == Demo3ViewPostGoodsPositionAdd) {
+            //公司上传图片
+            if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
+                
+                [self.image_paths addObjectsFromArray:self.addImage_paths];
+                 [_delegate sendArray_addImageUrls:self.image_paths];
+            }
         }
       
     }

@@ -66,7 +66,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pI0-XN-HtZ">
-                                <rect key="frame" x="73" y="82" width="35.5" height="17"/>
+                                <rect key="frame" x="73" y="82" width="207" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -96,7 +96,7 @@
                                     <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="chatAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DAi-wB-dNA"/>
+                                    <action selector="chatAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7eG-hc-xL3"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -125,6 +125,7 @@
                             <constraint firstAttribute="height" constant="192" id="dqD-lB-0vs"/>
                             <constraint firstAttribute="bottom" secondItem="43K-wT-VTO" secondAttribute="bottom" constant="10" id="jeg-53-xee"/>
                             <constraint firstAttribute="bottom" secondItem="i5P-AI-faF" secondAttribute="bottom" constant="47" id="ly6-RD-FyI"/>
+                            <constraint firstAttribute="trailing" secondItem="pI0-XN-HtZ" secondAttribute="trailing" constant="20" id="mZ3-dO-zqz"/>
                             <constraint firstAttribute="bottom" secondItem="Lu3-KG-XhW" secondAttribute="bottom" constant="10" id="rdn-VU-M9F"/>
                             <constraint firstItem="660-Wy-n2m" firstAttribute="leading" secondItem="tc3-vi-Zsv" secondAttribute="leading" constant="13" id="stD-0N-lJl"/>
                             <constraint firstItem="Lu3-KG-XhW" firstAttribute="leading" secondItem="uth-ef-dfR" secondAttribute="trailing" constant="10" id="y0A-gs-tQN"/>
