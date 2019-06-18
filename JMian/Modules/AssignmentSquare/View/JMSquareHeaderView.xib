@@ -85,6 +85,11 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="incomeLab" destination="aK7-Qj-yfQ" id="sgY-be-NVD"/>
+                <outlet property="taskCompletedLab" destination="ER6-O9-rfN" id="K7j-SI-YF1"/>
+                <outlet property="taskProcessingLab" destination="rrS-t6-VLT" id="cb3-Yp-Onk"/>
+            </connections>
             <point key="canvasLocation" x="47.826086956521742" y="-187.16517857142856"/>
         </view>
     </objects>

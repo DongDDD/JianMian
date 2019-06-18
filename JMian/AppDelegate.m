@@ -97,6 +97,7 @@
     }
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alert show];
+  
 }
 
 
@@ -129,7 +130,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //向微信注册
-    [WXApi registerApp:@"wx04f4e125be6826c5"];
+    [WXApi registerApp:@"wx54740079e4464d53"];
     //高德地图
     [AMapServices sharedServices].apiKey = AMapAPIKey;
     [AMapServices sharedServices].enableHTTPS = YES;

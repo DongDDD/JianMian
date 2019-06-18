@@ -12,10 +12,18 @@
 #import "JMHTTPManager+CreateTaskOrder.h"
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMCompanyIntroduceViewController.h"
+#import "JMShareView.h"
+#import "WXApi.h"
+#import "JMCDetailModel.h"
 
-@interface JMCDetailWebViewController ()
+
+@interface JMCDetailWebViewController ()<JMShareViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic, copy) NSString *favorites_id;
+@property (nonatomic, strong) JMShareView *choosePayView;
+@property (nonatomic ,strong) UIView *BGPayView;
+@property (nonatomic ,strong) JMCDetailModel *detailModel;
+
 
 @end
 
@@ -28,13 +36,12 @@
     [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"bbb"];
     [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"ccc"];
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-
+    [self initView];
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.view addSubview:self.bottomView];
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
@@ -46,6 +53,22 @@
     [super viewDidDisappear:animated];
     
 }
+
+-(void)initView{
+    [self.view addSubview:self.bottomView];
+    [self.view addSubview:self.choosePayView];
+    [self.view addSubview:self.BGPayView];
+
+    [self.BGPayView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(_choosePayView.mas_top);
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.mas_topLayoutGuide);
+    }];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenChoosePayView)];
+    [self.BGPayView addGestureRecognizer:tap];
+
+}
+
 -(void)fanhui{
     [super fanhui];
     // 用完移除
@@ -53,6 +76,9 @@
     [[self.webView configuration].userContentController removeScriptMessageHandlerForName:@"ccc"];
 
 }
+
+
+
 
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
 
@@ -87,6 +113,14 @@
 
 }
 
+-(void)right2Action{
+
+    [self showChoosePayView];
+
+}
+
+
+
 -(void)rightAction:(UIButton *)sender{
     NSLog(@"收藏");
     sender.selected = !sender.selected;
@@ -114,6 +148,44 @@
     
 }
 
+-(void)showChoosePayView{
+    [self.choosePayView setHidden:NO];
+    [self.BGPayView setHidden:NO];
+    
+    [UIView animateWithDuration:0.18 animations:^{
+        self.choosePayView.frame =CGRectMake(0, self.view.frame.size.height-205, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
+        
+        
+    }];
+    
+}
+
+-(void)hiddenChoosePayView{
+    [self.choosePayView setHidden:YES];
+    [self.BGPayView setHidden:YES];
+    [UIView animateWithDuration:0.18 animations:^{
+        self.choosePayView.frame =CGRectMake(0,SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
+        
+        
+    }];
+    
+}
+
+#pragma mark - 点击事件
+
+-(void)shareViewCancelAction{
+    [self hiddenChoosePayView];
+}
+
+-(void)shareViewLeftAction{
+    
+    [self wxShare:0];
+ }
+-(void)shareViewRightAction{
+    [self wxShare:1];
+
+}
+
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
     
@@ -124,27 +196,62 @@
     
     [self sendResquest];
 }
+#pragma mark -- 获取数据
 
 -(void)getData{
-
+    
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
+            self.detailModel = [JMCDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            
             NSDictionary *dic = responsObject[@"data"];
             //判断是否有被收藏过
             if (![dic[@"favorites"] isEqual:[NSNull null]]) {
                 self.favorites_id = dic[@"favorites"][@"favorite_id"];
                 [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-
+                
             }
-          
+            
             [self ocToJs_dicData:dic];
         }
-
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
     
 }
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n
+{   //检测是否安装微信
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = self.detailModel.task_title;
+    urlMessage.description = @"来得米，招人，找活，找你想要的！" ;
+    
+//    UIImageView *imgView = [[UIImageView alloc]init];
+//    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+//
+    
+    UIImage *image = [UIImage imageNamed:@"jianmian_home"];
+    //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    [urlMessage setThumbData:thumbData];
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    webObj.webpageUrl = self.detailModel.share_url;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+
+}
+
+
 //申请职位
 -(void)sendResquest{
     [[JMHTTPManager sharedInstance]createTaskOrder_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -208,7 +315,30 @@
     }
     
 }
+#pragma mark -- getter
 
+-(JMShareView *)choosePayView{
+    if (!_choosePayView) {
+        _choosePayView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
+        _choosePayView.delegate = self;
+        [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat_pay"] forState:UIControlStateNormal];
+        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Share_WeChat_friends"] forState:UIControlStateNormal];
+        _choosePayView.lab1.text = @"微信分享";
+        _choosePayView.lab2.text = @"朋友圈";
+    }
+    return _choosePayView;
+}
+
+-(UIView *)BGPayView{
+    if (!_BGPayView) {
+        _BGPayView = [[UIView alloc]init];
+        _BGPayView.backgroundColor = [UIColor blackColor];
+        _BGPayView.alpha = 0.5;
+        _BGPayView.hidden = YES;
+    }
+    return  _BGPayView;
+    
+}
 
 /*
 #pragma mark - Navigation

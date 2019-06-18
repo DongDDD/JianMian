@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="80" id="KGk-i7-Jjw" customClass="JMMoneyDetailTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="63.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019-6-15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3pv-fC-x9s">
+                        <rect key="frame" x="20" y="39" width="65" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="jKR-fl-Awl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+800" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2x8-5M-ohh">
+                        <rect key="frame" x="258" y="12" width="42" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="入账" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rwt-XB-M2J">
+                        <rect key="frame" x="20" y="16" width="31" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="kdb-6n-x55"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="2x8-5M-ohh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="Mgc-ec-6v6"/>
+                    <constraint firstItem="Rwt-XB-M2J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="VeQ-cJ-VkW"/>
+                    <constraint firstItem="3pv-fC-x9s" firstAttribute="leading" secondItem="Rwt-XB-M2J" secondAttribute="leading" id="dNW-T8-JcG"/>
+                    <constraint firstItem="3pv-fC-x9s" firstAttribute="top" secondItem="Rwt-XB-M2J" secondAttribute="bottom" constant="8" id="eHs-i5-mhK"/>
+                    <constraint firstItem="Rwt-XB-M2J" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="pp0-YD-9G5"/>
+                    <constraint firstAttribute="trailing" secondItem="2x8-5M-ohh" secondAttribute="trailing" constant="20" id="uag-Zb-6g0"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="moneyLab" destination="2x8-5M-ohh" id="1NW-OV-3U5"/>
+                <outlet property="timeLab" destination="3pv-fC-x9s" id="RY1-nS-aWh"/>
+                <outlet property="titleLab" destination="Rwt-XB-M2J" id="R1t-ZC-21q"/>
+            </connections>
+            <point key="canvasLocation" x="-84.057971014492765" y="93.75"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -78,7 +78,7 @@
         
         if ([data.snapshot_type_label_id isEqualToString:@"1043"] ) {
         
-            [self.rightBtn setTitle:@"通过&发送产品链接" forState:UIControlStateNormal];
+            [self.rightBtn setTitle:@"通过" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.rightBtn.backgroundColor = MASTER_COLOR;
         }else{

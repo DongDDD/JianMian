@@ -54,8 +54,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *company_reg_capital;
 
 @property (nonatomic, copy) NSString *share;
-
-
+// 累计收入
+@property (nonatomic, copy) NSString *available_amount_c;
+@property (nonatomic, copy) NSString *unusable_amount_c;
+@property (nonatomic, copy) NSString *available_amount_b;
+@property (nonatomic, copy) NSString *unusable_amount_b;
+@property (nonatomic, copy) NSString *task_completed_count;
+@property (nonatomic, copy) NSString *task_processing_count;
 
 
 @end

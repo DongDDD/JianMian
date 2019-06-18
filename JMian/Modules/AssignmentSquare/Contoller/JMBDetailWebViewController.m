@@ -14,8 +14,12 @@
 #import "JMChatViewViewController.h"
 #import "JMVideoChatView.h"
 #import "JMInterViewModel.h"
+#import "JMShareView.h"
+#import "WXApi.h"
+#import "JMBDetailModel.h"
 
-@interface JMBDetailWebViewController ()<JMVideoChatViewDelegate>
+
+@interface JMBDetailWebViewController ()<JMVideoChatViewDelegate,JMShareViewDelegate>
 
 @property (nonatomic, copy) NSString *favorites_id;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -23,6 +27,10 @@
 @property (copy, nonatomic)NSString *user_id;
 @property (nonatomic, strong) JMVideoChatView *videoChatView;
 @property (nonatomic, strong) JMInterViewModel *interViewModel;
+
+@property (nonatomic, strong) JMShareView *choosePayView;
+@property (nonatomic ,strong) UIView *BGPayView;
+@property (nonatomic ,strong) JMBDetailModel *detailModel;
 
 
 @end
@@ -34,9 +42,24 @@
     self.title = @"兼职人才详情";
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self setHTMLPath:@"SecondModulesHTML/B/Bdetail.html"];
-    [self.view addSubview:self.bottomView];
+    [self initView];
     // Do any additional setup after loading the view from its nib.
 }
+-(void)initView{
+    [self.view addSubview:self.bottomView];
+    [self.view addSubview:self.choosePayView];
+    [self.view addSubview:self.BGPayView];
+    
+    [self.BGPayView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(_choosePayView.mas_top);
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.mas_topLayoutGuide);
+    }];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenChoosePayView)];
+    [self.BGPayView addGestureRecognizer:tap];
+    
+}
+
 
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
     
@@ -71,6 +94,50 @@
     
 }
 
+#pragma mark - 点击事件
+-(void)right2Action{
+   
+    [self showChoosePayView];
+
+}
+
+
+-(void)shareViewCancelAction{
+    [self hiddenChoosePayView];
+}
+
+-(void)shareViewLeftAction{
+    
+    [self wxShare:0];
+}
+
+-(void)shareViewRightAction{
+    [self wxShare:1];
+    
+}
+
+-(void)showChoosePayView{
+    [self.choosePayView setHidden:NO];
+    [self.BGPayView setHidden:NO];
+    
+    [UIView animateWithDuration:0.18 animations:^{
+        self.choosePayView.frame =CGRectMake(0, self.view.frame.size.height-205, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
+        
+        
+    }];
+    
+}
+
+-(void)hiddenChoosePayView{
+    [self.choosePayView setHidden:YES];
+    [self.BGPayView setHidden:YES];
+    [UIView animateWithDuration:0.18 animations:^{
+        self.choosePayView.frame =CGRectMake(0,SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
+        
+        
+    }];
+    
+}
 - (IBAction)bottomLeftAction:(UIButton *)sender {
     [self createChatRequstWithForeign_key:self.ability_id user_id:_user_id];
 }
@@ -97,6 +164,37 @@
     [self.navigationController setNavigationBarHidden:NO];
 
 }
+
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n
+{   //检测是否安装微信
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = self.detailModel.user_nickname;
+    urlMessage.description = self.detailModel.type_label_name ;
+    
+    //    UIImageView *imgView = [[UIImageView alloc]init];
+    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+    //
+    
+    UIImage *image = [UIImage imageNamed:@"jianmian_home"];
+    //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    [urlMessage setThumbData:thumbData];
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    webObj.webpageUrl = self.detailModel.share_url;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+    
+}
+
 #pragma mark - 数据请求
 
 -(void)rightAction:(UIButton *)sender{
@@ -145,6 +243,9 @@
 -(void)getData{
     [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
+            
+            self.detailModel = [JMBDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
             NSDictionary *dic = responsObject[@"data"];
             //判断是否有被收藏过
             if (![dic[@"favorites"] isEqual:[NSNull null]]) {
@@ -210,6 +311,30 @@
 }
 
 
+#pragma mark -- getter
+
+-(JMShareView *)choosePayView{
+    if (!_choosePayView) {
+        _choosePayView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
+        _choosePayView.delegate = self;
+        [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat_pay"] forState:UIControlStateNormal];
+        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Share_WeChat_friends"] forState:UIControlStateNormal];
+        _choosePayView.lab1.text = @"微信分享";
+        _choosePayView.lab2.text = @"朋友圈";
+    }
+    return _choosePayView;
+}
+
+-(UIView *)BGPayView{
+    if (!_BGPayView) {
+        _BGPayView = [[UIView alloc]init];
+        _BGPayView.backgroundColor = [UIColor blackColor];
+        _BGPayView.alpha = 0.5;
+        _BGPayView.hidden = YES;
+    }
+    return  _BGPayView;
+    
+}
 
 /*
 #pragma mark - Navigation

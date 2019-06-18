@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *cardNumTextField;
 @property (weak, nonatomic) IBOutlet UITextField *openAccountTextField;
 @property (weak, nonatomic) IBOutlet UIScrollView *nextStepBtn;
+@property (weak, nonatomic) IBOutlet UILabel *titleNameLab;
 
 
 @end
@@ -26,9 +27,13 @@
     [super viewDidLoad];
     self.title = @"绑定银行卡";
     self.scrollView.delegate = self;
-    // Do any additional setup after loading the view from its nib.
-    // Do any additional setup after loading the view from its nib.
-
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        self.titleNameLab.text = @"公司名称";
+    }else{
+        self.titleNameLab.text = @"真实姓名";
+    }
+ 
     _companyNameTextField.delegate = self;
     _bankNameTextField.delegate = self;
     _cardNumTextField.delegate = self;

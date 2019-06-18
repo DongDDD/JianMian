@@ -43,7 +43,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitleViewImageViewName:@"jianmian_home"];
+    [self setTitleViewImageViewName:@"demi_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
     self.per_page = 15;
     self.page = 1;
@@ -307,6 +307,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         if ([userModel.type isEqualToString:C_Type_USER]) {
             JMSquareHeaderView *view =  [JMSquareHeaderView new];
+            [view setUserModel:userModel];
             return view;
         }else{
             return [UIView new];

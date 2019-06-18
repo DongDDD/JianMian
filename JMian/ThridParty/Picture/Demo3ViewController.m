@@ -184,11 +184,22 @@ static const CGFloat kPhotoViewMargin = 12.0;
         [self initView];
         
     }else if (_viewType == Demo3ViewPostGoodsPositionAdd) {
-        for (NSString *url in self.image_paths) {
-            NSString *imgUrl = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
-            [self.image_paths addObject:imgUrl];
-        }
-        
+//        NSMutableArray *arr = [NSMutableArray array];
+//        [arr addObjectsFromArray:self.image_paths];
+//         [self.image_paths removeAllObjects];
+//        for (NSString *url in arr) {
+//            if (![url containsString:@"https://%@"]) {
+//                NSString *url1 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
+//                [self.image_paths addObject:url1];
+//
+//            }else{
+//                [self.image_paths addObject:url];
+//
+//            }
+//
+//        }
+//
+      
         
         [self initView];
         
@@ -241,8 +252,14 @@ static const CGFloat kPhotoViewMargin = 12.0;
         }else if (_viewType == Demo3ViewPostGoodsPositionAdd) {
             //公司上传图片
             if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
+                NSMutableArray *array = [NSMutableArray array];
+                for (NSString *url  in self.addImage_paths) {
+                    NSString *url1 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
+                    [array addObject:url1];
+                }
                 
-                [self.image_paths addObjectsFromArray:self.addImage_paths];
+                
+                [self.image_paths addObjectsFromArray:array];
                  [_delegate sendArray_addImageUrls:self.image_paths];
             }
         }

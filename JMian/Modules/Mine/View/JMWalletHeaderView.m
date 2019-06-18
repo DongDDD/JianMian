@@ -38,17 +38,33 @@
     iconImg.layer.masksToBounds = YES;
     [self addSubview:iconImg];
     
-    UILabel *money = [[UILabel alloc]init];
-    money.text = @"00.00";
-    money.textColor = [UIColor whiteColor];
-    money.font = [UIFont systemFontOfSize:45];
-    [self addSubview:money];
+    _money = [[UILabel alloc]init];
+    _money.text = @"00.00";
+    _money.textColor = [UIColor whiteColor];
+    _money.font = [UIFont systemFontOfSize:30];
+    [self addSubview:_money];
     
     UILabel *moneyBottomLab = [[UILabel alloc]init];
-    moneyBottomLab.text = @"我的余额";
+    moneyBottomLab.text = @"可用金额";
     moneyBottomLab.font = [UIFont systemFontOfSize:12];
     moneyBottomLab.textColor = [UIColor whiteColor];
     [self addSubview:moneyBottomLab];
+    
+    _money2 = [[UILabel alloc]init];
+    _money2.text = @"00.00";
+    _money2.textColor = [UIColor whiteColor];
+    _money2.font = [UIFont systemFontOfSize:30];
+    [self addSubview:_money2];
+    
+    UILabel *moneyBottomLab2 = [[UILabel alloc]init];
+    moneyBottomLab2.text = @"冻结金额";
+    moneyBottomLab2.font = [UIFont systemFontOfSize:12];
+    moneyBottomLab2.textColor = [UIColor whiteColor];
+    [self addSubview:moneyBottomLab2];
+    
+    UIView *centerView = [[UIView alloc]init];
+    centerView.backgroundColor = [UIColor whiteColor];
+    [self addSubview:centerView];
     
     
     [BGImgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,18 +80,49 @@
         make.top.mas_equalTo(BGImgView).offset(-26);
     }];
     
-    [money mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_money mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(BGImgView);
-        make.centerX.mas_equalTo(self);
+        make.left.mas_equalTo(self.mas_left).offset(SCREEN_WIDTH*0.13);
         
     }];
     
     [moneyBottomLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(_money);
+        make.top.mas_equalTo(_money.mas_bottom).offset(18);
+    }];
+    
+    [_money2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerY.mas_equalTo(BGImgView);
+        make.right.mas_equalTo(self.mas_right).offset(-SCREEN_WIDTH*0.13);
+        
+    }];
+    
+    [moneyBottomLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(_money2);
+        make.top.mas_equalTo(_money2.mas_bottom).offset(18);
+    }];
+    
+    [centerView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self);
-        make.top.mas_equalTo(money.mas_bottom).offset(18);
+        make.centerY.mas_equalTo(moneyBottomLab);
+        make.height.mas_equalTo(11);
+        make.width.mas_equalTo(1);
     }];
     
 }
+
+
+-(void)setUserModel:(JMUserInfoModel *)userModel{
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        self.money.text = [NSString stringWithFormat:@"%@",userModel.available_amount_b];
+        self.money2.text = [NSString stringWithFormat:@"%@",userModel.unusable_amount_b];
+    }else{
+        self.money.text = [NSString stringWithFormat:@"%@",userModel.available_amount_c];
+        self.money2.text = [NSString stringWithFormat:@"%@",userModel.unusable_amount_c];
+    }
+
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -55,7 +55,7 @@
 -(void)rightAction{
     [self.goodsNameTextfield resignFirstResponder];
     [self.goodsPriceTextField resignFirstResponder];
-    [self.decriptionTextView resignFirstResponder];
+    [self.decriptionTextView.contentTextView resignFirstResponder];
     
     if (_goods_title.length > 0 || _goods_price.length > 0 || _goods_desc.length > 0) {
         if(_delegate && [_delegate respondsToSelector:@selector(didWriteGoodsDescWithGoodsName:price:goodsDetaolInfo:)]){

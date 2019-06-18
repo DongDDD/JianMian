@@ -228,6 +228,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 
 - (void)sendArray_addImageUrls:(NSMutableArray *)addImageUrls {
+    
      self.image_arr = addImageUrls;
     NSLog(@"addImageUrls%@",addImageUrls);
     [self.postGoodsImagesView.goodsImageBtn setTitle:@"已上传" forState:UIControlStateNormal];
@@ -291,7 +292,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 //        _demo3ViewVC.image_paths = array;
 //
 //    }
-    
+    _demo3ViewVC.image_paths = _image_arr.mutableCopy;
     [self.navigationController pushViewController:_demo3ViewVC animated:YES];
  
    

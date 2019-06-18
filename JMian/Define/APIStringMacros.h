@@ -115,6 +115,9 @@
 #define Fectch_TaskOrderInfo_URL @"api/task/order/info"
 //C端申请兼职任务
 #define Create_TaskOrder_URL @"api/task/order/create"
+//模拟付款
+#define Pay_Money_URL @"api/payment/notify/wechat"
+
 //改变任务状态
 #define Change_TaskOrderStatus_URL @"api/task/order/status"
 //创建任务评价
@@ -125,6 +128,11 @@
 #define Fectch_OrderList_URL @"api/order/paginate"
 //视频列表
 #define Fectch_VideoList_URL @"api/video/lists"
+//明细
+#define Fectch_MoneyDetails_URL @"api/user/money/details"
+#define Fectch_WalletDetails_URL @"api/user/wallet/details"
+//提现
+#define Money_Withdraw_URL @"api/user/money/withdraw"
 
 //会话列表
 #define Chat_List_URL @"converse/lists"

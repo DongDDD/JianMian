@@ -9,6 +9,7 @@
 #import "JMWalletViewController.h"
 #import "JMWalletHeaderView.h"
 #import "JMWithdrawViewController.h"
+#import "JMMoneyDetailsViewController.h"
 
 @interface JMWalletViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -17,6 +18,8 @@
 @property(nonatomic,strong)NSArray *imgArr;
 
 @property(nonatomic,strong)NSArray *titleArr;
+
+@property(nonatomic,strong)JMWalletHeaderView *walletHeaderView;
 
 @end
 
@@ -78,8 +81,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-    [self.navigationController pushViewController:[[JMWithdrawViewController alloc]init] animated:YES];
+    if (indexPath.row == 0) {
+        [self.navigationController pushViewController:[[JMWithdrawViewController alloc]init] animated:YES];
+        
+    }else{
+          [self.navigationController pushViewController:[[JMMoneyDetailsViewController alloc]init] animated:YES];
+    
+    }
 
 }
 
@@ -91,7 +99,8 @@
         _tableView.backgroundColor = BG_COLOR;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.tableHeaderView = [[JMWalletHeaderView alloc]initWithFrame:CGRectMake(0, 1, 0, 225)];
+        JMWalletHeaderView *walletHeaderView = self.walletHeaderView;
+        _tableView.tableHeaderView = walletHeaderView;
 //        _tableView.sectionFooterHeight = 225;
         _tableView.rowHeight = 64;
         _tableView.sectionHeaderHeight = 235;
@@ -100,6 +109,14 @@
     return _tableView;
 }
 
+-(JMWalletHeaderView *)walletHeaderView{
+    if (_walletHeaderView == nil) {
+        _walletHeaderView = [[JMWalletHeaderView alloc]initWithFrame:CGRectMake(0, 1, 0, 225)];
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        [_walletHeaderView setUserModel:userModel];
+    }
+    return _walletHeaderView;
+}
 
 
 

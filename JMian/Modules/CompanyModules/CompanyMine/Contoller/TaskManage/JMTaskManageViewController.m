@@ -22,6 +22,7 @@
 #import "JMHTTPManager+CreateConversation.h"
 #import "JMMessageListModel.h"
 #import "JMChatViewViewController.h"
+#import "JMHTTPManager+PayMoney.h"
 
 
 @interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate>
@@ -99,15 +100,15 @@
             _user_id = data.user_user_id;
             [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
             return;
-        }else if([data.status isEqualToString:Task_Finish]) {
+        }else if ([data.status isEqualToString:Task_Finish]) {
             //B改状态------B端确认完成任务&支付尾款
             [self payWithData:data];
             return;
-        }else if([data.status isEqualToString:Task_Pass]) {
+        }else if ([data.status isEqualToString:Task_Pass]) {
             //B改状态------销售分成任务的 点击结束任务按钮
             [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
             return;
-        }else if([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_boss isEqualToString:@"0"]) {
+        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_boss isEqualToString:@"0"]) {
             //B——创建评价
             JMTaskCommetViewController *vc = [[JMTaskCommetViewController alloc]init];
             [vc setData:data];
@@ -125,7 +126,7 @@
                 [self changeTaskStatusRequestWithStatus:Task_Finish task_order_id:data.task_order_id];
                 return;
             }
-        }else if([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_user isEqualToString:@"0"]) {
+        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_user isEqualToString:@"0"]) {
             //C——-创建评价
             JMTaskCommetViewController *vc = [[JMTaskCommetViewController alloc]init];
             [vc setData:data];
@@ -316,8 +317,20 @@
     
 }
 
+-(void)payMoneyRequestWithNo:(NSString *)no amount:(NSString *)amount{
+    
+    [[JMHTTPManager sharedInstance]payMoneyOrder_no:no amount:amount successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        NSLog(@"支付成功");
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
 //拉起微信支付
 - (void)wechatPayWithModel:(JMOrderPaymentModel *)model{
+    
     PayReq* req = [[PayReq alloc] init];
     req.partnerId = model.wx_partnerid;
     req.prepayId = model.wx_prepayid;
@@ -328,12 +341,17 @@
     [WXApi sendReq:req];
     
     
+//    [self payMoneyRequestWithNo:model.serial_no amount:@"130"];
+    
+    
 }
 
 
 //拉起支付宝支付
 -(void)alipayWithModel:(JMOrderPaymentModel *)model{
-    // 发起支付
+    [self payMoneyRequestWithNo:model.serial_no amount:@"130"];
+
+//    // 发起支付
     [[AlipaySDK defaultService] payOrder:model.alipay fromScheme:@"alisdkdemo" callback:^(NSDictionary *resultDic) {
         NSLog(@"支付结果 reslut = %@",resultDic);
     }];

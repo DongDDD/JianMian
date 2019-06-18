@@ -45,6 +45,11 @@
         make.bottom.mas_equalTo(self.view);
         make.left.and.right.mas_equalTo(self.view);
     }];
+    [self.jobHomeListVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.BGView);
+        make.bottom.mas_equalTo(self.BGView);
+        make.left.and.right.mas_equalTo(self.view);
+    }];
     [self.partTimeJobHomeListVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.BGView);
         make.bottom.mas_equalTo(self.BGView);

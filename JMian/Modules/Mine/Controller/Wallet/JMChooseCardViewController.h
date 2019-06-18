@@ -7,10 +7,17 @@
 //
 
 #import "BaseViewController.h"
+#import "JMBankCardData.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol JMChooseCardViewControllerDelegate <NSObject>
 
+-(void)didChooseBankCardWithData:(JMBankCardData *)data;
+
+@end
 @interface JMChooseCardViewController : BaseViewController
+
+@property(nonatomic, weak)id<JMChooseCardViewControllerDelegate>delegate;
 
 @end
 

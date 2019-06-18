@@ -8,8 +8,13 @@
 
 #import "JMWithdrawViewController.h"
 #import "JMChooseCardViewController.h"
-@interface JMWithdrawViewController () <UITextFieldDelegate>
+#import "JMHTTPManager+MoneyWithDraw.h"
+#import "JMBankCardData.h"
+@interface JMWithdrawViewController () <UITextFieldDelegate,JMChooseCardViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *cashTextField;
+@property (strong, nonatomic)JMBankCardData *bankCardData;
+@property (weak, nonatomic) IBOutlet UILabel *cardNumberLab;
+@property (weak, nonatomic) IBOutlet UILabel *bankNameLab;
 
 @end
 
@@ -18,10 +23,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.title = @"申请提现";
     self.cashTextField.delegate = self;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
 }
+
 -(void)hideKeyboard{
    
     [_cashTextField resignFirstResponder];
@@ -29,8 +36,34 @@
  
 }
 
+-(void)didChooseBankCardWithData:(JMBankCardData *)data{
+    _bankCardData = data;
+    self.bankNameLab.text = data.bank_name;
+    NSString *lastFourStr = [data.card_number substringFromIndex:data.card_number.length- 4];
+    NSString *str1 = [NSString stringWithFormat:@"尾号%@ 储蓄卡",lastFourStr];
+    self.cardNumberLab.text = str1;
+  
+}
+- (IBAction)withDrawAction:(UIButton *)sender {
+    
+    [self withDrawRequest];
+    
+}
+
+-(void)withDrawRequest{
+    [_cashTextField resignFirstResponder];
+    [[JMHTTPManager sharedInstance]withdrawMoneyWithBank_card_id:_bankCardData.bank_card_id amount:_cashTextField.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
 - (IBAction)chooseCardTap:(UITapGestureRecognizer *)sender {
-    [self.navigationController pushViewController:[[JMChooseCardViewController alloc]init] animated:YES];
+    JMChooseCardViewController *vc = [[JMChooseCardViewController alloc]init];
+    vc.delegate = self;
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField

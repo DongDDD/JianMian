@@ -239,9 +239,6 @@
 		0425656F229EE211000614E7 /* qidong.png@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0425656C229EE210000614E7 /* qidong.png@2x.png */; };
 		04256570229EE211000614E7 /* qidong.png@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0425656D229EE211000614E7 /* qidong.png@3x.png */; };
 		04256571229EE211000614E7 /* qidong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0425656E229EE211000614E7 /* qidong.png */; };
-		04256575229EE21D000614E7 /* yao.png in Resources */ = {isa = PBXBuildFile; fileRef = 04256572229EE21C000614E7 /* yao.png */; };
-		04256576229EE21D000614E7 /* yao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04256573229EE21C000614E7 /* yao@3x.png */; };
-		04256577229EE21D000614E7 /* yao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04256574229EE21C000614E7 /* yao@2x.png */; };
 		0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0425CB56228449D600E08587 /* JMVideoChatViewController.m */; };
 		0425CB59228449D600E08587 /* JMVideoChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0425CB57228449D600E08587 /* JMVideoChatViewController.xib */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
@@ -358,6 +355,25 @@
 		0488E59922953B6700C2E398 /* JMCityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0488E59722953B6700C2E398 /* JMCityListViewController.m */; };
 		0488E59A22953B6700C2E398 /* JMCityListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0488E59822953B6700C2E398 /* JMCityListViewController.xib */; };
 		0488E59D2295438100C2E398 /* JMCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0488E59C2295438100C2E398 /* JMCityModel.m */; };
+		048A0DCA22B887D5006530EC /* JMHTTPManager+PayMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DC922B887D5006530EC /* JMHTTPManager+PayMoney.m */; };
+		048A0DCD22B89369006530EC /* JMMoneyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DCC22B89369006530EC /* JMMoneyDetailsViewController.m */; };
+		048A0DD122B8951B006530EC /* JMMoneyDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DCF22B8951B006530EC /* JMMoneyDetailTableViewCell.m */; };
+		048A0DD222B8951B006530EC /* JMMoneyDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DD022B8951B006530EC /* JMMoneyDetailTableViewCell.xib */; };
+		048A0DD622B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DD522B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.m */; };
+		048A0DDA22B8D768006530EC /* yao1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DD722B8D768006530EC /* yao1@3x.png */; };
+		048A0DDB22B8D768006530EC /* yao1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DD822B8D768006530EC /* yao1@2x.png */; };
+		048A0DDC22B8D768006530EC /* yao1.png in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DD922B8D768006530EC /* yao1.png */; };
+		048A0DE022B8D806006530EC /* demi.png in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DDD22B8D805006530EC /* demi.png */; };
+		048A0DE122B8D806006530EC /* demi@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DDE22B8D805006530EC /* demi@2x.png */; };
+		048A0DE222B8D806006530EC /* demi@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DDF22B8D805006530EC /* demi@3x.png */; };
+		048A0DE622B8DB34006530EC /* demi_home.png in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DE322B8DB33006530EC /* demi_home.png */; };
+		048A0DE722B8DB34006530EC /* demi_home@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DE422B8DB33006530EC /* demi_home@2x.png */; };
+		048A0DE822B8DB34006530EC /* demi_home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048A0DE522B8DB34006530EC /* demi_home@3x.png */; };
+		048A0DEB22B8DF57006530EC /* JMHTTPManager+FectchWalletDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DEA22B8DF57006530EC /* JMHTTPManager+FectchWalletDetails.m */; };
+		048A0DEE22B8E0A2006530EC /* JMWalletDetailsCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DED22B8E0A2006530EC /* JMWalletDetailsCellData.m */; };
+		048A0DF122B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DF022B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m */; };
+		048A0DF422B91A6B006530EC /* JMCDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DF322B91A6B006530EC /* JMCDetailModel.m */; };
+		048A0DF722B91A8E006530EC /* JMBDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DF622B91A8E006530EC /* JMBDetailModel.m */; };
 		048E662E22850EE900694D86 /* THDatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 048E662C22850EE900694D86 /* THDatePickerView.m */; };
 		048E6632228574BE00694D86 /* peer_countermand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E662F228574BD00694D86 /* peer_countermand@2x.png */; };
 		048E6633228574BE00694D86 /* peer_countermand.png in Resources */ = {isa = PBXBuildFile; fileRef = 048E6630228574BD00694D86 /* peer_countermand.png */; };
@@ -1093,9 +1109,6 @@
 		0425656C229EE210000614E7 /* qidong.png@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qidong.png@2x.png"; sourceTree = "<group>"; };
 		0425656D229EE211000614E7 /* qidong.png@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qidong.png@3x.png"; sourceTree = "<group>"; };
 		0425656E229EE211000614E7 /* qidong.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = qidong.png; sourceTree = "<group>"; };
-		04256572229EE21C000614E7 /* yao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yao.png; sourceTree = "<group>"; };
-		04256573229EE21C000614E7 /* yao@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yao@3x.png"; sourceTree = "<group>"; };
-		04256574229EE21C000614E7 /* yao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yao@2x.png"; sourceTree = "<group>"; };
 		0425CB55228449D600E08587 /* JMVideoChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoChatViewController.h; sourceTree = "<group>"; };
 		0425CB56228449D600E08587 /* JMVideoChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoChatViewController.m; sourceTree = "<group>"; };
 		0425CB57228449D600E08587 /* JMVideoChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVideoChatViewController.xib; sourceTree = "<group>"; };
@@ -1243,6 +1256,34 @@
 		0488E59822953B6700C2E398 /* JMCityListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCityListViewController.xib; sourceTree = "<group>"; };
 		0488E59B2295438100C2E398 /* JMCityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCityModel.h; sourceTree = "<group>"; };
 		0488E59C2295438100C2E398 /* JMCityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCityModel.m; sourceTree = "<group>"; };
+		048A0DC822B887D5006530EC /* JMHTTPManager+PayMoney.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+PayMoney.h"; sourceTree = "<group>"; };
+		048A0DC922B887D5006530EC /* JMHTTPManager+PayMoney.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+PayMoney.m"; sourceTree = "<group>"; };
+		048A0DCB22B89369006530EC /* JMMoneyDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMoneyDetailsViewController.h; sourceTree = "<group>"; };
+		048A0DCC22B89369006530EC /* JMMoneyDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMoneyDetailsViewController.m; sourceTree = "<group>"; };
+		048A0DCE22B8951B006530EC /* JMMoneyDetailTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMoneyDetailTableViewCell.h; sourceTree = "<group>"; };
+		048A0DCF22B8951B006530EC /* JMMoneyDetailTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMoneyDetailTableViewCell.m; sourceTree = "<group>"; };
+		048A0DD022B8951B006530EC /* JMMoneyDetailTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMoneyDetailTableViewCell.xib; sourceTree = "<group>"; };
+		048A0DD422B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+FectchMoneyDetail.h"; sourceTree = "<group>"; };
+		048A0DD522B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchMoneyDetail.m"; sourceTree = "<group>"; };
+		048A0DD722B8D768006530EC /* yao1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yao1@3x.png"; sourceTree = "<group>"; };
+		048A0DD822B8D768006530EC /* yao1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "yao1@2x.png"; sourceTree = "<group>"; };
+		048A0DD922B8D768006530EC /* yao1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yao1.png; sourceTree = "<group>"; };
+		048A0DDD22B8D805006530EC /* demi.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demi.png; sourceTree = "<group>"; };
+		048A0DDE22B8D805006530EC /* demi@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demi@2x.png"; sourceTree = "<group>"; };
+		048A0DDF22B8D805006530EC /* demi@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demi@3x.png"; sourceTree = "<group>"; };
+		048A0DE322B8DB33006530EC /* demi_home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demi_home.png; sourceTree = "<group>"; };
+		048A0DE422B8DB33006530EC /* demi_home@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demi_home@2x.png"; sourceTree = "<group>"; };
+		048A0DE522B8DB34006530EC /* demi_home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "demi_home@3x.png"; sourceTree = "<group>"; };
+		048A0DE922B8DF57006530EC /* JMHTTPManager+FectchWalletDetails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+FectchWalletDetails.h"; sourceTree = "<group>"; };
+		048A0DEA22B8DF57006530EC /* JMHTTPManager+FectchWalletDetails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchWalletDetails.m"; sourceTree = "<group>"; };
+		048A0DEC22B8E0A2006530EC /* JMWalletDetailsCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMWalletDetailsCellData.h; sourceTree = "<group>"; };
+		048A0DED22B8E0A2006530EC /* JMWalletDetailsCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMWalletDetailsCellData.m; sourceTree = "<group>"; };
+		048A0DEF22B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+MoneyWithDraw.h"; sourceTree = "<group>"; };
+		048A0DF022B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+MoneyWithDraw.m"; sourceTree = "<group>"; };
+		048A0DF222B91A6B006530EC /* JMCDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCDetailModel.h; sourceTree = "<group>"; };
+		048A0DF322B91A6B006530EC /* JMCDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCDetailModel.m; sourceTree = "<group>"; };
+		048A0DF522B91A8E006530EC /* JMBDetailModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMBDetailModel.h; sourceTree = "<group>"; };
+		048A0DF622B91A8E006530EC /* JMBDetailModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMBDetailModel.m; sourceTree = "<group>"; };
 		048E662C22850EE900694D86 /* THDatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THDatePickerView.m; sourceTree = "<group>"; };
 		048E662D22850EE900694D86 /* THDatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THDatePickerView.h; sourceTree = "<group>"; };
 		048E662F228574BD00694D86 /* peer_countermand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "peer_countermand@2x.png"; sourceTree = "<group>"; };
@@ -1839,6 +1880,8 @@
 				04072F5F2282C5410067A05D /* JMBindBankCardViewController.xib */,
 				04072F682282D3680067A05D /* JMDeleteBankCardViewController.h */,
 				04072F692282D3680067A05D /* JMDeleteBankCardViewController.m */,
+				048A0DCB22B89369006530EC /* JMMoneyDetailsViewController.h */,
+				048A0DCC22B89369006530EC /* JMMoneyDetailsViewController.m */,
 			);
 			path = Wallet;
 			sourceTree = "<group>";
@@ -2433,9 +2476,12 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				04256572229EE21C000614E7 /* yao.png */,
-				04256574229EE21C000614E7 /* yao@2x.png */,
-				04256573229EE21C000614E7 /* yao@3x.png */,
+				048A0DDD22B8D805006530EC /* demi.png */,
+				048A0DDE22B8D805006530EC /* demi@2x.png */,
+				048A0DDF22B8D805006530EC /* demi@3x.png */,
+				048A0DD922B8D768006530EC /* yao1.png */,
+				048A0DD822B8D768006530EC /* yao1@2x.png */,
+				048A0DD722B8D768006530EC /* yao1@3x.png */,
 				0425656E229EE211000614E7 /* qidong.png */,
 				0425656C229EE210000614E7 /* qidong.png@2x.png */,
 				0425656D229EE211000614E7 /* qidong.png@3x.png */,
@@ -2484,6 +2530,7 @@
 		04731DDD22A643990013D7CE /* SecondCRequest */ = {
 			isa = PBXGroup;
 			children = (
+				048A0DD322B898E0006530EC /* Wallet */,
 				04A6DF6822B34DCC00F23BE6 /* Order */,
 				04EA211122AFCFCE0035C398 /* BDetail */,
 				04908B2B22A8AE82000B5AB4 /* Task */,
@@ -2778,6 +2825,19 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		048A0DD322B898E0006530EC /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				048A0DD422B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.h */,
+				048A0DD522B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.m */,
+				048A0DE922B8DF57006530EC /* JMHTTPManager+FectchWalletDetails.h */,
+				048A0DEA22B8DF57006530EC /* JMHTTPManager+FectchWalletDetails.m */,
+				048A0DEF22B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.h */,
+				048A0DF022B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
 		048E662B22850EE900694D86 /* TimeChoose */ = {
 			isa = PBXGroup;
 			children = (
@@ -2881,6 +2941,10 @@
 			children = (
 				04908B2F22A8B22D000B5AB4 /* JMSquareHomeCellData.h */,
 				04908B3022A8B22D000B5AB4 /* JMSquareHomeCellData.m */,
+				048A0DF222B91A6B006530EC /* JMCDetailModel.h */,
+				048A0DF322B91A6B006530EC /* JMCDetailModel.m */,
+				048A0DF522B91A8E006530EC /* JMBDetailModel.h */,
+				048A0DF622B91A8E006530EC /* JMBDetailModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3064,6 +3128,8 @@
 			children = (
 				04A6DF6922B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.h */,
 				04A6DF6A22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m */,
+				048A0DC822B887D5006530EC /* JMHTTPManager+PayMoney.h */,
+				048A0DC922B887D5006530EC /* JMHTTPManager+PayMoney.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -3574,6 +3640,9 @@
 		6D558636224B54D70037C14E /* home_slices */ = {
 			isa = PBXGroup;
 			children = (
+				048A0DE322B8DB33006530EC /* demi_home.png */,
+				048A0DE422B8DB33006530EC /* demi_home@2x.png */,
+				048A0DE522B8DB34006530EC /* demi_home@3x.png */,
 				047F8EB3228AC551005E81FA /* C_play.png */,
 				047F8EB2228AC551005E81FA /* C_play@2x.png */,
 				047F8EB4228AC552005E81FA /* C_play@3x.png */,
@@ -3720,6 +3789,8 @@
 				04072F6F2282DBE40067A05D /* JMBankCardData.m */,
 				04731DE822A66C630013D7CE /* JMAbilityCellData.h */,
 				04731DE922A66C630013D7CE /* JMAbilityCellData.m */,
+				048A0DEC22B8E0A2006530EC /* JMWalletDetailsCellData.h */,
+				048A0DED22B8E0A2006530EC /* JMWalletDetailsCellData.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3750,6 +3821,9 @@
 				04CC5F9222B3B67600C5DD46 /* JMDiscoverTopView.h */,
 				04CC5F9322B3B67600C5DD46 /* JMDiscoverTopView.m */,
 				04CC5F9522B3B68E00C5DD46 /* JMDiscoverTopView.xib */,
+				048A0DCE22B8951B006530EC /* JMMoneyDetailTableViewCell.h */,
+				048A0DCF22B8951B006530EC /* JMMoneyDetailTableViewCell.m */,
+				048A0DD022B8951B006530EC /* JMMoneyDetailTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4139,6 +4213,7 @@
 				6D55865D224B54D70037C14E /* home_ message@2x.png in Resources */,
 				04908ADE22A7A37B000B5AB4 /* VIP.png in Resources */,
 				0488E390229F903D0071DEE7 /* burse.png in Resources */,
+				048A0DD222B8951B006530EC /* JMMoneyDetailTableViewCell.xib in Resources */,
 				0488E3CA229F9BED0071DEE7 /* discovery_pitch_on.png in Resources */,
 				041CCF0A22A52403002DFED3 /* icon_return_bule@2x.png in Resources */,
 				0488E39C229F93C80071DEE7 /* icon_return @3x.png in Resources */,
@@ -4187,13 +4262,16 @@
 				040CA85C225F1EBF006D7A7F /* Location_of_detail_page@3x.png in Resources */,
 				04950FF522AEA1AF00C3D3FB /* jianbian@2x.png in Resources */,
 				04950FE922AE969A00C3D3FB /* stale_dated@3x.png in Resources */,
+				048A0DE722B8DB34006530EC /* demi_home@2x.png in Resources */,
 				04DEB4192296BF530089BD87 /* employ@3x.png in Resources */,
 				040C864A227E8B8100993490 /* JMMoreCollectionViewCell.xib in Resources */,
 				04072F2D2282949D0067A05D /* particulars@3x.png in Resources */,
 				041997D42266CB3500C6C134 /* JMCompanyHomeTableViewCell.xib in Resources */,
 				0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */,
 				04DEB4182296BF530089BD87 /* employ@2x.png in Resources */,
+				048A0DE022B8D806006530EC /* demi.png in Resources */,
 				040E365D22681C9A00A7D789 /* boy@2x.png in Resources */,
+				048A0DE222B8D806006530EC /* demi@3x.png in Resources */,
 				040701A522753755002BF58D /* autonym.png in Resources */,
 				04072F652282CB540067A05D /* camera_wallet@3x.png in Resources */,
 				040B839B2265F3E700F1A37A /* IDCard2@2x.png in Resources */,
@@ -4223,6 +4301,7 @@
 				04DD1D62224B6E95007CB11C /* 蓝点@3x.png in Resources */,
 				040A392F227DAC2B00EDD9E0 /* copyreader@3x.png in Resources */,
 				044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */,
+				048A0DDB22B8D768006530EC /* yao1@2x.png in Resources */,
 				049C652D22AD3D3200A93DFE /* gou_partTime@2x.png in Resources */,
 				0488E44522A021AA0071DEE7 /* garden@3x.png in Resources */,
 				040B83972265F3E700F1A37A /* IDCard1@3x.png in Resources */,
@@ -4263,7 +4342,6 @@
 				040701AF22753755002BF58D /* interview.png in Resources */,
 				040701BB2275DB58002BF58D /* JMCompanyLikeViewController.xib in Resources */,
 				04BE8B4522924262004EB7EC /* my_location@2x.png in Resources */,
-				04256577229EE21D000614E7 /* yao@2x.png in Resources */,
 				0488E380229F8EE00071DEE7 /* home_me_pitch_on@2x.png in Resources */,
 				04BE8B4622924262004EB7EC /* my_location@3x.png in Resources */,
 				041997F82267181A00C6C134 /* JMPictureOfPersonDetailViewController.xib in Resources */,
@@ -4288,13 +4366,15 @@
 				04072F282282949D0067A05D /* peijing.png in Resources */,
 				0488E37E229F8EE00071DEE7 /* home_me_pitch_on@3x.png in Resources */,
 				04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */,
-				04256576229EE21D000614E7 /* yao@3x.png in Resources */,
 				04ABB7B922B259E400E3F66A /* WeChat_pay@3x.png in Resources */,
 				040E365F22681C9A00A7D789 /* girl @3x.png in Resources */,
+				048A0DE622B8DB34006530EC /* demi_home.png in Resources */,
+				048A0DE122B8D806006530EC /* demi@2x.png in Resources */,
 				0488E3A3229F95320071DEE7 /* jobDetailShare@3x.png in Resources */,
 				04DD1D47224B6E95007CB11C /* break@3x.png in Resources */,
 				0488E38C229F8FCE0071DEE7 /* post_a_job_pitch_up@3x.png in Resources */,
 				04908AE422A7A38C000B5AB4 /* B_indent@2x.png in Resources */,
+				048A0DE822B8DB34006530EC /* demi_home@3x.png in Resources */,
 				04E02E70228BF38900924130 /* loading@2x.png in Resources */,
 				6D558654224B54D70037C14E /* Search_Home@2x.png in Resources */,
 				04A51227229ABD0500BA2DC5 /* resumePic.png in Resources */,
@@ -4377,12 +4457,14 @@
 				040C8654227E8F4A00993490 /* Photo.png in Resources */,
 				040A392E227DAC2B00EDD9E0 /* copyreader@2x.png in Resources */,
 				04950FFA22AEA1F400C3D3FB /* VIP2.png in Resources */,
+				048A0DDA22B8D768006530EC /* yao1@3x.png in Resources */,
 				049C653322AD3ED600A93DFE /* YES_Post.png in Resources */,
 				041CCF0B22A52403002DFED3 /* icon_return_bule.png in Resources */,
 				6D82F2902274BB0E00B9D2B9 /* JMMyDescriptionViewController.xib in Resources */,
 				0425656B229E91A8000614E7 /* Crystal.mp3 in Resources */,
 				0488E3B8229F98440071DEE7 /* JMSquareViewController.xib in Resources */,
 				04256559229C2CCD000614E7 /* talent@2x.png in Resources */,
+				048A0DDC22B8D768006530EC /* yao1.png in Resources */,
 				04DD1D5A224B6E95007CB11C /* 组 18.png in Resources */,
 				04950FEF22AE9FC700C3D3FB /* JMVIPViewController.xib in Resources */,
 				04ABB79A22B1EDDF00E3F66A /* JMTaskCommetViewController.xib in Resources */,
@@ -4405,7 +4487,6 @@
 				040C18172264148300456C53 /* JIANMIAN_login.png in Resources */,
 				0488E3C8229F9BED0071DEE7 /* discovery_pitch_on@3x.png in Resources */,
 				0488E3AE229F96360071DEE7 /* Collection_of_selected.png in Resources */,
-				04256575229EE21D000614E7 /* yao.png in Resources */,
 				040A40C12265B2480005E0D7 /* JMCompanyInfoViewController.xib in Resources */,
 				04BBF2C222918E7C0068A9B1 /* C_videos@3x.png in Resources */,
 				04DEB4122296AA7A0089BD87 /* countermand.png in Resources */,
@@ -4533,6 +4614,7 @@
 				04EA210B22AF61BC0035C398 /* JMTaskPartTimejobDetailModel.m in Sources */,
 				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
 				04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */,
+				048A0DCD22B89369006530EC /* JMMoneyDetailsViewController.m in Sources */,
 				048348C6226983C700DE4630 /* NSString+Extension.m in Sources */,
 				041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */,
 				04E25F6D22B509CD00F451C8 /* JMHTTPManager+FectchInvoiceInfo.m in Sources */,
@@ -4544,6 +4626,7 @@
 				04A9DFA5225AE3D800CD7CC1 /* JMUserInfoModel.m in Sources */,
 				04C6013E2260639C000B1FE0 /* JMAllMessageTableViewController.m in Sources */,
 				04072F6A2282D3680067A05D /* JMDeleteBankCardViewController.m in Sources */,
+				048A0DF422B91A6B006530EC /* JMCDetailModel.m in Sources */,
 				04BBF299228E67600068A9B1 /* JMAnswerOrHangUpView.m in Sources */,
 				041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */,
 				04C6015C2260874A000B1FE0 /* JMLookMeTableViewCell.m in Sources */,
@@ -4608,6 +4691,7 @@
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
 				040CD54F226AC0D1000BB230 /* JMCompanyInfoMineViewController.m in Sources */,
 				0485ACEC22A0C07300B31506 /* JMMPersonalCenterHeaderView.m in Sources */,
+				048A0DEB22B8DF57006530EC /* JMHTTPManager+FectchWalletDetails.m in Sources */,
 				040E366E2268531A00A7D789 /* JMEducationView.m in Sources */,
 				04EA210522AF541E0035C398 /* JMTaskListCellData.m in Sources */,
 				048348C5226983C700DE4630 /* UIView+Ext.m in Sources */,
@@ -4626,9 +4710,11 @@
 				6D82F28F2274BB0E00B9D2B9 /* JMMyDescriptionViewController.m in Sources */,
 				0492715C22982878008D6E0D /* JMBTypeLikeModel.m in Sources */,
 				6D558663224B564F0037C14E /* JMMineViewController.m in Sources */,
+				048A0DD122B8951B006530EC /* JMMoneyDetailTableViewCell.m in Sources */,
 				040A393E227DD20400EDD9E0 /* JMMoreView.m in Sources */,
 				041CCEF122A51EFC002DFED3 /* JMOrderStatusTableViewCell.m in Sources */,
 				041F672E22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m in Sources */,
+				048A0DEE22B8E0A2006530EC /* JMWalletDetailsCellData.m in Sources */,
 				040865E5227338E2005BB03E /* JMHTTPManager+InterView.m in Sources */,
 				048FEE352244853C001160C8 /* ViewController.m in Sources */,
 				04731DF022A6A3BA0013D7CE /* JMHTTPManager+FectchAbilityInfo.m in Sources */,
@@ -4644,6 +4730,7 @@
 				04CC5F9422B3B67600C5DD46 /* JMDiscoverTopView.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
 				040C865E227EDDE100993490 /* JMChatViewSectionView.m in Sources */,
+				048A0DF122B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m in Sources */,
 				04908AD322A7A06E000B5AB4 /* JMBUserCenterHeaderSubView.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,
 				6D020A6C22539FB0009BCFE4 /* JMCompanyIntroduceViewController.m in Sources */,
@@ -4672,6 +4759,7 @@
 				040A40C02265B2480005E0D7 /* JMCompanyInfoViewController.m in Sources */,
 				04072F602282C5410067A05D /* JMBindBankCardViewController.m in Sources */,
 				040865DA2272C241005BB03E /* JMHTTPManager+IDcard.m in Sources */,
+				048A0DCA22B887D5006530EC /* JMHTTPManager+PayMoney.m in Sources */,
 				0492715F22982E3C008D6E0D /* JMCTypeLikeModel.m in Sources */,
 				04950FDC22AE812C00C3D3FB /* JMTaskManageTableViewCell.m in Sources */,
 				04070BAA22B76912007BE031 /* JMCPartTimeJobLikeModel.m in Sources */,
@@ -4720,6 +4808,7 @@
 				049C652122AD3ACC00A93DFE /* JMMakeOutBillHeaderView.m in Sources */,
 				04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */,
 				041F672B22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m in Sources */,
+				048A0DD622B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.m in Sources */,
 				040865E12272FAF1005BB03E /* JMPostJobHomeTableViewCell.m in Sources */,
 				6D82F2982274C63E00B9D2B9 /* JMHTTPManager+Job.m in Sources */,
 				040E365222680FF800A7D789 /* JMHeaderOfPersonDetailView.m in Sources */,
@@ -4756,6 +4845,7 @@
 				0488E3B7229F98440071DEE7 /* JMSquareViewController.m in Sources */,
 				040A3933227DBEA700EDD9E0 /* JMGreetTableViewController.m in Sources */,
 				04731DEA22A66C630013D7CE /* JMAbilityCellData.m in Sources */,
+				048A0DF722B91A8E006530EC /* JMBDetailModel.m in Sources */,
 				04072F512282BAA60067A05D /* JMChooseCardViewController.m in Sources */,
 				040865D72272A919005BB03E /* JMJudgeViewController.m in Sources */,
 				6D020A782258A408009BCFE4 /* JMEducationalExperienceTableViewCell.m in Sources */,

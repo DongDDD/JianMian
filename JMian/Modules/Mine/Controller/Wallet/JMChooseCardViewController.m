@@ -111,6 +111,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (_delegate && [_delegate respondsToSelector:@selector(didChooseBankCardWithData:)]) {
+        [_delegate didChooseBankCardWithData:self.arrayList[indexPath.row]];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 //    [self.navigationController pushViewController:[[JMWithdrawViewController alloc]init] animated:YES];
     
 }

@@ -445,6 +445,10 @@
             width: 0.18rem;
             align-self: center;
         }
+        .mu-elevation-1{
+            -webkit-box-shadow:none;
+            box-shadow:none;
+        }
     </style>
 </head>
 <body>
@@ -543,7 +547,7 @@
                         <span class="unit">{{this.detail.payment_money}}<span>{{this.detail.unit}}</span></span>
                         <span class="label">
                         <ul>
-                            <li>{{this.detail.payment_method}}</li>
+                            <li>完工结</li>
                             <li>有定金</li>
                             <li>签合同</li>
                         </ul>
@@ -584,16 +588,16 @@
             <transition name="open-right">
                 <mu-paper v-show="credit" :z-depth="1" class="demo-loadmore-wrap">
                     <mu-container ref="container" class="demo-loadmore-content">
-                        <mu-load-more :loading="loading" @load="load">
-                            <div class="credit-lists" v-for="item in num" :key="item">
+                        <mu-load-more :loading="loading" @load="load" :loaded-all="over" :loading-text="text">
+                            <div class="credit-lists" v-for="(item,index) in record.data" :key="index">
                                 <div class="list">
                                     <div class="contain">
-                                        <span class="avator"><img src="../images/avator.jpg" alt=""></span>
-                                        <span class="user-name">戴小美<p>任务：区域销售代理</p></span>
-                                        <span class="num">5.0分</span>
+                                        <span class="avator"><img :src="item.user.avatar" alt=""></span>
+                                        <span class="user-name">{{item.user.nickname}}<p>任务：{{item.task.task_title}}</p></span>
+                                        <span class="num">{{item.reputation}}.0分</span>
                                     </div>
                                     <div class="remark">
-                                        <p>雇主太态度很好，结款也很迅速。给雇主点赞， 期望下次继续合作。</p>
+                                        <p>{{item.description}}</p>
                                     </div>
                                     <div class="line"></div>
                                 </div>
@@ -615,61 +619,8 @@
     var vue = new Vue({
         el: '#wrapper',
         data:{
-            detail:{
-                address:"",
-                city:{
-                    city_id:2,
-                    city_name:"广州市"
-                },
-                company:{
-                    company_id:2,
-                    company_name:"广州长得到有限公司",
-                    logo_path:""
-                },
-                deadline:"2019-06-10 00:00:00",
-                description:"",
-                front_money:0,
-                goods:{
-                    description:"你的事了美女你好在吗",
-                    goods_price:2,
-                    goods_title:"我现在",
-                },
-                images:[
-                    {
-                        denial_reason:"",
-                        file_id:4,
-                        file_path:"https://jmsp-images-1257721067.picgz.myqcloud.com/storage/images/2019/06/06/M8yI8wii5K3zwxvAWeAL0jUOtTnghvykIhCbG1ZB.jpeg",
-                        status:0,
-                        type:2
-                    }
-                ],
-                industry:[
-                    {
-                        label_id:1020,
-                        name:"打字员"
-                    }
-                ],
-                latitude:"39.90",
-                longitude:"116.40",
-                payment_method:2,
-                payment_money:5,
-                quantity_max:3,
-                status:1,
-                task_id:8,
-                task_title:"打字员",
-                type_label:{
-                    label_id:1043,
-                    name:"销售分成"
-                },
-                unit:"元",
-                video:{
-                    cover:"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com/storage/images/2019/06/06/42BCXOilrCWCU43peJhvZLDErhq6tbDoNRX7nbo4.jpeg",
-                    denial_reason:"",
-                    file_id:3,
-                    file_path:"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com/storage/videos/2019/06/06/440EImbV9mCY8SsynJmPTpRuncjxAFypTqBlfVej.mp4",
-                    status:0,
-                    type:1,
-                }},
+            detail:{},
+            record:{},
             describeList: [
                 {label: "即结",id:'1'},
                 {label: "有定金",id:'2'},
@@ -681,30 +632,21 @@
             credit:false,
             initialize: false,
             searchBarFixed:false,
-            // playing:true
+            token:'',
+            page:1,
+            over:false,
+            text:'正在加载'
         },
         mounted(){
             setTimeout(function () {
                 this.initialize = true;
             }.bind(this));
             document.addEventListener('scroll', this.handleScroll);
-            if(this.detail.payment_method === 2){
-                this.detail.payment_method = '日结';
-            }else if(this.detail.payment_method === 3){
-                this.detail.payment_method = '完工结';
+            if(this.detail){
+                this.init();
+                this.taskDataLoading();
             }
-            this.init();
-            this.likeDetail()
-                      
-            /*var video = document.getElementById('video');
-            video.addEventListener("pause",function(){
-                this.playing = true;
-                console.log(this.playing)
-            });
-            video.addEventListener("play",function(){
-                this.playing = false;
-                console.log(this.playing)
-            });*/
+            this.likeDetail();
         },
         methods:{
             handleScroll () {
@@ -713,11 +655,6 @@
                 let offsetTop = obj.offsetTop;
                 scrollTop > offsetTop ? this.searchBarFixed = true : this.searchBarFixed = false;
             },
-            /*videoPlay(){
-                var video = document.getElementById('video');
-                video.play();
-                this.playing = false;
-            },*/
             destroyed () {
                 window.removeEventListener('scroll', this.handleScroll); // 离开页面 关闭监听 不然会报错
             },
@@ -726,27 +663,65 @@
                 this.credit = false;
             },
             handleCredit(){
+                axios.get('http://app.jmzhipin.com/api/task/comment/paginate?company_id=' + this.detail.company.company_id, {
+                    headers: {
+                        'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                        'Authorization': this.token,
+                    }
+                })
+                    .then(function (res) {
+                        this.record = res.data;
+                        this.page = res.data.current_page;
+                        console.log(this.record)
+                    }.bind(this))
+                    .catch(function (error) {
+                        console.log(error);
+                    });
                 this.task = false;
                 this.credit = true;
             },
-            likeDetail(){
-                window.webkit.messageHandlers.aaa.postMessage(this.detail.favorites)
-
-                //window.webkit.messageHandlers.aaa.likeDetail(this.detail.favorites)
-            },
             clickCompanyDetails(){
-                window.webkit.messageHandlers.bbb.postMessage(this.detail.company.company_id);
+                window.webkit.messageHandlers.aaa.postMessage(this.detail.company.company_id);
             },
             clickCompanyToAMap(){
-                window.webkit.messageHandlers.ccc.postMessage()
+                window.webkit.messageHandlers.aaa.postMessage()
+            },
+            likeDetail(){
+                window.webkit.messageHandlers.aaa.postMessage(this.detail.favorites);
             },
             load() {
                 this.loading = true;
-                setTimeout(() => {
-                    this.loading = false;
-                    /*this.num += 10;
-                    this.show = false;*/
-                }, 2000)
+                this.page = this.page + 1;
+                axios.get('http://app.jmzhipin.com/api/task/comment/paginate?company_id=' +  this.detail.company.company_id + '&page=' + this.page, {
+                    headers: {
+                        'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                        'Authorization': this.token,
+                    }
+                })
+                    .then(function (res) {
+                        if(res.data.last_page < this.page){
+                            this.text = '已加载全部！';
+                            setTimeout(() => {
+                                this.over = true;
+                            }, 1500);
+                        }else{
+                            var length = res.data.data.length;
+                            for(var i = 0;i<length; i++){
+                                this.record.data.push(res.data.data[i])
+                            }
+                            this.page = res.data.current_page;
+                            setTimeout(() => {
+                                this.loading = false;
+                            }, 2000);
+                            console.log(this.record);
+                        }
+                        if(res.data.code !== 200){
+                            this.already = true;
+                        }
+                    }.bind(this))
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             },
             init(){
                 var longitude = this.detail.longitude;
@@ -797,31 +772,24 @@
                         content: createInfoWindow(img,triangle,name,area)
                     }
                 });
-                /*marker.on('click',function(e,name){
-                    marker.detailOnAMAP({
-                        name:name,
-                        position:marker.getPosition()
-                    })
-                })*/
+            },
+            taskDataLoading(){
+                window.webkit.messageHandlers.aaa.postMessage()
             }
         },
         watch:{
             detail:function () {
                 this.$nextTick(function(){
                     this.init();
-                    this.likeDetail()
-                    if(this.detail.payment_method === 2){
-                        this.detail.payment_method = '日结';
-                    }else if(this.detail.payment_method === 3){
-                        this.detail.payment_method = '完工结';
-                    }
+                    this.taskDataLoading();
                 });
             }
         }
     });
 
-    function showInfoFromJava(item) {
+    function showInfoFromJava(item,token) {
         vue.detail = JSON.parse(item);
+        vue.token = JSON.parse(token);
     }
 </script>
 </html>

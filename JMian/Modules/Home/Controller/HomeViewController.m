@@ -62,7 +62,7 @@ static NSString *cellIdent = @"cellIdent";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    [self setTitleViewImageViewName:@"jianmian_home"];
+    [self setTitleViewImageViewName:@"demi_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
     [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
     self.per_page = 15;
