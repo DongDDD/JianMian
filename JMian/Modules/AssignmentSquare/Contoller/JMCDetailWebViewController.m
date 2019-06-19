@@ -15,6 +15,10 @@
 #import "JMShareView.h"
 #import "WXApi.h"
 #import "JMCDetailModel.h"
+#import "JMMessageListModel.h"
+#import "JMChatViewViewController.h"
+#import "JMHTTPManager+CreateConversation.h"
+
 
 
 @interface JMCDetailWebViewController ()<JMShareViewDelegate>
@@ -23,6 +27,7 @@
 @property (nonatomic, strong) JMShareView *choosePayView;
 @property (nonatomic ,strong) UIView *BGPayView;
 @property (nonatomic ,strong) JMCDetailModel *detailModel;
+@property (copy, nonatomic)NSString *user_id;
 
 
 @end
@@ -189,7 +194,8 @@
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
     
-    
+    [self createChatRequstWithForeign_key:self.task_id user_id:_user_id];
+
 }
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
@@ -212,7 +218,8 @@
                 [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
                 
             }
-            
+            _user_id = dic[@"user"][@"user_id"];
+
             [self ocToJs_dicData:dic];
         }
         
@@ -221,6 +228,24 @@
     }];
     
 }
+
+//创建聊天
+-(void)createChatRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
+    
+    [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+        //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
+        //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        //        [alert show];
+        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+        
+        vc.myConvModel = messageListModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
 #pragma mark -- 微信分享的是链接
 - (void)wxShare:(int)n
 {   //检测是否安装微信

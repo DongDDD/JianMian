@@ -19,6 +19,7 @@
     [super viewDidLoad];
     [self setHTMLPath:@"SecondModulesHTML/C/C-resume_hy.html"];
     // Do any additional setup after loading the view.
+    self.title = @"选择行业";
     [self setRightBtnTextName:@"保存"];
     [self showProgressHUD_view:self.view];
 }
@@ -39,7 +40,7 @@
 
 
 -(void)getData{
-    [[JMHTTPManager sharedInstance]getLabels_Id:@"1015" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]getLabels_Id:@"1025" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSArray *array = responsObject[@"data"];
             //传数据到H5

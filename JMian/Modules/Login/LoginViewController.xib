@@ -53,12 +53,8 @@
                         <action selector="phoneLogin:" destination="-1" eventType="touchUpInside" id="7fg-y5-Wq9"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JIANMIAN_login.png" translatesAutoresizingMaskIntoConstraints="NO" id="2zX-mD-Rgr">
-                    <rect key="frame" x="107" y="134" width="161" height="111"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="111" id="RfB-xk-Prd"/>
-                        <constraint firstAttribute="width" constant="161" id="aOx-xt-cQ0"/>
-                    </constraints>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DEMI_BIG.png" translatesAutoresizingMaskIntoConstraints="NO" id="2zX-mD-Rgr">
+                    <rect key="frame" x="126.5" y="134" width="122.5" height="54.5"/>
                 </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -78,7 +74,7 @@
         </view>
     </objects>
     <resources>
-        <image name="JIANMIAN_login.png" width="161" height="111.5"/>
+        <image name="DEMI_BIG.png" width="122.5" height="54.5"/>
         <image name="WeChat_login.png" width="20.5" height="17.5"/>
         <image name="Webkey.png" width="20.5" height="22.5"/>
     </resources>

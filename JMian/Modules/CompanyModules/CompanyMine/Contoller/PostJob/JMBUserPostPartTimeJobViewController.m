@@ -40,22 +40,27 @@
 @property (weak, nonatomic) IBOutlet UIView *twoBtnBottomView;
 @property (nonatomic ,assign)BOOL isChange;
 @property (nonatomic, strong)AMapPOI *POIModel;
+@property (nonatomic, strong)JMInvoiceModel *invoiceModel;
+@property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
+@property (nonatomic, strong)JMTaskPartTimejobDetailModel *taskPartTimejobDetailModel;
+
 
 //请求参数
 @property (copy, nonatomic)NSString *type_label_id;//职位ID
 @property (copy, nonatomic)NSString *task_title;//职位名称
 @property (copy, nonatomic)NSString *unit;//计价单位
 @property (copy, nonatomic)NSString *payment_money;//任务金额
+@property (copy, nonatomic)NSString *front_money;//任务定金
 @property (copy, nonatomic)NSString *quantity_max;//招募人数
 @property (strong, nonatomic)NSMutableArray *industry_arr;//适合行业
 @property (copy, nonatomic)NSString *city_id;//地区
+@property (copy, nonatomic)NSString *adress;//地区
 @property (copy, nonatomic)NSString *myDecription;//职位描述
 @property (copy, nonatomic)NSString *deadline;//有效日期
 @property (copy, nonatomic)NSString *is_invoice;//是否有发票
 @property (copy, nonatomic)NSString *invoice_title;//发票抬头
 @property (copy, nonatomic)NSString *invoice_tax_number;//税务编号
 @property (copy, nonatomic)NSString *invoice_email;//邮箱
-
 
 //
 @property (copy, nonatomic)NSString *cityName;//地区
@@ -75,6 +80,7 @@
     [self initView];
     [self initLayout];
     self.title = @"发布兼职";
+    [self setRightBtnTextName:@"删除"];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyBoard)];
@@ -193,7 +199,7 @@
             _payment_money = text;
             break;
         case 102://定金
-            
+            _front_money = text;
             break;
         default:
             break;
@@ -215,25 +221,28 @@
     self.POIModel = data;
     NSString *adress = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
     [self.makeOutBillHeaderView.adressBtn setTitle:adress forState:UIControlStateNormal];
-    
+    _adress = adress;
     
 }
 //是否需要开发票
 -(void)didClickBillActionWithTag:(NSInteger)tag{
-    
+    _isChange = YES;
     switch (tag) {
         case 1000://需要
             [self.makeOutBillView setHidden:NO];
             [self changeMakeOutBillViewNeed];
             [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
             [_makeOutBillHeaderView.YESBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
-           self.is_invoice = @"1";
-
-            
+            self.is_invoice = @"1";
+            [_makeOutBillView.invoiceTitleTextField setText:_invoiceModel.invoice_title];
+            [_makeOutBillView.invoiceTaxNumTextField setText:_invoiceModel.invoice_tax_number];
+            [_makeOutBillView.invoiceEmailTextField setText:_invoiceModel.invoice_email];
+            _invoice_title = _invoiceModel.invoice_title;
+            _invoice_tax_number = _invoiceModel.invoice_tax_number;
+            _invoice_email = _invoiceModel.invoice_email;
             break;
         case 1001://不需要
             [self.makeOutBillView setHidden:YES];
-            
             [self changeMakeOutBillViewNONeed];
             [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
             [_makeOutBillHeaderView.YESBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
@@ -426,8 +435,11 @@
     [self.partTimeJobDetailView.jobNameTextField setText:model.task_title];
     
     [self.partTimeJobDetailView.paymentMoneyTextField setText:model.payment_money];
+    [self.partTimeJobDetailView.downPaymentTextField setText:model.front_money];
     [self.partTimeJobDetailView.cityBtn setTitle:model.cityName forState:UIControlStateNormal];
     [self.partTimeJobDetailView.cityBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+    [self.makeOutBillHeaderView.adressBtn setTitle:model.address forState:UIControlStateNormal];
+    [self.makeOutBillHeaderView.adressBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
     
     [self.partTimeJobDetailView.deadLineBtn setTitle:model.deadline forState:UIControlStateNormal];
     [self.partTimeJobDetailView.deadLineBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
@@ -442,31 +454,60 @@
     NSString *industry = [industryNameArray componentsJoinedByString:@","];
     [self.partTimeJobDetailView.industryBtn setTitle:industry forState:UIControlStateNormal];
     [self.partTimeJobDetailView.industryBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+    
+    [self.decriptionTextView.contentTextView setText:model.taskDescription];
+    [self.decriptionTextView.placeHolder setHidden:YES];
 
 }
 
 -(void)setInvoiceValuesWithModel:(JMInvoiceModel *)model{
-    self.makeOutBillView.invoiceTitleTextField.text = model.title;
-    self.makeOutBillView.invoiceTaxNumTextField.text = model.tax_number;
-    self.makeOutBillView.invoiceEmailTextField.text = model.email;
+    self.makeOutBillView.invoiceTitleTextField.text = model.invoice_title;
+    self.makeOutBillView.invoiceTaxNumTextField.text = model.invoice_tax_number;
+    self.makeOutBillView.invoiceEmailTextField.text = model.invoice_email;
     
 
 }
 
 #pragma mark - 提交数据
-
+-(void)rightAction{
+    //删除任务
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除吗，删除后数据将不可恢复！" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"确认删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self deleteTaskRequest];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }])];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+    }])];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    
+    
+}
 -(void)getInvoiceInfo{
 
 
     [[JMHTTPManager sharedInstance]fectchInvoiceInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
-        if (![responsObject[@"data"] isEqual:[NSNull null]]) {
-            JMInvoiceModel *model = [JMInvoiceModel mj_objectWithKeyValues:responsObject[@"data"]];
-            [self setInvoiceValuesWithModel:model];
-        }else{
-            [self didClickBillActionWithTag:1001];
-        
+        if (responsObject[@"data"]) {
+            _invoiceModel = [JMInvoiceModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            if (!self.task_id) {//添加状态
+                if (![responsObject[@"data"][@"invoice"] isEqual:[NSNull null]]) {
+//                    [self setInvoiceValuesWithModel:_invoiceModel];
+                    [self didClickBillActionWithTag:1000];
+
+                    
+                }else{
+                    [self didClickBillActionWithTag:1001];
+                    
+                }
+                
+            }
         }
+            
+        
       
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -477,7 +518,7 @@
 
 
 -(void)sendRequest{
-    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil deadline:_deadline status:nil is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil deadline:_deadline status:nil is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -492,15 +533,26 @@
 }
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除吗" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:([UIAlertAction actionWithTitle:@"是的" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self deleteTaskRequest];
-    }])];
-    [self presentViewController:alertController animated:YES completion:nil];
+    if ([_taskPartTimejobDetailModel.status isEqualToString:Position_Online]) {
+        
+        
+        //下线
+        [self updateTaskInfoRequest_status:Position_Downline];
+        
+    }else if ([_taskPartTimejobDetailModel.status isEqualToString:Position_Downline]){
+        //上线
+        [self updateTaskInfoRequest_status:Position_Online];
+        
+    
+    }
+
 }
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
-    [self updateTaskInfoRequest];
+    //保存编辑
+    if (_isChange) {
+        [self updateTaskInfoRequest_status:@"1"];        
+    }
 }
 
 
@@ -519,26 +571,26 @@
 }
 
 //更新任务请求
--(void)updateTaskInfoRequest{
-    if (_isChange) {
-        [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:nil industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"任务更新成功" preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                
-                [self.navigationController popViewControllerAnimated:YES];
-            }])];
-            [self presentViewController:alertController animated:YES completion:nil];
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+-(void)updateTaskInfoRequest_status:(NSString *)status{
+    [self.partTimeJobDetailView.jobNameTextField resignFirstResponder];
+    [self.partTimeJobDetailView.paymentMoneyTextField resignFirstResponder];
+    [self.partTimeJobDetailView.downPaymentTextField resignFirstResponder];
+    [self.decriptionTextView.contentTextView resignFirstResponder];
+    [self.makeOutBillView.invoiceTitleTextField resignFirstResponder];
+    [self.makeOutBillView.invoiceTaxNumTextField resignFirstResponder];
+    [self.makeOutBillView.invoiceEmailTextField resignFirstResponder];
+    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:nil industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:_adress goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil  is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"保存成功" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-        }];
-        
-    }else{
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有任何改动" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
+            [self.navigationController popViewControllerAnimated:YES];
         }])];
         [self presentViewController:alertController animated:YES completion:nil];
-    }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
     
     
 }
@@ -547,9 +599,26 @@
 -(void)getData{
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            JMTaskPartTimejobDetailModel *model = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            _taskPartTimejobDetailModel = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            if ([_taskPartTimejobDetailModel.status isEqualToString:Position_Downline]) {
+                [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
+
+            }else if ([_taskPartTimejobDetailModel.status isEqualToString:Position_Online]) {
+                [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
+                
+            }
+            
             //赋值
-            [self setRightBtnValues_model:model];
+            [self setRightBtnValues_model:_taskPartTimejobDetailModel];
+            //判断是否需要发票
+            if (![responsObject[@"data"][@"invoice"] isEqual:[NSNull null]]) {
+                [self setInvoiceValuesWithModel:_invoiceModel];
+                
+            }else{
+                [self didClickBillActionWithTag:1001];
+                
+            }
             
         }
         

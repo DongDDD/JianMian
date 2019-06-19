@@ -174,7 +174,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     //    self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = YES;
     //    [self initView];
-    if (_viewType == Demo3ViewPartTime) {
+    if (_viewType == Demo3ViewPartTimeEdit) {
         // 获得图片数组布局
         if (self.filesModelArray.count > 0) {
             for (JMImageModel *imageModel in self.filesModelArray) {
@@ -183,27 +183,15 @@ static const CGFloat kPhotoViewMargin = 12.0;
         }
         [self initView];
         
-    }else if (_viewType == Demo3ViewPostGoodsPositionAdd) {
-//        NSMutableArray *arr = [NSMutableArray array];
-//        [arr addObjectsFromArray:self.image_paths];
-//         [self.image_paths removeAllObjects];
-//        for (NSString *url in arr) {
-//            if (![url containsString:@"https://%@"]) {
-//                NSString *url1 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
-//                [self.image_paths addObject:url1];
-//
-//            }else{
-//                [self.image_paths addObject:url];
-//
-//            }
-//
-//        }
-//
-      
+    }else if (_viewType == Demo3ViewPartTimeResumeAdd){//个人发布兼职简历
         
         [self initView];
+
+    }else if (_viewType == Demo3ViewPostGoodsPositionAdd) {//发布商品图片
+  
+        [self initView];
         
-    }else if (_viewType == Demo3ViewPostGoodsPositionEditing) {
+    }else if (_viewType == Demo3ViewPostGoodsPositionEditing) {//商品图片编辑
         
         [self getGoodsImageData];
     }else if (_viewType == Demo3ViewDefault) {
@@ -243,7 +231,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [self lookClick];
     NSLog(@"上传图片---：%@",_addImage_paths);
     if ( _addImage_paths.count > 0 ) {
-        if (_viewType == Demo3ViewPartTime) {
+        if (_viewType == Demo3ViewPartTimeEdit) {
             //            上传partTimeJob图片
             [self uploadPartTimePicWithImages:_addImage_paths];
         }else if (_viewType == Demo3ViewDefault) {
@@ -260,10 +248,25 @@ static const CGFloat kPhotoViewMargin = 12.0;
                 
                 
                 [self.image_paths addObjectsFromArray:array];
-                 [_delegate sendArray_addImageUrls:self.image_paths];
+                [_delegate sendArray_addImageUrls:self.image_paths];
             }
+        }else if (_viewType == Demo3ViewPartTimeResumeAdd) {
+            if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
+                NSMutableArray *array = [NSMutableArray array];
+                for (NSString *url  in self.addImage_paths) {
+                    NSString *url1 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
+                    [array addObject:url1];
+                }
+                
+                
+                [self.image_paths addObjectsFromArray:array];
+                [_delegate sendArray_addImageUrls:self.image_paths];
+            }
+            
+            
+            
         }
-      
+        
     }
     
 }
@@ -405,7 +408,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     if (index < self.filesModelArray.count) {
         JMFilesModel *fileModel = self.filesModelArray[index];
         
-        if (_viewType == Demo3ViewPartTime ) {
+        if (_viewType == Demo3ViewPartTimeEdit ) {
             [self deletePartTimeJobImgRequestWithFile_id:fileModel.file_id];
         }else if (_viewType == Demo3ViewDefault){
             [self deleteCompanyImgRequestWithFile_id:fileModel.file_id];

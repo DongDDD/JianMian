@@ -23,9 +23,10 @@
 #import "JMMessageListModel.h"
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+PayMoney.h"
+#import "JMPayDetailViewController.h"
 
 
-@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate>
+@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate>
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) NSUInteger index;
@@ -47,10 +48,15 @@
     [self initView];
     self.currentStatus = @[Task_WaitDealWith];
     [self getDataWitnStatus:self.currentStatus];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySucceedNotification) name:Notification_PaySucceed object:nil];
+
     // Do any additional setup after loading the view from its nib.
 }
 
-
+-(void)viewDidDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
 
 
 #pragma mark - setUI -
@@ -78,6 +84,12 @@
 }
 
 #pragma mark - myDelegate
+-(void)paySucceedNotification{
+    
+    [self.tableView.mj_header beginRefreshing];
+    
+    
+}
 //底部左面的按钮事件
 -(void)leftActionWithData:(JMTaskOrderListCellData *)data{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
@@ -96,14 +108,25 @@
         //B现在状态：待处理or待通过
         if ([data.status isEqualToString:Task_WaitDealWith]) {
             //B改状态------B端通过任务申请&&支付定金
-            _task_order_id = data.task_order_id;
-            _user_id = data.user_user_id;
-            [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
+//            _task_order_id = data.task_order_id;
+//            _user_id = data.user_user_id;
+//            [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
+            JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
+            vc.data = data;
+            vc.delegate = self;
+            vc.viewType = JMPayDetailViewTypeDownPayment;
+            [self.navigationController pushViewController:vc animated:YES];
+      
             return;
         }else if ([data.status isEqualToString:Task_Finish]) {
-            //B改状态------B端确认完成任务&支付尾款
-            [self payWithData:data];
-            return;
+            //B改状态------B端确认完成任务&支付尾款@"3"
+            JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
+            vc.data = data;
+            vc.delegate = self;
+            vc.viewType = JMPayDetailViewTypeFinalPayment;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+             return;
         }else if ([data.status isEqualToString:Task_Pass]) {
             //B改状态------销售分成任务的 点击结束任务按钮
             [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
@@ -115,13 +138,12 @@
             vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             
-            
             return;
         }
     }else{
         //C----进行中----
         if ([data.status isEqualToString:Task_Pass]) {
-            if (![data.snapshot_type_label_id isEqualToString:@"1043"]) {
+            if (![data.snapshot_type_label_id isEqualToString:@"1027"]) {//不是销售分成才有这操作
                 //C---点"已完成"（C 唯一操作）-----status change to  '3'
                 [self changeTaskStatusRequestWithStatus:Task_Finish task_order_id:data.task_order_id];
                 return;
@@ -201,6 +223,7 @@
 }
 
 
+
 #pragma mark - 数据请求
 
 -(void)getDataWitnStatus:(NSArray *)status{
@@ -261,7 +284,10 @@
     
     [[JMHTTPManager sharedInstance]changeTaskOrderStatusWithTask_order_id:task_order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self.tableView.mj_header beginRefreshing];
-        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"审批通过\n 建议联系对方以便开始任务" leftTitle:@"朕知道了" rightTitle:@"和他聊聊"];
+        if (![status isEqualToString:@"3"]) {//
+            [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"审批通过\n 建议联系对方以便开始任务" leftTitle:@"朕知道了" rightTitle:@"和他聊聊"];
+            
+        }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -298,10 +324,29 @@
 }
 
 #pragma mark - 支付
-- (void)payWithData:(JMTaskOrderListCellData *)data
+//支付确认界面
+-(void)payDetailViewDownPayAction_data:(JMTaskOrderListCellData *)data{
+    _task_order_id = data.task_order_id;
+    _user_id = data.user_user_id;
+    //B端支付定金
+//    [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
+    [self payWithData:data mode:@"2"];
+    
+}
+
+-(void)payDetailViewAllPayAction_data:(JMTaskOrderListCellData *)data{
+    _task_order_id = data.task_order_id;
+    _user_id = data.user_user_id;
+    //B端支付定金
+//    [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
+        [self payWithData:data mode:@"3"];
+    
+}
+
+- (void)payWithData:(JMTaskOrderListCellData *)data mode:(NSString *)mode
 {
     [self showProgressHUD_view:self.view];
-    [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:data.task_order_id scenes:@"app" type:@"1" mode:@"3" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:data.task_order_id scenes:@"app" type:@"1" mode:mode successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             
             self.orderPaymentModel = [JMOrderPaymentModel mj_objectWithKeyValues:responsObject[@"data"]];

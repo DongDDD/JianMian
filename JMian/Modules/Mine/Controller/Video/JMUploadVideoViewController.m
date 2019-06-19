@@ -46,7 +46,7 @@
     [super viewDidLoad];
     self.title = @"视频简历";
     [self didUploadVideoView];
-    if (_viewType == JMUploadVideoViewTypePartTime) {
+    if (_viewType == JMUploadVideoViewTypePartTimeEdit) {
         [self getPartTimeInfoData];
     }else{
         [self getData];
@@ -399,7 +399,7 @@
                 NSString *url = responsObject[@"data"][0];
                 NSLog(@"urlurlurlurl--%@",url);
 //                kSaveMyDefault(@"videoPath", url);
-                if (_viewType == JMUploadVideoViewTypePartTime) {
+                if (_viewType == JMUploadVideoViewTypePartTimeEdit) {
                     [self postPartTimeVideo_url:url];
                     
                 }else{

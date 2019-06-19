@@ -12,7 +12,8 @@
 
 typedef enum : NSUInteger {
     Demo3ViewDefault,
-    Demo3ViewPartTime,
+    Demo3ViewPartTimeEdit,
+    Demo3ViewPartTimeResumeAdd,
     Demo3ViewPostGoodsPositionAdd,
     Demo3ViewPostGoodsPositionEditing
 } Demo3ViewType;

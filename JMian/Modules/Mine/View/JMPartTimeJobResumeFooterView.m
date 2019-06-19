@@ -123,6 +123,7 @@
     
 }
 
+
 -(void)textViewDidBeginEditing:(UITextView *)textView{
 
     self.placeHolder.hidden = YES;
@@ -133,7 +134,8 @@
 - (void)textViewDidChange:(UITextView *)textView
 {
     
-    
+    self.placeHolder.hidden = YES;
+
     self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)textView.text.length];
   
     if (textView.text.length >= 500) {
@@ -143,17 +145,17 @@
      
     }
     
-    if (textView.text.length == 0) {
-        _placeHolder.hidden = NO;
-   
-    }
+//    if (textView.text.length == 0) {
+//        _placeHolder.hidden = NO;
+//
+//    }
     
 }
 -(BOOL)textViewShouldEndEditing:(UITextView *)textView{
-    if (textView.text.length == 0) {
-        _placeHolder.hidden = NO;
-
-    }
+//    if (textView.text.length == 0) {
+//        _placeHolder.hidden = NO;
+//
+//    }
     if (_delegate && [_delegate respondsToSelector:@selector(sendContent:)]) {
         [_delegate sendContent:textView.text];
     }

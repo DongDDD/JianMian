@@ -60,6 +60,11 @@ static NSString *cellIdent = @"cellIdent";
     }
     [self.view addSubview:self.tableView];
     [self.tableView addSubview:self.footerView];
+//    第二版：C端 获取个人兼职简历
+        if (_viewType == JMPostPartTimeResumeVieweEdit) {
+    
+            [self getPartTimeInfoData];
+        }
     
 
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideTap)];
@@ -76,11 +81,6 @@ static NSString *cellIdent = @"cellIdent";
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    //第二版：C端 获取个人兼职简历
-    if (_viewType == JMPostPartTimeResumeVieweEdit) {
-        
-        [self getPartTimeInfoData];
-    }
     
 }
 
@@ -140,6 +140,7 @@ static NSString *cellIdent = @"cellIdent";
     }];
     
 }
+#pragma mark - 赋值
 
 -(void)setRightText_model:(JMAbilityCellData *)model{
         NSString *city = model.city_cityName;
@@ -164,6 +165,10 @@ static NSString *cellIdent = @"cellIdent";
             
         }
         self.rightArray = [NSMutableArray arrayWithObjects:city,type_name,insdutry,imgsStr,videoStr, nil];
+    
+    [self.footerView.contentTextView setText:model.myDescription];
+    [self.footerView.placeHolder setHidden:YES];
+    
    
 }
 
@@ -178,19 +183,21 @@ static NSString *cellIdent = @"cellIdent";
     [self.footerView.contentTextView resignFirstResponder];
 
     if (_viewType == JMPostPartTimeResumeVieweEdit) {
-        [self updateJobInfo];
+        [self updatePartTimeResume];
     }else{
-        [self createJob];
+        [self createPartTimeResume];
     }
     
 
 }
 
--(void)updateJobInfo{
+-(void)updatePartTimeResume{
     [[JMHTTPManager sharedInstance]updateAbility_Id:self.ability_id city_id:_city_id type_label_id:_type_label_id industry_arr:_industry_arr myDescription:_myDescription video_path:nil video_cover:nil image_arr:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"保存成功！" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
         [alert addAction:cancel];
         [self presentViewController:alert animated:YES completion:nil];
 //        [self.progressHUD setHidden:YES];
@@ -206,10 +213,15 @@ static NSString *cellIdent = @"cellIdent";
 
 }
 
--(void)createJob{
-
+-(void)createPartTimeResume{
+    NSMutableArray *imageArr = [NSMutableArray array];
+    for (NSString *url in _image_arr) {
+        
+        NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
+        [imageArr addObject:strUrl];
+    }
     
-    [[JMHTTPManager sharedInstance]createAbility_city_id:_city_id type_label_id:_type_label_id industry_arr:_industry_arr myDescription:_myDescription video_path:nil video_cover:nil image_arr:_image_arr status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createAbility_city_id:_city_id type_label_id:_type_label_id industry_arr:_industry_arr myDescription:_myDescription video_path:nil video_cover:nil image_arr:imageArr status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
@@ -232,6 +244,7 @@ static NSString *cellIdent = @"cellIdent";
     NSLog(@"%@%@",city_id,city_name);
 }
 
+//职位类型
 -(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName{
     _type_label_id = type_id;
     [self.rightArray replaceObjectAtIndex:1 withObject:typeName];
@@ -274,7 +287,13 @@ static NSString *cellIdent = @"cellIdent";
 - (void)sendArray_addImageUrls:(NSArray *)addImageUrls {
     _image_arr = addImageUrls;
     NSLog(@"addImageUrls%@",addImageUrls);
+    if (addImageUrls) {
+        [self.rightArray replaceObjectAtIndex:3 withObject:@"已上传"];
+        [self.tableView reloadData];
+        
+    }
 
+ 
 }
 
 //已上传视频
@@ -335,22 +354,33 @@ static NSString *cellIdent = @"cellIdent";
     }else if (indexPath.row == 3) {
         Demo3ViewController *vc = [[Demo3ViewController alloc]init];
         vc.delegate = self;
-        vc.ability_id = self.ability_id;
 //        NSMutableArray *imagPathArray = [NSMutableArray arrayWithObject:self.myPartTimeVitaModel.images];
         
 //        for (JMImageModel *data in self.myPartTimeVitaModel.images) {
 //            [imagPathArray addObject:data.file_path];
 //        }
 //        self.photos.mutableCopy
-        vc.filesModelArray = self.myPartTimeVitaModel.images.mutableCopy;
-//        vc.image_paths = imagPathArray;
-        vc.viewType = Demo3ViewPartTime;
+        if (_viewType == JMPostPartTimeResumeVieweEdit) {//编辑兼职简历
+            vc.filesModelArray = self.myPartTimeVitaModel.images.mutableCopy;
+            vc.ability_id = self.ability_id;
+            vc.viewType = Demo3ViewPartTimeEdit;
+
+        }else if (_viewType == JMPostPartTimeResumeViewAdd){//添加兼职简历
+            vc.image_paths = _image_arr.mutableCopy;
+            vc.viewType = Demo3ViewPartTimeResumeAdd;
+        
+        }
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.row == 4) {
         JMUploadVideoViewController *vc = [[JMUploadVideoViewController alloc]init];
-        vc.viewType = JMUploadVideoViewTypePartTime;
-        vc.ability_id = self.ability_id;
+        if (_viewType == JMPostPartTimeResumeViewAdd) {
+            
+        }else if (_viewType == JMPostPartTimeResumeVieweEdit) {
+        
+            vc.ability_id = self.ability_id;
+            vc.viewType = JMUploadVideoViewTypePartTimeEdit;
+        }
 //        vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
         

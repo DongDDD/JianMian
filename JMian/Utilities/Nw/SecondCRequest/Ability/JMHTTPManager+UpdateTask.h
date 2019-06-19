@@ -29,6 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
               video_path:(nullable NSString *)video_path
              video_cover:(nullable NSString *)video_cover
                image_arr:(nullable NSArray *)image_arr
+              is_invoice:(nullable NSString *)is_invoice
+           invoice_title:(nullable NSString *)invoice_title
+      invoice_tax_number:(nullable NSString *)invoice_tax_number
+           invoice_email:(nullable NSString *)invoice_email
                   status:(nullable NSString *)status
             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end

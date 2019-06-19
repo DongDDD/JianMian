@@ -20,8 +20,9 @@
 @interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *dataArray;
-@property (nonatomic, strong)JMTitlesView *titleView;
-@property (nonatomic, assign)NSUInteger index;
+@property (nonatomic, strong) JMTitlesView *titleView;
+@property (nonatomic, assign) NSUInteger index;
+//@property (strong, nonatomic) NSString *status;
 
 //@property (nonatomic, assign)NSInteger page;
 //@property (nonatomic, assign)NSInteger per_page;
@@ -44,18 +45,18 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         [self.view addSubview:self.tableView];
     
     }
+    [self showProgressHUD_view:self.view];
+
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     switch (_viewType) {
         case JMPartTimeJobTypeDefault:
-            
             [self getData];
             break;
         case JMPartTimeJobTypeManage:
-            
-            [self getTaskListData];
+            [self getNowData];
             break;
             
         default:
@@ -70,7 +71,11 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     [[JMHTTPManager sharedInstance]fectchAbilityList_city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.dataArray = [JMAbilityCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            if (self.dataArray.count == 0) {
+                [self.tableView setHidden:YES];
+            }
         }
+        [self hiddenHUD];
         [self.tableView reloadData];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -79,13 +84,25 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 
--(void)getTaskListData{
-
-    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:nil type_label_id:nil industry_arr:nil status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+-(void)getTaskListData_status:(NSString *)status{
+    [self showHUD];
+    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:nil type_label_id:nil industry_arr:nil status:status page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.dataArray = [JMTaskListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            //上线状态下才需要隐藏
+            if (self.dataArray.count==0) {
+                if (_index == 0) {
+                    [self.tableView setHidden:YES];
+                }
+            }else{
+                [self.tableView setHidden:NO];
+                
+            }
+            
+            
         }
         [self.tableView reloadData];
+        [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];
@@ -94,6 +111,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 - (IBAction)postPartTimeResumeAction:(UIButton *)sender {
     JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
+    vc.viewType = JMPostPartTimeResumeViewAdd;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -101,6 +119,17 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
     vc.viewType = JMPostPartTimeResumeViewAdd;
     [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+-(void)getNowData{
+    if (_index == 0) {
+        //已发布职位
+        [self getTaskListData_status:Position_Online];
+    }else if (_index == 1) {
+        //已下线职位
+        [self getTaskListData_status:Position_Downline];
+    }
 
 }
 #pragma mark - UITableViewDelegate
@@ -149,7 +178,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     JMTaskListCellData *data = self.dataArray[indexPath.row];
     type_labelID = data.type_labelID;
     task_id = data.task_id;
-    if ([type_labelID isEqualToString: @"1043"]) {
+    if ([type_labelID isEqualToString: @"1027"]) {
         [self gotoBUserPostPositionVC_task_id:task_id];
         
     }else{
@@ -245,13 +274,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
-//            if (index==0) {
-//                _status = Position_Online;//已发布职位
-//                [weakSelf getListData];
-//            }else{
-//                _status = Position_Downline;//已下线职位
-//                [weakSelf getListData];
-//            }
+            [weakSelf getNowData];
         };
         
     }

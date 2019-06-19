@@ -520,6 +520,11 @@
 		04A9DFBF225C7B9F00CD7CC1 /* 启动图@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */; };
 		04A9DFC0225C7B9F00CD7CC1 /* 启动图@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */; };
 		04A9DFC1225C7B9F00CD7CC1 /* 启动图.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */; };
+		04AB444022B9CA3200000E03 /* JMPayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB443E22B9CA3200000E03 /* JMPayDetailViewController.m */; };
+		04AB444122B9CA3200000E03 /* JMPayDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04AB443F22B9CA3200000E03 /* JMPayDetailViewController.xib */; };
+		04AB444522BA13F500000E03 /* DEMI_BIG@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB444222BA13F500000E03 /* DEMI_BIG@3x.png */; };
+		04AB444622BA13F500000E03 /* DEMI_BIG@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB444322BA13F500000E03 /* DEMI_BIG@2x.png */; };
+		04AB444722BA13F500000E03 /* DEMI_BIG.png in Resources */ = {isa = PBXBuildFile; fileRef = 04AB444422BA13F500000E03 /* DEMI_BIG.png */; };
 		04ABB78A22B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABB78922B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m */; };
 		04ABB78D22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABB78C22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.m */; };
 		04ABB79022B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABB78F22B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.m */; };
@@ -1483,6 +1488,12 @@
 		04A9DFBC225C7B9F00CD7CC1 /* 启动图@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@2x.png"; sourceTree = "<group>"; };
 		04A9DFBD225C7B9F00CD7CC1 /* 启动图@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图@3x.png"; sourceTree = "<group>"; };
 		04A9DFBE225C7B9F00CD7CC1 /* 启动图.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "启动图.png"; sourceTree = "<group>"; };
+		04AB443D22B9CA3200000E03 /* JMPayDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPayDetailViewController.h; sourceTree = "<group>"; };
+		04AB443E22B9CA3200000E03 /* JMPayDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPayDetailViewController.m; sourceTree = "<group>"; };
+		04AB443F22B9CA3200000E03 /* JMPayDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPayDetailViewController.xib; sourceTree = "<group>"; };
+		04AB444222BA13F500000E03 /* DEMI_BIG@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEMI_BIG@3x.png"; sourceTree = "<group>"; };
+		04AB444322BA13F500000E03 /* DEMI_BIG@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DEMI_BIG@2x.png"; sourceTree = "<group>"; };
+		04AB444422BA13F500000E03 /* DEMI_BIG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DEMI_BIG.png; sourceTree = "<group>"; };
 		04ABB78822B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+CreateTaskOrder.h"; sourceTree = "<group>"; };
 		04ABB78922B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+CreateTaskOrder.m"; sourceTree = "<group>"; };
 		04ABB78B22B0F94400E3F66A /* JMHTTPManager+TaskOrderStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+TaskOrderStatus.h"; sourceTree = "<group>"; };
@@ -2476,6 +2487,9 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				04AB444422BA13F500000E03 /* DEMI_BIG.png */,
+				04AB444322BA13F500000E03 /* DEMI_BIG@2x.png */,
+				04AB444222BA13F500000E03 /* DEMI_BIG@3x.png */,
 				048A0DDD22B8D805006530EC /* demi.png */,
 				048A0DDE22B8D805006530EC /* demi@2x.png */,
 				048A0DDF22B8D805006530EC /* demi@3x.png */,
@@ -3014,6 +3028,9 @@
 				04ABB7BC22B28CF300E3F66A /* JMSnapshotWebViewController.h */,
 				04ABB7BD22B28CF300E3F66A /* JMSnapshotWebViewController.m */,
 				04ABB7BE22B28CF300E3F66A /* JMSnapshotWebViewController.xib */,
+				04AB443D22B9CA3200000E03 /* JMPayDetailViewController.h */,
+				04AB443E22B9CA3200000E03 /* JMPayDetailViewController.m */,
+				04AB443F22B9CA3200000E03 /* JMPayDetailViewController.xib */,
 			);
 			path = TaskManage;
 			sourceTree = "<group>";
@@ -4027,6 +4044,7 @@
 				04DD1D4B224B6E95007CB11C /* verification_code.png in Resources */,
 				040BF07322719E4E0088697D /* me@2x.png in Resources */,
 				041CCF0122A52403002DFED3 /* store@3x.png in Resources */,
+				04AB444522BA13F500000E03 /* DEMI_BIG@3x.png in Resources */,
 				04ABB7BB22B259E400E3F66A /* WeChat_pay.png in Resources */,
 				04072F662282CB540067A05D /* camera_wallet@2x.png in Resources */,
 				040C18162264148300456C53 /* JIANMIAN_login@2x.png in Resources */,
@@ -4199,6 +4217,7 @@
 				041CCF0622A52403002DFED3 /* store.png in Resources */,
 				04DEB40B22968E840089BD87 /* no_pass@2x.png in Resources */,
 				04DD1D4F224B6E95007CB11C /* phone@3x.png in Resources */,
+				04AB444622BA13F500000E03 /* DEMI_BIG@2x.png in Resources */,
 				04BE8B4A2292583F004EB7EC /* accretion@2x.png in Resources */,
 				04950FE222AE968A00C3D3FB /* Timeout@2x.png in Resources */,
 				04908B2322A7FE0A000B5AB4 /* square_mission@2x.png in Resources */,
@@ -4374,6 +4393,7 @@
 				04DD1D47224B6E95007CB11C /* break@3x.png in Resources */,
 				0488E38C229F8FCE0071DEE7 /* post_a_job_pitch_up@3x.png in Resources */,
 				04908AE422A7A38C000B5AB4 /* B_indent@2x.png in Resources */,
+				04AB444722BA13F500000E03 /* DEMI_BIG.png in Resources */,
 				048A0DE822B8DB34006530EC /* demi_home@3x.png in Resources */,
 				04E02E70228BF38900924130 /* loading@2x.png in Resources */,
 				6D558654224B54D70037C14E /* Search_Home@2x.png in Resources */,
@@ -4423,6 +4443,7 @@
 				040701B022753755002BF58D /* share2@2x.png in Resources */,
 				0407149F227C6CC70026C368 /* more@2x.png in Resources */,
 				6D020A212250F3F9009BCFE4 /* 组 54@3x.png in Resources */,
+				04AB444122B9CA3200000E03 /* JMPayDetailViewController.xib in Resources */,
 				040A40BC226589A50005E0D7 /* JMCompanyBaseInfoViewController.xib in Resources */,
 				04C120DD22882E97001BDEBC /* my_videos_2@3x.png in Resources */,
 				04908B5422A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.xib in Resources */,
@@ -4682,6 +4703,7 @@
 				04950FCF22AE585600C3D3FB /* JMGoodsDescriptionViewController.m in Sources */,
 				6D020A7122539FB0009BCFE4 /* JMIntroduceContentView.m in Sources */,
 				040701BF2275DB7A002BF58D /* JMCompanyLikeTableViewCell.m in Sources */,
+				04AB444022B9CA3200000E03 /* JMPayDetailViewController.m in Sources */,
 				04731DE122A6445F0013D7CE /* JMHTTPManager+CreateAbility.m in Sources */,
 				04070BA722B74150007BE031 /* JMBPartTimeJobLikeModel.m in Sources */,
 				04EA210F22AFC1710035C398 /* JMBDetailWebViewController.m in Sources */,

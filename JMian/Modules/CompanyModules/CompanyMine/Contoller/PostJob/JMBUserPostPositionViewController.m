@@ -79,6 +79,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [self initView];
     [self initLayout];
     self.title = @"发布网络销售职位";
+    [self setRightBtnTextName:@"删除"];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
   
@@ -229,7 +230,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 - (void)sendArray_addImageUrls:(NSMutableArray *)addImageUrls {
     
-     self.image_arr = addImageUrls;
+    self.image_arr = addImageUrls;
     NSLog(@"addImageUrls%@",addImageUrls);
     [self.postGoodsImagesView.goodsImageBtn setTitle:@"已上传" forState:UIControlStateNormal];
     [self.postGoodsImagesView.goodsImageBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
@@ -344,6 +345,8 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 }
 
 #pragma mark - 视频
+
+
 
 -(void)videoLeftBtnAction{
     [self filmVideo];
@@ -554,7 +557,13 @@ static NSString *cellIdent = @"BUserPostPositionCell";
                          NSLog(@"%.2f s %.2f M",length,size);
                          [self centerFrameImageWithVideoURL:outputURL completion:^(UIImage *image) {
                              self.videoView.videoImg.image = image;
-                             [self upload_Img:image];
+                             if (image) {
+                                 [_videoView.playBtn setHidden:NO];
+                                 [_videoView.videoLeftBtn setTitle:@"重新拍摄" forState:UIControlStateNormal];
+                                 [_videoView.videoRightBtn setTitle:@"重新上传" forState:UIControlStateNormal];
+                                 [self upload_Img:image];
+                                 
+                             }
                          }];
                      });
                  });
@@ -709,10 +718,34 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         
     }
     
+    if (model.video_file_path == nil) {
+        self.videoView.videoImg.image = [UIImage imageNamed:@"Novideos"];
+        [_videoView.videoLeftBtn setTitle:@"拍摄视频" forState:UIControlStateNormal];
+        [_videoView.videoRightBtn setTitle:@"上传视频" forState:UIControlStateNormal];
+        [_videoView.playBtn setHidden:YES];
+    }
+    
 }
 
 
 #pragma mark -  提交数据
+
+-(void)rightAction{
+ //删除任务
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除吗，删除后数据将不可恢复！" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"确认删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self deleteTaskRequest];
+
+        [self.navigationController popViewControllerAnimated:YES];
+    }])];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+    }])];
+    [self presentViewController:alertController animated:YES completion:nil];
+
+
+
+}
 
 -(void)OKAction{
     if (self.isReadProtocol == YES) {
@@ -721,7 +754,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         [self.detailView.positionNameTextField resignFirstResponder];
 
         if (self.task_id) {
-            [self updateTaskInfoRequest];//更新
+            [self updateTaskInfoRequest_status:@"1"];//更新
         }else{
         
             [self sendRequest];//创建
@@ -738,26 +771,41 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     }
     
 }
-- (IBAction)deleteTaskACtion:(UIButton *)sender {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除吗" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:([UIAlertAction actionWithTitle:@"是的" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self deleteTaskRequest];
+//下线任务
+- (IBAction)downLineTaskAction:(UIButton *)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你要确认下线该职位吗？" preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"确认下线" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        [self updateTaskInfoRequest_status:@"0"];
+    }])];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
     }])];
     [self presentViewController:alertController animated:YES completion:nil];
 
-}
 
+}
+//保存编辑
 - (IBAction)saveUpdateAction:(UIButton *)sender {
     [self.detailView.quantityMaxTextField resignFirstResponder];
     [self.detailView.paymentMoneyTextField resignFirstResponder];
     [self.detailView.positionNameTextField resignFirstResponder];
-    [self updateTaskInfoRequest];
+    if (_isChange) {
+        [self updateTaskInfoRequest_status:@"1"];
+        
+    }
 }
 
 -(void)sendRequest{
+    NSMutableArray *imageArr = [NSMutableArray array];
+    for (NSString *url in _image_arr) {
+ 
+        NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
+        [imageArr addObject:strUrl];
+    }
     
     
-    [[JMHTTPManager sharedInstance]createTask_task_title:@"销售分成" type_label_id:@"1043" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:_image_arr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createTask_task_title:@"销售分成" type_label_id:@"1027" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -784,28 +832,18 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     }];
 }
 //更新任务请求
--(void)updateTaskInfoRequest{
-    if (_isChange) {
-        [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude address:_address goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:_image_arr status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"任务更新成功" preferredStyle:UIAlertControllerStyleAlert];
+-(void)updateTaskInfoRequest_status:(NSString *)status{
+        [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude address:_address goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:_image_arr is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self.navigationController popViewControllerAnimated:YES];
-
+                
             }])];
             [self presentViewController:alertController animated:YES completion:nil];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
-        
-    }else{
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"没有任何改动" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
-    }
     
-
 }
 
 
@@ -860,6 +898,10 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     if (_videoView == nil) {
         _videoView = [[JMBUserPositionVideoView alloc]init];
         _videoView.delegate = self;
+        if (!self.task_id) {
+            [_videoView.videoLeftBtn setTitle:@"拍摄视频" forState:UIControlStateNormal];
+            [_videoView.videoRightBtn setTitle:@"上传视频" forState:UIControlStateNormal];
+        }
     }
     return _videoView;
 }

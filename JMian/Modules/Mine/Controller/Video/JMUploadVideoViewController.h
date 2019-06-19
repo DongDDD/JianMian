@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
     JMUploadVideoViewTypeDefault,
-    JMUploadVideoViewTypePartTime,
+    JMUploadVideoViewTypePartTimeEdit,
 } JMUploadVideoViewType;
 
 @protocol JMUploadVideoViewDelegate <NSObject>

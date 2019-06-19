@@ -55,8 +55,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *goodsPrice;
 @property (nonatomic, copy) NSString *goodsDescription;
 
+@property (nonatomic, copy) NSString *invoice;
+
 @property (nonatomic, strong) NSArray *industry;
 @property (nonatomic, strong) NSArray *images;
+
+
 
 
 @end

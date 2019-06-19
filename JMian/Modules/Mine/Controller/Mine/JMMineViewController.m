@@ -95,7 +95,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
-    [self getUserData];//    [self getCompanyData];
+    [self getUserData];
     if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
         [self.BUserCenterHeaderView setHidden:NO];
         
@@ -122,15 +122,22 @@
 #pragma mark - 获取数据
 
 -(void)getUserData{
-    
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-
-        self.userInfoModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-        [self.tableView reloadData];
-//        [self getCompanyData];
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+ 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-
+        
     }];
+//    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//        self.userInfoModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+//        [self.tableView reloadData];
+////        [self getCompanyData];
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
     
 }
 

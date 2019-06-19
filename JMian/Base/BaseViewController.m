@@ -173,11 +173,12 @@
     self.tabBarController.tabBar.hidden = self.navigationController.viewControllers.count > 1 ? YES : NO;
 
 }
-//-(void)showHUDWithView:(UIView *)view{
-//    [_myProgressHUD setHidden:NO];
-//    [_HUDbackgroundView setHidden:NO];
-//
-//}
+
+-(void)showHUD{
+    [_myProgressHUD setHidden:NO];
+    [_HUDbackgroundView setHidden:NO];
+
+}
 
 -(void)hiddenHUD{
     [self.myProgressHUD setHidden:YES];

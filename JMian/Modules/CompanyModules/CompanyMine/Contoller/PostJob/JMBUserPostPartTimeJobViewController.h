@@ -9,6 +9,10 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef enum : NSUInteger {
+    JMBUserPostPartTimeJobTypeAdd,
+    JMBUserPostPartTimeJobTypeEdit,
+} JMBUserPostPartTimeJobViewType;
 
 @interface JMBUserPostPartTimeJobViewController : BaseViewController
 

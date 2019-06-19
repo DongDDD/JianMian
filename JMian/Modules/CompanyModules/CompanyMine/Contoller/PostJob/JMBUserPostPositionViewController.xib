@@ -55,7 +55,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="deleteTaskACtion:" destination="-1" eventType="touchUpInside" id="aMO-fx-jOI"/>
+                                <action selector="downLineTaskAction:" destination="-1" eventType="touchUpInside" id="aMO-fx-jOI"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfO-5Z-NYR">

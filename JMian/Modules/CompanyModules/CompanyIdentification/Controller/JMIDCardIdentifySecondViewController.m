@@ -49,32 +49,32 @@
 //
 //}
 - (IBAction)commitAction:(UIButton *)sender {
-    
-    [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil type:nil password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:self.image_front image_behind:self.image_behind user_step:nil enterprise_step:nil real_status:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [self.IDCardText resignFirstResponder];
+    [self.nameText resignFirstResponder];
+    [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil type:nil password:nil avatar:nil nickname:nil email:nil name:self.nameText.text sex:nil ethnic:nil birthday:@"1980-12-09" address:nil number:self.IDCardText.text image_front:self.image_front image_behind:self.image_behind user_step:nil enterprise_step:nil real_status:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        [self showAlertWithTitle:@"提示" message:@"您的信息已经提交成功， 审核结果我们会第一时间通知你" leftTitle:@"返回" rightTitle:@"确认"];
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];
 
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"您的信息已经提交成功， 审核结果我们会第一时间通知你" preferredStyle: UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-        JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc]init];
-        
-        [UIApplication sharedApplication].delegate.window.rootViewController=tab;
-
-    }]];
-    [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-//        //点击确认后需要做的事
-////        C端
-        
-        JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc]init];
-     
-        [UIApplication sharedApplication].delegate.window.rootViewController=tab;
-
  
-    }]];
-    [self presentViewController:alert animated:YES completion:nil]; //注意一定要写此句，否则不会显示
+}
+
+-(void)alerLeftAction{
+    JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc]init];
+    
+    [UIApplication sharedApplication].delegate.window.rootViewController=tab;
+
+}
+
+-(void)alertRightAction{
+
+    JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc]init];
+    
+    [UIApplication sharedApplication].delegate.window.rootViewController=tab;
+    
     
 }
 

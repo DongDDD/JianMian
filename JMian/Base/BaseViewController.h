@@ -55,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) MBProgressHUD *myProgressHUD;
 -(void)showProgressHUD_view:(UIView *)view;
+-(void)showHUD;
 -(void)hiddenHUD;
 
 // 将JSON串转化为字典或者数组

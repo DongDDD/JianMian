@@ -31,7 +31,7 @@ static CGFloat kMagin = 10.f;
 
 
 -(void)getData{
-    [[JMHTTPManager sharedInstance]getLabels_Id:@"1021" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]getLabels_Id:@"1027" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             _labsArray = [JMPartTimeJobLabsCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             

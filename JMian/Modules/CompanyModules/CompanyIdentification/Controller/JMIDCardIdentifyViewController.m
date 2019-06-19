@@ -196,22 +196,22 @@
 
         
         //图片赋值显示
-        if (_isImage1==YES) {
-            
-            [[JMHTTPManager sharedInstance]identifyIDcardWithFiles:_imgUrlArrl card_side:@"FRONT" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        if (_isImage1==YES) {
 //
-////                if (responsObject[@"data"]) {
-////                    self.IDCardModel =  [JMIDCardModel mj_objectWithKeyValues:responsObject[@"data"]];
-////                    _imagefontUrl = self.IDCardModel.file_path;
-////                }
+//            [[JMHTTPManager sharedInstance]identifyIDcardWithFiles:_imgUrlArrl card_side:@"FRONT" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+////
+//////                if (responsObject[@"data"]) {
+//////                    self.IDCardModel =  [JMIDCardModel mj_objectWithKeyValues:responsObject[@"data"]];
+//////                    _imagefontUrl = self.IDCardModel.file_path;
+//////                }
+////
+//            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 //
-            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-
-            }];
+//            }];
+//
+//
+//        }else{
         
-    
-        }else{
-            
 //            [[JMHTTPManager sharedInstance]identifyIDcardWithFiles:_imgUrlArrl card_side:@"BACK" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 //
 //                if (responsObject[@"data"]) {
@@ -225,7 +225,7 @@
 //            }];
             
     
-        }
+//        }
         
         
         

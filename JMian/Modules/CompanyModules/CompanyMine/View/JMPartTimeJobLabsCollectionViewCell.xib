@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w0c-d0-heB">
-                        <rect key="frame" x="0.0" y="0.0" width="82" height="33"/>
+                        <rect key="frame" x="1" y="1" width="80" height="31"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -40,10 +40,10 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="w0c-d0-heB" secondAttribute="bottom" id="ahr-PQ-wyI"/>
-                <constraint firstItem="w0c-d0-heB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="dk3-mD-xmw"/>
-                <constraint firstAttribute="trailing" secondItem="w0c-d0-heB" secondAttribute="trailing" id="jTJ-PU-6BM"/>
-                <constraint firstItem="w0c-d0-heB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="pgj-Cz-uGA"/>
+                <constraint firstAttribute="trailing" secondItem="w0c-d0-heB" secondAttribute="trailing" constant="1" id="1Vt-IZ-E2n"/>
+                <constraint firstAttribute="bottom" secondItem="w0c-d0-heB" secondAttribute="bottom" constant="1" id="u94-aU-UQf"/>
+                <constraint firstItem="w0c-d0-heB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="1" id="wDK-Fl-h1B"/>
+                <constraint firstItem="w0c-d0-heB" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="1" id="yum-nh-1tr"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="76" height="50"/>

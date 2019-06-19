@@ -12,11 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMInvoiceModel : NSObject
 
-@property (nonatomic, copy) NSString *email;
-@property (nonatomic, copy) NSString *invoice_id;
-@property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *tax_number;
+@property (nonatomic, copy) NSString *tax_c;
+@property (nonatomic, copy) NSString *tax_b;
+
+@property (nonatomic, copy) NSString *invoice_email;
+@property (nonatomic, copy) NSString *invoice_invoice_id;
+@property (nonatomic, copy) NSString *invoice_title;
+@property (nonatomic, copy) NSString *invoice_tax_number;
 
 @end
+
+
 
 NS_ASSUME_NONNULL_END

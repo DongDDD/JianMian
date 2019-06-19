@@ -193,6 +193,9 @@ static NSString *C_cellIdent = @"CSquareCellID";
             array = [JMAbilityCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
             [self.dataArray addObjectsFromArray:array];
+            if (array.count < 15) {
+                [self.tableView.mj_footer setHidden:YES];
+            }
         }
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
@@ -213,6 +216,9 @@ static NSString *C_cellIdent = @"CSquareCellID";
             array = [JMTaskListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
             [self.dataArray addObjectsFromArray:array];
+            if (array.count < 15) {
+                [self.tableView.mj_footer setHidden:YES];
+            }
         }
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];

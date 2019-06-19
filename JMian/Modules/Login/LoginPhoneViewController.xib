@@ -24,12 +24,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JIANMIAN_login.png" translatesAutoresizingMaskIntoConstraints="NO" id="bTt-m9-7Gi">
-                    <rect key="frame" x="48" y="101" width="93" height="65"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="65" id="6BG-wV-8IB"/>
-                        <constraint firstAttribute="width" constant="93" id="owW-ia-H8U"/>
-                    </constraints>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DEMI_BIG.png" translatesAutoresizingMaskIntoConstraints="NO" id="bTt-m9-7Gi">
+                    <rect key="frame" x="48" y="111.5" width="122.5" height="54.5"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="5K3-J4-jgL">
                     <rect key="frame" x="48" y="221" width="20" height="27"/>
@@ -119,7 +115,7 @@
         </view>
     </objects>
     <resources>
-        <image name="JIANMIAN_login.png" width="161" height="111.5"/>
+        <image name="DEMI_BIG.png" width="122.5" height="54.5"/>
         <image name="phone.png" width="20" height="26.5"/>
         <image name="verification_code.png" width="20" height="23"/>
     </resources>

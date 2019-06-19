@@ -226,7 +226,7 @@
 //创建聊天
 -(void)createChatRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
     
-    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
         //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];

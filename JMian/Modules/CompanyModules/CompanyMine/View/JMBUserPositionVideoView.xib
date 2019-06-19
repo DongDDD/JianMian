@@ -19,7 +19,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uBR-J3-a81">
                     <rect key="frame" x="20" y="62" width="374" height="224"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h20-E1-f1V">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="NOvideos.png" translatesAutoresizingMaskIntoConstraints="NO" id="h20-E1-f1V">
                             <rect key="frame" x="0.0" y="0.0" width="374" height="224"/>
                         </imageView>
                         <view alpha="0.55000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M1x-hC-CKc">
@@ -29,7 +29,7 @@
                                 <constraint firstAttribute="height" constant="50" id="NoX-PW-CCP"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eph-A4-qse" userLabel="play">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eph-A4-qse" userLabel="play">
                             <rect key="frame" x="147.5" y="46" width="79" height="82"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="82" id="I25-AE-AQe"/>
@@ -151,6 +151,7 @@
         </view>
     </objects>
     <resources>
+        <image name="NOvideos.png" width="335" height="223.5"/>
         <image name="play.png" width="141" height="141"/>
     </resources>
 </document>

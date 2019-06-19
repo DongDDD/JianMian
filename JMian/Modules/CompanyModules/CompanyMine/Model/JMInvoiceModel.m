@@ -9,5 +9,15 @@
 #import "JMInvoiceModel.h"
 
 @implementation JMInvoiceModel
++(NSDictionary *)mj_replacedKeyFromPropertyName{
+    
+    return @{
+             @"invoice_email":@"invoice.email",
+             @"invoice_invoice_id":@"invoice.invoice_id",
+             @"invoice_title":@"invoice.title",
+             @"invoice_tax_number":@"invoice.tax_number",
+             };
+    
+}
 
 @end

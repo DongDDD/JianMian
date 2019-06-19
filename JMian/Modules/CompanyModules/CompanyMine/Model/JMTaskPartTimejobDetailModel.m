@@ -22,6 +22,8 @@
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
+             @"taskDescription":@"description",
+
              @"type_labelID":@"type_label.label_id",
              @"type_labelName":@"type_label.name",
              
