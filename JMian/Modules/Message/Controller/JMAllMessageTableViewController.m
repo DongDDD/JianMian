@@ -425,7 +425,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
     if ([_myModel.data.convId isEqualToString:@"dominator"]) {
         _receiverID = @"dominator";
     }else{
-    
+//    17817295362
         if (_isSelfIsSender) {
     
             _receiverID = _myModel.recipient_mark;

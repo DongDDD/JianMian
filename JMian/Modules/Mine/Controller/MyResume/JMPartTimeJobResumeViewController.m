@@ -14,7 +14,7 @@
 #import "JMTitlesView.h"
 #import "JMHTTPManager+FectchTaskList.h"
 #import "JMTaskListCellData.h"
-#import "JMBUserPostPositionViewController.h"
+#import "JMBUserPostSaleJobViewController.h"
 #import "JMBUserPostPartTimeJobViewController.h"
 
 @interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -52,7 +52,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     switch (_viewType) {
-        case JMPartTimeJobTypeDefault:
+        case JMPartTimeJobTypeResume:
             [self getData];
             break;
         case JMPartTimeJobTypeManage:
@@ -109,6 +109,9 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 }
 
+
+
+
 - (IBAction)postPartTimeResumeAction:(UIButton *)sender {
     JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
     vc.viewType = JMPostPartTimeResumeViewAdd;
@@ -139,7 +142,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         cell = [[JMPostJobHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdent];
     }
     switch (_viewType) {
-        case JMPartTimeJobTypeDefault:
+        case JMPartTimeJobTypeResume:
             
             [cell setPartTimeJobModel:self.dataArray[indexPath.row]];
             break;
@@ -158,30 +161,30 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 
     switch (_viewType) {
-        case JMPartTimeJobTypeDefault:
+        case JMPartTimeJobTypeResume:
             [self gotoPostPartTimejobResumeVC_indexPath:indexPath];
             break;
         case JMPartTimeJobTypeManage:
-            [self gotoBUserVC__indexPath:indexPath];
-            
+            [self gotoBUserPostPartTimeVC__indexPath:indexPath];
             break;
-            
         default:
             break;
     }
 
 }
 
--(void)gotoBUserVC__indexPath:(NSIndexPath *)indexPath{
+-(void)gotoBUserPostPartTimeVC__indexPath:(NSIndexPath *)indexPath{
     NSString *task_id;
     NSString *type_labelID;
     JMTaskListCellData *data = self.dataArray[indexPath.row];
     type_labelID = data.type_labelID;
     task_id = data.task_id;
     if ([type_labelID isEqualToString: @"1027"]) {
+        //销售分成
         [self gotoBUserPostPositionVC_task_id:task_id];
         
     }else{
+        //其他兼职
         [self gotoBUserPostPartTimeJobVC_task_id:task_id];
         
     }
@@ -199,9 +202,13 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     [self.navigationController pushViewController:vc animated:YES];
 
 }
+
+
+
 //B端发布网络销售
 -(void)gotoBUserPostPositionVC_task_id:(NSString *)task_id{
-    JMBUserPostPositionViewController *vc = [[JMBUserPostPositionViewController alloc]init];
+    JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+    vc.viewType = JMBUserPostSaleJobViewTypeEdit;
     vc.task_id = task_id;
     [self.navigationController pushViewController:vc animated:YES];
 
@@ -210,10 +217,9 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 //B端发布兼职
 -(void)gotoBUserPostPartTimeJobVC_task_id:(NSString *)task_id{
     JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
+    vc.viewType = JMBUserPostPartTimeJobTypeEdit;
     vc.task_id = task_id;
     [self.navigationController pushViewController:vc animated:YES];
-
-
 }
 
 #pragma mark - UITableViewDataSource
@@ -231,7 +237,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (_viewType == JMPartTimeJobTypeDefault) {
+    if (_viewType == JMPartTimeJobTypeResume) {
         UIButton *headerBtn = [[UIButton alloc]init];
         headerBtn.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
         [headerBtn setTitle:@"再发一份兼职简历 + " forState:UIControlStateNormal];

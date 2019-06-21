@@ -11,10 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMInvoiceModel : NSObject
-
+//独立接口的发票
 @property (nonatomic, copy) NSString *tax_c;
 @property (nonatomic, copy) NSString *tax_b;
-
 @property (nonatomic, copy) NSString *invoice_email;
 @property (nonatomic, copy) NSString *invoice_invoice_id;
 @property (nonatomic, copy) NSString *invoice_title;

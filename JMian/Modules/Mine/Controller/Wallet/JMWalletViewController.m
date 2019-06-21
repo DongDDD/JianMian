@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view from its nib.
     [self.view addSubview:self.tableView];
     self.imgArr = @[@"withdraw_deposit",@"particulars"];
-    self.titleArr = @[@"提现",@"消费"];
+    self.titleArr = @[@"提现",@"钱包明细"];
 }
 
 

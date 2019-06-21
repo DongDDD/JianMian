@@ -25,15 +25,14 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="戴小美" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4lE-3c-sGf">
                                 <rect key="frame" x="25" y="20" width="49" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvV-7X-sU8">
-                                <rect key="frame" x="25" y="52" width="35" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvV-7X-sU8">
+                                <rect key="frame" x="25" y="52" width="0.0" height="20"/>
                                 <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="J3U-YQ-IVG"/>
-                                    <constraint firstAttribute="width" constant="35" id="eHm-LP-0mm"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" red="0.61568627450000002" green="0.61568627450000002" blue="0.61568627450000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -60,11 +59,10 @@
                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txp-Ug-bOv">
-                                <rect key="frame" x="70" y="52" width="35" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="txp-Ug-bOv">
+                                <rect key="frame" x="35" y="52" width="0.0" height="20"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="9dG-V2-2d0"/>
                                     <constraint firstAttribute="height" constant="20" id="XBs-yJ-6d5"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -76,11 +74,10 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="lab" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hif-Z8-bQN">
-                                <rect key="frame" x="115" y="52" width="35" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hif-Z8-bQN">
+                                <rect key="frame" x="45" y="52" width="0.0" height="20"/>
                                 <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="MkL-Hh-IkL"/>
                                     <constraint firstAttribute="height" constant="20" id="gMH-8T-NsL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -135,12 +132,12 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="bgView" destination="Ebg-Ov-OXS" id="27W-Yh-dJR"/>
-                <outlet property="education" destination="txp-Ug-bOv" id="KDI-km-g20"/>
-                <outlet property="exp" destination="JvV-7X-sU8" id="uG7-Kx-KOa"/>
+                <outlet property="lab1" destination="JvV-7X-sU8" id="uG7-Kx-KOa"/>
+                <outlet property="lab2" destination="txp-Ug-bOv" id="KDI-km-g20"/>
+                <outlet property="lab3" destination="hif-Z8-bQN" id="RkH-4M-qYw"/>
                 <outlet property="myDescription" destination="sCa-Ac-q41" id="rtW-qK-lZ5"/>
                 <outlet property="name" destination="4lE-3c-sGf" id="esv-QD-pV3"/>
                 <outlet property="salary" destination="w7k-5F-deD" id="ABk-9Z-rDf"/>
-                <outlet property="workName" destination="hif-Z8-bQN" id="RkH-4M-qYw"/>
             </connections>
             <point key="canvasLocation" x="74.637681159420296" y="108.48214285714285"/>
         </tableViewCell>

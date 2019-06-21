@@ -73,6 +73,8 @@ NS_ASSUME_NONNULL_BEGIN
                   message:(NSString *)message
                 leftTitle:(NSString *)leftTitle
                rightTitle:(NSString *)rightTitle;
+//简单弹框提示
+-(void)showAlertSimpleTips:(NSString *)title message:(NSString *)message btnTitle:(NSString *)btnTitle;
 -(void)alerLeftAction;
 -(void)alertRightAction;
 @end

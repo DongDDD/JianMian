@@ -14,9 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMChatDetailInfoTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 @property (weak, nonatomic) IBOutlet UILabel *name;
-@property (weak, nonatomic) IBOutlet UILabel *exp;
-@property (weak, nonatomic) IBOutlet UILabel *education;
-@property (weak, nonatomic) IBOutlet UILabel *workName;
+@property (weak, nonatomic) IBOutlet UILabel *lab1;
+@property (weak, nonatomic) IBOutlet UILabel *lab2;
+@property (weak, nonatomic) IBOutlet UILabel *lab3;
 @property (weak, nonatomic) IBOutlet UILabel *salary;
 @property (weak, nonatomic) IBOutlet UILabel *myDescription;
 

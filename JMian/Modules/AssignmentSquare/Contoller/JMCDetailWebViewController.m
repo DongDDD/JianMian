@@ -18,6 +18,7 @@
 #import "JMMessageListModel.h"
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+CreateConversation.h"
+#import "JMIDCardIdentifyViewController.h"
 
 
 
@@ -131,10 +132,9 @@
     sender.selected = !sender.selected;
     if (sender.selected) {
         [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.task_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-       
-            [alert show];
+         
+            [self showAlertSimpleTips:@"提示" message:@"收藏成功" btnTitle:@"好的"];
+
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -142,10 +142,9 @@
     }else{
     
         [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.favorites_id  mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"取消收藏成功"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alert show];
-            
+       
+            [self showAlertSimpleTips:@"提示" message:@"已取消收藏" btnTitle:@"好的"];
+
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -193,8 +192,13 @@
 
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
-    
-    [self createChatRequstWithForeign_key:self.task_id user_id:_user_id];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+        [self createChatRequstWithForeign_key:self.task_id user_id:_user_id];
+        
+    }else{
+       [self showAlertWithTitle:@"提示" message:@"实名认证后才能聊天" leftTitle:@"返回" rightTitle:@"去实名认证"];
+    }
 
 }
 
@@ -279,14 +283,24 @@
 
 //申请职位
 -(void)sendResquest{
-    [[JMHTTPManager sharedInstance]createTaskOrder_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"申请成功" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    
+    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+        [[JMHTTPManager sharedInstance]createTaskOrder_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+    
+    }else{
+      [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
+    }
+}
+
+
+-(void)alertRightAction{
+    JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)ocToJs_dicData:(NSDictionary *)dicData{

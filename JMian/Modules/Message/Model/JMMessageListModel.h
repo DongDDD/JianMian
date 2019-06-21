@@ -17,6 +17,8 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 };
 
 @interface JMMessageListModel : NSObject
+@property(nonatomic,copy)NSString *type;//1-全职聊天。2-兼职聊天
+
 //后台数据
 @property(nonatomic,copy)NSString *sender_user_id;
 @property(nonatomic,copy)NSString *sender_type;
@@ -43,7 +45,10 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property(nonatomic,copy)NSString *work_work_experience_min;
 @property(nonatomic,copy)NSString *work_work_experience_max;
 
-//workInfo是一个对象
+
+
+
+//招聘信息
 @property (copy, nonatomic) NSString *workInfo_company_name;
 @property (copy, nonatomic) NSString *workInfo_financing;
 @property (copy, nonatomic) NSString *workInfo_company_id;
@@ -51,6 +56,36 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property (copy, nonatomic) NSString *workInfo_industry;
 @property (copy, nonatomic) NSString *workInfo_employee;
 @property (copy, nonatomic) NSString *workInfo_industry_label_id;
+//兼职招聘信息
+@property(nonatomic,copy)NSString *work_task_id;
+@property(nonatomic,copy)NSString *work_task_title;
+@property(nonatomic,copy)NSString *work_payment_method;
+@property(nonatomic,copy)NSString *work_unit;
+@property(nonatomic,copy)NSString *work_payment_money;
+@property(nonatomic,copy)NSString *work_front_money;
+@property(nonatomic,copy)NSString *work_quantity_max;
+@property(nonatomic,copy)NSString *work_deadline;
+@property(nonatomic,copy)NSString *work_mydDscription;
+@property(nonatomic,copy)NSString *work_address;
+@property(nonatomic,copy)NSString *work_status;
+@property(nonatomic,copy)NSString *work_goods;
+@property(nonatomic,copy)NSString *work_type_label_label_id;
+@property(nonatomic,copy)NSString *work_type_label_name;
+
+
+//简历
+@property (copy, nonatomic) NSString *job_ability_id;
+@property (copy, nonatomic) NSString *job_description;
+@property (copy, nonatomic) NSString *job_status;
+@property (copy, nonatomic) NSString *job_look;
+@property (copy, nonatomic) NSString *job_user_user_id;
+@property (copy, nonatomic) NSString *job_user_company_id;
+@property (copy, nonatomic) NSString *job_user_nickname;
+@property (copy, nonatomic) NSString *job_user_avatar;
+@property (copy, nonatomic) NSString *job_user_reputation;
+@property (copy, nonatomic) NSString *job_type_label_label_id;
+@property (copy, nonatomic) NSString *job_type_label_name;
+@property (strong, nonatomic) NSArray *job_industry;
 
 
 @property(nonatomic,copy)NSString *job_user_job_id;
@@ -58,9 +93,14 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 //腾讯云数据
 @property (nonatomic, strong) JMAllMessageTableViewCellData *data;
 
-
 @end
 
+@interface JMChatInfoIndustry : NSObject
+
+@property(nonatomic,copy)NSString *label_id;
+@property(nonatomic,copy)NSString *name;
+
+@end
 
 
 NS_ASSUME_NONNULL_END

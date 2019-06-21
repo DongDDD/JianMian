@@ -20,6 +20,7 @@
 #import "JMBUserInfoViewController.h"
 #import "JMGetCompanyLocationViewController.h"
 #import "JMHTTPManager+Login.h"
+#import "JMHTTPManager+CompanyFileDelete.h"
 
 
 
@@ -38,7 +39,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLab;
 @property (nonatomic, strong) NSMutableArray *addImage_paths;//公司图片数组
-@property (nonatomic, strong) NSMutableArray *filesModelArray;//用来提取公司图片的数组
+@property (nonatomic, strong) NSMutableArray *filesModelArray;//服务器文件数组（包含视频和图片）
+@property (nonatomic, strong) NSMutableArray *imageDataArray;//服务器图片数组 （提取到这里）
 
 
 @property (weak, nonatomic) IBOutlet UIButton *myPositionBtn;
@@ -89,7 +91,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self getNewUserInfo];
-
+   
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -99,6 +101,7 @@
     
     
 }
+#pragma mark - 数据请求
 
 -(void)getNewUserInfo{
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -123,8 +126,26 @@
         if (responsObject[@"data"]) {
             self.model = [JMCompanyInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             
-            [self initView];
+            if (self.model.files.count > 0) {
+                for (JMFilesModel *filesModel in self.model.files) {
+                    if ([filesModel.files_type isEqualToString:@"2"]) {//过滤视频走 只要图片
+                        [self.imageDataArray addObject:filesModel];
+                    }
+                }
+//                if (self.filesModelArray.count > 0) {//获得图片链接数组
+//                    self.imageDataArray = [NSMutableArray array];
+//                    for (JMFilesModel *filesModel in self.filesModelArray) {
+//                        [self.imageDataArray addObject:filesModel];
+//                    }
+//                }
+            }
+            
         }
+        
+        
+//        self.imageDataArray = self.model.files.mutableCopy;
+        [self initView];
+    
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -132,6 +153,21 @@
     
 }
 
+//公司上传图片
+-(void)uploadCompanyWithImages:(NSArray *)images{
+    
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:userModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:images label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片上传成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+}
 
 -(void)updateInfoData{
  
@@ -152,8 +188,19 @@
     
     
 }
-
-
+//删除公司图片
+-(void)deleteCompanyImgRequestWithFile_id:(NSString *)file_id{
+    [[JMHTTPManager sharedInstance]deleteCompanyFile_Id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片删除成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+}
 
 //赋值
 -(void)initView{
@@ -225,6 +272,10 @@
     [self uploadVideo];
 }
 
+- (IBAction)pickerViewDeleteAction:(id)sender {
+    [self.pickerBGView setHidden:YES];
+}
+
 - (IBAction)myPositionActoin:(UIButton *)sender {
     
     JMBUserInfoViewController *vc = [[JMBUserInfoViewController alloc]init];
@@ -239,14 +290,6 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
--(void)sendAdress_Data:(AMapPOI *)data
-{
-    self.POIModel = data;
-    NSString *adr = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
-    [self.companyAdress setTitle:adr forState:UIControlStateNormal];
-    
-    
-}
 
 
 //上传公司图片
@@ -259,23 +302,26 @@
 //    [self.navigationController pushViewController:vc animated:YES];
     
     Demo3ViewController *vc = [[Demo3ViewController alloc]init];
-    vc.viewType = Demo3ViewDefault;
+    vc.company_id = self.model.company_id;
+    vc.viewType = Demo3ViewCompanyInfoEdit;
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
 
 //JMMyPictureViewControllerDelegate
--(void)sendArray_image_paths:(NSMutableArray *)image_paths{
-    //增加了图片上传
-    if (image_paths.count > 0) {
-        if (image_paths != self.addImage_paths) {
-            _isChange = YES;
-            self.addImage_paths = [NSMutableArray array];
-            self.addImage_paths = image_paths;
+//-(void)sendArray_image_paths:(NSMutableArray *)image_paths{
+//    //增加了图片上传
+//    if (image_paths.count > 0) {
+//        if (image_paths != self.addImage_paths) {
+//            _isChange = YES;
+//            self.addImage_paths = [NSMutableArray array];
+//            self.addImage_paths = image_paths;
+//
+//        }
+//    }
+//}
 
-        }
-    }
-}
 
 - (IBAction)companyDescriptionAction:(UIButton *)sender {
     
@@ -286,17 +332,6 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)sendTextView_textData:(NSString *)textData{
-    if (![self.companyDecriptionBtn.titleLabel.text isEqualToString:textData]) {
-        if (![self.companyDecriptionBtn.titleLabel.text isEqualToString:textData]) {
-            self.isChange = YES;
-            [self.companyDecriptionBtn setTitle:textData forState:UIControlStateNormal];
-        }
-        
-    }
-    
-    
-}
 
 - (IBAction)playAction:(UIButton *)sender {
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.videoURL];
@@ -349,11 +384,40 @@
     [self.pickerBGView setHidden:YES];
     
 }
-
-- (IBAction)pickerViewDeleteAction:(id)sender {
-    [self.pickerBGView setHidden:YES];
+#pragma mark - myDelegate
+-(void)sendTextView_textData:(NSString *)textData{
+    if (![self.companyDecriptionBtn.titleLabel.text isEqualToString:textData]) {
+        if (![self.companyDecriptionBtn.titleLabel.text isEqualToString:textData]) {
+            self.isChange = YES;
+            [self.companyDecriptionBtn setTitle:textData forState:UIControlStateNormal];
+        }
+        
+    }
+}
+//删除兼职图片
+-(void)deleteCompanyImageWithIndex:(NSInteger)index{
+    JMFilesModel *fileModel = self.imageDataArray[index];
+    if (index < self.imageDataArray.count) {
+        [self deleteCompanyImgRequestWithFile_id:fileModel.file_id];
+        [self.imageDataArray removeObject:fileModel];
+    }
+    
 }
 
+//添加的图片
+-(void)sendAddImgs:(NSMutableArray *)Imgs{
+    [self uploadCompanyWithImages:Imgs.mutableCopy];
+}
+
+//公司地址回传
+-(void)sendAdress_Data:(AMapPOI *)data
+{
+    self.POIModel = data;
+    NSString *adr = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
+    [self.companyAdress setTitle:adr forState:UIControlStateNormal];
+    
+    
+}
 
 #pragma mark - pickerViewDelegate
 
@@ -930,6 +994,13 @@
 
 
 #pragma mark - lazy
+
+- (NSMutableArray *)imageDataArray {
+    if (!_imageDataArray) {
+        _imageDataArray = [NSMutableArray array];
+    }
+    return _imageDataArray;
+}
 
 - (NSMutableArray *)filesModelArray {
     if (!_filesModelArray) {

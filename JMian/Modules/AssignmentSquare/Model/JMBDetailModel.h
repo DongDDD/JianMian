@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy)NSString *user_nickname;
 @property(nonatomic, copy)NSString *user_avatar;
+@property(nonatomic, copy)NSString *user_id;
 
 
 @property(nonatomic, copy)NSString *type_label_name;

@@ -21,6 +21,7 @@
 #import "JMHTTPManager+DeleteAbilityImage.h"
 #import "JMHTTPManager+FectchTaskInfo.h"
 #import "JMTaskPartTimejobDetailModel.h"
+#import "JMHTTPManager+FectchAbilityInfo.h"
 
 
 static const CGFloat kPhotoViewMargin = 12.0;
@@ -36,9 +37,12 @@ static const CGFloat kPhotoViewMargin = 12.0;
 //@property (strong, nonatomic)NSMutableArray *addImgArray;//UIImage类型
 
 @property (strong, nonatomic)JMCompanyInfoModel *companyInfoModel;
-@property (strong, nonatomic)JMAbilityCellData *partTimeJobModel;
 
 @property (nonatomic, strong) NSMutableArray *addImage_paths;//添加的图片（服务器返回的链接数组）
+
+@property (nonatomic, strong) NSMutableArray *imageList;//目前展示的图片，UIImage类型
+@property (nonatomic, strong) NSMutableArray *partTResumeAddImgs;//UIImage类型
+
 
 @end
 
@@ -79,6 +83,14 @@ static const CGFloat kPhotoViewMargin = 12.0;
     }
     return _addImage_paths;
 }
+
+-(NSMutableArray *)partTResumeAddImgs{
+    
+    if (!_partTResumeAddImgs) {
+        _partTResumeAddImgs = [NSMutableArray array];
+    }
+    return _partTResumeAddImgs;
+}
 -(NSMutableArray *)image_paths{
     
     if (!_image_paths) {
@@ -87,9 +99,17 @@ static const CGFloat kPhotoViewMargin = 12.0;
     return _image_paths;
 }
 
+-(NSMutableArray *)imageList{
+    
+    if (!_imageList) {
+        _imageList = [NSMutableArray array];
+    }
+    return _imageList;
+}
+#pragma mark - 网络请求获取图片
 
-//获取最新图片数据
--(void)getData{
+//获取公司最新图片数据
+-(void)getCompanyImagesData{
      JMUserInfoModel *_userInfoModel = [JMUserInfoManager getUserInfo];
     [[JMHTTPManager sharedInstance]fetchCompanyInfo_Id:_userInfoModel.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
@@ -105,7 +125,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
             
         }
         
-        if (self.filesModelArray.count > 0) {
+        if (self.filesModelArray.count > 0) {//获得图片链接数组
             self.image_paths = [NSMutableArray array];
             for (JMFilesModel *filesModel in self.filesModelArray) {
                 [self.image_paths addObject:filesModel.files_file_path];
@@ -120,7 +140,6 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
 }
 
-#pragma mark - 获取数据
 -(void)getGoodsImageData{
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
@@ -144,7 +163,36 @@ static const CGFloat kPhotoViewMargin = 12.0;
 }
 
 
-
+//获取兼职简历图片
+-(void)getPartTimeJobResumeData{
+    [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMAbilityCellData *partTimeJobModel = [JMAbilityCellData mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            for (JMImageModel *data in partTimeJobModel.images) {
+                
+                [self.image_paths addObject:data.file_path];
+            }
+            
+            [self initView];
+            
+            //            if (self.partTimeVitaModel.video_file_path!=nil) {
+            //
+            //                NSURL *url = [NSURL URLWithString:self.partTimeVitaModel.video_file_path];
+            //
+            //
+            //
+            //            }
+//            [self setRightText_model:self.myPartTimeVitaModel];
+//            [self.tableView reloadData];
+            
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 
 -(void)initView{
     
@@ -163,52 +211,60 @@ static const CGFloat kPhotoViewMargin = 12.0;
     self.photoView = photoView;
     [self.manager addNetworkingImageToAlbum:self.image_paths selected:YES];
     [self.photoView refreshView];
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"公司图片";
+    self.title = @"图片";
     [self setRightBtnTextName:@"保存"];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [UIColor whiteColor];
     //    self.navigationController.navigationBar.translucent = NO;
     self.automaticallyAdjustsScrollViewInsets = YES;
     //    [self initView];
-    if (_viewType == Demo3ViewPartTimeEdit) {
-        // 获得图片数组布局
-        if (self.filesModelArray.count > 0) {
-            for (JMImageModel *imageModel in self.filesModelArray) {
-                [self.image_paths addObject:imageModel.file_path];
-            }
-        }
+    if (_viewType == Demo3ViewPartTimeResumeAdd){//个人发布兼职简历
         [self initView];
         
-    }else if (_viewType == Demo3ViewPartTimeResumeAdd){//个人发布兼职简历
-        
-        [self initView];
-
     }else if (_viewType == Demo3ViewPostGoodsPositionAdd) {//发布商品图片
-  
         [self initView];
         
-    }else if (_viewType == Demo3ViewPostGoodsPositionEditing) {//商品图片编辑
-        
+    }else if (_viewType == Demo3ViewPostGoodsPositionEdit) {//商品图片编辑
         [self getGoodsImageData];
-    }else if (_viewType == Demo3ViewDefault) {
-        //拿公司信息传过来的filesModelArray里面的图片，获得图片数组布局
-        if (self.filesModelArray.count > 0) {
-            self.image_paths = [NSMutableArray array];
-            for (JMFilesModel *filesModel in self.filesModelArray) {
-                [self.image_paths addObject:filesModel.files_file_path];
-            }
-        }
-        [self getData];//获取服务器最新图片数组
+        
+    }else if (_viewType == Demo3ViewPartTimeResumeEdit) {//个人兼职简历编辑
+        [self getPartTimeJobResumeData];
+        
+    }else if (_viewType == Demo3ViewCompanyInfoEdit) {//公司信息图片编辑
+//        //拿公司信息传过来的filesModelArray里面的图片，获得图片数组布局
+//        if (self.filesModelArray.count > 0) {
+//            self.image_paths = [NSMutableArray array];
+//            for (JMFilesModel *filesModel in self.filesModelArray) {
+//                [self.image_paths addObject:filesModel.files_file_path];
+//            }
+//        }
+        [self getCompanyImagesData];//获取服务器最新图片数组
     }
     
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImage:) name:@"SendImageNotification" object:nil];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDeleteImage:) name:@"SendDeleteImageNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteImage:) name:@"DeleteImgNotification" object:nil];
 
     
+}
+
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+//    for (UIImage *img in self.partTResumeAddImgs) {
+//        [self sendRequstTest_img:img];
+//    }
+//    for (int i = 0; i < self.partTResumeAddImgs.count; i++) {
+//        UIImage *img = self.partTResumeAddImgs[i];
+//
+//
+//    }
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -220,9 +276,17 @@ static const CGFloat kPhotoViewMargin = 12.0;
 //获取选中图片
 -(void)getImage:(NSNotification *)notification{
     UIImage * img = notification.object;
+    
+//    [self.partTResumeAddImgs addObject:img];
     [self sendRequst_img:img];
 }
 
+//-(void)getDeleteImage:(NSNotification *)notification{
+//    UIImage * img = notification.object;
+//    [self.partTResumeAddImgs removeObject:img];
+//
+////    [self sendRequst_img:img];
+//}
 
 
 #pragma mark -上传图片并返回
@@ -231,26 +295,67 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [self lookClick];
     NSLog(@"上传图片---：%@",_addImage_paths);
     if ( _addImage_paths.count > 0 ) {
-        if (_viewType == Demo3ViewPartTimeEdit) {
-            //            上传partTimeJob图片
-            [self uploadPartTimePicWithImages:_addImage_paths];
-        }else if (_viewType == Demo3ViewDefault) {
+        if (_viewType == Demo3ViewPartTimeResumeEdit) {
+            
+            
+//            [self uploadPartTimePicWithImages:_addImage_paths];
+//            NSMutableArray *array = [NSMutableArray array];
+//            for (NSString *url  in self.addImage_paths) {
+//                NSString *url1 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
+//                [array addObject:url1];
+//            }
+//            [_delegate sendArray_addImageUrls:array];//传透只用于显示
+            [_delegate sendAddImgs:self.addImage_paths];//传透增加了的图片数组 直接丢给服务器 没前缀
+            
+        }else if (_viewType == Demo3ViewCompanyInfoEdit) {
             //公司上传图片
-            [self uploadCompanyWithImages:_addImage_paths];
+            [_delegate sendAddImgs:self.addImage_paths];//传透增加了的图片数组 直接丢给服务器 没前缀
+
+//            [self uploadCompanyWithImages:_addImage_paths];
+        }else if (_viewType == Demo3ViewPostGoodsPositionEdit) {
+            //公司上传图片
+            [_delegate sendAddImgs:self.addImage_paths];//传透增加了的图片数组 直接丢给服务器 没前缀
+            
+            //            [self uploadCompanyWithImages:_addImage_paths];
         }else if (_viewType == Demo3ViewPostGoodsPositionAdd) {
-            //公司上传图片
+//            if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
+//                NSMutableArray *array = [NSMutableArray array];
+//                for (NSString *url  in self.addImage_paths) {
+//                    NSString *url1 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
+//                    [array addObject:url1];
+//                }
+//
+//
+//                [self.image_paths addObjectsFromArray:array];
+//                [_delegate sendArray_addImageUrls:self.image_paths];
+            
+            
+      
             if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
                 NSMutableArray *array = [NSMutableArray array];
                 for (NSString *url  in self.addImage_paths) {
                     NSString *url1 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
                     [array addObject:url1];
                 }
-                
-                
-                [self.image_paths addObjectsFromArray:array];
-                [_delegate sendArray_addImageUrls:self.image_paths];
+
+
+//                [self.image_paths addObjectsFromArray:array];
+                [_delegate sendArray_addImageUrls:array];
             }
         }else if (_viewType == Demo3ViewPartTimeResumeAdd) {
+            //兼职简历上传图片
+//            if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
+//                NSMutableArray *array = [NSMutableArray array];
+//                for (NSString *url  in self.addImage_paths) {
+//                    NSString *url1 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
+//                    [array addObject:url1];
+//                }
+//
+//
+//                [self.image_paths addObjectsFromArray:array];
+//                [_delegate sendArray_addImageUrls:self.image_paths];
+//            }
+            
             if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
                 NSMutableArray *array = [NSMutableArray array];
                 for (NSString *url  in self.addImage_paths) {
@@ -259,11 +364,9 @@ static const CGFloat kPhotoViewMargin = 12.0;
                 }
                 
                 
-                [self.image_paths addObjectsFromArray:array];
-                [_delegate sendArray_addImageUrls:self.image_paths];
+                //                [self.image_paths addObjectsFromArray:array];
+                [_delegate sendArray_addImageUrls:array];
             }
-            
-            
             
         }
         
@@ -271,16 +374,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
     
 }
 
-//兼职上传图片
--(void)uploadPartTimePicWithImages:(NSArray *)images{
-    [[JMHTTPManager sharedInstance]updateAbility_Id:self.ability_id city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:images status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片上传成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-}
+
 //公司上传图片
 -(void)uploadCompanyWithImages:(NSArray *)images{
     
@@ -316,6 +410,65 @@ static const CGFloat kPhotoViewMargin = 12.0;
     }];
     
 }
+
+-(void)sendRequstTest_img:(UIImage *)img{
+    NSArray *array = @[img];
+    if (array.count > 0) {
+        [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            if (responsObject[@"data"]) {
+                NSLog(@"Test666%@",responsObject[@"data"]);
+                NSString *url = responsObject[@"data"][0];
+                [self.addImage_paths addObject:url];
+                
+                //            if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
+                //                [_delegate sendArray_addImageUrls:array];
+                //            }
+//                if () {
+//                    <#statements#>
+//                }
+            }
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+        
+    }
+    
+}
+
+
+//-(void)sendRequst2_imgArray:(NSArray *)imgArray{
+//
+//    [[JMHTTPManager sharedInstance]uploadsImageWithFiles:imgArray successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        if (responsObject[@"data"]) {
+//            NSLog(@"2222222%@",responsObject[@"data"]);
+//
+//            //            if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
+//            //                [_delegate sendArray_addImageUrls:array];
+//            //            }
+//        }
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//}
+//
+//-(void)sendRequst3_imgArray:(NSArray *)imgArray{
+//
+//    [[JMHTTPManager sharedInstance]uploadsWithFiles:imgArray successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        if (responsObject[@"data"]) {
+//            NSLog(@"----33333--%@",responsObject[@"data"]);
+////            NSString *url = responsObject[@"data"][0];
+////            [self.addImage_paths addObject:url];
+//
+//            //            if (_delegate && [_delegate respondsToSelector:@selector(sendArray_addImageUrls:)]) {
+//            //                [_delegate sendArray_addImageUrls:array];
+//            //            }
+//        }
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//}
 
 -(void)fanhui{
     [super fanhui];
@@ -380,6 +533,17 @@ static const CGFloat kPhotoViewMargin = 12.0;
     [self.toolManager getSelectedImageList:allList success:^(NSArray<UIImage *> *imageList) {
         [weakSelf.view handleLoading];
         NSSLog(@"imageListimageList%@",imageList);
+        if (_viewType == Demo3ViewPartTimeResumeAdd || _viewType == Demo3ViewPostGoodsPositionAdd) {
+            _imageList = imageList.mutableCopy;
+            [self.addImage_paths removeAllObjects];
+            for (UIImage *img in imageList) {
+                [self sendRequstTest_img:img];
+            }
+            
+        }
+       
+//        [self sendRequst2_imgArray:imageList];
+//        [self sendRequst3_imgArray:imageList];
     } failed:^{
         [weakSelf.view handleLoading];
     }];
@@ -405,52 +569,133 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
 - (void)deleteSend_index:(NSInteger)index{
     NSSLog(@"删除图片下标%ld",(long)index);
-    if (index < self.filesModelArray.count) {
-        JMFilesModel *fileModel = self.filesModelArray[index];
-        
-        if (_viewType == Demo3ViewPartTimeEdit ) {
-            [self deletePartTimeJobImgRequestWithFile_id:fileModel.file_id];
-        }else if (_viewType == Demo3ViewDefault){
-            [self deleteCompanyImgRequestWithFile_id:fileModel.file_id];
+    if (_viewType == Demo3ViewPartTimeResumeEdit) {
+        //            [self deletePartTimeJobImgRequestWithFile_id:fileModel.file_id];
+        //image_paths服务器获取的图片
+        if (index > self.image_paths.count - 1) {
+            NSLog(@"addImage_paths:%@",self.addImage_paths);
+            NSInteger addImageIndex = index - self.image_paths.count;
+            [self.addImage_paths removeObjectAtIndex:addImageIndex];
+        }else{
+            if (self.image_paths.count > 0) {
+                if (_delegate && [_delegate respondsToSelector:@selector(deletePartTimeJobResumeImageWithIndex:)]) {
+                    //            JMFilesModel *fileModel = self.filesModelArray[index];
+                    [_delegate deletePartTimeJobResumeImageWithIndex:index];
+                }
+                
+                [self.image_paths removeObjectAtIndex:index];
+                
+            }else{
+                [self.addImage_paths removeObjectAtIndex:index];
+
+            }
             
+        }
+    }else if (_viewType == Demo3ViewCompanyInfoEdit) {
+        if (index > self.image_paths.count - 1) {
+            NSLog(@"addImage_paths:%@",self.addImage_paths);
+            NSInteger addImageIndex = index - self.image_paths.count;
+            [self.addImage_paths removeObjectAtIndex:addImageIndex];
+        }else{
+            if (self.image_paths.count > 0) {
+                if (_delegate && [_delegate respondsToSelector:@selector(deleteCompanyImageWithIndex:)]) {
+                    //            JMFilesModel *fileModel = self.filesModelArray[index];
+                    [_delegate deleteCompanyImageWithIndex:index];
+                }
+                
+                [self.image_paths removeObjectAtIndex:index];
+                
+            }else{
+                [self.addImage_paths removeObjectAtIndex:index];
+                
+            }
+//            if (_delegate && [_delegate respondsToSelector:@selector(deleteCompanyImageWithIndex:)]) {
+//                //            JMFilesModel *fileModel = self.filesModelArray[index];
+//                [_delegate deleteCompanyImageWithIndex:index];
+//            }
+//            [self.image_paths removeObjectAtIndex:index];
+//
         }
         
         
-//        [self.filesModelArray removeObject:fileModel];
-        [self.filesModelArray removeObjectAtIndex:index];
+    }else if (_viewType == Demo3ViewPostGoodsPositionEdit) {
+        if (index > self.image_paths.count - 1) {
+            NSLog(@"addImage_paths:%@",self.addImage_paths);
+            NSInteger addImageIndex = index - self.image_paths.count;
+            [self.addImage_paths removeObjectAtIndex:addImageIndex];
+        }else{
+            if (self.image_paths.count > 0) {
+                if (_delegate && [_delegate respondsToSelector:@selector(deleteSalePositionImageWithIndex:)]) {
+                    //            JMFilesModel *fileModel = self.filesModelArray[index];
+                    [_delegate deleteSalePositionImageWithIndex:index];
+                }
+                
+                [self.image_paths removeObjectAtIndex:index];
+                
+            }else{
+                [self.addImage_paths removeObjectAtIndex:index];
+                
+            }
+            //            if (_delegate && [_delegate respondsToSelector:@selector(deleteCompanyImageWithIndex:)]) {
+            //                //            JMFilesModel *fileModel = self.filesModelArray[index];
+            //                [_delegate deleteCompanyImageWithIndex:index];
+            //            }
+            //            [self.image_paths removeObjectAtIndex:index];
+            //
+        }
         
-    }else{
-        //可以删除
-        NSInteger addImgArrayIndex = (index + 1) - self.filesModelArray.count;
-        [self.addImage_paths removeObjectAtIndex:addImgArrayIndex];
+//        [self.image_paths removeObjectAtIndex:index];
+        
+    }else if (_viewType == Demo3ViewPostGoodsPositionAdd) {
+        [self.image_paths removeObjectAtIndex:index];
+        
+    }else if (_viewType == Demo3ViewPartTimeResumeAdd) {
+        [self.image_paths removeObjectAtIndex:index];
+        
+    }else if (_viewType == Demo3ViewPartTimeResumeAdd) {
+        [self.image_paths removeObjectAtIndex:index];
         
     }
     
-}
--(void)deleteCompanyImgRequestWithFile_id:(NSString *)file_id{
-    [[JMHTTPManager sharedInstance]deleteCompanyFile_Id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        //            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片删除成功"
-        //                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        //            [alert show];
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-
-
-}
-
-
--(void)deletePartTimeJobImgRequestWithFile_id:(NSString *)file_id{
-    [[JMHTTPManager sharedInstance]deleteAbilityImage_Id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片删除成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+    
+//    if (index < self.filesModelArray.count) {
+//
+//      if (_viewType == Demo3ViewCompanyInfoEdit){
+//            JMFilesModel *fileModel = self.filesModelArray[index];
+//            [self deleteCompanyImageWithIndex:fileModel.file_id];
+//
+//        }
+//
+//
+////        [self.filesModelArray removeObject:fileModel];
+//        [self.filesModelArray removeObjectAtIndex:index];
+//    }
     
 }
+//-(void)deleteCompanyImgRequestWithFile_id:(NSString *)file_id{
+//    [[JMHTTPManager sharedInstance]deleteCompanyFile_Id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//        //            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片删除成功"
+//        //                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//        //            [alert show];
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//
+//}
+
+
+//-(void)deletePartTimeJobImgRequestWithFile_id:(NSString *)file_id{
+//    [[JMHTTPManager sharedInstance]deleteAbilityImage_Id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片删除成功"
+//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//        [alert show];
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//}
 
 
 @end

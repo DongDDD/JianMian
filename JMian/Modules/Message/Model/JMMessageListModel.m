@@ -6,11 +6,21 @@
 //  Copyright © 2019 mac. All rights reserved.
 //
 
+
+
+
+
 #import "JMMessageListModel.h"
 #import <MJExtension.h>
 
 
 @implementation JMMessageListModel
+
++ (NSDictionary *)mj_objectClassInArray {
+    return @{
+             @"job_industry":@"JMChatInfoIndustry",
+             };
+}
 
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     
@@ -43,7 +53,36 @@
              @"workInfo_industry":@"work.info.industry",
              @"workInfo_employee":@"work.info.employee",
              @"workInfo_industry_label_id":@"work.info.industry_label_id",
-             @"job_user_job_id":@"job.user_job_id"
+             @"job_user_job_id":@"job.user_job_id",
+
+             @"work_task_id":@"work.task_id",
+             @"work_task_title":@"work.task_title",
+             @"work_payment_method":@"work.payment_method",
+             @"work_unit":@"work.unit",
+             @"work_payment_money":@"work.payment_money",
+             @"work_front_money":@"work.front_money",
+             @"work_quantity_max":@"work.quantity_max",
+             @"workInfo_employee":@"workInfo.employee",
+             @"work_deadline":@"work.deadline",
+             @"work_mydDscription":@"work.Dscription",
+             @"work_address":@"work.address",
+             @"work_status":@"work.status",
+             @"work_goods":@"work.goods",
+             @"work_type_label_label_id":@"work.type_label.label_id",
+             @"work_type_label_name":@"work.type_label.name",
+             
+             @"job_ability_id":@"job.ability_id",
+             @"job_description":@"job.description",
+             @"job_status":@"job.status",
+             @"job_look":@"job.look",
+             @"job_user_user_id":@"job.user.user_id",
+             @"job_user_company_id":@"job.user.company_id",
+             @"job_user_nickname":@"job.user.nickname",
+             @"job_user_avatar":@"job.user.avatar",
+             @"job_user_reputation":@"job.user.reputation",
+             @"job_type_label_label_id":@"job.type_label.label_id",
+             @"job_type_label_name":@"job.type_label.name",
+             @"job_industry":@"job.industry"
 
              };
     
@@ -51,4 +90,9 @@
 
 @end
 
+@implementation JMChatInfoIndustry
+
+
+
+@end
 

@@ -24,6 +24,7 @@
 #import "JMTaskPartTimejobDetailModel.h"
 #import "JMHTTPManager+UpdateTask.h"
 #import "JMHTTPManager+DeleteTask.h"
+#import "JMHTTPManager+DeleteGoodsImage.h"
 #import "JMPostGoodsImagesView.h"
 
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
@@ -37,7 +38,8 @@
 @property (strong, nonatomic)Demo3ViewController *demo3ViewVC;
 @property (strong, nonatomic)JMPostGoodsImagesView *postGoodsImagesView;
 @property (strong, nonatomic)JMComfirmPostBottomView *comfirmPostBottomView;
-@property (nonatomic,strong)NSArray *quantityArray;;
+@property (nonatomic,strong)NSArray *quantityArray;
+@property (nonatomic,strong)NSMutableArray *imageDataArr;;
 @property (nonatomic,strong)UIDatePicker *dataPickerView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic ,assign)BOOL isChange;
@@ -79,8 +81,9 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [self initView];
     [self initLayout];
     self.title = @"发布网络销售职位";
-    
-    [self setRightBtnTextName:@"删除"];
+    if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
+        [self setRightBtnTextName:@"删除"];
+    }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
   
@@ -102,7 +105,8 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     
     
     //编辑模式
-    if (self.task_id) {
+    if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
+        //获取
         [self getData];
         self.bottomView.hidden = NO;
         [self.view addSubview:self.bottomView];
@@ -122,7 +126,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [self.detailView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.scrollView.mas_top);
-        make.height.mas_equalTo(408);
+        make.height.mas_equalTo(357);
     }];
     [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
@@ -153,6 +157,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 - (void)sendlabsWithJson:(nonnull NSString *)json {
     _isChange = YES;
+    self.labsJson = json;
     NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *arrayData = [self toArrayOrNSDictionary:data];
     NSLog(@"arrayData%@",arrayData);
@@ -203,7 +208,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     _isChange = YES;
     switch (tag) {
         case 100:// 职位名称
-//            _task_title = text;
+            _task_title = text;
             break;
         case 101:// 佣金/每单
             _payment_money = text;
@@ -238,6 +243,24 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     
 }
 
+//添加的图片
+-(void)sendAddImgs:(NSMutableArray *)Imgs{
+    [self updateTaskImagesRequest_images:Imgs.mutableCopy];
+//    [self uploadCompanyWithImages:Imgs.mutableCopy];
+}
+
+//删除图片
+-(void)deleteSalePositionImageWithIndex:(NSInteger)index{
+    if (self.imageDataArr.count > 0) {
+        JMImageModel *model = self.imageDataArr[index];
+        if (index < self.imageDataArr.count) {
+            [self deleteGoodsImageRequsetWithFile_id:model.file_id];
+            [self.imageDataArr removeObject:model];
+            //        [self.image_arr.mutableCopy removeObjectAtIndex:index];
+        }
+
+    }
+}
 
 -(void)gotoLabsVC{
     JMPartTimeJobTypeLabsViewController *vc =  [[JMPartTimeJobTypeLabsViewController alloc]init];
@@ -248,7 +271,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 -(void)gotoIndustryVC{
     JMIndustryWebViewController *vc =  [[JMIndustryWebViewController alloc]init];
     vc.delegate = self;
-    //    vc.labsJson = self.labsJson;
+    vc.labsJson = self.labsJson;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -273,28 +296,21 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 -(void)gotoUploadImageAction{
  
     _demo3ViewVC = [[Demo3ViewController alloc]init];
-    _demo3ViewVC.task_id = self.task_id;//进入界面重新调用接口获得最新图片
     _demo3ViewVC.delegate = self;
-    if (self.task_id) {
+    if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
         //编辑状态
-        _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionEditing;
+        _demo3ViewVC.task_id = self.task_id;//进入界面重新调用接口获得最新图片
+        _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionEdit;
 
-    }else{
+    }else if (_viewType == JMBUserPostSaleJobViewTypeAdd) {
         //添加状态
         _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionAdd;
     
     }
-    
-//    if (_image_arr.count > 0) {
-//        NSMutableArray *array = [NSMutableArray array];
-//        for (NSString *url in _image_arr) {
-//            NSString *imgUrl = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",url];
-//            [array addObject:imgUrl];
-//        }
-//        _demo3ViewVC.image_paths = array;
-//
-//    }
-    _demo3ViewVC.image_paths = _image_arr.mutableCopy;
+    if (_image_arr.count > 0) {
+        //选好的图片_image_arr
+        _demo3ViewVC.image_paths = _image_arr.mutableCopy;
+    }
     [self.navigationController pushViewController:_demo3ViewVC animated:YES];
  
    
@@ -390,7 +406,6 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     }
     
 }
-
 
 
 -(void)uploadVideo{
@@ -497,7 +512,9 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 
 -(void)fetchmyVideo{
-    
+    if (![self.video_path containsString:@"https://jmsp-videos"]) {
+        self.video_path = [NSString stringWithFormat:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com%@",self.video_path];
+    }
     NSString * path = [NSString stringWithFormat:@"%@", self.video_path];
     //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
@@ -506,8 +523,6 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     self.tabBarController.tabBar.hidden = YES;
     [self.navigationController pushViewController:playVC animated:NO];
-    
-    
     
 }
 
@@ -724,6 +739,11 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         [_videoView.videoLeftBtn setTitle:@"拍摄视频" forState:UIControlStateNormal];
         [_videoView.videoRightBtn setTitle:@"上传视频" forState:UIControlStateNormal];
         [_videoView.playBtn setHidden:YES];
+    }else{
+        [_videoView.videoLeftBtn setTitle:@"重新拍摄" forState:UIControlStateNormal];
+        [_videoView.videoRightBtn setTitle:@"重新上传" forState:UIControlStateNormal];
+        [_videoView.playBtn setHidden:NO];
+
     }
     
 }
@@ -806,7 +826,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     }
     
     
-    [[JMHTTPManager sharedInstance]createTask_task_title:@"销售分成" type_label_id:@"1027" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:@"1027" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -820,10 +840,12 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     
 }
 
+
+
 -(void)deleteTaskRequest{
     [[JMHTTPManager sharedInstance]deleteTask_Id:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"下线成功" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"已删除" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self.navigationController popViewControllerAnimated:YES];
         }])];
@@ -832,9 +854,38 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         
     }];
 }
+
+//上传图片请求
+-(void)updateTaskImagesRequest_images:(NSArray *)images{
+    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:images is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"成功添加图片" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+-(void)deleteGoodsImageRequsetWithFile_id:(NSString *)file_id{
+    [[JMHTTPManager sharedInstance]deleteGoodsImageWithFile_id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"删除成功" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
+}
+
 //更新任务请求
 -(void)updateTaskInfoRequest_status:(NSString *)status{
-        [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude address:_address goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:_image_arr is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude address:_address goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:_image_arr is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 [self.navigationController popViewControllerAnimated:YES];
@@ -854,6 +905,9 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             JMTaskPartTimejobDetailModel *model = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            self.imageDataArr = model.images.mutableCopy;
+            
             //赋值
             [self setRightBtnValues_model:model];
             
@@ -942,7 +996,13 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     return _scrollView;
 }
 
+-(NSMutableArray *)imageDataArr{
+    if (_imageDataArr == nil) {
+        _imageDataArr = [NSMutableArray array];
+    }
+    return _imageDataArr;
 
+}
 -(UIDatePicker *)dataPickerView{
     if (!_dataPickerView) {
         _dataPickerView = [[UIDatePicker alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 350)];

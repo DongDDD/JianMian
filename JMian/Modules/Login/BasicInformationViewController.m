@@ -70,7 +70,7 @@
     
     [_headerImg setImage:savedImage forState:UIControlStateNormal];
     //    [imge setImage:savedImage];
-    [IQKeyboardManager sharedManager].enable = NO;//试过用enable这个属性，但是没有效果；改成enableAutoToolbar就可以了
+//    [IQKeyboardManager sharedManager].enable = NO;//试过用enable这个属性，但是没有效果；改成enableAutoToolbar就可以了
     
 }
 
@@ -82,7 +82,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [IQKeyboardManager sharedManager].enable = YES;
+//    [IQKeyboardManager sharedManager].enable = YES;
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -102,40 +102,23 @@
     }];
     
 }
-//- (void)keyboardWillShow:(NSNotification *)aNotification {
-//    self.datePicker.hidden = YES;
-//    NSDictionary *userInfo = aNotification.userInfo;
-//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-////    _keyboardRect = aValue.CGRectValue;
-//
-//    CGRect keyboardRect = aValue.CGRectValue;
-//    CGRect frame = self.emailText.frame;
-//    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-//    CGRect rect= CGRectMake(0,_changeHeight+30,SCREEN_WIDTH,SCREEN_HEIGHT);
-//    [UIView animateWithDuration:0.3 animations:^ {
-//        self.view.frame = rect;
-//
-//    }];
-//
-//
-//
-//}
-//
-//- (void)keyboardWillHide:(NSNotification *)aNotification {
-//    [UIView animateWithDuration:0.3 animations:^ {
-//        self.view.frame = CGRectMake(0,64,SCREEN_WIDTH,SCREEN_HEIGHT);
-//
-//    }];
-//
-//}
 
 
 -(void)initView{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
 //    self.model = userModel;
-    if (self.model) {
+    //C端申请第一步，填写基本信息
+    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+        [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+        [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
+        self.emailText.text = userModel.email;
+        self.nameText.text = userModel.card_name;
+    }
+    
+    
+    if (_viewType == BasicInformationViewTypeEdit) {
         [self setRightBtnTextName:@"保存"];
-        self.nameText.text = userModel.nickname;
+        self.nameText.text = userModel.card_name;
         [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
         [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
         self.emailText.text = userModel.email;
@@ -148,6 +131,8 @@
     }else {
         [self setRightBtnTextName:@"下一步"];
     }
+    
+    
     
     [self.navigationController setNavigationBarHidden:NO];
     self.datePicker.backgroundColor = [UIColor whiteColor];
@@ -368,12 +353,18 @@
     return YES;
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 #pragma mark -scrollView delegte
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     self.datePicker.hidden = YES;
-    [self.nameText resignFirstResponder];
-    [self.emailText resignFirstResponder];
+//    [self.nameText resignFirstResponder];
+//    [self.emailText resignFirstResponder];
 }
 
 
@@ -445,7 +436,9 @@
 - (IBAction)manBtn:(id)sender {
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
     if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
-     
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改性别"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
         return;
     }
     self.sex = @(1);
@@ -468,7 +461,9 @@
 - (IBAction)womanBtn:(id)sender {
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
     if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
-      
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改性别"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
         return;
     }
     self.sex = @(2);
@@ -494,30 +489,31 @@
 
 
 -(void)rightAction{
-
-   
-        [[JMHTTPManager sharedInstance] updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:_imageUrl nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [self.nameText resignFirstResponder];
+    [self.emailText resignFirstResponder];
+    
+    [[JMHTTPManager sharedInstance] updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:_imageUrl nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMUserInfoManager saveUserInfo:userInfo];
             
             
-            [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-                
-                JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-                [JMUserInfoManager saveUserInfo:userInfo];
-                
-                
-                if (self.model) {
-                    [self.navigationController popViewControllerAnimated:YES];
-                }else {
-                    JobIntensionViewController *jobIntension = [[JobIntensionViewController alloc]init];
-                    [self.navigationController pushViewController:jobIntension animated:YES];
-                }
-            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-                
-            }];
-            
-            
+            if (self.model) {
+                [self.navigationController popViewControllerAnimated:YES];
+            }else {
+                JobIntensionViewController *jobIntension = [[JobIntensionViewController alloc]init];
+                [self.navigationController pushViewController:jobIntension animated:YES];
+            }
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
+        }];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
         }];
   
 }

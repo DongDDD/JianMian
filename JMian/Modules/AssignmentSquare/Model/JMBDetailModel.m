@@ -23,6 +23,8 @@
     return @{
              @"user_nickname":@"user.nickname",
              @"user_avatar":@"user.avatar",
+             @"user_id":@"user.user_id",
+
              @"type_label_name":@"type.label_name",
              
              };

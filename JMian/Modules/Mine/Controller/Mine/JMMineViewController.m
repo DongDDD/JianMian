@@ -88,8 +88,8 @@
     
     
     
-    self.imageNameArr = @[@"mine_share",@"subscribe",@"burse",@"autonym"];
-    self.labelStrArr = @[@"分享APP",@"网点预约拍摄",@"我的钱包",@"实名认证"];
+    self.imageNameArr = @[@"burse",@"autonym"];
+    self.labelStrArr = @[@"我的钱包",@"实名认证"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -265,19 +265,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
         //我的钱包
-        if (indexPath.row == 2) {
+        if (indexPath.row == 0) {
             [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
-        }else  if (indexPath.row == 3) {
+        }else  if (indexPath.row == 1) {
             //实名认证
             JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
             if ([model.card_status isEqualToString:Card_PassIdentify]) {
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"你已通过实名认证"
-                                                              delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-                [alert show];
+                [self showAlertSimpleTips:@"提示" message:@"你已通过实名认证" btnTitle:@"好的"];
+                
             }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"审核实名认证中"
-                                                              delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-                [alert show];
+                [self showAlertSimpleTips:@"提示" message:@"审核实名认证中" btnTitle:@"好的"];
             }else{
                 
                 [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];

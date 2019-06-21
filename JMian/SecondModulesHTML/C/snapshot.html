@@ -249,7 +249,6 @@
                         }
                     }
                     div{
-                        margin-bottom: 0.48rem;
                         ul{
                             margin-left: 0.4rem;
                             display: inline;
@@ -345,10 +344,10 @@
             </span>
             <span class="contain">
                 <p class="c-name">{{this.detail.snapshot.company.company_name}}</p>
-            <span class="credit">
-                <span>信用等级</span>
+            <span class="credit" v-if="this.detail.company.reputation">
+                <span>信用</span>
                 <div>
-                    <img src="../images/mission@2x.png" alt="">
+                    <img v-if="level>0" id="level" v-for="item in level" :src="level1" alt="" >
                 </div>
             </span>
             </span>
@@ -380,7 +379,6 @@
                     <p>招募人数：<span>{{this.detail.snapshot.quantity_max}}</span></p>
                     <p>工作城市：<span>{{this.detail.snapshot.city.city_name}}</span></p>
                     <div>适合行业：<ul><li v-for="item in this.detail.industry">{{item.name}}<span>/</span></li></ul></div>
-                    <p>任务有效期：<span>{{this.detail.snapshot.deadline}}</span></p>
                 </div>
                 <div class="line" style="margin:0 0.53rem;"></div>
                 <div class="product">
@@ -393,7 +391,7 @@
                 <div class="describe" v-if="this.detail.snapshot.video">
                     <span>产品视频</span>
                     <div style="text-align: center;margin-top: 0.66rem;position: relative">
-                        <video id="video" width="70%" style="border-radius: 0.33rem" controls webkit-playsinline="true" playsinline x5-video-player-type="h5" :poster="this.detail.video.cover">
+                        <video id="video" width="70%" style="border-radius: 0.33rem" controls webkit-playsinline="true" playsinline x5-video-player-type="h5" :poster="this.detail.snapshot.video.cover">
                             <source :src="this.detail.snapshot.video.file_path">
                         </video>
                     </div>
@@ -402,7 +400,7 @@
                 <div class="describe">
                     <span>产品图片</span>
                     <ul style="width: 100%;margin-top: 0.66rem;">
-                        <li style="display: inline-block" v-for="item in this.snapshot.detail.images"><img :src="item.file_path" alt="" style="width: 2.8rem;margin-right: 0.16rem"></li>
+                        <li style="display: inline-block" v-for="item in this.detail.snapshot.images"><img :src="item.file_path" alt="" style="width: 2.8rem;margin-right: 0.16rem"></li>
                     </ul>
                 </div>
                 <div class="bottom">
@@ -428,7 +426,6 @@
                     <p>招募人数：<span>{{this.detail.snapshot.quantity_max}}</span></p>
                     <p>工作城市：<span>{{this.detail.snapshot.city.city_name}}</span></p>
                     <div>适合行业：<ul><li v-for="item in this.detail.industry">{{item.name}}<span>/</span></li></ul></div>
-                    <p>任务有效期：<span>{{this.detail.snapshot.deadline}}</span></p>
                 </div>
                 <div class="line" style="margin:0 0.53rem;"></div>
                 <div class="describe">
@@ -472,22 +469,121 @@
                 {label: "签合同",id:'3'},
             ],
             initialize: false,
+            level:0,
+            level1:"../images/x.png",
+            level2:"../images/z.png",
+            level3:"../images/mission3@2x.png",
+            level4:"../images/mission@2x.png",
+            openSimple: false,
+            bigImg: '',
         },
         mounted(){
             setTimeout(function () {
                 this.initialize = true;
             }.bind(this));
-            this.init();
+            if(this.detail.payment_method !== 1){
+                this.init();
+            }
+
         },
         methods:{
             clickCompanyDetails(){
-                window.webkit.messageHandlers.aaa.postMessage(this.detail.company.company_id);
+                window.webkit.messageHandlers.aaa.postMessage(this.detail.snapshot.company.company_id);
             },
             clickCompanyToAMap(){
                 window.webkit.messageHandlers.aaa.postMessage()
             },
             clickTaskDetails(){
-                window.webkit.messageHandlers.aaa.postMessage(this.detail.task_id);
+                window.webkit.messageHandlers.aaa.postMessage(this.detail.task_id)
+            },
+            openSimpleDialog (img) {
+                this.openSimple = true;
+                this.bigImg = img
+            },
+            leveling(){
+                var img = document.getElementById('level');
+                if(this.detail.company.reputation){
+                    if(4 <= this.detail.company.reputation && this.detail.company.reputation <= 10){
+                        this.level = 1;
+                        img.src = this.level1
+                    }
+                    if(11 <= this.detail.company.reputation && this.detail.company.reputation <= 40){
+                        this.level = 2;
+                        img.src = this.level1
+                    }
+                    if(41 <= this.detail.company.reputation && this.detail.company.reputation <= 90){
+                        this.level = 3;
+                        img.src = this.level1
+                    }
+                    if(91 <= this.detail.company.reputation && this.detail.company.reputation <= 150){
+                        this.level = 4;
+                        img.src = this.level1
+                    }
+                    if(151 <= this.detail.company.reputation && this.detail.company.reputation <= 250){
+                        this.level = 5;
+                        img.src = this.level1
+                    }
+                    if(251 <= this.detail.company.reputation && this.detail.company.reputation <= 500){
+                        this.level = 1;
+                        img.src = this.level2
+                    }
+                    if(501 <= this.detail.company.reputation && this.detail.company.reputation <= 1000){
+                        this.level = 2;
+                        img.src = this.level2
+                    }
+                    if(1001 <= this.detail.company.reputation && this.detail.company.reputation <= 2000){
+                        this.level = 3;
+                        img.src = this.level2
+                    }
+                    if(2001 <= this.detail.company.reputation && this.detail.company.reputation <= 5000){
+                        this.level = 4;
+                        img.src = this.level2
+                    }
+                    if(5001 <= this.detail.company.reputation && this.detail.company.reputation <= 10000){
+                        this.level = 5;
+                        img.src = this.level2
+                    }
+                    if(10001 <= this.detail.company.reputation && this.detail.company.reputation <= 20000){
+                        this.level = 1;
+                        img.src = this.level3
+                    }
+                    if(20001 <= this.detail.company.reputation && this.detail.company.reputation <= 50000){
+                        this.level = 2;
+                        img.src = this.level3
+                    }
+                    if(50001 <= this.detail.company.reputation && this.detail.company.reputation <= 100000){
+                        this.level = 3;
+                        img.src = this.level3
+                    }
+                    if(100001 <= this.detail.company.reputation && this.detail.company.reputation <= 200000){
+                        this.level = 4;
+                        img.src = this.level3
+                    }
+                    if(200001 <= this.detail.company.reputation && this.detail.company.reputation <= 500000){
+                        this.level = 5;
+                        img.src = this.level3
+                    }
+                    if(500001 <= this.detail.company.reputation && this.detail.company.reputation <= 1000000){
+                        this.level = 1;
+                        img.src = this.level4
+                    }
+                    if(1000001 <= this.detail.company.reputation && this.detail.company.reputation <= 2000000){
+                        this.level = 2;
+                        img.src = this.level4
+                    }
+                    if(2000001 <= this.detail.company.reputation && this.detail.company.reputation <= 5000000){
+                        this.level = 3;
+                        img.src = this.level4
+                    }
+                    if(5000001 <= this.detail.company.reputation && this.detail.company.reputation <= 10000000){
+                        this.level = 4;
+                        img.src = this.level4
+                    }
+                    if(this.detail.company.reputation > 1000000){
+                        this.level = 5;
+                        img.src = this.level4
+                    }
+                }
             },
             init(){
                 var longitude = this.detail.snapshot.longitude;
@@ -543,7 +639,10 @@
         watch:{
             detail:function () {
                 this.$nextTick(function(){
-                    this.init();
+                    if(this.detail.payment_method !== 1){
+                        this.init();
+                    }
+                    vue.leveling();
                 });
             }
         }
@@ -552,5 +651,11 @@
     function showInfoFromJava(item) {
         vue.detail = JSON.parse(item);
     }
+    /*if(vue.detail){
+        function taskDataLoading(){
+            Javascript:aaa.taskDataLoading()
+        }
+        this.taskDataLoading()
+    };*/
 </script>
 </html>

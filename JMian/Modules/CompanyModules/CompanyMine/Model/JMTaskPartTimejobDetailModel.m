@@ -46,7 +46,11 @@
              @"video_cover":@"video.cover",
              @"video_file_path":@"video.file_path",
              @"video_status":@"video.status",
-             @"video_denial_reason":@"video.denial_reason"
+             @"video_denial_reason":@"video.denial_reason",
+             
+             @"invoice_email":@"invoice.email",
+             @"invoice_title":@"invoice.title",
+             @"invoice_tax_number":@"invoice.tax_number"
              };
 }
 

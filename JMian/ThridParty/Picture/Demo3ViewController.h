@@ -11,18 +11,21 @@
 #import "JMCompanyInfoModel.h"
 
 typedef enum : NSUInteger {
-    Demo3ViewDefault,
-    Demo3ViewPartTimeEdit,
+    Demo3ViewCompanyInfoEdit,
+    Demo3ViewPartTimeResumeEdit,
     Demo3ViewPartTimeResumeAdd,
     Demo3ViewPostGoodsPositionAdd,
-    Demo3ViewPostGoodsPositionEditing
+    Demo3ViewPostGoodsPositionEdit
 } Demo3ViewType;
 
 
 @protocol Demo3ViewControllerDelegate <NSObject>
 
 -(void)sendArray_addImageUrls:(NSMutableArray *)addImageUrls;
-
+-(void)deletePartTimeJobResumeImageWithIndex:(NSInteger)index;
+-(void)deleteSalePositionImageWithIndex:(NSInteger)index;
+-(void)deleteCompanyImageWithIndex:(NSInteger)index;
+-(void)sendAddImgs:(NSMutableArray *)Imgs;
 @end
 
 @interface Demo3ViewController : BaseViewController;
@@ -32,6 +35,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, strong)JMFilesModel *filesModel;
 @property (nonatomic, weak)id<Demo3ViewControllerDelegate>delegate;
 @property (nonatomic, assign)Demo3ViewType viewType;
+
+@property (nonatomic, copy)NSString *company_id;//任务主键
 @property (nonatomic, copy)NSString *ability_id;//兼职简历主键
 @property (nonatomic, copy)NSString *task_id;//任务主键
 

@@ -10,12 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 typedef enum : NSUInteger {
-    JMPartTimeJobTypeDefault,
+    JMPartTimeJobTypeResume,
     JMPartTimeJobTypeManage,
-} JMPartTimeJobViewType;
+} JMPartTimeJobResumeViewType;
 
 @interface JMPartTimeJobResumeViewController : BaseViewController
-@property (nonatomic, assign)JMPartTimeJobViewType viewType;
+@property (nonatomic, assign)JMPartTimeJobResumeViewType viewType;
 
 @end
 

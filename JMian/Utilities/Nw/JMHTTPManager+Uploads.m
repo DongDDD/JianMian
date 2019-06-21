@@ -28,6 +28,12 @@
 }
 
 
+- (void)uploadsImageWithFiles:(NSArray *)files successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    
+    NSDictionary *dic = @{@"files":files};
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Uploads_Image_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
 
 
 @end

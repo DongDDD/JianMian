@@ -224,8 +224,8 @@ typedef enum _PickerState_Exp {
     
     [self.datePicker setHidden:YES];
     self.pickerView.hidden = YES;
-    [self.majorField resignFirstResponder];
-    [self.schoolNameField resignFirstResponder];
+//    [self.majorField resignFirstResponder];
+//    [self.schoolNameField resignFirstResponder];
 
 }
 

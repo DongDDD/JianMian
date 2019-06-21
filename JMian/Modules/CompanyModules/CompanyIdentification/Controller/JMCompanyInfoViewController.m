@@ -342,7 +342,7 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
     self.pickerView.hidden = YES;
-    [_abbreviationTextField resignFirstResponder];
+//    [_abbreviationTextField resignFirstResponder];
 
 }
 

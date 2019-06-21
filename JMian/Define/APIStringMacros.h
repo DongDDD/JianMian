@@ -106,6 +106,8 @@
 #define Delete_Task_URL @"api/task/delete"
 #define Update_Task_URL @"api/task/update"
 #define Fectch_TaskInfo_URL @"api/task/info"
+#define Delete_GoodsImage_URL @"api/task/delete/file"
+
 //发票信息
 #define Fectch_InvoiceInfo_URL @"api/user/invoice"
 

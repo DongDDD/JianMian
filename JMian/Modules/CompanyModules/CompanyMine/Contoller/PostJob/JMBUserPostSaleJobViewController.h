@@ -9,11 +9,16 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef enum : NSUInteger {
+    JMBUserPostSaleJobViewTypeAdd,
+    JMBUserPostSaleJobViewTypeEdit,
+} JMBUserPostSaleJobViewType;
 
 
-@interface JMBUserPostPositionViewController : BaseViewController
+@interface JMBUserPostSaleJobViewController : BaseViewController
 
 @property(nonatomic, copy)NSString *task_id;//任务主键
+@property(nonatomic, assign)JMBUserPostSaleJobViewType viewType;
 
 @end
 

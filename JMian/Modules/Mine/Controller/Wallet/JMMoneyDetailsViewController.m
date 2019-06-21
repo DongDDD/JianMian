@@ -21,7 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"明细";
+    self.title = @"钱包明细";
     [self.view addSubview:self.tableView];
     [self getData];
     // Do any additional setup after loading the view.

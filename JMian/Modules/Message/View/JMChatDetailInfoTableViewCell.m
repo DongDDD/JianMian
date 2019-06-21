@@ -9,8 +9,12 @@
 #import "JMChatDetailInfoTableViewCell.h"
 #import "JMUserInfoModel.h"
 #import "JMUserInfoManager.h"
+#import "DimensMacros.h"
+@interface JMChatDetailInfoTableViewCell ()
 
+@property(nonatomic,strong)JMMessageListModel *myModel;
 
+@end
 
 @implementation JMChatDetailInfoTableViewCell
 
@@ -19,9 +23,23 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (instancetype)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil].lastObject;
+        self.bgView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:95/255.0 blue:133/255.0 alpha:0.1].CGColor;
+        self.bgView.layer.shadowOffset = CGSizeMake(0,2);
+        self.bgView.layer.shadowOpacity = 1;
+        self.bgView.layer.shadowRadius = 5;
+        self.bgView.layer.borderWidth = 0.5;
+        self.bgView.layer.borderColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0].CGColor;
+    }
+    return self;
+}
 
 -(void)setMyConModel:(JMMessageListModel *)myConModel
 {
+    _myModel = myConModel;
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     //判断senderid是不是自己
     if (model.user_id == myConModel.sender_user_id) {
@@ -30,13 +48,55 @@
     }else{
         self.name.text = myConModel.sender_nickname;
     }
-    self.education.text = [self getEducationStrWithEducation:myConModel.work_education];
-    self.salary.text = [self getSalaryStrWithMin:_myConModel.work_salary_min max:myConModel.work_salary_max];
-    self.myDescription.text = myConModel.work_description;
-    self.workName.text = myConModel.work_work_name;
-    self.salary.text = [self getSalaryStrWithMin:myConModel.work_salary_min max:myConModel.work_salary_max];
+    
+    [self setValuesWithChatType:myConModel.type];
+    
+//    self.education.text = [self getEducationStrWithEducation:myConModel.work_education];
+//    self.salary.text = [self getSalaryStrWithMin:_myConModel.work_salary_min max:myConModel.work_salary_max];
+//    self.myDescription.text = myConModel.work_description;
+//    self.lab3.text = myConModel.work_work_name;
+//    self.salary.text = [self getSalaryStrWithMin:myConModel.work_salary_min max:myConModel.work_salary_max];
     
 }
+
+-(void)setValuesWithChatType:(NSString *)chatType{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([chatType isEqualToString:@"1"]) {//全职对话赋值
+        
+        
+    }else if ([chatType isEqualToString:@"2"]){//兼职对话赋值
+        if ([userModel.type isEqualToString:B_Type_UESR]) {
+            self.salary.text = _myModel.job_type_label_name;
+            self.myDescription.text = _myModel.job_description;
+            NSMutableArray *array = [NSMutableArray array];
+            for (JMChatInfoIndustry *industryModel in _myModel.job_industry) {
+                [array addObject:industryModel.name];
+            }
+            
+//            self.lab1.text = array[0];
+//            self.lab2.text = array[1];
+//            self.lab3.text = array[2];
+        }else{
+            self.salary.text = _myModel.job_type_label_name;
+            self.myDescription.text = _myModel.job_description;
+            NSMutableArray *array = [NSMutableArray array];
+            for (JMChatInfoIndustry *industryModel in _myModel.job_industry) {
+                [array addObject:industryModel.name];
+            }
+            self.lab1.text = array[0];
+            self.lab2.text = array[1];
+            self.lab3.text = array[2];
+            
+            
+            
+            
+        }
+        
+    }
+    
+    
+}
+
 //工资数据转化，除以1000，转化成k
 -(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
     NSInteger myint = [min integerValue];

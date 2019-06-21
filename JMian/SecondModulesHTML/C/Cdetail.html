@@ -65,10 +65,14 @@
                     .credit{
                         display: flex;
                         span{
-                            margin-right: 0.4rem;
+                            align-self: center;
                         }
-                        img{
-                            width: 0.58rem;
+                        div{
+                            align-self: center;
+                            img{
+                                width: 0.4rem;
+                                margin-top: 0.15rem;
+                            }
                         }
                     }
                 }
@@ -181,7 +185,6 @@
                         }
                     }
                     div{
-                        margin-bottom: 0.48rem;
                         ul{
                             margin-left: 0.4rem;
                             display: inline;
@@ -314,7 +317,6 @@
                         }
                     }
                     div{
-                        margin-bottom: 0.48rem;
                         ul{
                             margin-left: 0.4rem;
                             display: inline;
@@ -452,19 +454,19 @@
     </style>
 </head>
 <body>
-<div id="wrapper">
-    <div v-show="initialize">
+<div id="wrapper" v-show="initialize">
+    <div>
         <div class="line"></div>
         <header style="display: none" v-show="initialize" @click="clickCompanyDetails">
         <span class="avatar">
-            <img :src="this.detail.company.logo_path" alt="">
+            <img v-if="this.detail.company" :src="this.detail.company.logo_path" alt="">
         </span>
             <span class="contain">
-            <p class="c-name">{{this.detail.company.company_name}}</p>
-            <span class="credit">
-                <span>信用等级</span>
+            <p class="c-name" v-if="this.detail.company">{{this.detail.company.company_name}}</p>
+            <span class="credit" v-if="this.detail.company.reputation">
+                <span>信用</span>
                 <div>
-                    <img src="../images/mission@2x.png" alt="">
+                    <img v-if="level>0" id="level" v-for="item in level" :src="level1" alt="" >
                 </div>
             </span>
         </span>
@@ -476,7 +478,7 @@
         <div id="searchBar" >
             <ul :class="searchBarFixed == true ? 'isFixed' :''">
                 <li :class="task == true ? 'toggle' :''" style="border-right: 1px solid rgba(235,235,235,1);" @click="handleTask">任务描述</li>
-                <li :class="credit == true ? 'toggle' :''" @click="handleCredit">雇佣记录</li>
+                <li :class="credit == true ? 'toggle' :''" @click="handleCredit">信誉评价</li>
             </ul>
         </div>
         <div class="nav-light">
@@ -485,12 +487,12 @@
             <div v-show="credit"></div>
         </div>
         <div class="line"></div>
-        <div id="sale-task" v-show="initialize" v-if="this.detail.payment_method === 1">
+        <div id="sale-task" v-show="this.detail.payment_method === 1">
             <transition name="open-left">
                 <div v-show="task">
                     <div class="task">
-                        <span class="task-name">{{this.detail.task_title}}</span>
-                        <span class="unit">{{this.detail.payment_money}}<span>{{this.detail.unit}}</span></span>
+                        <span class="task-name" v-if="this.detail">{{this.detail.task_title}}</span>
+                        <span class="unit" v-if="this.detail">{{this.detail.payment_money}}<span>{{this.detail.unit}}</span></span>
                         <span class="label">
                             <ul>
                                 <li>即结</li>
@@ -500,17 +502,16 @@
                     </div>
                     <div class="line" style="margin: 0 0.53rem;"></div>
                     <div class="require">
-                        <p>招募人数：<span>{{this.detail.quantity_max}}</span></p>
-                        <p>工作城市：<span>{{this.detail.city.city_name}}</span></p>
+                        <p>招募人数：<span v-if="this.detail">{{this.detail.quantity_max}}</span></p>
+                        <p>工作城市：<span v-if="this.detail.city">{{this.detail.city.city_name}}</span></p>
                         <div>适合行业：<ul><li v-for="item in this.detail.industry">{{item.name}}<span>/</span></li></ul></div>
-                        <p>任务有效期：<span>{{this.detail.deadline}}</span></p>
                     </div>
                     <div class="line" style="margin:0 0.53rem;"></div>
                     <div class="product">
                         <span>产品描述</span>
-                        <div>产品名称：{{this.detail.goods.goods_title}}</div>
-                        <div style="margin-bottom: 0.53rem">产品价格：{{this.detail.goods.goods_price}}</div>
-                        <p style="margin-bottom: 0.72rem">{{this.detail.goods.description}}</p>
+                        <div v-if="this.detail.goods">产品名称：{{this.detail.goods.goods_title}}</div>
+                        <div v-if="this.detail.goods" style="margin-bottom: 0.53rem">产品价格：{{this.detail.goods.goods_price}}</div>
+                        <p v-if="this.detail.goods" style="margin-bottom: 0.72rem">{{this.detail.goods.description}}</p>
                     </div>
                     <div class="line" style="margin:0 0.53rem;"></div>
                     <div class="describe" v-if="this.detail.video">
@@ -519,16 +520,13 @@
                             <video id="video" width="70%" style="border-radius: 0.33rem" controls webkit-playsinline="true" playsinline x5-video-player-type="h5" :poster="this.detail.video.cover">
                                 <source :src="this.detail.video.file_path">
                             </video>
-                            <!--<div id="output" v-if="playing" @click="videoPlay">
-                                <img src="../images/pofang@2x.png" alt="" style="width: 2rem;">
-                            </div>-->
                         </div>
                     </div>
                     <div class="line" style="margin:0 0.53rem;"></div>
-                    <div class="describe">
+                    <div class="describe" v-if="this.detail.images">
                         <span>产品图片</span>
                         <ul style="width: 100%;margin-top: 0.66rem;">
-                            <li style="display: inline-block" v-for="item in this.detail.images"><img :src="item.file_path" alt="" style="width: 2.8rem;margin-right: 0.16rem"></li>
+                            <li style="display: inline-block" v-for="item in this.detail.images"><img :src="item.file_path" alt="" style="width: 2.8rem;margin-right: 0.16rem" @click="openSimpleDialog(item.file_path)"></li>
                         </ul>
                     </div>
                     <div class="bottom">
@@ -539,36 +537,34 @@
                 </div>
             </transition>
         </div>
-        <div id="job-task" v-show="initialize" v-if="this.detail.payment_method !== 1">
+        <div id="job-task" v-show="this.detail.payment_method !== 1">
             <transition name="open-left">
                 <div v-show="task" style="position: relative">
                     <div class="task">
-                        <span class="task-name">{{this.detail.task_title}}</span>
-                        <span class="unit">{{this.detail.payment_money}}<span>{{this.detail.unit}}</span></span>
+                        <span class="task-name" v-if="this.detail">{{this.detail.task_title}}</span>
+                        <span class="unit" v-if="this.detail">{{this.detail.payment_money}}<span v-if="this.detail">{{this.detail.unit}}</span></span>
                         <span class="label">
                         <ul>
                             <li>完工结</li>
-                            <li>有定金</li>
                             <li>签合同</li>
                         </ul>
                     </span>
                     </div>
                     <div class="line" style="margin: 0 0.53rem;"></div>
                     <div class="require">
-                        <p>招募人数：<span>{{this.detail.quantity_max}}</span></p>
-                        <p>工作城市：<span>{{this.detail.city.city_name}}</span></p>
+                        <p>招募人数：<span v-if="this.detail">{{this.detail.quantity_max}}</span></p>
+                        <p>工作城市：<span v-if="this.detail.city">{{this.detail.city.city_name}}</span></p>
                         <div>适合行业：<ul><li v-for="item in this.detail.industry">{{item.name}}<span>/</span></li></ul></div>
-                        <p>任务有效期：<span>{{this.detail.deadline}}</span></p>
                     </div>
                     <div class="line" style="margin:0 0.53rem;"></div>
                     <div class="describe">
                         <span>工作描述</span>
-                        <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem">
+                        <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem" v-if="this.detail">
                             {{this.detail.description}}
                         </p>
                     </div>
-                    <div class="line" style="margin:0 0.53rem;"></div>
-                    <div class="map">
+                    <div class="line" style="margin:0 0.53rem;" v-if="this.detail.address"></div>
+                    <div class="map" v-if="this.detail.address">
                         <p>工作地址</p>
                         <div style="margin: 0 0.29rem 0.37rem 0.53rem">
                             <img src="../images/didian2@2x.png" alt="" style="width: 0.34rem;">
@@ -584,15 +580,15 @@
                 </div>
             </transition>
         </div>
-        <div id="credit" v-show="initialize">
+        <div id="credit">
             <transition name="open-right">
                 <mu-paper v-show="credit" :z-depth="1" class="demo-loadmore-wrap">
                     <mu-container ref="container" class="demo-loadmore-content">
                         <mu-load-more :loading="loading" @load="load" :loaded-all="over" :loading-text="text">
-                            <div class="credit-lists" v-for="(item,index) in record.data" :key="index">
+                            <div class="credit-lists" v-for="item in this.record.data">
                                 <div class="list">
                                     <div class="contain">
-                                        <span class="avator"><img :src="item.user.avatar" alt=""></span>
+                                        <span class="avator"><img src="../images/x.png" alt=""></span>
                                         <span class="user-name">{{item.user.nickname}}<p>任务：{{item.task.task_title}}</p></span>
                                         <span class="num">{{item.reputation}}.0分</span>
                                     </div>
@@ -607,6 +603,11 @@
                 </mu-paper>
             </transition>
         </div>
+        <mu-container>
+            <mu-dialog width="100%" :open.sync="openSimple">
+                <img :src="bigImg" alt="" style="width: 100%">
+            </mu-dialog>
+        </mu-container>
     </div>
 
 </div>
@@ -623,8 +624,7 @@
             record:{},
             describeList: [
                 {label: "即结",id:'1'},
-                {label: "有定金",id:'2'},
-                {label: "签合同",id:'3'},
+                {label: "签合同",id:'2'},
             ],
             loading: false,
             num:10,
@@ -635,18 +635,20 @@
             token:'',
             page:1,
             over:false,
-            text:'正在加载'
+            text:'正在加载',
+            level:0,
+            level1:"../images/x.png",
+            level2:"../images/z.png",
+            level3:"../images/mission3@2x.png",
+            level4:"../images/mission@2x.png",
+            openSimple: false,
+            bigImg: '',
         },
         mounted(){
             setTimeout(function () {
                 this.initialize = true;
             }.bind(this));
             document.addEventListener('scroll', this.handleScroll);
-            if(this.detail){
-                this.init();
-                this.taskDataLoading();
-            }
-            this.likeDetail();
         },
         methods:{
             handleScroll () {
@@ -663,20 +665,25 @@
                 this.credit = false;
             },
             handleCredit(){
-                axios.get('http://app.jmzhipin.com/api/task/comment/paginate?company_id=' + this.detail.company.company_id, {
-                    headers: {
-                        'x-access-sign': '585c84aca67b58e000364309783e31e6',
-                        'Authorization': this.token,
-                    }
-                })
-                    .then(function (res) {
-                        this.record = res.data;
-                        this.page = res.data.current_page;
-                        console.log(this.record)
-                    }.bind(this))
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+                if(this.token){
+                    console.log(this.token)
+                    axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?company_id=' + this.detail.company.company_id, {
+                        headers: {
+                            'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                            'Authorization': this.token,
+                        }
+                    })
+                        .then(function (res) {
+                            var jsonData = JSON.stringify(res.data);
+                            this.record = JSON.parse(jsonData);
+                            this.page = this.record.current_page;
+                            console.log(this.record)
+                            console.log(JSON.parse(this.record.data))
+                        }.bind(this))
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
                 this.task = false;
                 this.credit = true;
             },
@@ -686,13 +693,10 @@
             clickCompanyToAMap(){
                 window.webkit.messageHandlers.aaa.postMessage()
             },
-            likeDetail(){
-                window.webkit.messageHandlers.aaa.postMessage(this.detail.favorites);
-            },
             load() {
                 this.loading = true;
                 this.page = this.page + 1;
-                axios.get('http://app.jmzhipin.com/api/task/comment/paginate?company_id=' +  this.detail.company.company_id + '&page=' + this.page, {
+                axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?company_id=' +  this.detail.company.company_id + '&page=' + this.page, {
                     headers: {
                         'x-access-sign': '585c84aca67b58e000364309783e31e6',
                         'Authorization': this.token,
@@ -722,6 +726,95 @@
                     .catch(function (error) {
                         console.log(error);
                     });
+            },
+            openSimpleDialog (img) {
+                this.openSimple = true;
+                this.bigImg = img
+            },
+            leveling(){
+                var img = document.getElementById('level');
+                if(this.detail.company.reputation){
+                    if(4 <= this.detail.company.reputation && this.detail.company.reputation <= 10){
+                        this.level = 1;
+                        img.src = this.level1
+                    }
+                    if(11 <= this.detail.company.reputation && this.detail.company.reputation <= 40){
+                        this.level = 2;
+                        img.src = this.level1
+                    }
+                    if(41 <= this.detail.company.reputation && this.detail.company.reputation <= 90){
+                        this.level = 3;
+                        img.src = this.level1
+                    }
+                    if(91 <= this.detail.company.reputation && this.detail.company.reputation <= 150){
+                        this.level = 4;
+                        img.src = this.level1
+                    }
+                    if(151 <= this.detail.company.reputation && this.detail.company.reputation <= 250){
+                        this.level = 5;
+                        img.src = this.level1
+                    }
+                    if(251 <= this.detail.company.reputation && this.detail.company.reputation <= 500){
+                        this.level = 1;
+                        img.src = this.level2
+                    }
+                    if(501 <= this.detail.company.reputation && this.detail.company.reputation <= 1000){
+                        this.level = 2;
+                        img.src = this.level2
+                    }
+                    if(1001 <= this.detail.company.reputation && this.detail.company.reputation <= 2000){
+                        this.level = 3;
+                        img.src = this.level2
+                    }
+                    if(2001 <= this.detail.company.reputation && this.detail.company.reputation <= 5000){
+                        this.level = 4;
+                        img.src = this.level2
+                    }
+                    if(5001 <= this.detail.company.reputation && this.detail.company.reputation <= 10000){
+                        this.level = 5;
+                        img.src = this.level2
+                    }
+                    if(10001 <= this.detail.company.reputation && this.detail.company.reputation <= 20000){
+                        this.level = 1;
+                        img.src = this.level3
+                    }
+                    if(20001 <= this.detail.company.reputation && this.detail.company.reputation <= 50000){
+                        this.level = 2;
+                        img.src = this.level3
+                    }
+                    if(50001 <= this.detail.company.reputation && this.detail.company.reputation <= 100000){
+                        this.level = 3;
+                        img.src = this.level3
+                    }
+                    if(100001 <= this.detail.company.reputation && this.detail.company.reputation <= 200000){
+                        this.level = 4;
+                        img.src = this.level3
+                    }
+                    if(200001 <= this.detail.company.reputation && this.detail.company.reputation <= 500000){
+                        this.level = 5;
+                        img.src = this.level3
+                    }
+                    if(500001 <= this.detail.company.reputation && this.detail.company.reputation <= 1000000){
+                        this.level = 1;
+                        img.src = this.level4
+                    }
+                    if(1000001 <= this.detail.company.reputation && this.detail.company.reputation <= 2000000){
+                        this.level = 2;
+                        img.src = this.level4
+                    }
+                    if(2000001 <= this.detail.company.reputation && this.detail.company.reputation <= 5000000){
+                        this.level = 3;
+                        img.src = this.level4
+                    }
+                    if(5000001 <= this.detail.company.reputation && this.detail.company.reputation <= 10000000){
+                        this.level = 4;
+                        img.src = this.level4
+                    }
+                    if(this.detail.company.reputation > 1000000){
+                        this.level = 5;
+                        img.src = this.level4
+                    }
+                }
             },
             init(){
                 var longitude = this.detail.longitude;
@@ -773,15 +866,14 @@
                     }
                 });
             },
-            taskDataLoading(){
-                window.webkit.messageHandlers.aaa.postMessage()
-            }
         },
         watch:{
             detail:function () {
                 this.$nextTick(function(){
-                    this.init();
-                    this.taskDataLoading();
+                    if(vue.detail.payment_method !== 1){
+                        vue.init();
+                    }
+                    vue.leveling();
                 });
             }
         }
@@ -789,7 +881,16 @@
 
     function showInfoFromJava(item,token) {
         vue.detail = JSON.parse(item);
-        vue.token = JSON.parse(token);
+        vue.token = token;
+        console.log(token)
     }
+
+    /*if(vue.detail){
+        function taskDataLoading(){
+            Javascript:aaa.taskDataLoading()
+        }
+        this.taskDataLoading();
+    }*/
+
 </script>
 </html>

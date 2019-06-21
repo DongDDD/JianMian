@@ -38,7 +38,6 @@
                 height: 13.2rem;
                 z-index: -1000;
                 width: 100%;
-                background-color: #000000;
                 .video-wrapper{
                     width: 100%;
                     height: 13rem;
@@ -46,27 +45,6 @@
                     video{
                         width: 100%;
                     }
-                   /* .example_video_1-dimensions{
-                        width: 100%;
-                        height: 100%;
-                    }*/
-                    /*.video-js .vjs-control-bar{
-                        bottom: 0.05rem                    }
-                    .video-js .vjs-big-play-button{
-                        display: none;
-                        top:50%;
-                        left: 50%;
-                        width: 2.7rem;
-                        height: 2.7rem;
-                        line-height: 2.6rem;
-                        font-size: 1.3rem;
-                        border-radius: 50%;
-                        transform: translate3d(-50%, -50%, 0);
-                    }
-                    .vjs-poster{
-                        background-color: transparent;
-                        background-size: unset;
-                    }*/
                     #output {
                         position: absolute;
                         top:0;
@@ -90,7 +68,7 @@
                         left: 0;
                         background-color: #999999;
                         width: 100%;
-                        height: 0.8rem;
+                        height: 1rem;
                         div{
                             display: flex;
                             justify-content: space-between;
@@ -202,14 +180,14 @@
     </style>
 </head>
 <body style="background: no-repeat;">
-<div id="wrapper" v-show="initialize">
+<div id="wrapper" v-if="initialize">
     <div class="video">
-        <div class="video-wrapper" v-if="this.detail.video">
+        <div class="video-wrapper">
             <div id="output" v-if="play" @click="videoPlay">
                 <img src="../images/pofang@2x.png" alt="" style="width: 2rem;">
             </div>
-            <video  id="video" preload="auto" x5-video-player-type="h5" webkit-playsinline="true" playsinline :poster="this.detail.video.cover">
-                <source :src="this.detail.video" type="video/mp4">
+            <video id="video" preload="auto" x5-video-player-type="h5" v-if="this.detail.video" :poster="this.detail.video.cover">
+                <source :src="this.detail.video.file_path" type="video/mp4">
             </video>
             <div class="control">
                 <div>
@@ -222,21 +200,15 @@
                         <span class="current">00:00:00</span>/
                         <span class="totalTime">00:00:00</span>
                     </span>
-                    <!--<span class="full" @click="goFullScreen" v-if="q">
-                        F
-                    </span>
-                    <span class="full" @click="exitFullscreen" v-if="!q">
-                        E
-                    </span>-->
                 </div>
             </div>
         </div>
     </div>
-    <div class="contain">
+    <div class="contain" id="contain">
         <div class="user_info">
             <div>
-                <span style="font-size: 0.53rem;color:#484848;font-family: PingFang-SC-Heavy">{{this.detail.user.nickname}}<img src="../images/mission@2x.png" alt="" style="margin-left: 0.32rem;width: 0.58rem;margin-top: 0.1rem"></span>
-                <span style="color:#3BC7FF;font-size: 0.42rem">{{this.detail.city.city_name}}</span>
+                <span style="font-size: 0.53rem;color:#484848;font-family: PingFang-SC-Heavy" v-if="this.detail.user">{{this.detail.user.nickname}}<img v-if="level>0" id="level" v-for="item in level" :src="level1" style="margin-left: 0.32rem;width: 0.38rem;margin-top: 0.1rem"></span>
+                <span style="color:#3BC7FF;font-size: 0.42rem" v-if="this.detail.city">{{this.detail.city.city_name}}</span>
             </div>
             <ul>
                 <li v-for="item in this.detail.industry">{{item.name}}</li>
@@ -261,19 +233,18 @@
             <span>接单记录</span>
             <mu-paper :z-depth="1" class="demo-loadmore-wrap">
                 <mu-container ref="container" class="demo-loadmore-content">
-                    <mu-load-more :loading="loading" @load="load">
-                        <div v-for="item in num" style="font-family: PingFang-SC-Medium">
+                    <mu-load-more :loading="loading" @load="load" :loaded-all="over" :loading-text="text">
+                        <div v-for="(item,index) in record.data" style="font-family: PingFang-SC-Medium">
                             <div style="width: 100%;margin-top: 0.8rem;margin-bottom: 0.37rem;display: flex;justify-content: space-between;">
-                                <div style="width: 0.88rem;"><img src="../images/1.jpeg" alt="" width="100%" style="border-radius: 50%"></div>
+                                <div style="width: 0.88rem;"><img :src="item.company.logo_path" alt="" width="100%" style="border-radius: 50%"></div>
                                 <div style="width:6rem;margin-left: 0.34rem">
-                                    <span style="font-size: 0.4rem;color: #333333">广州翰阅网络科技</span>
-                                    <p style="font-size: 0.32rem;margin-top: 0.29rem">任务：区域销售代理</p>
+                                    <span style="font-size: 0.4rem;color: #333333">{{item.company.company_name}}</span>
+                                    <p style="font-size: 0.32rem;margin-top: 0.29rem">任务：{{item.task.task_title}}</p>
                                 </div>
-                                <p style="color:#3BC7FF;font-size: 0.42rem;margin-top: 0">5.0分</p>
+                                <p style="color:#3BC7FF;font-size: 0.42rem;margin-top: 0">{{item.reputation}}.0分</p>
                             </div>
                             <p style="margin-left: 1.2rem;color:#333333;font-size: 0.37rem;line-height: 0.56rem;margin-bottom: 0.8rem;">
-                                小女孩太态度很好，工作也很迅速。给她点赞，
-                                期望下次继续合作。
+                                {{item.description}}
                             </p>
                             <div class="line"></div>
                         </div>
@@ -294,43 +265,79 @@
         el: '#wrapper',
         data: {
             detail:{},
-            num:5,
+            record:{},
             loading: false,
             initialize: false,
             play:true,
             pause:false,
-            q:true,
+            token:'',
+            page:1,
+            over:false,
+            text:'正在加载',
+            level:0,
+            level1:"../images/x.png",
+            level2:"../images/z.png",
+            level3:"../images/mission3@2x.png",
+            level4:"../images/mission@2x.png",
+            // q:true,
         },
         mounted() {
-            setTimeout(function () {
+            if(this.detail){
                 this.initialize = true;
-            }.bind(this));
-            this.initVideo();
-            var video = document.getElementById('video');
-            video.addEventListener("loadedmetadata",function(){
-                document.querySelector(".totalTime").innerText = this.getTimeBySecond(video.duration);
-            }.bind(this));
-            video.addEventListener("ended",function(){
-                document.getElementsByClassName('bar')[0].style.width = '0';
-                video.currentTime = 0;
-                this.play = true;
-            }.bind(this));
+            }
+            if(this.detail){
+                this.handleRecord();
+            };
         },
         methods:{
             load() {
-                this.loading = true;
-                setTimeout(() => {
-                    this.loading = false;
-                }, 2000);
-            },
-            initVideo(){
-                if(this.detail.video != null){
-                    var video = document.getElementsByClassName('contain')[0];
-                    video.style.marginTop = '13rem';
-                }else{
-                    var video = document.getElementsByClassName('contain')[0];
-                    video.style.marginTop = '-0.3rem';
+                if(this.detail){
+                    this.loading = true;
+                    this.page = this.page + 1;
+                    axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?user_id=' + this.detail.user.user_id + '&page=' + this.page, {
+                        headers: {
+                            'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                            'Authorization': this.token,
+                        }
+                    })
+                        .then(function (res) {
+                            if(res.data.last_page < this.page){
+                                this.text = '已加载全部！';
+                                setTimeout(() => {
+                                    this.over = true;
+                                }, 1500);
+                            }else{
+                                var length = res.data.data.length;
+                                for(var i = 0;i<length; i++){
+                                    this.record.data.push(res.data.data[i])
+                                }
+                                this.page = res.data.current_page;
+                                setTimeout(() => {
+                                    this.loading = false;
+                                }, 1000);
+                                console.log(this.record);
+                            }
+                            if(res.data.data.length < 1){
+                                this.text = '已加载全部！';
+                                setTimeout(() => {
+                                    this.over = true;
+                                }, 1500);
+                            }
+                            if(res.data.code !== 200){
+                                setTimeout(() => {
+                                    this.over = true;
+                                }, 1500);
+                            }
+                        }.bind(this))
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                    setTimeout(() => {
+                        this.text = '已加载全部！';
+                        this.loading = false;
+                    }, 1500);
                 }
+
             },
             videoPause(e){
                 var video = document.getElementById('video');
@@ -367,62 +374,149 @@
                 console.log(time);
                 document.querySelector(".current").innerText = this.getTimeBySecond(time);
             },
-            /*goFullScreen() {
-                element = document.getElementById('video');
-                if (element.requestFullscreen) { //w3c
-                    element.requestFullscreen();
-                } else if (element.mozRequestFullScreen) { //moz Firefox
-                    element.mozRequestFullScreen();
-                } else if (element.msRequestFullscreen) { //IE
-                    element.msRequestFullscreen();
-                } else if (element.oRequestFullscreen) { //Opera
-                    element.oRequestFullscreen();
-                } else if (element.webkitRequestFullscreen) { //webkit内核 Chrome Safari
-                    element.webkitRequestFullScreen();
-                } else {
-                    var docHtml = document.documentElement;
-                    var docBody = document.body;
-                    var cssText = 'width:100%;height:100%;overflow:hidden;';
-                    docHtml.style.cssText = cssText;
-                    docBody.style.cssText = cssText;
-                    element.style.cssText = cssText + ';' + 'margin:0px;padding:0px;';
-                    document.IsFullScreen = true;
-                }
-                this.q=false
-            },
-            //退出全屏
-            exitFullscreen() {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.oCancelFullScreen) {
-                    document.oCancelFullScreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else {
-                    var docHtml = document.documentElement;
-                    var docBody = document.body;
-                    var videobox = document.getElementById('video');
-                    docHtml.style.cssText = "";
-                    docBody.style.cssText = "";
-                    videobox.style.cssText = "";
-                    document.IsFullScreen = false;
-                }
-                this.q=true
-            },*/
             getTimeBySecond(second){
                 var hour = parseInt(second / (60* 60));
                 var minute = parseInt((second/60) % 60);
                 var second = parseInt(second % 60);
                 return (hour < 10 ? "0" + hour:hour) + ":" + (minute < 10 ? "0" + minute:minute) + ":" + (second < 10 ? "0" + second:second);
-            }
+            },
+            handleRecord(){
+                axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?user_id=' + this.detail.user.user_id, {
+                    headers: {
+                        'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                        'Authorization': this.token,
+                    }
+                })
+                    .then(function (res) {
+                        var jsonData = JSON.stringify(res.data);
+                        this.record = JSON.parse(jsonData);
+                        this.page = this.record.current_page;
+                        console.log(this.record)
+                        console.log(JSON.parse(this.record.data))
+                    }.bind(this))
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            leveling(){
+                var img = document.getElementById('level');
+                if(this.detail.user.reputation){
+                    if(4 <= this.detail.user.reputation && this.detail.user.reputation <= 10){
+                        this.level = 1;
+                        img.src = this.level1
+                    }
+                    if(11 <= this.detail.user.reputation && this.detail.user.reputation <= 40){
+                        this.level = 2;
+                        img.src = this.level1
+                    }
+                    if(41 <= this.detail.user.reputation && this.detail.user.reputation <= 90){
+                        this.level = 3;
+                        img.src = this.level1
+                    }
+                    if(91 <= this.detail.user.reputation && this.detail.user.reputation <= 150){
+                        this.level = 4;
+                        img.src = this.level1
+                    }
+                    if(151 <= this.detail.user.reputation && this.detail.user.reputation <= 250){
+                        this.level = 5;
+                        img.src = this.level1
+                    }
+                    if(251 <= this.detail.user.reputation && this.detail.user.reputation <= 500){
+                        this.level = 1;
+                        img.src = this.level2
+                    }
+                    if(501 <= this.detail.user.reputation && this.detail.user.reputation <= 1000){
+                        this.level = 2;
+                        img.src = this.level2
+                    }
+                    if(1001 <= this.detail.user.reputation && this.detail.user.reputation <= 2000){
+                        this.level = 3;
+                        img.src = this.level2
+                    }
+                    if(2001 <= this.detail.user.reputation && this.detail.user.reputation <= 5000){
+                        this.level = 4;
+                        img.src = this.level2
+                    }
+                    if(5001 <= this.detail.user.reputation && this.detail.user.reputation <= 10000){
+                        this.level = 5;
+                        img.src = this.level2
+                    }
+                    if(10001 <= this.detail.user.reputation && this.detail.user.reputation <= 20000){
+                        this.level = 1;
+                        img.src = this.level3
+                    }
+                    if(20001 <= this.detail.user.reputation && this.detail.user.reputation <= 50000){
+                        this.level = 2;
+                        img.src = this.level3
+                    }
+                    if(50001 <= this.detail.user.reputation && this.detail.user.reputation <= 100000){
+                        this.level = 3;
+                        img.src = this.level3
+                    }
+                    if(100001 <= this.detail.user.reputation && this.detail.user.reputation <= 200000){
+                        this.level = 4;
+                        img.src = this.level3
+                    }
+                    if(200001 <= this.detail.user.reputation && this.detail.user.reputation <= 500000){
+                        this.level = 5;
+                        img.src = this.level3
+                    }
+                    if(500001 <= this.detail.user.reputation && this.detail.user.reputation <= 1000000){
+                        this.level = 1;
+                        img.src = this.level4
+                    }
+                    if(1000001 <= this.detail.user.reputation && this.detail.user.reputation <= 2000000){
+                        this.level = 2;
+                        img.src = this.level4
+                    }
+                    if(2000001 <= this.detail.user.reputation && this.detail.user.reputation <= 5000000){
+                        this.level = 3;
+                        img.src = this.level4
+                    }
+                    if(5000001 <= this.detail.user.reputation && this.detail.user.reputation <= 10000000){
+                        this.level = 4;
+                        img.src = this.level4
+                    }
+                    if(this.detail.user.reputation > 1000000){
+                        this.level = 5;
+                        img.src = this.level4
+                    }
+                }
+            },
         },
+        watch:{
+            detail(){
+                this.$nextTick(function(){
+                    var videoWrap = document.getElementById('contain');
+                    if(vue.detail.video){
+                        videoWrap.style.marginTop = '13rem';
+                    }else{
+                        videoWrap.style.marginTop = '-0.3rem';
+                    }
+                    var video = document.getElementById('video');
+                    video.addEventListener("ended",function(){
+                        document.getElementsByClassName('bar')[0].style.width = '0';
+                        video.currentTime = 0;
+                        vue.play = true;
+                    });
+                    video.addEventListener("loadedmetadata",function(){
+                        document.querySelector(".totalTime").innerText = vue.getTimeBySecond(video.duration);
+                    });
+                    vue.leveling();
+                    vue.handleRecord();
+                });
+            }
+        }
     });
-    function showInfoFromJava(item) {
+    function showInfoFromJava(item,token) {
         vue.detail = JSON.parse(item);
-    }
+        vue.token = token;
+    };
+    /*if(vue.detail){
+        function taskDataLoading(){
+            Javascript:aaa.taskDataLoading()
+        }
+        this.taskDataLoading();
+    };*/
 </script>
 </html>

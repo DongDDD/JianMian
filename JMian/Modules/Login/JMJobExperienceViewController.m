@@ -52,6 +52,7 @@ typedef enum _PickerState_Exp {
     self.scrollView.delegate = self;
     [self.scrollView addSubview:self.moreBtn];
     [self.view addSubview:_datePckerView];
+    
 
     UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
     [self.view addGestureRecognizer:bgTap];

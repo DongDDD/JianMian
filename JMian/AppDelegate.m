@@ -25,11 +25,17 @@
 #import "JMVideoChatViewController.h"
 #import "IQKeyboardManager.h"
 
-
+//1求职意向状态增加应届生
+//2工资选择用K表示，选择跨度加大
+//3C端求职意向学历选择删去“不限”
+//4加大部分按钮，更容易点击
+//5键盘按完成收起
+//6实名认证才可以聊天
+//7.聊天提示系统声音
+//8.C端看全职的时候看到个人用户信息，在实名认证后会这样
+//
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate>
-
-
 
 @end
 

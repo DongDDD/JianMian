@@ -428,7 +428,7 @@
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [_workNameTextField resignFirstResponder];
+//    [_workNameTextField resignFirstResponder];
     [self.pickerBGView setHidden:YES];
 
 }

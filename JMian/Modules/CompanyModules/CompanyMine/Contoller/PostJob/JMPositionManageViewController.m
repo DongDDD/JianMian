@@ -10,7 +10,7 @@
 #import "JMTitlesView.h"
 #import "JMPostJobHomeViewController.h"
 #import "JMPartTimeJobResumeViewController.h"
-#import "JMBUserPostPositionViewController.h"
+#import "JMBUserPostSaleJobViewController.h"
 #import "JMBUserPostPartTimeJobViewController.h"
 
 @interface JMPositionManageViewController ()
@@ -66,7 +66,7 @@
     }else if(_index == 1){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
         [alert addAction:[UIAlertAction actionWithTitle:@"发布网络销售类" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            JMBUserPostPositionViewController *vc = [[JMBUserPostPositionViewController alloc]init];
+            JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
             vc.title = @"发布网络销售职位";
             [self.navigationController pushViewController:vc animated:YES];
  

@@ -42,7 +42,7 @@
 @property (nonatomic, strong)AMapPOI *POIModel;
 @property (nonatomic, strong)JMInvoiceModel *invoiceModel;
 @property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
-@property (nonatomic, strong)JMTaskPartTimejobDetailModel *taskPartTimejobDetailModel;
+@property (nonatomic, strong)JMTaskPartTimejobDetailModel *partTimejobDetailModel;
 
 
 //请求参数
@@ -80,7 +80,11 @@
     [self initView];
     [self initLayout];
     self.title = @"发布兼职";
-    [self setRightBtnTextName:@"删除"];
+    if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
+        
+        [self showProgressHUD_view:self.view];
+        [self setRightBtnTextName:@"删除"];
+    }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyBoard)];
@@ -129,7 +133,7 @@
 
 - (void)sendlabsWithJson:(nonnull NSString *)json {
     _isChange = YES;
-
+    self.labsJson = json;
     NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
     NSArray *arrayData = [self toArrayOrNSDictionary:data];
     NSLog(@"arrayData%@",arrayData);
@@ -228,20 +232,23 @@
 -(void)didClickBillActionWithTag:(NSInteger)tag{
     _isChange = YES;
     switch (tag) {
-        case 1000://需要
+        case 1000://需要发票
             [self.makeOutBillView setHidden:NO];
             [self changeMakeOutBillViewNeed];
             [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
             [_makeOutBillHeaderView.YESBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
             self.is_invoice = @"1";
-            [_makeOutBillView.invoiceTitleTextField setText:_invoiceModel.invoice_title];
-            [_makeOutBillView.invoiceTaxNumTextField setText:_invoiceModel.invoice_tax_number];
-            [_makeOutBillView.invoiceEmailTextField setText:_invoiceModel.invoice_email];
-            _invoice_title = _invoiceModel.invoice_title;
-            _invoice_tax_number = _invoiceModel.invoice_tax_number;
-            _invoice_email = _invoiceModel.invoice_email;
+            //判断是否有写好的默认发票信息
+            if (_invoiceModel) {
+                [_makeOutBillView.invoiceTitleTextField setText:_invoiceModel.invoice_title];
+                [_makeOutBillView.invoiceTaxNumTextField setText:_invoiceModel.invoice_tax_number];
+                [_makeOutBillView.invoiceEmailTextField setText:_invoiceModel.invoice_email];
+                _invoice_title = _invoiceModel.invoice_title;
+                _invoice_tax_number = _invoiceModel.invoice_tax_number;
+                _invoice_email = _invoiceModel.invoice_email;
+            }
             break;
-        case 1001://不需要
+        case 1001://不需要发票
             [self.makeOutBillView setHidden:YES];
             [self changeMakeOutBillViewNONeed];
             [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
@@ -284,7 +291,7 @@
 -(void)gotoIndustryVC{
     JMIndustryWebViewController *vc =  [[JMIndustryWebViewController alloc]init];
     vc.delegate = self;
-//    vc.labsJson = self.labsJson;
+    vc.labsJson = self.labsJson;
     [self.navigationController pushViewController:vc animated:YES];
 
 }
@@ -485,6 +492,7 @@
     
     
 }
+//获取 -默认- 发票信息
 -(void)getInvoiceInfo{
 
 
@@ -493,7 +501,7 @@
         if (responsObject[@"data"]) {
             _invoiceModel = [JMInvoiceModel mj_objectWithKeyValues:responsObject[@"data"]];
             
-            if (!self.task_id) {//添加状态
+            if (_viewType == JMBUserPostPartTimeJobTypeAdd) {//添加状态
                 if (![responsObject[@"data"][@"invoice"] isEqual:[NSNull null]]) {
 //                    [self setInvoiceValuesWithModel:_invoiceModel];
                     [self didClickBillActionWithTag:1000];
@@ -533,13 +541,13 @@
 }
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
-    if ([_taskPartTimejobDetailModel.status isEqualToString:Position_Online]) {
+    if ([_partTimejobDetailModel.status isEqualToString:Position_Online]) {
         
         
         //下线
         [self updateTaskInfoRequest_status:Position_Downline];
         
-    }else if ([_taskPartTimejobDetailModel.status isEqualToString:Position_Downline]){
+    }else if ([_partTimejobDetailModel.status isEqualToString:Position_Downline]){
         //上线
         [self updateTaskInfoRequest_status:Position_Online];
         
@@ -595,33 +603,43 @@
     
 }
 
-
+//获取兼职职位详情数据
 -(void)getData{
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            _taskPartTimejobDetailModel = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            _partTimejobDetailModel = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
             
-            if ([_taskPartTimejobDetailModel.status isEqualToString:Position_Downline]) {
+            if ([_partTimejobDetailModel.status isEqualToString:Position_Downline]) {
                 [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
 
-            }else if ([_taskPartTimejobDetailModel.status isEqualToString:Position_Online]) {
+            }else if ([_partTimejobDetailModel.status isEqualToString:Position_Online]) {
                 [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
                 
             }
             
             //赋值
-            [self setRightBtnValues_model:_taskPartTimejobDetailModel];
-            //判断是否需要发票
-            if (![responsObject[@"data"][@"invoice"] isEqual:[NSNull null]]) {
-                [self setInvoiceValuesWithModel:_invoiceModel];
-                
-            }else{
-                [self didClickBillActionWithTag:1001];
+            [self setRightBtnValues_model:_partTimejobDetailModel];
+            //编辑状态
+            if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
+                //判断该职位信息本身是否需要开发票
+                if (_partTimejobDetailModel.invoice_tax_number == nil || _partTimejobDetailModel.invoice_title == nil || _partTimejobDetailModel.invoice_email == nil ) {
+                    //不需要开发票
+                    [self didClickBillActionWithTag:1001];
+
+                }else{
+                    //需要开发票
+                    _invoiceModel = [[JMInvoiceModel alloc]init];
+                    _invoiceModel.invoice_title = _partTimejobDetailModel.invoice_title;
+                    _invoiceModel.invoice_tax_number = _partTimejobDetailModel.invoice_tax_number;
+                    _invoiceModel.invoice_email = _partTimejobDetailModel.invoice_email;
+                    [self setInvoiceValuesWithModel:_invoiceModel];
+                    
+                }
                 
             }
             
         }
-        
+        [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         

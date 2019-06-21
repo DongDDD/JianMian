@@ -11,13 +11,15 @@
 #import "DimensMacros.h"
 #import "JMCompanyLikeTableViewCell.h"
 #import "JMChatDetailInfoTableViewCell.h"
+#import "JMChatDetailPartTimeJobTableViewCell.h"
 #import "JMChatViewSectionView.h"
 #import "JMVideoChatViewController.h"
 #import "THDatePickerView.h"
 #import "JMHTTPManager+InterView.h"
+#import "JMHTTPManager+CreateTaskOrder.h"
 
 
-@interface JMMessageTableViewController ()<TIMMessageListener,JMChatViewSectionViewDelegate,THDatePickerViewDelegate>
+@interface JMMessageTableViewController ()<TIMMessageListener,JMChatViewSectionViewDelegate,THDatePickerViewDelegate,JMChatDetailPartTimeJobTableViewCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *uiMsgs;
 
@@ -35,6 +37,7 @@
 
 @end
 static NSString *cellIdent = @"infoCellIdent";
+static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 
 @implementation JMMessageTableViewController
@@ -45,6 +48,8 @@ static NSString *cellIdent = @"infoCellIdent";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = BG_COLOR;
     [self.tableView registerNib:[UINib nibWithNibName:@"JMChatDetailInfoTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
+    [self.tableView registerNib:[UINib nibWithNibName:@"JMChatDetailPartTimeJobTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent2];
+
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewController)];
     [self.view addGestureRecognizer:tap];
@@ -421,6 +426,24 @@ static NSString *cellIdent = @"infoCellIdent";
     }
 }
 
+#pragma mark - Mydelegate
+-(void)applyForAction_model:(JMMessageListModel *)model{
+    [self sendCreateTaskOrderResquest_task_id:model.work_task_id];
+}
+
+#pragma mark - 申请兼职职位
+
+-(void)sendCreateTaskOrderResquest_task_id:(NSString *)task_id{
+    [[JMHTTPManager sharedInstance]createTaskOrder_taskID:task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"申请成功" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
 #pragma mark - Table view data source
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     if (_isScrollBottom == NO) {
@@ -470,17 +493,45 @@ static NSString *cellIdent = @"infoCellIdent";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 0) {
+        //兼职类型对话且招聘信息不为空
+        if ([_myModel.type isEqualToString:@"2"] && _myModel.work_task_id) {
+            JMChatDetailPartTimeJobTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent2 forIndexPath:indexPath];
+            if(cell == nil)
+            {
+                cell = [[JMChatDetailPartTimeJobTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent2];
+            }
+            cell.delegate = self;
+            [cell setMyConModel:_myModel];
+            return cell;
+        }
+        
         JMChatDetailInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
 
         if(cell == nil)
         {
             cell = [[JMChatDetailInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
         }
+        //管理员隐藏头部对话信息详情
         if (_isDominator) {
             [cell setHidden:YES];
         }
         
-        [cell setMyConModel:_myModel];
+        //兼职对话类型
+        if ([_myModel.type isEqualToString:@"2"]) {
+            if (!_myModel.job_ability_id) {
+                //兼职简历为空
+                [cell setHidden:YES];
+            }else{
+                [cell setHidden:NO];
+                [cell setMyConModel:_myModel];
+            
+            }
+            
+        }else if([_myModel.type isEqualToString:@"1"]){
+        
+            [cell setMyConModel:_myModel];
+        }
+        
         return cell;
 
     }else if (indexPath.row > 0 ) {
@@ -512,14 +563,28 @@ static NSString *cellIdent = @"infoCellIdent";
 {
     
     if (indexPath.row == 0) {
-        
         if (_isDominator) {
             return 0;
-            
-        }else{
-            return 200;
         }
-    }else{
+        if ([_myModel.type isEqualToString:@"2"]) {
+            //兼职对话类型
+            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+            if ([userModel.type isEqualToString:B_Type_UESR]) {
+                //兼职对话，兼职简历为空
+                if (!_myModel.job_ability_id) {
+                    return 0;
+                }
+            }else{
+                //兼职对话，招聘信息为空
+                if (!_myModel.work_task_id) {
+                    return 0;
+                }
+            }
+            
+        }
+        return 200;
+        
+    }else if (indexPath.row > 0) {
         CGFloat height = 0;
         NSObject *data = _uiMsgs[indexPath.row-1];
         if([data isKindOfClass:[JMMessageCellData class]]){
@@ -528,7 +593,7 @@ static NSString *cellIdent = @"infoCellIdent";
             height = [cell getHeight:data];
         }
         return height;
-
+        
     }
     return 0;
 }

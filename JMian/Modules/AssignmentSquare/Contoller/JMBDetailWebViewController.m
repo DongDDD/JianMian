@@ -202,9 +202,8 @@
     sender.selected = !sender.selected;
     if (sender.selected) {
         [[JMHTTPManager sharedInstance]createLikeWith_type:@"2" Id:self.ability_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alert show];
+       
+            [self showAlertSimpleTips:@"提示" message:@"收藏成功" btnTitle:@"好的"];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -212,10 +211,10 @@
     }else{
         
         [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.ability_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"取消收藏成功"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alert show];
-            
+      
+            [self showAlertSimpleTips:@"提示" message:@"已取消收藏" btnTitle:@"好的"];
+
+
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -225,19 +224,21 @@
 
 //创建聊天
 -(void)createChatRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
-    
-    [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-        //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
-        //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        //        [alert show];
-        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+    if (user_id && foreign_key) {
+        [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+            //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
+            //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            //        [alert show];
+            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+            
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
         
-        vc.myConvModel = messageListModel;
-        [self.navigationController pushViewController:vc animated:YES];
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+    }
 }
 
 -(void)getData{
@@ -245,18 +246,24 @@
         if (responsObject[@"data"]) {
             
             self.detailModel = [JMBDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
-            
             NSDictionary *dic = responsObject[@"data"];
+            [self ocToJs_dicData:dic];
             //判断是否有被收藏过
             if (![dic[@"favorites"] isEqual:[NSNull null]]) {
                 self.favorites_id = dic[@"favorites"][@"favorite_id"];
                 [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-                
+
             }
-            [self ocToJs_dicData:dic];
-            
-            
-            _user_id = dic[@"user"][@"user_id"];
+            //获取该用户ID
+            _user_id = self.detailModel.user_id ;
+            if (!_user_id) {
+                //异常处理
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"该用户已被删除" preferredStyle:UIAlertControllerStyleAlert];
+                [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self.navigationController popViewControllerAnimated:YES];
+                }])];
+                [self presentViewController:alertController animated:YES completion:nil];
+            }
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
