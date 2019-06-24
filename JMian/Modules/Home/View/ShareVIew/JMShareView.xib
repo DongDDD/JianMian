@@ -102,7 +102,7 @@
                 <outlet property="lab1" destination="CbL-du-49f" id="Xj4-3V-8OP"/>
                 <outlet property="lab2" destination="P6Y-6a-WEk" id="lZF-PV-DTp"/>
             </connections>
-            <point key="canvasLocation" x="791.20000000000005" y="-399.85007496251876"/>
+            <point key="canvasLocation" x="783" y="-391"/>
         </view>
     </objects>
     <resources>

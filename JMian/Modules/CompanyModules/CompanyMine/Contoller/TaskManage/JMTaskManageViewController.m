@@ -48,9 +48,16 @@
     [self initView];
     self.currentStatus = @[Task_WaitDealWith];
     [self getDataWitnStatus:self.currentStatus];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySucceedNotification) name:Notification_PaySucceed object:nil];
+   
 
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySucceedNotification) name:Notification_PaySucceed object:nil];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -87,8 +94,12 @@
 -(void)paySucceedNotification{
     
     [self.tableView.mj_header beginRefreshing];
-    
-    
+    [self.choosePayView setHidden:YES];
+    [self.BGPayView setHidden:YES];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR] && _index == 0) {
+          [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"审批通过\n 建议联系对方以便开始任务" leftTitle:@"朕知道了" rightTitle:@"和他聊聊"];
+    }
 }
 //底部左面的按钮事件
 -(void)leftActionWithData:(JMTaskOrderListCellData *)data{
@@ -97,6 +108,10 @@
         if ([data.status isEqualToString:Task_WaitDealWith]) {
             //B拒绝
             [self changeTaskStatusRequestWithStatus:Task_Refuse task_order_id:data.task_order_id];
+        }else if ([data.status isEqualToString:Task_Finish] && _index == 1) {
+            //B和他聊聊
+            
+            [self createChatRequstWithTask_order_id:data.task_order_id user_id:data.user_user_id];
         }
     }
 }
@@ -107,16 +122,24 @@
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         //B现在状态：待处理or待通过
         if ([data.status isEqualToString:Task_WaitDealWith]) {
+            
             //B改状态------B端通过任务申请&&支付定金
-//            _task_order_id = data.task_order_id;
-//            _user_id = data.user_user_id;
-//            [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
-            JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
-            vc.data = data;
-            vc.delegate = self;
-            vc.viewType = JMPayDetailViewTypeDownPayment;
-            [self.navigationController pushViewController:vc animated:YES];
-      
+            if ([data.payment_method isEqualToString:@"3"]) {
+                
+                JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
+                vc.data = data;
+                vc.delegate = self;
+                vc.viewType = JMPayDetailViewTypeDownPayment;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }else if ([data.payment_method isEqualToString:@"1"]){
+                //B改状态------B端通过网络销售任务，直接改状态
+
+                _task_order_id = data.task_order_id;
+                _user_id = data.user_user_id;
+                [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
+                
+            }
             return;
         }else if ([data.status isEqualToString:Task_Finish]) {
             //B改状态------B端确认完成任务&支付尾款@"3"
@@ -143,7 +166,7 @@
     }else{
         //C----进行中----
         if ([data.status isEqualToString:Task_Pass]) {
-            if (![data.snapshot_type_label_id isEqualToString:@"1027"]) {//不是销售分成才有这操作
+            if (![data.payment_method isEqualToString:@"1"]) {//不是销售分成才有这操作
                 //C---点"已完成"（C 唯一操作）-----status change to  '3'
                 [self changeTaskStatusRequestWithStatus:Task_Finish task_order_id:data.task_order_id];
                 return;
@@ -191,7 +214,7 @@
     
 }
 //取消
--(void)cancelAction{
+-(void)shareViewCancelAction{
     [self hiddenChoosePayView];
 
 }
@@ -240,6 +263,7 @@
     
     
 }
+
 -(void)setupHeaderRefresh
 {
     MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
@@ -284,7 +308,7 @@
     
     [[JMHTTPManager sharedInstance]changeTaskOrderStatusWithTask_order_id:task_order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self.tableView.mj_header beginRefreshing];
-        if (![status isEqualToString:@"3"]) {//
+        if ([status isEqualToString:Task_Pass]) {//
             [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"审批通过\n 建议联系对方以便开始任务" leftTitle:@"朕知道了" rightTitle:@"和他聊聊"];
             
         }
@@ -330,7 +354,13 @@
     _user_id = data.user_user_id;
     //B端支付定金
 //    [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
-    [self payWithData:data mode:@"2"];
+    if (![data.front_money isEqualToString:@"0"]) {
+        [self payWithData:data mode:@"2"];
+        
+    }else{
+        //定金为0时 直接改状态成@“1” 已通过
+        [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:_task_order_id];
+    }
     
 }
 

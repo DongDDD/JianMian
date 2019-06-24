@@ -76,7 +76,7 @@
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             <connections>
                                 <action selector="invoiceTextFieldEditingDidEnd:" destination="iN0-l3-epB" eventType="editingDidEnd" id="qcK-Ox-oDN"/>
                             </connections>
@@ -116,7 +116,7 @@
                             <rect key="frame" x="136.5" y="1.5" width="257.5" height="60"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                             <connections>
                                 <action selector="invoiceTextFieldEditingDidEnd:" destination="iN0-l3-epB" eventType="editingDidEnd" id="3qK-Oh-s5s"/>
                             </connections>
@@ -156,7 +156,7 @@
                             <rect key="frame" x="138" y="1.5" width="256" height="60"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                            <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
                             <connections>
                                 <action selector="invoiceTextFieldEditingDidEnd:" destination="iN0-l3-epB" eventType="editingDidEnd" id="CyQ-vO-ATb"/>
                             </connections>

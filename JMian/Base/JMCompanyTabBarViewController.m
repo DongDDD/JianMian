@@ -19,11 +19,16 @@
 #import "JMSquareViewController.h"
 #import "JMDiscoverHomeViewController.h"
 #import "JMAssignmentSquareViewController.h"
+#import "UITabBar+XSDExt.h"
+
 
 @interface JMCompanyTabBarViewController ()
 @property (nonatomic, strong) NSArray *modelArray;
 @property (nonatomic, assign)int unReadNum;
 @property (nonatomic ,strong)JMMessageViewController *message;
+@property (nonatomic ,strong)JMMineViewController *mine;
+@property(nonatomic,strong)UIView *taskBadgeView;
+
 @end
 
 @implementation JMCompanyTabBarViewController
@@ -47,15 +52,16 @@
     [self addChildVc:discover title:@"发现" image:@"discovery" selectedImage:@"discovery_pitch_on"];
 
 
-    JMMineViewController *mine = [[JMMineViewController alloc] init];
-
-    [self addChildVc:mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on" ];
+    self.mine = [[JMMineViewController alloc] init];
+    [self addChildVc:self.mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on" ];
     [self setSelectedIndex:2];
 
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskNotification:) name:Notification_TaskListener object:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -68,6 +74,15 @@
     _unReadNum = 0;
     [self getMsgList];
 }
+
+- (void)taskNotification:(NSNotification *)notification
+{
+    self.mine.tabBarItem.badgeValue = @".";
+    [self.mine.BUserCenterHeaderSubView.taskBadgeView setHidden:NO];
+    //显示
+}
+
+
 
 #pragma mark - 获取未读消息
 

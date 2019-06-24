@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMPartTimeJobResumeViewController">
             <connections>
+                <outlet property="no_dataBtn" destination="4GI-xR-hYz" id="6jF-D4-YJR"/>
+                <outlet property="no_dataLab" destination="R0Y-aI-BDr" id="Uva-QU-aS8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

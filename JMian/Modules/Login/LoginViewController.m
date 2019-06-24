@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController setNavigationBarHidden:YES];
+    self.navigationController.navigationBarHidden = YES;
     // Do any additional setup after loading the view from its nib.
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }

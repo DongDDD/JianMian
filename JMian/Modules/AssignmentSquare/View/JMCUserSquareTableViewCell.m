@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *jobLabs;
 @property (weak, nonatomic) IBOutlet UILabel *paymentLab;
 @property (weak, nonatomic) IBOutlet UILabel *unitLab;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 
 @end
 
@@ -23,6 +24,18 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
+        self.bgView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:95/255.0 blue:133/255.0 alpha:0.1].CGColor;
+        self.bgView.layer.shadowOffset = CGSizeMake(0,2);
+        self.bgView.layer.shadowOpacity = 1;
+        self.bgView.layer.shadowRadius = 5;
+        self.bgView.layer.borderWidth = 0.5;
+        self.bgView.layer.borderColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0].CGColor;
+    }
+    return self;
 }
 
 -(void)setModel:(JMTaskListCellData *)model{

@@ -24,6 +24,7 @@ typedef enum _PickerState {
 } _PickerState;
 
 @interface JobIntensionViewController ()<UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,PositionDesiredDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *statusBtn4;
 @property (weak, nonatomic) IBOutlet UIButton *statusBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *statusBtn2;
 @property (weak, nonatomic) IBOutlet UIButton *positionBtn;
@@ -35,8 +36,8 @@ typedef enum _PickerState {
 
 @property (nonatomic, copy) NSString *job_labelID;
 @property (nonatomic, strong) NSNumber *statusNum;
-@property (nonatomic, strong) NSNumber *salaryMin;
-@property (nonatomic, strong) NSNumber *salaryMax;
+@property (nonatomic, copy) NSString *salaryMin;
+@property (nonatomic, copy) NSString *salaryMax;
 @property (nonatomic, strong) NSNumber *educationNum;
 @property (nonatomic, strong) NSDate *startWorkDate;
 
@@ -94,7 +95,7 @@ typedef enum _PickerState {
         make.bottom.mas_equalTo(self.view.mas_bottom);
     }];
 
-    self.pickerArray = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
 
 }
 
@@ -102,6 +103,7 @@ typedef enum _PickerState {
 - (IBAction)status1Action:(UIButton *)sender {
     [self.statusBtn2 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
     [self.statusBtn1 setImage:[UIImage imageNamed:@"蓝点"] forState:UIControlStateNormal];
+       [self.statusBtn4 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
     self.statusNum = @1;
     
 }
@@ -110,9 +112,17 @@ typedef enum _PickerState {
 - (IBAction)status2Action:(UIButton *)sender {
     [self.statusBtn2 setImage:[UIImage imageNamed:@"蓝点"] forState:UIControlStateNormal];
     [self.statusBtn1 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+       [self.statusBtn4 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
     
     self.statusNum = @2;
     
+}
+- (IBAction)status4Action:(UIButton *)sender {
+     [self.statusBtn4 setImage:[UIImage imageNamed:@"蓝点"] forState:UIControlStateNormal];
+    [self.statusBtn2 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+    [self.statusBtn1 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+    
+    self.statusNum = @2;
 }
 
 
@@ -134,7 +144,18 @@ typedef enum _PickerState {
 }
 
 - (IBAction)choogseSalaryAction:(UIButton *)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"3000~5000",@"5000~8000",@"8000~10000",@"10000~20000",nil];
+    self.pickerArray = @[@"1k-2k",
+                         @"2k-4k",
+                         @"4k-6k",
+                         @"6k-8k",
+                         @"8k-10k",
+                         @"10k-15k",
+                         @"15k-20k",
+                         @"20k-30k",
+                         @"30k-40k",
+                         @"40k-50k",
+                         @"50k-以上",
+                         ];
     [self.datePicker setHidden:YES];
     [self.pickerView setHidden:NO];
 
@@ -152,7 +173,7 @@ typedef enum _PickerState {
 
 
 - (IBAction)chooseEducationAction:(UIButton *)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
     
     [self.pickerView setHidden:NO];
     [self.datePicker setHidden:YES];
@@ -251,15 +272,16 @@ typedef enum _PickerState {
     if (self.pickerState == EducationState) {
         [self.educationBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
         [self.educationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-        self.educationNum = [NSNumber numberWithInteger:row];
+        self.educationNum = [NSNumber numberWithInteger:row + 1];
         
     }else if(self.pickerState == SalaryState){
         [self.salaryBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
         [self.salaryBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     
         NSString *salaryStr =[self.pickerArray objectAtIndex:row];
-        [self setSalaryRangeWithSalaryStr:salaryStr];
-       
+        NSMutableArray *array = [self setSalaryRangeWithSalaryStr:salaryStr];
+        self.salaryMin = array[0];
+        self.salaryMax = array[1];
         
         //        self.salaryMin = NSNumber nu
         
@@ -272,20 +294,31 @@ typedef enum _PickerState {
 }
 
 
--(void)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
-    NSArray *array = [salaryStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
-    
-    NSString *minStr = array[0];
-    NSString *maxStr = array[1];
-    
-    NSInteger minNum = [minStr integerValue];
-    NSInteger maxNum = [maxStr integerValue];
-    
-    
-    self.salaryMin = @(minNum);
-    self.salaryMax = @(maxNum);
-    
-}
+//-(void)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
+//    NSArray *array = [salaryStr componentsSeparatedByString:@"-"]; //从字符 - 中分隔成2个元素的数组
+//
+//    NSString *minStr = array[0];
+//    NSString *maxStr = array[1];
+//
+////    NSInteger minNum = [minStr integerValue];
+////    NSInteger maxNum = [maxStr integerValue];
+////
+//
+//    NSString *string1 = [minStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
+//    self.salaryMin = string1;
+//    NSString *string2;
+//    if (![maxStr isEqualToString: @"以上"]) {
+//        string2 = [maxStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
+//        self.salaryMax = string2;
+//    }else{
+//        self.salaryMax = nil;
+//
+//    }
+//
+//
+//
+//
+//}
 #pragma mark - scrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

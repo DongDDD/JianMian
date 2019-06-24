@@ -126,7 +126,9 @@
 #define Notification_JMMUploadProgressListener @"Notification_JMMUploadProgressListener"
 #define Notification_JMMUHangUpListener @"Notification_JMMUHangUpListener"
 //支付结果
-#define Notification_PaySucceed @"Notification_JMMMessageListener"
+#define Notification_PaySucceed @"Notification_PaySucceed"
+//任务
+#define Notification_TaskListener @"Notification_TaskListener"
 
 //发起视频
 #define Channel_ID @"Channel_ID"

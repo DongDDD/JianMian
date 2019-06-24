@@ -249,27 +249,25 @@
 }
 
 - (IBAction)salaryAction:(UIButton *)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"3000~5000",@"5000~8000",@"8000~10000",@"10000~20000",nil];
+    self.pickerArray = @[@"1k-2k",
+                         @"2k-4k",
+                         @"4k-6k",
+                         @"6k-8k",
+                         @"8k-10k",
+                         @"10k-15k",
+                         @"15k-20k",
+                         @"20k-30k",
+                         @"30k-40k",
+                         @"40k-50k",
+                         @"50k-以上",
+                         ];
     [self.pickerView reloadAllComponents];
     _selectedBtn = sender;
    
     [self.pickerBGView setHidden:NO];
 
 }
--(void)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
-    NSArray *array = [salaryStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
-    
-    NSString *minStr = array[0];
-    NSString *maxStr = array[1];
-    
-    NSInteger minNum = [minStr integerValue];
-    NSInteger maxNum = [maxStr integerValue];
-    
-    
-    self.salaryMin = @(minNum);
-    self.salaryMax = @(maxNum);
-      
-}
+
 - (IBAction)welFareAction:(UIButton *)sender{
  
     JMWelfareViewController *vc = [[JMWelfareViewController alloc]init];
@@ -389,14 +387,23 @@
         case 4:
             [self.salaryBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
             [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
-
+//            NSMutableArray *aaa = [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
+//            self.salaryMin = array[0];
+//            self.salaryMax = array[1];
+            [self setSalaryValus_row:row];
             break;
 
         default:
             break;
     }
 
+
+}
+
+-(void)setSalaryValus_row:(NSInteger)row{
+    NSMutableArray *array = [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
+    self.salaryMin = array[0];
+    self.salaryMax = array[1];
 
 }
 

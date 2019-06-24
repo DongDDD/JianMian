@@ -12,8 +12,9 @@
 #import "JMPartTimeJobResumeViewController.h"
 #import "JMBUserPostSaleJobViewController.h"
 #import "JMBUserPostPartTimeJobViewController.h"
+#import "JMPostNewJobViewController.h"
 
-@interface JMPositionManageViewController ()
+@interface JMPositionManageViewController ()<JMPartTimeJobResumeViewControllerDelegate>
 
 @property(nonatomic, strong)JMTitlesView *titleView;
 @property(nonatomic, strong)JMPostJobHomeViewController *jobHomeListVC;
@@ -61,7 +62,9 @@
 
 -(void)rightAction{
     if (_index == 0) {
-    
+        JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
         
     }else if(_index == 1){
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
@@ -86,6 +89,13 @@
     }
 
 }
+
+-(void)postPartTimeJobAction{
+
+    [self rightAction];
+
+}
+
 
 -(void)setCurrentIndex{
 //    __weak typeof(self) ws = self;
@@ -137,6 +147,7 @@
 -(JMPartTimeJobResumeViewController *)partTimeJobHomeListVC{
     if (!_partTimeJobHomeListVC) {
         _partTimeJobHomeListVC = [[JMPartTimeJobResumeViewController alloc]init];
+        _partTimeJobHomeListVC.delegate = self;
         _partTimeJobHomeListVC.viewType = JMPartTimeJobTypeManage;
         _partTimeJobHomeListVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         [self addChildViewController:_partTimeJobHomeListVC];

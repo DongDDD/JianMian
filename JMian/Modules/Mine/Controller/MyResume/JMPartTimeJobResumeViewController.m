@@ -23,6 +23,8 @@
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (nonatomic, assign) NSUInteger index;
 //@property (strong, nonatomic) NSString *status;
+@property (weak, nonatomic) IBOutlet UILabel *no_dataLab;
+@property (weak, nonatomic) IBOutlet UIButton *no_dataBtn;
 
 //@property (nonatomic, assign)NSInteger page;
 //@property (nonatomic, assign)NSInteger per_page;
@@ -40,10 +42,12 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
             make.left.and.right.mas_equalTo(self.view);
         }];
-
-    }else{
+        self.no_dataLab.text = @"你还没有发布兼职任务，快去发布吧！";
+        [self.no_dataBtn setTitle:@"发布兼职任务" forState:UIControlStateNormal];
+        
+    }else if (_viewType == JMPartTimeJobTypeResume){
         [self.view addSubview:self.tableView];
-    
+
     }
     [self showProgressHUD_view:self.view];
 
@@ -113,9 +117,16 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 
 - (IBAction)postPartTimeResumeAction:(UIButton *)sender {
-    JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
-    vc.viewType = JMPostPartTimeResumeViewAdd;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (_viewType == JMPartTimeJobTypeResume) {
+        
+        JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
+        vc.viewType = JMPostPartTimeResumeViewAdd;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (_viewType == JMPartTimeJobTypeManage) {
+        if (_delegate && [_delegate respondsToSelector:@selector(postPartTimeJobAction)]) {
+            [_delegate postPartTimeJobAction];
+        }
+    }
 }
 
 -(void)addPartTimeJobResume{
@@ -175,12 +186,12 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 -(void)gotoBUserPostPartTimeVC__indexPath:(NSIndexPath *)indexPath{
     NSString *task_id;
-    NSString *type_labelID;
+    NSString *payment_method;
     JMTaskListCellData *data = self.dataArray[indexPath.row];
-    type_labelID = data.type_labelID;
+    payment_method = data.payment_method;
     task_id = data.task_id;
-    if ([type_labelID isEqualToString: @"1027"]) {
-        //销售分成
+    if ([payment_method isEqualToString: @"1"]) {
+        //网络销售
         [self gotoBUserPostPositionVC_task_id:task_id];
         
     }else{

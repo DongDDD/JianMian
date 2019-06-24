@@ -173,6 +173,7 @@
     self.tabBarController.tabBar.hidden = self.navigationController.viewControllers.count > 1 ? YES : NO;
 
 }
+#pragma mark - 弹窗
 
 -(void)showHUD{
     [_myProgressHUD setHidden:NO];
@@ -207,7 +208,6 @@
                          message:(NSString *)message
                        leftTitle:(NSString *)leftTitle
                       rightTitle:(NSString *)rightTitle
-
 {
     
     
@@ -272,8 +272,34 @@
     
     
 }
+#pragma mark - 数据处理
 
-
+-(NSMutableArray *)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
+    NSArray *array = [salaryStr componentsSeparatedByString:@"-"]; //从字符 - 中分隔成2个元素的数组
+    
+    NSString *minStr = array[0];
+    NSString *maxStr = array[1];
+    
+    //    NSInteger minNum = [minStr integerValue];
+    //    NSInteger maxNum = [maxStr integerValue];
+    //
+    
+    NSString *string1 = [minStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
+//    self.salaryMin = string1;
+    NSString *string2;
+    if (![maxStr isEqualToString: @"以上"]) {
+        string2 = [maxStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
+//        self.salaryMax = string2;
+    }else{
+        string2 = @"以上";
+        
+    }
+    
+    NSMutableArray *arrayMinMax = [NSMutableArray arrayWithObjects:string1,string2,nil];
+    
+    return arrayMinMax;
+    
+}
 
 - (id)toArrayOrNSDictionary:(NSData *)jsonData{
     

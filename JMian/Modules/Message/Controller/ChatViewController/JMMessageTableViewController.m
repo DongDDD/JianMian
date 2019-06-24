@@ -492,9 +492,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if (indexPath.row == 0) {
-        //兼职类型对话且招聘信息不为空
-        if ([_myModel.type isEqualToString:@"2"] && _myModel.work_task_id) {
+        //兼职类型对话且招聘信息不为空，且是C端用户
+        if ([_myModel.type isEqualToString:@"2"] && _myModel.work_task_id && [userModel.type isEqualToString:C_Type_USER]) {
             JMChatDetailPartTimeJobTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent2 forIndexPath:indexPath];
             if(cell == nil)
             {

@@ -93,7 +93,7 @@
     }];
     
     UIView * xian1View = [[UIView alloc]init];
-    xian1View.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
+    xian1View.backgroundColor = BG_COLOR;
     [self addSubview:xian1View];
     
     [xian1View mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -105,7 +105,7 @@
     
     
     UIView * xian2View = [[UIView alloc]init];
-    xian2View.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
+    xian2View.backgroundColor = BG_COLOR;
     [self addSubview:xian2View];
     
     [xian2View mas_makeConstraints:^(MASConstraintMaker *make) {

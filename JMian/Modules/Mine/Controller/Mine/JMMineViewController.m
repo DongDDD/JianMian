@@ -33,6 +33,7 @@
 #import "JMTaskManageViewController.h"
 #import "JMVIPViewController.h"
 #import "JMTaskManageViewController.h"
+#import "UITabBar+XSDExt.h"
 
 
 
@@ -45,7 +46,7 @@
 @property (strong, nonatomic) JMUserInfoModel *userInfoModel;
 @property (strong, nonatomic) JMMPersonalCenterHeaderView *personalCenterHeaderView;
 @property (strong, nonatomic) JMBUserCenterHeaderView *BUserCenterHeaderView;
-@property (strong, nonatomic) JMBUserCenterHeaderSubView *BUserCenterHeaderSubView;
+
 
 
 @end
@@ -95,6 +96,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
+
     [self getUserData];
     if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
         [self.BUserCenterHeaderView setHidden:NO];
@@ -103,6 +105,12 @@
         
         [self.personalCenterHeaderView setHidden:NO];
     }
+    
+    if (_BUserCenterHeaderSubView.taskBadgeView.hidden) {
+        
+        self.tabBarItem.badgeValue = nil;
+    }
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -118,6 +126,7 @@
 -(void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
 }
+
 
 #pragma mark - 获取数据
 
@@ -170,6 +179,8 @@
 -(void)BTaskClick{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     vc.title = @"任务管理";
+    [_BUserCenterHeaderSubView.taskBadgeView setHidden:YES];
+   
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -434,7 +445,7 @@
                                                             (__bridge id)UIColorFromHEX(0x258ff2).CGColor
                                                             ]];
    
-        JMBUserCenterHeaderSubView *_BUserCenterHeaderSubView = [[JMBUserCenterHeaderSubView alloc]initWithFrame:CGRectMake(13, 85, SCREEN_WIDTH-26, 105)];
+        _BUserCenterHeaderSubView = [[JMBUserCenterHeaderSubView alloc]initWithFrame:CGRectMake(13, 85, SCREEN_WIDTH-26, 105)];
 
         _BUserCenterHeaderSubView.delegate = self;
         _BUserCenterHeaderSubView.layer.shadowColor = [UIColor colorWithRed:20/255.0 green:31/255.0 blue:87/255.0 alpha:0.1].CGColor;

@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZK-4v-tRN" userLabel="BGView">
-                        <rect key="frame" x="5" y="5" width="362" height="120.5"/>
+                        <rect key="frame" x="10" y="10" width="352" height="120.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品区域销售代理/销售助理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKV-b8-h8G">
                                 <rect key="frame" x="14" y="14" width="201" height="16"/>
@@ -74,13 +74,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="提成/单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MP5-m5-cZb">
-                                <rect key="frame" x="308" y="42.5" width="41" height="14.5"/>
+                                <rect key="frame" x="298" y="42.5" width="41" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Be8-8A-Y8U">
-                                <rect key="frame" x="262" y="37.5" width="38" height="24"/>
+                                <rect key="frame" x="252" y="37.5" width="38" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -119,15 +119,16 @@
                 </subviews>
                 <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="tZK-4v-tRN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="0bu-uC-huD"/>
-                    <constraint firstItem="tZK-4v-tRN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="DfY-Va-T9b"/>
-                    <constraint firstAttribute="trailing" secondItem="tZK-4v-tRN" secondAttribute="trailing" constant="5" id="L6L-iT-FX6"/>
-                    <constraint firstAttribute="bottom" secondItem="tZK-4v-tRN" secondAttribute="bottom" constant="5" id="v34-ve-4ZH"/>
+                    <constraint firstItem="tZK-4v-tRN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="0bu-uC-huD"/>
+                    <constraint firstItem="tZK-4v-tRN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="DfY-Va-T9b"/>
+                    <constraint firstAttribute="trailing" secondItem="tZK-4v-tRN" secondAttribute="trailing" constant="10" id="L6L-iT-FX6"/>
+                    <constraint firstAttribute="bottom" secondItem="tZK-4v-tRN" secondAttribute="bottom" id="v34-ve-4ZH"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="adress" destination="MvE-zp-i4o" id="IXW-Kv-AtZ"/>
+                <outlet property="bgView" destination="tZK-4v-tRN" id="BW4-W1-gi0"/>
                 <outlet property="jobLabs" destination="ps3-lc-jCv" id="lBk-Z2-kaD"/>
                 <outlet property="paymentLab" destination="Be8-8A-Y8U" id="dMO-al-ckB"/>
                 <outlet property="titleLab" destination="mKV-b8-h8G" id="T3b-Jo-J8G"/>

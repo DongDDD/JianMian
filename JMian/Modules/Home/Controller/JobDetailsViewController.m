@@ -25,6 +25,7 @@
 #import "JMCustomAnnotationView.h"
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMHTTPManager+Login.h"
+#import "JMIDCardIdentifyViewController.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate,MAMapViewDelegate>
@@ -201,17 +202,19 @@
 
     }else{
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后才能进行聊天"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-    
+        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
+   
     }
     
     
 
 
 }
-
+-(void)alertRightAction{
+    JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 -(void)rightAction:(UIButton *)sender{
     NSLog(@"收藏");
     sender.selected = !sender.selected;

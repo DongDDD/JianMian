@@ -70,14 +70,17 @@
                                 <constraint firstAttribute="height" constant="1" id="ufL-sy-ph4"/>
                             </constraints>
                         </view>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zuy-38-ggz">
-                            <rect key="frame" x="91" y="22" width="303" height="17"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写真实姓名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zuy-38-ggz">
+                            <rect key="frame" x="91" y="5.5" width="303" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="WFG-y5-vaB"/>
+                            </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aeJ-cE-in4">
-                            <rect key="frame" x="91" y="72" width="303" height="17"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写身份证信息" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aeJ-cE-in4">
+                            <rect key="frame" x="91" y="55.5" width="303" height="50"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
@@ -88,6 +91,7 @@
                         <constraint firstItem="Zuy-38-ggz" firstAttribute="centerY" secondItem="kcB-8d-BeT" secondAttribute="centerY" id="1W6-Ue-52H"/>
                         <constraint firstItem="aeJ-cE-in4" firstAttribute="trailing" secondItem="Zuy-38-ggz" secondAttribute="trailing" id="3v5-jI-Iw9"/>
                         <constraint firstAttribute="trailing" secondItem="Zuy-38-ggz" secondAttribute="trailing" constant="20" id="CZe-Bd-s16"/>
+                        <constraint firstItem="aeJ-cE-in4" firstAttribute="height" secondItem="Zuy-38-ggz" secondAttribute="height" id="HCC-nx-41e"/>
                         <constraint firstItem="kcB-8d-BeT" firstAttribute="leading" secondItem="hGU-8o-WVr" secondAttribute="leading" constant="20" id="KgY-Gr-mdd"/>
                         <constraint firstItem="kcB-8d-BeT" firstAttribute="top" secondItem="hGU-8o-WVr" secondAttribute="top" constant="20" id="Mhe-ia-HUM"/>
                         <constraint firstAttribute="trailing" secondItem="HQx-lE-dhI" secondAttribute="trailing" constant="20" id="O01-Rd-3SR"/>

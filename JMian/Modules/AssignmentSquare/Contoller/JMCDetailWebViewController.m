@@ -19,17 +19,19 @@
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+CreateConversation.h"
 #import "JMIDCardIdentifyViewController.h"
+#import "JMApplyForProtocolView.h"
 
 
 
-@interface JMCDetailWebViewController ()<JMShareViewDelegate>
+@interface JMCDetailWebViewController ()<JMShareViewDelegate,JMApplyForProtocolViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic, copy) NSString *favorites_id;
 @property (nonatomic, strong) JMShareView *choosePayView;
 @property (nonatomic ,strong) UIView *BGPayView;
 @property (nonatomic ,strong) JMCDetailModel *detailModel;
 @property (copy, nonatomic)NSString *user_id;
-
+@property (nonatomic, strong) JMApplyForProtocolView *applyForProtocolView;
+@property (nonatomic, assign)BOOL isRead;
 
 @end
 
@@ -126,7 +128,6 @@
 }
 
 
-
 -(void)rightAction:(UIButton *)sender{
     NSLog(@"收藏");
     sender.selected = !sender.selected;
@@ -175,6 +176,41 @@
     
 }
 
+-(void)showAlertVCWithCustumView:(UIView *)custumView
+                         message:(NSString *)message
+                       leftTitle:(NSString *)leftTitle
+                      rightTitle:(NSString *)rightTitle
+
+{
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n" message:message preferredStyle: UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:leftTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+     }]];
+    [alert addAction:[UIAlertAction actionWithTitle:rightTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        if (_isRead) {
+            [self sendResquest];//申请请求
+        }else{
+            [self showAlertSimpleTips:@"提示" message:@"请阅读并同意《平台服务协议》" btnTitle:@"好的"];
+        
+        }
+    }]];
+ 
+  
+    [alert.view addSubview:custumView];
+    [custumView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(alert.view).mas_offset(10);
+        make.left.mas_equalTo(alert.view).mas_offset(10);
+        make.right.mas_equalTo(alert.view).mas_offset(-10);
+        make.height.mas_equalTo(150);
+
+    }];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 #pragma mark - 点击事件
 
 -(void)shareViewCancelAction{
@@ -204,8 +240,17 @@
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
     
-    [self sendResquest];
+    [self showAlertVCWithCustumView:self.applyForProtocolView message:@"" leftTitle:@"取消" rightTitle:@"确认"];
+//    [self sendResquest];
 }
+
+-(void)isReadProtocol:(BOOL)isRead{
+    _isRead = isRead;
+
+}
+
+
+
 #pragma mark -- 获取数据
 
 -(void)getData{
@@ -287,15 +332,23 @@
     
     if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
         [[JMHTTPManager sharedInstance]createTaskOrder_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            [self showAlertSimpleTips:@"提示" message:@"申请成功" btnTitle:@"好的"];
+            
+            //发送自定义消息
+            NSString *receiverId = [NSString stringWithFormat:@"%@b",_user_id];
+            [self setTaskMessage_receiverID:receiverId dic:nil title:@"任务提醒"];
+            
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
-    
+        
     }else{
-      [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
+        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
+        
     }
 }
+
 
 
 -(void)alertRightAction{
@@ -354,6 +407,41 @@
     }
     
 }
+
+
+#pragma mark -  （自定义消息）
+
+-(void)setTaskMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
+    
+    TIMConversation *conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:receiverID];
+    
+    // 转换为 NSData
+    
+    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
+    //    [custom_elem setData:data];
+    if (dic) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+        [custom_elem setData:data];
+        
+    }
+    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+    
+    [custom_elem setDesc:title];
+    TIMMessage * msg = [[TIMMessage alloc] init];
+    [msg addElem:custom_elem];
+    [conv sendMessage:msg succ:^(){
+        NSLog(@"SendMsg Succ");
+    }fail:^(int code, NSString * err) {
+        NSLog(@"SendMsg Failed:%d->%@", code, err);
+        
+        
+    }];
+    
+    
+}
+
 #pragma mark -- getter
 
 -(JMShareView *)choosePayView{
@@ -379,6 +467,15 @@
     
 }
 
+-(JMApplyForProtocolView *)applyForProtocolView{
+    if (!_applyForProtocolView) {
+        _applyForProtocolView = [[JMApplyForProtocolView alloc]init];
+        _applyForProtocolView.delegate = self;
+ 
+    }
+    return  _applyForProtocolView;
+    
+}
 /*
 #pragma mark - Navigation
 

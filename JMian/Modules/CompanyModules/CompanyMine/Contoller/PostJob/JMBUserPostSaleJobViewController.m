@@ -820,13 +820,11 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 -(void)sendRequest{
     NSMutableArray *imageArr = [NSMutableArray array];
     for (NSString *url in _image_arr) {
- 
         NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
         [imageArr addObject:strUrl];
     }
     
-    
-    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:@"1027" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:@"1086" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
@@ -854,6 +852,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         
     }];
 }
+
 
 //上传图片请求
 -(void)updateTaskImagesRequest_images:(NSArray *)images{

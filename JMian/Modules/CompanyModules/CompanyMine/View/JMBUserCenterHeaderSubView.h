@@ -20,6 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMBUserCenterHeaderSubView : UIView
 @property(nonatomic,weak)id<JMBUserCenterHeaderSubViewDelegate>delegate;
+@property(nonatomic,strong)UIView *taskBadgeView;
+@property(nonatomic,strong)UIView *orderBadgeView;
+@property(nonatomic,strong)UIButton *leftBtn;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

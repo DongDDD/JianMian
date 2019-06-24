@@ -355,6 +355,9 @@
 		0488E59922953B6700C2E398 /* JMCityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0488E59722953B6700C2E398 /* JMCityListViewController.m */; };
 		0488E59A22953B6700C2E398 /* JMCityListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0488E59822953B6700C2E398 /* JMCityListViewController.xib */; };
 		0488E59D2295438100C2E398 /* JMCityModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0488E59C2295438100C2E398 /* JMCityModel.m */; };
+		04896A0722C07A9B00E674C5 /* JMApplyForProtocolView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04896A0622C07A9B00E674C5 /* JMApplyForProtocolView.m */; };
+		04896A0922C07BBD00E674C5 /* JMApplyForProtocolView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04896A0822C07BBD00E674C5 /* JMApplyForProtocolView.xib */; };
+		04896A0C22C0B6F600E674C5 /* UITabBar+XSDExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 04896A0B22C0B6F500E674C5 /* UITabBar+XSDExt.m */; };
 		048A0DCA22B887D5006530EC /* JMHTTPManager+PayMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DC922B887D5006530EC /* JMHTTPManager+PayMoney.m */; };
 		048A0DCD22B89369006530EC /* JMMoneyDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DCC22B89369006530EC /* JMMoneyDetailsViewController.m */; };
 		048A0DD122B8951B006530EC /* JMMoneyDetailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048A0DCF22B8951B006530EC /* JMMoneyDetailTableViewCell.m */; };
@@ -1265,6 +1268,11 @@
 		0488E59822953B6700C2E398 /* JMCityListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCityListViewController.xib; sourceTree = "<group>"; };
 		0488E59B2295438100C2E398 /* JMCityModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCityModel.h; sourceTree = "<group>"; };
 		0488E59C2295438100C2E398 /* JMCityModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCityModel.m; sourceTree = "<group>"; };
+		04896A0522C07A9B00E674C5 /* JMApplyForProtocolView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMApplyForProtocolView.h; sourceTree = "<group>"; };
+		04896A0622C07A9B00E674C5 /* JMApplyForProtocolView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMApplyForProtocolView.m; sourceTree = "<group>"; };
+		04896A0822C07BBD00E674C5 /* JMApplyForProtocolView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMApplyForProtocolView.xib; sourceTree = "<group>"; };
+		04896A0A22C0B6F500E674C5 /* UITabBar+XSDExt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITabBar+XSDExt.h"; sourceTree = "<group>"; };
+		04896A0B22C0B6F500E674C5 /* UITabBar+XSDExt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+XSDExt.m"; sourceTree = "<group>"; };
 		048A0DC822B887D5006530EC /* JMHTTPManager+PayMoney.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+PayMoney.h"; sourceTree = "<group>"; };
 		048A0DC922B887D5006530EC /* JMHTTPManager+PayMoney.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+PayMoney.m"; sourceTree = "<group>"; };
 		048A0DCB22B89369006530EC /* JMMoneyDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMoneyDetailsViewController.h; sourceTree = "<group>"; };
@@ -2457,6 +2465,8 @@
 				04A2479E224C7AFF00DEB8E3 /* CALayer+UIColor.m */,
 				6DEA99152255ACD00029FE8A /* NSDictionary+NullSafe.h */,
 				6DEA99162255ACD00029FE8A /* NSDictionary+NullSafe.m */,
+				04896A0A22C0B6F500E674C5 /* UITabBar+XSDExt.h */,
+				04896A0B22C0B6F500E674C5 /* UITabBar+XSDExt.m */,
 				04EB6CB32255FDD900CBAF79 /* Foundation+Log.m */,
 			);
 			path = Category;
@@ -2986,6 +2996,9 @@
 				04908B1922A7F7D1000B5AB4 /* JMSquareHeaderView.h */,
 				04908B1A22A7F7D1000B5AB4 /* JMSquareHeaderView.m */,
 				04908B1C22A7F7ED000B5AB4 /* JMSquareHeaderView.xib */,
+				04896A0522C07A9B00E674C5 /* JMApplyForProtocolView.h */,
+				04896A0622C07A9B00E674C5 /* JMApplyForProtocolView.m */,
+				04896A0822C07BBD00E674C5 /* JMApplyForProtocolView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4056,6 +4069,7 @@
 				0485AD2522A10F7E00B31506 /* mine_share@2x.png in Resources */,
 				04CC5F9D22B3BB9A00C5DD46 /* JMDiscoverCollectionViewCell.xib in Resources */,
 				040B837C2265D73600F1A37A /* companyCamera.png@2x.png in Resources */,
+				04896A0922C07BBD00E674C5 /* JMApplyForProtocolView.xib in Resources */,
 				6D0209FB224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.xib in Resources */,
 				049555E8227B25C50008AF1C /* other_bubble.png in Resources */,
 				049C651E22AD30E500A93DFE /* JMMakeOutBillView.xib in Resources */,
@@ -4657,6 +4671,7 @@
 				04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */,
 				048A0DCD22B89369006530EC /* JMMoneyDetailsViewController.m in Sources */,
 				048348C6226983C700DE4630 /* NSString+Extension.m in Sources */,
+				04896A0722C07A9B00E674C5 /* JMApplyForProtocolView.m in Sources */,
 				041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */,
 				04E25F6D22B509CD00F451C8 /* JMHTTPManager+FectchInvoiceInfo.m in Sources */,
 				040A392A227DA9A600EDD9E0 /* JMGreetCell.m in Sources */,
@@ -4773,6 +4788,7 @@
 				04A4211022BCF2C30001A2F0 /* JMChatDetailPartTimeJobTableViewCell.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
 				040C865E227EDDE100993490 /* JMChatViewSectionView.m in Sources */,
+				04896A0C22C0B6F600E674C5 /* UITabBar+XSDExt.m in Sources */,
 				048A0DF122B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m in Sources */,
 				04908AD322A7A06E000B5AB4 /* JMBUserCenterHeaderSubView.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,

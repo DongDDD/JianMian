@@ -39,7 +39,18 @@ static NSString *cellIdent = @"cellIdent";
     [super viewDidLoad];
     self.title =@"新增期望职位";
     _titleArray = @[@"期望职位",@"薪资要求",@"工作城市"];
-    _pickerArray = @[@"3000~5000",@"5000~8000",@"8000~10000",@"10000~20000"];
+    _pickerArray = @[@"1k-2k",
+                     @"2k-4k",
+                     @"4k-6k",
+                     @"6k-8k",
+                     @"8k-10k",
+                     @"10k-15k",
+                     @"15k-20k",
+                     @"20k-30k",
+                     @"30k-40k",
+                     @"40k-50k",
+                     @"50k-以上",
+                     ];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -174,19 +185,30 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 
--(void)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
-    NSArray *array = [salaryStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
+-(NSMutableArray *)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
+    NSArray *array = [salaryStr componentsSeparatedByString:@"-"]; //从字符 - 中分隔成2个元素的数组
     
     NSString *minStr = array[0];
     NSString *maxStr = array[1];
-//
-//    NSInteger minNum = [minStr integerValue];
-//    NSInteger maxNum = [maxStr integerValue];
-//
-//
-    self.salaryMin = minStr;
-    self.salaryMax = maxStr;
     
+    //    NSInteger minNum = [minStr integerValue];
+    //    NSInteger maxNum = [maxStr integerValue];
+    //
+    
+    NSString *string1 = [minStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
+    //    self.salaryMin = string1;
+    NSString *string2;
+    if (![maxStr isEqualToString: @"以上"]) {
+        string2 = [maxStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
+        //        self.salaryMax = string2;
+    }else{
+        string2 = @"以上";
+        
+    }
+    
+    NSMutableArray *arrayMinMax = [NSMutableArray arrayWithObjects:string1,string2,nil];
+    
+    return arrayMinMax;
     
 }
 
@@ -278,10 +300,13 @@ static NSString *cellIdent = @"cellIdent";
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     _isChange = YES;
     [self.rightTextArray replaceObjectAtIndex:1 withObject:self.pickerArray[row]];
-    [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
+    NSMutableArray *array = [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
+    self.salaryMin = array[0];
+    self.salaryMax = array[1];
     [self.tableView reloadData];
     
 }
+
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
     self.pickerView.hidden = YES;

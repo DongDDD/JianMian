@@ -7,7 +7,7 @@
 //
 
 #import "JMMakeOutBillView.h"
-@interface JMMakeOutBillView ()
+@interface JMMakeOutBillView ()<UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *taitouImg;
 @property (weak, nonatomic) IBOutlet UIView *taitouView;
@@ -19,6 +19,9 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
         _isSetTaitou = NO;
+        self.invoiceTitleTextField.delegate = self;
+        self.invoiceTaxNumTextField.delegate = self;
+        self.invoiceEmailTextField.delegate = self;
         self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] lastObject];
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
         [self.taitouView addGestureRecognizer:tap];
@@ -42,6 +45,13 @@
     }
 }
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (_delegate && [_delegate respondsToSelector:@selector(invoiceTextRerurnActionWithTextField:)]) {
+        [_delegate invoiceTextRerurnActionWithTextField:textField];
+    }
+    
+    return YES;
+}
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

@@ -13,10 +13,15 @@ typedef enum : NSUInteger {
     JMPartTimeJobTypeResume,
     JMPartTimeJobTypeManage,
 } JMPartTimeJobResumeViewType;
+@protocol JMPartTimeJobResumeViewControllerDelegate <NSObject>
+
+-(void)postPartTimeJobAction;
+
+@end
 
 @interface JMPartTimeJobResumeViewController : BaseViewController
 @property (nonatomic, assign)JMPartTimeJobResumeViewType viewType;
-
+@property (nonatomic, weak)id<JMPartTimeJobResumeViewControllerDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

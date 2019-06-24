@@ -67,6 +67,13 @@ static NSString *C_cellIdent = @"CSquareCellID";
     }
     // Do any additional setup after loading the view from its nib.
 }
+
+
+-(void)fanhui{
+ 
+ 
+}
+
 #pragma mark - setUI -
 
 -(void)initTableView{
@@ -252,6 +259,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
             
             [cell setModel:self.dataArray[indexPath.row]];
         }
+        
         return cell;
     
     }

@@ -26,22 +26,18 @@
     [super awakeFromNib];
     // Initialization code
 }
-- (instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil].lastObject;
+
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.bgView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:95/255.0 blue:133/255.0 alpha:0.1].CGColor;
         self.bgView.layer.shadowOffset = CGSizeMake(0,2);
         self.bgView.layer.shadowOpacity = 1;
-        self.bgView.layer.shadowRadius = 10;
+        self.bgView.layer.shadowRadius = 5;
         self.bgView.layer.borderWidth = 0.5;
         self.bgView.layer.borderColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0].CGColor;
-     
-        
     }
     return self;
 }
-
 -(void)setMyConModel:(JMMessageListModel *)myConModel{
     _myModel = myConModel;
     self.titleNamelab.text = myConModel.work_task_title;

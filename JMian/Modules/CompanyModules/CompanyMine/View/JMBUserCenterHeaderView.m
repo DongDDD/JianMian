@@ -22,7 +22,6 @@
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
-        
         [self initView];
         [self initLayout];
     }
@@ -61,9 +60,9 @@
     
     
     [_settingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self).offset(-19);
+        make.right.mas_equalTo(self);
         make.centerY.mas_equalTo(_titleLab);
-        make.size.mas_equalTo(CGSizeMake(19, 19));
+        make.size.mas_equalTo(CGSizeMake(80, 50));
     }];
     
     [_VIPImg mas_makeConstraints:^(MASConstraintMaker *make) {

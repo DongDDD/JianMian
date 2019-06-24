@@ -130,6 +130,8 @@
 
 }
 
+
+
 //正在改变
 - (void)textViewDidChange:(UITextView *)textView
 {

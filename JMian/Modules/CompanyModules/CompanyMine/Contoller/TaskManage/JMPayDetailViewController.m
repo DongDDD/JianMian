@@ -53,21 +53,24 @@
         self.detailViewLab1.text = [NSString stringWithFormat:@" 任务总额：%@ ",_data.payment_money];
         self.detailViewLab2.text = [NSString stringWithFormat:@" 已交定金：%@  ",_data.front_money];
 
-        NSInteger front_money = [_data.front_money integerValue];
-        NSInteger all_money = [_data.payment_money integerValue];
-        NSInteger now = all_money - front_money;
+//        double front_money = [_data.front_money doubleValue];
+//        double all_money = [_data.payment_money doubleValue];
+//        double now = all_money - front_money;
+        NSString *money = [self calculateBySubtractingMinuend:_data.payment_money subtractorNumber:_data.front_money];
         self.moneyDetailViewLab1.text = @"剩余应付";
-        self.moneyDetailViewLab2.text = [NSString stringWithFormat:@"%ld 元",(long)now];
-        
+        self.moneyDetailViewLab2.text = [NSString stringWithFormat:@"%@ 元",money];
+//        NSLog(@"剩余应付  %ld 元",(long)now);
         self.bottomViewLab1.text = @"合计";
-        self.bottomViewLab2.text = [NSString stringWithFormat:@"¥%ld",(long)now];
-     
+        self.bottomViewLab2.text = [NSString stringWithFormat:@"¥%@",money];
+//        NSLog(@"合计  %ld 元",(long)now);
+
     }
    
 }
 
 - (IBAction)payAction:(UIButton *)sender {
     if(_viewType == JMPayDetailViewTypeDownPayment){
+       
         if (_delegate && [_delegate respondsToSelector:@selector(payDetailViewDownPayAction_data:)]) {
             [_delegate payDetailViewDownPayAction_data:_data];
  
@@ -81,6 +84,15 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark ----两个数相减------------ number1 - number2
+-(NSString *)calculateBySubtractingMinuend:(NSString *)number1 subtractorNumber:(NSString *)number2
+{
+    NSDecimalNumber *num1 = [NSDecimalNumber decimalNumberWithString:number1];
+    NSDecimalNumber *num2 = [NSDecimalNumber decimalNumberWithString:number2];
+    NSDecimalNumber *addingNum = [num1 decimalNumberBySubtracting:num2];
+    return [addingNum stringValue];
+    
+}
 /*
 #pragma mark - Navigation
 

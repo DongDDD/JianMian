@@ -74,9 +74,10 @@
         [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.leftBtn.backgroundColor = TEXT_GRAYmin_COLOR;
         self.leftBtn.layer.borderWidth = 0;
+        self.leftBtn.layer.borderColor = TEXT_GRAYmin_COLOR.CGColor;
 
         
-        if ([data.snapshot_type_label_id isEqualToString:@"1027"] ) {
+        if ([data.payment_method isEqualToString:@"1"] ) {
         
             [self.rightBtn setTitle:@"通过" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -89,12 +90,13 @@
         //进行中: 已通过
     }else if ([data.status isEqualToString:Task_Pass]){
 
-        if ([data.snapshot_type_label_id isEqualToString:@"1027"] ) {
+        if ([data.payment_method isEqualToString:@"1"] ) {
             
             [self.leftBtn setTitle:@"结束任务" forState:UIControlStateNormal];
             [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.leftBtn.backgroundColor = TEXT_GRAYmin_COLOR;
             self.leftBtn.layer.borderWidth = 0;
+            self.leftBtn.layer.borderColor = TEXT_GRAYmin_COLOR.CGColor;
 
             [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -127,7 +129,7 @@
         
         //已结束
     }else if([data.status isEqualToString:Task_DidComfirm]){
-        if (![data.snapshot_type_label_id isEqualToString:@"1027"]) {
+        if (![data.payment_method isEqualToString:@"1"]) {
             [self.leftBtn setTitle:@"发票申请中..." forState:UIControlStateNormal];
             [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
             self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
@@ -152,6 +154,16 @@
         }
         
         
+    }else if([data.status isEqualToString:Task_Refuse]){
+        [self.leftBtn setHidden:YES];
+        [self.rightBtn setHidden:NO];
+        
+        [self.rightBtn setTitle:@"已拒绝" forState:UIControlStateNormal];
+        [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.rightBtn.backgroundColor = TEXT_GRAYmin_COLOR;
+        self.rightBtn.layer.borderWidth = 0;
+        self.rightBtn.layer.borderColor = TEXT_GRAYmin_COLOR.CGColor;
+    
     }
     
 }
@@ -165,8 +177,8 @@
     [self.iconImgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.headerLab.text = data.task_title;
     self.moneyLab.text = [NSString stringWithFormat:@"%@%@",data.payment_money,data.unit];
-    if ([data.snapshot_type_label_id isEqualToString:@"1027"] ) {
-        //销售分成
+    if ([data.payment_method isEqualToString:@"1"] ) {
+        //网络销售
         self.infoLab1.text = data.goodsTitle;
         self.infoLab2.text = @"即结";
         self.infoLab3.text = data.snapshot_cityName;
@@ -194,7 +206,7 @@
 
         [self.leftBtn setHidden:YES];
         [self.rightBtn setHidden:NO];
-        if ([data.snapshot_type_label_id isEqualToString:@"1027"] ) {
+        if ([data.payment_method isEqualToString:@"1"] ) {
 
             [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -250,6 +262,16 @@
         }
         
  
+    }else if([data.status isEqualToString:Task_Refuse]){
+        [self.leftBtn setHidden:YES];
+        [self.rightBtn setHidden:NO];
+
+        [self.rightBtn setTitle:@"已被拒绝" forState:UIControlStateNormal];
+        [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        self.rightBtn.backgroundColor = TEXT_GRAYmin_COLOR;
+        self.rightBtn.layer.borderWidth = 0;
+        self.rightBtn.layer.borderColor = TEXT_GRAYmin_COLOR.CGColor;
+        
     }
     
     

@@ -77,6 +77,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)showAlertSimpleTips:(NSString *)title message:(NSString *)message btnTitle:(NSString *)btnTitle;
 -(void)alerLeftAction;
 -(void)alertRightAction;
+//工资K数据转换 “000”
+-(NSMutableArray *)setSalaryRangeWithSalaryStr:(NSString *)salaryStr;
 @end
 
 NS_ASSUME_NONNULL_END

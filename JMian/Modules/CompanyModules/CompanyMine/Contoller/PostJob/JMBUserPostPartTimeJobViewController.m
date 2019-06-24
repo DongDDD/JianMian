@@ -26,7 +26,7 @@
 #import "JMInvoiceModel.h"
 
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
-@interface JMBUserPostPartTimeJobViewController ()<JMPartTimeJobResumeFooterViewDelegate,JMMakeOutBillHeaderViewDelegate,JMBUserPartTimeJobDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMMakeOutBillHeaderViewDelegate,JMMakeOutBillViewDelegate>
+@interface JMBUserPostPartTimeJobViewController ()<JMPartTimeJobResumeFooterViewDelegate,JMMakeOutBillHeaderViewDelegate,JMBUserPartTimeJobDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMMakeOutBillHeaderViewDelegate,JMMakeOutBillViewDelegate,UITextFieldDelegate>
 @property(nonatomic, strong)JMBUserPartTimeJobDetailView *partTimeJobDetailView;
 @property (strong, nonatomic)NSArray *leftTextArray;
 @property (strong, nonatomic)UIScrollView *scrollView;
@@ -80,6 +80,7 @@
     [self initView];
     [self initLayout];
     self.title = @"发布兼职";
+    
     if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
         
         [self showProgressHUD_view:self.view];
@@ -203,7 +204,13 @@
             _payment_money = text;
             break;
         case 102://定金
-            _front_money = text;
+            if (text.length > 0) {
+                _front_money = text;
+                
+            }else{
+                _front_money = @"0";
+
+            }
             break;
         default:
             break;
@@ -281,7 +288,13 @@
     }
 
 }
-
+//-(void)invoiceTextRerurnActionWithTextField:(UITextField *)textField{
+//    [textField resignFirstResponder];
+//}
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
 -(void)gotoLabsVC{
     JMPartTimeJobTypeLabsViewController *vc =  [[JMPartTimeJobTypeLabsViewController alloc]init];
     vc.delegate = self;
@@ -526,6 +539,12 @@
 
 
 -(void)sendRequest{
+//    NSString *myfront_money;
+//    if (_front_money.length > 0) {
+//        myfront_money = _front_money;
+//    }else{
+//        myfront_money = @"0";
+//    }
     [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil deadline:_deadline status:nil is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -706,6 +725,9 @@
     if (_partTimeJobDetailView == nil) {
         _partTimeJobDetailView = [[JMBUserPartTimeJobDetailView alloc]init];
         _partTimeJobDetailView.delegate = self;
+        _partTimeJobDetailView.jobNameTextField.delegate = self;
+        _partTimeJobDetailView.paymentMoneyTextField.delegate = self;
+        _partTimeJobDetailView.downPaymentTextField.delegate = self;
 
     }
     return _partTimeJobDetailView;
@@ -736,6 +758,9 @@
 - (JMMakeOutBillView *)makeOutBillView{
     if (_makeOutBillView == nil) {
         _makeOutBillView = [JMMakeOutBillView new];
+        _makeOutBillView.invoiceTitleTextField.delegate = self;
+        _makeOutBillView.invoiceTaxNumTextField.delegate = self;
+        _makeOutBillView.invoiceEmailTextField.delegate = self;
         _makeOutBillView.delegate = self;
     }
     return _makeOutBillView;

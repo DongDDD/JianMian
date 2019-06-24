@@ -7,10 +7,13 @@
 //
 
 #import "BaseViewController.h"
+#import "JMBUserCenterHeaderSubView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMMineViewController : BaseViewController
+
+@property (strong, nonatomic) JMBUserCenterHeaderSubView *BUserCenterHeaderSubView;
 
 @end
 

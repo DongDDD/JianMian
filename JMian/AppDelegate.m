@@ -103,11 +103,10 @@
                 break;
         }
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:strMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alert show];
   
 }
-
 
 
 
@@ -215,7 +214,8 @@
 - (void)onNewMessage:(NSArray *)msgs
 {
 
- 
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    AudioServicesPlaySystemSound(1007);
     
     if (self.isBackgroundTask) {
         
@@ -271,6 +271,8 @@
             [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
         
         }
+     
+        
 //        else if (self.videoChatDic){
 //
 //            NSString *str = self.videoChatDic[@"leaveAction"];
@@ -291,6 +293,10 @@
 
         }
         
+        if ([custom_elem.desc containsString:@"任务"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:Notification_TaskListener object:msgs];
+            
+        }
 //        NSString *title = [NSString stringWithFormat:@" %@ 邀请你视频面试",self.videoChatDic[TITLE]];
 //
 //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:self.videoChatDic[Sub_TITLE]
@@ -352,22 +358,24 @@
 
     [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
     [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"leaveAction"];
-//    [self setVideoCloseView_receiverID:self.videoChatDic[SendMarkID] dic:dic];
 
 }
 
 #pragma mark - 发送拒绝接听视频命令（自定义消息）
 
 -(void)setVideoInvite_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
+
+    
+    
     
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:receiverID];
     
-    // 转换为 NSData
-
+    
     TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
-//    [custom_elem setData:data];
+    
+    // 转换为 NSData
     if (dic) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
         [custom_elem setData:data];
@@ -377,6 +385,8 @@
     
     [custom_elem setDesc:title];
     TIMMessage * msg = [[TIMMessage alloc] init];
+    
+    [msg addElem:custom_elem];
     [conv sendMessage:msg succ:^(){
         NSLog(@"SendMsg Succ");
     }fail:^(int code, NSString * err) {
@@ -387,38 +397,12 @@
     }];
     
     
+    
+    
 }
 
 
--(void)setVideoCloseView_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic{
-    
-    TIMConversation *conv = [[TIMManager sharedInstance]
-                             getConversation:(TIMConversationType)TIM_C2C
-                             receiver:receiverID];
-    
-    // 转换为 NSData
-    
-    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
-    //    [custom_elem setData:data];
-    if (dic) {
-        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-        [custom_elem setData:data];
-        
-    }
-    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
-    
-    [custom_elem setDesc:@"tttttttttt"];
-    TIMMessage * msg = [[TIMMessage alloc] init];
-    [conv sendMessage:msg succ:^(){
-        NSLog(@"SendMsg Succ");
-    }fail:^(int code, NSString * err) {
-        NSLog(@"SendMsg Failed:%d->%@", code, err);
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"发送失败"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-    }];
-    
-}
+
 
 
 
