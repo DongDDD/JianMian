@@ -31,12 +31,12 @@
         //收入
         moneyText = [NSString stringWithFormat:@"+ %@",data.amount];
         self.moneyLab.text = moneyText;
-        self.moneyLab.textColor = [UIColor greenColor];
-    }else if ([data.action isEqualToString:@"1"]){
+        self.moneyLab.textColor = [UIColor colorWithRed:255/255.0 green:78/255.0 blue:77/255.0 alpha:1.0];
+    }else if ([data.action isEqualToString:@"2"]){
         //支出
         moneyText = [NSString stringWithFormat:@"- %@",data.amount];
         self.moneyLab.text = moneyText;
-        self.moneyLab.textColor = [UIColor redColor];
+        self.moneyLab.textColor = [UIColor colorWithRed:29/255.0 green:204/255.0 blue:20/255.0 alpha:1.0];
     }
 //    self.moneyLab.text = NS
     

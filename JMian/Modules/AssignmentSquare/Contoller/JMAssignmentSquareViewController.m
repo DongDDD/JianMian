@@ -18,10 +18,12 @@
 #import "JMBUserSquareTableViewCell.h"
 #import "JMBDetailWebViewController.h"
 #import "JMCDetailWebViewController.h"
+#import "JMWalletViewController.h"
+#import "JMTaskManageViewController.h"
 
 
 
-@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate>
+@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate>
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) NSUInteger index;
@@ -120,6 +122,26 @@ static NSString *C_cellIdent = @"CSquareCellID";
     self.tableView.mj_footer = footer;
     //     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
 }
+
+#pragma mark - myDeletgate -
+-(void)didClickIncomeAction{
+    [self.navigationController pushViewController:[JMWalletViewController new] animated:YES];
+}
+
+-(void)didClickTaskProcessingAction{
+    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    [vc setMyIndex:1];
+    [self.navigationController pushViewController:vc animated:YES];
+  
+}
+
+-(void)didClickTaskCompletedAction{
+    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    [vc setMyIndex:2];
+
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - Action -
 
 -(void)loadMoreBills
@@ -321,6 +343,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         if ([userModel.type isEqualToString:C_Type_USER]) {
             JMSquareHeaderView *view =  [JMSquareHeaderView new];
+            view.delegate = self;
             [view setUserModel:userModel];
             return view;
         }else{

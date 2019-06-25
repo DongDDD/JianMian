@@ -7,7 +7,6 @@
 //
 
 #import "JMTaskManageViewController.h"
-#import "JMTitlesView.h"
 #import "JMTaskManageTableViewCell.h"
 #import "JMHTTPManager+FectchMyTaskOrderList.h"
 #import "JMHTTPManager+TaskOrderStatus.h"
@@ -27,15 +26,15 @@
 
 
 @interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate>
-@property (nonatomic, strong) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
+@property (nonatomic, strong) JMTitlesView *titleView;
 @property (assign, nonatomic) NSUInteger index;
 @property (strong, nonatomic) NSArray *listsArray;
 @property (strong, nonatomic) JMShareView *choosePayView;
 @property (strong, nonatomic) JMOrderPaymentModel *orderPaymentModel;
 @property (nonatomic ,strong) UIView *BGPayView;
 
-@property (strong, nonatomic)NSArray *currentStatus;
+@property (strong, nonatomic)NSArray *currentStatusArray;
 @property (copy, nonatomic)NSString *task_order_id;
 @property (copy, nonatomic)NSString *user_id;
 
@@ -46,9 +45,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    self.currentStatus = @[Task_WaitDealWith];
-    [self getDataWitnStatus:self.currentStatus];
-   
+//    self.currentStatusArray = @[Task_WaitDealWith];
+//    [self getDataWitnStatus:self.currentStatusArray];
+//   
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -67,6 +66,17 @@
 
 
 #pragma mark - setUI -
+-(void)setMyIndex:(NSInteger)myIndex{
+    [self.titleView setCurrentTitleIndex:myIndex];
+    __weak JMTaskManageViewController *weakSelf = self;
+    self.titleView.didTitleClick = ^(NSInteger index) {
+        _index = index;
+        [weakSelf setCurrentIndex];
+    };
+    
+    
+}
+
 
 -(void)initView{
     [self.view addSubview:self.titleView];
@@ -295,12 +305,12 @@
 
 //刷新
 -(void)refreshData{
-    [self getDataWitnStatus:self.currentStatus];
+    [self getDataWitnStatus:self.currentStatusArray];
     
 }
 //上拉更多
 -(void)loadMoreBills{
-    [self getDataWitnStatus:self.currentStatus];
+    [self getDataWitnStatus:self.currentStatusArray];
     
 }
 //改变任务状态
@@ -437,16 +447,16 @@
     switch (_index) {
         case 0:
             //待处理
-            self.currentStatus = @[Task_WaitDealWith];
+            self.currentStatusArray = @[Task_WaitDealWith];
             break;
         case 1:
             //进行中
-            self.currentStatus = @[Task_Pass,Task_Finish];
+            self.currentStatusArray = @[Task_Pass,Task_Finish];
             
             break;
         case 2:
             //已结束
-            self.currentStatus = @[Task_Refuse,Task_DidComfirm];
+            self.currentStatusArray = @[Task_Refuse,Task_DidComfirm];
             
             break;
             
@@ -454,7 +464,7 @@
             break;
     }
     [self.tableView.mj_header beginRefreshing];
-    [self getDataWitnStatus:self.currentStatus];
+    [self getDataWitnStatus:self.currentStatusArray];
     
     
 }
@@ -519,13 +529,13 @@
 - (JMTitlesView *)titleView {
     if (!_titleView) {
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"待通过", @"进行中", @"已结束"]];
-        _titleView.viewType = JMTitlesViewDefault;;
-        [_titleView setCurrentTitleIndex:0];
-        __weak JMTaskManageViewController *weakSelf = self;
-        _titleView.didTitleClick = ^(NSInteger index) {
-            _index = index;
-            [weakSelf setCurrentIndex];
-        };
+        _titleView.viewType = JMTitlesViewDefault;
+//        [_titleView setCurrentTitleIndex:0];
+//        __weak JMTaskManageViewController *weakSelf = self;
+//        _titleView.didTitleClick = ^(NSInteger index) {
+//            _index = index;
+//            [weakSelf setCurrentIndex];
+//        };
     }
     
     return _titleView;

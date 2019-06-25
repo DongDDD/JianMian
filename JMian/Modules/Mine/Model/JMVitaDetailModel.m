@@ -24,6 +24,9 @@
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
+             
+             @"myDescription":@"description",
+
              @"user_nickname":@"user.nickname",
              @"user_avatar":@"user.avatar",
              @"user_email":@"user.email",

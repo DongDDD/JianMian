@@ -363,7 +363,7 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hl-hA-yP8">
+                        <button hidden="YES" opaque="NO" tag="1003" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hl-hA-yP8">
                             <rect key="frame" x="167" y="-1" width="200" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="Szd-7K-SDP"/>
@@ -382,9 +382,23 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <textField opaque="NO" tag="103" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入人数" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ke8-ud-Bwx">
+                            <rect key="frame" x="167" y="-1" width="200" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="5Ef-PP-ayO"/>
+                                <constraint firstAttribute="width" constant="200" id="fIM-2i-d1e"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            <connections>
+                                <action selector="textFieldEndEditing:" destination="iN0-l3-epB" eventType="editingDidEnd" id="Si4-2K-oqk"/>
+                            </connections>
+                        </textField>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
+                        <constraint firstItem="Ke8-ud-Bwx" firstAttribute="centerY" secondItem="g2Q-eD-Jji" secondAttribute="centerY" id="6HH-ze-mQo"/>
                         <constraint firstAttribute="trailing" secondItem="kYO-Pe-hzN" secondAttribute="trailing" constant="20" id="AO5-EP-mu9"/>
                         <constraint firstAttribute="bottom" secondItem="kYO-Pe-hzN" secondAttribute="bottom" id="Bgr-6t-bdY"/>
                         <constraint firstAttribute="trailing" secondItem="ytI-An-opb" secondAttribute="trailing" constant="20" id="IxP-YS-Oms"/>
@@ -482,6 +496,7 @@
                 <constraint firstItem="vx4-Rk-BEy" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="e2W-df-KOO"/>
                 <constraint firstItem="vx4-Rk-BEy" firstAttribute="height" secondItem="sym-bM-6bA" secondAttribute="height" id="eSZ-sa-ib1"/>
                 <constraint firstItem="928-yo-ARE" firstAttribute="top" secondItem="tJI-lL-5J3" secondAttribute="bottom" id="eb4-2E-xSX"/>
+                <constraint firstItem="Ke8-ud-Bwx" firstAttribute="trailing" secondItem="z2l-s6-IgZ" secondAttribute="trailing" id="hBl-kJ-hUp"/>
                 <constraint firstItem="sym-bM-6bA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="icJ-ew-iUJ"/>
                 <constraint firstItem="UMn-qc-BeD" firstAttribute="trailing" secondItem="pXL-cc-NJA" secondAttribute="trailing" id="k3T-lF-GHc"/>
                 <constraint firstItem="tJI-lL-5J3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="klz-Nf-aUC"/>
@@ -504,6 +519,7 @@
                 <outlet property="jobTypeBtn" destination="UgY-Ao-Yat" id="3MY-aY-FkA"/>
                 <outlet property="paymentMoneyTextField" destination="hJ4-C3-2wA" id="YHr-a7-4b2"/>
                 <outlet property="quantityMaxBtn" destination="4hl-hA-yP8" id="96I-pz-Dmg"/>
+                <outlet property="quantityMaxTextField" destination="Ke8-ud-Bwx" id="f8H-mm-8Ib"/>
             </connections>
             <point key="canvasLocation" x="42" y="39"/>
         </view>

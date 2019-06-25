@@ -33,11 +33,11 @@
 @property (strong, nonatomic) AVPlayerViewController *playerVC;
 @property (nonatomic, strong) NSURL *finalURL;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
+@property (nonatomic, copy)NSString *myVideoUrl;//用于播放，获取帧图片和回传
 
-@property (nonatomic, strong)JMDidUploadVideoView *didUploadVideoView;
-@property (nonatomic, strong)JMVitaDetailModel *model;
-@property (nonatomic, strong)JMAbilityCellData *partTimeJobModel;
-
+@property (nonatomic, strong)JMDidUploadVideoView *didUploadVideoView;//有视频数据就显示
+@property (nonatomic, strong)JMVitaDetailModel *model;//全职
+@property (nonatomic, strong)JMAbilityCellData *partTimeJobModel;//兼职
 @end
 
 @implementation JMUploadVideoViewController
@@ -45,11 +45,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"视频简历";
-    [self didUploadVideoView];
+    [self.view addSubview:self.didUploadVideoView];
+    [self.didUploadVideoView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.and.bottom.mas_equalTo(self.view);
+    }];
+    
+ 
     if (_viewType == JMUploadVideoViewTypePartTimeEdit) {
+        //获取兼职视频
         [self getPartTimeInfoData];
-    }else{
-        [self getData];
+    }else if (_viewType == JMUploadVideoViewTypeJobEdit){
+        //获取全职视频
+        [self getJobData];
     }
    
 }
@@ -61,16 +69,22 @@
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.bottomLab.frame.origin.y+self.bottomLab.frame.size.height+30);
 
 }
+
+
+
 //第二版：C端 获取个人兼职简历
 -(void)getPartTimeInfoData{
     [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.partTimeJobModel = [JMAbilityCellData mj_objectWithKeyValues:responsObject[@"data"]];
             if (self.partTimeJobModel.video_file_path!=nil) {
-                
+                //用于回传和播放
+                [self setVideoUrl:self.partTimeJobModel.video_file_path];
+
+//                _myVideoUrl = self.partTimeJobModel.video_file_path;
                 [self.didUploadVideoView setHidden:NO];
-                NSURL *url = [NSURL URLWithString:self.partTimeJobModel.video_file_path];
                 
+                NSURL *url = [NSURL URLWithString:self.partTimeJobModel.video_file_path];
                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -95,17 +109,18 @@
 
 
 //第一版：C端 获取个人全职简历
--(void)getData{
+-(void)getJobData{
    
         //        int jobId = [responsObject[@"data"][0][@"user_job_id"] intValue];
         [[JMHTTPManager sharedInstance] fetchVitaInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             if (responsObject[@"data"]) {
                 self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
                 if (self.model.video_file_path!=nil) {
-                    
+                    //拼接前缀 用于播放
+                    [self setVideoUrl:self.model.video_file_path];
                     [self.didUploadVideoView setHidden:NO];
-                    NSURL *url = [NSURL URLWithString:self.model.video_file_path];
                     
+                    NSURL *url = [NSURL URLWithString:self.model.video_file_path];
                     dispatch_async(dispatch_get_global_queue(0, 0), ^{
                         
                         dispatch_async(dispatch_get_main_queue(), ^{
@@ -130,6 +145,13 @@
 }
 
 #pragma mark - 点击事件
+-(void)fanhui{
+    [super fanhui];
+    if (_delegate && [_delegate respondsToSelector:@selector(didPostVideoWithUrl:)]) {
+        [_delegate didPostVideoWithUrl:self.myVideoUrl];
+    }
+}
+
 //选择视频上传
 - (IBAction)chooseVideoFromPhoto:(UIButton *)sender {
 //    FMImagePicker *picker = [[FMImagePicker alloc] init];
@@ -297,13 +319,36 @@
     
 }
 
+//拼接字符串，才能播放或者获取第一帧，此方法在获取服务器地址后和传值进来后都要用到
+-(void)setVideoUrl:(NSString *)videoUrl{
+    if (videoUrl) {
+        [self.didUploadVideoView setHidden:NO];
+        if (![videoUrl containsString:@"https://jmsp-videos"]) {
+            _myVideoUrl = [NSString stringWithFormat:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com%@",videoUrl];
+        }else{
+            _myVideoUrl = videoUrl;
+        }
+        
+        NSURL *url = [NSURL URLWithString:_myVideoUrl];
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [self centerFrameImageWithVideoURL:url completion:^(UIImage *image) {
+                    self.didUploadVideoView.imgView.image = image;
+                    
+                }];
+            });
+        });
+    }
+}
+
 
 -(void)fetchmyVideo{
 
-        NSString * path = [NSString stringWithFormat:@"%@", self.model.video_file_path ];
         //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
 //        AVPlayer *player = [AVPlayer playerWithURL:url];
-        [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path];
+        [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:_myVideoUrl];
         [[JMVideoPlayManager sharedInstance] play];
         AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
         self.tabBarController.tabBar.hidden = YES;
@@ -352,9 +397,9 @@
                  //UISaveVideoAtPathToSavedPhotosAlbum([outputURL path], self, nil, NULL);//这个是保存到手机相册
                  
                  dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                     CGFloat length = [self getVideoLength:outputURL];
-                     CGFloat size = [self getFileSize:[outputURL path]];
-                     
+//                     CGFloat length = [self getVideoLength:outputURL];
+//                     CGFloat size = [self getFileSize:[outputURL path]];
+//
                      dispatch_async(dispatch_get_main_queue(), ^{
 //                         self.bottomLab.text = [NSString stringWithFormat:@"%.2f s, 压缩后大小为：%.2f M",length,size];
                          [self centerFrameImageWithVideoURL:outputURL completion:^(UIImage *image) {
@@ -385,7 +430,7 @@
 #pragma mark - 视频上传
 
 /**
- 视频上传
+ 视频上传,获得服务器地址
  
  @param url url
  */
@@ -399,12 +444,19 @@
                 NSString *url = responsObject[@"data"][0];
                 NSLog(@"urlurlurlurl--%@",url);
 //                kSaveMyDefault(@"videoPath", url);
+                //拼接字符串
+                [self setVideoUrl:url];
+                
                 if (_viewType == JMUploadVideoViewTypePartTimeEdit) {
                     [self postPartTimeVideo_url:url];
                     
-                }else{
+                }else if (_viewType == JMUploadVideoViewTypeJobEdit) {
                 
                     [self postVideo_url:url];
+                }else if (_viewType == JMUploadVideoViewTypePartTimeAdd) {
+                    
+                    [self.progressHUD setHidden:YES];
+                    [self showAlertSimpleTips:@"提示" message:@"已保存" btnTitle:@"好的"];
                 }
                 
                 
@@ -601,12 +653,7 @@
         _didUploadVideoView = [[JMDidUploadVideoView alloc]init];
         _didUploadVideoView.hidden = YES;
         _didUploadVideoView.delegate = self;
-        [self.view addSubview:self.didUploadVideoView];
-        
-        [self.didUploadVideoView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.and.right.mas_equalTo(self.view);
-            make.top.and.bottom.mas_equalTo(self.view);
-        }];
+
     }
     return _didUploadVideoView;
 }

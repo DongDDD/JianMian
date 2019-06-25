@@ -29,7 +29,7 @@
 
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
 
-@interface JMBUserPostSaleJobViewController ()<JMBUserPositionDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMGoodsDescriptionViewControllerDelegate,JMBUserPositionVideoViewDelegate,UIImagePickerControllerDelegate,JMPostGoodsImagesViewDelegate,Demo3ViewControllerDelegate>
+@interface JMBUserPostSaleJobViewController ()<JMBUserPositionDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMGoodsDescriptionViewControllerDelegate,JMBUserPositionVideoViewDelegate,UIImagePickerControllerDelegate,JMPostGoodsImagesViewDelegate,Demo3ViewControllerDelegate,UITextFieldDelegate>
 
 @property (strong, nonatomic)UIScrollView *scrollView;
 
@@ -43,6 +43,8 @@
 @property (nonatomic,strong)UIDatePicker *dataPickerView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic ,assign)BOOL isChange;
+@property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
+@property (nonatomic, strong)JMTaskPartTimejobDetailModel *partTimeModel;
 
 //---请求参数-------------------------------------------
 @property (copy, nonatomic)NSString *task_title;//职位名称***
@@ -151,6 +153,12 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         make.height.mas_equalTo(127);
     }];
     
+}
+#pragma mark - textFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+  
+    [textField resignFirstResponder];
+    return YES;
 }
 
 #pragma mark - myDelegate
@@ -512,11 +520,14 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 
 -(void)fetchmyVideo{
+    NSString * path;
     if (![self.video_path containsString:@"https://jmsp-videos"]) {
-        self.video_path = [NSString stringWithFormat:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com%@",self.video_path];
+        path = [NSString stringWithFormat:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com%@",self.video_path];
+    }else{
+        path = self.video_path;
+
     }
-    NSString * path = [NSString stringWithFormat:@"%@", self.video_path];
-    //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+     //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path];
     [[JMVideoPlayManager sharedInstance] play];
@@ -695,6 +706,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 #pragma mark - 赋值
 -(void)setRightBtnValues_model:(JMTaskPartTimejobDetailModel *)model{
+    [self.detailView.positionNameTextField setText:model.task_title];
     [self.detailView.paymentMoneyTextField setText:model.payment_money];
     [self.detailView.cityBtn setTitle:model.cityName forState:UIControlStateNormal];
     [self.detailView.cityBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
@@ -793,16 +805,26 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     
 }
 //下线任务
-- (IBAction)downLineTaskAction:(UIButton *)sender {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你要确认下线该职位吗？" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:([UIAlertAction actionWithTitle:@"确认下线" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+- (IBAction)bottomLeftBtnAction:(UIButton *)sender {
+    if ([_partTimeModel.status isEqualToString:Position_Online]) {
         
-        [self updateTaskInfoRequest_status:@"0"];
-    }])];
-    [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你要确认下线该职位吗？" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"确认下线" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self downLineTaskInfoRequest_status:Position_Downline];
+        }])];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
         
-    }])];
-    [self presentViewController:alertController animated:YES completion:nil];
+    }else if ([_partTimeModel.status isEqualToString:Position_Downline]) {
+        
+        [self onLineTaskInfoRequest_status:Position_Online];
+        
+        
+    }
+    
 
 
 }
@@ -812,7 +834,8 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [self.detailView.paymentMoneyTextField resignFirstResponder];
     [self.detailView.positionNameTextField resignFirstResponder];
     if (_isChange) {
-        [self updateTaskInfoRequest_status:@"1"];
+        //保留当前status状态，修改编辑
+        [self updateTaskInfoRequest_status:_partTimeModel.status];
         
     }
 }
@@ -820,8 +843,11 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 -(void)sendRequest{
     NSMutableArray *imageArr = [NSMutableArray array];
     for (NSString *url in _image_arr) {
-        NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
-        [imageArr addObject:strUrl];
+        if ([url containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
+            NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
+            [imageArr addObject:strUrl];
+            
+        }
     }
     
     [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:@"1086" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -884,6 +910,21 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 //更新任务请求
 -(void)updateTaskInfoRequest_status:(NSString *)status{
+    
+//    if ([_video_path containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
+//        _video_path = [_video_path stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
+//
+//    }
+    //没更改
+    if ([_video_path isEqualToString:_partTimeModel.video_file_path]) {
+        _video_path = nil;
+    }
+    //没更改
+    if ([_video_cover isEqualToString:_partTimeModel.video_cover]) {
+        _video_cover = nil;
+
+    }
+    
         [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude address:_address goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:_image_arr is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
             [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -896,19 +937,51 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         }];
     
 }
-
-
+//任务请求
+-(void)downLineTaskInfoRequest_status:(NSString *)status{
+    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:nil unit:nil payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"下线成功" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+//重新上线任务请求
+-(void)onLineTaskInfoRequest_status:(NSString *)status{
+    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:nil unit:nil payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"上线成功" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 #pragma mark - 获取数据
 -(void)getData{
     [self showProgressHUD_view:self.view];
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            JMTaskPartTimejobDetailModel *model = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
-            
-            self.imageDataArr = model.images.mutableCopy;
+            _partTimeModel = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            if ([_partTimeModel.status isEqualToString:Position_Downline]) {
+                [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
+
+            }else if ([_partTimeModel.status isEqualToString:Position_Online]) {
+                [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
+
+            }
+            self.imageDataArr = _partTimeModel.images.mutableCopy;
             
             //赋值
-            [self setRightBtnValues_model:model];
+            [self setRightBtnValues_model:_partTimeModel];
             
         }
         [self hiddenHUD];
@@ -943,6 +1016,9 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 -(JMBUserPositionDetailView *)detailView{
     if (_detailView == nil) {
         _detailView = [[JMBUserPositionDetailView alloc]init];
+        _detailView.positionNameTextField.delegate = self;
+        _detailView.paymentMoneyTextField.delegate = self;
+        _detailView.quantityMaxTextField.delegate = self;
         _detailView.delegate = self;
         
     }

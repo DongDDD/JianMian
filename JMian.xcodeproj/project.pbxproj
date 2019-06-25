@@ -389,6 +389,7 @@
 		048FEE402244853C001160C8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE3F2244853C001160C8 /* main.m */; };
 		048FEE4A2244853C001160C8 /* JMianTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE492244853C001160C8 /* JMianTests.m */; };
 		048FEE552244853C001160C8 /* JMianUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FEE542244853C001160C8 /* JMianUITests.m */; };
+		048FF0FF22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m in Sources */ = {isa = PBXBuildFile; fileRef = 048FF0FE22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m */; };
 		04908ACD22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04908ACC22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m */; };
 		04908AD022A79A59000B5AB4 /* JMBUserCenterHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04908ACF22A79A59000B5AB4 /* JMBUserCenterHeaderView.m */; };
 		04908AD322A7A06E000B5AB4 /* JMBUserCenterHeaderSubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04908AD222A7A06E000B5AB4 /* JMBUserCenterHeaderSubView.m */; };
@@ -1322,6 +1323,8 @@
 		048FEE502244853C001160C8 /* JMianUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JMianUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		048FEE542244853C001160C8 /* JMianUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMianUITests.m; sourceTree = "<group>"; };
 		048FEE562244853C001160C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		048FF0FD22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+DeletePartTimeJobVita.h"; sourceTree = "<group>"; };
+		048FF0FE22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+DeletePartTimeJobVita.m"; sourceTree = "<group>"; };
 		04908ACB22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+DeleteAbilityImage.h"; sourceTree = "<group>"; };
 		04908ACC22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+DeleteAbilityImage.m"; sourceTree = "<group>"; };
 		04908ACE22A79A59000B5AB4 /* JMBUserCenterHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMBUserCenterHeaderView.h; sourceTree = "<group>"; };
@@ -2588,6 +2591,8 @@
 				04731DEF22A6A3BA0013D7CE /* JMHTTPManager+FectchAbilityInfo.m */,
 				04908ACB22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.h */,
 				04908ACC22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m */,
+				048FF0FD22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.h */,
+				048FF0FE22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m */,
 				049C653522AD6DCA00A93DFE /* JMHTTPManager+CreateTask.h */,
 				049C653622AD6DCA00A93DFE /* JMHTTPManager+CreateTask.m */,
 				049C653822AD706000A93DFE /* JMHTTPManager+DeleteTask.h */,
@@ -4694,6 +4699,7 @@
 				04908B4922A9089B000B5AB4 /* JMBUserPostSaleJobViewController.m in Sources */,
 				6D020A6F22539FB0009BCFE4 /* CompanyRequirementsView.m in Sources */,
 				040A3927227DA5F900EDD9E0 /* JMGreetView.m in Sources */,
+				048FF0FF22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m in Sources */,
 				04EA212522AFF28C0035C398 /* JMTaskOrderListCellData.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				040C865A227ED71100993490 /* JMChatDetailInfoTableViewCell.m in Sources */,

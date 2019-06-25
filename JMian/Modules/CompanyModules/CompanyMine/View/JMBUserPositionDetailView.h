@@ -9,11 +9,11 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
 @protocol JMBUserPositionDetailViewDelegate <NSObject>
 
 -(void)didWriteTextFieldWithTag:(NSInteger)tag text:(NSString *)text;
 -(void)didClickRightBtnWithTag:(NSInteger)tag;
-
 
 @end
 @interface JMBUserPositionDetailView : UIView

@@ -119,8 +119,15 @@
             [sender setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             sender.layer.borderColor = MASTER_COLOR.CGColor;
             NSLog(@"%@",_allSubviews[i]);
-            if (_delegate && [_delegate respondsToSelector:@selector(didChooseLabsTitle_str:index:)]) {
-                [_delegate didChooseLabsTitle_str:_labTitle index:i];
+            if (_viewType == JMLabsScreenViewMyAdvantage) {
+                if (_delegate && [_delegate respondsToSelector:@selector(didChooseLabsTitle_str:index:)]) {
+                    [_delegate didChooseLabsTitle_str:_allSubviews[i] index:i];
+                }
+            }else{
+                if (_delegate && [_delegate respondsToSelector:@selector(didChooseLabsTitle_str:index:)]) {
+                    [_delegate didChooseLabsTitle_str:_labTitle index:i];
+                }
+            
             }
             
             continue;

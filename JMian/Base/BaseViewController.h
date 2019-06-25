@@ -79,6 +79,11 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)alertRightAction;
 //工资K数据转换 “000”
 -(NSMutableArray *)setSalaryRangeWithSalaryStr:(NSString *)salaryStr;
+//工资000数据转换 “k”
+-(NSString *)getSalaryKWithStr:(NSString *)str;
+-(NSString *)getSalaryKtransformStrWithMin:(id)min max:(id)max;
+//学历数据转化
+-(NSString *)getEducationStrWithEducation:(NSString *)education;
 @end
 
 NS_ASSUME_NONNULL_END

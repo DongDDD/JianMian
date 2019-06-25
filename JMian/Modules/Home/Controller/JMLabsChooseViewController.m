@@ -118,6 +118,7 @@
     for (int i=0; i<3; i++) {
         
         _labsView = [[JMLabsScreenView alloc]init];
+        _labsView.viewType = JMLabsScreenViewDefualt;
         _labsView.delegate = self;
         __weak JMLabsScreenView *weakLabsView = _labsView;
         //labs标签决定最终高度，高度通过闭包传出来

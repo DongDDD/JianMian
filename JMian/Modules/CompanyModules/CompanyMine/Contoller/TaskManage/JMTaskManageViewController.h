@@ -7,10 +7,15 @@
 //
 
 #import "BaseViewController.h"
+#import "JMTitlesView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMTaskManageViewController : BaseViewController
+
+@property(nonatomic, assign)NSInteger myIndex;
+//-(void)getDataWitnStatus:(NSArray *)status;
+
 
 @end
 

@@ -272,13 +272,14 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
                     TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
                     JMMessageCellData *textData = [[JMMessageCellData alloc]init];
-                    if ([custom_elem.desc isEqualToString:@"我发起了视频聊天"]){
-                        textData.content = @"发起了视频";
-                    }else{
-                        textData.content = @"结束了视频";
-
-                    
-                    }
+//                    if ([custom_elem.desc isEqualToString:@"我发起了视频聊天"]){
+//                        textData.content = @"发起了视频";
+//                    }else{
+//                        textData.content = @"结束了视频";
+//
+//
+//                    }
+                    textData.content = custom_elem.desc;
 //                    else if ([custom_elem.desc isEqualToString:@"[我发起了视频聊天]"]){
 //                        textData.content = @"对方发起了视频聊天";
 //

@@ -16,7 +16,7 @@
 
 
 
-@interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate,JMGetCompanyLocationViewControllerDelegate>
+@interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate,JMGetCompanyLocationViewControllerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *workNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *workNameBtn;
@@ -64,8 +64,8 @@
     
     self.pickerView.delegate = self;
     self.scrollView.delegate = self;
-    
-   [self.pickerView selectRow:0 inComponent:0 animated:NO];
+    self.workNameTextField.delegate = self;
+    [self.pickerView selectRow:0 inComponent:0 animated:NO];
     // Do any additional setup after loading the view from its nib.
     if (_viewType == JMPostNewJobViewTypeEdit) {
         [self setupValues];
@@ -76,6 +76,11 @@
     }
 }
 
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.workNameTextField resignFirstResponder];
+}
+#pragma mark - 赋值
 -(void)setupValues{
     [self.workPropertyBtn setTitle:self.homeworkModel.work_name forState:UIControlStateNormal];
     [self.workNameBtn setTitle:self.homeworkModel.work_name forState:UIControlStateNormal];
@@ -84,63 +89,12 @@
     NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",self.homeworkModel.work_experience_min,self.homeworkModel.work_experience_max];
     [self.expriencesBtn setTitle:experienceStr forState:UIControlStateNormal];
     [self.educationBtn setTitle:[self getEducationStrWithEducation:self.homeworkModel.education] forState:UIControlStateNormal];
-    NSString *str = [self getSalaryStrWithMin:self.homeworkModel.salary_min max:self.homeworkModel.salary_max];
+    NSString *str = [self getSalaryKtransformStrWithMin:self.homeworkModel.salary_min max:self.homeworkModel.salary_max];
     [self.salaryBtn setTitle:str forState:UIControlStateNormal];
     [self.workLocationBtn setTitle:self.homeworkModel.address forState:UIControlStateNormal];
     [self.jobDescriptionBtn setTitle:self.homeworkModel.Description forState:UIControlStateNormal];
 
 
-}
-
-//工资数据转化，除以1000，转化成k
--(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
-    NSInteger myint = [min integerValue];
-    NSInteger intMin = myint/1000;
-    
-    NSInteger myint2 = [max integerValue];
-    NSInteger intMax = myint2/1000;
-    
-    NSString *salaryStr;
-    salaryStr = [NSString stringWithFormat:@"%dk~%dk",  (int)intMin, (int)intMax];
-    
-    return salaryStr;
-}
-
-//学历数据转化
--(NSString *)getEducationStrWithEducation:(NSString *)education{
-    NSInteger myInt = [education integerValue];
-    
-    switch (myInt) {
-        case 0:
-            return @"不限";
-            break;
-        case 1:
-            return @"初中及以下";
-            break;
-        case 2:
-            return @"中专/中技";
-            break;
-        case 3:
-            return @"高中";
-            break;
-        case 4:
-            return @"大专";
-            break;
-        case 5:
-            return @"本科";
-            break;
-        case 6:
-            return @"硕士";
-            break;
-        case 7:
-            return @"博士";
-            break;
-            
-        default:
-            break;
-    }
-    return @"不限";
-    
 }
 
 #pragma mark - 数据提交
@@ -179,11 +133,8 @@
     NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
     [[JMHTTPManager sharedInstance]updateWorkWith_Id:self.homeworkModel.work_id city_id:@"3" work_label_id:_positionLabId work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self showAlertSimpleTips:@"提示" message:@"提交成功" btnTitle:@"好的"];
+        [self.navigationController popViewControllerAnimated:YES];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -259,7 +210,7 @@
                          @"20k-30k",
                          @"30k-40k",
                          @"40k-50k",
-                         @"50k-以上",
+                         @"50k-100K",
                          ];
     [self.pickerView reloadAllComponents];
     _selectedBtn = sender;
@@ -291,7 +242,6 @@
 }
 
 - (IBAction)workLocationAction:(UIButton *)sender {
-    
     JMGetCompanyLocationViewController *vc = [[JMGetCompanyLocationViewController alloc]init];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
@@ -358,7 +308,13 @@
 - (IBAction)pickerViewDeleteAction:(id)sender {
     [self.pickerBGView setHidden:YES];
 }
+#pragma mark - textField delegate
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    
+    return YES;
+}
 
 #pragma mark - pickerView delegate
 
@@ -387,9 +343,7 @@
         case 4:
             [self.salaryBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
             [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//            NSMutableArray *aaa = [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
-//            self.salaryMin = array[0];
-//            self.salaryMax = array[1];
+            //k 转 000后 传给服务器
             [self setSalaryValus_row:row];
             break;
 
@@ -420,7 +374,7 @@
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 
 {
-    
+    [self.workNameTextField resignFirstResponder];
     return [self.pickerArray count];
     
 }

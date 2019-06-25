@@ -26,9 +26,9 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Experience_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
-- (void)updateExperienceWith_experienceId:(NSNumber *)experienceId
+- (void)updateExperienceWith_experienceId:(NSString *)experienceId
                              company_name:(nullable NSString *)company_name
-                             job_label_id:(nullable NSNumber *)job_label_id
+                             job_label_id:(nullable NSString *)job_label_id
                                start_date:(nullable NSDate *)start_date
                                  end_date:(nullable NSDate *)end_date
                               description:(nullable NSString *)description
@@ -42,7 +42,7 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
-- (void)deleteExperienceWith_experienceId:(NSNumber *)experienceId
+- (void)deleteExperienceWith_experienceId:(NSString *)experienceId
                              successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     NSParameterAssert(experienceId);

@@ -21,7 +21,7 @@ typedef enum _PickerState_Exp {
     endWorkstate
 } _PickerState_Exp;
 
-@interface JMJobExperienceViewController () <UIScrollViewDelegate>
+@interface JMJobExperienceViewController () <UIScrollViewDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *companyNameText;
 
 @property (weak, nonatomic) IBOutlet UIButton *startDateBtn;
@@ -50,6 +50,8 @@ typedef enum _PickerState_Exp {
     [super viewDidLoad];
     self.datePckerView.backgroundColor = BG_COLOR;
     self.scrollView.delegate = self;
+    self.companyNameText.delegate = self;
+    self.jobDescriptionText.delegate = self;
     [self.scrollView addSubview:self.moreBtn];
     [self.view addSubview:_datePckerView];
     
@@ -61,11 +63,12 @@ typedef enum _PickerState_Exp {
     switch (self.viewType) {
         case JMJobExperienceViewTypeDefault:
             [self setRightBtnTextName:@"下一步"];
+            self.title = @"工作经历";
             [self setIsHiddenBackBtn:YES];
             [self.saveBtn setTitle:@"完成" forState:UIControlStateNormal];
             break;
         case JMJobExperienceViewTypeEdit:
-            self.navigationItem.title = @"编辑工作经历";
+            self.title = @"编辑工作经历";
             [self setRightBtnTextName:@"删除"];
             [self.saveBtn setTitle:@"保存" forState:UIControlStateNormal];
             self.headerViewHeightConstraint.constant = 0;
@@ -73,12 +76,17 @@ typedef enum _PickerState_Exp {
             self.companyNameText.text = self.model.company_name;
             self.jobDescriptionText.text = self.model.experiences_description;
             [self.jobLabelId setTitle:self.model.work_name forState:UIControlStateNormal];
+            [self.jobLabelId setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
             [self.startDateBtn setTitle:self.model.start_date forState:UIControlStateNormal];
+            [self.startDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
             [self.endDateBtn setTitle:self.model.end_date forState:UIControlStateNormal];
+            [self.endDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+
             break;
         case JMJobExperienceViewTypeAdd:
-            self.navigationItem.title = @"新增工作经历";
+            self.title = @"新增工作经历";
             [self setRightBtnTextName:@"保存"];
+            
             [self.saveBtn setTitle:@"保存" forState:UIControlStateNormal];
             self.headerViewHeightConstraint.constant = 0;
             self.headerView.hidden = YES;
@@ -113,15 +121,22 @@ typedef enum _PickerState_Exp {
 }
 
 - (void)deleteExperience {
-    [[JMHTTPManager sharedInstance] deleteExperienceWith_experienceId:@([self.model.experience_id integerValue]) successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
+    [self showAlertWithTitle:@"提醒⚠️" message:@"删除后数据将不可恢复" leftTitle:@"返回" rightTitle:@"确认删除"];
+
+}
+
+-(void)alertRightAction{
+
+    [[JMHTTPManager sharedInstance] deleteExperienceWith_experienceId:self.model.experience_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.navigationController popViewControllerAnimated:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+
 }
 
 - (void)updateExperience {
-    [[JMHTTPManager sharedInstance] updateExperienceWith_experienceId:@([self.model.experience_id integerValue]) company_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] updateExperienceWith_experienceId:self.model.experience_id company_name:self.companyNameText.text job_label_id:@"1" start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
             [self.navigationController popViewControllerAnimated:YES];
        
@@ -133,7 +148,7 @@ typedef enum _PickerState_Exp {
 }
 
 - (void)createExperience {
-    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1)start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1) start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         switch (self.viewType) {
             case JMJobExperienceViewTypeDefault: {
@@ -225,6 +240,12 @@ typedef enum _PickerState_Exp {
     }
     
 }
+#pragma mark - textFieldDelegate
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
 
 #pragma mark - UIscrollView
 
@@ -234,7 +255,7 @@ typedef enum _PickerState_Exp {
     
 }
 
--(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if(actionSheet.tag == 254){
         switch (buttonIndex) {

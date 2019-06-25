@@ -378,7 +378,7 @@
         if ([_userInfoModel.type isEqualToString:C_Type_USER]) {
             JMUploadVideoViewController *vc = [[JMUploadVideoViewController alloc]init];
             vc.title = @"视频简历";
-            vc.viewType = JMUploadVideoViewTypeDefault;
+            vc.viewType = JMUploadVideoViewTypeJobEdit;
             [self.navigationController pushViewController:vc animated:YES];
             
         }else if ([_userInfoModel.type isEqualToString:B_Type_UESR]){

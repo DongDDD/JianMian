@@ -286,14 +286,8 @@
     
     NSString *string1 = [minStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
 //    self.salaryMin = string1;
-    NSString *string2;
-    if (![maxStr isEqualToString: @"以上"]) {
-        string2 = [maxStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
-//        self.salaryMax = string2;
-    }else{
-        string2 = @"以上";
-        
-    }
+    NSString *string2 = [maxStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
+//
     
     NSMutableArray *arrayMinMax = [NSMutableArray arrayWithObjects:string1,string2,nil];
     
@@ -301,6 +295,63 @@
     
 }
 
+-(NSString *)getSalaryKWithStr:(NSString *)str{
+    NSInteger salaryInt = [str integerValue];
+    NSInteger salaryInt2 = salaryInt/1000;
+    NSString *salaryStr = [NSString stringWithFormat:@"%ldk",(long)salaryInt2];
+    return salaryStr;
+}
+
+//工资数据转化，除以1000，转化成k
+-(NSString *)getSalaryKtransformStrWithMin:(id)min max:(id)max{
+    NSInteger myint = [min integerValue];
+    NSInteger intMin = myint/1000;
+    
+    NSInteger myint2 = [max integerValue];
+    NSInteger intMax = myint2/1000;
+    
+    NSString *salaryStr;
+    salaryStr = [NSString stringWithFormat:@"%dk~%dk",  (int)intMin, (int)intMax];
+    
+    return salaryStr;
+}
+
+//学历数据转化
+-(NSString *)getEducationStrWithEducation:(NSString *)education{
+    NSInteger myInt = [education integerValue];
+    
+    switch (myInt) {
+        case 0:
+            return @"不限";
+            break;
+        case 1:
+            return @"初中及以下";
+            break;
+        case 2:
+            return @"中专/中技";
+            break;
+        case 3:
+            return @"高中";
+            break;
+        case 4:
+            return @"大专";
+            break;
+        case 5:
+            return @"本科";
+            break;
+        case 6:
+            return @"硕士";
+            break;
+        case 7:
+            return @"博士";
+            break;
+            
+        default:
+            break;
+    }
+    return @"不限";
+    
+}
 - (id)toArrayOrNSDictionary:(NSData *)jsonData{
     
     NSError *error = nil;

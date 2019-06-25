@@ -42,8 +42,8 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
             make.left.and.right.mas_equalTo(self.view);
         }];
-        self.no_dataLab.text = @"你还没有发布兼职任务，快去发布吧！";
-        [self.no_dataBtn setTitle:@"发布兼职任务" forState:UIControlStateNormal];
+        self.no_dataLab.text = @"你还没有发布任务，快去发布吧！";
+        [self.no_dataBtn setTitle:@"发布任务" forState:UIControlStateNormal];
         
     }else if (_viewType == JMPartTimeJobTypeResume){
         [self.view addSubview:self.tableView];
@@ -57,10 +57,10 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     [super viewWillAppear:animated];
     switch (_viewType) {
         case JMPartTimeJobTypeResume:
-            [self getData];
+            [self getAbilityListData];
             break;
         case JMPartTimeJobTypeManage:
-            [self getNowData];
+            [self getCurrrentDataWithIndex:_index];
             break;
             
         default:
@@ -69,7 +69,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     
 }
 
--(void)getData{
+-(void)getAbilityListData{
 //    NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
 //    NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
     [[JMHTTPManager sharedInstance]fectchAbilityList_city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -77,9 +77,14 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             self.dataArray = [JMAbilityCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             if (self.dataArray.count == 0) {
                 [self.tableView setHidden:YES];
+            }else{
+            
+                [self.tableView setHidden:NO];
             }
         }
-        [self hiddenHUD];
+//        [self hiddenHUD];
+        [self.myProgressHUD setHidden:YES];
+
         [self.tableView reloadData];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -89,7 +94,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 
 -(void)getTaskListData_status:(NSString *)status{
-    [self showHUD];
+  
     [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:nil type_label_id:nil industry_arr:nil status:status page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.dataArray = [JMTaskListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
@@ -106,7 +111,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             
         }
         [self.tableView reloadData];
-        [self hiddenHUD];
+        [self.myProgressHUD setHidden:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];
@@ -136,11 +141,13 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 }
 
--(void)getNowData{
-    if (_index == 0) {
+-(void)getCurrrentDataWithIndex:(NSInteger)index{
+    [self.myProgressHUD setHidden:NO];
+
+    if (index == 0) {
         //已发布职位
         [self getTaskListData_status:Position_Online];
-    }else if (_index == 1) {
+    }else if (index == 1) {
         //已下线职位
         [self getTaskListData_status:Position_Downline];
     }
@@ -225,7 +232,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
     
 }
-//B端发布兼职
+//B端发布任务
 -(void)gotoBUserPostPartTimeJobVC_task_id:(NSString *)task_id{
     JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
     vc.viewType = JMBUserPostPartTimeJobTypeEdit;
@@ -291,7 +298,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
-            [weakSelf getNowData];
+            [weakSelf getCurrrentDataWithIndex:index];
         };
         
     }

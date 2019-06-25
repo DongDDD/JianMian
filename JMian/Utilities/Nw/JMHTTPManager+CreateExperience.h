@@ -20,16 +20,16 @@ NS_ASSUME_NONNULL_BEGIN
                                user_step:(nullable NSNumber *)user_step
                             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
-- (void)updateExperienceWith_experienceId:(NSNumber *)experienceId
+- (void)updateExperienceWith_experienceId:(NSString *)experienceId
                              company_name:(nullable NSString *)company_name
-                             job_label_id:(nullable NSNumber *)job_label_id
+                             job_label_id:(nullable NSString *)job_label_id
                                start_date:(nullable NSDate *)start_date
                                  end_date:(nullable NSDate *)end_date
                               description:(nullable NSString *)description
                              successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 
-- (void)deleteExperienceWith_experienceId:(NSNumber *)experienceId
+- (void)deleteExperienceWith_experienceId:(NSString *)experienceId
                              successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 @end

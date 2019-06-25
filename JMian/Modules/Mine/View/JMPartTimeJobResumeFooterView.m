@@ -12,6 +12,7 @@
 
 @property(nonatomic,strong)UILabel *wordsLenghLabel;
 @property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,assign)JMPartTimeJobResumeFooterViewType myViewType;
 
 @end
 
@@ -78,7 +79,18 @@
 }
 
 -(void)setViewType:(JMPartTimeJobResumeFooterViewType)viewType{
+    _myViewType = viewType;
     switch (viewType) {
+        case JMPartTimeJobResumeFooterViewTypeJobDecription:
+            _placeHolder.text = @"例如\n职位要求、\n性别要求、\n工作时段等等   ";
+            _wordsLenghLabel.text = @"0/150";
+
+            break;
+        case JMPartTimeJobResumeFooterViewTypeMyAdvantage:
+            _placeHolder.text = @"请填写你的优势，500字以内... ";
+            _titleLab.text = @"我的优势";
+
+            break;
         case JMPartTimeJobResumeFooterViewTypeDefault:
             _titleLab.text = @"工作描述";
             _placeHolder.text = @"可描述你的工作技能、岗位职责、特长等等.. ";
@@ -97,6 +109,7 @@
             _placeHolder.text = @"请填写评价";
             
             break;
+
         default:
             break;
     }
@@ -115,7 +128,13 @@
 
 -(void)setContent:(NSString *)content{
     _contentTextView.text = content;
-    self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)content.length];
+    if (_viewType == JMPartTimeJobResumeFooterViewTypeMyAdvantage) {
+        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/150", (unsigned long)content.length];
+
+    }else{
+        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)content.length];
+    
+    }
     if (content.length > 0) {
         self.placeHolder.hidden = YES;
     }
@@ -138,14 +157,28 @@
     
     self.placeHolder.hidden = YES;
 
-    self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)textView.text.length];
-  
-    if (textView.text.length >= 500) {
-
-        textView.text = [textView.text substringToIndex:500];
-        _wordsLenghLabel.text = @"500/500";
-     
+    if (_myViewType == JMPartTimeJobResumeFooterViewTypeMyAdvantage) {
+        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/150", (unsigned long)textView.text.length];
+        
+        if (textView.text.length >= 150) {
+            
+            textView.text = [textView.text substringToIndex:150];
+            _wordsLenghLabel.text = @"150/150";
+            
+        }
+        
+    }else{
+    
+        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)textView.text.length];
+        
+        if (textView.text.length >= 500) {
+            
+            textView.text = [textView.text substringToIndex:500];
+            _wordsLenghLabel.text = @"500/500";
+            
+        }
     }
+    
     
 //    if (textView.text.length == 0) {
 //        _placeHolder.hidden = NO;

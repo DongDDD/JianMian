@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *paymentMoneyTextField;
 @property (weak, nonatomic) IBOutlet UITextField *downPaymentTextField;
 @property (weak, nonatomic) IBOutlet UIButton *quantityMaxBtn;
+@property (weak, nonatomic) IBOutlet UITextField *quantityMaxTextField;
+
 @property (weak, nonatomic) IBOutlet UIButton *industryBtn;
 @property (weak, nonatomic) IBOutlet UIButton *deadLineBtn;
 

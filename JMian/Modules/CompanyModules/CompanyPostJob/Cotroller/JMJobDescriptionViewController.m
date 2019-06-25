@@ -8,15 +8,17 @@
 
 #import "JMJobDescriptionViewController.h"
 #import "JMTitlesView.h"
+#import "JMPartTimeJobResumeFooterView.h"
 
-@interface JMJobDescriptionViewController ()<UITextViewDelegate>
+@interface JMJobDescriptionViewController ()<UITextViewDelegate,JMPartTimeJobResumeFooterViewDelegate>
 
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic , strong) UITextView *textView;
 
 @property (nonatomic, strong)UIView *placeholderView;
-
+@property (strong, nonatomic)JMPartTimeJobResumeFooterView *decriptionTextView;
+@property (copy, nonatomic)NSString *decriStr;
 
 
 @end
@@ -31,12 +33,15 @@
     [self setRightBtnTextName:@"保存"];
     
     [self.view addSubview:self.titleView];
-    [self setTextFieldUI];
+    [self.view addSubview:self.decriptionTextView];
+    self.view.backgroundColor = BG_COLOR;
+//    [self setTextFieldUI];
     
 }
 
 -(void)rightAction{
-    [self.delegate sendTextView_textData:self.textView.text];
+    [_decriptionTextView.contentTextView resignFirstResponder];
+    [self.delegate sendTextView_textData:_decriStr];
     [self.navigationController popViewControllerAnimated:YES];
 
 }
@@ -49,8 +54,7 @@
     self.textView.returnKeyType = UIReturnKeyDone;//返回键类型
     self.textView.keyboardType = UIKeyboardTypeDefault;//键盘类型
 
-//    self.textField.placeholder = @"填写岗位职责、任职要求等（3000字以内），清晰的 描述有助于更好的展开招聘，例如：/n 岗位职责 1, ... 2, ... 3, ... \n 任职要求 1, ... 2, ... 3, ...";
-    
+
     [self.view addSubview:self.textView];
     
     [self.textView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -137,6 +141,13 @@
     
     return _titleView;
 }
+#pragma mark - MyDelegate
+
+-(void)sendContent:(NSString *)content{
+    _decriStr = content;
+    
+
+}
 
 #pragma mark - UITextDelegate
 
@@ -145,15 +156,27 @@
 
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    //判断类型，如果不是UITextView类型，收起键盘
-    for (UIView* view in self.view.subviews) {
-        if ([view isKindOfClass:[UITextView class]]) {
-            UITextView* tv = (UITextView*)view;
-            [tv resignFirstResponder];
-        }
+-(JMPartTimeJobResumeFooterView *)decriptionTextView{
+    if (_decriptionTextView == nil) {
+        _decriptionTextView = [JMPartTimeJobResumeFooterView new];
+        _decriptionTextView.frame = CGRectMake(0, self.titleView.frame.origin.y+self.titleView.frame.size.height, SCREEN_WIDTH, 229);
+        _decriptionTextView.delegate = self;
+        [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeJobDecription];
+        //        _decriptionTextView.contentTextView.delegate = self;
+        
     }
+    return _decriptionTextView;
 }
+
+//- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+//    //判断类型，如果不是UITextView类型，收起键盘
+//    for (UIView* view in self.view.subviews) {
+//        if ([view isKindOfClass:[UITextView class]]) {
+//            UITextView* tv = (UITextView*)view;
+//            [tv resignFirstResponder];
+//        }
+//    }
+//}
 /*
 #pragma mark - Navigation
 

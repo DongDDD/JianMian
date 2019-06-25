@@ -92,7 +92,7 @@ static NSString *cellIdent = @"cellIdent";
     }
 }
 
-//发布兼职数据
+//发布任务数据
 -(void)getPartTimeCityList{
     for (JMCityModel *cityModel in self.firstArray) {
         if ([cityModel.level isEqualToString:@"1"]) {

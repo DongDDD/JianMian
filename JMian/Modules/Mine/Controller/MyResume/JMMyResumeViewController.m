@@ -295,7 +295,7 @@
             return cell;
         }
         case JMMyResumeCellTypeHeader3:
-        {
+        {//已隐藏
             JMMyResumeHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeader3TableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             [cell cellConfigWithIdentifier:JMMyResumeHeader3TableViewCellIdentifier imageViewName:@"resumePic" title:@"图片作品"];
@@ -325,7 +325,7 @@
         case JMMyResumeCellTypyText:
         {
             JMMyResumeTextTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeTextTableViewCellIdentifier forIndexPath:indexPath];
-            [cell setVitadescription:self.cellConfigures.model.vita_description];
+            [cell setVitadescription:self.cellConfigures.model.myDescription];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -348,22 +348,24 @@
         case JMMyResumeCellTypeHeader:
         {
             
-            JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
-            vc.model = self.cellConfigures.jobstArr[indexPath.row];
-            vc.viewType = JMAddMyJobTableViewTypeEdit;
-            [self.navigationController pushViewController:vc animated:YES];
             
             break;
 
         }
         case JMMyResumeCellTypeCareerStatus:
         {
+            JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
+            vc.viewType = JMAddMyJobTableViewTypeAdd;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
             
         }
         case JMMyResumeCellTypeCareerObjective:
         {
-            
+            JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
+            vc.model = self.cellConfigures.jobstArr[indexPath.row];
+            vc.viewType = JMAddMyJobTableViewTypeEdit;
+            [self.navigationController pushViewController:vc animated:YES];
 
            
 //            else if (indexPath.row == 1) {
@@ -383,7 +385,6 @@
         {
             JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc] init];
             vc.viewType = JMJobExperienceViewTypeAdd;
-            vc.model = self.cellConfigures.workExperienceArr[indexPath.row];
             [self.navigationController pushViewController:vc animated:YES];
             break;
 
@@ -429,7 +430,7 @@
         case JMMyResumeCellTypeHeaderOnlyLabel:
         {
             JMMyDescriptionViewController *vc = [[JMMyDescriptionViewController alloc] init];
-            vc.myDescription = self.cellConfigures.vita_description;
+            vc.myDescription = self.cellConfigures.model.myDescription;
             [self.navigationController pushViewController:vc animated:YES];
             break;
 

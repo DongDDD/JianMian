@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMTaskPartTimejobDetailModel : NSObject
 
+@property (nonatomic, copy) NSString *status;
+
 @property (nonatomic, copy) NSString *task_id;
 
 @property (nonatomic, copy) NSString *task_title;
@@ -25,7 +27,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *longitude;
 @property (nonatomic, copy) NSString *latitude;
 @property (nonatomic, copy) NSString *address;
-@property (nonatomic, copy) NSString *status;
 
 @property (nonatomic, copy) NSString *user_user_id;
 @property (nonatomic, copy) NSString *user_company_id;

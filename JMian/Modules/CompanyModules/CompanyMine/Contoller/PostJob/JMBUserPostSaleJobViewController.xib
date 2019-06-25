@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMBUserPostSaleJobViewController">
             <connections>
+                <outlet property="bottomLeftBtn" destination="u9d-RF-aJr" id="HfI-Nh-Nvq"/>
                 <outlet property="bottomView" destination="sNI-uY-KZ5" id="fzu-ue-1N8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -39,7 +40,7 @@
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="136" id="dyH-gb-dR5"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="下线">
+                            <state key="normal" title="加载中">
                                 <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -55,7 +56,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="downLineTaskAction:" destination="-1" eventType="touchUpInside" id="aMO-fx-jOI"/>
+                                <action selector="bottomLeftBtnAction:" destination="-1" eventType="touchUpInside" id="aMO-fx-jOI"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfO-5Z-NYR">

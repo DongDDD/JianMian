@@ -79,7 +79,7 @@
     [self getInvoiceInfo];//获取发票信息
     [self initView];
     [self initLayout];
-    self.title = @"发布兼职";
+    self.title = @"发布任务";
     
     if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
         
@@ -181,7 +181,7 @@
             [self gotoCityListVC];
             break;
         case 1003://招募人数
-            [self showPickView];
+//            [self showPickView];
             break;
         case 1004://适合行业
             [self gotoIndustryVC];
@@ -211,6 +211,9 @@
                 _front_money = @"0";
 
             }
+        case 103://基本工资
+            _quantity_max = text;
+            break;
             break;
         default:
             break;
@@ -394,16 +397,16 @@
 }
 
 
--(void)showPickView{
-    [self hideKeyBoard];
-    [self.view addSubview:self.pickerView];
-    __weak typeof(self) ws = self;
-    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        ws.pickerView.frame = CGRectMake(0, SCREEN_HEIGHT-350, SCREEN_WIDTH, 350);
-    } completion:nil];
-    
-
-}
+//-(void)showPickView{
+//    [self hideKeyBoard];
+//    [self.view addSubview:self.pickerView];
+//    __weak typeof(self) ws = self;
+//    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//        ws.pickerView.frame = CGRectMake(0, SCREEN_HEIGHT-350, SCREEN_WIDTH, 350);
+//    } completion:nil];
+//
+//
+//}
 
 -(void)isReadProtocol:(BOOL)isRead{
 
@@ -422,6 +425,8 @@
     [self.partTimeJobDetailView.jobNameTextField resignFirstResponder];
     [self.partTimeJobDetailView.paymentMoneyTextField resignFirstResponder];
     [self.partTimeJobDetailView.downPaymentTextField resignFirstResponder];
+    [self.partTimeJobDetailView.quantityMaxTextField resignFirstResponder];
+
     [self.decriptionTextView.contentTextView resignFirstResponder];
     [self.makeOutBillView.invoiceTitleTextField resignFirstResponder];
     [self.makeOutBillView.invoiceTaxNumTextField resignFirstResponder];
@@ -589,6 +594,7 @@
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"下线成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
             [self.navigationController popViewControllerAnimated:YES];
         }])];
         [self presentViewController:alertController animated:YES completion:nil];
@@ -627,13 +633,13 @@
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             _partTimejobDetailModel = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
-            
+       
             if ([_partTimejobDetailModel.status isEqualToString:Position_Downline]) {
                 [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
 
             }else if ([_partTimejobDetailModel.status isEqualToString:Position_Online]) {
                 [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
-                
+
             }
             
             //赋值
@@ -670,45 +676,45 @@
 #pragma mark pickerview function
 
 
-
-//返回有几列
-
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-
-{
-    
-    return 1;
-    
-}
-
-//返回指定列的行数
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [_quantityArray count];
-}
-
-//显示的标题
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    
-    NSString *str = [_quantityArray objectAtIndex:row];
-    
-    return str;
-    
-}
-
-//被选择的行
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    [self.partTimeJobDetailView.quantityMaxBtn setTitle: [_quantityArray objectAtIndex:row] forState:UIControlStateNormal];
-    [self.partTimeJobDetailView.quantityMaxBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
-    self.quantity_max = [_quantityArray objectAtIndex:row];
-    NSLog(@"_quantity%@",[_quantityArray objectAtIndex:row]);
-    
-}
-
+//
+////返回有几列
+//
+//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+//
+//{
+//
+//    return 1;
+//
+//}
+//
+////返回指定列的行数
+//
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//{
+//    return [_quantityArray count];
+//}
+//
+////显示的标题
+//
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//
+//    NSString *str = [_quantityArray objectAtIndex:row];
+//
+//    return str;
+//
+//}
+//
+////被选择的行
+//
+//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+//
+//    [self.partTimeJobDetailView.quantityMaxBtn setTitle: [_quantityArray objectAtIndex:row] forState:UIControlStateNormal];
+//    [self.partTimeJobDetailView.quantityMaxBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+//    self.quantity_max = [_quantityArray objectAtIndex:row];
+//    NSLog(@"_quantity%@",[_quantityArray objectAtIndex:row]);
+//
+//}
+//
 
 #pragma mark - Getter
 
@@ -728,6 +734,7 @@
         _partTimeJobDetailView.jobNameTextField.delegate = self;
         _partTimeJobDetailView.paymentMoneyTextField.delegate = self;
         _partTimeJobDetailView.downPaymentTextField.delegate = self;
+        _partTimeJobDetailView.quantityMaxTextField.delegate = self;
 
     }
     return _partTimeJobDetailView;

@@ -20,10 +20,11 @@
 #import "IQKeyboardManager.h"
 #import "JMPartTimeJobTypeLabsViewController.h"
 #import "JMHTTPManager+DeleteAbilityImage.h"
+#import "JMHTTPManager+DeletePartTimeJobVita.h"
 
 
 
-@interface JMPostPartTimeResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMIndustryWebViewControllerDelegate,JMCityListViewControllerDelegate,PositionDesiredDelegate,Demo3ViewControllerDelegate,JMPartTimeJobResumeFooterViewDelegate,JMUploadVideoViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate>
+@interface JMPostPartTimeResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMIndustryWebViewControllerDelegate,JMCityListViewControllerDelegate,PositionDesiredDelegate,Demo3ViewControllerDelegate,JMPartTimeJobResumeFooterViewDelegate,JMUploadVideoViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMUploadVideoViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic,strong)NSMutableArray *leftArray;
@@ -34,6 +35,9 @@
 @property (nonatomic,assign)CGRect Frame;
 @property (nonatomic,strong)JMAbilityCellData *myPartTimeVitaModel;
 @property (nonatomic,strong)NSMutableArray *imageDataArr;
+@property (nonatomic, assign)BOOL isUpLoadVideo;
+
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 
 //提交请求参数
 @property (nonatomic,strong)NSString *city_id;
@@ -52,18 +56,19 @@ static NSString *cellIdent = @"cellIdent";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"发布兼职简历";
     self.view.backgroundColor = BG_COLOR;
-    if (_viewType == JMPostPartTimeResumeVieweEdit) {
-        [self setRightBtnTextName:@"保存"];
-
-    }else if (_viewType == JMPostPartTimeResumeViewAdd){
-        [self setRightBtnTextName:@"发布"];
-
-    }
     [self.view addSubview:self.tableView];
     [self.tableView addSubview:self.footerView];
-
+    
+    if (_viewType == JMPostPartTimeResumeVieweEdit) {
+        [self setRightBtnTextName:@"保存"];
+        self.title = @"编辑兼职简历";
+        [self.bottomView setHidden:NO];
+        [self.view addSubview:self.bottomView];
+    }else if (_viewType == JMPostPartTimeResumeViewAdd) {
+        self.title = @"发布任务简历";
+        [self setRightBtnTextName:@"发布"];
+    }
     
 
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideTap)];
@@ -77,7 +82,6 @@ static NSString *cellIdent = @"cellIdent";
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [IQKeyboardManager sharedManager].enable = NO;
-
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     //    第二版：C端 获取个人兼职简历
@@ -116,9 +120,11 @@ static NSString *cellIdent = @"cellIdent";
 
 - (void)keyboardWillHide:(NSNotification *)aNotification {
     [UIView animateWithDuration:0.3 animations:^ {
-        self.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        self.view.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT);
 
     }];
+
+
 }
 
 #pragma mark - 赋值
@@ -171,6 +177,25 @@ static NSString *cellIdent = @"cellIdent";
     
 
 }
+
+- (IBAction)deleteAction:(UIButton *)sender {
+    [self showAlertWithTitle:@"提醒⚠️" message:@"删除后数据将不可恢复" leftTitle:@"返回" rightTitle:@"确认删除"];
+}
+
+-(void)alertRightAction{
+    [[JMHTTPManager sharedInstance]deleteAbilityVita_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.navigationController popViewControllerAnimated:YES];
+        [self showAlertSimpleTips:@"提示" message:@"已删除" btnTitle:@"好的"];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+- (IBAction)saveAction:(UIButton *)sender {
+    [self rightAction];
+}
+
 #pragma mark - 数据请求
 //获取兼职简历
 -(void)getPartTimeInfoData{
@@ -325,12 +350,23 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 //已上传视频
--(void)isUploadVideo:(BOOL)isUploadVideo{
-    if (isUploadVideo) {
+//-(void)isUploadVideo:(BOOL)isUploadVideo{
+//    _isUpLoadVideo = isUploadVideo;
+//    if (isUploadVideo) {
+//        [self.rightArray replaceObjectAtIndex:4 withObject:@"已上传"];
+//        [self.tableView reloadData];
+//    }
+//
+//}
+
+-(void)didPostVideoWithUrl:(NSString *)url{
+    if (url != nil) {
+        _isUpLoadVideo = YES;
+        _video_path = url;//请求参数和用于传值
         [self.rightArray replaceObjectAtIndex:4 withObject:@"已上传"];
         [self.tableView reloadData];
     }
-
+    
 }
 
 //删除兼职图片
@@ -346,8 +382,6 @@ static NSString *cellIdent = @"cellIdent";
     }
 
 }
-
-
 
 
 
@@ -421,14 +455,16 @@ static NSString *cellIdent = @"cellIdent";
         
     }else if (indexPath.row == 4) {
         JMUploadVideoViewController *vc = [[JMUploadVideoViewController alloc]init];
+        vc.delegate = self;
         if (_viewType == JMPostPartTimeResumeViewAdd) {
-            
+            vc.viewType = JMUploadVideoViewTypePartTimeAdd;
+            if (_video_path) {
+                vc.videoUrl = _video_path;
+            }
         }else if (_viewType == JMPostPartTimeResumeVieweEdit) {
-        
             vc.ability_id = self.ability_id;
             vc.viewType = JMUploadVideoViewTypePartTimeEdit;
         }
-//        vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
         
     }
@@ -478,7 +514,7 @@ static NSString *cellIdent = @"cellIdent";
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height+100) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;

@@ -154,7 +154,7 @@ typedef enum _PickerState {
                          @"20k-30k",
                          @"30k-40k",
                          @"40k-50k",
-                         @"50k-以上",
+                         @"50k-100K",
                          ];
     [self.datePicker setHidden:YES];
     [self.pickerView setHidden:NO];

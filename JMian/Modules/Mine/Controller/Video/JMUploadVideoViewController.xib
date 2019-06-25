@@ -27,7 +27,7 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TIE-VJ-OrX">
-                            <rect key="frame" x="27" y="92" width="360" height="484"/>
+                            <rect key="frame" x="27" y="50" width="360" height="484"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="my_videos_2.png" translatesAutoresizingMaskIntoConstraints="NO" id="NJQ-6u-Ddz">
                                     <rect key="frame" x="31" y="67" width="298" height="139"/>
@@ -40,7 +40,7 @@
                                         </userDefinedRuntimeAttribute>
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                         <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
-                                            <color key="value" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="value" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
@@ -107,13 +107,13 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="亲，只能上传一个视频哦" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vlp-ru-IlY">
-                            <rect key="frame" x="139.5" y="596" width="135" height="15"/>
+                            <rect key="frame" x="139.5" y="554" width="135" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="为了给你更好的体验强烈建议竖屏拍摄！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w4f-vv-eqP">
-                            <rect key="frame" x="96.5" y="620" width="221" height="15"/>
+                            <rect key="frame" x="96.5" y="578" width="221" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <color key="textColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -128,7 +128,7 @@
                         <constraint firstAttribute="trailing" secondItem="TIE-VJ-OrX" secondAttribute="trailing" constant="27" id="ZGs-Lx-pKK"/>
                         <constraint firstItem="w4f-vv-eqP" firstAttribute="top" secondItem="Vlp-ru-IlY" secondAttribute="bottom" constant="9" id="cun-9o-4kH"/>
                         <constraint firstAttribute="bottom" secondItem="w4f-vv-eqP" secondAttribute="bottom" constant="183" id="hHf-SD-dK3"/>
-                        <constraint firstItem="TIE-VJ-OrX" firstAttribute="top" secondItem="cxa-JP-Jvm" secondAttribute="top" constant="92" id="oSc-16-QgD"/>
+                        <constraint firstItem="TIE-VJ-OrX" firstAttribute="top" secondItem="cxa-JP-Jvm" secondAttribute="top" constant="50" id="oSc-16-QgD"/>
                     </constraints>
                 </scrollView>
             </subviews>

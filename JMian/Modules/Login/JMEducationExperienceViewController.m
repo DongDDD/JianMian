@@ -14,7 +14,7 @@ typedef enum _PickerState_Exp {
     endWorkstate
 } _PickerState_Exp;
 
-@interface JMEducationExperienceViewController ()<UIPickerViewDelegate,UIPickerViewDataSource>
+@interface JMEducationExperienceViewController ()<UIPickerViewDelegate,UIPickerViewDataSource,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *schoolNameField;
 @property (weak, nonatomic) IBOutlet UIButton *selectEducationBtn;
 @property (weak, nonatomic) IBOutlet UIButton *startTimeBtn;
@@ -40,6 +40,8 @@ typedef enum _PickerState_Exp {
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.datePicker.backgroundColor = BG_COLOR;
+    self.schoolNameField.delegate = self;
+    self.majorField.delegate = self;
     [self setPickerVIewUI];
     
 //    [self setIsHiddenBackBtn:YES];
@@ -49,6 +51,10 @@ typedef enum _PickerState_Exp {
         case JMEducationExperienceViewTypeAdd:
             self.title = @"新增教育经历";
             [self setRightBtnTextName:@"保存"];
+            [self.startTimeBtn setTitleColor:TEXT_GRAYmin_COLOR forState:UIControlStateNormal];
+            [self.endTimeBtn setTitleColor:TEXT_GRAYmin_COLOR forState:UIControlStateNormal];
+            [self.selectEducationBtn setTitleColor:TEXT_GRAYmin_COLOR forState:UIControlStateNormal];
+
             break;
         case JMEducationExperienceViewTypeEdit:
             self.title = @"编辑教育经历";
@@ -58,6 +64,9 @@ typedef enum _PickerState_Exp {
             [self.startTimeBtn setTitle:self.model.s_date forState:UIControlStateNormal];
             [self.endTimeBtn setTitle:self.model.e_date forState:UIControlStateNormal];
             [self.selectEducationBtn setTitle:educationArr[[self.model.education intValue]] forState:UIControlStateNormal];
+            [self.startTimeBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+            [self.endTimeBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+            [self.selectEducationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
             [self setRightBtnTextName:@"删除"];
             break;
     }
@@ -98,7 +107,8 @@ typedef enum _PickerState_Exp {
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 
 {
-    
+    [self.schoolNameField resignFirstResponder];
+    [self.majorField resignFirstResponder];
     return [self.pickerArray count];
     
 }
@@ -116,15 +126,25 @@ typedef enum _PickerState_Exp {
     
     [self.selectEducationBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
     [self.selectEducationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    NSString *eduStr = [NSString stringWithFormat:@"%ld",row];
+    NSString *eduStr = [NSString stringWithFormat:@"%ld",row+1];
     self.educationNum = eduStr;
 
 }
-    
+
+#pragma mark - textFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
     
 #pragma mark - Action
     
 - (void)deleteExperience {
+    [self showAlertWithTitle:@"提醒⚠️" message:@"删除后数据将不可恢复" leftTitle:@"返回" rightTitle:@"确认删除"];
+}
+
+-(void)alertRightAction{
     [[JMHTTPManager sharedInstance] deleteEducationExperienceWith_experienceId:self.model.education_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [self.navigationController popViewControllerAnimated:YES];
@@ -132,7 +152,7 @@ typedef enum _PickerState_Exp {
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-
+    
 }
 
 - (void)updateExperience {
@@ -168,7 +188,7 @@ typedef enum _PickerState_Exp {
     }
 }
 - (IBAction)selectEducation:(id)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
     
     [self.pickerView setHidden:NO];
     [self.datePicker setHidden:YES];

@@ -465,7 +465,7 @@
     
     //工资
     UILabel *salaryLab = [[UILabel alloc]init];
-    NSString *salaryStr = [self getSalaryStrWithMin:_myModel.salary_min max:_myModel.salary_max];
+    NSString *salaryStr = [self getSalaryKtransformStrWithMin:_myModel.salary_min max:_myModel.salary_max];
     salaryLab.text = salaryStr;
     salaryLab.font = [UIFont systemFontOfSize:16];
     salaryLab.textColor = MASTER_COLOR;
@@ -526,7 +526,7 @@
 
 
 //工资数据转化，除以1000，转化成k
--(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
+-(NSString *)getSalaryKtransformStrWithMin:(id)min max:(id)max{
     NSInteger myint = [min integerValue];
     NSInteger intMin = myint/1000;
     
@@ -539,42 +539,6 @@
     return salaryStr;
 }
 
-//学历数据转化
--(NSString *)getEducationStrWithEducation:(NSString *)education{
-    NSInteger myInt = [education integerValue];
-    
-    switch (myInt) {
-        case 0:
-            return @"不限";
-            break;
-        case 1:
-            return @"初中及以下";
-            break;
-        case 2:
-            return @"中专/中技";
-            break;
-        case 3:
-            return @"高中";
-            break;
-        case 4:
-            return @"大专";
-            break;
-        case 5:
-            return @"本科";
-            break;
-        case 6:
-            return @"硕士";
-            break;
-        case 7:
-            return @"博士";
-            break;
-            
-        default:
-            break;
-    }
-    return @"不限";
-    
-}
 
 #pragma mark - 公司简介
 

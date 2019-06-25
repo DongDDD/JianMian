@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
+typedef enum : NSUInteger {
+    JMLabsScreenViewDefualt,
+    JMLabsScreenViewMyAdvantage,
+} JMLabsScreenViewType;
 @protocol JMLabsScreenViewDelegate <NSObject>
 
 - (void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index;
@@ -25,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UIButton * tagBtn;
 @property(nonatomic,assign)NSInteger selectIndex;
 @property(nonatomic,assign)NSInteger index;
+@property(nonatomic,assign)JMLabsScreenViewType viewType;
 @property(nonatomic,weak)id<JMLabsScreenViewDelegate>delegate;
 
 @end

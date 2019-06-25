@@ -63,11 +63,41 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9s1-cC-miD">
+                    <rect key="frame" x="35" y="47" width="173" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="ful-J8-hmY"/>
+                        <constraint firstAttribute="width" constant="173" id="uHV-fm-LAw"/>
+                    </constraints>
+                    <connections>
+                        <action selector="incomeAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="heC-80-FVh"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2h-WI-UUS">
+                    <rect key="frame" x="35" y="107.5" width="101" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Sjs-Di-v8H"/>
+                    </constraints>
+                    <connections>
+                        <action selector="taskProcessingAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="ltI-pJ-Mg6"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48D-ml-cjQ">
+                    <rect key="frame" x="241" y="107.5" width="99" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="dy5-xK-l1h"/>
+                    </constraints>
+                    <connections>
+                        <action selector="taskCompletedAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="cLx-by-32I"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="48D-ml-cjQ" firstAttribute="width" secondItem="ER6-O9-rfN" secondAttribute="width" id="2vW-6b-P58"/>
                 <constraint firstItem="aK7-Qj-yfQ" firstAttribute="leading" secondItem="IHV-Y9-H2M" secondAttribute="leading" id="4Mk-OS-mRO"/>
                 <constraint firstItem="ER6-O9-rfN" firstAttribute="trailing" secondItem="cbL-NZ-ZOx" secondAttribute="trailing" constant="-30" id="53g-MU-MvT"/>
+                <constraint firstItem="48D-ml-cjQ" firstAttribute="trailing" secondItem="ER6-O9-rfN" secondAttribute="trailing" id="6KC-mj-ryo"/>
                 <constraint firstItem="cbL-NZ-ZOx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="5" id="9Nz-Nd-dLG"/>
                 <constraint firstItem="pRY-52-rNC" firstAttribute="leading" secondItem="aK7-Qj-yfQ" secondAttribute="trailing" constant="9" id="Ei9-Wz-c6x"/>
                 <constraint firstItem="IHV-Y9-H2M" firstAttribute="leading" secondItem="cbL-NZ-ZOx" secondAttribute="leading" constant="30" id="GDv-KS-BTX"/>
@@ -75,11 +105,17 @@
                 <constraint firstItem="pRY-52-rNC" firstAttribute="bottom" secondItem="aK7-Qj-yfQ" secondAttribute="bottom" id="Kvh-we-cmG"/>
                 <constraint firstItem="ER6-O9-rfN" firstAttribute="centerY" secondItem="rrS-t6-VLT" secondAttribute="centerY" id="Mfx-2Y-tYt"/>
                 <constraint firstItem="7eb-ip-0sO" firstAttribute="centerY" secondItem="rrS-t6-VLT" secondAttribute="centerY" id="Pd4-uK-i2z"/>
+                <constraint firstItem="48D-ml-cjQ" firstAttribute="centerY" secondItem="ER6-O9-rfN" secondAttribute="centerY" id="RUj-Ji-qQE"/>
                 <constraint firstItem="aK7-Qj-yfQ" firstAttribute="top" secondItem="IHV-Y9-H2M" secondAttribute="bottom" constant="22" id="Ras-sX-Wgp"/>
                 <constraint firstItem="rrS-t6-VLT" firstAttribute="top" secondItem="aK7-Qj-yfQ" secondAttribute="bottom" constant="29" id="SLU-f3-ZSz"/>
+                <constraint firstItem="9s1-cC-miD" firstAttribute="centerY" secondItem="aK7-Qj-yfQ" secondAttribute="centerY" id="WaT-EQ-GlJ"/>
                 <constraint firstAttribute="bottom" secondItem="cbL-NZ-ZOx" secondAttribute="bottom" constant="5" id="dKL-t7-Oob"/>
+                <constraint firstItem="g2h-WI-UUS" firstAttribute="width" secondItem="rrS-t6-VLT" secondAttribute="width" id="ds1-BN-3P9"/>
+                <constraint firstItem="g2h-WI-UUS" firstAttribute="leading" secondItem="rrS-t6-VLT" secondAttribute="leading" id="eMf-ib-pmO"/>
+                <constraint firstItem="9s1-cC-miD" firstAttribute="leading" secondItem="IHV-Y9-H2M" secondAttribute="leading" id="hVZ-f7-O7B"/>
                 <constraint firstItem="rrS-t6-VLT" firstAttribute="leading" secondItem="aK7-Qj-yfQ" secondAttribute="leading" id="mme-9s-VNy"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cbL-NZ-ZOx" secondAttribute="trailing" constant="5" id="nNf-vX-Jeg"/>
+                <constraint firstItem="g2h-WI-UUS" firstAttribute="centerY" secondItem="rrS-t6-VLT" secondAttribute="centerY" id="o6r-sb-hLp"/>
                 <constraint firstItem="cbL-NZ-ZOx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="uMy-yA-eKM"/>
                 <constraint firstItem="IHV-Y9-H2M" firstAttribute="top" secondItem="cbL-NZ-ZOx" secondAttribute="top" constant="19" id="yn9-ZF-2A3"/>
             </constraints>
@@ -90,7 +126,7 @@
                 <outlet property="taskCompletedLab" destination="ER6-O9-rfN" id="K7j-SI-YF1"/>
                 <outlet property="taskProcessingLab" destination="rrS-t6-VLT" id="cb3-Yp-Onk"/>
             </connections>
-            <point key="canvasLocation" x="47.826086956521742" y="-187.16517857142856"/>
+            <point key="canvasLocation" x="47.10144927536232" y="-187.16517857142856"/>
         </view>
     </objects>
     <resources>

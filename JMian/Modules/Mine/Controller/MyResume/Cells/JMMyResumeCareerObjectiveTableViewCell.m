@@ -39,7 +39,24 @@ NSString *const JMMyResumeCareerObjectiveTableViewCellIdentifier = @"JMMyResumeC
     }else{
         city = @"城市暂未选择";
     }
-    self.detailLab.text = [NSString stringWithFormat:@"%@ / %@~%@",city,model.salary_min,model.salary_max];
+    NSString *salaryStr = [self getSalaryKtransformStrWithMin:model.salary_min max:model.salary_max];
+    
+    self.detailLab.text = [NSString stringWithFormat:@"%@ / %@",city,salaryStr];
+
+}
+
+//工资数据转化，除以1000，转化成k
+-(NSString *)getSalaryKtransformStrWithMin:(id)min max:(id)max{
+    NSInteger myint = [min integerValue];
+    NSInteger intMin = myint/1000;
+    
+    NSInteger myint2 = [max integerValue];
+    NSInteger intMax = myint2/1000;
+    
+    NSString *salaryStr;
+    salaryStr = [NSString stringWithFormat:@"%dk~%dk",  (int)intMin, (int)intMax];
+    
+    return salaryStr;
 }
 
 //- (void)setCareerObjectiveWithRightLabelText:(NSString *)text {

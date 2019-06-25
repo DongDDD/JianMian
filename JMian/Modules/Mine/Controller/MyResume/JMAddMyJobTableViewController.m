@@ -49,7 +49,7 @@ static NSString *cellIdent = @"cellIdent";
                      @"20k-30k",
                      @"30k-40k",
                      @"40k-50k",
-                     @"50k-以上",
+                     @"50k-100k",
                      ];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -190,26 +190,22 @@ static NSString *cellIdent = @"cellIdent";
     
     NSString *minStr = array[0];
     NSString *maxStr = array[1];
-    
-    //    NSInteger minNum = [minStr integerValue];
-    //    NSInteger maxNum = [maxStr integerValue];
-    //
-    
+
     NSString *string1 = [minStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
-    //    self.salaryMin = string1;
-    NSString *string2;
-    if (![maxStr isEqualToString: @"以上"]) {
-        string2 = [maxStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
-        //        self.salaryMax = string2;
-    }else{
-        string2 = @"以上";
-        
-    }
+    NSString *string2 = [maxStr stringByReplacingOccurrencesOfString:@"k"withString:@"000"];
+   
     
     NSMutableArray *arrayMinMax = [NSMutableArray arrayWithObjects:string1,string2,nil];
     
     return arrayMinMax;
     
+}
+
+-(NSString *)getSalaryKWithStr:(NSString *)str{
+    NSInteger salaryInt = [str integerValue];
+    NSInteger salaryInt2 = salaryInt/1000;
+    NSString *salaryStr = [NSString stringWithFormat:@"%ldk",(long)salaryInt2];
+    return salaryStr;
 }
 
 #pragma mark - Table view data source
@@ -391,7 +387,9 @@ static NSString *cellIdent = @"cellIdent";
     if (_rightTextArray == nil) {
         if (self.model) {
             NSString *str1 = self.model.work_name;
-            NSString *str2 = [NSString stringWithFormat:@"%@~%@",self.model.salary_min,self.model.salary_max];
+            NSString *str2 = [NSString stringWithFormat:@"%@~%@",
+                               [self getSalaryKWithStr:self.model.salary_min],
+                              [self getSalaryKWithStr:self.model.salary_max]];
             NSString *str3;
             
             _job_labelID = self.model.job_label_id;

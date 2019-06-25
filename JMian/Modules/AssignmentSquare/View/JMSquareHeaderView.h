@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMSquareHeaderViewDelegate <NSObject>
 
 -(void)didClickIncomeAction;
+-(void)didClickTaskProcessingAction;
+-(void)didClickTaskCompletedAction;
 
 @end
 @interface JMSquareHeaderView : UIView

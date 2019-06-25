@@ -41,7 +41,7 @@
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             <connections>
                                 <action selector="textFieldEndEditing:" destination="iN0-l3-epB" eventType="editingDidEnd" id="MuT-ny-B01"/>
                             </connections>
@@ -83,7 +83,7 @@
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             <connections>
                                 <action selector="textFieldEndEditing:" destination="iN0-l3-epB" eventType="editingDidEnd" id="s13-Gw-2Zx"/>
                             </connections>
@@ -264,7 +264,7 @@
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             <connections>
                                 <action selector="textFieldEndEditing:" destination="iN0-l3-epB" eventType="editingDidEnd" id="kSW-sZ-Luk"/>
                             </connections>
