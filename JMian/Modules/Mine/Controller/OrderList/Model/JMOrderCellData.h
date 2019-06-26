@@ -28,7 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *pay_amount;
 @property (nonatomic, copy) NSString *pay_time;
 @property (nonatomic, copy) NSString *status;
-@property (nonatomic, copy) NSString *logistics_no;
+@property (nonatomic, copy) NSString *logistics_name;
+@property (nonatomic, copy) NSString *logistics_label_id;
+
 //-----快照----
 @property (nonatomic, copy) NSString *snapshot_task_id;
 

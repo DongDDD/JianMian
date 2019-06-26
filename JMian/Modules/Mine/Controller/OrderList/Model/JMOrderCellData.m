@@ -23,6 +23,8 @@
              @"snapshot_company_company_id":@"snapshot.company.company_id",
              @"snapshot_company_logo_path":@"snapshot.company.logo_path",
              @"snapshot_company_reputation":@"snapshot.company.reputation",
+             @"snapshot_company_company_name":@"snapshot.company.company_name",
+
 
              @"snapshot_goods_goods_title":@"snapshot.goods.goods_title",
              @"snapshot_goods_goods_price":@"snapshot.goods.goods_price",
@@ -50,8 +52,8 @@
              @"company_company_name":@"company_company_name",
              @"company_logo_path":@"company_logo_path",
              @"company_reputation":@"company_reputation",
-
-
+             @"logistics_label_id":@"logistics.label_id",
+             @"logistics_name":@"logistics.name",
              
              };
 }

@@ -18,7 +18,7 @@ typedef enum : NSUInteger {
 
 -(void)payDetailViewDownPayAction_data:(JMTaskOrderListCellData *)data;
 -(void)payDetailViewAllPayAction_data:(JMTaskOrderListCellData *)data;
-
+-(void)didPayMoneyWithStr:(NSString *)str;
 @end
 
 @interface JMPayDetailViewController : BaseViewController

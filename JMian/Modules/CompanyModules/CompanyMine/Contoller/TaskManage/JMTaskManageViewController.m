@@ -23,6 +23,9 @@
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+PayMoney.h"
 #import "JMPayDetailViewController.h"
+#import "JMPaySucceedViewController.h"
+#import "JMPayFailedViewController.h"
+#import "JMHTTPManager+FectchTaskOrderInfo.h"
 
 
 @interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate>
@@ -32,6 +35,8 @@
 @property (strong, nonatomic) NSArray *listsArray;
 @property (strong, nonatomic) JMShareView *choosePayView;
 @property (strong, nonatomic) JMOrderPaymentModel *orderPaymentModel;
+@property (strong, nonatomic) NSString *didPayMoney;
+
 @property (nonatomic ,strong) UIView *BGPayView;
 
 @property (strong, nonatomic)NSArray *currentStatusArray;
@@ -44,7 +49,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self initView];
+    
 //    self.currentStatusArray = @[Task_WaitDealWith];
 //    [self getDataWitnStatus:self.currentStatusArray];
 //   
@@ -67,13 +72,9 @@
 
 #pragma mark - setUI -
 -(void)setMyIndex:(NSInteger)myIndex{
-    [self.titleView setCurrentTitleIndex:myIndex];
-    __weak JMTaskManageViewController *weakSelf = self;
-    self.titleView.didTitleClick = ^(NSInteger index) {
-        _index = index;
-        [weakSelf setCurrentIndex];
-    };
-    
+    _index = myIndex;
+    [self initView];
+    [self setCurrentIndex];
     
 }
 
@@ -106,10 +107,12 @@
     [self.tableView.mj_header beginRefreshing];
     [self.choosePayView setHidden:YES];
     [self.BGPayView setHidden:YES];
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if ([userModel.type isEqualToString:B_Type_UESR] && _index == 0) {
-          [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"审批通过\n 建议联系对方以便开始任务" leftTitle:@"朕知道了" rightTitle:@"和他聊聊"];
-    }
+    JMPaySucceedViewController *vc = [[JMPaySucceedViewController alloc]init];
+    vc.didPayMoney = self.didPayMoney;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+    
 }
 //底部左面的按钮事件
 -(void)leftActionWithData:(JMTaskOrderListCellData *)data{
@@ -122,6 +125,11 @@
             //B和他聊聊
             
             [self createChatRequstWithTask_order_id:data.task_order_id user_id:data.user_user_id];
+        }else if ([data.status isEqualToString:Task_Pass] && _index == 1) {
+            //B结束销售任务
+            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
+
+      
         }
     }
 }
@@ -161,8 +169,13 @@
             
              return;
         }else if ([data.status isEqualToString:Task_Pass]) {
-            //B改状态------销售分成任务的 点击结束任务按钮
-            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
+            //进行中
+            //B---销售分成任务的 分享产品链接按钮
+            if ([data.payment_method isEqualToString:@"1"]) {
+                //销售任务分享产品链接
+                [self getGoodsUrlToShareDataWithTask_order_id:data.task_order_id];
+                
+            }
             return;
         }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_boss isEqualToString:@"0"]) {
             //B——创建评价
@@ -180,6 +193,10 @@
                 //C---点"已完成"（C 唯一操作）-----status change to  '3'
                 [self changeTaskStatusRequestWithStatus:Task_Finish task_order_id:data.task_order_id];
                 return;
+            }else{
+                NSLog(@"分享");
+                [self getGoodsUrlToShareDataWithTask_order_id:data.task_order_id];
+
             }
         }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_user isEqualToString:@"0"]) {
             //C——-创建评价
@@ -248,13 +265,11 @@
     
 }
 
+
 //已评价回调
 -(void)didComment{
     [self.tableView.mj_header beginRefreshing];
-    
-    
 }
-
 
 
 #pragma mark - 数据请求
@@ -271,6 +286,33 @@
         
     }];
     
+    
+}
+
+//获得任务信息去快照
+-(void)getTaskInfoDataWithTask_order_id:(NSString *)task_order_id{
+    [[JMHTTPManager sharedInstance]fectchTaskOrderInfo_taskID:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMTaskOrderListCellData *taskInfoData = [JMTaskOrderListCellData mj_objectWithKeyValues:responsObject[@"data"]];
+            JMSnapshotWebViewController *vc = [[JMSnapshotWebViewController alloc]init];
+            vc.data = taskInfoData;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+-(void)getGoodsUrlToShareDataWithTask_order_id:(NSString *)task_order_id{
+    [[JMHTTPManager sharedInstance]fectchTaskOrderInfo_taskID:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMTaskOrderListCellData *taskInfoData = [JMTaskOrderListCellData mj_objectWithKeyValues:responsObject[@"data"]];
+            [self wxShare:0 data1:taskInfoData];
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
     
 }
 
@@ -374,6 +416,12 @@
     
 }
 
+//delegate 付款金额
+-(void)didPayMoneyWithStr:(NSString *)str{
+    self.didPayMoney = str;
+    
+}
+
 -(void)payDetailViewAllPayAction_data:(JMTaskOrderListCellData *)data{
     _task_order_id = data.task_order_id;
     _user_id = data.user_user_id;
@@ -469,7 +517,59 @@
     
 }
 
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n data1:(JMTaskOrderListCellData *)data1
+{   //检测是否安装微信
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = data1.goodsTitle;
+    urlMessage.description = data1.goodsDescription;
+    
+    if (data1.snapshot_images.count > 0) {
+        NSString *url;
+        for (int i = 0; i < data1.snapshot_images.count; i++) {
+            JMTaskOrderImageModel *imgModel = data1.snapshot_images[0];
+            url = imgModel.file_path;
+        }
+        UIImage *image = [self getImageFromURL:url];
+        //缩略图,压缩图片,不超过 32 KB
+        NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+        [urlMessage setThumbData:thumbData];
+        
+    }else{
+        UIImage *image = [UIImage imageNamed:@"demi_home"];
 
+        NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+        [urlMessage setThumbData:thumbData];
+        
+    }
+ 
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    webObj.webpageUrl = data1.share_url;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+    NSLog(@"share WX");
+    
+}
+
+-(UIImage *) getImageFromURL:(NSString *)fileURL {
+    
+    UIImage * result;
+    
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+    
+    result = [UIImage imageWithData:data];
+    
+    return result;
+    
+}
 
 
 #pragma mark - Table view data source
@@ -501,9 +601,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     JMTaskOrderListCellData *data = self.listsArray[indexPath.row];
-    JMSnapshotWebViewController *vc = [[JMSnapshotWebViewController alloc]init];
-    vc.data = data;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self getTaskInfoDataWithTask_order_id:data.task_order_id];
+//    JMSnapshotWebViewController *vc = [[JMSnapshotWebViewController alloc]init];
+//    vc.data = data;
+//    [self.navigationController pushViewController:vc animated:YES];
     //    _model = self.listsArray[indexPath.row];
     
     
@@ -530,12 +631,12 @@
     if (!_titleView) {
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"待通过", @"进行中", @"已结束"]];
         _titleView.viewType = JMTitlesViewDefault;
-//        [_titleView setCurrentTitleIndex:0];
-//        __weak JMTaskManageViewController *weakSelf = self;
-//        _titleView.didTitleClick = ^(NSInteger index) {
-//            _index = index;
-//            [weakSelf setCurrentIndex];
-//        };
+        [_titleView setCurrentTitleIndex:_index];
+        __weak JMTaskManageViewController *weakSelf = self;
+        _titleView.didTitleClick = ^(NSInteger index) {
+            _index = index;
+            [weakSelf setCurrentIndex];
+        };
     }
     
     return _titleView;
@@ -564,7 +665,7 @@
     if (!_choosePayView) {
         _choosePayView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
         _choosePayView.delegate = self;
-        [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat_pay"] forState:UIControlStateNormal];
+        [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
         [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Alipay_pay"] forState:UIControlStateNormal];
         _choosePayView.lab1.text = @"微信支付";
         _choosePayView.lab2.text = @"支付宝";

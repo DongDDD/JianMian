@@ -180,8 +180,7 @@
     //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
     //
     
-    UIImage *image = [UIImage imageNamed:@"jianmian_home"];
-    //缩略图,压缩图片,不超过 32 KB
+    UIImage *image = [self getImageFromURL:self.detailModel.user_avatar];   //缩略图,压缩图片,不超过 32 KB
     NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
     [urlMessage setThumbData:thumbData];
     //分享实例
@@ -194,7 +193,17 @@
     [WXApi sendReq:sendReq];
     
 }
-
+-(UIImage *) getImageFromURL:(NSString *)fileURL {
+    
+    UIImage * result;
+    
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+    
+    result = [UIImage imageWithData:data];
+    
+    return result;
+    
+}
 #pragma mark - 数据请求
 
 -(void)rightAction:(UIButton *)sender{
@@ -324,8 +333,8 @@
     if (!_choosePayView) {
         _choosePayView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
         _choosePayView.delegate = self;
-        [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat_pay"] forState:UIControlStateNormal];
-        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Share_WeChat_friends"] forState:UIControlStateNormal];
+        [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
+        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Friendster"] forState:UIControlStateNormal];
         _choosePayView.lab1.text = @"微信分享";
         _choosePayView.lab2.text = @"朋友圈";
     }

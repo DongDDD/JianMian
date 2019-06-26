@@ -161,7 +161,7 @@
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
         _decriptionTextView.frame = CGRectMake(0, self.titleView.frame.origin.y+self.titleView.frame.size.height, SCREEN_WIDTH, 229);
         _decriptionTextView.delegate = self;
-        [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeJobDecription];
+        [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeJobDescription];
         //        _decriptionTextView.contentTextView.delegate = self;
         
     }

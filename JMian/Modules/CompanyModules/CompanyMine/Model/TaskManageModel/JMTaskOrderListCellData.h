@@ -19,11 +19,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *front_money;
 @property (nonatomic, copy) NSString *unit;
 @property (nonatomic, copy) NSString *payment_method;
+
 @property (nonatomic, strong) NSArray *industry;
+
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *denial_reason;
 @property (nonatomic, copy) NSString *is_comment_boss;
 @property (nonatomic, copy) NSString *is_comment_user;
+@property (nonatomic, copy) NSString *share_url;
 
 
 @property (nonatomic, copy) NSString *snapshot_task_id;
@@ -49,6 +52,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *snapshot_reputation;
 @property (nonatomic, copy) NSString *snapshot_user_nickname;
 @property (nonatomic, copy) NSString *snapshot_user_avatar;
+@property (nonatomic, copy) NSString *snapshot_share_url;
+@property (nonatomic, strong) NSArray *snapshot_images;
 
 
 
@@ -80,6 +85,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMTaskOrderIndustryModel : NSObject
 @property (nonatomic, copy) NSString *label_id;
 @property (nonatomic, copy) NSString *name;
+
+
+@end
+
+@interface JMTaskOrderImageModel : NSObject
+@property (nonatomic, copy) NSString *file_path;
+@property (nonatomic, copy) NSString *file_id;
 
 
 @end

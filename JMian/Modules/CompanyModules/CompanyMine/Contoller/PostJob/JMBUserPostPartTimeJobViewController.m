@@ -500,7 +500,6 @@
     [alertController addAction:([UIAlertAction actionWithTitle:@"确认删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self deleteTaskRequest];
         
-        [self.navigationController popViewControllerAnimated:YES];
     }])];
     [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
         
@@ -591,11 +590,11 @@
 
 -(void)deleteTaskRequest{
     [[JMHTTPManager sharedInstance]deleteTask_Id:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.navigationController popViewControllerAnimated:YES];
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"下线成功" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-            [self.navigationController popViewControllerAnimated:YES];
         }])];
         [self presentViewController:alertController animated:YES completion:nil];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {

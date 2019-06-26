@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, JMPartTimeJobResumeFooterViewType) {
     JMPartTimeJobResumeFooterViewTypeDefault,
-    JMPartTimeJobResumeFooterViewTypeJobDecription,
+    JMPartTimeJobResumeFooterViewTypeJobDescription,
+    JMPartTimeJobResumeFooterViewTypeCompanyInfoDescription,
     JMPartTimeJobResumeFooterViewTypeMyAdvantage,
     JMPartTimeJobResumeFooterViewTypePartTimeJob,
     JMPartTimeJobResumeFooterViewTypeGoodsDesc,

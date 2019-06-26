@@ -11,7 +11,9 @@
 @implementation JMTaskOrderListCellData
 + (NSDictionary *)mj_objectClassInArray {
     return @{
-             @"industry":@"JMTaskOrderIndustryModel"
+             @"industry":@"JMTaskOrderIndustryModel",
+             @"snapshot_images":@"JMTaskOrderImageModel"
+         
              };
 }
 
@@ -58,7 +60,8 @@
              @"snapshot_reputation":@"snapshot.company.reputation",
              @"snapshot_user_nickname":@"snapshot.user.nickname",
              @"snapshot_user_avatar":@"snapshot.user.avatar",
-
+             @"snapshot_share_url":@"snapshot.share_url",
+             @"snapshot_images":@"snapshot.images",
 
              };
 }
@@ -66,6 +69,15 @@
 @end
 
 @implementation JMTaskOrderIndustryModel
+
+
+
+
+@end
+
+@implementation JMTaskOrderImageModel
+
+
 
 
 @end

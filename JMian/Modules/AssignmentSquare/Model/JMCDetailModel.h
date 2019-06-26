@@ -12,11 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCDetailModel : NSObject
 @property(nonatomic, copy)NSString *share_url;
-@property(nonatomic, copy)NSString *images;
+@property(nonatomic, strong)NSArray *images;
 @property(nonatomic, copy)NSString *task_title;
 @property(nonatomic, copy)NSString *company_company_name;
 @property(nonatomic, copy)NSString *company_logo_path;
-
+@property(nonatomic, copy)NSString *myDescription;
 
 
 @property(nonatomic, copy)NSString *goods_description;

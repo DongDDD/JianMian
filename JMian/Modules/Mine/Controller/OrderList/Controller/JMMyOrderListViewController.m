@@ -12,6 +12,7 @@
 #import "JMOrderCellData.h"
 #import "JMHTTPManager+FectchOrderList.h"
 #import "JMOrderCellData.h"
+#import "JMLogisticsInfoViewController.h"
 
 @interface JMMyOrderListViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,JMOrderStatusTableViewCellDelegate>
 @property (strong, nonatomic) JMTitlesView *titleView;
@@ -39,6 +40,12 @@ static NSString *cellID = @"statusCellID";
     [self getData_status:self.currentStatus];
     // Do any additional setup after loading the view from its nib.
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.tableView.mj_header beginRefreshing];
+}
+
 #pragma mark - 数据请求
 -(void)getData_status:(NSString *)status{
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
@@ -156,7 +163,10 @@ static NSString *cellID = @"statusCellID";
             self.currentStatus = @"0";//已下单 ，没付款
 
             break;
+        case 3:
+            self.currentStatus = @"3";//已发货
             
+            break;
         default:
             break;
     }
@@ -208,6 +218,8 @@ static NSString *cellID = @"statusCellID";
     return cell;
 }
 
+#pragma mark - myDelegate
+
 -(void)didClickDetail_isSpread:(BOOL)isSpread indexPath:(nonnull NSIndexPath *)indexPath{
     _orderCellData = self.listDataArray[indexPath.row];
     if (_orderCellData.isSpread == NO) {
@@ -218,6 +230,12 @@ static NSString *cellID = @"statusCellID";
     [self.listDataArray replaceObjectAtIndex:indexPath.row withObject:_orderCellData];
     [self.tableView reloadData];
     
+}
+
+-(void)didClickDeliverGoodsWithData:(JMOrderCellData *)data{
+    JMLogisticsInfoViewController *vc = [[JMLogisticsInfoViewController alloc]init];
+    vc.order_id = data.order_id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Getter
@@ -240,7 +258,17 @@ static NSString *cellID = @"statusCellID";
         
 - (JMTitlesView *)titleView {
     if (!_titleView) {
-        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全部", @"已付款", @"未付款"]];
+        NSArray *titleArray = [NSArray array];
+        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+        if ([model.type isEqualToString:B_Type_UESR]) {
+            titleArray = @[@"全部", @"已付款", @"未付款",@"已发货"];
+            
+        }else if ([model.type isEqualToString:C_Type_USER]){
+            titleArray = @[@"全部", @"已付款", @"未付款"];
+        
+        }
+   
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:titleArray];
         __weak JMMyOrderListViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;

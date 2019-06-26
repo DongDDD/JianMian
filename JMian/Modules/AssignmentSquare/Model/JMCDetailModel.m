@@ -26,6 +26,7 @@
              @"goods_description":@"goods.description",
              @"goods_goods_title":@"goods.goods_title",
              @"goods_goods_price":@"goods.goods_price",
+             @"myDescription":@"description",
 
              };
     

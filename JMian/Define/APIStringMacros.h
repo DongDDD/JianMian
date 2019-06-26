@@ -130,6 +130,9 @@
 #define Fectch_OrderPayment_URL @"api/order/payment"
 //订单
 #define Fectch_OrderList_URL @"api/order/paginate"
+//物流信息
+#define Create_LogisticsInfo_URL @"api/order/logistics"
+
 //视频列表
 #define Fectch_VideoList_URL @"api/video/lists"
 //明细

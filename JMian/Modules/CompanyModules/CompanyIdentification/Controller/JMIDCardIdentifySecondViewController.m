@@ -53,7 +53,8 @@
     [self.nameText resignFirstResponder];
     [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil type:nil password:nil avatar:nil nickname:nil email:nil name:self.nameText.text sex:nil ethnic:nil birthday:@"1980-12-09" address:nil number:self.IDCardText.text image_front:self.image_front image_behind:self.image_behind user_step:nil enterprise_step:nil real_status:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        [self showAlertWithTitle:@"提示" message:@"您的信息已经提交成功， 审核结果我们会第一时间通知你" leftTitle:@"返回" rightTitle:@"确认"];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self showAlertSimpleTips:@"提示" message:@"您的信息已经提交成功， 审核结果我们会第一时间通知你" btnTitle:@"确认"];
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
@@ -62,21 +63,7 @@
  
 }
 
--(void)alerLeftAction{
-    JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc]init];
-    
-    [UIApplication sharedApplication].delegate.window.rootViewController=tab;
 
-}
-
--(void)alertRightAction{
-
-    JMCompanyTabBarViewController *tab = [[JMCompanyTabBarViewController alloc]init];
-    
-    [UIApplication sharedApplication].delegate.window.rootViewController=tab;
-    
-    
-}
 
 /*
 #pragma mark - Navigation

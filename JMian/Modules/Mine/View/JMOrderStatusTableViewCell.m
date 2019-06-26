@@ -26,7 +26,11 @@
 @property (nonatomic, strong)UILabel *remarkLab;//订单备注
 @property (weak, nonatomic) IBOutlet UIView *contactBGView;
 @property (weak, nonatomic) IBOutlet UIView *remakeDetailBGView;
+@property (weak, nonatomic) IBOutlet UILabel *orderRemakeLab;
+@property (weak, nonatomic) IBOutlet UIButton *deliverGoodsBtn;
 
+
+@property (nonatomic, strong)JMOrderCellData *myData;
 @end
 
 @implementation JMOrderStatusTableViewCell
@@ -39,42 +43,68 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
-    
 //        [self initView];
 //        [self initLayout];
+//        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//        if ([userModel.type isEqualToString:B_Type_UESR]) {
+//            [self.deliverGoodsBtn setHidden:YES];
+//
+//        }else if ([userModel.type isEqualToString:C_Type_USER]){
+//            [self.deliverGoodsBtn setHidden:NO];
+//
+//
+//        }
         
     }
     return self;
 }
 
 -(void)setOrderCellData:(JMOrderCellData *)orderCellData{
+    _myData = orderCellData;
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    
     if (orderCellData.isSpread == YES) {
         [self.remakeDetailBGView setHidden:NO];
     }else{
         [self.remakeDetailBGView setHidden:YES];
     }
     
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString: B_Type_UESR]) {
+        [self.deliverGoodsBtn setHidden:NO];
+        if (orderCellData.logistics_label_id) {
+            [self.deliverGoodsBtn setTitle:@"已发货" forState:UIControlStateNormal];
+            [self.deliverGoodsBtn setEnabled:NO];
+        }else{
+            [self.deliverGoodsBtn setTitle:@"去发货" forState:UIControlStateNormal];
+            [self.deliverGoodsBtn setEnabled:YES];
+        }
+        
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:orderCellData.referrer_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         NSString *str = [NSString stringWithFormat:@"销售：%@ >",orderCellData.referrer_nickname];
         [self.titleBtn setTitle:str forState:UIControlStateNormal];
         self.infoLab1.text = orderCellData.title;
         self.infoLab2.text = [NSString stringWithFormat:@"¥ %@",orderCellData.goods_price];
-        self.infoLab3.text = [NSString stringWithFormat:@"X %@",orderCellData.buy_quantity];
-        self.remarkLab.text = orderCellData.remark;
+        self.infoLab3.text = [NSString stringWithFormat:@"x %@",orderCellData.buy_quantity];
+        self.orderRemakeLab.text = orderCellData.remark;
         self.nameLab.text = orderCellData.contact_name;
         self.phoneNumLab.text = orderCellData.contact_phone;
         self.adressLab.text = orderCellData.contact_address;
     }else{
-        
+        [self.deliverGoodsBtn setHidden:YES];
+        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:orderCellData.referrer_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        NSString *str = [NSString stringWithFormat:@"%@ >",orderCellData.snapshot_company_company_name];
+        [self.titleBtn setTitle:str forState:UIControlStateNormal];
+        self.infoLab1.text = orderCellData.snapshot_goods_goods_title;
+        self.infoLab2.text = [NSString stringWithFormat:@"¥ %@",orderCellData.goods_price];
+        self.infoLab3.text = [NSString stringWithFormat:@"X %@",orderCellData.buy_quantity];
+        self.orderRemakeLab.text = orderCellData.remark;
+        self.nameLab.text = orderCellData.contact_name;
+        self.phoneNumLab.text = orderCellData.contact_phone;
+        self.adressLab.text = orderCellData.contact_address;
         
     }
     
-    
-    
 }
-
 
 
 -(void)initView{
@@ -141,6 +171,11 @@
     }
 }
 
+- (IBAction)deliverGoodsAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickDeliverGoodsWithData:)]) {
+        [_delegate didClickDeliverGoodsWithData:_myData];
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

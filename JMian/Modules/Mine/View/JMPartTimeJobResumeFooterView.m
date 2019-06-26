@@ -81,10 +81,17 @@
 -(void)setViewType:(JMPartTimeJobResumeFooterViewType)viewType{
     _myViewType = viewType;
     switch (viewType) {
-        case JMPartTimeJobResumeFooterViewTypeJobDecription:
+        case JMPartTimeJobResumeFooterViewTypeJobDescription:
             _placeHolder.text = @"例如\n职位要求、\n性别要求、\n工作时段等等   ";
             _wordsLenghLabel.text = @"0/150";
 
+            break;
+        case JMPartTimeJobResumeFooterViewTypeCompanyInfoDescription:
+            _placeHolder.text = @"例如\n企业类型...\n建立时间...\n从事哪方面的产品...\n以什么为重点...\n从事哪方面的产品....\n企业文化...等等   ";
+            _wordsLenghLabel.text = @"0/500";
+            _titleLab.text = @"公司简介";
+
+            
             break;
         case JMPartTimeJobResumeFooterViewTypeMyAdvantage:
             _placeHolder.text = @"请填写你的优势，500字以内... ";

@@ -22,6 +22,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *bottomViewLab2;
 @property (weak, nonatomic) IBOutlet UIView *invoiceView;
 
+@property (copy , nonatomic)NSString *didPayMoney;
+
 @end
 
 @implementation JMPayDetailViewController
@@ -48,6 +50,7 @@
         self.moneyDetailViewLab2.text = [NSString stringWithFormat:@"%@ 元",_data.front_money];
         self.bottomViewLab1.text = @"定金";
         self.bottomViewLab2.text = [NSString stringWithFormat:@"¥%@",_data.front_money];
+        self.didPayMoney = _data.front_money;
     }else if (_viewType == JMPayDetailViewTypeFinalPayment) {//尾款
         self.title = @"支付尾款";
         self.detailViewLab1.text = [NSString stringWithFormat:@" 任务总额：%@ ",_data.payment_money];
@@ -63,7 +66,7 @@
         self.bottomViewLab1.text = @"合计";
         self.bottomViewLab2.text = [NSString stringWithFormat:@"¥%@",money];
 //        NSLog(@"合计  %ld 元",(long)now);
-
+        self.didPayMoney = money;
     }
    
 }
@@ -79,6 +82,10 @@
         if (_delegate && [_delegate respondsToSelector:@selector(payDetailViewAllPayAction_data:)]) {
             [_delegate payDetailViewAllPayAction_data:_data];
         }
+    }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(didPayMoneyWithStr:)]) {
+        [_delegate didPayMoneyWithStr:self.didPayMoney];
     }
     
     [self.navigationController popViewControllerAnimated:YES];

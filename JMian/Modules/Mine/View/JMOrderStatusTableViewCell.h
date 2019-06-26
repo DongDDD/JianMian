@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMOrderStatusTableViewCellDelegate <NSObject>
 
 -(void)didClickDetail_isSpread:(BOOL)isSpread indexPath:(NSIndexPath *)indexPath;
-
+-(void)didClickDeliverGoodsWithData:(JMOrderCellData *)data;
 @end
 
 

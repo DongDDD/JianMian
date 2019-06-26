@@ -79,6 +79,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"公司信息";
+    [self setRightBtnTextName:@"保存"];
     [self getData];
     self.pickerView.delegate = self;
     [self.pickerView selectRow:0 inComponent:0 animated:NO];
@@ -101,6 +102,7 @@
     
     
 }
+
 #pragma mark - 数据请求
 
 -(void)getNewUserInfo{
@@ -261,6 +263,14 @@
         [self updateInfoData];
     }
 }
+-(void)rightAction{
+    if(_isChange){
+        _videoURL = nil;//不用上传视频了，选择完视频就上传完了
+        [self updateInfoData];
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"没有任何更改" btnTitle:@"哦哦"];
+    }
+}
 
 
 - (IBAction)videoLeftAction:(UIButton *)sender {
@@ -277,7 +287,7 @@
 }
 
 - (IBAction)myPositionActoin:(UIButton *)sender {
-    
+    _isChange = YES;
     JMBUserInfoViewController *vc = [[JMBUserInfoViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -396,6 +406,7 @@
 }
 //删除兼职图片
 -(void)deleteCompanyImageWithIndex:(NSInteger)index{
+    _isChange = YES;
     JMFilesModel *fileModel = self.imageDataArray[index];
     if (index < self.imageDataArray.count) {
         [self deleteCompanyImgRequestWithFile_id:fileModel.file_id];
@@ -406,12 +417,14 @@
 
 //添加的图片
 -(void)sendAddImgs:(NSMutableArray *)Imgs{
+    _isChange = YES;
     [self uploadCompanyWithImages:Imgs.mutableCopy];
 }
 
 //公司地址回传
 -(void)sendAdress_Data:(AMapPOI *)data
 {
+    _isChange = YES;
     self.POIModel = data;
     NSString *adr = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
     [self.companyAdress setTitle:adr forState:UIControlStateNormal];

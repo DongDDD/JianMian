@@ -304,13 +304,30 @@
     
     WXMediaMessage *urlMessage = [WXMediaMessage message];
     urlMessage.title = self.detailModel.task_title;
-    urlMessage.description = @"来得米，招人，找活，找你想要的！" ;
+    urlMessage.description = self.detailModel.myDescription;
     
 //    UIImageView *imgView = [[UIImageView alloc]init];
 //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
 //
     
-    UIImage *image = [UIImage imageNamed:@"jianmian_home"];
+    for (JMCDetailImageModel *imgModel in self.detailModel.images) {
+        
+        
+        
+    }
+    
+    NSString *url;
+    if (self.detailModel.images.count > 0) {
+        for (int i = 0; i < self.detailModel.images.count; i++) {
+            JMCDetailImageModel *imgModel = self.detailModel.images[0];
+            url = imgModel.file_path;
+        }
+        
+    }else if (self.detailModel.company_logo_path){
+        url= self.detailModel.company_logo_path;
+    }
+    
+    UIImage *image = [self getImageFromURL:url];
     //缩略图,压缩图片,不超过 32 KB
     NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
     [urlMessage setThumbData:thumbData];
@@ -325,6 +342,17 @@
 
 }
 
+-(UIImage *) getImageFromURL:(NSString *)fileURL {
+    
+    UIImage * result;
+    
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+    
+    result = [UIImage imageWithData:data];
+    
+    return result;
+    
+}
 
 //申请职位
 -(void)sendResquest{
@@ -448,8 +476,8 @@
     if (!_choosePayView) {
         _choosePayView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
         _choosePayView.delegate = self;
-        [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat_pay"] forState:UIControlStateNormal];
-        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Share_WeChat_friends"] forState:UIControlStateNormal];
+        [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
+        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Friendster"] forState:UIControlStateNormal];
         _choosePayView.lab1.text = @"微信分享";
         _choosePayView.lab2.text = @"朋友圈";
     }

@@ -34,6 +34,8 @@
 #import "JMVIPViewController.h"
 #import "JMTaskManageViewController.h"
 #import "UITabBar+XSDExt.h"
+#import "WXApi.h"
+
 
 
 
@@ -89,8 +91,8 @@
     
     
     
-    self.imageNameArr = @[@"burse",@"autonym"];
-    self.labelStrArr = @[@"我的钱包",@"实名认证"];
+    self.imageNameArr = @[@"mine_share",@"burse",@"autonym"];
+    self.labelStrArr = @[@"分享APP",@"我的钱包",@"实名认证"];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -171,6 +173,7 @@
 -(void)didClickMyTask{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     vc.title = @"我的任务";
+    [vc setMyIndex:0];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -179,9 +182,11 @@
 -(void)BTaskClick{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     vc.title = @"任务管理";
+    [vc setMyIndex:0];
     [_BUserCenterHeaderSubView.taskBadgeView setHidden:YES];
    
     [self.navigationController pushViewController:vc animated:YES];
+ 
 }
 
 -(void)BOrderClick{
@@ -275,10 +280,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 1) {
-        //我的钱包
+        
         if (indexPath.row == 0) {
+            //微信分享
+            [self wxShare:0];
+        }else if (indexPath.row == 1) {
+            //我的钱包
             [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
-        }else  if (indexPath.row == 1) {
+        }else  if (indexPath.row == 2) {
             //实名认证
             JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
             if ([model.card_status isEqualToString:Card_PassIdentify]) {
@@ -400,6 +409,37 @@
         [self.navigationController pushViewController:vc animated:YES];
     }
 
+}
+
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n
+{   //检测是否安装微信
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = @"得米";
+    urlMessage.description = @"来得米，招人，找活，找你想要的！" ;
+    
+    //    UIImageView *imgView = [[UIImageView alloc]init];
+    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+    //
+    
+    UIImage *image = [UIImage imageNamed:@"demi_home"];
+    //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    [urlMessage setThumbData:thumbData];
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    webObj.webpageUrl = userModel.share;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+    
 }
 
 
