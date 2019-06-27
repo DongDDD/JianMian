@@ -9,11 +9,24 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef enum : NSUInteger {
+    JMFeedBackChooseViewDefault,
+    JMFeedBackChooseViewAppdelegate,
+} JMFeedBackChooseViewType;
+
+
+@protocol JMFeedBackChooseViewControllerDelegate <NSObject>
+
+-(void)didCommitActionWithInterview_id:(NSString *)interview_id;
+
+@end
+
 
 @interface JMFeedBackChooseViewController : BaseViewController
 
 @property(nonatomic,copy)NSString *interview_id;
-
+@property(nonatomic,assign)id<JMFeedBackChooseViewControllerDelegate>delegate;
+@property(nonatomic,assign)JMFeedBackChooseViewType viewType;
 @end
 
 NS_ASSUME_NONNULL_END

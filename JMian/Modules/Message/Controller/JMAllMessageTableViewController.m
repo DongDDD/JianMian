@@ -72,6 +72,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 - (void)onNewMessage:(NSNotification *)notification
 {
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+    AudioServicesPlaySystemSound(1007);
     [self getMsgList];    //获取自己服务器数据
 
 }
@@ -101,7 +103,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
     _dataArray = [NSMutableArray array];
     NSMutableArray *converArray = [NSMutableArray array];
 
-//    15011331133
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
     NSLog(@"腾讯云数据%@",convs);
@@ -224,9 +225,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         else if([elem isKindOfClass:[TIMCustomElem class]]){
             TIMCustomElem *custom = (TIMCustomElem *)elem;
             str = custom.desc;
-            if ([str isEqualToString:@"leaveAction"]) {
-                str = @"取消了视频";
-            }
+          
             break;
         }
         else if([elem isKindOfClass:[TIMImageElem class]]){
@@ -378,9 +377,12 @@ static NSString *cellIdent = @"allMessageCellIdent";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
     [cell setData:[_dataArray objectAtIndex:indexPath.row]];
-    if (indexPath.row == 0) {
+    JMMessageListModel *model = _dataArray[indexPath.row];
+    if ([model.data.convId isEqualToString:@"dominator"]) {
+        
         cell.backgroundColor = BG_COLOR;
     }
+
     
     return cell;
 }

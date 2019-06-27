@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSArray *modelArray;
 @property (nonatomic, assign)int unReadNum;
 @property (nonatomic ,strong)JMMessageViewController *message;
+@property (nonatomic ,strong)JMMineViewController *mine;
 
 @end
 
@@ -61,9 +62,9 @@
     [self addChildVc:discover title:@"发现" image:@"discovery" selectedImage:@"discovery_pitch_on"];
 
   
-    JMMineViewController *mine = [[JMMineViewController alloc] init];
+    self.mine = [[JMMineViewController alloc] init];
     
-    [self addChildVc:mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on"];
+    [self addChildVc:self.mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on"];
     [self setSelectedIndex:2];
 
 }
@@ -71,6 +72,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderNotification:) name:Notification_OrderListener object:nil];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -83,6 +86,12 @@
     [self getMsgList];
 }
 
+- (void)orderNotification:(NSNotification *)notification
+{
+    self.mine.tabBarItem.badgeValue = @"@";
+    [self.mine.personalCenterHeaderView.orderBadgeView setHidden:NO];
+    
+}
 #pragma mark - 获取未读消息
 
 
@@ -110,6 +119,7 @@
     
     //    _dataArray = [NSMutableArray array];
     //    15011331133
+    JMUserInfoModel *userInfomodel = [JMUserInfoManager getUserInfo];
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
     NSLog(@"腾讯云数据%@",convs);
@@ -121,31 +131,31 @@
         }
         TIMMessage *msg = [conv getLastMsg];
         NSLog(@"%@",msg);
-        _unReadNum += [conv getUnReadMessageNum];
-//        for (JMMessageListModel *model in self.modelArray) {
-//            if (model.sender_user_id == userInfomodel.user_id) {
-//                //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
-//                if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
-//
-//                    _unReadNum += [conv getUnReadMessageNum];
-//                }
-//
-//            }else if(model.recipient_user_id == userInfomodel.user_id){
-//
-//                if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
-//
-//                    _unReadNum += [conv getUnReadMessageNum];
-//
-//                }
-//
-//            }
-//
-//        }
+//        _unReadNum += [conv getUnReadMessageNum];
+        for (JMMessageListModel *model in self.modelArray) {
+            if (model.sender_user_id == userInfomodel.user_id) {
+                //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
+                if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
+
+                    _unReadNum += [conv getUnReadMessageNum];
+                }
+
+            }else if(model.recipient_user_id == userInfomodel.user_id){
+
+                if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
+
+                    _unReadNum += [conv getUnReadMessageNum];
+
+                }
+
+            }
+
+        }
 //        加上系统消息的未读
-//        if ([[conv getReceiver] isEqualToString:@"dominator"]) {
-//            _unReadNum += [conv getUnReadMessageNum];
-//
-//        }
+        if ([[conv getReceiver] isEqualToString:@"dominator"]) {
+            _unReadNum += [conv getUnReadMessageNum];
+
+        }
     }
     
     NSLog(@"未读消息数量%d",_unReadNum);

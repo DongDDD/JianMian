@@ -63,6 +63,7 @@
 }
 
 -(void)initView{
+    [self showProgressHUD_view:self.view];
     [self.view addSubview:self.bottomView];
     [self.view addSubview:self.choosePayView];
     [self.view addSubview:self.BGPayView];
@@ -310,11 +311,7 @@
 //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
 //
     
-    for (JMCDetailImageModel *imgModel in self.detailModel.images) {
-        
-        
-        
-    }
+ 
     
     NSString *url;
     if (self.detailModel.images.count > 0) {
@@ -387,12 +384,13 @@
 - (void)ocToJs_dicData:(NSDictionary *)dicData{
     //OC调用JS
     NSString *json;
+    NSString *token;
     if (dicData) {
         json = [self dicToJSONWithDic:dicData];
     }
+    token = kFetchMyDefault(@"token");
     
-    
-    NSString *showInfoFromJava = [NSString stringWithFormat:@"showInfoFromJava('%@')",json];
+    NSString *showInfoFromJava = [NSString stringWithFormat:@"showInfoFromJava('%@','%@')",json,token];
     [self.webView evaluateJavaScript:showInfoFromJava completionHandler:^(id _Nullable data, NSError * _Nullable error) {
         //显示对话框
         
@@ -405,6 +403,9 @@
 // 页面加载完成之后调用
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
     [self getData];
+    [self hiddenHUD];
+    [self.bottomView setHidden:NO];
+
     //    [self ocToJs];
 }
 

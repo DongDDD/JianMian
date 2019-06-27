@@ -24,112 +24,20 @@
 #import "JMJudgeViewController.h"
 #import "JMVideoChatViewController.h"
 #import "IQKeyboardManager.h"
+#import "JMHTTPManager+InterView.h"
 
-//1求职意向状态增加应届生
-//2工资选择用K表示，选择跨度加大
-//3C端求职意向学历选择删去“不限”
-//4加大部分按钮，更容易点击
-//5键盘按完成收起
-//6实名认证才可以聊天
-//7.聊天提示系统声音
-//8.C端看全职的时候看到个人用户信息，在实名认证后会这样
-//
-
-@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate>
+@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate>
 
 @end
 
 @implementation AppDelegate
-- (void)registNotification
-{
-    self.window.backgroundColor = [UIColor whiteColor];
-
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    else
-    {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
-    }
-}
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-    NSLog(@"userInfouserInfo%@", userInfo);
-}
-
--(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(nonnull NSError *)error{
-    
-    NSLog(@"%@",error);
-    
-    
-}
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return  [WXApi handleOpenURL:url delegate:self];
-}
-
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [WXApi handleOpenURL:url delegate:self];
-}
-
-
-// 微信支付成功或者失败回调
--(void) onResp:(BaseResp*)resp
-{
-    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
-    NSString *strTitle;
-    
-    if([resp isKindOfClass:[SendMessageToWXResp class]])
-    {
-        strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
-    }
-    if([resp isKindOfClass:[PayResp class]]){
-        //支付返回结果，实际支付结果需要去微信服务器端查询
-        
-        switch (resp.errCode) {
-            case WXSuccess:
-                
-                strTitle = [NSString stringWithFormat:@"支付成功"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:Notification_PaySucceed object:nil];
-
-                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
-                break;
-                
-            default:
-                strTitle = [NSString stringWithFormat:@"支付失败"];
-                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
-                break;
-        }
-    }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alert show];
-  
-}
-
-
-
--(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
-    
-    //记录下 Apple 返回的 deviceToken
-//    _deviceToken = deviceToken;
-    NSLog(@"deviceTokendeviceToken---%@",deviceToken);
-//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
-//    judgevc.deviceToken = deviceToken;
-//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
-//    [_window setRootViewController:naVC];
-//    [self.window makeKeyAndVisible];
-    
-}
-
 
 - (void)initTimSDK {
     TIMSdkConfig *sdkConfig = [[TIMSdkConfig alloc] init];
     sdkConfig.sdkAppId = TIMSdkAppid.intValue;
     sdkConfig.accountType = TIMSdkAccountType;
     sdkConfig.disableLogPrint = NO; // 是否允许log打印
-        sdkConfig.logLevel = TIM_LOG_NONE; //Log输出级别（debug级别会很多）
+    sdkConfig.logLevel = TIM_LOG_NONE; //Log输出级别（debug级别会很多）
     [[TIMManager sharedInstance] initSdk:sdkConfig];
 }
 
@@ -143,7 +51,7 @@
     [AMapServices sharedServices].enableHTTPS = YES;
     [[TIMManager sharedInstance] addMessageListener:self];
     //坚决键盘遮挡问题
-//    [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition]; //输入框自动上移
+    //    [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition]; //输入框自动上移
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;//不显示工具条
@@ -156,10 +64,10 @@
     NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
     [_window setRootViewController:naVC];
     [self.window makeKeyAndVisible];//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
-//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
-//    [_window setRootViewController:naVC];
-//    [self.window makeKeyAndVisible];
-
+    //    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
+    //    [_window setRootViewController:naVC];
+    //    [self.window makeKeyAndVisible];
+    
     
     return YES;
 }
@@ -197,7 +105,7 @@
         }
         unReadCount += [conv getUnReadMessageNum];
     }
-
+    
     
     // 1.6.设置应用图标左上角显示的数字
     localNote.applicationIconBadgeNumber = unReadCount;
@@ -211,12 +119,159 @@
 }
 
 
+- (void)registNotification
+{
+    self.window.backgroundColor = [UIColor whiteColor];
+
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+    }
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    NSLog(@"userInfouserInfo%@", userInfo);
+}
+
+-(void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(nonnull NSError *)error{
+    
+    NSLog(@"%@",error);
+    
+    
+}
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return  [WXApi handleOpenURL:url delegate:self];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [WXApi handleOpenURL:url delegate:self];
+}
+
+-(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    
+    //记录下 Apple 返回的 deviceToken
+//    _deviceToken = deviceToken;
+    NSLog(@"deviceTokendeviceToken---%@",deviceToken);
+//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
+//    judgevc.deviceToken = deviceToken;
+//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
+//    [_window setRootViewController:naVC];
+//    [self.window makeKeyAndVisible];
+    
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application {
+    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+}
+
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    //
+    __block UIBackgroundTaskIdentifier bgTaskID;
+    bgTaskID = [application beginBackgroundTaskWithExpirationHandler:^ {
+        //不管有没有完成，结束 background_task 任务
+        [application endBackgroundTask: bgTaskID];
+        bgTaskID = UIBackgroundTaskInvalid;
+    }];
+    //获取未读计数
+    int unReadCount = 0;
+    NSArray *convs = [[TIMManager sharedInstance] getConversationList];
+    for (TIMConversation *conv in convs) {
+        if([conv getType] == TIM_SYSTEM){
+            continue;
+        }
+        unReadCount += [conv getUnReadMessageNum];
+    }
+    [UIApplication sharedApplication].applicationIconBadgeNumber = unReadCount;
+    
+    //doBackground
+    TIMBackgroundParam  *param = [[TIMBackgroundParam alloc] init];
+    [param setC2cUnread:unReadCount];
+    [[TIMManager sharedInstance] doBackground:param succ:^() {
+        NSLog(@"doBackgroud Succ");
+        self.isBackgroundTask = YES;
+    } fail:^(int code, NSString * err) {
+        NSLog(@"Fail: %d->%@", code, err);
+    }];
+}
+
+
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    [[TIMManager sharedInstance] doForeground:^() {
+        NSLog(@"doForegroud Succ");
+        self.isBackgroundTask = NO;
+    } fail:^(int code, NSString * err) {
+        NSLog(@"Fail: %d->%@", code, err);
+    }];
+}
+
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+}
+
+
+- (void)applicationWillTerminate:(UIApplication *)application {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+
+#pragma mark - 网络回调
+
+// 微信支付成功或者失败回调
+-(void) onResp:(BaseResp*)resp
+{
+    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+    NSString *strTitle;
+    
+    if([resp isKindOfClass:[SendMessageToWXResp class]])
+    {
+        strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
+    }
+    if([resp isKindOfClass:[PayResp class]]){
+        //支付返回结果，实际支付结果需要去微信服务器端查询
+        
+        switch (resp.errCode) {
+            case WXSuccess:
+                
+                strTitle = [NSString stringWithFormat:@"支付成功"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:Notification_PaySucceed object:nil];
+                
+                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
+                break;
+                
+            default:
+                strTitle = [NSString stringWithFormat:@"支付失败"];
+                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
+                break;
+        }
+    }
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alert show];
+    
+}
+
+//接收消息回调
 - (void)onNewMessage:(NSArray *)msgs
 {
+//    [_window addSubview:self.feedBackChooseVC.view];
 
-    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-    AudioServicesPlaySystemSound(1007);
-    
+  
     if (self.isBackgroundTask) {
         
 //        [self initLocalNotification];
@@ -230,6 +285,7 @@
     TIMMessage *msg = msgs[0];
     TIMElem * elem = [msg getElem:0];
     if ([elem isKindOfClass:[TIMCustomElem class]]) {
+    
         TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
         self.videoChatDic = (NSDictionary*) [NSKeyedUnarchiver unarchiveObjectWithData:custom_elem.data];
         if (self.videoChatDic == nil) {
@@ -265,6 +321,8 @@
 
         }else if (self.videoChatDic && [custom_elem.desc isEqualToString:@"interviewMessage"]){
             [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            AudioServicesPlaySystemSound(1007);
             
         }else if (self.videoChatDic && [custom_elem.desc isEqualToString:@"textMessage"]){
             //
@@ -285,7 +343,7 @@
 //            }
 //        }
         
-        if ([custom_elem.desc isEqualToString:@"leaveAction"]) {
+        if ([custom_elem.desc isEqualToString:@"结束了视频"]) {
             [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
             [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMUHangUpListener object:nil];
@@ -295,6 +353,16 @@
         
         if ([custom_elem.desc containsString:@"任务"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_TaskListener object:msgs];
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            AudioServicesPlaySystemSound(1007);
+            
+            
+        }
+        
+        if ([custom_elem.ext containsString:@"createOrder"]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:Notification_OrderListener object:msgs];
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            AudioServicesPlaySystemSound(1335);
             
         }
 //        NSString *title = [NSString stringWithFormat:@" %@ 邀请你视频面试",self.videoChatDic[TITLE]];
@@ -310,9 +378,9 @@
 
 
 
+#pragma mark - 视频界面事件
 
-#pragma mark - 接听视频聊天
-
+// 接听视频聊天
 -(void)answerAction{
     [self.answerOrHangUpView setHidden:YES];
 //    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
@@ -336,31 +404,73 @@
     
 }
 
-
-#pragma mark - 关闭视频聊天界面
--(void)hangupAction_model:(JMInterViewModel *)model{
-    //关闭自己的界面并向对方videoChatView丢出一个leaveAction 挂断命令
-    [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
-    [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
-//   JMUserInfoModel *
-    //谁发出的就挂掉谁的视频界面
-//    [self.answerOrHangUpView.player stop];
-    [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"leaveAction"];
-}
-
-//还没进入房间，弹窗的关闭
+//还没进入房间，拒绝接听，关闭弹窗
 -(void)didClickClose{
     NSDictionary *dic;
     dic = @{
-            @"leaveAction":@"leaveAction"
+            @"结束了视频":@"结束了视频"
             };
     [self.answerOrHangUpView.player stop];
-
+    [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
     [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
-    [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"leaveAction"];
+    if (self.videoChatDic[SendMarkID] ) {
+        
+        [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"结束了视频"];
+    }
+    
+}
+
+
+////关闭视频聊天界面
+//-(void)hangupAction_model:(JMInterViewModel *)model{
+//    //关闭自己的界面并向对方videoChatView丢出一个leaveAction 挂断命令
+//    [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
+//    [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
+////   JMUserInfoModel *
+//    //谁发出的就挂掉谁的视频界面
+////    [self.answerOrHangUpView.player stop];
+////    [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"结束了视频"];
+//
+//}
+
+// 对方挂断了 离开房间了
+-(void)appDelegateLeaveChannelActoin{
+
+    //改状态成4 这个状态才可以评价
+    [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
 
 }
 
+
+
+-(void)didCommitActionWithInterview_id:(NSString *)interview_id{
+    //改状态成4 这个状态才可以评价
+//    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//    if ([userModel.type isEqualToString:C_Type_USER]) {
+        [self.feedBackChooseVC.view removeFromSuperview];
+
+//    }
+}
+
+-(void)updateInterviewStatus_interviewID:(NSString *)interviewID status:(NSString *)status{
+    [[JMHTTPManager sharedInstance]updateInterViewWith_Id:interviewID status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        NSString *str;
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        if ([status isEqualToString:@"4"] && [userModel.type isEqualToString:C_Type_USER]) {
+            //C端在这个状态才可以去反馈
+            [_window addSubview:self.feedBackChooseVC.view];
+            str = @"面试结束了，快去面试反馈吧！";
+        }else if ([status isEqualToString:@"4"] && [userModel.type isEqualToString:B_Type_UESR]){
+            str = @"面试结束了，可以去面试管理录用人才";
+
+        }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:str delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        [alert show];
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
 #pragma mark - 发送拒绝接听视频命令（自定义消息）
 
 -(void)setVideoInvite_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
@@ -404,91 +514,6 @@
 
 
 
-
-
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    NSString *btnTitle = [alertView buttonTitleAtIndex:buttonIndex];
-//    if ([btnTitle isEqualToString:@"不方便"]) {
-//        NSLog(@"你点击了取消");
-//    }else if ([btnTitle isEqualToString:@"接受"]) {
-//        NSLog(@"你点击了接受");
-//        JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
-//        vc.view.frame = CGRectMake(0, 0, _window.frame.size.width, _window.frame.size.height);
-//        vc.videoChatDic = self.videoChatDic;
-//        vc.view.tag = 754;
-//        [_window addSubview:vc.view];
-//
-////        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-////        [_window setRootViewController:naVC];
-//
-//    }
-//}
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-}
-
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    
-//
-    __block UIBackgroundTaskIdentifier bgTaskID;
-    bgTaskID = [application beginBackgroundTaskWithExpirationHandler:^ {
-        //不管有没有完成，结束 background_task 任务
-        [application endBackgroundTask: bgTaskID];
-        bgTaskID = UIBackgroundTaskInvalid;
-    }];
-    //获取未读计数
-    int unReadCount = 0;
-    NSArray *convs = [[TIMManager sharedInstance] getConversationList];
-    for (TIMConversation *conv in convs) {
-        if([conv getType] == TIM_SYSTEM){
-            continue;
-        }
-        unReadCount += [conv getUnReadMessageNum];
-    }
-    [UIApplication sharedApplication].applicationIconBadgeNumber = unReadCount;
-
-    //doBackground
-    TIMBackgroundParam  *param = [[TIMBackgroundParam alloc] init];
-    [param setC2cUnread:unReadCount];
-    [[TIMManager sharedInstance] doBackground:param succ:^() {
-        NSLog(@"doBackgroud Succ");
-        self.isBackgroundTask = YES;
-    } fail:^(int code, NSString * err) {
-        NSLog(@"Fail: %d->%@", code, err);
-    }];
-}
-
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    [[TIMManager sharedInstance] doForeground:^() {
-        NSLog(@"doForegroud Succ");
-        self.isBackgroundTask = NO;
-    } fail:^(int code, NSString * err) {
-        NSLog(@"Fail: %d->%@", code, err);
-    }];
-}
-
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window {
-    return UIInterfaceOrientationMaskPortrait;
-}
-
 -(MBProgressHUD *)progressHUD{
     if (!_progressHUD) {
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.window];
@@ -525,4 +550,15 @@
     return _videoChatView;
 }
 
+
+-(JMFeedBackChooseViewController *)feedBackChooseVC{
+    if (_feedBackChooseVC == nil) {
+        _feedBackChooseVC = [[JMFeedBackChooseViewController alloc]init];
+        _feedBackChooseVC.interview_id = self.videoChatDic[Channel_ID];
+        _feedBackChooseVC.view.frame = _window.bounds;
+        _feedBackChooseVC.delegate = self;
+        _feedBackChooseVC.viewType = JMFeedBackChooseViewAppdelegate;
+    }
+    return _feedBackChooseVC;
+}
 @end

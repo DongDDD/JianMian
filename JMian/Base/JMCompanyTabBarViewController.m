@@ -62,6 +62,8 @@
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskNotification:) name:Notification_TaskListener object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderNotification:) name:Notification_OrderListener object:nil];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -75,9 +77,16 @@
     [self getMsgList];
 }
 
+- (void)orderNotification:(NSNotification *)notification
+{
+    self.mine.tabBarItem.badgeValue = @"@";
+    [self.mine.BUserCenterHeaderSubView.orderBadgeView setHidden:NO];
+
+}
+
 - (void)taskNotification:(NSNotification *)notification
 {
-    self.mine.tabBarItem.badgeValue = @".";
+    self.mine.tabBarItem.badgeValue = @"@";
     [self.mine.BUserCenterHeaderSubView.taskBadgeView setHidden:NO];
     //显示
 }

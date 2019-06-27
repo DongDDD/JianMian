@@ -23,7 +23,6 @@
 #import "JMUploadVideoViewController.h"
 #import "JMIDCardIdentifyViewController.h"
 #import "JMBUserInfoViewController.h"
-#import "JMMPersonalCenterHeaderView.h"
 #import "UIView+addGradualLayer.h"
 #import "JMMyOrderListViewController.h"
 #import "JMBUserCenterHeaderView.h"
@@ -46,7 +45,6 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *imageNameArr,*labelStrArr;
 @property (strong, nonatomic) JMUserInfoModel *userInfoModel;
-@property (strong, nonatomic) JMMPersonalCenterHeaderView *personalCenterHeaderView;
 @property (strong, nonatomic) JMBUserCenterHeaderView *BUserCenterHeaderView;
 
 
@@ -102,16 +100,20 @@
     [self getUserData];
     if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
         [self.BUserCenterHeaderView setHidden:NO];
+        if (_BUserCenterHeaderSubView.taskBadgeView.hidden && _BUserCenterHeaderSubView.orderBadgeView.hidden ) {
+            self.tabBarItem.badgeValue = nil;
+        }
         
     }else{
-        
         [self.personalCenterHeaderView setHidden:NO];
+        if (_personalCenterHeaderView.taskBadgeView.hidden && _personalCenterHeaderView.orderBadgeView.hidden) {
+            self.tabBarItem.badgeValue = nil;
+            
+            
+        }
     }
     
-    if (_BUserCenterHeaderSubView.taskBadgeView.hidden) {
-        
-        self.tabBarItem.badgeValue = nil;
-    }
+    
 
 }
 
@@ -166,17 +168,20 @@
 -(void)didClickMyOrder{
     JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
     vc.viewType = JMMyOrderListViewControllerCUser;
+    [self.personalCenterHeaderView.orderBadgeView setHidden:YES];
     [self.navigationController pushViewController:vc animated:YES];
     
-
 }
+
 -(void)didClickMyTask{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     vc.title = @"我的任务";
     [vc setMyIndex:0];
+    [self.personalCenterHeaderView.taskBadgeView setHidden:YES];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 #pragma mark - B端个人的中心
 
 -(void)BTaskClick{
@@ -184,7 +189,7 @@
     vc.title = @"任务管理";
     [vc setMyIndex:0];
     [_BUserCenterHeaderSubView.taskBadgeView setHidden:YES];
-   
+    
     [self.navigationController pushViewController:vc animated:YES];
  
 }
@@ -192,6 +197,7 @@
 -(void)BOrderClick{
     JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
     vc.viewType = JMMyOrderListViewControllerBUser;
+    [_BUserCenterHeaderSubView.orderBadgeView setHidden:YES];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

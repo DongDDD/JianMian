@@ -26,6 +26,7 @@
 #import "JMPaySucceedViewController.h"
 #import "JMPayFailedViewController.h"
 #import "JMHTTPManager+FectchTaskOrderInfo.h"
+#import "JMBDetailWebViewController.h"
 
 
 @interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate>
@@ -294,6 +295,7 @@
     [[JMHTTPManager sharedInstance]fectchTaskOrderInfo_taskID:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             JMTaskOrderListCellData *taskInfoData = [JMTaskOrderListCellData mj_objectWithKeyValues:responsObject[@"data"]];
+            
             JMSnapshotWebViewController *vc = [[JMSnapshotWebViewController alloc]init];
             vc.data = taskInfoData;
             [self.navigationController pushViewController:vc animated:YES];
@@ -602,6 +604,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     JMTaskOrderListCellData *data = self.listsArray[indexPath.row];
     [self getTaskInfoDataWithTask_order_id:data.task_order_id];
+    
+//    JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+//    vc.ability_id = data.ability_id;
+//    [self.navigationController pushViewController:vc animated:YES];
 //    JMSnapshotWebViewController *vc = [[JMSnapshotWebViewController alloc]init];
 //    vc.data = data;
 //    [self.navigationController pushViewController:vc animated:YES];

@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @interface JMMPersonalCenterHeaderView : UIView
 @property(nonatomic,weak)id<JMMPersonalCenterHeaderViewDelegate>delegate;
+@property(nonatomic,strong)UIView *taskBadgeView;
+@property(nonatomic,strong)UIView *orderBadgeView;
 @end
 
 NS_ASSUME_NONNULL_END

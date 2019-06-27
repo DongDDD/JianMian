@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)swicthCameraAction;//切换镜头
 -(void)hangupAction_model:(JMInterViewModel *)model;
+-(void)appDelegateLeaveChannelActoin; //对方离开了房间（对方挂断了）
+-(void)appDelegateHangupAction; //挂断
+
 @end
 
 

@@ -177,18 +177,13 @@
         .line {
             border-bottom: 1px solid #E6E6E6
         }
-         .dialog-open {
-            -webkit-overflow-scrolling:touch;
-            position: fixed;
-            width: 100%;
-        }
     </style>
 </head>
 <body style="background: no-repeat;">
-<div id="wrapper" style="visibility:hidden">
+<div id="wrapper" v-if="initialize">
     <div class="video">
         <div class="video-wrapper">
-            <div id="output" v-show="play" @click="videoPlay">
+            <div id="output" v-if="play" @click="videoPlay">
                 <img src="../images/pofang@2x.png" alt="" style="width: 2rem;">
             </div>
             <video id="video" preload="auto" x5-video-player-type="h5" v-if="this.detail.video" :poster="this.detail.video.cover">
@@ -196,8 +191,8 @@
             </video>
             <div class="control">
                 <div>
-                    <span class="pause" v-show="!play" @click="videoPause($event)"><span></span><span></span></span>
-                    <span class="play" v-show="play" @click="videoPlay"><div></div></span>
+                    <span class="pause" v-if="!play" @click="videoPause($event)"><span></span><span></span></span>
+                    <span class="play" v-if="play" @click="videoPlay"><div></div></span>
                     <span class="progress" @click="drop($event)">
                         <span class="bar" v-show="!play || pause"></span>
                     </span>
@@ -212,7 +207,7 @@
     <div class="contain" id="contain">
         <div class="user_info">
             <div>
-                <span style="font-size: 0.53rem;color:#484848;font-family: PingFang-SC-Heavy" v-if="this.detail.user">{{this.detail.user.nickname}}<img v-show="level>0" id="level" v-for="item in level" :src="level1" style="margin-left: 0.32rem;width: 0.4rem;margin-top: 0.1rem;margin-right:0.02rem"></span>
+                <span style="font-size: 0.53rem;color:#484848;font-family: PingFang-SC-Heavy" v-if="this.detail.user">{{this.detail.user.nickname}}<img v-if="level>0" id="level" v-for="item in level" :src="level1" style="margin-left: 0.32rem;width: 0.38rem;margin-top: 0.1rem"></span>
                 <span style="color:#3BC7FF;font-size: 0.42rem" v-if="this.detail.city">{{this.detail.city.city_name}}</span>
             </div>
             <ul>
@@ -230,7 +225,7 @@
         <div class="main">
             <span>图片作品</span>
             <ul style="width: 100%;margin-top: 0.66rem;">
-                <li style="display: inline-block;width: 2.8rem;height:2.8rem;line-height:2.8rem;overflow:hidden;background:#000;text-align:center;margin-right: 0.16rem;" v-for="item in this.detail.images"><img :src="item.file_path" alt="" style="width:100%;vertical-align:middle;" @click="openSimpleDialog(item.file_path)"></li>
+                <li style="display: inline-block" v-for="item in this.detail.images"><img :src="item.file_path" alt="" style="width: 2.76rem;margin-right: 0.16rem"></li>
             </ul>
         </div>
         <div class="line" style="margin: 0 0.53rem;"></div>
@@ -259,11 +254,6 @@
             <div style="height: 1rem"><br/></div>
         </div>
     </div>
-    <div style="position: fixed;top:0;left:0;background:#000;width: 100%;height: 100%;z-index:1000" v-if="openSimple" @click="close">
-        <div style="position: relative;width: 100%;height: 100%">
-            <img :src="bigImg" alt="" style="position: absolute;top:50%;left: 50%;transform: translate(-50%,-50%);width: 80%">
-        </div>
-    </div>
 </div>
 </body>
 <script src="../js/vue.js"></script>
@@ -290,73 +280,58 @@
             level3:"../images/mission3@2x.png",
             level4:"../images/mission@2x.png",
             // q:true,
-            openSimple: false,
-            bigImg: '',
         },
         mounted() {
             if(this.detail){
                 this.initialize = true;
             }
-            ModalHelper = ((bodyCls) => {
-                let scrollTop;
-                return {
-                    afterOpen: function () {
-                        scrollTop = document.scrollingElement.scrollTop;
-                        document.body.classList.add(bodyCls);
-                        document.body.style.top = -scrollTop + 'px';
-                    },
-                    beforeClose: function () {
-                        document.body.classList.remove(bodyCls);
-                        document.scrollingElement.scrollTop = scrollTop;
-                    },
-                };
-            })('dialog-open');
+            if(this.detail){
+                this.handleRecord();
+            };
         },
         methods:{
             load() {
                 if(this.detail){
                     this.loading = true;
                     this.page = this.page + 1;
-                    if(this.detail.user.user_id){
-                        axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?user_id=' + this.detail.user.user_id + '&page=' + this.page, {
-                            headers: {
-                                'x-access-sign': '585c84aca67b58e000364309783e31e6',
-                                'Authorization': this.token,
+                    axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?user_id=' + this.detail.user.user_id + '&page=' + this.page, {
+                        headers: {
+                            'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                            'Authorization': this.token,
+                        }
+                    })
+                        .then(function (res) {
+                            if(res.data.last_page < this.page){
+                                this.text = '已加载全部！';
+                                setTimeout(() => {
+                                    this.over = true;
+                                }, 1500);
+                            }else{
+                                var length = res.data.data.length;
+                                for(var i = 0;i<length; i++){
+                                    this.record.data.push(res.data.data[i])
+                                }
+                                this.page = res.data.current_page;
+                                setTimeout(() => {
+                                    this.loading = false;
+                                }, 1000);
+                                console.log(this.record);
                             }
-                        })
-                            .then(function (res) {
-                                if(res.data.last_page < this.page){
-                                    this.text = '已加载全部！';
-                                    setTimeout(() => {
-                                        this.over = true;
-                                    }, 1500);
-                                }else{
-                                    var length = res.data.data.length;
-                                    for(var i = 0;i<length; i++){
-                                        this.record.data.push(res.data.data[i])
-                                    }
-                                    this.page = res.data.current_page;
-                                    setTimeout(() => {
-                                        this.loading = false;
-                                    }, 1000);
-                                    console.log(this.record);
-                                }
-                                if(res.data.data.length < 1){
-                                    this.text = '已加载全部！';
-                                    setTimeout(() => {
-                                        this.over = true;
-                                    }, 1500);
-                                }
-                                if(res.data.code !== 200){
-                                    setTimeout(() => {
-                                        this.over = true;
-                                    }, 1500);
-                                }
-                            }.bind(this))
-                            .catch(function (error) {
-                                console.log(error);
-                            });
-                    }
+                            if(res.data.data.length < 1){
+                                this.text = '已加载全部！';
+                                setTimeout(() => {
+                                    this.over = true;
+                                }, 1500);
+                            }
+                            if(res.data.code !== 200){
+                                setTimeout(() => {
+                                    this.over = true;
+                                }, 1500);
+                            }
+                        }.bind(this))
+                        .catch(function (error) {
+                            console.log(error);
+                        });
                     setTimeout(() => {
                         this.text = '已加载全部！';
                         this.loading = false;
@@ -406,7 +381,6 @@
                 return (hour < 10 ? "0" + hour:hour) + ":" + (minute < 10 ? "0" + minute:minute) + ":" + (second < 10 ? "0" + second:second);
             },
             handleRecord(){
-            if(this.detail.user.user_id){
                 axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?user_id=' + this.detail.user.user_id, {
                     headers: {
                         'x-access-sign': '585c84aca67b58e000364309783e31e6',
@@ -417,13 +391,12 @@
                         var jsonData = JSON.stringify(res.data);
                         this.record = JSON.parse(jsonData);
                         this.page = this.record.current_page;
-                        console.log(jsonData)
-                        console.log(this.token)
+                        console.log(this.record)
+                        console.log(JSON.parse(this.record.data))
                     }.bind(this))
                     .catch(function (error) {
                         console.log(error);
                     });
-                }
             },
             leveling(){
                 var img = document.getElementById('level');
@@ -510,38 +483,27 @@
                     }
                 }
             },
-            openSimpleDialog (img) {
-                this.openSimple = true;
-                this.bigImg = img;
-                ModalHelper.afterOpen();
-            },
-             close(){
-                this.openSimple = false;
-                ModalHelper.beforeClose()
-            }
         },
         watch:{
             detail(){
                 this.$nextTick(function(){
-                    document.getElementById('wrapper').style.visibility = 'visible';
                     var videoWrap = document.getElementById('contain');
                     if(vue.detail.video){
                         videoWrap.style.marginTop = '13rem';
-                        var video = document.getElementById('video');
-                        video.addEventListener("ended",function(){
-                            document.getElementsByClassName('bar')[0].style.width = '0';
-                            video.currentTime = 0;
-                            vue.play = true;
-                        });
-                        video.addEventListener("loadedmetadata",function(){
-                            document.querySelector(".totalTime").innerText = vue.getTimeBySecond(video.duration);
-                        });
                     }else{
                         videoWrap.style.marginTop = '-0.3rem';
                     }
-                    if(vue.detail.user){
-                        vue.leveling();
-                    }
+                    var video = document.getElementById('video');
+                    video.addEventListener("ended",function(){
+                        document.getElementsByClassName('bar')[0].style.width = '0';
+                        video.currentTime = 0;
+                        vue.play = true;
+                    });
+                    video.addEventListener("loadedmetadata",function(){
+                        document.querySelector(".totalTime").innerText = vue.getTimeBySecond(video.duration);
+                    });
+                    vue.leveling();
+                    vue.handleRecord();
                 });
             }
         }
@@ -549,7 +511,6 @@
     function showInfoFromJava(item,token) {
         vue.detail = JSON.parse(item);
         vue.token = token;
-        vue.handleRecord();
     };
     /*if(vue.detail){
         function taskDataLoading(){

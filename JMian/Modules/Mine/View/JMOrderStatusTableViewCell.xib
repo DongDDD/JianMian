@@ -184,12 +184,20 @@
                                     <action selector="deliverGoodsAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="bgv-9P-BGs"/>
                                 </connections>
                             </button>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="delivered.png" translatesAutoresizingMaskIntoConstraints="NO" id="I2E-pk-kx2">
+                                <rect key="frame" x="329" y="0.0" width="39" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="6Xa-tG-cAz"/>
+                                    <constraint firstAttribute="width" constant="39" id="Hfd-XW-7bU"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7cL-B2-iVh" firstAttribute="leading" secondItem="zBe-fq-8LH" secondAttribute="leading" id="5Ct-Tk-O5B"/>
                             <constraint firstItem="jPk-kr-2ii" firstAttribute="top" secondItem="7cL-B2-iVh" secondAttribute="bottom" constant="5" id="62U-gR-tcH"/>
                             <constraint firstItem="tkH-kk-YJy" firstAttribute="top" secondItem="kNL-v9-3aS" secondAttribute="top" constant="-4" id="6nT-eF-j29"/>
+                            <constraint firstAttribute="trailing" secondItem="I2E-pk-kx2" secondAttribute="trailing" id="7RN-ka-JN1"/>
                             <constraint firstAttribute="trailing" secondItem="66R-eN-A25" secondAttribute="trailing" id="Cyw-im-1ye"/>
                             <constraint firstItem="TOz-mC-FAP" firstAttribute="trailing" secondItem="tkH-kk-YJy" secondAttribute="trailing" id="DwJ-tp-SSe"/>
                             <constraint firstItem="45G-2Y-dxr" firstAttribute="centerY" secondItem="zBe-fq-8LH" secondAttribute="centerY" id="F7t-oE-hlA"/>
@@ -207,6 +215,7 @@
                             <constraint firstItem="asB-c0-sEF" firstAttribute="trailing" secondItem="G4F-4Z-Eem" secondAttribute="trailing" id="g6A-tH-jzj"/>
                             <constraint firstItem="kNL-v9-3aS" firstAttribute="leading" secondItem="7cL-B2-iVh" secondAttribute="trailing" constant="15" id="hTk-ih-y9W"/>
                             <constraint firstItem="jPk-kr-2ii" firstAttribute="leading" secondItem="bNM-fB-NAZ" secondAttribute="leading" id="iVr-Qb-rlp"/>
+                            <constraint firstItem="I2E-pk-kx2" firstAttribute="top" secondItem="bNM-fB-NAZ" secondAttribute="top" id="jJh-9g-Yek"/>
                             <constraint firstItem="zBe-fq-8LH" firstAttribute="top" secondItem="bNM-fB-NAZ" secondAttribute="top" constant="20" id="kCe-zR-ReK"/>
                             <constraint firstItem="G4F-4Z-Eem" firstAttribute="trailing" secondItem="tkH-kk-YJy" secondAttribute="trailing" id="q0n-vm-SOo"/>
                             <constraint firstItem="kNL-v9-3aS" firstAttribute="bottom" secondItem="7cL-B2-iVh" secondAttribute="bottom" id="qkL-IB-ONU"/>
@@ -226,6 +235,7 @@
             <connections>
                 <outlet property="adressLab" destination="NWz-YK-Uyi" id="3tY-Nj-yYd"/>
                 <outlet property="contactBGView" destination="66R-eN-A25" id="ZBc-2p-xhH"/>
+                <outlet property="deiveredImageView" destination="I2E-pk-kx2" id="6Wn-ZX-4dv"/>
                 <outlet property="deliverGoodsBtn" destination="TOz-mC-FAP" id="2mB-S1-iqz"/>
                 <outlet property="iconImageView" destination="7cL-B2-iVh" id="zZm-ph-skD"/>
                 <outlet property="infoLab1" destination="kNL-v9-3aS" id="dKj-dg-UxK"/>
@@ -241,6 +251,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="delivered.png" width="39" height="31.5"/>
         <image name="order_annotion.png" width="14" height="13"/>
         <image name="order_cp.png" width="10" height="10"/>
         <image name="store.png" width="14" height="13"/>

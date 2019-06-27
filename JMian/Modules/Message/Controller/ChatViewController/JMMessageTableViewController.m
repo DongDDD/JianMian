@@ -17,9 +17,13 @@
 #import "THDatePickerView.h"
 #import "JMHTTPManager+InterView.h"
 #import "JMHTTPManager+CreateTaskOrder.h"
+#import "JMBDetailWebViewController.h"
+#import "JMCDetailWebViewController.h"
+#import "JMPersonDetailsViewController.h"
+#import "JobDetailsViewController.h"
 
 
-@interface JMMessageTableViewController ()<TIMMessageListener,JMChatViewSectionViewDelegate,THDatePickerViewDelegate,JMChatDetailPartTimeJobTableViewCellDelegate>
+@interface JMMessageTableViewController ()<TIMMessageListener,JMChatViewSectionViewDelegate,THDatePickerViewDelegate,JMChatDetailPartTimeJobTableViewCellDelegate,JMChatDetailInfoTableViewCellDelegate>
 
 @property (nonatomic, strong) NSMutableArray *uiMsgs;
 
@@ -432,6 +436,45 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     [self sendCreateTaskOrderResquest_task_id:model.work_task_id];
 }
 
+-(void)didClickHeaderInfoActionWithModel:(JMMessageListModel *)model{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        if ([model.type isEqualToString:@"1"]) {
+            //全职
+            JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
+            JMCompanyHomeModel *model = [[JMCompanyHomeModel alloc]init];
+            model.job_label_id = _myModel.work_work_id;
+            vc.companyModel = model;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if ([model.type isEqualToString:@"2"]) {
+            //兼职
+            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+            vc.ability_id = _myModel.job_ability_id;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        
+    }else{
+        if ([model.type isEqualToString:@"1"]) {
+            //全职
+            JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
+            JMCompanyHomeModel *model = [[JMCompanyHomeModel alloc]init];
+            model.job_label_id = _myModel.work_work_id;
+            vc.companyModel = model;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if ([model.type isEqualToString:@"2"]) {
+            //兼职
+            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+            vc.ability_id = _myModel.job_ability_id;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        
+    }
+
+}
 #pragma mark - 申请兼职职位
 
 -(void)sendCreateTaskOrderResquest_task_id:(NSString *)task_id{
@@ -513,6 +556,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         {
             cell = [[JMChatDetailInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
         }
+        cell.delegate = self;
         //管理员隐藏头部对话信息详情
         if (_isDominator) {
             [cell setHidden:YES];
@@ -606,11 +650,17 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 
 }
+
 //
-//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 //    [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
-//
-//}
+    if (indexPath.row == 0) {
+    
+        
+    }
+    
+
+}
 
 
 /*

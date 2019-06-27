@@ -74,10 +74,11 @@
     [_taskBadgeView setHidden:YES];
     [self addSubview:_taskBadgeView];
     
-//    _orderBadgeView = [[UIView alloc]init];
-//    _orderBadgeView.layer.cornerRadius = 5;
-//    _orderBadgeView.backgroundColor = [UIColor redColor];
-//    [self addSubview:_orderBadgeView];
+    _orderBadgeView = [[UIView alloc]init];
+    _orderBadgeView.layer.cornerRadius = 5;
+    [_orderBadgeView setHidden:YES];
+    _orderBadgeView.backgroundColor = [UIColor redColor];
+    [self addSubview:_orderBadgeView];
 }
 
 -(void)initLayout{
@@ -92,11 +93,11 @@
         make.top.mas_equalTo(_centerBtn.mas_bottom).offset(10);
         
     }];
-//    [_orderBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.mas_equalTo(_centerBtn).mas_offset(-5);
-//        make.top.mas_equalTo(_centerBtn).mas_offset(-5);
-//        make.size.mas_equalTo(CGSizeMake(10,10));
-//    }];
+    [_orderBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(_centerBtn).mas_offset(5);
+        make.top.mas_equalTo(_centerBtn).mas_offset(-5);
+        make.size.mas_equalTo(CGSizeMake(10,10));
+    }];
     
     
     [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {

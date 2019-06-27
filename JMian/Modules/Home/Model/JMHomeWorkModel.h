@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHomeWorkModel : NSObject
+@property (nonatomic, copy) NSString *share_url;
 
 @property (nonatomic, strong) NSString *work_id;
 @property (nonatomic, strong) NSString *company_id;

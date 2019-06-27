@@ -32,6 +32,9 @@
         self.bgView.layer.shadowRadius = 5;
         self.bgView.layer.borderWidth = 0.5;
         self.bgView.layer.borderColor = [UIColor colorWithRed:217/255.0 green:217/255.0 blue:217/255.0 alpha:1.0].CGColor;
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
+//        [self.bgView addGestureRecognizer:tap];
+        
     }
     return self;
 }
@@ -171,6 +174,16 @@
 //    }
 //    return self;
 //}
+//-(void)tapAction{
+//
+//    NSLog(@"asdf");
+//}
+- (IBAction)tapAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickHeaderInfoActionWithModel:)]) {
+        [_delegate didClickHeaderInfoActionWithModel:_myModel];
+    }
+
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

@@ -78,7 +78,18 @@
     _rightLab.text = @"我的订单";
     _rightLab.font = kFont(12);
     [self addSubview:_rightLab];
-
+    _taskBadgeView = [[UIView alloc]init];
+    _taskBadgeView.backgroundColor = [UIColor redColor];
+    _taskBadgeView.layer.cornerRadius = 5;
+    [_taskBadgeView setHidden:YES];
+    [self addSubview:_taskBadgeView];
+    
+    _orderBadgeView = [[UIView alloc]init];
+    _orderBadgeView.layer.cornerRadius = 5;
+    [_orderBadgeView setHidden:YES];
+    _orderBadgeView.backgroundColor = [UIColor redColor];
+    [self addSubview:_orderBadgeView];
+    
 //    UITapGestureRecognizer *assignTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(leftAction)];
 //    UITapGestureRecognizer *orderTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(rightAction)];
 //
@@ -137,6 +148,16 @@
         make.height.mas_equalTo(49);
     }];
     
+    [_orderBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(_rightBtn).mas_offset(5);
+        make.top.mas_equalTo(_rightBtn).mas_offset(-5);
+        make.size.mas_equalTo(CGSizeMake(10,10));
+    }];
+    [_taskBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(_leftBtn).mas_offset(5);
+        make.top.mas_equalTo(_leftBtn).mas_offset(-5);
+        make.size.mas_equalTo(CGSizeMake(10,10));
+    }];
     
 }
 

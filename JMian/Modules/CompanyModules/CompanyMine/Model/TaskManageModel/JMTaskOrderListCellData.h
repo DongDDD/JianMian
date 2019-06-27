@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMTaskOrderListCellData : NSObject
+
+
 @property (nonatomic, copy) NSString *task_order_id;
 @property (nonatomic, copy) NSString *task_title;
 @property (nonatomic, copy) NSString *task_id;

@@ -89,14 +89,24 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lx8-pG-kes">
+                                <rect key="frame" x="0.0" y="0.0" width="359" height="139.5"/>
+                                <connections>
+                                    <action selector="tapAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rAZ-Um-pIj"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="Lx8-pG-kes" firstAttribute="top" secondItem="Ebg-Ov-OXS" secondAttribute="top" id="2sl-fz-MNk"/>
+                            <constraint firstItem="Lx8-pG-kes" firstAttribute="leading" secondItem="Ebg-Ov-OXS" secondAttribute="leading" id="EYM-Hj-ckF"/>
                             <constraint firstAttribute="bottom" secondItem="sCa-Ac-q41" secondAttribute="bottom" constant="15" id="JWW-GU-BU2"/>
                             <constraint firstItem="txp-Ug-bOv" firstAttribute="centerY" secondItem="JvV-7X-sU8" secondAttribute="centerY" id="Jxu-kd-f2u"/>
                             <constraint firstItem="w7k-5F-deD" firstAttribute="centerY" secondItem="4lE-3c-sGf" secondAttribute="centerY" id="Kdp-lC-Kkh"/>
                             <constraint firstItem="JvV-7X-sU8" firstAttribute="leading" secondItem="4lE-3c-sGf" secondAttribute="leading" id="Zm2-x7-DnW"/>
                             <constraint firstItem="sCa-Ac-q41" firstAttribute="top" secondItem="JvV-7X-sU8" secondAttribute="bottom" constant="15" id="ZuK-aA-k0Z"/>
+                            <constraint firstAttribute="bottom" secondItem="Lx8-pG-kes" secondAttribute="bottom" id="cd6-rP-JGM"/>
                             <constraint firstItem="hif-Z8-bQN" firstAttribute="leading" secondItem="txp-Ug-bOv" secondAttribute="trailing" constant="10" id="cg9-Z5-9zt"/>
                             <constraint firstItem="4lE-3c-sGf" firstAttribute="leading" secondItem="Ebg-Ov-OXS" secondAttribute="leading" constant="25" id="gna-Ql-FML"/>
                             <constraint firstItem="sCa-Ac-q41" firstAttribute="leading" secondItem="JvV-7X-sU8" secondAttribute="leading" id="ikK-Gk-kD9"/>
@@ -104,6 +114,7 @@
                             <constraint firstAttribute="trailing" secondItem="sCa-Ac-q41" secondAttribute="trailing" constant="25" id="ktT-ah-DcM"/>
                             <constraint firstItem="txp-Ug-bOv" firstAttribute="leading" secondItem="JvV-7X-sU8" secondAttribute="trailing" constant="10" id="pFc-Ds-UvZ"/>
                             <constraint firstItem="4lE-3c-sGf" firstAttribute="top" secondItem="Ebg-Ov-OXS" secondAttribute="top" constant="20" id="pQs-oq-7QY"/>
+                            <constraint firstAttribute="trailing" secondItem="Lx8-pG-kes" secondAttribute="trailing" id="sLt-ZM-hlV"/>
                             <constraint firstAttribute="trailing" secondItem="w7k-5F-deD" secondAttribute="trailing" constant="20" id="yV0-RF-P1s"/>
                             <constraint firstItem="hif-Z8-bQN" firstAttribute="centerY" secondItem="txp-Ug-bOv" secondAttribute="centerY" id="zP6-AA-V4M"/>
                         </constraints>
@@ -131,7 +142,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
-                <outlet property="bgView" destination="Ebg-Ov-OXS" id="27W-Yh-dJR"/>
+                <outlet property="bgView" destination="Ebg-Ov-OXS" id="ECO-K2-sts"/>
                 <outlet property="lab1" destination="JvV-7X-sU8" id="uG7-Kx-KOa"/>
                 <outlet property="lab2" destination="txp-Ug-bOv" id="KDI-km-g20"/>
                 <outlet property="lab3" destination="hif-Z8-bQN" id="RkH-4M-qYw"/>

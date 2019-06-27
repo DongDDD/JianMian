@@ -8,6 +8,7 @@
 
 #import "JMVideoChatView.h"
 #import "Masonry.h"
+#import "JMFeedBackChooseViewController.h"
 
 
 @interface JMVideoChatView ()<JMWaitForAnswerViewDelegate>
@@ -23,6 +24,7 @@
 @property(nonatomic,strong)JMMessageListModel *messageListModel;
 
 @property(nonatomic,strong)JMWaitForAnswerView *waitForAnswerView;
+@property(nonatomic,strong)JMFeedBackChooseViewController *feedBackChooseVC;
 @end
 
 @implementation JMVideoChatView
@@ -148,11 +150,20 @@
 -(void)hangupBtnAction{
     if (_delegate && [_delegate respondsToSelector:@selector(hangupAction_model:)]) {
         [_delegate hangupAction_model:_myInterviewModel];
-        [self leaveChannel];
-        if (self.receiverID) {
-            [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"leaveAction"];
-        }
     }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(appDelegateLeaveChannelActoin)]) {
+        [_delegate appDelegateLeaveChannelActoin];
+    }
+    
+    [self leaveChannel];
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
+    if (self.receiverID)
+    {
+        [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"结束了视频"];
+    }
+ 
 
 
 }
@@ -374,10 +385,14 @@
 }
 
 
+#pragma mark -delegate
 
 - (void)initializeAgoraEngine {
     self.agoraKit = [AgoraRtcEngineKit sharedEngineWithAppId:VideoAgoraAPIKey delegate:self];
 }
+
+
+
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine firstRemoteVideoDecodedOfUid:(NSUInteger)uid size: (CGSize)size elapsed:(NSInteger)elapsed {
 //    if (self.remoteVideo.hidden) {
 //        self.remoteVideo.hidden = NO;
@@ -398,14 +413,25 @@
 //    self.remoteVideoMutedIndicator.hidden = !muted;
 }
 
+//对方挂断离开房间
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine didOfflineOfUid:(NSUInteger)uid reason:(AgoraUserOfflineReason)reason {
+    //接受方
+    if (_delegate && [_delegate respondsToSelector:@selector(appDelegateLeaveChannelActoin)]) {
+        [_delegate appDelegateLeaveChannelActoin];
+    
+    }
+    //发出邀请方
     if (_delegate && [_delegate respondsToSelector:@selector(hangupAction_model:)]) {
         [_delegate hangupAction_model:_myInterviewModel];
-        [self leaveChannel];
     }
-    NSLog(@"有人离线");
+    [self leaveChannel];
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
+
+    NSLog(@"对方挂断离开房间");
 
 }
+
 
 - (void)rtcEngine:(AgoraRtcEngineKit *)engine didJoinedOfUid:(NSUInteger)uid elapsed:(NSInteger)elapsed {
     
@@ -415,17 +441,33 @@
 //    [self.waitForAnswerView setHidden:YES];
     
 }
-#pragma mark -用来接收对方丢出的挂断命令
+#pragma mark -接收对方丢出的挂断命令
 -(void)hangupMessage{
 
     if (_delegate && [_delegate respondsToSelector:@selector(hangupAction_model:)]) {
         [_delegate hangupAction_model:_myInterviewModel];
-        [self leaveChannel];
     }
-
+    
+    [self leaveChannel];
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
+//    JMFeedBackChooseViewController *vc = [[JMFeedBackChooseViewController alloc]init];
+//    vc.interview_id = self.
+    
 }
-- (void)onNewMessage:(NSNotification *)notification
-{
+
+-(JMFeedBackChooseViewController *)feedBackChooseVC{
+    if (_feedBackChooseVC == nil) {
+        _feedBackChooseVC = [[JMFeedBackChooseViewController alloc]init];
+        _feedBackChooseVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
+    }
+    return _feedBackChooseVC;
+}
+
+
+//- (void)onNewMessage:(NSNotification *)notification
+//{
 //    NSArray *msgs = notification.object;
 //    for (TIMMessage *msg in msgs) {
 //        int cnt = [msg elemCount];
@@ -444,23 +486,23 @@
 //
 //        }
 //
+////    }
+//    NSArray *msgs = notification.object;
+//    TIMMessage *msg = msgs[0];
+//    TIMElem * elem = [msg getElem:0];
+//    if ([elem isKindOfClass:[TIMCustomElem class]]) {
+//        TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
+//        if ([custom_elem.desc isEqualToString:@"结束了视频"]) {
+//            NSLog(@"6leaveActionleaveActionleaveAction");
+//        }
 //    }
-    NSArray *msgs = notification.object;
-    TIMMessage *msg = msgs[0];
-    TIMElem * elem = [msg getElem:0];
-    if ([elem isKindOfClass:[TIMCustomElem class]]) {
-        TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
-        if ([custom_elem.desc isEqualToString:@"leaveAction"]) {
-            NSLog(@"6leaveActionleaveActionleaveAction");
-        }
-    }
-    
-            
-            
-        
-    NSLog(@"onNewMessage接受消息成功-------");
-
-}
+//
+//
+//
+//
+//    NSLog(@"onNewMessage接受消息成功-------");
+//
+//}
 //等待对方接听 只有关闭按钮
 //-(JMWaitForAnswerView *)waitForAnswerView{
 //    if (_waitForAnswerView == nil) {

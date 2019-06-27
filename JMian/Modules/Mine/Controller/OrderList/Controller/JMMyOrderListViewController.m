@@ -61,12 +61,11 @@ static NSString *cellID = @"statusCellID";
             
             
             [self.listDataArray addObjectsFromArray:array];
-            if (self.listDataArray.count > 0) {
-                [self.tableView reloadData];
 
-            }
             [self.tableView.mj_header endRefreshing];
             [self.tableView.mj_footer endRefreshing];
+            [self.tableView reloadData];
+
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

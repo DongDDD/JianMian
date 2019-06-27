@@ -79,12 +79,17 @@
     [self getInvoiceInfo];//获取发票信息
     [self initView];
     [self initLayout];
-    self.title = @"发布任务";
     
     if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
         
         [self showProgressHUD_view:self.view];
         [self setRightBtnTextName:@"删除"];
+        self.title = @"编辑任务";
+
+    }else if (_viewType == JMBUserPostPartTimeJobTypeAdd) {
+        self.title = @"发布任务";
+    
+    
     }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
@@ -468,7 +473,7 @@
     
     [self.partTimeJobDetailView.deadLineBtn setTitle:model.deadline forState:UIControlStateNormal];
     [self.partTimeJobDetailView.deadLineBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
-    [self.partTimeJobDetailView.quantityMaxBtn setTitle:model.quantity_max forState:UIControlStateNormal];
+    [self.partTimeJobDetailView.quantityMaxTextField setText:model.quantity_max];
     [self.partTimeJobDetailView.quantityMaxBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
     
     
@@ -480,8 +485,7 @@
     [self.partTimeJobDetailView.industryBtn setTitle:industry forState:UIControlStateNormal];
     [self.partTimeJobDetailView.industryBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
     
-    [self.decriptionTextView.contentTextView setText:model.taskDescription];
-    [self.decriptionTextView.placeHolder setHidden:YES];
+    [self.decriptionTextView setContent:model.taskDescription];
 
 }
 

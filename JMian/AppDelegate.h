@@ -12,6 +12,7 @@
 #import "JMVideoChatView.h"
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "JMFeedBackChooseViewController.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,AVAudioPlayerDelegate, WXApiDelegate>
@@ -24,6 +25,7 @@
 @property (strong, nonatomic)JMVideoChatView *videoChatView;
 @property (nonatomic, assign)BOOL isBackgroundTask;
 //@property (strong, nonatomic) NSData *deviceToken;
+@property(nonatomic,strong)JMFeedBackChooseViewController *feedBackChooseVC;
 
 
 @end

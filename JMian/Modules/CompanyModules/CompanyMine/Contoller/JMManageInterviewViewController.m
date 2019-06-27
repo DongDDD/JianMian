@@ -22,7 +22,7 @@
 //#define Interview_WaitInterview @"3" //待面试 （已同意，等待面试）
 //#define Interview_AlreadyInterview @"4" //未反馈
 //#define Interview_Reflect @"5" //已反馈
-@interface JMManageInterviewViewController ()<UITableViewDelegate,UITableViewDataSource,JMMangerInterviewTableViewCellDelegate,JMChooseTimeViewControllerDelegate,JMVideoChatViewDelegate>
+@interface JMManageInterviewViewController ()<UITableViewDelegate,UITableViewDataSource,JMMangerInterviewTableViewCellDelegate,JMChooseTimeViewControllerDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *titleView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -190,12 +190,18 @@ static NSString *cellIdent = @"managerCellIdent";
 //                 [self gotoVideoChatViewWithForeign_key:model.interview_id recipient:model.interviewer_id chatType:@"1"];
 //            }
         
+        }else if ([model.status isEqualToString:@"0"]){
+            //C残忍拒绝
+            [self updateInterviewStatus_interviewID:model.interview_id status:@"2"];
+   
         }
         
         
         if ([model.status isEqualToString:@"4"]) {//这个状态可以 面试反馈
             JMFeedBackChooseViewController *vc = [[JMFeedBackChooseViewController alloc]init];
+            vc.viewType = JMFeedBackChooseViewDefault;
             vc.interview_id = model.interview_id;
+//            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
             //            [self updateInterviewStatus_interviewID:model.interview_id status:@"2"];
             
@@ -235,6 +241,16 @@ static NSString *cellIdent = @"managerCellIdent";
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已更新面试列表"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
+        
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        if ([status isEqualToString:@"4"] && [userModel.type isEqualToString:C_Type_USER]) {
+            //C端在这个状态才可以去反馈
+            JMFeedBackChooseViewController *vc = [[JMFeedBackChooseViewController alloc]init];
+            vc.interview_id = interviewID;
+            vc.viewType = JMFeedBackChooseViewDefault;
+            vc.delegate = self;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
         [self.tableView.mj_header beginRefreshing];
 //        [self getListData_Status:_statusArray];//请求已邀请的数据
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -304,51 +320,21 @@ static NSString *cellIdent = @"managerCellIdent";
     //    NSLog(@"邀请面试");
     
 }
+#pragma mark - myDelegate
+
+//-(void)didCommitActionWithInterview_id:(NSString *)interview_id{
+//  
+//    [self updateInterviewStatus_interviewID:interview_id status:@"5"];
+//
+//}
 
 //挂断
 -(void)hangupAction_model:(JMInterViewModel *)model{
-  
     [_videoChatView removeFromSuperview];
     [self.navigationController setNavigationBarHidden:NO];
+    //挂断后改状态成 4
+    [self updateInterviewStatus_interviewID:model.interview_id status:@"4"];
     
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    //挂断后如果是C端就跳去面试反馈
-    if ([userModel.type isEqualToString:C_Type_USER]) {
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"面试结束了吗？按确认后将会标记已“面试”" preferredStyle: UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            //        //点击确认后需要做的事
-            ////        C端
-            JMFeedBackChooseViewController *vc = [[JMFeedBackChooseViewController alloc]init];
-            vc.interview_id = model.interview_id;
-            [self.navigationController pushViewController:vc animated:YES];
-      
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
-        
-        
-        
-        
-    }else{
-    //挂断后如果是B端改变面试状态，改成面试完status=4 hire=0
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"面试结束了吗？按确认后将会标记已“面试”" preferredStyle: UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"确认" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-            //        //点击确认后需要做的事
-            ////        C端
-            
-            [self updateInterviewStatus_interviewID:model.interview_id status:@"4"];
-      
-            
-        }]];
-        [self presentViewController:alert animated:YES completion:nil];
-
-    }
 }
 
 //-(void)hangupAction_model:

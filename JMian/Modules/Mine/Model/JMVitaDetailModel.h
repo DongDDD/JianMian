@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMVitaDetailModel : NSObject
+@property (nonatomic, copy) NSString *share_url;
+
 @property (copy, nonatomic) NSString *myDescription;
 
 @property (copy, nonatomic) NSString *user_job_id;

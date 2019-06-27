@@ -14,6 +14,7 @@
 #import "JMHTTPManager+Job.h"
 #import "TwoButtonView.h"
 #import "DimensMacros.h"
+#import "JMBottomView.h"
 
 @interface JMAddMyJobTableViewController ()<JMCityListViewControllerDelegate,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource,TwoButtonViewDelegate>
 
@@ -37,7 +38,6 @@ static NSString *cellIdent = @"cellIdent";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title =@"新增期望职位";
     _titleArray = @[@"期望职位",@"薪资要求",@"工作城市"];
     _pickerArray = @[@"1k-2k",
                      @"2k-4k",
@@ -58,12 +58,14 @@ static NSString *cellIdent = @"cellIdent";
     
     if (_viewType == JMAddMyJobTableViewTypeAdd) {
         [self setRightBtnTextName:@"添加"];
+        self.title =@"新增期望职位";
 
     }else if (_viewType == JMAddMyJobTableViewTypeEdit){
-       
+        self.title =@"编辑期望职位";
         [self setRightBtnTextName:@"保存"];
     
     }
+    
     [self setBackBtnImageViewName:@"icon_return_nav" textName:@""];
 //    [self.view addSubview:self.twoButtonView];
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -440,14 +442,14 @@ static NSString *cellIdent = @"cellIdent";
     return _progressHUD;
 }
 
-//-(TwoButtonView *)twoButtonView{
-//    if (!_twoButtonView) {
-//        _twoButtonView = [[TwoButtonView alloc]initWithFrame:CGRectMake(0,SCREEN_HEIGHT-300, SCREEN_WIDTH, 50)];
-//        _twoButtonView.backgroundColor = MASTER_COLOR;
-//        _twoButtonView.delegate = self;
-//    }
-//
-//    return _twoButtonView;
-//}
+-(TwoButtonView *)twoButtonView{
+    if (!_twoButtonView) {
+        _twoButtonView = [[TwoButtonView alloc]initWithFrame:CGRectMake(0,SCREEN_HEIGHT-300, SCREEN_WIDTH, 50)];
+        _twoButtonView.backgroundColor = MASTER_COLOR;
+        _twoButtonView.delegate = self;
+    }
+
+    return _twoButtonView;
+}
 
 @end

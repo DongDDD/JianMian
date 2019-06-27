@@ -27,10 +27,12 @@
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMHTTPManager+Login.h"
 #import "JMIDCardIdentifyViewController.h"
+#import "WXApi.h"
+#import "JMShareView.h"
 
 
 
-@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate,JMHeaderOfPersonDetailViewDelegate>
+@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate,JMHeaderOfPersonDetailViewDelegate,JMShareViewDelegate>
 
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -38,6 +40,7 @@
 @property (nonatomic, strong) JMPageView *pageView;
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (nonatomic, strong) JMBottomView *bottomView;
+@property(nonatomic,strong)JMShareView *shareView;//分享
 
 
 @property (nonatomic, assign) NSInteger index;
@@ -57,6 +60,7 @@
 @property (weak, nonatomic) THDatePickerView *dateView;
 @property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
 @property (copy, nonatomic) NSString *favorite_id;
+@property(nonatomic,strong)UIView *shareBgView;//灰色背景
 
 @end
 
@@ -320,7 +324,82 @@
     }];
     
 }
+
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n
+{   //检测是否安装微信
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = self.vitaModel.user_nickname;
+    urlMessage.description = self.vitaModel.vita_description ;
+    
+    //    UIImageView *imgView = [[UIImageView alloc]init];
+    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+    //
+    
+    UIImage *image = [self getImageFromURL:self.vitaModel.user_avatar];   //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    [urlMessage setThumbData:thumbData];
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    webObj.webpageUrl = self.vitaModel.share_url;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+    
+}
+
+-(UIImage *) getImageFromURL:(NSString *)fileURL {
+    
+    UIImage * result;
+    
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+    
+    result = [UIImage imageWithData:data];
+    
+    return result;
+    
+}
+
 #pragma mark - 点击事件
+
+-(void)right2Action{
+    if (self.shareView == nil) {
+        
+        [self.view addSubview:self.shareBgView];
+        
+        [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view);
+            make.left.and.right.equalTo(self.view);
+            make.height.equalTo(self.view);
+        }];
+        
+        self.shareView = [[JMShareView alloc]init];
+        self.shareView.delegate = self;
+        [self.view addSubview:self.shareView];
+        
+        [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view);
+            make.left.and.right.equalTo(self.view);
+            make.height.mas_equalTo(184+20);
+            
+        }];
+        NSLog(@"分享");
+        
+    }
+    
+    if (self.shareBgView.hidden == YES) {
+        [self.shareBgView setHidden:NO];
+        [self.shareView setHidden:NO];
+    }
+    
+    
+}
 
 -(void)rightAction:(UIButton *)sender{
     sender.selected = !sender.selected;
@@ -357,7 +436,13 @@
     
 }
 
-
+-(void)disapearAction{
+    NSLog(@"222");
+    [self.shareBgView setHidden:YES];
+    [self.shareView setHidden:YES];
+//    [self.sendMyResumeView setHidden:YES];
+    
+}
 /**
 时间选择取消
  */
@@ -480,7 +565,23 @@
     [self.navigationController pushViewController:vc animated:YES];
         
     }
+#pragma mark -- myDelegate
 
+
+-(void)shareViewCancelAction{
+    [self disapearAction];
+}
+
+-(void)shareViewLeftAction{
+    [self wxShare:0];
+    
+}
+
+-(void)shareViewRightAction{
+    [self wxShare:1];
+    
+    
+}
 #pragma mark - scrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -592,7 +693,20 @@
     return _pageContentView;
 }
 
-
+-(UIView *)shareBgView{
+    
+    if (!_shareBgView) {
+        
+        _shareBgView = [[UIView alloc]init];
+        _shareBgView.backgroundColor =  [UIColor colorWithRed:48/255.0 green:48/255.0 blue:51/255.0 alpha:0.5];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disapearAction)];
+        [_shareBgView addGestureRecognizer:tap];
+        
+    }
+    
+    return _shareBgView;
+    
+}
 
 //JMPictureOfPersonDetailViewController
 

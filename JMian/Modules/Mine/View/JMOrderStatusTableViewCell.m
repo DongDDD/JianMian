@@ -20,14 +20,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *adressLab;//收货地址
 @property (weak, nonatomic) IBOutlet UIImageView *detailImg;//详情按钮右面箭头
 
-@property (nonatomic, strong)UIView *detailContentView;//快递
-@property (nonatomic, strong)UIButton *expressBtn;//快递
-@property (nonatomic, strong)UIImageView *cpImage;//复制图标
-@property (nonatomic, strong)UILabel *remarkLab;//订单备注
+//@property (nonatomic, strong)UIView *detailContentView;//快递
+//@property (nonatomic, strong)UIImageView *cpImage;//复制图标
+
 @property (weak, nonatomic) IBOutlet UIView *contactBGView;
 @property (weak, nonatomic) IBOutlet UIView *remakeDetailBGView;
-@property (weak, nonatomic) IBOutlet UILabel *orderRemakeLab;
+@property (weak, nonatomic) IBOutlet UILabel *orderRemakeLab;//订单备注
 @property (weak, nonatomic) IBOutlet UIButton *deliverGoodsBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *deiveredImageView;
 
 
 @property (nonatomic, strong)JMOrderCellData *myData;
@@ -58,7 +58,7 @@
     }
     return self;
 }
-
+ //0:已下单 1:已取消 2:已支付 3:已发货
 -(void)setOrderCellData:(JMOrderCellData *)orderCellData{
     _myData = orderCellData;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
@@ -70,14 +70,27 @@
     }
     
     if ([userModel.type isEqualToString: B_Type_UESR]) {
-        [self.deliverGoodsBtn setHidden:NO];
         if (orderCellData.logistics_label_id) {
+            [self.deliverGoodsBtn setHidden:YES];
             [self.deliverGoodsBtn setTitle:@"已发货" forState:UIControlStateNormal];
+            [self.deiveredImageView setHidden:NO];
             [self.deliverGoodsBtn setEnabled:NO];
-        }else{
+
+        }else if ([orderCellData.status isEqualToString:@"2"]) {
+            [self.deliverGoodsBtn setHidden:NO];
             [self.deliverGoodsBtn setTitle:@"去发货" forState:UIControlStateNormal];
+            [self.deiveredImageView setHidden:NO];
             [self.deliverGoodsBtn setEnabled:YES];
+
+        }else if ([orderCellData.status isEqualToString:@"0"]) {
+            [self.deliverGoodsBtn setHidden:NO];
+            [self.deliverGoodsBtn setTitle:@"未付款" forState:UIControlStateNormal];
+            [self.deiveredImageView setHidden:YES];
+            [self.deliverGoodsBtn setEnabled:NO];
+            
         }
+        
+        
         
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:orderCellData.referrer_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         NSString *str = [NSString stringWithFormat:@"销售：%@ >",orderCellData.referrer_nickname];
@@ -89,7 +102,8 @@
         self.nameLab.text = orderCellData.contact_name;
         self.phoneNumLab.text = orderCellData.contact_phone;
         self.adressLab.text = orderCellData.contact_address;
-    }else{
+    }else if ([userModel.type isEqualToString: C_Type_USER]){
+        [self.deiveredImageView setHidden:YES];
         [self.deliverGoodsBtn setHidden:YES];
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:orderCellData.referrer_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         NSString *str = [NSString stringWithFormat:@"%@ >",orderCellData.snapshot_company_company_name];
@@ -107,62 +121,62 @@
 }
 
 
--(void)initView{
-    _detailContentView = [[UIView alloc]init];
-    _detailContentView.backgroundColor = [UIColor redColor];
-    [self addSubview:_detailContentView];
-    
-    _expressBtn = [[UIButton alloc]init];
-    [_expressBtn setTitle:@"顺丰快递 68411321654684" forState:UIControlStateNormal];
-    [_expressBtn sizeToFit];
-    [_expressBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-    _expressBtn.titleLabel.font = kFont(13);
-    [_detailContentView addSubview:_expressBtn];
-    
-    _cpImage = [[UIImageView alloc]init];
-    _cpImage.image = [UIImage imageNamed:@"order_cp"];
-    [_detailContentView addSubview:_cpImage];
-    
-    _remarkLab = [[UILabel alloc]init];
-    _remarkLab.text = @"麻烦老板给我发一个黑色的和一个白色的，还要一个红色的 谢谢老板";
-    _remarkLab.numberOfLines = 0;
-    _remarkLab.font = kFont(13);
-    _remarkLab.textColor = TEXT_GRAY_COLOR;
-    [_detailContentView addSubview:_remarkLab];
-}
+//-(void)initView{
+//    _detailContentView = [[UIView alloc]init];
+//    _detailContentView.backgroundColor = [UIColor redColor];
+//    [self addSubview:_detailContentView];
+//
+//    _expressBtn = [[UIButton alloc]init];
+//    [_expressBtn setTitle:@"顺丰快递 68411321654684" forState:UIControlStateNormal];
+//    [_expressBtn sizeToFit];
+//    [_expressBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//    _expressBtn.titleLabel.font = kFont(13);
+//    [_detailContentView addSubview:_expressBtn];
+//
+//    _cpImage = [[UIImageView alloc]init];
+//    _cpImage.image = [UIImage imageNamed:@"order_cp"];
+//    [_detailContentView addSubview:_cpImage];
+//
+//    _remarkLab = [[UILabel alloc]init];
+//    _remarkLab.text = @"麻烦老板给我发一个黑色的和一个白色的，还要一个红色的 谢谢老板";
+//    _remarkLab.numberOfLines = 0;
+//    _remarkLab.font = kFont(13);
+//    _remarkLab.textColor = TEXT_GRAY_COLOR;
+//    [_detailContentView addSubview:_remarkLab];
+//}
 
--(void)initLayout{
-    [_detailContentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(self);
-        make.centerX.mas_equalTo(self);
-        make.height.mas_equalTo(100);
-        make.bottom.mas_equalTo(_contactBGView.mas_top);
-    }];
-    
-    
-    [_expressBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_iconImageView.mas_bottom).offset(12);
-        make.left.mas_equalTo(_iconImageView);
-        make.height.mas_equalTo(13);
-    }];
-    [_cpImage mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(_expressBtn.mas_right).offset(10);
-        make.centerY.mas_equalTo(_expressBtn);
-        make.height.and.width.mas_equalTo(13);
-    }];
-    
-    [_remarkLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self).offset(20);
-        make.top.mas_equalTo(_iconImageView.mas_bottom).offset(37);
-        make.left.mas_equalTo(self).offset(20);
-        make.right.mas_equalTo(self).offset(-20);
-        make.height.mas_equalTo(40);
-    }];
-    
-    
-    
-    
-}
+//-(void)initLayout{
+//    [_detailContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.mas_equalTo(self);
+//        make.centerX.mas_equalTo(self);
+//        make.height.mas_equalTo(100);
+//        make.bottom.mas_equalTo(_contactBGView.mas_top);
+//    }];
+//
+//
+//    [_expressBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(_iconImageView.mas_bottom).offset(12);
+//        make.left.mas_equalTo(_iconImageView);
+//        make.height.mas_equalTo(13);
+//    }];
+//    [_cpImage mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(_expressBtn.mas_right).offset(10);
+//        make.centerY.mas_equalTo(_expressBtn);
+//        make.height.and.width.mas_equalTo(13);
+//    }];
+//
+//    [_remarkLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(self).offset(20);
+//        make.top.mas_equalTo(_iconImageView.mas_bottom).offset(37);
+//        make.left.mas_equalTo(self).offset(20);
+//        make.right.mas_equalTo(self).offset(-20);
+//        make.height.mas_equalTo(40);
+//    }];
+//
+//
+//
+//
+//}
 
 - (IBAction)detailSpreadAction:(UIButton *)sender {
     sender.selected = !sender.selected;

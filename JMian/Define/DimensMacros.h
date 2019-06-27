@@ -129,6 +129,8 @@
 #define Notification_PaySucceed @"Notification_PaySucceed"
 //任务
 #define Notification_TaskListener @"Notification_TaskListener"
+//订单
+#define Notification_OrderListener @"Notification_OrderListener"
 
 //发起视频
 #define Channel_ID @"Channel_ID"

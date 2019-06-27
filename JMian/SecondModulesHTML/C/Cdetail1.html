@@ -65,10 +65,14 @@
                     .credit{
                         display: flex;
                         span{
-                            margin-right: 0.4rem;
+                            align-self: center;
                         }
-                        img{
-                            width: 0.58rem;
+                        div{
+                            align-self: center;
+                            img{
+                                width: 0.4rem;
+                                margin-top: 0.15rem;
+                            }
                         }
                     }
                 }
@@ -80,18 +84,59 @@
                     }
                 }
             }
-            .detail{
-                padding: 0.29rem 0.5rem;
-                font-size: 0.34rem;
-                span:nth-child(1){
+            #searchBar{
+                display: flex;
+                text-align: center;
+                height: 1.22rem;
+                font-size:0.4rem;
+                .isFixed{
+                    position:fixed;
+                    top:0;
+                    height: 1.22rem;
+                    z-index:100;
                     color: #999999;
+                    background:#fff;
+                    border-bottom: 1px solid rgba(230, 230, 230, 1);
                 }
-                span:nth-child(2){
-                    color: #24BFFF;
-                    margin-left: 0.26rem;
+                ul {
+                    display: flex;
+                    width: 100%;
+                    border-top: 0.03rem solid rgba(230, 230, 230, 1);
+                    .toggle{
+                        color: #24BFFF;
+                    }
+                    li {
+                        display: flex;
+                        justify-content:center;
+                        align-items:center;
+                        align-self: center;
+                        width: 50%;
+                        height:100%;
+                    }
+                }
+
+            }
+            .nav-light{
+                display: flex;
+                justify-content: space-around;
+                text-align: center;
+                width: 100%;
+                div{
+                    width: 0.37rem;
+                    border-top: 1px solid #24BFFF;
+                }
+                span{
+                    width: 0.37rem;
                 }
             }
             #sale-task{
+                .open-left-enter-active, .open-left-leave-active {
+                    transform: translate3d(0,0,0);
+                    transition: all 0.3s;
+                }
+                .open-left-enter, .open-left-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                    transform: translate3d(-100%,0,0);
+                }
                 .task{
                     display: flex;
                     flex-direction: column;
@@ -140,7 +185,6 @@
                         }
                     }
                     div{
-                        margin-bottom: 0.48rem;
                         ul{
                             margin-left: 0.4rem;
                             display: inline;
@@ -184,6 +228,23 @@
                     p{
                         margin-top: 0.66rem;
                     }
+                    /*#output {
+                        position: absolute;
+                        top:0;
+                        left:0;
+                        width: 100%;
+                        height: 13rem;
+                        text-align: center;
+                        img{
+                            position: absolute;
+                            top:50%;
+                            left: 50%;
+                            transform: translate3d(-50%,-50%,0);
+                            z-index: 100;
+                            width: 100%;
+                            height: auto;
+                        }
+                    }*/
                 }
                 .bottom{
                     display: flex;
@@ -201,6 +262,13 @@
                 }
             }
             #job-task{
+                .open-left-enter-active, .open-left-leave-active {
+                    transform: translate3d(0,0,0);
+                    transition: all 0.3s;
+                }
+                .open-left-enter, .open-left-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                    transform: translate3d(-100%,0,0);
+                }
                 .task{
                     display: flex;
                     flex-direction: column;
@@ -303,6 +371,53 @@
                     }
                 }
             }
+            #credit{
+                .open-right-enter-active, .open-right-leave-active {
+                    transform: translate3d(0,0,0);
+                    transition: all 0.3s 0.06s;
+                }
+                .open-right-enter, .open-right-leave-to /* .fade-leave-active below version 2.1.8 */ {
+                    transform: translate3d(100%,0,0);
+                }
+                .credit-lists{
+                    padding: 0.66rem 0.53rem 0 0.53rem;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    -webkit-overflow-scrolling: touch;
+                    .contain{
+                        display: flex;
+                        margin-bottom: 0.37rem;
+                        font-size: 0.4rem;
+                        .avator{
+                            margin-right: 0.34rem;
+                            width: 0.88rem;
+                            img{
+                                width: 100%;
+                                border-radius: 50%;
+                            }
+                        }
+                        .user-name{
+                            align-self: flex-start;
+                            width: 6.56rem;
+                            color: #333333;
+                            p{
+                                font-size: 0.32rem;
+                                color: #999999;
+                            }
+                        }
+                        .num{
+                            align-self: flex-start;
+                            color:#24BFFF;
+                        }
+                    }
+                    .remark{
+                        margin-bottom: 0.66rem;
+                        color: #333333;
+                        font-size: 0.37rem;
+                        margin-left: 1.23rem;
+                    }
+                }
+            }
         }
         .wrapper{
             position:relative;
@@ -332,129 +447,169 @@
             width: 0.18rem;
             align-self: center;
         }
+        .mu-elevation-1{
+            -webkit-box-shadow:none;
+            box-shadow:none;
+        }
     </style>
 </head>
 <body>
-<div id="wrapper">
-    <div v-show="initialize">
+<div id="wrapper" v-show="initialize">
+    <div>
         <div class="line"></div>
         <header style="display: none" v-show="initialize" @click="clickCompanyDetails">
-            <span class="avatar" v-if="this.detail.snapshot.company">
-                <img :src="this.detail.snapshot.company.logo_path" alt="">
-            </span>
-            <span class="contain" v-if="this.detail.snapshot.company">
-                <p class="c-name">{{this.detail.snapshot.company.company_name}}</p>
-            <span class="credit" v-if="level>0">
+        <span class="avatar">
+            <img v-if="this.detail.company" :src="this.detail.company.logo_path" alt="">
+        </span>
+            <span class="contain">
+            <p class="c-name" v-if="this.detail.company">{{this.detail.company.company_name}}</p>
+            <span class="credit" v-if="this.detail.company.reputation">
                 <span>信用</span>
                 <div>
                     <img v-if="level>0" id="level" v-for="item in level" :src="level1" alt="" >
                 </div>
             </span>
-            </span>
+        </span>
             <span class="icon-footer">
-                <img src="../images/icon_return@2x.png" alt="">
-            </span>
+            <img src="../images/icon_return@2x.png" alt="">
+        </span>
         </header>
         <div style="height: 0.24rem;background: #F5F5F6;"><br/></div>
-        <div class="line"></div>
-        <div class="detail">
-            <span>当前内容为订单快照,包含创建时的描述</span>
-            <span @click="clickTaskDetails">点击查看最新内容</span>
+        <div id="searchBar" >
+            <ul :class="searchBarFixed == true ? 'isFixed' :''">
+                <li :class="task == true ? 'toggle' :''" style="border-right: 1px solid rgba(235,235,235,1);" @click="handleTask">任务描述</li>
+                <li :class="credit == true ? 'toggle' :''" @click="handleCredit">信誉评价</li>
+            </ul>
+        </div>
+        <div class="nav-light">
+            <div v-show="task"></div>
+            <span v-show="credit || task"></span>
+            <div v-show="credit"></div>
         </div>
         <div class="line"></div>
-        <div id="sale-task" v-show="initialize" v-if="this.detail.payment_method === 1">
-            <div>
-                <div class="task">
-                    <span class="task-name">{{this.detail.task_title}}</span>
-                    <span class="unit">{{this.detail.payment_money}}<span>{{this.detail.unit}}</span></span>
-                    <span class="label">
+        <div id="sale-task" v-show="this.detail.payment_method === 1">
+            <transition name="open-left">
+                <div v-show="task">
+                    <div class="task">
+                        <span class="task-name" v-if="this.detail">{{this.detail.task_title}}</span>
+                        <span class="unit" v-if="this.detail">{{this.detail.payment_money}}<span>{{this.detail.unit}}</span></span>
+                        <span class="label">
+                            <ul>
+                                <li>即结</li>
+                                <li>签合同</li>
+                            </ul>
+                        </span>
+                    </div>
+                    <div class="line" style="margin: 0 0.53rem;"></div>
+                    <div class="require">
+                        <p>招募人数：<span v-if="this.detail">{{this.detail.quantity_max}}</span></p>
+                        <p>工作城市：<span v-if="this.detail.city">{{this.detail.city.city_name}}</span></p>
+                        <div>适合行业：<ul><li v-for="item in this.detail.industry">{{item.name}}<span>/</span></li></ul></div>
+                    </div>
+                    <div class="line" style="margin:0 0.53rem;"></div>
+                    <div class="product">
+                        <span>产品描述</span>
+                        <div v-if="this.detail.goods">产品名称：{{this.detail.goods.goods_title}}</div>
+                        <div v-if="this.detail.goods" style="margin-bottom: 0.53rem">产品价格：{{this.detail.goods.goods_price}}</div>
+                        <p v-if="this.detail.goods" style="margin-bottom: 0.72rem">{{this.detail.goods.description}}</p>
+                    </div>
+                    <div class="line" style="margin:0 0.53rem;"></div>
+                    <div class="describe" v-if="this.detail.video">
+                        <span>产品视频</span>
+                        <div style="text-align: center;margin-top: 0.66rem;position: relative">
+                            <video id="video" width="70%" style="border-radius: 0.33rem" controls webkit-playsinline="true" playsinline x5-video-player-type="h5" :poster="this.detail.video.cover">
+                                <source :src="this.detail.video.file_path">
+                            </video>
+                        </div>
+                    </div>
+                    <div class="line" style="margin:0 0.53rem;"></div>
+                    <div class="describe" v-if="this.detail.images">
+                        <span>产品图片</span>
+                        <ul style="width: 100%;margin-top: 0.66rem;">
+                            <li style="display: inline-block" v-for="item in this.detail.images"><img :src="item.file_path" alt="" style="width: 2.8rem;margin-right: 0.16rem" @click="openSimpleDialog(item.file_path)"></li>
+                        </ul>
+                    </div>
+                    <div class="bottom">
+                        <span></span>
+                        <p style="display:inline-block;vertical-align:middle;align-self: center;margin: 0 0.34rem">已经到底啦，再往上逛逛吧</p>
+                        <span></span>
+                    </div>
+                </div>
+            </transition>
+        </div>
+        <div id="job-task" v-show="this.detail.payment_method !== 1">
+            <transition name="open-left">
+                <div v-show="task" style="position: relative">
+                    <div class="task">
+                        <span class="task-name" v-if="this.detail">{{this.detail.task_title}}</span>
+                        <span class="unit" v-if="this.detail">{{this.detail.payment_money}}<span v-if="this.detail">{{this.detail.unit}}</span></span>
+                        <span class="label">
                         <ul>
-                            <li>即结</li>
+                            <li>完工结</li>
                             <li>签合同</li>
                         </ul>
                     </span>
-                </div>
-                <div class="line" style="margin: 0 0.53rem;"></div>
-                <div class="require">
-                    <p>招募人数：<span>{{this.detail.snapshot.quantity_max}}</span></p>
-                    <p>工作城市：<span>{{this.detail.snapshot.city.city_name}}</span></p>
-                    <div>适合行业：<ul><li v-for="item in this.detail.industry">{{item.name}}<span>/</span></li></ul></div>
-                </div>
-                <div class="line" style="margin:0 0.53rem;"></div>
-                <div class="product">
-                    <span>产品描述</span>
-                    <div>产品名称：{{this.detail.goods.goods_title}}</div>
-                    <div style="margin-bottom: 0.53rem">产品价格：{{this.detail.goods.goods_price}}</div>
-                    <p style="margin-bottom: 0.72rem">{{this.detail.goods.description}}</p>
-                </div>
-                <div class="line" style="margin:0 0.53rem;"></div>
-                <div class="describe" v-show="this.detail.snapshot.video">
-                    <span>产品视频</span>
-                    <div style="text-align: center;margin-top: 0.66rem;position: relative">
-                        <video id="video" width="70%" style="border-radius: 0.33rem" controls webkit-playsinline="true" playsinline x5-video-player-type="h5" v-if="this.detail.snapshot.video" :poster="this.detail.snapshot.video.cover">
-                            <source :src="this.detail.snapshot.video.file_path">
-                        </video>
+                    </div>
+                    <div class="line" style="margin: 0 0.53rem;"></div>
+                    <div class="require">
+                        <p>招募人数：<span v-if="this.detail">{{this.detail.quantity_max}}</span></p>
+                        <p>工作城市：<span v-if="this.detail.city">{{this.detail.city.city_name}}</span></p>
+                        <div>适合行业：<ul><li v-for="item in this.detail.industry">{{item.name}}<span>/</span></li></ul></div>
+                    </div>
+                    <div class="line" style="margin:0 0.53rem;"></div>
+                    <div class="describe">
+                        <span>工作描述</span>
+                        <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem" v-if="this.detail">
+                            {{this.detail.description}}
+                        </p>
+                    </div>
+                    <div class="line" style="margin:0 0.53rem;" v-if="this.detail.address"></div>
+                    <div class="map" v-if="this.detail.address">
+                        <p>工作地址</p>
+                        <div style="margin: 0 0.29rem 0.37rem 0.53rem">
+                            <img src="../images/didian2@2x.png" alt="" style="width: 0.34rem;">
+                            <span>{{this.detail.address}}</span>
+                        </div>
+                        <div v-if="this.detail.latitude && this.detail.longitude" id="mapContainer" style="height: 7rem;" @click="clickCompanyToAMap"></div>
+                    </div>
+                    <div class="bottom" style="">
+                        <span></span>
+                        <p style="display:inline-block;vertical-align:middle;align-self: center;margin: 0 0.34rem">已经到底啦，再往上逛逛吧</p>
+                        <span></span>
                     </div>
                 </div>
-                <div class="line" style="margin:0 0.53rem;"></div>
-                <div class="describe" v-if="this.detail.snapshot.images">
-                    <span>产品图片</span>
-                    <ul style="width: 100%;margin-top: 0.66rem;">
-                        <li style="display: inline-block" v-for="item in this.detail.snapshot.images"><img :src="item.file_path" alt="" style="width: 2.8rem;margin-right: 0.16rem;vertical-align:middle;" @click="openSimpleDialog(item.file_path)"></li>
-                    </ul>
-                </div>
-                <div class="bottom">
-                    <span></span>
-                    <p style="display:inline-block;vertical-align:middle;align-self: center;margin: 0 0.34rem">已经到底啦，再往上逛逛吧</p>
-                    <span></span>
-                </div>
-            </div>
+            </transition>
         </div>
-        <div id="job-task" v-show="initialize" v-if="this.detail.payment_method !== 1">
-            <div style="position: relative">
-                <div class="task">
-                    <span class="task-name">{{this.detail.task_title}}</span>
-                    <span class="unit">{{this.detail.payment_money}}<span>{{this.detail.unit}}</span></span>
-                    <span class="label"><ul>
-                        <li>完工结</li>
-                        <li>签合同</li>
-                    </ul></span>
-                </div>
-                <div class="line" style="margin: 0 0.53rem;"></div>
-                <div class="require">
-                    <p>招募人数：<span>{{this.detail.snapshot.quantity_max}}</span></p>
-                    <p>工作城市：<span>{{this.detail.snapshot.city.city_name}}</span></p>
-                    <div>适合行业：<ul><li v-for="item in this.detail.industry">{{item.name}}<span>/</span></li></ul></div>
-                </div>
-                <div class="line" style="margin:0 0.53rem;"></div>
-                <div class="describe">
-                    <span>工作描述</span>
-                    <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem">
-                        {{this.detail.snapshot.description}}
-                    </p>
-                </div>
-                <div class="line" style="margin:0 0.53rem;"></div>
-                <div class="map" v-if="this.detail.snapshot.latitude && this.detail.snapshot.longitude">
-                    <p>工作地址</p>
-                    <div style="margin: 0 0.29rem 0.37rem 0.53rem">
-                        <img src="../images/didian2@2x.png" alt="" style="width: 0.34rem;">
-                        <span>{{this.detail.snapshot.address}}</span>
-                    </div>
-                    <div id="mapContainer" style="height: 7rem;" @click="clickCompanyToAMap"></div>
-                </div>
-                <div class="bottom" style="">
-                    <span></span>
-                    <p style="display:inline-block;vertical-align:middle;align-self: center;margin: 0 0.34rem">已经到底啦，再往上逛逛吧</p>
-                    <span></span>
-                </div>
-            </div>
+        <div id="credit">
+            <transition name="open-right">
+                <mu-paper v-show="credit" :z-depth="1" class="demo-loadmore-wrap">
+                    <mu-container ref="container" class="demo-loadmore-content">
+                        <mu-load-more :loading="loading" @load="load" :loaded-all="over" :loading-text="text">
+                            <div class="credit-lists" v-for="item in this.record.data">
+                                <div class="list">
+                                    <div class="contain">
+                                        <span class="avator"><img src="../images/x.png" alt=""></span>
+                                        <span class="user-name">{{item.user.nickname}}<p>任务：{{item.task.task_title}}</p></span>
+                                        <span class="num">{{item.reputation}}.0分</span>
+                                    </div>
+                                    <div class="remark">
+                                        <p>{{item.description}}</p>
+                                    </div>
+                                    <div class="line"></div>
+                                </div>
+                            </div>
+                        </mu-load-more>
+                    </mu-container>
+                </mu-paper>
+            </transition>
         </div>
+        <mu-container>
+            <mu-dialog width="100%" :open.sync="openSimple">
+                <img :src="bigImg" alt="" style="width: 100%">
+            </mu-dialog>
+        </mu-container>
     </div>
-    <div style="position: fixed;top:0;left:0;background:#000;width: 100%;height: 100%;z-index:1000" v-if="openSimple" @click="close">
-        <div style="position: relative;width: 100%;height: 100%">
-            <img :src="bigImg" alt="" style="position: absolute;top:50%;left: 50%;transform: translate(-50%,-50%);width: 80%">
-        </div>
-    </div>
+
 </div>
 </body>
 <script src="../js/vue.js"></script>
@@ -466,12 +621,21 @@
         el: '#wrapper',
         data:{
             detail:{},
+            record:{},
             describeList: [
                 {label: "即结",id:'1'},
-                {label: "有定金",id:'2'},
-                {label: "签合同",id:'3'},
+                {label: "签合同",id:'2'},
             ],
+            loading: false,
+            num:10,
+            task:true,
+            credit:false,
             initialize: false,
+            searchBarFixed:false,
+            token:'',
+            page:1,
+            over:false,
+            text:'正在加载',
             level:0,
             level1:"../images/x.png",
             level2:"../images/z.png",
@@ -484,27 +648,88 @@
             setTimeout(function () {
                 this.initialize = true;
             }.bind(this));
-            if(this.detail.payment_method !== 1){
-                this.init();
-              }
-
+            document.addEventListener('scroll', this.handleScroll);
         },
         methods:{
+            handleScroll () {
+                var obj = document.getElementById('searchBar');
+                var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+                let offsetTop = obj.offsetTop;
+                scrollTop > offsetTop ? this.searchBarFixed = true : this.searchBarFixed = false;
+            },
+            destroyed () {
+                window.removeEventListener('scroll', this.handleScroll); // 离开页面 关闭监听 不然会报错
+            },
+            handleTask() {
+                this.task = true;
+                this.credit = false;
+            },
+            handleCredit(){
+                if(this.token){
+                    console.log(this.token)
+                    axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?company_id=' + this.detail.company.company_id, {
+                        headers: {
+                            'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                            'Authorization': this.token,
+                        }
+                    })
+                        .then(function (res) {
+                            var jsonData = JSON.stringify(res.data);
+                            this.record = JSON.parse(jsonData);
+                            this.page = this.record.current_page;
+                            console.log(this.record)
+                            console.log(JSON.parse(this.record.data))
+                        }.bind(this))
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                }
+                this.task = false;
+                this.credit = true;
+            },
             clickCompanyDetails(){
-                window.webkit.messageHandlers.aaa.postMessage(this.detail.snapshot.company.company_id);
+                window.webkit.messageHandlers.aaa.postMessage(this.detail.company.company_id);
             },
             clickCompanyToAMap(){
                 window.webkit.messageHandlers.aaa.postMessage()
             },
-            clickTaskDetails(){
-                window.webkit.messageHandlers.aaa.postMessage(this.detail.task_id)
+            load() {
+                this.loading = true;
+                this.page = this.page + 1;
+                axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?company_id=' +  this.detail.company.company_id + '&page=' + this.page, {
+                    headers: {
+                        'x-access-sign': '585c84aca67b58e000364309783e31e6',
+                        'Authorization': this.token,
+                    }
+                })
+                    .then(function (res) {
+                        if(res.data.last_page < this.page){
+                            this.text = '已加载全部！';
+                            setTimeout(() => {
+                                this.over = true;
+                            }, 1500);
+                        }else{
+                            var length = res.data.data.length;
+                            for(var i = 0;i<length; i++){
+                                this.record.data.push(res.data.data[i])
+                            }
+                            this.page = res.data.current_page;
+                            setTimeout(() => {
+                                this.loading = false;
+                            }, 2000);
+                            console.log(this.record);
+                        }
+                        if(res.data.code !== 200){
+                            this.already = true;
+                        }
+                    }.bind(this))
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             },
             openSimpleDialog (img) {
                 this.openSimple = true;
                 this.bigImg = img
-            },
-            close(){
-                this.openSimple = false;
             },
             leveling(){
                 var img = document.getElementById('level');
@@ -592,10 +817,10 @@
                 }
             },
             init(){
-                var longitude = this.detail.snapshot.longitude;
-                var latitude = this.detail.snapshot.latitude;
-                var name = this.detail.snapshot.company.company_name;
-                var area = this.detail.snapshot.address;
+                var longitude = this.detail.longitude;
+                var latitude = this.detail.latitude;
+                var name = this.detail.company.company_name;
+                var area = this.detail.address;
                 var map = new AMap.Map('mapContainer', {
                     zoom: 15,
                     center:[longitude,latitude],
@@ -640,13 +865,13 @@
                         content: createInfoWindow(img,triangle,name,area)
                     }
                 });
-            }
+            },
         },
         watch:{
             detail:function () {
                 this.$nextTick(function(){
-                    if(this.detail.payment_method !== 1){
-                        this.init();
+                    if(vue.detail.payment_method !== 1){
+                        vue.init();
                     }
                     vue.leveling();
                 });
@@ -654,14 +879,18 @@
         }
     });
 
-    function showInfoFromJava(item) {
+    function showInfoFromJava(item,token) {
         vue.detail = JSON.parse(item);
+        vue.token = token;
+        console.log(token)
     }
+
     /*if(vue.detail){
         function taskDataLoading(){
             Javascript:aaa.taskDataLoading()
         }
-        this.taskDataLoading()
-    };*/
+        this.taskDataLoading();
+    }*/
+
 </script>
 </html>

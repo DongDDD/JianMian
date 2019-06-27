@@ -70,13 +70,13 @@
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
         [alert addAction:[UIAlertAction actionWithTitle:@"发布网络销售任务" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
-            vc.title = @"发布网络销售任务";
+            vc.viewType = JMBUserPostSaleJobViewTypeAdd;
             [self.navigationController pushViewController:vc animated:YES];
  
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"发布任务" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
-            vc.title = @"发布任务";
+            vc.viewType = JMBUserPostPartTimeJobTypeAdd;
             [self.navigationController pushViewController:vc animated:YES];
             
         }]];

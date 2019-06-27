@@ -130,15 +130,19 @@
         //已结束
     }else if([data.status isEqualToString:Task_DidComfirm]){
         if (![data.payment_method isEqualToString:@"1"]) {
-            [self.leftBtn setTitle:@"发票申请中..." forState:UIControlStateNormal];
-            [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
-            self.leftBtn.layer.borderWidth = 0.5;
-            self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
-        }else{
+//            [self.leftBtn setTitle:@"发票申请中..." forState:UIControlStateNormal];
+//            [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+//            self.leftBtn.layer.borderWidth = 0.5;
+//            self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
+//            [self.leftBtn setHidden:YES];
+//
+//        }else{
             [self.leftBtn setHidden:YES];
 
         }
+        [self.leftBtn setHidden:YES];
+
         //雇员是否评价：0:否 1:是
         if ([data.is_comment_boss isEqualToString:@"0"]) {
             [self.rightBtn setTitle:@"去评价" forState:UIControlStateNormal];

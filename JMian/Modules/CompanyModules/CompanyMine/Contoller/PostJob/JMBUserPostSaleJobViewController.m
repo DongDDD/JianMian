@@ -82,9 +82,12 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     // Do any additional setup after loading the view from its nib.
     [self initView];
     [self initLayout];
-    self.title = @"发布网络销售职位";
     if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
         [self setRightBtnTextName:@"删除"];
+        self.title = @"编辑网络销售职位";
+    }else if (_viewType == JMBUserPostSaleJobViewTypeAdd) {
+        self.title = @"发布网络销售职位";
+    
     }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];

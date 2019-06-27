@@ -512,6 +512,11 @@
 		04A5122D229ABDE200BA2DC5 /* paizhao@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A5122A229ABDE100BA2DC5 /* paizhao@3x.png */; };
 		04A5122E229ABDE200BA2DC5 /* paizhao.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A5122B229ABDE100BA2DC5 /* paizhao.png */; };
 		04A5122F229ABDE200BA2DC5 /* paizhao@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A5122C229ABDE100BA2DC5 /* paizhao@2x.png */; };
+		04A64E8C22C452EF006C3ABA /* delivered.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A64E8922C452EE006C3ABA /* delivered.png */; };
+		04A64E8D22C452EF006C3ABA /* delivered@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A64E8A22C452EF006C3ABA /* delivered@2x.png */; };
+		04A64E8E22C452EF006C3ABA /* delivered@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A64E8B22C452EF006C3ABA /* delivered@3x.png */; };
+		04A64E9122C4C935006C3ABA /* JMMyTopViewNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A64E9022C4C935006C3ABA /* JMMyTopViewNavView.m */; };
+		04A64E9322C4C93F006C3ABA /* JMMyTopViewNavView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A64E9222C4C93F006C3ABA /* JMMyTopViewNavView.xib */; };
 		04A6DF6B22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6DF6A22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m */; };
 		04A9DFA2225AE3C400CD7CC1 /* JMMyResumeCareerStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A3F2251186B009BCFE4 /* JMMyResumeCareerStatusTableViewCell.m */; };
 		04A9DFA5225AE3D800CD7CC1 /* JMUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9DFA4225AE3D800CD7CC1 /* JMUserInfoModel.m */; };
@@ -1505,6 +1510,12 @@
 		04A5122A229ABDE100BA2DC5 /* paizhao@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paizhao@3x.png"; sourceTree = "<group>"; };
 		04A5122B229ABDE100BA2DC5 /* paizhao.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paizhao.png; sourceTree = "<group>"; };
 		04A5122C229ABDE100BA2DC5 /* paizhao@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paizhao@2x.png"; sourceTree = "<group>"; };
+		04A64E8922C452EE006C3ABA /* delivered.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delivered.png; sourceTree = "<group>"; };
+		04A64E8A22C452EF006C3ABA /* delivered@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delivered@2x.png"; sourceTree = "<group>"; };
+		04A64E8B22C452EF006C3ABA /* delivered@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "delivered@3x.png"; sourceTree = "<group>"; };
+		04A64E8F22C4C935006C3ABA /* JMMyTopViewNavView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMyTopViewNavView.h; sourceTree = "<group>"; };
+		04A64E9022C4C935006C3ABA /* JMMyTopViewNavView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMyTopViewNavView.m; sourceTree = "<group>"; };
+		04A64E9222C4C93F006C3ABA /* JMMyTopViewNavView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMyTopViewNavView.xib; sourceTree = "<group>"; };
 		04A6DF6922B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+FectchOrderList.h"; sourceTree = "<group>"; };
 		04A6DF6A22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchOrderList.m"; sourceTree = "<group>"; };
 		04A9DFA3225AE3D700CD7CC1 /* JMUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMUserInfoModel.h; sourceTree = "<group>"; };
@@ -2734,6 +2745,9 @@
 				048348D52269C01200DE4630 /* JMMangerInterviewTableViewCell.h */,
 				048348D62269C01200DE4630 /* JMMangerInterviewTableViewCell.m */,
 				048348D72269C01200DE4630 /* JMMangerInterviewTableViewCell.xib */,
+				04A64E8F22C4C935006C3ABA /* JMMyTopViewNavView.h */,
+				04A64E9022C4C935006C3ABA /* JMMyTopViewNavView.m */,
+				04A64E9222C4C93F006C3ABA /* JMMyTopViewNavView.xib */,
 				040701BC2275DB7A002BF58D /* JMCompanyLikeTableViewCell.h */,
 				040701BD2275DB7A002BF58D /* JMCompanyLikeTableViewCell.m */,
 				040701BE2275DB7A002BF58D /* JMCompanyLikeTableViewCell.xib */,
@@ -3527,6 +3541,9 @@
 				0485AD2122A10F7D00B31506 /* mine_share.png */,
 				0485AD2222A10F7D00B31506 /* mine_share@2x.png */,
 				0485AD2022A10F7D00B31506 /* mine_share@3x.png */,
+				04A64E8922C452EE006C3ABA /* delivered.png */,
+				04A64E8A22C452EF006C3ABA /* delivered@2x.png */,
+				04A64E8B22C452EF006C3ABA /* delivered@3x.png */,
 				0485AD1A22A10F5900B31506 /* subscribe.png */,
 				0485AD1C22A10F5A00B31506 /* subscribe@2x.png */,
 				0485AD1B22A10F5A00B31506 /* subscribe@3x.png */,
@@ -4129,6 +4146,7 @@
 				6D0209FB224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.xib in Resources */,
 				049555E8227B25C50008AF1C /* other_bubble.png in Resources */,
 				049C651E22AD30E500A93DFE /* JMMakeOutBillView.xib in Resources */,
+				04A64E9322C4C93F006C3ABA /* JMMyTopViewNavView.xib in Resources */,
 				04DD1D4B224B6E95007CB11C /* verification_code.png in Resources */,
 				040BF07322719E4E0088697D /* me@2x.png in Resources */,
 				041CCF0122A52403002DFED3 /* store@3x.png in Resources */,
@@ -4428,6 +4446,7 @@
 				040C8651227E8F4A00993490 /* Photo@3x.png in Resources */,
 				040BF07622719E4E0088697D /* syndicate@3x.png in Resources */,
 				048FEE382244853C001160C8 /* Main.storyboard in Resources */,
+				04A64E8D22C452EF006C3ABA /* delivered@2x.png in Resources */,
 				0488E396229F93510071DEE7 /* icon_return_nav.png in Resources */,
 				04C6013F2260639C000B1FE0 /* JMAllMessageTableViewController.xib in Resources */,
 				04ABB7AE22B259CB00E3F66A /* Alipay_pay@2x.png in Resources */,
@@ -4503,6 +4522,7 @@
 				6D020A7222539FB0009BCFE4 /* HomeTableViewCell.xib in Resources */,
 				6D558664224B564F0037C14E /* JMMineViewController.xib in Resources */,
 				0488E3C9229F9BED0071DEE7 /* discovery_pitch_on@2x.png in Resources */,
+				04A64E8C22C452EF006C3ABA /* delivered.png in Resources */,
 				0485AD1822A10D1900B31506 /* myResume@3x.png in Resources */,
 				0488E398229F93510071DEE7 /* icon_return_nav@3x.png in Resources */,
 				0488E44A22A023990071DEE7 /* di_icon_return.png in Resources */,
@@ -4612,6 +4632,7 @@
 				04DEB4122296AA7A0089BD87 /* countermand.png in Resources */,
 				040B839A2265F3E700F1A37A /* IDCard2@3x.png in Resources */,
 				041997C42266C5DC00C6C134 /* post_a_job@3x.png in Resources */,
+				04A64E8E22C452EF006C3ABA /* delivered@3x.png in Resources */,
 				04908B0022A7D280000B5AB4 /* JMPositionManageViewController.xib in Resources */,
 				04072F352282B2440067A05D /* JMWithdrawViewController.xib in Resources */,
 				6D55865E224B54D70037C14E /* home_ message@3x.png in Resources */,
@@ -4775,6 +4796,7 @@
 				6D020A6E22539FB0009BCFE4 /* MapBGView.m in Sources */,
 				041997CE2266C75000C6C134 /* JMPostJobHomeViewController.m in Sources */,
 				04ABB78A22B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m in Sources */,
+				04A64E9122C4C935006C3ABA /* JMMyTopViewNavView.m in Sources */,
 				040701BA2275DB58002BF58D /* JMCompanyLikeViewController.m in Sources */,
 				040AF5B022784BC70027D7D8 /* JMChatViewViewController.m in Sources */,
 				6D82F287227492CF00B9D2B9 /* JMEducationExperienceViewController.m in Sources */,

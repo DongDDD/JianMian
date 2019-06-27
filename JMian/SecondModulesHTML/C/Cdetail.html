@@ -66,12 +66,14 @@
                         display: flex;
                         span{
                             align-self: center;
+                            margin-right:0.02rem;
                         }
                         div{
                             align-self: center;
                             img{
                                 width: 0.4rem;
                                 margin-top: 0.15rem;
+                                margin-left:0.02rem;
                             }
                         }
                     }
@@ -250,7 +252,6 @@
                     display: flex;
                     justify-content: center;
                     height: 1.2rem;
-                    margin-bottom: 1.33rem;
                     text-align: center;
                     color:#999999;
                     font-size: 0.26rem;
@@ -355,7 +356,7 @@
                 }
                 .bottom{
                     position:absolute;
-                    bottom: -0.1rem;
+                    bottom: -1rem;
                     left: 0;
                     display: flex;
                     justify-content: center;
@@ -451,22 +452,27 @@
             -webkit-box-shadow:none;
             box-shadow:none;
         }
+        .dialog-open {
+            -webkit-overflow-scrolling:touch;
+            position: fixed;
+            width: 100%;
+        }
     </style>
 </head>
 <body>
-<div id="wrapper" v-show="initialize">
+<div id="wrapper" style="visibility:hidden">
     <div>
         <div class="line"></div>
         <header style="display: none" v-show="initialize" @click="clickCompanyDetails">
         <span class="avatar">
             <img v-if="this.detail.company" :src="this.detail.company.logo_path" alt="">
         </span>
-            <span class="contain">
+        <span class="contain">
             <p class="c-name" v-if="this.detail.company">{{this.detail.company.company_name}}</p>
-            <span class="credit" v-if="this.detail.company.reputation">
+            <span class="credit" v-show="level>0">
                 <span>信用</span>
                 <div>
-                    <img v-if="level>0" id="level" v-for="item in level" :src="level1" alt="" >
+                    <img id="level" v-for="item in level" :src="level1" alt="">
                 </div>
             </span>
         </span>
@@ -510,15 +516,15 @@
                     <div class="product">
                         <span>产品描述</span>
                         <div v-if="this.detail.goods">产品名称：{{this.detail.goods.goods_title}}</div>
-                        <div v-if="this.detail.goods" style="margin-bottom: 0.53rem">产品价格：{{this.detail.goods.goods_price}}</div>
+                        <div v-if="this.detail.goods" style="margin-bottom: 0.53rem">产品价格：{{this.detail.goods.goods_price}}元</div>
                         <p v-if="this.detail.goods" style="margin-bottom: 0.72rem">{{this.detail.goods.description}}</p>
                     </div>
                     <div class="line" style="margin:0 0.53rem;"></div>
-                    <div class="describe" v-if="this.detail.video">
+                    <div class="describe" v-show="this.detail.video">
                         <span>产品视频</span>
                         <div style="text-align: center;margin-top: 0.66rem;position: relative">
-                            <video id="video" width="70%" style="border-radius: 0.33rem" controls webkit-playsinline="true" playsinline x5-video-player-type="h5" :poster="this.detail.video.cover">
-                                <source :src="this.detail.video.file_path">
+                            <video id="video" width="90%" style="border-radius: 0.33rem" controls webkit-playsinline="true" playsinline x5-video-player-type="h5" v-if="this.detail.video" :poster="this.detail.video.cover">
+                                <source :src="this.detail.video && this.detail.video.file_path">
                             </video>
                         </div>
                     </div>
@@ -526,7 +532,7 @@
                     <div class="describe" v-if="this.detail.images">
                         <span>产品图片</span>
                         <ul style="width: 100%;margin-top: 0.66rem;">
-                            <li style="display: inline-block" v-for="item in this.detail.images"><img :src="item.file_path" alt="" style="width: 2.8rem;margin-right: 0.16rem" @click="openSimpleDialog(item.file_path)"></li>
+                            <li style="display: inline-block;width: 2.8rem;height:2.8rem;line-height:2.8rem;overflow:hidden;background:#000;text-align:center;margin-right: 0.16rem;" v-for="item in this.detail.images"><img :src="item.file_path" alt="" style="width:100%;vertical-align:middle;" @click="openSimpleDialog(item.file_path)"></li>
                         </ul>
                     </div>
                     <div class="bottom">
@@ -559,7 +565,7 @@
                     <div class="line" style="margin:0 0.53rem;"></div>
                     <div class="describe">
                         <span>工作描述</span>
-                        <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem" v-if="this.detail">
+                        <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem" v-if="this.detail.description">
                             {{this.detail.description}}
                         </p>
                     </div>
@@ -572,7 +578,7 @@
                         </div>
                         <div v-if="this.detail.latitude && this.detail.longitude" id="mapContainer" style="height: 7rem;" @click="clickCompanyToAMap"></div>
                     </div>
-                    <div class="bottom" style="">
+                    <div class="bottom">
                         <span></span>
                         <p style="display:inline-block;vertical-align:middle;align-self: center;margin: 0 0.34rem">已经到底啦，再往上逛逛吧</p>
                         <span></span>
@@ -588,7 +594,7 @@
                             <div class="credit-lists" v-for="item in this.record.data">
                                 <div class="list">
                                     <div class="contain">
-                                        <span class="avator"><img src="../images/x.png" alt=""></span>
+                                        <span class="avator"><img :src="item.user.avatar" alt=""></span>
                                         <span class="user-name">{{item.user.nickname}}<p>任务：{{item.task.task_title}}</p></span>
                                         <span class="num">{{item.reputation}}.0分</span>
                                     </div>
@@ -603,13 +609,13 @@
                 </mu-paper>
             </transition>
         </div>
-        <mu-container>
-            <mu-dialog width="100%" :open.sync="openSimple">
-                <img :src="bigImg" alt="" style="width: 100%">
-            </mu-dialog>
-        </mu-container>
-    </div>
 
+    </div>
+    <div style="position: fixed;top:0;left:0;background:#000;width: 100%;height:100%;z-index:1000" v-if="openSimple" @click="close">
+        <div style="width: 100%;height:auto;text-align:center;position:relative">
+            <img :src="bigImg" alt="" style="width: 90%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
+        </div>
+    </div>
 </div>
 </body>
 <script src="../js/vue.js"></script>
@@ -649,6 +655,20 @@
                 this.initialize = true;
             }.bind(this));
             document.addEventListener('scroll', this.handleScroll);
+            ModalHelper = ((bodyCls) => {
+                let scrollTop;
+                return {
+                    afterOpen: function () {
+                        scrollTop = document.scrollingElement.scrollTop;
+                        document.body.classList.add(bodyCls);
+                        document.body.style.top = -scrollTop + 'px';
+                    },
+                    beforeClose: function () {
+                        document.body.classList.remove(bodyCls);
+                        document.scrollingElement.scrollTop = scrollTop;
+                    },
+                };
+            })('dialog-open');
         },
         methods:{
             handleScroll () {
@@ -666,7 +686,7 @@
             },
             handleCredit(){
                 if(this.token){
-                    console.log(this.token)
+                console.log(this.token)
                     axios.get('http://produce.jmzhipin.com/api/task/comment/paginate?company_id=' + this.detail.company.company_id, {
                         headers: {
                             'x-access-sign': '585c84aca67b58e000364309783e31e6',
@@ -729,10 +749,12 @@
             },
             openSimpleDialog (img) {
                 this.openSimple = true;
-                this.bigImg = img
+                this.bigImg = img;
+                ModalHelper.afterOpen();
             },
             leveling(){
                 var img = document.getElementById('level');
+                console.log(img)
                 if(this.detail.company.reputation){
                     if(4 <= this.detail.company.reputation && this.detail.company.reputation <= 10){
                         this.level = 1;
@@ -866,15 +888,20 @@
                     }
                 });
             },
+            close(){
+                this.openSimple = false;
+                ModalHelper.beforeClose()
+            }
         },
         watch:{
             detail:function () {
                 this.$nextTick(function(){
-                    if(vue.detail.payment_method !== 1){
+                    document.getElementById('wrapper').style.visibility = 'visible';
+                    if(vue.detail.payment_method !== 1 && this.detail.latitude && this.detail.longitude){
                         vue.init();
                     }
                     vue.leveling();
-                });
+                })
             }
         }
     });
@@ -890,6 +917,7 @@
             Javascript:aaa.taskDataLoading()
         }
         this.taskDataLoading();
+
     }*/
 
 </script>

@@ -9,7 +9,9 @@
 #import "JMFeedBackChooseViewController.h"
 #import "JMLabsChooseViewController.h"
 #import "JMHTTPManager+InterView.h"
-@interface JMFeedBackChooseViewController ()<JMLabsChooseViewControllerDelegate>
+#import "JMMyTopViewNavView.h"
+@interface JMFeedBackChooseViewController ()<JMLabsChooseViewControllerDelegate,JMMyTopViewNavViewDelegate>
+@property (nonatomic, strong) JMMyTopViewNavView *navView;
 @property (nonatomic, strong) JMLabsChooseViewController *labschooseVC;
 @property (nonatomic, assign)NSInteger index1;
 @property (nonatomic, assign)NSInteger index2;
@@ -25,7 +27,48 @@
     // Do any additional setup after loading the view.
     self.title = @"面试反馈";
     [self setRightBtnTextName:@"提交"];
+    [self initView];
+    
+}
+
+-(void)initView{
+
     [self labschooseVC];
+
+    
+    UIButton *saveBtn = [[UIButton alloc]init];
+    [saveBtn addTarget:self action:@selector(saveAction) forControlEvents:UIControlEventTouchUpInside];
+    saveBtn.backgroundColor = MASTER_COLOR;
+    saveBtn.layer.cornerRadius = 17.5;
+    [saveBtn setTitle:@"确认提交" forState:UIControlStateNormal];
+    [self.view addSubview:saveBtn];
+    [saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.height.mas_equalTo(37);
+        make.left.mas_equalTo(self.view).mas_offset(20);
+        make.right.mas_equalTo(self.view).mas_offset(-20);
+        make.bottom.mas_equalTo(self.view).mas_offset(-20-Bottom_SafeHeight);
+    }];
+}
+
+-(void)setViewType:(JMFeedBackChooseViewType)viewType{
+    if (viewType == JMFeedBackChooseViewAppdelegate) {
+        [self.view addSubview:self.navView];
+        _navView.backgroundColor = [UIColor whiteColor];
+        [_navView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.view);
+            make.height.mas_equalTo(64);
+            make.left.and.right.mas_equalTo(self.view);
+            
+        }];
+    }
+    
+}
+
+
+-(void)saveAction{
+    [self rightAction];
+    
+    
 }
 
 -(void)rightAction{
@@ -41,6 +84,10 @@
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"反馈提交成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
+        
+        if (_delegate && [_delegate respondsToSelector:@selector(didCommitActionWithInterview_id:)]) {
+            [_delegate didCommitActionWithInterview_id:self.interview_id];
+        }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -63,6 +110,12 @@
     }];
     
     
+}
+
+-(void)backAction{
+    if (_delegate && [_delegate respondsToSelector:@selector(didCommitActionWithInterview_id:)]) {
+        [_delegate didCommitActionWithInterview_id:self.interview_id];
+    }
 }
 
 - (void)didChooseLabsTitle_str:(nonnull NSString *)str index:(NSInteger)index {
@@ -99,16 +152,37 @@
         _labschooseVC.labsChooseViewType = JMLabsChooseViewTypeFeedBack;
         [self addChildViewController:_labschooseVC];
         [self.view addSubview:_labschooseVC.view];
-        [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.view);
-            make.left.and.right.mas_equalTo(self.view);
-            make.bottom.mas_equalTo(self.view);
-        }];
+        if (_viewType == JMFeedBackChooseViewDefault) {
+            [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.top.mas_equalTo(self.view);
+                make.left.and.right.mas_equalTo(self.view);
+                make.bottom.mas_equalTo(self.view);
+            }];
+        }else if  (_viewType == JMFeedBackChooseViewDefault) {
+            [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+                
+                make.top.mas_equalTo(self.view).mas_offset(64);
+                make.left.and.right.mas_equalTo(self.view);
+                make.bottom.mas_equalTo(self.view);
+            }];
+        }
+  
     }
     return  _labschooseVC;
     
 }
 
+-(JMMyTopViewNavView *)navView{
+    if (_navView == nil) {
+        _navView = [[JMMyTopViewNavView alloc]init];
+        _navView.delegate = self;
+        
+    }
+    return _navView;
+    
+
+}
 
 /*
 #pragma mark - Navigation
