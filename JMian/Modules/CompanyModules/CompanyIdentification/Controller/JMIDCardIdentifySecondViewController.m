@@ -11,7 +11,7 @@
 #import "JMCompanyTabBarViewController.h"
 #import "JMHTTPManager+UpdateInfo.h"
 
-@interface JMIDCardIdentifySecondViewController ()
+@interface JMIDCardIdentifySecondViewController ()<UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *img1;
 @property (weak, nonatomic) IBOutlet UIImageView *img2;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
@@ -24,21 +24,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitle:@"实名认证"];
-    self.navigationController.navigationBar.translucent = NO;
-    
-    self.extendedLayoutIncludesOpaqueBars = YES;
-    self.view.backgroundColor = [UIColor colorWithRed:247/255.0 green:247/255.0 blue:247/255.0 alpha:1.0];
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];//设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。tapGestureRecognizer.cancelsTouchesInView = NO;//将触摸事件添加到当前view
-    [self.view addGestureRecognizer:tapGestureRecognizer];
+//    self.navigationController.navigationBar.translucent = NO;
+//
+//    self.extendedLayoutIncludesOpaqueBars = YES;
+    self.view.backgroundColor = BG_COLOR;
+    self.nameText.delegate = self;
+    self.IDCardText.delegate = self;
+//    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];//设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。tapGestureRecognizer.cancelsTouchesInView = NO;//将触摸事件添加到当前view
+//    [self.view addGestureRecognizer:tapGestureRecognizer];
     // Do any additional setup after loading the view from its nib.
+    NSString *url1 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",self.image_front];
+    NSString *url2 = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",self.image_behind];
+    
+    [self.img1 sd_setImageWithURL:[NSURL URLWithString:url1] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [self.img2 sd_setImageWithURL:[NSURL URLWithString:url2] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     
 }
--(void)keyboardHide:(UITapGestureRecognizer*)tap{
-    [self.IDCardText resignFirstResponder];
-    [self.nameText resignFirstResponder];
-    
+
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
 }
+//-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+//    [self.IDCardText resignFirstResponder];
+//    [self.nameText resignFirstResponder];
+//
+//}
 
 //-(void)setImg1:(UIImageView *)img1{
 //    self.img1.image = img1.image;

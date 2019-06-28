@@ -436,18 +436,27 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     [self sendCreateTaskOrderResquest_task_id:model.work_task_id];
 }
 
+-(void)didClickPartTimeInfoAction{
+
+    //兼职
+    JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
+    vc.task_id = _myModel.work_task_id;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
 -(void)didClickHeaderInfoActionWithModel:(JMMessageListModel *)model{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        if ([model.type isEqualToString:@"1"]) {
+        if ([_myModel.type isEqualToString:@"1"]) {
             //全职
             JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
-            JMCompanyHomeModel *model = [[JMCompanyHomeModel alloc]init];
-            model.job_label_id = _myModel.work_work_id;
-            vc.companyModel = model;
+            JMCompanyHomeModel *model2 = [[JMCompanyHomeModel alloc]init];
+            model2.user_job_id = _myModel.job_user_job_id;
+            vc.companyModel = model2;
             [self.navigationController pushViewController:vc animated:YES];
             
-        }else if ([model.type isEqualToString:@"2"]) {
+        }else if ([_myModel.type isEqualToString:@"2"]) {
             //兼职
             JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
             vc.ability_id = _myModel.job_ability_id;
@@ -458,19 +467,20 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }else{
         if ([model.type isEqualToString:@"1"]) {
             //全职
-            JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
-            JMCompanyHomeModel *model = [[JMCompanyHomeModel alloc]init];
-            model.job_label_id = _myModel.work_work_id;
-            vc.companyModel = model;
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }else if ([model.type isEqualToString:@"2"]) {
-            //兼职
-            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
-            vc.ability_id = _myModel.job_ability_id;
+            JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
+            JMHomeWorkModel *model2 = [[JMHomeWorkModel alloc]init];
+            model2.work_id = _myModel.work_work_id;
+            vc.homeworkModel = model2;
             [self.navigationController pushViewController:vc animated:YES];
             
         }
+//        else if ([model.type isEqualToString:@"2"]) {
+//            //兼职
+//            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+//            vc.ability_id = _myModel.job_ability_id;
+//            [self.navigationController pushViewController:vc animated:YES];
+//
+//        }
         
     }
 
@@ -549,6 +559,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             [cell setMyConModel:_myModel];
             return cell;
         }
+  
         
         JMChatDetailInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
 
@@ -603,6 +614,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     
     return nil;
 }
+
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

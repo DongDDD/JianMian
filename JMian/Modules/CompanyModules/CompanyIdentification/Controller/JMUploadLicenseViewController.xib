@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMUploadLicenseViewController">
             <connections>
+                <outlet property="cameraBtn" destination="wNn-h3-IBu" id="1O7-GC-uc3"/>
                 <outlet property="headerImg" destination="DFz-tH-Jw5" id="GtN-3Z-6vn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 - (void)createVitaWith_work_status:(NSNumber *)work_status
-                         education:(NSNumber *)education
-                   work_start_date:(NSDate *)work_start_date
+                         education:(NSString *)education
+                   work_start_date:(NSString *)work_start_date
                       job_label_id:(NSString *)job_label_id
                  industry_label_id:(nullable NSNumber *)industry_label_id
                            city_id:(nullable NSNumber *)city_id

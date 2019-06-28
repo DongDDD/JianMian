@@ -15,15 +15,18 @@
 #import "JMJudgeViewController.h"
 #import "NavigationViewController.h"
 #import "LoginViewController.h"
+#import "STPickerDate.h"
+#import "STPickerSingle.h"
 
 
-typedef enum _PickerState {
-    SalaryState,
-    DateState,
-    EducationState
-} _PickerState;
 
-@interface JobIntensionViewController ()<UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,PositionDesiredDelegate>
+//typedef enum _PickerState {
+//    SalaryState,
+//    DateState,
+//    EducationState
+//} _PickerState;
+
+@interface JobIntensionViewController ()<UIScrollViewDelegate,UIPickerViewDelegate,UIPickerViewDataSource,PositionDesiredDelegate,STPickerDateDelegate,STPickerSingleDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *statusBtn4;
 @property (weak, nonatomic) IBOutlet UIButton *statusBtn1;
 @property (weak, nonatomic) IBOutlet UIButton *statusBtn2;
@@ -31,21 +34,24 @@ typedef enum _PickerState {
 @property (weak, nonatomic) IBOutlet UIButton *salaryBtn;
 @property (weak, nonatomic) IBOutlet UIButton *startWorkBtn;
 @property (weak, nonatomic) IBOutlet UIButton *educationBtn;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+//@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (nonatomic,strong) STPickerDate *pickerData;
+@property (nonatomic, strong) STPickerSingle *salaryPickerSingle;
+@property (nonatomic, strong) STPickerSingle *educationPickerSingle;
 
 @property (nonatomic, copy) NSString *job_labelID;
 @property (nonatomic, strong) NSNumber *statusNum;
 @property (nonatomic, copy) NSString *salaryMin;
 @property (nonatomic, copy) NSString *salaryMax;
-@property (nonatomic, strong) NSNumber *educationNum;
-@property (nonatomic, strong) NSDate *startWorkDate;
+@property (nonatomic, strong) NSString *education;
+@property (nonatomic, strong) NSString *startWorkDate;
 
-@property (strong, nonatomic) UIPickerView *pickerView;
-@property (strong, nonatomic) NSArray *salaryArray;
-@property (nonatomic, strong) NSArray *pickerArray;
+//@property (strong, nonatomic) UIPickerView *pickerView;
+//@property (strong, nonatomic) NSArray *salaryArray;
+//@property (nonatomic, strong) NSArray *pickerArray;
 
-@property (nonatomic,assign) _PickerState pickerState;
+//@property (nonatomic,assign) _PickerState pickerState;
 
 @property(nonatomic,strong)UIButton *moreBtn;
 
@@ -63,41 +69,41 @@ typedef enum _PickerState {
     
     self.statusNum = @(1);
     
-    self.datePicker.backgroundColor = BG_COLOR;
+//    self.datePicker.backgroundColor = BG_COLOR;
     
-    [self setPickerVIewUI];
-    [self.view addSubview:_datePicker];
+//    [self setPickerVIewUI];
+//    [self.view addSubview:_datePicker];
 
     self.scrollView.delegate = self;
     
-    UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
-    [self.view addGestureRecognizer:bgTap];
+//    UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
+//    [self.view addGestureRecognizer:bgTap];
     
     // Do any additional setup after loading the view from its nib.
     
 }
 
 
--(void)setPickerVIewUI{
-     self.pickerView = [[UIPickerView alloc]init];
-    self.pickerView.backgroundColor = BG_COLOR;
-    self.pickerView.delegate = self;
-    
-    self.pickerView.dataSource = self;
-    
-    [self.view addSubview:self.pickerView];
-    
-    self.pickerView.hidden = YES;
-    
-    [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.equalTo(self.view);
-        make.height.mas_equalTo(180);
-        make.bottom.mas_equalTo(self.view.mas_bottom);
-    }];
-
-    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
-
-}
+//-(void)setPickerVIewUI{
+//     self.pickerView = [[UIPickerView alloc]init];
+//    self.pickerView.backgroundColor = BG_COLOR;
+//    self.pickerView.delegate = self;
+//
+//    self.pickerView.dataSource = self;
+//
+//    [self.view addSubview:self.pickerView];
+//
+//    self.pickerView.hidden = YES;
+//
+//    [self.pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.and.right.equalTo(self.view);
+//        make.height.mas_equalTo(180);
+//        make.bottom.mas_equalTo(self.view.mas_bottom);
+//    }];
+//
+//    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+//
+//}
 
 #pragma mark - 点击事件
 - (IBAction)status1Action:(UIButton *)sender {
@@ -144,56 +150,63 @@ typedef enum _PickerState {
 }
 
 - (IBAction)choogseSalaryAction:(UIButton *)sender {
-    self.pickerArray = @[@"1k-2k",
-                         @"2k-4k",
-                         @"4k-6k",
-                         @"6k-8k",
-                         @"8k-10k",
-                         @"10k-15k",
-                         @"15k-20k",
-                         @"20k-30k",
-                         @"30k-40k",
-                         @"40k-50k",
-                         @"50k-100K",
-                         ];
-    [self.datePicker setHidden:YES];
-    [self.pickerView setHidden:NO];
+//    self.pickerArray = @[@"1k-2k",
+//                         @"2k-4k",
+//                         @"4k-6k",
+//                         @"6k-8k",
+//                         @"8k-10k",
+//                         @"10k-15k",
+//                         @"15k-20k",
+//                         @"20k-30k",
+//                         @"30k-40k",
+//                         @"40k-50k",
+//                         @"50k-100K",
+//                         ];
+//    [self.datePicker setHidden:YES];
+//    [self.pickerView setHidden:NO];
 
-    self.pickerState = SalaryState;
+//    self.pickerState = SalaryState;
     
-    [self.pickerView reloadAllComponents];
+//    [self.pickerView reloadAllComponents];
+    [self.view addSubview:self.salaryPickerSingle];
+
+    [self.salaryPickerSingle show];
 }
 
 - (IBAction)chooseStartWorkAction:(id)sender {
-
-    self.datePicker.hidden = NO;
-    [self.pickerView setHidden:YES];
+    [self.view addSubview:self.pickerData];
+    [self.pickerData show];
+//    self.datePicker.hidden = NO;
+//    [self.pickerView setHidden:YES];
     
 }
 
 
 - (IBAction)chooseEducationAction:(UIButton *)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+//    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+//
+//    [self.pickerView setHidden:NO];
+////    [self.datePicker setHidden:YES];
+//
+//    self.pickerState = EducationState;
+//    [self.pickerView reloadAllComponents];
+    [self.view addSubview:self.educationPickerSingle];
     
-    [self.pickerView setHidden:NO];
-    [self.datePicker setHidden:YES];
-    
-    self.pickerState = EducationState;
-    [self.pickerView reloadAllComponents];
+    [self.educationPickerSingle show];
 
 }
 
 
--(void)hiddenDatePickerAction{
-    self.datePicker.hidden = YES;
-    self.pickerView.hidden = YES;
-  
-}
+//-(void)hiddenDatePickerAction{
+////    self.datePicker.hidden = YES;
+//    self.pickerView.hidden = YES;
+//
+//}
 
 #pragma mark - 数据提交
 
 -(void)rightAction{
-    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusNum education:self.educationNum work_start_date:self.startWorkDate job_label_id:self.job_labelID industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:@4 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusNum education:self.education work_start_date:self.startWorkDate job_label_id:self.job_labelID industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:@4 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
@@ -220,78 +233,107 @@ typedef enum _PickerState {
 }
 
 
-- (IBAction)datePickerViewChange:(id)sender {
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    // 格式化日期格式
-    formatter.dateFormat = @"yyyy-MM-dd";
-    NSString *date = [formatter stringFromDate:self.datePicker.date];
-    // 显示时间
-    [self.startWorkBtn setTitle:date forState:UIControlStateNormal];
-    [self.startWorkBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    
-    self.startWorkDate  = [formatter dateFromString:date];
-    
-}
+//- (IBAction)datePickerViewChange:(id)sender {
+//
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    // 格式化日期格式
+//    formatter.dateFormat = @"yyyy-MM-dd";
+//    NSString *date = [formatter stringFromDate:self.datePicker.date];
+//    // 显示时间
+//    [self.startWorkBtn setTitle:date forState:UIControlStateNormal];
+//    [self.startWorkBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//
+//    self.startWorkDate  = [formatter dateFromString:date];
+//
+//}
 
 
 
 #pragma mark - PickerViewDelegate
+- (void)pickerDate:(STPickerDate *)pickerDate year:(NSInteger)year month:(NSInteger)month day:(NSInteger)day{
+    NSString *title = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)year,(long)month,(long)day];
+    [self.startWorkBtn setTitle:title forState:UIControlStateNormal];
+    [self.startWorkBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    // 格式化日期格式
+//    formatter.dateFormat = @"yyyy-MM-dd";
+//    NSString *date = [formatter stringFromDate:title];
+    self.startWorkDate  = title;
+//    [formatter dateFromString:date];
+}
 
-//返回有几列
-
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-
+- (void)pickerSingle:(STPickerSingle *)pickerSingle selectedTitle:(NSString *)selectedTitle row:(NSInteger)row
 {
-    
-    return 1;
-    
-}
-
-//返回指定列的行数
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-
-{
-    
-    return [self.pickerArray count];
-    
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    
-    NSString *str = [self.pickerArray objectAtIndex:row];
-    
-    return str;
-    
-}
-
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    if (self.pickerState == EducationState) {
-        [self.educationBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
-        [self.educationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-        self.educationNum = [NSNumber numberWithInteger:row + 1];
-        
-    }else if(self.pickerState == SalaryState){
-        [self.salaryBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
+    if (pickerSingle == _salaryPickerSingle) {
+        [self.salaryBtn setTitle:selectedTitle forState:UIControlStateNormal];
         [self.salaryBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    
-        NSString *salaryStr =[self.pickerArray objectAtIndex:row];
-        NSMutableArray *array = [self setSalaryRangeWithSalaryStr:salaryStr];
+        NSMutableArray *array = [self setSalaryRangeWithSalaryStr:selectedTitle];
         self.salaryMin = array[0];
         self.salaryMax = array[1];
-        
-        //        self.salaryMin = NSNumber nu
-        
-//        self.educationNum = [NSNumber numberWithInteger:row];
+    }else if (pickerSingle == _educationPickerSingle) {
+        [self.educationBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.educationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     
-    
+        self.education = [self getEducationNumWithEducationStr:selectedTitle];
     }
     
-    
+
 }
+
+////返回有几列
+//
+//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+//
+//{
+//
+//    return 1;
+//
+//}
+//
+////返回指定列的行数
+//
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//
+//{
+//
+//    return [self.pickerArray count];
+//
+//}
+//
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//
+//    NSString *str = [self.pickerArray objectAtIndex:row];
+//
+//    return str;
+//
+//}
+
+//
+//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+//
+//    if (self.pickerState == EducationState) {
+//        [self.educationBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
+//        [self.educationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//        self.educationNum = [NSNumber numberWithInteger:row + 1];
+//
+//    }else if(self.pickerState == SalaryState){
+//        [self.salaryBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
+//        [self.salaryBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//
+//        NSString *salaryStr =[self.pickerArray objectAtIndex:row];
+//        NSMutableArray *array = [self setSalaryRangeWithSalaryStr:salaryStr];
+//        self.salaryMin = array[0];
+//        self.salaryMax = array[1];
+//
+//        //        self.salaryMin = NSNumber nu
+//
+////        self.educationNum = [NSNumber numberWithInteger:row];
+//
+//
+//    }
+//
+//
+//}
 
 
 //-(void)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
@@ -321,12 +363,12 @@ typedef enum _PickerState {
 //}
 #pragma mark - scrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    [self.datePicker setHidden:YES];
-    [self.pickerView setHidden:YES];
-    
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//
+//    [self.datePicker setHidden:YES];
+//    [self.pickerView setHidden:YES];
+//
+//}
 
 -(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -420,6 +462,49 @@ typedef enum _PickerState {
     return _moreBtn;
 }
 
+-(STPickerDate *)pickerData{
+    if (_pickerData == nil) {
+        _pickerData = [[STPickerDate alloc]init];
+        _pickerData.delegate = self;
+        _pickerData.yearLeast = 1950;
+        _pickerData.yearSum = 2018;
+        _pickerData.heightPickerComponent = 28;
+        
+    }
+    return _pickerData;
+}
+
+-(STPickerSingle *)salaryPickerSingle{
+    if (_salaryPickerSingle == nil) {
+        _salaryPickerSingle = [[STPickerSingle alloc]init];
+        _salaryPickerSingle.delegate = self;
+        _salaryPickerSingle.title = @"薪资要求";
+        _salaryPickerSingle.widthPickerComponent = 200;
+        _salaryPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"1k-2k",
+                                         @"2k-4k",
+                                         @"4k-6k",
+                                         @"6k-8k",
+                                         @"8k-10k",
+                                         @"10k-15k",
+                                         @"15k-20k",
+                                         @"20k-30k",
+                                         @"30k-40k",
+                                         @"40k-50k",
+                                         @"50k-100K",nil];
+    }
+    return _salaryPickerSingle;
+}
+
+-(STPickerSingle *)educationPickerSingle{
+    if (_educationPickerSingle == nil) {
+        _educationPickerSingle = [[STPickerSingle alloc]init];
+        _salaryPickerSingle.title = @"我的学历";
+        _educationPickerSingle.delegate = self;
+        _educationPickerSingle.widthPickerComponent = 200;
+        _educationPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+    }
+    return _educationPickerSingle;
+}
 //- (NSAttributedString *)pickerView:(UIPickerView *)pickerView attributedTitleForRow:(NSInteger)row forComponent:(NSInteger)component{
 //
 //    NSString *str = [self.educationArray objectAtIndex:row];

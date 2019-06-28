@@ -84,6 +84,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSString *)getSalaryKtransformStrWithMin:(id)min max:(id)max;
 //学历数据转化
 -(NSString *)getEducationStrWithEducation:(NSString *)education;
+-(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr;
 @end
 
 NS_ASSUME_NONNULL_END

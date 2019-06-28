@@ -15,14 +15,17 @@
 #import "JMJudgeViewController.h"
 #import "NavigationViewController.h"
 #import "LoginViewController.h"
+#import "STPickerSingle.h"
+#import "JMHTTPManager+GetLabels.h"
+#import "JMLabsData.h"
 
 
-@interface JMCompanyInfoViewController ()<UIPickerViewDelegate,UIScrollViewDelegate>
+@interface JMCompanyInfoViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,STPickerSingleDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *headerImg;
 
-@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
-@property(nonatomic,strong) UIView *bgView;
+//@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+//@property(nonatomic,strong) UIView *bgView;
 
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLab;
 @property (weak, nonatomic) IBOutlet UITextField *abbreviationTextField;
@@ -30,15 +33,21 @@
 @property (weak, nonatomic) IBOutlet UIButton *employeeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *financingBtn;
 
+@property(nonatomic,strong) NSMutableArray *industryLabsArray;
+@property(nonatomic,strong) NSMutableArray *industryDataArray;
+@property(nonatomic,copy) NSString *industry_label_id;
 
-@property(nonatomic,strong) NSArray *pickerArray;
+//@property(nonatomic,strong) NSArray *pickerArray;
 
-@property(nonatomic,strong) UIButton *selectedBtn;
+//@property(nonatomic,strong) UIButton *selectedBtn;
 
 @property (nonatomic,copy)NSString *imageUrl;
 
 @property (nonatomic, assign)CGFloat changeHeight;
 @property(nonatomic,strong)UIButton *moreBtn;
+@property (nonatomic, strong) STPickerSingle *companyIndustryPickerSingle;
+@property (nonatomic, strong) STPickerSingle *employeePickerSingle;
+@property (nonatomic, strong) STPickerSingle *financingPickerSingle;
 
 
 @end
@@ -51,90 +60,90 @@
     self.extendedLayoutIncludesOpaqueBars = YES;
     [self setIsHiddenBackBtn:YES];
     [self setRightBtnTextName:@"下一步"];
-    self.pickerView.delegate = self;
+//    self.pickerView.delegate = self;
     [self.scrollView addSubview:self.moreBtn];
-    [self.view addSubview:self.pickerView];
+//    [self.view addSubview:self.pickerView];
     self.companyNameLab.text = kFetchMyDefault(@"company_name");
         
     self.scrollView.delegate = self;
-    
+    [self getLabsData];
     // Do any additional setup after loading the view from its nib.
 
-    _bgView = [[UIView alloc]init];
-    _bgView.backgroundColor = [UIColor grayColor];
-    _bgView.hidden = YES;
-    _bgView.alpha = 0.8;
-    [self.view addSubview:_bgView];
+//    _bgView = [[UIView alloc]init];
+//    _bgView.backgroundColor = [UIColor grayColor];
+//    _bgView.hidden = YES;
+//    _bgView.alpha = 0.8;
+//    [self.view addSubview:_bgView];
+//
+//    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.view);
+//        make.bottom.mas_equalTo(self.pickerView.mas_top);
+//        make.right.and.left.mas_equalTo(self.view);
+//    }];
     
-    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.pickerView.mas_top);
-        make.right.and.left.mas_equalTo(self.view);
-    }];
+//    UIButton *OKBtn = [[UIButton alloc]init];
+//    OKBtn.backgroundColor = [UIColor whiteColor];
+//    [OKBtn setHidden:YES];
+//    [OKBtn setTitle:@"确定" forState:UIControlStateNormal];
+//    [OKBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//    [OKBtn addTarget:self action:@selector(OKAction) forControlEvents:UIControlEventTouchUpInside];
+//    OKBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [self.view addSubview:OKBtn];
+//
+//    [OKBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(self.pickerView);
+//        make.top.mas_equalTo(self.pickerView);
+//        make.height.mas_equalTo(80);
+//        make.width.mas_equalTo(100);
+//    }];
     
-    UIButton *OKBtn = [[UIButton alloc]init];
-    OKBtn.backgroundColor = [UIColor whiteColor];
-    [OKBtn setHidden:YES];
-    [OKBtn setTitle:@"确定" forState:UIControlStateNormal];
-    [OKBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-    [OKBtn addTarget:self action:@selector(OKAction) forControlEvents:UIControlEventTouchUpInside];
-    OKBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [self.view addSubview:OKBtn];
-    
-    [OKBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(self.pickerView);
-        make.top.mas_equalTo(self.pickerView);
-        make.height.mas_equalTo(80);
-        make.width.mas_equalTo(100);
-    }];
-    
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];//设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。tapGestureRecognizer.cancelsTouchesInView = NO;//将触摸事件添加到当前view
-    [_bgView addGestureRecognizer:tapGestureRecognizer];
+//    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];//设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。tapGestureRecognizer.cancelsTouchesInView = NO;//将触摸事件添加到当前view
+//    [_bgView addGestureRecognizer:tapGestureRecognizer];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-    
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-- (void)keyboardWillShow:(NSNotification *)aNotification {
-    
-    NSDictionary *userInfo = aNotification.userInfo;
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardRect = aValue.CGRectValue;
-    CGRect frame = _abbreviationTextField.frame;
-    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-    CGRect rect= CGRectMake(0,-_changeHeight+100,SCREEN_WIDTH,SCREEN_HEIGHT);
-    
-    [UIView animateWithDuration:0.3 animations:^ {
-        self.view.frame = rect;
-        
-    }];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
 }
 
-- (void)keyboardWillHide:(NSNotification *)aNotification {
+//- (void)viewDidDisappear:(BOOL)animated
+//{
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
-    //上移n个单位，按实际情况设置
-    CGRect rect=CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
-    self.view.frame=rect;
-    
-    
-}
+//- (void)keyboardWillShow:(NSNotification *)aNotification {
+//
+//    NSDictionary *userInfo = aNotification.userInfo;
+//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//    CGRect keyboardRect = aValue.CGRectValue;
+//    CGRect frame = _abbreviationTextField.frame;
+//    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
+//    CGRect rect= CGRectMake(0,-_changeHeight+100,SCREEN_WIDTH,SCREEN_HEIGHT);
+//
+//    [UIView animateWithDuration:0.3 animations:^ {
+//        self.view.frame = rect;
+//
+//    }];
+//
+//}
+//
+//- (void)keyboardWillHide:(NSNotification *)aNotification {
+//
+//    //上移n个单位，按实际情况设置
+//    CGRect rect=CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+//    self.view.frame=rect;
+//
+//
+//}
 
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
     [_abbreviationTextField resignFirstResponder];
-    self.pickerView.hidden = YES;
-    [_bgView setHidden:YES];
+//    self.pickerView.hidden = YES;
+//    [_bgView setHidden:YES];
 
     //上移n个单位，按实际情况设置
     CGRect rect=CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
@@ -143,25 +152,28 @@
 
 #pragma mark - 点击事件
 
--(void)OKAction{
-
-    [self.pickerView setHidden:YES];
-    [_bgView setHidden:YES];
-
-}
+//-(void)OKAction{
+//
+//    [self.pickerView setHidden:YES];
+//    [_bgView setHidden:YES];
+//
+//}
 
 - (IBAction)industryAction:(UIButton *)sender {
-    NSLog(@"后台暂时没数据");
+    [self.view addSubview:self.companyIndustryPickerSingle];
+    [self.companyIndustryPickerSingle show];
     
     
 }
 
 - (IBAction)employeeAction:(UIButton *)sender {
-    [self.pickerView setHidden:NO];
-    [_bgView setHidden:NO];
-    self.pickerArray = [NSArray arrayWithObjects:@"15人以下",@"15～50人",@"50～100人",@"500人以上",nil];
-    [self.pickerView reloadAllComponents];
-    self.selectedBtn = sender;
+//    [self.pickerView setHidden:NO];
+//    [_bgView setHidden:NO];
+//    self.pickerArray = [NSArray arrayWithObjects:@"15人以下",@"15～50人",@"50～100人",@"500人以上",nil];
+//    [self.pickerView reloadAllComponents];
+//    self.selectedBtn = sender;
+    [self.view addSubview:self.employeePickerSingle];
+    [self.employeePickerSingle show];
     [_abbreviationTextField resignFirstResponder];
 
 }
@@ -169,61 +181,79 @@
 
 - (IBAction)financingStep:(UIButton *)sender {
     [_abbreviationTextField resignFirstResponder];
-    [self.pickerView setHidden:NO];
-    [_bgView setHidden:NO];
-    self.pickerArray = [NSArray arrayWithObjects:@"天使轮",@"A轮",@"B轮",@"C轮",@"D轮",@"不需要融资",nil];
-    [self.pickerView reloadAllComponents];
-    self.selectedBtn = sender;
+    [self.view addSubview:self.financingPickerSingle];
+    [self.financingPickerSingle show];
+//    [self.pickerView setHidden:NO];
+//    [_bgView setHidden:NO];
+//    self.pickerArray = [NSArray arrayWithObjects:@"天使轮",@"A轮",@"B轮",@"C轮",@"D轮",@"不需要融资",nil];
+//    [self.pickerView reloadAllComponents];
+//    self.selectedBtn = sender;
     
   
 
 }
-#pragma mark - PickerViewDelegate
+//#pragma mark - PickerViewDelegate
+//
+////返回有几列
+//
+//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+//{
+//    return 1;
+//
+//}
+//
+////返回指定列的行数
+//
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//
+//{
+//
+//    return [self.pickerArray count];
+//
+//}
+//
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//
+//    NSString *str = [self.pickerArray objectAtIndex:row];
+//
+//    return str;
+//
+//}
 
-//返回有几列
-
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-    
-}
-
-//返回指定列的行数
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-
-{
-    
-    return [self.pickerArray count];
-    
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    
-    NSString *str = [self.pickerArray objectAtIndex:row];
-    
-    return str;
-    
-}
+//
+//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+//
+//    if (self.selectedBtn.tag == 1) {
+//        [self.employeeBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
+//        [self.employeeBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//
+//    }else if(self.selectedBtn.tag == 2){
+//        [self.financingBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
+//        [self.financingBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//
+//    }
+//
+//
+//}
 
 
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    if (self.selectedBtn.tag == 1) {
-        [self.employeeBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
-        [self.employeeBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+#pragma mark - Data
+-(void)getLabsData{
+    [[JMHTTPManager sharedInstance]getLabels_Id:@"992" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            _industryDataArray = [JMLabsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            
+        }
+        for (JMLabsData *data in _industryDataArray) {
+            [self.industryLabsArray addObject:data.name];
+        }
         
-    }else if(self.selectedBtn.tag == 2){
-        [self.financingBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
-        [self.financingBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-
-    }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
     
     
 }
-
-
-#pragma mark - 数据提交
 -(void)rightAction{
     
     [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:kFetchMyDefault(@"company_name") company_position:kFetchMyDefault(@"company_position") nickname:nil avatar:nil enterprise_step:@"3" abbreviation:self.abbreviationTextField.text logo_path:self.imageUrl video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:@"1" financing:nil employee:self.employeeBtn.titleLabel.text      city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -338,13 +368,33 @@
         
     }
 }
-#pragma mark -scrollView delegte
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
-    self.pickerView.hidden = YES;
-//    [_abbreviationTextField resignFirstResponder];
-
+#pragma mark -Mydelegte
+- (void)pickerSingle:(STPickerSingle *)pickerSingle selectedTitle:(NSString *)selectedTitle row:(NSInteger)row{
+    
+    if (pickerSingle == _employeePickerSingle) {
+        [self.employeeBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.employeeBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+        
+    }else if(pickerSingle == _financingPickerSingle){
+        [self.financingBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.financingBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+        
+    }else if(pickerSingle == _companyIndustryPickerSingle){
+        [self.industryBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.industryBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+        JMLabsData *data = _industryDataArray[row];
+        self.industry_label_id = data.label_id;
+        
+    }
 }
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//
+//    self.pickerView.hidden = YES;
+////    [_abbreviationTextField resignFirstResponder];
+//
+//}
 
 // 图片选择结束之后，走这个方法，字典存放所有图片信息
 #pragma mark - image picker delegte
@@ -450,7 +500,21 @@
     [sheet showInView:self.view];
     
 }
+#pragma mark - lazy
 
+-(NSMutableArray *)industryDataArray{
+    if (_industryDataArray.count == 0) {
+        _industryDataArray = [NSMutableArray array];
+    }
+    return _industryDataArray;
+}
+
+-(NSMutableArray *)industryLabsArray{
+    if (_industryLabsArray.count == 0) {
+        _industryLabsArray = [NSMutableArray array];
+    }
+    return _industryLabsArray;
+}
 
 -(UIButton *)moreBtn{
     if (_moreBtn == nil) {
@@ -464,7 +528,40 @@
     return _moreBtn;
 }
 
+-(STPickerSingle *)employeePickerSingle{
+    if (_employeePickerSingle == nil) {
+        _employeePickerSingle = [[STPickerSingle alloc]init];
+        _employeePickerSingle.delegate = self;
+        _employeePickerSingle.title = @"人员规模";
+        _employeePickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _employeePickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"15人以下",@"15～50人",@"50～100人",@"500人以上",nil];
+    }
+    return _employeePickerSingle;
+}
 
+
+-(STPickerSingle *)financingPickerSingle{
+    if (_financingPickerSingle == nil) {
+        _financingPickerSingle = [[STPickerSingle alloc]init];
+        _financingPickerSingle.delegate = self;
+        _financingPickerSingle.title = @"发展阶段";
+        _financingPickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _financingPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"天使轮",@"A轮",@"B轮",@"C轮",@"D轮",@"不需要融资",nil];
+    }
+    return _financingPickerSingle;
+}
+
+
+-(STPickerSingle *)companyIndustryPickerSingle{
+    if (_companyIndustryPickerSingle == nil) {
+        _companyIndustryPickerSingle = [[STPickerSingle alloc]init];
+        _companyIndustryPickerSingle.delegate = self;
+        _companyIndustryPickerSingle.title = @"公司行业";
+        _companyIndustryPickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _companyIndustryPickerSingle.arrayData = self.industryLabsArray;
+    }
+    return _companyIndustryPickerSingle;
+}
 /*
 #pragma mark - Navigation
 

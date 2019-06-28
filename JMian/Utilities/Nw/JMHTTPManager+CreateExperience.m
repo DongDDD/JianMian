@@ -13,8 +13,8 @@
 
 - (void)createExperienceWithCompany_name:(NSString *)company_name
                             job_label_id:(NSNumber *)job_label_id
-                              start_date:(NSDate *)start_date
-                                end_date:(nullable NSDate *)end_date
+                              start_date:(NSString *)start_date
+                                end_date:(nullable NSString *)end_date
                              description:(NSString *)description
                               user_step:(nullable NSNumber *)user_step
                             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {

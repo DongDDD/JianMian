@@ -75,7 +75,6 @@
         self.leftBtn.backgroundColor = TEXT_GRAYmin_COLOR;
         self.leftBtn.layer.borderWidth = 0;
         self.leftBtn.layer.borderColor = TEXT_GRAYmin_COLOR.CGColor;
-
         
         if ([data.payment_method isEqualToString:@"1"] ) {
         
@@ -83,7 +82,14 @@
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.rightBtn.backgroundColor = MASTER_COLOR;
         }else{
-            [self.rightBtn setTitle:@"通过&支付定金" forState:UIControlStateNormal];
+            NSString *str;
+            if ([data.front_money isEqualToString:@"0"]) {
+                str = @"通过&&无定金";
+            }else{
+                str = @"通过&支付定金";
+
+            }
+            [self.rightBtn setTitle:str forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.rightBtn.backgroundColor = MASTER_COLOR;
         }

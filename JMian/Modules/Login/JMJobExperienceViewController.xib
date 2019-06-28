@@ -12,11 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMJobExperienceViewController">
             <connections>
                 <outlet property="companyNameText" destination="Thh-IG-hw5" id="G6F-WX-X1c"/>
-                <outlet property="datePckerView" destination="z2j-g2-D7A" id="Map-K6-rrn"/>
                 <outlet property="endDateBtn" destination="XGl-rC-7JW" id="T2V-sg-ZlM"/>
-                <outlet property="jobDescriptionText" destination="UiC-pq-MpP" id="GWO-VK-fze"/>
                 <outlet property="jobLabelId" destination="8rM-tf-D1A" id="hXo-vr-utD"/>
-                <outlet property="saveBtn" destination="m0J-zT-CbZ" id="XDC-3N-hyR"/>
                 <outlet property="scrollView" destination="ntR-Us-3WV" id="clD-gi-R2j"/>
                 <outlet property="startDateBtn" destination="Ksp-Pc-zf0" id="6AL-yB-21F"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -79,39 +76,6 @@
                                     <color key="textColor" red="0.33725490200000002" green="0.33725490200000002" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工作描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EuD-sr-4W1">
-                                    <rect key="frame" x="20" y="401.5" width="94" height="17"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="94" id="5Dc-AS-yS2"/>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="7p4-Zx-sBK"/>
-                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="58" id="CSX-7C-hAy"/>
-                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="94" id="TgE-FZ-24r"/>
-                                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="17" id="etf-uE-O95"/>
-                                        <constraint firstAttribute="height" constant="17" id="g7X-jc-3XR"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <color key="textColor" red="0.33725490200000002" green="0.33725490200000002" blue="0.33725490200000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m0J-zT-CbZ">
-                                    <rect key="frame" x="20" y="528" width="335" height="50"/>
-                                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="PH4-1K-Hkh"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                    <state key="normal" title="完成">
-                                        <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
-                                    </state>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                            <integer key="value" value="25"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="finishBtn:" destination="-1" eventType="touchUpInside" id="hez-ja-uG2"/>
-                                    </connections>
-                                </button>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Thh-IG-hw5">
                                     <rect key="frame" x="20" y="154" width="335" height="39"/>
                                     <constraints>
@@ -175,22 +139,13 @@
                                         <constraint firstAttribute="height" constant="0.5" id="71W-ed-h8o"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wSJ-ba-1Xo" userLabel="footvVew">
+                                <view hidden="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wSJ-ba-1Xo" userLabel="footvVew">
                                     <rect key="frame" x="20" y="477.5" width="335" height="0.5"/>
                                     <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="0.5" id="A8c-O8-jeg"/>
                                     </constraints>
                                 </view>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UiC-pq-MpP">
-                                    <rect key="frame" x="20" y="418.5" width="335" height="50"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="WbQ-Za-iRY"/>
-                                    </constraints>
-                                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
-                                </textField>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XGl-rC-7JW">
                                     <rect key="frame" x="129.5" y="242" width="74" height="48"/>
                                     <constraints>
@@ -208,28 +163,21 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="8rM-tf-D1A" firstAttribute="top" secondItem="wAE-3j-nEM" secondAttribute="bottom" constant="5" id="4a4-7F-eDW"/>
-                                <constraint firstItem="UiC-pq-MpP" firstAttribute="top" secondItem="EuD-sr-4W1" secondAttribute="bottom" id="6ae-cg-edd"/>
                                 <constraint firstItem="oL3-kO-1Hp" firstAttribute="centerY" secondItem="Ksp-Pc-zf0" secondAttribute="centerY" id="8gN-Uw-Ekr"/>
                                 <constraint firstItem="e0Q-3Q-olr" firstAttribute="top" secondItem="Thh-IG-hw5" secondAttribute="bottom" constant="8.5" id="933-CG-H9r"/>
                                 <constraint firstItem="Pck-mO-sDS" firstAttribute="leading" secondItem="xR5-CE-9gu" secondAttribute="leading" constant="20" id="Ab1-K5-jkz"/>
                                 <constraint firstItem="ema-Hd-lK9" firstAttribute="top" secondItem="Pck-mO-sDS" secondAttribute="bottom" constant="73" id="DAv-bo-MOm"/>
                                 <constraint firstItem="oL3-kO-1Hp" firstAttribute="leading" secondItem="Ksp-Pc-zf0" secondAttribute="trailing" constant="10" id="Dck-xj-bJS"/>
-                                <constraint firstItem="EuD-sr-4W1" firstAttribute="top" secondItem="wAE-3j-nEM" secondAttribute="bottom" constant="73" id="GNw-si-RKO"/>
+                                <constraint firstItem="8rM-tf-D1A" firstAttribute="top" secondItem="wAE-3j-nEM" secondAttribute="bottom" constant="5" id="FpU-lo-a0e"/>
                                 <constraint firstAttribute="trailing" secondItem="Thh-IG-hw5" secondAttribute="trailing" constant="20" id="JBx-HA-LwH"/>
                                 <constraint firstItem="ema-Hd-lK9" firstAttribute="leading" secondItem="Pck-mO-sDS" secondAttribute="leading" id="K9p-BO-oej"/>
-                                <constraint firstItem="wSJ-ba-1Xo" firstAttribute="top" secondItem="UiC-pq-MpP" secondAttribute="bottom" constant="9" id="Krm-mx-ibV"/>
                                 <constraint firstItem="e0Q-3Q-olr" firstAttribute="leading" secondItem="xR5-CE-9gu" secondAttribute="leading" constant="20" id="L2b-ZL-nBX"/>
                                 <constraint firstItem="ema-Hd-lK9" firstAttribute="top" secondItem="e0Q-3Q-olr" secondAttribute="bottom" constant="19.5" id="NEL-e8-713"/>
-                                <constraint firstItem="UiC-pq-MpP" firstAttribute="leading" secondItem="EuD-sr-4W1" secondAttribute="leading" id="OO9-Od-ti0"/>
                                 <constraint firstItem="wAE-3j-nEM" firstAttribute="top" secondItem="ema-Hd-lK9" secondAttribute="bottom" constant="73" id="OhV-VK-o13"/>
                                 <constraint firstAttribute="trailing" secondItem="e0Q-3Q-olr" secondAttribute="trailing" constant="20" id="P3U-1A-1GZ"/>
-                                <constraint firstItem="EuD-sr-4W1" firstAttribute="leading" secondItem="wAE-3j-nEM" secondAttribute="leading" id="Pd6-zU-mCs"/>
                                 <constraint firstItem="GbW-wY-fTa" firstAttribute="top" secondItem="5P2-Ag-Hqs" secondAttribute="bottom" constant="20" id="Pqp-pL-wbL"/>
-                                <constraint firstAttribute="trailing" secondItem="m0J-zT-CbZ" secondAttribute="trailing" constant="20" id="QeX-qT-quV"/>
                                 <constraint firstItem="Ksp-Pc-zf0" firstAttribute="top" secondItem="ema-Hd-lK9" secondAttribute="bottom" constant="5.5" id="Qk5-nh-Me1"/>
-                                <constraint firstItem="m0J-zT-CbZ" firstAttribute="top" secondItem="wSJ-ba-1Xo" secondAttribute="bottom" constant="50" id="SLO-o7-Xwp"/>
                                 <constraint firstItem="Pck-mO-sDS" firstAttribute="top" secondItem="GbW-wY-fTa" secondAttribute="bottom" constant="47.5" id="T04-0G-CrI"/>
-                                <constraint firstAttribute="trailing" secondItem="UiC-pq-MpP" secondAttribute="trailing" constant="20" id="T8R-g4-jc2"/>
                                 <constraint firstItem="XGl-rC-7JW" firstAttribute="leading" secondItem="oL3-kO-1Hp" secondAttribute="trailing" constant="10" id="TIP-Qr-lKf"/>
                                 <constraint firstItem="5P2-Ag-Hqs" firstAttribute="top" secondItem="xR5-CE-9gu" secondAttribute="top" constant="5" id="Ukx-ep-H5s"/>
                                 <constraint firstAttribute="trailing" secondItem="wSJ-ba-1Xo" secondAttribute="trailing" constant="20" id="Vy8-Ia-xpN"/>
@@ -250,29 +198,9 @@
                                 <constraint firstItem="sfn-1j-rQb" firstAttribute="leading" secondItem="xR5-CE-9gu" secondAttribute="leading" constant="20" id="pNO-Mv-JeH"/>
                                 <constraint firstItem="wSJ-ba-1Xo" firstAttribute="leading" secondItem="xR5-CE-9gu" secondAttribute="leading" constant="20" id="rY5-Sa-480"/>
                                 <constraint firstItem="MU4-N0-HTl" firstAttribute="top" secondItem="8rM-tf-D1A" secondAttribute="bottom" constant="14" id="ufC-JT-Mbw"/>
-                                <constraint firstItem="m0J-zT-CbZ" firstAttribute="leading" secondItem="xR5-CE-9gu" secondAttribute="leading" constant="20" id="wed-MJ-sWg"/>
                                 <constraint firstItem="wAE-3j-nEM" firstAttribute="leading" secondItem="ema-Hd-lK9" secondAttribute="leading" id="zXV-ZE-Bua"/>
                             </constraints>
                         </view>
-                        <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="z2j-g2-D7A">
-                            <rect key="frame" x="0.0" y="431" width="375" height="216"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="216" id="NDq-wF-2UT"/>
-                            </constraints>
-                            <date key="date" timeIntervalSinceReferenceDate="-22952509.19695282">
-                                <!--2000-04-10 08:18:10 +0000-->
-                            </date>
-                            <date key="minimumDate" timeIntervalSinceReferenceDate="-1262264400">
-                                <!--1961-01-01 11:00:00 +0000-->
-                            </date>
-                            <date key="maximumDate" timeIntervalSinceReferenceDate="599482800">
-                                <!--2019-12-31 11:00:00 +0000-->
-                            </date>
-                            <locale key="locale" localeIdentifier="zh_CN"/>
-                            <connections>
-                                <action selector="datePickerViewChange:" destination="-1" eventType="valueChanged" id="F5k-pb-Cgg"/>
-                            </connections>
-                        </datePicker>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -287,13 +215,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="z2j-g2-D7A" secondAttribute="bottom" id="7O1-y8-2ey"/>
                 <constraint firstItem="ntR-Us-3WV" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="CNZ-dT-dZH"/>
                 <constraint firstItem="ntR-Us-3WV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="WB4-ck-uaj"/>
-                <constraint firstItem="z2j-g2-D7A" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Y3q-9j-kKx"/>
                 <constraint firstAttribute="trailing" secondItem="ntR-Us-3WV" secondAttribute="trailing" id="fP4-Vg-wsv"/>
                 <constraint firstItem="ntR-Us-3WV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kYG-Qy-j7o"/>
-                <constraint firstAttribute="trailing" secondItem="z2j-g2-D7A" secondAttribute="trailing" id="vOZ-Oa-I0t"/>
             </constraints>
             <point key="canvasLocation" x="-271.19999999999999" y="74.212893553223395"/>
         </view>

@@ -388,22 +388,12 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+    vc.myConvModel = [_dataArray objectAtIndex:indexPath.row];
+    [self setReadMessageAction_model:[_dataArray objectAtIndex:indexPath.row]];
+    [self.navigationController pushViewController:vc animated:YES];
     
-    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
-        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-        vc.myConvModel = [_dataArray objectAtIndex:indexPath.row];
-        //    vc.conversation = [_dataArray objectAtIndex:indexPath.row];
-        [self setReadMessageAction_model:[_dataArray objectAtIndex:indexPath.row]];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }else{
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请先进行实名认证"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        
-        
-    }
+    
 }
 -(void)getUserInfo{
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)createExperienceWithCompany_name:(NSString *)company_name
                             job_label_id:(NSNumber *)job_label_id
-                              start_date:(NSDate *)start_date
-                                end_date:(nullable NSDate *)end_date
+                              start_date:(NSString *)start_date
+                                end_date:(nullable NSString *)end_date
                              description:(NSString *)description
                                user_step:(nullable NSNumber *)user_step
                             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
@@ -23,8 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateExperienceWith_experienceId:(NSString *)experienceId
                              company_name:(nullable NSString *)company_name
                              job_label_id:(nullable NSString *)job_label_id
-                               start_date:(nullable NSDate *)start_date
-                                 end_date:(nullable NSDate *)end_date
+                               start_date:(nullable NSString *)start_date
+                                 end_date:(nullable NSString *)end_date
                               description:(nullable NSString *)description
                              successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 

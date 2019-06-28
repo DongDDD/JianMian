@@ -17,17 +17,18 @@
 #import "NavigationViewController.h"
 #import "JMJudgeViewController.h"
 #import "IQKeyboardManager.h"
+#import "STPickerDate.h"
 
 
 
-@interface BasicInformationViewController ()<UITextFieldDelegate,UIScrollViewDelegate>
+@interface BasicInformationViewController ()<UITextFieldDelegate,UIScrollViewDelegate,STPickerDateDelegate>
 
 @property(nonatomic,strong)NSNumber *sex;
 @property (weak, nonatomic) IBOutlet UITextField *nameText;
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
 @property (nonatomic,copy)NSString *imageUrl;
 @property (weak, nonatomic) IBOutlet UIButton *headerImg;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+//@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIButton *birtnDateBtn;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -40,6 +41,7 @@
 
 @property(nonatomic,strong) UIView *bgView;
 @property(nonatomic,strong)UIButton *moreBtn;
+@property(nonatomic,strong)STPickerDate *pickerData;
 @end
 
 @implementation BasicInformationViewController
@@ -52,10 +54,10 @@
     }else{
         [self setIsHiddenBackBtn:YES];
     }
-    [self.scrollView addSubview:self.moreBtn];
-    [self.view addSubview:_datePicker];
-    [self getNewUserInfo];
     self.nameText.delegate = self;
+    [self.scrollView addSubview:self.moreBtn];
+  //  [self.view addSubview:_datePicker];
+    [self getNewUserInfo];
 //    self.birthDateText.inputView = self.datePicker;
     // Do any additional setup after loading the view from its nib.
 }
@@ -76,7 +78,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT*1.5);
+//    _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT*1.5);
 
 }
 
@@ -135,14 +137,14 @@
     
     
     [self.navigationController setNavigationBarHidden:NO];
-    self.datePicker.backgroundColor = [UIColor whiteColor];
+   // self.datePicker.backgroundColor = [UIColor whiteColor];
     self.emailText.delegate = self;
     self.emailText.keyboardType = UIKeyboardTypeEmailAddress;
     self.nameText.delegate = self;
     self.scrollView.delegate = self;
     
     
-    _bgView = [[UIView alloc]init];
+   /* _bgView = [[UIView alloc]init];
     _bgView.backgroundColor = [UIColor grayColor];
     _bgView.hidden = YES;
     _bgView.alpha = 0.8;
@@ -153,56 +155,42 @@
         make.bottom.mas_equalTo(self.datePicker.mas_top);
         make.right.and.left.mas_equalTo(self.view);
     }];
+    */
     
     
-    
-    UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
-    [self.view addGestureRecognizer:bgTap];
-    [_bgView addGestureRecognizer:bgTap];
+//    UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
+//    [self.view addGestureRecognizer:bgTap];
+//    [_bgView addGestureRecognizer:bgTap];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
 //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
 }
 
-- (IBAction)datePickerViewChange:(id)sender {
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    // 格式化日期格式
-    formatter.dateFormat = @"yyyy-MM-dd";
-    NSString *date = [formatter stringFromDate:self.datePicker.date];
-    // 显示时间
-    [self.birtnDateBtn setTitle:date forState:UIControlStateNormal];
-    [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    
-    
-}
+//- (IBAction)datePickerViewChange:(id)sender {
+//    
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    // 格式化日期格式
+//    formatter.dateFormat = @"yyyy-MM-dd";
+//    NSString *date = [formatter stringFromDate:self.datePicker.date];
+//    // 显示时间
+//    [self.birtnDateBtn setTitle:date forState:UIControlStateNormal];
+//    [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//    
+//    
+//}
 
 
 
-- (IBAction)showDatePeckerAction:(id)sender {
-    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
-    if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改出生年月"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        return;
-    }
-    
-    self.datePicker.hidden = NO;
-    [_bgView setHidden:NO];
-    [_nameText resignFirstResponder];
-    [_emailText resignFirstResponder];
-}
 
 
--(void)hiddenDatePickerAction{
-    self.datePicker.hidden = YES;
-    [_bgView setHidden:YES];
-    [_nameText resignFirstResponder];
-    [_emailText resignFirstResponder];
-    
-}
+//-(void)hiddenDatePickerAction{
+////    self.datePicker.hidden = YES;
+////    [_bgView setHidden:YES];
+//    [_nameText resignFirstResponder];
+//    [_emailText resignFirstResponder];
+//
+//}
 
 - (IBAction)headerAction:(id)sender {
     
@@ -359,17 +347,13 @@
     return YES;
 }
 
-#pragma mark -scrollView delegte
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    self.datePicker.hidden = YES;
-//    [self.nameText resignFirstResponder];
-//    [self.emailText resignFirstResponder];
+
+- (void)pickerDate:(STPickerDate *)pickerDate year:(NSInteger)year month:(NSInteger)month day:(NSInteger)day{
+    NSString *title = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)year,(long)month,(long)day];
+    [self.birtnDateBtn setTitle:title forState:UIControlStateNormal];
+    [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+
 }
-
-
-
-
 // 图片选择结束之后，走这个方法，字典存放所有图片信息
 #pragma mark - image picker delegte
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -484,6 +468,20 @@
 
 
 
+- (IBAction)showDatePeckerAction:(id)sender {
+    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+    if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改出生年月"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
+    [self.view addSubview:self.pickerData];
+    [self.pickerData show];
+
+    [_nameText resignFirstResponder];
+    [_emailText resignFirstResponder];
+}
 
 #pragma mark - 数据提交到服务器
 
@@ -541,6 +539,18 @@
     return _moreBtn;
 }
 
+
+-(STPickerDate *)pickerData{
+    if (_pickerData == nil) {
+        _pickerData = [[STPickerDate alloc]init];
+        _pickerData.delegate = self;
+        _pickerData.yearLeast = 1950;
+        _pickerData.yearSum = 2018;
+        _pickerData.heightPickerComponent = 28;
+
+    }
+    return _pickerData;
+}
 /*
 #pragma mark - Navigation
 

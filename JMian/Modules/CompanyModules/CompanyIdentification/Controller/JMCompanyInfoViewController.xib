@@ -18,7 +18,6 @@
                 <outlet property="financingBtn" destination="pj4-nO-pIz" id="BpE-pG-CxH"/>
                 <outlet property="headerImg" destination="8ua-DM-Osf" id="wlE-Cs-uWE"/>
                 <outlet property="industryBtn" destination="4YA-Gf-MVq" id="8lQ-QK-nH4"/>
-                <outlet property="pickerView" destination="NJK-gW-YIb" id="UgO-XG-qVi"/>
                 <outlet property="scrollView" destination="jwH-JF-xxn" id="mDH-BM-3sc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -116,7 +115,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="47" id="OCp-t7-UNq"/>
                                     </constraints>
-                                    <state key="normal" title="暂无选择">
+                                    <state key="normal" title="请选择">
                                         <color key="titleColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
@@ -147,7 +146,7 @@
                                         <action selector="financingStep:" destination="-1" eventType="touchUpInside" id="Mgf-dd-uoU"/>
                                     </connections>
                                 </button>
-                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="ivF-Xt-ajw">
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="ivF-Xt-ajw">
                                     <rect key="frame" x="387" y="26" width="7" height="11"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="11" id="5Az-VD-8LZ"/>
@@ -227,13 +226,6 @@
                         <constraint firstItem="1vf-4A-SlJ" firstAttribute="trailing" secondItem="bZq-7i-XfD" secondAttribute="trailing" id="y4i-kB-3Bj"/>
                     </constraints>
                 </scrollView>
-                <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NJK-gW-YIb">
-                    <rect key="frame" x="0.0" y="576" width="414" height="286"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="286" id="cg7-Iq-md6"/>
-                    </constraints>
-                </pickerView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ua-DM-Osf">
                     <rect key="frame" x="20" y="104" width="91" height="91"/>
                     <constraints>
@@ -253,14 +245,11 @@
                 <constraint firstItem="Qg7-Nh-akg" firstAttribute="leading" secondItem="YM0-I7-Pdc" secondAttribute="leading" id="Bge-7u-PWv"/>
                 <constraint firstItem="8ua-DM-Osf" firstAttribute="top" secondItem="fX8-KE-AoI" secondAttribute="bottom" constant="30" id="Enb-15-3Sq"/>
                 <constraint firstAttribute="bottom" secondItem="jwH-JF-xxn" secondAttribute="bottom" id="FUi-cc-M1i"/>
-                <constraint firstItem="NJK-gW-YIb" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="OXU-Po-Dn4"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="NJK-gW-YIb" secondAttribute="bottom" id="OgG-zH-qJc"/>
                 <constraint firstItem="fX8-KE-AoI" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="YCm-e8-nTN"/>
                 <constraint firstItem="Qg7-Nh-akg" firstAttribute="top" secondItem="YM0-I7-Pdc" secondAttribute="bottom" constant="15" id="Ypp-eI-mZm"/>
                 <constraint firstItem="jwH-JF-xxn" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="bQT-LL-V6F"/>
                 <constraint firstItem="jwH-JF-xxn" firstAttribute="top" secondItem="Qg7-Nh-akg" secondAttribute="bottom" constant="47" id="dbb-z4-zgB"/>
                 <constraint firstItem="8ua-DM-Osf" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="e9L-mn-c6i"/>
-                <constraint firstItem="NJK-gW-YIb" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="tYr-Jn-ZQR"/>
                 <constraint firstItem="YM0-I7-Pdc" firstAttribute="top" secondItem="fX8-KE-AoI" secondAttribute="bottom" constant="52" id="tds-Qy-Dv5"/>
                 <constraint firstItem="jwH-JF-xxn" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="wXC-dZ-O1Q"/>
             </constraints>

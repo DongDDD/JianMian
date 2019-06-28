@@ -17,6 +17,7 @@
 @interface JMUploadLicenseViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *headerImg;
 @property (nonatomic,copy)NSString *imageLicenseUrl;
+@property (weak, nonatomic) IBOutlet UIButton *cameraBtn;
 
 
 @end
@@ -25,9 +26,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        self.navigationController.navigationBar.translucent = NO;
-    
-        self.extendedLayoutIncludesOpaqueBars = YES;
+//        self.navigationController.navigationBar.translucent = NO;
+//
+//        self.extendedLayoutIncludesOpaqueBars = YES;
+    [self setIsHiddenBackBtn:YES];
     [self getUserInfo];
     // Do any additional setup after loading the view from its nib.
     
@@ -166,7 +168,7 @@
     
     //图片赋值显示
     _headerImg.image = savedImage;
-    
+    [self.cameraBtn setHidden:YES];
 //    [_headerImg setImage:savedImage forState:UIControlStateNormal];
 
     

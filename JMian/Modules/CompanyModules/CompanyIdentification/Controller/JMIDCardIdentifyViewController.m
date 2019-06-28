@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imageView1;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView2;
-@property(nonatomic,assign)BOOL isImage1;
+@property(nonatomic,assign)BOOL isFrontImage;
 
 @property(nonatomic,strong)NSArray *imgUrlArrl;
 
@@ -44,12 +44,11 @@
 }
 - (IBAction)tapBtnAction:(UIButton *)sender {
     if (sender.tag == 0) {
-        
-        _isImage1 = YES;
+        _isFrontImage = YES;
         [self getImagePickeerUI];
         
     }else if(sender.tag == 1){
-        _isImage1 = NO;
+        _isFrontImage = NO;
         [self getImagePickeerUI];
         
     }
@@ -160,7 +159,7 @@
     NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
     //读取路径进行上传
-    if (_isImage1==YES) {
+    if (_isFrontImage==YES) {
         
         _imageView1.image = savedImage;
     
@@ -189,11 +188,15 @@
         
         if (responsObject[@"data"]) {
             _imageUrl = responsObject[@"data"][0];
-            _imgUrlArrl = @[_imageUrl];
+//            _imgUrlArrl = @[_imageUrl];
+            if (_isFrontImage) {
+                _imagefontUrl = _imageUrl;
+            }else{
+                _imagebehindUrl = _imageUrl;
+            }
             
         }
         
-
         
         //图片赋值显示
 //        if (_isImage1==YES) {

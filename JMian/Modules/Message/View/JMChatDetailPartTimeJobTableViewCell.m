@@ -56,6 +56,11 @@
     }
 }
 
+- (IBAction)tapAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickPartTimeInfoAction)]) {
+        [_delegate didClickPartTimeInfoAction];
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

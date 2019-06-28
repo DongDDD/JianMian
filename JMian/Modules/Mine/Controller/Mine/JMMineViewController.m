@@ -296,15 +296,15 @@
         }else  if (indexPath.row == 2) {
             //实名认证
             JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-            if ([model.card_status isEqualToString:Card_PassIdentify]) {
-                [self showAlertSimpleTips:@"提示" message:@"你已通过实名认证" btnTitle:@"好的"];
-                
-            }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
-                [self showAlertSimpleTips:@"提示" message:@"审核实名认证中" btnTitle:@"好的"];
-            }else{
-                
+//            if ([model.card_status isEqualToString:Card_PassIdentify]) {
+//                [self showAlertSimpleTips:@"提示" message:@"你已通过实名认证" btnTitle:@"好的"];
+//
+//            }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
+//                [self showAlertSimpleTips:@"提示" message:@"审核实名认证中" btnTitle:@"好的"];
+//            }else{
+//
                 [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
-            }
+//            }
         }
 
         

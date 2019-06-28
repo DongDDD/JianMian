@@ -435,6 +435,8 @@
 		0491B2612286A07800F1FD3A /* JMLabsChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */; };
 		0492715C22982878008D6E0D /* JMBTypeLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492715B22982878008D6E0D /* JMBTypeLikeModel.m */; };
 		0492715F22982E3C008D6E0D /* JMCTypeLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492715E22982E3C008D6E0D /* JMCTypeLikeModel.m */; };
+		0492F00B22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492F00A22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m */; };
+		0492F00E22C6530A00C7EFB2 /* JMLabsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492F00D22C6530A00C7EFB2 /* JMLabsData.m */; };
 		0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */; };
 		0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */; };
 		04950FCF22AE585600C3D3FB /* JMGoodsDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04950FCD22AE585600C3D3FB /* JMGoodsDescriptionViewController.m */; };
@@ -1407,6 +1409,10 @@
 		0492715B22982878008D6E0D /* JMBTypeLikeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMBTypeLikeModel.m; sourceTree = "<group>"; };
 		0492715D22982E3C008D6E0D /* JMCTypeLikeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCTypeLikeModel.h; sourceTree = "<group>"; };
 		0492715E22982E3C008D6E0D /* JMCTypeLikeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCTypeLikeModel.m; sourceTree = "<group>"; };
+		0492F00922C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+FectchTaskAbility.h"; sourceTree = "<group>"; };
+		0492F00A22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchTaskAbility.m"; sourceTree = "<group>"; };
+		0492F00C22C6530A00C7EFB2 /* JMLabsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabsData.h; sourceTree = "<group>"; };
+		0492F00D22C6530A00C7EFB2 /* JMLabsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabsData.m; sourceTree = "<group>"; };
 		0494691B2244EEDA00A5BEB7 /* ChooseIdentity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseIdentity.h; sourceTree = "<group>"; };
 		0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseIdentity.m; sourceTree = "<group>"; };
 		0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseIdentity.xib; sourceTree = "<group>"; };
@@ -2058,6 +2064,8 @@
 			children = (
 				040865DB2272E898005BB03E /* JMIDCardModel.h */,
 				040865DC2272E898005BB03E /* JMIDCardModel.m */,
+				0492F00C22C6530A00C7EFB2 /* JMLabsData.h */,
+				0492F00D22C6530A00C7EFB2 /* JMLabsData.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3095,6 +3103,8 @@
 				04E25F6C22B509CD00F451C8 /* JMHTTPManager+FectchInvoiceInfo.m */,
 				04A4210A22BC92350001A2F0 /* JMHTTPManager+DeleteGoodsImage.h */,
 				04A4210B22BC92350001A2F0 /* JMHTTPManager+DeleteGoodsImage.m */,
+				0492F00922C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.h */,
+				0492F00A22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m */,
 			);
 			path = Task;
 			sourceTree = "<group>";
@@ -4716,6 +4726,7 @@
 				"${PODS_ROOT}/HXWeiboPhotoPicker/微博照片选择/HXWeiboPhotoPicker/HXWeiboPhotoPicker.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
+				"${PODS_ROOT}/STPickerView/STPickerView/Resource/area.plist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
@@ -4726,6 +4737,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HXWeiboPhotoPicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/area.plist",
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
@@ -4744,6 +4756,7 @@
 				04EA212122AFEC390035C398 /* JMHTTPManager+FectchMyTaskOrderList.m in Sources */,
 				04EA211D22AFD8C60035C398 /* JMCDetailWebViewController.m in Sources */,
 				6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */,
+				0492F00E22C6530A00C7EFB2 /* JMLabsData.m in Sources */,
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
 				040B838A2265EC0600F1A37A /* JMCompanyHomeViewController.m in Sources */,
 				04BBF2B022903D090068A9B1 /* JMCompanyVideoView.m in Sources */,
@@ -4952,6 +4965,7 @@
 				04908B5322A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.m in Sources */,
 				049FDBA72289A3C000E9BC25 /* JMPlayerViewController.m in Sources */,
 				049FDBA42289556600E9BC25 /* JMDidUploadVideoView.m in Sources */,
+				0492F00B22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m in Sources */,
 				040AF59E2277F4F00027D7D8 /* JMMessageTableViewController.m in Sources */,
 				04ABB7BF22B28CF300E3F66A /* JMSnapshotWebViewController.m in Sources */,
 				040CD552226ACD42000BB230 /* JMHTTPManager+FetchCompanyInfo.m in Sources */,

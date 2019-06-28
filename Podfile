@@ -20,4 +20,5 @@ pod 'MCTabBarController'
 pod 'IQKeyboardManager', '3.3.7'
 pod 'WechatOpenSDK'
 pod 'AlipaySDK-iOS'
+pod 'STPickerView', '2.4'
 

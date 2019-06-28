@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BasicInformationViewController">
             <connections>
                 <outlet property="birtnDateBtn" destination="R2G-Vq-3Up" id="jIi-h1-Tr4"/>
-                <outlet property="datePicker" destination="jO4-h6-hOg" id="9Cp-Cs-XpU"/>
                 <outlet property="emailText" destination="rOe-QJ-orW" id="eBw-Ba-29U"/>
                 <outlet property="headerImg" destination="xz1-PU-svB" id="xSJ-iC-Xl6"/>
                 <outlet property="manBtn" destination="NQ1-fX-nFI" id="0Jb-RB-em7"/>
@@ -45,13 +44,13 @@
                                     <color key="textColor" red="0.27450980392156865" green="0.27450980392156865" blue="0.27450980392156865" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xz1-PU-svB">
+                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xz1-PU-svB">
                                     <rect key="frame" x="139" y="58" width="97" height="92"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="97" id="r9t-cI-Mwi"/>
                                         <constraint firstAttribute="height" constant="92" id="wPj-OJ-2YG"/>
                                     </constraints>
-                                    <state key="normal" title=" " image="camera.png" backgroundImage="camera.png"/>
+                                    <state key="normal" title=" " image="camera.png"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="46"/>
@@ -161,22 +160,6 @@
                                         <action selector="showDatePeckerAction:" destination="-1" eventType="touchUpInside" id="eEA-Ie-IJV"/>
                                     </connections>
                                 </button>
-                                <datePicker hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="jO4-h6-hOg">
-                                    <rect key="frame" x="0.0" y="533" width="375" height="228"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="228" id="wMA-EQ-wM1"/>
-                                    </constraints>
-                                    <date key="date" timeIntervalSinceReferenceDate="-22952509.19695282">
-                                        <!--2000-04-10 08:18:10 +0000-->
-                                    </date>
-                                    <date key="maximumDate" timeIntervalSinceReferenceDate="599482800">
-                                        <!--2019-12-31 11:00:00 +0000-->
-                                    </date>
-                                    <locale key="locale" localeIdentifier="zh_CN"/>
-                                    <connections>
-                                        <action selector="datePickerViewChange:" destination="-1" eventType="valueChanged" id="j8j-et-Yjw"/>
-                                    </connections>
-                                </datePicker>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mKC-aC-BuO">
                                     <rect key="frame" x="198" y="180" width="72" height="25"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -262,14 +245,11 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="jO4-h6-hOg" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="1gJ-20-Bib"/>
                 <constraint firstItem="apJ-xv-pVX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="G4P-Rb-h4R"/>
                 <constraint firstItem="apJ-xv-pVX" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Hcs-c8-pb4"/>
                 <constraint firstAttribute="trailing" secondItem="apJ-xv-pVX" secondAttribute="trailing" id="Y5v-5P-P1R"/>
                 <constraint firstItem="apJ-xv-pVX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hsU-wf-UDU"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="apJ-xv-pVX" secondAttribute="bottom" id="iqz-4g-y6D"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="jO4-h6-hOg" secondAttribute="trailing" id="qI3-BH-Wr7"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="jO4-h6-hOg" secondAttribute="bottom" id="uAI-JM-qat"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

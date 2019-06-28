@@ -316,7 +316,7 @@
     return salaryStr;
 }
 
-//学历数据转化
+//学历数据转化 num 转 字符串
 -(NSString *)getEducationStrWithEducation:(NSString *)education{
     NSInteger myInt = [education integerValue];
     
@@ -352,6 +352,46 @@
     return @"不限";
     
 }
+//学历数据转化 字符串 转 num
+
+-(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr{
+    
+    
+    if ([educationStr isEqualToString:@"初中及以下"]) {
+        return @"1";
+
+    }else if ([educationStr isEqualToString:@"中专/中技"]){
+        return @"2";
+
+        
+    }else if ([educationStr isEqualToString:@"高中"]){
+        return @"3";
+
+        
+    }else if ([educationStr isEqualToString:@"大专"]){
+        return @"4";
+        
+        
+    }else if ([educationStr isEqualToString:@"本科"]){
+        return @"5";
+        
+        
+    }else if ([educationStr isEqualToString:@"硕士"]){
+        return @"6";
+        
+        
+    }else if ([educationStr isEqualToString:@"博士"]){
+        return @"7";
+        
+        
+    }
+    
+    
+    
+    return @"0";
+    
+}
+
 - (id)toArrayOrNSDictionary:(NSData *)jsonData{
     
     NSError *error = nil;

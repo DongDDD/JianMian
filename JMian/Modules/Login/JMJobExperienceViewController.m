@@ -15,32 +15,40 @@
 #import "JMJudgeViewController.h"
 #import "NavigationViewController.h"
 #import "LoginViewController.h"
+#import "STPickerDate.h"
+#import "JMPartTimeJobResumeFooterView.h"
 
-typedef enum _PickerState_Exp {
-    startWorkState,
-    endWorkstate
-} _PickerState_Exp;
+//typedef enum _PickerState_Exp {
+//    startWorkState,
+//    endWorkstate
+//} _PickerState_Exp;
 
-@interface JMJobExperienceViewController () <UIScrollViewDelegate,UITextFieldDelegate>
+@interface JMJobExperienceViewController () <UIScrollViewDelegate,UITextFieldDelegate,STPickerDateDelegate,JMPartTimeJobResumeFooterViewDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *companyNameText;
 
 @property (weak, nonatomic) IBOutlet UIButton *startDateBtn;
 @property (weak, nonatomic) IBOutlet UIButton *endDateBtn;
-@property (strong, nonatomic)NSDate *startDate;
-@property (strong, nonatomic)NSDate *endDate;
+@property (strong, nonatomic)NSString *startDate;
+@property (strong, nonatomic)NSString *endDate;
 
 @property (weak, nonatomic) IBOutlet UIButton *jobLabelId;
-@property (weak, nonatomic) IBOutlet UITextField *jobDescriptionText;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePckerView;
+//@property (weak, nonatomic) IBOutlet UITextField *jobDescriptionText;
+//@property (weak, nonatomic) IBOutlet UIDatePicker *datePckerView;
 
-@property (nonatomic,assign) _PickerState_Exp pickerState;
-@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
+//@property (nonatomic,assign) _PickerState_Exp pickerState;
+//@property (weak, nonatomic) IBOutlet UIButton *saveBtn;
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *headerViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, assign)CGFloat changeHeight;
+//@property (nonatomic, assign)CGFloat changeHeight;
 @property(nonatomic,strong)UIButton *moreBtn;
+@property (nonatomic,strong) STPickerDate *pickerDataStart;
+@property (nonatomic,strong) STPickerDate *pickerDataEnd;
+@property (strong, nonatomic)JMPartTimeJobResumeFooterView *decriptionTextView;
+@property (weak, nonatomic) IBOutlet UILabel *workDescTitleLab;
+@property(nonatomic,copy)NSString *jobDescStr;
+@property(nonatomic,strong)UIButton *saveBtn;
 
 @end
 
@@ -48,22 +56,15 @@ typedef enum _PickerState_Exp {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.datePckerView.backgroundColor = BG_COLOR;
+//    self.datePckerView.backgroundColor = BG_COLOR;
     self.scrollView.delegate = self;
     self.companyNameText.delegate = self;
-    self.jobDescriptionText.delegate = self;
-    [self.scrollView addSubview:self.moreBtn];
-    [self.view addSubview:_datePckerView];
-    
-
-    UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
-    [self.view addGestureRecognizer:bgTap];
-    // Do any additional setup after loading the view from its nib.
+    [self initView];
     
     switch (self.viewType) {
         case JMJobExperienceViewTypeDefault:
             [self setRightBtnTextName:@"下一步"];
-            self.title = @"工作经历";
+//            self.title = @"工作经历";
             [self setIsHiddenBackBtn:YES];
             [self.saveBtn setTitle:@"完成" forState:UIControlStateNormal];
             break;
@@ -74,7 +75,7 @@ typedef enum _PickerState_Exp {
             self.headerViewHeightConstraint.constant = 0;
             self.headerView.hidden = YES;
             self.companyNameText.text = self.model.company_name;
-            self.jobDescriptionText.text = self.model.experiences_description;
+//            self.jobDescriptionText.text = self.model.experiences_description;
             [self.jobLabelId setTitle:self.model.work_name forState:UIControlStateNormal];
             [self.jobLabelId setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
             [self.startDateBtn setTitle:self.model.start_date forState:UIControlStateNormal];
@@ -99,9 +100,10 @@ typedef enum _PickerState_Exp {
     
 }
 
--(void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT*1.2);
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.view layoutIfNeeded];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.saveBtn.frame.origin.y+self.saveBtn.frame.size.height+50);
     
 }
 
@@ -109,16 +111,29 @@ typedef enum _PickerState_Exp {
 {
 }
 
+-(void)initView{
+    [self.scrollView addSubview:self.decriptionTextView];
+    [self.scrollView addSubview:self.moreBtn];
+    [self.scrollView addSubview:self.saveBtn];
+    [self.saveBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.moreBtn.mas_bottom).offset(10);
+        make.left.mas_equalTo(self.view).mas_offset(20);
+        make.right.mas_equalTo(self.view).mas_offset(-20);
+        make.height.mas_equalTo(37);
+    }];
+
+}
+
 
 #pragma mark - 点击事件
 
 
--(void)hiddenDatePickerAction{
-    self.datePckerView.hidden = YES;
-    [_companyNameText resignFirstResponder];
-    [_jobDescriptionText resignFirstResponder];
-    
-}
+//-(void)hiddenDatePickerAction{
+////    self.datePckerView.hidden = YES;
+//    [_companyNameText resignFirstResponder];
+//    [_jobDescriptionText resignFirstResponder];
+//
+//}
 
 - (void)deleteExperience {
     [self showAlertWithTitle:@"提醒⚠️" message:@"删除后数据将不可恢复" leftTitle:@"返回" rightTitle:@"确认删除"];
@@ -136,7 +151,7 @@ typedef enum _PickerState_Exp {
 }
 
 - (void)updateExperience {
-    [[JMHTTPManager sharedInstance] updateExperienceWith_experienceId:self.model.experience_id company_name:self.companyNameText.text job_label_id:@"1" start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] updateExperienceWith_experienceId:self.model.experience_id company_name:self.companyNameText.text job_label_id:@"1" start_date:self.startDate end_date:self.endDate description:self.jobDescStr successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
             [self.navigationController popViewControllerAnimated:YES];
        
@@ -148,7 +163,7 @@ typedef enum _PickerState_Exp {
 }
 
 - (void)createExperience {
-    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1) start_date:self.startDate end_date:self.endDate description:self.jobDescriptionText.text user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1) start_date:self.startDate end_date:self.endDate description:self.jobDescStr user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         switch (self.viewType) {
             case JMJobExperienceViewTypeDefault: {
@@ -187,23 +202,45 @@ typedef enum _PickerState_Exp {
 
 - (IBAction)startWorkAction:(UIButton *)sender {
     [_companyNameText resignFirstResponder];
-    [_jobDescriptionText resignFirstResponder];
-    [self.datePckerView setHidden:NO];
-     self.pickerState = startWorkState;
+    [self.decriptionTextView.contentTextView resignFirstResponder];
+//    [_jobDescriptionText resignFirstResponder];
+//    [self.datePckerView setHidden:NO];
+//     self.pickerState = startWorkState;
+    [self.view addSubview:self.pickerDataStart];
+    [self.pickerDataStart show];
 }
 
 
 - (IBAction)endWorkAction:(UIButton *)sender {
     [_companyNameText resignFirstResponder];
-    [_jobDescriptionText resignFirstResponder];
-    [self.datePckerView setHidden:NO];
-    self.pickerState = endWorkstate;
+    [self.decriptionTextView.contentTextView resignFirstResponder];
+//    [_jobDescriptionText resignFirstResponder];
+//    [self.datePckerView setHidden:NO];
+//    self.pickerState = endWorkstate;
+    [self.view addSubview:self.pickerDataEnd];
+    [self.pickerDataEnd show];
 }
 
 
 
-- (IBAction)finishBtn:(id)sender {
-    
+//- (IBAction)finishBtn:(id)sender {
+//
+//    switch (self.viewType) {
+//        case JMJobExperienceViewTypeDefault:
+//            [self createExperience];
+//            break;
+//        case JMJobExperienceViewTypeEdit:
+//            [self updateExperience];
+//            break;
+//        case JMJobExperienceViewTypeAdd:
+//            [self createExperience];
+//            break;
+//    }
+//
+//}
+-(void)saveBtnAction{
+    [_companyNameText resignFirstResponder];
+    [self.decriptionTextView.contentTextView resignFirstResponder];
     switch (self.viewType) {
         case JMJobExperienceViewTypeDefault:
             [self createExperience];
@@ -215,32 +252,54 @@ typedef enum _PickerState_Exp {
             [self createExperience];
             break;
     }
-    
 }
 
-- (IBAction)datePickerViewChange:(id)sender {
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    // 格式化日期格式
-    formatter.dateFormat = @"yyyy-MM-dd";
-    NSString *date = [formatter stringFromDate:self.datePckerView.date];
-    // 显示时间
-    if (self.pickerState==startWorkState) {
-        
-        [self.startDateBtn setTitle:date forState:UIControlStateNormal];
+
+//- (IBAction)datePickerViewChange:(id)sender {
+//
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    // 格式化日期格式
+//    formatter.dateFormat = @"yyyy-MM-dd";
+//    NSString *date = [formatter stringFromDate:self.datePckerView.date];
+//    // 显示时间
+//    if (self.pickerState==startWorkState) {
+//
+//        [self.startDateBtn setTitle:date forState:UIControlStateNormal];
+//        [self.startDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//        self.startDate  = [formatter dateFromString:date];
+//    }else if(self.pickerState == endWorkstate){
+//
+//        [self.endDateBtn setTitle:date forState:UIControlStateNormal];
+//        [self.endDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//        self.endDate = [formatter dateFromString:date];
+//
+//
+//    }
+//
+//}
+#pragma mark - MyDelegate
+-(void)sendContent:(NSString *)content{
+  
+    _jobDescStr = content;
+}
+
+#pragma mark - textFieldDelegate
+- (void)pickerDate:(STPickerDate *)pickerDate year:(NSInteger)year month:(NSInteger)month day:(NSInteger)day{
+    if (pickerDate == _pickerDataStart) {
+        NSString *title = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)year,(long)month,(long)day];
+        [self.startDateBtn setTitle:title forState:UIControlStateNormal];
         [self.startDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-        self.startDate  = [formatter dateFromString:date];
-    }else if(self.pickerState == endWorkstate){
-        
-        [self.endDateBtn setTitle:date forState:UIControlStateNormal];
+        self.startDate = title;
+    }else if (pickerDate == _pickerDataEnd) {
+        NSString *title = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)year,(long)month,(long)day];
+        [self.endDateBtn setTitle:title forState:UIControlStateNormal];
         [self.endDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-        self.endDate = [formatter dateFromString:date];
-        
-        
+        self.endDate = title;
+
     }
     
+    
 }
-#pragma mark - textFieldDelegate
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -249,11 +308,11 @@ typedef enum _PickerState_Exp {
 
 #pragma mark - UIscrollView
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    [self.datePckerView setHidden:YES];
-    
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//
+//    [self.datePckerView setHidden:YES];
+//
+//}
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -337,7 +396,7 @@ typedef enum _PickerState_Exp {
 
 -(UIButton *)moreBtn{
     if (_moreBtn == nil) {
-        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.jobDescriptionText.frame.origin.y+self.jobDescriptionText.frame.size.height+10, SCREEN_WIDTH, 40)];
+        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.decriptionTextView.frame.origin.y+self.decriptionTextView.frame.size.height+10, SCREEN_WIDTH, 40)];
         
         [_moreBtn setTitle:@"更多操作" forState:UIControlStateNormal];
         [_moreBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
@@ -347,6 +406,54 @@ typedef enum _PickerState_Exp {
     return _moreBtn;
 }
 
+-(STPickerDate *)pickerDataStart{
+    if (_pickerDataStart == nil) {
+        _pickerDataStart = [[STPickerDate alloc]init];
+        _pickerDataStart.delegate = self;
+        _pickerDataStart.yearLeast = 1950;
+        _pickerDataStart.yearSum = 2018;
+        _pickerDataStart.heightPickerComponent = 28;
+        
+    }
+    return _pickerDataStart;
+}
+
+-(STPickerDate *)pickerDataEnd{
+    if (_pickerDataEnd == nil) {
+        _pickerDataEnd = [[STPickerDate alloc]init];
+        _pickerDataEnd.delegate = self;
+        _pickerDataEnd.yearLeast = 1950;
+        _pickerDataEnd.yearSum = 2020;
+        _pickerDataEnd.heightPickerComponent = 28;
+        
+    }
+    return _pickerDataEnd;
+}
+
+-(JMPartTimeJobResumeFooterView *)decriptionTextView{
+    if (_decriptionTextView == nil) {
+        _decriptionTextView = [JMPartTimeJobResumeFooterView new];
+        _decriptionTextView.frame = CGRectMake(0, self.jobLabelId.frame.origin.y+self.jobLabelId.frame.size.height+20, SCREEN_WIDTH, 150);
+        _decriptionTextView.delegate = self;
+        [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeJobExpDescription];
+        //        _decriptionTextView.contentTextView.delegate = self;
+        
+    }
+    return _decriptionTextView;
+}
+
+-(UIButton *)saveBtn{
+    if (_saveBtn == nil) {
+        _saveBtn = [[UIButton alloc]init];
+        [_saveBtn setTitle:@"完成" forState:UIControlStateNormal];
+        _saveBtn.backgroundColor = MASTER_COLOR;
+        [_saveBtn addTarget:self action:@selector(saveBtnAction) forControlEvents:UIControlEventTouchUpInside];
+        [_saveBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _saveBtn.layer.cornerRadius = 18.5;
+    }
+    return _saveBtn;
+
+}
 
 /*
 #pragma mark - Navigation

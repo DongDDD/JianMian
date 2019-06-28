@@ -7,11 +7,14 @@
 //
 
 #import "BaseViewController.h"
+#import "JMTaskOrderListCellData.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMPaySucceedViewController : BaseViewController
 
 @property(nonatomic, copy)NSString *didPayMoney;
+@property(nonatomic, strong)JMTaskOrderListCellData *data;
 
 @end
 

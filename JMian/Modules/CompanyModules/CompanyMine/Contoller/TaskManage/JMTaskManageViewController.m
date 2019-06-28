@@ -27,6 +27,7 @@
 #import "JMPayFailedViewController.h"
 #import "JMHTTPManager+FectchTaskOrderInfo.h"
 #import "JMBDetailWebViewController.h"
+#import "JMHTTPManager+FectchTaskAbility.h"
 
 
 @interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate>
@@ -37,6 +38,7 @@
 @property (strong, nonatomic) JMShareView *choosePayView;
 @property (strong, nonatomic) JMOrderPaymentModel *orderPaymentModel;
 @property (strong, nonatomic) NSString *didPayMoney;
+@property (strong, nonatomic) JMTaskOrderListCellData *nowTaskData;
 
 @property (nonatomic ,strong) UIView *BGPayView;
 
@@ -108,9 +110,19 @@
     [self.tableView.mj_header beginRefreshing];
     [self.choosePayView setHidden:YES];
     [self.BGPayView setHidden:YES];
-    JMPaySucceedViewController *vc = [[JMPaySucceedViewController alloc]init];
-    vc.didPayMoney = self.didPayMoney;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([_nowTaskData.status isEqualToString:Task_Finish]) {
+        
+        JMTaskCommetViewController *vc = [[JMTaskCommetViewController alloc]init];
+        vc.data = _nowTaskData;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        JMPaySucceedViewController *vc = [[JMPaySucceedViewController alloc]init];
+        vc.data = _nowTaskData;
+        vc.didPayMoney = self.didPayMoney;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
     
     
     
@@ -137,6 +149,7 @@
 
 //底部右面的按钮事件
 -(void)rightActionWithData:(JMTaskOrderListCellData *)data{
+    _nowTaskData = data;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         //B现在状态：待处理or待通过
@@ -144,12 +157,20 @@
             
             //B改状态------B端通过任务申请&&支付定金
             if ([data.payment_method isEqualToString:@"3"]) {
-                
-                JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
-                vc.data = data;
-                vc.delegate = self;
-                vc.viewType = JMPayDetailViewTypeDownPayment;
-                [self.navigationController pushViewController:vc animated:YES];
+                if ([data.front_money isEqualToString:@"0"]) {
+                    //无定金直接通过
+                    _task_order_id = data.task_order_id;
+                    _user_id = data.user_user_id;
+                    [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
+                }else{
+                    //有定金跳支付界面
+                    JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
+                    vc.data = data;
+                    vc.delegate = self;
+                    vc.viewType = JMPayDetailViewTypeDownPayment;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                }
                 
             }else if ([data.payment_method isEqualToString:@"1"]){
                 //B改状态------B端通过网络销售任务，直接改状态
@@ -305,6 +326,26 @@
     }];
     
 }
+
+//获得ability_id去个人兼职简历
+-(void)getTaskAbilityIDInfoWithUser_id:(NSString *)user_id type_label_id:(NSString *)type_label_id{
+    
+    [[JMHTTPManager sharedInstance]fetchTaskAbilityWithUser_id:user_id type_label_id:type_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            NSString *ability_id = responsObject[@"data"][@"ability_id"];
+            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+            vc.ability_id = ability_id;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+}
+
+
 
 -(void)getGoodsUrlToShareDataWithTask_order_id:(NSString *)task_order_id{
     [[JMHTTPManager sharedInstance]fectchTaskOrderInfo_taskID:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -602,9 +643,18 @@
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     JMTaskOrderListCellData *data = self.listsArray[indexPath.row];
-    [self getTaskInfoDataWithTask_order_id:data.task_order_id];
-    
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        //去个人兼职简历
+//        JMBDetailWebViewController *vc =
+        [self getTaskAbilityIDInfoWithUser_id:data.user_user_id type_label_id:data.snapshot_type_label_id];
+    }else{
+        //去快照
+        
+        [self getTaskInfoDataWithTask_order_id:data.task_order_id];
+        
+    }
 //    JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
 //    vc.ability_id = data.ability_id;
 //    [self.navigationController pushViewController:vc animated:YES];

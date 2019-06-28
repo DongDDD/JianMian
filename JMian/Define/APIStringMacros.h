@@ -99,6 +99,9 @@
 #define Update_Ability_URL @"api/ability/update"
 #define Fectch_AbilityInfo_URL @"api/ability/info"
 #define Delete_AbilityVita_URL @"api/ability/delete"
+//兼职简历28
+#define Fectch_TaskAbility_URL @"api/user/ability"
+
 //删除兼职简历图片
 #define Delete_AbilityImage_URL @"api/ability/delete/file"
 //第二版任务

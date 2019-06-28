@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMChatDetailPartTimeJobTableViewCellDelegate <NSObject>
 
 -(void)applyForAction_model:(JMMessageListModel *)model;
-
+-(void)didClickPartTimeInfoAction;
 @end
 
 @interface JMChatDetailPartTimeJobTableViewCell : UITableViewCell

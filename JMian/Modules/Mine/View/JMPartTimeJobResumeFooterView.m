@@ -68,7 +68,7 @@
         make.bottom.mas_equalTo(self).offset(-30);
     }];
     [_placeHolder mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_contentTextView);
+        make.top.mas_equalTo(_contentTextView).mas_offset(10);
         make.left.mas_equalTo(_contentTextView);
     }];
     [_wordsLenghLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -81,6 +81,12 @@
 -(void)setViewType:(JMPartTimeJobResumeFooterViewType)viewType{
     _myViewType = viewType;
     switch (viewType) {
+        case JMPartTimeJobResumeFooterViewTypeJobExpDescription:
+            _placeHolder.text = @"请输入";
+            _titleLab.text = @"工作描述";
+            _wordsLenghLabel.hidden = YES;
+            
+            break;
         case JMPartTimeJobResumeFooterViewTypeJobDescription:
             _placeHolder.text = @"例如\n职位要求、\n性别要求、\n工作时段等等   ";
             _wordsLenghLabel.text = @"0/150";
