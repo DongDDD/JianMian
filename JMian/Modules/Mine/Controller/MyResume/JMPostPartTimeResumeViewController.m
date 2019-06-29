@@ -66,7 +66,7 @@ static NSString *cellIdent = @"cellIdent";
         [self.bottomView setHidden:NO];
         [self.view addSubview:self.bottomView];
     }else if (_viewType == JMPostPartTimeResumeViewAdd) {
-        self.title = @"发布任务简历";
+        self.title = @"发布兼职简历";
         [self setRightBtnTextName:@"发布"];
     }
     

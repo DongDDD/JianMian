@@ -122,5 +122,11 @@
     
 }
 
+- (void)deleteJobInfoWithId:(NSString *)Id SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSString *urlStr = [Delete_Job_URL stringByAppendingFormat:@"/%@",Id];
+
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodDELETE path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
 
 @end

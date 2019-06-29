@@ -64,6 +64,11 @@
         
         [self setPersonUserButtonUI];
     
+    }else if([status isEqualToString: @"2"]){
+        //编辑职位期望
+        [self setCompanyUserButtonUI:@"删除" btn2TitleStr:@"保存编辑"];
+
+ 
     }
     
 

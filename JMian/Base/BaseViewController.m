@@ -80,7 +80,7 @@
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.frame = CGRectMake(0, 0, 50, 21);
+    leftBtn.frame = CGRectMake(-30 , 0, 100, 28);
     [leftBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
     [leftBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     
@@ -255,6 +255,27 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+-(void)showAlertVCSucceesSingleWithMessage:(NSString *)message
+                       btnTitle:(NSString *)btnTitle
+{
+    
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n" message:message preferredStyle: UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:btnTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self alertSucceesAction];
+    }]];
+    UIImageView *icon = [[UIImageView alloc] init];
+    icon.image = [UIImage imageNamed:@"purchase_succeeds"];
+    [alert.view addSubview:icon];
+    [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(alert.view).mas_offset(23);
+        make.centerX.mas_equalTo(alert.view);
+        make.size.mas_equalTo(CGSizeMake(75, 64));
+        
+    }];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
 -(void)iconAlertLeftAction{
     
 }
@@ -269,6 +290,11 @@
 }
 
 -(void)alertRightAction{
+    
+    
+}
+
+-(void)alertSucceesAction{
     
     
 }

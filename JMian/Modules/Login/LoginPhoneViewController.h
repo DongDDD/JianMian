@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface LoginPhoneViewController : BaseViewController
 
+@property(nonatomic, copy)NSString *sign_id;
 
 @end
 

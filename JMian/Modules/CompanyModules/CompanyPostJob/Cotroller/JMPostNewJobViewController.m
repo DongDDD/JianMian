@@ -13,10 +13,11 @@
 #import "JMHTTPManager+Work.h"
 #import "PositionDesiredViewController.h"
 #import "JMGetCompanyLocationViewController.h"
+#import "STPickerSingle.h"
 
 
 
-@interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate,JMGetCompanyLocationViewControllerDelegate,UITextFieldDelegate>
+@interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate,JMGetCompanyLocationViewControllerDelegate,UITextFieldDelegate,STPickerSingleDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *workNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *workNameBtn;
@@ -32,6 +33,9 @@
 @property (nonatomic,strong) NSNumber *educationNum;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (nonatomic, strong) STPickerSingle *expPickerSingle;
+@property (nonatomic, strong) STPickerSingle *educationPickerSingle;
+@property (nonatomic, strong) STPickerSingle *salaryPickerSingle;
 
 @property (weak, nonatomic) IBOutlet UIButton *salaryBtn;
 @property (nonatomic,strong) NSNumber *salaryMin;
@@ -165,15 +169,17 @@
 }
 
 - (IBAction)workExpriencesAction:(UIButton *)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"1～3",@"3～5",@"5～10",nil];
-    [self.pickerView reloadAllComponents];
-    _selectedBtn = sender;
-
-    [self.pickerBGView setHidden:NO];
+//    self.pickerArray = [NSArray arrayWithObjects:@"1～3",@"3～5",@"5～10",nil];
+//    [self.pickerView reloadAllComponents];
+//    _selectedBtn = sender;
+//
+//    [self.pickerBGView setHidden:NO];
+    [self.view addSubview:self.expPickerSingle];
+    [self.expPickerSingle show];
 
 }
 -(void)setExprienceRangeWithExpStr:(NSString *)ExpStr{
-    NSArray *array = [ExpStr componentsSeparatedByString:@"～"]; //从字符 ~ 中分隔成2个元素的数组
+    NSArray *array = [ExpStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
     
     NSString *minStr = array[0];
     NSString *maxStr = array[1];
@@ -191,31 +197,35 @@
 }
 
 - (IBAction)educationAction:(UIButton *)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
-    [self.pickerView reloadAllComponents];
-    _selectedBtn = sender;
-
-    [self.pickerBGView setHidden:NO];
+//    self.pickerArray = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+//    [self.pickerView reloadAllComponents];
+//    _selectedBtn = sender;
+//
+//    [self.pickerBGView setHidden:NO];
+    [self.view addSubview:self.educationPickerSingle];
+    [self.educationPickerSingle show];
 
 }
 
 - (IBAction)salaryAction:(UIButton *)sender {
-    self.pickerArray = @[@"1k-2k",
-                         @"2k-4k",
-                         @"4k-6k",
-                         @"6k-8k",
-                         @"8k-10k",
-                         @"10k-15k",
-                         @"15k-20k",
-                         @"20k-30k",
-                         @"30k-40k",
-                         @"40k-50k",
-                         @"50k-100K",
-                         ];
-    [self.pickerView reloadAllComponents];
-    _selectedBtn = sender;
-   
-    [self.pickerBGView setHidden:NO];
+//    self.pickerArray = @[@"1k-2k",
+//                         @"2k-4k",
+//                         @"4k-6k",
+//                         @"6k-8k",
+//                         @"8k-10k",
+//                         @"10k-15k",
+//                         @"15k-20k",
+//                         @"20k-30k",
+//                         @"30k-40k",
+//                         @"40k-50k",
+//                         @"50k-100k",
+//                         ];
+//    [self.pickerView reloadAllComponents];
+//    _selectedBtn = sender;
+//
+//    [self.pickerBGView setHidden:NO];
+    [self.view addSubview:self.salaryPickerSingle];
+    [self.salaryPickerSingle show];
 
 }
 
@@ -317,7 +327,28 @@
 }
 
 #pragma mark - pickerView delegate
-
+- (void)pickerSingle:(STPickerSingle *)pickerSingle selectedTitle:(NSString *)selectedTitle row:(NSInteger)row{
+//    _isChange = YES;
+    if (pickerSingle == _expPickerSingle) {
+        [self.expriencesBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.expriencesBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [self setExprienceRangeWithExpStr:selectedTitle];
+    }else if (pickerSingle == _educationPickerSingle) {
+        [self.educationBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        self.educationNum = @(row);
+    
+    }else if (pickerSingle == _salaryPickerSingle) {
+        NSMutableArray *array = [self setSalaryRangeWithSalaryStr:selectedTitle];
+        self.salaryMin = array[0];
+        self.salaryMax = array[1];
+        [self.salaryBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    }
+    
+    
+    
+}
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     
     _pickerRow = row;
@@ -388,10 +419,63 @@
 }
 
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-//    [_workNameTextField resignFirstResponder];
-    [self.pickerBGView setHidden:YES];
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+////    [_workNameTextField resignFirstResponder];
+//    [self.pickerBGView setHidden:YES];
+//
+//}
+-(STPickerSingle *)expPickerSingle{
+    if (_expPickerSingle == nil) {
+        _expPickerSingle = [[STPickerSingle alloc]init];
+        _expPickerSingle.delegate = self;
+        _expPickerSingle.title = @"工作经验";
+        _expPickerSingle.titleUnit = @"年";
+        _expPickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _expPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"1~3",
+                                            @"3~5",
+                                            @"5~10",
+                                            nil];
+    }
+    return _expPickerSingle;
+}
 
+-(STPickerSingle *)educationPickerSingle{
+    if (_educationPickerSingle == nil) {
+        _educationPickerSingle = [[STPickerSingle alloc]init];
+        _educationPickerSingle.delegate = self;
+        _educationPickerSingle.title = @"学历要求";
+        _educationPickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _educationPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"不限",
+                                            @"初中及以下",
+                                            @"中专/中技",
+                                            @"高中",
+                                            @"大专",
+                                            @"本科",
+                                            @"硕士",
+                                            @"博士",
+                                            nil];
+    }
+    return _educationPickerSingle;
+}
+-(STPickerSingle *)salaryPickerSingle{
+    if (_salaryPickerSingle == nil) {
+        _salaryPickerSingle = [[STPickerSingle alloc]init];
+        _salaryPickerSingle.delegate = self;
+        _salaryPickerSingle.title = @"薪资要求";
+        _salaryPickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _salaryPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"1k-2k",
+                                         @"2k-4k",
+                                         @"4k-6k",
+                                         @"6k-8k",
+                                         @"8k-10k",
+                                         @"10k-15k",
+                                         @"15k-20k",
+                                         @"20k-30k",
+                                         @"30k-40k",
+                                         @"40k-50k",
+                                         @"50k-100k",nil];
+    }
+    return _salaryPickerSingle;
 }
 /*
 #pragma mark - Navigation

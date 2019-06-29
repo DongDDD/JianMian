@@ -9,7 +9,7 @@
 #import "JMGoodsDescriptionViewController.h"
 #import "JMPartTimeJobResumeFooterView.h"
 
-@interface JMGoodsDescriptionViewController ()<JMPartTimeJobResumeFooterViewDelegate>
+@interface JMGoodsDescriptionViewController ()<JMPartTimeJobResumeFooterViewDelegate,UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *goodsPriceTextField;
 @property (weak, nonatomic) IBOutlet UITextField *goodsNameTextfield;
@@ -26,6 +26,8 @@
     self.title = @"产品描述";
     [self setRightBtnTextName:@"保存"];
  
+    self.goodsNameTextfield.delegate = self;
+    self.goodsPriceTextField.delegate = self;
     [self.goodsNameTextfield setText:_goods_title];
     [self.goodsPriceTextField setText:_goods_price];
     [self.view addSubview:self.decriptionTextView];
@@ -45,7 +47,11 @@
 //    }
 //
 //}
-
+#pragma mark - textFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
 #pragma mark - myDelegate
 
  - (void)sendContent:(nonnull NSString *)content {

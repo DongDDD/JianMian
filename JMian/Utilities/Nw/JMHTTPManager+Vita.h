@@ -58,6 +58,8 @@ NS_ASSUME_NONNULL_BEGIN
                         salary_max:(NSString *)salary_max
                             status:(nullable NSString *)status
                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
+- (void)deleteJobInfoWithId:(NSString *)Id SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

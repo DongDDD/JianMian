@@ -34,7 +34,7 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (assign, nonatomic) NSUInteger index;
-@property (strong, nonatomic) NSArray *listsArray;
+@property (strong, nonatomic) NSMutableArray *listsArray;
 @property (strong, nonatomic) JMShareView *choosePayView;
 @property (strong, nonatomic) JMOrderPaymentModel *orderPaymentModel;
 @property (strong, nonatomic) NSString *didPayMoney;
@@ -45,6 +45,10 @@
 @property (strong, nonatomic)NSArray *currentStatusArray;
 @property (copy, nonatomic)NSString *task_order_id;
 @property (copy, nonatomic)NSString *user_id;
+@property (copy, nonatomic)NSString *receiver_id;
+
+@property (assign, nonatomic)NSInteger per_page;
+@property (assign, nonatomic)NSInteger page;
 
 @end
 
@@ -52,7 +56,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.page = 1;
+    self.per_page = 15;
 //    self.currentStatusArray = @[Task_WaitDealWith];
 //    [self getDataWitnStatus:self.currentStatusArray];
 //   
@@ -129,21 +134,32 @@
 }
 //底部左面的按钮事件
 -(void)leftActionWithData:(JMTaskOrderListCellData *)data{
+    _nowTaskData = data;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        if ([data.status isEqualToString:Task_WaitDealWith]) {
+        _receiver_id = [NSString stringWithFormat:@"%@a",data.user_user_id];
+
+        if ([data.status isEqualToString:Task_WaitDealWith] && _index == 0) {
             //B拒绝
             [self changeTaskStatusRequestWithStatus:Task_Refuse task_order_id:data.task_order_id];
         }else if ([data.status isEqualToString:Task_Finish] && _index == 1) {
-            //B和他聊聊
+            //B：C任务已完成 和C聊聊
             
-            [self createChatRequstWithTask_order_id:data.task_order_id user_id:data.user_user_id];
+            [self createChatJudge];
         }else if ([data.status isEqualToString:Task_Pass] && _index == 1) {
-            //B结束销售任务
-            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
-
+            //B：销售任务进行中 和C聊聊
+//            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
+            [self createChatJudge];
       
+        }else if ([data.status isEqualToString:Task_Finish] && _index == 1) {
+            //B：普通任务进行中 和C聊聊
+            //            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
+            [self createChatJudge];
+            
         }
+    }else if ([userModel.type isEqualToString:C_Type_USER] && _index == 1){
+        _receiver_id = [NSString stringWithFormat:@"%@a",data.user_user_id];
+        [self createChatJudge];
     }
 }
 
@@ -152,8 +168,10 @@
     _nowTaskData = data;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
+        _receiver_id = [NSString stringWithFormat:@"%@a",data.user_user_id];
+
         //B现在状态：待处理or待通过
-        if ([data.status isEqualToString:Task_WaitDealWith]) {
+        if ([data.status isEqualToString:Task_WaitDealWith] && _index == 0) {
             
             //B改状态------B端通过任务申请&&支付定金
             if ([data.payment_method isEqualToString:@"3"]) {
@@ -172,7 +190,7 @@
                     
                 }
                 
-            }else if ([data.payment_method isEqualToString:@"1"]){
+            }else if ([data.payment_method isEqualToString:@"1"] && _index == 0){
                 //B改状态------B端通过网络销售任务，直接改状态
 
                 _task_order_id = data.task_order_id;
@@ -181,7 +199,7 @@
                 
             }
             return;
-        }else if ([data.status isEqualToString:Task_Finish]) {
+        }else if ([data.status isEqualToString:Task_Finish] && _index == 1) {
             //B改状态------B端确认完成任务&支付尾款@"3"
             JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
             vc.data = data;
@@ -192,14 +210,16 @@
              return;
         }else if ([data.status isEqualToString:Task_Pass]) {
             //进行中
-            //B---销售分成任务的 分享产品链接按钮
-            if ([data.payment_method isEqualToString:@"1"]) {
-                //销售任务分享产品链接
-                [self getGoodsUrlToShareDataWithTask_order_id:data.task_order_id];
-                
+            //B---销售分成任务的 结束任务
+            if ([data.payment_method isEqualToString:@"1"] && _index == 1){
+                //销售任务和他聊聊
+//                [self getGoodsUrlToShareDataWithTask_order_id:data.task_order_id];
+//                self createChatRequstWithTask_order_id:data.snapshot_type_label_id user_id:<#(NSString *)#>
+                //B结束销售任务
+                [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
             }
             return;
-        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_boss isEqualToString:@"0"]) {
+        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_boss isEqualToString:@"0"]  && _index == 2) {
             //B——创建评价
             JMTaskCommetViewController *vc = [[JMTaskCommetViewController alloc]init];
             [vc setData:data];
@@ -209,8 +229,9 @@
             return;
         }
     }else{
+        _receiver_id = [NSString stringWithFormat:@"%@b",data.boss_user_id];
         //C----进行中----
-        if ([data.status isEqualToString:Task_Pass]) {
+        if ([data.status isEqualToString:Task_Pass]  && _index == 0) {
             if (![data.payment_method isEqualToString:@"1"]) {//不是销售分成才有这操作
                 //C---点"已完成"（C 唯一操作）-----status change to  '3'
                 [self changeTaskStatusRequestWithStatus:Task_Finish task_order_id:data.task_order_id];
@@ -220,7 +241,7 @@
                 [self getGoodsUrlToShareDataWithTask_order_id:data.task_order_id];
 
             }
-        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_user isEqualToString:@"0"]) {
+        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_user isEqualToString:@"0"] && _index == 2){
             //C——-创建评价
             JMTaskCommetViewController *vc = [[JMTaskCommetViewController alloc]init];
             [vc setData:data];
@@ -282,7 +303,7 @@
 //和他聊聊
 -(void)iconAlertRightAction{
     
-    [self createChatRequstWithTask_order_id:_task_order_id user_id:_user_id];
+    [self createChatJudge];
 
     
 }
@@ -297,10 +318,22 @@
 #pragma mark - 数据请求
 
 -(void)getDataWitnStatus:(NSArray *)status{
-    [[JMHTTPManager sharedInstance]fectchTaskList_status:status page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
+    NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
+    [[JMHTTPManager sharedInstance]fectchTaskList_status:status page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            self.listsArray = [JMTaskOrderListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            NSMutableArray *newArray =[NSMutableArray array];
+           newArray = [JMTaskOrderListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            if (newArray.count > 0) {
+                [self.listsArray addObjectsFromArray:newArray];
+                [self.tableView.mj_footer setHidden:NO];
+
+            }else{
+                [self.tableView.mj_footer setHidden:YES];
+            }
+            
         }
+        
         [self.tableView reloadData];
         [self.tableView.mj_header endRefreshing];
         [self.tableView.mj_footer endRefreshing];
@@ -311,7 +344,7 @@
     
 }
 
-//获得任务信息去快照
+//C端获得任务信息去快照
 -(void)getTaskInfoDataWithTask_order_id:(NSString *)task_order_id{
     [[JMHTTPManager sharedInstance]fectchTaskOrderInfo_taskID:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
@@ -327,8 +360,8 @@
     
 }
 
-//获得ability_id去个人兼职简历
--(void)getTaskAbilityIDInfoWithUser_id:(NSString *)user_id type_label_id:(NSString *)type_label_id{
+//B端获得ability_id去C端个人兼职简历
+-(void)getTaskAbilityIDInfoWithUser_id:(NSString *)user_id type_label_id:(NSString *)type_label_id {
     
     [[JMHTTPManager sharedInstance]fetchTaskAbilityWithUser_id:user_id type_label_id:type_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
@@ -345,7 +378,19 @@
     
 }
 
+//用于B端获取兼职简历ID创建聊天
+-(void)getTaskAbilityIDToChatWithUser_id:(NSString *)user_id  type_label_id:(NSString *)type_label_id {
+    [[JMHTTPManager sharedInstance]fetchTaskAbilityWithUser_id:user_id type_label_id:type_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            NSString *ability_id = responsObject[@"data"][@"ability_id"];
+            [self createChatRequestWithForeign_key:ability_id user_id:_nowTaskData.user_user_id];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 
+}
 
 -(void)getGoodsUrlToShareDataWithTask_order_id:(NSString *)task_order_id{
     [[JMHTTPManager sharedInstance]fectchTaskOrderInfo_taskID:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -390,21 +435,40 @@
 
 //刷新
 -(void)refreshData{
+    [self.listsArray removeAllObjects];
+    self.page = 1;
     [self getDataWitnStatus:self.currentStatusArray];
     
 }
+
 //上拉更多
 -(void)loadMoreBills{
+    self.page += 1;
     [self getDataWitnStatus:self.currentStatusArray];
     
 }
+
 //改变任务状态
 -(void)changeTaskStatusRequestWithStatus:(NSString *)status task_order_id:(NSString *)task_order_id {
     
-    [[JMHTTPManager sharedInstance]changeTaskOrderStatusWithTask_order_id:task_order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]changeTaskOrderStatusWithTask_order_id:task_order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {        
         [self.tableView.mj_header beginRefreshing];
         if ([status isEqualToString:Task_Pass]) {//
             [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"审批通过\n 建议联系对方以便开始任务" leftTitle:@"朕知道了" rightTitle:@"和他聊聊"];
+            [self setTaskMessage_receiverID:_receiver_id dic:nil title:@"[任务发布者已通过任务申请]"];
+        }else if ([status isEqualToString:Task_DidComfirm]) {
+            [self setTaskMessage_receiverID:_receiver_id dic:nil title:@"[任务发布者已确认完成任务]"];
+            
+        }else if ([status isEqualToString:Task_Refuse]) {
+            if ( _index == 0) {
+                [self setTaskMessage_receiverID:_receiver_id dic:nil title:@"[任务发布者已拒绝任务申请]"];
+            }else if ([_nowTaskData.payment_method isEqualToString:@"1"] && _index == 1){
+                [self setTaskMessage_receiverID:_receiver_id dic:nil title:@"[任务发布者已结束销售任务]"];
+            }
+            
+        }else if ([status isEqualToString:Task_Finish]) {
+            //C 端唯一改状态操作
+            [self setTaskMessage_receiverID:_receiver_id dic:nil title:@"[任务接受者已完成任务]"];
             
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -425,10 +489,27 @@
     
 }
 
-//创建聊天
--(void)createChatRequstWithTask_order_id:(NSString *)task_order_id user_id:(NSString *)user_id{
+//B端用Ability_id创建聊天  C端用Task_id创建聊天
+-(void)createChatJudge{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+//        foreign_key = _nowTaskData.
+        //调用新接口，获得ability_id
+        [self getTaskAbilityIDToChatWithUser_id:_nowTaskData.user_user_id type_label_id:_nowTaskData.snapshot_type_label_id];
+        
+    }else if ([userModel.type isEqualToString:C_Type_USER]){
+        //task_id 创建聊天
+
+        [self createChatRequestWithForeign_key:_nowTaskData.task_id user_id:_nowTaskData.boss_user_id];
+    }
     
-    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:user_id foreign_key:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+}
+
+
+
+-(void)createChatRequestWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
+    //Chat_type：2 灵活就业
+    [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
         //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -440,13 +521,48 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+    
 }
 
+
+#pragma mark -  （自定义消息）
+
+-(void)setTaskMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
+    
+    TIMConversation *conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:receiverID];
+    
+    // 转换为 NSData
+    
+    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
+    //    [custom_elem setData:data];
+    if (dic) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+        [custom_elem setData:data];
+        
+    }
+    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+    
+    [custom_elem setDesc:title];
+    TIMMessage * msg = [[TIMMessage alloc] init];
+    [msg addElem:custom_elem];
+    [conv sendMessage:msg succ:^(){
+        NSLog(@"SendMsg Succ");
+//        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"申请成功" leftTitle:@"返回" rightTitle:@"查看任务"];
+    }fail:^(int code, NSString * err) {
+        NSLog(@"SendMsg Failed:%d->%@", code, err);
+        
+        
+    }];
+    
+    
+}
 #pragma mark - 支付
 //支付确认界面
 -(void)payDetailViewDownPayAction_data:(JMTaskOrderListCellData *)data{
-    _task_order_id = data.task_order_id;
-    _user_id = data.user_user_id;
+//    _task_order_id = data.task_order_id;
+//    _user_id = data.user_user_id;
     //B端支付定金
 //    [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
     if (![data.front_money isEqualToString:@"0"]) {
@@ -554,8 +670,8 @@
         default:
             break;
     }
+    self.page = 0;
     [self.tableView.mj_header beginRefreshing];
-    [self getDataWitnStatus:self.currentStatusArray];
     
     
 }
@@ -740,6 +856,12 @@
     
 }
 
+-(NSMutableArray *)listsArray{
+    if (_listsArray.count == 0) {
+        _listsArray = [NSMutableArray array];
+    }
+    return _listsArray;
+}
 /*
  #pragma mark - Navigation
  

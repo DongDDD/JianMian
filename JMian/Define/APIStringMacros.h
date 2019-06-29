@@ -54,6 +54,7 @@
 //岗位
 #define Update_job_URL @"api/user/job/update"
 #define Add_Job_URL @"api/user/job/create"
+#define Delete_Job_URL @"api/user/job/delete"
 
 //工作经历
 #define Create_Experience_URL @"api/user/experience/create"

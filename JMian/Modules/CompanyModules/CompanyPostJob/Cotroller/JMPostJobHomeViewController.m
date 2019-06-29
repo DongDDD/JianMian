@@ -47,9 +47,9 @@ static NSString *cellIdent = @"cellIdent";
     [self setTitle:@"职位管理"];
 //    [self.view addSubview:self.progressHUD];
     _status = Position_Online;
-    [self setupInit];
+    [self.view addSubview:self.titleView];
+    [self getUserStatus];
     [self setupDownRefresh];
-
 //    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
 //    model = [JMUserInfoManager getUserInfo];
 //    if ([model.card_status isEqualToString:Card_PassIdentify]) {//“3”代表已通过实名认证，通过才能发布职位
@@ -73,7 +73,6 @@ static NSString *cellIdent = @"cellIdent";
     self.breakBGView.hidden = YES;
     [self.tableView.mj_header beginRefreshing];
 //    [self jugdeCard_status];
-    [self getUserStatus];
 
 //    [self getUserInfo];
     
@@ -113,19 +112,21 @@ static NSString *cellIdent = @"cellIdent";
         model = [JMUserInfoManager getUserInfo];
         
         if ([model.card_status isEqualToString:Card_PassIdentify]) {
-            [self setRightBtnTextName:@"发布职位"];
+//            [self setRightBtnTextName:@"发布职位"];
             [self.tableView.mj_header beginRefreshing];
+//            [self setupDownRefresh];
 //            [self getListData];
           
         }else if ([model.card_status isEqualToString:Card_WaitIdentify]){
             
             self.breakBGView.hidden = NO;
             [self.postOrIdentityBtn setHidden:YES];
-
+            [self setRightBtnTextName:@""];
             self.tipsLab.text = @"实名认证审核中\n发布岗位需实名认证";
 
         }else if ([model.card_status isEqualToString:Card_NOIdentify]){
             [self.postOrIdentityBtn setTitle:@"去实名认证" forState:UIControlStateNormal];
+//            [self setRightBtnTextName:@"去实名认证"];
             self.breakBGView.hidden = NO;
             self.tipsLab.text = @"你还没有实名认证 快去认证吧！\n发布岗位需实名认证";
  
@@ -136,7 +137,7 @@ static NSString *cellIdent = @"cellIdent";
             }
             
         }
-        
+
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -182,10 +183,7 @@ static NSString *cellIdent = @"cellIdent";
 
 }
 
-- (void)setupInit {
-    [self.view addSubview:self.titleView];
 
-}
 -(void)setupDownRefresh
 {
     
@@ -217,6 +215,7 @@ static NSString *cellIdent = @"cellIdent";
 
             
             }
+            
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
             
@@ -230,25 +229,7 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 
-- (JMTitlesView *)titleView {
-    if (!_titleView) {
-        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"已发布", @"已下线"]];
-        __weak JMPostJobHomeViewController *weakSelf = self;
-        
-        _titleView.didTitleClick = ^(NSInteger index) {
-            _index = index;
-            if (index==0) {
-                _status = Position_Online;//已发布职位
-                [weakSelf getListData];
-            }else{
-                _status = Position_Downline;//已下线职位
-                [weakSelf getListData];
-            }
-        };
-   
-    }
-    return _titleView;
-}
+
 
 
 
@@ -289,6 +270,7 @@ static NSString *cellIdent = @"cellIdent";
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+#pragma mark - lazy
 
 -(UITableView *)tableView{
     if (!_tableView) {
@@ -306,6 +288,24 @@ static NSString *cellIdent = @"cellIdent";
     
 }
 
+- (JMTitlesView *)titleView {
+    if (!_titleView) {
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"已发布", @"已下线"]];
+        __weak JMPostJobHomeViewController *weakSelf = self;
+        
+        _titleView.didTitleClick = ^(NSInteger index) {
+            _index = index;
+            if (index==0) {
+                _status = Position_Online;//已发布职位
+            }else{
+                _status = Position_Downline;//已下线职位
+            }
+            [weakSelf getListData];
+        };
+        
+    }
+    return _titleView;
+}
 //-(MBProgressHUD *)progressHUD{
 //    if (!_progressHUD) {
 //        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];

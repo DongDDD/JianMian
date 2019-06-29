@@ -20,7 +20,7 @@
 #import "JMHTTPManager+CreateConversation.h"
 #import "JMIDCardIdentifyViewController.h"
 #import "JMApplyForProtocolView.h"
-
+#import "JMTaskManageViewController.h"
 
 
 @interface JMCDetailWebViewController ()<JMShareViewDelegate,JMApplyForProtocolViewDelegate>
@@ -252,7 +252,7 @@
 
 
 
-#pragma mark -- 获取数据
+#pragma mark -- Data
 
 -(void)getData{
     
@@ -279,6 +279,41 @@
     
 }
 
+//申请职位
+-(void)sendResquest{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    
+    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+        [[JMHTTPManager sharedInstance]createTaskOrder_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            //            [self showAlertSimpleTips:@"提示" message:@"申请成功" btnTitle:@"好的"];
+            
+            //创建聊天
+            [self createChatToSendCustumMessageRequstWithForeign_key:self.task_id user_id:_user_id];
+            //            [self setTaskMessage_receiverID:receiverId dic:nil title:@"任务提醒"];
+            
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+        
+    }else{
+        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
+        
+    }
+}
+//申请任务后的创建聊天，用来发送自定义消息
+-(void)createChatToSendCustumMessageRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
+    
+    [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+//
+        NSString *receiverId = [NSString stringWithFormat:@"%@b",_user_id];
+        [self setTaskMessage_receiverID:receiverId dic:nil title:@"[任务申请]"];
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
 //创建聊天
 -(void)createChatRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
     
@@ -287,6 +322,7 @@
         //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
         //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         //        [alert show];
+        
         JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
         
         vc.myConvModel = messageListModel;
@@ -351,30 +387,16 @@
     
 }
 
-//申请职位
--(void)sendResquest{
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+
+
+-(void)iconAlertRightAction{
+    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    [vc setMyIndex:0];
+    vc.title = @"我的任务";
+    [self.navigationController pushViewController:vc animated:YES];
     
-    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
-        [[JMHTTPManager sharedInstance]createTaskOrder_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            [self showAlertSimpleTips:@"提示" message:@"申请成功" btnTitle:@"好的"];
-            
-            //发送自定义消息
-            NSString *receiverId = [NSString stringWithFormat:@"%@b",_user_id];
-            [self setTaskMessage_receiverID:receiverId dic:nil title:@"任务提醒"];
-            
-            
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-        }];
-        
-    }else{
-        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
-        
-    }
+
 }
-
-
 
 -(void)alertRightAction{
     JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
@@ -462,6 +484,7 @@
     [msg addElem:custom_elem];
     [conv sendMessage:msg succ:^(){
         NSLog(@"SendMsg Succ");
+        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"申请成功" leftTitle:@"返回" rightTitle:@"查看任务"];
     }fail:^(int code, NSString * err) {
         NSLog(@"SendMsg Failed:%d->%@", code, err);
         

@@ -25,6 +25,7 @@
 #import "JMVideoChatViewController.h"
 #import "IQKeyboardManager.h"
 #import "JMHTTPManager+InterView.h"
+#import "LoginPhoneViewController.h"
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate>
 
@@ -229,21 +230,60 @@
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window {
     return UIInterfaceOrientationMaskPortrait;
 }
+#pragma mark - 请求
+-(void)loginRequestWithCode:(NSString *)code{
+    [[JMHTTPManager sharedInstance] loginWithMode:@"wx" phone:@"" captcha:code sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            NSString *sign_id = responsObject[@"data"][@"sign_id"];
+            if (sign_id) {
+                LoginPhoneViewController *vc = [[LoginPhoneViewController alloc]init];
+                vc.sign_id = sign_id;
+                NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+                [_window setRootViewController:naVC];
+                [self.window makeKeyAndVisible];
 
+            }else{
+                //返回用户信息
+                
+                JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+                [JMUserInfoManager saveUserInfo:userInfo];
+                kSaveMyDefault(@"usersig", userInfo.usersig);
+                JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
+                NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
+                [_window setRootViewController:naVC];
+                [self.window makeKeyAndVisible];
+            }
+        }
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
+}
 
 #pragma mark - 网络回调
 
 // 微信支付成功或者失败回调
 -(void) onResp:(BaseResp*)resp
 {
-    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
+    //    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
     NSString *strTitle;
     
-    if([resp isKindOfClass:[SendMessageToWXResp class]])
+    if([resp isKindOfClass:[SendAuthResp class]]){//判断是否为授权登录类
+        
+        SendAuthResp *req = (SendAuthResp *)resp;
+        
+        if([req.state isEqualToString:@"wx_oauth_authorization_state"]){//微信授权成功
+            strTitle = @"微信授权成功";
+            NSLog(@"%@",req.code); //获得code
+            [self loginRequestWithCode:req.code];
+            
+        }
+    }else if([resp isKindOfClass:[SendMessageToWXResp class]])
     {
         strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
-    }
-    if([resp isKindOfClass:[PayResp class]]){
+    }else if([resp isKindOfClass:[PayResp class]]){
         //支付返回结果，实际支付结果需要去微信服务器端查询
         
         switch (resp.errCode) {

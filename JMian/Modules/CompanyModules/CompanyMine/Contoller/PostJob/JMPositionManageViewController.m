@@ -13,6 +13,7 @@
 #import "JMBUserPostSaleJobViewController.h"
 #import "JMBUserPostPartTimeJobViewController.h"
 #import "JMPostNewJobViewController.h"
+#import "JMHTTPManager+Login.h"
 
 @interface JMPositionManageViewController ()<JMPartTimeJobResumeViewControllerDelegate>
 
@@ -30,7 +31,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"职位管理";
-    [self setRightBtnTextName:@"发布全职"];
+//    [self setRightBtnTextName:@"发布全职"];
+ 
+//    [self getUserInfo];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+        [self setRightBtnTextName:@"发布全职"];
+        
+    }
     [self initView];
     // Do any additional setup after loading the view from its nib.
 }
@@ -96,26 +104,39 @@
 
 }
 
+-(void)getUserInfo{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+            [self setRightBtnTextName:@"发布全职"];
+            
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
 
 -(void)setCurrentIndex{
-//    __weak typeof(self) ws = self;
-////    [UIView animateWithDuration:0.3 animations:^{
-//    CGRect Frame = self.BGView.frame;
-//        Frame.origin.x = -_index*SCREEN_WIDTH ;
-//        self.BGView.frame = Frame;
-//    }];
-    if (_index == 0) {
-        _partTimeJobHomeListVC.view.hidden = YES;
-        _jobHomeListVC.view.hidden = NO;
-        [self setRightBtnTextName:@"发布全职"];
-
-    }else if(_index == 1){
-        _partTimeJobHomeListVC.view.hidden = NO;
-        _jobHomeListVC.view.hidden = YES;
-        [self setRightBtnTextName:@"发布任务"];
-
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+        if (_index == 0) {
+            _partTimeJobHomeListVC.view.hidden = YES;
+            _jobHomeListVC.view.hidden = NO;
+            [self setRightBtnTextName:@"发布全职"];
+            
+        }else if(_index == 1){
+            _partTimeJobHomeListVC.view.hidden = NO;
+            _jobHomeListVC.view.hidden = YES;
+            [self setRightBtnTextName:@"发布任务"];
+            
+        }
+    
     }
-
 
 }
 #pragma mark - getter

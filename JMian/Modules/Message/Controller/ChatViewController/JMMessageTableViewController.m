@@ -271,8 +271,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                     data = textData;
                     [uiMsgs addObject:data];
                     
-                }
-                else if ([elem isKindOfClass:[TIMCustomElem class]]){
+                }else if ([elem isKindOfClass:[TIMCustomElem class]]){
 
                     TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
                     JMMessageCellData *textData = [[JMMessageCellData alloc]init];
@@ -330,15 +329,9 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                 else if ([elem isKindOfClass:[TIMCustomElem class]]){
 
                     TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
-                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
-                    if ([custom_elem.desc isEqualToString:@"我发起了视频聊天"]){
-                        textData.content = @"发起视频";
-                    }else{
-                        textData.content = @"结束了视频";
-                        
-                        
-                    }
-
+                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];                    
+                    textData.content = custom_elem.desc;
+                    
                     if (_isSelfIsSender) {
 
                         textData.head = _myModel.sender_avatar;

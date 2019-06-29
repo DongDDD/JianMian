@@ -264,12 +264,7 @@
     }
 }
 -(void)rightAction{
-    if(_isChange){
-        _videoURL = nil;//不用上传视频了，选择完视频就上传完了
-        [self updateInfoData];
-    }else{
-        [self showAlertSimpleTips:@"提示" message:@"没有任何更改" btnTitle:@"哦哦"];
-    }
+    [self fanhui];
 }
 
 

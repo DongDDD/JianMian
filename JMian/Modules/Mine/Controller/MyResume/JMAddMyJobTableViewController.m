@@ -14,14 +14,16 @@
 #import "JMHTTPManager+Job.h"
 #import "TwoButtonView.h"
 #import "DimensMacros.h"
-#import "JMBottomView.h"
+#import "JMBottom2View.h"
+#import "STPickerSingle.h"
 
-@interface JMAddMyJobTableViewController ()<JMCityListViewControllerDelegate,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource,TwoButtonViewDelegate>
+
+@interface JMAddMyJobTableViewController ()<JMCityListViewControllerDelegate,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMBottom2ViewDelegate,STPickerSingleDelegate>
 
 @property(nonatomic,strong)NSArray *titleArray;
 @property(nonatomic,strong)NSMutableArray *rightTextArray;
-@property(nonatomic,strong) NSArray *pickerArray;
-@property (strong, nonatomic) UIPickerView *pickerView;
+//@property(nonatomic,strong) NSArray *pickerArray;
+//@property (strong, nonatomic) UIPickerView *pickerView;
 
 @property (nonatomic, copy) NSString *user_job_id;
 @property (nonatomic, copy) NSString *job_labelID;
@@ -29,7 +31,8 @@
 @property (nonatomic, copy) NSString *salaryMax;
 @property (nonatomic, copy)NSString *city_id;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
-@property (strong, nonatomic) TwoButtonView *twoButtonView;
+@property (strong, nonatomic) JMBottom2View *bottomView;
+@property (nonatomic, strong) STPickerSingle *salaryPickerSingle;
 @property (nonatomic, assign)BOOL isChange;
 @end
 
@@ -39,18 +42,18 @@ static NSString *cellIdent = @"cellIdent";
 - (void)viewDidLoad {
     [super viewDidLoad];
     _titleArray = @[@"期望职位",@"薪资要求",@"工作城市"];
-    _pickerArray = @[@"1k-2k",
-                     @"2k-4k",
-                     @"4k-6k",
-                     @"6k-8k",
-                     @"8k-10k",
-                     @"10k-15k",
-                     @"15k-20k",
-                     @"20k-30k",
-                     @"30k-40k",
-                     @"40k-50k",
-                     @"50k-100k",
-                     ];
+//    _pickerArray = @[@"1k-2k",
+//                     @"2k-4k",
+//                     @"4k-6k",
+//                     @"6k-8k",
+//                     @"8k-10k",
+//                     @"10k-15k",
+//                     @"15k-20k",
+//                     @"20k-30k",
+//                     @"30k-40k",
+//                     @"40k-50k",
+//                     @"50k-100k",
+//                     ];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -65,13 +68,15 @@ static NSString *cellIdent = @"cellIdent";
         [self setRightBtnTextName:@"保存"];
     
     }
-    
+    [self.view addSubview:self.bottomView];
+
     [self setBackBtnImageViewName:@"icon_return_nav" textName:@""];
-//    [self.view addSubview:self.twoButtonView];
+
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
 }
+
 
 
 - (void)setBackBtnImageViewName:(NSString *)imageName textName:(NSString *)textName{
@@ -95,6 +100,8 @@ static NSString *cellIdent = @"cellIdent";
     self.navigationItem.leftBarButtonItem = leftItem;
     
 }
+
+
 -(void)setRightBtnTextName:(NSString *)rightLabName{
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -232,6 +239,7 @@ static NSString *cellIdent = @"cellIdent";
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.textLabel.text = _titleArray[indexPath.row];
     cell.detailTextLabel.text = self.rightTextArray[indexPath.row];
+    cell.detailTextLabel.textColor = TITLE_COLOR;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 //    cell.detailTextLabel.textColor = TEXT_GRAY_COLOR;
@@ -249,8 +257,10 @@ static NSString *cellIdent = @"cellIdent";
         vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (indexPath.row == 1){
-        [self.view addSubview:self.pickerView];
-        [self.pickerView setHidden:NO];
+//        [self.view addSubview:self.pickerView];
+//        [self.pickerView setHidden:NO];
+        [self.view addSubview:self.salaryPickerSingle];
+        [self.salaryPickerSingle show];
         
         
     }else{
@@ -265,6 +275,15 @@ static NSString *cellIdent = @"cellIdent";
 
 
 #pragma mark - PickerViewDelegate
+- (void)pickerSingle:(STPickerSingle *)pickerSingle selectedTitle:(NSString *)selectedTitle row:(NSInteger)row{
+    _isChange = YES;
+    [self.rightTextArray replaceObjectAtIndex:1 withObject:selectedTitle];
+    NSMutableArray *array = [self setSalaryRangeWithSalaryStr:selectedTitle];
+    self.salaryMin = array[0];
+    self.salaryMax = array[1];
+    [self.tableView reloadData];
+
+}
 
 //返回有几列
 
@@ -277,38 +296,38 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 //返回指定列的行数
+//
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//
+//{
+//
+//    return [self.pickerArray count];
+//
+//}
+//
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//
+//    NSString *str = [self.pickerArray objectAtIndex:row];
+//
+//    return str;
+//
+//}
 
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 
-{
-    
-    return [self.pickerArray count];
-    
-}
+//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+//    _isChange = YES;
+//    [self.rightTextArray replaceObjectAtIndex:1 withObject:self.pickerArray[row]];
+//    NSMutableArray *array = [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
+//    self.salaryMin = array[0];
+//    self.salaryMax = array[1];
+//    [self.tableView reloadData];
+//
+//}
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    
-    NSString *str = [self.pickerArray objectAtIndex:row];
-    
-    return str;
-    
-}
-
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    _isChange = YES;
-    [self.rightTextArray replaceObjectAtIndex:1 withObject:self.pickerArray[row]];
-    NSMutableArray *array = [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
-    self.salaryMin = array[0];
-    self.salaryMax = array[1];
-    [self.tableView reloadData];
-    
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    self.pickerView.hidden = YES;
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//
+//    self.pickerView.hidden = YES;
+//}
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -419,19 +438,20 @@ static NSString *cellIdent = @"cellIdent";
     return _rightTextArray;
 }
 
--(UIPickerView *)pickerView{
-    if (_pickerView == nil) {
-        
-        _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-300, SCREEN_WIDTH, 300)];
-        _pickerView.backgroundColor = BG_COLOR;
-        _pickerView.delegate = self;
-        _pickerView.dataSource = self;
+//-(UIPickerView *)pickerView{
+//    if (_pickerView == nil) {
+//
+//        _pickerView = [[UIPickerView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-300, SCREEN_WIDTH, 300)];
+//        _pickerView.backgroundColor = BG_COLOR;
+//        _pickerView.delegate = self;
+//        _pickerView.dataSource = self;
+//
+//
+//    }
+//
+//    return _pickerView;
+//}
 
-        
-    }
-    
-    return _pickerView;
-}
 -(MBProgressHUD *)progressHUD{
     if (!_progressHUD) {
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -442,14 +462,34 @@ static NSString *cellIdent = @"cellIdent";
     return _progressHUD;
 }
 
--(TwoButtonView *)twoButtonView{
-    if (!_twoButtonView) {
-        _twoButtonView = [[TwoButtonView alloc]initWithFrame:CGRectMake(0,SCREEN_HEIGHT-300, SCREEN_WIDTH, 50)];
-        _twoButtonView.backgroundColor = MASTER_COLOR;
-        _twoButtonView.delegate = self;
+-(JMBottom2View *)bottomView{
+    if (_bottomView == nil) {
+        _bottomView = [[JMBottom2View alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 74)];
+//        _bottomView.backgroundColor = MASTER_COLOR;
+        _bottomView.delegate = self;
     }
 
-    return _twoButtonView;
+    return _bottomView;
 }
 
+-(STPickerSingle *)salaryPickerSingle{
+    if (_salaryPickerSingle == nil) {
+        _salaryPickerSingle = [[STPickerSingle alloc]init];
+        _salaryPickerSingle.delegate = self;
+        _salaryPickerSingle.title = @"薪资要求";
+        _salaryPickerSingle.widthPickerComponent = 200;
+        _salaryPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"1k-2k",
+                                         @"2k-4k",
+                                         @"4k-6k",
+                                         @"6k-8k",
+                                         @"8k-10k",
+                                         @"10k-15k",
+                                         @"15k-20k",
+                                         @"20k-30k",
+                                         @"30k-40k",
+                                         @"40k-50k",
+                                         @"50k-100K",nil];
+    }
+    return _salaryPickerSingle;
+}
 @end

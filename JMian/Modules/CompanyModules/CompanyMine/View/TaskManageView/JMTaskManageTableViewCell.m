@@ -64,6 +64,7 @@
     self.infoLab3.text = [NSString stringWithFormat:@" %@   ",industryStr];
  
 }
+//------B下半部分
 
 -(void)setBButton_data:(JMTaskOrderListCellData *)data{
     [self.leftBtn setHidden:NO];
@@ -97,21 +98,30 @@
     }else if ([data.status isEqualToString:Task_Pass]){
 
         if ([data.payment_method isEqualToString:@"1"] ) {
+            //销售任务
+            [self.leftBtn setHidden:NO];
+            [self.rightBtn setHidden:NO];
+            [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
+            [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+            self.leftBtn.layer.borderWidth = 0.5;
+            self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
             
-            [self.leftBtn setTitle:@"结束任务" forState:UIControlStateNormal];
-            [self.leftBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            self.leftBtn.backgroundColor = TEXT_GRAYmin_COLOR;
-            self.leftBtn.layer.borderWidth = 0;
-            self.leftBtn.layer.borderColor = TEXT_GRAYmin_COLOR.CGColor;
-
-            [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
+            [self.rightBtn setTitle:@"结束任务" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.rightBtn.backgroundColor = MASTER_COLOR;
             
             
         }else{
-            [self.leftBtn setHidden:YES];
+            [self.leftBtn setHidden:NO];
+            [self.rightBtn setHidden:NO];
 
+            [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
+            [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+            self.leftBtn.layer.borderWidth = 0.5;
+            self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
+            
             [self.rightBtn setTitle:@"进行中" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
             self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
@@ -122,6 +132,9 @@
         
          //进行中: 对方已完成
     }else if([data.status isEqualToString:Task_Finish]){
+        [self.leftBtn setHidden:NO];
+        [self.rightBtn setHidden:NO];
+
         [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
         [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
         self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
@@ -214,9 +227,16 @@
     //进行中：已通过
     }else if (([data.status isEqualToString:Task_Pass])){
 
-        [self.leftBtn setHidden:YES];
+        [self.leftBtn setHidden:NO];
         [self.rightBtn setHidden:NO];
         if ([data.payment_method isEqualToString:@"1"] ) {
+ 
+            
+            [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
+            [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+            self.leftBtn.layer.borderWidth = 0.5;
+            self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
 
             [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -224,7 +244,11 @@
             self.rightBtn.backgroundColor = MASTER_COLOR;
             
         }else{
-            
+            [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
+            [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+            self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+            self.leftBtn.layer.borderWidth = 0.5;
+            self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
             [self.rightBtn setTitle:@"已完成(任务ing)" forState:UIControlStateNormal];
             
             self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
@@ -239,8 +263,11 @@
 
         //进行中：已完成
     } else if ([data.status isEqualToString:Task_Finish]) {
-        [self.leftBtn setHidden:YES];
-        [self.rightBtn setHidden:NO];
+        [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
+        [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
+        self.leftBtn.layer.borderWidth = 0.5;
+        self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
         [self.rightBtn setTitle:@"等待对方确认付尾款" forState:UIControlStateNormal];
         self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
         self.rightBtn.layer.borderWidth = 0.5;

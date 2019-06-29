@@ -126,7 +126,30 @@
     self.comfirmPostBottomView.frame = CGRectMake(0, _makeOutBillView.frame.origin.y+_makeOutBillView.frame.size.height, SCREEN_WIDTH, 127);
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.comfirmPostBottomView.frame.origin.y+self.comfirmPostBottomView.frame.size.height+100);
 }
+#pragma mark - myAction
 
+- (IBAction)bottomLeftAction:(UIButton *)sender {
+    if ([_partTimejobDetailModel.status isEqualToString:Position_Online]) {
+        
+        
+        //下线
+        [self updateTaskInfoRequest_status:Position_Downline];
+        
+    }else if ([_partTimejobDetailModel.status isEqualToString:Position_Downline]){
+        //上线
+        [self updateTaskInfoRequest_status:Position_Online];
+        
+        
+    }
+    
+}
+
+- (IBAction)bottomRightAction:(UIButton *)sender {
+    //保存编辑
+    if (_isChange) {
+        [self updateTaskInfoRequest_status:@"1"];
+    }
+}
 
 #pragma mark - MyDelegate
 -(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName{
@@ -227,6 +250,7 @@
 }
 
 -(void)chooseAdressAction{
+    [self.decriptionTextView.contentTextView resignFirstResponder];
     JMGetCompanyLocationViewController *vc = [[JMGetCompanyLocationViewController alloc]init];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
@@ -451,6 +475,8 @@
     
 }
 
+
+
 #pragma mark - ScrollViewdelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
 
@@ -554,41 +580,13 @@
 //        myfront_money = @"0";
 //    }
     [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil deadline:_deadline status:nil is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"提交成功" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self.navigationController popViewControllerAnimated:YES];
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
-        
+        [self showAlertVCSucceesSingleWithMessage:@"创建任务成功" btnTitle:@"好的"];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
 
 }
 
-- (IBAction)bottomLeftAction:(UIButton *)sender {
-    if ([_partTimejobDetailModel.status isEqualToString:Position_Online]) {
-        
-        
-        //下线
-        [self updateTaskInfoRequest_status:Position_Downline];
-        
-    }else if ([_partTimejobDetailModel.status isEqualToString:Position_Downline]){
-        //上线
-        [self updateTaskInfoRequest_status:Position_Online];
-        
-    
-    }
-
-}
-
-- (IBAction)bottomRightAction:(UIButton *)sender {
-    //保存编辑
-    if (_isChange) {
-        [self updateTaskInfoRequest_status:@"1"];        
-    }
-}
 
 
 
@@ -616,18 +614,17 @@
     [self.makeOutBillView.invoiceTaxNumTextField resignFirstResponder];
     [self.makeOutBillView.invoiceEmailTextField resignFirstResponder];
     [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:nil industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:_adress goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil  is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"保存成功" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self.navigationController popViewControllerAnimated:YES];
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
+        [self showAlertVCSucceesSingleWithMessage:@"保存成功" btnTitle:@"好的"];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+
     
-    
-    
+}
+
+-(void)alertSucceesAction{
+    [self.navigationController popViewControllerAnimated:YES];
+
     
 }
 

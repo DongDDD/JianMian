@@ -17,7 +17,7 @@
 #import "PositionDesiredViewController.h"
 #import "JMMyPictureViewController.h"
 #import "JMHTTPManager+Job.h"
-#import "JMAddMyJobTableViewController.h"
+#import "JMAddVitaJobViewController.h"
 #import "JMMyResumeFooterView.h"
 #import "JMMPersonalCenterHeaderView.h"
 #import "JMMyResumeHeaderSecondTableViewCell.h"
@@ -33,8 +33,8 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) JMVitaDetailModel *model;
 @property (copy, nonatomic) NSString *job_labelID;
-@property (strong, nonatomic) UIPickerView *pickerView;
-@property (nonatomic, strong) UIDatePicker *datePicker;
+//@property (strong, nonatomic) UIPickerView *pickerView;
+//@property (nonatomic, strong) UIDatePicker *datePicker;
 @property (nonatomic, strong) NSArray *pickerArray;
 @property (nonatomic, strong) NSNumber *salaryMin;
 @property (nonatomic, strong) NSNumber *salaryMax;
@@ -182,60 +182,60 @@
 //}
 
 -(void)addJobAction{
-    JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
-    vc.viewType = JMAddMyJobTableViewTypeAdd;
+    JMAddVitaJobViewController *vc = [[JMAddVitaJobViewController alloc]init];
+    vc.viewType = JMAddVitaJobViewTypeAdd;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - PickerViewDelegate
+//#pragma mark - PickerViewDelegate
+//
+////返回有几列
+//
+//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+//{
+//    return 1;
+//
+//}
+//
+////返回指定列的行数
+//
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//
+//{
+//
+//    return [self.pickerArray count];
+//
+//}
+//
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//
+//    NSString *str = [self.pickerArray objectAtIndex:row];
+//
+//    return str;
+//
+//}
+//
+//
+//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+//
+//    NSString *salaryStr =[self.pickerArray objectAtIndex:row];
+//    [self setSalaryRangeWithSalaryStr:salaryStr];
+//}
 
-//返回有几列
-
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
-    return 1;
-    
-}
-
-//返回指定列的行数
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-
-{
-    
-    return [self.pickerArray count];
-    
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    
-    NSString *str = [self.pickerArray objectAtIndex:row];
-    
-    return str;
-    
-}
-
-
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    NSString *salaryStr =[self.pickerArray objectAtIndex:row];
-    [self setSalaryRangeWithSalaryStr:salaryStr];
-}
-
--(void)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
-    NSArray *array = [salaryStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
-    
-    NSString *minStr = array[0];
-    NSString *maxStr = array[1];
-    
-    NSInteger minNum = [minStr integerValue];
-    NSInteger maxNum = [maxStr integerValue];
-    
-    
-    self.salaryMin = @(minNum);
-    self.salaryMax = @(maxNum);
-    
-}
+//-(void)setSalaryRangeWithSalaryStr:(NSString *)salaryStr{
+//    NSArray *array = [salaryStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
+//
+//    NSString *minStr = array[0];
+//    NSString *maxStr = array[1];
+//
+//    NSInteger minNum = [minStr integerValue];
+//    NSInteger maxNum = [maxStr integerValue];
+//
+//
+//    self.salaryMin = @(minNum);
+//    self.salaryMax = @(maxNum);
+//
+//}
 
 #pragma mark - UITableViewDelegate
 
@@ -354,17 +354,17 @@
         }
         case JMMyResumeCellTypeCareerStatus:
         {
-            JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
-            vc.viewType = JMAddMyJobTableViewTypeAdd;
+            JMAddVitaJobViewController *vc = [[JMAddVitaJobViewController alloc]init];
+            vc.viewType = JMAddVitaJobViewTypeAdd;
             [self.navigationController pushViewController:vc animated:YES];
             break;
             
         }
         case JMMyResumeCellTypeCareerObjective:
         {
-            JMAddMyJobTableViewController *vc = [[JMAddMyJobTableViewController alloc]init];
+            JMAddVitaJobViewController *vc = [[JMAddVitaJobViewController alloc]init];
             vc.model = self.cellConfigures.jobstArr[indexPath.row];
-            vc.viewType = JMAddMyJobTableViewTypeEdit;
+            vc.viewType = JMAddVitaJobViewTypeEdit;
             [self.navigationController pushViewController:vc animated:YES];
 
            
@@ -473,10 +473,10 @@
     return [self.cellConfigures heightForFooterInSection:section];
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    self.pickerView.hidden = YES;
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//
+//    self.pickerView.hidden = YES;
+//}
 
 #pragma mark - Getter
 - (UITableView *)tableView {

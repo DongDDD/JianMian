@@ -75,8 +75,12 @@ NS_ASSUME_NONNULL_BEGIN
                rightTitle:(NSString *)rightTitle;
 //简单弹框提示
 -(void)showAlertSimpleTips:(NSString *)title message:(NSString *)message btnTitle:(NSString *)btnTitle;
+//操作成功提示
+-(void)showAlertVCSucceesSingleWithMessage:(NSString *)message
+                                  btnTitle:(NSString *)btnTitle;
 -(void)alerLeftAction;
 -(void)alertRightAction;
+-(void)alertSucceesAction;
 //工资K数据转换 “000”
 -(NSMutableArray *)setSalaryRangeWithSalaryStr:(NSString *)salaryStr;
 //工资000数据转换 “k”

@@ -26,10 +26,6 @@
     [super viewDidLoad];
     [[UIApplication sharedApplication].keyWindow addSubview:self.progressHUD];
     self.view.backgroundColor = [UIColor whiteColor];
-    // Do any additional setup after loading the view.
-    
-//    CGFloat navigationBarAndStatusBarHeight = self.navigationController.navigationBar.frame.size.height + [[UIApplication sharedApplication] statusBarFrame].size.height;
-//    CGFloat tabBarHeight = self.tabBarController.tabBar.frame.size.height;
     if (kFetchMyDefault(@"token")){
         [self getUserInfo];
     }else{
@@ -42,6 +38,7 @@
         }
    
 }
+#pragma mark - data
 
 -(void)getUserInfo{
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -106,6 +103,7 @@
     }
     
 }
+#pragma mark - 判断注册到哪步
 
 - (NSString *)getCompanyStepWhereWitnEnterprise_step:(NSString *)enterprise_step{
     
