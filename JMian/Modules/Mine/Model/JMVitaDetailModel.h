@@ -44,6 +44,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *video_status;
 @property (copy, nonatomic) NSString *video_type;
 
+@property (copy, nonatomic) NSString *real_sex;
+@property (copy, nonatomic) NSString *real_ethnic;
+@property (copy, nonatomic) NSString *real_name;
+@property (copy, nonatomic) NSString *real_birthday;
+
+
 @property (strong, nonatomic) NSArray *experiences;
 @property (strong, nonatomic) NSArray *shielding;
 @property (strong, nonatomic) NSArray *learning;//C我的简历 的

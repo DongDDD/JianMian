@@ -119,7 +119,7 @@
 {
     [super viewDidAppear:animated];
     [self.view layoutIfNeeded];
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.HRView.frame.origin.y+self.HRView.frame.size.height+134);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.mapBGView.frame.origin.y+self.mapBGView.frame.size.height+150);
     
 //    self.scrollView.contentOffset= CGPointMake(0, -80);
 }
@@ -406,7 +406,7 @@
     [self setCompanyIntroductionView];
     [self setJobDescriptionView];
     [self setMapView];
-    [self setHRView];
+//    [self setHRView];
     [self setBottomView];
 }
 
@@ -728,47 +728,47 @@
 //        make.bottom.mas_equalTo(self.jobDescriptionView.mas_bottom);
     }];
     
-    UILabel *label2 = [[UILabel alloc]init];
-    label2.text = @"任职要求";
-    label2.font = [UIFont systemFontOfSize:15];
-    label2.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
-    [self.jobDescriptionView addSubview:label2];
+//    UILabel *label2 = [[UILabel alloc]init];
+//    label2.text = @"任职要求";
+//    label2.font = [UIFont systemFontOfSize:15];
+//    label2.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
+//    [self.jobDescriptionView addSubview:label2];
+//
+//    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(label.mas_left);
+//        make.width.mas_equalTo(100);
+//        make.height.mas_equalTo(15);
+//        make.top.mas_equalTo(self.jobDoLab.mas_bottom).offset(35);
+//    }];
+//
+//    //职责要求内容
+//
+//    self.jobRequireLab = [[UILabel alloc]init];
+//    self.jobRequireLab.font = [UIFont systemFontOfSize:14];
+//    self.jobRequireLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
+//    self.jobRequireLab.numberOfLines = 0;
+//
+//    NSMutableParagraphStyle  *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
+//    NSString  *testString2 = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
+//    NSMutableAttributedString  *setString2 = [[NSMutableAttributedString alloc] initWithString:testString2];
+//    [setString2  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [testString2 length])];
+//    [self.jobRequireLab  setAttributedText:setString2];
+//    [paragraphStyle2  setLineSpacing:13.5];
+//
     
-    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(label.mas_left);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(15);
-        make.top.mas_equalTo(self.jobDoLab.mas_bottom).offset(35);
-    }];
+//    [self.jobDescriptionView addSubview:self.jobRequireLab];
     
-    //职责要求内容
-
-    self.jobRequireLab = [[UILabel alloc]init];
-    self.jobRequireLab.font = [UIFont systemFontOfSize:14];
-    self.jobRequireLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
-    self.jobRequireLab.numberOfLines = 0;
-    
-    NSMutableParagraphStyle  *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
-    NSString  *testString2 = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
-    NSMutableAttributedString  *setString2 = [[NSMutableAttributedString alloc] initWithString:testString2];
-    [setString2  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [testString2 length])];
-    [self.jobRequireLab  setAttributedText:setString2];
-    [paragraphStyle2  setLineSpacing:13.5];
-    
-    
-    [self.jobDescriptionView addSubview:self.jobRequireLab];
-    
-    [self.jobRequireLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(label2.mas_left);
-        make.right.mas_equalTo(self.jobDescriptionView.mas_right).offset(-38);
-        
-        make.top.mas_equalTo(label2.mas_bottom).offset(15);
-        //        make.bottom.mas_equalTo(self.jobDescriptionView.mas_bottom);
-    }];
+//    [self.jobRequireLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(label2.mas_left);
+//        make.right.mas_equalTo(self.jobDescriptionView.mas_right).offset(-38);
+//
+//        make.top.mas_equalTo(label2.mas_bottom).offset(15);
+//        //        make.bottom.mas_equalTo(self.jobDescriptionView.mas_bottom);
+//    }];
     
     
     [self.jobDescriptionView mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.jobRequireLab.mas_bottom).offset(30);
+        make.bottom.mas_equalTo(self.jobDoLab.mas_bottom).offset(30);
     }];
 
 
@@ -801,6 +801,7 @@
         make.height.mas_equalTo(224);
         make.bottom.mas_equalTo(self.mapBGView);
     }];
+    _mapView.scrollEnabled = NO;
 
     
 }
@@ -836,82 +837,82 @@
     
 }
 #pragma mark - 职位发布者
-
--(void)setHRView{
-    
-    self.HRView = [[UIView alloc]init];
-    self.HRView.backgroundColor = [UIColor whiteColor];
-    [self.scrollView addSubview:self.HRView];
-    
-    [self.HRView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(self.view);
-        make.height.mas_equalTo(166);
-        make.top.mas_equalTo(self.mapBGView.mas_bottom);
-    }];
-
-    UILabel *label = [[UILabel alloc]init];
-    label.text = @"职位发布者";
-    label.font = [UIFont systemFontOfSize:17];
-    label.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
-    [self.HRView addSubview:label];
-    
-    [label mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.jobDescriptionView.mas_left).offset(22);
-        make.width.mas_equalTo(200);
-        make.height.mas_equalTo(16);
-        make.top.mas_equalTo(self.HRView.mas_top).offset(30);
-    }];
-    
-    UIImageView *iconImg = [[UIImageView alloc]init];
-    [iconImg sd_setImageWithURL:[NSURL URLWithString:_myModel.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    
-    [self.HRView addSubview:iconImg];
-    
-    [iconImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(label.mas_left);
-        make.width.mas_equalTo(49);
-        make.height.mas_equalTo(51);
-        make.top.mas_equalTo(label.mas_bottom).offset(29);
-    }];
-    
-    UILabel *nameLab = [[UILabel alloc]init];
-    nameLab.text = _myModel.user_nickname;
-    nameLab.font = [UIFont systemFontOfSize:17];
-    nameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
-    [self.HRView addSubview:nameLab];
-    
-    [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(iconImg.mas_right).offset(15);
-        make.width.mas_equalTo(100);
-        make.height.mas_equalTo(16);
-        make.top.mas_equalTo(iconImg.mas_top).offset(7);
-    }];
-    
-    UILabel *nameLab2 = [[UILabel alloc]init];
-    nameLab2.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
-    nameLab2.text = _myModel.companyName;
-    nameLab2.font = [UIFont systemFontOfSize:13];
-    [self.HRView addSubview:nameLab2];
-    
-    [nameLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(nameLab);
-        make.width.mas_equalTo(150);
-        make.height.mas_equalTo(13);
-        make.top.mas_equalTo(nameLab.mas_bottom).offset(10);
-    }];
-    
-    UIView * xianView = [[UIView alloc]init];
-    xianView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
-    [self.HRView addSubview:xianView];
-    
-    [xianView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self.HRView.mas_left).offset(22);
-        make.right.mas_equalTo(self.HRView.mas_right).offset(-22);
-        make.height.mas_equalTo(1);
-        make.top.mas_equalTo(self.HRView.mas_top);
-    }];
-    
-}
+//
+//-(void)setHRView{
+//
+//    self.HRView = [[UIView alloc]init];
+//    self.HRView.backgroundColor = [UIColor whiteColor];
+//    [self.scrollView addSubview:self.HRView];
+//
+//    [self.HRView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.and.right.mas_equalTo(self.view);
+//        make.height.mas_equalTo(166);
+//        make.top.mas_equalTo(self.mapBGView.mas_bottom);
+//    }];
+//
+//    UILabel *label = [[UILabel alloc]init];
+//    label.text = @"职位发布者";
+//    label.font = [UIFont systemFontOfSize:17];
+//    label.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
+//    [self.HRView addSubview:label];
+//
+//    [label mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(self.jobDescriptionView.mas_left).offset(22);
+//        make.width.mas_equalTo(200);
+//        make.height.mas_equalTo(16);
+//        make.top.mas_equalTo(self.HRView.mas_top).offset(30);
+//    }];
+//
+//    UIImageView *iconImg = [[UIImageView alloc]init];
+//    [iconImg sd_setImageWithURL:[NSURL URLWithString:_myModel.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+//
+//    [self.HRView addSubview:iconImg];
+//
+//    [iconImg mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(label.mas_left);
+//        make.width.mas_equalTo(49);
+//        make.height.mas_equalTo(51);
+//        make.top.mas_equalTo(label.mas_bottom).offset(29);
+//    }];
+//
+//    UILabel *nameLab = [[UILabel alloc]init];
+//    nameLab.text = _myModel.user_nickname;
+//    nameLab.font = [UIFont systemFontOfSize:17];
+//    nameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
+//    [self.HRView addSubview:nameLab];
+//
+//    [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(iconImg.mas_right).offset(15);
+//        make.width.mas_equalTo(100);
+//        make.height.mas_equalTo(16);
+//        make.top.mas_equalTo(iconImg.mas_top).offset(7);
+//    }];
+//
+//    UILabel *nameLab2 = [[UILabel alloc]init];
+//    nameLab2.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
+//    nameLab2.text = _myModel.companyName;
+//    nameLab2.font = [UIFont systemFontOfSize:13];
+//    [self.HRView addSubview:nameLab2];
+//
+//    [nameLab2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(nameLab);
+//        make.width.mas_equalTo(150);
+//        make.height.mas_equalTo(13);
+//        make.top.mas_equalTo(nameLab.mas_bottom).offset(10);
+//    }];
+//
+//    UIView * xianView = [[UIView alloc]init];
+//    xianView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
+//    [self.HRView addSubview:xianView];
+//
+//    [xianView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(self.HRView.mas_left).offset(22);
+//        make.right.mas_equalTo(self.HRView.mas_right).offset(-22);
+//        make.height.mas_equalTo(1);
+//        make.top.mas_equalTo(self.HRView.mas_top);
+//    }];
+//
+//}
 
 -(void)setBottomView{
     self.twoBtnView = [[TwoButtonView alloc]init];

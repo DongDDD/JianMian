@@ -34,6 +34,8 @@
 @property (nonatomic, strong) NSURL *finalURL;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 @property (nonatomic, copy)NSString *myVideoUrl;//用于播放，获取帧图片和回传
+@property (nonatomic, copy)NSString *video_cover;//封面图片
+
 
 @property (nonatomic, strong)JMDidUploadVideoView *didUploadVideoView;//有视频数据就显示
 @property (nonatomic, strong)JMVitaDetailModel *model;//全职
@@ -119,6 +121,19 @@
                     //拼接前缀 用于播放
                     [self setVideoUrl:self.model.video_file_path];
                     [self.didUploadVideoView setHidden:NO];
+                    if ([self.model.video_status isEqualToString:@"0"]) {
+                        self.title = @"视频审核中";
+                        [_didUploadVideoView.leftBtn setHidden:YES];
+                        [_didUploadVideoView.rightBtn setHidden:YES];
+                        
+                    }else if ([self.model.video_status isEqualToString:@"1"]){
+                        self.title = @"视频审核不通过";
+                        [_didUploadVideoView.leftBtn setHidden:YES];
+                        [_didUploadVideoView.rightBtn setHidden:YES];
+                    }else if ([self.model.video_status isEqualToString:@"2"]){
+                        self.title = @"视频审核已通过";
+   
+                    }
                     
                     NSURL *url = [NSURL URLWithString:self.model.video_file_path];
                     dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -147,8 +162,8 @@
 #pragma mark - 点击事件
 -(void)fanhui{
     [super fanhui];
-    if (_delegate && [_delegate respondsToSelector:@selector(didPostVideoWithUrl:)]) {
-        [_delegate didPostVideoWithUrl:self.myVideoUrl];
+    if (_delegate && [_delegate respondsToSelector:@selector(didPostVideoWithUrl:video_cover:)]) {
+        [_delegate didPostVideoWithUrl:self.myVideoUrl video_cover:_video_cover];
     }
 }
 
@@ -404,6 +419,7 @@
 //                         self.bottomLab.text = [NSString stringWithFormat:@"%.2f s, 压缩后大小为：%.2f M",length,size];
                          [self centerFrameImageWithVideoURL:outputURL completion:^(UIImage *image) {
                              self.didUploadVideoView.imgView.image = image;
+                             [self upload_Img:image];
                              
                          }];
                      });
@@ -445,6 +461,9 @@
                 NSLog(@"urlurlurlurl--%@",url);
 //                kSaveMyDefault(@"videoPath", url);
                 //拼接字符串
+//                if (_delegate && [_delegate respondsToSelector:@selector(didGetVideoUrlToPlayWitnPlayUrl:)]) {
+//                    [_delegate didGetVideoUrlToPlayWitnPlayUrl:<#(nonnull NSString *)#>];
+//                }
                 [self setVideoUrl:url];
                 
                 if (_viewType == JMUploadVideoViewTypePartTimeEdit) {
@@ -473,7 +492,21 @@
     
     
 }
-
+-(void)upload_Img:(UIImage *)img{
+    NSArray *array = @[img];
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+            _video_cover = responsObject[@"data"][0];
+            
+        }
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 //第二版兼职上传视频
 -(void)postPartTimeVideo_url:(NSString *)url{
     [[JMHTTPManager sharedInstance]updateAbility_Id:self.ability_id city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

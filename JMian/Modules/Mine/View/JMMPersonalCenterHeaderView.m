@@ -43,7 +43,7 @@
 //    _barBackgroundImageView.image = [UIImage imageNamed:@"mine_peijing"];
 //    [self addSubview:_barBackgroundImageView];
     _titleLab = [[UILabel alloc]init];
-    _titleLab.text = @"个人中心";
+    _titleLab.text = @"个人用户";
     _titleLab.textColor = [UIColor whiteColor];
     _titleLab.font = kFont(16);
     [self addSubview:_titleLab];

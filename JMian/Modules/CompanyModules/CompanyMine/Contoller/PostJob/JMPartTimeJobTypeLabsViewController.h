@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMPartTimeJobTypeLabsViewController : BaseViewController
 
 @property(nonatomic,weak)id<JMPartTimeJobTypeLabsViewControllerDelegate>delegate;
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
 

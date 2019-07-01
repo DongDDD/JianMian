@@ -81,7 +81,7 @@ static NSString *cellIdent = @"cellIdent";
     }
     
     JMCityModel *allchooseModel = [[JMCityModel alloc]init];
-    allchooseModel.city_name = @"全部";
+    allchooseModel.city_name = @"全国";
     [self.leve2ModelArray addObject:allchooseModel];
     
     //        for (int i = 0; i < self.leve2ModelArray.count; i++) {
@@ -184,7 +184,7 @@ static NSString *cellIdent = @"cellIdent";
         self.leve3ModelArray = [NSMutableArray array];
         //选择第一层的哪个城市，选择完获取到区数组
         JMCityModel *cityModel = self.leve2ModelArray[indexPath.row];
-        if (![cityModel.city_name isEqualToString:@"全部"]) {
+        if (![cityModel.city_name isEqualToString:@"全国"]) {
             for (NSDictionary *dic in cityModel.children) {
                 JMCityModel *model = [JMCityModel mj_objectWithKeyValues:dic];
                 [self.leve3ModelArray addObject:model];
@@ -193,7 +193,7 @@ static NSString *cellIdent = @"cellIdent";
             //--------选择全部---------，清空第二层级的数组
             self.leve3ModelArray = [NSMutableArray array];
             _city_id = nil;
-            _city_name = @"全部";
+            _city_name = @"全国";
             [self setRightBtnTextName:@"保存"];
         }
         

@@ -16,6 +16,8 @@
              @"type_labelName":@"type_label.name",
              @"companyiId":@"company.company_id",
              @"companyLogo_path":@"company.logo_path",
+             @"companyReputation":@"company.reputation",
+
              
              @"cityID":@"city.city_id",
              @"cityName":@"city.city_name",

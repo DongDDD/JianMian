@@ -9,6 +9,11 @@
 #import "JMLabsData.h"
 
 @implementation JMLabsData
-
++ (NSDictionary *)mj_objectClassInArray {
+    return @{
+             @"children":@"JMLabsData",
+             
+             };
+}
 
 @end

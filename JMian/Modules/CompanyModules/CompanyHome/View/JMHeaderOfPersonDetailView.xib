@@ -34,9 +34,8 @@
                     </userDefinedRuntimeAttributes>
                 </imageView>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VEH-SL-CzS">
-                    <rect key="frame" x="20" y="144" width="374" height="401"/>
+                    <rect key="frame" x="0.0" y="144" width="414" height="401"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="374" id="3Sf-2Y-GS8"/>
                         <constraint firstAttribute="height" constant="401" id="e4t-Fb-pNe"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -100,7 +99,7 @@
                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="girl .png" translatesAutoresizingMaskIntoConstraints="NO" id="Yan-2C-7Nc">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Yan-2C-7Nc">
                     <rect key="frame" x="160" y="76" width="17" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="4iB-oe-djq"/>
@@ -174,6 +173,7 @@
                 <constraint firstItem="F9z-aw-qaC" firstAttribute="centerY" secondItem="oq9-OH-x8q" secondAttribute="centerY" id="JCc-9A-IJF"/>
                 <constraint firstItem="nTs-HD-QHz" firstAttribute="top" secondItem="E6m-dj-9zl" secondAttribute="bottom" constant="452" id="KXy-I7-8os"/>
                 <constraint firstItem="oq9-OH-x8q" firstAttribute="top" secondItem="dTP-bI-wCl" secondAttribute="bottom" constant="19" id="L5x-9h-VX3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VEH-SL-CzS" secondAttribute="trailing" id="Lqg-8c-Abs"/>
                 <constraint firstItem="nTs-HD-QHz" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="MVN-Li-kw3"/>
                 <constraint firstItem="dTP-bI-wCl" firstAttribute="top" secondItem="nfO-aP-CDQ" secondAttribute="bottom" constant="19" id="NH1-jo-2Bl"/>
                 <constraint firstItem="VZM-CA-KtE" firstAttribute="centerX" secondItem="VEH-SL-CzS" secondAttribute="centerX" id="OdA-0p-X5G"/>
@@ -191,15 +191,14 @@
                 <constraint firstItem="qCK-Mf-1xB" firstAttribute="leading" secondItem="F9z-aw-qaC" secondAttribute="leading" id="k9Q-ja-PAp"/>
                 <constraint firstItem="Yan-2C-7Nc" firstAttribute="leading" secondItem="krg-Qt-8XE" secondAttribute="trailing" constant="12" id="l7J-he-KR1"/>
                 <constraint firstItem="zwB-uT-Ysz" firstAttribute="centerY" secondItem="nfO-aP-CDQ" secondAttribute="centerY" id="ptI-OP-IT3"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VEH-SL-CzS" secondAttribute="trailing" constant="20" id="qLL-WF-YIW"/>
                 <constraint firstItem="VEH-SL-CzS" firstAttribute="top" secondItem="E6m-dj-9zl" secondAttribute="bottom" constant="21" id="qlA-gd-d8a"/>
                 <constraint firstItem="mPd-gP-Pik" firstAttribute="top" secondItem="krg-Qt-8XE" secondAttribute="bottom" constant="11" id="su8-Hd-coV"/>
                 <constraint firstItem="nfO-aP-CDQ" firstAttribute="top" secondItem="nTs-HD-QHz" secondAttribute="bottom" constant="30" id="ud4-XC-ha3"/>
                 <constraint firstItem="igf-6w-jDu" firstAttribute="leading" secondItem="mPd-gP-Pik" secondAttribute="trailing" constant="20" id="voF-tM-JYh"/>
+                <constraint firstItem="VEH-SL-CzS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="wOq-gE-k2J"/>
                 <constraint firstItem="krg-Qt-8XE" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="30" id="wlV-Qw-7ra"/>
                 <constraint firstItem="uRA-iU-K86" firstAttribute="top" secondItem="oq9-OH-x8q" secondAttribute="bottom" constant="19" id="xcD-14-rNQ"/>
                 <constraint firstItem="VEH-SL-CzS" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="yp4-zC-8Km"/>
-                <constraint firstItem="VEH-SL-CzS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="zN9-Pj-yF1"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
@@ -222,7 +221,6 @@
         </view>
     </objects>
     <resources>
-        <image name="girl .png" width="17" height="17"/>
         <image name="play.png" width="141" height="141"/>
     </resources>
 </document>

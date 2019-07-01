@@ -231,7 +231,7 @@
     }else{
         _receiver_id = [NSString stringWithFormat:@"%@b",data.boss_user_id];
         //C----进行中----
-        if ([data.status isEqualToString:Task_Pass]  && _index == 0) {
+        if ([data.status isEqualToString:Task_Pass]  && _index == 1) {
             if (![data.payment_method isEqualToString:@"1"]) {//不是销售分成才有这操作
                 //C---点"已完成"（C 唯一操作）-----status change to  '3'
                 [self changeTaskStatusRequestWithStatus:Task_Finish task_order_id:data.task_order_id];

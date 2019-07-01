@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMHTTPManager (CreateExperience)
 
 - (void)createExperienceWithCompany_name:(NSString *)company_name
-                            job_label_id:(NSNumber *)job_label_id
+                            job_label_id:(NSString *)job_label_id
                               start_date:(NSString *)start_date
                                 end_date:(nullable NSString *)end_date
                              description:(NSString *)description

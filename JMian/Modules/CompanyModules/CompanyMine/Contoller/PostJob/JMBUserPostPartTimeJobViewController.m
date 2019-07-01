@@ -24,9 +24,10 @@
 #import "JMGetCompanyLocationViewController.h"
 #import "JMHTTPManager+FectchInvoiceInfo.h"
 #import "JMInvoiceModel.h"
+#import "JMChoosePartTImeJobTypeLablesViewController.h"
 
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
-@interface JMBUserPostPartTimeJobViewController ()<JMPartTimeJobResumeFooterViewDelegate,JMMakeOutBillHeaderViewDelegate,JMBUserPartTimeJobDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMMakeOutBillHeaderViewDelegate,JMMakeOutBillViewDelegate,UITextFieldDelegate>
+@interface JMBUserPostPartTimeJobViewController ()<JMPartTimeJobResumeFooterViewDelegate,JMMakeOutBillHeaderViewDelegate,JMBUserPartTimeJobDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMMakeOutBillHeaderViewDelegate,JMMakeOutBillViewDelegate,UITextFieldDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate>
 @property(nonatomic, strong)JMBUserPartTimeJobDetailView *partTimeJobDetailView;
 @property (strong, nonatomic)NSArray *leftTextArray;
 @property (strong, nonatomic)UIScrollView *scrollView;
@@ -327,9 +328,12 @@
     [textField resignFirstResponder];
     return YES;
 }
+
 -(void)gotoLabsVC{
-    JMPartTimeJobTypeLabsViewController *vc =  [[JMPartTimeJobTypeLabsViewController alloc]init];
+    JMChoosePartTImeJobTypeLablesViewController *vc =  [[JMChoosePartTImeJobTypeLablesViewController alloc]init];
     vc.delegate = self;
+    vc.myVC = self;
+//    vc.viewType = JMChoosePartTImeJobTypeLablesViewTypePartTimeJob;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

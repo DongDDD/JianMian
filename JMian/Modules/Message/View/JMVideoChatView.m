@@ -161,7 +161,7 @@
     [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
     if (self.receiverID)
     {
-        [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"结束了视频"];
+        [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"视频视频已取消"];
     }
  
 
@@ -235,7 +235,7 @@
     
     //发送面试邀请1
     if ((self.receiverID)) {
-        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"我发起了视频聊天"];
+        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"[邀请视频视频聊天]"];
     }
     //加入视频聊天频道
     if (_channel_Id) {
@@ -287,7 +287,7 @@
     
     //发送面试邀请1
     if ((self.receiverID)) {
-        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"我发起了视频聊天"];
+        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"[邀请视频视频聊天]"];
     }
     //加入视频聊天频道
     [self joinChannel_channelId:interviewModel.interview_id];

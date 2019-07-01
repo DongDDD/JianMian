@@ -72,8 +72,10 @@ static NSString *cellIdent = @"cellIdent";
     [super viewDidLoad];
     
     [self setTitleViewImageViewName:@"demi_home"];
-    [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
-    [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
+//    [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
+//    [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
+    [self setIsHiddenBackBtn:YES];
+    [self setIsHiddenRightBtn:YES];
     
     self.per_page = 15;
     self.page = 1;
@@ -270,7 +272,7 @@ static NSString *cellIdent = @"cellIdent";
     if (cell == nil) {
         cell = [[JMCompanyHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
     }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.indexPath = indexPath;
     cell.delegate = self;
     if (self.arrDate.count > 0) {

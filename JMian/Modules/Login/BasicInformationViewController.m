@@ -67,10 +67,10 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //从沙盒拿
-    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
-    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
-    
-    [_headerImg setImage:savedImage forState:UIControlStateNormal];
+//    NSString *fullPath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Documents"] stringByAppendingPathComponent:@"currentImage.png"];
+//    UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
+//    
+//    [_headerImg setImage:savedImage forState:UIControlStateNormal];
     //    [imge setImage:savedImage];
 //    [IQKeyboardManager sharedManager].enable = NO;//试过用enable这个属性，但是没有效果；改成enableAutoToolbar就可以了
     

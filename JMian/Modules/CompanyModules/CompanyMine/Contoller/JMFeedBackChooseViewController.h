@@ -21,7 +21,6 @@ typedef enum : NSUInteger {
 
 @end
 
-
 @interface JMFeedBackChooseViewController : BaseViewController
 
 @property(nonatomic,copy)NSString *interview_id;

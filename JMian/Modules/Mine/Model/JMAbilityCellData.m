@@ -23,6 +23,7 @@
              @"myDescription":@"description",
              @"user_companyId":@"user_company_id",
              @"user_nickname":@"user.nickname",
+             @"user_reputation":@"user.reputation",   
              @"user_avatar":@"user.avatar",
              @"city_cityId":@"city.city_id",
              @"type_labelId":@"type_label.label_id",

@@ -15,6 +15,7 @@
                 <outlet property="bankNameLab" destination="iEb-60-jc7" id="ewI-ej-Mlo"/>
                 <outlet property="cardNumberLab" destination="bE7-B9-f57" id="mN5-Ac-aqw"/>
                 <outlet property="cashTextField" destination="xu7-ew-Cdl" id="8dl-HL-pW9"/>
+                <outlet property="myMoneyLab" destination="sW7-xH-KOx" id="rMt-Xr-LvF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

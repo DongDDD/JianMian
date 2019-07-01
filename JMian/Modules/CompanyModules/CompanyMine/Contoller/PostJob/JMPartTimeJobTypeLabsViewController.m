@@ -10,7 +10,6 @@
 #import "JMPartTimeJobLabsCollectionViewCell.h"
 #import "JMHTTPManager+GetLabels.h"
 @interface JMPartTimeJobTypeLabsViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
-@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic ,strong) NSArray *labsArray;
 @property (nonatomic ,strong) NSString *didChooseLab;
 
@@ -89,7 +88,7 @@ static CGFloat kMagin = 10.f;
         //设置senction的内边距@
         flowLayout.sectionInset = UIEdgeInsetsMake(kMagin, kMagin, kMagin, kMagin);
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         [_collectionView registerClass:[JMPartTimeJobLabsCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];

@@ -98,6 +98,8 @@
 
 
     [self getUserData];
+   
+    
     if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
         [self.BUserCenterHeaderView setHidden:NO];
         if (_BUserCenterHeaderSubView.taskBadgeView.hidden && _BUserCenterHeaderSubView.orderBadgeView.hidden ) {
@@ -139,19 +141,17 @@
         
         JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         [JMUserInfoManager saveUserInfo:userInfo];
- 
+        if ([userInfo.deadline isEqualToString:@"0"]) {
+            [self.BUserCenterHeaderView.VIPImg setHidden:YES];
+        }else{
+            [self.BUserCenterHeaderView.VIPImg setHidden:NO];
+
+        }
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-//    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//
-//        self.userInfoModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-//        [self.tableView reloadData];
-////        [self getCompanyData];
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-//    }];
-    
+ 
 }
 
 -(void)rightAction{
@@ -460,7 +460,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
 //        _tableView.tableHeaderView = [[JMMPersonalCenterHeaderView alloc]initWithFrame:CGRectMake(0, 0, 0, 106)];
-
+        _tableView.showsVerticalScrollIndicator = NO;
         _tableView.sectionFooterHeight = 0;
         _tableView.sectionHeaderHeight = 0;
 

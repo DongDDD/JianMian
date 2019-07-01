@@ -12,7 +12,7 @@
 @interface JMBUserCenterHeaderView ()
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UIButton *settingBtn;
-@property(nonatomic,strong)UIImageView *VIPImg;
+
 
 
 @end
@@ -36,11 +36,12 @@
     //    [self addSubview:_barBackgroundImageView];
     _VIPImg = [[UIImageView alloc]init];
     _VIPImg.image = [UIImage imageNamed:@"vvip"];
+    [_VIPImg setHidden:YES];
     [self addSubview:_VIPImg];
 
     
     _titleLab = [[UILabel alloc]init];
-    _titleLab.text = @"个人中心";
+    _titleLab.text = @"企业用户";
     _titleLab.textColor = [UIColor whiteColor];
     _titleLab.font = kFont(16);
     [self addSubview:_titleLab];

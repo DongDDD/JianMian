@@ -170,8 +170,6 @@
         [self.rightBtn setHidden:NO];
         [self.deleteImg setHidden:YES];
 
-
-
     }else if ([model.status isEqualToString:@"3"] ){//C端接受邀约了
         
         
@@ -219,7 +217,7 @@
         self.headerTitleLab.textColor = TEXT_GRAY_COLOR;
     }
 //录用状态：点击已面试返回的状态 录用状态：0:未确定 1:不合适 2:已录用
-    else if ([model.hire isEqualToString:@"0"] && [model.status isEqualToString:@"4"]){//0:未确定
+    else if ([model.hire isEqualToString:@"0"]){//0:未确定
         
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
         self.headerTitleLab.textColor = MASTER_COLOR;

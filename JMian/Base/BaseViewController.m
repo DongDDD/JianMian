@@ -19,8 +19,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-   
 //    self.navigationController.navigationBar.translucent = NO;
 //
 //    self.extendedLayoutIncludesOpaqueBars = YES;
@@ -84,7 +82,7 @@
     [leftBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
     [leftBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     
-    UILabel *leftLab = [[UILabel alloc]initWithFrame:CGRectMake(leftBtn.frame.origin.x+leftBtn.frame.size.width-5, 0, 100,leftBtn.frame.size.height)];
+    UILabel *leftLab = [[UILabel alloc]initWithFrame:CGRectMake(leftBtn.frame.origin.x+leftBtn.frame.size.width-30, 0, 100,leftBtn.frame.size.height)];
     leftLab.text = textName;
     leftLab.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
     leftLab.font = [UIFont systemFontOfSize:13];

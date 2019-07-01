@@ -37,6 +37,11 @@
                                     <constraint firstAttribute="height" constant="63" id="2Yh-GQ-Fwk"/>
                                     <constraint firstAttribute="width" constant="63" id="vPe-JZ-eRu"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <real key="value" value="31.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dDz-wx-7X2">
                                 <rect key="frame" x="20" y="42" width="315" height="1"/>
@@ -74,7 +79,7 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="有导游证，语音表达能力强" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uaf-Vq-9ta">
-                                <rect key="frame" x="141" y="90.5" width="135" height="16"/>
+                                <rect key="frame" x="141" y="90.5" width="114" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="6Xc-Bq-E9a"/>
                                 </constraints>
@@ -94,13 +99,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square_mission.png" translatesAutoresizingMaskIntoConstraints="NO" id="bUH-Gp-oWg">
-                                <rect key="frame" x="154" y="65" width="22" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="22" id="3RG-w2-lWb"/>
-                                    <constraint firstAttribute="height" constant="15" id="Lm0-BI-1A5"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -108,13 +106,12 @@
                             <constraint firstAttribute="bottom" secondItem="6U1-A8-1em" secondAttribute="bottom" constant="11" id="2Sl-Vh-xVI"/>
                             <constraint firstAttribute="trailing" secondItem="dDz-wx-7X2" secondAttribute="trailing" constant="20" id="33k-jf-SwT"/>
                             <constraint firstItem="367-8H-7hc" firstAttribute="leading" secondItem="aOK-9s-CUh" secondAttribute="leading" constant="14" id="3eu-hf-gEG"/>
-                            <constraint firstItem="bUH-Gp-oWg" firstAttribute="centerY" secondItem="1KT-L1-7Mo" secondAttribute="centerY" id="AIn-fL-gRy"/>
                             <constraint firstItem="Uaf-Vq-9ta" firstAttribute="leading" secondItem="Dbz-L8-x8h" secondAttribute="trailing" constant="12" id="E2J-16-C0o"/>
                             <constraint firstItem="367-8H-7hc" firstAttribute="top" secondItem="aOK-9s-CUh" secondAttribute="top" constant="15" id="EPw-uK-LSE"/>
-                            <constraint firstItem="bUH-Gp-oWg" firstAttribute="leading" secondItem="1KT-L1-7Mo" secondAttribute="trailing" constant="20" id="Fvl-EZ-q4Y"/>
                             <constraint firstItem="dDz-wx-7X2" firstAttribute="top" secondItem="367-8H-7hc" secondAttribute="bottom" constant="11" id="Hhb-nK-qmd"/>
                             <constraint firstItem="1KT-L1-7Mo" firstAttribute="top" secondItem="6U1-A8-1em" secondAttribute="top" constant="11" id="K66-WN-29a"/>
                             <constraint firstItem="Dbz-L8-x8h" firstAttribute="leading" secondItem="1KT-L1-7Mo" secondAttribute="leading" id="Rak-tR-bLt"/>
+                            <constraint firstAttribute="trailing" secondItem="Uaf-Vq-9ta" secondAttribute="trailing" constant="100" id="d0F-I7-qEs"/>
                             <constraint firstItem="Dbz-L8-x8h" firstAttribute="top" secondItem="1KT-L1-7Mo" secondAttribute="bottom" constant="9" id="gdL-ol-go9"/>
                             <constraint firstItem="1KT-L1-7Mo" firstAttribute="leading" secondItem="6U1-A8-1em" secondAttribute="trailing" constant="11" id="lDP-MI-q2e"/>
                             <constraint firstItem="Uaf-Vq-9ta" firstAttribute="centerY" secondItem="Dbz-L8-x8h" secondAttribute="centerY" id="lst-yx-51T"/>
@@ -151,11 +148,10 @@
                 <outlet property="nameLab" destination="1KT-L1-7Mo" id="lEQ-j2-sIl"/>
                 <outlet property="titleLab" destination="367-8H-7hc" id="x4K-JK-uhV"/>
             </connections>
-            <point key="canvasLocation" x="124.6376811594203" y="81.696428571428569"/>
+            <point key="canvasLocation" x="123.91304347826087" y="81.361607142857139"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="square_icon.png" width="62.5" height="62.5"/>
-        <image name="square_mission.png" width="22" height="15"/>
     </resources>
 </document>

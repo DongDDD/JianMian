@@ -37,13 +37,11 @@
                                     <constraint firstAttribute="width" constant="63" id="0v7-qg-n3c"/>
                                     <constraint firstAttribute="height" constant="63" id="pLZ-cx-66d"/>
                                 </constraints>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square_mission.png" translatesAutoresizingMaskIntoConstraints="NO" id="br2-pt-UDk">
-                                <rect key="frame" x="91" y="42" width="22" height="15"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="22" id="mjz-t1-I9H"/>
-                                    <constraint firstAttribute="height" constant="15" id="w1t-E0-IST"/>
-                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <real key="value" value="31.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="番禺区" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MvE-zp-i4o">
                                 <rect key="frame" x="91" y="66.5" width="58" height="16"/>
@@ -89,17 +87,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MvE-zp-i4o" firstAttribute="centerY" secondItem="duZ-yM-w3L" secondAttribute="centerY" id="C0p-25-u0b"/>
-                            <constraint firstItem="MvE-zp-i4o" firstAttribute="leading" secondItem="br2-pt-UDk" secondAttribute="leading" id="DvE-uP-pKg"/>
-                            <constraint firstItem="ps3-lc-jCv" firstAttribute="leading" secondItem="br2-pt-UDk" secondAttribute="leading" id="E0c-hi-yOC"/>
-                            <constraint firstItem="br2-pt-UDk" firstAttribute="top" secondItem="mKV-b8-h8G" secondAttribute="bottom" constant="12" id="JFm-g4-E6t"/>
                             <constraint firstAttribute="trailing" secondItem="MP5-m5-cZb" secondAttribute="trailing" constant="13" id="Jbv-hX-xY8"/>
                             <constraint firstItem="duZ-yM-w3L" firstAttribute="leading" secondItem="mKV-b8-h8G" secondAttribute="leading" id="JzW-Gc-GUc"/>
+                            <constraint firstItem="ps3-lc-jCv" firstAttribute="top" secondItem="MvE-zp-i4o" secondAttribute="bottom" constant="9" id="Mgq-zB-lGg"/>
                             <constraint firstItem="duZ-yM-w3L" firstAttribute="top" secondItem="mKV-b8-h8G" secondAttribute="bottom" constant="13" id="SiM-Yv-JmQ"/>
-                            <constraint firstItem="br2-pt-UDk" firstAttribute="leading" secondItem="duZ-yM-w3L" secondAttribute="trailing" constant="14" id="TE3-ud-ZTO"/>
                             <constraint firstItem="mKV-b8-h8G" firstAttribute="leading" secondItem="tZK-4v-tRN" secondAttribute="leading" constant="14" id="i0D-qY-VCA"/>
+                            <constraint firstItem="MvE-zp-i4o" firstAttribute="leading" secondItem="duZ-yM-w3L" secondAttribute="trailing" constant="14" id="iNy-Zj-HRp"/>
                             <constraint firstItem="ps3-lc-jCv" firstAttribute="bottom" secondItem="duZ-yM-w3L" secondAttribute="bottom" id="sG9-lG-fdx"/>
                             <constraint firstItem="mKV-b8-h8G" firstAttribute="top" secondItem="tZK-4v-tRN" secondAttribute="top" constant="14" id="u7s-ks-4Dp"/>
-                            <constraint firstItem="MP5-m5-cZb" firstAttribute="centerY" secondItem="br2-pt-UDk" secondAttribute="centerY" id="uBa-oE-oOG"/>
+                            <constraint firstItem="ps3-lc-jCv" firstAttribute="leading" secondItem="MvE-zp-i4o" secondAttribute="leading" id="vLL-yW-S3p"/>
+                            <constraint firstItem="Be8-8A-Y8U" firstAttribute="top" secondItem="mKV-b8-h8G" secondAttribute="bottom" constant="7.5" id="wZN-2Z-Cls"/>
                             <constraint firstItem="Be8-8A-Y8U" firstAttribute="centerY" secondItem="MP5-m5-cZb" secondAttribute="centerY" id="yTn-ie-HPb"/>
                             <constraint firstItem="MP5-m5-cZb" firstAttribute="leading" secondItem="Be8-8A-Y8U" secondAttribute="trailing" constant="8" id="zdq-Ui-CEu"/>
                         </constraints>
@@ -129,6 +126,7 @@
             <connections>
                 <outlet property="adress" destination="MvE-zp-i4o" id="IXW-Kv-AtZ"/>
                 <outlet property="bgView" destination="tZK-4v-tRN" id="BW4-W1-gi0"/>
+                <outlet property="headerIconImg" destination="duZ-yM-w3L" id="nkZ-oF-T7k"/>
                 <outlet property="jobLabs" destination="ps3-lc-jCv" id="lBk-Z2-kaD"/>
                 <outlet property="paymentLab" destination="Be8-8A-Y8U" id="dMO-al-ckB"/>
                 <outlet property="titleLab" destination="mKV-b8-h8G" id="T3b-Jo-J8G"/>
@@ -139,6 +137,5 @@
     </objects>
     <resources>
         <image name="square_icon.png" width="62.5" height="62.5"/>
-        <image name="square_mission.png" width="22" height="15"/>
     </resources>
 </document>

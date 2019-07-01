@@ -36,22 +36,22 @@
     
     
     
-    UIButton *left = [[UIButton alloc]init];
-    [left setTitle:@"重新上传" forState:UIControlStateNormal];
-    [left setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-    [left addTarget:self action:@selector(leftClick) forControlEvents:UIControlEventTouchUpInside];
-    left.layer.cornerRadius = 18.5;
-    left.layer.borderWidth = 0.5;
-    left.layer.borderColor = MASTER_COLOR.CGColor;
-    [self addSubview:left];
+    _leftBtn = [[UIButton alloc]init];
+    [_leftBtn setTitle:@"重新上传" forState:UIControlStateNormal];
+    [_leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    [_leftBtn addTarget:self action:@selector(leftClick) forControlEvents:UIControlEventTouchUpInside];
+    _leftBtn.layer.cornerRadius = 18.5;
+    _leftBtn.layer.borderWidth = 0.5;
+    _leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
+    [self addSubview:_leftBtn];
     
-    UIButton *right = [[UIButton alloc]init];
-    right.backgroundColor = MASTER_COLOR;
-    [right addTarget:self action:@selector(rightClick) forControlEvents:UIControlEventTouchUpInside];
-    [right setTitle:@"重新拍摄" forState:UIControlStateNormal];
-    [right setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    right.layer.cornerRadius = 18.5;
-    [self addSubview:right];
+    _rightBtn = [[UIButton alloc]init];
+    _rightBtn.backgroundColor = MASTER_COLOR;
+    [_rightBtn addTarget:self action:@selector(rightClick) forControlEvents:UIControlEventTouchUpInside];
+    [_rightBtn setTitle:@"重新拍摄" forState:UIControlStateNormal];
+    [_rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _rightBtn.layer.cornerRadius = 18.5;
+    [self addSubview:_rightBtn];
    
     
     [_imgView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -66,19 +66,19 @@
         make.width.and.height.mas_equalTo(68);
     }];
     
-    [left mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(18);
-        make.right.mas_equalTo(right.mas_left).offset(-20);
+        make.right.mas_equalTo(_rightBtn.mas_left).offset(-20);
         make.height.mas_equalTo(37);
         make.width.mas_equalTo(SCREEN_WIDTH*0.36);
         make.top.mas_equalTo(_imgView.mas_bottom).offset(25);
     }];
     
-    [right mas_makeConstraints:^(MASConstraintMaker *make) {
+    [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(self).offset(-18);
-        make.width.mas_equalTo(left);
-        make.height.mas_equalTo(left);
-        make.top.mas_equalTo(left);
+        make.width.mas_equalTo(_leftBtn);
+        make.height.mas_equalTo(_leftBtn);
+        make.top.mas_equalTo(_leftBtn);
     }];
     
     

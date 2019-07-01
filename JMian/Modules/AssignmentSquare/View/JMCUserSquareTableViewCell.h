@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCUserSquareTableViewCell : UITableViewCell
 @property(nonatomic,strong)JMTaskListCellData *model;
-
+//- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier model:(JMTaskListCellData *)model;
 @end
 
 NS_ASSUME_NONNULL_END

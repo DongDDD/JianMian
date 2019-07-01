@@ -43,7 +43,12 @@
              @"video_status":@"video.status",
              @"video_type":@"video.type",
              @"favorites_favorite_id":@"favorites.favorite_id",
-             @"city_is_hot":@"city.is_hot"
+             @"city_is_hot":@"city.is_hot",
+             
+             @"real_sex":@"real.sex",
+             @"real_ethnic":@"real.ethnic",
+             @"real_name":@"real.name",
+             @"real_birthday":@"real.birthday",
              };
 }
 

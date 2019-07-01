@@ -190,6 +190,9 @@
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self setScrollViewUI];
     [self setHeaderVieUI];
+    self.titleView.frame = CGRectMake(self.titleView.frame.origin.x, _headerView.frame.origin.y+_headerView.frame.size.height-43, self.titleView.frame.size.width, self.titleView.frame.size.height);
+    _pageView.frame = CGRectMake(_pageView.frame.origin.x,_titleView.frame.origin.y+_titleView.frame.size.height, _pageView.frame.size.width, _pageView.frame.size.height);
+    [self.scrollView addSubview:self.titleView];
     [self setPageUI];
 
     [self setBottomViewUI];
@@ -312,7 +315,9 @@
         
         //同时创建会话
         [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            
+            //发送消息推送
+            NSString *receiver_id = [NSString stringWithFormat:@"%@a",self.vitaModel.user_id];
+            [self setTaskMessage_receiverID:receiver_id dic:nil title:@"[面试邀请通知]"];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -561,10 +566,45 @@
 }
 
 -(void)alertRightAction{
-        JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+    JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+#pragma mark -- 发送自定义消息
+
+-(void)setTaskMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
+    
+    TIMConversation *conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:receiverID];
+    
+    // 转换为 NSData
+    
+    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
+    //    [custom_elem setData:data];
+    if (dic) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+        [custom_elem setData:data];
         
     }
+    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+    
+    [custom_elem setDesc:title];
+    TIMMessage * msg = [[TIMMessage alloc] init];
+    [msg addElem:custom_elem];
+    [conv sendMessage:msg succ:^(){
+        NSLog(@"SendMsg Succ");
+        //        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"申请成功" leftTitle:@"返回" rightTitle:@"查看任务"];
+    }fail:^(int code, NSString * err) {
+        NSLog(@"SendMsg Failed:%d->%@", code, err);
+        
+        
+    }];
+    
+    
+}
+
 #pragma mark -- myDelegate
 
 

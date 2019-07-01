@@ -10,12 +10,11 @@
 #import "JMPostPartTimeResumeViewController.h"
 #import "JMHTTPManager+FectchAbility.h"
 #import "JMPostJobHomeTableViewCell.h"
-#import "JMAbilityCellData.h"
 #import "JMTitlesView.h"
 #import "JMHTTPManager+FectchTaskList.h"
-#import "JMTaskListCellData.h"
 #import "JMBUserPostSaleJobViewController.h"
 #import "JMBUserPostPartTimeJobViewController.h"
+#import "JMIDCardIdentifyViewController.h"
 
 @interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
@@ -48,13 +47,26 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     }else if (_viewType == JMPartTimeJobTypeResume){
         [self.view addSubview:self.tableView];
 
+    }else if (_viewType == JMPartTimeJobTypeHome){
+        [self.view addSubview:self.tableView];
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.mas_topLayoutGuideTop);
+            make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+            make.left.and.right.mas_equalTo(self.view);
+        }];
+        
+ 
     }
+    
+  
+    
     [self showProgressHUD_view:self.view];
 
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     switch (_viewType) {
         case JMPartTimeJobTypeResume:
             [self getAbilityListData];
@@ -62,9 +74,30 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         case JMPartTimeJobTypeManage:
             [self getCurrrentDataWithIndex:_index];
             break;
-            
+        case JMPartTimeJobTypeHome:
+            if ([userModel.type isEqualToString:B_Type_UESR]) {
+                [self getTaskListData_status:nil];
+                self.no_dataLab.text = @"你还没有发布任务，快去发布吧！";
+                [self.no_dataBtn setTitle:@"发布任务" forState:UIControlStateNormal];
+            }else{
+                [self getAbilityListData];
+                self.no_dataLab.text = @"你还没有兼职简历，快去发布吧！";
+                [self.no_dataBtn setTitle:@"发布兼职简历" forState:UIControlStateNormal];
+            }
+            break;
         default:
             break;
+    }
+    if ([userModel.card_status isEqualToString:Card_NOIdentify]) {
+        self.no_dataLab.text = @"你还没有实名认证，快去认证吧";
+        [self.no_dataBtn setTitle:@"实名认证" forState:UIControlStateNormal];
+    }else if ([userModel.card_status isEqualToString:Card_WaitIdentify]) {
+        self.no_dataLab.text = @"实名认证审核中";
+        [self.no_dataBtn setHidden:YES];
+    }else if ([userModel.card_status isEqualToString:Card_RefuseIdentify]) {
+        self.no_dataLab.text = @"实名认证没有通过";
+        [self.no_dataBtn setTitle:@"实名认证" forState:UIControlStateNormal];
+        
     }
     
 }
@@ -119,15 +152,24 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 
-
-
 - (IBAction)postPartTimeResumeAction:(UIButton *)sender {
+    if ([sender.titleLabel.text isEqualToString:@"实名认证"]) {
+        JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    
+    
     if (_viewType == JMPartTimeJobTypeResume) {
         
         JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
         vc.viewType = JMPostPartTimeResumeViewAdd;
         [self.navigationController pushViewController:vc animated:YES];
     }else if (_viewType == JMPartTimeJobTypeManage) {
+        if (_delegate && [_delegate respondsToSelector:@selector(postPartTimeJobAction)]) {
+            [_delegate postPartTimeJobAction];
+        }
+    }else if (_viewType == JMPartTimeJobTypeHome) {
         if (_delegate && [_delegate respondsToSelector:@selector(postPartTimeJobAction)]) {
             [_delegate postPartTimeJobAction];
         }
@@ -159,6 +201,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     if (cell == nil) {
         cell = [[JMPostJobHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdent];
     }
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     switch (_viewType) {
         case JMPartTimeJobTypeResume:
             
@@ -166,6 +209,16 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             break;
         case JMPartTimeJobTypeManage:
             [cell setTaskListCellData:self.dataArray[indexPath.row]];
+
+            break;
+        case JMPartTimeJobTypeHome:
+            if ([userModel.type isEqualToString:B_Type_UESR]) {
+                
+                [cell setTaskListCellData:self.dataArray[indexPath.row]];
+            }else{
+            
+                [cell setPartTimeJobModel:self.dataArray[indexPath.row]];
+            }
             break;
             
         default:
@@ -177,7 +230,8 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
+    JMUserInfoModel *userInfomodel = [JMUserInfoManager getUserInfo];
+ 
     switch (_viewType) {
         case JMPartTimeJobTypeResume:
             [self gotoPostPartTimejobResumeVC_indexPath:indexPath];
@@ -185,6 +239,19 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         case JMPartTimeJobTypeManage:
             [self gotoBUserPostPartTimeVC__indexPath:indexPath];
             break;
+        case JMPartTimeJobTypeHome:
+            if ([userInfomodel.type isEqualToString:B_Type_UESR]) {
+                if (_delegate && [_delegate respondsToSelector:@selector(didClickCellWithTaskData:)]) {
+                    [_delegate didClickCellWithTaskData:self.dataArray[indexPath.row]];
+                }
+            }else{
+                if (_delegate && [_delegate respondsToSelector:@selector(didClickCellWithAbilityData:)]) {
+                    [_delegate didClickCellWithAbilityData:self.dataArray[indexPath.row]];
+                }
+            
+            }
+            
+             break;
         default:
             break;
     }
@@ -210,7 +277,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 }
 
-//C端发布兼职简历
+//C端编辑兼职简历
 -(void)gotoPostPartTimejobResumeVC_indexPath:(NSIndexPath *)indexPath{
 
     JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
@@ -273,7 +340,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _titleView.frame.size.height, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _titleView.frame.size.height,SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;
@@ -281,8 +348,10 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
         if (_viewType == JMPartTimeJobTypeManage) {
             _tableView.sectionHeaderHeight = 0;
-        }else{
+        }else if(_viewType == JMPartTimeJobTypeResume){
             _tableView.sectionHeaderHeight = 43;
+        }else if(_viewType == JMPartTimeJobTypeHome){
+            _tableView.sectionHeaderHeight = 0;
         }
         _tableView.sectionFooterHeight = 0;
         [_tableView registerNib:[UINib nibWithNibName:@"JMPostJobHomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];

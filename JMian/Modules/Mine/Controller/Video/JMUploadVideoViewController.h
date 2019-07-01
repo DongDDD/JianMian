@@ -21,7 +21,8 @@ typedef enum : NSUInteger {
 @protocol JMUploadVideoViewDelegate <NSObject>
 
 //-(void)isUploadVideo:(BOOL)isUploadVideo;
--(void)didPostVideoWithUrl:(NSString *)url;
+-(void)didPostVideoWithUrl:(NSString *)url video_cover:(NSString *)video_cover;
+-(void)didGetVideoUrlToPlayWitnPlayUrl:(NSString *)playUrl;
 @end
 
 @interface JMUploadVideoViewController : BaseViewController

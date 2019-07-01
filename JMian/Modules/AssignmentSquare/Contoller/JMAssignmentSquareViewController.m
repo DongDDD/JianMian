@@ -20,19 +20,36 @@
 #import "JMCDetailWebViewController.h"
 #import "JMWalletViewController.h"
 #import "JMTaskManageViewController.h"
+#import "JMGradeView.h"
+#import "JMPartTimeJobTypeLabsViewController.h"
+#import "JMPartTimeJobResumeViewController.h"
+#import "JMTaskListCellData.h"
+#import "JMAbilityCellData.h"
+#import "JMBUserPostSaleJobViewController.h"
+#import "JMBUserPostPartTimeJobViewController.h"
+#import "JMPostPartTimeResumeViewController.h"
+#import "JMHTTPManager+Login.h"
+#import "JMCityListViewController.h"
+#import "JMChoosePartTImeJobTypeLablesViewController.h"
 
 
 
-@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate>
+@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate>
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) NSUInteger index;
-@property (strong, nonatomic) JMChoosePositionTableViewController *choosePositionVC;//与我匹配
+//@property (strong, nonatomic) JMChoosePositionTableViewController *partTimeJobHomeListVC;//与我匹配
+@property(nonatomic, strong)JMPartTimeJobResumeViewController *partTimeJobHomeListVC;
+
+//@property (strong, nonatomic) JMPartTimeJobTypeLabsViewController *partTimeJobTypeLabsVC;
 @property (strong, nonatomic) UIView *tapView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,assign)NSInteger per_page;
+@property (copy, nonatomic)NSString *city_id;//城市ID
+@property (copy, nonatomic)NSString *type_label_id;//职位ID
+@property (strong, nonatomic)NSMutableArray *industryLabIDArray;//根据行业标签筛选
 
 
 @end
@@ -46,33 +63,41 @@ static NSString *C_cellIdent = @"CSquareCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitleViewImageViewName:@"demi_home"];
-    [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
+    [self setBackBtnImageViewName:@"site_Home" textName:@"全国"];
     self.per_page = 15;
     self.page = 1;
     
-    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(handleSwipeFrom)];
+    UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(hidePartTimeViewSwipeAction)];
     [swipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self.view addGestureRecognizer:swipe];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleTapFrom)];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePartTimeViewTapAction)];
     [self.tapView addGestureRecognizer:tap];
     
     [self initTableView];
+    [self setIsHiddenRightBtn:YES];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-       
+        [self setIsHiddenBackBtn:YES];
+
         [self BToGetData];
-        
     }else{
         [self CToGetData];
+        [self setIsHiddenBackBtn:NO];
 
     
     }
     // Do any additional setup after loading the view from its nib.
 }
 
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getUserData];
+}
 -(void)fanhui{
- 
+    JMCityListViewController *vc = [[JMCityListViewController alloc]init];
+    vc.viewType = JMCityListViewPartTime;
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
  
 }
 
@@ -87,7 +112,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     }];
     
     [self.view addSubview:self.tapView];
-    [self.view addSubview:self.choosePositionVC.view];
+    [self.view addSubview:self.partTimeJobHomeListVC.view];
     [self setupHeaderRefresh];
     [self setupFooterRefresh];
 
@@ -124,6 +149,13 @@ static NSString *C_cellIdent = @"CSquareCellID";
 }
 
 #pragma mark - myDeletgate -
+-(void)didSelectedCity_id:(NSString *)city_id city_name:(NSString *)city_name{
+    _city_id = city_id;
+    _page = 1;
+    [self setBackBtnImageViewName:@"site_Home" textName:city_name];
+    [self.dataArray removeAllObjects];
+    [self.tableView.mj_header beginRefreshing];
+}
 -(void)didClickIncomeAction{
     [self.navigationController pushViewController:[JMWalletViewController new] animated:YES];
 }
@@ -133,7 +165,6 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [vc setMyIndex:1];
     vc.title = @"我的任务";
     [self.navigationController pushViewController:vc animated:YES];
-  
 }
 
 -(void)didClickTaskCompletedAction{
@@ -143,11 +174,68 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+-(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName{
+    _type_label_id = type_id;
+    self.page = 1;
+    [_industryLabIDArray removeAllObjects];
+    [self.tableView.mj_header beginRefreshing];
+    
+}
+
+-(void)didClickCellWithTaskData:(JMTaskListCellData *)taskData{
+
+    _page = 1;
+    _type_label_id = taskData.type_labelID;
+    [self hidePartTimeViewTapAction];
+    [self.tableView.mj_header beginRefreshing];
+
+}
+
+-(void)didClickCellWithAbilityData:(JMAbilityCellData *)abilityData{
+    NSMutableArray *industryArray = [NSMutableArray array];
+    for (JMIndustryModel *data in abilityData.industry) {
+        [industryArray addObject:data.label_id];
+    }
+    self.industryLabIDArray = industryArray;
+    [self hidePartTimeViewTapAction];
+    _page = 1;
+    _type_label_id = nil;
+    [self.tableView.mj_header beginRefreshing];
+
+}
+
+-(void)postPartTimeJobAction{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
+        [alert addAction:[UIAlertAction actionWithTitle:@"发布网络销售任务" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+            vc.viewType = JMBUserPostSaleJobViewTypeAdd;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"发布任务" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
+            vc.viewType = JMBUserPostPartTimeJobTypeAdd;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }else if ([userModel.type isEqualToString:C_Type_USER]) {
+        JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
+        vc.viewType = JMPostPartTimeResumeViewAdd;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 #pragma mark - Action -
 
 -(void)loadMoreBills
 {
-    self.page += 1;
+    _page += 1;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         
@@ -176,33 +264,46 @@ static NSString *C_cellIdent = @"CSquareCellID";
     }
 }
 
--(void)handleTapFrom{
+-(void)hidePartTimeViewTapAction{
     __weak typeof(self) ws = self;
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        CGRect Frame = ws.choosePositionVC.view.frame;
+        CGRect Frame = ws.partTimeJobHomeListVC.view.frame;
         Frame.origin.x = -SCREEN_WIDTH;
-        ws.choosePositionVC.view.frame = Frame;
+        ws.partTimeJobHomeListVC.view.frame = Frame;
         self.tapView.hidden = YES;
     } completion:nil];
 }
 //侧拉手势
--(void)handleSwipeFrom{
+-(void)hidePartTimeViewSwipeAction{
     __weak typeof(self) ws = self;
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-        CGRect Frame = ws.choosePositionVC.view.frame;
+        CGRect Frame = ws.partTimeJobHomeListVC.view.frame;
         Frame.origin.x = -SCREEN_WIDTH;
-        ws.choosePositionVC.view.frame = Frame;
+        ws.partTimeJobHomeListVC.view.frame = Frame;
         self.tapView.hidden = YES;
     } completion:nil];
 }
 
--(void)movePageContentView{
-    __weak typeof(self) ws = self;
-    if (_index == 2) {
+-(void)showPageContentView{
+    if (_index == 0) {
+        self.page = 1;
+        _type_label_id = nil;
+        _city_id = nil;
+        [_industryLabIDArray removeAllObjects];
+        [self.tableView.mj_header beginRefreshing];
+    }else if (_index == 1) {
+        JMChoosePartTImeJobTypeLablesViewController *vc = [[JMChoosePartTImeJobTypeLablesViewController alloc]init];
+        vc.myVC = self;
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+     
+    }else if (_index == 2) {
+
+        __weak typeof(self) ws = self;
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            CGRect Frame = ws.choosePositionVC.view.frame;
+            CGRect Frame = ws.partTimeJobHomeListVC.view.frame;
             Frame.origin.x = 0;
-            ws.choosePositionVC.view.frame = Frame;
+            ws.partTimeJobHomeListVC.view.frame = Frame;
             self.tapView.hidden = NO;
             
         } completion:nil];
@@ -217,7 +318,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-    [[JMHTTPManager sharedInstance]fectchAbilityList_city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fectchAbilityList_city_id:_city_id type_label_id:_type_label_id industry_arr:_industryLabIDArray myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSMutableArray *array = [NSMutableArray array];
             array = [JMAbilityCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
@@ -225,6 +326,9 @@ static NSString *C_cellIdent = @"CSquareCellID";
             [self.dataArray addObjectsFromArray:array];
             if (array.count < 15) {
                 [self.tableView.mj_footer setHidden:YES];
+            }else{
+                [self.tableView.mj_footer setHidden:NO];
+
             }
         }
         [self.tableView reloadData];
@@ -239,7 +343,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 -(void)CToGetData{
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:nil type_label_id:nil industry_arr:nil status:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:_city_id type_label_id:_type_label_id industry_arr:_industryLabIDArray status:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         if (responsObject[@"data"]) {
             NSMutableArray *array = [NSMutableArray array];
@@ -248,6 +352,9 @@ static NSString *C_cellIdent = @"CSquareCellID";
             [self.dataArray addObjectsFromArray:array];
             if (array.count < 15) {
                 [self.tableView.mj_footer setHidden:YES];
+            }else{
+                [self.tableView.mj_footer setHidden:NO];
+                
             }
         }
         [self.tableView reloadData];
@@ -259,18 +366,36 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 }
 
+-(void)getUserData{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        [self.tableView reloadData];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 #pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         JMBUserSquareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:B_cellIdent];
+     
         if (cell == nil) {
             cell = [[JMBUserSquareTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:B_cellIdent];
+        }
+        for(UIView *view in [cell subviews]){
+            if ([view isKindOfClass:[JMGradeView class]]) {
+                [view removeFromSuperview];
+            }
         }
         if (self.dataArray.count>0) {
             
             [cell setModel:self.dataArray[indexPath.row]];
         }
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
         
     }else{
@@ -282,7 +407,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
             
             [cell setModel:self.dataArray[indexPath.row]];
         }
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     
     }
@@ -398,7 +523,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         __weak JMAssignmentSquareViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
-            [weakSelf movePageContentView];
+            [weakSelf showPageContentView];
         };
     }
     
@@ -426,27 +551,16 @@ static NSString *C_cellIdent = @"CSquareCellID";
 }
 
 
--(JMChoosePositionTableViewController *)choosePositionVC{
-    if (_choosePositionVC == nil) {
-        _choosePositionVC = [[JMChoosePositionTableViewController alloc]init];
-        _choosePositionVC.delegate = self;
-        [self addChildViewController:_choosePositionVC];
-        _choosePositionVC.view.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH*0.7, self.view.frame.size.height);
-
-//        [_choosePositionVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.mas_equalTo(self.view);
-//            make.right.mas_equalTo(self.view);
-//            make.bottom.mas_equalTo(self.view);
-//        }];
-
-//        [_bgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.mas_equalTo(_choosePositionVC.view.mas_bottom);
-//            make.left.and.right.mas_equalTo(_choosePositionVC.view);
-//            make.bottom.mas_equalTo(self.view);
-//        }];
+-(JMPartTimeJobResumeViewController *)partTimeJobHomeListVC{
+    if (_partTimeJobHomeListVC == nil) {
+        _partTimeJobHomeListVC = [[JMPartTimeJobResumeViewController alloc]init];
+        _partTimeJobHomeListVC.delegate = self;
+        _partTimeJobHomeListVC.viewType = JMPartTimeJobTypeHome;
+        [self addChildViewController:_partTimeJobHomeListVC];
+        _partTimeJobHomeListVC.view.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, self.view.frame.size.height-43);
     }
-    return  _choosePositionVC;
-    
+    return  _partTimeJobHomeListVC;
+
 }
 
 -(UIView *)tapView{
@@ -466,7 +580,26 @@ static NSString *C_cellIdent = @"CSquareCellID";
     return _dataArray;
 }
 
+//兼职职位
+//-(JMPartTimeJobResumeViewController *)partTimeJobHomeListVC{
+//    if (!_partTimeJobHomeListVC) {
+//        _partTimeJobHomeListVC = [[JMPartTimeJobResumeViewController alloc]init];
+//        _partTimeJobHomeListVC.delegate = self;
+//        _partTimeJobHomeListVC.viewType = JMPartTimeJobTypeManage;
+//        _partTimeJobHomeListVC.view.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH*0.7, self.view.frame.size.height);
+//        [self addChildViewController:_partTimeJobHomeListVC];
+//    }
+//    return _partTimeJobHomeListVC;
+//}
 
+//-(JMPartTimeJobTypeLabsViewController *)partTimeJobTypeLabsVC{
+//    if (_partTimeJobTypeLabsVC == nil) {
+//        _partTimeJobTypeLabsVC = [[JMPartTimeJobTypeLabsViewController alloc]init];
+//        _partTimeJobTypeLabsVC.view.frame =  CGRectMake(0, self.titleView.frame.origin.y+self.titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT*0.5);
+//        [self addChildViewController:_partTimeJobTypeLabsVC];
+//    }
+//    return _partTimeJobTypeLabsVC;
+//}
 /*
 #pragma mark - Navigation
 

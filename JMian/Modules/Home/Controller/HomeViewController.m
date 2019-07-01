@@ -63,7 +63,7 @@ static NSString *cellIdent = @"cellIdent";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self setTitleViewImageViewName:@"demi_home"];
-    [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
+    [self setBackBtnImageViewName:@"site_Home" textName:@"全国"];
     [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
     self.per_page = 15;
     self.page = 1;
@@ -180,7 +180,9 @@ static NSString *cellIdent = @"cellIdent";
 }
 -(void)didSelectedCity_id:(NSString *)city_id{
     
-    
+    _city_id = city_id;
+    self.arrDate = [NSMutableArray array];
+    [self.tableView.mj_header beginRefreshing];
 
 }
 

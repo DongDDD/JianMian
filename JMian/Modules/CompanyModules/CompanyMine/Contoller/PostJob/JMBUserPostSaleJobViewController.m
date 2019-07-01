@@ -26,6 +26,7 @@
 #import "JMHTTPManager+DeleteTask.h"
 #import "JMHTTPManager+DeleteGoodsImage.h"
 #import "JMPostGoodsImagesView.h"
+#import "JMChoosePartTImeJobTypeLablesViewController.h"
 
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
 
@@ -853,7 +854,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         }
     }
     
-    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:@"1086" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:@"1091" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self showAlertVCSucceesSingleWithMessage:@"创建任务成功" btnTitle:@"好的"];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

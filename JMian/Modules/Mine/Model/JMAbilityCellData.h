@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *user_companyId;
 @property (copy, nonatomic) NSString *user_nickname;
 @property (copy, nonatomic) NSString *user_avatar;
+@property (copy, nonatomic) NSString *user_reputation;
 
 @property (copy, nonatomic) NSString *city_cityId;
 @property (copy, nonatomic) NSString *city_cityName;

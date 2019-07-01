@@ -82,7 +82,7 @@
     
     [_money mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(BGImgView);
-        make.left.mas_equalTo(self.mas_left).offset(SCREEN_WIDTH*0.13);
+        make.left.mas_equalTo(self.mas_left).offset(SCREEN_WIDTH*0.2);
         
     }];
     
@@ -93,7 +93,7 @@
     
     [_money2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(BGImgView);
-        make.right.mas_equalTo(self.mas_right).offset(-SCREEN_WIDTH*0.13);
+        make.right.mas_equalTo(self.mas_right).offset(-SCREEN_WIDTH*0.2);
         
     }];
     

@@ -8,6 +8,8 @@
 
 #import "JMCUserSquareTableViewCell.h"
 #import "DimensMacros.h"
+#import "JMGradeView.h"
+
 @interface JMCUserSquareTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *headerIconImg;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
@@ -16,10 +18,18 @@
 @property (weak, nonatomic) IBOutlet UILabel *paymentLab;
 @property (weak, nonatomic) IBOutlet UILabel *unitLab;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
+@property (nonatomic, strong)JMGradeView *gradeView;
+@property (nonatomic, strong)JMTaskListCellData *myModel;
 
 @end
 
 @implementation JMCUserSquareTableViewCell
+-(void)prepareForReuse{
+    [super prepareForReuse];
+    [self.gradeView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [obj removeFromSuperview];
+    }];
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -39,26 +49,44 @@
 }
 
 -(void)setModel:(JMTaskListCellData *)model{
-    
+    _myModel = model;
+    [self.headerIconImg sd_setImageWithURL:[NSURL URLWithString:model.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+
     self.titleLab.text = model.task_title;
     if (model.address == nil) {
         self.adress.text = @"不限地区";
     }else{
         self.adress.text = model.cityName;
     }
+    
+    if ([model.front_money isEqualToString:@"0"]) {
+        self.jobLabs.text = @"无定金";
+    }else{
+        self.jobLabs.text = @"有定金";
+
+    }
     self.paymentLab.text = model.payment_money;
     self.unitLab.text = model.unit;
     
-//    [self.headerIconImg sd_setImageWithURL:[NSURL URLWithString:model] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-//    NSMutableArray *industryNameArray = [NSMutableArray array];
-//    for (JMIndustryModel *data in model.industry) {
-//        [industryNameArray addObject:data.name];
-//    }
-//    NSString *industryStr = [industryNameArray componentsJoinedByString:@"/"];
-//    self.jobLabs.text = industryStr;
+    [self addSubview:self.gradeView];
+    _gradeView.gradeStr = _myModel.companyReputation;
+    [_gradeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.adress.mas_left);
+        make.bottom.mas_equalTo(self.adress.mas_top).offset(-3);
+        make.width.mas_equalTo(200);
+        make.height.mas_equalTo(18);
+    }];
+ ;
+ 
+
 }
 
-
+-(JMGradeView *)gradeView{
+    if (_gradeView == nil) {
+        _gradeView =  [[JMGradeView alloc]init];
+    }
+    return _gradeView;
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -21,6 +21,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)UIImageView *imgView;
 @property(nonatomic,weak)id<JMDidUploadVideoViewDelegate>delegate;
+@property(nonatomic,strong)UIButton *leftBtn;
+@property(nonatomic,strong)UIButton *rightBtn;
+
 @end
 
 NS_ASSUME_NONNULL_END

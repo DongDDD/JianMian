@@ -354,7 +354,7 @@
         
         
         NSLog(@"视频自定义消息%@",self.videoChatDic);
-        if (self.videoChatDic && [custom_elem.desc isEqualToString:@"我发起了视频聊天"]) {
+        if (self.videoChatDic && [custom_elem.desc isEqualToString:@"[邀请视频视频聊天]"]) {
             [self.answerOrHangUpView setHidden:NO];
             [_window addSubview:self.answerOrHangUpView];
             [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
@@ -367,6 +367,8 @@
         }else if (self.videoChatDic && [custom_elem.desc isEqualToString:@"textMessage"]){
             //
             [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            AudioServicesPlaySystemSound(1007);
         
         }
      
@@ -383,11 +385,13 @@
 //            }
 //        }
         
-        if ([custom_elem.desc isEqualToString:@"结束了视频"]) {
+        if ([custom_elem.desc isEqualToString:@"视频视频已取消"]) {
             [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
             [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMUHangUpListener object:nil];
             NSLog(@"leaveActionleaveActionleaveAction");
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            AudioServicesPlaySystemSound(1007);
 
         }
         
@@ -448,14 +452,14 @@
 -(void)didClickClose{
     NSDictionary *dic;
     dic = @{
-            @"结束了视频":@"结束了视频"
+            @"视频视频已取消":@"视频视频已取消"
             };
     [self.answerOrHangUpView.player stop];
     [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
     [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
     if (self.videoChatDic[SendMarkID] ) {
         
-        [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"结束了视频"];
+        [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"视频视频已取消"];
     }
     
 }

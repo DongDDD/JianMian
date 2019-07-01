@@ -36,6 +36,8 @@
 @property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
 @property (nonatomic, strong)NSArray *statusArray;
 @property (nonatomic, strong)JMVideoChatView *videoChatView;
+@property (copy, nonatomic)NSString *receiver_id; //发送自定义消息接受者ID
+
 @end
 
 static NSString *cellIdent = @"managerCellIdent";
@@ -125,13 +127,15 @@ static NSString *cellIdent = @"managerCellIdent";
     JMUserInfoModel *userinfoModel = [JMUserInfoManager getUserInfo];
     
     if ([userinfoModel.type isEqualToString:C_Type_USER]) {
-        
+        _receiver_id = [NSString stringWithFormat:@"%@b",model.interviewer_user_id];
+
         if ([model.status isEqualToString:Interview_WaitAgree]) {//接受邀约按钮
             [self updateInterviewStatus_interviewID:model.interview_id status:Interview_WaitInterview];
         }
         
     }else if ([userinfoModel.type isEqualToString:B_Type_UESR]){
-     
+        _receiver_id = [NSString stringWithFormat:@"%@a",model.candidate_user_id];
+
         if ([model.hire isEqualToString:@"0"] && ([model.status isEqualToString:@"4"] || [model.status isEqualToString:@"5"])) {//修改时间
 //            self.BgBtn.hidden = NO;
 //
@@ -153,6 +157,7 @@ static NSString *cellIdent = @"managerCellIdent";
 {
     JMUserInfoModel *userinfoModel = [JMUserInfoManager getUserInfo];
     if ([userinfoModel.type isEqualToString:B_Type_UESR]) {
+        _receiver_id = [NSString stringWithFormat:@"%@a",model.candidate_user_id];
         if ([model.status isEqualToString:@"3"] && isInterviewTime) {//进入房间
             
             _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
@@ -174,6 +179,8 @@ static NSString *cellIdent = @"managerCellIdent";
         }
         
     }else{
+        _receiver_id = [NSString stringWithFormat:@"%@b",model.interviewer_user_id];
+
         if ([model.status isEqualToString:@"3"] && isInterviewTime){
             _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
             _videoChatView.delegate = self;
@@ -226,6 +233,13 @@ static NSString *cellIdent = @"managerCellIdent";
     [[JMHTTPManager sharedInstance]feedbackInterViewWith_interview_id:interviewID label_ids:label_ids successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
       
         [self.tableView.mj_header beginRefreshing];
+        if ([label_ids isEqualToArray: @[@"1"]]) {
+            [self setCustumMessage_receiverID:_receiver_id dic:nil title:@"[面试结果:不适合]"];
+            
+        }else if ([label_ids isEqualToArray: @[@"2"]]){
+            [self setCustumMessage_receiverID:_receiver_id dic:nil title:@"[面试结果:确认录用]"];
+
+        }
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -238,9 +252,6 @@ static NSString *cellIdent = @"managerCellIdent";
 
 -(void)updateInterviewStatus_interviewID:(NSString *)interviewID status:(NSString *)status{
     [[JMHTTPManager sharedInstance]updateInterViewWith_Id:interviewID status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已更新面试列表"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
         
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         if ([status isEqualToString:@"4"] && [userModel.type isEqualToString:C_Type_USER]) {
@@ -250,6 +261,12 @@ static NSString *cellIdent = @"managerCellIdent";
             vc.viewType = JMFeedBackChooseViewDefault;
             vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
+        }else if ([status isEqualToString:@"2"]){
+            [self setCustumMessage_receiverID:_receiver_id dic:nil title:@"[应聘者已拒绝面试邀请]"];
+        
+        }else if ([status isEqualToString:@"3"]){
+            [self setCustumMessage_receiverID:_receiver_id dic:nil title:@"[应聘者已接受面试邀请]"];
+            
         }
         [self.tableView.mj_header beginRefreshing];
 //        [self getListData_Status:_statusArray];//请求已邀请的数据
@@ -320,6 +337,7 @@ static NSString *cellIdent = @"managerCellIdent";
     //    NSLog(@"邀请面试");
     
 }
+
 #pragma mark - myDelegate
 
 //-(void)didCommitActionWithInterview_id:(NSString *)interview_id{
@@ -336,7 +354,49 @@ static NSString *cellIdent = @"managerCellIdent";
     [self updateInterviewStatus_interviewID:model.interview_id status:@"4"];
     
 }
+#pragma mark -  （自定义消息）
+//-(void)createChatRequestWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id {
+//    //Chat_type：2 灵活就业
+//    [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+//
+//      } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//}
 
+-(void)setCustumMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
+    
+    TIMConversation *conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:receiverID];
+    
+    // 转换为 NSData
+    
+    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
+    //    [custom_elem setData:data];
+    if (dic) {
+        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+        [custom_elem setData:data];
+        
+    }
+    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+    
+    [custom_elem setDesc:title];
+    TIMMessage * msg = [[TIMMessage alloc] init];
+    [msg addElem:custom_elem];
+    [conv sendMessage:msg succ:^(){
+        NSLog(@"SendMsg Succ");
+        //        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"申请成功" leftTitle:@"返回" rightTitle:@"查看任务"];
+    }fail:^(int code, NSString * err) {
+        NSLog(@"SendMsg Failed:%d->%@", code, err);
+        
+        
+    }];
+    
+    
+}
 //-(void)hangupAction_model:
 #pragma mark - THDatePickerViewDelegate
 /**

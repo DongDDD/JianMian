@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy)NSString *name;
 @property(nonatomic, copy)NSString *label_id;
+@property(nonatomic, strong)NSArray *children;
 
 @end
 

@@ -203,13 +203,13 @@
     if ([data.payment_method isEqualToString:@"1"] ) {
         //网络销售
         self.infoLab1.text = data.goodsTitle;
-        self.infoLab2.text = @"即结";
-        self.infoLab3.text = data.snapshot_cityName;
+        self.infoLab2.text = @" 即结  ";
+        self.infoLab3.text =  [NSString stringWithFormat:@" %@  ", data.snapshot_cityName];
     }else{
         //其他兼职
         self.infoLab1.text = data.snapshot_companyName;
-        self.infoLab2.text = data.snapshot_cityName;
-        self.infoLab3.text = @"完工结";
+        self.infoLab2.text = [NSString stringWithFormat:@" %@  ", data.snapshot_cityName];
+        self.infoLab3.text = @" 完工结  ";
     }
     
 

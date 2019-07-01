@@ -392,8 +392,9 @@
                         .avator{
                             margin-right: 0.34rem;
                             width: 0.88rem;
+                            height:0.88rem;
+                            overflow:hidden
                             img{
-                                width: 100%;
                                 border-radius: 50%;
                             }
                         }
@@ -419,6 +420,26 @@
                     }
                 }
             }
+            .mu-carousel{
+            position:relative;
+            width:100%;
+            height:100%;
+            .mu-carousel-item{
+                position:absolute;
+                top:50%;
+                left:50%;
+                transform:translate(-50%,-50%);
+                width:90%;
+                height:90%;
+                img{
+                    position:absolute;
+                    top:50%;
+                    left:50%;
+                    transform:translate(-50%,-50%);
+                    width:90%;
+                }
+            }
+        }
         }
         .wrapper{
             position:relative;
@@ -457,6 +478,7 @@
             position: fixed;
             width: 100%;
         }
+
     </style>
 </head>
 <body>
@@ -523,7 +545,7 @@
                     <div class="describe" v-show="this.detail.video">
                         <span>产品视频</span>
                         <div style="text-align: center;margin-top: 0.66rem;position: relative">
-                            <video id="video" width="90%" style="border-radius: 0.33rem" controls webkit-playsinline="true" playsinline x5-video-player-type="h5" v-if="this.detail.video" :poster="this.detail.video.cover">
+                            <video id="video" width="90%" style="border-radius: 0.33rem" controls preload="auto" x5-video-player-type="h5" v-if="this.detail.video" :poster="this.detail.video.cover">
                                 <source :src="this.detail.video && this.detail.video.file_path">
                             </video>
                         </div>
@@ -532,7 +554,7 @@
                     <div class="describe" v-if="this.detail.images">
                         <span>产品图片</span>
                         <ul style="width: 100%;margin-top: 0.66rem;">
-                            <li style="display: inline-block;width: 2.8rem;height:2.8rem;line-height:2.8rem;overflow:hidden;background:#000;text-align:center;margin-right: 0.16rem;" v-for="item in this.detail.images"><img :src="item.file_path" alt="" style="width:100%;vertical-align:middle;" @click="openSimpleDialog(item.file_path)"></li>
+                            <li style="display: inline-block;width: 2.8rem;height:2.8rem;line-height:2.8rem;overflow:hidden;background:#000;text-align:center;margin-right: 0.12rem;" v-for="(item,index) in this.detail.images"><img :src="item.file_path" alt="" style="width:100%;vertical-align:middle;" @click="openSimpleDialog(index)"></li>
                         </ul>
                     </div>
                     <div class="bottom">
@@ -594,7 +616,7 @@
                             <div class="credit-lists" v-for="item in this.record.data">
                                 <div class="list">
                                     <div class="contain">
-                                        <span class="avator"><img :src="item.user.avatar" alt=""></span>
+                                        <span class="avator"><img :src="item.user.avatar" alt="" width="100%" height="100%"></span>
                                         <span class="user-name">{{item.user.nickname}}<p>任务：{{item.task.task_title}}</p></span>
                                         <span class="num">{{item.reputation}}.0分</span>
                                     </div>
@@ -609,12 +631,13 @@
                 </mu-paper>
             </transition>
         </div>
-
     </div>
-    <div style="position: fixed;top:0;left:0;background:#000;width: 100%;height:100%;z-index:1000" v-if="openSimple" @click="close">
-        <div style="width: 100%;height:auto;text-align:center;position:relative">
-            <img :src="bigImg" alt="" style="width: 90%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)">
-        </div>
+    <div style="position: fixed;top:0;left:0;background:#000;width: 100%;height: 100%;z-index:1000;text-align:center" v-if="openSimple" @click="close">
+        <mu-carousel hide-indicators hide-controls interval=6000 :active="bigImg">
+            <mu-carousel-item v-for="(item,index) in this.detail.images">
+                <img :src="item.file_path">
+            </mu-carousel-item>
+        </mu-carousel>
     </div>
 </div>
 </body>
@@ -648,7 +671,7 @@
             level3:"../images/mission3@2x.png",
             level4:"../images/mission@2x.png",
             openSimple: false,
-            bigImg: '',
+            bigImg: null,
         },
         mounted(){
             setTimeout(function () {
@@ -706,6 +729,8 @@
                 }
                 this.task = false;
                 this.credit = true;
+                var video = document.getElementById('video');
+                video.pause();
             },
             clickCompanyDetails(){
                 window.webkit.messageHandlers.aaa.postMessage(this.detail.company.company_id);
@@ -747,9 +772,9 @@
                         console.log(error);
                     });
             },
-            openSimpleDialog (img) {
+            openSimpleDialog (index) {
                 this.openSimple = true;
-                this.bigImg = img;
+                this.bigImg = index;
                 ModalHelper.afterOpen();
             },
             leveling(){
@@ -848,7 +873,7 @@
                     center:[longitude,latitude],
                     offset: new AMap.Pixel(0, 0),
                     dragEnable:false,
-                    zoomEnable:false
+                    zoomEnable:true
                 });
                 var img = '<img style="width: 100%" src="../images/icon_return@2x.png" alt="">';
                 var triangle = '<div style="position: absolute;bottom: -0.45rem; left: 50%;transform: translateX(-70%);border: 0.2rem solid transparent;border-top: 0.2rem solid #fff;"></div>';

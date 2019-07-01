@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *companyiId;
 @property (nonatomic, copy) NSString *companyName;
 @property (nonatomic, copy) NSString *companyLogo_path;
+@property (nonatomic, copy) NSString *companyReputation;
 
 @property (nonatomic, copy) NSString *cityID;
 @property (nonatomic, copy) NSString *cityName;

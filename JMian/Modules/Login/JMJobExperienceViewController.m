@@ -17,6 +17,7 @@
 #import "LoginViewController.h"
 #import "STPickerDate.h"
 #import "JMPartTimeJobResumeFooterView.h"
+#import "PositionDesiredViewController.h"
 
 //typedef enum _PickerState_Exp {
 //    startWorkState,
@@ -49,6 +50,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *workDescTitleLab;
 @property(nonatomic,copy)NSString *jobDescStr;
 @property(nonatomic,strong)UIButton *saveBtn;
+@property(nonatomic,copy)NSString *positionLabId;
+
 
 @end
 
@@ -163,7 +166,7 @@
 }
 
 - (void)createExperience {
-    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:@(1) start_date:self.startDate end_date:self.endDate description:self.jobDescStr user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] createExperienceWithCompany_name:self.companyNameText.text job_label_id:self.positionLabId start_date:self.startDate end_date:self.endDate description:self.jobDescStr user_step:@6 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         switch (self.viewType) {
             case JMJobExperienceViewTypeDefault: {
@@ -221,6 +224,12 @@
     [self.pickerDataEnd show];
 }
 
+- (IBAction)jobTypeChooseAction:(id)sender {
+    PositionDesiredViewController *vc = [[PositionDesiredViewController alloc]init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 
 //- (IBAction)finishBtn:(id)sender {
@@ -240,6 +249,7 @@
 //}
 -(void)saveBtnAction{
     [_companyNameText resignFirstResponder];
+    [_decriptionTextView.contentTextView resignFirstResponder];
     [self.decriptionTextView.contentTextView resignFirstResponder];
     switch (self.viewType) {
         case JMJobExperienceViewTypeDefault:
@@ -278,8 +288,15 @@
 //
 //}
 #pragma mark - MyDelegate
+//PositionDesiredViewController代理方法
+-(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
+    [self.jobLabelId setTitle:labStr forState:UIControlStateNormal];
+    [self.jobLabelId setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    self.positionLabId = labIDStr;
+}
+
+
 -(void)sendContent:(NSString *)content{
-  
     _jobDescStr = content;
 }
 

@@ -73,7 +73,7 @@
 }
 #pragma mark - MyDelegate
 
--(void)cancelAction{
+-(void)shareViewCancelAction{
     [self hiddenChoosePayView];
     
 }

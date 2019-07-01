@@ -21,6 +21,7 @@
 #import "JMPartTimeJobTypeLabsViewController.h"
 #import "JMHTTPManager+DeleteAbilityImage.h"
 #import "JMHTTPManager+DeletePartTimeJobVita.h"
+#import "JMChoosePartTImeJobTypeLablesViewController.h"
 
 
 
@@ -175,7 +176,6 @@ static NSString *cellIdent = @"cellIdent";
         [self createPartTimeResume];
     }
     
-
 }
 
 - (IBAction)deleteAction:(UIButton *)sender {
@@ -250,7 +250,8 @@ static NSString *cellIdent = @"cellIdent";
         [imageArr addObject:strUrl];
     }
     
-    [[JMHTTPManager sharedInstance]createAbility_city_id:_city_id type_label_id:_type_label_id industry_arr:_industry_arr myDescription:_myDescription video_path:nil video_cover:nil image_arr:imageArr status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+     NSString *videoUrl = [_video_path stringByReplacingOccurrencesOfString:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com" withString:@""];
+    [[JMHTTPManager sharedInstance]createAbility_city_id:_city_id type_label_id:_type_label_id industry_arr:_industry_arr myDescription:_myDescription video_path:videoUrl video_cover:_video_cover image_arr:imageArr status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
@@ -359,14 +360,14 @@ static NSString *cellIdent = @"cellIdent";
 //
 //}
 
--(void)didPostVideoWithUrl:(NSString *)url{
+-(void)didPostVideoWithUrl:(NSString *)url video_cover:(nonnull NSString *)video_cover{
     if (url != nil) {
         _isUpLoadVideo = YES;
         _video_path = url;//请求参数和用于传值
+        _video_cover = video_cover;
         [self.rightArray replaceObjectAtIndex:4 withObject:@"已上传"];
         [self.tableView reloadData];
     }
-    
 }
 
 //删除兼职图片
@@ -420,8 +421,9 @@ static NSString *cellIdent = @"cellIdent";
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.row == 1) {
-        JMPartTimeJobTypeLabsViewController *vc =  [[JMPartTimeJobTypeLabsViewController alloc]init];
+        JMChoosePartTImeJobTypeLablesViewController *vc =  [[JMChoosePartTImeJobTypeLablesViewController alloc]init];
         vc.delegate = self;
+        vc.myVC = self;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (indexPath.row == 2) {

@@ -15,6 +15,7 @@
 @property (strong, nonatomic)JMBankCardData *bankCardData;
 @property (weak, nonatomic) IBOutlet UILabel *cardNumberLab;
 @property (weak, nonatomic) IBOutlet UILabel *bankNameLab;
+@property (weak, nonatomic) IBOutlet UILabel *myMoneyLab;
 
 @end
 
@@ -25,6 +26,15 @@
     // Do any additional setup after loading the view from its nib.
     self.title = @"申请提现";
     self.cashTextField.delegate = self;
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        self.myMoneyLab.text = [NSString stringWithFormat:@"账户余额%@元", userModel.available_amount_b];
+        
+    }else{
+        self.myMoneyLab.text = [NSString stringWithFormat:@"账户余额%@元", userModel.available_amount_c];
+
+    }
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyboard)];
     [self.view addGestureRecognizer:tap];
 }
@@ -53,10 +63,16 @@
 -(void)withDrawRequest{
     [_cashTextField resignFirstResponder];
     [[JMHTTPManager sharedInstance]withdrawMoneyWithBank_card_id:_bankCardData.bank_card_id amount:_cashTextField.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
+        [self showAlertVCSucceesSingleWithMessage:@"提现请求提交成功，请留意到账信息" btnTitle:@"好的"];
+        [self.navigationController popViewControllerAnimated:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+}
+
+-(void)alertSucceesAction{
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 - (IBAction)chooseCardTap:(UITapGestureRecognizer *)sender {

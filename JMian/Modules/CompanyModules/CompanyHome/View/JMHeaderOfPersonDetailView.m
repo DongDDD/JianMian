@@ -25,6 +25,15 @@
 -(void)setModel:(JMVitaDetailModel *)model{
     [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:model.user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.realNameLab.text = model.user_nickname;
+    
+    if ([model.real_sex isEqualToString:@"1"]) {
+        self.sexImageView.image = [UIImage imageNamed:@"boy"];
+        
+    }else{
+        self.sexImageView.image = [UIImage imageNamed:@"girl"];
+
+    
+    }
     //    self.sexImageView =
     //    self.experiencesLab.text
     self.educationLab.text = [self getEducationStrWithEducation:model.vita_education];

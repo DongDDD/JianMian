@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.title = @"订单快照";
     
     
     [self setHTMLPath:@"SecondModulesHTML/C/snapshot.html"];

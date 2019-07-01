@@ -10,6 +10,7 @@
 #import "JMWalletHeaderView.h"
 #import "JMWithdrawViewController.h"
 #import "JMMoneyDetailsViewController.h"
+#import "JMHTTPManager+Login.h"
 
 @interface JMWalletViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -32,9 +33,24 @@
     [self.view addSubview:self.tableView];
     self.imgArr = @[@"withdraw_deposit",@"particulars"];
     self.titleArr = @[@"提现",@"钱包明细"];
+    
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getUserData];
 }
 
-
+-(void)getUserData{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        [self.tableView reloadData];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 //section
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 //{

@@ -42,7 +42,7 @@
     self.salaryLab.text = salaryStr;
     self.educationLab.text = [self getEducationStrWithEducation:model.vitaEducation];
     self.subDecription.text = model.vita_description;
-    if (model.video_file_path == nil) {
+    if (model.video_file_path == nil || ![model.video_status isEqualToString:@"2"]) {
         [self.playBtn setHidden:YES];
     }else{
          [self.playBtn setHidden:NO];
