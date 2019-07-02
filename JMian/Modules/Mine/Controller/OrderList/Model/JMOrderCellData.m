@@ -12,7 +12,7 @@
 
 + (NSDictionary *)mj_objectClassInArray {
     return @{
-             @"images":@"JMSnapshotImageModel"
+             @"snapshot_images":@"JMSnapshotImageModel"
              };
 }
 
@@ -24,7 +24,7 @@
              @"snapshot_company_logo_path":@"snapshot.company.logo_path",
              @"snapshot_company_reputation":@"snapshot.company.reputation",
              @"snapshot_company_company_name":@"snapshot.company.company_name",
-
+             @"snapshot_images":@"snapshot.images",
 
              @"snapshot_goods_goods_title":@"snapshot.goods.goods_title",
              @"snapshot_goods_goods_price":@"snapshot.goods.goods_price",
@@ -44,9 +44,9 @@
              @"referrer_avatar":@"referrer.avatar",
              @"referrer_reputation":@"referrer.reputation",
              
-             @"city_city_id":@"city_city_id",
-             @"city_city_name":@"city_city_name",
-             @"city_name_relation":@"city_name_relation",
+             @"city_city_id":@"city.city_id",
+             @"city_city_name":@"city.city_name",
+             @"city_name_relation":@"city.name_relation",
              
              @"company_company_id":@"company_company_id",
              @"company_company_name":@"company_company_name",

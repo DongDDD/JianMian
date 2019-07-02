@@ -190,9 +190,9 @@
                     
                 }
                 
+           //B改状态------B端通过网络销售任务，直接改状态
             }else if ([data.payment_method isEqualToString:@"1"] && _index == 0){
-                //B改状态------B端通过网络销售任务，直接改状态
-
+                
                 _task_order_id = data.task_order_id;
                 _user_id = data.user_user_id;
                 [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];

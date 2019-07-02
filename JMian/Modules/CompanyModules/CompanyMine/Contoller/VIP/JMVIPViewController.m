@@ -18,6 +18,10 @@
 @property (strong, nonatomic) JMShareView *choosePayView;
 @property (nonatomic ,strong) UIView *BGPayView;
 @property (strong, nonatomic) JMOrderPaymentModel *orderPaymentModel;
+@property (weak, nonatomic) IBOutlet UILabel *leftLab1;
+@property (weak, nonatomic) IBOutlet UILabel *leftLab2;
+@property (weak, nonatomic) IBOutlet UIButton *rightBtn;
+@property (weak, nonatomic) IBOutlet UILabel *rightLab;
 
 @end
 
@@ -27,6 +31,13 @@
     [super viewDidLoad];
     self.title = @"得米会员";
     [self initView];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if (userModel.deadline) {
+        self.leftLab1.text = @"到期：";
+        self.leftLab2.text = @"2020年7月1日";
+        self.rightLab.text = @"已开通";
+        [self.rightBtn setEnabled:NO];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 -(void)initView{
@@ -83,7 +94,7 @@
     [self wechatPayWithModel:self.orderPaymentModel];
 }
 
--(void)rightAction{
+-(void)shareViewRightAction{
     [self alipayWithModel:self.orderPaymentModel];
 
     

@@ -304,7 +304,7 @@
     
     TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
     [custom_elem setData:data];
-    [custom_elem setDesc:@"你有一个视频邀请"];
+    [custom_elem setDesc:@"[邀请视频聊天]"];
     TIMMessage * msg = [[TIMMessage alloc] init];
     
     [msg addElem:custom_elem];

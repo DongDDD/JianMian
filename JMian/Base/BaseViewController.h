@@ -89,6 +89,8 @@ NS_ASSUME_NONNULL_BEGIN
 //学历数据转化
 -(NSString *)getEducationStrWithEducation:(NSString *)education;
 -(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr;
+//求职状态数据转化
+-(NSString *)getJobStatusWithStatusStr:(NSString *)statusStr;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -46,7 +46,6 @@ static NSString *cellIdent = @"wuliucellIdent";
 - (IBAction)saveAction:(UIButton *)sender {
     [self sendGoodsRequst];
     
-    
 }
 - (IBAction)expressTextField:(UITextField *)sender {
     [self hideListView];
@@ -91,11 +90,15 @@ static NSString *cellIdent = @"wuliucellIdent";
 -(void)sendGoodsRequst{
     [self.expressageNumTextField resignFirstResponder];
     [[JMHTTPManager sharedInstance]createLogisticsInfoWithId:_order_id Logistics_label_id:_logisticsCelldata.label_id logistics_no:self.expressageNumTextField.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"物流信息提交成功" leftTitle:@"返回" rightTitle:@"好的"];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self showAlertVCSucceesSingleWithMessage:@"物流信息提交成功" btnTitle:@"返回"];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+
+}
+
+-(void)alertSucceesAction{
+    [self.navigationController popViewControllerAnimated:YES];
 
 }
 #pragma mark - Table view data source

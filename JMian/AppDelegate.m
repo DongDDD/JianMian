@@ -46,7 +46,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //向微信注册
-    [WXApi registerApp:@"wx54740079e4464d53"];
+    [WXApi registerApp:@"wxb42b10e7d84612a9"];
     //高德地图
     [AMapServices sharedServices].apiKey = AMapAPIKey;
     [AMapServices sharedServices].enableHTTPS = YES;
@@ -354,11 +354,11 @@
         
         
         NSLog(@"视频自定义消息%@",self.videoChatDic);
-        if (self.videoChatDic && [custom_elem.desc isEqualToString:@"[邀请视频视频聊天]"]) {
+        if (self.videoChatDic && [custom_elem.desc isEqualToString:@"[邀请视频聊天]"]) {
             [self.answerOrHangUpView setHidden:NO];
             [_window addSubview:self.answerOrHangUpView];
             [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
-
+            AudioServicesPlaySystemSound(1118);
         }else if (self.videoChatDic && [custom_elem.desc isEqualToString:@"interviewMessage"]){
             [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
@@ -385,13 +385,14 @@
 //            }
 //        }
         
-        if ([custom_elem.desc isEqualToString:@"视频视频已取消"]) {
+        if ([custom_elem.desc isEqualToString:@"[视频已取消]"]) {
             [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
             [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMUHangUpListener object:nil];
             NSLog(@"leaveActionleaveActionleaveAction");
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-            AudioServicesPlaySystemSound(1007);
+            AudioServicesRemoveSystemSoundCompletion(1118);
+            AudioServicesDisposeSystemSoundID(1118); AudioServicesRemoveSystemSoundCompletion(kSystemSoundID_Vibrate);
+            AudioServicesDisposeSystemSoundID(kSystemSoundID_Vibrate);
 
         }
         
@@ -452,14 +453,14 @@
 -(void)didClickClose{
     NSDictionary *dic;
     dic = @{
-            @"视频视频已取消":@"视频视频已取消"
+            @"[视频已取消]":@"[视频已取消]"
             };
     [self.answerOrHangUpView.player stop];
     [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
     [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
     if (self.videoChatDic[SendMarkID] ) {
         
-        [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"视频视频已取消"];
+        [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"[视频已取消]"];
     }
     
 }

@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMMyResumeHeaderSecondTableViewCell : UITableViewCell
 
+@property(nonatomic,copy)NSString *workStatus;
+@property (weak, nonatomic) IBOutlet UILabel *rightLab;
+
 @end
 
 NS_ASSUME_NONNULL_END

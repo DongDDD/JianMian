@@ -20,6 +20,20 @@ NSString *const JMMyResumeHeaderSecondTableViewCellIdentifier = @"JMMyResumeHead
     // Initialization code
 }
 
+-(void)setWorkStatus:(NSString *)workStatus{
+    
+    if ([workStatus isEqualToString:@"4"]) {
+        
+        self.rightLab.text = @"应届生";
+    }else if ([workStatus isEqualToString:@"1"]) {
+        self.rightLab.text = @"在职";
+
+    }else if ([workStatus isEqualToString:@"2"]) {
+        self.rightLab.text = @"离职";
+
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

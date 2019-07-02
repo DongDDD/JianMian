@@ -12,6 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMVIPViewController">
             <connections>
+                <outlet property="leftLab1" destination="3bC-ec-OPY" id="ZGz-kC-6tY"/>
+                <outlet property="leftLab2" destination="OtL-Mv-xBe" id="OWk-jP-7Vv"/>
+                <outlet property="rightBtn" destination="xHe-U4-HwX" id="dPc-DX-xpL"/>
+                <outlet property="rightLab" destination="CoP-Ey-ZaS" id="IAJ-YY-6oc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

@@ -300,7 +300,6 @@
     _jobDescStr = content;
 }
 
-#pragma mark - textFieldDelegate
 - (void)pickerDate:(STPickerDate *)pickerDate year:(NSInteger)year month:(NSInteger)month day:(NSInteger)day{
     if (pickerDate == _pickerDataStart) {
         NSString *title = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)year,(long)month,(long)day];
@@ -312,11 +311,12 @@
         [self.endDateBtn setTitle:title forState:UIControlStateNormal];
         [self.endDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
         self.endDate = title;
-
+        
     }
     
     
 }
+#pragma mark - textFieldDelegate
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];

@@ -53,10 +53,11 @@
         [self setIsHiddenBackBtn:NO];
     }else{
         [self setIsHiddenBackBtn:YES];
+        [self.scrollView addSubview:self.moreBtn];
     }
     self.nameText.delegate = self;
-    [self.scrollView addSubview:self.moreBtn];
   //  [self.view addSubview:_datePicker];
+    self.sex = @(1);
     [self getNewUserInfo];
 //    self.birthDateText.inputView = self.datePicker;
     // Do any additional setup after loading the view from its nib.
@@ -98,19 +99,25 @@
         
         JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         [JMUserInfoManager saveUserInfo:userInfo];
-        [self initView];
+        [self setValuesAction];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
     
 }
 
-
--(void)initView{
+#pragma mark - 赋值
+-(void)setValuesAction{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
 //    self.model = userModel;
     //C端申请第一步，填写基本信息
-    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+//    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+//        [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//        [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
+//        self.emailText.text = userModel.email;
+//        self.nameText.text = userModel.card_name;
+//    }
+    if (_viewType == BasicInformationViewTypeEdit) {
         [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
         [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
         self.emailText.text = userModel.email;
@@ -126,9 +133,26 @@
         self.emailText.text = userModel.email;
         [self.headerImg sd_setImageWithURL:[NSURL URLWithString:userModel.avatar] forState:UIControlStateNormal];
         if ([self.model.realSex isEqualToString:@"1"]) {
-            [self.womanBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+            [self.womanBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
+            self.womanBtn.layer.masksToBounds = YES;
+            self.womanBtn.layer.borderColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0].CGColor;
+            self.womanBtn.backgroundColor = [UIColor whiteColor];
+            
+            // 设置当前选中按钮的颜色
+            [self.manBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
+            self.manBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+            self.manBtn.backgroundColor = MASTER_COLOR;
         }else {
-            [self.manBtn sendActionsForControlEvents:UIControlEventTouchUpInside];
+            // 恢复上一个按钮颜色
+            [self.manBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
+            self.manBtn.layer.masksToBounds = YES;
+            self.manBtn.layer.borderColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0].CGColor;
+            self.manBtn.backgroundColor = [UIColor whiteColor];
+            
+            // 设置当前选中按钮的颜色
+            [self.womanBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
+            self.womanBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+            self.womanBtn.backgroundColor = MASTER_COLOR;
         }
     }else {
         [self setRightBtnTextName:@"下一步"];

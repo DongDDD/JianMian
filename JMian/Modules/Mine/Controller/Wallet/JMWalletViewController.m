@@ -35,22 +35,27 @@
     self.titleArr = @[@"提现",@"钱包明细"];
     
 }
+
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self getUserData];
 }
+
 
 -(void)getUserData{
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         [JMUserInfoManager saveUserInfo:userInfo];
-        [self.tableView reloadData];
+        [self.walletHeaderView setUserModel:userInfo];
+
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
     
 }
+
 //section
 //- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 //{

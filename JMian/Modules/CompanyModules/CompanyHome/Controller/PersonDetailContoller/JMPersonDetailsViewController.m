@@ -317,7 +317,7 @@
         [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             //发送消息推送
             NSString *receiver_id = [NSString stringWithFormat:@"%@a",self.vitaModel.user_id];
-            [self setTaskMessage_receiverID:receiver_id dic:nil title:@"[面试邀请通知]"];
+            [self setCustumMessage_receiverID:receiver_id dic:nil title:@"[面试邀请通知]"];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -573,7 +573,7 @@
 
 #pragma mark -- 发送自定义消息
 
--(void)setTaskMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
+-(void)setCustumMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
     
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C

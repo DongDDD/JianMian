@@ -132,11 +132,11 @@
                                             <constraint firstAttribute="height" constant="14" id="nmJ-eP-qrJ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <state key="normal" title="顺丰快递：65461213467897987">
+                                        <state key="normal" title=" ">
                                             <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                     </button>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="order_cp.png" translatesAutoresizingMaskIntoConstraints="NO" id="S44-0M-SoH">
+                                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="order_cp.png" translatesAutoresizingMaskIntoConstraints="NO" id="S44-0M-SoH">
                                         <rect key="frame" x="230" y="8.5" width="13" height="13"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="13" id="Nk2-vE-q9a"/>
@@ -171,9 +171,8 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOz-mC-FAP">
-                                <rect key="frame" x="236.5" y="7" width="102" height="39"/>
+                                <rect key="frame" x="286.5" y="7" width="52" height="39"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="102" id="EzH-Bo-haz"/>
                                     <constraint firstAttribute="height" constant="39" id="FbG-U1-74t"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -235,16 +234,17 @@
             <connections>
                 <outlet property="adressLab" destination="NWz-YK-Uyi" id="3tY-Nj-yYd"/>
                 <outlet property="contactBGView" destination="66R-eN-A25" id="ZBc-2p-xhH"/>
-                <outlet property="deiveredImageView" destination="I2E-pk-kx2" id="6Wn-ZX-4dv"/>
-                <outlet property="deliverGoodsBtn" destination="TOz-mC-FAP" id="2mB-S1-iqz"/>
+                <outlet property="didSendGoodsImageView" destination="I2E-pk-kx2" id="6Wn-ZX-4dv"/>
                 <outlet property="iconImageView" destination="7cL-B2-iVh" id="zZm-ph-skD"/>
                 <outlet property="infoLab1" destination="kNL-v9-3aS" id="dKj-dg-UxK"/>
                 <outlet property="infoLab2" destination="tkH-kk-YJy" id="ivB-xh-V2A"/>
                 <outlet property="infoLab3" destination="G4F-4Z-Eem" id="tal-nr-e85"/>
+                <outlet property="logisticsNumBtn" destination="3NG-XE-G3m" id="fxJ-ZN-Jlt"/>
                 <outlet property="nameLab" destination="GdG-4Q-2mz" id="Q6g-87-ry8"/>
                 <outlet property="orderRemakeLab" destination="JW6-uW-PJU" id="Tj5-48-El3"/>
                 <outlet property="phoneNumLab" destination="0fq-7I-VpV" id="SdV-oq-gOq"/>
                 <outlet property="remakeDetailBGView" destination="jPk-kr-2ii" id="VyL-bn-sCx"/>
+                <outlet property="rightTopBtn" destination="TOz-mC-FAP" id="754-7C-G5m"/>
                 <outlet property="titleBtn" destination="45G-2Y-dxr" id="mCX-cI-t5g"/>
             </connections>
             <point key="canvasLocation" x="-4.3478260869565224" y="87.723214285714278"/>

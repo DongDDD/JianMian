@@ -50,6 +50,9 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="rightLab" destination="hcr-hl-6gs" id="bB5-A7-JMB"/>
+            </connections>
             <point key="canvasLocation" x="131.8840579710145" y="82.366071428571431"/>
         </tableViewCell>
     </objects>

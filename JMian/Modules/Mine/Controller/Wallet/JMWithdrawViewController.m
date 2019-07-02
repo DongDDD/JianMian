@@ -15,7 +15,8 @@
 @property (strong, nonatomic)JMBankCardData *bankCardData;
 @property (weak, nonatomic) IBOutlet UILabel *cardNumberLab;
 @property (weak, nonatomic) IBOutlet UILabel *bankNameLab;
-@property (weak, nonatomic) IBOutlet UILabel *myMoneyLab;
+@property (weak, nonatomic) IBOutlet UILabel *myAllMoneyLab;
+@property (copy, nonatomic) NSString *available_amount;
 
 @end
 
@@ -28,10 +29,11 @@
     self.cashTextField.delegate = self;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        self.myMoneyLab.text = [NSString stringWithFormat:@"账户余额%@元", userModel.available_amount_b];
-        
+        self.myAllMoneyLab.text = [NSString stringWithFormat:@"账户余额%@元", userModel.available_amount_b];
+        _available_amount = userModel.available_amount_b;
     }else{
-        self.myMoneyLab.text = [NSString stringWithFormat:@"账户余额%@元", userModel.available_amount_c];
+        self.myAllMoneyLab.text = [NSString stringWithFormat:@"账户余额%@元", userModel.available_amount_c];
+        _available_amount = userModel.available_amount_c;
 
     }
     
@@ -39,11 +41,10 @@
     [self.view addGestureRecognizer:tap];
 }
 
+
 -(void)hideKeyboard{
-   
     [_cashTextField resignFirstResponder];
 
- 
 }
 
 -(void)didChooseBankCardWithData:(JMBankCardData *)data{
@@ -55,15 +56,23 @@
   
 }
 - (IBAction)withDrawAction:(UIButton *)sender {
+    if (_cardNumberLab.text.length > 1) {
+        [self withDrawRequest];
+        
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"请选择银行卡" btnTitle:@"好的"];
+    }
     
-    [self withDrawRequest];
+}
+- (IBAction)allWithDrawAction:(id)sender {
+    [self.cashTextField setText:_available_amount];
     
 }
 
 -(void)withDrawRequest{
     [_cashTextField resignFirstResponder];
     [[JMHTTPManager sharedInstance]withdrawMoneyWithBank_card_id:_bankCardData.bank_card_id amount:_cashTextField.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        [self showAlertVCSucceesSingleWithMessage:@"提现请求提交成功，请留意到账信息" btnTitle:@"好的"];
+        [self showAlertVCSucceesSingleWithMessage:@"提交成功，请留意到账信息" btnTitle:@"好的"];
         [self.navigationController popViewControllerAnimated:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

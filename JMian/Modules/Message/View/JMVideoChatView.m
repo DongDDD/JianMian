@@ -161,7 +161,7 @@
     [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
     if (self.receiverID)
     {
-        [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"视频视频已取消"];
+        [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"[视频已取消]"];
     }
  
 
@@ -222,20 +222,19 @@
        
     }
     _channel_Id = messageListModel.chat_id;
-    
     NSDictionary *dic;
     dic = @{
-            TITLE:sendTitle,
-            Sub_TITLE:sendSubTitle,
-            Avatar_URL:_imgUrl,
-            Channel_ID:_channel_Id,
-            SendMarkID:sendMarkID
-            
+            TITLE:sendTitle, //用户名称
+            Sub_TITLE:sendSubTitle, //用户职位
+            Avatar_URL:_imgUrl, //用户头像
+            Channel_ID:_channel_Id, //房间ID
+            SendMarkID:sendMarkID, //用户类型
+            isPartTime:@(NO) //是否为兼职视频
             };
     
     //发送面试邀请1
     if ((self.receiverID)) {
-        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"[邀请视频视频聊天]"];
+        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"[邀请视频聊天]"];
     }
     //加入视频聊天频道
     if (_channel_Id) {
@@ -281,13 +280,14 @@
             Sub_TITLE:sendSubTitle,
             Avatar_URL:_imgUrl,
             Channel_ID:_channel_Id,
-            SendMarkID:sendMarkID
+            SendMarkID:sendMarkID,
+            isPartTime:@(NO) //是否为兼职视频
 
             };
     
     //发送面试邀请1
     if ((self.receiverID)) {
-        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"[邀请视频视频聊天]"];
+        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"[邀请视频聊天]"];
     }
     //加入视频聊天频道
     [self joinChannel_channelId:interviewModel.interview_id];
@@ -374,8 +374,9 @@
 }
 
 - (void)joinChannel_channelId:(NSString *)channelId{
-
+    
     [self.agoraKit joinChannelByToken:nil channelId:channelId info:nil uid:0 joinSuccess:^(NSString *channel, NSUInteger uid, NSInteger elapsed) {
+        NSLog(@"成功进入房间");
         // Join channel "demoChannel1"
     }];
     
@@ -419,7 +420,7 @@
     if (_delegate && [_delegate respondsToSelector:@selector(appDelegateLeaveChannelActoin)]) {
         [_delegate appDelegateLeaveChannelActoin];
     
-    }
+    } 
     //发出邀请方
     if (_delegate && [_delegate respondsToSelector:@selector(hangupAction_model:)]) {
         [_delegate hangupAction_model:_myInterviewModel];

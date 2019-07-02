@@ -136,16 +136,17 @@
 #define Channel_ID @"Channel_ID"
 #define Mark_ID @"Mark_ID"
 #define Avatar_URL @"Avatar_URL"
-#define User_Id @"User_Id"
+#define User_ID @"User_ID"
 #define TITLE @"TITLE"
 #define Sub_TITLE @"Sub_TITLE"
 #define SendMarkID @"SendMarkID"
+#define isPartTime @"isPartTime"
 
 
 
 
 #define AMapAPIKey @"3226a67b997e0c6d25b38614a86ff5e0"
-#define VideoAgoraAPIKey @"a529ef85c7354d57aefd91a53325253b"
+#define VideoAgoraAPIKey @"d72d5c2ac54b48fead3697d8e130985c"
 #define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define Is_IPhoneX (SCREEN_WIDTH >=375.0f && SCREEN_HEIGHT >=812.0f && Is_Iphone)
 #define Bottom_SafeHeight   (Is_IPhoneX ? (34.0):(0))

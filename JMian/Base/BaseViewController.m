@@ -98,7 +98,7 @@
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(0, 0, 30, 30);
+    rightBtn.frame = CGRectMake(0, 0, 30, 28);
     [rightBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
     [rightBtn setTitle:rightLabName forState:UIControlStateNormal];
     [rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
@@ -258,7 +258,7 @@
 {
     
     
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n" message:message preferredStyle: UIAlertControllerStyleAlert];
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:message preferredStyle: UIAlertControllerStyleAlert];
     [alert addAction:[UIAlertAction actionWithTitle:btnTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self alertSucceesAction];
     }]];
@@ -340,7 +340,7 @@
     return salaryStr;
 }
 
-//学历数据转化 num 转 字符串
+//学历数据转化 数字 转 文字
 -(NSString *)getEducationStrWithEducation:(NSString *)education{
     NSInteger myInt = [education integerValue];
     
@@ -376,7 +376,7 @@
     return @"不限";
     
 }
-//学历数据转化 字符串 转 num
+//学历数据转化 文字 转 数字
 
 -(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr{
     
@@ -411,6 +411,26 @@
     }
     
     
+    
+    return @"0";
+    
+}
+
+//求职状态数据转化 文字 转 数字
+
+-(NSString *)getJobStatusWithStatusStr:(NSString *)statusStr{
+    
+    
+    if ([statusStr isEqualToString:@"应届生"]) {
+        return @"4";
+        
+    }else if ([statusStr isEqualToString:@"在职"]){
+        return @"1";
+        
+    }else if ([statusStr isEqualToString:@"离职"]){
+        return @"2";
+        
+    }
     
     return @"0";
     

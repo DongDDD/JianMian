@@ -8,16 +8,19 @@
 
 #import "JMMyResumeIconTableViewCell.h"
 #import <UIImageView+WebCache.h>
+#import "DimensMacros.h"
 
 NSString *const JMMyResumeIconTableViewCellIdentifier = @"JMMyResumeIconTableViewCellIdentifier";
 
 @interface JMMyResumeIconTableViewCell ()
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subLab;
 
 @end
 
 @implementation JMMyResumeIconTableViewCell
+
 
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -31,7 +34,10 @@ NSString *const JMMyResumeIconTableViewCellIdentifier = @"JMMyResumeIconTableVie
 
 - (void)setUserInfo:(JMUserInfoModel *)model {
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    self.userNameLabel.text = model.nickname;
+    self.userNameLabel.text = model.card_name;
+    if ([model.card_status isEqualToString:Card_PassIdentify]) {
+        self.subLab.text = @"基本信息查看";
+    }
     
 }
 @end

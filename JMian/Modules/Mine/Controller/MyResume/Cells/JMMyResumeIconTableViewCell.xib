@@ -71,6 +71,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="iconImageView" destination="3W4-DB-eBb" id="BfV-ch-gKA"/>
+                <outlet property="subLab" destination="3eD-KO-EGq" id="1Xi-Uv-Zri"/>
                 <outlet property="userNameLabel" destination="Uqa-Lg-Elu" id="d4D-0e-FBo"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="129.24107142857142"/>

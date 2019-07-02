@@ -15,8 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)createEducationExperienceWithSchool_name:(NSString *)school_name
                                        education:(NSString *)education
-                                          s_date:(NSDate*)s_date
-                                          e_date:(nullable NSDate *)e_date
+                                          s_date:(NSString*)s_date
+                                          e_date:(nullable NSString *)e_date
                                            major:(NSString *)major
                                      description:(nullable NSString *)description
                                        user_step:(nullable NSString *)user_step
@@ -24,8 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)updateEducationExperienceWithEducationId:(NSString *)educationId
                                        education:(nullable NSString *)education
-                                          s_date:(nullable NSDate*)s_date
-                                          e_date:(nullable NSDate *)e_date
+                                          s_date:(nullable NSString*)s_date
+                                          e_date:(nullable NSString *)e_date
                                            major:(nullable NSString *)major
                                      description:(nullable NSString *)description
                                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;

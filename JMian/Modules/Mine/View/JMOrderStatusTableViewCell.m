@@ -18,7 +18,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;//收货人姓名
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumLab;//收货人电话
 @property (weak, nonatomic) IBOutlet UILabel *adressLab;//收货地址
-@property (weak, nonatomic) IBOutlet UIImageView *detailImg;//详情按钮右面箭头
+//@property (weak, nonatomic) IBOutlet UIImageView *detailImg;//详情按钮右面箭头
+@property (weak, nonatomic) IBOutlet UIButton *logisticsNumBtn;
 
 //@property (nonatomic, strong)UIView *detailContentView;//快递
 //@property (nonatomic, strong)UIImageView *cpImage;//复制图标
@@ -26,8 +27,8 @@
 @property (weak, nonatomic) IBOutlet UIView *contactBGView;
 @property (weak, nonatomic) IBOutlet UIView *remakeDetailBGView;
 @property (weak, nonatomic) IBOutlet UILabel *orderRemakeLab;//订单备注
-@property (weak, nonatomic) IBOutlet UIButton *deliverGoodsBtn;
-@property (weak, nonatomic) IBOutlet UIImageView *deiveredImageView;
+@property (weak, nonatomic) IBOutlet UIButton *rightTopBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *didSendGoodsImageView;
 
 
 @property (nonatomic, strong)JMOrderCellData *myData;
@@ -58,65 +59,111 @@
     }
     return self;
 }
- //0:已下单 1:已取消 2:已支付 3:已发货
+ //0:已下单 1:已取消 2:已支付(未发货) 3:已发货
 -(void)setOrderCellData:(JMOrderCellData *)orderCellData{
     _myData = orderCellData;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    
+    //详情展开判断
     if (orderCellData.isSpread == YES) {
         [self.remakeDetailBGView setHidden:NO];
     }else{
         [self.remakeDetailBGView setHidden:YES];
     }
-    
-    if ([userModel.type isEqualToString: B_Type_UESR]) {
-        if (orderCellData.logistics_label_id) {
-            [self.deliverGoodsBtn setHidden:YES];
-            [self.deliverGoodsBtn setTitle:@"已发货" forState:UIControlStateNormal];
-            [self.deiveredImageView setHidden:NO];
-            [self.deliverGoodsBtn setEnabled:NO];
+    //获取产品第一张图片
+    JMSnapshotImageModel *imgModel = orderCellData.snapshot_images[0];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:imgModel.file_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    self.infoLab2.text = [NSString stringWithFormat:@"¥ %@",orderCellData.goods_price];
+    self.infoLab3.text = [NSString stringWithFormat:@"X %@",orderCellData.buy_quantity];
+    //------是否有物流信息，有则已发货
 
-        }else if ([orderCellData.status isEqualToString:@"2"]) {
-            [self.deliverGoodsBtn setHidden:NO];
-            [self.deliverGoodsBtn setTitle:@"去发货" forState:UIControlStateNormal];
-            [self.deiveredImageView setHidden:NO];
-            [self.deliverGoodsBtn setEnabled:YES];
+    if (orderCellData.logistics_name) {
+        [self.rightTopBtn setHidden:YES];
+        [self.didSendGoodsImageView setHidden:NO];
+//        [self.deliverGoodsBtn setTitle:@"已发货" forState:UIControlStateNormal];
+//        [self.deliverGoodsBtn setEnabled:NO];
+        NSString *logisticsInfo = [NSString stringWithFormat:@"%@:%@",orderCellData.logistics_name,orderCellData.logistics_no];
+        [self.logisticsNumBtn setTitle:logisticsInfo forState:UIControlStateNormal];
 
-        }else if ([orderCellData.status isEqualToString:@"0"]) {
-            [self.deliverGoodsBtn setHidden:NO];
-            [self.deliverGoodsBtn setTitle:@"未付款" forState:UIControlStateNormal];
-            [self.deiveredImageView setHidden:YES];
-            [self.deliverGoodsBtn setEnabled:NO];
-            
+    }else if ([orderCellData.status isEqualToString:@"0"]) {
+        [self.rightTopBtn setHidden:NO];
+        [self.rightTopBtn setTitle:@"未付款" forState:UIControlStateNormal];
+        [self.didSendGoodsImageView setHidden:YES];
+        [self.rightTopBtn setEnabled:NO];
+        
+    }else if ([orderCellData.status isEqualToString:@"2"]) {
+        //已付款,未发货
+        NSString *rightTopBtnTitle;
+        if ([userModel.type isEqualToString:B_Type_UESR]) {
+            //商家
+            rightTopBtnTitle = @"已付款,去发货";
+            [self.rightTopBtn setEnabled:YES];
+
+        }else if ([userModel.type isEqualToString:C_Type_USER]){
+            //任务接受者或消费者
+            rightTopBtnTitle = @"已付款，待发货";
+            [self.rightTopBtn setEnabled:NO];
+
         }
+
+        [self.rightTopBtn setTitle:rightTopBtnTitle forState:UIControlStateNormal];
+        [self.rightTopBtn setHidden:NO];
+        [self.didSendGoodsImageView setHidden:YES];
         
-        
-        
-        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:orderCellData.referrer_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    }
+ 
+    
+    self.orderRemakeLab.text = orderCellData.remark;//---备注
+    self.nameLab.text = orderCellData.contact_name;//---联系人
+    self.phoneNumLab.text = orderCellData.contact_phone;//---联系电话
+    //地址获取
+    NSMutableArray *adrArr = [NSMutableArray array];
+    for (NSString *str in orderCellData.city_name_relation) {
+        [adrArr addObject:str];
+    }
+    NSString *adrStr = [adrArr componentsJoinedByString:@""];
+    NSString *adrStr2 = [NSString stringWithFormat:@"%@%@",adrStr,orderCellData.city_city_name];
+    NSString *adrStr3 = [NSString stringWithFormat:@"%@%@",adrStr2,orderCellData.contact_address];
+    self.adressLab.text = adrStr3;
+    
+    
+    //订单状态
+    if ([userModel.type isEqualToString: B_Type_UESR]) {
         NSString *str = [NSString stringWithFormat:@"销售：%@ >",orderCellData.referrer_nickname];
         [self.titleBtn setTitle:str forState:UIControlStateNormal];
         self.infoLab1.text = orderCellData.title;
-        self.infoLab2.text = [NSString stringWithFormat:@"¥ %@",orderCellData.goods_price];
-        self.infoLab3.text = [NSString stringWithFormat:@"x %@",orderCellData.buy_quantity];
-        self.orderRemakeLab.text = orderCellData.remark;
-        self.nameLab.text = orderCellData.contact_name;
-        self.phoneNumLab.text = orderCellData.contact_phone;
-        self.adressLab.text = orderCellData.contact_address;
+//        if ([orderCellData.status isEqualToString:@"2"]) {
+//            [self.rightTopBtn setHidden:NO];
+//            [self.didSendGoodsImageView setHidden:YES];
+//            [self.rightTopBtn setTitle:@"已付款,去发货" forState:UIControlStateNormal];
+//            [self.rightTopBtn setEnabled:YES];
+//        }
+        //        if (orderCellData.logistics_label_id) {
+        //            [self.deliverGoodsBtn setHidden:YES];
+//            [self.deliverGoodsBtn setTitle:@"已发货" forState:UIControlStateNormal];
+//            [self.deiveredImageView setHidden:NO];
+//            [self.deliverGoodsBtn setEnabled:NO];
+//
+//        }else if ([orderCellData.status isEqualToString:@"2"]) {
+//            [self.deliverGoodsBtn setHidden:NO];
+//            [self.deliverGoodsBtn setTitle:@"去发货" forState:UIControlStateNormal];
+//            [self.deiveredImageView setHidden:YES];
+//            [self.deliverGoodsBtn setEnabled:YES];
+//
+//        }else if ([orderCellData.status isEqualToString:@"0"]) {
+//            [self.deliverGoodsBtn setHidden:NO];
+//            [self.deliverGoodsBtn setTitle:@"未付款" forState:UIControlStateNormal];
+//            [self.deiveredImageView setHidden:YES];
+//            [self.deliverGoodsBtn setEnabled:NO];
+//
+//        }
+
     }else if ([userModel.type isEqualToString: C_Type_USER]){
-        [self.deiveredImageView setHidden:YES];
-        [self.deliverGoodsBtn setHidden:YES];
-        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:orderCellData.referrer_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         NSString *str = [NSString stringWithFormat:@"%@ >",orderCellData.snapshot_company_company_name];
         [self.titleBtn setTitle:str forState:UIControlStateNormal];
         self.infoLab1.text = orderCellData.snapshot_goods_goods_title;
-        self.infoLab2.text = [NSString stringWithFormat:@"¥ %@",orderCellData.goods_price];
-        self.infoLab3.text = [NSString stringWithFormat:@"X %@",orderCellData.buy_quantity];
-        self.orderRemakeLab.text = orderCellData.remark;
-        self.nameLab.text = orderCellData.contact_name;
-        self.phoneNumLab.text = orderCellData.contact_phone;
-        self.adressLab.text = orderCellData.contact_address;
         
     }
+
     
 }
 

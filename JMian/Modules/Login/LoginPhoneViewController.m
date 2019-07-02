@@ -84,6 +84,7 @@
 //        [alert show];
 //        
 //        [self.view addSubview:self.progressHUD];
+        [self showAlertVCSucceesSingleWithMessage:@"验证码已发送到你手机" btnTitle:@"好的"];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
     }];

@@ -114,17 +114,17 @@
         UIImage*thumbnailImage = thumbnailImageRef ? [[UIImage alloc]initWithCGImage: thumbnailImageRef] : nil;
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (thumbnailImage == nil) {
-                self.playBtn.hidden = YES;
-                self.videoImageView.image = [UIImage imageNamed:@"NOvideos"];
-                self.videoImageView.backgroundColor = TITLE_COLOR;
-
-            }else{
-                self.playBtn.hidden = NO;
-
-                self.videoImageView.image  = thumbnailImage;
-                self.videoImageView.backgroundColor = [UIColor whiteColor];
-            }
+//            if (thumbnailImage == nil) {
+//                self.playBtn.hidden = YES;
+//                self.videoImageView.image = [UIImage imageNamed:@"NOvideos"];
+//                self.videoImageView.backgroundColor = TITLE_COLOR;
+//
+//            }else{
+//            }
+            self.playBtn.hidden = NO;
+            
+            self.videoImageView.image  = thumbnailImage;
+            self.videoImageView.backgroundColor = [UIColor whiteColor];
         });
         
     });

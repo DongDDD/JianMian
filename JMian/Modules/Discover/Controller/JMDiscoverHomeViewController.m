@@ -129,15 +129,15 @@ static CGFloat kMagin = 10.f;
     [self showProgressHUD_view:self.view];
     [[JMHTTPManager sharedInstance]fectchVideoList_mode:mode city_id:nil contact_phone:nil per_page:@"10" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            NSMutableArray *array = [NSMutableArray array];
-            array = [JMVideoListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+//            NSMutableArray *array = [NSMutableArray array];
+            self.videoDataList = [JMVideoListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
-            if (array.count == 0) {
+            if (self.videoDataList.count < 10) {
                 [self.collectionView.mj_footer setHidden:YES];
 //                _isShowAllData = YES;
             }
             
-            [self.videoDataList addObjectsFromArray:array];
+//            [self.videoDataList addObjectsFromArray:array];
             [self.collectionView reloadData];
  
 

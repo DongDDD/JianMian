@@ -247,6 +247,7 @@ static NSString *cellID = @"statusCellID";
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
         _tableView.sectionHeaderHeight = 0;
+        _tableView.showsVerticalScrollIndicator = NO;
         [_tableView registerNib:[UINib nibWithNibName:@"JMOrderStatusTableViewCell" bundle:nil] forCellReuseIdentifier:cellID];
 
     }

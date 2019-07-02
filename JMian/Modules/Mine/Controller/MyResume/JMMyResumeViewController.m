@@ -23,8 +23,9 @@
 #import "JMMyResumeHeaderSecondTableViewCell.h"
 #import "JMTitlesView.h"
 #import "JMPartTimeJobResumeViewController.h"
+#import "STPickerSingle.h"
 
-@interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMMyResumeFooterViewDelegate,JMMyResumeCareerStatusTableViewCellDelegate>
+@interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMMyResumeFooterViewDelegate,JMMyResumeCareerStatusTableViewCellDelegate,STPickerSingleDelegate>
 
 @property (strong, nonatomic) JMMyResumeCellConfigures *cellConfigures;
 @property (strong, nonatomic) JMTitlesView *titleView;
@@ -43,6 +44,7 @@
 
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 @property (nonatomic, assign) NSInteger index;
+@property (nonatomic, strong) STPickerSingle *jobStatusPickerSingle;
 
 @end
 
@@ -133,7 +135,7 @@
     _work_status = status;
     [[JMHTTPManager sharedInstance] updateVitaWith_work_status:status education:nil work_start_date:self.work_start_date description:nil video_path:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-//        [self sendRequest];
+        [self sendRequest];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -236,7 +238,18 @@
 //    self.salaryMax = @(maxNum);
 //
 //}
-
+#pragma mark - PickerViewDelegate
+- (void)pickerSingle:(STPickerSingle *)pickerSingle selectedTitle:(NSString *)selectedTitle row:(NSInteger)row{
+    //    _isChange = YES;
+    if (pickerSingle == _jobStatusPickerSingle) {
+        NSString *status = [self getJobStatusWithStatusStr:selectedTitle];
+        [self upDateInfo_status:status];
+        
+    }
+    
+    
+    
+}
 #pragma mark - UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -252,7 +265,7 @@
             JMMyResumeHeaderSecondTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyResumeHeaderSecondTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //            cell.delegate = self;
-//            [cell setWorkStatus:self.model.work_status];
+            [cell setWorkStatus:self.model.work_status];
             return cell;
         }
         case JMMyResumeCellTypeCareerStatus:
@@ -347,6 +360,8 @@
          }
         case JMMyResumeCellTypeHeader:
         {
+            [self.view addSubview:self.jobStatusPickerSingle];
+            [self.jobStatusPickerSingle show];
             
             
             break;
@@ -558,5 +573,18 @@
 }
 
 
-
+-(STPickerSingle *)jobStatusPickerSingle{
+    if (_jobStatusPickerSingle == nil) {
+        _jobStatusPickerSingle = [[STPickerSingle alloc]init];
+        _jobStatusPickerSingle.delegate = self;
+        _jobStatusPickerSingle.title = @"求职状态";
+        _jobStatusPickerSingle.contentMode = STPickerContentModeCenter;
+        _jobStatusPickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _jobStatusPickerSingle.arrayData = [NSMutableArray arrayWithObjects:                                            @"应届生",
+                                            @"在职",
+                                            @"离职",
+                                            nil];
+    }
+    return _jobStatusPickerSingle;
+}
 @end

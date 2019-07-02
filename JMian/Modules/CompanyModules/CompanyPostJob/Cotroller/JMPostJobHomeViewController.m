@@ -166,11 +166,26 @@ static NSString *cellIdent = @"cellIdent";
         
         self.hidesBottomBarWhenPushed=NO;
   
+    }else if ([model.card_status isEqualToString:@"2"]){
+        
+        [self showAlertWithTitle:@"提示" message:@"实名认证不通过" leftTitle:@"返回" rightTitle:@"去实名认证"];
+   
+ 
     }
     
     
 }
 
+//-(void)alerLeftAction{
+//}
+
+-(void)alertRightAction{
+    JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+
+
+}
 
 -(void)rightAction{
     self.hidesBottomBarWhenPushed=YES;

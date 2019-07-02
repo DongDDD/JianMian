@@ -15,7 +15,7 @@
                 <outlet property="bankNameLab" destination="iEb-60-jc7" id="ewI-ej-Mlo"/>
                 <outlet property="cardNumberLab" destination="bE7-B9-f57" id="mN5-Ac-aqw"/>
                 <outlet property="cashTextField" destination="xu7-ew-Cdl" id="8dl-HL-pW9"/>
-                <outlet property="myMoneyLab" destination="sW7-xH-KOx" id="rMt-Xr-LvF"/>
+                <outlet property="myAllMoneyLab" destination="sW7-xH-KOx" id="rMt-Xr-LvF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -120,6 +120,9 @@
                             <state key="normal" title="全部体现">
                                 <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="allWithDrawAction:" destination="-1" eventType="touchUpInside" id="T2E-Ql-nnk"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SNm-PM-2k9">
                             <rect key="frame" x="57" y="249.5" width="300" height="50"/>

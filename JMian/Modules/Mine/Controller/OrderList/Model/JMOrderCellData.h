@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *logistics_name;
 @property (nonatomic, copy) NSString *logistics_label_id;
+@property (nonatomic, copy) NSString *logistics_no;
 
 //-----快照----
 @property (nonatomic, copy) NSString *snapshot_task_id;
@@ -51,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *snapshot_video_denial_reason;
 @property (nonatomic, copy) NSString *snapshot_video_look;
 
-@property (nonatomic, strong) NSArray *images;
+@property (nonatomic, strong) NSArray *snapshot_images;
 //----------
 @property (nonatomic, copy) NSString *referrer_user_id;
 @property (nonatomic, copy) NSString *referrer_phone;
