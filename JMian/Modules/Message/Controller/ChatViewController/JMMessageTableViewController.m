@@ -143,9 +143,11 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 - (void)scrollToBottom:(BOOL)animate
 {
+   
     if (_uiMsgs.count > 0) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_uiMsgs.count-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:animate];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_uiMsgs.count inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:animate];
     }
+  
 }
 
 - (NSMutableArray *)extracted:(JMMessageTableViewController *const __weak)ws {

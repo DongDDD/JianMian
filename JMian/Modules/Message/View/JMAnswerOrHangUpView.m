@@ -18,8 +18,8 @@
         
         self.backgroundColor = [UIColor blackColor];
         [self initView];
-//        [self playSounds];
-//        [_player play];
+        [self playSounds];
+        [_player play];
     }
     return self;
 }

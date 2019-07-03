@@ -60,6 +60,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *referrer_avatar;
 @property (nonatomic, copy) NSString *referrer_reputation;
 
+@property (nonatomic, copy) NSString *boss_reputation;
+@property (nonatomic, copy) NSString *boss_user_id;
+@property (nonatomic, copy) NSString *boss_nickname;
+@property (nonatomic, copy) NSString *boss_company_id;
+@property (nonatomic, copy) NSString *boss_avatar;
+
+
 @property (nonatomic, copy) NSString *city_city_id;
 @property (nonatomic, copy) NSString *city_city_name;
 @property (nonatomic, strong) NSArray *city_name_relation;

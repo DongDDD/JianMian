@@ -79,6 +79,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     leftBtn.frame = CGRectMake(-30 , 0, 100, 28);
+//    leftBtn.backgroundColor = [UIColor redColor];
     [leftBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
     [leftBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     
@@ -110,7 +111,7 @@
 
 
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 28)];
 
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];

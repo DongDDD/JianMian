@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Y2-RS-2o1">
-                    <rect key="frame" x="39.5" y="218" width="335" height="220"/>
+                    <rect key="frame" x="39.5" y="194" width="335" height="220"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fx4-wX-2IO">
                             <rect key="frame" x="25" y="47" width="285" height="0.5"/>
@@ -113,7 +113,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8mq-xL-u41">
-                    <rect key="frame" x="206.5" y="403" width="1" height="19"/>
+                    <rect key="frame" x="206.5" y="379" width="1" height="19"/>
                     <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="TiH-su-pAx"/>
@@ -124,7 +124,7 @@
             <color key="backgroundColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="8mq-xL-u41" firstAttribute="centerX" secondItem="8Y2-RS-2o1" secondAttribute="centerX" id="0X5-Iu-rXI"/>
-                <constraint firstItem="8Y2-RS-2o1" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="174" id="EEU-gS-kP7"/>
+                <constraint firstItem="8Y2-RS-2o1" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="150" id="EEU-gS-kP7"/>
                 <constraint firstItem="8Y2-RS-2o1" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="eQC-Gt-TT1"/>
                 <constraint firstItem="8mq-xL-u41" firstAttribute="centerY" secondItem="w3P-8Y-l3c" secondAttribute="centerY" id="evy-Yu-LgQ"/>
             </constraints>

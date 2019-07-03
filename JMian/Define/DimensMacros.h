@@ -139,14 +139,14 @@
 #define User_ID @"User_ID"
 #define TITLE @"TITLE"
 #define Sub_TITLE @"Sub_TITLE"
-#define SendMarkID @"SendMarkID"
+//#define SendMarkID @"SendMarkID"
 #define isPartTime @"isPartTime"
 
 
 
 
-#define AMapAPIKey @"3226a67b997e0c6d25b38614a86ff5e0"
-#define VideoAgoraAPIKey @"d72d5c2ac54b48fead3697d8e130985c"
+#define AMapAPIKey @"d8494573dfc17e6efe99774447611ced"
+#define VideoAgoraAPIKey @"a046b14ce976410ab008d99924892a6a"
 #define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define Is_IPhoneX (SCREEN_WIDTH >=375.0f && SCREEN_HEIGHT >=812.0f && Is_Iphone)
 #define Bottom_SafeHeight   (Is_IPhoneX ? (34.0):(0))

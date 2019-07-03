@@ -44,6 +44,13 @@
              @"referrer_avatar":@"referrer.avatar",
              @"referrer_reputation":@"referrer.reputation",
              
+             @"boss_reputation":@"boss.reputation",
+             @"boss_user_id":@"boss.user_id",
+             @"boss_nickname":@"boss.nickname",
+             @"boss_company_id":@"boss.company_id",
+             @"boss_avatar":@"boss.avatar",
+             
+
              @"city_city_id":@"city.city_id",
              @"city_city_name":@"city.city_name",
              @"city_name_relation":@"city.name_relation",

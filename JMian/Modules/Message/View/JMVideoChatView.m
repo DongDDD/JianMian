@@ -20,6 +20,10 @@
 @property(nonatomic,copy)NSString *myTitle;
 @property(nonatomic,copy)NSString *subTitle;
 @property(nonatomic,copy)NSString *channel_Id;
+@property(nonatomic,copy)NSString *UserID;
+
+@property(nonatomic,assign)BOOL isPartTimeVideo;
+
 @property(nonatomic,strong)JMInterViewModel *myInterviewModel;
 @property(nonatomic,strong)JMMessageListModel *messageListModel;
 
@@ -159,9 +163,15 @@
     [self leaveChannel];
     [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
     [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
+    NSDictionary *dic;
+    dic = @{
+            User_ID:_UserID,
+            Channel_ID:_channel_Id, //用户类型
+            isPartTime:@(NO) //是否为兼职视频
+            };
     if (self.receiverID)
     {
-        [self setVideoInvite_receiverID:self.receiverID dic:nil title:@"[视频已取消]"];
+        [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"[视频已取消]"];
     }
  
 
@@ -195,7 +205,7 @@
     //用于发送自定义消息
     NSString *sendSubTitle;
     NSString *sendTitle;
-    NSString *sendMarkID;
+    NSString *userID;
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
     //------------B端从兼职人才进来视频聊天---------------
     if ([userInfoModel.type isEqualToString:B_Type_UESR]) {
@@ -206,7 +216,7 @@
             //赋值用于发送自定义消息
             sendSubTitle = _subTitle;
             sendTitle = _myTitle;
-            sendMarkID = messageListModel.sender_mark;
+            userID = messageListModel.sender_mark;
             self.receiverID = messageListModel.recipient_mark;
         }else if (userInfoModel.user_id == messageListModel.recipient_user_id){
             _imgUrl = messageListModel.recipient_avatar;
@@ -215,7 +225,7 @@
             // 赋值用于发送自定义消息
             sendSubTitle = _subTitle;
             sendTitle = _myTitle;
-            sendMarkID = messageListModel.recipient_mark;
+            userID = messageListModel.recipient_mark;
             self.receiverID = messageListModel.sender_mark;
             
         }
@@ -228,8 +238,8 @@
             Sub_TITLE:sendSubTitle, //用户职位
             Avatar_URL:_imgUrl, //用户头像
             Channel_ID:_channel_Id, //房间ID
-            SendMarkID:sendMarkID, //用户类型
-            isPartTime:@(NO) //是否为兼职视频
+            User_ID:userID, //用户类型
+            isPartTime:@(YES) //是否为兼职视频
             };
     
     //发送面试邀请1
@@ -243,12 +253,13 @@
 
 }
 
+#pragma mark - B端从面试管理进来视频聊天
 
 -(void)setInterviewModel:(JMInterViewModel *)interviewModel{
     _myInterviewModel = interviewModel;
     NSString *sendSubTitle;
     NSString *sendTitle;
-    NSString *sendMarkID;
+    NSString *userID;
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
     if ([userInfoModel.type isEqualToString:B_Type_UESR]) {
         //------------B端从面试管理进来视频聊天---------------
@@ -258,7 +269,7 @@
         //赋值用于发送自定义消息
         sendSubTitle = interviewModel.company_company_name;
         sendTitle = interviewModel.interviewer_nickname;
-        sendMarkID = [NSString stringWithFormat:@"%@b",interviewModel.interviewer_id];
+        userID = [NSString stringWithFormat:@"%@b",interviewModel.interviewer_id];
         self.receiverID =[NSString stringWithFormat:@"%@a",interviewModel.candidate_id];
     }else if([userInfoModel.type isEqualToString:C_Type_USER]) {
         //------------C端从面试管理进来视频聊天---------------
@@ -268,23 +279,23 @@
         //赋值用于发送自定义消息
         sendSubTitle = interviewModel.work_work_name;
         sendTitle = interviewModel.candidate_nickname;
-        sendMarkID = [NSString stringWithFormat:@"%@a",interviewModel.candidate_id];
+        userID = [NSString stringWithFormat:@"%@a",interviewModel.candidate_id];
         self.receiverID = [NSString stringWithFormat:@"%@b",interviewModel.interviewer_id];
         
     }
+    _UserID = userID;
     _channel_Id = interviewModel.interview_id;
-    
     NSDictionary *dic;
     dic = @{
             TITLE:sendTitle,
             Sub_TITLE:sendSubTitle,
             Avatar_URL:_imgUrl,
             Channel_ID:_channel_Id,
-            SendMarkID:sendMarkID,
+            User_ID:userID,
             isPartTime:@(NO) //是否为兼职视频
 
             };
-    
+    self.videoChatDic = dic;
     //发送面试邀请1
     if ((self.receiverID)) {
         [self setVideoInvite_receiverID:self.receiverID dic:dic title:@"[邀请视频聊天]"];
@@ -334,12 +345,13 @@
 #pragma mark - B/C从弹窗进来视频聊天
 
 -(void)setVideoChatDic:(NSDictionary *)videoChatDic{
-    
+//    _isPartTimeVideo = NO;
     // 提取自定义消息传过来的数据，然后赋值
     _imgUrl = videoChatDic[Avatar_URL];
     _myTitle = videoChatDic[TITLE];
     _subTitle = videoChatDic[Sub_TITLE];
     _channel_Id = videoChatDic[Channel_ID];
+    _isPartTimeVideo = videoChatDic[isPartTime];
     //加入视频聊天频道
     [self joinChannel_channelId:_channel_Id];
     //布局UI

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMAllMessageTableViewController : UITableViewController
 @property (nonatomic, strong) void(^didReadMessage)(int);
+@property(nonatomic,assign)int unReadNum;
 
 @end
 

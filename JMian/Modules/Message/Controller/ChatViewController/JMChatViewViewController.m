@@ -19,10 +19,11 @@
 #import "DimensMacros.h"
 #import "THDatePickerView.h"
 #import "JMHTTPManager+InterView.h"
+#import "JMHTTPManager+CreateConversation.h"
+#import "JMVideoChatView.h"
 
 
-
-@interface JMChatViewViewController () <JMInputTextViewDelegate,JMMessageTableViewControllerDelegate,JMInputControllerDelegate,THDatePickerViewDelegate>
+@interface JMChatViewViewController () <JMInputTextViewDelegate,JMMessageTableViewControllerDelegate,JMInputControllerDelegate,THDatePickerViewDelegate,JMVideoChatViewDelegate>
 
 @property (nonatomic ,strong) JMMessageTableViewController *messageController;
 @property (nonatomic ,strong) JMInputController *inputController;
@@ -35,7 +36,7 @@
 
 @property (weak, nonatomic) THDatePickerView *dateView;
 @property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
-
+@property (strong, nonatomic) JMVideoChatView *videoChatView;
 
 @end
 
@@ -65,6 +66,13 @@
     [self.navigationController setNavigationBarHidden:NO];
 //     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
 
+}
+
+-(void)fanhui{
+    [super fanhui];
+    if (_delegate && [_delegate respondsToSelector:@selector(didReadActionWithData:)]) {
+        [_delegate didReadActionWithData:_myConvModel];
+    }
 }
 
 //-(void)onNewMessage:(NSArray *)msgs{
@@ -185,14 +193,22 @@
 
 //视频面试邀请
 -(void)videoInterviewController:(JMMessageTableViewController *)controller{
-
+    if ([_myConvModel.type isEqualToString:@"2"]) {
+        
+        [self gotoVideoChatViewWithForeign_key:_myConvModel.work_task_id recipient:_myConvModel.job_user_user_id chatType:@"2"];
+     
+    }else if ([_myConvModel.type isEqualToString:@"1"]) {
+        
         self.BgBtn.hidden = NO;
-    
+        
         [UIView animateWithDuration:0.3 animations:^{
             self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
             [self.dateView show];
         }];
-    
+        
+        
+       
+    }
     
 
 }
@@ -205,7 +221,6 @@
 - (void)isDominatorController:(JMMessageTableViewController *)controller{
     _isDominator = YES;
 }
-
 
 
 - (void)sendGreetAction:(NSInteger *)index{
@@ -225,7 +240,71 @@
     
 }
 
+#pragma mark -  （自定义消息 兼职视频邀请)
 
+-(void)gotoVideoChatViewWithForeign_key:(NSString *)foreign_key
+                              recipient:(NSString *)recipient
+                               chatType:(NSString *)chatType{
+    _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+    _videoChatView.delegate = self;
+    _videoChatView.tag = 222;
+    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
+    //    [_videoChatView setInterviewModel:nil];
+    [self.view addSubview:_videoChatView];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+//JMVideoChatViewDelegate 挂断
+-(void)hangupAction_model:(JMInterViewModel *)model{
+    
+    
+    [self.navigationController setNavigationBarHidden:NO];
+    
+}
+
+//#pragma mark -  （自定义消息 兼职视频邀请)
+//-(void)createChatToSendCustumMessageRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
+//
+//    [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        //        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+//        //
+//        NSString *receiverId = [NSString stringWithFormat:@"%@a",user_id];
+//        [self setTaskMessage_receiverID:receiverId dic:nil title:@"[邀请视频聊天]"];
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//}
+//-(void)setTaskMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
+//
+//    TIMConversation *conv = [[TIMManager sharedInstance]
+//                             getConversation:(TIMConversationType)TIM_C2C
+//                             receiver:receiverID];
+//
+//    // 转换为 NSData
+//
+//    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
+//    //    [custom_elem setData:data];
+//    if (dic) {
+//        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
+//        [custom_elem setData:data];
+//
+//    }
+//    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+//
+//    [custom_elem setDesc:title];
+//    TIMMessage * msg = [[TIMMessage alloc] init];
+//    [msg addElem:custom_elem];
+//    [conv sendMessage:msg succ:^(){
+//        NSLog(@"SendMsg Succ");
+////        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"申请成功" leftTitle:@"返回" rightTitle:@"查看任务"];
+//    }fail:^(int code, NSString * err) {
+//        NSLog(@"SendMsg Failed:%d->%@", code, err);
+//
+//
+//    }];
+//
+//
+//}
 
 /*
 #pragma mark - Navigation

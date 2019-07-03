@@ -55,8 +55,8 @@
         [self.view addSubview:self.navView];
         _navView.backgroundColor = [UIColor whiteColor];
         [_navView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.view);
-            make.height.mas_equalTo(64);
+            make.top.mas_equalTo(self.navView.mas_bottom).offset(20);
+            make.height.mas_equalTo(SafeAreaTopHeight);
             make.left.and.right.mas_equalTo(self.view);
             
         }];

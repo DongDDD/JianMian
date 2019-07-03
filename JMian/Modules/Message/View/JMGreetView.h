@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMGreetViewDelegate <NSObject>
 
 -(void)addGreetAction;
-
+-(void)didChooseGreetWithStr:(NSString *)str;
 @end
 
 @interface JMGreetView : UIView <UITableViewDelegate,UITableViewDataSource>
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UIButton *bottomBtn;
 @property(nonatomic,weak)id<JMGreetViewDelegate>delegate;
-
+@property(nonatomic,strong)NSArray *listArray;
 @end
 
 NS_ASSUME_NONNULL_END

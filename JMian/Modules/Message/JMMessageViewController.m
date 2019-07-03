@@ -42,7 +42,7 @@
     [self.view addSubview:self.pageView];
     [self.view addSubview:self.titleView];
     
-    [self.pageView setCurrentIndex:1];//添加子视图”谁看过我“
+//    [self.pageView setCurrentIndex:1];//添加子视图”谁看过我“
     [self.pageView setCurrentIndex:0];//添加子视图”全部信息“
     
     
@@ -51,7 +51,7 @@
 
 - (JMTitlesView *)titleView {
     if (!_titleView) {
-        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全部消息", @"谁看过我"]];
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全部消息"]];
         __weak JMMessageViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {
             [weakSelf.pageView setCurrentIndex:index];
@@ -88,12 +88,12 @@
             }
             
         };
-        JMLookMeTableViewController *lookMeVC = [[JMLookMeTableViewController alloc] init];
-
-        [self addChildViewController:allMessageVC];
-        [self addChildViewController:lookMeVC];
-        
-        _childVCs = @[allMessageVC, lookMeVC];
+//        JMLookMeTableViewController *lookMeVC = [[JMLookMeTableViewController alloc] init];
+//
+//        [self addChildViewController:allMessageVC];
+//        [self addChildViewController:lookMeVC];
+//
+        _childVCs = @[allMessageVC];
 //    }
     return _childVCs;
 }

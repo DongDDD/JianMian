@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMChatViewViewControllerDelegate <NSObject>
 
 -(void)sendUnReadNum_cell:(JMAllMessageTableViewCell *)cell;
-
+-(void)didReadActionWithData:(JMMessageListModel *)data;
 @end
 
 

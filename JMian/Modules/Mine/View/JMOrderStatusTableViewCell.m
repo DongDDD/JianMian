@@ -95,8 +95,14 @@
         NSString *rightTopBtnTitle;
         if ([userModel.type isEqualToString:B_Type_UESR]) {
             //商家
-            rightTopBtnTitle = @"已付款,去发货";
-            [self.rightTopBtn setEnabled:YES];
+            if ([orderCellData.boss_user_id isEqualToString:userModel.user_id]) {
+                [self.rightTopBtn setHidden:YES];
+                [self.rightTopBtn setEnabled:NO];
+            }else{
+                rightTopBtnTitle = @"已付款,去发货";
+                [self.rightTopBtn setEnabled:YES];
+                
+            }
 
         }else if ([userModel.type isEqualToString:C_Type_USER]){
             //任务接受者或消费者

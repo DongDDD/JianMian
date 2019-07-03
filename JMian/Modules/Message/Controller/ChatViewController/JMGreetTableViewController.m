@@ -42,7 +42,7 @@ static NSString *cellIdent = @"CellIdent";
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
     //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //    }
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.text = @"你好，我对你发布的简历很感兴趣，希望我们详聊...";
     return cell;
 }

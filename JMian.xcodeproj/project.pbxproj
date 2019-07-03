@@ -642,6 +642,17 @@
 		04C37F0E22C7293C00E2A107 /* JMBottom2View.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C37F0D22C7293C00E2A107 /* JMBottom2View.xib */; };
 		04C37F1222C72D6500E2A107 /* JMAddVitaJobViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C37F1022C72D6500E2A107 /* JMAddVitaJobViewController.m */; };
 		04C37F1322C72D6500E2A107 /* JMAddVitaJobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C37F1122C72D6500E2A107 /* JMAddVitaJobViewController.xib */; };
+		04C4A17122CC414D0049DA29 /* JMMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C4A16F22CC414D0049DA29 /* JMMessageListViewController.m */; };
+		04C4A17222CC414D0049DA29 /* JMMessageListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C4A17022CC414D0049DA29 /* JMMessageListViewController.xib */; };
+		04C4A17622CC4ABF0049DA29 /* JMAboutOursViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C4A17422CC4ABF0049DA29 /* JMAboutOursViewController.m */; };
+		04C4A17722CC4ABF0049DA29 /* JMAboutOursViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C4A17522CC4ABF0049DA29 /* JMAboutOursViewController.xib */; };
+		04C4A17B22CC4B1C0049DA29 /* logo2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C4A17822CC4B1B0049DA29 /* logo2@3x.png */; };
+		04C4A17C22CC4B1C0049DA29 /* logo2.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C4A17922CC4B1B0049DA29 /* logo2.png */; };
+		04C4A17D22CC4B1C0049DA29 /* logo2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04C4A17A22CC4B1B0049DA29 /* logo2@2x.png */; };
+		04C4A18122CC55920049DA29 /* JMOpinionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C4A17F22CC55920049DA29 /* JMOpinionViewController.m */; };
+		04C4A18222CC55920049DA29 /* JMOpinionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C4A18022CC55920049DA29 /* JMOpinionViewController.xib */; };
+		04C4A18522CCE4850049DA29 /* JMHTTPManager+FectchGreetList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C4A18422CCE4850049DA29 /* JMHTTPManager+FectchGreetList.m */; };
+		04C4A18922CCF5040049DA29 /* JMGreetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C4A18822CCF5040049DA29 /* JMGreetModel.m */; };
 		04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013522603967000B1FE0 /* JMTitlesView.m */; };
 		04C6013922603F73000B1FE0 /* JMPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013822603F73000B1FE0 /* JMPageView.m */; };
 		04C6013E2260639C000B1FE0 /* JMAllMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013C2260639C000B1FE0 /* JMAllMessageTableViewController.m */; };
@@ -1703,6 +1714,22 @@
 		04C37F0F22C72D6500E2A107 /* JMAddVitaJobViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAddVitaJobViewController.h; sourceTree = "<group>"; };
 		04C37F1022C72D6500E2A107 /* JMAddVitaJobViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAddVitaJobViewController.m; sourceTree = "<group>"; };
 		04C37F1122C72D6500E2A107 /* JMAddVitaJobViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMAddVitaJobViewController.xib; sourceTree = "<group>"; };
+		04C4A16E22CC414D0049DA29 /* JMMessageListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageListViewController.h; sourceTree = "<group>"; };
+		04C4A16F22CC414D0049DA29 /* JMMessageListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageListViewController.m; sourceTree = "<group>"; };
+		04C4A17022CC414D0049DA29 /* JMMessageListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMessageListViewController.xib; sourceTree = "<group>"; };
+		04C4A17322CC4ABF0049DA29 /* JMAboutOursViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAboutOursViewController.h; sourceTree = "<group>"; };
+		04C4A17422CC4ABF0049DA29 /* JMAboutOursViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAboutOursViewController.m; sourceTree = "<group>"; };
+		04C4A17522CC4ABF0049DA29 /* JMAboutOursViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMAboutOursViewController.xib; sourceTree = "<group>"; };
+		04C4A17822CC4B1B0049DA29 /* logo2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo2@3x.png"; sourceTree = "<group>"; };
+		04C4A17922CC4B1B0049DA29 /* logo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo2.png; sourceTree = "<group>"; };
+		04C4A17A22CC4B1B0049DA29 /* logo2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "logo2@2x.png"; sourceTree = "<group>"; };
+		04C4A17E22CC55920049DA29 /* JMOpinionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMOpinionViewController.h; sourceTree = "<group>"; };
+		04C4A17F22CC55920049DA29 /* JMOpinionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMOpinionViewController.m; sourceTree = "<group>"; };
+		04C4A18022CC55920049DA29 /* JMOpinionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMOpinionViewController.xib; sourceTree = "<group>"; };
+		04C4A18322CCE4850049DA29 /* JMHTTPManager+FectchGreetList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+FectchGreetList.h"; sourceTree = "<group>"; };
+		04C4A18422CCE4850049DA29 /* JMHTTPManager+FectchGreetList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchGreetList.m"; sourceTree = "<group>"; };
+		04C4A18722CCF5040049DA29 /* JMGreetModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMGreetModel.h; sourceTree = "<group>"; };
+		04C4A18822CCF5040049DA29 /* JMGreetModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMGreetModel.m; sourceTree = "<group>"; };
 		04C6013422603967000B1FE0 /* JMTitlesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMTitlesView.h; sourceTree = "<group>"; };
 		04C6013522603967000B1FE0 /* JMTitlesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMTitlesView.m; sourceTree = "<group>"; };
 		04C6013722603F73000B1FE0 /* JMPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPageView.h; sourceTree = "<group>"; };
@@ -2255,6 +2282,12 @@
 				04196DAC22805C450000A6AA /* JMMySettingViewController.h */,
 				04196DAD22805C450000A6AA /* JMMySettingViewController.m */,
 				04196DAE22805C450000A6AA /* JMMySettingViewController.xib */,
+				04C4A17322CC4ABF0049DA29 /* JMAboutOursViewController.h */,
+				04C4A17422CC4ABF0049DA29 /* JMAboutOursViewController.m */,
+				04C4A17522CC4ABF0049DA29 /* JMAboutOursViewController.xib */,
+				04C4A17E22CC55920049DA29 /* JMOpinionViewController.h */,
+				04C4A17F22CC55920049DA29 /* JMOpinionViewController.m */,
+				04C4A18022CC55920049DA29 /* JMOpinionViewController.xib */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -2356,6 +2389,8 @@
 				040E54DF22772A99004AB0F9 /* JMMessageListModel.m */,
 				04196DA3227FE1190000A6AA /* JMAllMessageTableViewCellData.h */,
 				04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */,
+				04C4A18722CCF5040049DA29 /* JMGreetModel.h */,
+				04C4A18822CCF5040049DA29 /* JMGreetModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -2616,6 +2651,9 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				04C4A17922CC4B1B0049DA29 /* logo2.png */,
+				04C4A17A22CC4B1B0049DA29 /* logo2@2x.png */,
+				04C4A17822CC4B1B0049DA29 /* logo2@3x.png */,
 				04AF933E22CA29AF00D9FCBF /* deimi_login.png */,
 				04AF934022CA29B000D9FCBF /* deimi_login@2x.png */,
 				04AF933F22CA29B000D9FCBF /* deimi_login@3x.png */,
@@ -3427,6 +3465,9 @@
 				04C6013B2260639C000B1FE0 /* JMAllMessageTableViewController.h */,
 				04C6013C2260639C000B1FE0 /* JMAllMessageTableViewController.m */,
 				04C6013D2260639C000B1FE0 /* JMAllMessageTableViewController.xib */,
+				04C4A16E22CC414D0049DA29 /* JMMessageListViewController.h */,
+				04C4A16F22CC414D0049DA29 /* JMMessageListViewController.m */,
+				04C4A17022CC414D0049DA29 /* JMMessageListViewController.xib */,
 				04C60140226063E3000B1FE0 /* JMLookMeTableViewController.h */,
 				04C60141226063E3000B1FE0 /* JMLookMeTableViewController.m */,
 				04C60142226063E3000B1FE0 /* JMLookMeTableViewController.xib */,
@@ -3961,6 +4002,8 @@
 				040807B822A3C59E00C0744F /* JMHTTPManager+GetLabels.m */,
 				04A4210722BB6E890001A2F0 /* JMHTTPManager+FectchImageUrl.h */,
 				04A4210822BB6E890001A2F0 /* JMHTTPManager+FectchImageUrl.m */,
+				04C4A18322CCE4850049DA29 /* JMHTTPManager+FectchGreetList.h */,
+				04C4A18422CCE4850049DA29 /* JMHTTPManager+FectchGreetList.m */,
 				04731DDD22A643990013D7CE /* SecondCRequest */,
 			);
 			name = Network;
@@ -4261,6 +4304,7 @@
 				0485ACF022A0C92A00B31506 /* C_indent@2x.png in Resources */,
 				04C0F74222ABC6D200C3AA33 /* JMBUserPartTimeJobDetailView.xib in Resources */,
 				6D020A6922539FB0009BCFE4 /* JobDetailsViewController.xib in Resources */,
+				04C4A17722CC4ABF0049DA29 /* JMAboutOursViewController.xib in Resources */,
 				6D0209ED224FB900009BCFE4 /* enshrine@3x.png in Resources */,
 				04DD1D6E224B6E95007CB11C /* camera.png in Resources */,
 				04908AFA22A7B9C4000B5AB4 /* tiao.png in Resources */,
@@ -4276,12 +4320,14 @@
 				041C07D62261891A0088FBE1 /* JMNotificationHeaderTableViewCell.xib in Resources */,
 				04BBF29E228E90BA0068A9B1 /* answer@2x.png in Resources */,
 				0488E3F9229FB0620071DEE7 /* mission.png in Resources */,
+				04C4A17222CC414D0049DA29 /* JMMessageListViewController.xib in Resources */,
 				04072F4B2282BA650067A05D /* delete@3x.png in Resources */,
 				041997CF2266C75000C6C134 /* JMPostJobHomeViewController.xib in Resources */,
 				04ABB7AD22B259CB00E3F66A /* Alipay_pay.png in Resources */,
 				04A4211122BCF2C30001A2F0 /* JMChatDetailPartTimeJobTableViewCell.xib in Resources */,
 				04BBF2AD22901E530068A9B1 /* JMCustomAnnotationView.xib in Resources */,
 				6D020A2A2250F3F9009BCFE4 /* education@3x.png in Resources */,
+				04C4A17C22CC4B1C0049DA29 /* logo2.png in Resources */,
 				04A5FD4C22C8A5B200850604 /* languan.png in Resources */,
 				048E6632228574BE00694D86 /* peer_countermand@2x.png in Resources */,
 				0485AD1F22A10F5A00B31506 /* subscribe@2x.png in Resources */,
@@ -4303,6 +4349,7 @@
 				04AF934122CA29B000D9FCBF /* deimi_login.png in Resources */,
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
 				041CCF0522A52403002DFED3 /* order_cp@3x.png in Resources */,
+				04C4A17B22CC4B1C0049DA29 /* logo2@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
 				6D020A262250F3F9009BCFE4 /* 椭圆 3@3x.png in Resources */,
 				04BBF2C322918E7C0068A9B1 /* C_videos.png in Resources */,
@@ -4556,6 +4603,7 @@
 				040BF07A22719E4E0088697D /* switchover@2x.png in Resources */,
 				041997F3226717D700C6C134 /* JMContactOfPersonDetailViewController.xib in Resources */,
 				04DD1D50224B6E95007CB11C /* Webkey@2x.png in Resources */,
+				04C4A17D22CC4B1C0049DA29 /* logo2@2x.png in Resources */,
 				04A2479B224C773A00DEB8E3 /* 0000@3x.png in Resources */,
 				04BE8B4022924241004EB7EC /* notification.png in Resources */,
 				6D020A792258A408009BCFE4 /* JMEducationalExperienceTableViewCell.xib in Resources */,
@@ -4566,6 +4614,7 @@
 				040A40C92265B41A0005E0D7 /* company_logo@3x.png in Resources */,
 				6D020A6822539FB0009BCFE4 /* HomeViewController.xib in Resources */,
 				044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */,
+				04C4A18222CC55920049DA29 /* JMOpinionViewController.xib in Resources */,
 				6D020A222250F3F9009BCFE4 /* experience@2x.png in Resources */,
 				04072F4D2282BA650067A05D /* delete@2x.png in Resources */,
 				04DD1D48224B6E95007CB11C /* WeChat_login@3x.png in Resources */,
@@ -4855,6 +4904,7 @@
 				6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */,
 				0492F00E22C6530A00C7EFB2 /* JMLabsData.m in Sources */,
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
+				04C4A17622CC4ABF0049DA29 /* JMAboutOursViewController.m in Sources */,
 				040B838A2265EC0600F1A37A /* JMCompanyHomeViewController.m in Sources */,
 				04BBF2B022903D090068A9B1 /* JMCompanyVideoView.m in Sources */,
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
@@ -4872,6 +4922,7 @@
 				04896A0722C07A9B00E674C5 /* JMApplyForProtocolView.m in Sources */,
 				041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */,
 				04E25F6D22B509CD00F451C8 /* JMHTTPManager+FectchInvoiceInfo.m in Sources */,
+				04C4A18122CC55920049DA29 /* JMOpinionViewController.m in Sources */,
 				040A392A227DA9A600EDD9E0 /* JMGreetCell.m in Sources */,
 				04BBF2A3228EC6790068A9B1 /* JMVideoChatView.m in Sources */,
 				04731DE722A665650013D7CE /* JMHTTPManager+FectchAbility.m in Sources */,
@@ -4881,6 +4932,7 @@
 				04C6013E2260639C000B1FE0 /* JMAllMessageTableViewController.m in Sources */,
 				04072F6A2282D3680067A05D /* JMDeleteBankCardViewController.m in Sources */,
 				048A0DF422B91A6B006530EC /* JMCDetailModel.m in Sources */,
+				04C4A18922CCF5040049DA29 /* JMGreetModel.m in Sources */,
 				04BBF299228E67600068A9B1 /* JMAnswerOrHangUpView.m in Sources */,
 				041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */,
 				04C6015C2260874A000B1FE0 /* JMLookMeTableViewCell.m in Sources */,
@@ -4985,6 +5037,7 @@
 				04072F732283181A0067A05D /* JMPOIAdressData.m in Sources */,
 				040C181D2264210500456C53 /* JMHTTPManager+Vita.m in Sources */,
 				04ABB7A622B232C700E3F66A /* JMHTTPManager+OrderPay.m in Sources */,
+				04C4A18522CCE4850049DA29 /* JMHTTPManager+FectchGreetList.m in Sources */,
 				048348BA22696DC800DE4630 /* JMJobDescriptionViewController.m in Sources */,
 				040CD54C226AADF6000BB230 /* JMHTTPManager+CompanyCreate.m in Sources */,
 				04CC5F9422B3B67600C5DD46 /* JMDiscoverTopView.m in Sources */,
@@ -5054,6 +5107,7 @@
 				0485AD2C22A1164900B31506 /* JMMyResumeHeaderSecondTableViewCell.m in Sources */,
 				048348D32269BE4100DE4630 /* JMManageInterviewViewController.m in Sources */,
 				04ABB7A922B2383200E3F66A /* JMOrderPaymentModel.m in Sources */,
+				04C4A17122CC414D0049DA29 /* JMMessageListViewController.m in Sources */,
 				041CCED822A507A7002DFED3 /* JMMyOrderListViewController.m in Sources */,
 				04908B3A22A8CCB9000B5AB4 /* JMCUserSquareTableViewCell.m in Sources */,
 				0488E59922953B6700C2E398 /* JMCityListViewController.m in Sources */,

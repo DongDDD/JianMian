@@ -9,6 +9,7 @@
 #import "JMInputController.h"
 #import "DimensMacros.h"
 #import "Masonry.h"
+#import "JMHTTPManager+FectchGreetList.h"
 
 typedef NS_ENUM(NSUInteger, InputStatus) {
     Input_Status_Input,
@@ -19,7 +20,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 };
 
 
-@interface JMInputController ()<JMInputTextViewDelegate>
+@interface JMInputController ()<JMInputTextViewDelegate,JMGreetViewDelegate>
 @property (nonatomic, assign) InputStatus status;
 @end
 
@@ -127,6 +128,8 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     
 }
 
+
+
 //- (void)textViewDidTouchFace:(JMInputTextView *)textView
 //{
 //    if(_status == Input_Status_Input_More){
@@ -146,6 +149,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 ////    }
 //
 //}
+#pragma mark -  mydelegate
 
 - (void)textViewDidTouchMore:(JMInputTextView *)textView
 {
@@ -168,6 +172,21 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     }
 }
 
+-(void)didChooseGreetWithStr:(NSString *)str{
+    [_inputTextView.textView setText:str];
+}
+
+-(void)addGreetAction{
+    [_inputTextView.textView resignFirstResponder];
+    [[JMHTTPManager sharedInstance]createGreet_text:_inputTextView.textView.text mode:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        NSLog(@"添加成功！");
+        [_greeView.tableView reloadData];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 
 - (void)showMoreAnimation
 {
@@ -236,6 +255,8 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     }
 }
 
+
+
 - (JMMoreView *)moreView
 {
     if(!_moreView){
@@ -249,10 +270,11 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 {
     if(!_greeView){
         _greeView = [[JMGreetView alloc] initWithFrame:CGRectMake(0, _inputTextView.frame.origin.y + _inputTextView.frame.size.height, _inputTextView.frame.size.width, JMGreetView_Height)];
-        //        _moreView.delegate = self;
+        _greeView.delegate = self;
     }
     return _greeView;
 }
+
 
 
 /*

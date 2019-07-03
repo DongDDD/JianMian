@@ -122,6 +122,10 @@
             _placeHolder.text = @"请填写评价";
             
             break;
+        case JMPartTimeJobResumeFooterViewTypeSetting:
+            _placeHolder.text = @"请提出你的宝贵意见";
+            
+            break;
 
         default:
             break;

@@ -1,12 +1,12 @@
 //
-//  JMAllMessageTableViewController.m
+//  JMMessageListViewController.m
 //  JMian
 //
-//  Created by mac on 2019/4/12.
+//  Created by mac on 2019/7/3.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMAllMessageTableViewController.h"
+#import "JMMessageListViewController.h"
 #import "JMAllMessageTableViewCell.h"
 #import "JMNotificationViewController.h"
 #import <TIMManager.h>
@@ -18,8 +18,8 @@
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+Login.h"
 
-@interface JMAllMessageTableViewController ()
-
+@interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource,JMChatViewViewControllerDelegate>
+@property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSArray *modelArray;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
@@ -27,75 +27,83 @@
 
 @end
 
+
 static NSString *cellIdent = @"allMessageCellIdent";
 
 
-@implementation JMAllMessageTableViewController
+@implementation JMMessageListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
- 
-    [self.tableView registerNib:[UINib nibWithNibName:@"JMAllMessageTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
-     self.tableView.rowHeight = 79;
-    self.tableView.bounces = YES;
-   self.tableView.separatorStyle = UITableViewCellAccessoryNone;
-    [self.view addSubview:self.progressHUD];
-  
-//    [self initRefresh];
+    
+    self.title = @"聊出好机会";
+    [self setIsHiddenBackBtn:YES];
+    [self initView];
+    //    [self initRefresh];
 }
-
 
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [self getMsgList];    //获取自己服务器数据
+    [self getMsgList];    //获取自己服务器数据
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
+-(void)initView{
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.progressHUD];
+    [self setupHeaderRefresh];
 
 }
 
-//-(void)initRefresh{
-//    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(getData)];
-//    header.lastUpdatedTimeLabel.hidden = YES;
-//    header.stateLabel.hidden = YES;
-//    self.tableView.mj_header = header;
-//
-//
-//}
+-(void)setupHeaderRefresh
+{
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+    [self.tableView.mj_header beginRefreshing];
+}
+
+
+
 
 -(void)loadNewData{
-//    [self getMsgList];    //获取自己服务器数据
-
+    [self getMsgList];    //获取自己服务器数据
+    
 }
 
 - (void)onNewMessage:(NSNotification *)notification
 {
-//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-//    AudioServicesPlaySystemSound(1007);
-    [self getMsgList];    //获取自己服务器数据
 
+    [self getMsgList];    //获取自己服务器数据
+    
 }
 
 
 -(void)getMsgList{
-
+    
+    self.title = @"收取中...";
     [[JMHTTPManager sharedInstance]fecthMessageList_mode:@"array" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             
             self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-                [self updateConversations]; //获取腾讯云数据
+            [self updateConversations]; //获取腾讯云数据
         }
+        self.title = @"聊出好机会";
         [self.progressHUD setHidden:YES];
-//        [self.tableView.mj_header endRefreshing];
+        [self.tableView.mj_header endRefreshing];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         
     }];
-
-
+    
+    
 }
 
 - (void)updateConversations {
@@ -103,7 +111,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
     _dataArray = [NSMutableArray array];
     NSMutableArray *converArray = [NSMutableArray array];
-
+    self.unReadNum = 0;
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
     NSLog(@"腾讯云数据%@",convs);
@@ -119,6 +127,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
                 if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
                     data.unRead = [conv getUnReadMessageNum];
+                    _unReadNum += [conv getUnReadMessageNum];
                     data.convId = [conv getReceiver];
                     model.data = data;
                     data.time = [self getDateDisplayString:msg.timestamp];
@@ -126,10 +135,10 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     
                     model.data = data;
                     [converArray addObject:model];
-                    
+
                     
                 }
-
+                
             }else if(model.recipient_user_id == userInfomodel.user_id){
                 //判断recipient是自己的话，拿sender_mark去跟腾讯云的ReceiverID配对接收者
                 
@@ -138,6 +147,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
                     data.convId = [conv getReceiver];
                     data.unRead = [conv getUnReadMessageNum];
+                    _unReadNum += [conv getUnReadMessageNum];
                     model.data = data;
                     data.time = [self getDateDisplayString:msg.timestamp];
                     data.subTitle = [self getLastDisplayString:conv];
@@ -147,17 +157,18 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     
                     
                 }
-
+                
             }
-
+            
             
         }
-
+        
         if ([[conv getReceiver] isEqualToString:@"dominator"]) {
             JMMessageListModel *model = [[JMMessageListModel alloc]init];
             JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
             data.convId = [conv getReceiver];
             data.unRead = [conv getUnReadMessageNum];
+            _unReadNum += [conv getUnReadMessageNum];
             data.time = [self getDateDisplayString:msg.timestamp];
             data.subTitle = [self getLastDisplayString:conv];
             
@@ -177,9 +188,15 @@ static NSString *cellIdent = @"allMessageCellIdent";
     }
     
     [self.progressHUD hideAnimated:YES];
-//    [self.tableView.mj_header endRefreshing];
+    //    [self.tableView.mj_header endRefreshing];
     [self.tableView reloadData];
-
+    NSLog(@"未读消息数量%d",_unReadNum);
+    if (_unReadNum > 0) {
+        self.unReadNum = _unReadNum;
+        self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
+    }else{
+        self.tabBarItem.badgeValue = nil;
+    }
 }
 
 //-(void)getDominator{
@@ -226,7 +243,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         else if([elem isKindOfClass:[TIMCustomElem class]]){
             TIMCustomElem *custom = (TIMCustomElem *)elem;
             str = custom.desc;
-          
+            
             break;
         }
         else if([elem isKindOfClass:[TIMImageElem class]]){
@@ -383,7 +400,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         
         cell.backgroundColor = BG_COLOR;
     }
-
+    
     
     return cell;
 }
@@ -391,11 +408,13 @@ static NSString *cellIdent = @"allMessageCellIdent";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
     vc.myConvModel = [_dataArray objectAtIndex:indexPath.row];
+    vc.delegate = self;
 //    [self setReadMessageAction_model:[_dataArray objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:vc animated:YES];
     
     
 }
+
 -(void)getUserInfo{
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
@@ -409,45 +428,55 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 -(void)setReadMessageAction_model:(JMMessageListModel *)_myModel{
-
-        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-        //判断senderid是不是自己
-       BOOL _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
-       NSString *_receiverID;
+    
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    //判断senderid是不是自己
+    BOOL _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
+    NSString *_receiverID;
     //先判断是否系统消息
     if ([_myModel.data.convId isEqualToString:@"dominator"]) {
         _receiverID = @"dominator";
     }else{
-//    17817295362
+        //    17817295362
         if (_isSelfIsSender) {
-    
+            
             _receiverID = _myModel.recipient_mark;
         }else{
-    
+            
             _receiverID = _myModel.sender_mark;
         }
     }
     
-        TIMConversation *conv = [[TIMManager sharedInstance]
-                                 getConversation:(TIMConversationType)TIM_C2C
-                                 receiver:_receiverID];
-        [conv setReadMessage:nil succ:^{
-            NSLog(@"已读上报");
-            if (_myModel.data.unRead > 0) {
-                
-                self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
-            }else{
-                self.tabBarItem.badgeValue = nil;
-            }
-//            !_didReadMessage ? : _didReadMessage(_myModel.data.unRead);
-            
-        } fail:^(int code, NSString *msg) {
-            NSLog(@"已读上报失败");
-    
-        }];
+    TIMConversation *conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:_receiverID];
+    [conv setReadMessage:nil succ:^{
+        NSLog(@"已读上报");
+//        if (_myModel.data.unRead > 0) {
+//
+//            self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
+//        }else{
+//            self.tabBarItem.badgeValue = nil;
+//        }
+        [self getMsgList];
+        //            !_didReadMessage ? : _didReadMessage(_myModel.data.unRead);
+        
+    } fail:^(int code, NSString *msg) {
+        NSLog(@"已读上报失败");
+        
+    }];
     
     
 }
+#pragma mark - MyDelegate
+-(void)didReadActionWithData:(JMMessageListModel *)data{
+        [self setReadMessageAction_model:data];
+    
+}
+
+
+#pragma mark - lazy
+
 -(MBProgressHUD *)progressHUD{
     if (!_progressHUD) {
         _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
@@ -458,22 +487,46 @@ static NSString *cellIdent = @"allMessageCellIdent";
     return _progressHUD;
 }
 
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
+        _tableView.separatorStyle = NO;
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+        _tableView.sectionHeaderHeight = 0;
+        _tableView.showsVerticalScrollIndicator = NO;
+        [self.tableView registerNib:[UINib nibWithNibName:@"JMAllMessageTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
+        self.tableView.rowHeight = 79;
+        self.tableView.separatorStyle = UITableViewCellAccessoryNone;
+        
+        
+    }
+    return _tableView;
+}
 
 /*
-#pragma mark - Table view delegate
+ #pragma mark - Table view delegate
+ 
+ // In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
+ - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Navigation logic may go here, for example:
+ // Create the next view controller.
+ <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
+ 
+ // Pass the selected object to the new view controller.
+ 
+ // Push the view controller.
+ [self.navigationController pushViewController:detailViewController animated:YES];
+ }
+ */
 
-// In a xib-based application, navigation from a table can be handled in -tableView:didSelectRowAtIndexPath:
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Navigation logic may go here, for example:
-    // Create the next view controller.
-    <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:<#@"Nib name"#> bundle:nil];
-    
-    // Pass the selected object to the new view controller.
-    
-    // Push the view controller.
-    [self.navigationController pushViewController:detailViewController animated:YES];
-}
-*/
+/*
+ #pragma mark - Navigation
+
+#pragma mark - Getter
+
 
 /*
 #pragma mark - Navigation

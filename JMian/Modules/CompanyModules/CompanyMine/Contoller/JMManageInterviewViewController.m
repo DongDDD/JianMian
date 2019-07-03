@@ -262,10 +262,10 @@ static NSString *cellIdent = @"managerCellIdent";
             vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
         }else if ([status isEqualToString:@"2"]){
-            [self setCustumMessage_receiverID:_receiver_id dic:nil title:@"[应聘者已拒绝面试邀请]"];
+            [self setCustumMessage_receiverID:_receiver_id dic:nil title:@"[用户拒绝面试邀请]"];
         
         }else if ([status isEqualToString:@"3"]){
-            [self setCustumMessage_receiverID:_receiver_id dic:nil title:@"[应聘者已接受面试邀请]"];
+            [self setCustumMessage_receiverID:_receiver_id dic:nil title:@"[用户接受面试邀请成功]"];
             
         }
         [self.tableView.mj_header beginRefreshing];

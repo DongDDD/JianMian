@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)setInterviewModel:(JMInterViewModel *)interviewModel;
 -(void)setVideoChatDic:(NSDictionary *)videoChatDic;
+@property (nonatomic, strong)NSDictionary *videoChatDic;
 @property (nonatomic, copy)NSString *receiverID;//此ID仅用于发送视频自定义消息
 
 @property(nonatomic,weak)id<JMVideoChatViewDelegate>delegate;

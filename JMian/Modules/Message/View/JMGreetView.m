@@ -10,6 +10,8 @@
 #import "JMGreetCell.h"
 #import "Masonry.h"
 #import "DimensMacros.h"
+#import "JMHTTPManager+FectchGreetList.h"
+#import "JMGreetModel.h"
 
 @implementation JMGreetView
 static NSString *cellIdent = @"CellIdent";
@@ -18,6 +20,7 @@ static NSString *cellIdent = @"CellIdent";
     if (self = [super initWithFrame:frame]) {
         [self initView];
         self.backgroundColor = [UIColor whiteColor];
+        [self getGreetList];
     }
     return self;
 }
@@ -51,13 +54,25 @@ static NSString *cellIdent = @"CellIdent";
 
 -(void)addGreetAction:(UIButton *)button
 {
-    if(_delegate && [_delegate respondsToSelector:@selector(addGreetAction:)]){
+    if(_delegate && [_delegate respondsToSelector:@selector(addGreetAction)]){
         [_delegate addGreetAction];
     }
 
 
 }
 
+
+-(void)getGreetList{
+    [[JMHTTPManager sharedInstance]getGreetList_keyword:nil mode:nil user_id:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.listArray = [JMGreetModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+         }
+        [self.tableView reloadData];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -65,7 +80,7 @@ static NSString *cellIdent = @"CellIdent";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return self.listArray.count;
 }
 
 
@@ -79,15 +94,25 @@ static NSString *cellIdent = @"CellIdent";
          UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    }
-  
-    cell.textLabel.text = @"你好，我对你发布的简历很感兴趣，希望我们详聊...";
+    JMGreetModel *model = self.listArray[indexPath.row];
+    NSString *str = model.text;
+    cell.textLabel.text = str;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.font = [UIFont systemFontOfSize:13];
     cell.textLabel.textColor = TITLE_COLOR;
-    cell.backgroundColor = BG_COLOR;;
+    cell.backgroundColor = BG_COLOR;
     return cell;
 }
 
-
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *str;
+    JMGreetModel *model = self.listArray[indexPath.row];
+    str = model.text;
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(didChooseGreetWithStr:)]) {
+        [_delegate didChooseGreetWithStr:str];
+    }
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

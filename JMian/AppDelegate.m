@@ -26,6 +26,7 @@
 #import "IQKeyboardManager.h"
 #import "JMHTTPManager+InterView.h"
 #import "LoginPhoneViewController.h"
+#import "JMManageInterviewViewController.h"
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate>
 
@@ -356,6 +357,7 @@
         NSLog(@"视频自定义消息%@",self.videoChatDic);
         if (self.videoChatDic && [custom_elem.desc isEqualToString:@"[邀请视频聊天]"]) {
             [self.answerOrHangUpView setHidden:NO];
+            [self.answerOrHangUpView.player play];
             [_window addSubview:self.answerOrHangUpView];
             [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
             AudioServicesPlaySystemSound(1118);
@@ -373,26 +375,14 @@
         }
      
         
-//        else if (self.videoChatDic){
-//
-//            NSString *str = self.videoChatDic[@"leaveAction"];
-//            if ([str isEqualToString:@"leaveAction"]) {
-//                [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
-//                [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
-//                [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMUHangUpListener object:nil];
-//                NSLog(@"----leaveAction----Colse");
-//
-//            }
-//        }
-        
         if ([custom_elem.desc isEqualToString:@"[视频已取消]"]) {
             [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
             [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMUHangUpListener object:nil];
-            NSLog(@"leaveActionleaveActionleaveAction");
-            AudioServicesRemoveSystemSoundCompletion(1118);
-            AudioServicesDisposeSystemSoundID(1118); AudioServicesRemoveSystemSoundCompletion(kSystemSoundID_Vibrate);
-            AudioServicesDisposeSystemSoundID(kSystemSoundID_Vibrate);
+//            [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
+            [self.answerOrHangUpView.player stop];
+            
+            NSLog(@"[视频已取消]");
 
         }
         
@@ -444,23 +434,51 @@
 //    [_window makeKeyAndVisible];
     [self.answerOrHangUpView.player stop];
     [_window addSubview:self.videoChatView];
-    [self.videoChatView setVideoChatDic:self.videoChatDic];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    NSString *myMarkId;
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        myMarkId = [NSString stringWithFormat:@"%@b",userModel.user_id];
+    }else{
+        myMarkId = [NSString stringWithFormat:@"%@a",userModel.user_id];
+    }
+    NSDictionary *dic;
+    dic = @{
+            User_ID:myMarkId,
+            Channel_ID:self.videoChatDic[Channel_ID], //用户类型
+            isPartTime:self.videoChatDic[isPartTime] //是否为兼职视频
+            };
+    
+    
+    [self.videoChatView setVideoChatDic:dic];
     
     
 }
 
 //还没进入房间，拒绝接听，关闭弹窗
 -(void)didClickClose{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    NSString *myMarkId;
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        myMarkId = [NSString stringWithFormat:@"%@b",userModel.user_id];
+    }else{
+        myMarkId = [NSString stringWithFormat:@"%@a",userModel.user_id];
+    }
     NSDictionary *dic;
     dic = @{
-            @"[视频已取消]":@"[视频已取消]"
+            User_ID:myMarkId,
+            Channel_ID:self.videoChatDic[Channel_ID], //用户类型
+            isPartTime:self.videoChatDic[isPartTime] //是否为兼职视频
             };
     [self.answerOrHangUpView.player stop];
-    [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
     [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
-    if (self.videoChatDic[SendMarkID] ) {
+    NSNumber * boolNum = self.videoChatDic[isPartTime];
+    BOOL isPT = [boolNum boolValue];
+    if (!isPT) {
+        [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
         
-        [self setVideoInvite_receiverID:self.videoChatDic[SendMarkID] dic:nil title:@"[视频已取消]"];
+    }
+    if (self.videoChatDic[User_ID]) {
+        [self setVideoInvite_receiverID:self.videoChatDic[User_ID] dic:dic title:@"[视频已取消]"];
     }
     
 }
@@ -480,9 +498,13 @@
 
 // 对方挂断了 离开房间了
 -(void)appDelegateLeaveChannelActoin{
-
-    //改状态成4 这个状态才可以评价
-    [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
+    NSNumber *boolNum = self.videoChatDic[isPartTime];
+    BOOL isPT = [boolNum boolValue];
+    if (!isPT) {
+        //改状态成4 这个状态才可以评价
+        [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
+        
+    }
 
 }
 
@@ -500,13 +522,27 @@
 -(void)updateInterviewStatus_interviewID:(NSString *)interviewID status:(NSString *)status{
     [[JMHTTPManager sharedInstance]updateInterViewWith_Id:interviewID status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         NSString *str;
+        NSNumber * boolNum = self.videoChatDic[isPartTime];
+        BOOL isPT = [boolNum boolValue];
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         if ([status isEqualToString:@"4"] && [userModel.type isEqualToString:C_Type_USER]) {
             //C端在这个状态才可以去反馈
-            [_window addSubview:self.feedBackChooseVC.view];
-            str = @"面试结束了，快去面试反馈吧！";
+            if(isPT){
+                str = @"视频结束了！";
+            }else{
+                [_window addSubview:self.feedBackChooseVC.view];
+                str = @"面试结束了，请进行面试反馈吧！";
+                
+
+            }
         }else if ([status isEqualToString:@"4"] && [userModel.type isEqualToString:B_Type_UESR]){
-            str = @"面试结束了，可以去面试管理录用人才";
+            if(isPT){
+           
+                str = @"视频结束了！";
+            }else{
+
+                str = @"面试结束了，可以去面试管理录用人才";
+            }
 
         }
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:str delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
@@ -578,7 +614,6 @@
         _answerOrHangUpView = [[JMAnswerOrHangUpView alloc]initWithFrame:_window.bounds];
         _answerOrHangUpView.delegate = self;
         _answerOrHangUpView.tag = 221;
-        
         
     }
     return _answerOrHangUpView;

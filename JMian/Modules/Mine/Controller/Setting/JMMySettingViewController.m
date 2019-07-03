@@ -13,6 +13,8 @@
 #import "NavigationViewController.h"
 #import "JMJudgeViewController.h"
 #import "JMVideoPlayManager.h"
+#import "JMAboutOursViewController.h"
+#import "JMOpinionViewController.h"
 
 @interface JMMySettingViewController ()<UITableViewDelegate,UITableViewDataSource,JMUserChangeWindowViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -31,7 +33,7 @@
     self.tableView.backgroundColor = BG_COLOR;
     self.tableView.sectionIndexColor = BG_COLOR;
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
-    _titleArray = @[@"修改手机号",@"清除缓存",@"客服热线: 159-8910-9060",@"应用版本"];
+    _titleArray = @[@"客服热线",@"应用版本"];
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -64,7 +66,7 @@
         
         return 1;
     }else if (section == 1){
-        return 4;
+        return 2;
         
     }else if (section == 2){
         return 2;
@@ -84,9 +86,10 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TTextMessageCell_ReuseId];
     
     if(cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:TTextMessageCell_ReuseId];
         //            cell.delegate = self;
     }
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = _titleArray[indexPath.row];
     cell.textLabel.textColor = TITLE_COLOR;
@@ -100,12 +103,19 @@
 
     }else if (indexPath.section == 1){
         
-            cell.textLabel.text = _titleArray[indexPath.row];
-        
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.textLabel.text = _titleArray[indexPath.row];
+        if (indexPath.row == 0) {
+            cell.detailTextLabel.text = @"159-8910-9060";
+        }
         
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
             cell.textLabel.text = @"关于平台";
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            cell.detailTextLabel.text = app_Version;
+
         }else if (indexPath.row == 1){
             cell.textLabel.text = @"反馈意见";
         }
@@ -135,10 +145,22 @@
          }else{
              _myWindowView = [[JMUserChangeWindowView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
              _myWindowView.delegate = self;
-             [self.view addSubview:_myWindowView];
+             [[UIApplication sharedApplication].keyWindow addSubview:_myWindowView];
          }
      
      }
+    if (indexPath.section == 2) {
+        if (indexPath.row ==0) {
+            JMAboutOursViewController *vc = [[JMAboutOursViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (indexPath.row ==1) {
+            JMOpinionViewController *vc = [JMOpinionViewController alloc];
+            [self.navigationController pushViewController:vc animated:NO];
+
+        }
+    }
+    
+    
     if (indexPath.section == 3) {
         
         [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

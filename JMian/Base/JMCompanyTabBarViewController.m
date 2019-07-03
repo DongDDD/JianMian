@@ -20,12 +20,16 @@
 #import "JMDiscoverHomeViewController.h"
 #import "JMAssignmentSquareViewController.h"
 #import "UITabBar+XSDExt.h"
+#import "JMAllMessageTableViewController.h"
+#import "JMMessageListViewController.h"
 
 
 @interface JMCompanyTabBarViewController ()
 @property (nonatomic, strong) NSArray *modelArray;
 @property (nonatomic, assign)int unReadNum;
-@property (nonatomic ,strong)JMMessageViewController *message;
+//@property (nonatomic ,strong)JMMessageViewController *message;
+@property (nonatomic ,strong)JMMessageListViewController *message;
+
 @property (nonatomic ,strong)JMMineViewController *mine;
 @property(nonatomic,strong)UIView *taskBadgeView;
 
@@ -36,12 +40,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     //B端
     JMCompanyHomeViewController *companyHome = [[JMCompanyHomeViewController alloc]init];
     [self addChildVc:companyHome title:@"首页" image:@"home" selectedImage:@"pitch_on_home" ];
     
-    self.message = [[JMMessageViewController alloc] init];
+    self.message = [[JMMessageListViewController alloc] init];
     
     [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
     
@@ -63,6 +66,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskNotification:) name:Notification_TaskListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderNotification:) name:Notification_OrderListener object:nil];
+    [self getMsgList];
 
 }
 
@@ -159,6 +163,8 @@
     if (_unReadNum > 0) {
         self.message.unReadNum = _unReadNum;
         self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.message.unReadNum];
+    }else{
+        self.message.tabBarItem.badgeValue = nil;
     }
 }
 
