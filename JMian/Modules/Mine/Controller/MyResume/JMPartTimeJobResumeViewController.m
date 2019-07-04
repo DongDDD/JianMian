@@ -46,7 +46,11 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         
     }else if (_viewType == JMPartTimeJobTypeResume){
         [self.view addSubview:self.tableView];
-
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.mas_topLayoutGuideTop);
+            make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+            make.left.and.right.mas_equalTo(self.view);
+        }];
     }else if (_viewType == JMPartTimeJobTypeHome){
         [self.view addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

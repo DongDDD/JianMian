@@ -161,8 +161,14 @@
 
     NSLog(@"未读消息数量%d",_unReadNum);
     if (_unReadNum > 0) {
-        self.message.unReadNum = _unReadNum;
-        self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.message.unReadNum];
+        if (_unReadNum > 99) {
+            self.message.tabBarItem.badgeValue = @"99+";
+
+        }else{
+            self.message.unReadNum = _unReadNum;
+            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.message.unReadNum];
+        
+        }
     }else{
         self.message.tabBarItem.badgeValue = nil;
     }

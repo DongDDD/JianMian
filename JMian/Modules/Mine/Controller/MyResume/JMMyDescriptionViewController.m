@@ -52,6 +52,10 @@
     }
 }
 
+-(void)doneClicked{
+    [_decriptionTextView.contentTextView resignFirstResponder];
+}
+
 -(void)setMyDescription:(NSString *)myDescription {
     [self.decriptionTextView setContent:myDescription];
     [self.decriptionTextView.placeHolder setHidden:YES];
@@ -101,7 +105,7 @@
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
 //        _decriptionTextView.contentTextView.delegate = self;
         _decriptionTextView.frame = CGRectMake(0, 10, SCREEN_WIDTH, 229);
-//        _decriptionTextView.contentTextView.returnKeyType = UIReturnKeyDone;
+        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
         [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeMyAdvantage];
         //        _decriptionTextView.contentTextView.delegate = self;
         

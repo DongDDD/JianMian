@@ -17,12 +17,13 @@
 #import "JMAllMessageTableViewCellData.h"
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+Login.h"
+#import "JMHTTPManager+CreateConversation.h"
 
 @interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource,JMChatViewViewControllerDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSArray *modelArray;
-@property (nonatomic, strong) MBProgressHUD *progressHUD;
+//@property (nonatomic, strong) MBProgressHUD *progressHUD;
 @property (nonatomic, strong)JMMessageListModel *dominatorModel;
 
 @end
@@ -46,6 +47,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self getMsgList];    //获取自己服务器数据
+    [self setupHeaderRefresh];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
 }
 
@@ -56,8 +58,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 -(void)initView{
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.progressHUD];
-    [self setupHeaderRefresh];
 
 }
 
@@ -85,6 +85,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
 }
 
+#pragma mark - data
 
 -(void)getMsgList{
     
@@ -96,7 +97,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
             [self updateConversations]; //获取腾讯云数据
         }
         self.title = @"聊出好机会";
-        [self.progressHUD setHidden:YES];
+//        [self.progressHUD setHidden:YES];
         [self.tableView.mj_header endRefreshing];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -104,6 +105,23 @@ static NSString *cellIdent = @"allMessageCellIdent";
     }];
     
     
+}
+//创建聊天
+-(void)createChatRequstWithType:(NSString *)type foreign_key:(NSString *)foreign_key recipient:(NSString *)user_id{
+    if (user_id && foreign_key) {
+        [[JMHTTPManager sharedInstance]createChat_type:type recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+            //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
+            //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            //        [alert show];
+            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+
+        }];
+
+    }
 }
 
 - (void)updateConversations {
@@ -187,13 +205,18 @@ static NSString *cellIdent = @"allMessageCellIdent";
         
     }
     
-    [self.progressHUD hideAnimated:YES];
     //    [self.tableView.mj_header endRefreshing];
     [self.tableView reloadData];
     NSLog(@"未读消息数量%d",_unReadNum);
     if (_unReadNum > 0) {
-        self.unReadNum = _unReadNum;
-        self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
+        if (_unReadNum > 99) {
+            self.tabBarItem.badgeValue = @"99+";
+            
+        }else{
+            self.unReadNum = _unReadNum;
+            self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
+            
+        }
     }else{
         self.tabBarItem.badgeValue = nil;
     }
@@ -396,6 +419,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
     JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
     [cell setData:[_dataArray objectAtIndex:indexPath.row]];
     JMMessageListModel *model = _dataArray[indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if ([model.data.convId isEqualToString:@"dominator"]) {
         
         cell.backgroundColor = BG_COLOR;
@@ -405,13 +429,35 @@ static NSString *cellIdent = @"allMessageCellIdent";
     return cell;
 }
 
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        NSString *recipient_id;
+        NSString *foreign_key;
+        if (userModel.user_id == messagelistModel.sender_user_id) {
+            recipient_id = messagelistModel.recipient_user_id;
+        }else{
+            recipient_id = messagelistModel.sender_user_id;
+        }
+        if ([messagelistModel.type isEqualToString:@"1"]) {
+            foreign_key = messagelistModel.work_work_id;
+        }else if ([messagelistModel.type isEqualToString:@"2"]) {
+            foreign_key = messagelistModel.job_ability_id;
+
+        }
+        
+        
+        [self createChatRequstWithType:messagelistModel.type foreign_key:foreign_key recipient:recipient_id];
+    }else{
+        
     JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-    vc.myConvModel = [_dataArray objectAtIndex:indexPath.row];
+    vc.myConvModel = messagelistModel;
     vc.delegate = self;
 //    [self setReadMessageAction_model:[_dataArray objectAtIndex:indexPath.row]];
     [self.navigationController pushViewController:vc animated:YES];
-    
+    }
     
 }
 
@@ -477,15 +523,15 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 #pragma mark - lazy
 
--(MBProgressHUD *)progressHUD{
-    if (!_progressHUD) {
-        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-        _progressHUD.progress = 0.6;
-        _progressHUD.dimBackground = NO; //设置有遮罩
-        [_progressHUD showAnimated:YES]; //显示进度框
-    }
-    return _progressHUD;
-}
+//-(MBProgressHUD *)progressHUD{
+//    if (!_progressHUD) {
+//        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//        _progressHUD.progress = 0.6;
+//        _progressHUD.dimBackground = NO; //设置有遮罩
+//        [_progressHUD showAnimated:YES]; //显示进度框
+//    }
+//    return _progressHUD;
+//}
 
 - (UITableView *)tableView {
     if (!_tableView) {

@@ -11,7 +11,12 @@
 
 
 @implementation JMHomeWorkModel
-
++ (NSDictionary *)mj_objectClassInArray {
+    return @{
+             @"files":@"JMComFilesModel",
+             
+             };
+}
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     
     return @{
@@ -44,5 +49,12 @@
              };
     
 }
+
+@end
+
+
+@implementation JMComFilesModel
+
+ 
 
 @end

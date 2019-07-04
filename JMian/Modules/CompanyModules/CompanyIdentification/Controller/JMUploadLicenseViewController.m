@@ -53,29 +53,34 @@
 - (IBAction)doneAction:(id)sender {
     
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    
-    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:userModel.company_real_company_name company_position:userModel.company_real_company_position nickname:nil avatar:nil enterprise_step:@"4" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:_imageLicenseUrl status:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    if (_imageLicenseUrl) {
         
-        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:userModel.company_real_company_name company_position:userModel.company_real_company_position nickname:nil avatar:nil enterprise_step:@"4" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:_imageLicenseUrl status:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
-            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-            [JMUserInfoManager saveUserInfo:userInfo];
+            [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                
+                JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+                [JMUserInfoManager saveUserInfo:userInfo];
+                
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
+                                                              delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+                [alert show];
+                JMChangeIdentityViewController *vc = [[JMChangeIdentityViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                
+            }];
             
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alert show];
-            JMChangeIdentityViewController *vc = [[JMChangeIdentityViewController alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
+            
         }];
-        
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-        
-    }];
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"请选择营业执照" btnTitle:@"好的"];
+    
+    }
     
 }
 

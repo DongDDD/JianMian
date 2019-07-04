@@ -25,6 +25,8 @@
 -(void)setVideoUrl:(NSString *)videoUrl{
     if (videoUrl == nil) {
         self.videoImg.image = [UIImage imageNamed:@"break"];
+        [self.playBtn setHidden:YES];
+        self.titleLab.text = @"该公司暂时没有上传视频";
     }else{
         NSURL *URL = [NSURL URLWithString:videoUrl];
         dispatch_async(dispatch_get_global_queue(0, 0), ^{

@@ -91,6 +91,10 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr;
 //求职状态数据转化
 -(NSString *)getJobStatusWithStatusStr:(NSString *)statusStr;
+//键盘工具栏
+- (UIToolbar *)myToolbar;
+//没数据提示
+-(JMNoDataView *)noDataView;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -21,7 +21,7 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *workNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *workNameBtn;
-@property (weak, nonatomic) IBOutlet UIView *pickerBGView;
+//@property (weak, nonatomic) IBOutlet UIView *pickerBGView;
 @property (weak, nonatomic) IBOutlet UIButton *workPropertyBtn;
 
 
@@ -153,6 +153,7 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 //PositionDesiredViewController代理方法
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
     [self.workNameBtn setTitle:labStr forState:UIControlStateNormal];
@@ -162,10 +163,10 @@
 }
 
 - (IBAction)workPorpertyAction:(UIButton *)sender {
-    self.pickerArray = [NSArray arrayWithObjects:@"兼职",@"全职",@"实习",nil];
-    [self.pickerView reloadAllComponents];
-    _selectedBtn = sender;
-    [self.pickerBGView setHidden:NO];
+//    self.pickerArray = [NSArray arrayWithObjects:@"兼职",@"全职",@"实习",nil];
+//    [self.pickerView reloadAllComponents];
+//    _selectedBtn = sender;
+//    [self.pickerBGView setHidden:NO];
 }
 
 - (IBAction)workExpriencesAction:(UIButton *)sender {
@@ -178,6 +179,7 @@
     [self.expPickerSingle show];
 
 }
+
 -(void)setExprienceRangeWithExpStr:(NSString *)ExpStr{
     NSArray *array = [ExpStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
     
@@ -187,12 +189,8 @@
     NSInteger minNum = [minStr integerValue];
     NSInteger maxNum = [maxStr integerValue];
     
-    
     self.expriencesMin = @(minNum);
     self.expriencesMax = @(maxNum);
-    
-    
-    
     
 }
 
@@ -235,6 +233,7 @@
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 //JMWelfareViewController代理方法
 -(void)sendBtnLabData:(NSMutableArray *)btns{
     NSMutableArray *strArray = [[NSMutableArray alloc]init];
@@ -280,44 +279,44 @@
     
 }
 
-
-- (IBAction)pickerOKAction:(UIButton *)sender {
-    
-    
-    switch (_selectedBtn.tag) {
-        case 1:
-            [self.workPropertyBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-            [self.workPropertyBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            break;
-            
-        case 2:
-            [self.expriencesBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-            [self.expriencesBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            [self setExprienceRangeWithExpStr:self.pickerArray[_pickerRow]];
-            break;
-            
-        case 3:
-            [self.educationBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-            [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            self.educationNum = @(_pickerRow);
-            break;
-            
-        case 4:
-            [self.salaryBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-            [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            [self setSalaryRangeWithSalaryStr:self.pickerArray[_pickerRow]];
-            
-            break;
-            
-        default:
-            break;
-    }
-    [self.pickerBGView setHidden:YES];
-    
-}
-- (IBAction)pickerViewDeleteAction:(id)sender {
-    [self.pickerBGView setHidden:YES];
-}
+//
+//- (IBAction)pickerOKAction:(UIButton *)sender {
+//
+//
+//    switch (_selectedBtn.tag) {
+//        case 1:
+//            [self.workPropertyBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+//            [self.workPropertyBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            break;
+//
+//        case 2:
+//            [self.expriencesBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+//            [self.expriencesBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            [self setExprienceRangeWithExpStr:self.pickerArray[_pickerRow]];
+//            break;
+//
+//        case 3:
+//            [self.educationBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+//            [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            self.educationNum = @(_pickerRow);
+//            break;
+//
+//        case 4:
+//            [self.salaryBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+//            [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            [self setSalaryRangeWithSalaryStr:self.pickerArray[_pickerRow]];
+//
+//            break;
+//
+//        default:
+//            break;
+//    }
+////    [self.pickerBGView setHidden:YES];
+//
+//}
+//- (IBAction)pickerViewDeleteAction:(id)sender {
+////    [self.pickerBGView setHidden:YES];
+//}
 #pragma mark - textField delegate
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -349,74 +348,74 @@
     
     
 }
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    _pickerRow = row;
-    
-    switch (_selectedBtn.tag) {
-        case 1:
-            [self.workPropertyBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
-            [self.workPropertyBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            break;
-       
-        case 2:
-            [self.expriencesBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
-            [self.expriencesBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            [self setExprienceRangeWithExpStr:self.pickerArray[row]];
-            break;
-      
-        case 3:
-            [self.educationBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
-            [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            self.educationNum = @(row);
-            break;
-        
-        case 4:
-            [self.salaryBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
-            [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            //k 转 000后 传给服务器
-            [self setSalaryValus_row:row];
-            break;
-
-        default:
-            break;
-    }
-
-
-}
-
--(void)setSalaryValus_row:(NSInteger)row{
-    NSMutableArray *array = [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
-    self.salaryMin = array[0];
-    self.salaryMax = array[1];
-
-}
-
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-
-{
-    
-    return 1;
-    
-}
-
-//返回指定列的行数
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-
-{
-    [self.workNameTextField resignFirstResponder];
-    return [self.pickerArray count];
-    
-}
+//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
 //
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    
-    NSString *str = [self.pickerArray objectAtIndex:row];
-    
-    return str;
-    
-}
+//    _pickerRow = row;
+//
+//    switch (_selectedBtn.tag) {
+//        case 1:
+//            [self.workPropertyBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
+//            [self.workPropertyBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            break;
+//
+//        case 2:
+//            [self.expriencesBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
+//            [self.expriencesBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            [self setExprienceRangeWithExpStr:self.pickerArray[row]];
+//            break;
+//
+//        case 3:
+//            [self.educationBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
+//            [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            self.educationNum = @(row);
+//            break;
+//
+//        case 4:
+//            [self.salaryBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
+//            [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            //k 转 000后 传给服务器
+//            [self setSalaryValus_row:row];
+//            break;
+//
+//        default:
+//            break;
+//    }
+//
+//
+//}
+
+//-(void)setSalaryValus_row:(NSInteger)row{
+//    NSMutableArray *array = [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
+//    self.salaryMin = array[0];
+//    self.salaryMax = array[1];
+//
+//}
+
+//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+//
+//{
+//
+//    return 1;
+//
+//}
+//
+////返回指定列的行数
+//
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//
+//{
+//    [self.workNameTextField resignFirstResponder];
+//    return [self.pickerArray count];
+//
+//}
+////
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//
+//    NSString *str = [self.pickerArray objectAtIndex:row];
+//
+//    return str;
+//
+//}
 
 
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView{

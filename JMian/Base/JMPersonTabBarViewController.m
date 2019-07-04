@@ -25,7 +25,7 @@
 
 @interface JMPersonTabBarViewController () <MCTabBarControllerDelegate>
 @property (nonatomic, strong) NSArray *modelArray;
-//@property (nonatomic, assign)int unReadNum;
+@property (nonatomic, assign)int unReadNum;
 //@property (nonatomic ,strong)JMMessageViewController *message;
 @property (nonatomic ,strong)JMMineViewController *mine;
 @property (nonatomic ,strong)JMMessageListViewController *message;
@@ -37,7 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
+    _unReadNum = 0;
+    [self getMsgList];
     //选中时的颜色
     //透明设置为NO，显示白色，view的高度到tabbar顶部截止，YES的话到底部
 //    self.mcTabbar.translucent = NO;
@@ -73,11 +74,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self.message selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderNotification:) name:Notification_OrderListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskNotification:) name:Notification_TaskListener object:nil];
 
-
+   
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -85,10 +86,11 @@
     
 }
 
-//- (void)onNewMessage:(NSNotification *)notification
-//{
-//    [self getMsgList];
-//}
+- (void)onNewMessage:(NSNotification *)notification
+{
+    _unReadNum = 0;
+    [self getMsgList];
+}
 
 - (void)orderNotification:(NSNotification *)notification
 {
@@ -106,75 +108,83 @@
 #pragma mark - 获取未读消息
 
 
-//-(void)getMsgList{
-//
-//    [[JMHTTPManager sharedInstance]fecthMessageList_mode:@"array" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//        if (responsObject[@"data"]) {
-//
-//            self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-//            [self updateConversations]; //获取腾讯云数据
-//
-//            //            [self.tableView reloadData];
-//
-//        }
-//
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-//
-//    }];
-//
-//
-//}
+-(void)getMsgList{
 
-//- (void)updateConversations {
-//
-//    //    _dataArray = [NSMutableArray array];
-//    //    15011331133
-//    JMUserInfoModel *userInfomodel = [JMUserInfoManager getUserInfo];
-//    TIMManager *manager = [TIMManager sharedInstance];
-//    NSArray *convs = [manager getConversationList];
-//    NSLog(@"腾讯云数据%@",convs);
-//    _unReadNum = 0;
-//
-//    for (TIMConversation *conv in convs) {
-//        if([conv getType] == TIM_SYSTEM){
-//            continue;
-//        }
-//        TIMMessage *msg = [conv getLastMsg];
-//        NSLog(@"%@",msg);
-////        _unReadNum += [conv getUnReadMessageNum];
-//        for (JMMessageListModel *model in self.modelArray) {
-//            if (model.sender_user_id == userInfomodel.user_id) {
-//                //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
-//                if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
-//
-//                    _unReadNum += [conv getUnReadMessageNum];
-//                }
-//
-//            }else if(model.recipient_user_id == userInfomodel.user_id){
-//
-//                if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
-//
-//                    _unReadNum += [conv getUnReadMessageNum];
-//
-//                }
-//
-//            }
-//
-//        }
-////        加上系统消息的未读
-//        if ([[conv getReceiver] isEqualToString:@"dominator"]) {
-//            _unReadNum += [conv getUnReadMessageNum];
-//
-//        }
-//    }
-//
-//    NSLog(@"未读消息数量%d",_unReadNum);
-//    if (_unReadNum > 0) {
-//        self.message.unReadNum = _unReadNum;
-//        self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.message.unReadNum];
-//    }
-//}
+    [[JMHTTPManager sharedInstance]fecthMessageList_mode:@"array" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+
+            self.modelArray = [JMMessageListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            [self updateConversations]; //获取腾讯云数据
+
+            //            [self.tableView reloadData];
+
+        }
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+
+
+    }];
+
+
+}
+
+- (void)updateConversations {
+
+    //    _dataArray = [NSMutableArray array];
+    //    15011331133
+    JMUserInfoModel *userInfomodel = [JMUserInfoManager getUserInfo];
+    TIMManager *manager = [TIMManager sharedInstance];
+    NSArray *convs = [manager getConversationList];
+    NSLog(@"腾讯云数据%@",convs);
+
+
+    for (TIMConversation *conv in convs) {
+        if([conv getType] == TIM_SYSTEM){
+            continue;
+        }
+        TIMMessage *msg = [conv getLastMsg];
+        NSLog(@"%@",msg);
+//        _unReadNum += [conv getUnReadMessageNum];
+        for (JMMessageListModel *model in self.modelArray) {
+            if (model.sender_user_id == userInfomodel.user_id) {
+                //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
+                if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
+
+                    _unReadNum += [conv getUnReadMessageNum];
+                }
+
+            }else if(model.recipient_user_id == userInfomodel.user_id){
+
+                if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
+
+                    _unReadNum += [conv getUnReadMessageNum];
+
+                }
+
+            }
+
+        }
+//        加上系统消息的未读
+        if ([[conv getReceiver] isEqualToString:@"dominator"]) {
+            _unReadNum += [conv getUnReadMessageNum];
+
+        }
+    }
+
+    NSLog(@"未读消息数量%d",_unReadNum);
+    if (_unReadNum > 0) {
+        if (_unReadNum > 99) {
+            self.message.tabBarItem.badgeValue = @"99+";
+            
+        }else{
+            self.message.unReadNum = _unReadNum;
+            self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.message.unReadNum];
+            
+        }
+    }else{
+        self.message.tabBarItem.badgeValue = nil;
+    }
+}
 
 
 

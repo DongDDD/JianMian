@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *videoUrl;
 @property (weak, nonatomic) IBOutlet UIImageView *videoImg;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic)id<JMCompanyVideoViewDelegate>delegate;
 
 @end

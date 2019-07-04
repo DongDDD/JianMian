@@ -152,6 +152,8 @@
 //常用语
 #define Fetch_GreetList_URL @"api/greet/paginate"
 #define Create_Greet_URL @"api/greet/create"
+//模版
+#define Fectch_TplList_URL @"tpl/paginate"
 
 //银行卡
 #define Fetch_BankCardList_URL @"api/bank/card/lists"

@@ -31,6 +31,7 @@
 //@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIButton *birtnDateBtn;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property(nonatomic,copy)NSString *birtnDateStr;
 
 @property (weak, nonatomic) IBOutlet UIButton *womanBtn;
 @property (weak, nonatomic) IBOutlet UIButton *manBtn;
@@ -117,22 +118,22 @@
 //        self.emailText.text = userModel.email;
 //        self.nameText.text = userModel.card_name;
 //    }
-    if (_viewType == BasicInformationViewTypeEdit) {
-        [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-        [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
-        self.emailText.text = userModel.email;
-        self.nameText.text = userModel.card_name;
-    }
-    
+//    if (_viewType == BasicInformationViewTypeEdit) {
+//        [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//        [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
+//        self.emailText.text = userModel.email;
+//        self.nameText.text = userModel.card_name;
+//    }
+//
     
     if (_viewType == BasicInformationViewTypeEdit) {
         [self setRightBtnTextName:@"保存"];
         self.nameText.text = userModel.card_name;
+        self.emailText.text = userModel.email;
         [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
         [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
-        self.emailText.text = userModel.email;
         [self.headerImg sd_setImageWithURL:[NSURL URLWithString:userModel.avatar] forState:UIControlStateNormal];
-        if ([self.model.realSex isEqualToString:@"1"]) {
+        if ([self.model.card_sex isEqualToString:@"1"]) {
             [self.womanBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
             self.womanBtn.layer.masksToBounds = YES;
             self.womanBtn.layer.borderColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0].CGColor;
@@ -142,7 +143,7 @@
             [self.manBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
             self.manBtn.layer.borderColor = [UIColor whiteColor].CGColor;
             self.manBtn.backgroundColor = MASTER_COLOR;
-        }else {
+        }else if ([self.model.card_sex isEqualToString:@"2"]) {
             // 恢复上一个按钮颜色
             [self.manBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
             self.manBtn.layer.masksToBounds = YES;
@@ -371,12 +372,13 @@
     return YES;
 }
 
+#pragma mark - mydelegte
 
 - (void)pickerDate:(STPickerDate *)pickerDate year:(NSInteger)year month:(NSInteger)month day:(NSInteger)day{
     NSString *title = [NSString stringWithFormat:@"%ld-%ld-%ld",(long)year,(long)month,(long)day];
     [self.birtnDateBtn setTitle:title forState:UIControlStateNormal];
     [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-
+    _birtnDateStr = title;
 }
 // 图片选择结束之后，走这个方法，字典存放所有图片信息
 #pragma mark - image picker delegte
@@ -514,7 +516,7 @@
     [self.nameText resignFirstResponder];
     [self.emailText resignFirstResponder];
     
-    [[JMHTTPManager sharedInstance] updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:_imageUrl nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:self.birtnDateBtn.titleLabel.text address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:_imageUrl nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:_birtnDateStr address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

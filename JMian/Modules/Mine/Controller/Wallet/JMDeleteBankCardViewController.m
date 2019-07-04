@@ -27,6 +27,13 @@
     self.title = @"选择银行卡";
     [self setRightBtnTextName:@"保存"];
     [self.view addSubview:self.tableView];
+    if (_arrayList.count == 0) {
+        [self.view addSubview:self.noDataView];
+        [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.centerY.mas_equalTo(self.view);
+            make.top.bottom.left.right.mas_equalTo(self.view);
+        }];
+    }
 }
 
 

@@ -64,10 +64,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9s1-cC-miD">
-                    <rect key="frame" x="35" y="47" width="173" height="50"/>
+                    <rect key="frame" x="35" y="47" width="335" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="ful-J8-hmY"/>
-                        <constraint firstAttribute="width" constant="173" id="uHV-fm-LAw"/>
                     </constraints>
                     <connections>
                         <action selector="incomeAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="heC-80-FVh"/>
@@ -108,6 +107,7 @@
                 <constraint firstItem="48D-ml-cjQ" firstAttribute="centerY" secondItem="ER6-O9-rfN" secondAttribute="centerY" id="RUj-Ji-qQE"/>
                 <constraint firstItem="aK7-Qj-yfQ" firstAttribute="top" secondItem="IHV-Y9-H2M" secondAttribute="bottom" constant="22" id="Ras-sX-Wgp"/>
                 <constraint firstItem="rrS-t6-VLT" firstAttribute="top" secondItem="aK7-Qj-yfQ" secondAttribute="bottom" constant="29" id="SLU-f3-ZSz"/>
+                <constraint firstItem="9s1-cC-miD" firstAttribute="trailing" secondItem="cbL-NZ-ZOx" secondAttribute="trailing" id="UM8-yd-Lo4"/>
                 <constraint firstItem="9s1-cC-miD" firstAttribute="centerY" secondItem="aK7-Qj-yfQ" secondAttribute="centerY" id="WaT-EQ-GlJ"/>
                 <constraint firstAttribute="bottom" secondItem="cbL-NZ-ZOx" secondAttribute="bottom" constant="5" id="dKL-t7-Oob"/>
                 <constraint firstItem="g2h-WI-UUS" firstAttribute="width" secondItem="rrS-t6-VLT" secondAttribute="width" id="ds1-BN-3P9"/>

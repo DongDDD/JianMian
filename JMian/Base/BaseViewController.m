@@ -9,9 +9,12 @@
 #import "BaseViewController.h"
 #import "UIView+addGradualLayer.h"
 #import "JMHTTPManager+Login.h"
+
 @interface BaseViewController ()
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 @property (nonatomic, strong) UIView *HUDbackgroundView;
+@property (nonatomic, strong)UIToolbar *myToolbar;
+@property (nonatomic, strong)JMNoDataView *noDataView;
 
 @end
 
@@ -452,6 +455,29 @@
     }
     
 }
+
+- (UIToolbar *)myToolbar
+{
+    if (_myToolbar == nil) {
+        CGRect tempFrame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 44);
+        _myToolbar = [[UIToolbar alloc] initWithFrame:tempFrame];
+        
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"完成"
+                                                                       style:UIBarButtonItemStyleDone target:self
+                                                                      action:@selector(doneClicked)];
+        _myToolbar.items = @[doneButton];
+    }
+    
+    return _myToolbar;
+}
+
+-(JMNoDataView *)noDataView{
+    if (_noDataView==nil) {
+        _noDataView = [[JMNoDataView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, SCREEN_HEIGHT)];
+    }
+    return _noDataView;
+}
+
 //-(MBProgressHUD *)progressHUD{
 //    if (!_progressHUD) {
 //        _progressHUD = [[MBProgressHUD alloc] init];

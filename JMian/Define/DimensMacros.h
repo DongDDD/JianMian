@@ -25,6 +25,7 @@
 #import "VIMediaCache.h"
 #import "Masonry.h"
 #import <WebKit/WebKit.h>
+#import "JMNoDataView.h"
 
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
@@ -145,7 +146,7 @@
 
 
 
-#define AMapAPIKey @"d8494573dfc17e6efe99774447611ced"
+#define AMapAPIKey @"38e2ca286abf181c06a69ebba0dc5d6f"
 #define VideoAgoraAPIKey @"a046b14ce976410ab008d99924892a6a"
 #define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define Is_IPhoneX (SCREEN_WIDTH >=375.0f && SCREEN_HEIGHT >=812.0f && Is_Iphone)

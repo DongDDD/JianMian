@@ -98,7 +98,7 @@
 
 -(void)playSounds{
     NSError *err;
-    NSURL *url = [[NSBundle mainBundle] URLForResource:@"Crystal" withExtension:@"mp3"];
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"videoMeet" withExtension:@"mp3"];
     //    初始化播放器
     _player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&err];
     //    设置播放器声音

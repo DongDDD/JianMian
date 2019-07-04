@@ -52,22 +52,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *videoStatus;
 @property (nonatomic, copy) NSString *videoDenial_reason;
 
-
-
-
-
-
-
-
-
-
-
-
-
-//@property (nonatomic, strong) NSArray *labels;
-
+@property (nonatomic, strong) NSArray *files;
 
 
 @end
+
+@interface JMComFilesModel : NSObject
+
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *denial_reason;
+@property (nonatomic, copy) NSString *type;
+@property (nonatomic, copy) NSString *file_path;
+
+@end
+
 
 NS_ASSUME_NONNULL_END

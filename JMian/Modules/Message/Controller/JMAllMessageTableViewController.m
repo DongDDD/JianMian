@@ -434,8 +434,14 @@ static NSString *cellIdent = @"allMessageCellIdent";
         [conv setReadMessage:nil succ:^{
             NSLog(@"已读上报");
             if (_myModel.data.unRead > 0) {
-                
-                self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
+                if (_unReadNum > 99) {
+                    self.tabBarItem.badgeValue = @"99+";
+                    
+                }else{
+                    self.unReadNum = _unReadNum;
+                    self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
+                    
+                }
             }else{
                 self.tabBarItem.badgeValue = nil;
             }

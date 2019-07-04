@@ -417,7 +417,7 @@
 
 // 接听视频聊天
 -(void)answerAction{
-    [self.answerOrHangUpView setHidden:YES];
+    [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
 //    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
 //    JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
 //    vc.view.frame = self.answerOrHangUpView.bounds;

@@ -46,6 +46,11 @@ static NSString *cellIdent = @"CellIdent";
     [self.view addSubview:self.titleView];
     self.mode = @"1";
     [self getListData];
+    [self.view addSubview:self.noDataView];
+    [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.centerY.mas_equalTo(self.view);
+        make.top.bottom.left.right.mas_equalTo(self.view);
+    }];
     
     // Do any additional setup after loading the view from its nib.
 }
@@ -74,6 +79,15 @@ static NSString *cellIdent = @"CellIdent";
                  }
              
              }
+            if (self.listsArray.count == 0) {
+                [self.noDataView setHidden:NO];
+            }else{
+                [self.noDataView setHidden:YES];
+
+            }
+            
+            
+            
         }
         [self.tableView reloadData];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {

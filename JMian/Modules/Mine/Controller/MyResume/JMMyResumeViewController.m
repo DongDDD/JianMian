@@ -78,7 +78,7 @@
     [self.partTimeJobVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.tableView);
         make.width.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
         make.left.mas_equalTo(self.tableView.mas_right);
     }];
 }

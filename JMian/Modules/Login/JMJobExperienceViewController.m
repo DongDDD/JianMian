@@ -73,6 +73,7 @@
             break;
         case JMJobExperienceViewTypeEdit:
             self.title = @"编辑工作经历";
+            [self.moreBtn setHidden:YES];
             [self setRightBtnTextName:@"删除"];
             [self.saveBtn setTitle:@"保存" forState:UIControlStateNormal];
             self.headerViewHeightConstraint.constant = 0;
@@ -409,6 +410,9 @@
     [sheet showInView:self.view];
     
 }
+-(void)doneClicked{
+    [_decriptionTextView.contentTextView resignFirstResponder];
+}
 
 
 -(UIButton *)moreBtn{
@@ -452,6 +456,7 @@
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
         _decriptionTextView.frame = CGRectMake(0, self.jobLabelId.frame.origin.y+self.jobLabelId.frame.size.height+20, SCREEN_WIDTH, 150);
         _decriptionTextView.delegate = self;
+        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
         [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeJobExpDescription];
         //        _decriptionTextView.contentTextView.delegate = self;
         

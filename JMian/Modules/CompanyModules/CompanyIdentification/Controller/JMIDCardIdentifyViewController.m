@@ -79,13 +79,17 @@
 }
 
 - (IBAction)nextAction:(id)sender {
-    
-    JMIDCardIdentifySecondViewController *vc = [[JMIDCardIdentifySecondViewController alloc]init];
-    vc.image_front = _imagefontUrl;
-    vc.image_behind = _imagebehindUrl;
-//    [vc setImg1:_imageView1];
-//    [vc setImg2:_imageView2];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (_imagefontUrl && _imagebehindUrl) {
+        JMIDCardIdentifySecondViewController *vc = [[JMIDCardIdentifySecondViewController alloc]init];
+        vc.image_front = _imagefontUrl;
+        vc.image_behind = _imagebehindUrl;
+        //    [vc setImg1:_imageView1];
+        //    [vc setImg2:_imageView2];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"请上传身份证" btnTitle:@"好的"];
+    }
     
 }
 

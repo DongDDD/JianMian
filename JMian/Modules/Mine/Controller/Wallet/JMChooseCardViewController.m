@@ -29,6 +29,11 @@
     
     
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.noDataView];
+    [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.centerY.mas_equalTo(self.view);
+        make.top.bottom.left.right.mas_equalTo(self.view);
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -58,9 +63,18 @@
 -(void)getDataList{
     [[JMHTTPManager sharedInstance]fecthBankCardList_bank_id:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            self.arrayList = [JMBankCardData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            [self.tableView reloadData];
+                self.arrayList = [JMBankCardData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            if (self.arrayList.count > 0) {
+                [self.tableView reloadData];
+                [self.noDataView setHidden:YES];
+            }else{
+                [self.noDataView setHidden:NO];
+              
+            }
+        
+            
         }
+        
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

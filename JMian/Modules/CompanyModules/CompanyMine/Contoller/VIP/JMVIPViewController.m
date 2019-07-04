@@ -32,7 +32,7 @@
     self.title = @"得米会员";
     [self initView];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if (userModel.deadline) {
+    if (userModel.deadline == 0) {
         self.leftLab1.text = @"到期：";
         self.leftLab2.text = @"2020年7月1日";
         self.rightLab.text = @"已开通";
