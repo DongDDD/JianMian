@@ -162,6 +162,7 @@
 #pragma mark - 点击事件
 -(void)fanhui{
     [super fanhui];
+   
     if (_delegate && [_delegate respondsToSelector:@selector(didPostVideoWithUrl:video_cover:)]) {
         [_delegate didPostVideoWithUrl:self.myVideoUrl video_cover:_video_cover];
     }
@@ -507,9 +508,10 @@
     }];
     
 }
-//第二版兼职上传视频
+
+//第二版兼职编辑我的简历
 -(void)postPartTimeVideo_url:(NSString *)url{
-    [[JMHTTPManager sharedInstance]updateAbility_Id:self.ability_id city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateAbility_Id:self.ability_id city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:url video_cover:_video_cover image_arr:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频上传成功！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
@@ -531,7 +533,7 @@
 //第一版个人上传全职视频
 -(void)postVideo_url:(NSString *)url{
     
-    [[JMHTTPManager sharedInstance]updateVitaWith_work_status:nil education:nil work_start_date:nil description:nil video_path:url image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateVitaWith_work_status:nil education:nil work_start_date:nil description:nil video_path:url  video_cover:_video_cover image_paths:nil  successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"视频上传成功！" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:nil];
         [alert addAction:cancel];

@@ -75,12 +75,12 @@
         make.width.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view);
     }];
-    [self.partTimeJobVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.tableView);
-        make.width.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
-        make.left.mas_equalTo(self.tableView.mas_right);
-    }];
+//    [self.partTimeJobVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.tableView);
+//        make.width.mas_equalTo(self.view);
+//        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+//        make.left.mas_equalTo(self.tableView.mas_right);
+//    }];
 }
 
 - (void)sendRequest {
@@ -122,7 +122,7 @@
 //}
 
 - (void)updateVita {
-    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:nil education:nil work_start_date:self.work_start_date description:nil video_path:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:nil education:nil work_start_date:self.work_start_date description:nil video_path:nil video_cover:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [self sendRequest];
 
@@ -133,7 +133,7 @@
 
 -(void)upDateInfo_status:(NSString *)status{
     _work_status = status;
-    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:status education:nil work_start_date:self.work_start_date description:nil video_path:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:status education:nil work_start_date:self.work_start_date description:nil video_path:nil video_cover:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [self sendRequest];
         
@@ -565,7 +565,7 @@
 -(JMPartTimeJobResumeViewController *)partTimeJobVC{
     if (!_partTimeJobVC) {
         _partTimeJobVC = [[JMPartTimeJobResumeViewController alloc]init];
-        _partTimeJobVC.view.frame = CGRectMake(SCREEN_WIDTH,0, SCREEN_WIDTH, self.view.frame.size.height);
+        _partTimeJobVC.view.frame = CGRectMake(SCREEN_WIDTH,self.titleView.frame.size.height, SCREEN_WIDTH, self.view.frame.size.height-self.titleView.frame.size.height);
         [self addChildViewController:_partTimeJobVC];
         
     }

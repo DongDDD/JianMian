@@ -45,6 +45,7 @@
     [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"ccc"];
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self initView];
+    _isRead = YES;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -243,6 +244,7 @@
     
     [self showAlertVCWithCustumView:self.applyForProtocolView message:@"" leftTitle:@"取消" rightTitle:@"确认"];
 //    [self sendResquest];
+    
 }
 
 -(void)isReadProtocol:(BOOL)isRead{
@@ -347,8 +349,6 @@
 //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
 //
     
- 
-    
     NSString *url;
     if (self.detailModel.images.count > 0) {
         for (int i = 0; i < self.detailModel.images.count; i++) {
@@ -360,9 +360,12 @@
         url= self.detailModel.company_logo_path;
     }
     
-    UIImage *image = [self getImageFromURL:url];
+//    UIImage *image = [self getImageFromURL:url];
+//    UIImage *image = [UIImage imageNamed:@"demi_home"];
+//NSData *thumbData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     //缩略图,压缩图片,不超过 32 KB
-    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    UIImage *image = [self handleImageWithURLStr:url];
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.1);
     [urlMessage setThumbData:thumbData];
     //分享实例
     WXWebpageObject *webObj = [WXWebpageObject object];
@@ -375,6 +378,22 @@
 
 }
 
+- (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
+    NSURL *url = [NSURL URLWithString:imageURLStr];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    NSData *newImageData = imageData;
+    // 压缩图片data大小
+    newImageData = UIImageJPEGRepresentation([UIImage imageWithData:newImageData scale:0.1], 0.1f);
+    UIImage *image = [UIImage imageWithData:newImageData];
+    
+    // 压缩图片分辨率(因为data压缩到一定程度后，如果图片分辨率不缩小的话还是不行)
+    CGSize newSize = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0,0,(NSInteger)newSize.width, (NSInteger)newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
     UIImage * result;

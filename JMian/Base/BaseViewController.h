@@ -95,6 +95,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIToolbar *)myToolbar;
 //没数据提示
 -(JMNoDataView *)noDataView;
+//加减乘除
+-(NSString *)calculateByMultiplying:(NSString *)number1 secondNumber:(NSString *)number2;
+-(NSString *)calculateByadding:(NSString *)number1 secondNumber:(NSString *)number2;
+-(NSString *)calculateBySubtractingMinuend:(NSString *)number1 subtractorNumber:(NSString *)number2;
 @end
 
 NS_ASSUME_NONNULL_END

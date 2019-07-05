@@ -33,7 +33,7 @@
 
 - (void)updateVita {
     [self.decriptionTextView.contentTextView resignFirstResponder];
-    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:nil education:nil work_start_date:nil description:self.decriptionTextView.contentTextView.text video_path:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:nil education:nil work_start_date:nil description:self.decriptionTextView.contentTextView.text video_path:nil video_cover:nil  image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
        
         [self.navigationController popViewControllerAnimated:YES];
         

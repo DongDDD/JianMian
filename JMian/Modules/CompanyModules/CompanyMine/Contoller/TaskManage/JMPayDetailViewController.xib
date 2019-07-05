@@ -20,6 +20,7 @@
                 <outlet property="detailViewSubTitle" destination="Oko-kV-WjC" id="vz1-fJ-uET"/>
                 <outlet property="headerLabs" destination="XmV-K9-JY4" id="p2u-Ly-S4v"/>
                 <outlet property="iconImageView" destination="wBP-bU-79p" id="lh9-hl-jWC"/>
+                <outlet property="invoiceLab" destination="NLc-Oa-aFc" id="9WC-7I-Y4u"/>
                 <outlet property="invoiceView" destination="LpY-Mr-lCu" id="Yrc-AF-tpR"/>
                 <outlet property="moneyDetailViewLab1" destination="dhc-co-qtK" id="vBh-TW-iQk"/>
                 <outlet property="moneyDetailViewLab2" destination="TEQ-qa-D5K" id="yQZ-vq-0YY"/>

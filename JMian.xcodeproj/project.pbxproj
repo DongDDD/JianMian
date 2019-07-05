@@ -437,6 +437,8 @@
 		0492715F22982E3C008D6E0D /* JMCTypeLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492715E22982E3C008D6E0D /* JMCTypeLikeModel.m */; };
 		0492F00B22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492F00A22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m */; };
 		0492F00E22C6530A00C7EFB2 /* JMLabsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492F00D22C6530A00C7EFB2 /* JMLabsData.m */; };
+		0493FEE622CF697600EC7215 /* money.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0493FEE522CF697600EC7215 /* money.mp3 */; };
+		0493FEEA22CF6ADF00EC7215 /* JMPlaySoundsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0493FEE922CF6ADF00EC7215 /* JMPlaySoundsManager.m */; };
 		0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */; };
 		0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */; };
 		04950FCF22AE585600C3D3FB /* JMGoodsDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04950FCD22AE585600C3D3FB /* JMGoodsDescriptionViewController.m */; };
@@ -1454,6 +1456,9 @@
 		0492F00A22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchTaskAbility.m"; sourceTree = "<group>"; };
 		0492F00C22C6530A00C7EFB2 /* JMLabsData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabsData.h; sourceTree = "<group>"; };
 		0492F00D22C6530A00C7EFB2 /* JMLabsData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabsData.m; sourceTree = "<group>"; };
+		0493FEE522CF697600EC7215 /* money.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = money.mp3; sourceTree = "<group>"; };
+		0493FEE822CF6ADF00EC7215 /* JMPlaySoundsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlaySoundsManager.h; sourceTree = "<group>"; };
+		0493FEE922CF6ADF00EC7215 /* JMPlaySoundsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPlaySoundsManager.m; sourceTree = "<group>"; };
 		0494691B2244EEDA00A5BEB7 /* ChooseIdentity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChooseIdentity.h; sourceTree = "<group>"; };
 		0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChooseIdentity.m; sourceTree = "<group>"; };
 		0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChooseIdentity.xib; sourceTree = "<group>"; };
@@ -2726,6 +2731,7 @@
 		0462C7222244937D003B6639 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				0493FEE722CF6A5000EC7215 /* MP3 */,
 				04FB1A1C22A36B8800A8F02C /* WebView */,
 				047F8EA8228A6535005E81FA /* Video */,
 				6DDA717A225EF3A800A7C8F7 /* UserInfo */,
@@ -3105,6 +3111,7 @@
 				048FEE3B2244853C001160C8 /* LaunchScreen.storyboard */,
 				0425656A229E91A8000614E7 /* Crystal.mp3 */,
 				04AC6A2E22CE1AED00693424 /* videoMeet.mp3 */,
+				0493FEE522CF697600EC7215 /* money.mp3 */,
 				048FEE3E2244853C001160C8 /* Info.plist */,
 				048FEE3F2244853C001160C8 /* main.m */,
 			);
@@ -3227,6 +3234,15 @@
 				0492F00A22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m */,
 			);
 			path = Task;
+			sourceTree = "<group>";
+		};
+		0493FEE722CF6A5000EC7215 /* MP3 */ = {
+			isa = PBXGroup;
+			children = (
+				0493FEE822CF6ADF00EC7215 /* JMPlaySoundsManager.h */,
+				0493FEE922CF6ADF00EC7215 /* JMPlaySoundsManager.m */,
+			);
+			path = MP3;
 			sourceTree = "<group>";
 		};
 		04950FD122AE7EA900C3D3FB /* TaskManage */ = {
@@ -4463,6 +4479,7 @@
 				04E25F6822B4901D00F451C8 /* purchase_succeeds.png in Resources */,
 				0488E37F229F8EE00071DEE7 /* home_me_pitch_on.png in Resources */,
 				04BF6DAE22C37700003032BC /* JMLogisticsInfoViewController.xib in Resources */,
+				0493FEE622CF697600EC7215 /* money.mp3 in Resources */,
 				0485AD1E22A10F5A00B31506 /* subscribe@3x.png in Resources */,
 				040BF07722719E4E0088697D /* syndicate@2x.png in Resources */,
 				04DD1D49224B6E95007CB11C /* verification_code@3x.png in Resources */,
@@ -4953,6 +4970,7 @@
 				048A0DCD22B89369006530EC /* JMMoneyDetailsViewController.m in Sources */,
 				048348C6226983C700DE4630 /* NSString+Extension.m in Sources */,
 				04896A0722C07A9B00E674C5 /* JMApplyForProtocolView.m in Sources */,
+				0493FEEA22CF6ADF00EC7215 /* JMPlaySoundsManager.m in Sources */,
 				041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */,
 				04E25F6D22B509CD00F451C8 /* JMHTTPManager+FectchInvoiceInfo.m in Sources */,
 				04C4A18122CC55920049DA29 /* JMOpinionViewController.m in Sources */,
@@ -5392,7 +5410,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TJ2RYY9984;
 				INFOPLIST_FILE = JMian/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5414,7 +5432,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TJ2RYY9984;
 				INFOPLIST_FILE = JMian/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

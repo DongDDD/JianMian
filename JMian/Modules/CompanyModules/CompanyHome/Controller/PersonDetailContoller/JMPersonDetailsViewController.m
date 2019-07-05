@@ -219,16 +219,18 @@
     }
     self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, H)];
     if (self.companyModel.video_file_path) {
-    
+//        NSString *url = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",self.companyModel.video_file_path];
+//        [self.headerView.videoImg sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage: [UIImage imageNamed:@"loading"]];
+//        self.headerView.playBtn.hidden = NO;
         self.headerView.videoImg.image = [UIImage imageNamed:@"loading"];
         
         NSString *str = self.companyModel.video_file_path;
-        
+
         NSURL *URL = [NSURL URLWithString:str];
         dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            
+
             UIImage *image = [self thumbnailImageForVideo:URL atTime:1];
-            
+
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.headerView.videoImg.image = image;
                 self.headerView.playBtn.hidden = NO;
@@ -619,8 +621,6 @@
 
 -(void)shareViewRightAction{
     [self wxShare:1];
-    
-    
 }
 #pragma mark - scrollViewDelegate
 

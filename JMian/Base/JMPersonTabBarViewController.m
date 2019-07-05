@@ -94,15 +94,27 @@
 
 - (void)orderNotification:(NSNotification *)notification
 {
-    self.mine.tabBarItem.badgeValue = @"@";
+    if (self.mine.BUserCenterHeaderSubView.taskBadgeView.hidden == NO) {
+        self.mine.tabBarItem.badgeValue = @"2";
+        
+    }else{
+        self.mine.tabBarItem.badgeValue = @"1";
+        
+    }
     [self.mine.personalCenterHeaderView.orderBadgeView setHidden:NO];
     
 }
 
 - (void)taskNotification:(NSNotification *)notification
 {
-    self.mine.tabBarItem.badgeValue = @"@";
-    [self.mine.BUserCenterHeaderSubView.taskBadgeView setHidden:NO];
+    if (self.mine.BUserCenterHeaderSubView.orderBadgeView.hidden == NO) {
+        self.mine.tabBarItem.badgeValue = @"2";
+        
+    }else{
+        self.mine.tabBarItem.badgeValue = @"1";
+        
+    }
+     [self.mine.BUserCenterHeaderSubView.taskBadgeView setHidden:NO];
     //显示
 }
 #pragma mark - 获取未读消息

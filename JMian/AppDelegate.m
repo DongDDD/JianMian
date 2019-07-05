@@ -27,6 +27,7 @@
 #import "JMHTTPManager+InterView.h"
 #import "LoginPhoneViewController.h"
 #import "JMManageInterviewViewController.h"
+#import "JMPlaySoundsManager.h"
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate>
 
@@ -52,6 +53,10 @@
     [AMapServices sharedServices].apiKey = AMapAPIKey;
     [AMapServices sharedServices].enableHTTPS = YES;
     [[TIMManager sharedInstance] addMessageListener:self];
+    //MP3播放器
+    [[JMPlaySoundsManager sharedInstance] setVideoSounds];
+    [[JMPlaySoundsManager sharedInstance] setMoneySounds];
+
     //坚决键盘遮挡问题
     //    [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition]; //输入框自动上移
     [IQKeyboardManager sharedManager].enable = YES;
@@ -357,47 +362,29 @@
         NSLog(@"视频自定义消息%@",self.videoChatDic);
         if (self.videoChatDic && [custom_elem.desc isEqualToString:@"[邀请视频聊天]"]) {
             [self.answerOrHangUpView setHidden:NO];
-            [self.answerOrHangUpView.player play];
+            [[JMPlaySoundsManager sharedInstance].videoSoundsPlayer play];
             [_window addSubview:self.answerOrHangUpView];
             [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
-            AudioServicesPlaySystemSound(1118);
-        }else if (self.videoChatDic && [custom_elem.desc isEqualToString:@"interviewMessage"]){
-            [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-            AudioServicesPlaySystemSound(1007);
-            
-        }else if (self.videoChatDic && [custom_elem.desc isEqualToString:@"textMessage"]){
-            //
-            [self initLocalNotification_alertBody:self.videoChatDic[@"content"]];
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-            AudioServicesPlaySystemSound(1007);
-        
-        }
-     
-        
-        if ([custom_elem.desc isEqualToString:@"[视频已取消]"]) {
+        }else if ([custom_elem.desc isEqualToString:@"[视频已取消]"]) {
             [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
             [[[UIApplication sharedApplication].keyWindow viewWithTag:222] removeFromSuperview];
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMUHangUpListener object:nil];
 //            [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
-            [self.answerOrHangUpView.player stop];
-            
+//            [self.answerOrHangUpView.player stop];
+            [[JMPlaySoundsManager sharedInstance].videoSoundsPlayer stop];
+
             NSLog(@"[视频已取消]");
 
-        }
-        
-        if ([custom_elem.desc containsString:@"任务"]) {
+        }else if ([custom_elem.desc containsString:@"任务"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_TaskListener object:msgs];
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             AudioServicesPlaySystemSound(1007);
-            
-            
         }
         
         if ([custom_elem.ext containsString:@"createOrder"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_OrderListener object:msgs];
-            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-            AudioServicesPlaySystemSound(1335);
+            [[JMPlaySoundsManager sharedInstance].moneySoundsPlayer play];
+
             
         }
 //        NSString *title = [NSString stringWithFormat:@" %@ 邀请你视频面试",self.videoChatDic[TITLE]];
@@ -405,6 +392,9 @@
 //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:self.videoChatDic[Sub_TITLE]
 //                                                      delegate:self cancelButtonTitle:@"接受" otherButtonTitles: @"拒绝", nil];
 //        [alert show];
+    }else{
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+        AudioServicesPlaySystemSound(1007);
     }
     
     
@@ -432,7 +422,7 @@
 //        make.left.and.right.mas_equalTo(_window);
 //    }];
 //    [_window makeKeyAndVisible];
-    [self.answerOrHangUpView.player stop];
+    [[JMPlaySoundsManager sharedInstance].videoSoundsPlayer stop];
     [_window addSubview:self.videoChatView];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     NSString *myMarkId;
@@ -469,7 +459,7 @@
             Channel_ID:self.videoChatDic[Channel_ID], //用户类型
             isPartTime:self.videoChatDic[isPartTime] //是否为兼职视频
             };
-    [self.answerOrHangUpView.player stop];
+    [[JMPlaySoundsManager sharedInstance].videoSoundsPlayer stop];
     [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
     NSNumber * boolNum = self.videoChatDic[isPartTime];
     BOOL isPT = [boolNum boolValue];

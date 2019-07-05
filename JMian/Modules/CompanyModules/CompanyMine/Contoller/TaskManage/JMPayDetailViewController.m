@@ -7,6 +7,8 @@
 //
 
 #import "JMPayDetailViewController.h"
+#import "JMHTTPManager+FectchInvoiceInfo.h"
+#import "JMInvoiceModel.h"
 
 @interface JMPayDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
@@ -21,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *bottomViewLab1;
 @property (weak, nonatomic) IBOutlet UILabel *bottomViewLab2;
 @property (weak, nonatomic) IBOutlet UIView *invoiceView;
+@property (weak, nonatomic) IBOutlet UILabel *invoiceLab;
+@property (nonatomic, strong)JMInvoiceModel *invoiceModel;
 
 @property (copy , nonatomic)NSString *didPayMoney;
 
@@ -30,7 +34,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
     [self initView];
     // Do any additional setup after loading the view from its nib.
 }
@@ -53,20 +56,8 @@
         self.didPayMoney = _data.front_money;
     }else if (_viewType == JMPayDetailViewTypeFinalPayment) {//尾款
         self.title = @"支付尾款";
-        self.detailViewLab1.text = [NSString stringWithFormat:@" 任务总额：%@ ",_data.payment_money];
-        self.detailViewLab2.text = [NSString stringWithFormat:@" 已交定金：%@  ",_data.front_money];
-
-//        double front_money = [_data.front_money doubleValue];
-//        double all_money = [_data.payment_money doubleValue];
-//        double now = all_money - front_money;
-        NSString *money = [self calculateBySubtractingMinuend:_data.payment_money subtractorNumber:_data.front_money];
-        self.moneyDetailViewLab1.text = @"剩余应付";
-        self.moneyDetailViewLab2.text = [NSString stringWithFormat:@"%@ 元",money];
-//        NSLog(@"剩余应付  %ld 元",(long)now);
-        self.bottomViewLab1.text = @"合计";
-        self.bottomViewLab2.text = [NSString stringWithFormat:@"¥%@",money];
-//        NSLog(@"合计  %ld 元",(long)now);
-        self.didPayMoney = money;
+        [self getInvoiceData];
+      
     }
    
 }
@@ -99,6 +90,37 @@
     NSDecimalNumber *addingNum = [num1 decimalNumberBySubtracting:num2];
     return [addingNum stringValue];
     
+}
+
+
+-(void)getInvoiceData{
+    [[JMHTTPManager sharedInstance]fectchInvoiceInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+            //任务总额
+            self.detailViewLab1.text = [NSString stringWithFormat:@" 任务总额：%@ ",_data.payment_money];
+            //已交定金
+            self.detailViewLab2.text = [NSString stringWithFormat:@" 已交定金：%@  ",_data.front_money];
+            _invoiceModel = [JMInvoiceModel mj_objectWithKeyValues:responsObject[@"data"]];
+            //税金
+            NSString *invoiceMoney = [self calculateByMultiplying:_invoiceModel.tax_b secondNumber:_data.payment_money];
+            //尾款
+            NSString *lastMoney = [self calculateBySubtractingMinuend:_data.payment_money subtractorNumber:_data.front_money];
+            self.moneyDetailViewLab1.text = @"剩余应付";
+            self.moneyDetailViewLab2.text = [NSString stringWithFormat:@"%@ 元",lastMoney];
+            //        NSLog(@"剩余应付  %ld 元",(long)now);
+            //合计 = 尾款 + 税金
+            NSString *total = [self calculateByadding:lastMoney secondNumber:invoiceMoney];
+            self.bottomViewLab1.text = @"合计";
+            self.bottomViewLab2.text = total;
+            self.didPayMoney = total;
+        }
+        
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 }
 /*
 #pragma mark - Navigation

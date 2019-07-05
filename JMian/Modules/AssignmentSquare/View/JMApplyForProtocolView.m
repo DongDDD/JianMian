@@ -16,6 +16,7 @@
     self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] lastObject];
     if (self) {
         self.frame = frame;
+        _agreeBtn.selected = YES;
         [_agreeBtn setImage:[UIImage imageNamed:@"YES_Post"] forState:UIControlStateSelected];
         [_agreeBtn setImage:[UIImage imageNamed:@"gou_partTime"] forState:UIControlStateNormal];
     }

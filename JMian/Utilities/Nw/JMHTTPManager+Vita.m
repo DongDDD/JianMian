@@ -47,6 +47,7 @@
                    work_start_date:(nullable NSDate *)work_start_date
                        description:(nullable NSString *)description
                         video_path:(nullable NSString *)video_path
+                       video_cover:(nullable NSString *)video_cover
                        image_paths:(nullable NSArray *)image_paths
                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
 
@@ -55,6 +56,7 @@
                           @"work_start_date":work_start_date,
                           @"description":description,
                           @"video_path":video_path,
+                          @"video_cover":video_cover,
                           @"image_paths":image_paths
                           };
     

@@ -80,7 +80,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 - (void)onNewMessage:(NSNotification *)notification
 {
-
     [self getMsgList];    //获取自己服务器数据
     
 }
@@ -107,9 +106,9 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
 }
 //创建聊天
--(void)createChatRequstWithType:(NSString *)type foreign_key:(NSString *)foreign_key recipient:(NSString *)user_id{
-    if (user_id && foreign_key) {
-        [[JMHTTPManager sharedInstance]createChat_type:type recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+-(void)createChatRequstWithType:(NSString *)type foreign_key:(NSString *)foreign_key recipient:(NSString *)recipient{
+    if (recipient || foreign_key) {
+        [[JMHTTPManager sharedInstance]createChat_type:type recipient:recipient foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
             //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
             //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -424,30 +423,39 @@ static NSString *cellIdent = @"allMessageCellIdent";
         
         cell.backgroundColor = BG_COLOR;
     }
-    
+    NSLog(@"用户ID：-----%@",model.data.convId);
     
     return cell;
 }
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *recipient_id;
+    NSString *foreign_key;
     JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        NSString *recipient_id;
-        NSString *foreign_key;
-        if (userModel.user_id == messagelistModel.sender_user_id) {
-            recipient_id = messagelistModel.recipient_user_id;
+        if ([_dominatorModel.data.convId isEqualToString:@"dominator"] && foreign_key == nil) {
+            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+            vc.myConvModel = messagelistModel;
+            vc.delegate = self;
+            [self.navigationController pushViewController:vc animated:YES];
+            
         }else{
-            recipient_id = messagelistModel.sender_user_id;
-        }
-        if ([messagelistModel.type isEqualToString:@"1"]) {
-            foreign_key = messagelistModel.work_work_id;
-        }else if ([messagelistModel.type isEqualToString:@"2"]) {
-            foreign_key = messagelistModel.job_ability_id;
-
-        }
+            if (userModel.user_id == messagelistModel.sender_user_id) {
+                recipient_id = messagelistModel.recipient_user_id;
+            }else{
+                recipient_id = messagelistModel.sender_user_id;
+            }
+            if ([messagelistModel.type isEqualToString:@"1"]) {
+                foreign_key = messagelistModel.work_work_id;
+            }else if ([messagelistModel.type isEqualToString:@"2"]) {
+                foreign_key = messagelistModel.job_ability_id;
+                
+            }
         
+        
+        }
         
         [self createChatRequstWithType:messagelistModel.type foreign_key:foreign_key recipient:recipient_id];
     }else{

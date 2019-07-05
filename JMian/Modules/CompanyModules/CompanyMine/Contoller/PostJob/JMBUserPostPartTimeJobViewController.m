@@ -330,11 +330,18 @@
 }
 
 -(void)gotoLabsVC{
-    JMChoosePartTImeJobTypeLablesViewController *vc =  [[JMChoosePartTImeJobTypeLablesViewController alloc]init];
-    vc.delegate = self;
-    vc.myVC = self;
-//    vc.viewType = JMChoosePartTImeJobTypeLablesViewTypePartTimeJob;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
+        
+        return;
+    }else if (_viewType == JMBUserPostPartTimeJobTypeAdd) {
+    
+        JMChoosePartTImeJobTypeLablesViewController *vc =  [[JMChoosePartTImeJobTypeLablesViewController alloc]init];
+        vc.delegate = self;
+        vc.myVC = self;
+        //    vc.viewType = JMChoosePartTImeJobTypeLablesViewTypePartTimeJob;
+        [self.navigationController pushViewController:vc animated:YES];
+    
+    }
 }
 
 -(void)gotoIndustryVC{
@@ -342,7 +349,6 @@
     vc.delegate = self;
     vc.labsJson = self.labsJson;
     [self.navigationController pushViewController:vc animated:YES];
-
 }
 
 -(void)gotoCityListVC{

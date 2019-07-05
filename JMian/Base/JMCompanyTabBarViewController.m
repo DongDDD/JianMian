@@ -83,14 +83,26 @@
 
 - (void)orderNotification:(NSNotification *)notification
 {
-    self.mine.tabBarItem.badgeValue = @"@";
+    if (self.mine.BUserCenterHeaderSubView.taskBadgeView.hidden == NO) {
+        self.mine.tabBarItem.badgeValue = @"2";
+        
+    }else{
+        self.mine.tabBarItem.badgeValue = @"1";
+
+    }
     [self.mine.BUserCenterHeaderSubView.orderBadgeView setHidden:NO];
 
 }
 
 - (void)taskNotification:(NSNotification *)notification
 {
-    self.mine.tabBarItem.badgeValue = @"@";
+    if (self.mine.BUserCenterHeaderSubView.orderBadgeView.hidden == NO) {
+        self.mine.tabBarItem.badgeValue = @"2";
+        
+    }else{
+        self.mine.tabBarItem.badgeValue = @"1";
+        
+    }
     [self.mine.BUserCenterHeaderSubView.taskBadgeView setHidden:NO];
     //显示
 }

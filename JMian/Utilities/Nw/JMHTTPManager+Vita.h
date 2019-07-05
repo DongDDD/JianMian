@@ -29,9 +29,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)updateVitaWith_work_status:(nullable NSString *)work_status
                          education:(nullable NSNumber *)education
                    work_start_date:(nullable NSDate *)work_start_date
-                        description:(nullable NSString *)description
-                            video_path:(nullable NSString *)video_path
-                         image_paths:(nullable NSArray *)image_paths
+                       description:(nullable NSString *)description
+                        video_path:(nullable NSString *)video_path
+                       video_cover:(nullable NSString *)video_cover
+                       image_paths:(nullable NSArray *)image_paths
                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 

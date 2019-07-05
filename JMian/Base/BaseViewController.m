@@ -455,6 +455,34 @@
     }
     
 }
+#pragma mark ----加减乘除------------ number1 - number2
+//相乘
+-(NSString *)calculateByMultiplying:(NSString *)number1 secondNumber:(NSString *)number2
+{
+    NSDecimalNumber *num1 = [NSDecimalNumber decimalNumberWithString:number1];
+    NSDecimalNumber *num2 = [NSDecimalNumber decimalNumberWithString:number2];
+    NSDecimalNumber *multiplyingNum = [num1 decimalNumberByMultiplyingBy:num2];
+    return [multiplyingNum stringValue];
+    
+}
+//相减
+-(NSString *)calculateBySubtractingMinuend:(NSString *)number1 subtractorNumber:(NSString *)number2
+{
+    NSDecimalNumber *num1 = [NSDecimalNumber decimalNumberWithString:number1];
+    NSDecimalNumber *num2 = [NSDecimalNumber decimalNumberWithString:number2];
+    NSDecimalNumber *addingNum = [num1 decimalNumberBySubtracting:num2];
+    return [addingNum stringValue];
+    
+}
+//相加
+-(NSString *)calculateByadding:(NSString *)number1 secondNumber:(NSString *)number2
+{
+    NSDecimalNumber *num1 = [NSDecimalNumber decimalNumberWithString:number1];
+    NSDecimalNumber *num2 = [NSDecimalNumber decimalNumberWithString:number2];
+    NSDecimalNumber *addingNum = [num1 decimalNumberByAdding:num2];
+    return [addingNum stringValue];
+}
+#pragma mark ----常用工具UI
 
 - (UIToolbar *)myToolbar
 {

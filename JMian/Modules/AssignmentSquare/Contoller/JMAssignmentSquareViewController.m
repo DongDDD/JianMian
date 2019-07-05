@@ -169,6 +169,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 -(void)didClickTaskCompletedAction{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    vc.title = @"任务管理";
     [vc setMyIndex:2];
 
     [self.navigationController pushViewController:vc animated:YES];

@@ -85,7 +85,7 @@
         }else{
             NSString *str;
             if ([data.front_money isEqualToString:@"0"]) {
-                str = @"通过&&无定金";
+                str = @"通过";
             }else{
                 str = @"通过&支付定金";
 
@@ -140,8 +140,15 @@
         self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
         self.leftBtn.layer.borderWidth = 0.5;
         self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
+        NSString *titleStr;
+        if ([data.front_money isEqualToString:@"0"]) {
+            titleStr = @"确认对方完成&支付全款";
+        }else{
+            titleStr = @"确认对方完成&支付尾款";
 
-        [self.rightBtn setTitle:@"确认对方完成&支付尾款" forState:UIControlStateNormal];
+        }
+        
+        [self.rightBtn setTitle:titleStr forState:UIControlStateNormal];
         [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.rightBtn.backgroundColor = MASTER_COLOR;
         
