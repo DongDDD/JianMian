@@ -38,7 +38,7 @@
     if (!_isHomeViewVC) {
         [self setSearchView];
     }
-  
+    
     [self getData];
     
 }
@@ -61,6 +61,7 @@
 #pragma mark - 获取期望职位数据 -
 
 -(void)getData{
+    [self showProgressHUD_view:self.view];
     [[JMHTTPManager sharedInstance] fetchPositionLabelsWithMyId:@"967" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         self.firstArr =  [JMSystemLabelsModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
@@ -69,7 +70,7 @@
         dropMenu.dataSource = self;
         dropMenu.delegate = self;
         [self.view addSubview:dropMenu];
-        
+        [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

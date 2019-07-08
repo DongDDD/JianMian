@@ -19,6 +19,9 @@
 #import "JMHTTPManager+Work.h"
 #import "JMHomeWorkModel.h"
 #import "JMCityListViewController.h"
+#import "SJVideoPlayer.h"
+#import <SJVideoPlayer/SJVideoPlayer.h>
+#import "JMVideoSingleViewController.h"
 
 @interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate,JMLabsChooseViewControllerDelegate,JMChoosePositionTableViewControllerDelegate,JMCityListViewControllerDelegate>
 
@@ -39,6 +42,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *choosePositionBtn;
 @property (weak, nonatomic) IBOutlet UIButton *chooseRequireBtn;
 @property(nonatomic,strong)NSMutableArray *choosePositionArray;
+@property (nonatomic, strong, nullable) SJVideoPlayer *player;
 
 // -----------筛选------------
 @property(nonatomic,copy)NSString *job_label_id;
@@ -76,7 +80,7 @@ static NSString *cellIdent = @"cellIdent";
 //    [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
     [self setIsHiddenBackBtn:YES];
     [self setIsHiddenRightBtn:YES];
-    
+    self.view.backgroundColor = BG_COLOR;
     self.per_page = 15;
     self.page = 1;
 //    [self getData];
@@ -96,7 +100,7 @@ static NSString *cellIdent = @"cellIdent";
  
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-    [[JMHTTPManager sharedInstance]fetchVitaPaginateWith_city_id:self.city_id job_label_id:self.job_label_id education:self.education work_year_s:self.work_year_s work_year_e:self.work_year_e salary_min:self.salary_min salary_max:self.salary_max page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fetchVitaPaginateWith_city_id:self.city_id job_label_id:self.job_label_id education:@"2" work_year_s:self.work_year_s work_year_e:self.work_year_e salary_min:self.salary_min salary_max:self.salary_max page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSMutableArray *modelArray = [JMCompanyHomeModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
@@ -182,6 +186,7 @@ static NSString *cellIdent = @"cellIdent";
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.separatorColor = BG_COLOR;
+    self.tableView.backgroundColor = BG_COLOR;
     self.tableView.estimatedRowHeight = 0;
     self.tableView.estimatedSectionHeaderHeight = 0;
     self.tableView.estimatedSectionFooterHeight = 0;
@@ -314,11 +319,26 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 -(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model{
-    
+//    SJVideoPlayer *_videoPlayer = [SJVideoPlayer player];
+//    _videoPlayer.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); // 可以使用AutoLayout, 这里为了简便设置的Frame.
+//    [self.view addSubview:_videoPlayer.view];
+//    // 初始化资源
+//    _videoPlayer.URLAsset = [[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:model.video_file_path]];
+//     _player = [SJVideoPlayer player];
+//    _player.URLAsset = [[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:model.video_file_path]];
+//    [[UIApplication sharedApplication].keyWindow  addSubview:_player.view];
+//    [_player.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.offset(0);
+//    }];
+//
+//    _player.URLAsset.title = model.workName;
+ 
+//    JMVideoSingleViewController *vc = [[JMVideoSingleViewController alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
+//
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    self.tabBarController.tabBar.hidden = YES;
-    [self.navigationController pushViewController:playVC animated:NO];
+    [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
     
 }
@@ -398,27 +418,54 @@ static NSString *cellIdent = @"cellIdent";
 //人才要求
 -(void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index{
     if ([str isEqualToString:@"最低学历"]) {
-    
-        self.education = [NSString stringWithFormat:@"%ld",(long)(index)];
+        NSString *strIndex = [NSString stringWithFormat:@"%ld",(long)index];
+        self.education = strIndex;
    
         NSLog(@"学历---%@",self.education);
-    }else if ([str isEqualToString:@"工作经历"]) {
-        NSString *exp = [self getArray_index:index];
-        if (![exp isEqualToString:@"全部"] && ![exp isEqualToString:@"应届生"]) {
-            self.work_year_e = [exp substringToIndex:0];
-            self.work_year_s = [exp substringToIndex:3];
-            NSLog(@"工作经验--: %@~~%@",self.work_year_e,self.work_year_s);
-
-        }else if([exp isEqualToString:@"应届生"]){
-        
-          
-        
-        }
-//        self.work_year_s
+    }else if ([str isEqualToString:@"工作经验"]) {
+        NSString *labStr = [self getArray_index:index];
+        [self getExpWithLabStr:labStr];
     }
 
 }
 
+
+-(void)getExpWithLabStr:(NSString *)labStr{
+    if ([labStr isEqualToString:@"应届生"]) {
+        self.work_year_s = @"0";
+        self.work_year_e = @"1";
+
+    }else if ([labStr isEqualToString:@"1年"]) {
+         self.work_year_s = @"1";
+        self.work_year_e = @"2";
+    }else if ([labStr isEqualToString:@"1～3年"]) {
+        self.work_year_s = @"1";
+        self.work_year_e = @"3";
+        
+    }else if ([labStr isEqualToString:@"3～5年"]) {
+        self.work_year_s = @"3";
+        self.work_year_e = @"5";
+        
+        
+    }else if ([labStr isEqualToString:@"5～10年"]) {
+        self.work_year_s = @"5";
+        self.work_year_e = @"10";
+        
+        
+    }else if ([labStr isEqualToString:@"10年以上"]) {
+        self.work_year_s = @"10";
+        self.work_year_e = @"30";
+        
+        
+    }else if ([labStr isEqualToString:@"全部"]) {
+        self.work_year_s = nil;
+        self.work_year_e = nil;
+        
+        
+    }
+ 
+
+}
 
 
 
@@ -428,6 +475,28 @@ static NSString *cellIdent = @"cellIdent";
   
     array = @[@"全部",@"应届生",@"1年",@"1～3年",@"3～5年",@"5～10年",@"10年以上"];
 
+    
+    
+    return array[index];
+    
+}
+
+-(NSString *)getSalaryStr_index:(NSInteger )index
+{
+    NSArray *array;
+    
+    array = @[@"1k-2k",
+              @"2k-4k",
+              @"4k-6k",
+              @"6k-8k",
+              @"8k-10k",
+              @"10k-15k",
+              @"15k-20k",
+              @"20k-30k",
+              @"30k-40k",
+              @"40k-50k",
+              @"50k-100k"];
+    
     
     
     return array[index];

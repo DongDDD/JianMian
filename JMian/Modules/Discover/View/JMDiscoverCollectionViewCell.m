@@ -47,8 +47,10 @@
         self.nameLab.text = data.user_nickname;
         [self.iconImagView sd_setImageWithURL:[NSURL URLWithString:data.user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         self.infoLab.text = data.work_name;
-        NSURL *url = [NSURL URLWithString:data.video_file_path];
-        [self videoImageWithvideoURL:url atTime:0.2];
+        //封面
+        NSURL *url = [NSURL URLWithString:data.video_cover];
+        [_videoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"break"]];
+//        [self videoImageWithvideoURL:url atTime:0.2];
         
     }else{
         self.nameLab.text = data.company_name;
@@ -60,9 +62,11 @@
         }
         NSString *industryStr = [industryNameArray componentsJoinedByString:@"/"];
         self.infoLab.text = industryStr;
+        //封面
         JMCVideoModel *CVideoModel = data.video[0];
-        NSURL *url = [NSURL URLWithString:CVideoModel.file_path];
-        [self videoImageWithvideoURL:url atTime:0.2];
+        NSURL *url = [NSURL URLWithString:CVideoModel.cover];
+        [_videoImageView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"break"]];
+//        [self videoImageWithvideoURL:url atTime:0.2];
 //
     }
     

@@ -78,11 +78,6 @@
         [self.delegate didSelectItemWithRow:indexPath.row];
     }
     
-
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectItemAtIndexPath:withContent:)]) {
-//        [self.delegate didSelectItemAtIndexPath:indexPath withContent:self.dataAry[indexPath.row]];
-//    }
-    
 }
 
 - (UICollectionView *)collectionView {

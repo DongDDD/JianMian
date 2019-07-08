@@ -29,6 +29,7 @@
 #import "JMIDCardIdentifyViewController.h"
 #import "WXApi.h"
 #import "JMShareView.h"
+#import "SJVideoPlayer.h"
 
 
 
@@ -219,24 +220,26 @@
     }
     self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, H)];
     if (self.companyModel.video_file_path) {
-//        NSString *url = [NSString stringWithFormat:@"https://jmsp-images-1257721067.picgz.myqcloud.com%@",self.companyModel.video_file_path];
-//        [self.headerView.videoImg sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage: [UIImage imageNamed:@"loading"]];
-//        self.headerView.playBtn.hidden = NO;
-        self.headerView.videoImg.image = [UIImage imageNamed:@"loading"];
-        
-        NSString *str = self.companyModel.video_file_path;
-
-        NSURL *URL = [NSURL URLWithString:str];
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-
-            UIImage *image = [self thumbnailImageForVideo:URL atTime:1];
-
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.headerView.videoImg.image = image;
-                self.headerView.playBtn.hidden = NO;
-
-            });
-        });
+        if (self.companyModel.video_cover) {
+            
+            [self.headerView.videoImg sd_setImageWithURL:[NSURL URLWithString:self.companyModel.video_cover] placeholderImage:[UIImage imageNamed:@"loading"]];
+        }
+        self.headerView.playBtn.hidden = NO;
+//        self.headerView.videoImg.image = [UIImage imageNamed:@"loading"];
+//
+//        NSString *str = self.companyModel.video_file_path;
+//
+//        NSURL *URL = [NSURL URLWithString:str];
+//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//
+//            UIImage *image = [self thumbnailImageForVideo:URL atTime:1];
+//
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                self.headerView.videoImg.image = image;
+//                self.headerView.playBtn.hidden = NO;
+//
+//            });
+//        });
     }
     self.headerView.delegate = self;
     [self.headerView setModel:self.vitaModel];
@@ -460,16 +463,26 @@
         self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
     }];
 }
+
 //播放视频
 -(void)playAction
 {
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.companyModel.video_file_path];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    self.tabBarController.tabBar.hidden = YES;
-    [self.navigationController pushViewController:playVC animated:NO];
-
-    
+    [self presentViewController:playVC animated:YES completion:nil];
+    [[JMVideoPlayManager sharedInstance] play];
+//    [[UIApplication sharedApplication].keyWindow addSubview:playVC.view];
+//    [playVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.edges.offset(0);
+//    }];
+ 
+//    SJVideoPlayer *_videoPlayer = [SJVideoPlayer player];
+//    _videoPlayer.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); // 可以使用AutoLayout, 这里为了简便设置的Frame.
+//    [self.view addSubview:_videoPlayer.view];
+//    // 初始化资源
+//    _videoPlayer.URLAsset = [[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:self.companyModel.video_file_path]];
+//    [_videoPlayer play];
 //    JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
 //    vc.player = self.player;
 //    vc.topTitle = self.companyModel.userNickname;

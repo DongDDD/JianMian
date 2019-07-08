@@ -62,13 +62,16 @@
 
 -(void)rightAction{
     [_decriptionTextView.contentTextView resignFirstResponder];
-    [self.delegate sendTextView_textData:_decriStr];
+    if (_delegate && [_delegate respondsToSelector:@selector(sendTextView_textData:)]) {
+        [self.delegate sendTextView_textData:_decriStr];
+    }
     [self.navigationController popViewControllerAnimated:YES];
 
 }
 - (IBAction)changeTPLAction:(id)sender {
     JMTPLModel *model = self.dataArray[self.TPLIndex];
     [self.decriptionTextView setContent:model.myTemplate];
+    _decriStr = model.myTemplate;
     if (_TPLIndex < self.dataArray.count-1) {
         _TPLIndex += 1;
     }else{
@@ -96,27 +99,22 @@
 #pragma mark - data
 
 -(void)getData{
-    [[JMHTTPManager sharedInstance]getTplList_type:@"2" foreign_key:nil status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]getTplList_type:@"2" foreign_key:_foreign_key status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.dataArray = [JMTPLModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
         }
-        
-        
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
 
-
 }
-
 
 #pragma mark - MyDelegate
 -(void)sendContent:(NSString *)content{
     _decriStr = content;
     
 }
-
 
 #pragma mark - UITextDelegate
 

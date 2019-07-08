@@ -394,6 +394,7 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
+
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
     UIImage * result;

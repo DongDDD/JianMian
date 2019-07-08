@@ -35,6 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *video_file_path;
 @property(nonatomic, copy)NSString *video_status;
 @property(nonatomic, copy)NSString *video_denial_reason;
+@property(nonatomic, copy)NSString *video_cover;
 
 
 
@@ -68,6 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *denial_reason;
 @property(nonatomic, copy)NSString *file_id;
 @property(nonatomic, copy)NSString *company_id;
+@property(nonatomic, copy)NSString *cover;
 
 @end
 

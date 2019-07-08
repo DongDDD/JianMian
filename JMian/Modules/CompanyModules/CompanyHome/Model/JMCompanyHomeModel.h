@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *userNickname;
 @property (nonatomic, copy) NSString *userAvatar;
 
-@property (nonatomic, strong) NSDate *vitaWork_start_date;
+@property (nonatomic, copy) NSString *vitaWork_start_date;
 @property (nonatomic, strong) NSNumber *vitaWork_status;
 @property (nonatomic, copy) NSString *vitaEducation;
 
@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy) NSString *video_file_path;
 @property (nonatomic, copy) NSString *video_status;
+@property (nonatomic, copy) NSString *video_cover;
 
 
 

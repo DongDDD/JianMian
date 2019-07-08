@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JMDiscoverTopView">
             <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -29,26 +29,28 @@
                         <constraint firstAttribute="width" constant="11" id="PeA-Rc-svk"/>
                     </constraints>
                 </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="950-Rl-PfW">
-                    <rect key="frame" x="349" y="10.5" width="43" height="28"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="切换  &gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGa-hM-3d8">
+                    <rect key="frame" x="351" y="16.5" width="43" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <state key="normal" title="切换  &gt;">
-                        <color key="titleColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                </button>
+                    <color key="textColor" red="0.28235294119999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="950-Rl-PfW" secondAttribute="trailing" constant="22" id="C8Q-se-zwC"/>
                 <constraint firstItem="0fS-nV-n3K" firstAttribute="leading" secondItem="PrW-7O-tEb" secondAttribute="trailing" constant="8" id="JCw-H2-heM"/>
+                <constraint firstItem="GGa-hM-3d8" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="Kqg-VL-6j4"/>
                 <constraint firstItem="0fS-nV-n3K" firstAttribute="centerY" secondItem="PrW-7O-tEb" secondAttribute="centerY" id="MKh-Az-wYo"/>
                 <constraint firstItem="PrW-7O-tEb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="caA-Wb-Qpu"/>
-                <constraint firstItem="950-Rl-PfW" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="e8I-9V-YXg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="GGa-hM-3d8" secondAttribute="trailing" constant="20" id="kpb-YG-mnF"/>
                 <constraint firstItem="PrW-7O-tEb" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="rbj-32-igl"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="131.8840579710145" y="-180.80357142857142"/>
+            <connections>
+                <outlet property="leftLab" destination="0fS-nV-n3K" id="B5e-zV-6CR"/>
+            </connections>
+            <point key="canvasLocation" x="131.8840579710145" y="-181.13839285714286"/>
         </view>
     </objects>
     <resources>

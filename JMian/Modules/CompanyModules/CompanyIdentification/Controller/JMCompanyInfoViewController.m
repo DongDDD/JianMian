@@ -149,6 +149,7 @@
     CGRect rect=CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
     self.view.frame=rect;
 }
+ 
 
 #pragma mark - 点击事件
 

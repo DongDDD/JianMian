@@ -43,6 +43,11 @@
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self setHTMLPath:@"SecondModulesHTML/B/Bdetail.html"];
     [self initView];
+    [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.mas_topLayoutGuide);
+        make.bottom.mas_equalTo(self.view).offset(-self.bottomView.frame.size.height);
+    }];
     // Do any additional setup after loading the view from its nib.
 }
 -(void)initView{
@@ -91,7 +96,6 @@
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
     
 }
 

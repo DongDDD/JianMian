@@ -9,9 +9,11 @@
 #import "JMCompanyHomeTableViewCell.h"
 #import "DimensMacros.h"
 
+
 @interface JMCompanyHomeTableViewCell ()
 
 @property(nonatomic,strong)JMCompanyHomeModel *myModel;
+@property (weak, nonatomic) IBOutlet UIImageView *playImgView;
 
 @end
 
@@ -44,38 +46,55 @@
     self.subDecription.text = model.vita_description;
     if (model.video_file_path == nil || ![model.video_status isEqualToString:@"2"]) {
         [self.playBtn setHidden:YES];
+        [self.playImgView setHidden:YES];
     }else{
-         [self.playBtn setHidden:NO];
-//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//            
-//            NSURL *url = [NSURL URLWithString:model.video_file_path];
-//            //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
-//            AVPlayer *player = [AVPlayer playerWithURL:url];
-//            self.player = player;
-//        });
+        [self.playBtn setHidden:NO];
+        [self.playImgView setHidden:NO];
         
     }
+    NSString *expStr1 = [self getExpWithWork_start_date:model.vitaWork_start_date];
+    NSString *expStr2;
+    if (![expStr1 isEqualToString:@"0"]) {
+        expStr2 = [NSString stringWithFormat:@"%@年",expStr1];
+        
+    }else{
+        expStr2 = @"应届生";
+    }
+    self.experinenceLab.text = expStr2;
 
     
 }
 
-//-(void)loadPlayer{
-//    NSURL *url = [NSURL URLWithString:@"https://jmsp-1258537318.picgz.myqcloud.com//storage//images//2019//05//13//K7xxhMIVfIbCgHGOHFqmIN8cGMh9QRw32luiKRJ3.mp4"];
-//    //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
-//    AVPlayer *player = [AVPlayer playerWithURL:url];
-//    self.player = player;
-////    //创建AVPlayerViewController控制器
-////    AVPlayerViewController *playerVC = [[AVPlayerViewController alloc] init];
-////    playerVC.player = player;
-////
-//////    playerVC.view.frame = self.view.frame;
-//////    [self.view addSubview:playerVC.view];
-////    self.playerVC = playerVC;
-//    //调用控制器的属性player的开始播放方法
-////    [self.playerVC.player play];
-//
-//
-//}
+-(NSString *)getExpWithWork_start_date:(NSString *)work_start_date{
+    //创建两个日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *startDate = [dateFormatter dateFromString:work_start_date];
+    NSDate *endDate = [NSDate date];
+    
+    //利用NSCalendar比较日期的差异
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    /**
+     * 要比较的时间单位,常用如下,可以同时传：
+     *    NSCalendarUnitDay : 天
+     *    NSCalendarUnitYear : 年
+     *    NSCalendarUnitMonth : 月
+     *    NSCalendarUnitHour : 时
+     *    NSCalendarUnitMinute : 分
+     *    NSCalendarUnitSecond : 秒
+     */
+    NSCalendarUnit unit = NSCalendarUnitYear;//只比较天数差异
+    //比较的结果是NSDateComponents类对象
+    NSDateComponents *delta = [calendar components:unit fromDate:startDate toDate:endDate options:0];
+    //打印
+    NSLog(@"%@",delta);
+    //获取其中的"年"
+    NSLog(@"----年：%ld",delta.year);
+    NSString *expYear = [NSString stringWithFormat:@"%ld",(long)delta.year];
+    return expYear;
+}
+
+
 
 //工资数据转化，除以1000，转化成k
 -(NSString *)getSalaryStrWithMin:(id)min max:(id)max{

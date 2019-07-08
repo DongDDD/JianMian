@@ -66,6 +66,9 @@ NS_ASSUME_NONNULL_BEGIN
                          message:(NSString *)message
                        leftTitle:(NSString *)leftTitle
                       rightTitle:(NSString *)rightTitle;
+-(void)showAlertOneBtnVCWithHeaderIcon:(NSString *)headerIcon
+                               message:(NSString *)message
+                              btnTitle:(NSString *)btnTitle;
 -(void)iconAlertLeftAction;
 -(void)iconAlertRightAction;
 //弹窗不带图标

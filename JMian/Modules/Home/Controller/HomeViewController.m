@@ -412,8 +412,8 @@ static NSString *cellIdent = @"cellIdent";
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.videoFile_path];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    self.tabBarController.tabBar.hidden = YES;
-    [self.navigationController pushViewController:playVC animated:NO];
+    [self presentViewController:playVC animated:YES completion:nil];
+    [[JMVideoPlayManager sharedInstance] play];
     
 }
 

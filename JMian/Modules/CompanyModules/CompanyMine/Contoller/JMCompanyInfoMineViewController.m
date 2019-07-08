@@ -342,11 +342,13 @@
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.videoURL];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    self.tabBarController.tabBar.hidden = YES;
-    [self.navigationController pushViewController:playVC animated:NO];
+    [self presentViewController:playVC animated:YES completion:nil];
+    [[JMVideoPlayManager sharedInstance] play];
+
 
     
 }
+
 
 - (IBAction)industryAction:(UIButton *)sender {
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"公司行业暂时不提供修改功能"
@@ -755,8 +757,8 @@
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    self.tabBarController.tabBar.hidden = YES;
-    [self.navigationController pushViewController:playVC animated:NO];
+    [self presentViewController:playVC animated:YES completion:nil];
+    [[JMVideoPlayManager sharedInstance] play];
     
     
     

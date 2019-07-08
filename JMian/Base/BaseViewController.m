@@ -233,6 +233,30 @@
     [self presentViewController:alert animated:YES completion:nil];
     
 }
+
+
+-(void)showAlertOneBtnVCWithHeaderIcon:(NSString *)headerIcon
+                         message:(NSString *)message
+                       btnTitle:(NSString *)btnTitle
+{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:message preferredStyle: UIAlertControllerStyleAlert];
+    [alert addAction:[UIAlertAction actionWithTitle:btnTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        [self iconAlertLeftAction];
+    }]];
+  
+    UIImageView *icon = [[UIImageView alloc] init];
+    icon.image = [UIImage imageNamed:headerIcon];
+    [alert.view addSubview:icon];
+    [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(alert.view).mas_offset(23);
+        make.centerX.mas_equalTo(alert.view);
+        make.size.mas_equalTo(CGSizeMake(75, 64));
+        
+    }];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+}
+
 -(void)showAlertWithTitle:(NSString *)title message:(NSString *)message leftTitle:(NSString *)leftTitle rightTitle:(NSString *)rightTitle{
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title message:message preferredStyle: UIAlertControllerStyleAlert];
@@ -413,9 +437,7 @@
         
         
     }
-    
-    
-    
+
     return @"0";
     
 }

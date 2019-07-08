@@ -11,6 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMDiscoverTopView : UIView
+@property (weak, nonatomic) IBOutlet UILabel *leftLab;
+
 
 @end
 

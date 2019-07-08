@@ -43,6 +43,7 @@
     self.companyNameTextField.delegate = self;
     [self.scrollView addSubview:self.moreBtn];
     [self setRightBtnTextName:@"下一步"];
+    [self getUserInfo];
     // Do any additional setup after loading the view from its nib.
 //    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];//设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。tapGestureRecognizer.cancelsTouchesInView = NO;//将触摸事件添加到当前view
 //    [self.view addGestureRecognizer:tapGestureRecognizer];
@@ -65,6 +66,43 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+
+//赋值
+-(void)getUserInfo{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        if (userInfo.nickname.length > 0) {
+            _myNameTextField.text = userInfo.nickname;
+            [_myNameTextField setEnabled:NO];
+        }
+        if (userInfo.avatar.length > 0) {
+            [_headerImg setImage:[self getImageFromURL:userInfo.avatar] forState:UIControlStateNormal];
+        }
+        //1等待审核 2拒绝  3通过
+        if ([userInfo.company_real_status isEqualToString:@"2"]) {
+            [self showAlertOneBtnVCWithHeaderIcon:@"Failure" message:userInfo.company_real_denial_reason btnTitle:@"重新填写"];
+            [self.myPositionTextField setText:userInfo.company_position];
+            [self.companyNameTextField setText:userInfo.company_real_company_name];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+-(UIImage *) getImageFromURL:(NSString *)fileURL {
+    
+    UIImage * result;
+    
+    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
+    
+    result = [UIImage imageWithData:data];
+    
+    return result;
+    
+}
 
 //-(void)keyboardHide:(UITapGestureRecognizer*)tap{
 //    [_myNameTextField resignFirstResponder];
@@ -107,6 +145,13 @@
 
 #pragma mark - 数据提交
 -(void)rightAction{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if (userModel.avatar.length > 0 && _imageUrl == nil) {
+        if ([userModel.avatar containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
+            _imageUrl = [userModel.avatar stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
+ 
+        }
+    }
     [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:self.companyNameTextField.text company_position:self.myPositionTextField.text nickname:self.myNameTextField.text avatar:_imageUrl enterprise_step:@"2" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -139,24 +184,30 @@
 
 
 - (IBAction)headerAtion:(id)sender {
-    
-    //选取照片上传
-    UIActionSheet *sheet;
-    // 判断是否支持相机
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    //个人信息的头像
+    if (userModel.avatar.length > 0) {
+        return;
+    }else{
         
-    {
-        sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选择", nil];
+        //选取照片上传
+        UIActionSheet *sheet;
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+            
+        {
+            sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"拍照",@"从相册选择", nil];
+            
+        }else {
+            
+            sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从相册选择", nil];
+            
+        }
         
-    }else {
+        sheet.tag = 255;
         
-        sheet = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"从相册选择", nil];
-        
+        [sheet showInView:self.view];
     }
-    
-    sheet.tag = 255;
-    
-    [sheet showInView:self.view];
 }
 
 -(void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex

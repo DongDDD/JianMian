@@ -34,7 +34,7 @@
              @"company_real_reg_date":@"company_real.reg_date",
              @"company_real_denial_reason":@"company_real.denial_reason",
              @"company_real_unified_credit_code":@"company_real.unified_credit_code",
-             @"company_real_status":@"company.real_status",
+             @"company_real_status":@"company_real.status",
              @"company_real_reg_capital":@"company_real.reg_capital",
 
 

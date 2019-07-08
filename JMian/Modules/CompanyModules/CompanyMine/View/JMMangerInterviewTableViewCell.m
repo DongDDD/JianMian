@@ -83,9 +83,6 @@
             
         }
         
-        
-        
-        
     }else if ([model.status isEqualToString:Interview_Refuse]){//你 C端已拒绝
         self.headerTitleLab.text = [NSString stringWithFormat:@"面试邀请：%@",model.time];
         self.headerTitleLab.textColor = TEXT_GRAY_COLOR;
@@ -134,6 +131,7 @@
     NSDate *datestr = [dateFormatter dateFromString:dateStr];
     return datestr;
 }
+
 #pragma mark - //B端面试列表状态
 //B端面试列表状态。录用状态：0:未确定 1:不合适 2:已录用
 -(void)init_B_TypeViewWith:(JMInterViewModel *)model

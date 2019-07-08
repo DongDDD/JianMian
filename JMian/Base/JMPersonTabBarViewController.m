@@ -39,6 +39,7 @@
 
     _unReadNum = 0;
     [self getMsgList];
+    self.view.backgroundColor = [UIColor whiteColor];
     //选中时的颜色
     //透明设置为NO，显示白色，view的高度到tabbar顶部截止，YES的话到底部
 //    self.mcTabbar.translucent = NO;
@@ -94,7 +95,7 @@
 
 - (void)orderNotification:(NSNotification *)notification
 {
-    if (self.mine.BUserCenterHeaderSubView.taskBadgeView.hidden == NO) {
+    if (self.mine.personalCenterHeaderView.taskBadgeView.hidden == NO) {
         self.mine.tabBarItem.badgeValue = @"2";
         
     }else{
@@ -107,14 +108,14 @@
 
 - (void)taskNotification:(NSNotification *)notification
 {
-    if (self.mine.BUserCenterHeaderSubView.orderBadgeView.hidden == NO) {
+    if (self.mine.personalCenterHeaderView.orderBadgeView.hidden == NO) {
         self.mine.tabBarItem.badgeValue = @"2";
         
     }else{
         self.mine.tabBarItem.badgeValue = @"1";
         
     }
-     [self.mine.BUserCenterHeaderSubView.taskBadgeView setHidden:NO];
+     [self.mine.personalCenterHeaderView.taskBadgeView setHidden:NO];
     //显示
 }
 #pragma mark - 获取未读消息

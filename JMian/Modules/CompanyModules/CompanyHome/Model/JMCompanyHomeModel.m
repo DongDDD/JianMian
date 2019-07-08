@@ -29,7 +29,9 @@
              @"cityIs_hot":@"city.is_hot",
              
              @"video_file_path":@"video.file_path",
-             @"video_status":@"video.status"
+             @"video_status":@"video.status",
+             @"video_cover":@"video.cover"
+
              };
 
 }

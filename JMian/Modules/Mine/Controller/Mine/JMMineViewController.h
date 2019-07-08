@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMMineViewController : BaseViewController
 
-@property (strong, nonatomic) JMBUserCenterHeaderSubView *BUserCenterHeaderSubView;
+//@property (strong, nonatomic) JMBUserCenterHeaderSubView *BUserCenterHeaderSubView;
 @property (strong, nonatomic) JMMPersonalCenterHeaderView *personalCenterHeaderView;
 
 @end

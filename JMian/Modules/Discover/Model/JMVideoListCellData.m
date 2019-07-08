@@ -41,7 +41,8 @@
              @"video_file_path":@"video.file_path",
              @"video_status":@"video.status",
              @"video_denial_reason":@"video.denial_reason",
-
+             @"video_cover":@"video.cover",
+             
              @"city_city_id":@"city.city_id",
              @"city_city_name":@"city.city_name",
 

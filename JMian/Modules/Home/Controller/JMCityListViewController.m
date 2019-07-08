@@ -36,7 +36,7 @@ static NSString *cellIdent = @"cellIdent";
     [self getData];
     [self.view addSubview:self.tableView1];
     [self.view addSubview:self.tableView2];
-
+    [self showProgressHUD_view:self.view];
     // Do any additional setup after loading the view from its nib.
     
 }
@@ -57,7 +57,7 @@ static NSString *cellIdent = @"cellIdent";
         
         [_tableView1 reloadData];
         [_tableView2 reloadData];
-        
+        [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -214,7 +214,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(UITableView *)tableView1{
     if (!_tableView1) {
-        _tableView1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 100, SCREEN_HEIGHT) style:UITableViewStylePlain];
+        _tableView1 = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 100, self.view.frame.size.height-64) style:UITableViewStylePlain];
         _tableView1.delegate = self;
         _tableView1.dataSource = self;
         _tableView1.rowHeight = 78.0f;
@@ -228,7 +228,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(UITableView *)tableView2{
     if (!_tableView2) {
-        _tableView2 = [[UITableView alloc]initWithFrame:CGRectMake(_tableView1.frame.size.width, 0, SCREEN_WIDTH-_tableView1.frame.size.width, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+        _tableView2 = [[UITableView alloc]initWithFrame:CGRectMake(_tableView1.frame.size.width, 0, SCREEN_WIDTH-_tableView1.frame.size.width,self.view.frame.size.height-64) style:UITableViewStylePlain];
         _tableView2.delegate = self;
         _tableView2.dataSource = self;
         _tableView2.rowHeight = 78.0f;

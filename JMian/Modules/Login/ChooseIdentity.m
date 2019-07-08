@@ -13,7 +13,7 @@
 #import "JMCompanyHomeViewController.h"
 #import "JMJudgeViewController.h"
 #import "JMPersonTabBarViewController.h"
-
+#import "NavigationViewController.h"
 #import "JMCompanyTabBarViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "JMUserInfoModel.h"
@@ -30,15 +30,21 @@
 
     // Do any additional setup after loading the view from its nib.
 }
+
 - (IBAction)isSearchJob:(id)sender {
     [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-
-        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        JMJudgeViewController *vc = [[JMJudgeViewController alloc] init];
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
 //        [self getUserInfo];
-
-        BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
-        
-        [self.navigationController pushViewController:vc animated:YES];
+//        BasicInformationViewController *judgevc = [[BasicInformationViewController alloc]init];
+//        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
+//        [self setRootViewController:naVC];
+//        BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
+//
+//        [self.navigationController pushViewController:vc animated:YES];
 //        kSaveMyDefault(@"type", @"person");
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -68,9 +74,10 @@
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             [JMUserInfoManager saveUserInfo:userInfo];
             
-            JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
-            [self.navigationController pushViewController:vc animated:YES];
-            
+         
+            JMJudgeViewController *vc = [[JMJudgeViewController alloc] init];
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
 //            JMCompanyBaseInfoViewController *vc = [[JMCompanyBaseInfoViewController alloc]init];
 //            [self.navigationController pushViewController:vc animated:YES];
       

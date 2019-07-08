@@ -1,5 +1,5 @@
 target "JMian"
-pod 'Masonry', '~> 1.0.1'
+pod 'Masonry', '~> 1.1.0'
 pod 'AFNetworking'
 pod 'MJExtension'
 pod 'SDWebImage'
@@ -21,4 +21,4 @@ pod 'IQKeyboardManager', '3.3.7'
 pod 'WechatOpenSDK'
 pod 'AlipaySDK-iOS'
 pod 'STPickerView', '2.4'
-
+pod 'SJVideoPlayer'

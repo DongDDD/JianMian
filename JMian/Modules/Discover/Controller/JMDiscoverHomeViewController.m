@@ -13,15 +13,18 @@
 #import "JMHTTPManager+FectchVideoLists.h"
 #import "JMVideoListCellData.h"
 #import "JMVideoPlayManager.h"
-static CGFloat kMagin = 10.f;
+#import "JMCityListViewController.h"
 
-@interface JMDiscoverHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,JMDiscoverCollectionViewCellDelegate>
+//static CGFloat kMagin = 10.f;
+
+@interface JMDiscoverHomeViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,JMDiscoverCollectionViewCellDelegate,JMCityListViewControllerDelegate>
 @property(nonatomic ,strong)JMTitlesView *titleView;
 @property(nonatomic ,strong)JMDiscoverTopView *discoverTopView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *videoDataList;
 @property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, copy)NSString *mode;
+@property (nonatomic, copy)NSString *city_id;
 @property (nonatomic, assign)BOOL isShowAllData;
 @property (nonatomic, strong)NSMutableArray *imageArray;
 @end
@@ -38,8 +41,14 @@ static CGFloat kMagin = 10.f;
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.tabBarController.tabBar.hidden = NO;
+//    self.tabBarController.tabBar.hidden = NO;
     self.navigationController.navigationBarHidden = YES;
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBarHidden = NO;
 
 }
 
@@ -124,14 +133,33 @@ static CGFloat kMagin = 10.f;
 
 
 }
-#pragma mark ====== getData ======
+#pragma mark Action
+-(void)changeCityAction{
+    JMCityListViewController *vc = [[JMCityListViewController alloc]init];
+    vc.delegate = self;
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        if (_index == 0) {
+            vc.viewType = JMCityListViewPartTime;
+            
+        }else if (_index == 1) {
+            vc.viewType = JMCityListViewDefault;
+        }
+        
+    }
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+#pragma mark   getData
 -(void)getData_mode:(NSString *)mode{
     [self showProgressHUD_view:self.view];
-    [[JMHTTPManager sharedInstance]fectchVideoList_mode:mode city_id:nil contact_phone:nil per_page:@"10" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fectchVideoList_mode:mode city_id:_city_id contact_phone:nil per_page:@"10" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
 //            NSMutableArray *array = [NSMutableArray array];
             self.videoDataList = [JMVideoListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
+//            [self.videoDataList addObjectsFromArray:array]
             if (self.videoDataList.count < 10) {
                 [self.collectionView.mj_footer setHidden:YES];
 //                _isShowAllData = YES;
@@ -153,7 +181,7 @@ static CGFloat kMagin = 10.f;
 }
 
 
-#pragma mark ====== MyDelegate ======
+#pragma mark   MyDelegate
 -(void)didClickPlayAction_data:(JMVideoListCellData *)data{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     NSString *videoUrl;
@@ -169,17 +197,21 @@ static CGFloat kMagin = 10.f;
 
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:videoUrl];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    self.tabBarController.tabBar.hidden = YES;
-    self.navigationController.navigationBarHidden = NO;
-
-    [self.navigationController pushViewController:playVC animated:NO];
+    [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
     
 
 }
+-(void)didSelectedCity_id:(NSString *)city_id city_name:(NSString *)city_name{
+    
+    _city_id = city_id;
+    self.discoverTopView.leftLab.text = city_name;
+//    self.arrDate = [NSMutableArray array];
+    [self.collectionView.mj_header beginRefreshing];
+    
+}
 
-
-#pragma mark ====== UICollectionViewDelegate ======
+#pragma mark  UICollectionViewDelegate
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return self.videoDataList.count;
@@ -209,16 +241,16 @@ static CGFloat kMagin = 10.f;
         //自动网格布局
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc]init];
         
-        CGFloat itemWidth = (self.view.frame.size.width - 4 * kMagin) / 2;
+        CGFloat itemWidth = (self.view.frame.size.width  ) / 2;
         
         //设置单元格大小
         flowLayout.itemSize = CGSizeMake(itemWidth, 265);
         //最小行间距(默认为10)
-        flowLayout.minimumLineSpacing = 10;
+        flowLayout.minimumLineSpacing = 0;
         //最小item间距（默认为10）
-        flowLayout.minimumInteritemSpacing = 10;
+        flowLayout.minimumInteritemSpacing = 0;
         //设置senction的内边距@
-        flowLayout.sectionInset = UIEdgeInsetsMake(kMagin, kMagin, kMagin, kMagin);
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
@@ -261,6 +293,8 @@ static CGFloat kMagin = 10.f;
 -(JMDiscoverTopView *)discoverTopView{
     if (!_discoverTopView) {
         _discoverTopView = [[JMDiscoverTopView alloc]init];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(changeCityAction)];
+        [_discoverTopView addGestureRecognizer:tap];
     }
     return  _discoverTopView;
 

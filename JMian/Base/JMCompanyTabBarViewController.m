@@ -22,6 +22,8 @@
 #import "UITabBar+XSDExt.h"
 #import "JMAllMessageTableViewController.h"
 #import "JMMessageListViewController.h"
+#import "JMBMineViewController.h"
+
 
 
 @interface JMCompanyTabBarViewController ()
@@ -30,7 +32,7 @@
 //@property (nonatomic ,strong)JMMessageViewController *message;
 @property (nonatomic ,strong)JMMessageListViewController *message;
 
-@property (nonatomic ,strong)JMMineViewController *mine;
+@property (nonatomic ,strong)JMBMineViewController *mine;
 @property(nonatomic,strong)UIView *taskBadgeView;
 
 @end
@@ -55,7 +57,7 @@
     [self addChildVc:discover title:@"发现" image:@"discovery" selectedImage:@"discovery_pitch_on"];
 
 
-    self.mine = [[JMMineViewController alloc] init];
+    self.mine = [[JMBMineViewController alloc] init];
     [self addChildVc:self.mine title:@"我的" image:@"home_me" selectedImage:@"home_me_pitch_on" ];
     [self setSelectedIndex:2];
 

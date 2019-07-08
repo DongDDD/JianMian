@@ -49,12 +49,11 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *jobDescriptionBtn;
 
-
 @property (nonatomic, strong)NSArray *pickerArray;
 @property (nonatomic, copy)NSString *pickerStr;
 @property (nonatomic, assign)NSUInteger pickerRow;
 
-@property (nonatomic, copy)NSString *positionLabId;
+@property (nonatomic, copy)NSString *work_label_id;
 
 
 @end
@@ -88,7 +87,7 @@
 -(void)setupValues{
     [self.workPropertyBtn setTitle:self.homeworkModel.work_name forState:UIControlStateNormal];
     [self.workNameBtn setTitle:self.homeworkModel.work_name forState:UIControlStateNormal];
-    self.positionLabId = self.homeworkModel.work_label_id;
+    self.work_label_id = self.homeworkModel.work_label_id;
     self.workNameTextField.text = self.homeworkModel.work_name;
     NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",self.homeworkModel.work_experience_min,self.homeworkModel.work_experience_max];
     [self.expriencesBtn setTitle:experienceStr forState:UIControlStateNormal];
@@ -116,7 +115,7 @@
 -(void)createJob{
     NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
     NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
-    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_positionLabId work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_work_label_id work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -135,7 +134,7 @@
 -(void)updateJob{
     NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
     NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
-    [[JMHTTPManager sharedInstance]updateWorkWith_Id:self.homeworkModel.work_id city_id:@"3" work_label_id:_positionLabId work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateWorkWith_Id:self.homeworkModel.work_id city_id:@"3" work_label_id:_work_label_id work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [self showAlertSimpleTips:@"提示" message:@"提交成功" btnTitle:@"好的"];
         [self.navigationController popViewControllerAnimated:YES];
@@ -154,13 +153,7 @@
     
 }
 
-//PositionDesiredViewController代理方法
--(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
-    [self.workNameBtn setTitle:labStr forState:UIControlStateNormal];
-    [self.workNameBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-    self.positionLabId = labIDStr;
-    
-}
+
 
 - (IBAction)workPorpertyAction:(UIButton *)sender {
 //    self.pickerArray = [NSArray arrayWithObjects:@"兼职",@"全职",@"实习",nil];
@@ -234,6 +227,33 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+- (IBAction)workLocationAction:(UIButton *)sender {
+    JMGetCompanyLocationViewController *vc = [[JMGetCompanyLocationViewController alloc]init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+- (IBAction)jobDescriptionAction:(UIButton *)sender {
+    if (self.work_label_id) {
+        JMJobDescriptionViewController *vc = [[JMJobDescriptionViewController alloc]init];
+        vc.delegate = self;
+        vc.foreign_key = self.work_label_id;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"请先选择工作性质" btnTitle:@"好的"];
+    }
+}
+
+#pragma mark - myDelegate
+//PositionDesiredViewController代理方法
+-(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
+    [self.workNameBtn setTitle:labStr forState:UIControlStateNormal];
+    [self.workNameBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    self.work_label_id = labIDStr;
+    
+}
+
 //JMWelfareViewController代理方法
 -(void)sendBtnLabData:(NSMutableArray *)btns{
     NSMutableArray *strArray = [[NSMutableArray alloc]init];
@@ -242,88 +262,36 @@
         [strArray addObject:btn.titleLabel.text];
 //        btn.titleLabel.text;
     }
-    
     NSString *str = [strArray componentsJoinedByString:@","];
     [self.welfareBtn setTitle:str forState:UIControlStateNormal];
     [self.welfareBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
 //    NSLog(@"%@",str);
-
 }
 
-- (IBAction)workLocationAction:(UIButton *)sender {
-    JMGetCompanyLocationViewController *vc = [[JMGetCompanyLocationViewController alloc]init];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
-    
-}
 
 -(void)sendAdress_Data:(AMapPOI *)data
 {
     self.POIModel = data;
     NSString *adr = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
     [self.workLocationBtn setTitle:adr forState:UIControlStateNormal];
-
-
 }
 
-- (IBAction)jobDescriptionAction:(UIButton *)sender {
-    
-    JMJobDescriptionViewController *vc = [[JMJobDescriptionViewController alloc]init];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
-}
 
 -(void)sendTextView_textData:(NSString *)textData{
-    
-    [_jobDescriptionBtn setTitle:textData forState:UIControlStateNormal];
-    
+    if (textData.length > 0) {
+        [_jobDescriptionBtn setTitle:@"已完善" forState:UIControlStateNormal];
+        [_jobDescriptionBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    }
 }
 
-//
-//- (IBAction)pickerOKAction:(UIButton *)sender {
-//
-//
-//    switch (_selectedBtn.tag) {
-//        case 1:
-//            [self.workPropertyBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-//            [self.workPropertyBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//            break;
-//
-//        case 2:
-//            [self.expriencesBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-//            [self.expriencesBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//            [self setExprienceRangeWithExpStr:self.pickerArray[_pickerRow]];
-//            break;
-//
-//        case 3:
-//            [self.educationBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-//            [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//            self.educationNum = @(_pickerRow);
-//            break;
-//
-//        case 4:
-//            [self.salaryBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-//            [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//            [self setSalaryRangeWithSalaryStr:self.pickerArray[_pickerRow]];
-//
-//            break;
-//
-//        default:
-//            break;
-//    }
-////    [self.pickerBGView setHidden:YES];
-//
-//}
-//- (IBAction)pickerViewDeleteAction:(id)sender {
-////    [self.pickerBGView setHidden:YES];
-//}
+
 #pragma mark - textField delegate
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
-    
     return YES;
 }
+
 
 #pragma mark - pickerView delegate
 - (void)pickerSingle:(STPickerSingle *)pickerSingle selectedTitle:(NSString *)selectedTitle row:(NSInteger)row{
@@ -344,10 +312,9 @@
         [self.salaryBtn setTitle:selectedTitle forState:UIControlStateNormal];
         [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
     }
-    
-    
-    
+
 }
+
 //-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
 //
 //    _pickerRow = row;
