@@ -88,6 +88,26 @@
                         <action selector="loginPhoneBtn:" destination="-1" eventType="touchUpInside" id="RXw-Uq-4nn"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即代表你同意“招聘app”的" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3G9-fe-bwl">
+                    <rect key="frame" x="68" y="626" width="239" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="239" id="XF5-ZU-qne"/>
+                        <constraint firstAttribute="height" constant="21" id="ect-iW-qjH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4n-7h-Rf9">
+                    <rect key="frame" x="228" y="623.5" width="79" height="26"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                    <state key="normal" title="服务和隐私条约">
+                        <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="xieyiAction:" destination="-1" eventType="touchUpInside" id="0no-UQ-nuR"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -100,6 +120,7 @@
                 <constraint firstItem="Y8f-e0-i2e" firstAttribute="leading" secondItem="5y9-0G-IKN" secondAttribute="leading" id="IfL-tD-kYI"/>
                 <constraint firstItem="Y8f-e0-i2e" firstAttribute="top" secondItem="E9e-fs-icf" secondAttribute="top" id="ORB-Mu-Mn2"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="BWF-oX-VHW" secondAttribute="trailing" constant="30" id="P74-FY-QpQ"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="3G9-fe-bwl" secondAttribute="bottom" constant="20" id="Rx5-e9-kGb"/>
                 <constraint firstItem="5K3-J4-jgL" firstAttribute="top" secondItem="bTt-m9-7Gi" secondAttribute="bottom" constant="55" id="Skg-lq-zWH"/>
                 <constraint firstItem="bTt-m9-7Gi" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="48" id="YAN-2W-rmT"/>
                 <constraint firstItem="Y8f-e0-i2e" firstAttribute="height" secondItem="5y9-0G-IKN" secondAttribute="height" id="c1l-Pc-G6R"/>
@@ -108,7 +129,10 @@
                 <constraint firstItem="5y9-0G-IKN" firstAttribute="leading" secondItem="5K3-J4-jgL" secondAttribute="trailing" constant="16" id="hDz-iT-TiE"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="Hhe-d4-UWW" secondAttribute="trailing" constant="30" id="hr8-yG-8sW"/>
                 <constraint firstItem="E9e-fs-icf" firstAttribute="height" secondItem="5K3-J4-jgL" secondAttribute="height" id="mbk-NL-09G"/>
+                <constraint firstItem="x4n-7h-Rf9" firstAttribute="leading" secondItem="3G9-fe-bwl" secondAttribute="trailing" constant="-79" id="qBg-gN-8e5"/>
+                <constraint firstItem="3G9-fe-bwl" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="qi2-aS-ya3"/>
                 <constraint firstItem="5y9-0G-IKN" firstAttribute="bottom" secondItem="5K3-J4-jgL" secondAttribute="bottom" id="qku-G4-s8p"/>
+                <constraint firstItem="x4n-7h-Rf9" firstAttribute="centerY" secondItem="3G9-fe-bwl" secondAttribute="centerY" id="tPG-cx-hWd"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="132" y="154.27286356821591"/>

@@ -10,10 +10,7 @@
 #import "LoginPhoneViewController.h"
 #import "WXApi.h"
 #import "JMHTTPManager+Login.h"
-
-
-
-
+#import "JMServiceProtocolWebViewController.h"
 
 
 @interface LoginViewController ()<UIGestureRecognizerDelegate,WXApiDelegate>
@@ -50,6 +47,12 @@
     [WXApi sendReq:req];
     
     
+    
+}
+
+- (IBAction)xieyiAction:(id)sender {
+    JMServiceProtocolWebViewController *vc = [[JMServiceProtocolWebViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

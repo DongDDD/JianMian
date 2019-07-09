@@ -13,6 +13,7 @@
 #import "VendorKeyMacros.h"
 #import "JMJudgeViewController.h"
 #import "NavigationViewController.h"
+#import "JMServiceProtocolWebViewController.h"
 
 @interface LoginPhoneViewController ()<UIActionSheetDelegate,UIGestureRecognizerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumText;
@@ -93,6 +94,10 @@
 }
 
 
+- (IBAction)xieyiAction:(id)sender {
+    JMServiceProtocolWebViewController *vc = [[JMServiceProtocolWebViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 
 

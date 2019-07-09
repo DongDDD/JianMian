@@ -22,8 +22,11 @@
 #import "SJVideoPlayer.h"
 #import <SJVideoPlayer/SJVideoPlayer.h>
 #import "JMVideoSingleViewController.h"
+#import "JMLabChooseBottomView.h"
+#import "ZFPlayer.h"
 
-@interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate,JMLabsChooseViewControllerDelegate,JMChoosePositionTableViewControllerDelegate,JMCityListViewControllerDelegate>
+
+@interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate,JMLabsChooseViewControllerDelegate,JMChoosePositionTableViewControllerDelegate,JMCityListViewControllerDelegate,JMLabChooseBottomViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
 
@@ -43,7 +46,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *chooseRequireBtn;
 @property(nonatomic,strong)NSMutableArray *choosePositionArray;
 @property (nonatomic, strong, nullable) SJVideoPlayer *player;
+@property (nonatomic, strong)UIView *bottomView;
+@property (nonatomic, strong)JMLabChooseBottomView *labChooseBottomView;
 
+@property (weak, nonatomic) IBOutlet ZFPlayerView *playView;
+@property (nonatomic, strong) ZFPlayerView *playerView;
+@property (atomic, strong) NSURL *url;
 // -----------筛选------------
 @property(nonatomic,copy)NSString *job_label_id;
 @property(nonatomic,copy)NSString *city_id;
@@ -85,7 +93,21 @@ static NSString *cellIdent = @"cellIdent";
     self.page = 1;
 //    [self getData];
     [self setTableView];
-//    [self ]
+    [self initView];
+    
+//    self.playerView = [[ZFPlayerView alloc] init];
+//    [self.view addSubview:self.playerView];
+//    [self.playerView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(self.view).offset(20);
+//        make.left.right.equalTo(self.view);
+//        // Here a 16:9 aspect ratio, can customize the video aspect ratio
+//        make.height.equalTo(self.playView.mas_width).multipliedBy(9.0f/16.0f);
+//    }];
+//    self.url = [NSURL URLWithString:@"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4"];
+//    ZFPlayerController *controlView = [[ZFPlayerController alloc] init];
+//    // model
+  ;
+ 
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -206,6 +228,24 @@ static NSString *cellIdent = @"cellIdent";
     [self setupFooterRefresh];//下拉加载更多
 
 }
+
+-(void)initView{
+    [self.bgBtn setHidden:YES];
+    [self.labschooseVC.view setHidden:YES];
+    [self.choosePositionVC.view setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
+    [self.view addSubview:self.bgBtn];
+    [self.view addSubview:self.labschooseVC.view];
+    [self.view addSubview:self.choosePositionVC.view];
+    [self.view addSubview:self.labChooseBottomView];
+    [_labChooseBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.labschooseVC.view.mas_bottom);
+        make.height.mas_equalTo(37);
+        make.left.right.mas_equalTo(self.view);
+    }];
+}
+
+
 
 #pragma mark - 下拉刷新 -
 -(void)setupHeaderRefresh
@@ -330,12 +370,14 @@ static NSString *cellIdent = @"cellIdent";
 //    [_player.view mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.edges.offset(0);
 //    }];
-//
+
 //    _player.URLAsset.title = model.workName;
  
 //    JMVideoSingleViewController *vc = [[JMVideoSingleViewController alloc]init];
 //    [self.navigationController pushViewController:vc animated:YES];
 //
+    
+    
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
@@ -350,8 +392,11 @@ static NSString *cellIdent = @"cellIdent";
     [self.chooseRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.choosePositionVC.view setHidden:NO];
     [self.labschooseVC.view setHidden:YES];
-    [self getPositionListData];
+    [self.labChooseBottomView setHidden:YES];
     [self.bgBtn setHidden:NO];
+    [self getPositionListData];
+    
+ 
     //    self.choosePositionVC
 }
 
@@ -362,24 +407,25 @@ static NSString *cellIdent = @"cellIdent";
     [self.choosePositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:NO];
     [self.choosePositionVC.view setHidden:YES];
-    [self.bgBtn setHidden:YES];
-
-   
-
+    [self.labChooseBottomView setHidden:NO];
+    [self.bgBtn setHidden:NO];
+ 
 }
 
 
 -(void)bgBtnAction{
     [self.choosePositionVC.view setHidden:YES];
     [self.labschooseVC.view setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
     [_bgBtn setHidden:YES];
 
 }
 
 //要求筛选
--(void)resetAction{
+-(void)labChooseBottomLeftAction{
     self.arrDate = [NSMutableArray array];
     [self.labschooseVC.view setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
     [_bgBtn setHidden:YES];
     _page = 1;
     _city_id = nil;
@@ -394,11 +440,12 @@ static NSString *cellIdent = @"cellIdent";
 //    [_bgBtn setHidden:YES];
     
 }
-//职位选择
--(void)OKAction
+//确认
+-(void)labChooseBottomRightAction
 {
     self.arrDate = [NSMutableArray array];
     [self.labschooseVC.view setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
     [_bgBtn setHidden:YES];
     [self.tableView.mj_header beginRefreshing];
 
@@ -520,44 +567,71 @@ static NSString *cellIdent = @"cellIdent";
         _choosePositionVC.delegate = self;
         [self addChildViewController:_choosePositionVC];
         [self.view addSubview:_choosePositionVC.view];
-        _bgBtn = [[UIButton alloc]init];
-        _bgBtn.backgroundColor = [UIColor blackColor];
-        _bgBtn.alpha = 0.3;
-        [_bgBtn addTarget:self action:@selector(bgBtnAction) forControlEvents:UIControlEventTouchDown];
-        [self.view addSubview:_bgBtn];
+//        _bgBtn = [[UIButton alloc]init];
+//        _bgBtn.backgroundColor = [UIColor blackColor];
+//        _bgBtn.alpha = 0.3;
+//        [_bgBtn addTarget:self action:@selector(bgBtnAction) forControlEvents:UIControlEventTouchDown];
+//        [self.view addSubview:_bgBtn];
         [_choosePositionVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.mas_equalTo(self.headerView.mas_bottom);
             make.left.and.right.mas_equalTo(self.view);
             make.bottom.mas_equalTo(self.view).offset(-200);
         }];
         
-        [_bgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(_choosePositionVC.view.mas_bottom);
-            make.left.and.right.mas_equalTo(_choosePositionVC.view);
-            make.bottom.mas_equalTo(self.view);
-        }];
+//        [_bgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.top.mas_equalTo(_choosePositionVC.view.mas_bottom);
+//            make.left.and.right.mas_equalTo(_choosePositionVC.view);
+//            make.bottom.mas_equalTo(self.view);
+//        }];
     }
     return  _choosePositionVC;
     
 }
 
 
+-(UIButton *)bgBtn{
+    if (!_bgBtn) {
+        _bgBtn = [[UIButton alloc]init];
+        _bgBtn.backgroundColor = [UIColor blackColor];
+        _bgBtn.alpha = 0.3;
+        [_bgBtn addTarget:self action:@selector(bgBtnAction) forControlEvents:UIControlEventTouchDown];
+        [self.view addSubview:_bgBtn];
+        [_bgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_headerView.mas_bottom);
+            make.left.and.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view);
+        }];
+    }
+    return _bgBtn;
+}
+
 -(JMLabsChooseViewController *)labschooseVC{
     if (_labschooseVC == nil) {
         _labschooseVC = [[JMLabsChooseViewController alloc]init];
-        _labschooseVC.view.frame = CGRectMake(0, self.headerView.frame.origin.y+self.headerView.frame.size.height, SCREEN_WIDTH, self.view.frame.size.height-100);
+        _labschooseVC.view.frame = CGRectMake(0, self.headerView.frame.origin.y+self.headerView.frame.size.height, SCREEN_WIDTH, self.view.frame.size.height);
         _labschooseVC.delegate = self;
         _labschooseVC.view.tag = 556;
         [self addChildViewController:_labschooseVC];
         [self.view addSubview:_labschooseVC.view];
-//        [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.top.mas_equalTo(self.headerView.mas_bottom);
-//            make.left.and.right.mas_equalTo(self.view);
-//            make.bottom.mas_equalTo(self.view).offset(-71);
-//        }];
+        [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.headerView.mas_bottom);
+            make.left.and.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view).offset(-150);
+        }];
+        
+ 
     }
     return  _labschooseVC;
     
+}
+
+
+-(JMLabChooseBottomView *)labChooseBottomView{
+    if (!_labChooseBottomView) {
+        _labChooseBottomView = [[JMLabChooseBottomView alloc]init];
+        _labChooseBottomView.delegate = self;
+    }
+    return  _labChooseBottomView;
 }
 
 -(NSMutableArray *)arrDate{

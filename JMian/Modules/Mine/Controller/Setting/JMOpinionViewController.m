@@ -41,6 +41,10 @@
     
 }
 
+-(void)doneClicked{
+    [_decriptionTextView.contentTextView resignFirstResponder];
+}
+
 -(JMPartTimeJobResumeFooterView *)decriptionTextView{
     if (_decriptionTextView == nil) {
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];

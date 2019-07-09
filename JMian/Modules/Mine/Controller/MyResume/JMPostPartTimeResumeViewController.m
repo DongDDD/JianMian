@@ -196,6 +196,10 @@ static NSString *cellIdent = @"cellIdent";
     [self rightAction];
 }
 
+-(void)doneClicked{
+    [_footerView.contentTextView resignFirstResponder];
+}
+
 #pragma mark - 数据请求
 //获取兼职简历
 -(void)getPartTimeInfoData{
@@ -550,6 +554,7 @@ static NSString *cellIdent = @"cellIdent";
         _footerView.frame = CGRectMake(0, 350 , SCREEN_WIDTH, 229);
         _footerView.viewType = JMPartTimeJobResumeFooterViewTypeDefault;
         _footerView.delegate = self;
+        _footerView.contentTextView.inputAccessoryView = self.myToolbar;
 //        _footerView.contentTextView.delegate = self;
         
     }

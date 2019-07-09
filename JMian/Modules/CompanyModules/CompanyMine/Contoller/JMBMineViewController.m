@@ -255,7 +255,7 @@
 -(UIScrollView *)scrollView{
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc]init];
-        _scrollView.frame = CGRectMake(0, -20, SCREEN_WIDTH, self.view.frame.size.height);
+        _scrollView.frame = CGRectMake(0, -SafeAreaStatusHeight, SCREEN_WIDTH, self.view.frame.size.height);
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.backgroundColor = BG_COLOR;
     }

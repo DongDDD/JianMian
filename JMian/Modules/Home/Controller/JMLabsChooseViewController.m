@@ -33,11 +33,11 @@
 
 -(void)initView{
     if (_labsChooseViewType != JMLabsChooseViewTypeFeedBack) {
-        UIView *bgView = [[UIView alloc]initWithFrame:self.view.bounds];
-        bgView.backgroundColor = [UIColor blackColor];
-        bgView.alpha = 0.3;
-        [self.view addSubview:bgView];
-        [self initBtnView];
+//        UIView *bgView = [[UIView alloc]initWithFrame:self.view.bounds];
+//        bgView.backgroundColor = [UIColor blackColor];
+//        bgView.alpha = 0.3;
+//        [self.view addSubview:bgView];
+//        [self initBtnView];
         
     }else{
         [self initFeedBackBtn];
@@ -76,25 +76,25 @@
 
 }
 
--(void)initBtnView{
-
-    UIButton *leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,SCREEN_HEIGHT-300, self.view.frame.size.width/2, BottomBtnH)];
-    [leftBtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
-    [leftBtn setTitle:@"全部" forState:UIControlStateNormal];
-    [leftBtn setBackgroundColor:[UIColor whiteColor]];
-    [leftBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    leftBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [self.view addSubview:leftBtn];
-    
-    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(leftBtn.frame.size.width,SCREEN_HEIGHT-300, self.view.frame.size.width/2, BottomBtnH)];
-    [rightBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setTitle:@"确认" forState:UIControlStateNormal];
-    [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [rightBtn setBackgroundColor:MASTER_COLOR];
-    rightBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-    [self.view addSubview:rightBtn];
-
-}
+//-(void)initBtnView{
+//
+//    UIButton *leftBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,SCREEN_HEIGHT-300, self.view.frame.size.width/2, BottomBtnH)];
+//    [leftBtn addTarget:self action:@selector(leftAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [leftBtn setTitle:@"全部" forState:UIControlStateNormal];
+//    [leftBtn setBackgroundColor:[UIColor whiteColor]];
+//    [leftBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//    leftBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [self.view addSubview:leftBtn];
+//
+//    UIButton *rightBtn = [[UIButton alloc]initWithFrame:CGRectMake(leftBtn.frame.size.width,SCREEN_HEIGHT-300, self.view.frame.size.width/2, BottomBtnH)];
+//    [rightBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+//    [rightBtn setTitle:@"确认" forState:UIControlStateNormal];
+//    [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//    [rightBtn setBackgroundColor:MASTER_COLOR];
+//    rightBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+//    [self.view addSubview:rightBtn];
+//
+//}
 
 
 -(void)initLabsView
@@ -106,7 +106,7 @@
         bottomPadding = 0;
     }else{
         titleArray = @[@"最低学历",@"工作经验",@"薪资要求"];
-        bottomPadding = 300;
+        bottomPadding = 250;
 
     }
     

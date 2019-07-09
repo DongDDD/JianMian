@@ -59,34 +59,11 @@
     [self setIsHiddenBackBtn:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     _userInfoModel = [JMUserInfoManager getUserInfo];
-//    if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
-//
-//        [[UIApplication sharedApplication].keyWindow addSubview:self.BUserCenterHeaderView];
-////        [[UIApplication sharedApplication].keyWindow addSubview:self.BUserCenterHeaderSubView];
-//
-//    }else if ([_userInfoModel.type isEqualToString:C_Type_USER]){
-//
-//        [[UIApplication sharedApplication].keyWindow addSubview:self.personalCenterHeaderView];
-//    }
 
-//    [self setRightBtnImageViewName:@"upinstall" imageNameRight2:@""];
- 
     [self.view addSubview:self.tableView];
-//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-//
-//        if ([_userInfoModel.type isEqualToString:B_Type_UESR]) {
-//
-//            make.top.mas_equalTo(self.mas_topLayoutGuide).offset(130);
-//        }else{
-//            make.top.mas_equalTo(self.mas_topLayoutGuide).mas_offset(80);
-//
-//        }
-//
-//        make.left.right.bottom.equalTo(self.view);
-//    }];
-    
+
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view).mas_offset(-40);
+        make.top.mas_equalTo(self.view).mas_offset(-SafeAreaStatusHeight);
         make.left.right.bottom.equalTo(self.view);
     }];
     

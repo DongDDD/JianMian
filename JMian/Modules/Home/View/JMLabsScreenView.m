@@ -42,19 +42,16 @@
     _allSubviews = labsArray;
     UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(20, 34, 100, 14)];
     titleLab.text = title;
-    titleLab.font = [UIFont systemFontOfSize:14];
+    titleLab.font = [UIFont systemFontOfSize:13];
     titleLab.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
     [self addSubview:titleLab];
-
     
     NSArray * tagArr = labsArray;
     CGFloat tagBtnX = 20;
     CGFloat tagBtnY = titleLab.frame.origin.y+titleLab.frame.size.height+16;
     for (int i= 0; i<tagArr.count; i++) {
-        
         CGSize tagTextSize = [tagArr[i] sizeWithFont:GlobalFont(14) maxSize:CGSizeMake(SCREEN_WIDTH-25, 29)];
         if (tagBtnX+tagTextSize.width+30 > SCREEN_WIDTH-32) {
-            
             tagBtnX = 20;
             tagBtnY += 29+15;
         }

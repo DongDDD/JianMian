@@ -139,7 +139,6 @@
         _decriptionTextView.delegate = self;
 //        _decriptionTextView.contentTextView.keyboardType = UIReturnKeyDone;
         _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
-
         [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeJobDescription];
         //        _decriptionTextView.contentTextView.delegate = self;
         

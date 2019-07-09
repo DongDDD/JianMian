@@ -189,6 +189,9 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+-(void)fanhui{
+    [self.navigationController popViewControllerAnimated:NO];
+}
 //#pragma mark - PickerViewDelegate
 //
 ////返回有几列

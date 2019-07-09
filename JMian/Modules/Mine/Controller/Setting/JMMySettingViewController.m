@@ -107,14 +107,16 @@
         cell.textLabel.text = _titleArray[indexPath.row];
         if (indexPath.row == 0) {
             cell.detailTextLabel.text = @"159-8910-9060";
+        }else if (indexPath.row == 1) {
+            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+            NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+            cell.detailTextLabel.text = app_Version;
         }
         
     }else if (indexPath.section == 2){
         if (indexPath.row == 0) {
             cell.textLabel.text = @"关于平台";
-            NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
-            NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
-            cell.detailTextLabel.text = app_Version;
+           
 
         }else if (indexPath.row == 1){
             cell.textLabel.text = @"反馈意见";

@@ -238,6 +238,10 @@
 		04256571229EE211000614E7 /* qidong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0425656E229EE211000614E7 /* qidong.png */; };
 		0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0425CB56228449D600E08587 /* JMVideoChatViewController.m */; };
 		0425CB59228449D600E08587 /* JMVideoChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0425CB57228449D600E08587 /* JMVideoChatViewController.xib */; };
+		042CA63422D4376400ABB7AF /* JMServiceProtocolWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CA63222D4376400ABB7AF /* JMServiceProtocolWebViewController.m */; };
+		042CA63522D4376400ABB7AF /* JMServiceProtocolWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042CA63322D4376400ABB7AF /* JMServiceProtocolWebViewController.xib */; };
+		042CA63822D475A500ABB7AF /* JMLabChooseBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CA63722D475A500ABB7AF /* JMLabChooseBottomView.m */; };
+		042CA63A22D475B300ABB7AF /* JMLabChooseBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042CA63922D475B300ABB7AF /* JMLabChooseBottomView.xib */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
 		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
@@ -1196,6 +1200,12 @@
 		0425CB55228449D600E08587 /* JMVideoChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoChatViewController.h; sourceTree = "<group>"; };
 		0425CB56228449D600E08587 /* JMVideoChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoChatViewController.m; sourceTree = "<group>"; };
 		0425CB57228449D600E08587 /* JMVideoChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVideoChatViewController.xib; sourceTree = "<group>"; };
+		042CA63122D4376400ABB7AF /* JMServiceProtocolWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMServiceProtocolWebViewController.h; sourceTree = "<group>"; };
+		042CA63222D4376400ABB7AF /* JMServiceProtocolWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMServiceProtocolWebViewController.m; sourceTree = "<group>"; };
+		042CA63322D4376400ABB7AF /* JMServiceProtocolWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMServiceProtocolWebViewController.xib; sourceTree = "<group>"; };
+		042CA63622D475A500ABB7AF /* JMLabChooseBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabChooseBottomView.h; sourceTree = "<group>"; };
+		042CA63722D475A500ABB7AF /* JMLabChooseBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabChooseBottomView.m; sourceTree = "<group>"; };
+		042CA63922D475B300ABB7AF /* JMLabChooseBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMLabChooseBottomView.xib; sourceTree = "<group>"; };
 		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -2318,6 +2328,9 @@
 				040E366D2268531A00A7D789 /* JMEducationView.m */,
 				040E366F22687B2D00A7D789 /* JMBottomView.h */,
 				040E367022687B2D00A7D789 /* JMBottomView.m */,
+				042CA63622D475A500ABB7AF /* JMLabChooseBottomView.h */,
+				042CA63722D475A500ABB7AF /* JMLabChooseBottomView.m */,
+				042CA63922D475B300ABB7AF /* JMLabChooseBottomView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2627,6 +2640,9 @@
 				6D82F284227492CF00B9D2B9 /* JMEducationExperienceViewController.h */,
 				6D82F285227492CF00B9D2B9 /* JMEducationExperienceViewController.m */,
 				6D82F286227492CF00B9D2B9 /* JMEducationExperienceViewController.xib */,
+				042CA63122D4376400ABB7AF /* JMServiceProtocolWebViewController.h */,
+				042CA63222D4376400ABB7AF /* JMServiceProtocolWebViewController.m */,
+				042CA63322D4376400ABB7AF /* JMServiceProtocolWebViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -4503,6 +4519,7 @@
 				04DD1D51224B6E95007CB11C /* Webkey@3x.png in Resources */,
 				040CA839225F1EB2006D7A7F /* Share_WeChat_friends@2x.png in Resources */,
 				048E6634228574BE00694D86 /* peer_countermand@3x.png in Resources */,
+				042CA63522D4376400ABB7AF /* JMServiceProtocolWebViewController.xib in Resources */,
 				04072F452282BA650067A05D /* redlining_2@2x.png in Resources */,
 				04908AD822A7A361000B5AB4 /* vvip@3x.png in Resources */,
 				04072F2C2282949D0067A05D /* withdraw_deposit@3x.png in Resources */,
@@ -4812,6 +4829,7 @@
 				04908B3B22A8CCB9000B5AB4 /* JMCUserSquareTableViewCell.xib in Resources */,
 				041CCF0722A52403002DFED3 /* store@2x.png in Resources */,
 				6D020A202250F3F9009BCFE4 /* 组 54@2x.png in Resources */,
+				042CA63A22D475B300ABB7AF /* JMLabChooseBottomView.xib in Resources */,
 				04B4F88722B7BFDB00A06E9C /* JMPostGoodsImagesView.xib in Resources */,
 				040B837E2265D73600F1A37A /* companyCamera.png in Resources */,
 				04A2479C224C773A00DEB8E3 /* 0000@2x.png in Resources */,
@@ -5082,6 +5100,7 @@
 				041997EE2267173D00C6C134 /* JMPersonDetailsViewController.m in Sources */,
 				6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */,
 				040865DD2272E898005BB03E /* JMIDCardModel.m in Sources */,
+				042CA63822D475A500ABB7AF /* JMLabChooseBottomView.m in Sources */,
 				040865E822733B78005BB03E /* JMInterViewModel.m in Sources */,
 				047F8EAB228A6672005E81FA /* JMVideoPlayManager.m in Sources */,
 				040E366922682E5900A7D789 /* JMSelfDescriptionView.m in Sources */,
@@ -5176,6 +5195,7 @@
 				040701B5227556A4002BF58D /* JMChooseTimeViewController.m in Sources */,
 				04BF6D9622C31921003032BC /* JMPayFailedViewController.m in Sources */,
 				040B83772265D01800F1A37A /* JMUploadLicenseViewController.m in Sources */,
+				042CA63422D4376400ABB7AF /* JMServiceProtocolWebViewController.m in Sources */,
 				040B838F2265EF6A00F1A37A /* JMIDCardIdentifyViewController.m in Sources */,
 				04731DED22A6A1C90013D7CE /* JMHTTPManager+UpdateAbility.m in Sources */,
 				041997F72267181A00C6C134 /* JMPictureOfPersonDetailViewController.m in Sources */,
