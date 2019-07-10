@@ -76,6 +76,18 @@
 
     [self addSubview:_btn3];
     
+    
+    _sendBtn = [[UIButton alloc]init];
+    [_sendBtn setTitle:@"发送" forState:UIControlStateNormal];
+    _sendBtn.titleLabel.font = [UIFont systemFontOfSize:13];
+    _sendBtn.backgroundColor = MASTER_COLOR;
+    _sendBtn.layer.cornerRadius = 5;
+    [_sendBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [_sendBtn addTarget:self action:@selector(sendMessageAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:_sendBtn];
+    
+    
     [_btn1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(15);
         make.centerY.mas_equalTo(self);
@@ -95,6 +107,15 @@
         make.centerY.mas_equalTo(self);
         make.height.mas_equalTo(_btn3);
         make.width.mas_equalTo(_btn3);
+    }];
+    
+    //盖住表情和更多按钮
+    [_sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(_btn3);
+        make.centerY.mas_equalTo(self);
+        make.left.mas_equalTo(_btn2);
+        make.height.mas_equalTo(_btn2);
+//        make.width.mas_equalTo(_btn3);
     }];
     
     [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -144,7 +165,8 @@
                 [self clearInput];
             }
         }
-     [textView resignFirstResponder];             return NO;
+             [textView resignFirstResponder];
+         return NO;
     }
     return YES;
 }
@@ -164,6 +186,16 @@
 //        [_delegate textViewDidTouchFace:self];
 //    }
 
+}
+
+-(void)sendMessageAction{
+    
+    if(_delegate && [_delegate respondsToSelector:@selector(textView:didSendMessage:)]){
+        if(![_textView.text isEqualToString:@""]){
+            [_delegate textView:self didSendMessage:_textView.text];
+            [self clearInput];
+        }
+    }
 }
 
 

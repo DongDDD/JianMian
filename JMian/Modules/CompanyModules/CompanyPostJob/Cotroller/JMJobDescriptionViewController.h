@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(weak,nonatomic)id<JMJobDescriptionDelegate>delegate;
 @property(nonatomic,copy)NSString *foreign_key;
+@property(nonatomic,copy)NSString *jobDescriptionStr;
+
 @end
 
 NS_ASSUME_NONNULL_END

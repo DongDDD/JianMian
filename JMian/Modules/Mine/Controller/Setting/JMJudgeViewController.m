@@ -64,6 +64,7 @@
         NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
         [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
     }else{
+//        [self jugdeStepToVCWithModel:model];
         //根据用户类型登录腾讯云腾讯云登录。先登录腾讯云再登录账号
         [self loginIM_tpye:model.type];
         

@@ -48,7 +48,7 @@ static NSString *cellIdent = @"cellIdent";
 //    [self.view addSubview:self.progressHUD];
     _status = Position_Online;
     [self.view addSubview:self.titleView];
-    [self getUserStatus];
+//    [self getUserStatus];
     [self setupDownRefresh];
 //    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
 //    model = [JMUserInfoManager getUserInfo];
@@ -101,62 +101,60 @@ static NSString *cellIdent = @"cellIdent";
 //}
 
 
--(void)getUserStatus{
+//-(void)getUserStatus{
+//
+//    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+//        [JMUserInfoManager saveUserInfo:userInfo];
+//
+//        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+//        model = [JMUserInfoManager getUserInfo];
+//
+//        if ([model.card_status isEqualToString:Card_PassIdentify]) {
+////            [self setRightBtnTextName:@"发布职位"];
+//            [self.tableView.mj_header beginRefreshing];
+////            [self setupDownRefresh];
+////            [self getListData];
+//
+//        }else if ([model.card_status isEqualToString:Card_WaitIdentify]){
+//
+//            self.breakBGView.hidden = NO;
+//            [self.postOrIdentityBtn setHidden:YES];
+//            [self setRightBtnTextName:@""];
+//            self.tipsLab.text = @"实名认证审核中\n发布岗位需实名认证";
+//
+//        }else if ([model.card_status isEqualToString:Card_NOIdentify]){
+//            [self.postOrIdentityBtn setTitle:@"去实名认证" forState:UIControlStateNormal];
+////            [self setRightBtnTextName:@"去实名认证"];
+//            self.breakBGView.hidden = NO;
+//            self.tipsLab.text = @"你还没有实名认证 快去认证吧！\n发布岗位需实名认证";
+//
+//        }else{
+//            if (self.dataArray.count == 0) {
+//                self.tableView.hidden = YES;
+//
+//            }
+//
+//        }
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//
+//}
 
-    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-        [JMUserInfoManager saveUserInfo:userInfo];
-        
-        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-        model = [JMUserInfoManager getUserInfo];
-        
-        if ([model.card_status isEqualToString:Card_PassIdentify]) {
-//            [self setRightBtnTextName:@"发布职位"];
-            [self.tableView.mj_header beginRefreshing];
-//            [self setupDownRefresh];
-//            [self getListData];
-          
-        }else if ([model.card_status isEqualToString:Card_WaitIdentify]){
-            
-            self.breakBGView.hidden = NO;
-            [self.postOrIdentityBtn setHidden:YES];
-            [self setRightBtnTextName:@""];
-            self.tipsLab.text = @"实名认证审核中\n发布岗位需实名认证";
 
-        }else if ([model.card_status isEqualToString:Card_NOIdentify]){
-            [self.postOrIdentityBtn setTitle:@"去实名认证" forState:UIControlStateNormal];
-//            [self setRightBtnTextName:@"去实名认证"];
-            self.breakBGView.hidden = NO;
-            self.tipsLab.text = @"你还没有实名认证 快去认证吧！\n发布岗位需实名认证";
- 
-        }else{
-            if (self.dataArray.count == 0) {
-                self.tableView.hidden = YES;
-                
-            }
-            
-        }
-
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-    
-}
-
-
-- (IBAction)gotoIdentify:(id)sender {
+- (IBAction)gotoIdentify:(UIButton *)sender {
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     model = [JMUserInfoManager getUserInfo];
    
     if ([model.card_status isEqualToString:@"0"]) {
-   
-        JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+        [self showAlertWithTitle:@"提示" message:@"请先进行实名认证" leftTitle:@"返回" rightTitle:@"去实名认证"];
         
-        [self.navigationController pushViewController:vc animated:YES];
-
-  
+        
+        
     }else if ([model.card_status isEqualToString:@"3"]){
   
         self.hidesBottomBarWhenPushed=YES;
@@ -171,6 +169,9 @@ static NSString *cellIdent = @"cellIdent";
         [self showAlertWithTitle:@"提示" message:@"实名认证不通过" leftTitle:@"返回" rightTitle:@"去实名认证"];
    
  
+    }else if ([model.card_status isEqualToString:@"1"]) {
+        [self showAlertSimpleTips:@"提示" message:@"实名认证审核" btnTitle:@"好的"];
+    
     }
     
     

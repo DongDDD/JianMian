@@ -30,7 +30,8 @@ static NSString *cellIdent = @"CellIdent";
 -(void)initView
 {
 
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-50)];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height-50) style:UITableViewStyleGrouped];
+    _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
     _tableView.backgroundColor = BG_COLOR;
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -73,6 +74,18 @@ static NSString *cellIdent = @"CellIdent";
     }];
     
 }
+
+-(void)deleteGreetRequest_ID:(NSString *)ID{
+    [[JMHTTPManager sharedInstance]deleteGreet_ID:ID successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -86,11 +99,6 @@ static NSString *cellIdent = @"CellIdent";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-//    static NSString *CellIdentifier = @"Cell";
-//    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:CellIdentifier];
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
-//    if (cell == nil)
-//    {
          UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    }
@@ -112,6 +120,36 @@ static NSString *cellIdent = @"CellIdent";
     if (_delegate && [_delegate respondsToSelector:@selector(didChooseGreetWithStr:)]) {
         [_delegate didChooseGreetWithStr:str];
     }
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    return YES;
+}
+
+// 定义编辑样式
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+// 进入编辑模式，按下出现的编辑按钮后,进行删除操作
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        JMGreetModel *model = self.listArray[indexPath.row];
+        [self deleteGreetRequest_ID:model.greet_id];
+        [self.listArray removeObjectAtIndex:indexPath.row];
+
+        [self.tableView reloadData];
+        NSLog(@"UITableViewCellEditingStyleDelete");
+       
+    }
+}
+
+// 修改编辑按钮文字
+- (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    return @"删除";
 }
 
 /*

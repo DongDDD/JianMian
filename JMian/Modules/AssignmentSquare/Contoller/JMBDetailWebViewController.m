@@ -50,6 +50,12 @@
     }];
     // Do any additional setup after loading the view from its nib.
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+
+}
 -(void)initView{
     [self showProgressHUD_view:self.view];
     [self.view addSubview:self.bottomView];

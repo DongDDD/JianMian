@@ -20,7 +20,7 @@
 #import "JMLabsData.h"
 
 
-@interface JMCompanyInfoViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,STPickerSingleDelegate>
+@interface JMCompanyInfoViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,STPickerSingleDelegate,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *headerImg;
 
@@ -66,79 +66,20 @@
     self.companyNameLab.text = kFetchMyDefault(@"company_name");
         
     self.scrollView.delegate = self;
+    self.abbreviationTextField.delegate = self;
     [self getLabsData];
     // Do any additional setup after loading the view from its nib.
 
-//    _bgView = [[UIView alloc]init];
-//    _bgView.backgroundColor = [UIColor grayColor];
-//    _bgView.hidden = YES;
-//    _bgView.alpha = 0.8;
-//    [self.view addSubview:_bgView];
-//
-//    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(self.view);
-//        make.bottom.mas_equalTo(self.pickerView.mas_top);
-//        make.right.and.left.mas_equalTo(self.view);
-//    }];
-    
-//    UIButton *OKBtn = [[UIButton alloc]init];
-//    OKBtn.backgroundColor = [UIColor whiteColor];
-//    [OKBtn setHidden:YES];
-//    [OKBtn setTitle:@"确定" forState:UIControlStateNormal];
-//    [OKBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//    [OKBtn addTarget:self action:@selector(OKAction) forControlEvents:UIControlEventTouchUpInside];
-//    OKBtn.titleLabel.font = [UIFont systemFontOfSize:14];
-//    [self.view addSubview:OKBtn];
-//
-//    [OKBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.mas_equalTo(self.pickerView);
-//        make.top.mas_equalTo(self.pickerView);
-//        make.height.mas_equalTo(80);
-//        make.width.mas_equalTo(100);
-//    }];
-    
-//    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(keyboardHide:)];//设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。tapGestureRecognizer.cancelsTouchesInView = NO;//将触摸事件添加到当前view
-//    [_bgView addGestureRecognizer:tapGestureRecognizer];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
     
 }
 
-//- (void)viewDidDisappear:(BOOL)animated
-//{
-//    [[NSNotificationCenter defaultCenter] removeObserver:self];
-//}
-
-//- (void)keyboardWillShow:(NSNotification *)aNotification {
-//
-//    NSDictionary *userInfo = aNotification.userInfo;
-//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
-//    CGRect keyboardRect = aValue.CGRectValue;
-//    CGRect frame = _abbreviationTextField.frame;
-//    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-//    CGRect rect= CGRectMake(0,-_changeHeight+100,SCREEN_WIDTH,SCREEN_HEIGHT);
-//
-//    [UIView animateWithDuration:0.3 animations:^ {
-//        self.view.frame = rect;
-//
-//    }];
-//
-//}
-//
-//- (void)keyboardWillHide:(NSNotification *)aNotification {
-//
-//    //上移n个单位，按实际情况设置
-//    CGRect rect=CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
-//    self.view.frame=rect;
-//
-//
-//}
 
 -(void)keyboardHide:(UITapGestureRecognizer*)tap{
     [_abbreviationTextField resignFirstResponder];
@@ -153,12 +94,6 @@
 
 #pragma mark - 点击事件
 
-//-(void)OKAction{
-//
-//    [self.pickerView setHidden:YES];
-//    [_bgView setHidden:YES];
-//
-//}
 
 - (IBAction)industryAction:(UIButton *)sender {
     [self.view addSubview:self.companyIndustryPickerSingle];
@@ -168,11 +103,7 @@
 }
 
 - (IBAction)employeeAction:(UIButton *)sender {
-//    [self.pickerView setHidden:NO];
-//    [_bgView setHidden:NO];
-//    self.pickerArray = [NSArray arrayWithObjects:@"15人以下",@"15～50人",@"50～100人",@"500人以上",nil];
-//    [self.pickerView reloadAllComponents];
-//    self.selectedBtn = sender;
+
     [self.view addSubview:self.employeePickerSingle];
     [self.employeePickerSingle show];
     [_abbreviationTextField resignFirstResponder];
@@ -184,58 +115,17 @@
     [_abbreviationTextField resignFirstResponder];
     [self.view addSubview:self.financingPickerSingle];
     [self.financingPickerSingle show];
-//    [self.pickerView setHidden:NO];
-//    [_bgView setHidden:NO];
-//    self.pickerArray = [NSArray arrayWithObjects:@"天使轮",@"A轮",@"B轮",@"C轮",@"D轮",@"不需要融资",nil];
-//    [self.pickerView reloadAllComponents];
-//    self.selectedBtn = sender;
+
     
   
 
 }
-//#pragma mark - PickerViewDelegate
-//
-////返回有几列
-//
-//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-//{
-//    return 1;
-//
-//}
-//
-////返回指定列的行数
-//
-//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-//
-//{
-//
-//    return [self.pickerArray count];
-//
-//}
-//
-//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-//
-//    NSString *str = [self.pickerArray objectAtIndex:row];
-//
-//    return str;
-//
-//}
+#pragma mark - textFieldDelegate
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
 
-//
-//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-//
-//    if (self.selectedBtn.tag == 1) {
-//        [self.employeeBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
-//        [self.employeeBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-//
-//    }else if(self.selectedBtn.tag == 2){
-//        [self.financingBtn setTitle:[self.pickerArray objectAtIndex:row] forState:UIControlStateNormal];
-//        [self.financingBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-//
-//    }
-//
-//
-//}
+}
 
 
 #pragma mark - Data

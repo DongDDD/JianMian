@@ -10,6 +10,7 @@
 #import "DimensMacros.h"
 #import "Masonry.h"
 #import "JMHTTPManager+FectchGreetList.h"
+#import "JMMyCustumWindowView.h"
 
 typedef NS_ENUM(NSUInteger, InputStatus) {
     Input_Status_Input,
@@ -20,8 +21,12 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 };
 
 
-@interface JMInputController ()<JMInputTextViewDelegate,JMGreetViewDelegate>
+@interface JMInputController ()<JMInputTextViewDelegate,JMGreetViewDelegate,JMMyCustumWindowViewDelegate>
 @property (nonatomic, assign) InputStatus status;
+@property (nonatomic, strong) JMMyCustumWindowView *myCustumWindowView;
+@property (nonatomic, strong) UIView *windowViewBGView;
+
+
 @end
 
 @implementation JMInputController
@@ -176,17 +181,51 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     [_inputTextView.textView setText:str];
 }
 
+//添加常用语
 -(void)addGreetAction{
-    [_inputTextView.textView resignFirstResponder];
-    [[JMHTTPManager sharedInstance]createGreet_text:_inputTextView.textView.text mode:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    self.myCustumWindowView.titleLab.text = @"新增常用语";
+    [[UIApplication sharedApplication].keyWindow addSubview:self.windowViewBGView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.myCustumWindowView];
+    [_myCustumWindowView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).mas_offset(20);
+        make.right.mas_equalTo(self.view).mas_offset(-20);
+        make.height.mas_equalTo(220);
+        make.centerY.mas_equalTo([UIApplication sharedApplication].keyWindow).mas_offset(-100);
+    }];
+    
+    
+//    [_inputTextView.textView resignFirstResponder];
+//    [[JMHTTPManager sharedInstance]createGreet_text:_inputTextView.textView.text mode:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//        NSLog(@"添加成功！");
+//        [_greeView.tableView reloadData];
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+    
+}
+
+-(void)windowLeftAction{
+    
+    [self.myCustumWindowView removeFromSuperview];
+    [self.windowViewBGView removeFromSuperview];
+
+}
+
+-(void)windowRightAction{
+    
+    [self.myCustumWindowView removeFromSuperview];
+    [self.windowViewBGView removeFromSuperview];
+    [self.myCustumWindowView.contentTextView resignFirstResponder];
+    [[JMHTTPManager sharedInstance]createGreet_text:self.myCustumWindowView.contentTextView.text mode:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         NSLog(@"添加成功！");
-        [_greeView.tableView reloadData];
+        [_greeView getGreetList];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-    
 }
+
 
 - (void)showMoreAnimation
 {
@@ -271,12 +310,28 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     if(!_greeView){
         _greeView = [[JMGreetView alloc] initWithFrame:CGRectMake(0, _inputTextView.frame.origin.y + _inputTextView.frame.size.height, _inputTextView.frame.size.width, JMGreetView_Height)];
         _greeView.delegate = self;
+        
     }
     return _greeView;
 }
 
+-(JMMyCustumWindowView *)myCustumWindowView{
+    if (!_myCustumWindowView) {
+        _myCustumWindowView = [[JMMyCustumWindowView alloc]init];
+        _myCustumWindowView.layer.cornerRadius = 10;
+        _myCustumWindowView.delegate = self;
+    }
+    return _myCustumWindowView;
+}
 
-
+-(UIView *)windowViewBGView{
+    if (!_windowViewBGView) {
+        _windowViewBGView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+        _windowViewBGView.backgroundColor = [UIColor blackColor];
+        _windowViewBGView.alpha = 0.3;
+    }
+    return _windowViewBGView;
+}
 /*
 #pragma mark - Navigation
 

@@ -35,4 +35,12 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Greet_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
+
+- (void)deleteGreet_ID:(nullable NSString *)ID
+          successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSString *urlStr = [Delete_Greet_URL stringByAppendingFormat:@"/%@",ID];
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodDELETE path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
 @end

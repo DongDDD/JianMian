@@ -32,6 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UITextView *textView;
 @property(nonatomic,strong)UIButton *btn2;
 @property(nonatomic,strong)UIButton *btn3;
+@property(nonatomic,strong)UIButton *sendBtn;
+
 //@property (nonatomic ,strong) JMGreetView *greetView;
 
 

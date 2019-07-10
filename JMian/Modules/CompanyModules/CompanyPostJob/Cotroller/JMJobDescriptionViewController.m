@@ -36,6 +36,7 @@
     self.title = @"职位描述";
     [self setRightBtnTextName:@"保存"];
     
+    [self.decriptionTextView setContent:_jobDescriptionStr];
     [self.view addSubview:self.decriptionTextView];
     [self.decriptionTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);

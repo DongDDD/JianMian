@@ -79,6 +79,11 @@
         }
         if (userInfo.avatar.length > 0) {
             [_headerImg setImage:[self getImageFromURL:userInfo.avatar] forState:UIControlStateNormal];
+            [_myNameTextField setEnabled:NO];
+
+        }else{
+            [_myNameTextField setEnabled:YES];
+
         }
         //1等待审核 2拒绝  3通过
         if ([userInfo.company_real_status isEqualToString:@"2"]) {

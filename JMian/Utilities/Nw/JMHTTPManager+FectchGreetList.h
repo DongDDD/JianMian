@@ -22,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)createGreet_text:(nullable NSString *)text
                     mode:(nullable NSString *)mode
             successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
+- (void)deleteGreet_ID:(nullable NSString *)ID
+          successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

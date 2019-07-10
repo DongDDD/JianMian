@@ -20,7 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)UIButton *bottomBtn;
 @property(nonatomic,weak)id<JMGreetViewDelegate>delegate;
-@property(nonatomic,strong)NSArray *listArray;
+@property(nonatomic,strong)NSMutableArray *listArray;
+-(void)getGreetList;
 @end
 
 NS_ASSUME_NONNULL_END

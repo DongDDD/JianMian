@@ -152,6 +152,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     
                     model.data = data;
                     [converArray addObject:model];
+                    NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
 
                     
                 }
@@ -171,7 +172,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     
                     model.data = data;
                     [converArray addObject:model];
-                    
+                    NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
+
                     
                 }
                 
@@ -191,6 +193,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
             
             model.data = data;
             self.dominatorModel = model;
+            NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
+
         }
         
     }
@@ -435,7 +439,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
     JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        if ([_dominatorModel.data.convId isEqualToString:@"dominator"] && foreign_key == nil) {
+        if ([messagelistModel.data.convId isEqualToString:@"dominator"] && foreign_key == nil) {
             JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
             vc.myConvModel = messagelistModel;
             vc.delegate = self;

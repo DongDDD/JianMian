@@ -242,6 +242,11 @@
 		042CA63522D4376400ABB7AF /* JMServiceProtocolWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042CA63322D4376400ABB7AF /* JMServiceProtocolWebViewController.xib */; };
 		042CA63822D475A500ABB7AF /* JMLabChooseBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CA63722D475A500ABB7AF /* JMLabChooseBottomView.m */; };
 		042CA63A22D475B300ABB7AF /* JMLabChooseBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042CA63922D475B300ABB7AF /* JMLabChooseBottomView.xib */; };
+		042CA64C22D60B2400ABB7AF /* JMMyCustumWindowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CA64B22D60B2400ABB7AF /* JMMyCustumWindowView.m */; };
+		042CA64E22D60B3A00ABB7AF /* JMMyCustumWindowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042CA64D22D60B3A00ABB7AF /* JMMyCustumWindowView.xib */; };
+		042CA65222D626AD00ABB7AF /* juyingcai@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 042CA64F22D626AC00ABB7AF /* juyingcai@2x.png */; };
+		042CA65322D626AD00ABB7AF /* juyingcai@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 042CA65022D626AC00ABB7AF /* juyingcai@3x.png */; };
+		042CA65422D626AD00ABB7AF /* juyingcai.png in Resources */ = {isa = PBXBuildFile; fileRef = 042CA65122D626AD00ABB7AF /* juyingcai.png */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
 		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
@@ -518,7 +523,6 @@
 		04A247DE224CE70E00DEB8E3 /* play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A247DB224CE70E00DEB8E3 /* play@2x.png */; };
 		04A247DF224CE70E00DEB8E3 /* play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A247DC224CE70E00DEB8E3 /* play@3x.png */; };
 		04A247E0224CE70E00DEB8E3 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A247DD224CE70E00DEB8E3 /* play.png */; };
-		04A4210922BB6E890001A2F0 /* JMHTTPManager+FectchImageUrl.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4210822BB6E890001A2F0 /* JMHTTPManager+FectchImageUrl.m */; };
 		04A4210C22BC92360001A2F0 /* JMHTTPManager+DeleteGoodsImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4210B22BC92350001A2F0 /* JMHTTPManager+DeleteGoodsImage.m */; };
 		04A4211022BCF2C30001A2F0 /* JMChatDetailPartTimeJobTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A4210E22BCF2C30001A2F0 /* JMChatDetailPartTimeJobTableViewCell.m */; };
 		04A4211122BCF2C30001A2F0 /* JMChatDetailPartTimeJobTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A4210F22BCF2C30001A2F0 /* JMChatDetailPartTimeJobTableViewCell.xib */; };
@@ -1206,6 +1210,13 @@
 		042CA63622D475A500ABB7AF /* JMLabChooseBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabChooseBottomView.h; sourceTree = "<group>"; };
 		042CA63722D475A500ABB7AF /* JMLabChooseBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabChooseBottomView.m; sourceTree = "<group>"; };
 		042CA63922D475B300ABB7AF /* JMLabChooseBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMLabChooseBottomView.xib; sourceTree = "<group>"; };
+		042CA64A22D60B2400ABB7AF /* JMMyCustumWindowView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMyCustumWindowView.h; sourceTree = "<group>"; };
+		042CA64B22D60B2400ABB7AF /* JMMyCustumWindowView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMyCustumWindowView.m; sourceTree = "<group>"; };
+		042CA64D22D60B3A00ABB7AF /* JMMyCustumWindowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMyCustumWindowView.xib; sourceTree = "<group>"; };
+		042CA64F22D626AC00ABB7AF /* juyingcai@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "juyingcai@2x.png"; sourceTree = "<group>"; };
+		042CA65022D626AC00ABB7AF /* juyingcai@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "juyingcai@3x.png"; sourceTree = "<group>"; };
+		042CA65122D626AD00ABB7AF /* juyingcai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = juyingcai.png; sourceTree = "<group>"; };
+		042CA65522D6279100ABB7AF /* libAFNetworking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libAFNetworking.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -1581,8 +1592,6 @@
 		04A247DB224CE70E00DEB8E3 /* play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@2x.png"; sourceTree = "<group>"; };
 		04A247DC224CE70E00DEB8E3 /* play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "play@3x.png"; sourceTree = "<group>"; };
 		04A247DD224CE70E00DEB8E3 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
-		04A4210722BB6E890001A2F0 /* JMHTTPManager+FectchImageUrl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+FectchImageUrl.h"; sourceTree = "<group>"; };
-		04A4210822BB6E890001A2F0 /* JMHTTPManager+FectchImageUrl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchImageUrl.m"; sourceTree = "<group>"; };
 		04A4210A22BC92350001A2F0 /* JMHTTPManager+DeleteGoodsImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+DeleteGoodsImage.h"; sourceTree = "<group>"; };
 		04A4210B22BC92350001A2F0 /* JMHTTPManager+DeleteGoodsImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+DeleteGoodsImage.m"; sourceTree = "<group>"; };
 		04A4210D22BCF2C30001A2F0 /* JMChatDetailPartTimeJobTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMChatDetailPartTimeJobTableViewCell.h; sourceTree = "<group>"; };
@@ -2615,6 +2624,16 @@
 			path = VideoChatViewController;
 			sourceTree = "<group>";
 		};
+		042CA64922D5DC1200ABB7AF /* MyCustumWindow */ = {
+			isa = PBXGroup;
+			children = (
+				042CA64A22D60B2400ABB7AF /* JMMyCustumWindowView.h */,
+				042CA64B22D60B2400ABB7AF /* JMMyCustumWindowView.m */,
+				042CA64D22D60B3A00ABB7AF /* JMMyCustumWindowView.xib */,
+			);
+			path = MyCustumWindow;
+			sourceTree = "<group>";
+		};
 		044DF23C2244C06900301243 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -2720,6 +2739,9 @@
 		0462C7202244935D003B6639 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				042CA65122D626AD00ABB7AF /* juyingcai.png */,
+				042CA64F22D626AC00ABB7AF /* juyingcai@2x.png */,
+				042CA65022D626AC00ABB7AF /* juyingcai@3x.png */,
 				04C4A17922CC4B1B0049DA29 /* logo2.png */,
 				04C4A17A22CC4B1B0049DA29 /* logo2@2x.png */,
 				04C4A17822CC4B1B0049DA29 /* logo2@3x.png */,
@@ -2775,6 +2797,7 @@
 		0462C7222244937D003B6639 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				042CA64922D5DC1200ABB7AF /* MyCustumWindow */,
 				0493FEE722CF6A5000EC7215 /* MP3 */,
 				04FB1A1C22A36B8800A8F02C /* WebView */,
 				047F8EA8228A6535005E81FA /* Video */,
@@ -3716,6 +3739,7 @@
 		47579204418359BAEBA6F740 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				042CA65522D6279100ABB7AF /* libAFNetworking.a */,
 				1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */,
 			);
 			name = Frameworks;
@@ -4099,8 +4123,6 @@
 				04072F6C2282D6150067A05D /* JMHTTPManager+BankCark.m */,
 				040807B722A3C59E00C0744F /* JMHTTPManager+GetLabels.h */,
 				040807B822A3C59E00C0744F /* JMHTTPManager+GetLabels.m */,
-				04A4210722BB6E890001A2F0 /* JMHTTPManager+FectchImageUrl.h */,
-				04A4210822BB6E890001A2F0 /* JMHTTPManager+FectchImageUrl.m */,
 				04C4A18322CCE4850049DA29 /* JMHTTPManager+FectchGreetList.h */,
 				04C4A18422CCE4850049DA29 /* JMHTTPManager+FectchGreetList.m */,
 				04AC6A1E22CD8B0200693424 /* JMHTTPManager+FectchTplLIst.h */,
@@ -4529,6 +4551,7 @@
 				0488E44B22A023990071DEE7 /* di_icon_return@2x.png in Resources */,
 				048348BB22696DC800DE4630 /* JMJobDescriptionViewController.xib in Resources */,
 				04072F462282BA650067A05D /* redlining_2@3x.png in Resources */,
+				042CA64E22D60B3A00ABB7AF /* JMMyCustumWindowView.xib in Resources */,
 				04C120DF22882E97001BDEBC /* my_videos_2.png in Resources */,
 				0488E397229F93510071DEE7 /* icon_return_nav@2x.png in Resources */,
 				6D558656224B54D70037C14E /* home_ message_pitch_on@2x.png in Resources */,
@@ -4583,6 +4606,7 @@
 				04DD1D4F224B6E95007CB11C /* phone@3x.png in Resources */,
 				04AB444622BA13F500000E03 /* DEMI_BIG@2x.png in Resources */,
 				04BE8B4A2292583F004EB7EC /* accretion@2x.png in Resources */,
+				042CA65222D626AD00ABB7AF /* juyingcai@2x.png in Resources */,
 				04950FE222AE968A00C3D3FB /* Timeout@2x.png in Resources */,
 				04BF6DA122C335FE003032BC /* WeChat.png in Resources */,
 				04908B2322A7FE0A000B5AB4 /* square_mission@2x.png in Resources */,
@@ -4744,6 +4768,7 @@
 				040BF05F227159B60088697D /* JMChangeIdentityViewController.xib in Resources */,
 				0425CB59228449D600E08587 /* JMVideoChatViewController.xib in Resources */,
 				040714A0227C6CC70026C368 /* more@3x.png in Resources */,
+				042CA65322D626AD00ABB7AF /* juyingcai@3x.png in Resources */,
 				04ABB7C022B28CF300E3F66A /* JMSnapshotWebViewController.xib in Resources */,
 				6D55865A224B54D70037C14E /* jianmian_home@2x.png in Resources */,
 				040701C02275DB7A002BF58D /* JMCompanyLikeTableViewCell.xib in Resources */,
@@ -4882,6 +4907,7 @@
 				0425655B229C2CCD000614E7 /* talent@3x.png in Resources */,
 				040BF06922719B920088697D /* JMUserChangeWindowView.xib in Resources */,
 				040701A422753755002BF58D /* share2@3x.png in Resources */,
+				042CA65422D626AD00ABB7AF /* juyingcai.png in Resources */,
 				04950FE822AE969A00C3D3FB /* stale_dated@2x.png in Resources */,
 				04072F492282BA650067A05D /* redlining_2.png in Resources */,
 				040B839C2265F3E700F1A37A /* IDCard1@2x.png in Resources */,
@@ -5063,6 +5089,7 @@
 				6D0209FF2250F09D009BCFE4 /* JMMyResumeViewController.m in Sources */,
 				04072F192282909B0067A05D /* JMWalletViewController.m in Sources */,
 				6D020A872259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.m in Sources */,
+				042CA64C22D60B2400ABB7AF /* JMMyCustumWindowView.m in Sources */,
 				6D0209FA224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.m in Sources */,
 				04C2CF0322D2275B00DAB29B /* JMVideoSingleViewController.m in Sources */,
 				6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */,
@@ -5183,7 +5210,6 @@
 				6D82F2942274C07200B9D2B9 /* JMMyPictureViewController.m in Sources */,
 				04A9DFA2225AE3C400CD7CC1 /* JMMyResumeCareerStatusTableViewCell.m in Sources */,
 				049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */,
-				04A4210922BB6E890001A2F0 /* JMHTTPManager+FectchImageUrl.m in Sources */,
 				04908B0422A7E916000B5AB4 /* JMAssignmentSquareViewController.m in Sources */,
 				04A9DFAD225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.m in Sources */,
 				04C37F1222C72D6500E2A107 /* JMAddVitaJobViewController.m in Sources */,
@@ -5486,7 +5512,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TJ2RYY9984;
 				INFOPLIST_FILE = JMian/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -5508,7 +5534,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TJ2RYY9984;
 				INFOPLIST_FILE = JMian/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

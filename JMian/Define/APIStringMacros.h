@@ -152,6 +152,8 @@
 //常用语
 #define Fetch_GreetList_URL @"api/greet/paginate"
 #define Create_Greet_URL @"api/greet/create"
+#define Delete_Greet_URL @"api/greet/delete"
+
 //模版
 #define Fectch_TplList_URL @"tpl/paginate"
 

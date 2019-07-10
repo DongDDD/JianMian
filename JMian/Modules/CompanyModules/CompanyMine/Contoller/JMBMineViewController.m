@@ -50,8 +50,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = BG_COLOR;
+    
+  
     [self initView];
+//    UILabel *titleLab = [[UILabel alloc]init];
+//    titleLab.text = @"企业用户";
+//    titleLab.textColor = [UIColor whiteColor];
+//    [self.view addSubview:titleLab];
+//    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerX.mas_equalTo(self.view);
+//        make.top.mas_equalTo(self.view).offset(10);
+//        make.width.height.mas_equalTo(50);
+//    }];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -238,7 +249,7 @@
 
 -(JMBMineInfoView *)BMineInfoView{
     if (!_BMineInfoView) {
-        _BMineInfoView = [[JMBMineInfoView alloc]initWithFrame:CGRectMake(0, self.BUserCenterHeaderView.frame.origin.y+self.BUserCenterHeaderView.frame.size.height+74, SCREEN_WIDTH, 172)];
+        _BMineInfoView = [[JMBMineInfoView alloc]initWithFrame:CGRectMake(0, self.BUserCenterHeaderView.frame.origin.y+self.BUserCenterHeaderView.frame.size.height+74, SCREEN_WIDTH, 162)];
         _BMineInfoView.delegate = self;
     }
     return _BMineInfoView;
@@ -255,8 +266,9 @@
 -(UIScrollView *)scrollView{
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc]init];
-        _scrollView.frame = CGRectMake(0, -SafeAreaStatusHeight, SCREEN_WIDTH, self.view.frame.size.height);
+        _scrollView.frame = CGRectMake(0, -0, SCREEN_WIDTH, SCREEN_HEIGHT);
         _scrollView.showsVerticalScrollIndicator = NO;
+        _scrollView.scrollEnabled = NO;
         _scrollView.backgroundColor = BG_COLOR;
     }
     return _scrollView;

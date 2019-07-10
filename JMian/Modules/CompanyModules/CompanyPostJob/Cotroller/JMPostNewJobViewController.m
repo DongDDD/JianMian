@@ -48,6 +48,8 @@
 @property (nonatomic, strong)AMapPOI *POIModel;
 
 @property (weak, nonatomic) IBOutlet UIButton *jobDescriptionBtn;
+@property (nonatomic, copy)NSString *jobDescriptionStr;
+
 
 @property (nonatomic, strong)NSArray *pickerArray;
 @property (nonatomic, copy)NSString *pickerStr;
@@ -115,7 +117,7 @@
 -(void)createJob{
     NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
     NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
-    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_work_label_id work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_work_label_id work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionStr address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -234,10 +236,11 @@
     
 }
 - (IBAction)jobDescriptionAction:(UIButton *)sender {
-    if (self.work_label_id) {
+    if (self.work_label_id || _jobDescriptionStr) {
         JMJobDescriptionViewController *vc = [[JMJobDescriptionViewController alloc]init];
         vc.delegate = self;
         vc.foreign_key = self.work_label_id;
+        vc.jobDescriptionStr = _jobDescriptionStr;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
@@ -281,6 +284,7 @@
     if (textData.length > 0) {
         [_jobDescriptionBtn setTitle:@"已完善" forState:UIControlStateNormal];
         [_jobDescriptionBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        _jobDescriptionStr = textData;
     }
 }
 
@@ -315,81 +319,7 @@
 
 }
 
-//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-//
-//    _pickerRow = row;
-//
-//    switch (_selectedBtn.tag) {
-//        case 1:
-//            [self.workPropertyBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
-//            [self.workPropertyBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//            break;
-//
-//        case 2:
-//            [self.expriencesBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
-//            [self.expriencesBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//            [self setExprienceRangeWithExpStr:self.pickerArray[row]];
-//            break;
-//
-//        case 3:
-//            [self.educationBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
-//            [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//            self.educationNum = @(row);
-//            break;
-//
-//        case 4:
-//            [self.salaryBtn setTitle:self.pickerArray[row] forState:UIControlStateNormal];
-//            [self.salaryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-//            //k 转 000后 传给服务器
-//            [self setSalaryValus_row:row];
-//            break;
-//
-//        default:
-//            break;
-//    }
-//
-//
-//}
 
-//-(void)setSalaryValus_row:(NSInteger)row{
-//    NSMutableArray *array = [self setSalaryRangeWithSalaryStr:self.pickerArray[row]];
-//    self.salaryMin = array[0];
-//    self.salaryMax = array[1];
-//
-//}
-
-//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-//
-//{
-//
-//    return 1;
-//
-//}
-//
-////返回指定列的行数
-//
-//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-//
-//{
-//    [self.workNameTextField resignFirstResponder];
-//    return [self.pickerArray count];
-//
-//}
-////
-//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-//
-//    NSString *str = [self.pickerArray objectAtIndex:row];
-//
-//    return str;
-//
-//}
-
-
-//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-////    [_workNameTextField resignFirstResponder];
-//    [self.pickerBGView setHidden:YES];
-//
-//}
 -(STPickerSingle *)expPickerSingle{
     if (_expPickerSingle == nil) {
         _expPickerSingle = [[STPickerSingle alloc]init];

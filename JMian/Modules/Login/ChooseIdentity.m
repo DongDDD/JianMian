@@ -33,15 +33,10 @@
 
 - (IBAction)isSearchJob:(id)sender {
     [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-        [JMUserInfoManager saveUserInfo:userInfo];
-        JMJudgeViewController *vc = [[JMJudgeViewController alloc] init];
-        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-//        [self getUserInfo];
-//        BasicInformationViewController *judgevc = [[BasicInformationViewController alloc]init];
-//        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
-//        [self setRootViewController:naVC];
+        
+        [self getUserInfoToJudge];
+
+        
 //        BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
 //
 //        [self.navigationController pushViewController:vc animated:YES];
@@ -54,37 +49,30 @@
     
 }
 
-//-(void)getUserInfo{
-//    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//        
-//        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-//        [JMUserInfoManager saveUserInfo:userInfo];
-//        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
-//        [self.navigationController pushViewController:vc animated:YES];
-//        
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//        
-//    }];
-//    
-//}
+-(void)getUserInfoToJudge{
+    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        kFetchMyDefault(@"usersig");
+        NSLog(@"usersig-----:%@",kFetchMyDefault(@"usersig"));
+        [JMUserInfoManager saveUserInfo:userInfo];
+        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 - (IBAction)isCompanyBtn:(id)sender {
     [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil  type:@(2) password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:@"1" real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-  
-            JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-            [JMUserInfoManager saveUserInfo:userInfo];
-            
-         
-            JMJudgeViewController *vc = [[JMJudgeViewController alloc] init];
-            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-//            JMCompanyBaseInfoViewController *vc = [[JMCompanyBaseInfoViewController alloc]init];
-//            [self.navigationController pushViewController:vc animated:YES];
-      
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-        }];
+//
+        [self getUserInfoToJudge];
+
         
+//        JMCompanyBaseInfoViewController *vc = [[JMCompanyBaseInfoViewController alloc] init];
+//        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+//        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

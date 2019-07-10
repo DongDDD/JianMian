@@ -50,7 +50,7 @@
                                 <constraint firstAttribute="width" constant="185" id="Xbo-UL-DfJ"/>
                                 <constraint firstAttribute="height" constant="47" id="kKs-00-gyq"/>
                             </constraints>
-                            <state key="normal">
+                            <state key="normal" title="实名认证">
                                 <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -66,7 +66,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <action selector="gotoIdentify:" destination="-1" eventType="touchUpInside" id="YUS-2S-mNw"/>
+                                <action selector="gotoIdentify:" destination="-1" eventType="touchUpInside" id="xgf-Py-PXg"/>
                             </connections>
                         </button>
                     </subviews>

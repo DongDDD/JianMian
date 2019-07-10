@@ -191,6 +191,7 @@
     [_myWindowView setHidden:YES];
 }
 
+//切换身份
 -(void)OKAction{
     
     [[JMHTTPManager sharedInstance]userChangeWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
