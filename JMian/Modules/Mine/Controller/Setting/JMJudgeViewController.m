@@ -107,7 +107,8 @@
 #pragma mark - 判断注册到哪步
 
 - (NSString *)getCompanyStepWhereWitnEnterprise_step:(NSString *)enterprise_step{
-    
+    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+
     NSArray *vcArray = @[@"ChooseIdentity",
                          @"JMCompanyBaseInfoViewController",//当enterprise_step=1
                          @"JMCompanyInfoViewController",    //当enterprise_step=2
@@ -117,18 +118,27 @@
                          
                          ];
     
-    int stepInt = [enterprise_step intValue];
-    if (stepInt > vcArray.count ) {
+    int BstepInt = [enterprise_step intValue];
+    int CstepInt = [userInfoModel.user_step intValue];
+
+    if (BstepInt > vcArray.count ) {
         return vcArray[5];
     }
-    if (stepInt < vcArray.count) return vcArray[stepInt];
     
+    //判断C端是否已经填了信息，是的话B端跳去填写基本信息第一步，不用选择身份
+    if (CstepInt > 0 && BstepInt == 0) {
+        return vcArray[1];
+    }else if (BstepInt < vcArray.count) {
+        return vcArray[BstepInt];
+    }
     return nil;
 }
 
 
 //获取个人用户填写信息步骤
 - (NSString *)getPersonStepWhereWitnUser_step:(NSString *)user_step{
+    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+
     //因为服务器的user_step不是按顺序，但是数组是按顺序取，所以用[NSNull null]占一个位置
     NSArray *vcArray = @[@"ChooseIdentity",
                          @"BasicInformationViewController", //当user_step=1
@@ -137,11 +147,18 @@
                          @"JMJobExperienceViewController",  //当user_step=4
                          [NSNull null],
                          @"JMPersonTabBarViewController"];        //当user_step=6
-    int stepInt = [user_step intValue];
-    if (stepInt > vcArray.count ) {
+    int BstepInt = [userInfoModel.enterprise_step intValue];
+    int CstepInt = [user_step intValue];
+    if (BstepInt > vcArray.count ) {
         return vcArray[6];
     }
-    if (stepInt < vcArray.count) return vcArray[stepInt];
+    //判断C端是否已经填了信息，是的话B端跳去填写基本信息第一步，不用选择身份
+    if (BstepInt > 0 && CstepInt == 0) {
+        return vcArray[1];
+    }else if (CstepInt < vcArray.count) {
+        //正常判断步骤
+        return vcArray[CstepInt];
+    }
     
     return nil;
 }
@@ -163,8 +180,6 @@
     }else if ([tpye isEqualToString:B_Type_UESR]){
         userIDstr = [NSString stringWithFormat:@"%@b",model.user_id];
     }
-    
-    
     
     if (userIDstr) {
         // identifier 为用户名，userSig 为用户登录凭证

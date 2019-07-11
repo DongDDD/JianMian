@@ -488,7 +488,7 @@ static NSString *cellIdent = @"cellIdent";
                                          @"20k-30k",
                                          @"30k-40k",
                                          @"40k-50k",
-                                         @"50k-100K",nil];
+                                         @"50k-100k",nil];
     }
     return _salaryPickerSingle;
 }

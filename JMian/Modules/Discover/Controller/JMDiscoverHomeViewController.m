@@ -241,7 +241,7 @@
         //自动网格布局
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc]init];
         
-        CGFloat itemWidth = (self.view.frame.size.width  ) / 2;
+        CGFloat itemWidth = (SCREEN_WIDTH ) / 3;
         
         //设置单元格大小
         flowLayout.itemSize = CGSizeMake(itemWidth, 265);
@@ -252,7 +252,7 @@
         //设置senction的内边距@
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         
-        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
+        _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, SCREEN_HEIGHT) collectionViewLayout:flowLayout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
         [_collectionView registerClass:[JMDiscoverCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];

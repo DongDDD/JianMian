@@ -46,10 +46,16 @@
         make.top.mas_equalTo(companyNameLab.mas_bottom).offset(17);
         make.height.mas_equalTo(15);
     }];
-    
+    NSString *endStr;
+    if (model.end_date) {
+        endStr = model.end_date;
+    }else{
+        endStr = @"至今";
+
+    }
     
     UILabel *dateLab =  [[UILabel alloc]init];
-    dateLab.text =[NSString stringWithFormat:@"%@  ~~  %@",model.start_date,model.end_date];
+    dateLab.text =[NSString stringWithFormat:@"%@  ～  %@",model.start_date,endStr];
     dateLab.textColor = TEXT_GRAY_COLOR;
     dateLab.font = [UIFont systemFontOfSize:13.0f];
     [self addSubview:dateLab];
@@ -64,13 +70,23 @@
     self.contentLabel =  [[UILabel alloc]init];
     self.contentLabel.textColor = TITLE_COLOR;
     self.contentLabel.font = [UIFont systemFontOfSize:13.0f];
-    NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     if (model.experiences_description != nil) {
+        NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         NSString  *testString2 = model.experiences_description;
         NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString2];
-        [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString2 length])];
-        [self.contentLabel  setAttributedText:setString];
-        [paragraphStyle  setLineSpacing:13.5];
+        if (paragraphStyle!=nil) {
+            [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString2 length])];
+            [self.contentLabel  setAttributedText:setString];
+            [paragraphStyle  setLineSpacing:13.5];
+            
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"paragraphStyle = nil"
+                                                          delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alert show];
+           
+            
+       
+        }
         
     }
     self.contentLabel.numberOfLines = 0;

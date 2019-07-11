@@ -22,8 +22,9 @@
 #import "JMPlayerViewController.h"
 #import "PositionDesiredViewController.h"
 #import "JMCityListViewController.h"
+#import "JMLabChooseBottomView.h"
 
-@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate,JMCityListViewControllerDelegate>
+@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate,JMCityListViewControllerDelegate,JMLabChooseBottomViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIButton *allOfPositionBtn; //所有职位
@@ -46,6 +47,8 @@
 
 @property (nonatomic, strong) PositionDesiredViewController *choosePositionVC;
 @property (nonatomic, strong) JMLabsChooseViewController *labschooseVC;
+@property (nonatomic, strong) JMLabChooseBottomView *labChooseBottomView;
+@property (nonatomic, strong) UIButton *bgBtn;
 
 @property(nonatomic,strong)NSMutableArray *playerArray;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
@@ -67,7 +70,8 @@ static NSString *cellIdent = @"cellIdent";
     self.per_page = 15;
     self.page = 1;
     [self setTableView];
-    [self setJuhua];
+    [self initView];
+//    [self setJuhua];
 //    [self getData];
     
 //    [self loginIM];
@@ -115,14 +119,35 @@ static NSString *cellIdent = @"cellIdent";
     [self setupUpRefresh];
 }
 
-#pragma mark - 菊花
--(void)setJuhua{
-    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-    self.progressHUD.progress = 0.0;
-    self.progressHUD.dimBackground = NO; //设置有遮罩
-    [self.progressHUD showAnimated:YES]; //显示进度框
-    [self.view addSubview:self.progressHUD];
+-(void)initView{
+
+    [self.bgBtn setHidden:YES];
+    [self.labschooseVC.view setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
+
+    [self.view addSubview:self.bgBtn];
+    [self.view addSubview:self.labschooseVC.view];
+    [self.view addSubview:self.labChooseBottomView];
+    [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.headView.mas_bottom);
+        make.left.and.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view).offset(-150);
+    }];
+    [_labChooseBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.labschooseVC.view.mas_bottom);
+        make.height.mas_equalTo(37);
+        make.left.right.mas_equalTo(self.view);
+    }];
+
 }
+#pragma mark - 菊花
+//-(void)setJuhua{
+//    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//    self.progressHUD.progress = 0.0;
+//    self.progressHUD.dimBackground = NO; //设置有遮罩
+//    [self.progressHUD showAnimated:YES]; //显示进度框
+//    [self.view addSubview:self.progressHUD];
+//}
 -(void)setupUpRefresh
 {
     MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
@@ -265,26 +290,65 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 
--(void)resetAction{
+//-(void)resetAction{
+//    [self.labschooseVC.view setHidden:YES];
+//    [self.tableView.mj_header beginRefreshing];
+//
+//}
+//
+//-(void)OKAction
+//{
+//    self.arrDate = [NSMutableArray array];
+//    [self.labschooseVC.view setHidden:YES];
+//    [self.tableView.mj_header beginRefreshing];
+//
+//
+//}
+
+//要求筛选
+-(void)labChooseBottomLeftAction{
+    self.arrDate = [NSMutableArray array];
     [self.labschooseVC.view setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
+    [_bgBtn setHidden:YES];
+    _page = 1;
+    _city_id = nil;
+    _work_year_e = nil;
+    _work_year_s = nil;
+    _work_lab_id = nil;
+    _education = nil;
+    _salary_max = nil;
+    _salary_min = nil;
     [self.tableView.mj_header beginRefreshing];
-
+    //    [self.labschooseVC.view setHidden:YES];
+    //    [_bgBtn setHidden:YES];
+    
 }
-
--(void)OKAction
+//确认
+-(void)labChooseBottomRightAction
 {
     self.arrDate = [NSMutableArray array];
     [self.labschooseVC.view setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
+    [_bgBtn setHidden:YES];
     [self.tableView.mj_header beginRefreshing];
-
+    
     
 }
-
 
 -(void)closeVideoAction{
 
   
 
+}
+
+-(void)bgBtnAction{
+    [self.bgBtn setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
+    [self.labschooseVC.view setHidden:YES];
+    
+    
+    
 }
 
 //-(void)getPlayerArray
@@ -361,9 +425,12 @@ static NSString *cellIdent = @"cellIdent";
     [self.choosePositionBtn setBackgroundColor:[UIColor whiteColor]];
     [self.choosePositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:NO];
+    [self.labChooseBottomView setHidden:NO];
+    [self.bgBtn setHidden:NO];
 
  
 }
+
 
 -(void)didSelectedCity_id:(NSString *)city_id city_name:(NSString *)city_name{
     _city_id = city_id;
@@ -502,17 +569,34 @@ static NSString *cellIdent = @"cellIdent";
         _labschooseVC = [[JMLabsChooseViewController alloc]init];
         _labschooseVC.delegate = self;
         [self addChildViewController:_labschooseVC];
-        [self.view addSubview:_labschooseVC.view];
-        [_labschooseVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.headView.mas_bottom);
-            make.left.and.right.mas_equalTo(self.view);
-            make.bottom.mas_equalTo(self.view).offset(-71);
-        }];
+        
     }
     return  _labschooseVC;
 
 }
+-(JMLabChooseBottomView *)labChooseBottomView{
+    if (!_labChooseBottomView) {
+        _labChooseBottomView = [[JMLabChooseBottomView alloc]init];
+        _labChooseBottomView.delegate = self;
+    }
+    return  _labChooseBottomView;
+}
 
+-(UIButton *)bgBtn{
+    if (!_bgBtn) {
+        _bgBtn = [[UIButton alloc]init];
+        _bgBtn.backgroundColor = [UIColor blackColor];
+        _bgBtn.alpha = 0.3;
+        [_bgBtn addTarget:self action:@selector(bgBtnAction) forControlEvents:UIControlEventTouchDown];
+        [self.view addSubview:_bgBtn];
+        [_bgBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(_headView.mas_bottom);
+            make.left.and.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view);
+        }];
+    }
+    return _bgBtn;
+}
 -(NSMutableArray *)arrDate{
     if (!_arrDate) {
         _arrDate = [NSMutableArray array];

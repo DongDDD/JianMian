@@ -7,6 +7,7 @@
 //
 
 #import "JMContactOfPersonDetailViewController.h"
+#import "DimensMacros.h"
 
 @interface JMContactOfPersonDetailViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *phoneNumberLab;
@@ -18,9 +19,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _phoneNumberLab.text = _phoneNumberStr;
-    _emailLab.text = _emailStr;
     
+   JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if (_phoneNumberStr.length >10 && _emailStr.length > 10) {
+        if ([userModel.deadline isEqualToString:@"0"]) {
+            
+            _phoneNumberStr =[_phoneNumberStr stringByReplacingOccurrencesOfString:[_phoneNumberStr substringWithRange:NSMakeRange(2,5)]withString:@"*****"];
+            NSLog(@"_phoneNumberStr:%@",_phoneNumberStr);
+            _emailStr =[_emailStr stringByReplacingOccurrencesOfString:[_emailStr substringWithRange:NSMakeRange(3,6)]withString:@"******"];
+            NSLog(@"_phoneNumberStr:%@",_emailStr);
+        }
+        
+        _phoneNumberLab.text = _phoneNumberStr;
+        _emailLab.text = _emailStr;
+        
+    }
+
     // Do any additional setup after loading the view from its nib.
 }
 

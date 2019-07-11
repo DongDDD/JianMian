@@ -524,6 +524,7 @@
 -(JMNoDataView *)noDataView{
     if (_noDataView==nil) {
         _noDataView = [[JMNoDataView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, SCREEN_HEIGHT)];
+        _noDataView.backgroundColor = BG_COLOR;
     }
     return _noDataView;
 }

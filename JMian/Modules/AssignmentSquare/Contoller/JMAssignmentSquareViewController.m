@@ -302,11 +302,11 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
         __weak typeof(self) ws = self;
         [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-            CGRect Frame = ws.partTimeJobHomeListVC.view.frame;
-            Frame.origin.x = 0;
-            ws.partTimeJobHomeListVC.view.frame = Frame;
+//            CGRect Frame = ws.partTimeJobHomeListVC.view.frame;
+//            Frame.origin.x = 0;
+//            ws.partTimeJobHomeListVC.view.frame = Frame;
             self.tapView.hidden = NO;
-            
+            _partTimeJobHomeListVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, self.view.frame.size.height-43);
         } completion:nil];
         
     }

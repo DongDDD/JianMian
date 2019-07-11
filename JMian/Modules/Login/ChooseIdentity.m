@@ -32,19 +32,20 @@
 }
 
 - (IBAction)isSearchJob:(id)sender {
-    [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        [self getUserInfoToJudge];
-
-        
-//        BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
+//    [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:@"1" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 //
-//        [self.navigationController pushViewController:vc animated:YES];
-//        kSaveMyDefault(@"type", @"person");
-
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-
-    }];
+//        [self getUserInfoToJudge];
+//
+//
+////        BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
+////
+////        [self.navigationController pushViewController:vc animated:YES];
+////        kSaveMyDefault(@"type", @"person");
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+    [self chooseTypeWithType:@"1" step:@"1"];
 
     
 }
@@ -62,24 +63,48 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-    
+
 }
 - (IBAction)isCompanyBtn:(id)sender {
-    [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil  type:@(2) password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:@"1" real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//    [[JMHTTPManager sharedInstance]updateUserInfoWithCompany_position:nil  type:@(2) password:nil avatar:nil nickname:nil email:nil name:nil sex:nil ethnic:nil birthday:nil address:nil number:nil image_front:nil image_behind:nil user_step:nil enterprise_step:@"1" real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+////
+//        [self getUserInfoToJudge];
 //
-        [self getUserInfoToJudge];
+//
+////        JMCompanyBaseInfoViewController *vc = [[JMCompanyBaseInfoViewController alloc] init];
+////        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+////        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+    
+    [self chooseTypeWithType:@"2" step:@"1"];
+    NSLog(@"我要招人");
+}
 
+
+-(void)chooseTypeWithType:(NSString *)type step:(NSString *)step{
+    
+    [[JMHTTPManager sharedInstance]userChangeWithType:type step:step  successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-//        JMCompanyBaseInfoViewController *vc = [[JMCompanyBaseInfoViewController alloc] init];
-//        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
-//        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [JMUserInfoManager saveUserInfo:userInfo];
+        kSaveMyDefault(@"usersig", userInfo.usersig);
+        NSLog(@"usersig-----:%@",userInfo.usersig);
+        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+//        [[TIMManager sharedInstance] logout:^() {
+//            NSLog(@"logout succ");
+//        } fail:^(int code, NSString * err) {
+//            NSLog(@"logout fail: code=%d err=%@", code, err);
+//        }];
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
     
-    NSLog(@"我要招人");
 }
-
 
 /*
 #pragma mark - Navigation

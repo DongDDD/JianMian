@@ -236,6 +236,8 @@
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window {
     return UIInterfaceOrientationMaskPortrait;
 }
+
+
 #pragma mark - 请求
 -(void)loginRequestWithCode:(NSString *)code{
     [[JMHTTPManager sharedInstance] loginWithMode:@"wx" phone:@"" captcha:code sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

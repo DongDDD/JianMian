@@ -27,9 +27,14 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:User_info_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
 }
 
-- (void)userChangeWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
-    
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:User_Change parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+- (void)userChangeWithType:(nullable NSString *)type
+                      step:(nullable NSString *)step
+              successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+//    NSString *urlStr = [User_Change stringByAppendingFormat:@"/%@",type];
+//    NSString *urlStr2 = [urlStr stringByAppendingFormat:@"/%@",step];
+
+    NSDictionary *dic = @{@"type":type,@"step":step};
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:User_Change parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
 

@@ -48,8 +48,8 @@ static NSString *cellIdent = @"CellIdent";
     [self getListData];
     [self.view addSubview:self.noDataView];
     [self.noDataView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.centerY.mas_equalTo(self.view);
-        make.top.bottom.left.right.mas_equalTo(self.view);
+        make.bottom.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.titleView.mas_bottom);
     }];
     
     // Do any additional setup after loading the view from its nib.

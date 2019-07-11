@@ -96,10 +96,13 @@
     //
     NSMutableParagraphStyle  *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
     NSString  *testString2 = content;
-    NSMutableAttributedString  *setString2 = [[NSMutableAttributedString alloc] initWithString:testString2];
-    [setString2  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [testString2 length])];
-    [self.contentLabel  setAttributedText:setString2];
-    [paragraphStyle2  setLineSpacing:13.5];
+    if (testString2) {
+        NSMutableAttributedString  *setString2 = [[NSMutableAttributedString alloc] initWithString:testString2];
+        [setString2  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [testString2 length])];
+        [self.contentLabel  setAttributedText:setString2];
+        [paragraphStyle2  setLineSpacing:13.5];
+        
+    }
     
     //                contentLabel.frame = CGRectMake(titleLabel.frame.origin.x, titleLabel.frame.origin.y+titleLabel.frame.size.height, self.frame.size.width-20,0);
     [self addSubview:self.contentLabel];
