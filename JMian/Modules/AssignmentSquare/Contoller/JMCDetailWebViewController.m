@@ -220,11 +220,14 @@
 }
 
 -(void)shareViewLeftAction{
-    
     [self wxShare:0];
- }
+    [self hiddenChoosePayView];
+    
+}
 -(void)shareViewRightAction{
     [self wxShare:1];
+    [self hiddenChoosePayView];
+    
 
 }
 
@@ -337,6 +340,7 @@
 #pragma mark -- 微信分享的是链接
 - (void)wxShare:(int)n
 {   //检测是否安装微信
+  
     SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
     sendReq.bText = NO; //不使用文本信息
     sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏

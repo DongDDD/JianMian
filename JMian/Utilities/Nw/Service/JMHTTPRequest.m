@@ -29,4 +29,5 @@
     self.failureBlock = failure;
     [[JMHTTPManager sharedInstance] sendRequest:self];
 }
+
 @end

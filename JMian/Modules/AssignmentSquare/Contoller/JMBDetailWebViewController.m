@@ -118,12 +118,15 @@
 }
 
 -(void)shareViewLeftAction{
-    
     [self wxShare:0];
+    [self hiddenChoosePayView];
+    
 }
 
 -(void)shareViewRightAction{
     [self wxShare:1];
+    [self hiddenChoosePayView];
+    
     
 }
 

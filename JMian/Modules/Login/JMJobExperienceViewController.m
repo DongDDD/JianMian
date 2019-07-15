@@ -189,6 +189,9 @@
 
 
 -(void)rightAction{
+    [_companyNameText resignFirstResponder];
+    [_decriptionTextView.contentTextView resignFirstResponder];
+
     switch (self.viewType) {
         case JMJobExperienceViewTypeDefault:
             [self createExperience];

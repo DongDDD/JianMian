@@ -60,6 +60,13 @@
   //  [self.view addSubview:_datePicker];
     self.sex = @(1);
     [self getNewUserInfo];
+    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+    if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
+        [self.nameText setEnabled:NO];
+        [self.birtnDateBtn setEnabled:NO];
+
+        
+    }
 //    self.birthDateText.inputView = self.datePicker;
     // Do any additional setup after loading the view from its nib.
 }
@@ -110,24 +117,7 @@
 #pragma mark - 赋值
 -(void)setValuesAction{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-//    self.model = userModel;
-    //C端申请第一步，填写基本信息
-//    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
-//        [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-//        [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
-//        self.emailText.text = userModel.email;
-//        self.nameText.text = userModel.card_name;
-//    }
-//    if (_viewType == BasicInformationViewTypeEdit) {
-//        [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-//        [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
-//        self.emailText.text = userModel.email;
-//        self.nameText.text = userModel.card_name;
-//    }
-//
-    
-    if (_viewType == BasicInformationViewTypeEdit) {
-        [self setRightBtnTextName:@"保存"];
+    if (userModel.card_name) {
         self.nameText.text = userModel.card_name;
         self.emailText.text = userModel.email;
         [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
@@ -155,6 +145,12 @@
             self.womanBtn.layer.borderColor = [UIColor whiteColor].CGColor;
             self.womanBtn.backgroundColor = MASTER_COLOR;
         }
+        
+    }
+    
+    if (_viewType == BasicInformationViewTypeEdit) {
+        [self setRightBtnTextName:@"保存"];
+        
     }else {
         [self setRightBtnTextName:@"下一步"];
     }
@@ -168,54 +164,12 @@
     self.nameText.delegate = self;
     self.scrollView.delegate = self;
     
-    
-   /* _bgView = [[UIView alloc]init];
-    _bgView.backgroundColor = [UIColor grayColor];
-    _bgView.hidden = YES;
-    _bgView.alpha = 0.8;
-    [self.view addSubview:_bgView];
-    
-    [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view);
-        make.bottom.mas_equalTo(self.datePicker.mas_top);
-        make.right.and.left.mas_equalTo(self.view);
-    }];
-    */
-    
-    
-//    UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
-//    [self.view addGestureRecognizer:bgTap];
-//    [_bgView addGestureRecognizer:bgTap];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-//
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 
 }
 
-//- (IBAction)datePickerViewChange:(id)sender {
-//    
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    // 格式化日期格式
-//    formatter.dateFormat = @"yyyy-MM-dd";
-//    NSString *date = [formatter stringFromDate:self.datePicker.date];
-//    // 显示时间
-//    [self.birtnDateBtn setTitle:date forState:UIControlStateNormal];
-//    [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-//    
-//    
-//}
 
 
 
-
-
-//-(void)hiddenDatePickerAction{
-////    self.datePicker.hidden = YES;
-////    [_bgView setHidden:YES];
-//    [_nameText resignFirstResponder];
-//    [_emailText resignFirstResponder];
-//
-//}
 
 - (IBAction)headerAction:(id)sender {
     
@@ -350,21 +304,21 @@
 
 #pragma mark -textField delegte
 
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    if (textField == self.nameText) {
-        JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
-        if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改名字"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alert show];
-            
-            return NO;
-        }
-        
-        
-    }
-    return YES;
-}
+//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+//    if (textField.tag == 100) {
+//        JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+//        if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
+//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改名字"
+//                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//            [alert show];
+//
+//            return NO;
+//        }
+//
+//
+//    }
+//    return YES;
+//}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];

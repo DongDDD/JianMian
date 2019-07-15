@@ -396,7 +396,12 @@
     [[JMHTTPManager sharedInstance]fectchTaskOrderInfo_taskID:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             JMTaskOrderListCellData *taskInfoData = [JMTaskOrderListCellData mj_objectWithKeyValues:responsObject[@"data"]];
-            [self wxShare:0 data1:taskInfoData];
+            if([WXApi isWXAppInstalled])
+            {
+                [self wxShare:0 data1:taskInfoData];
+            }else{
+//                [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
+            }
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -622,16 +627,20 @@
 
 //拉起微信支付
 - (void)wechatPayWithModel:(JMOrderPaymentModel *)model{
-    
-    PayReq* req = [[PayReq alloc] init];
-    req.partnerId = model.wx_partnerid;
-    req.prepayId = model.wx_prepayid;
-    req.nonceStr = model.wx_noncestr;
-    req.timeStamp = model.wx_timestamp;
-    req.package = model.wx_package;
-    req.sign = model.wx_sign;
-    [WXApi sendReq:req];
-    
+    if([WXApi isWXAppInstalled])
+    {
+        PayReq* req = [[PayReq alloc] init];
+        req.partnerId = model.wx_partnerid;
+        req.prepayId = model.wx_prepayid;
+        req.nonceStr = model.wx_noncestr;
+        req.timeStamp = model.wx_timestamp;
+        req.package = model.wx_package;
+        req.sign = model.wx_sign;
+        [WXApi sendReq:req];
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"你还没安装微信" btnTitle:@"好的"];
+        
+    }
     
 //    [self payMoneyRequestWithNo:model.serial_no amount:@"130"];
     
@@ -700,10 +709,8 @@
         
     }else{
         UIImage *image = [UIImage imageNamed:@"demi_home"];
-
         NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
         [urlMessage setThumbData:thumbData];
-        
     }
  
     //分享实例

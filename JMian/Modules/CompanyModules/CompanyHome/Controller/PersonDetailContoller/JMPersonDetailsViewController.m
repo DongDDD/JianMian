@@ -561,6 +561,7 @@
     if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
     
         [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
             JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
             //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
             //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -628,11 +629,13 @@
 }
 
 -(void)shareViewLeftAction{
+    [self disapearAction];
     [self wxShare:0];
     
 }
 
 -(void)shareViewRightAction{
+    [self disapearAction];
     [self wxShare:1];
 }
 #pragma mark - scrollViewDelegate

@@ -403,10 +403,13 @@ static NSString *cellIdent = @"cellIdent";
     [self.choosePositionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.companyRequireBtn setBackgroundColor:[UIColor whiteColor]];
     [self.companyRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    [self.labschooseVC.view setHidden:YES];
     [self.navigationController pushViewController:self.choosePositionVC animated:YES];
 //    [self.choosePositionVC.view setHidden:NO];
-   
+    [self.bgBtn setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
+    [self.labschooseVC.view setHidden:YES];
+    
+    
 }
 
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{

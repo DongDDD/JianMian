@@ -7,7 +7,7 @@
 //
 
 #import "JMJudgeViewController.h"
-#import "JMCompanyTabBarViewController.h"
+#import "JMBAndCTabBarViewController.h"
 #import "JMPersonTabBarViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "NavigationViewController.h"
@@ -90,7 +90,7 @@
     
     if (vcStr) {
         vc = [[NSClassFromString(vcStr) alloc]init];
-        if ([vc isKindOfClass:[JMPersonTabBarViewController class]] || [vc isKindOfClass:[JMCompanyTabBarViewController class]]) {
+        if ([vc isKindOfClass:[JMBAndCTabBarViewController class]]) {
 
             [UIApplication sharedApplication].delegate.window.rootViewController = vc;
             
@@ -114,7 +114,7 @@
                          @"JMCompanyInfoViewController",    //当enterprise_step=2
                          @"JMUploadLicenseViewController",  //当enterprise_step=3
                          @"JMChangeIdentityViewController", //当enterprise_step=4
-                         @"JMCompanyTabBarViewController"   //当enterprise_step=5
+                         @"JMBAndCTabBarViewController"   //当enterprise_step=5
                          
                          ];
     
@@ -146,7 +146,7 @@
                          @"JobIntensionViewController",     //当user_step=3
                          @"JMJobExperienceViewController",  //当user_step=4
                          [NSNull null],
-                         @"JMPersonTabBarViewController"];        //当user_step=6
+                         @"JMBAndCTabBarViewController"];        //当user_step=6
     int BstepInt = [userInfoModel.enterprise_step intValue];
     int CstepInt = [user_step intValue];
     if (BstepInt > vcArray.count ) {

@@ -166,6 +166,8 @@
 
 //接口
 #define Get_Labels_URL @"/labels"
+//版本号
+#define Get_VersionInfo_URL @"version/info"
 
 
 #define GET_CONTENT_DETAIL      @"channel/getContentDetail" //获取内容详情(含上一个和下一个)

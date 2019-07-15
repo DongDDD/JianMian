@@ -37,8 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    _unReadNum = 0;
-    [self getMsgList];
+//    _unReadNum = 0;
+//    [self getMsgList];
     self.view.backgroundColor = [UIColor whiteColor];
     //选中时的颜色
     //透明设置为NO，显示白色，view的高度到tabbar顶部截止，YES的话到底部
@@ -78,6 +78,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self.message selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderNotification:) name:Notification_OrderListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskNotification:) name:Notification_TaskListener object:nil];
+    [self getMsgList];
 
    
 }
@@ -142,48 +143,46 @@
 }
 
 - (void)updateConversations {
-
-    //    _dataArray = [NSMutableArray array];
-    //    15011331133
     JMUserInfoModel *userInfomodel = [JMUserInfoManager getUserInfo];
+    
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
     NSLog(@"腾讯云数据%@",convs);
-
-
     for (TIMConversation *conv in convs) {
         if([conv getType] == TIM_SYSTEM){
             continue;
         }
         TIMMessage *msg = [conv getLastMsg];
         NSLog(@"%@",msg);
-//        _unReadNum += [conv getUnReadMessageNum];
         for (JMMessageListModel *model in self.modelArray) {
             if (model.sender_user_id == userInfomodel.user_id) {
                 //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
                 if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
-
                     _unReadNum += [conv getUnReadMessageNum];
                 }
-
+                
             }else if(model.recipient_user_id == userInfomodel.user_id){
-
+                //判断recipient是自己的话，拿sender_mark去跟腾讯云的ReceiverID配对接收者
+                
                 if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
-
+                    
                     _unReadNum += [conv getUnReadMessageNum];
-
+                    
+                    
                 }
-
+                
+                //服务器系统消息
             }
-
+            
+            
         }
-//        加上系统消息的未读
+        
         if ([[conv getReceiver] isEqualToString:@"dominator"]) {
             _unReadNum += [conv getUnReadMessageNum];
-
+            
         }
     }
-
+    
     NSLog(@"未读消息数量%d",_unReadNum);
     if (_unReadNum > 0) {
         if (_unReadNum > 99) {
@@ -198,7 +197,6 @@
         self.message.tabBarItem.badgeValue = nil;
     }
 }
-
 
 
 

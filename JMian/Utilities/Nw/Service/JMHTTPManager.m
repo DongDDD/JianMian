@@ -73,7 +73,10 @@
 - (NSURLSessionTask *)sessionTaskForRequest:(JMHTTPRequest *)request {
 
     NSMutableURLRequest *urlRequest = nil;
-    if(kFetchMyDefault(@"token")) [self.requestSerializer setValue:kFetchMyDefault(@"token") forHTTPHeaderField:@"Authorization"];
+    if(kFetchMyDefault(@"token")) {
+        [self.requestSerializer setValue:kFetchMyDefault(@"token") forHTTPHeaderField:@"Authorization"];
+        
+    }
 
     switch (request.method) {
         case JMRequestMethodGET:
@@ -222,9 +225,26 @@
     NSLog(@"Request%@=======>:%@", error?@"失败":@"成功", task.currentRequest.URL.absoluteString);
     NSLog(@"requestBody======>:%@", params);
     NSLog(@"requstHeader=====>:%@", task.currentRequest.allHTTPHeaderFields);
+    NSLog(@"服务器返回的响应头HeaderFields============>:%@",[(NSHTTPURLResponse *)task.response allHeaderFields]);
+
     NSLog(@"response=========>:%@", responseObject);
     NSLog(@"error============>:%@", error);
     NSLog(@"<<<<<<<<<<<<<<<<<<<<<👆 REQUEST FINISH 👆<<<<<<<<<<<<<<<<<<<<<<<<<<");
+    
+    
+    //处理过期Token
+    NSString *token;
+    if ([task.response isKindOfClass:[NSHTTPURLResponse class]]) {
+        NSHTTPURLResponse *r = (NSHTTPURLResponse *)task.response;
+        token = [r allHeaderFields][@"Authorization"];
+//        NSLog(@"allHeaderFields============>:%@",[r allHeaderFields]);
+        NSLog(@"newToken============>:%@",token);
+        if (token) {
+            kSaveMyDefault(@"token",token);
+        }
+    }
+    
+    
     if (responseObject[@"message"]) {
         
         NSString *code = [responseObject objectForKey:@"code"];
@@ -240,8 +260,6 @@
         
     }
     
-    
-  
 }
 
 - (NSError *)_errorFromRequestWithTask:(NSURLSessionTask *)task httpResponse:(NSHTTPURLResponse *)httpResponse responseObject:(NSDictionary *)responseObject error:(NSError *)error {

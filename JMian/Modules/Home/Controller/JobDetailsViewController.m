@@ -350,13 +350,14 @@
 }
 
 -(void)shareViewLeftAction{
+    [self disapearAction];
     [self wxShare:0];
-    
+  
 }
 
 -(void)shareViewRightAction{
+    [self disapearAction];
     [self wxShare:1];
-
 
 }
 #pragma mark - 数据请求

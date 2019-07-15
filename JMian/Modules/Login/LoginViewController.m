@@ -15,6 +15,9 @@
 
 @interface LoginViewController ()<UIGestureRecognizerDelegate,WXApiDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *wechatLoginBtn;
+@property (weak, nonatomic) IBOutlet UIButton *phoneLoginBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *logoImgView;
 
 @end
 
@@ -23,6 +26,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationController.navigationBarHidden = YES;
+    if(![WXApi isWXAppInstalled]){
+        [self.wechatLoginBtn setHidden:YES];
+    }
+
     // Do any additional setup after loading the view from its nib.
 //    self.navigationController.interactivePopGestureRecognizer.delegate = self;
 }
@@ -39,12 +46,18 @@
 
 
 - (IBAction)wechatLoginAction:(id)sender {
-    
-    SendAuthReq *req = [[SendAuthReq alloc] init];
-    req.state = @"wx_oauth_authorization_state";//用于保持请求和回调的状态，授权请求或原样带回
-    req.scope = @"snsapi_userinfo";//授权作用域：获取用户个人信息
-    
-    [WXApi sendReq:req];
+
+    if([WXApi isWXAppInstalled])
+    {
+        NSLog(@"wechat is install");
+        SendAuthReq *req = [[SendAuthReq alloc] init];
+        req.state = @"wx_oauth_authorization_state";//用于保持请求和回调的状态，授权请求或原样带回
+        req.scope = @"snsapi_userinfo";//授权作用域：获取用户个人信息
+
+        [WXApi sendReq:req];
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"未安装微信" btnTitle:@"好的"];
+    }
     
     
     

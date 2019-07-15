@@ -26,6 +26,7 @@
 #import "Masonry.h"
 #import <WebKit/WebKit.h>
 #import "JMNoDataView.h"
+#import "JMVersionManager.h"
 
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度

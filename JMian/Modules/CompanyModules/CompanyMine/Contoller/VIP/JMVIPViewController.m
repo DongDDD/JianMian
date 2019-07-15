@@ -126,15 +126,19 @@
 
 
 - (void)wechatPayWithModel:(JMOrderPaymentModel *)model{
-    PayReq* req = [[PayReq alloc] init];
-    req.partnerId = model.wx_partnerid;
-    req.prepayId = model.wx_prepayid;
-    req.nonceStr = model.wx_noncestr;
-    req.timeStamp = model.wx_timestamp;
-    req.package = model.wx_package;
-    req.sign = model.wx_sign;
-    [WXApi sendReq:req];
-    
+    if([WXApi isWXAppInstalled])
+    {
+        PayReq* req = [[PayReq alloc] init];
+        req.partnerId = model.wx_partnerid;
+        req.prepayId = model.wx_prepayid;
+        req.nonceStr = model.wx_noncestr;
+        req.timeStamp = model.wx_timestamp;
+        req.package = model.wx_package;
+        req.sign = model.wx_sign;
+        [WXApi sendReq:req];
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"你还没安装微信" btnTitle:@"好的"];
+    }
     
 }
 

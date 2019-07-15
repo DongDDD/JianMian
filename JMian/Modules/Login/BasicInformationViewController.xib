@@ -124,7 +124,7 @@
                                     <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="邮箱用于接受面试通知" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rOe-QJ-orW">
+                                <textField opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="邮箱用于接受面试通知" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rOe-QJ-orW">
                                     <rect key="frame" x="20" y="435" width="306" height="55"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="55" id="FbC-uT-0HR"/>
@@ -182,7 +182,7 @@
                                         <action selector="womanBtn:" destination="-1" eventType="touchUpInside" id="dFo-98-Dzt"/>
                                     </connections>
                                 </button>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入名字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vqL-lE-2Xj">
+                                <textField opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入名字" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vqL-lE-2Xj">
                                     <rect key="frame" x="20" y="243" width="335" height="73"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="73" id="L01-Cd-o94"/>

@@ -12,7 +12,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
             <connections>
+                <outlet property="logoImgView" destination="2zX-mD-Rgr" id="yHX-j4-CnJ"/>
+                <outlet property="phoneLoginBtn" destination="L5O-Ib-NaR" id="nIc-1L-ZJ6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wechatLoginBtn" destination="uAD-co-Nvw" id="TXB-1m-hqE"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

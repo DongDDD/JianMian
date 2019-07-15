@@ -23,8 +23,12 @@
    
     NSString *salaryStr = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
     self.salaryLab.text = salaryStr;
-    
-    NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",model.work_experience_min,model.work_experience_max];
+    NSString *experienceStr;
+    if ([model.work_experience_min isEqualToString:@"0"]) {        
+        experienceStr = @"不限";
+    }else{
+        experienceStr = [NSString stringWithFormat:@"%@~%@年",model.work_experience_min,model.work_experience_max];
+    }
     self.workExperienceLab.text = experienceStr;
     
     NSString *cityStr = [NSString stringWithFormat:@"%@",model.cityName];

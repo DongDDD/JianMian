@@ -8,7 +8,7 @@
 
 #import "JMIDCardIdentifySecondViewController.h"
 #import "JMPersonTabBarViewController.h"
-#import "JMCompanyTabBarViewController.h"
+#import "JMBAndCTabBarViewController.h"
 #import "JMHTTPManager+UpdateInfo.h"
 
 @interface JMIDCardIdentifySecondViewController ()<UITextFieldDelegate>

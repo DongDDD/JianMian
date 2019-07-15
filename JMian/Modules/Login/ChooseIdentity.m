@@ -14,7 +14,7 @@
 #import "JMJudgeViewController.h"
 #import "JMPersonTabBarViewController.h"
 #import "NavigationViewController.h"
-#import "JMCompanyTabBarViewController.h"
+#import "JMBAndCTabBarViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "JMUserInfoModel.h"
 

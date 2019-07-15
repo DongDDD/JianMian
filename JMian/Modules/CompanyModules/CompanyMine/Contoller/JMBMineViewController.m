@@ -36,13 +36,17 @@
 #import "WXApi.h"
 #import "JMBMineInfoView.h"
 #import "JMBMineMoreFunctionView.h"
+#import "JMShareView.h"
+#import "JMHTTPManager+FectchVersionInfo.h"
 
-@interface JMBMineViewController ()<JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMBMineInfoViewDelegate,JMBMineMoreFunctionViewDelegate>
+@interface JMBMineViewController ()<JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMBMineInfoViewDelegate,JMBMineMoreFunctionViewDelegate,JMShareViewDelegate>
 
 @property (strong, nonatomic) JMBUserCenterHeaderView *BUserCenterHeaderView;
 @property (strong, nonatomic) JMBMineInfoView *BMineInfoView;
 @property (strong, nonatomic) JMBMineMoreFunctionView *BMineMoreFunctionView;
 @property (strong, nonatomic) UIScrollView *scrollView;
+@property(nonatomic,strong)JMShareView *shareView;//分享
+@property(nonatomic,strong)UIView *shareBgView;//灰色背景
 
 @end
 
@@ -53,16 +57,9 @@
     self.view.backgroundColor = BG_COLOR;
     
   
-    [self initView];
-//    UILabel *titleLab = [[UILabel alloc]init];
-//    titleLab.text = @"企业用户";
-//    titleLab.textColor = [UIColor whiteColor];
-//    [self.view addSubview:titleLab];
-//    [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(self.view);
-//        make.top.mas_equalTo(self.view).offset(10);
-//        make.width.height.mas_equalTo(50);
-//    }];
+   
+    [self getVersionData];
+
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -80,6 +77,14 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     self.navigationController.navigationBarHidden = NO;
+}
+#pragma mark - Action
+
+-(void)disapearAction{
+    NSLog(@"222");
+    [self.shareBgView setHidden:YES];
+    [self.shareView setHidden:YES];
+    
 }
 #pragma mark - data
 
@@ -99,6 +104,19 @@
         
     }];
     
+}
+
+-(void)getVersionData{
+    [[JMHTTPManager sharedInstance] fectchVersionWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMVersionModel *model = [JMVersionModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMVersionManager saveVersionInfo:model];
+        }
+         [self initView];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
 }
 
 #pragma mark - 布局
@@ -166,7 +184,30 @@
 -(void)didSelectCellWithRow:(NSInteger)row{
     if (row == 0) {
         //微信分享
-        [self wxShare:0];
+        if([WXApi isWXAppInstalled])
+        {
+            
+            [self wxShare:0];
+            
+        }else{
+            [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
+            [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.view);
+                make.left.and.right.equalTo(self.view);
+                make.height.equalTo(self.view);
+            }];
+            [self.shareView setHidden:NO];
+            [self.shareBgView setHidden:NO];
+            [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
+            [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(self.view);
+                make.left.and.right.equalTo(self.view);
+                make.height.mas_equalTo(184+SafeAreaBottomHeight);
+                
+            }];
+//            [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
+            
+        }
     }else if (row == 1) {
         //我的钱包
         [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
@@ -185,6 +226,19 @@
     }
 }
 
+-(void)shareViewCancelAction{
+    [self disapearAction];
+}
+
+-(void)shareViewLeftAction{
+    [self disapearAction];
+    [self wxShare:0];
+}
+
+-(void)shareViewRightAction{
+    [self disapearAction];
+    [self wxShare:1];
+}
 #pragma mark -- 微信分享的是链接
 - (void)wxShare:(int)n
 {   //检测是否安装微信
@@ -274,6 +328,27 @@
     return _scrollView;
 }
 
+-(JMShareView *)shareView{
+    if (!_shareView) {
+        _shareView = [[JMShareView alloc]init];
+        _shareView.delegate = self;
+    }
+    return _shareView;
+}
+-(UIView *)shareBgView{
+    
+    if (!_shareBgView) {
+        
+        _shareBgView = [[UIView alloc]init];
+        _shareBgView.backgroundColor =  [UIColor colorWithRed:48/255.0 green:48/255.0 blue:51/255.0 alpha:0.5];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disapearAction)];
+        [_shareBgView addGestureRecognizer:tap];
+        
+    }
+    
+    return _shareBgView;
+    
+}
 /*
 #pragma mark - Navigation
 

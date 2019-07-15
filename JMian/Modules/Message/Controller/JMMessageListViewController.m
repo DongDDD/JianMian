@@ -81,7 +81,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
 - (void)onNewMessage:(NSNotification *)notification
 {
     [self getMsgList];    //获取自己服务器数据
-    
 }
 
 #pragma mark - data

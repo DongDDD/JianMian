@@ -241,7 +241,7 @@
         //自动网格布局
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc]init];
         
-        CGFloat itemWidth = (SCREEN_WIDTH ) / 3;
+        CGFloat itemWidth = (SCREEN_WIDTH ) / 2.00;
         
         //设置单元格大小
         flowLayout.itemSize = CGSizeMake(itemWidth, 265);

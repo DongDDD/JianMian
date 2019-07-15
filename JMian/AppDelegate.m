@@ -19,7 +19,7 @@
 #import "VendorKeyMacros.h"
 #import "JMUserInfoManager.h"
 #import "JMUserInfoModel.h"
-#import "JMCompanyTabBarViewController.h"
+#import "JMBAndCTabBarViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "JMJudgeViewController.h"
 #import "JMVideoChatViewController.h"
@@ -29,7 +29,7 @@
 #import "JMManageInterviewViewController.h"
 #import "JMPlaySoundsManager.h"
 
-@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate>
+@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMUserStatusListener>
 
 @end
 
@@ -47,12 +47,17 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    //向微信注册
-    [WXApi registerApp:@"wxb42b10e7d84612a9"];
     //高德地图
     [AMapServices sharedServices].apiKey = AMapAPIKey;
     [AMapServices sharedServices].enableHTTPS = YES;
+    
+    //向微信注册
+    [WXApi registerApp:@"wxb42b10e7d84612a9"];
     [[TIMManager sharedInstance] addMessageListener:self];
+     //用户状态变更
+    TIMUserConfig * cfg = [[TIMUserConfig alloc] init];
+    cfg.userStatusListener = self;
+    
     //MP3播放器
     [[JMPlaySoundsManager sharedInstance] setVideoSounds];
     [[JMPlaySoundsManager sharedInstance] setMoneySounds];
@@ -61,19 +66,20 @@
     //    [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition]; //输入框自动上移
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
-    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;//不显示工具条
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;//不显示工具条
+    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemImage = [UIImage imageNamed:@"icon_return "];
+
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10.0f;
     [self registNotification];
-    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
     
-    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
-    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
-    [_window setRootViewController:naVC];
-    [self.window makeKeyAndVisible];//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
-    //    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
-    //    [_window setRootViewController:naVC];
-    //    [self.window makeKeyAndVisible];
+//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
+//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
+//    [_window setRootViewController:naVC];
+//    [self.window makeKeyAndVisible];
+    
+
     
     
     return YES;
@@ -141,6 +147,7 @@
     }
 }
 
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     NSLog(@"userInfouserInfo%@", userInfo);
@@ -165,11 +172,11 @@
     //记录下 Apple 返回的 deviceToken
 //    _deviceToken = deviceToken;
     NSLog(@"deviceTokendeviceToken---%@",deviceToken);
-//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
-//    judgevc.deviceToken = deviceToken;
-//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
-//    [_window setRootViewController:naVC];
-//    [self.window makeKeyAndVisible];
+    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
+    judgevc.deviceToken = deviceToken;
+    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
+    [_window setRootViewController:naVC];
+    [self.window makeKeyAndVisible];
     
 }
 
@@ -313,6 +320,20 @@
     [alert show];
     
 }
+
+//IM被踢下线
+-(void)onForceOffline{
+    NSLog(@"---被踢");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"抱歉！你被踢下线！如不是本人操作请重新登录及时修改密码！" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+    [alert show];
+    
+    LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
+    
+    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
+    [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+    
+}
+
 
 //接收消息回调
 - (void)onNewMessage:(NSArray *)msgs

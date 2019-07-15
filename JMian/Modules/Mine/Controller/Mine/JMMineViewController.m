@@ -253,7 +253,15 @@
         
         if (indexPath.row == 0) {
             //微信分享
-            [self wxShare:0];
+            if([WXApi isWXAppInstalled])
+            {
+                
+                [self wxShare:0];
+                
+            }else{
+                [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
+                
+            }
         }else if (indexPath.row == 1) {
             //我的钱包
             [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];

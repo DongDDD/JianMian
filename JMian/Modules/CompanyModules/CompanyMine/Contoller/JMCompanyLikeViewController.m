@@ -166,7 +166,7 @@ static NSString *cellIdent = @"CellIdent";
 
 
 -(void)deleteActionWithFavorite_id:(NSString *)favorite_id{
-    [[JMHTTPManager sharedInstance]deleteLikeWith_Id:favorite_id  mode:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]deleteLikeWith_Id:favorite_id  mode:self.mode SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self getListData];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

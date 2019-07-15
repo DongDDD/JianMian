@@ -7,6 +7,7 @@
 //
 
 #import "JMAboutOursViewController.h"
+#import "DimensMacros.h"
 
 @interface JMAboutOursViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *lab;
@@ -18,10 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"关于平台";
-    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];  
-    NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     
-    _lab.text = app_Version;
+    JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
+    _lab.text = versionModel.version;;
     // Do any additional setup after loading the view from its nib.
 }
 
