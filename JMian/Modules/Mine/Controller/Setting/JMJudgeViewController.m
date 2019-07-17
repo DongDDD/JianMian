@@ -80,13 +80,23 @@
     NSString *vcStr;
     
     //用户还没选择身份
-    if ([model.type isEqualToString:NO_Type_USER]) vcStr = [self getPersonStepWhereWitnUser_step:@"0"];
+    if ([model.type isEqualToString:NO_Type_USER])
+    {
+        vcStr = [self getPersonStepWhereWitnUser_step:@"0"];
+        
+    }
     
     //用户已经选择了C端身份，user_step判断用户填写信息步骤
-    if ([model.type isEqualToString:C_Type_USER]) vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+    if ([model.type isEqualToString:C_Type_USER])
+    {
+        vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+    }
     
     //用户选择了B端身份，enterprise_step判断用户填写信息步骤
-    if ([model.type isEqualToString:B_Type_UESR])  vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
+    if ([model.type isEqualToString:B_Type_UESR])
+    {
+        vcStr = [self getCompanyStepWhereWitnEnterprise_step:model.enterprise_step];
+    }
     
     if (vcStr) {
         vc = [[NSClassFromString(vcStr) alloc]init];
@@ -149,7 +159,7 @@
                          @"JMBAndCTabBarViewController"];        //当user_step=6
     int BstepInt = [userInfoModel.enterprise_step intValue];
     int CstepInt = [user_step intValue];
-    if (BstepInt > vcArray.count ) {
+    if (CstepInt > vcArray.count ) {
         return vcArray[6];
     }
     //判断C端是否已经填了信息，是的话B端跳去填写基本信息第一步，不用选择身份

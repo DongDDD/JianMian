@@ -28,9 +28,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zbd-k1-XmO">
-                    <rect key="frame" x="149" y="86" width="116" height="16"/>
+                    <rect key="frame" x="135.5" y="86" width="143" height="16"/>
                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <state key="normal" title="  我已阅读并同意" image="gou_partTime.png">
+                    <state key="normal" title="  我已阅读并不再提醒" image="gou_partTime.png">
                         <color key="titleColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -59,7 +59,7 @@
             <connections>
                 <outlet property="agreeBtn" destination="Zbd-k1-XmO" id="IY9-FL-loS"/>
             </connections>
-            <point key="canvasLocation" x="-42.028985507246382" y="-25.111607142857142"/>
+            <point key="canvasLocation" x="-57" y="-34"/>
         </view>
     </objects>
     <resources>

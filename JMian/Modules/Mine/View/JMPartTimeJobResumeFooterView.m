@@ -95,13 +95,13 @@
         case JMPartTimeJobResumeFooterViewTypeCompanyInfoDescription:
             _placeHolder.text = @"例如\n企业类型...\n建立时间...\n从事哪方面的产品...\n以什么为重点...\n从事哪方面的产品....\n企业文化...等等   ";
             _wordsLenghLabel.text = @"0/500";
-            _titleLab.text = @"公司简介";
+//            _titleLab.text = @"公司简介";
 
             
             break;
         case JMPartTimeJobResumeFooterViewTypeMyAdvantage:
             _placeHolder.text = @"请填写你的优势，500字以内... ";
-            _titleLab.text = @"我的优势";
+//            _titleLab.text = @"自我评价";
 
             break;
         case JMPartTimeJobResumeFooterViewTypeDefault:

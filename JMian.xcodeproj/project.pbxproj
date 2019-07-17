@@ -602,6 +602,8 @@
 		04B4F88222B7A5B300A06E9C /* JMInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F88122B7A5B300A06E9C /* JMInvoiceModel.m */; };
 		04B4F88522B7BFBE00A06E9C /* JMPostGoodsImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F88422B7BFBE00A06E9C /* JMPostGoodsImagesView.m */; };
 		04B4F88722B7BFDB00A06E9C /* JMPostGoodsImagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4F88622B7BFDA00A06E9C /* JMPostGoodsImagesView.xib */; };
+		04B620E722DDC612009C8853 /* JMTaskApplyForView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B620E622DDC612009C8853 /* JMTaskApplyForView.m */; };
+		04B620E922DDC659009C8853 /* JMTaskApplyForView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B620E822DDC659009C8853 /* JMTaskApplyForView.xib */; };
 		04BBF296228E57C50068A9B1 /* JMWaitForAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF295228E57C50068A9B1 /* JMWaitForAnswerView.m */; };
 		04BBF299228E67600068A9B1 /* JMAnswerOrHangUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF298228E67600068A9B1 /* JMAnswerOrHangUpView.m */; };
 		04BBF29E228E90BA0068A9B1 /* answer@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04BBF29B228E90B90068A9B1 /* answer@2x.png */; };
@@ -1700,6 +1702,9 @@
 		04B4F88322B7BFBE00A06E9C /* JMPostGoodsImagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPostGoodsImagesView.h; sourceTree = "<group>"; };
 		04B4F88422B7BFBE00A06E9C /* JMPostGoodsImagesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPostGoodsImagesView.m; sourceTree = "<group>"; };
 		04B4F88622B7BFDA00A06E9C /* JMPostGoodsImagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPostGoodsImagesView.xib; sourceTree = "<group>"; };
+		04B620E522DDC612009C8853 /* JMTaskApplyForView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTaskApplyForView.h; sourceTree = "<group>"; };
+		04B620E622DDC612009C8853 /* JMTaskApplyForView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTaskApplyForView.m; sourceTree = "<group>"; };
+		04B620E822DDC659009C8853 /* JMTaskApplyForView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMTaskApplyForView.xib; sourceTree = "<group>"; };
 		04BBF294228E57C50068A9B1 /* JMWaitForAnswerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMWaitForAnswerView.h; sourceTree = "<group>"; };
 		04BBF295228E57C50068A9B1 /* JMWaitForAnswerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMWaitForAnswerView.m; sourceTree = "<group>"; };
 		04BBF297228E67600068A9B1 /* JMAnswerOrHangUpView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAnswerOrHangUpView.h; sourceTree = "<group>"; };
@@ -2639,6 +2644,9 @@
 				042CA64A22D60B2400ABB7AF /* JMMyCustumWindowView.h */,
 				042CA64B22D60B2400ABB7AF /* JMMyCustumWindowView.m */,
 				042CA64D22D60B3A00ABB7AF /* JMMyCustumWindowView.xib */,
+				04B620E522DDC612009C8853 /* JMTaskApplyForView.h */,
+				04B620E622DDC612009C8853 /* JMTaskApplyForView.m */,
+				04B620E822DDC659009C8853 /* JMTaskApplyForView.xib */,
 			);
 			path = MyCustumWindow;
 			sourceTree = "<group>";
@@ -4488,6 +4496,7 @@
 				040BF07B22719E4E0088697D /* me.png in Resources */,
 				040CA837225F1EB2006D7A7F /* Share_WeChat_friends.png in Resources */,
 				040CA853225F1EBF006D7A7F /* dingwei@2x.png in Resources */,
+				04B620E922DDC659009C8853 /* JMTaskApplyForView.xib in Resources */,
 				04BE8B5822925E45004EB7EC /* pitch_on@2x.png in Resources */,
 				041CCED922A507A7002DFED3 /* JMMyOrderListViewController.xib in Resources */,
 				041CCF0922A52403002DFED3 /* icon_return_bule@3x.png in Resources */,
@@ -5228,6 +5237,7 @@
 				048A0DF122B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m in Sources */,
 				04908AD322A7A06E000B5AB4 /* JMBUserCenterHeaderSubView.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,
+				04B620E722DDC612009C8853 /* JMTaskApplyForView.m in Sources */,
 				6D020A6C22539FB0009BCFE4 /* JMCompanyIntroduceViewController.m in Sources */,
 				0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */,
 				048FEE322244853C001160C8 /* AppDelegate.m in Sources */,

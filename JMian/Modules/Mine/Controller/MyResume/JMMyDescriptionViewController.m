@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title  = @"我的优势";
+    self.title  = @"自我评价";
 //    self.myDescriptionTextView.delegate = self;
 //    self.myDescriptionTextView.text = self.myDescription;
     self.view.backgroundColor = BG_COLOR;

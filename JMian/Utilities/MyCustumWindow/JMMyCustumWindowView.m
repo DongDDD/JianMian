@@ -18,6 +18,8 @@
     }
     return self;
 }
+    
+    
 - (IBAction)leftAction:(UIButton *)sender {
     if (_delegate && [_delegate respondsToSelector:@selector(windowLeftAction)]) {
         [_delegate windowLeftAction];

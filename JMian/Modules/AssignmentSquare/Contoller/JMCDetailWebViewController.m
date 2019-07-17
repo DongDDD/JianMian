@@ -21,9 +21,10 @@
 #import "JMIDCardIdentifyViewController.h"
 #import "JMApplyForProtocolView.h"
 #import "JMTaskManageViewController.h"
+#import "JMTaskApplyForView.h"
 
 
-@interface JMCDetailWebViewController ()<JMShareViewDelegate,JMApplyForProtocolViewDelegate>
+@interface JMCDetailWebViewController ()<JMShareViewDelegate,JMApplyForProtocolViewDelegate,JMTaskApplyForViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic, copy) NSString *favorites_id;
 @property (nonatomic, strong) JMShareView *choosePayView;
@@ -31,6 +32,9 @@
 @property (nonatomic ,strong) JMCDetailModel *detailModel;
 @property (copy, nonatomic)NSString *user_id;
 @property (nonatomic, strong) JMApplyForProtocolView *applyForProtocolView;
+@property (nonatomic, strong) JMTaskApplyForView *taskApplyForView;
+@property (nonatomic, strong) UIView *windowViewBGView;
+
 @property (nonatomic, assign)BOOL isRead;
 
 @end
@@ -45,7 +49,7 @@
     [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"ccc"];
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self initView];
-    _isRead = YES;
+//    _isRead = YES;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -67,18 +71,34 @@
     [self showProgressHUD_view:self.view];
     [self.view addSubview:self.bottomView];
     [self.view addSubview:self.choosePayView];
+    
     [self.view addSubview:self.BGPayView];
 
+    [self initTaskApplyForView];
     [self.BGPayView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(_choosePayView.mas_top);
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
     }];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenChoosePayView)];
     [self.BGPayView addGestureRecognizer:tap];
 
 }
+    
+-(void)initTaskApplyForView{
+    [[UIApplication sharedApplication].keyWindow addSubview:self.windowViewBGView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.taskApplyForView];
+    [self.taskApplyForView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.centerY.mas_equalTo([UIApplication sharedApplication].keyWindow);
+        make.width.mas_equalTo(330);
+        make.height.mas_equalTo(250);
+    }];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenApplyForView)];
+    [self.windowViewBGView addGestureRecognizer:tap];
 
+    
+}
 -(void)fanhui{
     [super fanhui];
     // 用完移除
@@ -167,9 +187,11 @@
     
 }
 
+
 -(void)hiddenChoosePayView{
     [self.choosePayView setHidden:YES];
     [self.BGPayView setHidden:YES];
+
     [UIView animateWithDuration:0.18 animations:^{
         self.choosePayView.frame =CGRectMake(0,SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
         
@@ -177,48 +199,59 @@
     }];
     
 }
+    
+-(void)hiddenApplyForView{
+    [self.taskApplyForView setHidden:YES];
+    [self.windowViewBGView setHidden:YES];
 
--(void)showAlertVCWithCustumView:(UIView *)custumView
-                         message:(NSString *)message
-                       leftTitle:(NSString *)leftTitle
-                      rightTitle:(NSString *)rightTitle
-
-{
-    
-    
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n" message:message preferredStyle: UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:leftTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-     }]];
-    [alert addAction:[UIAlertAction actionWithTitle:rightTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
-        if (_isRead) {
-            [self sendResquest];//申请请求
-        }else{
-            [self showAlertSimpleTips:@"提示" message:@"请阅读并同意《平台服务协议》" btnTitle:@"好的"];
-        
-        }
-    }]];
- 
-  
-    [alert.view addSubview:custumView];
-    [custumView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(alert.view).mas_offset(10);
-        make.left.mas_equalTo(alert.view).mas_offset(10);
-        make.right.mas_equalTo(alert.view).mas_offset(-10);
-        make.height.mas_equalTo(150);
-
-    }];
-    
-    [self presentViewController:alert animated:YES completion:nil];
-    
 }
 
-#pragma mark - 点击事件
+-(void)showApplyForView{
+    [self.taskApplyForView setHidden:NO];
+    [self.windowViewBGView setHidden:NO];
+
+}
+
+//-(void)showAlertVCWithCustumView:(UIView *)custumView
+//                         message:(NSString *)message
+//                       leftTitle:(NSString *)leftTitle
+//                      rightTitle:(NSString *)rightTitle
+//
+//{
+//
+//
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n\n\n" message:message preferredStyle: UIAlertControllerStyleAlert];
+//    [alert addAction:[UIAlertAction actionWithTitle:leftTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//     }]];
+//    [alert addAction:[UIAlertAction actionWithTitle:rightTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//        if (_isRead) {
+//            [self sendResquest];//申请请求
+//        }else{
+//            [self showAlertSimpleTips:@"提示" message:@"请阅读并同意《平台服务协议》" btnTitle:@"好的"];
+//
+//        }
+//    }]];
+//
+//
+//    [alert.view addSubview:custumView];
+//    [custumView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(alert.view).mas_offset(10);
+//        make.left.mas_equalTo(alert.view).mas_offset(10);
+//        make.right.mas_equalTo(alert.view).mas_offset(-10);
+//        make.height.mas_equalTo(150);
+//
+//    }];
+//
+//    [self presentViewController:alert animated:YES completion:nil];
+//
+//}
+#pragma mark - MyDelegate
 
 -(void)shareViewCancelAction{
     [self hiddenChoosePayView];
 }
-
+    
 -(void)shareViewLeftAction{
     [self wxShare:0];
     [self hiddenChoosePayView];
@@ -228,8 +261,23 @@
     [self wxShare:1];
     [self hiddenChoosePayView];
     
+    
+}
+   
+    
+-(void)applyForViewDeleteAction{
+    [self hiddenApplyForView];
+    
+}
+
+-(void)applyForViewComfirmAction{
+    [self hiddenApplyForView];
+    [self sendResquest];
 
 }
+    
+
+#pragma mark - 点击事件
 
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
@@ -245,13 +293,30 @@
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
     
-    [self showAlertVCWithCustumView:self.applyForProtocolView message:@"" leftTitle:@"取消" rightTitle:@"确认"];
+//    [self showAlertVCWithCustumView:self.applyForProtocolView message:@"" leftTitle:@"取消" rightTitle:@"确认"];
 //    [self sendResquest];
+//    [self initTaskApplyForView];
+    NSString *isRead = kFetchMyDefault(@"isRead");
+    if ([isRead isEqualToString:@"1"]) {
+        [self sendResquest];
+        
+    }else{
+        [self showApplyForView];
     
+    }
 }
 
+
+
 -(void)isReadProtocol:(BOOL)isRead{
-    _isRead = isRead;
+    if (isRead) {
+        //不再提醒
+        kSaveMyDefault(@"isRead", @"1");
+        
+    }else{
+        kSaveMyDefault(@"isRead", @"0");
+
+    }
 
 }
 
@@ -551,6 +616,27 @@
     }
     return  _applyForProtocolView;
     
+}
+    
+-(JMTaskApplyForView *)taskApplyForView{
+    if (!_taskApplyForView) {
+        _taskApplyForView = [[JMTaskApplyForView alloc]init];
+        _taskApplyForView.layer.cornerRadius = 10;
+        [_taskApplyForView setHidden:YES];
+        _taskApplyForView.delegate = self;
+    }
+    return _taskApplyForView;
+}
+
+    
+-(UIView *)windowViewBGView{
+    if (!_windowViewBGView) {
+        _windowViewBGView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+        _windowViewBGView.backgroundColor = [UIColor blackColor];
+        [_windowViewBGView setHidden:YES];
+        _windowViewBGView.alpha = 0.3;
+    }
+    return _windowViewBGView;
 }
 /*
 #pragma mark - Navigation

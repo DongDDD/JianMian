@@ -459,7 +459,7 @@
     [[JMHTTPManager sharedInstance]changeTaskOrderStatusWithTask_order_id:task_order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {        
         [self.tableView.mj_header beginRefreshing];
         if ([status isEqualToString:Task_Pass]) {//
-            [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"审批通过\n 建议联系对方以便开始任务" leftTitle:@"朕知道了" rightTitle:@"和他聊聊"];
+            [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"审批通过\n 建议联系对方以便开始任务" leftTitle:@"确认" rightTitle:@"和他聊聊"];
             [self setTaskMessage_receiverID:_receiver_id dic:nil title:@"[任务发布者已通过任务申请]"];
         }else if ([status isEqualToString:Task_DidComfirm]) {
             [self setTaskMessage_receiverID:_receiver_id dic:nil title:@"[任务发布者已确认完成任务]"];

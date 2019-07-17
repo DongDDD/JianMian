@@ -34,18 +34,20 @@
 #import "JMTaskManageViewController.h"
 #import "UITabBar+XSDExt.h"
 #import "WXApi.h"
+#import "JMShareView.h"
 
 
 
 
 
-
-@interface JMMineViewController ()<UITableViewDelegate,UITableViewDataSource,JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate>
+@interface JMMineViewController ()<UITableViewDelegate,UITableViewDataSource,JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMShareViewDelegate>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *imageNameArr,*labelStrArr;
 @property (strong, nonatomic) JMUserInfoModel *userInfoModel;
 //@property (strong, nonatomic) JMBUserCenterHeaderView *BUserCenterHeaderView;
+@property(nonatomic,strong)JMShareView *shareView;//分享
+@property(nonatomic,strong)UIView *shareBgView;//灰色背景
 
 
 
@@ -123,6 +125,27 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 #pragma mark - My delegate
+-(void)shareViewCancelAction{
+    [self disapearAction];
+    
+}
+    
+-(void)shareViewLeftAction{
+    [self disapearAction];
+    [self wxShare:0];
+}
+    
+-(void)shareViewRightAction{
+    [self disapearAction];
+    [self wxShare:1];
+}
+
+-(void)disapearAction{
+    NSLog(@"222");
+    [self.shareBgView setHidden:YES];
+    [self.shareView setHidden:YES];
+}
+    
 #pragma mark - C端个人的中心
 -(void)didClickSetting{
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];
@@ -259,7 +282,22 @@
                 [self wxShare:0];
                 
             }else{
-                [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
+                [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
+                [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.equalTo(self.view);
+                    make.left.and.right.equalTo(self.view);
+                    make.height.equalTo(self.view);
+                }];
+                [self.shareView setHidden:NO];
+                [self.shareBgView setHidden:NO];
+                [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
+                [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.bottom.equalTo(self.view);
+                    make.left.and.right.equalTo(self.view);
+                    make.height.mas_equalTo(184+SafeAreaBottomHeight);
+                    
+                }];
+                //            [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
                 
             }
         }else if (indexPath.row == 1) {
@@ -278,7 +316,6 @@
                 [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
             }
         }
-
         
     }
     
@@ -449,6 +486,32 @@
     }
     return _personalCenterHeaderView;
 }
+    
+-(JMShareView *)shareView{
+        if (!_shareView) {
+            _shareView = [[JMShareView alloc]init];
+            _shareView.delegate = self;
+        }
+        return _shareView;
+    }
+    
+    
+-(UIView *)shareBgView{
+    
+    if (!_shareBgView) {
+        
+        _shareBgView = [[UIView alloc]init];
+        _shareBgView.backgroundColor =  [UIColor colorWithRed:48/255.0 green:48/255.0 blue:51/255.0 alpha:0.5];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disapearAction)];
+        [_shareBgView addGestureRecognizer:tap];
+        
+    }
+    
+    return _shareBgView;
+    
+}
+    
+    
 //
 //-(JMBUserCenterHeaderView *)BUserCenterHeaderView{
 //    if (!_BUserCenterHeaderView) {
