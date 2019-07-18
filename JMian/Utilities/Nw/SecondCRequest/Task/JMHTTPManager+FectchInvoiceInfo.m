@@ -10,7 +10,7 @@
 
 @implementation JMHTTPManager (FectchInvoiceInfo)
 
-- (void)fectchInvoiceInfoWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+-(void)fectchInvoiceInfoWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Fectch_InvoiceInfo_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     

@@ -138,6 +138,7 @@
                 <outlet property="NOBtn" destination="r5x-4y-I4N" id="gVH-Sx-WUU"/>
                 <outlet property="YESBtn" destination="n3t-Cf-OQB" id="ABm-iW-fav"/>
                 <outlet property="adressBtn" destination="3ih-fc-xlg" id="nZe-wc-6E4"/>
+                <outlet property="workLocationBGView" destination="xAE-YT-ZvC" id="bw4-bj-bIK"/>
             </connections>
             <point key="canvasLocation" x="18.840579710144929" y="141.62946428571428"/>
         </view>

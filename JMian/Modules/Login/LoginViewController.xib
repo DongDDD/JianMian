@@ -59,8 +59,8 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deimi_login.png" translatesAutoresizingMaskIntoConstraints="NO" id="2zX-mD-Rgr">
                     <rect key="frame" x="60" y="80" width="255" height="197.5"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即代表你同意“招聘app”的" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GL-4m-GWO">
-                    <rect key="frame" x="68" y="626" width="239" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即代表您阅读并同意" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GL-4m-GWO">
+                    <rect key="frame" x="66" y="626" width="239" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="CZP-xY-fcj"/>
                         <constraint firstAttribute="width" constant="239" id="iLQ-4U-cRE"/>
@@ -70,9 +70,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgG-LL-V1h">
-                    <rect key="frame" x="228" y="623.5" width="79" height="26"/>
+                    <rect key="frame" x="250" y="626" width="45" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <state key="normal" title="服务和隐私条约">
+                    <state key="normal" title="服务条款">
                         <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
@@ -84,16 +84,17 @@
             <constraints>
                 <constraint firstItem="uAD-co-Nvw" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="35r-B6-tBa"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="uAD-co-Nvw" secondAttribute="trailing" constant="20" id="AxY-dP-Uel"/>
+                <constraint firstItem="ZgG-LL-V1h" firstAttribute="bottom" secondItem="7GL-4m-GWO" secondAttribute="bottom" id="KgE-sU-8df"/>
                 <constraint firstItem="L5O-Ib-NaR" firstAttribute="height" secondItem="uAD-co-Nvw" secondAttribute="height" id="LFa-r2-AId"/>
                 <constraint firstItem="uAD-co-Nvw" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="303" id="PiP-LH-aM5"/>
                 <constraint firstItem="2zX-mD-Rgr" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="XBW-yK-cxx"/>
                 <constraint firstItem="2zX-mD-Rgr" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="60" id="bkG-F1-Qw3"/>
                 <constraint firstItem="L5O-Ib-NaR" firstAttribute="top" secondItem="uAD-co-Nvw" secondAttribute="bottom" constant="25" id="eu4-hx-yxl"/>
                 <constraint firstItem="uAD-co-Nvw" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="ezF-V4-bY0"/>
-                <constraint firstItem="ZgG-LL-V1h" firstAttribute="leading" secondItem="7GL-4m-GWO" secondAttribute="trailing" constant="-79" id="fBr-On-Ygk"/>
+                <constraint firstItem="ZgG-LL-V1h" firstAttribute="leading" secondItem="7GL-4m-GWO" secondAttribute="trailing" constant="-55" id="fBr-On-Ygk"/>
                 <constraint firstItem="L5O-Ib-NaR" firstAttribute="trailing" secondItem="uAD-co-Nvw" secondAttribute="trailing" id="fSw-wD-yDA"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="7GL-4m-GWO" secondAttribute="bottom" constant="20" id="hWs-3m-xFW"/>
-                <constraint firstItem="7GL-4m-GWO" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="nOX-Wp-4Vh"/>
+                <constraint firstItem="7GL-4m-GWO" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="-2" id="nOX-Wp-4Vh"/>
                 <constraint firstItem="ZgG-LL-V1h" firstAttribute="centerY" secondItem="7GL-4m-GWO" secondAttribute="centerY" id="rbs-V0-58C"/>
                 <constraint firstItem="L5O-Ib-NaR" firstAttribute="leading" secondItem="uAD-co-Nvw" secondAttribute="leading" id="y3S-YY-15k"/>
             </constraints>

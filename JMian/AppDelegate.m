@@ -28,6 +28,7 @@
 #import "LoginPhoneViewController.h"
 #import "JMManageInterviewViewController.h"
 #import "JMPlaySoundsManager.h"
+#import "JMHTTPManager+FectchVersionInfo.h"
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMUserStatusListener>
 
@@ -78,7 +79,7 @@
     NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
     [_window setRootViewController:naVC];
     [self.window makeKeyAndVisible];
-    
+    [self getVersionData];
 
     
     
@@ -275,6 +276,18 @@
         
         
     }];
+}
+
+-(void)getVersionData{
+    [[JMHTTPManager sharedInstance] fectchVersionWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMVersionModel *model = [JMVersionModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMVersionManager saveVersionInfo:model];
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
 }
 
 #pragma mark - 网络回调

@@ -13,7 +13,7 @@
 #import "JMHTTPManager+CreateTaskComment.h"
 #import "JMTaskCommetViewController.h"
 #import "WXApi.h"
-#import <AlipaySDK/AlipaySDK.h>
+//#import <AlipaySDK/AlipaySDK.h>
 #import "JMHTTPManager+OrderPay.h"
 #import "JMOrderPaymentModel.h"
 #import "JMShareView.h"
@@ -28,9 +28,16 @@
 #import "JMHTTPManager+FectchTaskOrderInfo.h"
 #import "JMBDetailWebViewController.h"
 #import "JMHTTPManager+FectchTaskAbility.h"
+#import <PassKit/PassKit.h>                                 //用户绑定的银行卡信息
+#import <PassKit/PKPaymentAuthorizationViewController.h>    //Apple pay的展示控件
+#import <AddressBook/AddressBook.h>                         //用户联系信息相关
 
 
-@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate>
+@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate,PKPaymentAuthorizationViewControllerDelegate>
+{
+    NSMutableArray *summaryItems;
+    NSMutableArray *shippingMethods;
+}
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (assign, nonatomic) NSUInteger index;
@@ -66,7 +73,6 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    
     [super viewWillAppear:animated];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySucceedNotification) name:Notification_PaySucceed object:nil];
 
@@ -108,6 +114,8 @@
     [self setupFooterRefresh];
     
 }
+
+
 
 #pragma mark - myDelegate
 -(void)paySucceedNotification{
@@ -175,18 +183,27 @@
             
             //B改状态------B端通过任务申请&&支付定金
             if ([data.payment_method isEqualToString:@"3"]) {
-                if ([data.front_money isEqualToString:@"0"]) {
-                    //无定金直接通过
+                JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
+                if ([versionModel.test isEqualToString:@"1"]) {
+                    //TEST直接通过
                     _task_order_id = data.task_order_id;
                     _user_id = data.user_user_id;
                     [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
                 }else{
-                    //有定金跳支付界面
-                    JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
-                    vc.data = data;
-                    vc.delegate = self;
-                    vc.viewType = JMPayDetailViewTypeDownPayment;
-                    [self.navigationController pushViewController:vc animated:YES];
+                    if ([data.front_money isEqualToString:@"0"]) {
+                        //无定金直接通过
+                        _task_order_id = data.task_order_id;
+                        _user_id = data.user_user_id;
+                        [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
+                    }else{
+                        //有定金跳支付界面
+                        JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
+                        vc.data = data;
+                        vc.delegate = self;
+                        vc.viewType = JMPayDetailViewTypeDownPayment;
+                        [self.navigationController pushViewController:vc animated:YES];
+                        
+                    }
                     
                 }
                 
@@ -294,7 +311,7 @@
     [self wechatPayWithModel:self.orderPaymentModel];
     
 }
-//支付宝支付
+//支付
 -(void)shareViewRightAction{
     [self alipayWithModel:self.orderPaymentModel];
     
@@ -314,7 +331,60 @@
     [self.tableView.mj_header beginRefreshing];
 }
 
+#pragma mark - PKPaymentAuthorizationViewControllerDelegate
+- (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
+                  didSelectShippingContact:(PKContact *)contact
+                                completion:(void (^)(PKPaymentAuthorizationStatus, NSArray<PKShippingMethod *> * _Nonnull, NSArray<PKPaymentSummaryItem *> * _Nonnull))completion{
+    //contact送货地址信息，PKContact类型
+    NSPersonNameComponents *name = contact.name;                //联系人姓名
+    CNPostalAddress *postalAddress = contact.postalAddress;     //联系人地址
+    NSString *emailAddress = contact.emailAddress;              //联系人邮箱
+    CNPhoneNumber *phoneNumber = contact.phoneNumber;           //联系人手机
+    NSString *supplementarySubLocality = contact.supplementarySubLocality;  //补充信息,iOS9.2及以上才有
+    
+    //送货信息选择回调，如果需要根据送货地址调整送货方式，比如普通地区包邮+极速配送，偏远地区只有付费普通配送，进行支付金额重新计算，可以实现该代理，返回给系统：shippingMethods配送方式，summaryItems账单列表，如果不支持该送货信息返回想要的PKPaymentAuthorizationStatus
+    completion(PKPaymentAuthorizationStatusSuccess, shippingMethods, summaryItems);
+}
 
+- (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
+                   didSelectShippingMethod:(PKShippingMethod *)shippingMethod
+                                completion:(void (^)(PKPaymentAuthorizationStatus, NSArray<PKPaymentSummaryItem *> * _Nonnull))completion{
+    //配送方式回调，如果需要根据不同的送货方式进行支付金额的调整，比如包邮和付费加速配送，可以实现该代理
+    PKShippingMethod *oldShippingMethod = [summaryItems objectAtIndex:2];
+    PKPaymentSummaryItem *total = [summaryItems lastObject];
+    total.amount = [total.amount decimalNumberBySubtracting:oldShippingMethod.amount];
+    total.amount = [total.amount decimalNumberByAdding:shippingMethod.amount];
+    
+    [summaryItems replaceObjectAtIndex:2 withObject:shippingMethod];
+    [summaryItems replaceObjectAtIndex:3 withObject:total];
+    
+    completion(PKPaymentAuthorizationStatusSuccess, summaryItems);
+}
+-(void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller didSelectPaymentMethod:(PKPaymentMethod *)paymentMethod completion:(void (^)(NSArray<PKPaymentSummaryItem *> * _Nonnull))completion{
+    //支付银行卡回调，如果需要根据不同的银行调整付费金额，可以实现该代理
+    completion(summaryItems);
+}
+-(void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller didSelectShippingAddress:(ABRecordRef)address completion:(void (^)(PKPaymentAuthorizationStatus, NSArray<PKShippingMethod *> * _Nonnull, NSArray<PKPaymentSummaryItem *> * _Nonnull))completion{
+    //送货地址回调，已弃用
+}
+- (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
+                       didAuthorizePayment:(PKPayment *)payment
+                                completion:(void (^)(PKPaymentAuthorizationStatus status))completion {
+    
+    PKPaymentToken *payToken = payment.token;
+    //支付凭据，发给服务端进行验证支付是否真实有效
+    PKContact *billingContact = payment.billingContact;     //账单信息
+    PKContact *shippingContact = payment.shippingContact;   //送货信息
+    PKContact *shippingMethod = payment.shippingMethod;     //送货方式
+    //等待服务器返回结果后再进行系统block调用
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //模拟服务器通信
+        completion(PKPaymentAuthorizationStatusSuccess);
+        [self paySucceedNotification];
+    });
+    
+    
+}
 #pragma mark - 数据请求
 
 -(void)getDataWitnStatus:(NSArray *)status{
@@ -564,14 +634,102 @@
     
 }
 #pragma mark - 支付
+
+-(void)applePay{
+    if (![PKPaymentAuthorizationViewController class]) {
+        //PKPaymentAuthorizationViewController需iOS8.0以上支持
+        NSLog(@"操作系统不支持ApplePay，请升级至9.0以上版本，且iPhone6以上设备才支持");
+        return;
+    }
+    //检查当前设备是否可以支付
+    if (![PKPaymentAuthorizationViewController canMakePayments]) {
+        //支付需iOS9.0以上支持
+        NSLog(@"设备不支持ApplePay，请升级至9.0以上版本，且iPhone6以上设备才支持");
+        return;
+    }
+    //检查用户是否可进行某种卡的支付，是否支持Amex、MasterCard、Visa与银联四种卡，根据自己项目的需要进行检测
+    NSArray *supportedNetworks = @[PKPaymentNetworkAmex, PKPaymentNetworkMasterCard,PKPaymentNetworkVisa,PKPaymentNetworkChinaUnionPay];
+    //    if (![PKPaymentAuthorizationViewController canMakePaymentsUsingNetworks:supportedNetworks]) {
+    //        NSLog(@"没有绑定支付卡");
+    //        return;
+    //    }
+    //设置币种、国家码及merchant标识符等基本信息
+    PKPaymentRequest *payRequest = [[PKPaymentRequest alloc]init];
+    payRequest.countryCode = @"CN";     //国家代码
+    payRequest.currencyCode = @"CNY";       //RMB的币种代码
+    payRequest.merchantIdentifier = @"merchant.ApplePayDemi";  //申请的merchantID
+    payRequest.supportedNetworks = supportedNetworks;   //用户可进行支付的银行卡
+    payRequest.merchantCapabilities = PKMerchantCapability3DS|PKMerchantCapabilityEMV;      //设置支持的交易处理协议，3DS必须支持，EMV为可选，目前国内的话还是使用两者吧
+    //    payRequest.requiredBillingAddressFields = PKAddressFieldEmail;
+    //如果需要邮寄账单可以选择进行设置，默认PKAddressFieldNone(不邮寄账单)
+    //楼主感觉账单邮寄地址可以事先让用户选择是否需要，否则会增加客户的输入麻烦度，体验不好，
+    payRequest.requiredShippingAddressFields = PKAddressFieldPostalAddress|PKAddressFieldPhone|PKAddressFieldName;
+    //送货地址信息，这里设置需要地址和联系方式和姓名，如果需要进行设置，默认PKAddressFieldNone(没有送货地址)
+    //设置两种配送方式
+    PKShippingMethod *freeShipping = [PKShippingMethod summaryItemWithLabel:@"包邮" amount:[NSDecimalNumber zero]];
+    freeShipping.identifier = @"freeshipping";
+    freeShipping.detail = @"6-8 天 送达";
+    
+    PKShippingMethod *expressShipping = [PKShippingMethod summaryItemWithLabel:@"极速送达" amount:[NSDecimalNumber decimalNumberWithString:@"10.00"]];
+    expressShipping.identifier = @"expressshipping";
+    expressShipping.detail = @"2-3 小时 送达";
+    shippingMethods = [NSMutableArray arrayWithArray:@[freeShipping, expressShipping]];
+    //shippingMethods为配送方式列表，类型是 NSMutableArray，这里设置成成员变量，在后续的代理回调中可以进行配送方式的调整。
+    payRequest.shippingMethods = shippingMethods;
+//    NSString *str;
+//    if (_index == 0) {
+//        str = [NSString stringWithFormat:@"%@",_nowTaskData.front_money];
+//
+//    }else if (_index == 1) {
+//        str = [NSString stringWithFormat:@"%@",_nowTaskData.payment_money];
+//
+//    }
+//    long pay = [str longLongValue];
+    NSDecimalNumber *subtotalAmount = [NSDecimalNumber decimalNumberWithMantissa:10 exponent:-2 isNegative:NO];   //12.75
+    PKPaymentSummaryItem *subtotal = [PKPaymentSummaryItem summaryItemWithLabel:@"金额" amount:subtotalAmount];
+    
+    NSDecimalNumber *discountAmount = [NSDecimalNumber decimalNumberWithString:@"0"];      //-12.74
+    PKPaymentSummaryItem *discount = [PKPaymentSummaryItem summaryItemWithLabel:@"优惠折扣" amount:discountAmount];
+    
+    NSDecimalNumber *methodsAmount = [NSDecimalNumber zero];
+    PKPaymentSummaryItem *methods = [PKPaymentSummaryItem summaryItemWithLabel:@"包邮" amount:methodsAmount];
+    
+    NSDecimalNumber *totalAmount = [NSDecimalNumber zero];
+    totalAmount = [totalAmount decimalNumberByAdding:subtotalAmount];
+    totalAmount = [totalAmount decimalNumberByAdding:discountAmount];
+    totalAmount = [totalAmount decimalNumberByAdding:methodsAmount];
+    PKPaymentSummaryItem *total = [PKPaymentSummaryItem summaryItemWithLabel:@"Demi" amount:totalAmount];  //最后这个是支付给谁。哈哈，快支付给我
+    
+    summaryItems = [NSMutableArray arrayWithArray:@[subtotal, discount, methods, total]];
+    //summaryItems为账单列表，类型是 NSMutableArray，这里设置成成员变量，在后续的代理回调中可以进行支付金额的调整。
+    payRequest.paymentSummaryItems = summaryItems;
+    //ApplePay控件
+    PKPaymentAuthorizationViewController *view = [[PKPaymentAuthorizationViewController alloc]initWithPaymentRequest:payRequest];
+    view.delegate = self;
+    [self presentViewController:view animated:YES completion:nil];
+}
+
+-(void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller{
+    [controller dismissViewControllerAnimated:YES completion:nil];
+    [self paySucceedNotification];
+
+}
+
 //支付确认界面
 -(void)payDetailViewDownPayAction_data:(JMTaskOrderListCellData *)data{
 //    _task_order_id = data.task_order_id;
 //    _user_id = data.user_user_id;
     //B端支付定金
 //    [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
+    
     if (![data.front_money isEqualToString:@"0"]) {
-        [self payWithData:data mode:@"2"];
+        JMVersionModel *model = [JMVersionManager getVersoinInfo];
+        if ([model.test isEqualToString:@"1"]) {
+            [self applePay];
+        }else{
+            [self payWithData:data mode:@"2"];
+            
+        }
         
     }else{
         //定金为0时 直接改状态成@“1” 已通过
@@ -627,20 +785,16 @@
 
 //拉起微信支付
 - (void)wechatPayWithModel:(JMOrderPaymentModel *)model{
-    if([WXApi isWXAppInstalled])
-    {
-        PayReq* req = [[PayReq alloc] init];
-        req.partnerId = model.wx_partnerid;
-        req.prepayId = model.wx_prepayid;
-        req.nonceStr = model.wx_noncestr;
-        req.timeStamp = model.wx_timestamp;
-        req.package = model.wx_package;
-        req.sign = model.wx_sign;
-        [WXApi sendReq:req];
-    }else{
-        [self showAlertSimpleTips:@"提示" message:@"你还没安装微信" btnTitle:@"好的"];
-        
-    }
+    
+    PayReq* req = [[PayReq alloc] init];
+    req.partnerId = model.wx_partnerid;
+    req.prepayId = model.wx_prepayid;
+    req.nonceStr = model.wx_noncestr;
+    req.timeStamp = model.wx_timestamp;
+    req.package = model.wx_package;
+    req.sign = model.wx_sign;
+    [WXApi sendReq:req];
+    [self hiddenChoosePayView];
     
 //    [self payMoneyRequestWithNo:model.serial_no amount:@"130"];
     
@@ -653,9 +807,9 @@
     [self payMoneyRequestWithNo:model.serial_no amount:@"130"];
 
 //    // 发起支付
-    [[AlipaySDK defaultService] payOrder:model.alipay fromScheme:@"alisdkdemo" callback:^(NSDictionary *resultDic) {
-        NSLog(@"支付结果 reslut = %@",resultDic);
-    }];
+//    [[AlipaySDK defaultService] payOrder:model.alipay fromScheme:@"alisdkdemo" callback:^(NSDictionary *resultDic) {
+//        NSLog(@"支付结果 reslut = %@",resultDic);
+//    }];
     
 }
 
@@ -739,7 +893,6 @@
 
 
 #pragma mark - Table view data source
-
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -845,9 +998,9 @@
         _choosePayView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
         _choosePayView.delegate = self;
         [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
-        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Alipay_pay"] forState:UIControlStateNormal];
-        _choosePayView.lab1.text = @"微信支付";
-        _choosePayView.lab2.text = @"支付宝";
+        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
+        _choosePayView.lab1.text = @"微信";
+        _choosePayView.lab2.text = @"朋友圈";
     }
     return _choosePayView;
 }

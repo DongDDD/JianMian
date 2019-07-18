@@ -17,24 +17,18 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="op1-93-Lnc" userLabel="公司图片View">
-                    <rect key="frame" x="0.0" y="44" width="414" height="63"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="0.0"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nqy-0L-Vc3" userLabel="foot">
-                            <rect key="frame" x="20" y="62" width="374" height="1"/>
+                            <rect key="frame" x="20" y="-1" width="374" height="1"/>
                             <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="its-eg-SJq"/>
                                 <constraint firstAttribute="height" constant="1" id="jzC-m8-xIE"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="电子发票：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VtZ-XT-U0M">
-                            <rect key="frame" x="49" y="23" width="71.5" height="17"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <nil key="textColor"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="需缴纳3%税金" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbK-6f-yXe">
-                            <rect key="frame" x="136.5" y="23" width="92" height="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dbK-6f-yXe">
+                            <rect key="frame" x="136.5" y="0.0" width="0.0" height="0.0"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -42,18 +36,15 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="dbK-6f-yXe" firstAttribute="leading" secondItem="VtZ-XT-U0M" secondAttribute="trailing" constant="16" id="2K8-mQ-C4g"/>
                         <constraint firstItem="nqy-0L-Vc3" firstAttribute="leading" secondItem="op1-93-Lnc" secondAttribute="leading" constant="20" id="CD5-tG-YtV"/>
-                        <constraint firstAttribute="height" constant="63" id="PP6-SD-Ao5"/>
-                        <constraint firstItem="VtZ-XT-U0M" firstAttribute="leading" secondItem="op1-93-Lnc" secondAttribute="leading" constant="49" id="XAe-3a-Gev"/>
+                        <constraint firstAttribute="height" id="PP6-SD-Ao5"/>
                         <constraint firstAttribute="trailing" secondItem="nqy-0L-Vc3" secondAttribute="trailing" constant="20" id="k6s-fK-taQ"/>
                         <constraint firstAttribute="bottom" secondItem="nqy-0L-Vc3" secondAttribute="bottom" id="pQU-T8-ncf"/>
-                        <constraint firstItem="VtZ-XT-U0M" firstAttribute="centerY" secondItem="op1-93-Lnc" secondAttribute="centerY" id="t1L-02-eks"/>
                         <constraint firstItem="dbK-6f-yXe" firstAttribute="centerY" secondItem="op1-93-Lnc" secondAttribute="centerY" id="wNx-xM-FYw"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sLI-oI-QJA" userLabel="公司图片View">
-                    <rect key="frame" x="0.0" y="107" width="414" height="63"/>
+                    <rect key="frame" x="0.0" y="44" width="414" height="63"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ue-lE-api" userLabel="foot">
                             <rect key="frame" x="20" y="62" width="374" height="1"/>
@@ -96,7 +87,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QOT-q9-qA0" userLabel="公司图片View">
-                    <rect key="frame" x="0.0" y="170" width="414" height="63"/>
+                    <rect key="frame" x="0.0" y="107" width="414" height="63"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6CA-yj-kDw" userLabel="foot">
                             <rect key="frame" x="20" y="62" width="374" height="1"/>
@@ -136,7 +127,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qHP-uY-BbP" userLabel="公司图片View">
-                    <rect key="frame" x="0.0" y="233" width="414" height="63"/>
+                    <rect key="frame" x="0.0" y="170" width="414" height="63"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mQJ-jZ-1gx" userLabel="foot">
                             <rect key="frame" x="20" y="62" width="374" height="1"/>
@@ -175,8 +166,8 @@
                         <constraint firstItem="h2y-dc-7lo" firstAttribute="centerY" secondItem="59o-nG-kRM" secondAttribute="centerY" id="s4G-Qn-H3f"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zW2-YA-TEC" userLabel="公司图片View">
-                    <rect key="frame" x="0.0" y="296" width="414" height="63"/>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zW2-YA-TEC" userLabel="公司图片View">
+                    <rect key="frame" x="0.0" y="233" width="414" height="63"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZYr-ku-aEH" userLabel="foot">
                             <rect key="frame" x="20" y="62" width="374" height="1"/>

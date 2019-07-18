@@ -35,7 +35,14 @@
     //    _barBackgroundImageView.image = [UIImage imageNamed:@"mine_peijing"];
     //    [self addSubview:_barBackgroundImageView];
     _VIPImg = [[UIImageView alloc]init];
-    _VIPImg.image = [UIImage imageNamed:@"vvip"];
+    JMVersionModel *model = [JMVersionManager getVersoinInfo];
+    if ([model.test isEqualToString:@"1"]) {
+        _VIPImg.image = [UIImage imageNamed:@""];
+
+    }else{
+        _VIPImg.image = [UIImage imageNamed:@"vvip"];
+    
+    }
     [_VIPImg setHidden:YES];
     [self addSubview:_VIPImg];
 

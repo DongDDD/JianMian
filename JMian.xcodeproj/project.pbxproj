@@ -250,6 +250,17 @@
 		04380A8E22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A8D22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m */; };
 		04380A9222DC15C900EA45C2 /* JMVersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A9122DC15C900EA45C2 /* JMVersionManager.m */; };
 		04380A9522DC167C00EA45C2 /* JMVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A9422DC167C00EA45C2 /* JMVersionModel.m */; };
+		0446E47622E0020400B3A26C /* JMVIPInvoiceApplyForViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446E47422E0020400B3A26C /* JMVIPInvoiceApplyForViewController.m */; };
+		0446E47722E0020400B3A26C /* JMVIPInvoiceApplyForViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0446E47522E0020400B3A26C /* JMVIPInvoiceApplyForViewController.xib */; };
+		0446E47A22E0031F00B3A26C /* JMVIPInvoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446E47922E0031F00B3A26C /* JMVIPInvoiceView.m */; };
+		0446E47C22E0032A00B3A26C /* JMVIPInvoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0446E47B22E0032A00B3A26C /* JMVIPInvoiceView.xib */; };
+		0446E48022E0047D00B3A26C /* vip2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0446E47D22E0047D00B3A26C /* vip2@2x.png */; };
+		0446E48122E0047D00B3A26C /* vip2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0446E47E22E0047D00B3A26C /* vip2@3x.png */; };
+		0446E48222E0047D00B3A26C /* vip2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0446E47F22E0047D00B3A26C /* vip2.png */; };
+		0446E48622E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446E48422E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.m */; };
+		0446E48722E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0446E48522E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.xib */; };
+		0446E48A22E04BBD00B3A26C /* JMInvoiceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446E48922E04BBD00B3A26C /* JMInvoiceHeaderView.m */; };
+		0446E48C22E04C2100B3A26C /* JMInvoiceHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0446E48B22E04C2100B3A26C /* JMInvoiceHeaderView.xib */; };
 		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
 		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
@@ -1228,6 +1239,21 @@
 		04380A9122DC15C900EA45C2 /* JMVersionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVersionManager.m; sourceTree = "<group>"; };
 		04380A9322DC167C00EA45C2 /* JMVersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVersionModel.h; sourceTree = "<group>"; };
 		04380A9422DC167C00EA45C2 /* JMVersionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVersionModel.m; sourceTree = "<group>"; };
+		0446E47322E0020400B3A26C /* JMVIPInvoiceApplyForViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVIPInvoiceApplyForViewController.h; sourceTree = "<group>"; };
+		0446E47422E0020400B3A26C /* JMVIPInvoiceApplyForViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVIPInvoiceApplyForViewController.m; sourceTree = "<group>"; };
+		0446E47522E0020400B3A26C /* JMVIPInvoiceApplyForViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVIPInvoiceApplyForViewController.xib; sourceTree = "<group>"; };
+		0446E47822E0031F00B3A26C /* JMVIPInvoiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVIPInvoiceView.h; sourceTree = "<group>"; };
+		0446E47922E0031F00B3A26C /* JMVIPInvoiceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVIPInvoiceView.m; sourceTree = "<group>"; };
+		0446E47B22E0032A00B3A26C /* JMVIPInvoiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVIPInvoiceView.xib; sourceTree = "<group>"; };
+		0446E47D22E0047D00B3A26C /* vip2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vip2@2x.png"; path = "../../../../Downloads/vip_slices-3/vip2@2x.png"; sourceTree = "<group>"; };
+		0446E47E22E0047D00B3A26C /* vip2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "vip2@3x.png"; path = "../../../../Downloads/vip_slices-3/vip2@3x.png"; sourceTree = "<group>"; };
+		0446E47F22E0047D00B3A26C /* vip2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = vip2.png; path = "../../../../Downloads/vip_slices-3/vip2.png"; sourceTree = "<group>"; };
+		0446E48322E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVIPInvoicePayTableViewCell.h; sourceTree = "<group>"; };
+		0446E48422E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVIPInvoicePayTableViewCell.m; sourceTree = "<group>"; };
+		0446E48522E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVIPInvoicePayTableViewCell.xib; sourceTree = "<group>"; };
+		0446E48822E04BBD00B3A26C /* JMInvoiceHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMInvoiceHeaderView.h; sourceTree = "<group>"; };
+		0446E48922E04BBD00B3A26C /* JMInvoiceHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMInvoiceHeaderView.m; sourceTree = "<group>"; };
+		0446E48B22E04C2100B3A26C /* JMInvoiceHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMInvoiceHeaderView.xib; sourceTree = "<group>"; };
 		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
@@ -3018,6 +3044,15 @@
 				04B4F88622B7BFDA00A06E9C /* JMPostGoodsImagesView.xib */,
 				04AF933922C9DE3700D9FCBF /* JMTitleToLabelsTableViewCell.h */,
 				04AF933A22C9DE3700D9FCBF /* JMTitleToLabelsTableViewCell.m */,
+				0446E47822E0031F00B3A26C /* JMVIPInvoiceView.h */,
+				0446E47922E0031F00B3A26C /* JMVIPInvoiceView.m */,
+				0446E47B22E0032A00B3A26C /* JMVIPInvoiceView.xib */,
+				0446E48322E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.h */,
+				0446E48422E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.m */,
+				0446E48522E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.xib */,
+				0446E48822E04BBD00B3A26C /* JMInvoiceHeaderView.h */,
+				0446E48922E04BBD00B3A26C /* JMInvoiceHeaderView.m */,
+				0446E48B22E04C2100B3A26C /* JMInvoiceHeaderView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3407,6 +3442,9 @@
 				04950FEB22AE9FC700C3D3FB /* JMVIPViewController.h */,
 				04950FEC22AE9FC700C3D3FB /* JMVIPViewController.m */,
 				04950FED22AE9FC700C3D3FB /* JMVIPViewController.xib */,
+				0446E47322E0020400B3A26C /* JMVIPInvoiceApplyForViewController.h */,
+				0446E47422E0020400B3A26C /* JMVIPInvoiceApplyForViewController.m */,
+				0446E47522E0020400B3A26C /* JMVIPInvoiceApplyForViewController.xib */,
 			);
 			path = VIP;
 			sourceTree = "<group>";
@@ -3825,6 +3863,9 @@
 				04C120DC22882E97001BDEBC /* my_videos_2.png */,
 				04C120DB22882E97001BDEBC /* my_videos_2@2x.png */,
 				04C120DA22882E97001BDEBC /* my_videos_2@3x.png */,
+				0446E47F22E0047D00B3A26C /* vip2.png */,
+				0446E47D22E0047D00B3A26C /* vip2@2x.png */,
+				0446E47E22E0047D00B3A26C /* vip2@3x.png */,
 				0407019722753753002BF58D /* autonym.png */,
 				040701A322753754002BF58D /* autonym@2x.png */,
 				0407019C22753754002BF58D /* autonym@3x.png */,
@@ -4358,6 +4399,9 @@
 					048FEE2C2244853C001160C8 = {
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
+							com.apple.ApplePay = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -4399,6 +4443,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04BE8B4422924262004EB7EC /* my_location.png in Resources */,
+				0446E48222E0047D00B3A26C /* vip2.png in Resources */,
 				047F8EAF228AC11B005E81FA /* transmit.png in Resources */,
 				047F8EB0228AC11B005E81FA /* transmit@3x.png in Resources */,
 				04BE8B5122925E3A004EB7EC /* Unselected_Vertices@3x.png in Resources */,
@@ -4629,6 +4674,7 @@
 				040A40C72265B41A0005E0D7 /* company_logo@2x.png in Resources */,
 				040714A4227C6CC70026C368 /* default_avatar@2x.png in Resources */,
 				6D020A242250F3F9009BCFE4 /* job_wanted@3x.png in Resources */,
+				0446E48C22E04C2100B3A26C /* JMInvoiceHeaderView.xib in Resources */,
 				04072F292282949D0067A05D /* peijing@3x.png in Resources */,
 				0495100722AEA24900C3D3FB /* vip_header@3x.png in Resources */,
 				0488E3D6229F9C690071DEE7 /* JMDiscoverHomeViewController.xib in Resources */,
@@ -4678,6 +4724,7 @@
 				04908B0522A7E916000B5AB4 /* JMAssignmentSquareViewController.xib in Resources */,
 				040C18152264148300456C53 /* JIANMIAN_login@3x.png in Resources */,
 				0488E39E229F93C80071DEE7 /* icon_return @2x.png in Resources */,
+				0446E48122E0047D00B3A26C /* vip2@3x.png in Resources */,
 				04A247E0224CE70E00DEB8E3 /* play.png in Resources */,
 				04BF6DA222C335FE003032BC /* WeChat@3x.png in Resources */,
 				0488E38B229F8FCE0071DEE7 /* post_a_job_pitch_up@2x.png in Resources */,
@@ -4718,6 +4765,7 @@
 				048A0DE022B8D806006530EC /* demi.png in Resources */,
 				040E365D22681C9A00A7D789 /* boy@2x.png in Resources */,
 				048A0DE222B8D806006530EC /* demi@3x.png in Resources */,
+				0446E47722E0020400B3A26C /* JMVIPInvoiceApplyForViewController.xib in Resources */,
 				040701A522753755002BF58D /* autonym.png in Resources */,
 				04072F652282CB540067A05D /* camera_wallet@3x.png in Resources */,
 				040B839B2265F3E700F1A37A /* IDCard2@2x.png in Resources */,
@@ -4753,6 +4801,7 @@
 				0488E44522A021AA0071DEE7 /* garden@3x.png in Resources */,
 				040B83972265F3E700F1A37A /* IDCard1@3x.png in Resources */,
 				040B83982265F3E700F1A37A /* IDCard1.png in Resources */,
+				0446E47C22E0032A00B3A26C /* JMVIPInvoiceView.xib in Resources */,
 				0485ACFF22A0D03F00B31506 /* mineBottom.png in Resources */,
 				04908ADD22A7A37B000B5AB4 /* VIP@2x.png in Resources */,
 				0488E39D229F93C80071DEE7 /* icon_return .png in Resources */,
@@ -4896,6 +4945,7 @@
 				0425655D229C2CCD000614E7 /* jop@3x.png in Resources */,
 				04908AD922A7A361000B5AB4 /* vvip.png in Resources */,
 				0485AD1122A1037400B31506 /* bule_upinstall@3x.png in Resources */,
+				0446E48722E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.xib in Resources */,
 				048348D42269BE4100DE4630 /* JMManageInterviewViewController.xib in Resources */,
 				04E02E7D228C145300924130 /* bofang@3x.png in Resources */,
 				04BF6DB322C37966003032BC /* QRCode.png in Resources */,
@@ -4964,6 +5014,7 @@
 				6D55865E224B54D70037C14E /* home_ message@3x.png in Resources */,
 				04DD1D64224B6E95007CB11C /* 蓝点.png in Resources */,
 				0485ACF122A0C92A00B31506 /* C_indent.png in Resources */,
+				0446E48022E0047D00B3A26C /* vip2@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5038,7 +5089,6 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-resources.sh",
 				"${PODS_ROOT}/AMap2DMap/MAMapKit.framework/AMap.bundle",
-				"${PODS_ROOT}/AlipaySDK-iOS/AlipaySDK.bundle",
 				"${PODS_ROOT}/HXWeiboPhotoPicker/微博照片选择/HXWeiboPhotoPicker/HXWeiboPhotoPicker.bundle",
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
@@ -5052,7 +5102,6 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AlipaySDK.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HXWeiboPhotoPicker.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
@@ -5131,6 +5180,7 @@
 				048FF0FF22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m in Sources */,
 				04EA212522AFF28C0035C398 /* JMTaskOrderListCellData.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
+				0446E47622E0020400B3A26C /* JMVIPInvoiceApplyForViewController.m in Sources */,
 				040C865A227ED71100993490 /* JMChatDetailInfoTableViewCell.m in Sources */,
 				04380A8E22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m in Sources */,
 				04908ACD22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m in Sources */,
@@ -5153,6 +5203,7 @@
 				049C653722AD6DCA00A93DFE /* JMHTTPManager+CreateTask.m in Sources */,
 				040C8649227E8B8100993490 /* JMMoreCollectionViewCell.m in Sources */,
 				04B4F88222B7A5B300A06E9C /* JMInvoiceModel.m in Sources */,
+				0446E48622E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.m in Sources */,
 				040BF06722719B6A0088697D /* JMUserChangeWindowView.m in Sources */,
 				04C0F73322ABBB4200C3AA33 /* JMBUserPositionVideoView.m in Sources */,
 				0491B2612286A07800F1FD3A /* JMLabsChooseViewController.m in Sources */,
@@ -5302,6 +5353,7 @@
 				0488E59922953B6700C2E398 /* JMCityListViewController.m in Sources */,
 				040A5115226FF47B0074BD4B /* JMGetCompanyLocationViewController.m in Sources */,
 				0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */,
+				0446E48A22E04BBD00B3A26C /* JMInvoiceHeaderView.m in Sources */,
 				04B4F88522B7BFBE00A06E9C /* JMPostGoodsImagesView.m in Sources */,
 				6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */,
 				040A40BB226589A50005E0D7 /* JMCompanyBaseInfoViewController.m in Sources */,
@@ -5352,6 +5404,7 @@
 				04BF6DB722C390A3003032BC /* JMLogisticsCellData.m in Sources */,
 				0486F77C22943CC200114A22 /* JMChoosePositionTableViewController.m in Sources */,
 				04BBF2A7228FFFDE0068A9B1 /* JMMapViewController.m in Sources */,
+				0446E47A22E0031F00B3A26C /* JMVIPInvoiceView.m in Sources */,
 				6D020A052250F21B009BCFE4 /* JMMyResumeIconTableViewCell.m in Sources */,
 				0486F7792293917900114A22 /* Demo3ViewController.m in Sources */,
 				04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */,

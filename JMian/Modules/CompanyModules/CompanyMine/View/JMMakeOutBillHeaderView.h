@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *adressBtn;
 @property (weak, nonatomic) IBOutlet UIButton *YESBtn;
 @property (weak, nonatomic) IBOutlet UIButton *NOBtn;
+@property (weak, nonatomic) IBOutlet UIView *workLocationBGView;
 
 @property(nonatomic,weak)id<JMMakeOutBillHeaderViewDelegate>delegate;
 @end

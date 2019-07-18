@@ -108,44 +108,44 @@
 - (void)orderNotification:(NSNotification *)notification
 {
     //B端
-    if (self.Bmine.BUserCenterHeaderSubView.taskBadgeView.hidden == NO) {
-        self.Bmine.tabBarItem.badgeValue = @"2";
-        
-    }else{
-        self.Bmine.tabBarItem.badgeValue = @"1";
-
-    }
+//    if (self.Bmine.BUserCenterHeaderSubView.taskBadgeView.hidden == NO) {
+//        self.Bmine.tabBarItem.badgeValue = @"2";
+//
+//    }else{
+//        self.Bmine.tabBarItem.badgeValue = @"1";
+//
+//    }
     [self.Bmine.BUserCenterHeaderSubView.orderBadgeView setHidden:NO];
     //C端
-    if (self.Cmine.personalCenterHeaderView.taskBadgeView.hidden == NO) {
-        self.Cmine.tabBarItem.badgeValue = @"2";
-        
-    }else{
-        self.Cmine.tabBarItem.badgeValue = @"1";
-        
-    }
+//    if (self.Cmine.personalCenterHeaderView.taskBadgeView.hidden == NO) {
+//        self.Cmine.tabBarItem.badgeValue = @"2";
+//
+//    }else{
+//        self.Cmine.tabBarItem.badgeValue = @"1";
+//
+//    }
     [self.Cmine.personalCenterHeaderView.orderBadgeView setHidden:NO];
 }
 
 - (void)taskNotification:(NSNotification *)notification
 {
     //B端
-    if (self.Bmine.BUserCenterHeaderSubView.orderBadgeView.hidden == NO) {
-        self.Bmine.tabBarItem.badgeValue = @"2";
-        
-    }else{
-        self.Bmine.tabBarItem.badgeValue = @"1";
-        
-    }
+//    if (self.Bmine.BUserCenterHeaderSubView.orderBadgeView.hidden == NO) {
+//        self.Bmine.tabBarItem.badgeValue = @"2";
+//
+//    }else{
+//        self.Bmine.tabBarItem.badgeValue = @"1";
+//
+//    }
     [self.Bmine.BUserCenterHeaderSubView.taskBadgeView setHidden:NO];
     //C端
-    if (self.Cmine.personalCenterHeaderView.orderBadgeView.hidden == NO) {
-        self.Cmine.tabBarItem.badgeValue = @"2";
-        
-    }else{
-        self.Cmine.tabBarItem.badgeValue = @"1";
-        
-    }
+//    if (self.Cmine.personalCenterHeaderView.orderBadgeView.hidden == NO) {
+//        self.Cmine.tabBarItem.badgeValue = @"2";
+//        
+//    }else{
+//        self.Cmine.tabBarItem.badgeValue = @"1";
+//        
+//    }
     [self.Cmine.personalCenterHeaderView.taskBadgeView setHidden:NO];
 }
 

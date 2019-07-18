@@ -87,7 +87,14 @@
             if ([data.front_money isEqualToString:@"0"]) {
                 str = @"通过";
             }else{
-                str = @"通过&支付定金";
+                JMVersionModel *model = [JMVersionManager getVersoinInfo];
+                if ([model.test isEqualToString:@"1"]) {
+                    str = @"通过";
+
+                }else{
+                    str = @"通过&支付定金";
+                    
+                }
 
             }
             [self.rightBtn setTitle:str forState:UIControlStateNormal];
@@ -141,11 +148,17 @@
         self.leftBtn.layer.borderWidth = 0.5;
         self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
         NSString *titleStr;
-        if ([data.front_money isEqualToString:@"0"]) {
-            titleStr = @"确认对方完成&支付全款";
+        JMVersionModel *model = [JMVersionManager getVersoinInfo];
+        if ([model.test isEqualToString:@"1"]) {
+            [self.rightBtn setHidden:YES];
         }else{
-            titleStr = @"确认对方完成&支付尾款";
-
+            if ([data.front_money isEqualToString:@"0"]) {
+                titleStr = @"确认对方完成&支付全款";
+            }else{
+                titleStr = @"确认对方完成&支付尾款";
+                
+            }
+            
         }
         
         [self.rightBtn setTitle:titleStr forState:UIControlStateNormal];
@@ -238,7 +251,6 @@
         [self.rightBtn setHidden:NO];
         if ([data.payment_method isEqualToString:@"1"] ) {
  
-            
             [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
             [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
             self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
@@ -247,8 +259,12 @@
 
             [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-
             self.rightBtn.backgroundColor = MASTER_COLOR;
+            
+            JMVersionModel *model = [JMVersionManager getVersoinInfo];
+            if ([model.test isEqualToString:@"1"]) {
+                [self.rightBtn setHidden:YES];
+            }
             
         }else{
             [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
@@ -261,7 +277,6 @@
             self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
             self.rightBtn.layer.borderWidth = 0.5;
             [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            
             self.rightBtn.layer.borderColor = MASTER_COLOR.CGColor;
             
         }
@@ -275,7 +290,14 @@
         self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
         self.leftBtn.layer.borderWidth = 0.5;
         self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
-        [self.rightBtn setTitle:@"等待对方确认付尾款" forState:UIControlStateNormal];
+        JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
+        if ([versionModel.test isEqualToString:@"1"]) {
+            [self.rightBtn setTitle:@"等待对方确认完成" forState:UIControlStateNormal];
+
+        }else{
+            [self.rightBtn setTitle:@"等待对方确认付尾款" forState:UIControlStateNormal];
+            
+        }
         self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
         self.rightBtn.layer.borderWidth = 0.5;
         [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];

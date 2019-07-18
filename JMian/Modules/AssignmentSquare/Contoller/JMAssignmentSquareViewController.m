@@ -33,7 +33,6 @@
 #import "JMChoosePartTImeJobTypeLablesViewController.h"
 
 
-
 @interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate>
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
@@ -467,12 +466,20 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-        if ([userModel.type isEqualToString:C_Type_USER]) {
-            JMSquareHeaderView *view =  [JMSquareHeaderView new];
-            view.delegate = self;
-            [view setUserModel:userModel];
-            return view;
+        JMVersionModel *model = [JMVersionManager getVersoinInfo];
+        if (![model.test isEqualToString:@"1"]) {
+            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+            if ([userModel.type isEqualToString:C_Type_USER]) {
+                JMSquareHeaderView *view =  [JMSquareHeaderView new];
+                view.delegate = self;
+                [view setUserModel:userModel];
+                return view;
+            
+            }else{
+                return [UIView new];
+
+            
+            }
         }else{
             return [UIView new];
             
@@ -491,7 +498,14 @@ static NSString *C_cellIdent = @"CSquareCellID";
     if (section == 0) {
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         if ([userModel.type isEqualToString:C_Type_USER]) {
-            return 159;
+            JMVersionModel *model = [JMVersionManager getVersoinInfo];
+            if (![model.test isEqualToString:@"1"]) {
+                return 159;
+
+            }else{
+                return 0;
+
+            }
         }else{
             return 0;
         

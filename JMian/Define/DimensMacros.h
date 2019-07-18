@@ -156,6 +156,8 @@
 #define kBoldFont(x) [UIFont boldSystemFontOfSize:x]
 #define kFont(x) [UIFont systemFontOfSize:x]
 #define kNameFont(x) [UIFont fontWithName:@"Heiti SC" size:x]
+#define kCOLOR_HEX(hexString) [UIColor colorWithRed:((float)((hexString &0xFF0000) >>16))/255.0green:((float)((hexString &0xFF00) >>8))/255.0blue:((float)(hexString &0xFF))/255.0alpha:1.0]
+
 //存储userDefault
 #define kSaveMyDefault(A,B) [[NSUserDefaults standardUserDefaults] setObject:B forKey:A]
 //读取duserDefault

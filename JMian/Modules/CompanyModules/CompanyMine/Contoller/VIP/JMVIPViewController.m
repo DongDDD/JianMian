@@ -9,10 +9,11 @@
 #import "JMVIPViewController.h"
 #import "JMShareView.h"
 #import "WXApi.h"
-#import <AlipaySDK/AlipaySDK.h>
+//#import <AlipaySDK/AlipaySDK.h>
 #import "JMHTTPManager+OrderPay.h"
 #import "JMOrderPaymentModel.h"
 #import "JMShareView.h"
+#import "JMVIPInvoiceApplyForViewController.h"
 
 @interface JMVIPViewController ()<JMShareViewDelegate>
 @property (strong, nonatomic) JMShareView *choosePayView;
@@ -38,8 +39,10 @@
         self.rightLab.text = @"已开通";
         [self.rightBtn setEnabled:NO];
     }
+ 
     // Do any additional setup after loading the view from its nib.
 }
+
 -(void)initView{
     [self.view addSubview:self.choosePayView];
     [self.view addSubview:self.BGPayView];
@@ -55,7 +58,9 @@
 
 - (IBAction)payAction:(UIButton *)sender {
  
-    [self getPayInfoData];
+//    [self getPayInfoData];
+    JMVIPInvoiceApplyForViewController *vc = [[JMVIPInvoiceApplyForViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)showChoosePayView{
@@ -143,12 +148,12 @@
 }
 
 
-//支付宝支付
+//支付
 -(void)alipayWithModel:(JMOrderPaymentModel *)model{
     // 发起支付
-    [[AlipaySDK defaultService] payOrder:model.alipay fromScheme:@"alisdkdemo" callback:^(NSDictionary *resultDic) {
-        NSLog(@"支付结果 reslut = %@",resultDic);
-    }];
+//    [[AlipaySDK defaultService] payOrder:model.alipay fromScheme:@"alisdkdemo" callback:^(NSDictionary *resultDic) {
+//        NSLog(@"支付结果 reslut = %@",resultDic);
+//    }];
     
 }
 
@@ -157,9 +162,9 @@
         _choosePayView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
         _choosePayView.delegate = self;
         [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
-        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Alipay_pay"] forState:UIControlStateNormal];
+        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Friendster"] forState:UIControlStateNormal];
         _choosePayView.lab1.text = @"微信支付";
-        _choosePayView.lab2.text = @"支付宝";
+        _choosePayView.lab2.text = @"朋友圈";
     }
     return _choosePayView;
 }

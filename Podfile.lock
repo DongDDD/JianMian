@@ -15,7 +15,6 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - AgoraRtcEngine_iOS (2.4.0.1)
-  - AlipaySDK-iOS (15.5.9)
   - AMap2DMap (5.6.1):
     - AMapFoundation (~> 1.4)
   - AMapFoundation (1.5.6)
@@ -250,7 +249,6 @@ PODS:
 DEPENDENCIES:
   - AFNetworking
   - AgoraRtcEngine_iOS
-  - AlipaySDK-iOS
   - AMap2DMap
   - AMapLocation
   - AMapSearch
@@ -277,7 +275,6 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - AgoraRtcEngine_iOS
-    - AlipaySDK-iOS
     - AMap2DMap
     - AMapFoundation
     - AMapLocation
@@ -307,7 +304,6 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   AgoraRtcEngine_iOS: be7eee187e0cf9bc67d67645cd0b75cd60b9503a
-  AlipaySDK-iOS: 1c5283b30977a24acecc0114662697f7dc78f618
   AMap2DMap: cac76bc057de18a1641f34df6b50bf5bc6b23571
   AMapFoundation: 20fce2a12cd152e1092afdd04379cdac21932185
   AMapLocation: 89a7e4eb6040d32ba73c77a4966ecc66e46aa7c3
@@ -334,6 +330,6 @@ SPEC CHECKSUMS:
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
   ZFPlayer: 4260b232df83cc7d571ffaa81e9317b3a74eb57c
 
-PODFILE CHECKSUM: 902cbd1b77c73f4a46a2cfecf40fdb774c5e1673
+PODFILE CHECKSUM: be1036fbdf7059a7d4b0fdc924117a63f998df6d
 
 COCOAPODS: 1.6.1

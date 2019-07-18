@@ -11,7 +11,7 @@
 #import "JMAnswerOrHangUpView.h"
 #import "JMVideoChatView.h"
 #import "WXApi.h"
-#import <AlipaySDK/AlipaySDK.h>
+//#import <AlipaySDK/AlipaySDK.h>
 #import "JMFeedBackChooseViewController.h"
 
 
