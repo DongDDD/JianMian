@@ -278,6 +278,7 @@
     }];
 }
 
+
 -(void)getVersionData{
     [[JMHTTPManager sharedInstance] fectchVersionWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {

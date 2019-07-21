@@ -14,6 +14,8 @@
 #import "JMOrderPaymentModel.h"
 #import "JMShareView.h"
 #import "JMVIPInvoiceApplyForViewController.h"
+#import "JMProtocalWebViewController.h"
+
 
 @interface JMVIPViewController ()<JMShareViewDelegate>
 @property (strong, nonatomic) JMShareView *choosePayView;
@@ -23,6 +25,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *leftLab2;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (weak, nonatomic) IBOutlet UILabel *rightLab;
+@property (weak, nonatomic) IBOutlet UIButton *protocalBtn;
 
 @end
 
@@ -33,15 +36,22 @@
     self.title = @"得米会员";
     [self initView];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if (userModel.deadline == 0) {
+    if (![userModel.deadline isEqualToString:@"0"]) {
         self.leftLab1.text = @"到期：";
-        self.leftLab2.text = @"2020年7月1日";
+        self.leftLab2.text = [self timeStampConversionNSString:userModel.deadline];
         self.rightLab.text = @"已开通";
         [self.rightBtn setEnabled:NO];
+    }else{
+        [self.protocalBtn setHidden:YES];
     }
  
     // Do any additional setup after loading the view from its nib.
 }
+
+
+
+    
+
 
 -(void)initView{
     [self.view addSubview:self.choosePayView];
@@ -56,23 +66,26 @@
 
 }
 
+
+- (IBAction)protocalAction:(id)sender {
+    JMProtocalWebViewController *vc = [[JMProtocalWebViewController alloc]init];
+    vc.viewType = JMProtocalWebDidPay;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
 - (IBAction)payAction:(UIButton *)sender {
- 
 //    [self getPayInfoData];
     JMVIPInvoiceApplyForViewController *vc = [[JMVIPInvoiceApplyForViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)showChoosePayView{
-    
-    
     [self.choosePayView setHidden:NO];
     [self.BGPayView setHidden:NO];
     
     [UIView animateWithDuration:0.18 animations:^{
         self.choosePayView.frame =CGRectMake(0, self.view.frame.size.height-205, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
-        
-        
     }];
     
 }
@@ -82,8 +95,6 @@
     [self.BGPayView setHidden:YES];
     [UIView animateWithDuration:0.18 animations:^{
         self.choosePayView.frame =CGRectMake(0,SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
-        
-        
     }];
     
 }
@@ -126,8 +137,6 @@
     
     
 }
-
-
 
 
 - (void)wechatPayWithModel:(JMOrderPaymentModel *)model{

@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="leftLab1" destination="3bC-ec-OPY" id="ZGz-kC-6tY"/>
                 <outlet property="leftLab2" destination="OtL-Mv-xBe" id="OWk-jP-7Vv"/>
+                <outlet property="protocalBtn" destination="Edh-pe-tac" id="cp3-U5-KBJ"/>
                 <outlet property="rightBtn" destination="xHe-U4-HwX" id="dPc-DX-xpL"/>
                 <outlet property="rightLab" destination="CoP-Ey-ZaS" id="IAJ-YY-6oc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -52,7 +53,7 @@
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VIP2.png" translatesAutoresizingMaskIntoConstraints="NO" id="mbF-N8-0tY">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VIP12.png" translatesAutoresizingMaskIntoConstraints="NO" id="mbF-N8-0tY">
                             <rect key="frame" x="20" y="359" width="65" height="65"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="65" id="2iJ-Zr-2mp"/>
@@ -85,10 +86,21 @@
                                 <constraint firstAttribute="height" constant="1" id="aPi-os-nD1"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edh-pe-tac">
+                            <rect key="frame" x="20" y="724" width="185" height="29"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <state key="normal" title="《“得米”平台用户服务协议》">
+                                <color key="titleColor" red="0.92941176469999998" green="0.71764705880000002" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="protocalAction:" destination="-1" eventType="touchUpInside" id="aO1-ae-xVX"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="iFq-Kv-3lk" firstAttribute="leading" secondItem="j0e-PO-4Bj" secondAttribute="leading" constant="20" id="0dO-kK-SxE"/>
+                        <constraint firstItem="Edh-pe-tac" firstAttribute="leading" secondItem="j0e-PO-4Bj" secondAttribute="leading" constant="20" id="0xE-5k-a9w"/>
                         <constraint firstItem="iFq-Kv-3lk" firstAttribute="centerX" secondItem="j0e-PO-4Bj" secondAttribute="centerX" id="4Rx-Xp-r8L"/>
                         <constraint firstItem="8ud-65-TAc" firstAttribute="leading" secondItem="mbF-N8-0tY" secondAttribute="trailing" constant="15" id="573-bE-vdH"/>
                         <constraint firstItem="XHq-5G-GgT" firstAttribute="leading" secondItem="htW-ZN-SJz" secondAttribute="leading" id="8rZ-Nf-YJX"/>
@@ -167,6 +179,7 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="j0e-PO-4Bj" secondAttribute="bottom" id="QNB-CZ-KH0"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="C0r-16-E2I" secondAttribute="trailing" id="RHk-7f-Afw"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="C0r-16-E2I" secondAttribute="bottom" id="Xab-dt-WDY"/>
+                <constraint firstItem="C0r-16-E2I" firstAttribute="top" secondItem="Edh-pe-tac" secondAttribute="bottom" constant="15" id="k3m-L1-98a"/>
                 <constraint firstItem="C0r-16-E2I" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="w9D-Ml-hCP"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="j0e-PO-4Bj" secondAttribute="trailing" id="yAc-pT-eaa"/>
             </constraints>
@@ -176,7 +189,7 @@
     </objects>
     <resources>
         <image name="VIP1.png" width="65" height="65"/>
-        <image name="VIP2.png" width="65" height="65"/>
+        <image name="VIP12.png" width="65" height="65"/>
         <image name="jianbian.png" width="145" height="50"/>
         <image name="vip_header.png" width="338" height="161.5"/>
     </resources>

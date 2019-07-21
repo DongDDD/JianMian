@@ -94,6 +94,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr;
 //求职状态数据转化
 -(NSString *)getJobStatusWithStatusStr:(NSString *)statusStr;
+//时间戳转化成时间字符串
+- (NSString *)timeStampConversionNSString:(NSString *)timeStamp;
 //键盘工具栏
 - (UIToolbar *)myToolbar;
 //没数据提示

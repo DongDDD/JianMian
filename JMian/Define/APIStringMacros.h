@@ -163,6 +163,9 @@
 #define Delete_BankCard_URL @"api/bank/card/delete"
 //获取系统标签
 #define Delete_BankCard_URL @"api/bank/card/delete"
+//获取会员协议
+#define Fectch_Protocal_URL @"member/contract"
+
 
 //接口
 #define Get_Labels_URL @"/labels"

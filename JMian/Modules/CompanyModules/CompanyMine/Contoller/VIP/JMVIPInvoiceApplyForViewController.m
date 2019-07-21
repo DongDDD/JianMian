@@ -16,6 +16,7 @@
 #import "JMHTTPManager+FectchInvoiceInfo.h"
 #import "JMInvoiceModel.h"
 #import "WXApi.h"
+#import "JMProtocalWebViewController.h"
 
 
 @interface JMVIPInvoiceApplyForViewController ()<UITableViewDelegate,UITableViewDataSource,JMMakeOutBillViewDelegate,JMInvoiceHeaderViewDelegate,UITextFieldDelegate,JMVIPInvoicePayTableViewCellDelegate>
@@ -156,9 +157,14 @@ static NSString *cellIdent = @"payCellIdent";
 //    }
     
 }
+
+
 #pragma mark - actoin
 -(void)protocalAction{
-
+    NSLog(@"protocal");
+    JMProtocalWebViewController *vc = [[JMProtocalWebViewController alloc]init];
+    vc.viewType = JMProtocalWebNoPay;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (IBAction)comfirmAction:(id)sender {

@@ -463,7 +463,6 @@
 }
 
 - (id)toArrayOrNSDictionary:(NSData *)jsonData{
-    
     NSError *error = nil;
     id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData
                                                     options:NSJSONReadingAllowFragments
@@ -477,6 +476,30 @@
     }
     
 }
+
+- (NSString *)timeStampConversionNSString:(NSString *)timeStamp
+{
+    //将对象类型的时间转换为NSDate类型
+    
+    double time = [timeStamp doubleValue];
+    
+    NSDate *myDate=[NSDate dateWithTimeIntervalSince1970:time];
+    
+    //设置时间格式
+    
+    NSDateFormatter *formatter=[[NSDateFormatter alloc]init];
+    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    //将时间转换为字符串
+    
+    NSString *timeStr=[formatter stringFromDate:myDate];
+    
+    return timeStr;
+}
+
+
+
 #pragma mark ----加减乘除------------ number1 - number2
 //相乘
 -(NSString *)calculateByMultiplying:(NSString *)number1 secondNumber:(NSString *)number2
@@ -487,6 +510,7 @@
     return [multiplyingNum stringValue];
     
 }
+
 //相减
 -(NSString *)calculateBySubtractingMinuend:(NSString *)number1 subtractorNumber:(NSString *)number2
 {
