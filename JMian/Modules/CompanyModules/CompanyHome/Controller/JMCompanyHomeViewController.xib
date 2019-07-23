@@ -57,7 +57,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="人才要求">
-                                <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -69,15 +69,13 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iuz-yQ-9Rc">
-                            <rect key="frame" x="62.5" y="11" width="76" height="22"/>
-                            <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="20" y="11" width="166.5" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="J4e-NK-FNs"/>
-                                <constraint firstAttribute="width" constant="76" id="ctg-KK-Oyj"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                             <state key="normal" title="选择职位">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -94,12 +92,13 @@
                         <constraint firstAttribute="bottom" secondItem="Ql8-gk-KBc" secondAttribute="bottom" id="8g8-WU-Xef"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="GXe-s1-fZI"/>
                         <constraint firstItem="Qsa-nh-upw" firstAttribute="height" secondItem="iuz-yQ-9Rc" secondAttribute="height" id="JNL-lf-auP"/>
-                        <constraint firstItem="6lh-vI-PTU" firstAttribute="leading" secondItem="iuz-yQ-9Rc" secondAttribute="trailing" constant="68" id="Kvc-hQ-cpC"/>
+                        <constraint firstItem="6lh-vI-PTU" firstAttribute="leading" secondItem="iuz-yQ-9Rc" secondAttribute="trailing" constant="20" id="Kvc-hQ-cpC"/>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="44" id="Nc7-TY-0ty"/>
                         <constraint firstItem="Cir-KK-X4j" firstAttribute="leading" secondItem="gJl-Mb-KDq" secondAttribute="leading" id="RhM-Sk-AhM"/>
                         <constraint firstAttribute="trailing" secondItem="Ql8-gk-KBc" secondAttribute="trailing" id="a9i-RF-Fcy"/>
                         <constraint firstItem="Qsa-nh-upw" firstAttribute="centerY" secondItem="gJl-Mb-KDq" secondAttribute="centerY" id="cPg-0Y-1bt"/>
                         <constraint firstItem="Cir-KK-X4j" firstAttribute="top" secondItem="gJl-Mb-KDq" secondAttribute="top" id="d54-3b-MJe"/>
+                        <constraint firstItem="iuz-yQ-9Rc" firstAttribute="leading" secondItem="gJl-Mb-KDq" secondAttribute="leading" constant="20" id="izk-BB-syN"/>
                         <constraint firstItem="iuz-yQ-9Rc" firstAttribute="centerY" secondItem="gJl-Mb-KDq" secondAttribute="centerY" id="k2G-0A-cQ0"/>
                         <constraint firstAttribute="trailing" secondItem="Cir-KK-X4j" secondAttribute="trailing" id="lIR-dR-2FB"/>
                         <constraint firstAttribute="height" constant="44" id="nb0-Xo-Cyz"/>

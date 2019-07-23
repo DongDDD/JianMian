@@ -74,7 +74,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xp-1M-2ww">
                             <rect key="frame" x="0.0" y="95" width="414" height="60"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工作性质" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58t-Cv-nWp">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工作岗位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58t-Cv-nWp">
                                     <rect key="frame" x="21" y="19.5" width="69.5" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="69.5" id="0KS-T4-VPS"/>
@@ -356,8 +356,9 @@
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPe-dX-PMY">
-                                    <rect key="frame" x="91" y="8.5" width="285" height="43"/>
+                                    <rect key="frame" x="276" y="8.5" width="100" height="43"/>
                                     <constraints>
+                                        <constraint firstAttribute="width" constant="100" id="mXV-Cl-ur6"/>
                                         <constraint firstAttribute="height" constant="43" id="vV8-q3-R0k"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -377,11 +378,10 @@
                                 <constraint firstItem="KPe-dX-PMY" firstAttribute="centerY" secondItem="8lL-2R-0rY" secondAttribute="centerY" id="i6M-MQ-Bgo"/>
                                 <constraint firstAttribute="trailing" secondItem="8lL-2R-0rY" secondAttribute="trailing" constant="20" id="iTY-Mt-LYl"/>
                                 <constraint firstItem="IKx-XX-XO3" firstAttribute="centerY" secondItem="7lA-HS-cku" secondAttribute="centerY" id="qnJ-vg-U1T"/>
-                                <constraint firstItem="KPe-dX-PMY" firstAttribute="leading" secondItem="IKx-XX-XO3" secondAttribute="trailing" id="sEX-6u-neY"/>
                                 <constraint firstItem="8lL-2R-0rY" firstAttribute="centerY" secondItem="7lA-HS-cku" secondAttribute="centerY" id="vLT-j5-MCh"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注意：职位名称发布后将不能修改" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iB-0G-GWC">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="注意：职位名称发布后将不能修改" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iB-0G-GWC">
                             <rect key="frame" x="21" y="68" width="154" height="12"/>
                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>

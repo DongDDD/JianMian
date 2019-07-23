@@ -10,6 +10,7 @@
 #import "WSDropMenuView.h"
 #import "JMHTTPManager+PositionDesired.h"
 #import "JMSystemLabelsModel.h"
+#import "PositionDesiredSecondViewController.h"
 
 
 
@@ -83,7 +84,7 @@
 -(void)setSearchView{
     
     self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH-40, 33)];
-    self.searchView.searchTextField.placeholder = @"                                        搜索";
+    self.searchView.searchTextField.placeholder = @"                                     搜索";
     self.searchView.searchTextField.returnKeyType =UIReturnKeySearch;
     self.searchView.searchTextField.delegate = self;
     UIImageView *image=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"圆角矩形 5"]];
@@ -94,6 +95,15 @@
   
 }
 
+#pragma mark - TextField -
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSLog(@"sousuo");
+    PositionDesiredSecondViewController *vc = [[PositionDesiredSecondViewController alloc]init];
+    vc.keyWord = textField.text;
+    [self.navigationController pushViewController:vc animated:YES];
+    return YES;
+}
 
 #pragma mark - WSDropMenuView DataSource -
 - (NSInteger)dropMenuView:(WSDropMenuView *)dropMenuView numberWithIndexPath:(WSIndexPath *)indexPath{

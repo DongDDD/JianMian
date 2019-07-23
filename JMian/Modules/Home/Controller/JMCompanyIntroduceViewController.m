@@ -85,7 +85,7 @@
     [self setIntroduceView];
     [self setSDCScrollView];
     [self setAdvantageView];
-    [self setBrightSpoView];
+//    [self setBrightSpoView];
     [self setMapView];
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,1800);
 }
@@ -271,31 +271,31 @@
 
 -(void)setAdvantageView{
     self.advantageView = [[JMIntroduceContentView alloc]init];
-    
+    self.advantageView.contenLab.text = @"asdfasdfasdfasdfsdfssdfssf";
     [self.pageContentView addSubview:self.advantageView];
     
     [self.advantageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.SDCScrollView.mas_bottom);
         make.left.mas_equalTo(self.pageContentView);
         make.width.mas_equalTo(SCREEN_WIDTH);
-        make.bottom.mas_equalTo(self.advantageView.contenLab.mas_bottom).offset(30);
+        make.bottom.mas_equalTo(300);
     }];
 
 }
 #pragma mark - 公司亮点
--(void)setBrightSpoView{
-    self.brightSpoView = [[JMIntroduceContentView alloc]init];
-    
-    [self.pageContentView addSubview:self.brightSpoView];
-    
-    [self.brightSpoView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.advantageView.mas_bottom);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.left.mas_equalTo(self.pageContentView);
-        make.bottom.mas_equalTo(self.brightSpoView.contenLab.mas_bottom).offset(30);
-    }];
-    
-}
+//-(void)setBrightSpoView{
+//    self.brightSpoView = [[JMIntroduceContentView alloc]init];
+//
+//    [self.pageContentView addSubview:self.brightSpoView];
+//
+//    [self.brightSpoView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self.advantageView.mas_bottom);
+//        make.width.mas_equalTo(SCREEN_WIDTH);
+//        make.left.mas_equalTo(self.pageContentView);
+//        make.bottom.mas_equalTo(self.brightSpoView.contenLab.mas_bottom).offset(30);
+//    }];
+//
+//}
 
 #pragma mark - 获取视频图片
 
@@ -332,7 +332,7 @@
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(346);
         make.left.mas_equalTo(self.pageContentView);
-        make.top.mas_equalTo(self.brightSpoView);
+        make.top.mas_equalTo(self.advantageView);
     }];
     
     [self.pageContentView addSubview:self.mapView];

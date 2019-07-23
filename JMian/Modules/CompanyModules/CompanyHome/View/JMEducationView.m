@@ -60,7 +60,7 @@
     //
     [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(schoolLabel.mas_left);
-        make.right.mas_equalTo(self).offset(-38);
+        make.width.mas_equalTo(100);
         make.top.mas_equalTo(schoolLabel.mas_bottom).offset(13);
     }];
     

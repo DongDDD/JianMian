@@ -10,9 +10,15 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol PositionDesiredSecondViewControllerDelegate <NSObject>
 
+-(void)didSelectedCellWithLabel_id:(NSString *)label_id;
+
+@end
 @interface PositionDesiredSecondViewController : BaseViewController
 
+@property(nonatomic,copy)NSString *keyWord;
+@property(nonatomic,weak)id<PositionDesiredSecondViewControllerDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -117,7 +117,7 @@
 }
 
 
-#pragma mark - 微信支付
+#pragma mark - 微信DEMI001
 - (void)getPayInfoData
 {
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
@@ -172,7 +172,7 @@
         _choosePayView.delegate = self;
         [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
         [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Friendster"] forState:UIControlStateNormal];
-        _choosePayView.lab1.text = @"微信支付";
+        _choosePayView.lab1.text = @"微信DEMI001";
         _choosePayView.lab2.text = @"朋友圈";
     }
     return _choosePayView;

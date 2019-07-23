@@ -77,12 +77,15 @@
     [self getUserInfo];
     //右上角分享 收藏按钮
     [self getData];
+
     if (_viewType != JobDetailsViewTypeEdit) {
         
         [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     }
     [self setTitle:@"职位详情"];
 }
+
+
 
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
@@ -111,13 +114,11 @@
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
-    
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -183,6 +184,20 @@
 
 
 -(void)chatAction{
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self loginOut];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     
     if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
@@ -222,6 +237,19 @@
 }
 -(void)rightAction:(UIButton *)sender{
     NSLog(@"收藏");
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self loginOut];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     sender.selected = !sender.selected;
     [[JMHTTPManager sharedInstance]createLikeWith_type:@"1" Id:self.myModel.work_id mode:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"

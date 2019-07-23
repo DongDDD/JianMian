@@ -76,13 +76,16 @@
 //    [self setHeaderVieUI];
 //    [self setPageUI];
     [self setJuhua];
-    //获取用户信息
     [self getUserInfo];
-
     [self getData];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //获取用户信息
+//    [self getUserInfo];
+//    [self getData];
+}
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];

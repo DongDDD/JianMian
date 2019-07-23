@@ -46,7 +46,7 @@
     self.detailViewSubTitle.text = _data.task_title;
     if (_viewType == JMPayDetailViewTypeDownPayment) {//定金
         [self.invoiceView setHidden:YES];
-        self.title = @"支付定金";
+        self.title = @"DEMI001定金";
         self.detailViewLab1.text = @" 完工结  ";
         self.detailViewLab2.text = [NSString stringWithFormat:@" 招募人数：%@  ",_data.snapshot_quantity_max];
         self.moneyDetailViewLab1.text = @"应付定金";
@@ -55,7 +55,7 @@
         self.bottomViewLab2.text = [NSString stringWithFormat:@"¥%@",_data.front_money];
         self.didPayMoney = _data.front_money;
     }else if (_viewType == JMPayDetailViewTypeFinalPayment) {//尾款
-        self.title = @"支付尾款";
+        self.title = @"DEMI001尾款";
         [self getInvoiceData];
       
     }

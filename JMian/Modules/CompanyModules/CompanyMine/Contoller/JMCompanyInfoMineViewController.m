@@ -172,9 +172,11 @@
 }
 
 -(void)updateInfoData{
- 
+    NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
+    NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
+    
     [self.progressHUD setHidden:NO];
-    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:_userInfoModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:_imgURL video_path:self.videoURL work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:self.facingBtn.titleLabel.text employee:self.employBtn.titleLabel.text address:nil url:nil longitude:nil latitude:nil description:self.companyDecriptionBtn.titleLabel.text image_path:self.addImage_paths label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:_userInfoModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:_imgURL video_path:self.videoURL work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:self.facingBtn.titleLabel.text employee:self.employBtn.titleLabel.text address:self.companyAdress.titleLabel.text url:nil longitude:longitude latitude:latitude description:self.companyDecriptionBtn.titleLabel.text image_path:self.addImage_paths label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"公司信息更新成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -190,6 +192,7 @@
     
     
 }
+
 //删除公司图片
 -(void)deleteCompanyImgRequestWithFile_id:(NSString *)file_id{
     [[JMHTTPManager sharedInstance]deleteCompanyFile_Id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -209,6 +212,7 @@
     [self.headerImg sd_setImageWithURL:[NSURL URLWithString:self.model.logo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.companyNameLab.text = self.model.company_name;
     //公司图片赋值
+    
    //获取视频路径
     self.videoURL = [self getVideoPath];
     if (self.videoURL != nil) {
@@ -230,7 +234,7 @@
         [self.leftBtn setTitle:@"拍摄视频" forState:UIControlStateNormal];
          [self.rightBtn setTitle:@"上传视频" forState:UIControlStateNormal];
     }
-   
+    [self.companyAdress setTitle:self.model.address forState:UIControlStateNormal];
     [self.industryBtn setTitle:self.model.industry_name forState:UIControlStateNormal];
     [self.employBtn setTitle:self.model.employee forState:UIControlStateNormal];
     [self.facingBtn setTitle:self.model.financing forState:UIControlStateNormal];

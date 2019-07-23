@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property(nonatomic,strong)YYLabel *contenLab;
+@property(nonatomic,copy)NSString *contentStr;
 @property(nonatomic,strong)UIButton *spreadBtn;
 @property(nonatomic,weak) id<JMIntroduceContentViewDelegate> delegate;
 @end

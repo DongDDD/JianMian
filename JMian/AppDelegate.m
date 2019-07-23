@@ -330,7 +330,7 @@
                 break;
         }
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:@"" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
     [alert show];
     
 }

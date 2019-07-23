@@ -53,10 +53,10 @@ static NSString *cellIdent = @"payCellIdent";
 //        make.left.right.mas_equalTo(self.view);
 //        make.top.mas_equalTo(self.tableView.mas_bottom);
 //    }];·
-    self.title = @"确认支付";
+    self.title = @"确认DEMI001";
     [self initView];
-    _imagArr = @[@"WeChat",@"Alipay_pay"];
-    _labArr = @[@"微信支付",@"支付宝支付"];
+    _imagArr = @[@"WeChat",@"WeChat"];
+    _labArr = @[@"微信DEMI001",@"DEMI001"];
     [self getInvoiceInfo];
 }
 
@@ -127,9 +127,9 @@ static NSString *cellIdent = @"payCellIdent";
     [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:userModel.user_id  scenes:@"app" type:@"3" mode:@"3" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {            
             self.orderPaymentModel = [JMOrderPaymentModel mj_objectWithKeyValues:responsObject[@"data"]];
-            if ([self.payName isEqualToString:@"微信支付"]) {
+            if ([self.payName isEqualToString:@"微信DEMI001"]) {
                 [self wechatPayWithModel:_orderPaymentModel];
-            }else if ([self.payName isEqualToString:@"支付宝支付"]) {
+            }else if ([self.payName isEqualToString:@"宝宝"]) {
                 
             }
 
@@ -293,7 +293,7 @@ static NSString *cellIdent = @"payCellIdent";
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 45)];
     view.backgroundColor = [UIColor whiteColor];
     UIButton *btn = [[UIButton alloc]init];
-    [btn setTitle:@"支付即同意《“得米”平台用户服务协议》" forState:UIControlStateNormal];
+    [btn setTitle:@"DEMI001即同意《“得米”平台用户服务协议》" forState:UIControlStateNormal];
     btn.titleLabel.font = kFont(13);
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);

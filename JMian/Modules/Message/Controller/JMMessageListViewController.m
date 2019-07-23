@@ -46,6 +46,19 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self loginOut];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     [self getMsgList];    //获取自己服务器数据
     [self setupHeaderRefresh];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
@@ -433,6 +446,19 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self loginOut];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     NSString *recipient_id;
     NSString *foreign_key;
     JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];

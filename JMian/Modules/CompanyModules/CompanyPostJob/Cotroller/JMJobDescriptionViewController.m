@@ -89,9 +89,13 @@
         [self.decriptionTextView setContent:@""];
     }else if (_index == 1) {
         JMTPLModel *model = self.dataArray[self.TPLIndex];
-
         [self.decriptionTextView setContent:model.myTemplate];
-
+        _decriStr = model.myTemplate;
+        if (_TPLIndex < self.dataArray.count-1) {
+            _TPLIndex += 1;
+        }else{
+            _TPLIndex = 0;
+        }
     }
 
 }

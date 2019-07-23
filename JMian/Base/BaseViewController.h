@@ -57,7 +57,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)showProgressHUD_view:(UIView *)view;
 -(void)showHUD;
 -(void)hiddenHUD;
-
+-(void)loginOut;//退出登录
 // 将JSON串转化为字典或者数组
 - (id)toArrayOrNSDictionary:(NSData *)jsonData;
 

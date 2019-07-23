@@ -157,6 +157,20 @@
 
 -(void)rightAction:(UIButton *)sender{
     NSLog(@"收藏");
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self loginOut];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+
     sender.selected = !sender.selected;
     if (sender.selected) {
         [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.task_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -286,6 +300,19 @@
 
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self loginOut];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
         [self createChatRequstWithForeign_key:self.task_id user_id:_user_id];
@@ -297,6 +324,20 @@
 }
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self loginOut];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+   
+        return;
+    }
     
 //    [self showAlertVCWithCustumView:self.applyForProtocolView message:@"" leftTitle:@"取消" rightTitle:@"确认"];
 //    [self sendResquest];

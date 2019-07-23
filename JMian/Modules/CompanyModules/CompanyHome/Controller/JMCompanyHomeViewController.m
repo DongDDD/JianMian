@@ -336,7 +336,7 @@ static NSString *cellIdent = @"cellIdent";
     if(self.arrDate.count > 0 ){
         JMCompanyHomeModel *model = self.arrDate[indexPath.row];
         vc.companyModel = model;
-    
+        
     }
 
     [self.navigationController pushViewController:vc animated:YES];
@@ -386,10 +386,8 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 - (IBAction)choosePositionAction:(UIButton *)sender {
-    [self.choosePositionBtn setBackgroundColor:MASTER_COLOR];
-    [self.choosePositionBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.chooseRequireBtn setBackgroundColor:[UIColor whiteColor]];
     [self.chooseRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.choosePositionBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
     [self.choosePositionVC.view setHidden:NO];
     [self.labschooseVC.view setHidden:YES];
     [self.labChooseBottomView setHidden:YES];
@@ -401,9 +399,7 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 - (IBAction)requireChooseAction:(UIButton *)sender {
-    [self.chooseRequireBtn setBackgroundColor:MASTER_COLOR];
-    [self.chooseRequireBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.choosePositionBtn setBackgroundColor:[UIColor whiteColor]];
+    [self.chooseRequireBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
     [self.choosePositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.labschooseVC.view setHidden:NO];
     [self.choosePositionVC.view setHidden:YES];
@@ -436,10 +432,13 @@ static NSString *cellIdent = @"cellIdent";
     _salary_max = nil;
     _salary_min = nil;
     [self.tableView.mj_header beginRefreshing];
+    [self.choosePositionBtn setTitle:@"选择职位" forState:UIControlStateNormal];
+    
 //    [self.labschooseVC.view setHidden:YES];
 //    [_bgBtn setHidden:YES];
     
 }
+
 //确认
 -(void)labChooseBottomRightAction
 {
@@ -449,8 +448,8 @@ static NSString *cellIdent = @"cellIdent";
     [_bgBtn setHidden:YES];
     [self.tableView.mj_header beginRefreshing];
 
-    
 }
+
 //职位选择
 -(void)didSelectCellActionController:(JMChoosePositionTableViewController *)controller{
     [self.choosePositionVC.view setHidden:YES];
@@ -458,7 +457,9 @@ static NSString *cellIdent = @"cellIdent";
     [self.arrDate removeAllObjects];
     self.job_label_id = controller.homeModel.work_label_id;
     [self.tableView.mj_header beginRefreshing];
-
+    [self.choosePositionBtn setTitle:controller.homeModel.work_name forState:UIControlStateNormal];
+    NSLog(@"work_label_name%@",controller.homeModel.work_name);
+    NSLog(@"job_label_id%@",self.job_label_id);
 
 }
 

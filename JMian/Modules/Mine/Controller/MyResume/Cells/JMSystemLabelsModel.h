@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *level;
 @property (nonatomic, strong) NSArray *children;
 @property (nonatomic, strong) NSArray *pid_relation;
+@property (nonatomic, strong) NSArray *name_relation;
 
 
 @end

@@ -592,9 +592,6 @@
 		04ABB7A022B1EF8C00E3F66A /* star_level@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ABB79D22B1EF8C00E3F66A /* star_level@3x.png */; };
 		04ABB7A622B232C700E3F66A /* JMHTTPManager+OrderPay.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABB7A522B232C700E3F66A /* JMHTTPManager+OrderPay.m */; };
 		04ABB7A922B2383200E3F66A /* JMOrderPaymentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABB7A822B2383200E3F66A /* JMOrderPaymentModel.m */; };
-		04ABB7AD22B259CB00E3F66A /* Alipay_pay.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ABB7AA22B259CB00E3F66A /* Alipay_pay.png */; };
-		04ABB7AE22B259CB00E3F66A /* Alipay_pay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ABB7AB22B259CB00E3F66A /* Alipay_pay@2x.png */; };
-		04ABB7AF22B259CB00E3F66A /* Alipay_pay@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04ABB7AC22B259CB00E3F66A /* Alipay_pay@3x.png */; };
 		04ABB7BF22B28CF300E3F66A /* JMSnapshotWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ABB7BD22B28CF300E3F66A /* JMSnapshotWebViewController.m */; };
 		04ABB7C022B28CF300E3F66A /* JMSnapshotWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ABB7BE22B28CF300E3F66A /* JMSnapshotWebViewController.xib */; };
 		04AC6A2022CD8B0200693424 /* JMHTTPManager+FectchTplLIst.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AC6A1F22CD8B0200693424 /* JMHTTPManager+FectchTplLIst.m */; };
@@ -713,6 +710,8 @@
 		04CC5F9D22B3BB9A00C5DD46 /* JMDiscoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CC5F9B22B3BB9A00C5DD46 /* JMDiscoverCollectionViewCell.xib */; };
 		04CC5FA122B3C5DC00C5DD46 /* JMHTTPManager+FectchVideoLists.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CC5FA022B3C5DC00C5DD46 /* JMHTTPManager+FectchVideoLists.m */; };
 		04CC5FA422B3C86200C5DD46 /* JMVideoListCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CC5FA322B3C86200C5DD46 /* JMVideoListCellData.m */; };
+		04DA849022E7060B003A218D /* JMJobDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DA848E22E7060B003A218D /* JMJobDetailsViewController.m */; };
+		04DA849122E7060B003A218D /* JMJobDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DA848F22E7060B003A218D /* JMJobDetailsViewController.xib */; };
 		04DD1D0E224B6D96007CB11C /* FailedLoadingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */; };
 		04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */; };
 		04DD1D45224B6E95007CB11C /* break@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04DD1D18224B6E95007CB11C /* break@2x.png */; };
@@ -1701,9 +1700,6 @@
 		04ABB7A522B232C700E3F66A /* JMHTTPManager+OrderPay.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+OrderPay.m"; sourceTree = "<group>"; };
 		04ABB7A722B2383200E3F66A /* JMOrderPaymentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMOrderPaymentModel.h; sourceTree = "<group>"; };
 		04ABB7A822B2383200E3F66A /* JMOrderPaymentModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMOrderPaymentModel.m; sourceTree = "<group>"; };
-		04ABB7AA22B259CB00E3F66A /* Alipay_pay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Alipay_pay.png; sourceTree = "<group>"; };
-		04ABB7AB22B259CB00E3F66A /* Alipay_pay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alipay_pay@2x.png"; sourceTree = "<group>"; };
-		04ABB7AC22B259CB00E3F66A /* Alipay_pay@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Alipay_pay@3x.png"; sourceTree = "<group>"; };
 		04ABB7BC22B28CF300E3F66A /* JMSnapshotWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMSnapshotWebViewController.h; sourceTree = "<group>"; };
 		04ABB7BD22B28CF300E3F66A /* JMSnapshotWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMSnapshotWebViewController.m; sourceTree = "<group>"; };
 		04ABB7BE22B28CF300E3F66A /* JMSnapshotWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMSnapshotWebViewController.xib; sourceTree = "<group>"; };
@@ -1868,6 +1864,9 @@
 		04CC5FA022B3C5DC00C5DD46 /* JMHTTPManager+FectchVideoLists.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchVideoLists.m"; sourceTree = "<group>"; };
 		04CC5FA222B3C86200C5DD46 /* JMVideoListCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoListCellData.h; sourceTree = "<group>"; };
 		04CC5FA322B3C86200C5DD46 /* JMVideoListCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoListCellData.m; sourceTree = "<group>"; };
+		04DA848D22E7060B003A218D /* JMJobDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMJobDetailsViewController.h; sourceTree = "<group>"; };
+		04DA848E22E7060B003A218D /* JMJobDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMJobDetailsViewController.m; sourceTree = "<group>"; };
+		04DA848F22E7060B003A218D /* JMJobDetailsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMJobDetailsViewController.xib; sourceTree = "<group>"; };
 		04DD1D0B224B6D95007CB11C /* FailedLoadingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FailedLoadingViewController.h; sourceTree = "<group>"; };
 		04DD1D0C224B6D95007CB11C /* FailedLoadingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FailedLoadingViewController.xib; sourceTree = "<group>"; };
 		04DD1D0D224B6D95007CB11C /* FailedLoadingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FailedLoadingViewController.m; sourceTree = "<group>"; };
@@ -3843,9 +3842,6 @@
 			isa = PBXGroup;
 			children = (
 				041CCEF322A52403002DFED3 /* Order_slice */,
-				04ABB7AA22B259CB00E3F66A /* Alipay_pay.png */,
-				04ABB7AB22B259CB00E3F66A /* Alipay_pay@2x.png */,
-				04ABB7AC22B259CB00E3F66A /* Alipay_pay@3x.png */,
 				04BF6DB022C37966003032BC /* QRCode.png */,
 				04BF6DAF22C37966003032BC /* QRCode@2x.png */,
 				04BF6DB122C37966003032BC /* QRCode@3x.png */,
@@ -4025,6 +4021,9 @@
 				6D020A4F22539FAF009BCFE4 /* JobDetailsViewController.h */,
 				6D020A5422539FAF009BCFE4 /* JobDetailsViewController.m */,
 				6D020A5322539FAF009BCFE4 /* JobDetailsViewController.xib */,
+				04DA848D22E7060B003A218D /* JMJobDetailsViewController.h */,
+				04DA848E22E7060B003A218D /* JMJobDetailsViewController.m */,
+				04DA848F22E7060B003A218D /* JMJobDetailsViewController.xib */,
 				6D020A5122539FAF009BCFE4 /* JMCompanyIntroduceViewController.h */,
 				6D020A5722539FAF009BCFE4 /* JMCompanyIntroduceViewController.m */,
 				6D020A5622539FAF009BCFE4 /* JMCompanyIntroduceViewController.xib */,
@@ -4413,7 +4412,7 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -4469,6 +4468,7 @@
 				040B83902265EF6A00F1A37A /* JMIDCardIdentifyViewController.xib in Resources */,
 				0485ACF722A0C94200B31506 /* my_task@3x.png in Resources */,
 				04E02E77228BF4BF00924130 /* minloading.png in Resources */,
+				04DA849122E7060B003A218D /* JMJobDetailsViewController.xib in Resources */,
 				04C37F1322C72D6500E2A107 /* JMAddVitaJobViewController.xib in Resources */,
 				04072F482282BA650067A05D /* more.png in Resources */,
 				0488E38A229F8FCE0071DEE7 /* post_a_job_pitch_up.png in Resources */,
@@ -4537,7 +4537,6 @@
 				04C4A17222CC414D0049DA29 /* JMMessageListViewController.xib in Resources */,
 				04072F4B2282BA650067A05D /* delete@3x.png in Resources */,
 				041997CF2266C75000C6C134 /* JMPostJobHomeViewController.xib in Resources */,
-				04ABB7AD22B259CB00E3F66A /* Alipay_pay.png in Resources */,
 				04A4211122BCF2C30001A2F0 /* JMChatDetailPartTimeJobTableViewCell.xib in Resources */,
 				04BBF2AD22901E530068A9B1 /* JMCustomAnnotationView.xib in Resources */,
 				6D020A2A2250F3F9009BCFE4 /* education@3x.png in Resources */,
@@ -4680,7 +4679,6 @@
 				04E02E75228BF4BF00924130 /* minloading@2x.png in Resources */,
 				048348C0226979CA00DE4630 /* JMWorkLocationViewController.xib in Resources */,
 				04E25F6A22B4901D00F451C8 /* purchase_succeeds@2x.png in Resources */,
-				04ABB7AF22B259CB00E3F66A /* Alipay_pay@3x.png in Resources */,
 				049C654D22AD854B00A93DFE /* JMPartTimeJobTypeLabsViewController.xib in Resources */,
 				0488E44322A021AA0071DEE7 /* garden.png in Resources */,
 				04BBF29F228E90BA0068A9B1 /* answer@3x.png in Resources */,
@@ -4825,7 +4823,6 @@
 				04A64E8D22C452EF006C3ABA /* delivered@2x.png in Resources */,
 				0488E396229F93510071DEE7 /* icon_return_nav.png in Resources */,
 				04C6013F2260639C000B1FE0 /* JMAllMessageTableViewController.xib in Resources */,
-				04ABB7AE22B259CB00E3F66A /* Alipay_pay@2x.png in Resources */,
 				0485AD1322A1037400B31506 /* bule_upinstall.png in Resources */,
 				040BF07A22719E4E0088697D /* switchover@2x.png in Resources */,
 				041997F3226717D700C6C134 /* JMContactOfPersonDetailViewController.xib in Resources */,
@@ -5176,6 +5173,7 @@
 				04C6013E2260639C000B1FE0 /* JMAllMessageTableViewController.m in Sources */,
 				04072F6A2282D3680067A05D /* JMDeleteBankCardViewController.m in Sources */,
 				048A0DF422B91A6B006530EC /* JMCDetailModel.m in Sources */,
+				04DA849022E7060B003A218D /* JMJobDetailsViewController.m in Sources */,
 				04C4A18922CCF5040049DA29 /* JMGreetModel.m in Sources */,
 				04BBF299228E67600068A9B1 /* JMAnswerOrHangUpView.m in Sources */,
 				041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */,

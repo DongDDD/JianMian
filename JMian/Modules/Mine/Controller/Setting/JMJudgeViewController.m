@@ -218,7 +218,7 @@
 
 -(void)gotoLoginViewVC{
 
-    LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
+    LoginViewController *loginVc = [[LoginViewController alloc]init];
     
     NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
     [UIApplication sharedApplication].delegate.window.rootViewController = naVC;

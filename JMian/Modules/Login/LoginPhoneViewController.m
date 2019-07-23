@@ -23,6 +23,7 @@
 @property (nonatomic, assign)CGFloat changeHeight;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 
+@property (weak, nonatomic) IBOutlet UIButton *youkeBtn;
 
 @end
 
@@ -31,14 +32,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self.navigationController setNavigationBarHidden:NO];
-    [self setIsHiddenBackBtn:YES];
+//    [self setIsHiddenBackBtn:NO];
     _phoneNumText.delegate = self;
     _phoneNumText.keyboardType = UIKeyboardTypeNumberPad;
     _captchaText.keyboardType = UIKeyboardTypeNumberPad;
 
     // Do any additional setup after loading the view from its nib.
 }
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
 
+}
 
 - (void)viewDidDisappear:(BOOL)animated
 {
@@ -48,6 +53,38 @@
 
 #pragma mark - 数据请求
 
+- (IBAction)youkeLogin:(id)sender {
+    [[JMHTTPManager sharedInstance]loginCaptchaWithPhone:@"13246841721" mode:@3 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+   
+        
+        [[JMHTTPManager sharedInstance]loginWithMode:@"sms" phone:@"13246841721" captcha:@"123456" sign_id:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            JMUserInfoModel *model = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            [JMUserInfoManager saveUserInfo:model];
+            
+            NSLog(@"用户手机号：----%@",model.phone);
+            
+            kSaveMyDefault(@"usersig", model.usersig);
+            
+            JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            //        [self.progressHUD setHidden:YES];
+            //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
+            //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            //       [alert show];
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 - (IBAction)loginPhoneBtn:(id)sender {
 //    [self.view addSubview:self.progressHUD];
     [[JMHTTPManager sharedInstance]loginWithMode:@"sms" phone:self.phoneNumText.text captcha:self.captchaText.text sign_id:self.sign_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

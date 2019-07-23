@@ -11,7 +11,9 @@
 #import "WXApi.h"
 #import "JMHTTPManager+Login.h"
 #import "JMServiceProtocolWebViewController.h"
-
+#import "JMHTTPManager+Login.h"
+#import "JMHTTPManager+Captcha.h"
+#import "JMJudgeViewController.h"
 
 @interface LoginViewController ()<UIGestureRecognizerDelegate,WXApiDelegate>
 
@@ -19,13 +21,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *phoneLoginBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImgView;
 
+@property (weak, nonatomic) IBOutlet UIButton *youkeBtn;
+
 @end
 
 @implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationController.navigationBarHidden = YES;
     if(![WXApi isWXAppInstalled]){
         [self.wechatLoginBtn setHidden:YES];
     }
@@ -43,9 +46,49 @@
 //    NSLog(@"Gesture begin");
 //    return YES;
 //}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+
+}
+- (IBAction)youkeLogin:(id)sender {
+    
+    [[JMHTTPManager sharedInstance]loginCaptchaWithPhone:@"13246841721" mode:@3 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+        [[JMHTTPManager sharedInstance]loginWithMode:@"sms" phone:@"13246841721" captcha:@"123456" sign_id:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+            JMUserInfoModel *model = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            [JMUserInfoManager saveUserInfo:model];
+            
+            NSLog(@"用户手机号：----%@",model.phone);
+            
+            kSaveMyDefault(@"usersig", model.usersig);
+            kSaveMyDefault(@"youke", @"1");
+
+            JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            //        [self.progressHUD setHidden:YES];
+            //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"登陆成功"
+            //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+            //       [alert show];
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
 
 
 - (IBAction)wechatLoginAction:(id)sender {
+    kRemoveMyDefault(@"youke");
 
     if([WXApi isWXAppInstalled])
     {
@@ -94,7 +137,7 @@
 }
 
 - (IBAction)phoneLogin:(id)sender {
-    
+    kRemoveMyDefault(@"youke");
     
     LoginPhoneViewController *loginPhone = [[LoginPhoneViewController alloc]initWithNibName:@"LoginPhoneViewController" bundle:nil];
     

@@ -298,18 +298,31 @@ static NSString *C_cellIdent = @"CSquareCellID";
         [self.navigationController pushViewController:vc animated:YES];
      
     }else if (_index == 2) {
-
-        __weak typeof(self) ws = self;
-        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//            CGRect Frame = ws.partTimeJobHomeListVC.view.frame;
-//            Frame.origin.x = 0;
-//            ws.partTimeJobHomeListVC.view.frame = Frame;
-            self.tapView.hidden = NO;
-            _partTimeJobHomeListVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, self.view.frame.size.height-43);
-        } completion:nil];
+        NSString *str = kFetchMyDefault(@"youke");
+        if ([str isEqualToString:@"1"]) {
+            [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
+            
+        }else{
+//            __weak typeof(self) ws = self;
+            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+                //            CGRect Frame = ws.partTimeJobHomeListVC.view.frame;
+                //            Frame.origin.x = 0;
+                //            ws.partTimeJobHomeListVC.view.frame = Frame;
+                self.tapView.hidden = NO;
+                _partTimeJobHomeListVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, self.view.frame.size.height-43);
+            } completion:nil];
+        
+        }
         
     }
 
+}
+
+-(void)alertRightAction{
+    [self loginOut];
+//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+//    [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+    //    [self presentViewController:l animated:YES completion:nil];
 }
 
 #pragma mark - GetData

@@ -9,11 +9,16 @@
 #import "PositionDesiredSecondViewController.h"
 #import "SearchView.h"
 #import "LoginViewController.h"
+#import "JMHTTPManager+PositionDesired.h"
+#import "JMSystemLabelsModel.h"
 
-@interface PositionDesiredSecondViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface PositionDesiredSecondViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property(nonatomic,strong)SearchView *searchView;
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSMutableArray *dataArray;
+@property(nonatomic,strong)NSMutableArray *dataArray;//所有model
+@property(nonatomic,strong)NSMutableArray *strArr;//拼接完被搜索的字符串
+@property(nonatomic,strong)NSArray *searchDataArr;//搜索完匹配的字符串
+
 
 @end
 
@@ -26,17 +31,63 @@
 
     
     self.view.backgroundColor = [UIColor whiteColor];
-    NSMutableArray *provinces=[[NSMutableArray alloc] initWithObjects:@"视觉设计师",@"UI设计师",@"多媒体设计师",@"游戏场景",@"美工",@"网页设计师", nil];
-    self.dataArray = provinces;
+//    NSMutableArray *provinces=[[NSMutableArray alloc] initWithObjects:@"视觉设计师",@"UI设计师",@"多媒体设计师",@"游戏场景",@"美工",@"网页设计师", nil];
+//    self.dataArray = provinces;
 
     [self setSearchView];
     [self setTableView];
+    [self getData];
+    
+}
+#pragma mark - data -
+
+-(void)getData{
+//    [self showProgressHUD_view:self.view];
+    [self showHUD];
+    [[JMHTTPManager sharedInstance] fetchPositionLabelsWithMyId:@"967" mode:@"lists" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        NSArray *dataArray =  [JMSystemLabelsModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+        _strArr = [NSMutableArray array];//制作拼接完被搜索的字符串
+        for (JMSystemLabelsModel *model in dataArray) {
+            NSString *str1 = [model.name_relation componentsJoinedByString:@"/"];
+            NSString *str2 = model.name;
+            NSString *str3 = [NSString stringWithFormat:@"%@-%@-%@",str1,str2,model.label_id];
+            [_strArr addObject:str3];
+        }
+        
+        // 搜索不区分大小写
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self contains [cd] %@",self.keyWord];
+        self.searchDataArr =  [[NSArray alloc] initWithArray:[_strArr filteredArrayUsingPredicate:predicate]];
+        NSLog(@"搜索完毕=-- %@",self.searchDataArr);
+        [self.tableView reloadData];
+
+//        if (self.keyWord) {
+//            for (int i = 0; i < _strArr.count; i++) {
+//                NSString *arrStr = _strArr[i];
+//                if ([arrStr containsString:self.keyWord]) {
+//                    [self.searchDataArr addObject:dataArray[i]];
+//                }
+//            }
+//            NSLog(@"搜索完毕=-- %@",self.searchDataArr);
+//
+//            [self.tableView reloadData];
+//
+//        }
+//
+//        WSDropMenuView *dropMenu = [[WSDropMenuView alloc] initWithFrame:CGRectMake(0,self.searchView.frame.origin.y+self.searchView.frame.size.height+15, self.view.frame.size.width,SCREEN_HEIGHT)];
+//        dropMenu.dataSource = self;
+//        dropMenu.delegate = self;
+//        [self.view addSubview:dropMenu];
+        [self hiddenHUD];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
     
 }
 #pragma mark - 布局UI -
 
 -(void)setTableView{
-    
+
     self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 111, SCREEN_WIDTH, SCREEN_HEIGHT-(self.searchView.frame.size.height+22)) style:UITableViewStylePlain];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -59,12 +110,31 @@
     
     
     self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, NAVIGATION_BAR_HEIGHT+21, SCREEN_WIDTH-40, 33)];
-    self.searchView.searchTextField.placeholder = @"请输入职位名称或公司";
- 
+    self.searchView.searchTextField.placeholder = @"请输入职位名称";
+    self.searchView.searchTextField.delegate = self;
     [self.view addSubview:self.searchView];
 
     
     
+}
+
+-(NSArray *)searchActionWithKeyWord:(NSString *)keyWord{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self contains [cd] %@",self.keyWord];
+    NSArray *arrays =  [[NSArray alloc] initWithArray:[_strArr filteredArrayUsingPredicate:predicate]];
+    NSLog(@"搜索完毕=-- %@",arrays);
+    return arrays;
+}
+#pragma mark - textField -
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    // 搜索不区分大小写
+//    self.searchDataArr = [self searchActionWithKeyWord:textField.text];
+//    NSLog(@"搜索完毕=-- %@",self.searchDataArr);
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self contains [cd] %@",self.keyWord];
+    self.searchDataArr =  [[NSArray alloc] initWithArray:[_strArr filteredArrayUsingPredicate:predicate]];
+    NSLog(@"搜索完毕=-- %@",self.searchDataArr);
+    [self.tableView reloadData];
+    
+    return YES;
 }
 
 #pragma mark - tableView DataSource -
@@ -76,7 +146,7 @@
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dataArray count];
+    return [self.searchDataArr count];
 }
 
 
@@ -97,15 +167,16 @@
     
     UIImage *img = [UIImage imageNamed:@"tachi.png"];
     cell.imageView.image = img;
-    
     cell.textLabel.textColor = [UIColor colorWithRed:101/255.0 green:101/255.0 blue:101/255.0 alpha:1.0];
     cell.textLabel.font = [UIFont systemFontOfSize:15];
-    cell.textLabel.text = [self.dataArray objectAtIndex:indexPath.row];
-    
-   
     cell.detailTextLabel.textColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1.0];
     cell.detailTextLabel.font = [UIFont systemFontOfSize:13];
-    cell.detailTextLabel.text = @"产品/产品经理";
+    
+    NSString *str1 = self.searchDataArr[indexPath.row];
+    NSArray *arr = [str1 componentsSeparatedByString:@"-"];
+//    JMSystemLabelsModel *model = [self.dataArray objectAtIndex:indexPath.row];
+    cell.textLabel.text = arr[1];
+    cell.detailTextLabel.text =  arr[0];
     
     
     
@@ -119,15 +190,19 @@
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    LoginViewController *vc = [[LoginViewController alloc] init];
-    
-    [self.navigationController pushViewController:vc animated:YES];
-    
-    NSLog(@"%d",indexPath.row);
+    NSString *str1 = self.searchDataArr[indexPath.row];
+    NSArray *arr = [str1 componentsSeparatedByString:@"-"];
+    [self.navigationController popViewControllerAnimated:YES];
+   
 }
 
 
-
+-(NSMutableArray *)dataArray{
+    if (_dataArray.count == 0) {
+        _dataArray = [NSMutableArray array];
+    }
+    return _dataArray;
+}
 
 /*
 #pragma mark - Navigation

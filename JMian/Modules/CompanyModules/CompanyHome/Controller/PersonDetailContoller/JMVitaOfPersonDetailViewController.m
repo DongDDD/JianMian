@@ -82,7 +82,7 @@
     if (self.educationArray.count > 0) {
         UIView * lastView ;
         for (int i=0; i<self.educationArray.count; i++) {
-            CGFloat Y = descriptionView.frame.origin.y+descriptionView.frame.size.height + lastView.frame.origin.y+lastView.frame.size.height;
+            CGFloat Y = descriptionView.frame.origin.y+descriptionView.frame.size.height + lastView.frame.size.height;
             JMEducationView *educationView = [[JMEducationView alloc]initWithFrame:CGRectMake(0, Y,SCREEN_WIDTH, 248)];
             educationView.model = self.educationArray[i];
             [self.view addSubview:educationView];

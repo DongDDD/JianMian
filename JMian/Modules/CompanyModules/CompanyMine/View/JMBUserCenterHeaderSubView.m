@@ -29,11 +29,11 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
         JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
-        if ([versionModel.test isEqualToString:@"1"]) {
-            //测试环境
+        if (![versionModel.test isEqualToString:@"1"]) {
             [self initView];
             [self initLayout];
         }else{
+            //测试环境
             [self initViewTest];
             [self initLayoutTest];
         

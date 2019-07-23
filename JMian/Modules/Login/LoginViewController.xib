@@ -16,6 +16,7 @@
                 <outlet property="phoneLoginBtn" destination="L5O-Ib-NaR" id="nIc-1L-ZJ6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="wechatLoginBtn" destination="uAD-co-Nvw" id="TXB-1m-hqE"/>
+                <outlet property="youkeBtn" destination="OjN-GZ-wIv" id="AdB-j5-J2h"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -57,45 +58,75 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="deimi_login.png" translatesAutoresizingMaskIntoConstraints="NO" id="2zX-mD-Rgr">
-                    <rect key="frame" x="60" y="80" width="255" height="197.5"/>
+                    <rect key="frame" x="58" y="80" width="255" height="198"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即代表您阅读并同意" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GL-4m-GWO">
-                    <rect key="frame" x="66" y="626" width="239" height="21"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OjN-GZ-wIv">
+                    <rect key="frame" x="276" y="40" width="79" height="30"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="CZP-xY-fcj"/>
-                        <constraint firstAttribute="width" constant="239" id="iLQ-4U-cRE"/>
+                        <constraint firstAttribute="width" constant="79" id="36p-hP-QbT"/>
+                        <constraint firstAttribute="height" constant="30" id="cAj-Dy-tuW"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgG-LL-V1h">
-                    <rect key="frame" x="250" y="626" width="45" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <state key="normal" title="服务条款">
-                        <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" title="游客登录">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
                     <connections>
-                        <action selector="xieyiAction:" destination="-1" eventType="touchUpInside" id="6ie-4b-w4P"/>
+                        <action selector="youkeLogin:" destination="-1" eventType="touchUpInside" id="uap-gt-iPx"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fTG-xc-bfo">
+                    <rect key="frame" x="62" y="631" width="251" height="26"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登录即代表您阅读并同意" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7GL-4m-GWO">
+                            <rect key="frame" x="35" y="2.5" width="124" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="CZP-xY-fcj"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgG-LL-V1h">
+                            <rect key="frame" x="162" y="0.0" width="45" height="26"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                            <state key="normal" title="服务条款">
+                                <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="xieyiAction:" destination="-1" eventType="touchUpInside" id="6ie-4b-w4P"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="7GL-4m-GWO" firstAttribute="centerY" secondItem="fTG-xc-bfo" secondAttribute="centerY" id="639-fr-GO8"/>
+                        <constraint firstAttribute="height" constant="26" id="Hkj-Mv-m9C"/>
+                        <constraint firstItem="ZgG-LL-V1h" firstAttribute="centerY" secondItem="7GL-4m-GWO" secondAttribute="centerY" id="JvW-1A-vcI"/>
+                        <constraint firstItem="ZgG-LL-V1h" firstAttribute="leading" secondItem="7GL-4m-GWO" secondAttribute="trailing" constant="3" id="d1R-sj-ahn"/>
+                        <constraint firstAttribute="width" constant="251" id="sv6-CB-tIt"/>
+                        <constraint firstItem="7GL-4m-GWO" firstAttribute="leading" secondItem="fTG-xc-bfo" secondAttribute="leading" constant="35" id="xx8-xi-xL5"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="fTG-xc-bfo" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="2LK-kR-ZNY"/>
                 <constraint firstItem="uAD-co-Nvw" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="35r-B6-tBa"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="uAD-co-Nvw" secondAttribute="trailing" constant="20" id="AxY-dP-Uel"/>
-                <constraint firstItem="ZgG-LL-V1h" firstAttribute="bottom" secondItem="7GL-4m-GWO" secondAttribute="bottom" id="KgE-sU-8df"/>
                 <constraint firstItem="L5O-Ib-NaR" firstAttribute="height" secondItem="uAD-co-Nvw" secondAttribute="height" id="LFa-r2-AId"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="fTG-xc-bfo" secondAttribute="bottom" constant="10" id="NWY-Ik-i5m"/>
                 <constraint firstItem="uAD-co-Nvw" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="303" id="PiP-LH-aM5"/>
-                <constraint firstItem="2zX-mD-Rgr" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="XBW-yK-cxx"/>
+                <constraint firstItem="OjN-GZ-wIv" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="20" id="V0g-99-K7x"/>
+                <constraint firstItem="2zX-mD-Rgr" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="-2" id="XBW-yK-cxx"/>
                 <constraint firstItem="2zX-mD-Rgr" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="60" id="bkG-F1-Qw3"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="OjN-GZ-wIv" secondAttribute="trailing" constant="20" id="eQZ-HF-sCt"/>
                 <constraint firstItem="L5O-Ib-NaR" firstAttribute="top" secondItem="uAD-co-Nvw" secondAttribute="bottom" constant="25" id="eu4-hx-yxl"/>
                 <constraint firstItem="uAD-co-Nvw" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="ezF-V4-bY0"/>
-                <constraint firstItem="ZgG-LL-V1h" firstAttribute="leading" secondItem="7GL-4m-GWO" secondAttribute="trailing" constant="-55" id="fBr-On-Ygk"/>
                 <constraint firstItem="L5O-Ib-NaR" firstAttribute="trailing" secondItem="uAD-co-Nvw" secondAttribute="trailing" id="fSw-wD-yDA"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="7GL-4m-GWO" secondAttribute="bottom" constant="20" id="hWs-3m-xFW"/>
-                <constraint firstItem="7GL-4m-GWO" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="-2" id="nOX-Wp-4Vh"/>
-                <constraint firstItem="ZgG-LL-V1h" firstAttribute="centerY" secondItem="7GL-4m-GWO" secondAttribute="centerY" id="rbs-V0-58C"/>
                 <constraint firstItem="L5O-Ib-NaR" firstAttribute="leading" secondItem="uAD-co-Nvw" secondAttribute="leading" id="y3S-YY-15k"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

@@ -383,6 +383,8 @@ static NSString *cellIdent = @"cellIdent";
     [self.choosePositionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.companyRequireBtn setBackgroundColor:[UIColor whiteColor]];
     [self.companyRequireBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.bgBtn setHidden:YES];
+    [self.labChooseBottomView setHidden:YES];
     [self.labschooseVC.view setHidden:YES];
     _page = 1;
     _city_id = nil;

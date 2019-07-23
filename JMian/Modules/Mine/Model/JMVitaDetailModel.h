@@ -30,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *user_avatar;
 @property (copy, nonatomic) NSString *vita_work_start_date;
 @property (copy, nonatomic) NSString *work_status;
+@property (copy, nonatomic) NSString *vita_status;
 @property (copy, nonatomic) NSString *vita_education;
 @property (copy, nonatomic) NSString *vita_description;
 @property (copy, nonatomic) NSString *work_start_date;

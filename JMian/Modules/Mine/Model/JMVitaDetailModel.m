@@ -27,6 +27,7 @@
              
              @"myDescription":@"description",
 
+             @"vita_status":@"vita.status",
              @"user_nickname":@"user.nickname",
              @"user_avatar":@"user.avatar",
              @"user_email":@"user.email",

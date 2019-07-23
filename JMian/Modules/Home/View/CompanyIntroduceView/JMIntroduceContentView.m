@@ -139,7 +139,9 @@ NSUInteger const maxLine = 6;
 }
 
 
+-(void)setContentStr:(NSString *)contentStr{
 
+}
 #pragma mark - 按钮点击事件，通过代理模式响应
 -(void)btnClick:(UIButton *)btn {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didClickButton:)]) {

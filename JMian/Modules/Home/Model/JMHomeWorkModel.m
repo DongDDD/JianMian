@@ -35,9 +35,11 @@
              @"companyLatitude":@"company.latitude",
              @"companyAddress":@"company.address",
              @"companyLabels":@"company.labels",
-             
              @"companyIndustry_label":@"company.address",
              @"companyCity":@"company.labels",
+             @"work_label_name":@"work_label.name",
+             @"work_label_label_id":@"work_label.label_id",
+
      
              @"videoCompanyId":@"video.company_id",
              @"videoFile_path":@"video.file_path",

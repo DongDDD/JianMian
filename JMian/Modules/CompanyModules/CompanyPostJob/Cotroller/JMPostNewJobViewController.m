@@ -75,7 +75,6 @@
     if (_viewType == JMPostNewJobViewTypeEdit) {
         [self setupValues];
         [self setRightBtnTextName:@"保存"];
-
     }else{
         [self setRightBtnTextName:@"发布"];
     }
@@ -85,10 +84,11 @@
     [super viewWillDisappear:animated];
     [self.workNameTextField resignFirstResponder];
 }
+
 #pragma mark - 赋值
 -(void)setupValues{
-    [self.workPropertyBtn setTitle:self.homeworkModel.work_name forState:UIControlStateNormal];
-    [self.workNameBtn setTitle:self.homeworkModel.work_name forState:UIControlStateNormal];
+    [self.workPropertyBtn setTitle:self.homeworkModel.work_label_name forState:UIControlStateNormal];
+    [self.workNameBtn setTitle:self.homeworkModel.work_label_name forState:UIControlStateNormal];
     self.work_label_id = self.homeworkModel.work_label_id;
     self.workNameTextField.text = self.homeworkModel.work_name;
     NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",self.homeworkModel.work_experience_min,self.homeworkModel.work_experience_max];
@@ -104,7 +104,8 @@
 
 #pragma mark - 数据提交
 -(void)rightAction{
-    
+    [self.workNameTextField resignFirstResponder];
+
     if (_viewType == JMPostNewJobViewTypeEdit) {
         [self updateJob];
     }else{
@@ -117,7 +118,7 @@
 -(void)createJob{
     NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
     NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
-    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_work_label_id work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionStr address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionStr address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -136,11 +137,28 @@
 -(void)updateJob{
     NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
     NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
-    [[JMHTTPManager sharedInstance]updateWorkWith_Id:self.homeworkModel.work_id city_id:@"3" work_label_id:_work_label_id work_name:self.workNameBtn.titleLabel.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateWorkWith_Id:self.homeworkModel.work_id city_id:@"3" work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-        [self showAlertSimpleTips:@"提示" message:@"提交成功" btnTitle:@"好的"];
-        [self.navigationController popViewControllerAnimated:YES];
-        
+//        [self showAlertVCSucceesSingleWithMessage:@"" btnTitle:@""];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:@"更新成功" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (self.navigationController.viewControllers.count >=2) {
+                UIViewController *listViewController =self.navigationController.viewControllers[1];
+                [self.navigationController popToViewController:listViewController animated:YES];
+                
+             }
+      
+        }]];
+        UIImageView *icon = [[UIImageView alloc] init];
+        icon.image = [UIImage imageNamed:@"purchase_succeeds"];
+        [alert.view addSubview:icon];
+        [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(alert.view).mas_offset(23);
+            make.centerX.mas_equalTo(alert.view);
+            make.size.mas_equalTo(CGSizeMake(75, 64));
+            
+        }];
+        [self presentViewController:alert animated:YES completion:nil];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         
@@ -244,7 +262,7 @@
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
-        [self showAlertSimpleTips:@"提示" message:@"请先选择工作性质" btnTitle:@"好的"];
+        [self showAlertSimpleTips:@"提示" message:@"请先选择工作岗位" btnTitle:@"好的"];
     }
 }
 

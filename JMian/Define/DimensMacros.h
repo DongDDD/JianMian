@@ -28,6 +28,7 @@
 #import "JMNoDataView.h"
 #import "JMVersionManager.h"
 
+
 #define STATUS_BAR_HEIGHT 20
 //NavBar高度
 #define NAVIGATION_BAR_HEIGHT 44
