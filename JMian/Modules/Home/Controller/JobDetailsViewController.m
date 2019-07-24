@@ -25,7 +25,6 @@
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMHTTPManager+Login.h"
 #import "JMIDCardIdentifyViewController.h"
-#import "WXApi.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate,MAMapViewDelegate,JMShareViewDelegate>
@@ -384,13 +383,11 @@
 
 -(void)shareViewLeftAction{
     [self disapearAction];
-    [self wxShare:0];
   
 }
 
 -(void)shareViewRightAction{
     [self disapearAction];
-    [self wxShare:1];
 
 }
 #pragma mark - 数据请求
@@ -963,34 +960,6 @@
     }];
 }
 
-#pragma mark -- 微信分享的是链接
-- (void)wxShare:(int)n
-{   //检测是否安装微信
-    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
-    sendReq.bText = NO; //不使用文本信息
-    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
-    
-    WXMediaMessage *urlMessage = [WXMediaMessage message];
-    urlMessage.title = self.myModel.companyName;
-    urlMessage.description = self.myModel.Description ;
-    
-    //    UIImageView *imgView = [[UIImageView alloc]init];
-    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
-    //
-    
-    UIImage *image = [self getImageFromURL:self.myModel.companyLogo_path];   //缩略图,压缩图片,不超过 32 KB
-    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
-    [urlMessage setThumbData:thumbData];
-    //分享实例
-    WXWebpageObject *webObj = [WXWebpageObject object];
-    webObj.webpageUrl = self.myModel.share_url;
-    
-    urlMessage.mediaObject = webObj;
-    sendReq.message = urlMessage;
-    //发送分享
-    [WXApi sendReq:sendReq];
-    
-}
 
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     

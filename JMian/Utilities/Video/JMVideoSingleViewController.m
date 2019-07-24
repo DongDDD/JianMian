@@ -7,11 +7,8 @@
 //
 
 #import "JMVideoSingleViewController.h"
-#import "SJVideoPlayer.h"
-#import <SJVideoPlayer/SJVideoPlayer.h>
 
 @interface JMVideoSingleViewController ()
-@property (nonatomic, strong, nullable) SJVideoPlayer *player;
 
 @end
 
@@ -20,12 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setHTMLPath:@"SecondModulesHTML/B/video.html"];
-    _player = [SJVideoPlayer player];
-    _player.URLAsset = [[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com/storage/videos/2019/07/04/sVjYyXuM2flMbqFsTIoRVgLSMirHHL9XNTSGAYHi.mp4"]];
-    [self.view addSubview:_player.view];
-    [_player.view mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.offset(0);
-    }];
+
     
     
 //    SJVideoPlayer *_videoPlayer = [SJVideoPlayer player];

@@ -8,14 +8,13 @@
 
 #import "LoginViewController.h"
 #import "LoginPhoneViewController.h"
-#import "WXApi.h"
 #import "JMHTTPManager+Login.h"
 #import "JMServiceProtocolWebViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "JMHTTPManager+Captcha.h"
 #import "JMJudgeViewController.h"
 
-@interface LoginViewController ()<UIGestureRecognizerDelegate,WXApiDelegate>
+@interface LoginViewController ()<UIGestureRecognizerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *wechatLoginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *phoneLoginBtn;
@@ -29,9 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    if(![WXApi isWXAppInstalled]){
         [self.wechatLoginBtn setHidden:YES];
-    }
 
     // Do any additional setup after loading the view from its nib.
 //    self.navigationController.interactivePopGestureRecognizer.delegate = self;
@@ -90,18 +87,7 @@
 - (IBAction)wechatLoginAction:(id)sender {
     kRemoveMyDefault(@"youke");
 
-    if([WXApi isWXAppInstalled])
-    {
-        NSLog(@"wechat is install");
-        SendAuthReq *req = [[SendAuthReq alloc] init];
-        req.state = @"wx_oauth_authorization_state";//用于保持请求和回调的状态，授权请求或原样带回
-        req.scope = @"snsapi_userinfo";//授权作用域：获取用户个人信息
-
-        [WXApi sendReq:req];
-    }else{
-        [self showAlertSimpleTips:@"提示" message:@"未安装微信" btnTitle:@"好的"];
-    }
-    
+  
     
     
 }
@@ -112,29 +98,7 @@
     
 }
 
-- (void)onResp:(id)resp{
-    
-    if([resp isKindOfClass:[SendAuthResp class]]){//判断是否为授权登录类
-        
-        SendAuthResp *req = (SendAuthResp *)resp;
-        
-        if([req.state isEqualToString:@"wx_oauth_authorization_state"]){//微信授权成功
-            
-            NSLog(@"%@",req.code); //获得code
-            
-            [[JMHTTPManager sharedInstance] loginWithMode:@"wx" phone:@"" captcha:req.code sign_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-              
-                LoginPhoneViewController *loginPhone = [[LoginPhoneViewController alloc]initWithNibName:@"LoginPhoneViewController" bundle:nil];
-                
-                [self.navigationController pushViewController:loginPhone animated:YES];
-                
-            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-                
-                
-            }];
-        }
-    }
-}
+
 
 - (IBAction)phoneLogin:(id)sender {
     kRemoveMyDefault(@"youke");

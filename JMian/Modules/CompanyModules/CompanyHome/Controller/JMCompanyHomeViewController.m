@@ -19,11 +19,8 @@
 #import "JMHTTPManager+Work.h"
 #import "JMHomeWorkModel.h"
 #import "JMCityListViewController.h"
-#import "SJVideoPlayer.h"
-#import <SJVideoPlayer/SJVideoPlayer.h>
 #import "JMVideoSingleViewController.h"
 #import "JMLabChooseBottomView.h"
-#import "ZFPlayer.h"
 
 
 @interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate,JMLabsChooseViewControllerDelegate,JMChoosePositionTableViewControllerDelegate,JMCityListViewControllerDelegate,JMLabChooseBottomViewDelegate>
@@ -45,12 +42,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *choosePositionBtn;
 @property (weak, nonatomic) IBOutlet UIButton *chooseRequireBtn;
 @property(nonatomic,strong)NSMutableArray *choosePositionArray;
-@property (nonatomic, strong, nullable) SJVideoPlayer *player;
 @property (nonatomic, strong)UIView *bottomView;
 @property (nonatomic, strong)JMLabChooseBottomView *labChooseBottomView;
 
-@property (weak, nonatomic) IBOutlet ZFPlayerView *playView;
-@property (nonatomic, strong) ZFPlayerView *playerView;
 @property (atomic, strong) NSURL *url;
 // -----------筛选------------
 @property(nonatomic,copy)NSString *job_label_id;

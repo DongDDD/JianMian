@@ -19,21 +19,17 @@
 #import "JMHTTPManager+FetchCompanyInfo.h"
 #import "JMCompanyLikeViewController.h"
 #import "JMMySettingViewController.h"
-#import "JMWalletViewController.h"
 #import "JMUploadVideoViewController.h"
 #import "JMIDCardIdentifyViewController.h"
 #import "JMBUserInfoViewController.h"
 #import "UIView+addGradualLayer.h"
-#import "JMMyOrderListViewController.h"
 #import "JMBUserCenterHeaderView.h"
 #import "JMBUserCenterHeaderSubView.h"
 #import "JMBUserMineSectionView.h"
 #import "JMPositionManageViewController.h"
 #import "JMTaskManageViewController.h"
-#import "JMVIPViewController.h"
 #import "JMTaskManageViewController.h"
 #import "UITabBar+XSDExt.h"
-#import "WXApi.h"
 #import "JMShareView.h"
 
 
@@ -139,12 +135,10 @@
     
 -(void)shareViewLeftAction{
     [self disapearAction];
-    [self wxShare:0];
 }
     
 -(void)shareViewRightAction{
     [self disapearAction];
-    [self wxShare:1];
 }
 
 -(void)disapearAction{
@@ -170,10 +164,7 @@
         [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
         return;
     }
-    JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
-    vc.viewType = JMMyOrderListViewControllerCUser;
-    [self.personalCenterHeaderView.orderBadgeView setHidden:YES];
-    [self.navigationController pushViewController:vc animated:YES];
+ 
     
 }
 
@@ -191,44 +182,8 @@
     
 }
 
-//#pragma mark - B端个人的中心
-//
-//-(void)BTaskClick{
-//    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-//    vc.title = @"任务管理";
-//    [vc setMyIndex:0];
-//    [_BUserCenterHeaderSubView.taskBadgeView setHidden:YES];
-//
-//    [self.navigationController pushViewController:vc animated:YES];
-//
-//}
-//
-//-(void)BOrderClick{
-//    JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
-//    vc.viewType = JMMyOrderListViewControllerBUser;
-//    [_BUserCenterHeaderSubView.orderBadgeView setHidden:YES];
-//    [self.navigationController pushViewController:vc animated:YES];
-//
-//}
-//
-//-(void)BVIPClick{
-//    JMVIPViewController *vc = [[JMVIPViewController alloc]init];
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
-//-(void)getCompanyData{
-//
-//
-//    [[JMHTTPManager sharedInstance] fetchCompanyInfo_Id:self.userInfoModel.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//
-//
-//
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-//
-//
-//    }];
-//
-//}
+
+
 
 - (NSDictionary *)generateDicFromArray:(NSArray *)array {
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -319,13 +274,7 @@
                     [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
                 }
             }else{
-                //微信分享
-                if([WXApi isWXAppInstalled])
-                {
-                    
-                    [self wxShare:0];
-                    
-                }else{
+     
                     [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
                     [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
                         make.top.equalTo(self.view);
@@ -342,13 +291,10 @@
                         
                     }];
                     //            [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
-                    
-                }
+     
             }
            
         }else if (indexPath.row == 1) {
-            //我的钱包
-            [self.navigationController pushViewController:[[JMWalletViewController alloc] init] animated:YES];
         }else  if (indexPath.row == 2) {
             //实名认证
             JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
@@ -475,36 +421,6 @@
 
 }
 
-#pragma mark -- 微信分享的是链接
-- (void)wxShare:(int)n
-{   //检测是否安装微信
-    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
-    sendReq.bText = NO; //不使用文本信息
-    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
-    
-    WXMediaMessage *urlMessage = [WXMediaMessage message];
-    urlMessage.title = @"得米";
-    urlMessage.description = @"来得米，招人，找活，找你想要的！" ;
-    
-    //    UIImageView *imgView = [[UIImageView alloc]init];
-    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
-    //
-    
-    UIImage *image = [UIImage imageNamed:@"demi_home"];
-    //缩略图,压缩图片,不超过 32 KB
-    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
-    [urlMessage setThumbData:thumbData];
-    //分享实例
-    WXWebpageObject *webObj = [WXWebpageObject object];
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    webObj.webpageUrl = userModel.share;
-    
-    urlMessage.mediaObject = webObj;
-    sendReq.message = urlMessage;
-    //发送分享
-    [WXApi sendReq:sendReq];
-    
-}
 
 
 #pragma mark - Getter

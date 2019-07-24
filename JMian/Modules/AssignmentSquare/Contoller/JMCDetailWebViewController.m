@@ -13,7 +13,6 @@
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMCompanyIntroduceViewController.h"
 #import "JMShareView.h"
-#import "WXApi.h"
 #import "JMCDetailModel.h"
 #import "JMMessageListModel.h"
 #import "JMChatViewViewController.h"
@@ -272,12 +271,10 @@
 }
     
 -(void)shareViewLeftAction{
-    [self wxShare:0];
     [self hiddenChoosePayView];
     
 }
 -(void)shareViewRightAction{
-    [self wxShare:1];
     [self hiddenChoosePayView];
     
     
@@ -448,50 +445,7 @@
     }];
 }
 
-#pragma mark -- 微信分享的是链接
-- (void)wxShare:(int)n
-{   //检测是否安装微信
-  
-    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
-    sendReq.bText = NO; //不使用文本信息
-    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
-    
-    WXMediaMessage *urlMessage = [WXMediaMessage message];
-    urlMessage.title = self.detailModel.task_title;
-    urlMessage.description = self.detailModel.myDescription;
-    
-//    UIImageView *imgView = [[UIImageView alloc]init];
-//    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
-//
-    
-    NSString *url;
-    if (self.detailModel.images.count > 0) {
-        for (int i = 0; i < self.detailModel.images.count; i++) {
-            JMCDetailImageModel *imgModel = self.detailModel.images[0];
-            url = imgModel.file_path;
-        }
-        
-    }else if (self.detailModel.company_logo_path){
-        url= self.detailModel.company_logo_path;
-    }
-    
-//    UIImage *image = [self getImageFromURL:url];
-//    UIImage *image = [UIImage imageNamed:@"demi_home"];
-//NSData *thumbData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-    //缩略图,压缩图片,不超过 32 KB
-    UIImage *image = [self handleImageWithURLStr:url];
-    NSData *thumbData = UIImageJPEGRepresentation(image, 0.1);
-    [urlMessage setThumbData:thumbData];
-    //分享实例
-    WXWebpageObject *webObj = [WXWebpageObject object];
-    webObj.webpageUrl = self.detailModel.share_url;
-    
-    urlMessage.mediaObject = webObj;
-    sendReq.message = urlMessage;
-    //发送分享
-    [WXApi sendReq:sendReq];
 
-}
 
 - (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
     NSURL *url = [NSURL URLWithString:imageURLStr];

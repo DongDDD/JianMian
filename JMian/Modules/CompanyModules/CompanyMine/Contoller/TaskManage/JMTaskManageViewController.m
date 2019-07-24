@@ -12,7 +12,6 @@
 #import "JMHTTPManager+TaskOrderStatus.h"
 #import "JMHTTPManager+CreateTaskComment.h"
 #import "JMTaskCommetViewController.h"
-#import "WXApi.h"
 #import "JMHTTPManager+OrderPay.h"
 #import "JMOrderPaymentModel.h"
 #import "JMShareView.h"
@@ -307,12 +306,10 @@
 
 //微信DEMI001
 -(void)shareViewLeftAction{
-    [self wechatPayWithModel:self.orderPaymentModel];
     
 }
 //DEMI001
 -(void)shareViewRightAction{
-    [self alipayWithModel:self.orderPaymentModel];
     
 }
 
@@ -465,12 +462,7 @@
     [[JMHTTPManager sharedInstance]fectchTaskOrderInfo_taskID:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             JMTaskOrderListCellData *taskInfoData = [JMTaskOrderListCellData mj_objectWithKeyValues:responsObject[@"data"]];
-            if([WXApi isWXAppInstalled])
-            {
-                [self wxShare:0 data1:taskInfoData];
-            }else{
-//                [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
-            }
+
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -782,23 +774,7 @@
     
 }
 
-//拉起微信支付
-- (void)wechatPayWithModel:(JMOrderPaymentModel *)model{
-    
-    PayReq* req = [[PayReq alloc] init];
-    req.partnerId = model.wx_partnerid;
-    req.prepayId = model.wx_prepayid;
-    req.nonceStr = model.wx_noncestr;
-    req.timeStamp = model.wx_timestamp;
-    req.package = model.wx_package;
-    req.sign = model.wx_sign;
-    [WXApi sendReq:req];
-    [self hiddenChoosePayView];
-    
-//    [self payMoneyRequestWithNo:model.serial_no amount:@"130"];
-    
-    
-}
+
 
 
 //拉起支付
@@ -838,45 +814,7 @@
     
 }
 
-#pragma mark -- 微信分享的是链接
-- (void)wxShare:(int)n data1:(JMTaskOrderListCellData *)data1
-{   //检测是否安装微信
-    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
-    sendReq.bText = NO; //不使用文本信息
-    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
-    
-    WXMediaMessage *urlMessage = [WXMediaMessage message];
-    urlMessage.title = data1.goodsTitle;
-    urlMessage.description = data1.goodsDescription;
-    
-    if (data1.snapshot_images.count > 0) {
-        NSString *url;
-        for (int i = 0; i < data1.snapshot_images.count; i++) {
-            JMTaskOrderImageModel *imgModel = data1.snapshot_images[0];
-            url = imgModel.file_path;
-        }
-        UIImage *image = [self getImageFromURL:url];
-        //缩略图,压缩图片,不超过 32 KB
-        NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
-        [urlMessage setThumbData:thumbData];
-        
-    }else{
-        UIImage *image = [UIImage imageNamed:@"demi_home"];
-        NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
-        [urlMessage setThumbData:thumbData];
-    }
- 
-    //分享实例
-    WXWebpageObject *webObj = [WXWebpageObject object];
-    webObj.webpageUrl = data1.share_url;
-    
-    urlMessage.mediaObject = webObj;
-    sendReq.message = urlMessage;
-    //发送分享
-    [WXApi sendReq:sendReq];
-    NSLog(@"share WX");
-    
-}
+
 
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     

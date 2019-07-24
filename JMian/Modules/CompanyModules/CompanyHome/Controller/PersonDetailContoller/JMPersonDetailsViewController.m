@@ -27,9 +27,7 @@
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMHTTPManager+Login.h"
 #import "JMIDCardIdentifyViewController.h"
-#import "WXApi.h"
 #import "JMShareView.h"
-#import "SJVideoPlayer.h"
 
 
 
@@ -343,34 +341,7 @@
     
 }
 
-#pragma mark -- 微信分享的是链接
-- (void)wxShare:(int)n
-{   //检测是否安装微信
-    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
-    sendReq.bText = NO; //不使用文本信息
-    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
-    
-    WXMediaMessage *urlMessage = [WXMediaMessage message];
-    urlMessage.title = self.vitaModel.user_nickname;
-    urlMessage.description = self.vitaModel.vita_description ;
-    
-    //    UIImageView *imgView = [[UIImageView alloc]init];
-    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
-    //
-    
-    UIImage *image = [self getImageFromURL:self.vitaModel.user_avatar];   //缩略图,压缩图片,不超过 32 KB
-    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
-    [urlMessage setThumbData:thumbData];
-    //分享实例
-    WXWebpageObject *webObj = [WXWebpageObject object];
-    webObj.webpageUrl = self.vitaModel.share_url;
-    
-    urlMessage.mediaObject = webObj;
-    sendReq.message = urlMessage;
-    //发送分享
-    [WXApi sendReq:sendReq];
-    
-}
+
 
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
@@ -480,21 +451,7 @@
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
-//    [[UIApplication sharedApplication].keyWindow addSubview:playVC.view];
-//    [playVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.offset(0);
-//    }];
- 
-//    SJVideoPlayer *_videoPlayer = [SJVideoPlayer player];
-//    _videoPlayer.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); // 可以使用AutoLayout, 这里为了简便设置的Frame.
-//    [self.view addSubview:_videoPlayer.view];
-//    // 初始化资源
-//    _videoPlayer.URLAsset = [[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:self.companyModel.video_file_path]];
-//    [_videoPlayer play];
-//    JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
-//    vc.player = self.player;
-//    vc.topTitle = self.companyModel.userNickname;
-//    [self.navigationController pushViewController:vc animated:YES];
+
     
 }
 
@@ -638,13 +595,11 @@
 
 -(void)shareViewLeftAction{
     [self disapearAction];
-    [self wxShare:0];
     
 }
 
 -(void)shareViewRightAction{
     [self disapearAction];
-    [self wxShare:1];
 }
 #pragma mark - scrollViewDelegate
 

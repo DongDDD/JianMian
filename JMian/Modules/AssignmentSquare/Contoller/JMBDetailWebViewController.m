@@ -15,7 +15,6 @@
 #import "JMVideoChatView.h"
 #import "JMInterViewModel.h"
 #import "JMShareView.h"
-#import "WXApi.h"
 #import "JMBDetailModel.h"
 
 
@@ -123,13 +122,11 @@
 }
 
 -(void)shareViewLeftAction{
-    [self wxShare:0];
     [self hiddenChoosePayView];
     
 }
 
 -(void)shareViewRightAction{
-    [self wxShare:1];
     [self hiddenChoosePayView];
     
     
@@ -184,34 +181,7 @@
 
 }
 
-#pragma mark -- 微信分享的是链接
-- (void)wxShare:(int)n
-{   //检测是否安装微信
-    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
-    sendReq.bText = NO; //不使用文本信息
-    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
-    
-    WXMediaMessage *urlMessage = [WXMediaMessage message];
-    urlMessage.title = self.detailModel.user_nickname;
-    urlMessage.description = self.detailModel.type_label_name ;
-    
-    //    UIImageView *imgView = [[UIImageView alloc]init];
-    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
-    //
-    
-    UIImage *image = [self getImageFromURL:self.detailModel.user_avatar];   //缩略图,压缩图片,不超过 32 KB
-    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
-    [urlMessage setThumbData:thumbData];
-    //分享实例
-    WXWebpageObject *webObj = [WXWebpageObject object];
-    webObj.webpageUrl = self.detailModel.share_url;
-    
-    urlMessage.mediaObject = webObj;
-    sendReq.message = urlMessage;
-    //发送分享
-    [WXApi sendReq:sendReq];
-    
-}
+
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
     UIImage * result;

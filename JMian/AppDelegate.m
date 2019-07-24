@@ -53,7 +53,6 @@
     [AMapServices sharedServices].enableHTTPS = YES;
     
     //向微信注册
-    [WXApi registerApp:@"wxb42b10e7d84612a9"];
     [[TIMManager sharedInstance] addMessageListener:self];
      //用户状态变更
     TIMUserConfig * cfg = [[TIMUserConfig alloc] init];
@@ -160,13 +159,7 @@
     
     
 }
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return  [WXApi handleOpenURL:url delegate:self];
-}
 
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [WXApi handleOpenURL:url delegate:self];
-}
 
 -(void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     
@@ -293,47 +286,7 @@
 
 #pragma mark - 网络回调
 
-// 微信支付成功或者失败回调
--(void) onResp:(BaseResp*)resp
-{
-    //    NSString *strMsg = [NSString stringWithFormat:@"errcode:%d", resp.errCode];
-    NSString *strTitle;
-    
-    if([resp isKindOfClass:[SendAuthResp class]]){//判断是否为授权登录类
-        
-        SendAuthResp *req = (SendAuthResp *)resp;
-        
-        if([req.state isEqualToString:@"wx_oauth_authorization_state"]){//微信授权成功
-            strTitle = @"微信授权成功";
-            NSLog(@"%@",req.code); //获得code
-            [self loginRequestWithCode:req.code];
-            
-        }
-    }else if([resp isKindOfClass:[SendMessageToWXResp class]])
-    {
-        strTitle = [NSString stringWithFormat:@"发送媒体消息结果"];
-    }else if([resp isKindOfClass:[PayResp class]]){
-        //支付返回结果，实际支付结果需要去微信服务器端查询
-        
-        switch (resp.errCode) {
-            case WXSuccess:
-                
-                strTitle = [NSString stringWithFormat:@"支付成功"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:Notification_PaySucceed object:nil];
-                
-                NSLog(@"支付成功－PaySuccess，retcode = %d", resp.errCode);
-                break;
-                
-            default:
-                strTitle = [NSString stringWithFormat:@"支付失败"];
-                NSLog(@"错误，retcode = %d, retstr = %@", resp.errCode,resp.errStr);
-                break;
-        }
-    }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:@"" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-    [alert show];
-    
-}
+
 
 //IM被踢下线
 -(void)onForceOffline{

@@ -18,7 +18,6 @@
 #import "JMBUserSquareTableViewCell.h"
 #import "JMBDetailWebViewController.h"
 #import "JMCDetailWebViewController.h"
-#import "JMWalletViewController.h"
 #import "JMTaskManageViewController.h"
 #import "JMGradeView.h"
 #import "JMPartTimeJobTypeLabsViewController.h"
@@ -156,7 +155,6 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self.tableView.mj_header beginRefreshing];
 }
 -(void)didClickIncomeAction{
-    [self.navigationController pushViewController:[JMWalletViewController new] animated:YES];
 }
 
 -(void)didClickTaskProcessingAction{
