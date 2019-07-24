@@ -88,19 +88,19 @@
 
 -(void)setTableView{
 
-    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 111, SCREEN_WIDTH, SCREEN_HEIGHT-(self.searchView.frame.size.height+22)) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-(self.searchView.frame.size.height+22)) style:UITableViewStylePlain];
     
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
+//    self.tableView.tableHeaderView = self.searchView;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 64;
     
     [self.view addSubview:self.tableView];
    
-    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(self.searchView.frame.origin.x, self.tableView.frame.origin.y,self.searchView.frame.size.width, 0.5)];
-    headerView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
-    [self.view addSubview:headerView];
+//    UIView *headerView = [[UIView alloc]initWithFrame:CGRectMake(self.searchView.frame.origin.x, self.tableView.frame.origin.y,self.searchView.frame.size.width, 0.5)];
+//    headerView.backgroundColor = [UIColor colorWithRed:230/255.0 green:230/255.0 blue:230/255.0 alpha:1.0];
+//    [self.view addSubview:headerView];
 
 
 
@@ -109,7 +109,7 @@
 -(void)setSearchView{
     
     
-    self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, NAVIGATION_BAR_HEIGHT+21, SCREEN_WIDTH-40, 33)];
+    self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20,0, SCREEN_WIDTH-40, 33)];
     self.searchView.searchTextField.placeholder = @"请输入职位名称";
     self.searchView.searchTextField.delegate = self;
     [self.view addSubview:self.searchView];
@@ -129,6 +129,8 @@
     // 搜索不区分大小写
 //    self.searchDataArr = [self searchActionWithKeyWord:textField.text];
 //    NSLog(@"搜索完毕=-- %@",self.searchDataArr);
+    [textField resignFirstResponder];
+    self.keyWord = textField.text;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"self contains [cd] %@",self.keyWord];
     self.searchDataArr =  [[NSArray alloc] initWithArray:[_strArr filteredArrayUsingPredicate:predicate]];
     NSLog(@"搜索完毕=-- %@",self.searchDataArr);
@@ -177,9 +179,7 @@
 //    JMSystemLabelsModel *model = [self.dataArray objectAtIndex:indexPath.row];
     cell.textLabel.text = arr[1];
     cell.detailTextLabel.text =  arr[0];
-    
-    
-    
+ 
     
     //添加右侧注释
     
@@ -192,8 +192,12 @@
     
     NSString *str1 = self.searchDataArr[indexPath.row];
     NSArray *arr = [str1 componentsSeparatedByString:@"-"];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"KeywWork" object:arr];
     [self.navigationController popViewControllerAnimated:YES];
-   
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectedCellWithArr:)]) {
+        [_delegate didSelectedCellWithArr:arr];
+    }
+  
 }
 
 
@@ -202,6 +206,15 @@
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
+}
+
+-(SearchView *)searchView{
+    if (!_searchView) {
+        _searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, NAVIGATION_BAR_HEIGHT+21, SCREEN_WIDTH-40, 33)];
+        _searchView.searchTextField.placeholder = @"请输入职位名称";
+        _searchView.searchTextField.delegate = self;
+    }
+    return _searchView;
 }
 
 /*

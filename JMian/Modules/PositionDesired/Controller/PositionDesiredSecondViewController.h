@@ -12,7 +12,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol PositionDesiredSecondViewControllerDelegate <NSObject>
 
--(void)didSelectedCellWithLabel_id:(NSString *)label_id;
+-(void)didSelectedCellWithArr:(NSArray *)arr;
 
 @end
 @interface PositionDesiredSecondViewController : BaseViewController

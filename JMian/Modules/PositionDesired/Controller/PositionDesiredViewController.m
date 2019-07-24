@@ -15,7 +15,7 @@
 
 
 
-@interface PositionDesiredViewController ()<WSDropMenuViewDataSource,WSDropMenuViewDelegate,UITextFieldDelegate>
+@interface PositionDesiredViewController ()<WSDropMenuViewDataSource,WSDropMenuViewDelegate,UITextFieldDelegate,PositionDesiredSecondViewControllerDelegate>
 
 @property (nonatomic, strong) NSArray *firstArr,*secArr,*thirdArr;
 
@@ -36,9 +36,9 @@
     [self setRightBtnTextName:@"保存"];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    if (!_isHomeViewVC) {
+//    if (!_isHomeViewVC) {
         [self setSearchView];
-    }
+//    }
     
     [self getData];
     
@@ -84,13 +84,12 @@
 -(void)setSearchView{
     
     self.searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH-40, 33)];
-    self.searchView.searchTextField.placeholder = @"                                     搜索";
+    self.searchView.searchTextField.placeholder = @"搜索";
     self.searchView.searchTextField.returnKeyType =UIReturnKeySearch;
     self.searchView.searchTextField.delegate = self;
-    UIImageView *image=[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"圆角矩形 5"]];
-    
-    self.searchView.searchTextField.leftView=image;
-    self.searchView.searchTextField.leftViewMode = UITextFieldViewModeAlways;
+//
+//    self.searchView.searchTextField.leftView=image;
+//    self.searchView.searchTextField.leftViewMode = UITextFieldViewModeAlways;
     [self.view addSubview:self.searchView];
   
 }
@@ -101,9 +100,23 @@
     NSLog(@"sousuo");
     PositionDesiredSecondViewController *vc = [[PositionDesiredSecondViewController alloc]init];
     vc.keyWord = textField.text;
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
     return YES;
 }
+#pragma mark - MyDelegate -
+-(void)didSelectedCellWithArr:(NSArray *)arr{
+    NSLog(@"label_idlabel_idlabel_id%@",arr);
+    if (_delegate && [_delegate respondsToSelector:@selector(sendPositoinData:labIDStr:)]){
+        _labStr = arr[1];
+        _labIDStr = arr[2];
+        [self.delegate sendPositoinData:_labStr labIDStr:_labIDStr];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    [self.navigationController popViewControllerAnimated:NO];
+
+}
+
 
 #pragma mark - WSDropMenuView DataSource -
 - (NSInteger)dropMenuView:(WSDropMenuView *)dropMenuView numberWithIndexPath:(WSIndexPath *)indexPath{
