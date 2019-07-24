@@ -703,7 +703,6 @@
 		04C6014E226071B5000B1FE0 /* JMAllMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C6014C226071B5000B1FE0 /* JMAllMessageTableViewCell.xib */; };
 		04C6015C2260874A000B1FE0 /* JMLookMeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6015A2260874A000B1FE0 /* JMLookMeTableViewCell.m */; };
 		04C6015D2260874A000B1FE0 /* JMLookMeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C6015B2260874A000B1FE0 /* JMLookMeTableViewCell.xib */; };
-		04C60160226097B1000B1FE0 /* JMNotificationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6015F226097B1000B1FE0 /* JMNotificationViewController.m */; };
 		04CC5F9422B3B67600C5DD46 /* JMDiscoverTopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CC5F9322B3B67600C5DD46 /* JMDiscoverTopView.m */; };
 		04CC5F9622B3B68E00C5DD46 /* JMDiscoverTopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04CC5F9522B3B68E00C5DD46 /* JMDiscoverTopView.xib */; };
 		04CC5F9C22B3BB9A00C5DD46 /* JMDiscoverCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04CC5F9A22B3BB9A00C5DD46 /* JMDiscoverCollectionViewCell.m */; };
@@ -1852,8 +1851,6 @@
 		04C601592260874A000B1FE0 /* JMLookMeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLookMeTableViewCell.h; sourceTree = "<group>"; };
 		04C6015A2260874A000B1FE0 /* JMLookMeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLookMeTableViewCell.m; sourceTree = "<group>"; };
 		04C6015B2260874A000B1FE0 /* JMLookMeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMLookMeTableViewCell.xib; sourceTree = "<group>"; };
-		04C6015E226097B1000B1FE0 /* JMNotificationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMNotificationViewController.h; sourceTree = "<group>"; };
-		04C6015F226097B1000B1FE0 /* JMNotificationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMNotificationViewController.m; sourceTree = "<group>"; };
 		04CC5F9222B3B67600C5DD46 /* JMDiscoverTopView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMDiscoverTopView.h; sourceTree = "<group>"; };
 		04CC5F9322B3B67600C5DD46 /* JMDiscoverTopView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMDiscoverTopView.m; sourceTree = "<group>"; };
 		04CC5F9522B3B68E00C5DD46 /* JMDiscoverTopView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMDiscoverTopView.xib; sourceTree = "<group>"; };
@@ -3668,8 +3665,6 @@
 				04C60140226063E3000B1FE0 /* JMLookMeTableViewController.h */,
 				04C60141226063E3000B1FE0 /* JMLookMeTableViewController.m */,
 				04C60142226063E3000B1FE0 /* JMLookMeTableViewController.xib */,
-				04C6015E226097B1000B1FE0 /* JMNotificationViewController.h */,
-				04C6015F226097B1000B1FE0 /* JMNotificationViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5199,7 +5194,6 @@
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
 				049C654C22AD854B00A93DFE /* JMPartTimeJobTypeLabsViewController.m in Sources */,
 				045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */,
-				04C60160226097B1000B1FE0 /* JMNotificationViewController.m in Sources */,
 				0488E59D2295438100C2E398 /* JMCityModel.m in Sources */,
 				04AF933722C9DD3B00D9FCBF /* JMChoosePartTImeJobTypeLablesViewController.m in Sources */,
 				04FB1A2222A3A70800A8F02C /* JMPartTimeJobResumeFooterView.m in Sources */,
