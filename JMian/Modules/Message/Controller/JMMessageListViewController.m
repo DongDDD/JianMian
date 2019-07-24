@@ -8,7 +8,6 @@
 
 #import "JMMessageListViewController.h"
 #import "JMAllMessageTableViewCell.h"
-#import "JMNotificationViewController.h"
 #import <TIMManager.h>
 #import <TIMMessage.h>
 #import <IMMessageExt.h>
