@@ -8,7 +8,6 @@
 
 #import "JMJudgeViewController.h"
 #import "JMBAndCTabBarViewController.h"
-#import "JMPersonTabBarViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "NavigationViewController.h"
 #import "LoginViewController.h"

@@ -65,7 +65,7 @@
     [_leftBtn setImage:[UIImage imageNamed:@"my_task"] forState:UIControlStateNormal];
     [self addSubview:_leftBtn];
     _leftLab = [[UILabel alloc]init];
-    _leftLab.text = @"我的任务";
+    _leftLab.text = @"我的兼职";
     _leftLab.font = kFont(12);
     _leftLab.textColor = [UIColor whiteColor];
     [self addSubview:_leftLab];
@@ -184,7 +184,7 @@
     [_leftBtn setImage:[UIImage imageNamed:@"my_task"] forState:UIControlStateNormal];
     [self addSubview:_leftBtn];
     _leftLab = [[UILabel alloc]init];
-    _leftLab.text = @"我的任务";
+    _leftLab.text = @"我的兼职";
     _leftLab.font = kFont(12);
     _leftLab.textColor = [UIColor whiteColor];
     [self addSubview:_leftLab];

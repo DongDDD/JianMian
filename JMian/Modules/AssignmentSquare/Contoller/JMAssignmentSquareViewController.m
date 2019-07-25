@@ -8,7 +8,6 @@
 
 #import "JMAssignmentSquareViewController.h"
 #import "JMTitlesView.h"
-#import "JMSquareHeaderView.h"
 #import "JMCUserSquareTableViewCell.h"
 #import "JMChoosePositionTableViewController.h"
 #import "JMHTTPManager+FectchAbility.h"
@@ -32,7 +31,7 @@
 #import "JMChoosePartTImeJobTypeLablesViewController.h"
 
 
-@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate>
+@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate>
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) NSUInteger index;
@@ -154,23 +153,23 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self.dataArray removeAllObjects];
     [self.tableView.mj_header beginRefreshing];
 }
--(void)didClickIncomeAction{
-}
-
--(void)didClickTaskProcessingAction{
-    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-    [vc setMyIndex:1];
-    vc.title = @"我的任务";
-    [self.navigationController pushViewController:vc animated:YES];
-}
-
--(void)didClickTaskCompletedAction{
-    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-    vc.title = @"任务管理";
-    [vc setMyIndex:2];
-
-    [self.navigationController pushViewController:vc animated:YES];
-}
+//-(void)didClickIncomeAction{
+//}
+//
+//-(void)didClickTaskProcessingAction{
+//    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+//    [vc setMyIndex:1];
+//    vc.title = @"兼职工作";
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
+//
+//-(void)didClickTaskCompletedAction{
+//    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+//    vc.title = @"兼职管理";
+//    [vc setMyIndex:2];
+//
+//    [self.navigationController pushViewController:vc animated:YES];
+//}
 
 -(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName{
     _type_label_id = type_id;
@@ -477,24 +476,9 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        JMVersionModel *model = [JMVersionManager getVersoinInfo];
-        if (![model.test isEqualToString:@"1"]) {
-            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-            if ([userModel.type isEqualToString:C_Type_USER]) {
-                JMSquareHeaderView *view =  [JMSquareHeaderView new];
-                view.delegate = self;
-                [view setUserModel:userModel];
-                return view;
-            
-            }else{
-                return [UIView new];
-
-            
-            }
-        }else{
-            return [UIView new];
-            
-        }
+ 
+        return [UIView new];
+   
     }
     
     if (section==1) {

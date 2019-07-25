@@ -12,7 +12,6 @@
 #import "JMCompanyBaseInfoViewController.h"
 #import "JMCompanyHomeViewController.h"
 #import "JMJudgeViewController.h"
-#import "JMPersonTabBarViewController.h"
 #import "NavigationViewController.h"
 #import "JMBAndCTabBarViewController.h"
 #import "JMHTTPManager+Login.h"

@@ -8,7 +8,6 @@
 
 #import "JMJobExperienceViewController.h"
 #import "JMHTTPManager+CreateExperience.h"
-#import "JMPersonTabBarViewController.h"
 #import "AppDelegate.h"
 #import "JMHTTPManager+Login.h"
 #import "PositionDesiredViewController.h"
@@ -111,9 +110,7 @@
     
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-}
+
 
 -(void)initView{
     [self.scrollView addSubview:self.decriptionTextView];
@@ -171,8 +168,8 @@
         
         switch (self.viewType) {
             case JMJobExperienceViewTypeDefault: {
-                JMPersonTabBarViewController *tab = [[JMPersonTabBarViewController alloc] init];
-                [UIApplication sharedApplication].delegate.window.rootViewController = tab;
+                JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];
                 break;
             }
             default:

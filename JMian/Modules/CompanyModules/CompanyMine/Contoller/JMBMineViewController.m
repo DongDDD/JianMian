@@ -117,7 +117,7 @@
 // - B端个人的中心
 -(void)BTaskClick{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-    vc.title = @"任务管理";
+    vc.title = @"兼职管理";
     [vc setMyIndex:0];
     [_BUserCenterHeaderSubView.taskBadgeView setHidden:YES];
     
@@ -125,13 +125,7 @@
     
 }
 
--(void)BOrderClick{
 
-}
-
--(void)BVIPClick{
-
-}
 
 -(void)didClickSetting{
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];

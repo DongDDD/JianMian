@@ -175,7 +175,7 @@
         return;
     }
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-    vc.title = @"我的任务";
+    vc.title = @"我的兼职";
     [vc setMyIndex:0];
     [self.personalCenterHeaderView.taskBadgeView setHidden:YES];
     [self.navigationController pushViewController:vc animated:YES];

@@ -127,19 +127,7 @@
     [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
 
     [bgView addSubview:colectBtn];
-    if (imageNameRight2 != nil) {
-        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(0, 0, 25, 25);
-        JMVersionModel *model = [JMVersionManager getVersoinInfo];
-        if ([model.test isEqualToString:@"1"]) {
-            [shareBtn setHidden:YES];
-            
-        }
-        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
-        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
-        [bgView addSubview:shareBtn];
-
-    }
+  
 
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -481,7 +469,7 @@
 -(void)iconAlertRightAction{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     [vc setMyIndex:0];
-    vc.title = @"我的任务";
+    vc.title = @"我的兼职";
     [self.navigationController pushViewController:vc animated:YES];
     
 

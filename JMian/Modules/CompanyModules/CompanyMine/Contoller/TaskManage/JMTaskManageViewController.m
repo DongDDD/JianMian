@@ -20,9 +20,6 @@
 #import "JMMessageListModel.h"
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+PayMoney.h"
-#import "JMPayDetailViewController.h"
-#import "JMPaySucceedViewController.h"
-#import "JMPayFailedViewController.h"
 #import "JMHTTPManager+FectchTaskOrderInfo.h"
 #import "JMBDetailWebViewController.h"
 #import "JMHTTPManager+FectchTaskAbility.h"
@@ -31,7 +28,7 @@
 //#import <AddressBook/AddressBook.h>                         //用户联系信息相关
 
 
-@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate>
+@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate>
 {
     NSMutableArray *summaryItems;
     NSMutableArray *shippingMethods;
@@ -72,7 +69,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(paySucceedNotification) name:Notification_PaySucceed object:nil];
 
 }
 
@@ -116,28 +112,7 @@
 
 
 #pragma mark - myDelegate
--(void)paySucceedNotification{
-    
-    [self.tableView.mj_header beginRefreshing];
-    [self.choosePayView setHidden:YES];
-    [self.BGPayView setHidden:YES];
-    if ([_nowTaskData.status isEqualToString:Task_Finish]) {
-        
-        JMTaskCommetViewController *vc = [[JMTaskCommetViewController alloc]init];
-        vc.data = _nowTaskData;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }else{
-        JMPaySucceedViewController *vc = [[JMPaySucceedViewController alloc]init];
-        vc.data = _nowTaskData;
-        vc.didPayMoney = self.didPayMoney;
-        [self.navigationController pushViewController:vc animated:YES];
-        
-    }
-    
-    
-    
-}
+
 //底部左面的按钮事件
 -(void)leftActionWithData:(JMTaskOrderListCellData *)data{
     _nowTaskData = data;
@@ -194,12 +169,7 @@
                         _user_id = data.user_user_id;
                         [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:data.task_order_id];
                     }else{
-                        //有定金跳支付界面
-                        JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
-                        vc.data = data;
-                        vc.delegate = self;
-                        vc.viewType = JMPayDetailViewTypeDownPayment;
-                        [self.navigationController pushViewController:vc animated:YES];
+                       
                         
                     }
                     
@@ -216,12 +186,7 @@
             return;
         }else if ([data.status isEqualToString:Task_Finish] && _index == 1) {
             //B改状态------B端确认完成任务&支付尾款@"3"
-            JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
-            vc.data = data;
-            vc.delegate = self;
-            vc.viewType = JMPayDetailViewTypeFinalPayment;
-            [self.navigationController pushViewController:vc animated:YES];
-            
+         
              return;
         }else if ([data.status isEqualToString:Task_Pass]) {
             //进行中

@@ -13,8 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMBUserCenterHeaderSubViewDelegate <NSObject>
 
 -(void)BTaskClick;
--(void)BOrderClick;
--(void)BVIPClick;
+
 @end
 
 

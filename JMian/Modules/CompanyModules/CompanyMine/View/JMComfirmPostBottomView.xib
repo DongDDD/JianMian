@@ -31,6 +31,9 @@
                     <state key="normal" title="《平台服务协议》">
                         <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
+                    <connections>
+                        <action selector="protocalAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="laX-qg-71V"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Wt-T2-1g1">
                     <rect key="frame" x="20" y="72" width="374" height="37"/>

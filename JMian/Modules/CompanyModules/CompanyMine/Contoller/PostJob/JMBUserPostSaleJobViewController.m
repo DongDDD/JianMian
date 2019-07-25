@@ -27,7 +27,7 @@
 #import "JMHTTPManager+DeleteGoodsImage.h"
 #import "JMPostGoodsImagesView.h"
 #import "JMChoosePartTImeJobTypeLablesViewController.h"
-
+#import "JMServiceProtocolWebViewController.h"
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
 
 @interface JMBUserPostSaleJobViewController ()<JMBUserPositionDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMGoodsDescriptionViewControllerDelegate,JMBUserPositionVideoViewDelegate,UIImagePickerControllerDelegate,JMPostGoodsImagesViewDelegate,Demo3ViewControllerDelegate,UITextFieldDelegate>
@@ -373,6 +373,11 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 }
 
+-(void)protocolAction{
+    JMServiceProtocolWebViewController *vc = [[JMServiceProtocolWebViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
 #pragma mark - 视频
 
 

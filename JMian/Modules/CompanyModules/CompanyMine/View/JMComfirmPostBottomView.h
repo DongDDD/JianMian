@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)isReadProtocol:(BOOL)isRead;
 -(void)OKAction;
-
+-(void)protocolAction;
 @end
 @interface JMComfirmPostBottomView : UIView
 @property(nonatomic,weak)id<JMComfirmPostBottomViewDelegate>delegate;

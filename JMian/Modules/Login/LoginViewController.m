@@ -16,7 +16,6 @@
 
 @interface LoginViewController ()<UIGestureRecognizerDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *wechatLoginBtn;
 @property (weak, nonatomic) IBOutlet UIButton *phoneLoginBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImgView;
 
@@ -28,7 +27,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        [self.wechatLoginBtn setHidden:YES];
 
     // Do any additional setup after loading the view from its nib.
 //    self.navigationController.interactivePopGestureRecognizer.delegate = self;
@@ -84,13 +82,7 @@
 }
 
 
-- (IBAction)wechatLoginAction:(id)sender {
-    kRemoveMyDefault(@"youke");
 
-  
-    
-    
-}
 
 - (IBAction)xieyiAction:(id)sender {
     JMServiceProtocolWebViewController *vc = [[JMServiceProtocolWebViewController alloc]init];

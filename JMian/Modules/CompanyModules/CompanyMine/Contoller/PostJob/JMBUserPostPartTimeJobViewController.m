@@ -25,6 +25,8 @@
 #import "JMHTTPManager+FectchInvoiceInfo.h"
 #import "JMInvoiceModel.h"
 #import "JMChoosePartTImeJobTypeLablesViewController.h"
+#import "JMServiceProtocolWebViewController.h"
+
 
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
 @interface JMBUserPostPartTimeJobViewController ()<JMPartTimeJobResumeFooterViewDelegate,JMMakeOutBillHeaderViewDelegate,JMBUserPartTimeJobDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMMakeOutBillHeaderViewDelegate,JMMakeOutBillViewDelegate,UITextFieldDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate>
@@ -489,6 +491,11 @@
 }
 
 
+-(void)protocolAction{
+    JMServiceProtocolWebViewController *vc = [[JMServiceProtocolWebViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 #pragma mark - ScrollViewdelegate
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{

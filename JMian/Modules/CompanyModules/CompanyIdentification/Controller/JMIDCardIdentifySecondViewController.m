@@ -7,7 +7,6 @@
 //
 
 #import "JMIDCardIdentifySecondViewController.h"
-#import "JMPersonTabBarViewController.h"
 #import "JMBAndCTabBarViewController.h"
 #import "JMHTTPManager+UpdateInfo.h"
 

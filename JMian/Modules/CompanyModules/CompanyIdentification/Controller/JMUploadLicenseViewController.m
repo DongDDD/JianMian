@@ -7,7 +7,6 @@
 //
 
 #import "JMUploadLicenseViewController.h"
-#import "JMPersonTabBarViewController.h"
 #import "JMChangeIdentityViewController.h"
 #import "JMHTTPManager+CompanyCreate.h"
 #import "JMHTTPManager+Login.h"

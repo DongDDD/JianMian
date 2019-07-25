@@ -83,21 +83,9 @@
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.rightBtn.backgroundColor = MASTER_COLOR;
         }else{
-            NSString *str;
-            if ([data.front_money isEqualToString:@"0"]) {
-                str = @"通过";
-            }else{
-                JMVersionModel *model = [JMVersionManager getVersoinInfo];
-                if ([model.test isEqualToString:@"1"]) {
-                    str = @"通过";
+      
 
-                }else{
-                    str = @"通过&支付定金";
-                    
-                }
-
-            }
-            [self.rightBtn setTitle:str forState:UIControlStateNormal];
+            [self.rightBtn setTitle:@"通过"forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.rightBtn.backgroundColor = MASTER_COLOR;
         }
@@ -152,12 +140,7 @@
         if ([model.test isEqualToString:@"1"]) {
             [self.rightBtn setHidden:YES];
         }else{
-            if ([data.front_money isEqualToString:@"0"]) {
-                titleStr = @"确认对方完成&支付全款";
-            }else{
-                titleStr = @"确认对方完成&支付尾款";
-                
-            }
+           
             
         }
         
@@ -257,7 +240,7 @@
             self.leftBtn.layer.borderWidth = 0.5;
             self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
 
-            [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
+            [self.rightBtn setTitle:@"销售兼职" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.rightBtn.backgroundColor = MASTER_COLOR;
             
