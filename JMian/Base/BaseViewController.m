@@ -74,7 +74,6 @@
     
     self.navigationItem.titleView=titleText;
     
-    
 }
 
 
