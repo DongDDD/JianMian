@@ -8,7 +8,7 @@
 
 #import "JMVIPViewController.h"
 #import "JMShareView.h"
-#import "WXApi.h"
+//#import "WXApi.h"
 //#import <AlipaySDK/AlipaySDK.h>
 #import "JMHTTPManager+OrderPay.h"
 #import "JMOrderPaymentModel.h"
@@ -117,7 +117,7 @@
 }
 
 
-#pragma mark - 微信DEMI001
+#pragma mark - 微信支付
 - (void)getPayInfoData
 {
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
@@ -140,20 +140,20 @@
 
 
 - (void)wechatPayWithModel:(JMOrderPaymentModel *)model{
-    if([WXApi isWXAppInstalled])
-    {
-        PayReq* req = [[PayReq alloc] init];
-        req.partnerId = model.wx_partnerid;
-        req.prepayId = model.wx_prepayid;
-        req.nonceStr = model.wx_noncestr;
-        req.timeStamp = model.wx_timestamp;
-        req.package = model.wx_package;
-        req.sign = model.wx_sign;
-        [WXApi sendReq:req];
-    }else{
-        [self showAlertSimpleTips:@"提示" message:@"你还没安装微信" btnTitle:@"好的"];
-    }
-    
+//    if([WXApi isWXAppInstalled])
+//    {
+//        PayReq* req = [[PayReq alloc] init];
+//        req.partnerId = model.wx_partnerid;
+//        req.prepayId = model.wx_prepayid;
+//        req.nonceStr = model.wx_noncestr;
+//        req.timeStamp = model.wx_timestamp;
+//        req.package = model.wx_package;
+//        req.sign = model.wx_sign;
+//        [WXApi sendReq:req];
+//    }else{
+//        [self showAlertSimpleTips:@"提示" message:@"你还没安装微信" btnTitle:@"好的"];
+//    }
+//
 }
 
 
@@ -172,7 +172,7 @@
         _choosePayView.delegate = self;
         [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
         [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Friendster"] forState:UIControlStateNormal];
-        _choosePayView.lab1.text = @"微信DEMI001";
+        _choosePayView.lab1.text = @"微信支付";
         _choosePayView.lab2.text = @"朋友圈";
     }
     return _choosePayView;

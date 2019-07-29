@@ -33,6 +33,7 @@
 #import "JMBMineInfoView.h"
 #import "JMBMineMoreFunctionView.h"
 #import "JMShareView.h"
+//#import "JMVIPViewController.h"
 
 @interface JMBMineViewController ()<JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMBMineInfoViewDelegate,JMBMineMoreFunctionViewDelegate,JMShareViewDelegate>
 
@@ -125,6 +126,12 @@
     
 }
 
+//-(void)BVIPClick{
+
+//    JMVIPViewController *vc = [[JMVIPViewController alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
+
+//}
 
 
 -(void)didClickSetting{

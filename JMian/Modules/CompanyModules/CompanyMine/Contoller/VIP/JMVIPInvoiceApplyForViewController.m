@@ -15,7 +15,7 @@
 #import "JMOrderPaymentModel.h"
 #import "JMHTTPManager+FectchInvoiceInfo.h"
 #import "JMInvoiceModel.h"
-#import "WXApi.h"
+//#import "WXApi.h"
 #import "JMProtocalWebViewController.h"
 
 
@@ -53,10 +53,10 @@ static NSString *cellIdent = @"payCellIdent";
 //        make.left.right.mas_equalTo(self.view);
 //        make.top.mas_equalTo(self.tableView.mas_bottom);
 //    }];·
-    self.title = @"确认DEMI001";
+    self.title = @"确认支付";
     [self initView];
-    _imagArr = @[@"WeChat",@"WeChat"];
-    _labArr = @[@"微信DEMI001",@"DEMI001"];
+//    _imagArr = @[@"vvip"];
+//    _labArr = @[@"购买一年VIP"];
     [self getInvoiceInfo];
 }
 
@@ -69,6 +69,7 @@ static NSString *cellIdent = @"payCellIdent";
 //        make.width.mas_equalTo(self.view);
 //        make.centerX.mas_equalTo(self.view);
 //    }];
+    
     [self.view addSubview:self.bottomView];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.view).offset(-SafeAreaBottomHeight);
@@ -145,14 +146,14 @@ static NSString *cellIdent = @"payCellIdent";
 - (void)wechatPayWithModel:(JMOrderPaymentModel *)model{
 //    if([WXApi isWXAppInstalled])
 //    {
-        PayReq* req = [[PayReq alloc] init];
-        req.partnerId = model.wx_partnerid;
-        req.prepayId = model.wx_prepayid;
-        req.nonceStr = model.wx_noncestr;
-        req.timeStamp = model.wx_timestamp;
-        req.package = model.wx_package;
-        req.sign = model.wx_sign;
-        [WXApi sendReq:req];
+//        PayReq* req = [[PayReq alloc] init];
+//        req.partnerId = model.wx_partnerid;
+//        req.prepayId = model.wx_prepayid;
+//        req.nonceStr = model.wx_noncestr;
+//        req.timeStamp = model.wx_timestamp;
+//        req.package = model.wx_package;
+//        req.sign = model.wx_sign;
+//        [WXApi sendReq:req];
 //    }else{
 //    }
     
@@ -293,7 +294,7 @@ static NSString *cellIdent = @"payCellIdent";
     UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 45)];
     view.backgroundColor = [UIColor whiteColor];
     UIButton *btn = [[UIButton alloc]init];
-    [btn setTitle:@"DEMI001即同意《“得米”平台用户服务协议》" forState:UIControlStateNormal];
+    [btn setTitle:@"支付即同意《“得米”平台用户服务协议》" forState:UIControlStateNormal];
     btn.titleLabel.font = kFont(13);
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     btn.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);

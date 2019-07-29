@@ -269,11 +269,11 @@
 
 }
 
-//微信DEMI001
+//微信支付
 -(void)shareViewLeftAction{
     
 }
-//DEMI001
+//支付
 -(void)shareViewRightAction{
     
 }
