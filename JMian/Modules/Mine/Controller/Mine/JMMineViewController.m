@@ -31,7 +31,7 @@
 #import "JMTaskManageViewController.h"
 #import "UITabBar+XSDExt.h"
 #import "JMShareView.h"
-
+#import "JMWalletViewController.h"
 
 
 
@@ -65,16 +65,16 @@
         make.left.right.bottom.equalTo(self.view);
     }];
     
-    JMVersionModel *model = [JMVersionManager getVersoinInfo];
-    if (![model.test isEqualToString:@"1"]) {
-        self.imageNameArr = @[@"mine_share",@"burse",@"autonym"];
-        self.labelStrArr = @[@"分享APP",@"我的钱包",@"实名认证"];
-        
-    }else{
-        self.imageNameArr = @[@"autonym"];
-        self.labelStrArr = @[@"实名认证"];
+//    JMVersionModel *model = [JMVersionManager getVersoinInfo];
+//    if (![model.test isEqualToString:@"1"]) {
+//        self.imageNameArr = @[@"mine_share",@"burse",@"autonym"];
+//        self.labelStrArr = @[@"分享APP",@"我的钱包",@"实名认证"];
+//        
+//    }else{
+        self.imageNameArr = @[@"burse",@"autonym"];
+        self.labelStrArr = @[@"我的钱包",@"实名认证"];
 
-    }
+//    }
     
 }
 
@@ -260,42 +260,44 @@
     if (indexPath.section == 1) {
         
         if (indexPath.row == 0) {
-            JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
-            if ([versionModel.test isEqualToString:@"1"]) {
-                //实名认证
-                JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-                if ([model.card_status isEqualToString:Card_PassIdentify]) {
-                    [self showAlertSimpleTips:@"提示" message:@"你已通过实名认证" btnTitle:@"好的"];
-                    
-                }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
-                    [self showAlertSimpleTips:@"提示" message:@"审核实名认证中" btnTitle:@"好的"];
-                }else{
-                    
-                    [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
-                }
-            }else{
-     
-                    [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
-                    [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.top.equalTo(self.view);
-                        make.left.and.right.equalTo(self.view);
-                        make.height.equalTo(self.view);
-                    }];
-                    [self.shareView setHidden:NO];
-                    [self.shareBgView setHidden:NO];
-                    [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
-                    [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
-                        make.bottom.equalTo(self.view);
-                        make.left.and.right.equalTo(self.view);
-                        make.height.mas_equalTo(184+SafeAreaBottomHeight);
-                        
-                    }];
-                    //            [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
-     
-            }
-           
-        }else if (indexPath.row == 1) {
-        }else  if (indexPath.row == 2) {
+//            JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
+//            if (![versionModel.test isEqualToString:@"1"]) {
+//                //实名认证
+//                JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+//                if ([model.card_status isEqualToString:Card_PassIdentify]) {
+//                    [self showAlertSimpleTips:@"提示" message:@"你已通过实名认证" btnTitle:@"好的"];
+//
+//                }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
+//                    [self showAlertSimpleTips:@"提示" message:@"审核实名认证中" btnTitle:@"好的"];
+//                }else{
+//
+//                    [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
+//                }
+//            }
+            
+//            else{
+//     
+//                    [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
+//                    [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                        make.top.equalTo(self.view);
+//                        make.left.and.right.equalTo(self.view);
+//                        make.height.equalTo(self.view);
+//                    }];
+//                    [self.shareView setHidden:NO];
+//                    [self.shareBgView setHidden:NO];
+//                    [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
+//                    [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                        make.bottom.equalTo(self.view);
+//                        make.left.and.right.equalTo(self.view);
+//                        make.height.mas_equalTo(184+SafeAreaBottomHeight);
+//                        
+//                    }];
+//                    //            [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
+//     
+//            }
+            JMWalletViewController *vc = [[JMWalletViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else  if (indexPath.row == 1) {
             //实名认证
             JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
             if ([model.card_status isEqualToString:Card_PassIdentify]) {

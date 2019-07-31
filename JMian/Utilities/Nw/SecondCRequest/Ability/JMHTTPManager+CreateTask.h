@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
                       city_id:(nullable NSString *)city_id
                     longitude:(nullable NSString *)longitude
                      latitude:(nullable NSString *)latitude
-                      address:(nullable NSArray *)address
+                      address:(nullable NSString *)address
                   goods_title:(nullable NSString *)goods_title
                   goods_price:(nullable NSString *)goods_price
                    goods_desc:(nullable NSString *)goods_desc

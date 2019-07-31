@@ -33,7 +33,7 @@
                           SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
        NSDictionary *dic =     @{
-                                 @":city_ids":city_ids,
+                                 @"city_ids":city_ids,
                                  @"company_id":company_id,
                                  @"label_id":label_id,
                                  @"work_label_id":work_label_id,

@@ -33,6 +33,7 @@
 #import "JMBMineInfoView.h"
 #import "JMBMineMoreFunctionView.h"
 #import "JMShareView.h"
+#import "JMWalletViewController.h"
 //#import "JMVIPViewController.h"
 
 @interface JMBMineViewController ()<JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMBMineInfoViewDelegate,JMBMineMoreFunctionViewDelegate,JMShareViewDelegate>
@@ -140,7 +141,7 @@
 }
 
 -(void)didSelectItemWithRow:(NSInteger)row{
-    NSLog(@"asdf");
+    
     if (row == 0) {
         //职位管理
         JMPositionManageViewController *vc = [[JMPositionManageViewController alloc]init];
@@ -163,52 +164,37 @@
 }
 
 -(void)didSelectCellWithRow:(NSInteger)row{
+
+//                [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
+//                [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.top.equalTo(self.view);
+//                    make.left.and.right.equalTo(self.view);
+//                    make.height.equalTo(self.view);
+//                }];
+//                [self.shareView setHidden:NO];
+//                [self.shareBgView setHidden:NO];
+//                [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
+//                [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+//                    make.bottom.equalTo(self.view);
+//                    make.left.and.right.equalTo(self.view);
+//                    make.height.mas_equalTo(184+SafeAreaBottomHeight);
+//
+//                }];
+//
+
     if (row == 0) {
-        JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
-        if ([versionModel.test isEqualToString:@"1"]) {
-            //实名认证
-            JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-            if ([model.card_status isEqualToString:Card_PassIdentify]) {
-                [self showAlertSimpleTips:@"提示" message:@"你已通过实名认证" btnTitle:@"好的"];
-                
-            }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
-                [self showAlertSimpleTips:@"提示" message:@"审核实名认证中" btnTitle:@"好的"];
-            }else{
-                
-                [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
-            }
-        }else{
-   
-                [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
-                [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.top.equalTo(self.view);
-                    make.left.and.right.equalTo(self.view);
-                    make.height.equalTo(self.view);
-                }];
-                [self.shareView setHidden:NO];
-                [self.shareBgView setHidden:NO];
-                [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
-                [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
-                    make.bottom.equalTo(self.view);
-                    make.left.and.right.equalTo(self.view);
-                    make.height.mas_equalTo(184+SafeAreaBottomHeight);
-                    
-                }];
-                //            [self showAlertSimpleTips:@"提示" message:@"请先安装微信" btnTitle:@"好的"];
-    
-        
-        }
-    }else if (row == 1) {
-    }else  if (row == 2) {
+        JMWalletViewController *vc = [[JMWalletViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }else  if (row == 1) {
         //实名认证
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         if ([model.card_status isEqualToString:Card_PassIdentify]) {
             [self showAlertSimpleTips:@"提示" message:@"你已通过实名认证" btnTitle:@"好的"];
-            
+
         }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
             [self showAlertSimpleTips:@"提示" message:@"审核实名认证中" btnTitle:@"好的"];
         }else{
-            
+
             [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
         }
     }
@@ -269,12 +255,12 @@
 -(JMBMineMoreFunctionView *)BMineMoreFunctionView{
     if (!_BMineMoreFunctionView) {
         CGFloat h = 0.0;
-        JMVersionModel *model = [JMVersionManager getVersoinInfo];
-        if ([model.test isEqualToString:@"1"]) {
-            h = 100;
-        }else{
+//        JMVersionModel *model = [JMVersionManager getVersoinInfo];
+//        if ([model.test isEqualToString:@"1"]) {
+//            h = 100;
+//        }else{
             h = 274;
-        }
+//        }
         _BMineMoreFunctionView = [[JMBMineMoreFunctionView alloc]initWithFrame:CGRectMake(0, self.BMineInfoView.frame.origin.y+self.BMineInfoView.frame.size.height, SCREEN_WIDTH, h)];
         _BMineMoreFunctionView.delegate = self;
     }

@@ -21,6 +21,10 @@
 #import "JMApplyForProtocolView.h"
 #import "JMTaskManageViewController.h"
 #import "JMTaskApplyForView.h"
+#import "JMHTTPManager+FectchAbility.h"
+#import "JMAbilityCellData.h"
+#import "JMPostPartTimeResumeViewController.h"
+
 
 
 @interface JMCDetailWebViewController ()<JMShareViewDelegate,JMApplyForProtocolViewDelegate,JMTaskApplyForViewDelegate>
@@ -35,6 +39,7 @@
 @property (nonatomic, strong) UIView *windowViewBGView;
 
 @property (nonatomic, assign)BOOL isRead;
+@property (nonatomic, assign)BOOL isPostPartTimeResume;
 
 @end
 
@@ -54,6 +59,7 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self getAbilityListData];
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
@@ -327,12 +333,28 @@
 //    [self showAlertVCWithCustumView:self.applyForProtocolView message:@"" leftTitle:@"取消" rightTitle:@"确认"];
 //    [self sendResquest];
 //    [self initTaskApplyForView];
-    NSString *isRead = kFetchMyDefault(@"isRead");
-    if ([isRead isEqualToString:@"1"]) {
-        [self sendResquest];
+    if (_isPostPartTimeResume == YES) {
+        NSString *isRead = kFetchMyDefault(@"isRead");
+        if ([isRead isEqualToString:@"1"]) {
+            [self sendResquest];
+            
+        }else{
+            [self showApplyForView];
+            
+        }
         
     }else{
-        [self showApplyForView];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"你还没有创建兼职简历" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去创建" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
+            vc.viewType = JMPostPartTimeResumeViewAdd;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
     
     }
 }
@@ -379,7 +401,26 @@
     }];
     
 }
+//获取自己有没发布兼职简历
+-(void)getAbilityListData{
+    //    NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
+    //    NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
+    [[JMHTTPManager sharedInstance]fectchAbilityList_city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            NSArray *arrData = [JMAbilityCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            if (arrData.count > 0) {
+                _isPostPartTimeResume = YES;
+            }else{
+                _isPostPartTimeResume = NO;
 
+            }
+        }
+  
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 //申请职位
 -(void)sendResquest{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];

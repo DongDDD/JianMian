@@ -25,7 +25,7 @@
             make.size.mas_equalTo(CGSizeMake(15, 15));
         }];
         
-       self.searchTextField=[[UITextField alloc]initWithFrame:CGRectMake(40, 0, self.bounds.size.width-30, self.frame.size.height)];
+       self.searchTextField=[[UITextField alloc]initWithFrame:CGRectMake(40, 0, self.bounds.size.width-40, self.frame.size.height)];
         
         self.backgroundColor = [UIColor colorWithRed:241/255.0 green:240/255.0 blue:245/255.0 alpha:1.0];
 

@@ -546,6 +546,8 @@
     return [addingNum stringValue];
     
 }
+
+
 //相加
 -(NSString *)calculateByadding:(NSString *)number1 secondNumber:(NSString *)number2
 {
@@ -554,6 +556,23 @@
     NSDecimalNumber *addingNum = [num1 decimalNumberByAdding:num2];
     return [addingNum stringValue];
 }
+
+- (BOOL)validateWithStartTime:(NSString *)startTime withExpireTime:(NSString *)expireTime {
+    NSDate *today = [NSDate date];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    // 时间格式,此处遇到过坑,建议时间HH大写,手机24小时进制和12小时禁止都可以完美格式化
+    [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm"];
+    
+    NSDate *start = [dateFormat dateFromString:startTime];
+    NSDate *expire = [dateFormat dateFromString:expireTime];
+    
+    if ([today compare:start] == NSOrderedDescending && [today compare:expire] == NSOrderedAscending) {
+        return YES;
+    }
+    return NO;
+}
+
 #pragma mark ----常用工具UI
 
 - (UIToolbar *)myToolbar

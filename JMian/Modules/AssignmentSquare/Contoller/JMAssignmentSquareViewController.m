@@ -8,6 +8,7 @@
 
 #import "JMAssignmentSquareViewController.h"
 #import "JMTitlesView.h"
+#import "JMSquareHeaderView.h"
 #import "JMCUserSquareTableViewCell.h"
 #import "JMChoosePositionTableViewController.h"
 #import "JMHTTPManager+FectchAbility.h"
@@ -17,6 +18,7 @@
 #import "JMBUserSquareTableViewCell.h"
 #import "JMBDetailWebViewController.h"
 #import "JMCDetailWebViewController.h"
+#import "JMWalletViewController.h"
 #import "JMTaskManageViewController.h"
 #import "JMGradeView.h"
 #import "JMPartTimeJobTypeLabsViewController.h"
@@ -31,7 +33,7 @@
 #import "JMChoosePartTImeJobTypeLablesViewController.h"
 
 
-@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate>
+@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate>
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) NSUInteger index;
@@ -75,13 +77,13 @@ static NSString *C_cellIdent = @"CSquareCellID";
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         [self setIsHiddenBackBtn:YES];
-
+        
         [self BToGetData];
     }else{
         [self CToGetData];
         [self setIsHiddenBackBtn:NO];
-
-    
+        
+        
     }
     // Do any additional setup after loading the view from its nib.
 }
@@ -95,7 +97,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     vc.viewType = JMCityListViewPartTime;
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
- 
+    
 }
 
 #pragma mark - setUI -
@@ -112,7 +114,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self.view addSubview:self.partTimeJobHomeListVC.view];
     [self setupHeaderRefresh];
     [self setupFooterRefresh];
-
+    
 }
 
 #pragma mark - 刷新 -
@@ -153,23 +155,23 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self.dataArray removeAllObjects];
     [self.tableView.mj_header beginRefreshing];
 }
-//-(void)didClickIncomeAction{
-//}
-//
-//-(void)didClickTaskProcessingAction{
-//    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-//    [vc setMyIndex:1];
-//    vc.title = @"兼职工作";
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
-//
-//-(void)didClickTaskCompletedAction{
-//    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-//    vc.title = @"兼职管理";
-//    [vc setMyIndex:2];
-//
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
+-(void)didClickIncomeAction{
+    [self.navigationController pushViewController:[JMWalletViewController new] animated:YES];
+}
+
+-(void)didClickTaskProcessingAction{
+    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    [vc setMyIndex:1];
+    vc.title = @"我的任务";
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)didClickTaskCompletedAction{
+    JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+    [vc setMyIndex:2];
+    
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 -(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName{
     _type_label_id = type_id;
@@ -180,12 +182,12 @@ static NSString *C_cellIdent = @"CSquareCellID";
 }
 
 -(void)didClickCellWithTaskData:(JMTaskListCellData *)taskData{
-
+    
     _page = 1;
     _type_label_id = taskData.type_labelID;
     [self hidePartTimeViewTapAction];
     [self.tableView.mj_header beginRefreshing];
-
+    
 }
 
 -(void)didClickCellWithAbilityData:(JMAbilityCellData *)abilityData{
@@ -198,7 +200,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     _page = 1;
     _type_label_id = nil;
     [self.tableView.mj_header beginRefreshing];
-
+    
 }
 
 -(void)postPartTimeJobAction{
@@ -293,14 +295,14 @@ static NSString *C_cellIdent = @"CSquareCellID";
         vc.myVC = self;
         vc.delegate = self;
         [self.navigationController pushViewController:vc animated:YES];
-     
+        
     }else if (_index == 2) {
         NSString *str = kFetchMyDefault(@"youke");
         if ([str isEqualToString:@"1"]) {
             [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
             
         }else{
-//            __weak typeof(self) ws = self;
+            //            __weak typeof(self) ws = self;
             [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
                 //            CGRect Frame = ws.partTimeJobHomeListVC.view.frame;
                 //            Frame.origin.x = 0;
@@ -308,17 +310,17 @@ static NSString *C_cellIdent = @"CSquareCellID";
                 self.tapView.hidden = NO;
                 _partTimeJobHomeListVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH*0.8, self.view.frame.size.height-43);
             } completion:nil];
-        
+            
         }
         
     }
-
+    
 }
 
 -(void)alertRightAction{
     [self loginOut];
-//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-//    [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+    //    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+    //    [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
     //    [self presentViewController:l animated:YES completion:nil];
 }
 
@@ -338,7 +340,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
                 [self.tableView.mj_footer setHidden:YES];
             }else{
                 [self.tableView.mj_footer setHidden:NO];
-
+                
             }
         }
         [self.tableView reloadData];
@@ -373,7 +375,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-
+    
 }
 
 -(void)getUserData{
@@ -392,7 +394,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         JMBUserSquareTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:B_cellIdent];
-     
+        
         if (cell == nil) {
             cell = [[JMBUserSquareTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:B_cellIdent];
         }
@@ -419,7 +421,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         }
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
-    
+        
     }
     return nil;
     
@@ -432,13 +434,13 @@ static NSString *C_cellIdent = @"CSquareCellID";
         JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
         vc.ability_id = model.ability_id;
         [self.navigationController pushViewController:vc animated:YES];
-    
+        
     }else{
         JMTaskListCellData *model = self.dataArray[indexPath.row];
         JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
         vc.task_id = model.task_id;
         [self.navigationController pushViewController:vc animated:YES];
-    
+        
     }
     
 }
@@ -476,16 +478,31 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
- 
-        return [UIView new];
-   
+        JMVersionModel *model = [JMVersionManager getVersoinInfo];
+        if (![model.test isEqualToString:@"1"]) {
+            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+            if ([userModel.type isEqualToString:C_Type_USER]) {
+                JMSquareHeaderView *view =  [JMSquareHeaderView new];
+                view.delegate = self;
+                [view setUserModel:userModel];
+                return view;
+                
+            }else{
+                return [UIView new];
+                
+                
+            }
+        }else{
+            return [UIView new];
+            
+        }
     }
     
     if (section==1) {
-        return self.titleView;        
+        return self.titleView;
     }
     return nil;
-
+    
 }
 
 
@@ -496,14 +513,14 @@ static NSString *C_cellIdent = @"CSquareCellID";
             JMVersionModel *model = [JMVersionManager getVersoinInfo];
             if (![model.test isEqualToString:@"1"]) {
                 return 159;
-
+                
             }else{
                 return 0;
-
+                
             }
         }else{
             return 0;
-        
+            
         }
     }
     
@@ -519,11 +536,11 @@ static NSString *C_cellIdent = @"CSquareCellID";
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         NSString *str1;
         NSString *str2;
-
+        
         if ([userModel.type isEqualToString:B_Type_UESR]) {
             str1 = @"推荐人才";
             str2 = @"职位筛选";
-
+            
         }else{
             str1 = @"推荐兼职";
             str2 = @"兼职分类";
@@ -549,13 +566,13 @@ static NSString *C_cellIdent = @"CSquareCellID";
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.showsVerticalScrollIndicator = NO;
-//        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
-//        _tableView.sectionHeaderHeight = 43;
-//        _tableView.sectionFooterHeight = 0;
-//        [_tableView registerNib:[UINib nibWithNibName:@"JMSquareHeaderModulesTableViewCell" bundle:nil] forCellReuseIdentifier:headerCellId];
+        //        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+        //        _tableView.sectionHeaderHeight = 43;
+        //        _tableView.sectionFooterHeight = 0;
+        //        [_tableView registerNib:[UINib nibWithNibName:@"JMSquareHeaderModulesTableViewCell" bundle:nil] forCellReuseIdentifier:headerCellId];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCUserSquareTableViewCell" bundle:nil] forCellReuseIdentifier:C_cellIdent];
         [_tableView registerNib:[UINib nibWithNibName:@"JMBUserSquareTableViewCell" bundle:nil] forCellReuseIdentifier:B_cellIdent];
-
+        
     }
     return _tableView;
 }
@@ -570,7 +587,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         _partTimeJobHomeListVC.view.frame = CGRectMake(-SCREEN_WIDTH, 0, SCREEN_WIDTH, self.view.frame.size.height-43);
     }
     return  _partTimeJobHomeListVC;
-
+    
 }
 
 -(UIView *)tapView{
@@ -611,13 +628,13 @@ static NSString *C_cellIdent = @"CSquareCellID";
 //    return _partTimeJobTypeLabsVC;
 //}
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

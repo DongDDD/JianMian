@@ -38,6 +38,7 @@ PODS:
   - STPickerView (2.4)
   - TXIMSDK_iOS (4.2.52)
   - VIMediaCache (0.4)
+  - WechatOpenSDK (1.8.4)
   - YYCache (1.0.4)
   - YYText (1.0.7)
 
@@ -59,6 +60,7 @@ DEPENDENCIES:
   - STPickerView (= 2.4)
   - TXIMSDK_iOS (~> 4.2.52)
   - VIMediaCache
+  - WechatOpenSDK
   - YYCache
   - YYText
 
@@ -82,6 +84,7 @@ SPEC REPOS:
     - STPickerView
     - TXIMSDK_iOS
     - VIMediaCache
+    - WechatOpenSDK
     - YYCache
     - YYText
 
@@ -104,9 +107,10 @@ SPEC CHECKSUMS:
   STPickerView: d0e234f230f45bd720a6739d0ae9fbddf038958b
   TXIMSDK_iOS: 298bb7420e5d540cb54644075e85b5e21fbf1213
   VIMediaCache: aa650f82cb114c68a343beb4e67416cf5eb2f3a2
+  WechatOpenSDK: 9b721089507c895d05f997408c30bb6e6f5f9b60
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: f68ccd6fa61786f7b0105483924bf350e257e9c1
+PODFILE CHECKSUM: 180932df680efe56301a2a06f241685f64eae3c3
 
 COCOAPODS: 1.6.1

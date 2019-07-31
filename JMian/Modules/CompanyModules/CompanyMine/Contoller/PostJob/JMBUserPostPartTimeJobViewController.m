@@ -468,14 +468,13 @@
 -(void)OKAction{
     [self.partTimeJobDetailView.jobNameTextField resignFirstResponder];
     [self.partTimeJobDetailView.paymentMoneyTextField resignFirstResponder];
-    [self.partTimeJobDetailView.downPaymentTextField resignFirstResponder];
     [self.partTimeJobDetailView.quantityMaxTextField resignFirstResponder];
-
+    [self.partTimeJobDetailView.downPaymentTextField resignFirstResponder];
     [self.decriptionTextView.contentTextView resignFirstResponder];
     [self.makeOutBillView.invoiceTitleTextField resignFirstResponder];
     [self.makeOutBillView.invoiceTaxNumTextField resignFirstResponder];
     [self.makeOutBillView.invoiceEmailTextField resignFirstResponder];
-
+    
     if (self.isReadProtocol == YES) {
         [self sendRequest];
         
@@ -599,7 +598,7 @@
 //    }else{
 //        myfront_money = @"0";
 //    }
-    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil deadline:_deadline status:nil is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:_adress goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil deadline:_deadline status:nil is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self showAlertVCSucceesSingleWithMessage:@"创建任务成功" btnTitle:@"好的"];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

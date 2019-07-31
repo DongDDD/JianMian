@@ -44,7 +44,7 @@
     
     }
     [_VIPImg setHidden:YES];
-    [self addSubview:_VIPImg];
+//    [self addSubview:_VIPImg];
 
     
     _titleLab = [[UILabel alloc]init];
@@ -73,11 +73,11 @@
         make.size.mas_equalTo(CGSizeMake(80, 50));
     }];
     
-    [_VIPImg mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(self).offset(20);
-        make.centerY.mas_equalTo(_titleLab);
-        make.size.mas_equalTo(CGSizeMake(38, 17));
-    }];
+//    [_VIPImg mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(self).offset(20);
+//        make.centerY.mas_equalTo(_titleLab);
+//        make.size.mas_equalTo(CGSizeMake(38, 17));
+//    }];
     
     
 }

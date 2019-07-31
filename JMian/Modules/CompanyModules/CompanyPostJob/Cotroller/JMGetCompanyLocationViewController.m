@@ -28,7 +28,6 @@
 @property (nonatomic,assign)BOOL isHaveLocation;
 @property (nonatomic ,strong)AMapPOI *POIModel;
 
-
 @end
 
 @implementation JMGetCompanyLocationViewController
@@ -40,7 +39,7 @@
     [self initMapView];
     
     self.request = [[AMapPOIKeywordsSearchRequest alloc] init];
-//    self.request.keywords  = @"商务住宅|餐饮服务|生活服务";
+//    self.request.keywords  = @"公司企业|商务写字楼";
     /* 按照距离排序. */
     self.request.sortrule = 0;
     self.request.offset = 50;
@@ -52,7 +51,6 @@
 
 -(void)rightAction
 {
-    
     if(_delegate && [_delegate respondsToSelector:@selector(sendAdress_Data:)]){
         if (self.POIModel != nil) {
             [_delegate sendAdress_Data:self.POIModel];
@@ -167,6 +165,7 @@
 
     if (response.pois.count == 0)
     {
+        [self.tableView reloadData];
         return;
     }
     
@@ -178,7 +177,12 @@
         [self.dataArray addObject:obj];
         ;
     }];
-    [self.tableView reloadData];
+//    if (self.dataArray.count > 0) {
+        [self.tableView reloadData];
+        
+//    }else{
+//        NSLog(@"没数据");
+//    }
     NSLog(@"response-----%@",response);
     
     //解析response获取POI信息，具体解析见 Demo

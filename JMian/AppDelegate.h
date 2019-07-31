@@ -11,6 +11,7 @@
 #import "JMAnswerOrHangUpView.h"
 #import "JMVideoChatView.h"
 #import "JMFeedBackChooseViewController.h"
+#import "WXApi.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,AVAudioPlayerDelegate>

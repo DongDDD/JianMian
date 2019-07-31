@@ -51,7 +51,7 @@
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         //B端
         JMCompanyHomeViewController *companyHome = [[JMCompanyHomeViewController alloc]init];
-        [self addChildVc:companyHome title:@"首页" image:@"home" selectedImage:@"pitch_on_home" ];
+        [self addChildVc:companyHome title:@"找全职" image:@"home" selectedImage:@"pitch_on_home" ];
         
         self.message = [[JMMessageListViewController alloc] init];
         [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
@@ -67,7 +67,7 @@
         
     }else if ([userModel.type isEqualToString:C_Type_USER]) {
         HomeViewController *home = [[HomeViewController alloc] init];
-        [self addChildVc:home title:@"首页" image:@"home" selectedImage:@"pitch_on_home"];
+        [self addChildVc:home title:@"找全职" image:@"home" selectedImage:@"pitch_on_home"];
         
         self.message = [[JMMessageListViewController alloc] init];
         [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
