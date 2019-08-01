@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)BTaskClick;
 -(void)BVIPClick;
+-(void)BOrderClick;
 
 @end
 

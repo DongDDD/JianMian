@@ -761,6 +761,14 @@
 		04E02E7B228C145300924130 /* bofang.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E02E78228C145200924130 /* bofang.png */; };
 		04E02E7C228C145300924130 /* bofang@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E02E79228C145200924130 /* bofang@2x.png */; };
 		04E02E7D228C145300924130 /* bofang@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E02E7A228C145200924130 /* bofang@3x.png */; };
+		04E129C522F27D330003D58F /* JMOrderStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129C222F27D320003D58F /* JMOrderStatusTableViewCell.m */; };
+		04E129C622F27D330003D58F /* JMOrderStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E129C422F27D330003D58F /* JMOrderStatusTableViewCell.xib */; };
+		04E129D422F27D520003D58F /* JMMyOrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E129C922F27D510003D58F /* JMMyOrderListViewController.xib */; };
+		04E129D522F27D520003D58F /* JMLogisticsInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E129CA22F27D510003D58F /* JMLogisticsInfoViewController.xib */; };
+		04E129D622F27D520003D58F /* JMMyOrderListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129CB22F27D510003D58F /* JMMyOrderListViewController.m */; };
+		04E129D722F27D520003D58F /* JMLogisticsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129CE22F27D510003D58F /* JMLogisticsInfoViewController.m */; };
+		04E129D822F27D520003D58F /* JMOrderCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129D222F27D510003D58F /* JMOrderCellData.m */; };
+		04E129D922F27D520003D58F /* JMLogisticsCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129D322F27D510003D58F /* JMLogisticsCellData.m */; };
 		04E25F6822B4901D00F451C8 /* purchase_succeeds.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25F6522B4901C00F451C8 /* purchase_succeeds.png */; };
 		04E25F6922B4901D00F451C8 /* purchase_succeeds@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25F6622B4901D00F451C8 /* purchase_succeeds@3x.png */; };
 		04E25F6A22B4901D00F451C8 /* purchase_succeeds@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25F6722B4901D00F451C8 /* purchase_succeeds@2x.png */; };
@@ -1907,6 +1915,19 @@
 		04E02E78228C145200924130 /* bofang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bofang.png; sourceTree = "<group>"; };
 		04E02E79228C145200924130 /* bofang@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bofang@2x.png"; sourceTree = "<group>"; };
 		04E02E7A228C145200924130 /* bofang@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bofang@3x.png"; sourceTree = "<group>"; };
+		04E129C222F27D320003D58F /* JMOrderStatusTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMOrderStatusTableViewCell.m; sourceTree = "<group>"; };
+		04E129C322F27D330003D58F /* JMOrderStatusTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMOrderStatusTableViewCell.h; sourceTree = "<group>"; };
+		04E129C422F27D330003D58F /* JMOrderStatusTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMOrderStatusTableViewCell.xib; sourceTree = "<group>"; };
+		04E129C922F27D510003D58F /* JMMyOrderListViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMMyOrderListViewController.xib; sourceTree = "<group>"; };
+		04E129CA22F27D510003D58F /* JMLogisticsInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMLogisticsInfoViewController.xib; sourceTree = "<group>"; };
+		04E129CB22F27D510003D58F /* JMMyOrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMMyOrderListViewController.m; sourceTree = "<group>"; };
+		04E129CC22F27D510003D58F /* JMLogisticsInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMLogisticsInfoViewController.h; sourceTree = "<group>"; };
+		04E129CD22F27D510003D58F /* JMMyOrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMMyOrderListViewController.h; sourceTree = "<group>"; };
+		04E129CE22F27D510003D58F /* JMLogisticsInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMLogisticsInfoViewController.m; sourceTree = "<group>"; };
+		04E129D022F27D510003D58F /* JMOrderCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMOrderCellData.h; sourceTree = "<group>"; };
+		04E129D122F27D510003D58F /* JMLogisticsCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMLogisticsCellData.h; sourceTree = "<group>"; };
+		04E129D222F27D510003D58F /* JMOrderCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMOrderCellData.m; sourceTree = "<group>"; };
+		04E129D322F27D510003D58F /* JMLogisticsCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMLogisticsCellData.m; sourceTree = "<group>"; };
 		04E25F6522B4901C00F451C8 /* purchase_succeeds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purchase_succeeds.png; sourceTree = "<group>"; };
 		04E25F6622B4901D00F451C8 /* purchase_succeeds@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchase_succeeds@3x.png"; sourceTree = "<group>"; };
 		04E25F6722B4901D00F451C8 /* purchase_succeeds@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchase_succeeds@2x.png"; sourceTree = "<group>"; };
@@ -3725,6 +3746,39 @@
 			path = BaseInformation_slices;
 			sourceTree = "<group>";
 		};
+		04E129C722F27D510003D58F /* OrderList */ = {
+			isa = PBXGroup;
+			children = (
+				04E129C822F27D510003D58F /* Controller */,
+				04E129CF22F27D510003D58F /* Model */,
+			);
+			path = OrderList;
+			sourceTree = "<group>";
+		};
+		04E129C822F27D510003D58F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				04E129CD22F27D510003D58F /* JMMyOrderListViewController.h */,
+				04E129CB22F27D510003D58F /* JMMyOrderListViewController.m */,
+				04E129C922F27D510003D58F /* JMMyOrderListViewController.xib */,
+				04E129CC22F27D510003D58F /* JMLogisticsInfoViewController.h */,
+				04E129CE22F27D510003D58F /* JMLogisticsInfoViewController.m */,
+				04E129CA22F27D510003D58F /* JMLogisticsInfoViewController.xib */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		04E129CF22F27D510003D58F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				04E129D022F27D510003D58F /* JMOrderCellData.h */,
+				04E129D122F27D510003D58F /* JMLogisticsCellData.h */,
+				04E129D222F27D510003D58F /* JMOrderCellData.m */,
+				04E129D322F27D510003D58F /* JMLogisticsCellData.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		04EA211122AFCFCE0035C398 /* BDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -4198,6 +4252,9 @@
 				04256568229D3F61000614E7 /* JMMyResumeFooterView.m */,
 				04FB1A2022A3A70800A8F02C /* JMPartTimeJobResumeFooterView.h */,
 				04FB1A2122A3A70800A8F02C /* JMPartTimeJobResumeFooterView.m */,
+				04E129C322F27D330003D58F /* JMOrderStatusTableViewCell.h */,
+				04E129C222F27D320003D58F /* JMOrderStatusTableViewCell.m */,
+				04E129C422F27D330003D58F /* JMOrderStatusTableViewCell.xib */,
 				04908AF222A7B89C000B5AB4 /* JMBUserMineSectionView.h */,
 				04908AF322A7B89C000B5AB4 /* JMBUserMineSectionView.m */,
 				04CC5F9222B3B67600C5DD46 /* JMDiscoverTopView.h */,
@@ -4216,9 +4273,10 @@
 		6DEA990E2254A0D90029FE8A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				0492AE6422F0463400AB21B3 /* Wallet */,
-				040BF0812271E02F0088697D /* Setting */,
 				6D8C069A226B536C00F77D98 /* Mine */,
+				04E129C722F27D510003D58F /* OrderList */,
+				040BF0812271E02F0088697D /* Setting */,
+				0492AE6422F0463400AB21B3 /* Wallet */,
 				6D020A012250F0A5009BCFE4 /* MyResume */,
 				04C120D422882B1D001BDEBC /* Video */,
 			);
@@ -4390,6 +4448,7 @@
 				04EA210122AF39690035C398 /* NOvideos.png in Resources */,
 				0488E3F8229FB0620071DEE7 /* mission@3x.png in Resources */,
 				04E25F6922B4901D00F451C8 /* purchase_succeeds@3x.png in Resources */,
+				04E129C622F27D330003D58F /* JMOrderStatusTableViewCell.xib in Resources */,
 				040B83902265EF6A00F1A37A /* JMIDCardIdentifyViewController.xib in Resources */,
 				0485ACF722A0C94200B31506 /* my_task@3x.png in Resources */,
 				04E02E77228BF4BF00924130 /* minloading.png in Resources */,
@@ -4841,6 +4900,7 @@
 				040E365E22681C9A00A7D789 /* girl.png in Resources */,
 				0485AD1722A10D1900B31506 /* myResume.png in Resources */,
 				04908B2822A7FE31000B5AB4 /* square_icon@3x.png in Resources */,
+				04E129D522F27D520003D58F /* JMLogisticsInfoViewController.xib in Resources */,
 				047F8EB5228AC552005E81FA /* C_play@2x.png in Resources */,
 				04A51229229ABD0500BA2DC5 /* resumePic@3x.png in Resources */,
 				0485AD2322A10F7E00B31506 /* mine_share@3x.png in Resources */,
@@ -4898,6 +4958,7 @@
 				6D020A2C2250F3F9009BCFE4 /*  copyreader@2x.png in Resources */,
 				04A5FD4422C8A58200850604 /* zhuanshi@3x.png in Resources */,
 				04950FF422AEA1AF00C3D3FB /* jianbian.png in Resources */,
+				04E129D422F27D520003D58F /* JMMyOrderListViewController.xib in Resources */,
 				040C8654227E8F4A00993490 /* Photo.png in Resources */,
 				040A392E227DAC2B00EDD9E0 /* copyreader@2x.png in Resources */,
 				04AF934322CA29B000D9FCBF /* deimi_login@2x.png in Resources */,
@@ -5111,6 +5172,7 @@
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				040C865A227ED71100993490 /* JMChatDetailInfoTableViewCell.m in Sources */,
 				04380A8E22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m in Sources */,
+				04E129D622F27D520003D58F /* JMMyOrderListViewController.m in Sources */,
 				04908ACD22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m in Sources */,
 				0455C11C22EEE4A6006B0149 /* JMPayFailedViewController.m in Sources */,
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
@@ -5118,9 +5180,11 @@
 				045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */,
 				0488E59D2295438100C2E398 /* JMCityModel.m in Sources */,
 				0455C11722EEE4A6006B0149 /* JMPaySucceedViewController.m in Sources */,
+				04E129D722F27D520003D58F /* JMLogisticsInfoViewController.m in Sources */,
 				04AF933722C9DD3B00D9FCBF /* JMChoosePartTImeJobTypeLablesViewController.m in Sources */,
 				04FB1A2222A3A70800A8F02C /* JMPartTimeJobResumeFooterView.m in Sources */,
 				6D020A6E22539FB0009BCFE4 /* MapBGView.m in Sources */,
+				04E129C522F27D330003D58F /* JMOrderStatusTableViewCell.m in Sources */,
 				041997CE2266C75000C6C134 /* JMPostJobHomeViewController.m in Sources */,
 				04ABB78A22B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m in Sources */,
 				04A64E9122C4C935006C3ABA /* JMMyTopViewNavView.m in Sources */,
@@ -5253,6 +5317,7 @@
 				0455C11422EEE4A6006B0149 /* JMTaskCommetViewController.m in Sources */,
 				041C07D52261891A0088FBE1 /* JMNotificationHeaderTableViewCell.m in Sources */,
 				04A247D2224CB99800DEB8E3 /* PositionDesiredSecondViewController.m in Sources */,
+				04E129D922F27D520003D58F /* JMLogisticsCellData.m in Sources */,
 				6D020A822259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.m in Sources */,
 				04196DA5227FE1190000A6AA /* JMAllMessageTableViewCellData.m in Sources */,
 				04908AD022A79A59000B5AB4 /* JMBUserCenterHeaderView.m in Sources */,
@@ -5313,6 +5378,7 @@
 				040CD558226B230A000BB230 /* JMHTTPManager+VitaPaginate.m in Sources */,
 				04FB1A1F22A36BD800A8F02C /* JMWeakWebViewScriptMessageDelegate.m in Sources */,
 				040E3675226890B700A7D789 /* JMPostNewJobViewController.m in Sources */,
+				04E129D822F27D520003D58F /* JMOrderCellData.m in Sources */,
 				04CC5FA122B3C5DC00C5DD46 /* JMHTTPManager+FectchVideoLists.m in Sources */,
 				04256569229D3F61000614E7 /* JMMyResumeFooterView.m in Sources */,
 				041997F2226717D700C6C134 /* JMContactOfPersonDetailViewController.m in Sources */,

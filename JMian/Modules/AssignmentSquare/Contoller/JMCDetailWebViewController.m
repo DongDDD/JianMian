@@ -510,7 +510,7 @@
 -(void)iconAlertRightAction{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     [vc setMyIndex:0];
-    vc.title = @"我的兼职";
+    vc.title = @"我的任务";
     [self.navigationController pushViewController:vc animated:YES];
     
 

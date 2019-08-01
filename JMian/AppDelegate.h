@@ -14,7 +14,7 @@
 #import "WXApi.h"
 
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate,AVAudioPlayerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate,AVAudioPlayerDelegate,WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) NSMutableArray *playArray;

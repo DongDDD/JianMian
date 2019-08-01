@@ -249,7 +249,7 @@
             self.leftBtn.layer.borderWidth = 0.5;
             self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
             
-            [self.rightBtn setTitle:@"销售类型兼职" forState:UIControlStateNormal];
+            [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             self.rightBtn.backgroundColor = MASTER_COLOR;
          

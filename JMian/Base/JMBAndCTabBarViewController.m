@@ -57,7 +57,7 @@
         [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
         
         JMAssignmentSquareViewController *square = [[JMAssignmentSquareViewController alloc]init];
-        [self addChildVc:square title:@"找兼职" image:@"mission" selectedImage:@"garden_pich_on"];
+        [self addChildVc:square title:@"任务广场" image:@"mission" selectedImage:@"garden_pich_on"];
         
         JMDiscoverHomeViewController *discover = [[JMDiscoverHomeViewController alloc]init];
         [self addChildVc:discover title:@"发现" image:@"discovery" selectedImage:@"discovery_pitch_on"];
@@ -72,7 +72,7 @@
         self.message = [[JMMessageListViewController alloc] init];
         [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
         JMAssignmentSquareViewController *square = [[JMAssignmentSquareViewController alloc]init];
-        [self addChildVc:square title:@"找兼职" image:@"mission" selectedImage:@"garden_pich_on"];
+        [self addChildVc:square title:@"找任务" image:@"mission" selectedImage:@"garden_pich_on"];
        
         JMDiscoverHomeViewController *discover = [[JMDiscoverHomeViewController alloc]init];
         [self addChildVc:discover title:@"发现" image:@"discovery" selectedImage:@"discovery_pitch_on"];

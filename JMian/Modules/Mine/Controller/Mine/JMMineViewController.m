@@ -32,7 +32,7 @@
 #import "UITabBar+XSDExt.h"
 #import "JMShareView.h"
 #import "JMWalletViewController.h"
-
+#import "JMMyOrderListViewController.h"
 
 
 
@@ -164,7 +164,8 @@
         [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
         return;
     }
- 
+    JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -175,7 +176,7 @@
         return;
     }
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-    vc.title = @"我的兼职";
+    vc.title = @"我的任务";
     [vc setMyIndex:0];
     [self.personalCenterHeaderView.taskBadgeView setHidden:YES];
     [self.navigationController pushViewController:vc animated:YES];

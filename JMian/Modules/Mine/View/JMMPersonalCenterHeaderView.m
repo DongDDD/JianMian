@@ -173,40 +173,33 @@
     [_leftBtn setImage:[UIImage imageNamed:@"my_task"] forState:UIControlStateNormal];
     [self addSubview:_leftBtn];
     _leftLab = [[UILabel alloc]init];
-    _leftLab.text = @"我的兼职";
+    _leftLab.text = @"我的任务";
     _leftLab.font = kFont(12);
     _leftLab.textColor = [UIColor whiteColor];
     [self addSubview:_leftLab];
 
     
-//    _rightBtn = [[UIButton alloc]init];
-//    [_rightBtn addTarget:self action:@selector(orderBtnAction) forControlEvents:UIControlEventTouchUpInside];
-//    [self addSubview:_rightBtn];
-//    _rightLab = [[UILabel alloc]init];
-//    _rightLab.textColor = [UIColor whiteColor];
-//    JMVersionModel *model = [JMVersionManager getVersoinInfo];
-//    if (![model.test isEqualToString:@"1"]) {
-//        _rightLab.text = @"我的订单";
-//        [_rightBtn setImage:[UIImage imageNamed:@"B_indent"] forState:UIControlStateNormal];
-//
-//    }else{
-//        _rightLab.text = @"任务详情";
-//        [_rightBtn setImage:[UIImage imageNamed:@"my_task"] forState:UIControlStateNormal];
-//
-//    }
-//    _rightLab.font = kFont(12);
-//    [self addSubview:_rightLab];
+    _rightBtn = [[UIButton alloc]init];
+    [_rightBtn addTarget:self action:@selector(orderBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [_rightBtn setImage:[UIImage imageNamed:@"C_indent"] forState:UIControlStateNormal];
+    [self addSubview:_rightBtn];
+    _rightLab = [[UILabel alloc]init];
+    _rightLab.textColor = [UIColor whiteColor];
+    _rightLab.text = @"我的订单";
+ 
+    _rightLab.font = kFont(12);
+    [self addSubview:_rightLab];
     _taskBadgeView = [[UIView alloc]init];
     _taskBadgeView.backgroundColor = [UIColor redColor];
     _taskBadgeView.layer.cornerRadius = 5;
     [_taskBadgeView setHidden:YES];
     [self addSubview:_taskBadgeView];
     
-//    _orderBadgeView = [[UIView alloc]init];
-//    _orderBadgeView.layer.cornerRadius = 5;
-//    [_orderBadgeView setHidden:YES];
-//    _orderBadgeView.backgroundColor = [UIColor redColor];
-//    [self addSubview:_orderBadgeView];
+    _orderBadgeView = [[UIView alloc]init];
+    _orderBadgeView.layer.cornerRadius = 5;
+    [_orderBadgeView setHidden:YES];
+    _orderBadgeView.backgroundColor = [UIColor redColor];
+    [self addSubview:_orderBadgeView];
     
 
 
@@ -229,7 +222,7 @@
 
     
     [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self);
+        make.centerX.mas_equalTo(self).offset(-SCREEN_WIDTH*0.2);;
         make.bottom.mas_equalTo(self).offset(-55);
         make.size.mas_equalTo(CGSizeMake(29, 28));
         
@@ -241,16 +234,16 @@
         
     }];
     
-//    [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(self).offset(SCREEN_WIDTH*0.2);
-//        make.top.mas_equalTo(_leftBtn);
-//        make.size.mas_equalTo(CGSizeMake(29, 28));
-//    }];
-//
-//    [_rightLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(_rightBtn);
-//        make.top.mas_equalTo(_rightBtn.mas_bottom).offset(10);
-//    }];
+    [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self).offset(SCREEN_WIDTH*0.2);
+        make.top.mas_equalTo(_leftBtn);
+        make.size.mas_equalTo(CGSizeMake(29, 28));
+    }];
+
+    [_rightLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(_rightBtn);
+        make.top.mas_equalTo(_rightBtn.mas_bottom).offset(10);
+    }];
     
     [_bottomImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self);
@@ -258,11 +251,11 @@
         make.height.mas_equalTo(49);
     }];
     
-//    [_orderBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.right.mas_equalTo(_rightBtn).mas_offset(5);
-//        make.top.mas_equalTo(_rightBtn).mas_offset(-5);
-//        make.size.mas_equalTo(CGSizeMake(10,10));
-//    }];
+    [_orderBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(_rightBtn).mas_offset(5);
+        make.top.mas_equalTo(_rightBtn).mas_offset(-5);
+        make.size.mas_equalTo(CGSizeMake(10,10));
+    }];
     [_taskBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.mas_equalTo(_leftBtn).mas_offset(5);
         make.top.mas_equalTo(_leftBtn).mas_offset(-5);

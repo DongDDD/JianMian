@@ -35,7 +35,7 @@
 #import "JMShareView.h"
 #import "JMWalletViewController.h"
 #import "JMVIPViewController.h"
-
+#import "JMMyOrderListViewController.h"
 @interface JMBMineViewController ()<JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMBMineInfoViewDelegate,JMBMineMoreFunctionViewDelegate,JMShareViewDelegate>
 
 @property (strong, nonatomic) JMBUserCenterHeaderView *BUserCenterHeaderView;
@@ -119,7 +119,7 @@
 // - B端个人的中心
 -(void)BTaskClick{
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-    vc.title = @"兼职管理";
+    vc.title = @"任务管理";
     [vc setMyIndex:0];
     [_BUserCenterHeaderSubView.taskBadgeView setHidden:YES];
     
@@ -134,6 +134,10 @@
 
 }
 
+-(void)BOrderClick{
+    JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 -(void)didClickSetting{
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];

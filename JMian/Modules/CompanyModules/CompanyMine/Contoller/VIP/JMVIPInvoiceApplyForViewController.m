@@ -275,14 +275,28 @@ static NSString *cellIdent = @"payCellIdent";
 //交易完成后的操作
 -(void)completeTransaction:(SKPaymentTransaction *)transaction{
     
-    NSString *productIdentifier = transaction.payment.productIdentifier;
-    NSData *transactionReceiptData = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
-    NSString *receipt = [transactionReceiptData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+//    NSString *productIdentifier = transaction.payment.productIdentifier;
+//    NSData *transactionReceiptData = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
+//    NSString *receipt = [transactionReceiptData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
-    if ([productIdentifier length]>0) {
-        //向自己的服务器验证购买凭证
-        NSLog(@"向自己的服务器验证购买凭证%@",receipt);
-    }
+    NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
+    // 从沙盒中获取到购买凭据
+    NSData *receiptData = [NSData dataWithContentsOfURL:receiptURL];
+
+    NSLog(@"向自己的服务器验证购买凭证receiptData%@",receiptData);
+
+    NSString *encodeStr = [receiptData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    NSString *receipt_data = [receiptData base64EncodedStringWithOptions:0];
+    NSString *StrData = [self toArrayOrNSDictionary:receiptData];
+    NSLog(@"向自己的服务器验证购买凭证StrData%@",StrData);
+    NSLog(@"向自己的服务器验证购买凭证receipt_data%@",receipt_data);
+
+    NSLog(@"向自己的服务器验证购买凭证%@",encodeStr);
+
+//    if ([productIdentifier length]>0) {
+//        //向自己的服务器验证购买凭证
+//        NSLog(@"向自己的服务器验证购买凭证%@",receipt);
+//    }
     
     //移除transaction购买操作
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
@@ -299,7 +313,11 @@ static NSString *cellIdent = @"payCellIdent";
     //移除transaction购买操作
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
-    
+
+-(void)successfulPurchaseOfId:(NSString *)productID andReceipt:(NSData *)transactionReceipt{
+    NSLog(@"successfulPurchaseOfId");
+
+}
 #pragma mark - Mydelegate
 
 //是否需要开发票
