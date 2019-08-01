@@ -60,15 +60,15 @@
     [self addSubview:_leftLab];
     
 //
-//    _rightBtn = [[UIButton alloc]init];
-//    [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
-//    [_rightBtn setImage:[UIImage imageNamed:@"VIP"] forState:UIControlStateNormal];
-//    [self addSubview:_rightBtn];
-//    _rightLab = [[UILabel alloc]init];
-//    _rightLab.textColor = TEXT_GRAY_COLOR;
-//    _rightLab.text = @"VIP会员";
-//    _rightLab.font = kFont(12);
-//    [self addSubview:_rightLab];
+    _rightBtn = [[UIButton alloc]init];
+    [_rightBtn addTarget:self action:@selector(rightAction) forControlEvents:UIControlEventTouchUpInside];
+    [_rightBtn setImage:[UIImage imageNamed:@"VIP"] forState:UIControlStateNormal];
+    [self addSubview:_rightBtn];
+    _rightLab = [[UILabel alloc]init];
+    _rightLab.textColor = TEXT_GRAY_COLOR;
+    _rightLab.text = @"VIP会员";
+    _rightLab.font = kFont(12);
+    [self addSubview:_rightLab];
     
     _taskBadgeView = [[UIView alloc]init];
     _taskBadgeView.backgroundColor = [UIColor redColor];
@@ -124,16 +124,16 @@
     }];
     
     
-//    [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(self).offset(SCREEN_WIDTH*0.15);
-//        make.top.mas_equalTo(_leftBtn);
-//        make.size.mas_equalTo(CGSizeMake(29, 28));
-//    }];
-//
-//    [_rightLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerX.mas_equalTo(_rightBtn);
-//        make.top.mas_equalTo(_rightBtn.mas_bottom).offset(10);
-//    }];
+    [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self).offset(SCREEN_WIDTH*0.15);
+        make.top.mas_equalTo(_leftBtn);
+        make.size.mas_equalTo(CGSizeMake(29, 28));
+    }];
+
+    [_rightLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(_rightBtn);
+        make.top.mas_equalTo(_rightBtn.mas_bottom).offset(10);
+    }];
 }
 
 
@@ -150,12 +150,12 @@
 //    }
 //
 //}
-//-(void)rightAction{
-//    if (_delegate && [_delegate respondsToSelector:@selector(BVIPClick)]) {
-//        [_delegate BVIPClick];
-//    }
-//    
-//}
+-(void)rightAction{
+    if (_delegate && [_delegate respondsToSelector:@selector(BVIPClick)]) {
+        [_delegate BVIPClick];
+    }
+    
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

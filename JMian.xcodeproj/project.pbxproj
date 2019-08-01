@@ -457,6 +457,13 @@
 		04908B5422A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04908B5222A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.xib */; };
 		0491B25E2286794600F1FD3A /* JMLabsScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491B25D2286794600F1FD3A /* JMLabsScreenView.m */; };
 		0491B2612286A07800F1FD3A /* JMLabsChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */; };
+		0492400422F17B550007C8A1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0492400322F17B540007C8A1 /* StoreKit.framework */; };
+		0492400F22F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492400622F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.m */; };
+		0492401022F17C940007C8A1 /* JMProtocalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492400822F17C940007C8A1 /* JMProtocalWebViewController.m */; };
+		0492401122F17C940007C8A1 /* JMVIPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492400922F17C940007C8A1 /* JMVIPViewController.xib */; };
+		0492401222F17C940007C8A1 /* JMVIPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492400A22F17C940007C8A1 /* JMVIPViewController.m */; };
+		0492401322F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492400C22F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.xib */; };
+		0492401422F17C940007C8A1 /* JMProtocalWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492400E22F17C940007C8A1 /* JMProtocalWebViewController.xib */; };
 		0492715C22982878008D6E0D /* JMBTypeLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492715B22982878008D6E0D /* JMBTypeLikeModel.m */; };
 		0492715F22982E3C008D6E0D /* JMCTypeLikeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492715E22982E3C008D6E0D /* JMCTypeLikeModel.m */; };
 		0492AE6122EFD4C000AB21B3 /* pry@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0492AE5E22EFD4BF00AB21B3 /* pry@3x.png */; };
@@ -1504,6 +1511,16 @@
 		0491B25D2286794600F1FD3A /* JMLabsScreenView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabsScreenView.m; sourceTree = "<group>"; };
 		0491B25F2286A07800F1FD3A /* JMLabsChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabsChooseViewController.h; sourceTree = "<group>"; };
 		0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabsChooseViewController.m; sourceTree = "<group>"; };
+		0492400322F17B540007C8A1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		0492400622F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMVIPInvoiceApplyForViewController.m; sourceTree = "<group>"; };
+		0492400722F17C940007C8A1 /* JMVIPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMVIPViewController.h; sourceTree = "<group>"; };
+		0492400822F17C940007C8A1 /* JMProtocalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMProtocalWebViewController.m; sourceTree = "<group>"; };
+		0492400922F17C940007C8A1 /* JMVIPViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMVIPViewController.xib; sourceTree = "<group>"; };
+		0492400A22F17C940007C8A1 /* JMVIPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMVIPViewController.m; sourceTree = "<group>"; };
+		0492400B22F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMVIPInvoiceApplyForViewController.h; sourceTree = "<group>"; };
+		0492400C22F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMVIPInvoiceApplyForViewController.xib; sourceTree = "<group>"; };
+		0492400D22F17C940007C8A1 /* JMProtocalWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMProtocalWebViewController.h; sourceTree = "<group>"; };
+		0492400E22F17C940007C8A1 /* JMProtocalWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMProtocalWebViewController.xib; sourceTree = "<group>"; };
 		049271592297C86B008D6E0D /* JMian.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JMian.entitlements; sourceTree = "<group>"; };
 		0492715A22982878008D6E0D /* JMBTypeLikeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMBTypeLikeModel.h; sourceTree = "<group>"; };
 		0492715B22982878008D6E0D /* JMBTypeLikeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMBTypeLikeModel.m; sourceTree = "<group>"; };
@@ -2081,6 +2098,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0492400422F17B550007C8A1 /* StoreKit.framework in Frameworks */,
 				4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2913,6 +2931,7 @@
 				0425654D229C0645000614E7 /* JMBUserInfoViewController.h */,
 				0425654E229C0645000614E7 /* JMBUserInfoViewController.m */,
 				0425654F229C0646000614E7 /* JMBUserInfoViewController.xib */,
+				0492400522F17C940007C8A1 /* VIP */,
 				0455C10122EEE4A5006B0149 /* TaskManage */,
 				04908AFB22A7D1F1000B5AB4 /* PostJob */,
 			);
@@ -3304,6 +3323,22 @@
 				0492F00A22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m */,
 			);
 			path = Task;
+			sourceTree = "<group>";
+		};
+		0492400522F17C940007C8A1 /* VIP */ = {
+			isa = PBXGroup;
+			children = (
+				0492400722F17C940007C8A1 /* JMVIPViewController.h */,
+				0492400A22F17C940007C8A1 /* JMVIPViewController.m */,
+				0492400922F17C940007C8A1 /* JMVIPViewController.xib */,
+				0492400B22F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.h */,
+				0492400622F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.m */,
+				0492400C22F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.xib */,
+				0492400D22F17C940007C8A1 /* JMProtocalWebViewController.h */,
+				0492400822F17C940007C8A1 /* JMProtocalWebViewController.m */,
+				0492400E22F17C940007C8A1 /* JMProtocalWebViewController.xib */,
+			);
+			path = VIP;
 			sourceTree = "<group>";
 		};
 		0492AE6422F0463400AB21B3 /* Wallet */ = {
@@ -3711,6 +3746,7 @@
 		47579204418359BAEBA6F740 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0492400322F17B540007C8A1 /* StoreKit.framework */,
 				042CA65522D6279100ABB7AF /* libAFNetworking.a */,
 				1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */,
 			);
@@ -4300,6 +4336,9 @@
 							com.apple.ApplePay = {
 								enabled = 1;
 							};
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -4385,8 +4424,10 @@
 				040BF07322719E4E0088697D /* me@2x.png in Resources */,
 				04A5FD5022C8A5C800850604 /* huangguan@2x.png in Resources */,
 				041CCF0122A52403002DFED3 /* store@3x.png in Resources */,
+				0492401122F17C940007C8A1 /* JMVIPViewController.xib in Resources */,
 				04AB444522BA13F500000E03 /* DEMI_BIG@3x.png in Resources */,
 				04072F662282CB540067A05D /* camera_wallet@2x.png in Resources */,
+				0492401322F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.xib in Resources */,
 				0455C11F22EEE4A6006B0149 /* JMSnapshotWebViewController.xib in Resources */,
 				04AC6A2F22CE1AEE00693424 /* videoMeet.mp3 in Resources */,
 				040C18162264148300456C53 /* JIANMIAN_login@2x.png in Resources */,
@@ -4882,6 +4923,7 @@
 				04072F2A2282949D0067A05D /* particulars@2x.png in Resources */,
 				0425655B229C2CCD000614E7 /* talent@3x.png in Resources */,
 				040BF06922719B920088697D /* JMUserChangeWindowView.xib in Resources */,
+				0492401422F17C940007C8A1 /* JMProtocalWebViewController.xib in Resources */,
 				0455C11922EEE4A6006B0149 /* JMPaySucceedViewController.xib in Resources */,
 				040701A422753755002BF58D /* share2@3x.png in Resources */,
 				042CA65422D626AD00ABB7AF /* juyingcai.png in Resources */,
@@ -5123,6 +5165,7 @@
 				049C653D22AD707700A93DFE /* JMHTTPManager+UpdateTask.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
 				040CD54F226AC0D1000BB230 /* JMCompanyInfoMineViewController.m in Sources */,
+				0492400F22F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.m in Sources */,
 				0485ACEC22A0C07300B31506 /* JMMPersonalCenterHeaderView.m in Sources */,
 				048A0DEB22B8DF57006530EC /* JMHTTPManager+FectchWalletDetails.m in Sources */,
 				040E366E2268531A00A7D789 /* JMEducationView.m in Sources */,
@@ -5241,6 +5284,7 @@
 				0446E48A22E04BBD00B3A26C /* JMInvoiceHeaderView.m in Sources */,
 				04B4F88522B7BFBE00A06E9C /* JMPostGoodsImagesView.m in Sources */,
 				6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */,
+				0492401222F17C940007C8A1 /* JMVIPViewController.m in Sources */,
 				040A40BB226589A50005E0D7 /* JMCompanyBaseInfoViewController.m in Sources */,
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
 				04908B5322A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.m in Sources */,
@@ -5292,6 +5336,7 @@
 				0486F7792293917900114A22 /* Demo3ViewController.m in Sources */,
 				04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */,
 				0488E3B7229F98440071DEE7 /* JMSquareViewController.m in Sources */,
+				0492401022F17C940007C8A1 /* JMProtocalWebViewController.m in Sources */,
 				040A3933227DBEA700EDD9E0 /* JMGreetTableViewController.m in Sources */,
 				04731DEA22A66C630013D7CE /* JMAbilityCellData.m in Sources */,
 				048A0DF722B91A8E006530EC /* JMBDetailModel.m in Sources */,

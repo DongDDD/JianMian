@@ -92,6 +92,8 @@
             [self.companyNameTextField setText:userInfo.company_real_company_name];
         }
         
+     
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

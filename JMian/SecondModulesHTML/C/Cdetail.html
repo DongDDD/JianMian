@@ -932,9 +932,10 @@
     });
 
     function showInfoFromJava(item,token) {
-        vue.detail = JSON.parse(item);
+        var b = JSON.parse(item.replace(/\n/g,"\\n").replace(/\r/g,"\\\r"))
+        vue.detail = b;
+        console.log(vue.detail)
         vue.token = token;
-        console.log(token)
     }
 
     /*if(vue.detail){

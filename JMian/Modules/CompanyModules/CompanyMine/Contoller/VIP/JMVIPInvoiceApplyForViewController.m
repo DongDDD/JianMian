@@ -17,9 +17,10 @@
 #import "JMInvoiceModel.h"
 //#import "WXApi.h"
 #import "JMProtocalWebViewController.h"
+#import <StoreKit/StoreKit.h>
 
 
-@interface JMVIPInvoiceApplyForViewController ()<UITableViewDelegate,UITableViewDataSource,JMMakeOutBillViewDelegate,JMInvoiceHeaderViewDelegate,UITextFieldDelegate,JMVIPInvoicePayTableViewCellDelegate>
+@interface JMVIPInvoiceApplyForViewController ()<UITableViewDelegate,UITableViewDataSource,JMMakeOutBillViewDelegate,JMInvoiceHeaderViewDelegate,UITextFieldDelegate,JMVIPInvoicePayTableViewCellDelegate,SKPaymentTransactionObserver,SKProductsRequestDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong)JMVIPInvoiceView *vipInvoiceView;
@@ -39,6 +40,7 @@
 @property (nonatomic, strong)NSArray *labArr;
 @property (nonatomic, copy)NSString *payName;
 
+@property(nonatomic,strong)NSArray*products;
 
 @end
 
@@ -58,6 +60,18 @@ static NSString *cellIdent = @"payCellIdent";
 //    _imagArr = @[@"vvip"];
 //    _labArr = @[@"购买一年VIP"];
     [self getInvoiceInfo];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
+
+}
+    
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    //44.移除监听者
+    [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
 }
 
 #pragma mark - UI
@@ -85,7 +99,6 @@ static NSString *cellIdent = @"payCellIdent";
     gl.locations = @[@(0.0),@(1.0)];
     
     [self.bottomView.layer addSublayer:gl];
-
 
 }
 
@@ -169,42 +182,157 @@ static NSString *cellIdent = @"payCellIdent";
 }
 
 - (IBAction)comfirmAction:(id)sender {
-    [self getPayInfoData];
- 
+//    [self getPayInfoData];
+//    NSString *product = self.profuctIdArr[sender.tag-100];
+
+//    //1.� 加载plist文件(模拟想要销售的商品)
+//    NSString *path = [[NSBundle mainBundle]pathForResource:@"Withint.plist" ofType:nil];
+//    NSArray *productsArray = [NSArray arrayWithContentsOfFile:path];
+//    //2. 取出所有想要销售的商品productID
+//    NSArray *productIDArray = [productsArray valueForKey:@"productID"];
+//    //3. 将所有的product放在NSSet里面
+//    NSSet *productIDSet = [NSSet setWithArray:productIDArray];
+//    //4. 创建请求对象
+//    SKProductsRequest *request = [[SKProductsRequest alloc]initWithProductIdentifiers:productIDSet];
+//    //4.1 设置代理
+//    request.delegate = self;
+//    //5. 开始请求可销售的商品
+//    [request start];
+    
+    if ([SKPaymentQueue canMakePayments]) {
+        NSArray *arr = @[@"com.hanyue.JianMianTest6"];
+        NSSet * set = [NSSet setWithArray:arr];
+        SKProductsRequest * request = [[SKProductsRequest alloc] initWithProductIdentifiers:set];
+        request.delegate = self;
+        [request start];
+     }else{
+        NSLog(@"失败,用户禁止应用内付费购买");
+    }
     
 }
 
+    /**
+     代理方法
+     当请求到可销售的商品的时候,会调用此方法
+     */
+- (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response NS_AVAILABLE_IOS(3_0){
+    NSLog(@"--%ld",response.products.count);
+        for(SKProduct *product in response.products){
+            NSLog(@"%@",product.localizedTitle);//名称
+            NSLog(@"%@",product.localizedDescription);//描述
+            NSLog(@"%@",product.price);//价格
+            NSLog(@"%@",product.productIdentifier);//id
+        }
+    //1. 保留所有的可销售的产品
+    self.products = response.products;
+    SKPayment * payment = [SKPayment paymentWithProduct:self.products[0]];
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
+    
+}
+    
+/**
+当交易队列当中 有交易状态发生改变的时候会执行该方法
+*/
+-(void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray<SKPaymentTransaction *> *)transactions{
+/**
+     SKPaymentTransactionStatePurchasing,//正在购买
+     SKPaymentTransactionStatePurchased, //已经购买(向服务器发送请求 给用户请求 停止该交易)
+     SKPaymentTransactionStateFailed,//购买失败
+     SKPaymentTransactionStateRestored,//恢复购买成功(向服务器发送请求 给用户请求 停止该交易):换个手机登录此app
+     SKPaymentTransactionStateDeferred//用户未决定最终状态(已经有票据)
+*/
+    //transactions是交易队列里面所有的交易
+    for (SKPaymentTransaction *transaction in transactions) {
+        switch (transaction.transactionState) {
+            case SKPaymentTransactionStatePurchasing:
+            NSLog(@"用户正在购买");
+            break;
+            case SKPaymentTransactionStatePurchased:
+            NSLog(@"用户购买成功");
+            [self completeTransaction:transaction];
+            //1. 停止所有交易
+            [queue finishTransaction:transaction];
+            //2 .请求给用户商品
+            break;
+            case SKPaymentTransactionStateFailed:
+            NSLog(@"用户正购买失败");
+            break;
+            case SKPaymentTransactionStateRestored:
+            NSLog(@"用户恢复购买成功");
+            //1. 停止所有交易
+            [queue finishTransaction:transaction];
+            //2 .请求给用户商品
+            break;
+            case SKPaymentTransactionStateDeferred:
+            NSLog(@"用户未决定最终状态");
+            break;
+            default:
+            break;
+        }
+    }
+}
+    
+//交易完成后的操作
+-(void)completeTransaction:(SKPaymentTransaction *)transaction{
+    
+    NSString *productIdentifier = transaction.payment.productIdentifier;
+    NSData *transactionReceiptData = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
+    NSString *receipt = [transactionReceiptData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    if ([productIdentifier length]>0) {
+        //向自己的服务器验证购买凭证
+        NSLog(@"向自己的服务器验证购买凭证%@",receipt);
+    }
+    
+    //移除transaction购买操作
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+}
+
+//交易失败后的操作
+-(void)failedTransaction:(SKPaymentTransaction *)transaction{
+    
+    if (transaction.error.code != SKErrorPaymentCancelled) {
+        NSLog(@"购买失败");
+    }else{
+        NSLog(@"用户取消交易");
+    }
+    //移除transaction购买操作
+    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+}
+    
 #pragma mark - Mydelegate
 
 //是否需要开发票
 -(void)didClickBillActionWithTag:(NSInteger)tag{
     switch (tag) {
         case 1000://需要发票
-            [self.makeOutBillView setHidden:NO];
-            [self changeMakeOutBillViewNeed];
-            [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
-            [_makeOutBillHeaderView.YESBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
-            self.is_invoice = @"1";
-            //判断是否有写好的默认发票信息
-            if (_invoiceModel) {
-                [_makeOutBillView.invoiceTitleTextField setText:_invoiceModel.invoice_title];
-                [_makeOutBillView.invoiceTaxNumTextField setText:_invoiceModel.invoice_tax_number];
-                [_makeOutBillView.invoiceEmailTextField setText:_invoiceModel.invoice_email];
-                _invoice_title = _invoiceModel.invoice_title;
-                _invoice_tax_number = _invoiceModel.invoice_tax_number;
-                _invoice_email = _invoiceModel.invoice_email;
-            }
-            break;
+        [self.makeOutBillView setHidden:NO];
+        [self changeMakeOutBillViewNeed];
+        [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+        [_makeOutBillHeaderView.YESBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
+        self.is_invoice = @"1";
+        //判断是否有写好的默认发票信息
+        if (_invoiceModel) {
+            [_makeOutBillView.invoiceTitleTextField setText:_invoiceModel.invoice_title];
+            [_makeOutBillView.invoiceTaxNumTextField setText:_invoiceModel.invoice_tax_number];
+            [_makeOutBillView.invoiceEmailTextField setText:_invoiceModel.invoice_email];
+            _invoice_title = _invoiceModel.invoice_title;
+            _invoice_tax_number = _invoiceModel.invoice_tax_number;
+            _invoice_email = _invoiceModel.invoice_email;
+        }
+        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];//恢复全部的购买
+        
+        break;
         case 1001://不需要发票
-            [self.makeOutBillView setHidden:YES];
-            [self changeMakeOutBillViewNONeed];
-            [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
-            [_makeOutBillHeaderView.YESBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
-            self.is_invoice = @"0";
-            
-            break;
+        [self.makeOutBillView setHidden:YES];
+        [self changeMakeOutBillViewNONeed];
+        [_makeOutBillHeaderView.NOBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
+        [_makeOutBillHeaderView.YESBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
+        self.is_invoice = @"0";
+        
+        break;
         default:
-            break;
+        break;
     }
     
 }
@@ -322,6 +450,7 @@ static NSString *cellIdent = @"payCellIdent";
     
     return view;
 }
+
 #pragma mark - getter
 
 -(UITableView *)tableView{

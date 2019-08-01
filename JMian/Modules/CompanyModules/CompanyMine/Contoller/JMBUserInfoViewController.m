@@ -42,6 +42,9 @@
         self.positionText.text = userModel.company_position;
         NSURL *url = [NSURL URLWithString:userModel.avatar];
         [self.headerImg sd_setImageWithURL:url];
+        if ([userInfo.card_status isEqualToString:Card_PassIdentify]) {
+            [self.nameText setEnabled:NO];
+        }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

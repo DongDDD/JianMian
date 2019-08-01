@@ -34,7 +34,7 @@
 #import "JMBMineMoreFunctionView.h"
 #import "JMShareView.h"
 #import "JMWalletViewController.h"
-//#import "JMVIPViewController.h"
+#import "JMVIPViewController.h"
 
 @interface JMBMineViewController ()<JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMBMineInfoViewDelegate,JMBMineMoreFunctionViewDelegate,JMShareViewDelegate>
 
@@ -127,12 +127,12 @@
     
 }
 
-//-(void)BVIPClick{
+-(void)BVIPClick{
 
-//    JMVIPViewController *vc = [[JMVIPViewController alloc]init];
-//    [self.navigationController pushViewController:vc animated:YES];
+    JMVIPViewController *vc = [[JMVIPViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 
-//}
+}
 
 
 -(void)didClickSetting{
@@ -285,6 +285,7 @@
     }
     return _shareView;
 }
+    
 -(UIView *)shareBgView{
     
     if (!_shareBgView) {

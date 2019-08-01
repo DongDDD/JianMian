@@ -273,6 +273,7 @@
     _adress = adress;
     
 }
+    
 //是否需要开发票
 -(void)didClickBillActionWithTag:(NSInteger)tag{
     _isChange = YES;
@@ -508,7 +509,8 @@
     [self.partTimeJobDetailView.jobTypeBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
     
     [self.partTimeJobDetailView.jobNameTextField setText:model.task_title];
-    
+    [self.partTimeJobDetailView.jobNameTextField setEnabled:NO];
+
     [self.partTimeJobDetailView.paymentMoneyTextField setText:model.payment_money];
     [self.partTimeJobDetailView.downPaymentTextField setText:model.front_money];
     [self.partTimeJobDetailView.cityBtn setTitle:model.cityName forState:UIControlStateNormal];
