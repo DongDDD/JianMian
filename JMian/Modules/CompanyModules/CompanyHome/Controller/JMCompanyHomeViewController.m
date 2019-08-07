@@ -78,9 +78,9 @@ static NSString *cellIdent = @"cellIdent";
     [super viewDidLoad];
     
     [self setTitleViewImageViewName:@"demi_home"];
-//    [self setBackBtnImageViewName:@"site_Home" textName:@"广州"];
+    [self setBackBtnImageViewName:@"site_Home" textName:@"不限"];
 //    [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
-    [self setIsHiddenBackBtn:YES];
+//    [self setIsHiddenBackBtn:YES];
     [self setIsHiddenRightBtn:YES];
     self.view.backgroundColor = BG_COLOR;
     self.per_page = 15;

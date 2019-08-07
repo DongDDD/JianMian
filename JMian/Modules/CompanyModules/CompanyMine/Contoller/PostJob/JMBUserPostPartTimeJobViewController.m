@@ -190,7 +190,7 @@
 
 - (void)didSelectedCity_id:(nonnull NSString *)city_id city_name:(nonnull NSString *)city_name {
     _isChange = YES;
-
+    
     _city_id = city_id;
     [self.partTimeJobDetailView.cityBtn setTitle:city_name forState:UIControlStateNormal];
     [self.partTimeJobDetailView.cityBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
@@ -513,7 +513,12 @@
 
     [self.partTimeJobDetailView.paymentMoneyTextField setText:model.payment_money];
     [self.partTimeJobDetailView.downPaymentTextField setText:model.front_money];
-    [self.partTimeJobDetailView.cityBtn setTitle:model.cityName forState:UIControlStateNormal];
+    if (model.cityID == nil) {
+        [self.partTimeJobDetailView.cityBtn setTitle:@"不限" forState:UIControlStateNormal];
+    }else{
+        [self.partTimeJobDetailView.cityBtn setTitle:model.cityName forState:UIControlStateNormal];
+
+    }
     [self.partTimeJobDetailView.cityBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
     [self.makeOutBillHeaderView.adressBtn setTitle:model.address forState:UIControlStateNormal];
     [self.makeOutBillHeaderView.adressBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
@@ -640,7 +645,6 @@
         
     }];
 
-    
 }
 
 -(void)alertSucceesAction{

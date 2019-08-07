@@ -171,6 +171,7 @@
 		040E3676226890B700A7D789 /* JMPostNewJobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040E3674226890B700A7D789 /* JMPostNewJobViewController.xib */; };
 		040E54DC22772382004AB0F9 /* JMHTTPManager+MessageList.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E54DB22772382004AB0F9 /* JMHTTPManager+MessageList.m */; };
 		040E54E022772A99004AB0F9 /* JMMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E54DF22772A99004AB0F9 /* JMMessageListModel.m */; };
+		0419512122F8476600D64C00 /* JMImageMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0419512022F8476600D64C00 /* JMImageMessageCellData.m */; };
 		04196DA5227FE1190000A6AA /* JMAllMessageTableViewCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */; };
 		04196DAF22805C450000A6AA /* JMMySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04196DAD22805C450000A6AA /* JMMySettingViewController.m */; };
 		04196DB022805C450000A6AA /* JMMySettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04196DAE22805C450000A6AA /* JMMySettingViewController.xib */; };
@@ -224,6 +225,11 @@
 		04256571229EE211000614E7 /* qidong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0425656E229EE211000614E7 /* qidong.png */; };
 		0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0425CB56228449D600E08587 /* JMVideoChatViewController.m */; };
 		0425CB59228449D600E08587 /* JMVideoChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0425CB57228449D600E08587 /* JMVideoChatViewController.xib */; };
+		042C16EC22F90E370048F8F2 /* TCommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16EA22F90E370048F8F2 /* TCommonTableViewCell.m */; };
+		042C16F622F924C10048F8F2 /* JMImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16F522F924C10048F8F2 /* JMImageMessageCell.m */; };
+		042C16F922F966B70048F8F2 /* JMTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16F822F966B70048F8F2 /* JMTextMessageCell.m */; };
+		042C16FC22F967670048F8F2 /* JMTextMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16FB22F967670048F8F2 /* JMTextMessageCellData.m */; };
+		042C16FF22F968010048F8F2 /* JMMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16FE22F968010048F8F2 /* JMMessageCellData.m */; };
 		042CA63422D4376400ABB7AF /* JMServiceProtocolWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CA63222D4376400ABB7AF /* JMServiceProtocolWebViewController.m */; };
 		042CA63522D4376400ABB7AF /* JMServiceProtocolWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042CA63322D4376400ABB7AF /* JMServiceProtocolWebViewController.xib */; };
 		042CA63822D475A500ABB7AF /* JMLabChooseBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CA63722D475A500ABB7AF /* JMLabChooseBottomView.m */; };
@@ -236,6 +242,7 @@
 		04380A8E22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A8D22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m */; };
 		04380A9222DC15C900EA45C2 /* JMVersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A9122DC15C900EA45C2 /* JMVersionManager.m */; };
 		04380A9522DC167C00EA45C2 /* JMVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A9422DC167C00EA45C2 /* JMVersionModel.m */; };
+		044276DB22F3EDDF00CAE54F /* JMCityListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 044276DA22F3EDDF00CAE54F /* JMCityListManager.m */; };
 		0446E47A22E0031F00B3A26C /* JMVIPInvoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446E47922E0031F00B3A26C /* JMVIPInvoiceView.m */; };
 		0446E47C22E0032A00B3A26C /* JMVIPInvoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0446E47B22E0032A00B3A26C /* JMVIPInvoiceView.xib */; };
 		0446E48022E0047D00B3A26C /* vip2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0446E47D22E0047D00B3A26C /* vip2@2x.png */; };
@@ -245,8 +252,6 @@
 		0446E48722E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0446E48522E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.xib */; };
 		0446E48A22E04BBD00B3A26C /* JMInvoiceHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446E48922E04BBD00B3A26C /* JMInvoiceHeaderView.m */; };
 		0446E48C22E04C2100B3A26C /* JMInvoiceHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0446E48B22E04C2100B3A26C /* JMInvoiceHeaderView.xib */; };
-		044DF25A2244D59C00301243 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF2582244D59C00301243 /* LoginViewController.m */; };
-		044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF2592244D59C00301243 /* LoginViewController.xib */; };
 		044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 044DF25D2244D6F100301243 /* LoginPhoneViewController.m */; };
 		044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF25E2244D6F100301243 /* LoginPhoneViewController.xib */; };
 		0455C11422EEE4A6006B0149 /* JMTaskCommetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0455C10222EEE4A5006B0149 /* JMTaskCommetViewController.m */; };
@@ -354,8 +359,6 @@
 		0488E3AE229F96360071DEE7 /* Collection_of_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 0488E3AB229F96350071DEE7 /* Collection_of_selected.png */; };
 		0488E3AF229F96360071DEE7 /* Collection_of_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0488E3AC229F96350071DEE7 /* Collection_of_selected@2x.png */; };
 		0488E3B0229F96360071DEE7 /* Collection_of_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0488E3AD229F96350071DEE7 /* Collection_of_selected@3x.png */; };
-		0488E3B7229F98440071DEE7 /* JMSquareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0488E3B5229F98440071DEE7 /* JMSquareViewController.m */; };
-		0488E3B8229F98440071DEE7 /* JMSquareViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0488E3B6229F98440071DEE7 /* JMSquareViewController.xib */; };
 		0488E3C8229F9BED0071DEE7 /* discovery_pitch_on@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0488E3C5229F9BEC0071DEE7 /* discovery_pitch_on@3x.png */; };
 		0488E3C9229F9BED0071DEE7 /* discovery_pitch_on@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0488E3C6229F9BEC0071DEE7 /* discovery_pitch_on@2x.png */; };
 		0488E3CA229F9BED0071DEE7 /* discovery_pitch_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 0488E3C7229F9BEC0071DEE7 /* discovery_pitch_on.png */; };
@@ -457,7 +460,6 @@
 		04908B5422A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04908B5222A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.xib */; };
 		0491B25E2286794600F1FD3A /* JMLabsScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491B25D2286794600F1FD3A /* JMLabsScreenView.m */; };
 		0491B2612286A07800F1FD3A /* JMLabsChooseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */; };
-		0492400422F17B550007C8A1 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0492400322F17B540007C8A1 /* StoreKit.framework */; };
 		0492400F22F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492400622F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.m */; };
 		0492401022F17C940007C8A1 /* JMProtocalWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0492400822F17C940007C8A1 /* JMProtocalWebViewController.m */; };
 		0492401122F17C940007C8A1 /* JMVIPViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0492400922F17C940007C8A1 /* JMVIPViewController.xib */; };
@@ -535,6 +537,7 @@
 		049C654D22AD854B00A93DFE /* JMPartTimeJobTypeLabsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049C654B22AD854B00A93DFE /* JMPartTimeJobTypeLabsViewController.xib */; };
 		049C655122AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C654F22AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.m */; };
 		049C655222AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049C655022AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.xib */; };
+		049EF53722FA7448007FD4EB /* JMCustumMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 049EF53622FA7448007FD4EB /* JMCustumMessageCellData.m */; };
 		049FDBA42289556600E9BC25 /* JMDidUploadVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FDBA32289556600E9BC25 /* JMDidUploadVideoView.m */; };
 		049FDBA72289A3C000E9BC25 /* JMPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FDBA62289A3C000E9BC25 /* JMPlayerViewController.m */; };
 		04A2479A224C773A00DEB8E3 /* 0000.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A24797224C773A00DEB8E3 /* 0000.png */; };
@@ -769,6 +772,8 @@
 		04E129D722F27D520003D58F /* JMLogisticsInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129CE22F27D510003D58F /* JMLogisticsInfoViewController.m */; };
 		04E129D822F27D520003D58F /* JMOrderCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129D222F27D510003D58F /* JMOrderCellData.m */; };
 		04E129D922F27D520003D58F /* JMLogisticsCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129D322F27D510003D58F /* JMLogisticsCellData.m */; };
+		04E129E222F2D4BD0003D58F /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E129DF22F2D4BD0003D58F /* LoginViewController.xib */; };
+		04E129E322F2D4BD0003D58F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129E122F2D4BD0003D58F /* LoginViewController.m */; };
 		04E25F6822B4901D00F451C8 /* purchase_succeeds.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25F6522B4901C00F451C8 /* purchase_succeeds.png */; };
 		04E25F6922B4901D00F451C8 /* purchase_succeeds@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25F6622B4901D00F451C8 /* purchase_succeeds@3x.png */; };
 		04E25F6A22B4901D00F451C8 /* purchase_succeeds@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25F6722B4901D00F451C8 /* purchase_succeeds@2x.png */; };
@@ -1132,6 +1137,8 @@
 		040E54DB22772382004AB0F9 /* JMHTTPManager+MessageList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+MessageList.m"; sourceTree = "<group>"; };
 		040E54DE22772A99004AB0F9 /* JMMessageListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageListModel.h; sourceTree = "<group>"; };
 		040E54DF22772A99004AB0F9 /* JMMessageListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageListModel.m; sourceTree = "<group>"; };
+		0419511F22F8476600D64C00 /* JMImageMessageCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMImageMessageCellData.h; sourceTree = "<group>"; };
+		0419512022F8476600D64C00 /* JMImageMessageCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMImageMessageCellData.m; sourceTree = "<group>"; };
 		04196DA3227FE1190000A6AA /* JMAllMessageTableViewCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAllMessageTableViewCellData.h; sourceTree = "<group>"; };
 		04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAllMessageTableViewCellData.m; sourceTree = "<group>"; };
 		04196DAC22805C450000A6AA /* JMMySettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMySettingViewController.h; sourceTree = "<group>"; };
@@ -1202,6 +1209,16 @@
 		0425CB55228449D600E08587 /* JMVideoChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoChatViewController.h; sourceTree = "<group>"; };
 		0425CB56228449D600E08587 /* JMVideoChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoChatViewController.m; sourceTree = "<group>"; };
 		0425CB57228449D600E08587 /* JMVideoChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVideoChatViewController.xib; sourceTree = "<group>"; };
+		042C16E922F90E370048F8F2 /* TCommonTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCommonTableViewCell.h; sourceTree = "<group>"; };
+		042C16EA22F90E370048F8F2 /* TCommonTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCommonTableViewCell.m; sourceTree = "<group>"; };
+		042C16F422F924C10048F8F2 /* JMImageMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMImageMessageCell.h; sourceTree = "<group>"; };
+		042C16F522F924C10048F8F2 /* JMImageMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMImageMessageCell.m; sourceTree = "<group>"; };
+		042C16F722F966B70048F8F2 /* JMTextMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTextMessageCell.h; sourceTree = "<group>"; };
+		042C16F822F966B70048F8F2 /* JMTextMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTextMessageCell.m; sourceTree = "<group>"; };
+		042C16FA22F967670048F8F2 /* JMTextMessageCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTextMessageCellData.h; sourceTree = "<group>"; };
+		042C16FB22F967670048F8F2 /* JMTextMessageCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTextMessageCellData.m; sourceTree = "<group>"; };
+		042C16FD22F968010048F8F2 /* JMMessageCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageCellData.h; sourceTree = "<group>"; };
+		042C16FE22F968010048F8F2 /* JMMessageCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageCellData.m; sourceTree = "<group>"; };
 		042CA63122D4376400ABB7AF /* JMServiceProtocolWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMServiceProtocolWebViewController.h; sourceTree = "<group>"; };
 		042CA63222D4376400ABB7AF /* JMServiceProtocolWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMServiceProtocolWebViewController.m; sourceTree = "<group>"; };
 		042CA63322D4376400ABB7AF /* JMServiceProtocolWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMServiceProtocolWebViewController.xib; sourceTree = "<group>"; };
@@ -1221,6 +1238,8 @@
 		04380A9122DC15C900EA45C2 /* JMVersionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVersionManager.m; sourceTree = "<group>"; };
 		04380A9322DC167C00EA45C2 /* JMVersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVersionModel.h; sourceTree = "<group>"; };
 		04380A9422DC167C00EA45C2 /* JMVersionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVersionModel.m; sourceTree = "<group>"; };
+		044276D922F3EDDF00CAE54F /* JMCityListManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCityListManager.h; sourceTree = "<group>"; };
+		044276DA22F3EDDF00CAE54F /* JMCityListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCityListManager.m; sourceTree = "<group>"; };
 		0446E47822E0031F00B3A26C /* JMVIPInvoiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVIPInvoiceView.h; sourceTree = "<group>"; };
 		0446E47922E0031F00B3A26C /* JMVIPInvoiceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVIPInvoiceView.m; sourceTree = "<group>"; };
 		0446E47B22E0032A00B3A26C /* JMVIPInvoiceView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVIPInvoiceView.xib; sourceTree = "<group>"; };
@@ -1233,9 +1252,6 @@
 		0446E48822E04BBD00B3A26C /* JMInvoiceHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMInvoiceHeaderView.h; sourceTree = "<group>"; };
 		0446E48922E04BBD00B3A26C /* JMInvoiceHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMInvoiceHeaderView.m; sourceTree = "<group>"; };
 		0446E48B22E04C2100B3A26C /* JMInvoiceHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMInvoiceHeaderView.xib; sourceTree = "<group>"; };
-		044DF2572244D59C00301243 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		044DF2582244D59C00301243 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		044DF2592244D59C00301243 /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		044DF25C2244D6F100301243 /* LoginPhoneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginPhoneViewController.h; sourceTree = "<group>"; };
 		044DF25D2244D6F100301243 /* LoginPhoneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginPhoneViewController.m; sourceTree = "<group>"; };
 		044DF25E2244D6F100301243 /* LoginPhoneViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginPhoneViewController.xib; sourceTree = "<group>"; };
@@ -1378,9 +1394,6 @@
 		0488E3AB229F96350071DEE7 /* Collection_of_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Collection_of_selected.png; sourceTree = "<group>"; };
 		0488E3AC229F96350071DEE7 /* Collection_of_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Collection_of_selected@2x.png"; sourceTree = "<group>"; };
 		0488E3AD229F96350071DEE7 /* Collection_of_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Collection_of_selected@3x.png"; sourceTree = "<group>"; };
-		0488E3B4229F98440071DEE7 /* JMSquareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMSquareViewController.h; sourceTree = "<group>"; };
-		0488E3B5229F98440071DEE7 /* JMSquareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMSquareViewController.m; sourceTree = "<group>"; };
-		0488E3B6229F98440071DEE7 /* JMSquareViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMSquareViewController.xib; sourceTree = "<group>"; };
 		0488E3C5229F9BEC0071DEE7 /* discovery_pitch_on@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "discovery_pitch_on@3x.png"; sourceTree = "<group>"; };
 		0488E3C6229F9BEC0071DEE7 /* discovery_pitch_on@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "discovery_pitch_on@2x.png"; sourceTree = "<group>"; };
 		0488E3C7229F9BEC0071DEE7 /* discovery_pitch_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discovery_pitch_on.png; sourceTree = "<group>"; };
@@ -1519,7 +1532,6 @@
 		0491B25D2286794600F1FD3A /* JMLabsScreenView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabsScreenView.m; sourceTree = "<group>"; };
 		0491B25F2286A07800F1FD3A /* JMLabsChooseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLabsChooseViewController.h; sourceTree = "<group>"; };
 		0491B2602286A07800F1FD3A /* JMLabsChooseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLabsChooseViewController.m; sourceTree = "<group>"; };
-		0492400322F17B540007C8A1 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		0492400622F17C940007C8A1 /* JMVIPInvoiceApplyForViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMVIPInvoiceApplyForViewController.m; sourceTree = "<group>"; };
 		0492400722F17C940007C8A1 /* JMVIPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMVIPViewController.h; sourceTree = "<group>"; };
 		0492400822F17C940007C8A1 /* JMProtocalWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMProtocalWebViewController.m; sourceTree = "<group>"; };
@@ -1627,6 +1639,8 @@
 		049C654E22AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPartTimeJobLabsCollectionViewCell.h; sourceTree = "<group>"; };
 		049C654F22AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPartTimeJobLabsCollectionViewCell.m; sourceTree = "<group>"; };
 		049C655022AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPartTimeJobLabsCollectionViewCell.xib; sourceTree = "<group>"; };
+		049EF53522FA7448007FD4EB /* JMCustumMessageCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCustumMessageCellData.h; sourceTree = "<group>"; };
+		049EF53622FA7448007FD4EB /* JMCustumMessageCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCustumMessageCellData.m; sourceTree = "<group>"; };
 		049FDBA22289556600E9BC25 /* JMDidUploadVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMDidUploadVideoView.h; sourceTree = "<group>"; };
 		049FDBA32289556600E9BC25 /* JMDidUploadVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMDidUploadVideoView.m; sourceTree = "<group>"; };
 		049FDBA52289A3C000E9BC25 /* JMPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayerViewController.h; sourceTree = "<group>"; };
@@ -1928,6 +1942,9 @@
 		04E129D122F27D510003D58F /* JMLogisticsCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMLogisticsCellData.h; sourceTree = "<group>"; };
 		04E129D222F27D510003D58F /* JMOrderCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMOrderCellData.m; sourceTree = "<group>"; };
 		04E129D322F27D510003D58F /* JMLogisticsCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMLogisticsCellData.m; sourceTree = "<group>"; };
+		04E129DF22F2D4BD0003D58F /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		04E129E022F2D4BD0003D58F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		04E129E122F2D4BD0003D58F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		04E25F6522B4901C00F451C8 /* purchase_succeeds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purchase_succeeds.png; sourceTree = "<group>"; };
 		04E25F6622B4901D00F451C8 /* purchase_succeeds@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchase_succeeds@3x.png"; sourceTree = "<group>"; };
 		04E25F6722B4901D00F451C8 /* purchase_succeeds@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchase_succeeds@2x.png"; sourceTree = "<group>"; };
@@ -2119,7 +2136,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0492400422F17B550007C8A1 /* StoreKit.framework in Frameworks */,
 				4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2313,6 +2329,12 @@
 			children = (
 				040AF5A822783E150027D7D8 /* JMMessageCell.h */,
 				040AF5A922783E150027D7D8 /* JMMessageCell.m */,
+				042C16F722F966B70048F8F2 /* JMTextMessageCell.h */,
+				042C16F822F966B70048F8F2 /* JMTextMessageCell.m */,
+				042C16F422F924C10048F8F2 /* JMImageMessageCell.h */,
+				042C16F522F924C10048F8F2 /* JMImageMessageCell.m */,
+				042C16E922F90E370048F8F2 /* TCommonTableViewCell.h */,
+				042C16EA22F90E370048F8F2 /* TCommonTableViewCell.m */,
 			);
 			path = ChatViewCell;
 			sourceTree = "<group>";
@@ -2478,6 +2500,14 @@
 				040E54DF22772A99004AB0F9 /* JMMessageListModel.m */,
 				04196DA3227FE1190000A6AA /* JMAllMessageTableViewCellData.h */,
 				04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */,
+				042C16FD22F968010048F8F2 /* JMMessageCellData.h */,
+				042C16FE22F968010048F8F2 /* JMMessageCellData.m */,
+				042C16FA22F967670048F8F2 /* JMTextMessageCellData.h */,
+				042C16FB22F967670048F8F2 /* JMTextMessageCellData.m */,
+				0419511F22F8476600D64C00 /* JMImageMessageCellData.h */,
+				0419512022F8476600D64C00 /* JMImageMessageCellData.m */,
+				049EF53522FA7448007FD4EB /* JMCustumMessageCellData.h */,
+				049EF53622FA7448007FD4EB /* JMCustumMessageCellData.m */,
 				04C4A18722CCF5040049DA29 /* JMGreetModel.h */,
 				04C4A18822CCF5040049DA29 /* JMGreetModel.m */,
 			);
@@ -2624,13 +2654,21 @@
 			path = VersionInfo;
 			sourceTree = "<group>";
 		};
+		044276D822F3E9F200CAE54F /* ListInfoManager */ = {
+			isa = PBXGroup;
+			children = (
+				044276D922F3EDDF00CAE54F /* JMCityListManager.h */,
+				044276DA22F3EDDF00CAE54F /* JMCityListManager.m */,
+			);
+			path = ListInfoManager;
+			sourceTree = "<group>";
+		};
 		044DF23C2244C06900301243 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				6DEA991B2255DF5C0029FE8A /* Model */,
-				044DF2572244D59C00301243 /* LoginViewController.h */,
-				044DF2582244D59C00301243 /* LoginViewController.m */,
-				044DF2592244D59C00301243 /* LoginViewController.xib */,
+				04E129E022F2D4BD0003D58F /* LoginViewController.h */,
+				04E129E122F2D4BD0003D58F /* LoginViewController.m */,
+				04E129DF22F2D4BD0003D58F /* LoginViewController.xib */,
 				044DF25C2244D6F100301243 /* LoginPhoneViewController.h */,
 				044DF25D2244D6F100301243 /* LoginPhoneViewController.m */,
 				044DF25E2244D6F100301243 /* LoginPhoneViewController.xib */,
@@ -2819,6 +2857,7 @@
 				04FB1A1C22A36B8800A8F02C /* WebView */,
 				047F8EA8228A6535005E81FA /* Video */,
 				6DDA717A225EF3A800A7C8F7 /* UserInfo */,
+				044276D822F3E9F200CAE54F /* ListInfoManager */,
 				04380A8F22DC154200EA45C2 /* VersionInfo */,
 				6D62995D224E0468007E7DE4 /* Network */,
 			);
@@ -3127,9 +3166,6 @@
 		0488E3B3229F97D80071DEE7 /* Contoller */ = {
 			isa = PBXGroup;
 			children = (
-				0488E3B4229F98440071DEE7 /* JMSquareViewController.h */,
-				0488E3B5229F98440071DEE7 /* JMSquareViewController.m */,
-				0488E3B6229F98440071DEE7 /* JMSquareViewController.xib */,
 				04908B0122A7E916000B5AB4 /* JMAssignmentSquareViewController.h */,
 				04908B0222A7E916000B5AB4 /* JMAssignmentSquareViewController.m */,
 				04908B0322A7E916000B5AB4 /* JMAssignmentSquareViewController.xib */,
@@ -3800,7 +3836,6 @@
 		47579204418359BAEBA6F740 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0492400322F17B540007C8A1 /* StoreKit.framework */,
 				042CA65522D6279100ABB7AF /* libAFNetworking.a */,
 				1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */,
 			);
@@ -4283,13 +4318,6 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		6DEA991B2255DF5C0029FE8A /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		6DEA991F2255DFE40029FE8A /* ShareVIew */ = {
 			isa = PBXGroup;
 			children = (
@@ -4395,7 +4423,7 @@
 								enabled = 1;
 							};
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -4825,7 +4853,6 @@
 				0488E3E0229FA19C0071DEE7 /* garden_pich_on@3x.png in Resources */,
 				040A40C92265B41A0005E0D7 /* company_logo@3x.png in Resources */,
 				6D020A6822539FB0009BCFE4 /* HomeViewController.xib in Resources */,
-				044DF25B2244D59C00301243 /* LoginViewController.xib in Resources */,
 				04C4A18222CC55920049DA29 /* JMOpinionViewController.xib in Resources */,
 				6D020A222250F3F9009BCFE4 /* experience@2x.png in Resources */,
 				04072F4D2282BA650067A05D /* delete@2x.png in Resources */,
@@ -4949,6 +4976,7 @@
 				0488E3AF229F96360071DEE7 /* Collection_of_selected@2x.png in Resources */,
 				040B83992265F3E700F1A37A /* IDCard2.png in Resources */,
 				040E366022681C9A00A7D789 /* boy.png in Resources */,
+				04E129E222F2D4BD0003D58F /* LoginViewController.xib in Resources */,
 				6D020A382250FF0D009BCFE4 /* JMMyResumeHeaderTableViewCell.xib in Resources */,
 				040714A3227C6CC70026C368 /* default_avatar@3x.png in Resources */,
 				040C8656227E8F4A00993490 /* Photo@2x.png in Resources */,
@@ -4971,7 +4999,6 @@
 				04BF6D9B22C31F81003032BC /* Failure@2x.png in Resources */,
 				04BF6DA822C3368B003032BC /* Friendster@2x.png in Resources */,
 				0425656B229E91A8000614E7 /* Crystal.mp3 in Resources */,
-				0488E3B8229F98440071DEE7 /* JMSquareViewController.xib in Resources */,
 				04256559229C2CCD000614E7 /* talent@2x.png in Resources */,
 				048A0DDC22B8D768006530EC /* yao1.png in Resources */,
 				04DD1D5A224B6E95007CB11C /* 组 18.png in Resources */,
@@ -5123,6 +5150,7 @@
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
 				04C4A17622CC4ABF0049DA29 /* JMAboutOursViewController.m in Sources */,
 				0492AE7E22F0463400AB21B3 /* JMWalletViewController.m in Sources */,
+				044276DB22F3EDDF00CAE54F /* JMCityListManager.m in Sources */,
 				040B838A2265EC0600F1A37A /* JMCompanyHomeViewController.m in Sources */,
 				04BBF2B022903D090068A9B1 /* JMCompanyVideoView.m in Sources */,
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
@@ -5191,6 +5219,7 @@
 				040701BA2275DB58002BF58D /* JMCompanyLikeViewController.m in Sources */,
 				040AF5B022784BC70027D7D8 /* JMChatViewViewController.m in Sources */,
 				6D82F287227492CF00B9D2B9 /* JMEducationExperienceViewController.m in Sources */,
+				042C16F922F966B70048F8F2 /* JMTextMessageCell.m in Sources */,
 				04908AFF22A7D280000B5AB4 /* JMPositionManageViewController.m in Sources */,
 				049C653722AD6DCA00A93DFE /* JMHTTPManager+CreateTask.m in Sources */,
 				040C8649227E8B8100993490 /* JMMoreCollectionViewCell.m in Sources */,
@@ -5201,6 +5230,7 @@
 				0491B2612286A07800F1FD3A /* JMLabsChooseViewController.m in Sources */,
 				04A9DFBA225C429B00CD7CC1 /* HomeTableViewCell.m in Sources */,
 				041997EE2267173D00C6C134 /* JMPersonDetailsViewController.m in Sources */,
+				042C16F622F924C10048F8F2 /* JMImageMessageCell.m in Sources */,
 				6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */,
 				040865DD2272E898005BB03E /* JMIDCardModel.m in Sources */,
 				042CA63822D475A500ABB7AF /* JMLabChooseBottomView.m in Sources */,
@@ -5250,6 +5280,7 @@
 				040865EB22734ADE005BB03E /* JMCompanyInfoModel.m in Sources */,
 				6D82F28F2274BB0E00B9D2B9 /* JMMyDescriptionViewController.m in Sources */,
 				0492AE7522F0463400AB21B3 /* JMChooseCardViewController.m in Sources */,
+				042C16EC22F90E370048F8F2 /* TCommonTableViewCell.m in Sources */,
 				04BF6DBA22C39EE4003032BC /* JMHTTPManager+CreatetLogisticsInfo.m in Sources */,
 				0492715C22982878008D6E0D /* JMBTypeLikeModel.m in Sources */,
 				6D558663224B564F0037C14E /* JMMineViewController.m in Sources */,
@@ -5279,6 +5310,7 @@
 				0492AE7922F0463400AB21B3 /* JMDeleteBankCardViewController.m in Sources */,
 				048A0DF122B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m in Sources */,
 				04908AD322A7A06E000B5AB4 /* JMBUserCenterHeaderSubView.m in Sources */,
+				042C16FF22F968010048F8F2 /* JMMessageCellData.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,
 				04B620E722DDC612009C8853 /* JMTaskApplyForView.m in Sources */,
 				6D020A6C22539FB0009BCFE4 /* JMCompanyIntroduceViewController.m in Sources */,
@@ -5295,7 +5327,6 @@
 				04C37F1222C72D6500E2A107 /* JMAddVitaJobViewController.m in Sources */,
 				6D020A332250F46F009BCFE4 /* JMMyResumeCellConfigures.m in Sources */,
 				6D8C0687226AE94F00F77D98 /* JMVitaDetailModel.m in Sources */,
-				044DF25A2244D59C00301243 /* LoginViewController.m in Sources */,
 				04071494227C691D0026C368 /* JMInputTextView.m in Sources */,
 				04EA210822AF61810035C398 /* JMTaskGoodsDetailModel.m in Sources */,
 				040701B5227556A4002BF58D /* JMChooseTimeViewController.m in Sources */,
@@ -5307,6 +5338,7 @@
 				04A9DFB8225B67D100CD7CC1 /* JMHTTPManager+UpdateInfo.m in Sources */,
 				049C652622AD3C0400A93DFE /* JMComfirmPostBottomView.m in Sources */,
 				04A5FD5B22C8A65D00850604 /* JMGradeView.m in Sources */,
+				04E129E322F2D4BD0003D58F /* LoginViewController.m in Sources */,
 				040E367122687B2D00A7D789 /* JMBottomView.m in Sources */,
 				040A40C02265B2480005E0D7 /* JMCompanyInfoViewController.m in Sources */,
 				040865DA2272C241005BB03E /* JMHTTPManager+IDcard.m in Sources */,
@@ -5317,6 +5349,7 @@
 				0455C11422EEE4A6006B0149 /* JMTaskCommetViewController.m in Sources */,
 				041C07D52261891A0088FBE1 /* JMNotificationHeaderTableViewCell.m in Sources */,
 				04A247D2224CB99800DEB8E3 /* PositionDesiredSecondViewController.m in Sources */,
+				0419512122F8476600D64C00 /* JMImageMessageCellData.m in Sources */,
 				04E129D922F27D520003D58F /* JMLogisticsCellData.m in Sources */,
 				6D020A822259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.m in Sources */,
 				04196DA5227FE1190000A6AA /* JMAllMessageTableViewCellData.m in Sources */,
@@ -5324,6 +5357,7 @@
 				0455C11D22EEE4A6006B0149 /* JMPayDetailViewController.m in Sources */,
 				041997EB2267173D00C6C134 /* JMVitaOfPersonDetailViewController.m in Sources */,
 				048E662E22850EE900694D86 /* THDatePickerView.m in Sources */,
+				042C16FC22F967670048F8F2 /* JMTextMessageCellData.m in Sources */,
 				04C6013922603F73000B1FE0 /* JMPageView.m in Sources */,
 				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
 				040A393B227DD1EB00EDD9E0 /* JMFaceView.m in Sources */,
@@ -5360,6 +5394,7 @@
 				040CD552226ACD42000BB230 /* JMHTTPManager+FetchCompanyInfo.m in Sources */,
 				04072F302282978A0067A05D /* JMWalletHeaderView.m in Sources */,
 				04C6014D226071B5000B1FE0 /* JMAllMessageTableViewCell.m in Sources */,
+				049EF53722FA7448007FD4EB /* JMCustumMessageCellData.m in Sources */,
 				04C120D822882B5F001BDEBC /* JMUploadVideoViewController.m in Sources */,
 				049C652122AD3ACC00A93DFE /* JMMakeOutBillHeaderView.m in Sources */,
 				04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */,
@@ -5401,7 +5436,6 @@
 				6D020A052250F21B009BCFE4 /* JMMyResumeIconTableViewCell.m in Sources */,
 				0486F7792293917900114A22 /* Demo3ViewController.m in Sources */,
 				04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */,
-				0488E3B7229F98440071DEE7 /* JMSquareViewController.m in Sources */,
 				0492401022F17C940007C8A1 /* JMProtocalWebViewController.m in Sources */,
 				040A3933227DBEA700EDD9E0 /* JMGreetTableViewController.m in Sources */,
 				04731DEA22A66C630013D7CE /* JMAbilityCellData.m in Sources */,

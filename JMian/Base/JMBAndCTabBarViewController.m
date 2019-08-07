@@ -16,7 +16,6 @@
 #import "JMMessageListModel.h"
 #import "JMAllMessageTableViewCellData.h"
 #import "DimensMacros.h"
-#import "JMSquareViewController.h"
 #import "JMDiscoverHomeViewController.h"
 #import "JMAssignmentSquareViewController.h"
 #import "UITabBar+XSDExt.h"
@@ -101,7 +100,7 @@
 
 - (void)onNewMessage:(NSNotification *)notification
 {
-    _unReadNum = 0;
+    
     [self getMsgList];
 }
 
@@ -178,6 +177,7 @@
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
     NSLog(@"腾讯云数据%@",convs);
+    _unReadNum = 0;
     for (TIMConversation *conv in convs) {
         if([conv getType] == TIM_SYSTEM){
             continue;
@@ -221,11 +221,14 @@
         }else{
             self.message.unReadNum = _unReadNum;
             self.message.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.message.unReadNum];
-        
+         
         }
     }else{
         self.message.tabBarItem.badgeValue = nil;
     }
+    NSLog(@"红点数量%@",self.message.tabBarItem.badgeValue);
+
+    
 }
 
 

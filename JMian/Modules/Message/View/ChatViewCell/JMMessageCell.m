@@ -10,17 +10,17 @@
 #import "DimensMacros.h"
 #import "NSString+Extension.h"
 
-@implementation JMMessageCellData : NSObject
-//- (id)init
-//{
-//    self = [super init];
-//    if(self){
-//        _status = Msg_Status_Sending;
-//    }
-//    return self;
-//}
-@end
-
+//@implementation JMMessageCellData : NSObject
+////- (id)init
+////{
+////    self = [super init];
+////    if(self){
+////        _status = Msg_Status_Sending;
+////    }
+////    return self;
+////}
+//@end
+//
 
 
 

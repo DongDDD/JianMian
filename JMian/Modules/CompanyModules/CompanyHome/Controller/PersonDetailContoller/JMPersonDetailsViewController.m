@@ -18,7 +18,6 @@
 #import "JMVitaDetailModel.h"
 #import "Masonry.h"
 #import "JMHTTPManager+InterView.h"
-//#import "JMChooseTimeViewController.h"
 #import "JMChatViewViewController.h"
 #import "JMHTTPManager+CreateConversation.h"
 #import "THDatePickerView.h"
@@ -27,6 +26,7 @@
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMHTTPManager+Login.h"
 #import "JMIDCardIdentifyViewController.h"
+#import "WXApi.h"
 #import "JMShareView.h"
 
 
@@ -71,8 +71,8 @@
     
     [self setTitle:@"个人详情"];
     
-//    [self setHeaderVieUI];
-//    [self setPageUI];
+    //    [self setHeaderVieUI];
+    //    [self setPageUI];
     [self setJuhua];
     [self getUserInfo];
     [self getData];
@@ -81,15 +81,15 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     //获取用户信息
-//    [self getUserInfo];
-//    [self getData];
+    //    [self getUserInfo];
+    //    [self getData];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
     _scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.pageContentView.frame.origin.y+self.vitaVc.view.frame.size.height-250);
-
-
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -108,7 +108,7 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-
+    
 }
 
 #pragma mark - 同步获取
@@ -148,7 +148,7 @@
     //    imgView.frame = CGRectMake(0, 0, 68, 99);
     self.progressHUD.customView = imgView;
     
-    [self.view addSubview:self.progressHUD];    
+    [self.view addSubview:self.progressHUD];
     
 }
 #pragma mark - 布局UI
@@ -164,13 +164,20 @@
         colectBtn.selected = YES;
     }else{
         colectBtn.selected = NO;
-
+        
     }
     [colectBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
     [colectBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
     
     [bgView addSubview:colectBtn];
+    if (imageNameRight2 != nil) {
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(0, 0, 25, 25);
+        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
+        [bgView addSubview:shareBtn];
+    }
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -179,7 +186,7 @@
 }
 
 -(void)initView{
-   
+    
     self.favorite_id = self.vitaModel.favorites_favorite_id;
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self setScrollViewUI];
@@ -188,12 +195,10 @@
     _pageView.frame = CGRectMake(_pageView.frame.origin.x,_titleView.frame.origin.y+_titleView.frame.size.height, _pageView.frame.size.width, _pageView.frame.size.height);
     [self.scrollView addSubview:self.titleView];
     [self setPageUI];
-
+    
     [self setBottomViewUI];
     [self initDatePickerView];
-
-
-
+      
 }
 
 -(void)setScrollViewUI{
@@ -201,7 +206,7 @@
     _scrollView.showsVerticalScrollIndicator = NO;
     _scrollView.delegate = self;
     [self.view addSubview:_scrollView];
-
+    
 }
 -(void)setHeaderVieUI{
     CGFloat H = 0.0;
@@ -209,7 +214,7 @@
         H = 772;
     }else{
         H = 350;
-    
+        
     }
     self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, H)];
     if (self.companyModel.video_file_path) {
@@ -218,21 +223,7 @@
             [self.headerView.videoImg sd_setImageWithURL:[NSURL URLWithString:self.companyModel.video_cover] placeholderImage:[UIImage imageNamed:@"loading"]];
         }
         self.headerView.playBtn.hidden = NO;
-//        self.headerView.videoImg.image = [UIImage imageNamed:@"loading"];
-//
-//        NSString *str = self.companyModel.video_file_path;
-//
-//        NSURL *URL = [NSURL URLWithString:str];
-//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//
-//            UIImage *image = [self thumbnailImageForVideo:URL atTime:1];
-//
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                self.headerView.videoImg.image = image;
-//                self.headerView.playBtn.hidden = NO;
-//
-//            });
-//        });
+
     }
     self.headerView.delegate = self;
     [self.headerView setModel:self.vitaModel];
@@ -247,17 +238,17 @@
     [self.pageContentView addSubview:self.vitaVc.view];
     [self.pageContentView addSubview:self.contactVc.view];
     [self.pageContentView addSubview:self.pictureVc.view];
-
-//    [self.scrollView addSubview:self.contactVc.view];
-//    [self.scrollView addSubview:self.pageView];
-//    [self.pageView setCurrentIndex:1];//添加子视图”谁看过我“
-//    [self.pageView setCurrentIndex:0];//添加子视图”全部信息“
+    
+    //    [self.scrollView addSubview:self.contactVc.view];
+    //    [self.scrollView addSubview:self.pageView];
+    //    [self.pageView setCurrentIndex:1];//添加子视图”谁看过我“
+    //    [self.pageView setCurrentIndex:0];//添加子视图”全部信息“
     
 }
 
 
 -(void)setBottomViewUI{
-
+    
     self.bottomView = [[JMBottomView alloc]init];
     self.bottomView.delegate = self;
     [self.view addSubview:self.bottomView];
@@ -266,7 +257,7 @@
         make.width.mas_equalTo(SCREEN_WIDTH);
         make.height.mas_equalTo(60);
     }];
-
+    
 }
 
 //时间选择器
@@ -286,7 +277,7 @@
     //    dateView.minuteInterval = 1;
     [self.view addSubview:dateView];
     self.dateView = dateView;
-
+    
 }
 
 
@@ -298,7 +289,7 @@
  */
 - (void)datePickerViewSaveBtnClickDelegate:(NSString *)timer {
     NSLog(@"保存点击");
-//    self.timerLbl.text = timer;
+    //    self.timerLbl.text = timer;
     
     self.BgBtn.hidden = YES;
     [UIView animateWithDuration:0.3 animations:^{
@@ -328,7 +319,34 @@
     
 }
 
-
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n
+{   //检测是否安装微信
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = self.vitaModel.user_nickname;
+    urlMessage.description = self.vitaModel.vita_description ;
+    
+    //    UIImageView *imgView = [[UIImageView alloc]init];
+    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+    //
+    
+    UIImage *image = [self getImageFromURL:self.vitaModel.user_avatar];   //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    [urlMessage setThumbData:thumbData];
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    webObj.webpageUrl = self.vitaModel.share_url;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+    
+}
 
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
@@ -390,7 +408,7 @@
                 
             }
             [self.progressHUD showAnimated:NO];
-
+            
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -402,7 +420,7 @@
                                                               delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
                 [alert show];
                 [self.progressHUD showAnimated:NO];
-
+                
             } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
                 
             }];
@@ -416,11 +434,11 @@
     NSLog(@"222");
     [self.shareBgView setHidden:YES];
     [self.shareView setHidden:YES];
-//    [self.sendMyResumeView setHidden:YES];
+    //    [self.sendMyResumeView setHidden:YES];
     
 }
 /**
-时间选择取消
+ 时间选择取消
  */
 - (void)datePickerViewCancelBtnClickDelegate {
     NSLog(@"取消点击");
@@ -438,7 +456,21 @@
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
-
+    //    [[UIApplication sharedApplication].keyWindow addSubview:playVC.view];
+    //    [playVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.edges.offset(0);
+    //    }];
+    
+    //    SJVideoPlayer *_videoPlayer = [SJVideoPlayer player];
+    //    _videoPlayer.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); // 可以使用AutoLayout, 这里为了简便设置的Frame.
+    //    [self.view addSubview:_videoPlayer.view];
+    //    // 初始化资源
+    //    _videoPlayer.URLAsset = [[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:self.companyModel.video_file_path]];
+    //    [_videoPlayer play];
+    //    JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
+    //    vc.player = self.player;
+    //    vc.topTitle = self.companyModel.userNickname;
+    //    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -446,17 +478,17 @@
 -(void)movePageContentView{
     
     __weak typeof(self) ws = self;
-
     
- 
+    
+    
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect vitaFrame = ws.pageContentView.frame;
         vitaFrame.origin.x = -_index*SCREEN_WIDTH ;
         ws.pageContentView.frame = vitaFrame;
-//        CGRect inputFrame = ws.inputController.view.frame;
-//        inputFrame.origin.y = msgFrame.origin.y + msgFrame.size.height;
-//        inputFrame.size.height = height;
-//        ws.inputController.view.frame = inputFrame;
+        //        CGRect inputFrame = ws.inputController.view.frame;
+        //        inputFrame.origin.y = msgFrame.origin.y + msgFrame.size.height;
+        //        inputFrame.size.height = height;
+        //        ws.inputController.view.frame = inputFrame;
         
     } completion:nil];
     
@@ -473,7 +505,7 @@
         default:
             break;
     }
-
+    
     
 }
 
@@ -481,12 +513,12 @@
 //显示时间选择器
 -(void)bottomRightButtonAction{
     self.BgBtn.hidden = NO;
-
+    
     [UIView animateWithDuration:0.3 animations:^{
         self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
         [self.dateView show];
     }];
-
+    
     
 }
 
@@ -511,7 +543,7 @@
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     
     if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
-    
+        
         [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
@@ -525,12 +557,12 @@
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
-    
+        
     }else{
-    
+        
         [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
     }
-
+    
 }
 
 -(void)alertRightAction{
@@ -582,30 +614,32 @@
 
 -(void)shareViewLeftAction{
     [self disapearAction];
+    [self wxShare:0];
     
 }
 
 -(void)shareViewRightAction{
     [self disapearAction];
+    [self wxShare:1];
 }
 #pragma mark - scrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
-
+    
     if (offsetY >= _headerView.frame.origin.y+_headerView.frame.size.height-self.titleView.frame.size.height){
         //只修改Y值
-            self.titleView.frame = CGRectMake(self.titleView.frame.origin.x, 0, self.titleView.frame.size.width, self.titleView.frame.size.height);
-            [self.view addSubview:self.titleView];
-     
+        self.titleView.frame = CGRectMake(self.titleView.frame.origin.x, 0, self.titleView.frame.size.width, self.titleView.frame.size.height);
+        [self.view addSubview:self.titleView];
+        
     }else{
         
         self.titleView.frame = CGRectMake(self.titleView.frame.origin.x, _headerView.frame.origin.y+_headerView.frame.size.height-43, self.titleView.frame.size.width, self.titleView.frame.size.height);
-         _pageView.frame = CGRectMake(_pageView.frame.origin.x,_titleView.frame.origin.y+_titleView.frame.size.height, _pageView.frame.size.width, _pageView.frame.size.height);
+        _pageView.frame = CGRectMake(_pageView.frame.origin.x,_titleView.frame.origin.y+_titleView.frame.size.height, _pageView.frame.size.width, _pageView.frame.size.height);
         [self.scrollView addSubview:self.titleView];
     }
-
-
+    
+    
     
 }
 
@@ -644,7 +678,7 @@
 -(JMVitaOfPersonDetailViewController *)vitaVc{
     if (_vitaVc == nil) {
         _vitaVc = [[JMVitaOfPersonDetailViewController alloc] init];
-//        _vitaVc.view.hidden = NO;
+        //        _vitaVc.view.hidden = NO;
         _vitaVc.experiencesArray = self.vitaModel.experiences;
         _vitaVc.educationArray = self.vitaModel.education;
         _vitaVc.shieldingArray = self.vitaModel.shielding;
@@ -660,7 +694,7 @@
         [self addChildViewController:_vitaVc];
         
     }
-//    [self.scrollView addSubview:_vitaVc.view];
+    //    [self.scrollView addSubview:_vitaVc.view];
     
     return _vitaVc;
 }
@@ -732,13 +766,13 @@
 //}
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

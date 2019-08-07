@@ -122,12 +122,28 @@
 #define TTextView_Height (50)
 #define JMMoreView_Height (100)
 #define JMGreetView_Height (211)
+//image cell
+#define TImageMessageCell_ReuseId @"TImageMessageCell"
+#define TImageMessageCell_Image_Width_Max (SCREEN_WIDTH * 0.4)
+#define TImageMessageCell_Image_Height_Max TImageMessageCell_Image_Width_Max
+#define TImageMessageCell_Margin_2 8
+#define TImageMessageCell_Margin_1 16
+#define TImageMessageCell_Progress_Color  RGBA(0, 0, 0, 0.5)
+
 //notification
 #define Notification_JMRefreshListener @"Notification_JMRefreshListener"
 #define Notification_JMMMessageListener @"Notification_JMMMessageListener"
 #define Notification_JMMMessageRevokeListener @"Notification_JMMMessageRevokeListener"
 #define Notification_JMMUploadProgressListener @"Notification_JMMUploadProgressListener"
 #define Notification_JMMUHangUpListener @"Notification_JMMUHangUpListener"
+
+//path
+#define TUIKit_DB_Path [NSHomeDirectory() stringByAppendingString:@"/Documents/com_tencent_imsdk_data/"]
+#define TUIKit_Image_Path [NSHomeDirectory() stringByAppendingString:@"/Documents/com_tencent_imsdk_data/image/"]
+#define TUIKit_Video_Path [NSHomeDirectory() stringByAppendingString:@"/Documents/com_tencent_imsdk_data/video/"]
+#define TUIKit_Voice_Path [NSHomeDirectory() stringByAppendingString:@"/Documents/com_tencent_imsdk_data/voice/"]
+#define TUIKit_File_Path  [NSHomeDirectory() stringByAppendingString:@"/Documents/com_tencent_imsdk_data/file/"]
+
 //支付结果
 #define Notification_PaySucceed @"Notification_PaySucceed"
 //任务

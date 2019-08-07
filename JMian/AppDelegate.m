@@ -29,7 +29,7 @@
 #import "JMPlaySoundsManager.h"
 #import "JMHTTPManager+FectchVersionInfo.h"
 
-@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMUserStatusListener>
+@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener>
 
 @end
 
@@ -55,8 +55,15 @@
     [WXApi registerApp:@"wxb42b10e7d84612a9"];
     [[TIMManager sharedInstance] addMessageListener:self];
      //用户状态变更
-    TIMUserConfig * cfg = [[TIMUserConfig alloc] init];
-    cfg.userStatusListener = self;
+    TIMUserConfig *userConfig = [[TIMUserConfig alloc] init];
+    userConfig.refreshListener = self;
+    userConfig.messageRevokeListener = self;
+    userConfig.uploadProgressListener = self;
+    userConfig.userStatusListener = self;
+//    userConfig.friendshipListener = self;
+    userConfig.messageUpdateListener = self;
+    [[TIMManager sharedInstance] setUserConfig:userConfig];
+
     
     //MP3播放器
     [[JMPlaySoundsManager sharedInstance] setVideoSounds];
@@ -254,6 +261,7 @@
             if (sign_id) {
                 LoginPhoneViewController *vc = [[LoginPhoneViewController alloc]init];
                 vc.sign_id = sign_id;
+                [vc setIsHiddenBackBtn:NO];
                 NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
                 [_window setRootViewController:naVC];
                 [self.window makeKeyAndVisible];
@@ -330,15 +338,15 @@
                 break;
         }
     }
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:@"" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-    [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:strTitle message:@"" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+//    [alert show];
     
 }
 
 //IM被踢下线
 -(void)onForceOffline{
     NSLog(@"---被踢");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"抱歉！你被踢下线！如不是本人操作请重新登录及时修改密码！" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你被强制下线" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
     [alert show];
     
     LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
@@ -438,7 +446,15 @@
     
 }
 
+- (void)onRefresh
+{
+//    [[NSNotificationCenter defaultCenter] postNotificationName:TUIKitNotification_TIMRefreshListener object:nil];
+}
 
+- (void)onRefreshConversations:(NSArray *)conversations
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMRefreshListener object:conversations];
+}
 
 #pragma mark - 视频界面事件
 

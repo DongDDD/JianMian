@@ -53,6 +53,8 @@
              @"snapshot_status":@"snapshot.status",
              @"snapshot_cityId":@"snapshot.city.city_id",
              @"snapshot_cityName":@"snapshot.city.city_name",
+             @"snapshot_invoice":@"snapshot.invoice",
+
 
              @"snapshot_companyID":@"snapshot.company.company_id",
              @"snapshot_companyName":@"snapshot.company.company_name",

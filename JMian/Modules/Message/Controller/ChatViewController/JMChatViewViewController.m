@@ -23,11 +23,12 @@
 #import "JMVideoChatView.h"
 
 
-@interface JMChatViewViewController () <JMInputTextViewDelegate,JMMessageTableViewControllerDelegate,JMInputControllerDelegate,THDatePickerViewDelegate,JMVideoChatViewDelegate>
+@interface JMChatViewViewController () <JMInputTextViewDelegate,JMMessageTableViewControllerDelegate,JMInputControllerDelegate,THDatePickerViewDelegate,JMVideoChatViewDelegate,UIImagePickerControllerDelegate, UIDocumentPickerDelegate>
 
 @property (nonatomic ,strong) JMMessageTableViewController *messageController;
 @property (nonatomic ,strong) JMInputController *inputController;
 @property (nonatomic ,strong) JMInputTextView *inputView;
+@property (nonatomic ,strong) TIMConversation *conv;
 
 @property (nonatomic, strong) NSArray *childVCs;
 
@@ -69,17 +70,52 @@
 }
 
 -(void)fanhui{
+//    if (_delegate && [_delegate respondsToSelector:@selector(didReadActionWithData:)]) {
+//        [_delegate didReadActionWithData:_myConvModel];
+//    }
     [super fanhui];
-    if (_delegate && [_delegate respondsToSelector:@selector(didReadActionWithData:)]) {
-        [_delegate didReadActionWithData:_myConvModel];
-    }
 }
 
+-(void)setReadMessageAction_model:(JMMessageListModel *)_myModel{
+    
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    //判断senderid是不是自己
+    BOOL _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
+    NSString *_receiverID;
+    //先判断是否系统消息
+    if ([_myModel.data.convId isEqualToString:@"dominator"]) {
+        _receiverID = @"dominator";
+    }else{
+        if (_isSelfIsSender) {
+            
+            _receiverID = _myModel.recipient_mark;
+        }else{
+            
+            _receiverID = _myModel.sender_mark;
+        }
+    }
+    
+    _conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:_receiverID];
+    [_conv setReadMessage:nil succ:^{
+        NSLog(@"已读上报");
+
+        //            !_didReadMessage ? : _didReadMessage(_myModel.data.unRead);
+        
+    } fail:^(int code, NSString *msg) {
+        NSLog(@"已读上报失败");
+        
+    }];
+    
+    
+}
 //-(void)onNewMessage:(NSArray *)msgs{
 //
 //
 //
 //}
+
 - (void)setupViews{
     //input
  
@@ -90,7 +126,8 @@
     [self addChildViewController:_messageController];
     [self.view addSubview:_messageController.view];
     [_messageController setMyConvModel:_myConvModel];
-    
+    [_messageController setConversation:_conv];
+
     if (!_isDominator) {
         //        不是系统消息才有输入框
         _inputController = [[JMInputController alloc] init];
@@ -189,6 +226,20 @@
     } completion:nil];
     
 }
+
+- (void)inputController:(JMInputController *)inputController didSelectMoreCell:(JMMoreCollectionViewCell *)cell{
+    if ([cell.titleLabel.text isEqualToString:@"拍照"]) {
+        NSLog(@"拍照");
+
+    }
+    if ([cell.titleLabel.text isEqualToString:@"相册"]) {
+        NSLog(@"相册");
+        [self selectPhotoForSend];
+    }
+}
+
+
+
 #pragma mark - JMMessageTableViewControllerDelegate
 
 //视频面试邀请
@@ -222,6 +273,20 @@
     _isDominator = YES;
 }
 
+- (void)sendImageMessage:(UIImage *)image;
+{
+    [_messageController sendImageMessage:image];
+}
+
+//- (void)sendVideoMessage:(NSURL *)url
+//{
+//    [_messageController sendVideoMessage:url];
+//}
+//
+//- (void)sendFileMessage:(NSURL *)url
+//{
+//    [_messageController sendFileMessage:url];
+//}
 
 - (void)sendGreetAction:(NSInteger *)index{
   
@@ -240,6 +305,59 @@
     
 }
 
+- (void)selectPhotoForSend
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    picker.delegate = self;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)takePictureForSend
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    picker.cameraCaptureMode =UIImagePickerControllerCameraCaptureModePhoto;
+    picker.delegate = self;
+    
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    // 快速点的时候会回调多次
+    picker.delegate = nil;
+    [picker dismissViewControllerAnimated:YES completion:^{
+        NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
+        if([mediaType isEqualToString:(NSString *)kUTTypeImage]){
+            UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+            UIImageOrientation imageOrientation = image.imageOrientation;
+            if(imageOrientation != UIImageOrientationUp)
+            {
+                CGFloat aspectRatio = MIN ( 1920 / image.size.width, 1920 / image.size.height );
+                CGFloat aspectWidth = image.size.width * aspectRatio;
+                CGFloat aspectHeight = image.size.height * aspectRatio;
+                
+                UIGraphicsBeginImageContext(CGSizeMake(aspectWidth, aspectHeight));
+                [image drawInRect:CGRectMake(0, 0, aspectWidth, aspectHeight)];
+                image = UIGraphicsGetImageFromCurrentImageContext();
+                UIGraphicsEndImageContext();
+            }
+            
+            [self sendImageMessage:image];
+        }
+        else if([mediaType isEqualToString:(NSString *)kUTTypeMovie]){
+            NSURL *url = [info objectForKey:UIImagePickerControllerMediaURL];
+//            [self sendVideoMessage:url];
+        }
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
 #pragma mark -  （自定义消息 兼职视频邀请)
 
 -(void)gotoVideoChatViewWithForeign_key:(NSString *)foreign_key
@@ -261,50 +379,6 @@
     
 }
 
-//#pragma mark -  （自定义消息 兼职视频邀请)
-//-(void)createChatToSendCustumMessageRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
-//
-//    [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//        //        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-//        //
-//        NSString *receiverId = [NSString stringWithFormat:@"%@a",user_id];
-//        [self setTaskMessage_receiverID:receiverId dic:nil title:@"[邀请视频聊天]"];
-//
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-//    }];
-//}
-//-(void)setTaskMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
-//
-//    TIMConversation *conv = [[TIMManager sharedInstance]
-//                             getConversation:(TIMConversationType)TIM_C2C
-//                             receiver:receiverID];
-//
-//    // 转换为 NSData
-//
-//    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
-//    //    [custom_elem setData:data];
-//    if (dic) {
-//        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-//        [custom_elem setData:data];
-//
-//    }
-//    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
-//
-//    [custom_elem setDesc:title];
-//    TIMMessage * msg = [[TIMMessage alloc] init];
-//    [msg addElem:custom_elem];
-//    [conv sendMessage:msg succ:^(){
-//        NSLog(@"SendMsg Succ");
-////        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"申请成功" leftTitle:@"返回" rightTitle:@"查看任务"];
-//    }fail:^(int code, NSString * err) {
-//        NSLog(@"SendMsg Failed:%d->%@", code, err);
-//
-//
-//    }];
-//
-//
-//}
 
 /*
 #pragma mark - Navigation

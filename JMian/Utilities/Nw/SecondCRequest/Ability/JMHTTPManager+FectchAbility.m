@@ -29,6 +29,8 @@
                            @"video_path":video_path,
                            @"video_cover":video_cover,
                            @"image_arr":image_arr,
+                           @"page":page,
+                           @"per_page":per_page,
                            @"status":status
                            };
     

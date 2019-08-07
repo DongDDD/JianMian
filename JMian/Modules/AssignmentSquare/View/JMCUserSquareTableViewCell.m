@@ -53,7 +53,8 @@
     [self.headerIconImg sd_setImageWithURL:[NSURL URLWithString:model.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
 
     self.titleLab.text = model.task_title;
-    if (model.address == nil) {
+    
+    if (model.city == nil) {
         self.adress.text = @"不限地区";
     }else{
         self.adress.text = model.cityName;

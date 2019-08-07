@@ -11,6 +11,7 @@
 #import "Masonry.h"
 #import "JMHTTPManager+FectchGreetList.h"
 #import "JMMyCustumWindowView.h"
+#import "JMTextMessageCellData.h"
 
 typedef NS_ENUM(NSUInteger, InputStatus) {
     Input_Status_Input,
@@ -21,7 +22,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 };
 
 
-@interface JMInputController ()<JMInputTextViewDelegate,JMGreetViewDelegate,JMMyCustumWindowViewDelegate>
+@interface JMInputController ()<JMInputTextViewDelegate,JMGreetViewDelegate,JMMyCustumWindowViewDelegate,JMMoreViewDelegate>
 @property (nonatomic, assign) InputStatus status;
 @property (nonatomic, strong) JMMyCustumWindowView *myCustumWindowView;
 @property (nonatomic, strong) UIView *windowViewBGView;
@@ -122,7 +123,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     
     [[UIApplication sharedApplication]sendAction:@selector(resignFirstResponder) to:nil from:nil forEvent:nil];
 
-    JMMessageCellData *data = [[JMMessageCellData alloc] init];
+    JMTextMessageCellData *data = [[JMTextMessageCellData alloc] init];
     
     data.content = text;
     data.isSelf = YES;
@@ -203,6 +204,13 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 //
 //    }];
     
+}
+
+- (void)moreView:(JMMoreView *)moreView didSelectMoreCell:(JMMoreCollectionViewCell *)cell
+{
+    if(_delegate && [_delegate respondsToSelector:@selector(inputController:didSelectMoreCell:)]){
+        [_delegate inputController:self didSelectMoreCell:cell];
+    }
 }
 
 -(void)windowLeftAction{
@@ -300,7 +308,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 {
     if(!_moreView){
         _moreView = [[JMMoreView alloc] initWithFrame:CGRectMake(0, _inputTextView.frame.origin.y + _inputTextView.frame.size.height, _inputTextView.frame.size.width, JMMoreView_Height)];
-//        _moreView.delegate = self;
+        _moreView.delegate = self;
     }
     return _moreView;
 }

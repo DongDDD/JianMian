@@ -7,10 +7,7 @@
 //
 
 #import "JMMessageTableViewController.h"
-#import "JMMessageCell.h"
 #import "DimensMacros.h"
-#import "JMCompanyLikeTableViewCell.h"
-#import "JMChatDetailInfoTableViewCell.h"
 #import "JMChatDetailPartTimeJobTableViewCell.h"
 #import "JMChatViewSectionView.h"
 #import "JMVideoChatViewController.h"
@@ -21,9 +18,18 @@
 #import "JMCDetailWebViewController.h"
 #import "JMPersonDetailsViewController.h"
 #import "JobDetailsViewController.h"
-
-
+#import "JMCompanyLikeTableViewCell.h"
+#import "JMChatDetailInfoTableViewCell.h"
+#import "JMImageMessageCellData.h"
+#import "JMImageMessageCell.h"
+#import "JMMessageCell.h"
+#import "JMTextMessageCell.h"
+#import "JMTextMessageCellData.h"
+#import "JMCustumMessageCellData.h"
+@import ImSDK;
 @interface JMMessageTableViewController ()<TIMMessageListener,JMChatViewSectionViewDelegate,THDatePickerViewDelegate,JMChatDetailPartTimeJobTableViewCellDelegate,JMChatDetailInfoTableViewCellDelegate>
+
+@property (nonatomic, strong) TIMConversation *conv;
 
 @property (nonatomic, strong) NSMutableArray *uiMsgs;
 
@@ -37,7 +43,7 @@
 
 @property (nonatomic, assign) BOOL isScrollBottom;
 @property (nonatomic, assign)BOOL isDominator;
-
+//@property id<TUIConversationDataProviderServiceProtocol> conversationDataProviderService;
 
 @end
 static NSString *cellIdent = @"infoCellIdent";
@@ -52,8 +58,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = BG_COLOR;
     [self.tableView registerNib:[UINib nibWithNibName:@"JMChatDetailInfoTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
+    
     [self.tableView registerNib:[UINib nibWithNibName:@"JMChatDetailPartTimeJobTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent2];
-
+    [self.tableView registerClass:[JMTextMessageCell class] forCellReuseIdentifier:TTextMessageCell_ReuseId];
+//    [self.tableView registerClass:[JMImageMessageCell class] forCellReuseIdentifier:TImageMessageCell_ReuseId];
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewController)];
     [self.view addGestureRecognizer:tap];
@@ -64,27 +72,29 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 //    [self readedReport];
   
-    
-
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self readedReport];
+//    [self readedReport];
     [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [self readedReport];
+//    [self readedReport];
     [super viewWillDisappear:animated];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(onRefreshNotification:)
+                                                 name:Notification_JMRefreshListener
+                                               object:nil];
 //     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setReadMessage:) name:Notification_JMRefreshListener object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
 //
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRevokeMessage:) name:Notification_JMMMessageRevokeListener object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUploadMessage:) name:Notification_JMMUploadProgressListener object:nil];
@@ -92,6 +102,13 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 }
 
+- (void)setConversation:(TIMConversation *)conversation
+{
+//    _conv = conversation;
+    
+//    self.conversationDataProviderService = [[TCServiceManager shareInstance] createService:@protocol(TUIConversationDataProviderServiceProtocol)];
+//    [self loadMessage];
+}
 
 //-(void)onNewMessage:(NSArray *)msgs{
 //
@@ -119,25 +136,40 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 //
 //}
 
-- (void)onRefreshConversations:(NSArray *)conversations
+- (void)onRefreshNotification:(NSNotification *)notifi
 {
-    
+//    NSArray<TIMConversation *> *convs = notifi.object;
+//    if ([convs isKindOfClass:[NSArray class]]) {
+//        for (TIMConversation *conv in convs) {
+//            if ([[conv getReceiver] isEqualToString:_receiverID]) {
+//              
+//        }
+//    }
+        
         NSLog(@"onRefreshConversations-------");
 
 }
 
-- (void)onNewMessage:(NSArray *)msgs
+- (void)onNewMessage:(NSNotification *)notification
 {
-    
-
+   
+//    [self loadMessage];
+//    NSArray *msgs = notification.object;
+//
+//    NSMutableArray *uiMsgs = [self transUIMsgFromIMMsg:msgs];
+//    [_uiMsgs addObjectsFromArray:uiMsgs];
+//    __weak typeof(self) ws = self;
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        [ws.tableView reloadData];
+//        [ws scrollToBottom:NO];
+//    });
+    NSArray *msgs = notification.object;
     NSMutableArray *uiMsgs = [self transUIMsgFromIMMsg:msgs];
-    [_uiMsgs addObjectsFromArray:uiMsgs];
-    __weak typeof(self) ws = self;
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [ws.tableView reloadData];
-        [ws scrollToBottom:YES];
-    });
-    
+    if (uiMsgs.count > 0) {
+        [_uiMsgs addObjectsFromArray:uiMsgs];
+        [self.tableView reloadData];
+        [self scrollToBottom:NO];
+    }
     
 }
 
@@ -155,24 +187,24 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 }
 
 
-- (void)readedReport
-{
-    [[TIMManager sharedInstance] addMessageListener:self];
-
-    if (_myModel) {
-        
-        
-        TIMConversation *conv = [[TIMManager sharedInstance]
-                                 getConversation:(TIMConversationType)TIM_C2C
-                                 receiver:_receiverID];
-        
-        [conv setReadMessage:nil succ:^{
-            NSLog(@"");
-        } fail:^(int code, NSString *msg) {
-            NSLog(@"");
-        }];
-    }
-}
+//- (void)readedReport
+//{
+//    [[TIMManager sharedInstance] addMessageListener:self];
+//
+//    if (_myModel) {
+//
+//
+//        TIMConversation *conv = [[TIMManager sharedInstance]
+//                                 getConversation:(TIMConversationType)TIM_C2C
+//                                 receiver:_receiverID];
+//
+//        [conv setReadMessage:nil succ:^{
+//            NSLog(@"");
+//        } fail:^(int code, NSString *msg) {
+//            NSLog(@"");
+//        }];
+//    }
+//}
 
 -(void)setMyConvModel:(JMMessageListModel *)myConvModel
 {
@@ -206,7 +238,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 
 //消息解释
-- (void)loadMessage
+- (void) loadMessage
 {
     
     _uiMsgs = [NSMutableArray array];
@@ -218,12 +250,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:_receiverID];
     
-//    [conv setReadMessage:nil succ:^{
-//        NSLog(@"已读上报");
-//    } fail:^(int code, NSString *msg) {
-//        NSLog(@"已读上报失败");
-//
-//    }];
+
     __weak typeof(self) ws = self;
     [conv getMessage:20 last:nil succ:^(NSArray *msgs) {
         if(msgs.count != 0){
@@ -236,17 +263,24 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     } fail:^(int code, NSString *msg) {
         
     }];
-    
+//     [self.conversationDataProviderService getMessage:self.conv count:0 last:_msgForGet succ:^(NSArray *msgs) {
+//
+//     }fail:^(int code, NSString *msg) {
+//
+//     }];
 }
 
 
 
 - (NSMutableArray *)transUIMsgFromIMMsg:(NSArray *)msgs
 {
+    
     NSMutableArray *uiMsgs = [NSMutableArray array];
     for (NSInteger k = msgs.count - 1; k >= 0; --k) {
         TIMMessage *msg = msgs[k];
-    
+        if(![[[msg getConversation] getReceiver] isEqualToString:_receiverID]){
+            continue;
+        }
 //        if(![[[msg getConversation] getReceiver] isEqualToString:_myModel.sender_mark]){
 //            continue;
 //        }
@@ -260,13 +294,12 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                 JMMessageCellData *data = nil;
                 if ([elem isKindOfClass:[TIMTextElem class]]) {
                     TIMTextElem * text_elem = (TIMTextElem *)elem;
-                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
+                    JMTextMessageCellData *textData = [[JMTextMessageCellData alloc]init];
                     textData.content = text_elem.text;
                     if (_isSelfIsSender) {
                         
                         textData.head = _myModel.recipient_avatar;
                     }else{
-                    
                         textData.head = _myModel.sender_avatar;
                     }
                     textData.isSelf = NO;
@@ -276,7 +309,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                 }else if ([elem isKindOfClass:[TIMCustomElem class]]){
 
                     TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
-                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
+                    JMCustumMessageCellData *textData = [[JMCustumMessageCellData alloc]init];
 //                    if ([custom_elem.desc isEqualToString:@"我发起了视频聊天"]){
 //                        textData.content = @"发起了视频";
 //                    }else{
@@ -303,7 +336,20 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                     [uiMsgs addObject:data];
 
 
+                }else if ([elem isKindOfClass:[TIMImageElem class]]){
+                    JMTextMessageCellData *textData = [[JMTextMessageCellData alloc]init];
+                    textData.content = @"[图片]";
+                    if (_isSelfIsSender) {
+                        
+                        textData.head = _myModel.recipient_avatar;
+                    }else{
+                        textData.head = _myModel.sender_avatar;
+                    }
+                    textData.isSelf = NO;
+                    data = textData;
+                    [uiMsgs addObject:data];
                 }
+
                 
             }
             
@@ -314,10 +360,9 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                 JMMessageCellData *data = nil;
                 if ([elem isKindOfClass:[TIMTextElem class]]) {
                     TIMTextElem * text_elem = (TIMTextElem *)elem;
-                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
+                    JMTextMessageCellData *textData = [[JMTextMessageCellData alloc]init];
                     textData.content = text_elem.text;
                     if (_isSelfIsSender) {
-                        
                         textData.head = _myModel.sender_avatar;
                     }else{
                         textData.head = _myModel.recipient_avatar;
@@ -331,7 +376,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                 else if ([elem isKindOfClass:[TIMCustomElem class]]){
 
                     TIMCustomElem * custom_elem = (TIMCustomElem *)elem;
-                    JMMessageCellData *textData = [[JMMessageCellData alloc]init];                    
+                    JMCustumMessageCellData *textData = [[JMCustumMessageCellData alloc]init];
                     textData.content = custom_elem.desc;
                     
                     if (_isSelfIsSender) {
@@ -346,6 +391,19 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                     [uiMsgs addObject:data];
 
 
+                }
+                else if ([elem isKindOfClass:[TIMImageElem class]]){
+                    JMTextMessageCellData *textData = [[JMTextMessageCellData alloc]init];
+                    textData.content = @"[图片]";
+                    if (_isSelfIsSender) {
+                        
+                        textData.head = _myModel.recipient_avatar;
+                    }else{
+                        textData.head = _myModel.sender_avatar;
+                    }
+                    textData.isSelf = YES;
+                    data = textData;
+                    [uiMsgs addObject:data];
                 }
                 
             }
@@ -375,50 +433,201 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 //
 }
 
+- (void)sendImageMessage:(UIImage *)image;
+{
+    NSData *data = UIImageJPEGRepresentation(image, 0.75);
+    NSString *path = [TUIKit_Image_Path stringByAppendingString:[self genImageName:nil]];
+    [[NSFileManager defaultManager] createFileAtPath:path contents:data attributes:nil];
+    
+    //    JMImageMessageCellData *uiImage = [[JMImageMessageCellData alloc] initWithDirection:MsgDirectionOutgoing];
+    JMImageMessageCellData *uiImage = [[JMImageMessageCellData alloc]init];
+    uiImage.path = path;
+    uiImage.length = data.length;
+    uiImage.isSelf = YES;
+    [self sendMessage:uiImage];
+}
 
--(void)sendMessage:(JMMessageCellData *)data{
-  
+- (void)sendMessage2:(JMMessageCellData *)msgData
+{
+    [self.tableView beginUpdates];
+    TIMMessage *imMsg = msgData.innerMessage;
+    JMMessageCellData *dateMsg = nil;
+    if (msgData.status == Msg_Status_Init)
+    {
+        //新消息
+        if (!imMsg) {
+            imMsg = [self transIMMsgFromUIMsg:msgData];
+        }
+//        dateMsg = [self transSystemMsgFromDate:imMsg.timestamp];
+        
+    }
+    //获取头像和昵称
+    msgData.status = Msg_Status_Sending;
+    msgData.isSelf = YES;
+    
+    if (_isSelfIsSender) {
+        msgData.head = _myModel.sender_avatar;
+        msgData.name = _myModel.sender_nickname;
+        
+    }else
+    {
+        msgData.head = _myModel.recipient_avatar;
+        msgData.name = _myModel.recipient_nickname;
+    }
+
+    [self.uiMsgs addObject:msgData];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count  inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
+    [self scrollToBottom:YES];
+    
+    __weak typeof(self) ws = self;
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:_receiverID];
+    [conv sendMessage:imMsg succ:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            [ws changeMsg:msgData status:Msg_Status_Succ];
+        });
+        NSLog(@"成功");
+
+    } fail:^(int code, NSString *desc) {
+        NSLog(@"失败====== %d",imMsg.status);
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            [THelper makeToastError:code msg:desc];
+//            [ws changeMsg:msg status:Msg_Status_Fail];
+        });
+    }];
     
-    TIMTextElem * text_elem = [[TIMTextElem alloc] init];
     
-    [text_elem setText:data.content];
+}
+
+- (void)changeMsg:(JMMessageCellData *)msg status:(TMsgStatus)status
+{
+    msg.status = status;
+    NSInteger index = [_uiMsgs indexOfObject:msg];
+    JMMessageCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index + 1 inSection:0]];
+//    [cell setData:msg];
+//    [cell fillWithData:msg];
+}
+
+//把自己发出的消息数据源转化成IM可以接收的类型
+- (TIMMessage *)transIMMsgFromUIMsg:(JMMessageCellData *)data
+{
+    TIMMessage *msg = [[TIMMessage alloc] init];
+    if([data isKindOfClass:[JMTextMessageCellData class]]){
+        TIMTextElem *imText = [[TIMTextElem alloc] init];
+        JMTextMessageCellData *text = (JMTextMessageCellData *)data;
+        imText.text = text.content;
+        [msg addElem:imText];
+    }
+    else if([data isKindOfClass:[JMImageMessageCellData class]]){
+        TIMImageElem *imImage = [[TIMImageElem alloc] init];
+        JMImageMessageCellData *uiImage = (JMImageMessageCellData *)data;
+        imImage.path = uiImage.path;
+        [msg addElem:imImage];
+    }
+    return msg;
+
+//    else if([data isKindOfClass:[TUIFaceMessageCellData class]]){
+//        TIMFaceElem *imImage = [[TIMFaceElem alloc] init];
+//        TUIFaceMessageCellData *image = (TUIFaceMessageCellData *)data;
+//        imImage.index = (int)image.groupIndex;
+//        imImage.data = [image.faceName dataUsingEncoding:NSUTF8StringEncoding];
+//        [msg addElem:imImage];
+//    }
+//    else if([data isKindOfClass:[TUIImageMessageCellData class]]){
+//        TIMImageElem *imImage = [[TIMImageElem alloc] init];
+//        TUIImageMessageCellData *uiImage = (TUIImageMessageCellData *)data;
+//        imImage.path = uiImage.path;
+//        [msg addElem:imImage];
+//    }
+//    else if([data isKindOfClass:[TUIVideoMessageCellData class]]){
+//        TIMVideoElem *imVideo = [[TIMVideoElem alloc] init];
+//        TUIVideoMessageCellData *uiVideo = (TUIVideoMessageCellData *)data;
+//        imVideo.videoPath = uiVideo.videoPath;
+//        imVideo.snapshotPath = uiVideo.snapshotPath;
+//        imVideo.snapshot = [[TIMSnapshot alloc] init];
+//        imVideo.snapshot.width = uiVideo.snapshotItem.size.width;
+//        imVideo.snapshot.height = uiVideo.snapshotItem.size.height;
+//        imVideo.video = [[TIMVideo alloc] init];
+//        imVideo.video.duration = (int)uiVideo.videoItem.duration;
+//        imVideo.video.type = uiVideo.videoItem.type;
+//        [msg addElem:imVideo];
+//    }
+//    else if([data isKindOfClass:[TUIVoiceMessageCellData class]]){
+//        TIMSoundElem *imSound = [[TIMSoundElem alloc] init];
+//        TUIVoiceMessageCellData *uiSound = (TUIVoiceMessageCellData *)data;
+//        imSound.path = uiSound.path;
+//        imSound.second = uiSound.duration;
+//        imSound.dataSize = uiSound.length;
+//        [msg addElem:imSound];
+//    }
+//    else if([data isKindOfClass:[TUIFileMessageCellData class]]){
+//        TIMFileElem *imFile = [[TIMFileElem alloc] init];
+//        TUIFileMessageCellData *uiFile = (TUIFileMessageCellData *)data;
+//        imFile.path = uiFile.path;
+//        imFile.fileSize = uiFile.length;
+//        imFile.filename = uiFile.fileName;
+//        [msg addElem:imFile];
+//    }
+//    data.innerMessage = msg;
     
-    TIMMessage * msg = [[TIMMessage alloc] init];
-    [msg addElem:text_elem];
-    
+}
+
+-(void)sendMessage:(JMMessageCellData *)data{
+    [self.tableView beginUpdates];
+    TIMConversation *conv = [[TIMManager sharedInstance]
+                             getConversation:(TIMConversationType)TIM_C2C
+                             receiver:_receiverID];
+    TIMMessage *msg = [self transIMMsgFromUIMsg:data];
+//    TIMTextElem * text_elem = [[TIMTextElem alloc] init];
+//
+//    [text_elem setText:data.content];
+//
+//    TIMMessage * msg = [[TIMMessage alloc] init];
+//    [msg addElem:text_elem];
+//
     [conv sendMessage:msg succ:^(){
-//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"测试提示" message:@"发送成功"
-//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-//        [alert show];
         NSLog(@"SendMsg Succ");
     }fail:^(int code, NSString * err) {
         NSLog(@"SendMsg Failed:%d->%@", code, err);
     }];
     
     
-    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
-    textData.content = text_elem.text;
+//    JMMessageCellData *textData = [[JMMessageCellData alloc]init];
     if (_isSelfIsSender) {
-        textData.head = _myModel.sender_avatar;
-        textData.name = _myModel.sender_nickname;
+        data.head = _myModel.sender_avatar;
+        data.name = _myModel.sender_nickname;
         
     }else
     {
-        textData.head = _myModel.recipient_avatar;
-        textData.name = _myModel.recipient_nickname;
+        data.head = _myModel.recipient_avatar;
+        data.name = _myModel.recipient_nickname;
     }
-    textData.isSelf = YES;
-    [self.uiMsgs addObject:textData];
-    
-    [self.tableView reloadData];
-    
+    data.isSelf = YES;
+    [self.uiMsgs addObject:data];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count  inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView endUpdates];
     [self scrollToBottom:YES];
+//    [self.tableView reloadData];
+    
 
 }
 
+
+
+- (NSString *)genImageName:(NSString *)uuid
+{
+    int sdkAppId = [[TIMManager sharedInstance] getGlobalConfig].sdkAppId;
+    NSString *identifier = [[TIMManager sharedInstance] getLoginUser];
+    if(uuid == nil){
+        uuid = [NSString stringWithFormat:@"%ld", (long)[[NSDate date] timeIntervalSince1970]];
+    }
+    NSString *name = [NSString stringWithFormat:@"%d_%@_image_%@", sdkAppId, identifier, uuid];
+    return name;
+}
 - (void)didTapViewController
 {
     if(_delegate && [_delegate respondsToSelector:@selector(didTapInMessageController:)]){
@@ -587,21 +796,32 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         return cell;
 
     }else if (indexPath.row > 0 ) {
-    
-        NSObject *data = _uiMsgs[indexPath.row-1];
+        
+        JMMessageCellData *data = _uiMsgs[indexPath.row-1];
         JMMessageCell *cell = nil;
-        if([data isKindOfClass:[JMMessageCellData class]]){
-            cell = [tableView dequeueReusableCellWithIdentifier:TTextMessageCell_ReuseId];
-            
-            if(cell == nil){
-                cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
-                //            cell.delegate = self;
+        if (!data.reuseId) {
+            if([data isKindOfClass:[JMTextMessageCellData class]]){
+                data.reuseId = TTextMessageCell_ReuseId;
+            }else if ([data isKindOfClass:[JMImageMessageCellData class]]){
+                data.reuseId = TImageMessageCell_ReuseId;
+                
+            }else if ([data isKindOfClass:[JMCustumMessageCellData class]]){
+                data.reuseId = TTextMessageCell_ReuseId;
+                
+            }else {
+                return nil;
             }
-            cell.backgroundColor = BG_COLOR;
-            [cell setData:_uiMsgs[indexPath.row-1]];
-            [cell setIsDominator:_isDominator];//系统消息
         }
     
+        cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId];
+        
+        if(cell == nil){
+            cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:data.reuseId];
+            //            cell.delegate = self;
+        }
+        cell.backgroundColor = BG_COLOR;
+        [cell setData2:_uiMsgs[indexPath.row-1]];
+        [cell setIsDominator:_isDominator];//系统消息
         return cell;
 
     

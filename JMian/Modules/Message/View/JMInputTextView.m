@@ -111,16 +111,15 @@
     
     //盖住表情和更多按钮
     [_sendBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(_btn3);
+        make.right.mas_equalTo(_btn3.mas_left).offset(-10);
         make.centerY.mas_equalTo(self);
-        make.left.mas_equalTo(_btn2);
         make.height.mas_equalTo(_btn2);
-//        make.width.mas_equalTo(_btn3);
+        make.width.mas_equalTo(80);
     }];
     
     [_textView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(_btn1.mas_right).offset(5);
-        make.right.mas_equalTo(_btn2.mas_left).offset(5);
+        make.right.mas_equalTo(_sendBtn.mas_left).offset(5);
         make.height.mas_equalTo(_btn2);
         make.centerY.mas_equalTo(_btn2);
     }];

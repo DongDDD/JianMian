@@ -23,17 +23,10 @@ static NSString *cellId = @"FunctionCell";
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
-//        self.imageNameArr = @[@"mine_share",@"burse",@"autonym"];
-        self.imageNameArr = @[@"burse",@"autonym"];
+    
+    self.imageNameArr = @[@"mine_share",@"burse",@"autonym"];
+    self.labelStrArr = @[@"分享APP",@"我的钱包",@"实名认证"];
 
-//        JMVersionModel *model = [JMVersionManager getVersoinInfo];
-//        if ([model.test isEqualToString:@"1"]) {
-            self.labelStrArr = @[@"我的钱包",@"实名认证"];
-
-//        }else{
-//            self.labelStrArr = @[@"分享APP",@"我的钱包",@"实名认证"];
-//
-//        }
         [self initView];
         [self initLayout];
         
@@ -78,17 +71,10 @@ static NSString *cellId = @"FunctionCell";
         make.centerY.mas_equalTo(_titleLab);
     }];
     
-    CGFloat h = 0.0;
-//    JMVersionModel *model = [JMVersionManager getVersoinInfo];
-//    if ([model.test isEqualToString:@"1"]) {
-//        h = 70;
-//    }else{
-        h = 200;
-//    }
     [self.BGView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(13);
         make.right.mas_equalTo(self).offset(-13);
-        make.height.mas_equalTo(h);
+        make.height.mas_equalTo(200);
         make.top.mas_equalTo(_titleLab.mas_bottom).offset(13);
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

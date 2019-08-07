@@ -15,6 +15,7 @@
 #import "JMVideoChatView.h"
 #import "JMInterViewModel.h"
 #import "JMShareView.h"
+#import "WXApi.h"
 #import "JMBDetailModel.h"
 
 
@@ -53,7 +54,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-
+    
 }
 -(void)initView{
     [self showProgressHUD_view:self.view];
@@ -90,6 +91,19 @@
     [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
     
     [bgView addSubview:colectBtn];
+    if (imageNameRight2 != nil) {
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(0, 0, 25, 25);
+        JMVersionModel *model = [JMVersionManager getVersoinInfo];
+        if ([model.test isEqualToString:@"1"]) {
+            [shareBtn setHidden:YES];
+            
+        }
+        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
+        [bgView addSubview:shareBtn];
+        
+    }
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
@@ -98,9 +112,9 @@
 
 #pragma mark - 点击事件
 -(void)right2Action{
-   
+    
     [self showChoosePayView];
-
+    
 }
 
 
@@ -109,11 +123,13 @@
 }
 
 -(void)shareViewLeftAction{
+    [self wxShare:0];
     [self hiddenChoosePayView];
     
 }
 
 -(void)shareViewRightAction{
+    [self wxShare:1];
     [self hiddenChoosePayView];
     
     
@@ -156,7 +172,7 @@
     _videoChatView.delegate = self;
     _videoChatView.tag = 222;
     [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
-//    [_videoChatView setInterviewModel:nil];
+    //    [_videoChatView setInterviewModel:nil];
     [self.view addSubview:_videoChatView];
     [self.navigationController setNavigationBarHidden:YES];
 }
@@ -165,10 +181,37 @@
     
     [_videoChatView removeFromSuperview];
     [self.navigationController setNavigationBarHidden:NO];
-
+    
 }
 
-
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n
+{   //检测是否安装微信
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = self.detailModel.user_nickname;
+    urlMessage.description = self.detailModel.type_label_name ;
+    
+    //    UIImageView *imgView = [[UIImageView alloc]init];
+    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+    //
+    
+    UIImage *image = [self getImageFromURL:self.detailModel.user_avatar];   //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    [urlMessage setThumbData:thumbData];
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    webObj.webpageUrl = self.detailModel.share_url;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+    
+}
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
     UIImage * result;
@@ -187,7 +230,7 @@
     sender.selected = !sender.selected;
     if (sender.selected) {
         [[JMHTTPManager sharedInstance]createLikeWith_type:@"2" Id:self.ability_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-       
+            
             [self showAlertSimpleTips:@"提示" message:@"收藏成功" btnTitle:@"好的"];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
@@ -196,10 +239,10 @@
     }else{
         
         [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.ability_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-      
+            
             [self showAlertSimpleTips:@"提示" message:@"已取消收藏" btnTitle:@"好的"];
-
-
+            
+            
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -237,7 +280,7 @@
             if (![dic[@"favorites"] isEqual:[NSNull null]]) {
                 self.favorites_id = dic[@"favorites"][@"favorite_id"];
                 [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-
+                
             }
             //获取该用户ID
             _user_id = self.detailModel.user_id ;
@@ -253,7 +296,7 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-
+    
 }
 
 
@@ -269,7 +312,7 @@
     NSString *showInfoFromJava = [NSString stringWithFormat:@"showInfoFromJava('%@','%@')",json,token];
     [self.webView evaluateJavaScript:showInfoFromJava completionHandler:^(id _Nullable data, NSError * _Nullable error) {
         //显示对话框
-   
+        
         //延迟
         NSLog(@"OC调用JS方法 showInfoFromJava ");
     }];
@@ -332,13 +375,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

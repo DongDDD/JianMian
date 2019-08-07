@@ -62,7 +62,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitleViewImageViewName:@"demi_home"];
-    [self setBackBtnImageViewName:@"site_Home" textName:@"全国"];
+    [self setBackBtnImageViewName:@"site_Home" textName:@"不限"];
     self.per_page = 15;
     self.page = 1;
     
@@ -76,12 +76,10 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self setIsHiddenRightBtn:YES];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        [self setIsHiddenBackBtn:YES];
         
         [self BToGetData];
     }else{
         [self CToGetData];
-        [self setIsHiddenBackBtn:NO];
         
         
     }
@@ -156,10 +154,20 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self.tableView.mj_header beginRefreshing];
 }
 -(void)didClickIncomeAction{
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
+        return;
+    }
     [self.navigationController pushViewController:[JMWalletViewController new] animated:YES];
 }
 
 -(void)didClickTaskProcessingAction{
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
+        return;
+    }
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     [vc setMyIndex:1];
     vc.title = @"我的任务";
@@ -167,6 +175,11 @@ static NSString *C_cellIdent = @"CSquareCellID";
 }
 
 -(void)didClickTaskCompletedAction{
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
+        return;
+    }
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     [vc setMyIndex:2];
     

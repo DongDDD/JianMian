@@ -55,6 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *snapshot_user_nickname;
 @property (nonatomic, copy) NSString *snapshot_user_avatar;
 @property (nonatomic, copy) NSString *snapshot_share_url;
+@property (nonatomic, copy) NSString *snapshot_invoice;
 @property (nonatomic, strong) NSArray *snapshot_images;
 
 

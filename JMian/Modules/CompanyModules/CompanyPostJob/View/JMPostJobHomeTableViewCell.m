@@ -20,7 +20,12 @@
     self.workNameLab.text = model.work_name;
     NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",model.work_experience_min,model.work_experience_max];
     NSString *educationStr = [self getEducationStrWithEducation:model.education];
-    NSString *cityStr = model.cityName;
+    NSString *cityStr;
+    if (model.cityId == nil) {
+        cityStr = @"不限";
+    }else{
+        cityStr = model.cityName;
+    }
     
     self.detailLab.text = [NSString stringWithFormat:@"%@ / %@ / %@",experienceStr,educationStr,cityStr];
    
@@ -32,6 +37,7 @@
 
 -(void)setPartTimeJobModel:(JMAbilityCellData *)partTimeJobModel{
     self.workNameLab.text = partTimeJobModel.type_name;
+    
     self.salaryLab.text = partTimeJobModel.city_cityName;
     
     NSMutableArray *industryNameArray = [NSMutableArray array];
@@ -49,10 +55,15 @@
     
 }
 
+
 -(void)setTaskListCellData:(JMTaskListCellData *)taskListCellData{
     self.workNameLab.text = taskListCellData.task_title;
     self.salaryLab.text = [NSString stringWithFormat:@"%@ 元",taskListCellData.payment_money];
-    self.detailLab.text = taskListCellData.cityName;
+    if (taskListCellData.cityID == nil) {
+        self.detailLab.text = @"不限";
+    }else{
+        self.detailLab.text = taskListCellData.cityName;
+    }
      
 }
 //工资数据转化，除以1000，转化成k
@@ -70,7 +81,7 @@
 }
 
 //学历数据转化
--(NSString *)getEducationStrWithEducation:(NSNumber *)education{
+-(NSString *)getEducationStrWithEducation:(NSString *)education{
     NSInteger myInt = [education integerValue];
     
     switch (myInt) {

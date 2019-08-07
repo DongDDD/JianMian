@@ -106,7 +106,7 @@
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.textLabel.text = _titleArray[indexPath.row];
         if (indexPath.row == 0) {
-            cell.detailTextLabel.text = @"159-8910-9060";
+            cell.detailTextLabel.text = @"020-31148487";
         }else if (indexPath.row == 1) {
             NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
             NSString *app_Version = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
@@ -150,6 +150,10 @@
              [[UIApplication sharedApplication].keyWindow addSubview:_myWindowView];
          }
      
+     }else if (indexPath.section == 1) {
+         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"02031148487"];
+         // NSLog(@"str======%@",str);
+         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
      }
     if (indexPath.section == 2) {
         if (indexPath.row ==0) {

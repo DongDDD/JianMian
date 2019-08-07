@@ -29,7 +29,9 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.17)
   - MJRefresh (3.2.0)
+  - MMLayout (0.1.0)
   - PrintBeautifulLog (1.0.0)
+  - ReactiveObjC (3.1.1)
   - SDCycleScrollView (1.75):
     - SDWebImage (>= 4.0.0)
   - SDWebImage (4.4.6):
@@ -54,7 +56,9 @@ DEPENDENCIES:
   - MBProgressHUD (~> 1.1.0)
   - MJExtension
   - MJRefresh
+  - MMLayout
   - PrintBeautifulLog
+  - ReactiveObjC
   - SDCycleScrollView
   - SDWebImage
   - STPickerView (= 2.4)
@@ -78,7 +82,9 @@ SPEC REPOS:
     - MBProgressHUD
     - MJExtension
     - MJRefresh
+    - MMLayout
     - PrintBeautifulLog
+    - ReactiveObjC
     - SDCycleScrollView
     - SDWebImage
     - STPickerView
@@ -101,7 +107,9 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
+  MMLayout: 7caa6fe2ebfd018ec49ab3ac2409b454c3687995
   PrintBeautifulLog: ae1edcf7af92ffcb1de3726d1545d043e861d2e0
+  ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   STPickerView: d0e234f230f45bd720a6739d0ae9fbddf038958b
@@ -111,6 +119,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 180932df680efe56301a2a06f241685f64eae3c3
+PODFILE CHECKSUM: ed865ac4de023ebee68a10413986db82e37f168d
 
 COCOAPODS: 1.6.1

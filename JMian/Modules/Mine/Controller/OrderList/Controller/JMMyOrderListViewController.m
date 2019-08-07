@@ -34,14 +34,13 @@ static NSString *cellID = @"statusCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    JMVersionModel *model = [JMVersionManager getVersoinInfo];
-    if (![model.test isEqualToString:@"1"]) {
-        
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
         self.title = @"订单列表";
         
     }else{
-        self.title = @"任务详情";
-        
+        self.title = @"我的订单";
+
     }
     self.per_page = 10;
     self.page = 1;

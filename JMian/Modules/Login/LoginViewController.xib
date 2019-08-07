@@ -15,6 +15,7 @@
                 <outlet property="logoImgView" destination="2zX-mD-Rgr" id="yHX-j4-CnJ"/>
                 <outlet property="phoneLoginBtn" destination="L5O-Ib-NaR" id="nIc-1L-ZJ6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wechatLoginBtn" destination="uAD-co-Nvw" id="TXB-1m-hqE"/>
                 <outlet property="youkeBtn" destination="OjN-GZ-wIv" id="AdB-j5-J2h"/>
             </connections>
         </placeholder>
@@ -23,9 +24,26 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5O-Ib-NaR">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAD-co-Nvw">
+                    <rect key="frame" x="20" y="323" width="335" height="50"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="cGG-VQ-aBT"/>
+                    </constraints>
+                    <state key="normal" title=" 微信登录" image="WeChat_login.png">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="25"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="wechatLoginAction:" destination="-1" eventType="touchUpInside" id="xad-ai-Vdz"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5O-Ib-NaR">
                     <rect key="frame" x="20" y="398" width="335" height="50"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal" title="手机登陆" image="Webkey.png">
                         <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -97,17 +115,26 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="fTG-xc-bfo" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="2LK-kR-ZNY"/>
+                <constraint firstItem="uAD-co-Nvw" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="35r-B6-tBa"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="uAD-co-Nvw" secondAttribute="trailing" constant="20" id="AxY-dP-Uel"/>
+                <constraint firstItem="L5O-Ib-NaR" firstAttribute="height" secondItem="uAD-co-Nvw" secondAttribute="height" id="LFa-r2-AId"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="fTG-xc-bfo" secondAttribute="bottom" constant="10" id="NWY-Ik-i5m"/>
+                <constraint firstItem="uAD-co-Nvw" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="303" id="PiP-LH-aM5"/>
                 <constraint firstItem="OjN-GZ-wIv" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="20" id="V0g-99-K7x"/>
                 <constraint firstItem="2zX-mD-Rgr" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" constant="-2" id="XBW-yK-cxx"/>
                 <constraint firstItem="2zX-mD-Rgr" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="60" id="bkG-F1-Qw3"/>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="OjN-GZ-wIv" secondAttribute="trailing" constant="20" id="eQZ-HF-sCt"/>
+                <constraint firstItem="L5O-Ib-NaR" firstAttribute="top" secondItem="uAD-co-Nvw" secondAttribute="bottom" constant="25" id="eu4-hx-yxl"/>
+                <constraint firstItem="uAD-co-Nvw" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="ezF-V4-bY0"/>
+                <constraint firstItem="L5O-Ib-NaR" firstAttribute="trailing" secondItem="uAD-co-Nvw" secondAttribute="trailing" id="fSw-wD-yDA"/>
+                <constraint firstItem="L5O-Ib-NaR" firstAttribute="leading" secondItem="uAD-co-Nvw" secondAttribute="leading" id="y3S-YY-15k"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="132" y="124.58770614692655"/>
         </view>
     </objects>
     <resources>
+        <image name="WeChat_login.png" width="20.5" height="17.5"/>
         <image name="Webkey.png" width="20.5" height="22.5"/>
         <image name="deimi_login.png" width="255" height="197.5"/>
     </resources>

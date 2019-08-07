@@ -25,6 +25,7 @@
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMHTTPManager+Login.h"
 #import "JMIDCardIdentifyViewController.h"
+#import "WXApi.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate,MAMapViewDelegate,JMShareViewDelegate>
@@ -68,15 +69,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.navigationController.navigationBar.translucent = NO;
-//    
-//    self.extendedLayoutIncludesOpaqueBars = NO;
-
+    //    self.navigationController.navigationBar.translucent = NO;
+    //
+    //    self.extendedLayoutIncludesOpaqueBars = NO;
+    
     [self setJuhua];
     [self getUserInfo];
     //右上角分享 收藏按钮
     [self getData];
-
+    
     if (_viewType != JobDetailsViewTypeEdit) {
         
         [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
@@ -95,13 +96,25 @@
     [colectBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
     [colectBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
-
+    
     [bgView addSubview:colectBtn];
-
+    if (imageNameRight2 != nil) {
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(0, 0, 25, 25);
+        JMVersionModel *model = [JMVersionManager getVersoinInfo];
+        if ([model.test isEqualToString:@"1"]) {
+            [shareBtn setHidden:YES];
+            
+        }
+        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
+        [bgView addSubview:shareBtn];
+        
+    }
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
-
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -114,7 +127,7 @@
     [self.view layoutIfNeeded];
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH,self.mapBGView.frame.origin.y+self.mapBGView.frame.size.height+150);
     
-//    self.scrollView.contentOffset= CGPointMake(0, -80);
+    //    self.scrollView.contentOffset= CGPointMake(0, -80);
 }
 
 #pragma mark - 懒加载
@@ -188,7 +201,7 @@
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     
     if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
-  
+        
         [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.myModel.user_id foreign_key:self.myModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             if(responsObject[@"data"]){
@@ -205,17 +218,17 @@
             
             
         }];
-    
-
+        
+        
     }else{
         
         [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
-   
+        
     }
     
     
-
-
+    
+    
 }
 -(void)alertRightAction{
     JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
@@ -243,7 +256,7 @@
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-
+        
     }];
     
 }
@@ -262,7 +275,7 @@
             make.left.and.right.equalTo(self.view);
             make.height.equalTo(self.view);
         }];
-      
+        
         self.shareView = [[JMShareView alloc]init];
         self.shareView.delegate = self;
         [self.view addSubview:self.shareView];
@@ -271,43 +284,43 @@
             make.bottom.equalTo(self.view);
             make.left.and.right.equalTo(self.view);
             make.height.mas_equalTo(184+20);
-
+            
         }];
         NSLog(@"分享");
         
     }
     
     if (self.shareBgView.hidden == YES) {
-         [self.shareBgView setHidden:NO];
+        [self.shareBgView setHidden:NO];
         [self.shareView setHidden:NO];
     }
     
-
+    
 }
 
 -(void)btnAction{
-     if ([_status isEqualToString:@"0"]) {
-         JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
-         vc.homeworkModel = self.myModel;
-         vc.viewType = JMPostNewJobViewTypeEdit;
-         [self.navigationController pushViewController:vc animated:YES];
-         
-     }else if ([_status isEqualToString:@"1"]) {//
+    if ([_status isEqualToString:@"0"]) {
+        JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
+        vc.homeworkModel = self.myModel;
+        vc.viewType = JMPostNewJobViewTypeEdit;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if ([_status isEqualToString:@"1"]) {//
         [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.myModel.work_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"0" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位下线成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
             [alert show];
             [self.navigationController popViewControllerAnimated:YES];
-
+            
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
-    
+        
     }
-
     
     
-
+    
+    
 }
 
 -(void)btn2Action{
@@ -331,35 +344,35 @@
         
         
     }
-
-
+    
+    
 }
 
 //投个简历
 //-(void)sendResumeButton{
-//    
+//
 //    [self.view addSubview:self.shareBgView];
-//    
+//
 //    [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.top.equalTo(self.view);
 //        make.left.and.right.equalTo(self.view);
 //        make.height.equalTo(self.view);
 //    }];
-//    
+//
 //    [self.view addSubview:self.sendMyResumeView];
-//    
+//
 //    [self.sendMyResumeView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.bottom.equalTo(self.view.mas_bottom);
 //        make.left.and.right.equalTo(self.view);
 //        make.height.mas_equalTo(234+20);
-//        
+//
 //    }];
-//    
+//
 //    if (self.sendMyResumeView.hidden == YES) {
 //         [self.shareBgView setHidden:NO];
 //        [self.sendMyResumeView setHidden:NO];
 //    }
-// 
+//
 //}
 
 #pragma mark -- myDelegate
@@ -371,12 +384,14 @@
 
 -(void)shareViewLeftAction{
     [self disapearAction];
-  
+    [self wxShare:0];
+    
 }
 
 -(void)shareViewRightAction{
     [self disapearAction];
-
+    [self wxShare:1];
+    
 }
 #pragma mark - 数据请求
 -(void)getData{
@@ -384,18 +399,18 @@
         
         
         if (responsObject[@"data"]) {
-
+            
             self.myModel = [JMHomeWorkModel mj_objectWithKeyValues:responsObject[@"data"]];
             NSLog(@"%@",self.myModel.companyName);
             [self setUI];
             [self.juhua stopAnimating];
-         }
+        }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         
     }];
-
+    
 }
 
 
@@ -425,13 +440,13 @@
     [self setCompanyIntroductionView];
     [self setJobDescriptionView];
     [self setMapView];
-//    [self setHRView];
+    //    [self setHRView];
     [self setBottomView];
 }
 
 -(void)setScrollView{
     self.scrollView = [[UIScrollView alloc]init];
-     self.scrollView.showsVerticalScrollIndicator = NO;
+    self.scrollView.showsVerticalScrollIndicator = NO;
     
     [self.view addSubview:self.scrollView];
     
@@ -440,7 +455,7 @@
         make.left.and.right.equalTo(self.view);
         make.height.equalTo(@SCREEN_HEIGHT);
     }];
-
+    
 }
 
 
@@ -473,18 +488,18 @@
 #pragma mark - 职位简介
 -(void)setFootOfVideoView{
     
- 
+    
     self.footOfVideoView = [[UIView alloc]init];
     self.footOfVideoView.backgroundColor = [UIColor whiteColor];
     [self.scrollView addSubview:self.footOfVideoView];
-   
+    
     [self.footOfVideoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self.view);
         make.top.equalTo(self.scrollView);
         make.height.mas_equalTo(134);
-       
+        
     }];
-
+    
     
     //职位名称
     UILabel *jobNameLab = [[UILabel alloc]init];
@@ -492,13 +507,13 @@
     jobNameLab.font = [UIFont systemFontOfSize:20];
     jobNameLab.textColor = [UIColor colorWithRed:72/255.0 green:72/255.0 blue:72/255.0 alpha:1.0];
     [self.footOfVideoView addSubview:jobNameLab];
-
+    
     [jobNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(300);
         make.height.mas_equalTo(19);
         make.left.mas_equalTo(self.footOfVideoView.mas_left).offset(22);
         make.top.mas_equalTo(self.footOfVideoView.mas_top).offset(30);
-
+        
     }];
     
     //工资
@@ -557,9 +572,9 @@
             make.top.mas_equalTo(yearsEduLab.mas_bottom).offset(10);
             
         }];
-     
+        
     }
-
+    
 }
 
 
@@ -597,7 +612,7 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(introduceAvtion)];
     
     [self.companyIntroductionView addGestureRecognizer:tap];
-        
+    
     [self.scrollView addSubview:self.companyIntroductionView];
     
     [self.companyIntroductionView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -607,7 +622,7 @@
     }];
     
     UIImageView *iconImage = [[UIImageView alloc]init];
- 
+    
     [iconImage sd_setImageWithURL:[NSURL URLWithString:_myModel.companyLogo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     iconImage.layer.borderWidth = 0.5;
     iconImage.layer.borderColor = [UIColor colorWithRed:204/255.0 green:204/255.0 blue:204/255.0 alpha:1.0].CGColor;
@@ -639,7 +654,7 @@
     companyMessageLab.textColor = [UIColor colorWithRed:102/255.0 green:102/255.0 blue:102/255.0 alpha:1.0];
     companyMessageLab.adjustsFontSizeToFitWidth = YES;
     [self.companyIntroductionView addSubview:companyMessageLab];
-
+    
     [companyMessageLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(companyNameLab);
         make.top.mas_equalTo(companyNameLab.mas_bottom).offset(10);
@@ -648,7 +663,7 @@
     UIImageView *rightImageView = [[UIImageView alloc]init];
     rightImageView.image = [UIImage imageNamed:@"icon_return "];
     [self.companyIntroductionView addSubview:rightImageView];
-   
+    
     [rightImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self.companyIntroductionView.mas_right).offset(-22);
         make.width.mas_equalTo(7);
@@ -721,21 +736,21 @@
         make.top.mas_equalTo(label.mas_bottom).offset(28);
     }];
     
- //岗位职责内容
+    //岗位职责内容
     self.jobDoLab =[[UILabel alloc]init];
     self.jobDoLab.font = [UIFont systemFontOfSize:14];
     self.jobDoLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
     self.jobDoLab.numberOfLines = 0;
     
-
+    
     NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    NSString  *testString = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
+    //    NSString  *testString = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
     NSString  *testString = _myModel.Description;
     NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString];
     [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString length])];
     [self.jobDoLab  setAttributedText:setString];
     [paragraphStyle  setLineSpacing:13.5];
-
+    
     [self.jobDescriptionView addSubview:self.jobDoLab];
     
     
@@ -744,67 +759,67 @@
         make.right.mas_equalTo(self.jobDescriptionView.mas_right).offset(-24);
         
         make.top.mas_equalTo(label1.mas_bottom).offset(15);
-//        make.bottom.mas_equalTo(self.jobDescriptionView.mas_bottom);
+        //        make.bottom.mas_equalTo(self.jobDescriptionView.mas_bottom);
     }];
     
-//    UILabel *label2 = [[UILabel alloc]init];
-//    label2.text = @"任职要求";
-//    label2.font = [UIFont systemFontOfSize:15];
-//    label2.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
-//    [self.jobDescriptionView addSubview:label2];
-//
-//    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(label.mas_left);
-//        make.width.mas_equalTo(100);
-//        make.height.mas_equalTo(15);
-//        make.top.mas_equalTo(self.jobDoLab.mas_bottom).offset(35);
-//    }];
-//
-//    //职责要求内容
-//
-//    self.jobRequireLab = [[UILabel alloc]init];
-//    self.jobRequireLab.font = [UIFont systemFontOfSize:14];
-//    self.jobRequireLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
-//    self.jobRequireLab.numberOfLines = 0;
-//
-//    NSMutableParagraphStyle  *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
-//    NSString  *testString2 = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
-//    NSMutableAttributedString  *setString2 = [[NSMutableAttributedString alloc] initWithString:testString2];
-//    [setString2  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [testString2 length])];
-//    [self.jobRequireLab  setAttributedText:setString2];
-//    [paragraphStyle2  setLineSpacing:13.5];
-//
+    //    UILabel *label2 = [[UILabel alloc]init];
+    //    label2.text = @"任职要求";
+    //    label2.font = [UIFont systemFontOfSize:15];
+    //    label2.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
+    //    [self.jobDescriptionView addSubview:label2];
+    //
+    //    [label2 mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.left.mas_equalTo(label.mas_left);
+    //        make.width.mas_equalTo(100);
+    //        make.height.mas_equalTo(15);
+    //        make.top.mas_equalTo(self.jobDoLab.mas_bottom).offset(35);
+    //    }];
+    //
+    //    //职责要求内容
+    //
+    //    self.jobRequireLab = [[UILabel alloc]init];
+    //    self.jobRequireLab.font = [UIFont systemFontOfSize:14];
+    //    self.jobRequireLab.textColor = [UIColor colorWithRed:107/255.0 green:107/255.0 blue:107/255.0 alpha:1.0];
+    //    self.jobRequireLab.numberOfLines = 0;
+    //
+    //    NSMutableParagraphStyle  *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
+    //    NSString  *testString2 = @"1.负责线上产品的界面设计视觉交互设计并为\n2.新功能新产品提供创意及设计方案等负责线上产品的界面设计视觉交互设计\n3.并为新功能新产品提供创意及设计方案等淮准确理解产品需求和交互原型输\n3.岀优质的界果图够通过视觉元素有效把控网站的整体设计风格";
+    //    NSMutableAttributedString  *setString2 = [[NSMutableAttributedString alloc] initWithString:testString2];
+    //    [setString2  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [testString2 length])];
+    //    [self.jobRequireLab  setAttributedText:setString2];
+    //    [paragraphStyle2  setLineSpacing:13.5];
+    //
     
-//    [self.jobDescriptionView addSubview:self.jobRequireLab];
+    //    [self.jobDescriptionView addSubview:self.jobRequireLab];
     
-//    [self.jobRequireLab mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(label2.mas_left);
-//        make.right.mas_equalTo(self.jobDescriptionView.mas_right).offset(-38);
-//
-//        make.top.mas_equalTo(label2.mas_bottom).offset(15);
-//        //        make.bottom.mas_equalTo(self.jobDescriptionView.mas_bottom);
-//    }];
+    //    [self.jobRequireLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.left.mas_equalTo(label2.mas_left);
+    //        make.right.mas_equalTo(self.jobDescriptionView.mas_right).offset(-38);
+    //
+    //        make.top.mas_equalTo(label2.mas_bottom).offset(15);
+    //        //        make.bottom.mas_equalTo(self.jobDescriptionView.mas_bottom);
+    //    }];
     
     
     [self.jobDescriptionView mas_updateConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.jobDoLab.mas_bottom).offset(30);
     }];
-
-
-
+    
+    
+    
 }
 #pragma mark - 高德地图
 
 -(void)setMapView{
-//
-     self.mapBGView = [[MapBGView alloc] init];
+    //
+    self.mapBGView = [[MapBGView alloc] init];
     [self.mapBGView setModel:_myModel];
     [self.scrollView addSubview:self.mapBGView];
     
     [self.mapBGView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.and.right.mas_equalTo(self.jobDescriptionView);
-            make.height.mas_equalTo(346);
-            make.top.mas_equalTo(self.jobDescriptionView.mas_bottom);
+        make.left.and.right.mas_equalTo(self.jobDescriptionView);
+        make.height.mas_equalTo(346);
+        make.top.mas_equalTo(self.jobDescriptionView.mas_bottom);
     }];
     
     [self.view addSubview:self.mapView];
@@ -821,7 +836,7 @@
         make.bottom.mas_equalTo(self.mapBGView);
     }];
     _mapView.scrollEnabled = NO;
-
+    
     
 }
 
@@ -948,6 +963,34 @@
     }];
 }
 
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n
+{   //检测是否安装微信
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = self.myModel.companyName;
+    urlMessage.description = self.myModel.Description ;
+    
+    //    UIImageView *imgView = [[UIImageView alloc]init];
+    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+    //
+    
+    UIImage *image = [self getImageFromURL:self.myModel.companyLogo_path];   //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    [urlMessage setThumbData:thumbData];
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    webObj.webpageUrl = self.myModel.share_url;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+    
+}
 
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
@@ -964,22 +1007,22 @@
 
 ///初始化地图
 -(MAMapView *)mapView{
-
+    
     if (_mapView == nil) {
         _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 300)];
         _mapView.delegate = self;
         
         [self.view addSubview:_mapView];
         
-//        [_mapView setCenterCoordinate:locationCoordinate animated:NO];
+        //        [_mapView setCenterCoordinate:locationCoordinate animated:NO];
         
-//        MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
-//        pointAnnotation.coordinate = locationCoordinate;//设置地图的定位中心点坐标self.mapView.centerCoordinate = coor;//将点添加到地图上，即所谓的大头针
-//        [_mapView addAnnotation:pointAnnotation];
+        //        MAPointAnnotation *pointAnnotation = [[MAPointAnnotation alloc] init];
+        //        pointAnnotation.coordinate = locationCoordinate;//设置地图的定位中心点坐标self.mapView.centerCoordinate = coor;//将点添加到地图上，即所谓的大头针
+        //        [_mapView addAnnotation:pointAnnotation];
         
     }
     return _mapView;
-
+    
 }
 
 
@@ -1010,13 +1053,13 @@
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

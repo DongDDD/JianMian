@@ -7,7 +7,6 @@
 //
 
 #import "JMMoreView.h"
-#import "JMMoreCollectionViewCell.h"
 
 @implementation JMMoreView
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -31,7 +30,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    JMMoreCollectionViewCell *cell = (JMMoreCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
+    JMMoreCollectionViewCell *cell = (JMMoreCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"moreCell" forIndexPath:indexPath];
     cell.imageView.image = [UIImage imageNamed:self.imageNameArr[indexPath.row]];
     //    [cell.iconBtn setImage:[UIImage imageNamed:self.imageNameArr[indexPath.row]] forState:UIControlStateNormal];
     cell.titleLabel.text = self.labelStrArr[indexPath.row];
@@ -41,11 +40,13 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectItemWithRow:)] ) {
-//        [self.delegate didSelectItemWithRow:indexPath.row];
-//    }
-//
-    NSLog(@"666");
+    UICollectionViewCell *cell =[collectionView cellForItemAtIndexPath:indexPath];
+    
+    if(_delegate && [_delegate respondsToSelector:@selector(moreView:didSelectMoreCell:)]){
+        if ([cell isKindOfClass:[JMMoreCollectionViewCell class]]) {
+            [_delegate moreView:self didSelectMoreCell:(JMMoreCollectionViewCell *)cell];;
+        }
+    }
     //    if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectItemAtIndexPath:withContent:)]) {
     //        [self.delegate didSelectItemAtIndexPath:indexPath withContent:self.dataAry[indexPath.row]];
     //    }
@@ -66,7 +67,7 @@
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:layout];
         _collectionView.delegate = self;
         _collectionView.dataSource = self;
-        [_collectionView registerClass:[JMMoreCollectionViewCell class] forCellWithReuseIdentifier:@"cell"];
+        [_collectionView registerClass:[JMMoreCollectionViewCell class] forCellWithReuseIdentifier:@"moreCell"];
         _collectionView.backgroundColor = [UIColor whiteColor];
         _collectionView.layer.borderWidth = 0;
     }

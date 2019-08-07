@@ -58,7 +58,12 @@
     NSString *industryStr = [industryNameArray componentsJoinedByString:@"/"];
     self.titleLab.text = industryStr;
     self.nameLab.text = model.user_nickname;
-    self.adress.text = model.city_cityName;
+    if (model.city_cityName == nil) {
+        self.adress.text = @"不限";
+    }else{
+        self.adress.text = model.city_cityName;
+
+    }
     [self.headerIconImg sd_setImageWithURL:[NSURL URLWithString:model.user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     
     self.jobLabs.text = [NSString stringWithFormat:@" %@  ",model.myDescription];

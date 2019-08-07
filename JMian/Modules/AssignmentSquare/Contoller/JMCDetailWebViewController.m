@@ -13,6 +13,7 @@
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMCompanyIntroduceViewController.h"
 #import "JMShareView.h"
+#import "WXApi.h"
 #import "JMCDetailModel.h"
 #import "JMMessageListModel.h"
 #import "JMChatViewViewController.h"
@@ -21,16 +22,12 @@
 #import "JMApplyForProtocolView.h"
 #import "JMTaskManageViewController.h"
 #import "JMTaskApplyForView.h"
-#import "JMHTTPManager+FectchAbility.h"
-#import "JMAbilityCellData.h"
-#import "JMPostPartTimeResumeViewController.h"
-
 
 
 @interface JMCDetailWebViewController ()<JMShareViewDelegate,JMApplyForProtocolViewDelegate,JMTaskApplyForViewDelegate>
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic, copy) NSString *favorites_id;
-@property (nonatomic, strong) JMShareView *choosePayView;
+@property (nonatomic, strong) JMShareView *shareView;
 @property (nonatomic ,strong) UIView *BGPayView;
 @property (nonatomic ,strong) JMCDetailModel *detailModel;
 @property (copy, nonatomic)NSString *user_id;
@@ -39,7 +36,6 @@
 @property (nonatomic, strong) UIView *windowViewBGView;
 
 @property (nonatomic, assign)BOOL isRead;
-@property (nonatomic, assign)BOOL isPostPartTimeResume;
 
 @end
 
@@ -53,13 +49,12 @@
     [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"ccc"];
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self initView];
-//    _isRead = YES;
+    //    _isRead = YES;
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self getAbilityListData];
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
@@ -75,22 +70,22 @@
 -(void)initView{
     [self showProgressHUD_view:self.view];
     [self.view addSubview:self.bottomView];
-    [self.view addSubview:self.choosePayView];
+    [self.view addSubview:self.shareView];
     
     [self.view addSubview:self.BGPayView];
-
+    
     [self initTaskApplyForView];
     [self.BGPayView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(_choosePayView.mas_top);
+        make.bottom.mas_equalTo(_shareView.mas_top);
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
     }];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenChoosePayView)];
     [self.BGPayView addGestureRecognizer:tap];
-
-}
     
+}
+
 -(void)initTaskApplyForView{
     [[UIApplication sharedApplication].keyWindow addSubview:self.windowViewBGView];
     [[UIApplication sharedApplication].keyWindow addSubview:self.taskApplyForView];
@@ -101,7 +96,7 @@
     }];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenApplyForView)];
     [self.windowViewBGView addGestureRecognizer:tap];
-
+    
     
 }
 -(void)fanhui{
@@ -109,16 +104,16 @@
     // 用完移除
     [[self.webView configuration].userContentController removeScriptMessageHandlerForName:@"bbb"];
     [[self.webView configuration].userContentController removeScriptMessageHandlerForName:@"ccc"];
-
+    
 }
 
 
 
 
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
-
+    
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
-
+    
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     colectBtn.frame = CGRectMake(45, 0, 25, 25);
@@ -126,25 +121,44 @@
         colectBtn.selected = YES;
     }else{
         colectBtn.selected = NO;
-
+        
     }
     [colectBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
     [colectBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
-
+    
     [bgView addSubview:colectBtn];
-  
-
+    if (imageNameRight2 != nil) {
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(0, 0, 25, 25);
+        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
+        [bgView addSubview:shareBtn];
+        
+    }
+    
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
-
-
+    
+    
 }
 
 -(void)right2Action{
-
-    [self showChoosePayView];
-
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self loginOut];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+    [self showShareView];
+    
 }
 
 
@@ -163,23 +177,23 @@
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-
+    
     sender.selected = !sender.selected;
     if (sender.selected) {
         [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.task_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-         
+            
             [self showAlertSimpleTips:@"提示" message:@"收藏成功" btnTitle:@"好的"];
-
+            
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
         
     }else{
-    
+        
         [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.favorites_id  mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-       
+            
             [self showAlertSimpleTips:@"提示" message:@"已取消收藏" btnTitle:@"好的"];
-
+            
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -187,12 +201,12 @@
     
 }
 
--(void)showChoosePayView{
-    [self.choosePayView setHidden:NO];
+-(void)showShareView{
+    [self.shareView setHidden:NO];
     [self.BGPayView setHidden:NO];
     
     [UIView animateWithDuration:0.18 animations:^{
-        self.choosePayView.frame =CGRectMake(0, self.view.frame.size.height-205, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
+        self.shareView.frame =CGRectMake(0, self.view.frame.size.height-205, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
         
         
     }];
@@ -201,27 +215,27 @@
 
 
 -(void)hiddenChoosePayView{
-    [self.choosePayView setHidden:YES];
+    [self.shareView setHidden:YES];
     [self.BGPayView setHidden:YES];
-
+    
     [UIView animateWithDuration:0.18 animations:^{
-        self.choosePayView.frame =CGRectMake(0,SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
+        self.shareView.frame =CGRectMake(0,SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
         
         
     }];
     
 }
-    
+
 -(void)hiddenApplyForView{
     [self.taskApplyForView setHidden:YES];
     [self.windowViewBGView setHidden:YES];
-
+    
 }
 
 -(void)showApplyForView{
     [self.taskApplyForView setHidden:NO];
     [self.windowViewBGView setHidden:NO];
-
+    
 }
 
 //-(void)showAlertVCWithCustumView:(UIView *)custumView
@@ -263,18 +277,20 @@
 -(void)shareViewCancelAction{
     [self hiddenChoosePayView];
 }
-    
+
 -(void)shareViewLeftAction{
+    [self wxShare:0];
     [self hiddenChoosePayView];
     
 }
 -(void)shareViewRightAction{
+    [self wxShare:1];
     [self hiddenChoosePayView];
     
     
 }
-   
-    
+
+
 -(void)applyForViewDeleteAction{
     [self hiddenApplyForView];
     
@@ -283,9 +299,9 @@
 -(void)applyForViewComfirmAction{
     [self hiddenApplyForView];
     [self sendResquest];
-
-}
     
+}
+
 
 #pragma mark - 点击事件
 
@@ -309,9 +325,9 @@
         [self createChatRequstWithForeign_key:self.task_id user_id:_user_id];
         
     }else{
-       [self showAlertWithTitle:@"提示" message:@"实名认证后才能聊天" leftTitle:@"返回" rightTitle:@"去实名认证"];
+        [self showAlertWithTitle:@"提示" message:@"实名认证后才能聊天" leftTitle:@"返回" rightTitle:@"去实名认证"];
     }
-
+    
 }
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
@@ -326,36 +342,20 @@
         }]];
         
         [self presentViewController:alert animated:YES completion:nil];
-   
+        
         return;
     }
     
-//    [self showAlertVCWithCustumView:self.applyForProtocolView message:@"" leftTitle:@"取消" rightTitle:@"确认"];
-//    [self sendResquest];
-//    [self initTaskApplyForView];
-    if (_isPostPartTimeResume == YES) {
-        NSString *isRead = kFetchMyDefault(@"isRead");
-        if ([isRead isEqualToString:@"1"]) {
-            [self sendResquest];
-            
-        }else{
-            [self showApplyForView];
-            
-        }
+    //    [self showAlertVCWithCustumView:self.applyForProtocolView message:@"" leftTitle:@"取消" rightTitle:@"确认"];
+    //    [self sendResquest];
+    //    [self initTaskApplyForView];
+    NSString *isRead = kFetchMyDefault(@"isRead");
+    if ([isRead isEqualToString:@"1"]) {
+        [self sendResquest];
         
     }else{
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"你还没有创建兼职简历" preferredStyle: UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"去创建" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
-            vc.viewType = JMPostPartTimeResumeViewAdd;
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }]];
+        [self showApplyForView];
         
-        [self presentViewController:alert animated:YES completion:nil];
-    
     }
 }
 
@@ -368,9 +368,9 @@
         
     }else{
         kSaveMyDefault(@"isRead", @"0");
-
+        
     }
-
+    
 }
 
 
@@ -392,7 +392,7 @@
                 
             }
             _user_id = dic[@"user"][@"user_id"];
-
+            
             [self ocToJs_dicData:dic];
         }
         
@@ -401,26 +401,7 @@
     }];
     
 }
-//获取自己有没发布兼职简历
--(void)getAbilityListData{
-    //    NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
-    //    NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-    [[JMHTTPManager sharedInstance]fectchAbilityList_city_id:nil type_label_id:nil industry_arr:nil myDescription:nil video_path:nil video_cover:nil image_arr:nil status:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        if (responsObject[@"data"]) {
-            NSArray *arrData = [JMAbilityCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            if (arrData.count > 0) {
-                _isPostPartTimeResume = YES;
-            }else{
-                _isPostPartTimeResume = NO;
 
-            }
-        }
-  
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-}
 //申请职位
 -(void)sendResquest{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
@@ -447,11 +428,11 @@
 -(void)createChatToSendCustumMessageRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
     
     [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-//
+        //        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+        //
         NSString *receiverId = [NSString stringWithFormat:@"%@b",_user_id];
         [self setTaskMessage_receiverID:receiverId dic:nil title:@"[任务申请]"];
-
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -474,7 +455,50 @@
     }];
 }
 
-
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n
+{   //检测是否安装微信
+    
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = self.detailModel.task_title;
+    urlMessage.description = self.detailModel.myDescription;
+    
+    //    UIImageView *imgView = [[UIImageView alloc]init];
+    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+    //
+    
+    NSString *url;
+    if (self.detailModel.images.count > 0) {
+        for (int i = 0; i < self.detailModel.images.count; i++) {
+            JMCDetailImageModel *imgModel = self.detailModel.images[0];
+            url = imgModel.file_path;
+        }
+        
+    }else if (self.detailModel.company_logo_path){
+        url= self.detailModel.company_logo_path;
+    }
+    
+    //    UIImage *image = [self getImageFromURL:url];
+    //    UIImage *image = [UIImage imageNamed:@"demi_home"];
+    //NSData *thumbData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    //缩略图,压缩图片,不超过 32 KB
+    UIImage *image = [self handleImageWithURLStr:url];
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.1);
+    [urlMessage setThumbData:thumbData];
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    webObj.webpageUrl = self.detailModel.share_url;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+    
+}
 
 - (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
     NSURL *url = [NSURL URLWithString:imageURLStr];
@@ -513,7 +537,7 @@
     vc.title = @"我的任务";
     [self.navigationController pushViewController:vc animated:YES];
     
-
+    
 }
 
 -(void)alertRightAction{
@@ -545,7 +569,7 @@
     [self getData];
     [self hiddenHUD];
     [self.bottomView setHidden:NO];
-
+    
     //    [self ocToJs];
 }
 
@@ -559,8 +583,8 @@
     //JS调用OC
     if([message.name isEqualToString:@"aaa"]){
         NSLog(@"message.body---%@",message.body);
-//        self.favorites = message.body;
- //        self.labsJson = message.body;
+        //        self.favorites = message.body;
+        //        self.labsJson = message.body;
         //        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"js调用到了oc" message:message.body preferredStyle:UIAlertControllerStyleAlert];
         //        [alertController addAction:([UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //        }])];
@@ -572,7 +596,7 @@
         vc.company_id = message.body;
         [self.navigationController pushViewController:vc animated:YES];
         
-    
+        
     }
     
 }
@@ -614,16 +638,16 @@
 
 #pragma mark -- getter
 
--(JMShareView *)choosePayView{
-    if (!_choosePayView) {
-        _choosePayView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
-        _choosePayView.delegate = self;
-        [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
-        [_choosePayView.btn2 setImage:[UIImage imageNamed:@"Friendster"] forState:UIControlStateNormal];
-        _choosePayView.lab1.text = @"微信分享";
-        _choosePayView.lab2.text = @"朋友圈";
+-(JMShareView *)shareView{
+    if (!_shareView) {
+        _shareView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
+        _shareView.delegate = self;
+        [_shareView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
+        [_shareView.btn2 setImage:[UIImage imageNamed:@"Friendster"] forState:UIControlStateNormal];
+        _shareView.lab1.text = @"微信分享";
+        _shareView.lab2.text = @"朋友圈";
     }
-    return _choosePayView;
+    return _shareView;
 }
 
 -(UIView *)BGPayView{
@@ -641,12 +665,12 @@
     if (!_applyForProtocolView) {
         _applyForProtocolView = [[JMApplyForProtocolView alloc]init];
         _applyForProtocolView.delegate = self;
- 
+        
     }
     return  _applyForProtocolView;
     
 }
-    
+
 -(JMTaskApplyForView *)taskApplyForView{
     if (!_taskApplyForView) {
         _taskApplyForView = [[JMTaskApplyForView alloc]init];
@@ -657,7 +681,7 @@
     return _taskApplyForView;
 }
 
-    
+
 -(UIView *)windowViewBGView{
     if (!_windowViewBGView) {
         _windowViewBGView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
@@ -668,13 +692,13 @@
     return _windowViewBGView;
 }
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

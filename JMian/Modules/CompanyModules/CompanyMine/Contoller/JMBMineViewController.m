@@ -34,8 +34,10 @@
 #import "JMBMineMoreFunctionView.h"
 #import "JMShareView.h"
 #import "JMWalletViewController.h"
-#import "JMVIPViewController.h"
+//#import "JMVIPViewController.h"
 #import "JMMyOrderListViewController.h"
+#import "WXApi.h"
+
 @interface JMBMineViewController ()<JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMBMineInfoViewDelegate,JMBMineMoreFunctionViewDelegate,JMShareViewDelegate>
 
 @property (strong, nonatomic) JMBUserCenterHeaderView *BUserCenterHeaderView;
@@ -129,8 +131,8 @@
 
 -(void)BVIPClick{
 
-    JMVIPViewController *vc = [[JMVIPViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+//    JMVIPViewController *vc = [[JMVIPViewController alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
 
 }
 
@@ -168,39 +170,39 @@
 }
 
 -(void)didSelectCellWithRow:(NSInteger)row{
-
-//                [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
-//                [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.top.equalTo(self.view);
-//                    make.left.and.right.equalTo(self.view);
-//                    make.height.equalTo(self.view);
-//                }];
-//                [self.shareView setHidden:NO];
-//                [self.shareBgView setHidden:NO];
-//                [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
-//                [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
-//                    make.bottom.equalTo(self.view);
-//                    make.left.and.right.equalTo(self.view);
-//                    make.height.mas_equalTo(184+SafeAreaBottomHeight);
-//
-//                }];
-//
-
     if (row == 0) {
+        [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
+        [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.view);
+            make.left.and.right.equalTo(self.view);
+            make.height.equalTo(self.view);
+        }];
+        [self.shareView setHidden:NO];
+        [self.shareBgView setHidden:NO];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
+        [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view);
+            make.left.and.right.equalTo(self.view);
+            make.height.mas_equalTo(184+SafeAreaBottomHeight);
+            
+        }];
+    }else  if (row == 1) {
         JMWalletViewController *vc = [[JMWalletViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
-    }else  if (row == 1) {
+    }else  if (row == 2) {
+    
         //实名认证
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         if ([model.card_status isEqualToString:Card_PassIdentify]) {
-            [self showAlertSimpleTips:@"提示" message:@"你已通过实名认证" btnTitle:@"好的"];
-
+            [self showAlertVCSucceesSingleWithMessage:@"你已通过实名认证" btnTitle:@"好的"];
+            
         }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
             [self showAlertSimpleTips:@"提示" message:@"审核实名认证中" btnTitle:@"好的"];
         }else{
-
+            
             [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
         }
+    
     }
 }
 
@@ -210,13 +212,44 @@
 
 -(void)shareViewLeftAction{
     [self disapearAction];
+    [self wxShare:0];
 }
 
 -(void)shareViewRightAction{
     [self disapearAction];
+    [self wxShare:1];
 }
 
-
+#pragma mark -- 微信分享的是链接
+- (void)wxShare:(int)n
+{   //检测是否安装微信
+    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+    sendReq.bText = NO; //不使用文本信息
+    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+    
+    WXMediaMessage *urlMessage = [WXMediaMessage message];
+    urlMessage.title = @"得米，招全职，找兼职，找你想要的";
+    urlMessage.description = @"来得米，招人，找活，找你想要的！";
+    
+    //    UIImageView *imgView = [[UIImageView alloc]init];
+    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+    //
+    
+    UIImage *image = [UIImage imageNamed:@"logo2"];
+    //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    [urlMessage setThumbData:thumbData];
+    //分享实例
+    WXWebpageObject *webObj = [WXWebpageObject object];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    webObj.webpageUrl = userModel.share;
+    
+    urlMessage.mediaObject = webObj;
+    sendReq.message = urlMessage;
+    //发送分享
+    [WXApi sendReq:sendReq];
+    
+}
 #pragma mark - lazy
 
 -(JMBUserCenterHeaderView *)BUserCenterHeaderView{
@@ -258,14 +291,7 @@
 
 -(JMBMineMoreFunctionView *)BMineMoreFunctionView{
     if (!_BMineMoreFunctionView) {
-        CGFloat h = 0.0;
-//        JMVersionModel *model = [JMVersionManager getVersoinInfo];
-//        if ([model.test isEqualToString:@"1"]) {
-//            h = 100;
-//        }else{
-            h = 274;
-//        }
-        _BMineMoreFunctionView = [[JMBMineMoreFunctionView alloc]initWithFrame:CGRectMake(0, self.BMineInfoView.frame.origin.y+self.BMineInfoView.frame.size.height, SCREEN_WIDTH, h)];
+        _BMineMoreFunctionView = [[JMBMineMoreFunctionView alloc]initWithFrame:CGRectMake(0, self.BMineInfoView.frame.origin.y+self.BMineInfoView.frame.size.height, SCREEN_WIDTH, 274)];
         _BMineMoreFunctionView.delegate = self;
     }
     return _BMineMoreFunctionView;
@@ -274,7 +300,7 @@
 -(UIScrollView *)scrollView{
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc]init];
-        _scrollView.frame = CGRectMake(0, -0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        _scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.scrollEnabled = NO;
         _scrollView.backgroundColor = BG_COLOR;

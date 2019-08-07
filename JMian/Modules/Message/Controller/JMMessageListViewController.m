@@ -551,10 +551,10 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
 }
 #pragma mark - MyDelegate
--(void)didReadActionWithData:(JMMessageListModel *)data{
-        [self setReadMessageAction_model:data];
-    
-}
+//-(void)didReadActionWithData:(JMMessageListModel *)data{
+//        [self setReadMessageAction_model:data];
+//    
+//}
 
 
 #pragma mark - lazy

@@ -12,6 +12,7 @@
 #import "JMFaceView.h"
 #import "JMMoreView.h"
 #import "JMMessageCell.h"
+#import "JMMoreCollectionViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @class JMInputController;
@@ -19,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)inputController:(JMInputController *)inputController didChangeHeight:(CGFloat)height;
 - (void)inputController:(JMInputController *)inputController didSendMessage:(JMMessageCellData *)msg;
 - (void)inputController:(JMInputController *)inputController didSelectMoreAtIndex:(NSInteger)index;
+- (void)inputController:(JMInputController *)inputController didSelectMoreCell:(JMMoreCollectionViewCell *)cell;
 @end
 
 

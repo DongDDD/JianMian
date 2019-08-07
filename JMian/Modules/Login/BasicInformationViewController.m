@@ -469,7 +469,10 @@
 -(void)rightAction{
     [self.nameText resignFirstResponder];
     [self.emailText resignFirstResponder];
-    
+    if (_imageUrl.length < 1) {
+        [self showAlertSimpleTips:@"提示" message:@"请选择头像" btnTitle:@"好的"];
+        return;
+    }
     [[JMHTTPManager sharedInstance] updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:_imageUrl nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:_birtnDateStr address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         
