@@ -9,6 +9,7 @@
 #import "JMImageMessageCellData.h"
 #import "DimensMacros.h"
 #import "SDWebImage/SDImageCache.h"
+#import "ReactiveObjC/ReactiveObjC.h"
 
 @interface JMImageMessageCellData ()
 @property (nonatomic, assign) BOOL isDownloading;
@@ -29,7 +30,7 @@
     NSString *path = nil;
     BOOL isDir = NO;
     *isExist = NO;
-    if(self.isSelf == NO) {
+    if(self.isSelf == YES) {
         //上传方本地原图是否有效
         path = [NSString stringWithFormat:@"%@%@", TUIKit_Image_Path, _path.lastPathComponent];
         if([[NSFileManager defaultManager] fileExistsAtPath:path isDirectory:&isDir]){
@@ -73,9 +74,9 @@
     //网络下载
     TIMImage *imImage = [self getIMImage:type];
     
-//    @weakify(self)
+    @weakify(self)
     [imImage getImage:path progress:^(NSInteger curSize, NSInteger totalSize) {
-//        @strongify(self)
+        @strongify(self)
         [self updateProgress:curSize * 100 / totalSize withType:type];
     } succ:^{
 //        @strongify(self)
@@ -83,7 +84,7 @@
         [self updateProgress:100 withType:type];
         [self decodeImage:type];
     } fail:^(int code, NSString *msg) {
-//        @strongify(self)
+        @strongify(self)
         self.isDownloading = NO;
     }];
 }

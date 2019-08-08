@@ -44,7 +44,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param data 填充数据需要的数据源
  */
-- (void)setData:(JMImageMessageCellData *)data;
+-(void)setData:(JMImageMessageCellData *)data;
 @end
 
 NS_ASSUME_NONNULL_END

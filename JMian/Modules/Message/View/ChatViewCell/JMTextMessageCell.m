@@ -7,7 +7,8 @@
 //
 
 #import "JMTextMessageCell.h"
-
+#import "DimensMacros.h"
+#import "NSString+Extension.h"
 @implementation JMTextMessageCell
 
 - (void)awakeFromNib {
@@ -21,4 +22,99 @@
     // Configure the view for the selected state
 }
 
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if(self){
+        _bubble = [[UIImageView alloc]init];
+        
+        [self addSubview:_bubble];
+        _content = [[UILabel alloc] init];
+        _content.font = [UIFont systemFontOfSize:14];
+        _content.numberOfLines = 0;
+        [_content sizeToFit];
+        [self addSubview:_content];
+    }
+    return self;
+}
+
+
+-(void)setData:(JMTextMessageCellData *)data{
+    [super setData:data];
+    _content.text = data.content;
+    //行距
+    NSString  *testString = _content.text;
+    NSMutableParagraphStyle  *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    NSMutableAttributedString  *setString = [[NSMutableAttributedString alloc] initWithString:testString];
+    [setString  addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [testString length])];
+    [_content  setAttributedText:setString];
+    [paragraphStyle  setLineSpacing:2];
+    if(!data.isSelf){
+        
+        CGFloat contentx = self.head.frame.origin.x + self.head.frame.size.width + TMessageCell_Margin;
+        CGFloat contenty = self.head.frame.origin.y+10;
+        CGSize size = [_content sizeThatFits:CGSizeMake(SCREEN_WIDTH*0.6, MAXFLOAT)];
+        _content.frame = CGRectMake(contentx+10, contenty, size.width, size.height);
+        
+        //气泡
+        _bubble.image = [self getBubbleImgWithImgName:@"other_bubble" rectMoveX:20];
+    }else{
+//        CGSize headSize = TMessageCell_Head_Size;
+//        CGFloat headx = SCREEN_WIDTH - TMessageCell_Margin - headSize.width;
+        CGSize contentSize = [self getlabelRectWith:_content.text];
+//        _head.frame = CGRectMake(headx, TMessageCell_Margin, headSize.width, headSize.height);
+        CGFloat contentx = self.head.frame.origin.x -TMessageCell_Margin - contentSize.width-10;
+        CGFloat contenty = self.head.frame.origin.y+10;
+        CGSize size = [_content sizeThatFits:CGSizeMake(SCREEN_WIDTH*0.6, MAXFLOAT)];
+        _content.frame = CGRectMake(contentx, contenty, size.width, size.height);
+        
+        //气泡
+        _bubble.image = [self getBubbleImgWithImgName:@"me_bubble" rectMoveX:8];
+    }
+    
+}
+
+-(UIImage *)getBubbleImgWithImgName:(NSString *)imgName rectMoveX:(CGFloat)rectMoveX
+{
+    CGRect rect = CGRectZero;
+    
+    rect = _content.frame;
+    rect.origin.x =  rect.origin.x -rectMoveX;
+    rect.origin.y =  rect.origin.y -13;
+    
+    rect.size.width =  rect.size.width + 26;
+    rect.size.height = rect.size.height + 26;
+    _bubble.frame = rect;
+    UIImage* img=[UIImage imageNamed:imgName];//原图
+    UIEdgeInsets edge=UIEdgeInsetsMake(40, 18, 18,20);
+    img= [img resizableImageWithCapInsets:edge resizingMode:UIImageResizingModeStretch];
+    
+    return img;
+    
+}
+
+
+- (CGFloat)getHeight:(JMMessageCellData *)data
+{
+    CGSize containerSize = [self getlabelRectWith:data.content];
+    CGFloat height = containerSize.height + TMessageCell_Margin * 3;
+    CGFloat minHeight = TMessageCell_Head_Size.height + 2 * TMessageCell_Margin;
+    if(height < minHeight){
+        height = minHeight;
+    }
+    return height;
+}
+
+
+
+- (CGSize)getlabelRectWith:(NSString *)text
+{
+    //    NSDictionary *attributes = @{NSFontAttributeName: textFont};
+    //    CGRect rect = [text boundingRectWithSize:maxSize
+    //                                     options:NSStringDrawingUsesLineFragmentOrigin
+    //                                  attributes:attributes
+    //                                     context:nil];
+    CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:14] maxSize:CGSizeMake(SCREEN_WIDTH*0.6, MAXFLOAT) andlineSpacing:2];
+    return size;
+}
 @end

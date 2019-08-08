@@ -60,11 +60,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) UIActivityIndicatorView *indicator;
 @property (nonatomic, strong) UIImageView *error;
 
-@property (nonatomic, strong) UILabel *content;
-@property (nonatomic, strong) UIImageView *bubble;
+//@property (nonatomic, strong) UILabel *content;
+//@property (nonatomic, strong) UIImageView *bubble;
 @property (nonatomic, assign)BOOL isDominator;
 
-- (CGFloat)getHeight:(JMMessageCellData *)data;
+//- (CGFloat)getHeight:(JMMessageCellData *)data;
 - (void)setData:(JMMessageCellData *)data;
 - (void)setupViews;
 /**

@@ -243,9 +243,6 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     
     _uiMsgs = [NSMutableArray array];
     
-    
-    
-    
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:_receiverID];
@@ -337,16 +334,23 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 
                 }else if ([elem isKindOfClass:[TIMImageElem class]]){
-                    JMTextMessageCellData *textData = [[JMTextMessageCellData alloc]init];
-                    textData.content = @"[图片]";
-                    if (_isSelfIsSender) {
+                    TIMImageElem *image = (TIMImageElem *)elem;
+
+                    JMImageMessageCellData *imageData =  [[JMImageMessageCellData alloc]init];
+                    
+                     if (_isSelfIsSender) {
                         
-                        textData.head = _myModel.recipient_avatar;
+                        imageData.head = _myModel.recipient_avatar;
                     }else{
-                        textData.head = _myModel.sender_avatar;
+                        imageData.head = _myModel.sender_avatar;
                     }
-                    textData.isSelf = NO;
-                    data = textData;
+                    imageData.isSelf = NO;
+                    
+                    
+                    
+                    
+                    
+                    data = imageData;
                     [uiMsgs addObject:data];
                 }
 
@@ -444,6 +448,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     uiImage.path = path;
     uiImage.length = data.length;
     uiImage.isSelf = YES;
+    uiImage.thumbImage = image;
     [self sendMessage:uiImage];
 }
 
@@ -581,13 +586,19 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:_receiverID];
     TIMMessage *msg = [self transIMMsgFromUIMsg:data];
-//    TIMTextElem * text_elem = [[TIMTextElem alloc] init];
-//
-//    [text_elem setText:data.content];
-//
+
 //    TIMMessage * msg = [[TIMMessage alloc] init];
-//    [msg addElem:text_elem];
-//
+//    /**
+//     *  构造图片内容
+//     */
+//    TIMImageElem * image_elem = [[TIMImageElem alloc] init];
+//    JMImageMessageCellData *uiImage = (JMImageMessageCellData *)data;
+//    image_elem.path = uiImage.path;
+//    /**
+//     *  将图片内容添加到消息容器中
+//     */
+//    NSLog(@"%@",image_elem.path);
+//    [msg addElem:image_elem];
     [conv sendMessage:msg succ:^(){
         NSLog(@"SendMsg Succ");
     }fail:^(int code, NSString * err) {
@@ -799,28 +810,40 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         
         JMMessageCellData *data = _uiMsgs[indexPath.row-1];
         JMMessageCell *cell = nil;
-        if (!data.reuseId) {
-            if([data isKindOfClass:[JMTextMessageCellData class]]){
-                data.reuseId = TTextMessageCell_ReuseId;
-            }else if ([data isKindOfClass:[JMImageMessageCellData class]]){
-                data.reuseId = TImageMessageCell_ReuseId;
-                
-            }else if ([data isKindOfClass:[JMCustumMessageCellData class]]){
-                data.reuseId = TTextMessageCell_ReuseId;
-                
-            }else {
-                return nil;
+//        if (!data.reuseId) {
+        if([data isKindOfClass:[JMTextMessageCellData class]]){
+            data.reuseId = TTextMessageCell_ReuseId;
+            cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId];
+            
+            if(cell == nil){
+                cell = [[JMTextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:data.reuseId];
+                //            cell.delegate = self;
             }
+            
+        }else if ([data isKindOfClass:[JMImageMessageCellData class]]){
+            data.reuseId = TImageMessageCell_ReuseId;
+            cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId];
+            
+            if(cell == nil){
+                cell = [[JMImageMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:data.reuseId];
+                //            cell.delegate = self;
+            }
+            
+        }else if ([data isKindOfClass:[JMCustumMessageCellData class]]){
+            data.reuseId = TTextMessageCell_ReuseId;
+            cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId];
+            
+            if(cell == nil){
+                cell = [[JMTextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:data.reuseId];
+                //            cell.delegate = self;
+            }
+        }else {
+            return nil;
         }
+//        }
     
-        cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId];
-        
-        if(cell == nil){
-            cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:data.reuseId];
-            //            cell.delegate = self;
-        }
         cell.backgroundColor = BG_COLOR;
-        [cell setData2:_uiMsgs[indexPath.row-1]];
+        [cell setData:_uiMsgs[indexPath.row-1]];
         [cell setIsDominator:_isDominator];//系统消息
         return cell;
 
@@ -860,10 +883,18 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }else if (indexPath.row > 0) {
         CGFloat height = 0;
         NSObject *data = _uiMsgs[indexPath.row-1];
-        if([data isKindOfClass:[JMMessageCellData class]]){
-            JMMessageCellData *data = _uiMsgs[indexPath.row-1];
-            JMMessageCell *cell = [[JMMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
+        if([data isKindOfClass:[JMTextMessageCellData class]]){
+            JMTextMessageCellData *data = _uiMsgs[indexPath.row-1];
+            JMTextMessageCell *cell = [[JMTextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TTextMessageCell_ReuseId];
             height = [cell getHeight:data];
+        }else  if([data isKindOfClass:[JMImageMessageCellData class]]){
+//            JMImageMessageCellData *data = _uiMsgs[indexPath.row-1];
+//            JMImageMessageCell *cell = [[JMImageMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TImageMessageCell_ReuseId];
+            height = 150;
+        }else  if([data isKindOfClass:[JMCustumMessageCellData class]]){
+            //            JMImageMessageCellData *data = _uiMsgs[indexPath.row-1];
+            //            JMImageMessageCell *cell = [[JMImageMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TImageMessageCell_ReuseId];
+            height = 80;
         }
         return height;
         
