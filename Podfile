@@ -21,3 +21,5 @@ pod 'STPickerView', '2.4'
 pod 'WechatOpenSDK'
 pod 'MMLayout'
 pod 'ReactiveObjC'
+pod 'iVersion'
+

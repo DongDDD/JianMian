@@ -14,12 +14,19 @@
 #import "JMBUserPostPartTimeJobViewController.h"
 #import "JMPostNewJobViewController.h"
 #import "JMHTTPManager+Login.h"
+#import "JMPostTaskBottomView.h"
+#import "JMPostTypeChooseView.h"
+#import "JMHistoryViewController.h"
 
-@interface JMPositionManageViewController ()<JMPartTimeJobResumeViewControllerDelegate>
+@interface JMPositionManageViewController ()<JMPartTimeJobResumeViewControllerDelegate,JMPostTaskBottomViewDelegate,JMPostTypeChooseViewDelegate>
 
 @property(nonatomic, strong)JMTitlesView *titleView;
 @property(nonatomic, strong)JMPostJobHomeViewController *jobHomeListVC;
 @property(nonatomic, strong)JMPartTimeJobResumeViewController *partTimeJobHomeListVC;
+@property(nonatomic, strong)JMPostTaskBottomView *postTaskBottomView;
+@property(nonatomic, strong)JMPostTypeChooseView *postTypeChooseView;
+
+@property(nonatomic, strong)UIView *chooseViewBgView;
 @property(nonatomic, strong)UIView *BGView;
 @property(nonatomic, assign)NSUInteger index;
 @property(nonatomic, strong)UIAlertController *alertController;
@@ -39,6 +46,7 @@
         [self setRightBtnTextName:@"发布全职"];
         
     }
+    [self setIsHiddenRightBtn:YES];
     [self initView];
     // Do any additional setup after loading the view from its nib.
 }
@@ -65,7 +73,28 @@
         make.left.and.right.mas_equalTo(self.view);
     }];
     
-
+    [self.view addSubview:self.postTaskBottomView];
+    [self.postTaskBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+        make.height.mas_equalTo(64);
+    }];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.chooseViewBgView];
+    [self.chooseViewBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo([UIApplication sharedApplication].keyWindow);
+        make.left.and.right.equalTo([UIApplication sharedApplication].keyWindow);
+        make.height.mas_equalTo(SCREEN_HEIGHT-217-SafeAreaBottomHeight);
+        
+    }];
+    [self.view addSubview:self.postTypeChooseView];
+    [self.postTypeChooseView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.view);
+        make.left.and.right.equalTo(self.view);
+        make.height.mas_equalTo(217+SafeAreaBottomHeight);
+        
+    }];
+    [self.postTypeChooseView setHidden:YES];
+    [self.chooseViewBgView setHidden:YES];
 }
 
 -(void)rightAction{
@@ -127,18 +156,78 @@
         if (_index == 0) {
             _partTimeJobHomeListVC.view.hidden = YES;
             _jobHomeListVC.view.hidden = NO;
-            [self setRightBtnTextName:@"发布全职"];
+//            [self setRightBtnTextName:@"发布全职"];
+            [self.postTaskBottomView.postTaskBtn setTitle:@"发布职位" forState:UIControlStateNormal];
+
             
         }else if(_index == 1){
             _partTimeJobHomeListVC.view.hidden = NO;
             _jobHomeListVC.view.hidden = YES;
-            [self setRightBtnTextName:@"发布任务"];
-            
+//            [self setRightBtnTextName:@"发布任务"];
+            [self.postTaskBottomView.postTaskBtn setTitle:@"发布任务" forState:UIControlStateNormal];
+
         }
     
     }
 
 }
+-(void)disapearAction{
+
+    [self.postTypeChooseView setHidden:YES];
+    [self.chooseViewBgView setHidden:YES];
+
+}
+#pragma mark - MyDelegate
+-(void)didClickPostAction{
+    if (_index == 0) {
+        JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    }else if(_index == 1){
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"发布网络销售任务" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+//            vc.viewType = JMBUserPostSaleJobViewTypeAdd;
+//            [self.navigationController pushViewController:vc animated:YES];
+//
+//        }]];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"发布任务" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//            JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
+//            vc.viewType = JMBUserPostPartTimeJobTypeAdd;
+//            [self.navigationController pushViewController:vc animated:YES];
+//
+//        }]];
+//        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//
+//        }]];
+//        [self presentViewController:alert animated:YES completion:nil];
+    
+        [self.postTypeChooseView setHidden:NO];
+        [self.chooseViewBgView setHidden:NO];
+    }
+
+}
+
+-(void)didSelectedPostTypeWithTag:(NSInteger)tag{
+    if (tag == 100) {
+        JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+        vc.viewType = JMBUserPostSaleJobViewTypeAdd;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (tag == 101) {
+        JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
+        vc.viewType = JMBUserPostPartTimeJobTypeAdd;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (tag == 102) {
+        JMHistoryViewController *vc = [[JMHistoryViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    
+    }
+    [self disapearAction];
+}
+
 #pragma mark - getter
 
 - (JMTitlesView *)titleView {
@@ -183,7 +272,36 @@
     return _BGView;
 }
 
+-(JMPostTaskBottomView *)postTaskBottomView{
+    if (!_postTaskBottomView) {
+        _postTaskBottomView = [[JMPostTaskBottomView alloc]init];
+        _postTaskBottomView.delegate = self;
+    }
+    return _postTaskBottomView;
+}
 
+-(JMPostTypeChooseView *)postTypeChooseView{
+    if (!_postTypeChooseView) {
+        _postTypeChooseView = [[JMPostTypeChooseView alloc]init];
+        _postTypeChooseView.delegate = self;
+    }
+    return _postTypeChooseView;
+}
+
+-(UIView *)chooseViewBgView{
+    
+    if (!_chooseViewBgView) {
+        
+        _chooseViewBgView = [[UIView alloc]init];
+        _chooseViewBgView.backgroundColor =  [UIColor colorWithRed:48/255.0 green:48/255.0 blue:51/255.0 alpha:0.5];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disapearAction)];
+        [_chooseViewBgView addGestureRecognizer:tap];
+        
+    }
+    
+    return _chooseViewBgView;
+    
+}
 /*
 #pragma mark - Navigation
 

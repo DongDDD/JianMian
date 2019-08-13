@@ -15,12 +15,20 @@
 #import "JMBUserPostSaleJobViewController.h"
 #import "JMBUserPostPartTimeJobViewController.h"
 #import "JMIDCardIdentifyViewController.h"
+#import "JMPostTaskBottomView.h"
+#import "JMPostTypeChooseView.h"
+#import "JMHistoryViewController.h"
 
-@interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource>
+
+@interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMPostTypeChooseViewDelegate,JMPostTaskBottomViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *dataArray;
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, strong) JMPostTaskBottomView *postTaskBottomView;
+@property (nonatomic, strong) JMPostTypeChooseView *postTypeChooseView;
+@property (nonatomic, strong) UIView *chooseViewBgView;
+
 //@property (strong, nonatomic) NSString *status;
 @property (weak, nonatomic) IBOutlet UILabel *no_dataLab;
 @property (weak, nonatomic) IBOutlet UIButton *no_dataBtn;
@@ -34,15 +42,39 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     if (_viewType == JMPartTimeJobTypeManage) {
-        [self.view addSubview:self.titleView];
+//        [self.view addSubview:self.titleView];
         [self.view addSubview:self.tableView];
         [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.titleView.mas_bottom);
+            make.top.mas_equalTo(self.mas_topLayoutGuideTop);
             make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
             make.left.and.right.mas_equalTo(self.view);
         }];
         self.no_dataLab.text = @"你还没有发布任务，快去发布吧！";
         [self.no_dataBtn setTitle:@"发布任务" forState:UIControlStateNormal];
+        
+        [self.view addSubview:self.postTaskBottomView];
+        [self.postTaskBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+            make.height.mas_equalTo(64);
+        }];
+        
+        [[UIApplication sharedApplication].keyWindow addSubview:self.chooseViewBgView];
+        [self.chooseViewBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo([UIApplication sharedApplication].keyWindow);
+            make.left.and.right.equalTo([UIApplication sharedApplication].keyWindow);
+            make.height.mas_equalTo(SCREEN_HEIGHT-217-SafeAreaBottomHeight);
+            
+        }];
+        [self.view addSubview:self.postTypeChooseView];
+        [self.postTypeChooseView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.equalTo(self.view);
+            make.left.and.right.equalTo(self.view);
+            make.height.mas_equalTo(217+SafeAreaBottomHeight);
+            
+        }];
+        [self.postTypeChooseView setHidden:YES];
+        [self.chooseViewBgView setHidden:YES];
         
     }else if (_viewType == JMPartTimeJobTypeResume){
         [self.view addSubview:self.tableView];
@@ -60,6 +92,15 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         }];
         
  
+    }else if (_viewType == JMPartTimeJobTypeHistory){
+        [self.view addSubview:self.tableView];
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.mas_topLayoutGuideTop);
+            make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+            make.left.and.right.mas_equalTo(self.view);
+        }];
+        
+        
     }
     
   
@@ -88,6 +129,9 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
                 self.no_dataLab.text = @"你还没有兼职简历，快去发布吧！";
                 [self.no_dataBtn setTitle:@"发布兼职简历" forState:UIControlStateNormal];
             }
+            break;
+        case JMPartTimeJobTypeHistory:
+            [self getCurrrentDataWithIndex:_index];
             break;
         default:
             break;
@@ -189,14 +233,15 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 -(void)getCurrrentDataWithIndex:(NSInteger)index{
     [self.myProgressHUD setHidden:NO];
+    [self getTaskListData_status:nil];
 
-    if (index == 0) {
-        //已发布职位
-        [self getTaskListData_status:Position_Online];
-    }else if (index == 1) {
-        //已下线职位
-        [self getTaskListData_status:Position_Downline];
-    }
+//    if (index == 0) {
+//        //已发布职位
+//        [self getTaskListData_status:Position_Online];
+//    }else if (index == 1) {
+//        //已下线职位
+//        [self getTaskListData_status:Position_Downline];
+//    }
 
 }
 #pragma mark - UITableViewDelegate
@@ -207,11 +252,13 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     }
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     switch (_viewType) {
-        case JMPartTimeJobTypeResume:
+        case JMPartTimeJobTypeResume://兼职简历
             
             [cell setPartTimeJobModel:self.dataArray[indexPath.row]];
             break;
-        case JMPartTimeJobTypeManage:
+        case JMPartTimeJobTypeManage://任务管理
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
             [cell setTaskListCellData:self.dataArray[indexPath.row]];
 
             break;
@@ -224,7 +271,10 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
                 [cell setPartTimeJobModel:self.dataArray[indexPath.row]];
             }
             break;
-            
+        case JMPartTimeJobTypeHistory://历史模版
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            [cell setTaskListCellData:self.dataArray[indexPath.row]];
+            break;
         default:
             break;
     }
@@ -256,6 +306,9 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             }
             
              break;
+        case JMPartTimeJobTypeHistory:
+            [self gotoBUserPostPartTimeVC__indexPath:indexPath];
+            break;
         default:
             break;
     }
@@ -297,7 +350,12 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 //B端发布网络销售
 -(void)gotoBUserPostPositionVC_task_id:(NSString *)task_id{
     JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
-    vc.viewType = JMBUserPostSaleJobViewTypeEdit;
+    if (_viewType == JMPartTimeJobTypeHistory) {
+        vc.viewType = JMBUserPostSaleJobViewTypeHistory;
+        
+    }else{
+        vc.viewType = JMBUserPostSaleJobViewTypeEdit;
+    }
     vc.task_id = task_id;
     [self.navigationController pushViewController:vc animated:YES];
 
@@ -306,7 +364,13 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 //B端发布任务
 -(void)gotoBUserPostPartTimeJobVC_task_id:(NSString *)task_id{
     JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
-    vc.viewType = JMBUserPostPartTimeJobTypeEdit;
+   if (_viewType == JMPartTimeJobTypeHistory) {
+        vc.viewType = JMBUserPostPartTimeJobTypeHistory;
+    
+   }else{
+       vc.viewType = JMBUserPostPartTimeJobTypeEdit;
+
+   }
     vc.task_id = task_id;
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -322,7 +386,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 89;
+    return 78;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -339,7 +403,36 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         return [UIView new];
     }
 }
+#pragma mark - MyDelegate
 
+-(void)didClickPostAction{
+    [self.postTypeChooseView setHidden:NO];
+    [self.chooseViewBgView setHidden:NO];
+}
+
+-(void)didSelectedPostTypeWithTag:(NSInteger)tag{
+    if (tag == 100) {
+        JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+        vc.viewType = JMBUserPostSaleJobViewTypeAdd;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (tag == 101) {
+        JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
+        vc.viewType = JMBUserPostPartTimeJobTypeAdd;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (tag == 102) {
+        JMHistoryViewController *vc = [[JMHistoryViewController alloc]init];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+    }
+    [self disapearAction];
+
+}
+
+-(void)disapearAction{
+    [self.postTypeChooseView setHidden:YES];
+    [self.chooseViewBgView setHidden:YES];
+}
 
 #pragma mark - Getter
 - (UITableView *)tableView {
@@ -376,6 +469,37 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         
     }
     return _titleView;
+}
+//
+-(JMPostTaskBottomView *)postTaskBottomView{
+    if (!_postTaskBottomView) {
+        _postTaskBottomView = [[JMPostTaskBottomView alloc]init];
+        _postTaskBottomView.delegate = self;
+    }
+    return _postTaskBottomView;
+}
+
+-(JMPostTypeChooseView *)postTypeChooseView{
+    if (!_postTypeChooseView) {
+        _postTypeChooseView = [[JMPostTypeChooseView alloc]init];
+        _postTypeChooseView.delegate = self;
+    }
+    return _postTypeChooseView;
+}
+
+-(UIView *)chooseViewBgView{
+    
+    if (!_chooseViewBgView) {
+        
+        _chooseViewBgView = [[UIView alloc]init];
+        _chooseViewBgView.backgroundColor =  [UIColor colorWithRed:48/255.0 green:48/255.0 blue:51/255.0 alpha:0.5];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(disapearAction)];
+        [_chooseViewBgView addGestureRecognizer:tap];
+        
+    }
+    
+    return _chooseViewBgView;
+    
 }
 /*
 #pragma mark - Navigation

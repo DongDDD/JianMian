@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol JMMakeOutBillHeaderViewDelegate <NSObject>
 
--(void)didClickBillActionWithTag:(NSInteger)tag;
+-(void)didClickBillActionWithTag:(NSInteger)tag isChange:(BOOL)isChange;
 -(void)chooseAdressAction;
 @end
 

@@ -15,6 +15,7 @@ typedef enum : NSUInteger {
     JMPartTimeJobTypeResume,
     JMPartTimeJobTypeManage,
     JMPartTimeJobTypeHome,
+    JMPartTimeJobTypeHistory,
 } JMPartTimeJobResumeViewType;
 @protocol JMPartTimeJobResumeViewControllerDelegate <NSObject>
 

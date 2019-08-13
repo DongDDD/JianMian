@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JMPostTypeChooseView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="230"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择发布类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5f3-Nw-LTB">
+                    <rect key="frame" x="10" y="20" width="86" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFn-IU-Q7M">
+                    <rect key="frame" x="10" y="55" width="394" height="45"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="1Sl-9W-oIA"/>
+                    </constraints>
+                    <state key="normal" title="发布销售代理任务">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="didChoosePostType:" destination="iN0-l3-epB" eventType="touchUpInside" id="Rga-dL-jl5"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="101" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hZC-ng-GiN">
+                    <rect key="frame" x="10" y="118" width="394" height="45"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="M6H-aj-LlS"/>
+                    </constraints>
+                    <state key="normal" title="发布兼职类">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="3"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="didChoosePostType:" destination="iN0-l3-epB" eventType="touchUpInside" id="QRT-mS-KN0"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="102" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5c9-Wj-6SK">
+                    <rect key="frame" x="164" y="173" width="86" height="29"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <state key="normal" title="使用历史模版">
+                        <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="didChoosePostType:" destination="iN0-l3-epB" eventType="touchUpInside" id="m9S-b6-86M"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="kFn-IU-Q7M" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="849-br-OgE"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kFn-IU-Q7M" secondAttribute="trailing" constant="10" id="CKX-Ly-v5P"/>
+                <constraint firstItem="5f3-Nw-LTB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="KDC-b5-bvR"/>
+                <constraint firstItem="5c9-Wj-6SK" firstAttribute="top" secondItem="hZC-ng-GiN" secondAttribute="bottom" constant="10" id="LmF-Bd-3tT"/>
+                <constraint firstItem="kFn-IU-Q7M" firstAttribute="top" secondItem="5f3-Nw-LTB" secondAttribute="bottom" constant="18" id="Uiq-WC-UaN"/>
+                <constraint firstItem="5f3-Nw-LTB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="cx2-gz-lFn"/>
+                <constraint firstItem="hZC-ng-GiN" firstAttribute="leading" secondItem="kFn-IU-Q7M" secondAttribute="leading" id="loB-6A-wOS"/>
+                <constraint firstItem="5c9-Wj-6SK" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="oX8-Uw-pbD"/>
+                <constraint firstItem="hZC-ng-GiN" firstAttribute="top" secondItem="kFn-IU-Q7M" secondAttribute="bottom" constant="18" id="sF4-KM-8y2"/>
+                <constraint firstItem="hZC-ng-GiN" firstAttribute="trailing" secondItem="kFn-IU-Q7M" secondAttribute="trailing" id="sGm-QU-Sq3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="-78.260869565217391" y="-137.94642857142856"/>
+        </view>
+    </objects>
+</document>

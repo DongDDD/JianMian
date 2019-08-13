@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *quantity_max;
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *city;
+@property (nonatomic, copy) NSString *status;
 
 @property (nonatomic, copy) NSString *type_labelID;
 @property (nonatomic, copy) NSString *type_labelName;

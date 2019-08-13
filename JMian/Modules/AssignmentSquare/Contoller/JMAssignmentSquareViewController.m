@@ -31,10 +31,15 @@
 #import "JMHTTPManager+Login.h"
 #import "JMCityListViewController.h"
 #import "JMChoosePartTImeJobTypeLablesViewController.h"
+#import "JMSquarePostTaskView.h"
+#import "JMSquareTaskManageViewController.h"
+#import "JMPartTimeJobResumeViewController.h"
 
 
-@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate>
+@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate,JMSquarePostTaskViewDelegate>
+@property (nonatomic, strong) UIView *titleAndPostTaskView;
 @property (nonatomic, strong) JMTitlesView *titleView;
+@property (nonatomic, strong) JMSquarePostTaskView *postTaskView;
 @property (strong, nonatomic) UITableView *tableView;
 @property (assign, nonatomic) NSUInteger index;
 //@property (strong, nonatomic) JMChoosePositionTableViewController *partTimeJobHomeListVC;//与我匹配
@@ -243,6 +248,15 @@ static NSString *C_cellIdent = @"CSquareCellID";
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
+
+-(void)didClickPostTaskAction{
+    JMPartTimeJobResumeViewController *vc = [[JMPartTimeJobResumeViewController alloc]init];
+    vc.viewType = JMPartTimeJobTypeManage;
+    vc.title = @"任务管理";
+    [self.navigationController pushViewController:vc animated:YES];
+    NSLog(@"didClickPostTaskAction");
+}
+
 #pragma mark - Action -
 
 -(void)loadMoreBills
@@ -491,28 +505,49 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 0) {
-        JMVersionModel *model = [JMVersionManager getVersoinInfo];
-        if (![model.test isEqualToString:@"1"]) {
-            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-            if ([userModel.type isEqualToString:C_Type_USER]) {
-                JMSquareHeaderView *view =  [JMSquareHeaderView new];
-                view.delegate = self;
-                [view setUserModel:userModel];
-                return view;
-                
-            }else{
-                return [UIView new];
-                
-                
-            }
+        //        JMVersionModel *model = [JMVersionManager getVersoinInfo];
+        //        if (![model.test isEqualToString:@"1"]) {
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        if ([userModel.type isEqualToString:C_Type_USER]) {
+            JMSquareHeaderView *view =  [JMSquareHeaderView new];
+            view.delegate = self;
+            [view setUserModel:userModel];
+            return view;
+            
         }else{
             return [UIView new];
             
+            
         }
+        //        }else{
+        //            return [UIView new];
+        //
+        //        }
     }
     
     if (section==1) {
-        return self.titleView;
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        if ([userModel.type isEqualToString:C_Type_USER]) {
+            return self.titleView;
+            
+        }else{
+            [self.titleAndPostTaskView addSubview:self.titleView];
+            [self.titleAndPostTaskView addSubview:self.postTaskView];
+            [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.titleAndPostTaskView);
+                make.right.mas_equalTo(self.titleAndPostTaskView);
+                make.top.mas_equalTo(self.titleAndPostTaskView);
+                make.height.mas_equalTo(44);
+            }];
+            [self.postTaskView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.left.mas_equalTo(self.titleAndPostTaskView);
+                make.right.mas_equalTo(self.titleAndPostTaskView);
+                make.top.mas_equalTo(self.titleView.mas_bottom);
+                make.height.mas_equalTo(61);
+            }];
+            return self.titleAndPostTaskView;
+            
+        }
     }
     return nil;
     
@@ -521,23 +556,27 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     if (section == 0) {
+        
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         if ([userModel.type isEqualToString:C_Type_USER]) {
-            JMVersionModel *model = [JMVersionManager getVersoinInfo];
-            if (![model.test isEqualToString:@"1"]) {
-                return 159;
-                
-            }else{
-                return 0;
-                
-            }
+            return 159;
+            
         }else{
             return 0;
             
         }
+    }else if (section == 1){
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        if ([userModel.type isEqualToString:C_Type_USER]) {
+            return 44;
+            
+        }else{
+            return 100;
+            
+        }
     }
     
-    return 43;
+    return 106;
     
 }
 
@@ -570,6 +609,22 @@ static NSString *C_cellIdent = @"CSquareCellID";
     return _titleView;
 }
 
+-(JMSquarePostTaskView *)postTaskView{
+    if (!_postTaskView) {
+        _postTaskView = [[JMSquarePostTaskView alloc]init];
+        _postTaskView.delegate = self;
+    }
+    return _postTaskView;
+}
+
+-(UIView *)titleAndPostTaskView{
+    if (!_titleAndPostTaskView) {
+        _titleAndPostTaskView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 106)];
+        
+    }
+    return _titleAndPostTaskView;
+    
+}
 
 - (UITableView *)tableView {
     if (!_tableView) {

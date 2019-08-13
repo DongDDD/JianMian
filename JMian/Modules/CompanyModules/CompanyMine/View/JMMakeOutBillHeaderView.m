@@ -28,8 +28,8 @@
     [_NOBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
     [_YESBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
 
-    if (_delegate && [_delegate respondsToSelector:@selector(didClickBillActionWithTag:) ]) {
-        [_delegate didClickBillActionWithTag:sender.tag];
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickBillActionWithTag:isChange:)]) {
+        [_delegate didClickBillActionWithTag:sender.tag isChange:YES];
     }
 }
 
@@ -37,8 +37,8 @@
     [_NOBtn setImage:[UIImage imageNamed:@"组 54"] forState:UIControlStateNormal];
     [_YESBtn setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
 
-    if (_delegate && [_delegate respondsToSelector:@selector(didClickBillActionWithTag:) ]) {
-        [_delegate didClickBillActionWithTag:sender.tag];
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickBillActionWithTag:isChange:)]) {
+        [_delegate didClickBillActionWithTag:sender.tag isChange:YES];
     }
 }
 - (IBAction)adressAction:(UIButton *)sender {

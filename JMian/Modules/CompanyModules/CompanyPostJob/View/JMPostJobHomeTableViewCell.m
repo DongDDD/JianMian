@@ -15,26 +15,32 @@
     // Initialization code
 }
 
+//全职职位
 -(void)setModel:(JMHomeWorkModel *)model{
     
     self.workNameLab.text = model.work_name;
+    NSString *salary = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
     NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",model.work_experience_min,model.work_experience_max];
     NSString *educationStr = [self getEducationStrWithEducation:model.education];
     NSString *cityStr;
     if (model.cityId == nil) {
         cityStr = @"不限";
     }else{
-        cityStr = model.cityName;
+        cityStr = [NSString stringWithFormat:@"%@",model.cityName];
     }
     
-    self.detailLab.text = [NSString stringWithFormat:@"%@ / %@ / %@",experienceStr,educationStr,cityStr];
+    self.detailLab.text = [NSString stringWithFormat:@"%@ / %@ / %@ %@",experienceStr,educationStr,cityStr,salary];
    
-    NSString *salary = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
     
-    self.salaryLab.text = salary;
+    if ([model.status isEqualToString:@"0"]) {
+        self.salaryLab.text = @"已下线";
+        [self.salaryLab setHidden:NO];
+    }else{
+        [self.salaryLab setHidden:YES];
+    }
 
 }
-
+//兼职简历
 -(void)setPartTimeJobModel:(JMAbilityCellData *)partTimeJobModel{
     self.workNameLab.text = partTimeJobModel.type_name;
     
@@ -55,16 +61,21 @@
     
 }
 
-
+//兼职任务管理
 -(void)setTaskListCellData:(JMTaskListCellData *)taskListCellData{
     self.workNameLab.text = taskListCellData.task_title;
-    self.salaryLab.text = [NSString stringWithFormat:@"%@ 元",taskListCellData.payment_money];
     if (taskListCellData.cityID == nil) {
-        self.detailLab.text = @"不限";
+        self.detailLab.text = [NSString stringWithFormat:@"不限-%@/单",taskListCellData.payment_money];
     }else{
-        self.detailLab.text = taskListCellData.cityName;
+        self.detailLab.text =[NSString stringWithFormat:@"%@-%@/单",taskListCellData.cityName,taskListCellData.payment_money] ;
     }
-     
+    if ([taskListCellData.status isEqualToString:@"0"]) {
+        self.salaryLab.text = @"已下线";
+        [self.salaryLab setHidden:NO];
+    }else{
+        [self.salaryLab setHidden:YES];
+    }
+    
 }
 //工资数据转化，除以1000，转化成k
 -(NSString *)getSalaryStrWithMin:(id)min max:(id)max{

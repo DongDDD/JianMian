@@ -46,8 +46,8 @@ static NSString *cellIdent = @"cellIdent";
     self.navigationItem.hidesBackButton = YES;
     [self setTitle:@"职位管理"];
 //    [self.view addSubview:self.progressHUD];
-    _status = Position_Online;
-    [self.view addSubview:self.titleView];
+    _status = nil;
+//    [self.view addSubview:self.titleView];
 //    [self getUserStatus];
     [self setupDownRefresh];
 //    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
@@ -270,6 +270,7 @@ static NSString *cellIdent = @"cellIdent";
         cell = [[JMPostJobHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
         //自带有两种基础的tableView样式，UITableViewCellStyleValue1、2. 后面的文章会讲解自定义样式
     }
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     JMHomeWorkModel *model = self.dataArray[indexPath.row];
     [cell setModel:model];
@@ -280,22 +281,25 @@ static NSString *cellIdent = @"cellIdent";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
-    vc.homeworkModel = self.dataArray[indexPath.row];
-    vc.status = _status;
+    JMHomeWorkModel *model = self.dataArray[indexPath.row];
+    vc.homeworkModel = model;
+    vc.status = model.status;
     vc.viewType = JobDetailsViewTypeEdit;
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 #pragma mark - lazy
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, self.titleView.frame.origin.y+self.titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT-200) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 78.0f;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        
+        _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
+
         [self.tableView registerNib:[UINib nibWithNibName:@"JMPostJobHomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
         [self.view addSubview:_tableView];
         

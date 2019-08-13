@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef enum : NSUInteger {
     JMBUserPostPartTimeJobTypeAdd,
     JMBUserPostPartTimeJobTypeEdit,
+    JMBUserPostPartTimeJobTypeHistory,
 } JMBUserPostPartTimeJobViewType;
 
 @interface JMBUserPostPartTimeJobViewController : BaseViewController

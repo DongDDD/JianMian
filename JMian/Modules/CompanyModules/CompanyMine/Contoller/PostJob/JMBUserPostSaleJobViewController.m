@@ -86,7 +86,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
         [self setRightBtnTextName:@"删除"];
         self.title = @"编辑网络销售职位";
-    }else if (_viewType == JMBUserPostSaleJobViewTypeAdd) {
+    }else if (_viewType == JMBUserPostSaleJobViewTypeAdd || _viewType == JMBUserPostSaleJobViewTypeHistory) {
         self.title = @"发布网络销售职位";
     
     }
@@ -117,6 +117,10 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         self.bottomView.hidden = NO;
         [self.view addSubview:self.bottomView];
         [self.comfirmPostBottomView setHidden:YES];
+    }else if (_viewType == JMBUserPostSaleJobViewTypeHistory) {
+        [self getData];
+        [self.comfirmPostBottomView setHidden:NO];
+
     }
     
    
@@ -314,7 +318,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         _demo3ViewVC.task_id = self.task_id;//进入界面重新调用接口获得最新图片
         _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionEdit;
 
-    }else if (_viewType == JMBUserPostSaleJobViewTypeAdd) {
+    }else if (_viewType == JMBUserPostSaleJobViewTypeAdd || _viewType == JMBUserPostSaleJobViewTypeHistory) {
         //添加状态
         _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionAdd;
     
@@ -725,10 +729,16 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
     [self.detailView.quantityMaxTextField setText:model.quantity_max];
  
+    _task_title = model.task_title;
+    _payment_money = model.payment_money;
+    _city_id = model.cityID;
+    _quantity_max = model.quantity_max;
     
     NSMutableArray *industryNameArray = [NSMutableArray array];
+    _industry_arr = [NSMutableArray array];
     for (JMTaskIndustryModel *industryModel in model.industry) {
         [industryNameArray addObject:industryModel.name];
+        [_industry_arr addObject:industryModel.label_id];
     }
     NSString *industry = [industryNameArray componentsJoinedByString:@","];
     [self.detailView.industryBtn setTitle:industry forState:UIControlStateNormal];
@@ -767,6 +777,8 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
     }
     
+    
+    
 }
 
 
@@ -795,9 +807,9 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         [self.detailView.paymentMoneyTextField resignFirstResponder];
         [self.detailView.positionNameTextField resignFirstResponder];
 
-        if (self.task_id) {
+        if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
             [self updateTaskInfoRequest_status:@"1"];//更新
-        }else{
+        }else if (_viewType == JMBUserPostSaleJobViewTypeAdd || _viewType == JMBUserPostSaleJobViewTypeHistory){
         
             [self sendRequest];//创建
         }

@@ -792,6 +792,16 @@
 		04EA7E2F23011376005B7CE5 /* JMPayDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA7E2123011376005B7CE5 /* JMPayDetailViewController.m */; };
 		04EA7E3023011376005B7CE5 /* JMTaskManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA7E2223011376005B7CE5 /* JMTaskManageViewController.m */; };
 		04EA7E3123011376005B7CE5 /* JMSnapshotWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EA7E2523011376005B7CE5 /* JMSnapshotWebViewController.xib */; };
+		04EA7E35230115C1005B7CE5 /* JMSquarePostTaskView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EA7E33230115C0005B7CE5 /* JMSquarePostTaskView.xib */; };
+		04EA7E36230115C1005B7CE5 /* JMSquarePostTaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA7E34230115C0005B7CE5 /* JMSquarePostTaskView.m */; };
+		04EA7E3A230115DE005B7CE5 /* JMSquareTaskManageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA7E37230115DD005B7CE5 /* JMSquareTaskManageViewController.m */; };
+		04EA7E3B230115DE005B7CE5 /* JMSquareTaskManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EA7E39230115DD005B7CE5 /* JMSquareTaskManageViewController.xib */; };
+		04EA7E3E23011BCD005B7CE5 /* JMPostTaskBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA7E3D23011BCD005B7CE5 /* JMPostTaskBottomView.m */; };
+		04EA7E4023011BE4005B7CE5 /* JMPostTaskBottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EA7E3F23011BE4005B7CE5 /* JMPostTaskBottomView.xib */; };
+		04EA7E4323014F26005B7CE5 /* JMPostTypeChooseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA7E4223014F26005B7CE5 /* JMPostTypeChooseView.m */; };
+		04EA7E4523014F47005B7CE5 /* JMPostTypeChooseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EA7E4423014F47005B7CE5 /* JMPostTypeChooseView.xib */; };
+		04EA7E4923015C96005B7CE5 /* JMHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EA7E4723015C96005B7CE5 /* JMHistoryViewController.m */; };
+		04EA7E4A23015C96005B7CE5 /* JMHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EA7E4823015C96005B7CE5 /* JMHistoryViewController.xib */; };
 		04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6CAE2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m */; };
 		04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EB6CB32255FDD900CBAF79 /* Foundation+Log.m */; };
 		04FB1A1F22A36BD800A8F02C /* JMWeakWebViewScriptMessageDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04FB1A1E22A36BD800A8F02C /* JMWeakWebViewScriptMessageDelegate.m */; };
@@ -1973,6 +1983,21 @@
 		04EA7E2323011376005B7CE5 /* JMSnapshotWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSnapshotWebViewController.h; sourceTree = "<group>"; };
 		04EA7E2423011376005B7CE5 /* JMPaySucceedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMPaySucceedViewController.h; sourceTree = "<group>"; };
 		04EA7E2523011376005B7CE5 /* JMSnapshotWebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMSnapshotWebViewController.xib; sourceTree = "<group>"; };
+		04EA7E32230115C0005B7CE5 /* JMSquarePostTaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSquarePostTaskView.h; sourceTree = "<group>"; };
+		04EA7E33230115C0005B7CE5 /* JMSquarePostTaskView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMSquarePostTaskView.xib; sourceTree = "<group>"; };
+		04EA7E34230115C0005B7CE5 /* JMSquarePostTaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMSquarePostTaskView.m; sourceTree = "<group>"; };
+		04EA7E37230115DD005B7CE5 /* JMSquareTaskManageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMSquareTaskManageViewController.m; sourceTree = "<group>"; };
+		04EA7E38230115DD005B7CE5 /* JMSquareTaskManageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMSquareTaskManageViewController.h; sourceTree = "<group>"; };
+		04EA7E39230115DD005B7CE5 /* JMSquareTaskManageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMSquareTaskManageViewController.xib; sourceTree = "<group>"; };
+		04EA7E3C23011BCD005B7CE5 /* JMPostTaskBottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPostTaskBottomView.h; sourceTree = "<group>"; };
+		04EA7E3D23011BCD005B7CE5 /* JMPostTaskBottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPostTaskBottomView.m; sourceTree = "<group>"; };
+		04EA7E3F23011BE4005B7CE5 /* JMPostTaskBottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPostTaskBottomView.xib; sourceTree = "<group>"; };
+		04EA7E4123014F26005B7CE5 /* JMPostTypeChooseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPostTypeChooseView.h; sourceTree = "<group>"; };
+		04EA7E4223014F26005B7CE5 /* JMPostTypeChooseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPostTypeChooseView.m; sourceTree = "<group>"; };
+		04EA7E4423014F47005B7CE5 /* JMPostTypeChooseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPostTypeChooseView.xib; sourceTree = "<group>"; };
+		04EA7E4623015C96005B7CE5 /* JMHistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHistoryViewController.h; sourceTree = "<group>"; };
+		04EA7E4723015C96005B7CE5 /* JMHistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHistoryViewController.m; sourceTree = "<group>"; };
+		04EA7E4823015C96005B7CE5 /* JMHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMHistoryViewController.xib; sourceTree = "<group>"; };
 		04EB6CA72255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+UpdateInfo.h"; sourceTree = "<group>"; };
 		04EB6CA82255B6ED00CBAF79 /* JMHTTPManager+UpdateInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+UpdateInfo.m"; sourceTree = "<group>"; };
 		04EB6CAD2255F21700CBAF79 /* JMHTTPManager+PositionDesired.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+PositionDesired.h"; sourceTree = "<group>"; };
@@ -3031,6 +3056,9 @@
 				0446E48822E04BBD00B3A26C /* JMInvoiceHeaderView.h */,
 				0446E48922E04BBD00B3A26C /* JMInvoiceHeaderView.m */,
 				0446E48B22E04C2100B3A26C /* JMInvoiceHeaderView.xib */,
+				04EA7E4123014F26005B7CE5 /* JMPostTypeChooseView.h */,
+				04EA7E4223014F26005B7CE5 /* JMPostTypeChooseView.m */,
+				04EA7E4423014F47005B7CE5 /* JMPostTypeChooseView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3149,6 +3177,9 @@
 				04EA211A22AFD8C60035C398 /* JMCDetailWebViewController.h */,
 				04EA211B22AFD8C60035C398 /* JMCDetailWebViewController.m */,
 				04EA211C22AFD8C60035C398 /* JMCDetailWebViewController.xib */,
+				04EA7E38230115DD005B7CE5 /* JMSquareTaskManageViewController.h */,
+				04EA7E37230115DD005B7CE5 /* JMSquareTaskManageViewController.m */,
+				04EA7E39230115DD005B7CE5 /* JMSquareTaskManageViewController.xib */,
 			);
 			path = Contoller;
 			sourceTree = "<group>";
@@ -3277,6 +3308,9 @@
 				04AF933422C9DD3B00D9FCBF /* JMChoosePartTImeJobTypeLablesViewController.h */,
 				04AF933522C9DD3B00D9FCBF /* JMChoosePartTImeJobTypeLablesViewController.m */,
 				04AF933622C9DD3B00D9FCBF /* JMChoosePartTImeJobTypeLablesViewController.xib */,
+				04EA7E4623015C96005B7CE5 /* JMHistoryViewController.h */,
+				04EA7E4723015C96005B7CE5 /* JMHistoryViewController.m */,
+				04EA7E4823015C96005B7CE5 /* JMHistoryViewController.xib */,
 			);
 			path = PostJob;
 			sourceTree = "<group>";
@@ -3311,6 +3345,9 @@
 				04896A0822C07BBD00E674C5 /* JMApplyForProtocolView.xib */,
 				04A5FD5922C8A65D00850604 /* JMGradeView.h */,
 				04A5FD5A22C8A65D00850604 /* JMGradeView.m */,
+				04EA7E32230115C0005B7CE5 /* JMSquarePostTaskView.h */,
+				04EA7E34230115C0005B7CE5 /* JMSquarePostTaskView.m */,
+				04EA7E33230115C0005B7CE5 /* JMSquarePostTaskView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3801,23 +3838,23 @@
 		04EA7E1323011376005B7CE5 /* TaskManage */ = {
 			isa = PBXGroup;
 			children = (
+				04EA7E1B23011376005B7CE5 /* JMTaskManageViewController.h */,
+				04EA7E2223011376005B7CE5 /* JMTaskManageViewController.m */,
 				04EA7E1423011376005B7CE5 /* JMTaskCommetViewController.m */,
-				04EA7E1523011376005B7CE5 /* JMPayDetailViewController.h */,
-				04EA7E1623011376005B7CE5 /* JMPayFailedViewController.h */,
 				04EA7E1723011376005B7CE5 /* JMTaskCommetViewController.xib */,
+				04EA7E1523011376005B7CE5 /* JMPayDetailViewController.h */,
+				04EA7E2123011376005B7CE5 /* JMPayDetailViewController.m */,
+				04EA7E1E23011376005B7CE5 /* JMPayDetailViewController.xib */,
+				04EA7E1623011376005B7CE5 /* JMPayFailedViewController.h */,
+				04EA7E2023011376005B7CE5 /* JMPayFailedViewController.m */,
 				04EA7E1823011376005B7CE5 /* JMPayFailedViewController.xib */,
 				04EA7E1923011376005B7CE5 /* JMPaySucceedViewController.m */,
-				04EA7E1A23011376005B7CE5 /* JMSnapshotWebViewController.m */,
-				04EA7E1B23011376005B7CE5 /* JMTaskManageViewController.h */,
 				04EA7E1C23011376005B7CE5 /* JMPaySucceedViewController.xib */,
-				04EA7E1D23011376005B7CE5 /* JMTaskCommetViewController.h */,
-				04EA7E1E23011376005B7CE5 /* JMPayDetailViewController.xib */,
-				04EA7E1F23011376005B7CE5 /* JMTaskManageViewController.xib */,
-				04EA7E2023011376005B7CE5 /* JMPayFailedViewController.m */,
-				04EA7E2123011376005B7CE5 /* JMPayDetailViewController.m */,
-				04EA7E2223011376005B7CE5 /* JMTaskManageViewController.m */,
-				04EA7E2323011376005B7CE5 /* JMSnapshotWebViewController.h */,
 				04EA7E2423011376005B7CE5 /* JMPaySucceedViewController.h */,
+				04EA7E1D23011376005B7CE5 /* JMTaskCommetViewController.h */,
+				04EA7E1F23011376005B7CE5 /* JMTaskManageViewController.xib */,
+				04EA7E2323011376005B7CE5 /* JMSnapshotWebViewController.h */,
+				04EA7E1A23011376005B7CE5 /* JMSnapshotWebViewController.m */,
 				04EA7E2523011376005B7CE5 /* JMSnapshotWebViewController.xib */,
 			);
 			path = TaskManage;
@@ -4300,6 +4337,9 @@
 				04C37F0A22C7292E00E2A107 /* JMBottom2View.h */,
 				04C37F0B22C7292E00E2A107 /* JMBottom2View.m */,
 				04C37F0D22C7293C00E2A107 /* JMBottom2View.xib */,
+				04EA7E3C23011BCD005B7CE5 /* JMPostTaskBottomView.h */,
+				04EA7E3D23011BCD005B7CE5 /* JMPostTaskBottomView.m */,
+				04EA7E3F23011BE4005B7CE5 /* JMPostTaskBottomView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -4616,6 +4656,7 @@
 				04908AF122A7A926000B5AB4 /* B_task@3x.png in Resources */,
 				04256558229C2CCD000614E7 /* jop@2x.png in Resources */,
 				04EA7E2723011376005B7CE5 /* JMTaskCommetViewController.xib in Resources */,
+				04EA7E35230115C1005B7CE5 /* JMSquarePostTaskView.xib in Resources */,
 				04EA210222AF39690035C398 /* NOvideos@2x.png in Resources */,
 				0485AD0022A0D03F00B31506 /* mineBottom@3x.png in Resources */,
 				040C865B227ED71100993490 /* JMChatDetailInfoTableViewCell.xib in Resources */,
@@ -4663,6 +4704,7 @@
 				04E02E6F228BF38900924130 /* loading@3x.png in Resources */,
 				04A5122D229ABDE200BA2DC5 /* paizhao@3x.png in Resources */,
 				04E25F6822B4901D00F451C8 /* purchase_succeeds.png in Resources */,
+				04EA7E4523014F47005B7CE5 /* JMPostTypeChooseView.xib in Resources */,
 				0488E37F229F8EE00071DEE7 /* home_me_pitch_on.png in Resources */,
 				04796ADC22D2FF6A0082BD59 /* transmit2@2x.png in Resources */,
 				04C2CF0422D2275B00DAB29B /* JMVideoSingleViewController.xib in Resources */,
@@ -4718,6 +4760,7 @@
 				04908B2322A7FE0A000B5AB4 /* square_mission@2x.png in Resources */,
 				040701AD22753755002BF58D /* enshrine.png in Resources */,
 				04ABB7A022B1EF8C00E3F66A /* star_level@3x.png in Resources */,
+				04EA7E4023011BE4005B7CE5 /* JMPostTaskBottomView.xib in Resources */,
 				04072F272282949D0067A05D /* peijing@2x.png in Resources */,
 				047F8EB7228AC552005E81FA /* C_play@3x.png in Resources */,
 				0495100522AEA24900C3D3FB /* vip_header@2x.png in Resources */,
@@ -4758,6 +4801,7 @@
 				04BF6DA222C335FE003032BC /* WeChat@3x.png in Resources */,
 				0488E38B229F8FCE0071DEE7 /* post_a_job_pitch_up@2x.png in Resources */,
 				041997ED2267173D00C6C134 /* JMVitaOfPersonDetailViewController.xib in Resources */,
+				04EA7E4A23015C96005B7CE5 /* JMHistoryViewController.xib in Resources */,
 				04A9DFAA225AE9B900CD7CC1 /* JMJobExperienceViewController.xib in Resources */,
 				0492AE8322F04FAD00AB21B3 /* JMSquareHeaderView.xib in Resources */,
 				040714A2227C6CC70026C368 /* expression@3x.png in Resources */,
@@ -4775,6 +4819,7 @@
 				04C0F73522ABBB5500C3AA33 /* JMBUserPositionVideoView.xib in Resources */,
 				040CA84D225F1EBF006D7A7F /* dingwei@3x.png in Resources */,
 				048348AB22695EC000DE4630 /* NO_Data.png in Resources */,
+				04EA7E3B230115DE005B7CE5 /* JMSquareTaskManageViewController.xib in Resources */,
 				040B838B2265EC0600F1A37A /* JMCompanyHomeViewController.xib in Resources */,
 				0488E3CE229F9C120071DEE7 /* discovery.png in Resources */,
 				04DD1D4D224B6E95007CB11C /* verification_code@2x.png in Resources */,
@@ -5116,6 +5161,7 @@
 				"${PODS_ROOT}/IQKeyboardManager/IQKeyBoardManager/Resources/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle",
 				"${PODS_ROOT}/STPickerView/STPickerView/Resource/area.plist",
+				"${PODS_ROOT}/iVersion/iVersion/iVersion.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
@@ -5126,6 +5172,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MJRefresh.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/area.plist",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/iVersion.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
@@ -5144,6 +5191,7 @@
 				040701C32275E4A3002BF58D /* JMHTTPManager+CompanyLike.m in Sources */,
 				04EA212122AFEC390035C398 /* JMHTTPManager+FectchMyTaskOrderList.m in Sources */,
 				04EA211D22AFD8C60035C398 /* JMCDetailWebViewController.m in Sources */,
+				04EA7E3A230115DE005B7CE5 /* JMSquareTaskManageViewController.m in Sources */,
 				6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */,
 				0492F00E22C6530A00C7EFB2 /* JMLabsData.m in Sources */,
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
@@ -5157,6 +5205,7 @@
 				045EDD63225D97650054C5F3 /* JMHTTPManager+Captcha.m in Sources */,
 				040CD555226B1FB5000BB230 /* JMBAndCTabBarViewController.m in Sources */,
 				04908AF422A7B89C000B5AB4 /* JMBUserMineSectionView.m in Sources */,
+				04EA7E36230115C1005B7CE5 /* JMSquarePostTaskView.m in Sources */,
 				04EA210B22AF61BC0035C398 /* JMTaskPartTimejobDetailModel.m in Sources */,
 				04AC6A2B22CDB04C00693424 /* JMNoDataView.m in Sources */,
 				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
@@ -5184,6 +5233,7 @@
 				04EA7E2E23011376005B7CE5 /* JMPayFailedViewController.m in Sources */,
 				041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */,
 				04C6015C2260874A000B1FE0 /* JMLookMeTableViewCell.m in Sources */,
+				04EA7E4923015C96005B7CE5 /* JMHistoryViewController.m in Sources */,
 				04AC6A2722CDAE4E00693424 /* JMNoDataViewController.m in Sources */,
 				6D0209FF2250F09D009BCFE4 /* JMMyResumeViewController.m in Sources */,
 				6D020A872259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.m in Sources */,
@@ -5192,6 +5242,7 @@
 				04C2CF0322D2275B00DAB29B /* JMVideoSingleViewController.m in Sources */,
 				6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */,
 				04908B4922A9089B000B5AB4 /* JMBUserPostSaleJobViewController.m in Sources */,
+				04EA7E4323014F26005B7CE5 /* JMPostTypeChooseView.m in Sources */,
 				6D020A6F22539FB0009BCFE4 /* CompanyRequirementsView.m in Sources */,
 				040A3927227DA5F900EDD9E0 /* JMGreetView.m in Sources */,
 				048FF0FF22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m in Sources */,
@@ -5323,6 +5374,7 @@
 				04908B0422A7E916000B5AB4 /* JMAssignmentSquareViewController.m in Sources */,
 				04A9DFAD225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.m in Sources */,
 				04C37F1222C72D6500E2A107 /* JMAddVitaJobViewController.m in Sources */,
+				04EA7E3E23011BCD005B7CE5 /* JMPostTaskBottomView.m in Sources */,
 				6D020A332250F46F009BCFE4 /* JMMyResumeCellConfigures.m in Sources */,
 				6D8C0687226AE94F00F77D98 /* JMVitaDetailModel.m in Sources */,
 				04EA7E2F23011376005B7CE5 /* JMPayDetailViewController.m in Sources */,
