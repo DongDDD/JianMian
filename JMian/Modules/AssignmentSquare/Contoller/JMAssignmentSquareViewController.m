@@ -34,6 +34,8 @@
 #import "JMSquarePostTaskView.h"
 #import "JMSquareTaskManageViewController.h"
 #import "JMPartTimeJobResumeViewController.h"
+#import "JMTaskSeachViewController.h"
+
 
 
 @interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate,JMSquarePostTaskViewDelegate>
@@ -81,12 +83,10 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self setIsHiddenRightBtn:YES];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        
         [self BToGetData];
     }else{
+        [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
         [self CToGetData];
-        
-        
     }
     // Do any additional setup after loading the view from its nib.
 }
@@ -101,6 +101,12 @@ static NSString *C_cellIdent = @"CSquareCellID";
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+-(void)rightAction{
+    
+    JMTaskSeachViewController *vc = [[JMTaskSeachViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - setUI -
@@ -250,11 +256,26 @@ static NSString *C_cellIdent = @"CSquareCellID";
 }
 
 -(void)didClickPostTaskAction{
-    JMPartTimeJobResumeViewController *vc = [[JMPartTimeJobResumeViewController alloc]init];
-    vc.viewType = JMPartTimeJobTypeManage;
-    vc.title = @"任务管理";
-    [self.navigationController pushViewController:vc animated:YES];
-    NSLog(@"didClickPostTaskAction");
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        
+        JMPartTimeJobResumeViewController *vc = [[JMPartTimeJobResumeViewController alloc]init];
+        vc.viewType = JMPartTimeJobTypeManage;
+        vc.title = @"任务管理";
+        [self.navigationController pushViewController:vc animated:YES];
+        NSLog(@"didClickPostTaskAction");
+        
+    }else{
+        
+        JMPartTimeJobResumeViewController *vc = [[JMPartTimeJobResumeViewController alloc]init];
+        vc.viewType = JMPartTimeJobTypeResume;
+        vc.title = @"兼职简历";
+        [self.navigationController pushViewController:vc animated:YES];
+        NSLog(@"didClickPostTaskAction");
+        
+        
+        
+    }
 }
 
 #pragma mark - Action -
@@ -526,11 +547,11 @@ static NSString *C_cellIdent = @"CSquareCellID";
     }
     
     if (section==1) {
-        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-        if ([userModel.type isEqualToString:C_Type_USER]) {
-            return self.titleView;
-            
-        }else{
+//        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//        if ([userModel.type isEqualToString:C_Type_USER]) {
+//            return self.titleView;
+//
+//        }else{
             [self.titleAndPostTaskView addSubview:self.titleView];
             [self.titleAndPostTaskView addSubview:self.postTaskView];
             [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -547,7 +568,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
             }];
             return self.titleAndPostTaskView;
             
-        }
+//        }
     }
     return nil;
     
@@ -566,14 +587,14 @@ static NSString *C_cellIdent = @"CSquareCellID";
             
         }
     }else if (section == 1){
-        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-        if ([userModel.type isEqualToString:C_Type_USER]) {
-            return 44;
-            
-        }else{
+//        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//        if ([userModel.type isEqualToString:C_Type_USER]) {
+//            return 44;
+//
+//        }else{
             return 100;
             
-        }
+//        }
     }
     
     return 106;
@@ -612,6 +633,15 @@ static NSString *C_cellIdent = @"CSquareCellID";
 -(JMSquarePostTaskView *)postTaskView{
     if (!_postTaskView) {
         _postTaskView = [[JMSquarePostTaskView alloc]init];
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        NSString *str;
+        if ([userModel.type isEqualToString:B_Type_UESR]) {
+            str = @"立即发布任务";
+        }else{
+            str = @"发布兼职简历";
+
+        }
+        [_postTaskView.postBtn setTitle:str forState:UIControlStateNormal];
         _postTaskView.delegate = self;
     }
     return _postTaskView;

@@ -54,7 +54,11 @@
     self.headerLab.text = data.task_title;
     self.moneyLab.text = [NSString stringWithFormat:@"%@%@",data.payment_money,data.unit];
     self.infoLab1.text = data.user_nickname;
-    self.infoLab2.text = data.snapshot_cityName;
+    if (data.snapshot_cityName == nil) {
+        self.infoLab2.text = @"不限地区";
+    }else{
+        self.infoLab2.text = data.snapshot_cityName;
+    }
     //职位标签
     NSMutableArray *industryNameArray = [NSMutableArray array];
     for (JMTaskOrderIndustryModel *IndustryData in data.industry) {
@@ -216,11 +220,21 @@
         //网络销售
         self.infoLab1.text = data.goodsTitle;
         self.infoLab2.text = @" 即结  ";
-        self.infoLab3.text =  [NSString stringWithFormat:@" %@  ", data.snapshot_cityName];
+        if (data.snapshot_cityName == nil) {
+            self.infoLab3.text =  @" 不限地区  ";
+        }else{
+            
+            self.infoLab3.text =  [NSString stringWithFormat:@" %@  ", data.snapshot_cityName];
+        }
     }else{
         //其他兼职
         self.infoLab1.text = data.snapshot_companyName;
-        self.infoLab2.text = [NSString stringWithFormat:@" %@  ", data.snapshot_cityName];
+        if (data.snapshot_cityName == nil) {
+            self.infoLab2.text = @" 不限地区  ";
+        }else{
+            
+            self.infoLab2.text = [NSString stringWithFormat:@" %@  ", data.snapshot_cityName];
+        }
         self.infoLab3.text = @" 完工结  ";
     }
     

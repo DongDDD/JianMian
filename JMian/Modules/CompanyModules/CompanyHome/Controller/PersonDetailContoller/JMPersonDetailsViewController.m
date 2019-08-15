@@ -70,7 +70,9 @@
     // Do any additional setup after loading the view from its nib.
     
     [self setTitle:@"个人详情"];
-    
+    if (_user_job_id == nil) {
+        _user_job_id = self.companyModel.user_job_id;
+    }
     //    [self setHeaderVieUI];
     //    [self setPageUI];
     [self setJuhua];
@@ -98,7 +100,7 @@
 
 #pragma mark - 获取数据
 -(void)getData{
-    [[JMHTTPManager sharedInstance] fetchJobInfoWithId:self.companyModel.user_job_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] fetchJobInfoWithId:_user_job_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         //
         if (responsObject[@"data"]) {
             

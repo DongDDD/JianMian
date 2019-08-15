@@ -606,6 +606,8 @@
 		04B4F88222B7A5B300A06E9C /* JMInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F88122B7A5B300A06E9C /* JMInvoiceModel.m */; };
 		04B4F88522B7BFBE00A06E9C /* JMPostGoodsImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F88422B7BFBE00A06E9C /* JMPostGoodsImagesView.m */; };
 		04B4F88722B7BFDB00A06E9C /* JMPostGoodsImagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4F88622B7BFDA00A06E9C /* JMPostGoodsImagesView.xib */; };
+		04B53AA123053C93007F0AF2 /* JMTaskSeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B53A9F23053C93007F0AF2 /* JMTaskSeachViewController.m */; };
+		04B53AA223053C93007F0AF2 /* JMTaskSeachViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B53AA023053C93007F0AF2 /* JMTaskSeachViewController.xib */; };
 		04B620E722DDC612009C8853 /* JMTaskApplyForView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B620E622DDC612009C8853 /* JMTaskApplyForView.m */; };
 		04B620E922DDC659009C8853 /* JMTaskApplyForView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B620E822DDC659009C8853 /* JMTaskApplyForView.xib */; };
 		04BBF296228E57C50068A9B1 /* JMWaitForAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF295228E57C50068A9B1 /* JMWaitForAnswerView.m */; };
@@ -1740,6 +1742,9 @@
 		04B4F88322B7BFBE00A06E9C /* JMPostGoodsImagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPostGoodsImagesView.h; sourceTree = "<group>"; };
 		04B4F88422B7BFBE00A06E9C /* JMPostGoodsImagesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPostGoodsImagesView.m; sourceTree = "<group>"; };
 		04B4F88622B7BFDA00A06E9C /* JMPostGoodsImagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPostGoodsImagesView.xib; sourceTree = "<group>"; };
+		04B53A9E23053C93007F0AF2 /* JMTaskSeachViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTaskSeachViewController.h; sourceTree = "<group>"; };
+		04B53A9F23053C93007F0AF2 /* JMTaskSeachViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTaskSeachViewController.m; sourceTree = "<group>"; };
+		04B53AA023053C93007F0AF2 /* JMTaskSeachViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMTaskSeachViewController.xib; sourceTree = "<group>"; };
 		04B620E522DDC612009C8853 /* JMTaskApplyForView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTaskApplyForView.h; sourceTree = "<group>"; };
 		04B620E622DDC612009C8853 /* JMTaskApplyForView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTaskApplyForView.m; sourceTree = "<group>"; };
 		04B620E822DDC659009C8853 /* JMTaskApplyForView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMTaskApplyForView.xib; sourceTree = "<group>"; };
@@ -3180,6 +3185,9 @@
 				04EA7E38230115DD005B7CE5 /* JMSquareTaskManageViewController.h */,
 				04EA7E37230115DD005B7CE5 /* JMSquareTaskManageViewController.m */,
 				04EA7E39230115DD005B7CE5 /* JMSquareTaskManageViewController.xib */,
+				04B53A9E23053C93007F0AF2 /* JMTaskSeachViewController.h */,
+				04B53A9F23053C93007F0AF2 /* JMTaskSeachViewController.m */,
+				04B53AA023053C93007F0AF2 /* JMTaskSeachViewController.xib */,
 			);
 			path = Contoller;
 			sourceTree = "<group>";
@@ -4751,6 +4759,7 @@
 				6D0209EB224FB900009BCFE4 /* interview@3x.png in Resources */,
 				041CCF0622A52403002DFED3 /* store.png in Resources */,
 				04DEB40B22968E840089BD87 /* no_pass@2x.png in Resources */,
+				04B53AA223053C93007F0AF2 /* JMTaskSeachViewController.xib in Resources */,
 				04DD1D4F224B6E95007CB11C /* phone@3x.png in Resources */,
 				04AB444622BA13F500000E03 /* DEMI_BIG@2x.png in Resources */,
 				04BE8B4A2292583F004EB7EC /* accretion@2x.png in Resources */,
@@ -5244,6 +5253,7 @@
 				04908B4922A9089B000B5AB4 /* JMBUserPostSaleJobViewController.m in Sources */,
 				04EA7E4323014F26005B7CE5 /* JMPostTypeChooseView.m in Sources */,
 				6D020A6F22539FB0009BCFE4 /* CompanyRequirementsView.m in Sources */,
+				04B53AA123053C93007F0AF2 /* JMTaskSeachViewController.m in Sources */,
 				040A3927227DA5F900EDD9E0 /* JMGreetView.m in Sources */,
 				048FF0FF22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m in Sources */,
 				04EA212522AFF28C0035C398 /* JMTaskOrderListCellData.m in Sources */,
@@ -5717,6 +5727,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TJ2RYY9984;
 				INFOPLIST_FILE = JMianTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5735,6 +5746,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = TJ2RYY9984;
 				INFOPLIST_FILE = JMianTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

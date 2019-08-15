@@ -72,7 +72,10 @@
     //    self.navigationController.navigationBar.translucent = NO;
     //
     //    self.extendedLayoutIncludesOpaqueBars = NO;
-    
+    if (_work_id == nil) {
+        _work_id = self.homeworkModel.work_id;
+        
+    }
     [self setJuhua];
     [self getUserInfo];
     //右上角分享 收藏按钮
@@ -395,7 +398,7 @@
 }
 #pragma mark - 数据请求
 -(void)getData{
-    [[JMHTTPManager sharedInstance]fetchWorkInfoWith_Id:self.homeworkModel.work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fetchWorkInfoWith_Id:_work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         
         if (responsObject[@"data"]) {

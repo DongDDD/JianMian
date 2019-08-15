@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger, JobDetailsViewType) {
 
 @interface JobDetailsViewController : BaseViewController
 
+@property (nonatomic, strong) NSString *work_id;
 @property(nonatomic,strong)JMHomeWorkModel *homeworkModel;
 @property (nonatomic, strong) NSString *status;
 @property(nonatomic, assign)JobDetailsViewType viewType;

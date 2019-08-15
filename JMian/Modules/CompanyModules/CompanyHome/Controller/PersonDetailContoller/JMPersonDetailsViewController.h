@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)JMCompanyHomeModel *companyModel;
 //@property (strong, nonatomic) AVPlayer *player;
-@property(nonatomic,strong)NSNumber *user_job_id;
+@property(nonatomic,strong)NSString *user_job_id;
 @end
 
 NS_ASSUME_NONNULL_END

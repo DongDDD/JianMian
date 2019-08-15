@@ -22,7 +22,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="41" id="EgX-K8-7Kp"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                     <state key="normal" title="  立即发布任务" image="sqp.png">
                         <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>

@@ -195,11 +195,7 @@
     urlMessage.title = self.detailModel.user_nickname;
     urlMessage.description = self.detailModel.type_label_name ;
     
-    //    UIImageView *imgView = [[UIImageView alloc]init];
-    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
-    //
-    
-    UIImage *image = [self getImageFromURL:self.detailModel.user_avatar];   //缩略图,压缩图片,不超过 32 KB
+    UIImage *image = [self handleImageWithURLStr:self.detailModel.user_avatar];
     NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
     [urlMessage setThumbData:thumbData];
     //分享实例
@@ -212,17 +208,25 @@
     [WXApi sendReq:sendReq];
     
 }
--(UIImage *) getImageFromURL:(NSString *)fileURL {
+//压缩处理
+- (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
+    NSURL *url = [NSURL URLWithString:imageURLStr];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    NSData *newImageData = imageData;
+    // 压缩图片data大小
+    newImageData = UIImageJPEGRepresentation([UIImage imageWithData:newImageData scale:0.1], 0.1f);
+    UIImage *image = [UIImage imageWithData:newImageData];
     
-    UIImage * result;
-    
-    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
-    
-    result = [UIImage imageWithData:data];
-    
-    return result;
-    
+    // 压缩图片分辨率(因为data压缩到一定程度后，如果图片分辨率不缩小的话还是不行)
+    CGSize newSize = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0,0,(NSInteger)newSize.width, (NSInteger)newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
+
+
 #pragma mark - 数据请求
 
 -(void)rightAction:(UIButton *)sender{
@@ -268,6 +272,7 @@
         
     }
 }
+
 
 -(void)getData{
     [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

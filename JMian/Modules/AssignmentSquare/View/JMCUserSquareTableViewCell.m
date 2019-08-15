@@ -54,7 +54,7 @@
 
     self.titleLab.text = model.task_title;
     
-    if (model.city == nil) {
+    if (model.cityName == nil) {
         self.adress.text = @"不限地区";
     }else{
         self.adress.text = model.cityName;
@@ -77,7 +77,7 @@
         make.width.mas_equalTo(200);
         make.height.mas_equalTo(18);
     }];
- ;
+  
  
 
 }
