@@ -8,9 +8,9 @@
 
 #import "JMMessageListViewController.h"
 #import "JMAllMessageTableViewCell.h"
-#import <TIMManager.h>
-#import <TIMMessage.h>
-#import <IMMessageExt.h>
+#import <ImSDK/TIMManager.h>
+#import <ImSDK/TIMMessage.h>
+#import <ImSDK/IMMessageExt.h>
 #import "JMHTTPManager+MessageList.h"
 #import "JMMessageListModel.h"
 #import "JMAllMessageTableViewCellData.h"

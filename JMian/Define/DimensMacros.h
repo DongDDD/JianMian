@@ -12,9 +12,9 @@
 #import <MJExtension.h>
 #import <UIImageView+WebCache.h>
 #import "JMUserInfoManager.h"
-#import <TIMManager.h>
-#import <TIMMessage.h>
-#import <IMMessageExt.h>
+#import <ImSDK/TIMManager.h>
+#import <ImSDK/TIMMessage.h>
+#import <ImSDK/IMMessageExt.h>
 #import "MJRefresh.h"
 #import "MBProgressHUD.h"
 #import <AgoraRtcEngineKit/AgoraRtcEngineKit.h>

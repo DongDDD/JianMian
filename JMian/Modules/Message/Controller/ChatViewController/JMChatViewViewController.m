@@ -7,9 +7,9 @@
 //
 
 #import "JMChatViewViewController.h"
-#import <TIMManager.h>
-#import <TIMMessage.h>
-#import <IMMessageExt.h>
+#import <ImSDK/TIMManager.h>
+#import <ImSDK/TIMMessage.h>
+#import <ImSDK/IMMessageExt.h>
 #import "JMMessageTableViewController.h"
 #import "JMInputTextView.h"
 #import "JMMessageCell.h"

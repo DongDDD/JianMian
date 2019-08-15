@@ -6,7 +6,6 @@ pod 'SDWebImage'
 pod 'MJRefresh'
 pod 'SDCycleScrollView'
 pod 'YYText'
-pod 'TXIMSDK_iOS',  '~> 4.2.52'
 pod ‘YYCache’
 pod 'PrintBeautifulLog'
 pod 'AMap2DMap'

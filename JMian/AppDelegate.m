@@ -14,7 +14,7 @@
 //#import "JMJobExperienceViewController.h"
 
 #import "NavigationViewController.h"
-#import <TIMManager.h>
+#import <ImSDK/TIMManager.h>
 #import "VendorKeyMacros.h"
 #import "JMUserInfoManager.h"
 #import "JMUserInfoModel.h"
@@ -38,7 +38,7 @@
 - (void)initTimSDK {
     TIMSdkConfig *sdkConfig = [[TIMSdkConfig alloc] init];
     sdkConfig.sdkAppId = TIMSdkAppid.intValue;
-    sdkConfig.accountType = TIMSdkAccountType;
+//    sdkConfig.accountType = TIMSdkAccountType;
     sdkConfig.disableLogPrint = NO; // 是否允许log打印
     sdkConfig.logLevel = TIM_LOG_NONE; //Log输出级别（debug级别会很多）
     [[TIMManager sharedInstance] initSdk:sdkConfig];
