@@ -278,7 +278,9 @@ static const CGFloat kPhotoViewMargin = 12.0;
     UIImage * img = notification.object;
     
 //    [self.partTResumeAddImgs addObject:img];
-    [self sendRequst_img:img];
+    if (img) {
+        [self sendRequst_img:img];
+    }
 }
 
 //-(void)getDeleteImage:(NSNotification *)notification{

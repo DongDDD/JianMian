@@ -383,7 +383,7 @@
             <span @click="clickTaskDetails">点击查看最新内容</span>
         </div>
         <div class="line"></div>
-        <div id="sale-task" v-show="initialize" v-if="this.detail.payment_method === 1">
+        <div id="sale-task" v-if="this.detail.snapshot.payment_method == 1">
             <div>
                 <div class="task">
                     <span class="task-name">{{this.detail.task_title}}</span>
@@ -391,7 +391,7 @@
                     <span class="label">
                         <ul>
                             <li>即结</li>
-                            <li>签合同</li>
+                            <li>签合同</li>goods
                         </ul>
                     </span>
                 </div>
@@ -406,7 +406,7 @@
                     <span>产品描述</span>
                     <div>产品名称：{{this.detail.goods.goods_title}}</div>
                     <div style="margin-bottom: 0.53rem">产品价格：{{this.detail.goods.goods_price}}</div>
-                    <p style="margin-bottom: 0.72rem">{{this.detail.goods.description}}</p>
+                    <p style="margin-bottom: 0.72rem；white-space: pre-line">{{this.detail.goods.description}}</p>
                 </div>
                 <div class="line" style="margin:0 0.53rem;"></div>
                 <div class="describe" v-show="this.detail.snapshot.video">
@@ -431,7 +431,7 @@
                 </div>
             </div>
         </div>
-        <div id="job-task" v-show="initialize" v-if="this.detail.payment_method !== 1">
+        <div id="job-task" v-if="this.detail.snapshot.payment_method != 1">
             <div style="position: relative">
                 <div class="task">
                     <span class="task-name">{{this.detail.task_title}}</span>
@@ -450,7 +450,7 @@
                 <div class="line" style="margin:0 0.53rem;"></div>
                 <div class="describe">
                     <span>工作描述</span>
-                    <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem">
+                    <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem；white-space: pre-line">
                         {{this.detail.snapshot.description}}
                     </p>
                 </div>
@@ -679,6 +679,8 @@
     });
 
     function showInfoFromJava(item) {
+        var b = JSON.parse(item.replace(/\n/g,"\\n").replace(/\r/g,"\\\r"))
+        vue.detail = b;
         vue.detail = JSON.parse(item);
     }
     /*if(vue.detail){

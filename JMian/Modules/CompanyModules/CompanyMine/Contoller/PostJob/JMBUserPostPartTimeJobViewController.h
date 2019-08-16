@@ -19,6 +19,7 @@ typedef enum : NSUInteger {
 
 @property(nonatomic, copy)NSString *task_id;////任务主键
 @property(nonatomic, assign)JMBUserPostPartTimeJobViewType viewType;
+
 @end
 
 NS_ASSUME_NONNULL_END

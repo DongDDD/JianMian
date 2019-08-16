@@ -277,7 +277,7 @@
                 [[self currentViewController].navigationController pushViewController:vc animated:YES];
                 
             }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"此信息只能个人用户查看" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份"delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
                 [alert show];
             }
         }else if ([typeStr isEqualToString:@"user_job_id"]) {
@@ -288,7 +288,7 @@
                 [[self currentViewController].navigationController pushViewController:vc animated:YES];
             
             }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"此信息只能企业用户查看" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
                 [alert show];
             }
         }else if ([typeStr isEqualToString:@"ability_id"]) {
@@ -297,7 +297,7 @@
                 vc.ability_id = typeId;
                 [[self currentViewController].navigationController pushViewController:vc animated:YES];
             }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"此信息只能企业用户查看" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
                 [alert show];
             }
         }else if ([typeStr isEqualToString:@"task_id"]) {
@@ -306,7 +306,7 @@
                 vc.task_id = typeId;
                 [[self currentViewController].navigationController pushViewController:vc animated:YES];
             }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"此信息只能个人用户查看" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
                 [alert show];
             }
         }

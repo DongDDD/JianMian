@@ -23,7 +23,7 @@
                         <constraint firstAttribute="height" constant="41" id="EgX-K8-7Kp"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                    <state key="normal" title="  立即发布任务" image="sqp.png">
+                    <state key="normal" title="  立即发布任务">
                         <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
@@ -45,7 +45,4 @@
             <point key="canvasLocation" x="34.782608695652179" y="-237.72321428571428"/>
         </view>
     </objects>
-    <resources>
-        <image name="sqp.png" width="12.5" height="12"/>
-    </resources>
 </document>

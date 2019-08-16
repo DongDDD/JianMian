@@ -13,7 +13,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMUploadLicenseViewController">
             <connections>
                 <outlet property="cameraBtn" destination="wNn-h3-IBu" id="1O7-GC-uc3"/>
+                <outlet property="doneBtn" destination="0rH-sj-Su9" id="R5F-e3-dRs"/>
                 <outlet property="headerImg" destination="DFz-tH-Jw5" id="GtN-3Z-6vn"/>
+                <outlet property="scrollView" destination="cE2-N6-frJ" id="Hde-FM-hZ7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

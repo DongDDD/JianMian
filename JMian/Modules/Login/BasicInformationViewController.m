@@ -236,89 +236,16 @@
         
         [self presentViewController:imagePickerController animated:YES completion:^{}];
         
-    }else if(actionSheet.tag == 254){
-        switch (buttonIndex) {
-            case 0:
-                // 取消
-                return;
-            case 1:
-                // 切换身份
-//                sourceType = UIImagePickerControllerSourceTypeCamera;
-                [self changeIdentify];
-                break;
-                
-            case 2:
-                // 退出登录
-                [self logout];
-//                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                break;
-        }
-   
     }
-}
-
--(void)changeIdentify{
-    [[JMHTTPManager sharedInstance]userChangeWithType:@"" step:@""  successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-        [JMUserInfoManager saveUserInfo:userInfo];
-        kSaveMyDefault(@"usersig", userInfo.usersig);
-        NSLog(@"usersig-----:%@",userInfo.usersig);
-        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        [[TIMManager sharedInstance] logout:^() {
-            NSLog(@"logout succ");
-        } fail:^(int code, NSString * err) {
-            NSLog(@"logout fail: code=%d err=%@", code, err);
-        }];
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
 
 }
 
--(void)logout{
-    [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        kRemoveMyDefault(@"token");
-        kRemoveMyDefault(@"usersig");
-        //token为空执行
-        
-        [[TIMManager sharedInstance] logout:^() {
-            NSLog(@"logout succ");
-        } fail:^(int code, NSString * err) {
-            NSLog(@"logout fail: code=%d err=%@", code, err);
-        }];
-        LoginViewController *login = [[LoginViewController alloc] init];
-        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-        
-    }];
 
 
-}
+
 
 #pragma mark -textField delegte
 
-//-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-//    if (textField.tag == 100) {
-//        JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
-//        if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
-//            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改名字"
-//                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-//            [alert show];
-//
-//            return NO;
-//        }
-//
-//
-//    }
-//    return YES;
-//}
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -365,9 +292,6 @@
 //    
     
 }
-
-//图频上传
-
 
 
 
@@ -499,14 +423,7 @@
   
 }
 
--(void)moreAction{
 
-    UIActionSheet *sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"切换身份",@"退出登录", nil];
-    sheet.tag = 254;
-    
-    [sheet showInView:self.view];
-    
-}
 
 #pragma mark - lazy
 

@@ -146,7 +146,10 @@
     
 }
 -(void)rightAction{
-    
+    if (_imageUrl == nil) {
+        [self showAlertSimpleTips:@"提示" message:@"请上传公司logo" btnTitle:@"好的"];
+        return;
+    }
     [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:kFetchMyDefault(@"company_name") company_position:kFetchMyDefault(@"company_position") nickname:nil avatar:nil enterprise_step:@"3" abbreviation:self.abbreviationTextField.text logo_path:self.imageUrl video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:@"1" financing:nil employee:self.employeeBtn.titleLabel.text      city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
@@ -238,26 +241,8 @@
         
         [self presentViewController:imagePickerController animated:YES completion:^{}];
         
-    }else if(actionSheet.tag == 254){
-        switch (buttonIndex) {
-            case 0:
-                // 取消
-                return;
-            case 1:
-                // 切换身份
-                //                sourceType = UIImagePickerControllerSourceTypeCamera;
-                [self changeIdentify];
-                break;
-                
-            case 2:
-                // 退出登录
-                [self logout];
-                //                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                break;
-        }
-        
-        
     }
+    
 }
 
 #pragma mark -Mydelegte
@@ -336,61 +321,6 @@
     
 }
 
-
--(void)changeIdentify{
-    [[JMHTTPManager sharedInstance]userChangeWithType:@"" step:@""  successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-        [JMUserInfoManager saveUserInfo:userInfo];
-        kSaveMyDefault(@"usersig", userInfo.usersig);
-        NSLog(@"usersig-----:%@",userInfo.usersig);
-        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        [[TIMManager sharedInstance] logout:^() {
-            NSLog(@"logout succ");
-        } fail:^(int code, NSString * err) {
-            NSLog(@"logout fail: code=%d err=%@", code, err);
-        }];
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-}
-
--(void)logout{
-    [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        kRemoveMyDefault(@"token");
-        kRemoveMyDefault(@"usersig");
-        //token为空执行
-        
-        [[TIMManager sharedInstance] logout:^() {
-            NSLog(@"logout succ");
-        } fail:^(int code, NSString * err) {
-            NSLog(@"logout fail: code=%d err=%@", code, err);
-        }];
-        LoginViewController *login = [[LoginViewController alloc] init];
-        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-        
-    }];
-    
-    
-}
-
-
--(void)moreAction{
-    
-    UIActionSheet *sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"切换身份",@"退出登录", nil];
-    sheet.tag = 254;
-    
-    [sheet showInView:self.view];
-    
-}
 #pragma mark - lazy
 
 -(NSMutableArray *)industryDataArray{

@@ -539,7 +539,7 @@
                         <span>产品描述</span>
                         <div v-if="this.detail.goods">产品名称：{{this.detail.goods.goods_title}}</div>
                         <div v-if="this.detail.goods" style="margin-bottom: 0.53rem">产品价格：{{this.detail.goods.goods_price}}元</div>
-                        <p v-if="this.detail.goods" style="margin-bottom: 0.72rem">{{this.detail.goods.description}}</p>
+                        <p v-if="this.detail.goods" style="margin-bottom: 0.72rem；white-space: pre-line">{{this.detail.goods.description}}</p>
                     </div>
                     <div class="line" style="margin:0 0.53rem;"></div>
                     <div class="describe" v-show="this.detail.video">
@@ -587,7 +587,7 @@
                     <div class="line" style="margin:0 0.53rem;"></div>
                     <div class="describe">
                         <span>工作描述</span>
-                        <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem" v-if="this.detail.description">
+                        <p style="color:#333333;line-height: 0.69rem;font-size: 0.37rem；white-space: pre-line" v-if="this.detail.description">
                             {{this.detail.description}}
                         </p>
                     </div>

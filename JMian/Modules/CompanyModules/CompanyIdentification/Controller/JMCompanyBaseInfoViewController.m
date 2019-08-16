@@ -156,8 +156,11 @@
     if (userModel.avatar.length > 0 && _imageUrl == nil) {
         if ([userModel.avatar containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
             _imageUrl = [userModel.avatar stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
- 
         }
+    }
+    if (_imageUrl == nil) {
+        [self showAlertSimpleTips:@"提示" message:@"请上传头像" btnTitle:@"好的"];
+        return;
     }
     [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:self.companyNameTextField.text company_position:self.myPositionTextField.text nickname:self.myNameTextField.text avatar:_imageUrl enterprise_step:@"2" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
@@ -261,26 +264,9 @@
         
         [self presentViewController:imagePickerController animated:YES completion:^{}];
         
-    }else if(actionSheet.tag == 254){
-        switch (buttonIndex) {
-            case 0:
-                // 取消
-                return;
-            case 1:
-                // 切换身份
-                //                sourceType = UIImagePickerControllerSourceTypeCamera;
-                [self changeIdentify];
-                break;
-                
-            case 2:
-                // 退出登录
-                [self logout];
-                //                sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-                break;
-        }
-        
-        
     }
+    
+
 }
 //#pragma mark -scrollView delegte
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -346,61 +332,72 @@
 }
 
 
--(void)changeIdentify{
-    [[JMHTTPManager sharedInstance]userChangeWithType:@"" step:@""  successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-        [JMUserInfoManager saveUserInfo:userInfo];
-        kSaveMyDefault(@"usersig", userInfo.usersig);
-        NSLog(@"usersig-----:%@",userInfo.usersig);
-        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
-        
-        [[TIMManager sharedInstance] logout:^() {
-            NSLog(@"logout succ");
-        } fail:^(int code, NSString * err) {
-            NSLog(@"logout fail: code=%d err=%@", code, err);
-        }];
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-}
+//-(void)changeIdentify{
+//    [[JMHTTPManager sharedInstance]userChangeWithType:@"" step:@""  successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+//        [JMUserInfoManager saveUserInfo:userInfo];
+//        kSaveMyDefault(@"usersig", userInfo.usersig);
+//        NSLog(@"usersig-----:%@",userInfo.usersig);
+//        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+//        [self.navigationController pushViewController:vc animated:YES];
+//
+//        [[TIMManager sharedInstance] logout:^() {
+//            NSLog(@"logout succ");
+//        } fail:^(int code, NSString * err) {
+//            NSLog(@"logout fail: code=%d err=%@", code, err);
+//        }];
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//}
+//
+//-(void)logout{
+//    [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//        kRemoveMyDefault(@"token");
+//        kRemoveMyDefault(@"usersig");
+//        //token为空执行
+//
+//        [[TIMManager sharedInstance] logout:^() {
+//            NSLog(@"logout succ");
+//        } fail:^(int code, NSString * err) {
+//            NSLog(@"logout fail: code=%d err=%@", code, err);
+//        }];
+//        LoginViewController *login = [[LoginViewController alloc] init];
+//        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+//        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//
+//    }];
+//
+//
+//}
+//
 
--(void)logout{
-    [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-        kRemoveMyDefault(@"token");
-        kRemoveMyDefault(@"usersig");
-        //token为空执行
-        
-        [[TIMManager sharedInstance] logout:^() {
-            NSLog(@"logout succ");
-        } fail:^(int code, NSString * err) {
-            NSLog(@"logout fail: code=%d err=%@", code, err);
-        }];
-        LoginViewController *login = [[LoginViewController alloc] init];
-        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-        
-    }];
-    
-    
-}
 
-
-
--(void)moreAction{
-    
-    UIActionSheet *sheet  = [[UIActionSheet alloc] initWithTitle:@"选择" delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"取消" otherButtonTitles:@"切换身份",@"退出登录", nil];
-    sheet.tag = 254;
-    
-    [sheet showInView:self.view];
-    
-}
+//-(void)moreAction{
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
+//    [alert addAction:[UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//        [self logout];
+//
+//    }]];
+//    [alert addAction:[UIAlertAction actionWithTitle:@"切换身份" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//        [self changeIdentify];
+//
+//    }]];
+//    [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//    }]];
+//    [self presentViewController:alert animated:YES completion:nil];
+//
+//
+//}
 
 
 -(UIButton *)moreBtn{

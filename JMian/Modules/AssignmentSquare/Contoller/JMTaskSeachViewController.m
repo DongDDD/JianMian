@@ -9,7 +9,7 @@
 #import "JMTaskSeachViewController.h"
 #import "SearchView.h"
 
-@interface JMTaskSeachViewController ()
+@interface JMTaskSeachViewController ()<UITextFieldDelegate>
 
 @property(nonatomic,strong)SearchView *searchView;
 
@@ -22,6 +22,18 @@
     [self.view addSubview:self.searchView];
     // Do any additional setup after loading the view from its nib.
 }
+
+#pragma mark - textField -
+-(BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    if (_delegate && [_delegate respondsToSelector:@selector(didInputKeywordWithStr:)]) {
+        [_delegate didInputKeywordWithStr:textField.text];
+    }
+    [self.navigationController popViewControllerAnimated:YES];
+    return YES;
+}
+
+#pragma mark - getter -
 
 -(SearchView *)searchView{
     if (_searchView == nil) {

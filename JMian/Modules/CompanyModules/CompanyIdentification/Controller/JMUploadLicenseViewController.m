@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UIImageView *headerImg;
 @property (nonatomic,copy)NSString *imageLicenseUrl;
 @property (weak, nonatomic) IBOutlet UIButton *cameraBtn;
+@property(nonatomic,strong)UIButton *moreBtn;
+@property (weak, nonatomic) IBOutlet UIButton *doneBtn;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 
 @end
@@ -30,6 +33,7 @@
 //        self.extendedLayoutIncludesOpaqueBars = YES;
     [self setIsHiddenBackBtn:YES];
     [self getUserInfo];
+    [self.scrollView addSubview:self.moreBtn];
     // Do any additional setup after loading the view from its nib.
     
 }
@@ -210,6 +214,17 @@
     
 }
 
+-(UIButton *)moreBtn{
+    if (_moreBtn == nil) {
+        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.doneBtn.frame.origin.y+self.doneBtn.frame.size.height+20, SCREEN_WIDTH, 40)];
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        [_moreBtn setTitle:@"更多操作" forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [_moreBtn addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _moreBtn;
+}
 
 
 /*

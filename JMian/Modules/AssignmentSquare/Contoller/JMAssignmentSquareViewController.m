@@ -38,7 +38,7 @@
 
 
 
-@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate,JMSquarePostTaskViewDelegate>
+@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate,JMSquarePostTaskViewDelegate,JMTaskSeachViewControllerDelegate>
 @property (nonatomic, strong) UIView *titleAndPostTaskView;
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (nonatomic, strong) JMSquarePostTaskView *postTaskView;
@@ -51,6 +51,8 @@
 @property (strong, nonatomic) UIView *tapView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
 
+
+@property (copy, nonatomic)NSString *keyword;//搜索关键字
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,assign)NSInteger per_page;
 @property (copy, nonatomic)NSString *city_id;//城市ID
@@ -106,6 +108,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 -(void)rightAction{
     
     JMTaskSeachViewController *vc = [[JMTaskSeachViewController alloc]init];
+    vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -198,6 +201,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 }
 
 -(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName{
+    _keyword = @"";
     _type_label_id = type_id;
     self.page = 1;
     [_industryLabIDArray removeAllObjects];
@@ -208,6 +212,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 -(void)didClickCellWithTaskData:(JMTaskListCellData *)taskData{
     
     _page = 1;
+    _keyword = @"";
     _type_label_id = taskData.type_labelID;
     [self hidePartTimeViewTapAction];
     [self.tableView.mj_header beginRefreshing];
@@ -278,6 +283,12 @@ static NSString *C_cellIdent = @"CSquareCellID";
     }
 }
 
+
+-(void)didInputKeywordWithStr:(NSString *)str{
+    _keyword = str;
+    [self.tableView.mj_header beginRefreshing];
+
+}
 #pragma mark - Action -
 
 -(void)loadMoreBills
@@ -336,6 +347,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         self.page = 1;
         _type_label_id = nil;
         _city_id = nil;
+        _keyword = @"";
         [_industryLabIDArray removeAllObjects];
         [self.tableView.mj_header beginRefreshing];
     }else if (_index == 1) {
@@ -403,7 +415,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 -(void)CToGetData{
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:_city_id type_label_id:_type_label_id industry_arr:_industryLabIDArray status:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:_city_id type_label_id:_type_label_id industry_arr:_industryLabIDArray keyword:_keyword status:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         if (responsObject[@"data"]) {
             NSMutableArray *array = [NSMutableArray array];
@@ -638,7 +650,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         if ([userModel.type isEqualToString:B_Type_UESR]) {
             str = @"立即发布任务";
         }else{
-            str = @"发布兼职简历";
+            str = @"立即创建任务简历";
 
         }
         [_postTaskView.postBtn setTitle:str forState:UIControlStateNormal];

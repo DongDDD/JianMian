@@ -16,10 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
                        city_id:(nullable NSString *)city_id
                  type_label_id:(nullable NSString *)type_label_id
                   industry_arr:(nullable NSMutableArray *)industry_arr
+                       keyword:(nullable NSString *)keyword
                         status:(nullable NSString *)status
                           page:(nullable NSString *)page
                       per_page:(nullable NSString *)per_page
-
                   successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 

@@ -95,16 +95,12 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void)hideKeyboard{
-
-    
     [_companyNameTextField resignFirstResponder];
     [_bankNameTextField resignFirstResponder];
     [_cardNumTextField resignFirstResponder];
     [_openAccountTextField resignFirstResponder];
 
-
 }
-
 
 
 #pragma mark - textFieldDelegte
@@ -115,7 +111,6 @@
     [_cardNumTextField resignFirstResponder];
     [_openAccountTextField resignFirstResponder];
 
-    
     return YES;
 }
 
@@ -126,7 +121,11 @@
 }
 
 - (IBAction)nextStepAction:(UIButton *)sender {
-    
+    [_openAccountTextField resignFirstResponder];
+    if (self.openAccountTextField.text.length == 0) {
+        [self showAlertSimpleTips:@"提示" message:@"请正确填写开户行！否则提现将会失败!" btnTitle:@"好的"];
+        return;
+    }
     if (self.companyNameTextField.text && self.bankNameTextField.text && self.cardNumTextField.text && self.openAccountTextField.text) {
         [[JMHTTPManager sharedInstance] createBankCard_full_name:self.companyNameTextField.text bank_name:self.bankNameTextField.text card_number:self.cardNumTextField.text bank_branch:self.openAccountTextField.text image_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             

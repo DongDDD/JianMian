@@ -14,7 +14,7 @@
                           city_id:(nullable NSString *)city_id
                     type_label_id:(nullable NSString *)type_label_id
                      industry_arr:(nullable NSMutableArray *)industry_arr
-//                        keyword:(nullable NSString *)keyword
+                        keyword:(nullable NSString *)keyword
                            status:(nullable NSString *)status
                              page:(nullable NSString *)page
                          per_page:(nullable NSString *)per_page
@@ -24,7 +24,7 @@
                            @"city_id":city_id,
                            @"type_label_id":type_label_id,
                            @"industry_arr":industry_arr,
-//                           @"keyword":keyword,
+                           @"keyword":keyword,
                            @"status":status,
                            @"page":page,
                            @"per_page":per_page

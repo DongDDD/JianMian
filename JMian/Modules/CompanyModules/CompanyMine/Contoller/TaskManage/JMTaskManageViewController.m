@@ -27,9 +27,9 @@
 #import "JMHTTPManager+FectchTaskOrderInfo.h"
 #import "JMBDetailWebViewController.h"
 #import "JMHTTPManager+FectchTaskAbility.h"
-#import <PassKit/PassKit.h>                                 //用户绑定的银行卡信息
-#import <PassKit/PKPaymentAuthorizationViewController.h>    //Apple pay的展示控件
-#import <AddressBook/AddressBook.h>                         //用户联系信息相关
+//#import <PassKit/PassKit.h>                                 //用户绑定的银行卡信息
+//#import <PassKit/PKPaymentAuthorizationViewController.h>    //Apple pay的展示控件
+//#import <AddressBook/AddressBook.h>                         //用户联系信息相关
 
 
 @interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate>
@@ -67,7 +67,12 @@
     [super viewDidLoad];
     self.page = 1;
     self.per_page = 15;
-    self.title = @"我的任务";
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        self.title = @"任务管理";
+    }else{
+        self.title = @"我的任务";
+    }
 //    self.currentStatusArray = @[Task_WaitDealWith];
 //    [self getDataWitnStatus:self.currentStatusArray];
 //   
@@ -339,7 +344,7 @@
         //支付宝支付
         //    [self alipayWithModel:self.orderPaymentModel];
         if (![self.didPayMoney isEqualToString:@"0"]) {
-            [self applePay];
+//            [self applePay];
             
         }else{
             [self hiddenChoosePayView];
@@ -368,39 +373,39 @@
 
 //只要下面的
 
-- (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
-                       didAuthorizePayment:(PKPayment *)payment
-                                completion:(void (^)(PKPaymentAuthorizationStatus status))completion {
-
-    PKPaymentToken *payToken = payment.token;
-    //支付凭据，发给服务端进行验证支付是否真实有效
-    PKContact *billingContact = payment.billingContact;     //账单信息
-    PKContact *shippingContact = payment.shippingContact;   //送货信息
-    PKContact *shippingMethod = payment.shippingMethod;     //送货方式
-    //等待服务器返回结果后再进行系统block调用
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        //模拟服务器通信
-        completion(PKPaymentAuthorizationStatusSuccess);
-//        [self paySucceedNotification];
-        NSLog(@"paymentAuthorizationSucceed");
-        if (_index == 0) {
-            [self hiddenChoosePayView];
-//            [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:_nowTaskData.task_order_id];
-        }else if (_index == 1){
-            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:_nowTaskData.task_order_id];
-            
-        }
-    });
-
-
-}
-
--(void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller{
-    [controller dismissViewControllerAnimated:YES completion:nil];
-//    [self paySucceedNotification];
-    NSLog(@"payEnd");
-
-}
+//- (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
+//                       didAuthorizePayment:(PKPayment *)payment
+//                                completion:(void (^)(PKPaymentAuthorizationStatus status))completion {
+//
+//    PKPaymentToken *payToken = payment.token;
+//    //支付凭据，发给服务端进行验证支付是否真实有效
+//    PKContact *billingContact = payment.billingContact;     //账单信息
+//    PKContact *shippingContact = payment.shippingContact;   //送货信息
+//    PKContact *shippingMethod = payment.shippingMethod;     //送货方式
+//    //等待服务器返回结果后再进行系统block调用
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        //模拟服务器通信
+//        completion(PKPaymentAuthorizationStatusSuccess);
+////        [self paySucceedNotification];
+//        NSLog(@"paymentAuthorizationSucceed");
+//        if (_index == 0) {
+//            [self hiddenChoosePayView];
+////            [self changeTaskStatusRequestWithStatus:Task_Pass task_order_id:_nowTaskData.task_order_id];
+//        }else if (_index == 1){
+//            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:_nowTaskData.task_order_id];
+//
+//        }
+//    });
+//
+//
+//}
+//
+//-(void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller{
+//    [controller dismissViewControllerAnimated:YES completion:nil];
+////    [self paySucceedNotification];
+//    NSLog(@"payEnd");
+//
+//}
 
 #pragma mark - 数据请求
 
@@ -649,7 +654,7 @@
     
 }
 #pragma mark - 支付
-
+/*
 -(void)applePay{
     if (![PKPaymentAuthorizationViewController class]) {
         //PKPaymentAuthorizationViewController需iOS8.0以上支持
@@ -726,7 +731,7 @@
     [self presentViewController:view animated:YES completion:nil];
 }
 
-
+*/
 
 //支付确认界面
 -(void)payDetailViewDownPayAction_data:(JMTaskOrderListCellData *)data{
@@ -870,14 +875,22 @@
             url = imgModel.file_path;
         }
         UIImage *image = [self getImageFromURL:url];
+        UIGraphicsBeginImageContext(CGSizeMake(150, 150));
+        [image drawInRect:CGRectMake(0, 0, 150, 150)];
+        image = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
         //缩略图,压缩图片,不超过 32 KB
         NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+   
         [urlMessage setThumbData:thumbData];
 
     }else{
         UIImage *image = [UIImage imageNamed:@"demi_home"];
         NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
         [urlMessage setThumbData:thumbData];
+        UIImage *image2 = [UIImage imageWithData: thumbData];
+
+
     }
 
     //分享实例
@@ -903,8 +916,22 @@
     return result;
     
 }
-
-
+//d打印图片大小
+//- (void)calulateImageFileSize:(UIImage *)image {
+//    NSData *data = UIImagePNGRepresentation(image);
+//    if (!data) {
+//        data = UIImageJPEGRepresentation(image, 1);//需要改成0.5才接近原图片大小，原因请看下文
+//    }
+//    double dataLength = [data length] * 1.0;
+//    NSArray *typeArray = @[@"bytes",@"KB",@"MB",@"GB",@"TB",@"PB", @"EB",@"ZB",@"YB"];
+//    NSInteger index = 0;
+//    while (dataLength > 1024) {
+//        dataLength /= 1024.0;
+//        index ++;
+//    }
+//    NSLog(@"image = %.3f %@",dataLength,typeArray[index]);
+//
+//}
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -1012,8 +1039,8 @@
         _choosePayView.delegate = self;
         [_choosePayView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
         [_choosePayView.btn2 setImage:[UIImage imageNamed:@"pry"] forState:UIControlStateNormal];
-//        [_choosePayView.btn2 setHidden:YES];
-//        [_choosePayView.lab2 setHidden:YES];
+        [_choosePayView.btn2 setHidden:YES];
+        [_choosePayView.lab2 setHidden:YES];
         _choosePayView.lab1.text = @"微信支付";
         _choosePayView.lab2.text = @"Apple Pay (推荐)";
     }
@@ -1031,6 +1058,7 @@
     }
     return _shareView;
 }
+
 -(UIView *)BGPayView{
     if (!_BGPayView) {
         _BGPayView = [[UIView alloc]init];
