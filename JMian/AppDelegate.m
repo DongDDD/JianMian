@@ -28,6 +28,7 @@
 #import "JMManageInterviewViewController.h"
 #import "JMPlaySoundsManager.h"
 #import "JMHTTPManager+FectchVersionInfo.h"
+#import "TUIKit.h"
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener>
 
@@ -42,6 +43,8 @@
     sdkConfig.disableLogPrint = NO; // 是否允许log打印
     sdkConfig.logLevel = TIM_LOG_NONE; //Log输出级别（debug级别会很多）
     [[TIMManager sharedInstance] initSdk:sdkConfig];
+    [[TUIKit sharedInstance] setupWithAppId:TIMSdkAppid.intValue];
+
 }
 
 

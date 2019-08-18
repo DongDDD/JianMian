@@ -25,12 +25,13 @@ PODS:
   - HXWeiboPhotoPicker (2.1.5):
     - SDWebImage (~> 4.0)
   - IQKeyboardManager (3.3.7)
+  - ISVImageScrollView (0.1.2)
   - iVersion (1.11.5)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
   - MJExtension (3.0.17)
   - MJRefresh (3.2.0)
-  - MMLayout (0.1.0)
+  - MMLayout (0.2.0)
   - PrintBeautifulLog (1.0.0)
   - ReactiveObjC (3.1.1)
   - SDCycleScrollView (1.75):
@@ -39,6 +40,7 @@ PODS:
     - SDWebImage/Core (= 4.4.6)
   - SDWebImage/Core (4.4.6)
   - STPickerView (2.4)
+  - Toast (4.0.0)
   - VIMediaCache (0.4)
   - WechatOpenSDK (1.8.4)
   - YYCache (1.0.4)
@@ -52,17 +54,19 @@ DEPENDENCIES:
   - AMapSearch
   - HXWeiboPhotoPicker (~> 2.1.5)
   - IQKeyboardManager (= 3.3.7)
+  - ISVImageScrollView
   - iVersion
   - Masonry (~> 1.1.0)
   - MBProgressHUD (~> 1.1.0)
   - MJExtension
   - MJRefresh
-  - MMLayout
+  - MMLayout (= 0.2.0)
   - PrintBeautifulLog
   - ReactiveObjC
   - SDCycleScrollView
   - SDWebImage
   - STPickerView (= 2.4)
+  - Toast
   - VIMediaCache
   - WechatOpenSDK
   - YYCache
@@ -78,6 +82,7 @@ SPEC REPOS:
     - AMapSearch
     - HXWeiboPhotoPicker
     - IQKeyboardManager
+    - ISVImageScrollView
     - iVersion
     - Masonry
     - MBProgressHUD
@@ -89,6 +94,7 @@ SPEC REPOS:
     - SDCycleScrollView
     - SDWebImage
     - STPickerView
+    - Toast
     - VIMediaCache
     - WechatOpenSDK
     - YYCache
@@ -103,22 +109,24 @@ SPEC CHECKSUMS:
   AMapSearch: def5983c8ca1a6d7430970046dc814f6e337621d
   HXWeiboPhotoPicker: b389ed6a2f854270aa391c55591d0616a519c881
   IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
+  ISVImageScrollView: ba511d12a1661b40feb8921309c0854bf93ec749
   iVersion: 3a93a89259eb3b52b0a8ba52c46a0027fa6b4d30
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJExtension: 74ec83124a68891619fb7ba9c5c811bbf1691076
   MJRefresh: ed450d6eb9d3346a2cb033ab7eb6de090aeef437
-  MMLayout: 7caa6fe2ebfd018ec49ab3ac2409b454c3687995
+  MMLayout: 3fb59d58eeb8656c64e61d550fb0088e10666c11
   PrintBeautifulLog: ae1edcf7af92ffcb1de3726d1545d043e861d2e0
   ReactiveObjC: 011caa393aa0383245f2dcf9bf02e86b80b36040
   SDCycleScrollView: 884b88f0266dd4708a0e1934975c69cb971707b1
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   STPickerView: d0e234f230f45bd720a6739d0ae9fbddf038958b
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   VIMediaCache: aa650f82cb114c68a343beb4e67416cf5eb2f3a2
   WechatOpenSDK: 9b721089507c895d05f997408c30bb6e6f5f9b60
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 36d4154266aebdd1ae7667be471b8c34a563a0ea
+PODFILE CHECKSUM: 0a83359946f8de8dbab9fee42885311368348d82
 
 COCOAPODS: 1.6.1

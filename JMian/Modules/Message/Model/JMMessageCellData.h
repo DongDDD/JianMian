@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TCommonTableViewCell.h"
+#import <TCommonCell.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @import ImSDK;

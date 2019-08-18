@@ -18,7 +18,7 @@
 #import "JMVitaDetailModel.h"
 #import "Masonry.h"
 #import "JMHTTPManager+InterView.h"
-#import "JMChatViewViewController.h"
+//#import "JMChatViewViewController.h"
 #import "JMHTTPManager+CreateConversation.h"
 #import "THDatePickerView.h"
 #import "JMPlayerViewController.h"
@@ -28,7 +28,7 @@
 #import "JMIDCardIdentifyViewController.h"
 #import "WXApi.h"
 #import "JMShareView.h"
-
+#import "JMMessageListModel.h"
 
 
 @interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate,JMHeaderOfPersonDetailViewDelegate,JMShareViewDelegate>
@@ -547,13 +547,10 @@
         [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-            //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
-            //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            //        [alert show];
-            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-            
-            vc.myConvModel = messageListModel;
-            [self.navigationController pushViewController:vc animated:YES];
+//            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+//
+//            vc.myConvModel = messageListModel;
+//            [self.navigationController pushViewController:vc animated:YES];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];

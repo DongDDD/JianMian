@@ -83,10 +83,7 @@
 		040A392F227DAC2B00EDD9E0 /* copyreader@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040A392C227DAC2B00EDD9E0 /* copyreader@3x.png */; };
 		040A3930227DAC2B00EDD9E0 /* copyreader.png in Resources */ = {isa = PBXBuildFile; fileRef = 040A392D227DAC2B00EDD9E0 /* copyreader.png */; };
 		040A3933227DBEA700EDD9E0 /* JMGreetTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A3932227DBEA700EDD9E0 /* JMGreetTableViewController.m */; };
-		040A3937227DD1B200EDD9E0 /* JMInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A3935227DD1B200EDD9E0 /* JMInputController.m */; };
-		040A3938227DD1B200EDD9E0 /* JMInputController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A3936227DD1B200EDD9E0 /* JMInputController.xib */; };
 		040A393B227DD1EB00EDD9E0 /* JMFaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A393A227DD1EB00EDD9E0 /* JMFaceView.m */; };
-		040A393E227DD20400EDD9E0 /* JMMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A393D227DD20400EDD9E0 /* JMMoreView.m */; };
 		040A40BB226589A50005E0D7 /* JMCompanyBaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A40B9226589A50005E0D7 /* JMCompanyBaseInfoViewController.m */; };
 		040A40BC226589A50005E0D7 /* JMCompanyBaseInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040A40BA226589A50005E0D7 /* JMCompanyBaseInfoViewController.xib */; };
 		040A40C02265B2480005E0D7 /* JMCompanyInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A40BE2265B2480005E0D7 /* JMCompanyInfoViewController.m */; };
@@ -95,9 +92,6 @@
 		040A40C82265B41A0005E0D7 /* company_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 040A40C52265B41A0005E0D7 /* company_logo.png */; };
 		040A40C92265B41A0005E0D7 /* company_logo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040A40C62265B41A0005E0D7 /* company_logo@3x.png */; };
 		040A5115226FF47B0074BD4B /* JMGetCompanyLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A5114226FF47B0074BD4B /* JMGetCompanyLocationViewController.m */; };
-		040AF59E2277F4F00027D7D8 /* JMMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AF59D2277F4F00027D7D8 /* JMMessageTableViewController.m */; };
-		040AF5AA22783E150027D7D8 /* JMMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AF5A922783E150027D7D8 /* JMMessageCell.m */; };
-		040AF5B022784BC70027D7D8 /* JMChatViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040AF5962277D9350027D7D8 /* JMChatViewViewController.m */; };
 		040B83772265D01800F1A37A /* JMUploadLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040B83752265D01800F1A37A /* JMUploadLicenseViewController.m */; };
 		040B83782265D01800F1A37A /* JMUploadLicenseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040B83762265D01800F1A37A /* JMUploadLicenseViewController.xib */; };
 		040B837C2265D73600F1A37A /* companyCamera.png@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040B83792265D73600F1A37A /* companyCamera.png@2x.png */; };
@@ -132,8 +126,6 @@
 		040C18162264148300456C53 /* JIANMIAN_login@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C18132264148300456C53 /* JIANMIAN_login@2x.png */; };
 		040C18172264148300456C53 /* JIANMIAN_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C18142264148300456C53 /* JIANMIAN_login.png */; };
 		040C181D2264210500456C53 /* JMHTTPManager+Vita.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C181C2264210500456C53 /* JMHTTPManager+Vita.m */; };
-		040C8649227E8B8100993490 /* JMMoreCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040C8647227E8B8100993490 /* JMMoreCollectionViewCell.m */; };
-		040C864A227E8B8100993490 /* JMMoreCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040C8648227E8B8100993490 /* JMMoreCollectionViewCell.xib */; };
 		040C8651227E8F4A00993490 /* Photo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C864B227E8F4A00993490 /* Photo@3x.png */; };
 		040C8654227E8F4A00993490 /* Photo.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C864E227E8F4A00993490 /* Photo.png */; };
 		040C8656227E8F4A00993490 /* Photo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040C8650227E8F4A00993490 /* Photo@2x.png */; };
@@ -171,7 +163,6 @@
 		040E3676226890B700A7D789 /* JMPostNewJobViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040E3674226890B700A7D789 /* JMPostNewJobViewController.xib */; };
 		040E54DC22772382004AB0F9 /* JMHTTPManager+MessageList.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E54DB22772382004AB0F9 /* JMHTTPManager+MessageList.m */; };
 		040E54E022772A99004AB0F9 /* JMMessageListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 040E54DF22772A99004AB0F9 /* JMMessageListModel.m */; };
-		0419512122F8476600D64C00 /* JMImageMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0419512022F8476600D64C00 /* JMImageMessageCellData.m */; };
 		04196DA5227FE1190000A6AA /* JMAllMessageTableViewCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */; };
 		04196DAF22805C450000A6AA /* JMMySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04196DAD22805C450000A6AA /* JMMySettingViewController.m */; };
 		04196DB022805C450000A6AA /* JMMySettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04196DAE22805C450000A6AA /* JMMySettingViewController.xib */; };
@@ -225,11 +216,6 @@
 		04256571229EE211000614E7 /* qidong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0425656E229EE211000614E7 /* qidong.png */; };
 		0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0425CB56228449D600E08587 /* JMVideoChatViewController.m */; };
 		0425CB59228449D600E08587 /* JMVideoChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0425CB57228449D600E08587 /* JMVideoChatViewController.xib */; };
-		042C16EC22F90E370048F8F2 /* TCommonTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16EA22F90E370048F8F2 /* TCommonTableViewCell.m */; };
-		042C16F622F924C10048F8F2 /* JMImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16F522F924C10048F8F2 /* JMImageMessageCell.m */; };
-		042C16F922F966B70048F8F2 /* JMTextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16F822F966B70048F8F2 /* JMTextMessageCell.m */; };
-		042C16FC22F967670048F8F2 /* JMTextMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16FB22F967670048F8F2 /* JMTextMessageCellData.m */; };
-		042C16FF22F968010048F8F2 /* JMMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 042C16FE22F968010048F8F2 /* JMMessageCellData.m */; };
 		042CA63422D4376400ABB7AF /* JMServiceProtocolWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CA63222D4376400ABB7AF /* JMServiceProtocolWebViewController.m */; };
 		042CA63522D4376400ABB7AF /* JMServiceProtocolWebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042CA63322D4376400ABB7AF /* JMServiceProtocolWebViewController.xib */; };
 		042CA63822D475A500ABB7AF /* JMLabChooseBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 042CA63722D475A500ABB7AF /* JMLabChooseBottomView.m */; };
@@ -522,7 +508,6 @@
 		049C654D22AD854B00A93DFE /* JMPartTimeJobTypeLabsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049C654B22AD854B00A93DFE /* JMPartTimeJobTypeLabsViewController.xib */; };
 		049C655122AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C654F22AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.m */; };
 		049C655222AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049C655022AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.xib */; };
-		049EF53722FA7448007FD4EB /* JMCustumMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 049EF53622FA7448007FD4EB /* JMCustumMessageCellData.m */; };
 		049FDBA42289556600E9BC25 /* JMDidUploadVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FDBA32289556600E9BC25 /* JMDidUploadVideoView.m */; };
 		049FDBA72289A3C000E9BC25 /* JMPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FDBA62289A3C000E9BC25 /* JMPlayerViewController.m */; };
 		04A2479A224C773A00DEB8E3 /* 0000.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A24797224C773A00DEB8E3 /* 0000.png */; };
@@ -681,8 +666,6 @@
 		04C4A18922CCF5040049DA29 /* JMGreetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C4A18822CCF5040049DA29 /* JMGreetModel.m */; };
 		04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013522603967000B1FE0 /* JMTitlesView.m */; };
 		04C6013922603F73000B1FE0 /* JMPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013822603F73000B1FE0 /* JMPageView.m */; };
-		04C6013E2260639C000B1FE0 /* JMAllMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013C2260639C000B1FE0 /* JMAllMessageTableViewController.m */; };
-		04C6013F2260639C000B1FE0 /* JMAllMessageTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C6013D2260639C000B1FE0 /* JMAllMessageTableViewController.xib */; };
 		04C60143226063E3000B1FE0 /* JMLookMeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C60141226063E3000B1FE0 /* JMLookMeTableViewController.m */; };
 		04C60144226063E3000B1FE0 /* JMLookMeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C60142226063E3000B1FE0 /* JMLookMeTableViewController.xib */; };
 		04C6014D226071B5000B1FE0 /* JMAllMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6014B226071B5000B1FE0 /* JMAllMessageTableViewCell.m */; };
@@ -885,8 +868,133 @@
 		6D558664224B564F0037C14E /* JMMineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558662224B564F0037C14E /* JMMineViewController.xib */; };
 		6D558669224B58890037C14E /* JMMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558667224B58890037C14E /* JMMessageViewController.m */; };
 		6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558668224B58890037C14E /* JMMessageViewController.xib */; };
+		6D5DD5B923083CFD0064612A /* JMAllMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD5B623083CFC0064612A /* JMAllMessageTableViewController.m */; };
+		6D5DD5BA23083CFD0064612A /* JMAllMessageTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D5DD5B723083CFC0064612A /* JMAllMessageTableViewController.xib */; };
+		6D5DD8602308439D0064612A /* TModifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7522308439D0064612A /* TModifyView.m */; };
+		6D5DD8612308439D0064612A /* TUnReadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7532308439D0064612A /* TUnReadView.m */; };
+		6D5DD8622308439D0064612A /* TUILocalStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7562308439D0064612A /* TUILocalStorage.m */; };
+		6D5DD8632308439D0064612A /* THelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7582308439D0064612A /* THelper.m */; };
+		6D5DD8642308439D0064612A /* TAddCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7592308439D0064612A /* TAddCell.m */; };
+		6D5DD8652308439D0064612A /* TUIFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD75C2308439D0064612A /* TUIFileViewController.m */; };
+		6D5DD8662308439D0064612A /* TNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7602308439D0064612A /* TNavigationController.m */; };
+		6D5DD8672308439D0064612A /* TUIVideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7612308439D0064612A /* TUIVideoViewController.m */; };
+		6D5DD8682308439D0064612A /* TTextEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7622308439D0064612A /* TTextEditController.m */; };
+		6D5DD8692308439D0064612A /* TDateEditController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7632308439D0064612A /* TDateEditController.m */; };
+		6D5DD86A2308439D0064612A /* TUIAvatarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7642308439D0064612A /* TUIAvatarViewController.m */; };
+		6D5DD86B2308439D0064612A /* TUIImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7652308439D0064612A /* TUIImageViewController.m */; };
+		6D5DD86C2308439D0064612A /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD76A2308439D0064612A /* NSString+Common.m */; };
+		6D5DD86D2308439D0064612A /* TResponderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD76B2308439D0064612A /* TResponderTextView.m */; };
+		6D5DD86E2308439D0064612A /* TUIProfileCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD76F2308439D0064612A /* TUIProfileCardCell.m */; };
+		6D5DD86F2308439D0064612A /* TCommonTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7712308439D0064612A /* TCommonTextCell.m */; };
+		6D5DD8702308439D0064612A /* TUIButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7722308439D0064612A /* TUIButtonCell.m */; };
+		6D5DD8712308439D0064612A /* TCommonSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7732308439D0064612A /* TCommonSwitchCell.m */; };
+		6D5DD8722308439D0064612A /* TCommonAvatarCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7742308439D0064612A /* TCommonAvatarCell.m */; };
+		6D5DD8732308439D0064612A /* TCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7782308439D0064612A /* TCommonCell.m */; };
+		6D5DD8742308439D0064612A /* TAddHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7792308439D0064612A /* TAddHelper.m */; };
+		6D5DD8752308439D0064612A /* TUITabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD77A2308439D0064612A /* TUITabBarController.m */; };
+		6D5DD8762308439D0064612A /* NSDate+TUIKIT.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD77B2308439D0064612A /* NSDate+TUIKIT.m */; };
+		6D5DD8772308439D0064612A /* UIImage+TUIKIT.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD77C2308439D0064612A /* UIImage+TUIKIT.m */; };
+		6D5DD8782308439D0064612A /* TPopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD77D2308439D0064612A /* TPopCell.m */; };
+		6D5DD8792308439D0064612A /* TAddCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7812308439D0064612A /* TAddCollectionCell.m */; };
+		6D5DD87A2308439D0064612A /* TPopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7842308439D0064612A /* TPopView.m */; };
+		6D5DD87B2308439D0064612A /* TUIContactSelectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7882308439D0064612A /* TUIContactSelectController.m */; };
+		6D5DD87C2308439D0064612A /* TContactSelectViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD78A2308439D0064612A /* TContactSelectViewModel.m */; };
+		6D5DD87D2308439D0064612A /* TContactViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD78D2308439D0064612A /* TContactViewModel.m */; };
+		6D5DD87E2308439D0064612A /* TUIBlackListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7902308439D0064612A /* TUIBlackListViewModel.m */; };
+		6D5DD87F2308439D0064612A /* TUINewFriendViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7912308439D0064612A /* TUINewFriendViewModel.m */; };
+		6D5DD8802308439D0064612A /* TUIGroupConversationListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7922308439D0064612A /* TUIGroupConversationListViewModel.m */; };
+		6D5DD8812308439D0064612A /* TUIContactListPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7942308439D0064612A /* TUIContactListPicker.m */; };
+		6D5DD8822308439D0064612A /* TUIContactController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7952308439D0064612A /* TUIContactController.m */; };
+		6D5DD8832308439D0064612A /* TUIBlackListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7972308439D0064612A /* TUIBlackListController.m */; };
+		6D5DD8842308439D0064612A /* TCommonPendencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD79A2308439D0064612A /* TCommonPendencyCell.m */; };
+		6D5DD8852308439D0064612A /* TUIContactActionCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD79C2308439D0064612A /* TUIContactActionCellData.m */; };
+		6D5DD8862308439D0064612A /* TCommonContactSelectCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD79D2308439D0064612A /* TCommonContactSelectCellData.m */; };
+		6D5DD8872308439D0064612A /* TCommonContactCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD79E2308439D0064612A /* TCommonContactCell.m */; };
+		6D5DD8882308439D0064612A /* TUIContactActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD79F2308439D0064612A /* TUIContactActionCell.m */; };
+		6D5DD8892308439D0064612A /* TCommonContactSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7A02308439D0064612A /* TCommonContactSelectCell.m */; };
+		6D5DD88A2308439D0064612A /* TCommonContactCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7A22308439D0064612A /* TCommonContactCellData.m */; };
+		6D5DD88B2308439D0064612A /* TContactListPickerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7A42308439D0064612A /* TContactListPickerCell.m */; };
+		6D5DD88C2308439D0064612A /* TCommonPendencyCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7A72308439D0064612A /* TCommonPendencyCellData.m */; };
+		6D5DD88D2308439D0064612A /* TUIGroupConversationListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7AD2308439D0064612A /* TUIGroupConversationListController.m */; };
+		6D5DD88E2308439D0064612A /* TUINewFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7AF2308439D0064612A /* TUINewFriendViewController.m */; };
+		6D5DD88F2308439D0064612A /* TUIFaceMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7BA2308439D0064612A /* TUIFaceMessageCellData.m */; };
+		6D5DD8902308439D0064612A /* TUIFileMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7BD2308439D0064612A /* TUIFileMessageCellData.m */; };
+		6D5DD8912308439D0064612A /* TUIBubbleMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7BE2308439D0064612A /* TUIBubbleMessageCellData.m */; };
+		6D5DD8922308439D0064612A /* TUIJoinGroupMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7BF2308439D0064612A /* TUIJoinGroupMessageCellData.m */; };
+		6D5DD8932308439D0064612A /* TUITextMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7C02308439D0064612A /* TUITextMessageCellData.m */; };
+		6D5DD8942308439D0064612A /* TUISystemMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7C12308439D0064612A /* TUISystemMessageCellData.m */; };
+		6D5DD8952308439E0064612A /* TUIVoiceMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7C22308439D0064612A /* TUIVoiceMessageCellData.m */; };
+		6D5DD8962308439E0064612A /* TUIImageMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7C32308439D0064612A /* TUIImageMessageCellData.m */; };
+		6D5DD8972308439E0064612A /* TUIMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7C52308439D0064612A /* TUIMessageCellData.m */; };
+		6D5DD8982308439E0064612A /* TUIVideoMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7C62308439D0064612A /* TUIVideoMessageCellData.m */; };
+		6D5DD8992308439E0064612A /* TUIGroupPendencyViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7CB2308439D0064612A /* TUIGroupPendencyViewModel.m */; };
+		6D5DD89A2308439E0064612A /* TUIGroupPendencyCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7CC2308439D0064612A /* TUIGroupPendencyCellData.m */; };
+		6D5DD89B2308439E0064612A /* TUIGroupPendencyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7D02308439D0064612A /* TUIGroupPendencyCell.m */; };
+		6D5DD89C2308439E0064612A /* TUIGroupPendencyController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7D12308439D0064612A /* TUIGroupPendencyController.m */; };
+		6D5DD89D2308439E0064612A /* TUIOutgoingTextCellLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7D42308439D0064612A /* TUIOutgoingTextCellLayout.m */; };
+		6D5DD89E2308439E0064612A /* TUISystemMessageCellLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7D62308439D0064612A /* TUISystemMessageCellLayout.m */; };
+		6D5DD89F2308439E0064612A /* TUIMessageCellLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7D72308439D0064612A /* TUIMessageCellLayout.m */; };
+		6D5DD8A02308439E0064612A /* TUIIncommingTextCellLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7D92308439D0064612A /* TUIIncommingTextCellLayout.m */; };
+		6D5DD8A12308439E0064612A /* TUIChatController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7DE2308439D0064612A /* TUIChatController.m */; };
+		6D5DD8A22308439E0064612A /* TUIInputController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7E12308439D0064612A /* TUIInputController.m */; };
+		6D5DD8A32308439E0064612A /* TUIInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7E32308439D0064612A /* TUIInputBar.m */; };
+		6D5DD8A42308439E0064612A /* TUIRecordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7E42308439D0064612A /* TUIRecordView.m */; };
+		6D5DD8A52308439E0064612A /* TUIInputMoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7E72308439D0064612A /* TUIInputMoreCell.m */; };
+		6D5DD8A62308439E0064612A /* TUIMenuCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7E92308439D0064612A /* TUIMenuCell.m */; };
+		6D5DD8A72308439E0064612A /* TUIMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7EB2308439D0064612A /* TUIMenuView.m */; };
+		6D5DD8A82308439E0064612A /* TUIFaceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7EC2308439D0064612A /* TUIFaceCell.m */; };
+		6D5DD8A92308439E0064612A /* TUIFileMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7EF2308439D0064612A /* TUIFileMessageCell.m */; };
+		6D5DD8AA2308439E0064612A /* TUIVideoMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7F02308439D0064612A /* TUIVideoMessageCell.m */; };
+		6D5DD8AB2308439E0064612A /* TUITextMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7F22308439D0064612A /* TUITextMessageCell.m */; };
+		6D5DD8AC2308439E0064612A /* TUIJoinGroupMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7F32308439D0064612A /* TUIJoinGroupMessageCell.m */; };
+		6D5DD8AD2308439E0064612A /* TUISystemMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7F42308439D0064612A /* TUISystemMessageCell.m */; };
+		6D5DD8AE2308439E0064612A /* TUIImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7F52308439D0064612A /* TUIImageMessageCell.m */; };
+		6D5DD8AF2308439E0064612A /* TUIFaceMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7F82308439D0064612A /* TUIFaceMessageCell.m */; };
+		6D5DD8B02308439E0064612A /* TUIVoiceMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7FA2308439D0064612A /* TUIVoiceMessageCell.m */; };
+		6D5DD8B12308439E0064612A /* TUIBubbleMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7FE2308439D0064612A /* TUIBubbleMessageCell.m */; };
+		6D5DD8B22308439E0064612A /* TUIFaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8012308439D0064612A /* TUIFaceView.m */; };
+		6D5DD8B32308439E0064612A /* TUIMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8022308439D0064612A /* TUIMessageCell.m */; };
+		6D5DD8B42308439E0064612A /* TUIMessageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8032308439D0064612A /* TUIMessageController.m */; };
+		6D5DD8B52308439E0064612A /* TUIMoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8052308439D0064612A /* TUIMoreView.m */; };
+		6D5DD8B62308439E0064612A /* TUIGroupInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8082308439D0064612A /* TUIGroupInfoController.m */; };
+		6D5DD8B72308439E0064612A /* TUIGroupMembersView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD80D2308439D0064612A /* TUIGroupMembersView.m */; };
+		6D5DD8B82308439E0064612A /* TUIGroupMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD80F2308439D0064612A /* TUIGroupMemberCell.m */; };
+		6D5DD8B92308439E0064612A /* TUIGroupMembersCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8102308439D0064612A /* TUIGroupMembersCell.m */; };
+		6D5DD8BA2308439E0064612A /* TUIGroupMemberController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8112308439D0064612A /* TUIGroupMemberController.m */; };
+		6D5DD8BB2308439E0064612A /* TUIGroupInfoDataProviderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD81A2308439D0064612A /* TUIGroupInfoDataProviderService.m */; };
+		6D5DD8BC2308439E0064612A /* TUIUserProfileDataProviderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD81C2308439D0064612A /* TUIUserProfileDataProviderService.m */; };
+		6D5DD8BD2308439E0064612A /* TUIConversationDataProviderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD81D2308439D0064612A /* TUIConversationDataProviderService.m */; };
+		6D5DD8BE2308439E0064612A /* TUIMessageDataProviderService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD81F2308439D0064612A /* TUIMessageDataProviderService.m */; };
+		6D5DD8BF2308439E0064612A /* TNaviBarIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8232308439D0064612A /* TNaviBarIndicatorView.m */; };
+		6D5DD8C02308439E0064612A /* TConversationListViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8252308439D0064612A /* TConversationListViewModel.m */; };
+		6D5DD8C12308439E0064612A /* TUIConversationListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8272308439D0064612A /* TUIConversationListController.m */; };
+		6D5DD8C22308439E0064612A /* TUIConversationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8292308439D0064612A /* TUIConversationCell.m */; };
+		6D5DD8C32308439E0064612A /* TUIConversationCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD82A2308439D0064612A /* TUIConversationCellData.m */; };
+		6D5DD8C42308439E0064612A /* TUIKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD82F2308439D0064612A /* TUIKit.m */; };
+		6D5DD8C52308439E0064612A /* TIMGroupInfo+DataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8332308439D0064612A /* TIMGroupInfo+DataProvider.m */; };
+		6D5DD8C62308439E0064612A /* TIMConversation+DataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8372308439D0064612A /* TIMConversation+DataProvider.m */; };
+		6D5DD8C72308439E0064612A /* TIMUserProfile+DataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8392308439D0064612A /* TIMUserProfile+DataProvider.m */; };
+		6D5DD8C92308439E0064612A /* TIMMessage+DataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD83B2308439D0064612A /* TIMMessage+DataProvider.m */; };
+		6D5DD8CA2308439E0064612A /* TCContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD83D2308439D0064612A /* TCContext.m */; };
+		6D5DD8CB2308439E0064612A /* TCServiceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD83E2308439D0064612A /* TCServiceManager.m */; };
+		6D5DD8CC2308439E0064612A /* TCAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8402308439D0064612A /* TCAnnotation.m */; };
+		6D5DD8CD2308439E0064612A /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5DD8472308439D0064612A /* libopencore-amrwb.a */; };
+		6D5DD8CE2308439E0064612A /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D5DD84D2308439D0064612A /* libopencore-amrnb.a */; };
+		6D5DD8CF2308439E0064612A /* wav.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8502308439D0064612A /* wav.mm */; };
+		6D5DD8D02308439E0064612A /* amrFileCodec.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8512308439D0064612A /* amrFileCodec.mm */; };
+		6D5DD8D12308439E0064612A /* EMVoiceConverter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8542308439D0064612A /* EMVoiceConverter.mm */; };
+		6D5DD8D22308439E0064612A /* TUIError.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8582308439D0064612A /* TUIError.m */; };
+		6D5DD8D32308439E0064612A /* TUIImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8592308439D0064612A /* TUIImageCache.m */; };
+		6D5DD8D42308439E0064612A /* TUIKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD85A2308439D0064612A /* TUIKitConfig.m */; };
+		6D5DD8D52308439E0064612A /* TUIKitResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D5DD85E2308439D0064612A /* TUIKitResource.bundle */; };
+		6D5DD8D62308439E0064612A /* TUIKitFace.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6D5DD85F2308439D0064612A /* TUIKitFace.bundle */; };
+		6D5DD8D9230846510064612A /* JMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD8D8230846510064612A /* JMChatViewController.m */; };
 		6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */; };
 		6D629963224E1F92007E7DE4 /* JMHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */; };
+		6D72CE4023093B2D000BA072 /* matter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72CE3C23093B2D000BA072 /* matter@2x.png */; };
+		6D72CE4123093B2D000BA072 /* matter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72CE3D23093B2D000BA072 /* matter@3x.png */; };
+		6D72CE4223093B2D000BA072 /* photography@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72CE3E23093B2D000BA072 /* photography@2x.png */; };
+		6D72CE4323093B2D000BA072 /* photography@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D72CE3F23093B2D000BA072 /* photography@3x.png */; };
 		6D82F287227492CF00B9D2B9 /* JMEducationExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D82F285227492CF00B9D2B9 /* JMEducationExperienceViewController.m */; };
 		6D82F288227492CF00B9D2B9 /* JMEducationExperienceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D82F286227492CF00B9D2B9 /* JMEducationExperienceViewController.xib */; };
 		6D82F28B2274A61900B9D2B9 /* JMHTTPManager+EducationExperience.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D82F28A2274A61900B9D2B9 /* JMHTTPManager+EducationExperience.m */; };
@@ -1040,13 +1148,8 @@
 		040A392D227DAC2B00EDD9E0 /* copyreader.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = copyreader.png; sourceTree = "<group>"; };
 		040A3931227DBEA700EDD9E0 /* JMGreetTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMGreetTableViewController.h; sourceTree = "<group>"; };
 		040A3932227DBEA700EDD9E0 /* JMGreetTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMGreetTableViewController.m; sourceTree = "<group>"; };
-		040A3934227DD1B200EDD9E0 /* JMInputController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMInputController.h; sourceTree = "<group>"; };
-		040A3935227DD1B200EDD9E0 /* JMInputController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMInputController.m; sourceTree = "<group>"; };
-		040A3936227DD1B200EDD9E0 /* JMInputController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMInputController.xib; sourceTree = "<group>"; };
 		040A3939227DD1EB00EDD9E0 /* JMFaceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMFaceView.h; sourceTree = "<group>"; };
 		040A393A227DD1EB00EDD9E0 /* JMFaceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMFaceView.m; sourceTree = "<group>"; };
-		040A393C227DD20400EDD9E0 /* JMMoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMoreView.h; sourceTree = "<group>"; };
-		040A393D227DD20400EDD9E0 /* JMMoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMoreView.m; sourceTree = "<group>"; };
 		040A40B8226589A50005E0D7 /* JMCompanyBaseInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCompanyBaseInfoViewController.h; sourceTree = "<group>"; };
 		040A40B9226589A50005E0D7 /* JMCompanyBaseInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCompanyBaseInfoViewController.m; sourceTree = "<group>"; };
 		040A40BA226589A50005E0D7 /* JMCompanyBaseInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCompanyBaseInfoViewController.xib; sourceTree = "<group>"; };
@@ -1058,12 +1161,6 @@
 		040A40C62265B41A0005E0D7 /* company_logo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "company_logo@3x.png"; sourceTree = "<group>"; };
 		040A5113226FF47B0074BD4B /* JMGetCompanyLocationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMGetCompanyLocationViewController.h; sourceTree = "<group>"; };
 		040A5114226FF47B0074BD4B /* JMGetCompanyLocationViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMGetCompanyLocationViewController.m; sourceTree = "<group>"; };
-		040AF5952277D9350027D7D8 /* JMChatViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMChatViewViewController.h; sourceTree = "<group>"; };
-		040AF5962277D9350027D7D8 /* JMChatViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMChatViewViewController.m; sourceTree = "<group>"; };
-		040AF59C2277F4F00027D7D8 /* JMMessageTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageTableViewController.h; sourceTree = "<group>"; };
-		040AF59D2277F4F00027D7D8 /* JMMessageTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageTableViewController.m; sourceTree = "<group>"; };
-		040AF5A822783E150027D7D8 /* JMMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageCell.h; sourceTree = "<group>"; };
-		040AF5A922783E150027D7D8 /* JMMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageCell.m; sourceTree = "<group>"; };
 		040B83742265D01800F1A37A /* JMUploadLicenseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMUploadLicenseViewController.h; sourceTree = "<group>"; };
 		040B83752265D01800F1A37A /* JMUploadLicenseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMUploadLicenseViewController.m; sourceTree = "<group>"; };
 		040B83762265D01800F1A37A /* JMUploadLicenseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMUploadLicenseViewController.xib; sourceTree = "<group>"; };
@@ -1105,9 +1202,6 @@
 		040C18142264148300456C53 /* JIANMIAN_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JIANMIAN_login.png; sourceTree = "<group>"; };
 		040C181B2264210500456C53 /* JMHTTPManager+Vita.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+Vita.h"; sourceTree = "<group>"; };
 		040C181C2264210500456C53 /* JMHTTPManager+Vita.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+Vita.m"; sourceTree = "<group>"; };
-		040C8646227E8B8100993490 /* JMMoreCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMoreCollectionViewCell.h; sourceTree = "<group>"; };
-		040C8647227E8B8100993490 /* JMMoreCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMoreCollectionViewCell.m; sourceTree = "<group>"; };
-		040C8648227E8B8100993490 /* JMMoreCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMoreCollectionViewCell.xib; sourceTree = "<group>"; };
 		040C864B227E8F4A00993490 /* Photo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Photo@3x.png"; sourceTree = "<group>"; };
 		040C864E227E8F4A00993490 /* Photo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Photo.png; sourceTree = "<group>"; };
 		040C8650227E8F4A00993490 /* Photo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Photo@2x.png"; sourceTree = "<group>"; };
@@ -1161,8 +1255,6 @@
 		040E54DB22772382004AB0F9 /* JMHTTPManager+MessageList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+MessageList.m"; sourceTree = "<group>"; };
 		040E54DE22772A99004AB0F9 /* JMMessageListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageListModel.h; sourceTree = "<group>"; };
 		040E54DF22772A99004AB0F9 /* JMMessageListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageListModel.m; sourceTree = "<group>"; };
-		0419511F22F8476600D64C00 /* JMImageMessageCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMImageMessageCellData.h; sourceTree = "<group>"; };
-		0419512022F8476600D64C00 /* JMImageMessageCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMImageMessageCellData.m; sourceTree = "<group>"; };
 		04196DA3227FE1190000A6AA /* JMAllMessageTableViewCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAllMessageTableViewCellData.h; sourceTree = "<group>"; };
 		04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAllMessageTableViewCellData.m; sourceTree = "<group>"; };
 		04196DAC22805C450000A6AA /* JMMySettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMySettingViewController.h; sourceTree = "<group>"; };
@@ -1233,16 +1325,6 @@
 		0425CB55228449D600E08587 /* JMVideoChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoChatViewController.h; sourceTree = "<group>"; };
 		0425CB56228449D600E08587 /* JMVideoChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoChatViewController.m; sourceTree = "<group>"; };
 		0425CB57228449D600E08587 /* JMVideoChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVideoChatViewController.xib; sourceTree = "<group>"; };
-		042C16E922F90E370048F8F2 /* TCommonTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCommonTableViewCell.h; sourceTree = "<group>"; };
-		042C16EA22F90E370048F8F2 /* TCommonTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCommonTableViewCell.m; sourceTree = "<group>"; };
-		042C16F422F924C10048F8F2 /* JMImageMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMImageMessageCell.h; sourceTree = "<group>"; };
-		042C16F522F924C10048F8F2 /* JMImageMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMImageMessageCell.m; sourceTree = "<group>"; };
-		042C16F722F966B70048F8F2 /* JMTextMessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTextMessageCell.h; sourceTree = "<group>"; };
-		042C16F822F966B70048F8F2 /* JMTextMessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTextMessageCell.m; sourceTree = "<group>"; };
-		042C16FA22F967670048F8F2 /* JMTextMessageCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTextMessageCellData.h; sourceTree = "<group>"; };
-		042C16FB22F967670048F8F2 /* JMTextMessageCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTextMessageCellData.m; sourceTree = "<group>"; };
-		042C16FD22F968010048F8F2 /* JMMessageCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageCellData.h; sourceTree = "<group>"; };
-		042C16FE22F968010048F8F2 /* JMMessageCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageCellData.m; sourceTree = "<group>"; };
 		042CA63122D4376400ABB7AF /* JMServiceProtocolWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMServiceProtocolWebViewController.h; sourceTree = "<group>"; };
 		042CA63222D4376400ABB7AF /* JMServiceProtocolWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMServiceProtocolWebViewController.m; sourceTree = "<group>"; };
 		042CA63322D4376400ABB7AF /* JMServiceProtocolWebViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMServiceProtocolWebViewController.xib; sourceTree = "<group>"; };
@@ -1642,8 +1724,6 @@
 		049C654E22AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPartTimeJobLabsCollectionViewCell.h; sourceTree = "<group>"; };
 		049C654F22AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPartTimeJobLabsCollectionViewCell.m; sourceTree = "<group>"; };
 		049C655022AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPartTimeJobLabsCollectionViewCell.xib; sourceTree = "<group>"; };
-		049EF53522FA7448007FD4EB /* JMCustumMessageCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCustumMessageCellData.h; sourceTree = "<group>"; };
-		049EF53622FA7448007FD4EB /* JMCustumMessageCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCustumMessageCellData.m; sourceTree = "<group>"; };
 		049FDBA22289556600E9BC25 /* JMDidUploadVideoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMDidUploadVideoView.h; sourceTree = "<group>"; };
 		049FDBA32289556600E9BC25 /* JMDidUploadVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMDidUploadVideoView.m; sourceTree = "<group>"; };
 		049FDBA52289A3C000E9BC25 /* JMPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayerViewController.h; sourceTree = "<group>"; };
@@ -1853,9 +1933,6 @@
 		04C6013522603967000B1FE0 /* JMTitlesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMTitlesView.m; sourceTree = "<group>"; };
 		04C6013722603F73000B1FE0 /* JMPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPageView.h; sourceTree = "<group>"; };
 		04C6013822603F73000B1FE0 /* JMPageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPageView.m; sourceTree = "<group>"; };
-		04C6013B2260639C000B1FE0 /* JMAllMessageTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAllMessageTableViewController.h; sourceTree = "<group>"; };
-		04C6013C2260639C000B1FE0 /* JMAllMessageTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAllMessageTableViewController.m; sourceTree = "<group>"; };
-		04C6013D2260639C000B1FE0 /* JMAllMessageTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMAllMessageTableViewController.xib; sourceTree = "<group>"; };
 		04C60140226063E3000B1FE0 /* JMLookMeTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLookMeTableViewController.h; sourceTree = "<group>"; };
 		04C60141226063E3000B1FE0 /* JMLookMeTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLookMeTableViewController.m; sourceTree = "<group>"; };
 		04C60142226063E3000B1FE0 /* JMLookMeTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMLookMeTableViewController.xib; sourceTree = "<group>"; };
@@ -2132,10 +2209,263 @@
 		6D558666224B58890037C14E /* JMMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageViewController.h; sourceTree = "<group>"; };
 		6D558667224B58890037C14E /* JMMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageViewController.m; sourceTree = "<group>"; };
 		6D558668224B58890037C14E /* JMMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMessageViewController.xib; sourceTree = "<group>"; };
+		6D5DD5B623083CFC0064612A /* JMAllMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JMAllMessageTableViewController.m; path = "../../../../../JianMian的副本/JMian/Modules/Message/Controller/JMAllMessageTableViewController.m"; sourceTree = "<group>"; };
+		6D5DD5B723083CFC0064612A /* JMAllMessageTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JMAllMessageTableViewController.xib; path = "../../../../../JianMian的副本/JMian/Modules/Message/Controller/JMAllMessageTableViewController.xib"; sourceTree = "<group>"; };
+		6D5DD5B823083CFD0064612A /* JMAllMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JMAllMessageTableViewController.h; path = "../../../../../JianMian的副本/JMian/Modules/Message/Controller/JMAllMessageTableViewController.h"; sourceTree = "<group>"; };
+		6D5DD74D2308439D0064612A /* TAddHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAddHelper.h; sourceTree = "<group>"; };
+		6D5DD74E2308439D0064612A /* TResponderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TResponderTextView.h; sourceTree = "<group>"; };
+		6D5DD74F2308439D0064612A /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
+		6D5DD7502308439D0064612A /* NSDate+TUIKIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TUIKIT.h"; sourceTree = "<group>"; };
+		6D5DD7512308439D0064612A /* TUITabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUITabBarController.h; sourceTree = "<group>"; };
+		6D5DD7522308439D0064612A /* TModifyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TModifyView.m; sourceTree = "<group>"; };
+		6D5DD7532308439D0064612A /* TUnReadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUnReadView.m; sourceTree = "<group>"; };
+		6D5DD7542308439D0064612A /* TPopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPopCell.h; sourceTree = "<group>"; };
+		6D5DD7552308439D0064612A /* UIImage+TUIKIT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+TUIKIT.h"; sourceTree = "<group>"; };
+		6D5DD7562308439D0064612A /* TUILocalStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUILocalStorage.m; sourceTree = "<group>"; };
+		6D5DD7572308439D0064612A /* TPopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPopView.h; sourceTree = "<group>"; };
+		6D5DD7582308439D0064612A /* THelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = THelper.m; sourceTree = "<group>"; };
+		6D5DD7592308439D0064612A /* TAddCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAddCell.m; sourceTree = "<group>"; };
+		6D5DD75A2308439D0064612A /* TAddCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAddCollectionCell.h; sourceTree = "<group>"; };
+		6D5DD75C2308439D0064612A /* TUIFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIFileViewController.m; sourceTree = "<group>"; };
+		6D5DD75D2308439D0064612A /* TUIImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIImageViewController.h; sourceTree = "<group>"; };
+		6D5DD75E2308439D0064612A /* TUIAvatarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIAvatarViewController.h; sourceTree = "<group>"; };
+		6D5DD75F2308439D0064612A /* TDateEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDateEditController.h; sourceTree = "<group>"; };
+		6D5DD7602308439D0064612A /* TNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNavigationController.m; sourceTree = "<group>"; };
+		6D5DD7612308439D0064612A /* TUIVideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIVideoViewController.m; sourceTree = "<group>"; };
+		6D5DD7622308439D0064612A /* TTextEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTextEditController.m; sourceTree = "<group>"; };
+		6D5DD7632308439D0064612A /* TDateEditController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDateEditController.m; sourceTree = "<group>"; };
+		6D5DD7642308439D0064612A /* TUIAvatarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIAvatarViewController.m; sourceTree = "<group>"; };
+		6D5DD7652308439D0064612A /* TUIImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIImageViewController.m; sourceTree = "<group>"; };
+		6D5DD7662308439D0064612A /* TUIFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIFileViewController.h; sourceTree = "<group>"; };
+		6D5DD7672308439D0064612A /* TNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNavigationController.h; sourceTree = "<group>"; };
+		6D5DD7682308439D0064612A /* TUIVideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIVideoViewController.h; sourceTree = "<group>"; };
+		6D5DD7692308439D0064612A /* TTextEditController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTextEditController.h; sourceTree = "<group>"; };
+		6D5DD76A2308439D0064612A /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Common.m"; sourceTree = "<group>"; };
+		6D5DD76B2308439D0064612A /* TResponderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TResponderTextView.m; sourceTree = "<group>"; };
+		6D5DD76D2308439D0064612A /* TCommonSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonSwitchCell.h; sourceTree = "<group>"; };
+		6D5DD76E2308439D0064612A /* TCommonAvatarCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonAvatarCell.h; sourceTree = "<group>"; };
+		6D5DD76F2308439D0064612A /* TUIProfileCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIProfileCardCell.m; sourceTree = "<group>"; };
+		6D5DD7702308439D0064612A /* TCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonCell.h; sourceTree = "<group>"; };
+		6D5DD7712308439D0064612A /* TCommonTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonTextCell.m; sourceTree = "<group>"; };
+		6D5DD7722308439D0064612A /* TUIButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIButtonCell.m; sourceTree = "<group>"; };
+		6D5DD7732308439D0064612A /* TCommonSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonSwitchCell.m; sourceTree = "<group>"; };
+		6D5DD7742308439D0064612A /* TCommonAvatarCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonAvatarCell.m; sourceTree = "<group>"; };
+		6D5DD7752308439D0064612A /* TUIProfileCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIProfileCardCell.h; sourceTree = "<group>"; };
+		6D5DD7762308439D0064612A /* TUIButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIButtonCell.h; sourceTree = "<group>"; };
+		6D5DD7772308439D0064612A /* TCommonTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonTextCell.h; sourceTree = "<group>"; };
+		6D5DD7782308439D0064612A /* TCommonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonCell.m; sourceTree = "<group>"; };
+		6D5DD7792308439D0064612A /* TAddHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAddHelper.m; sourceTree = "<group>"; };
+		6D5DD77A2308439D0064612A /* TUITabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUITabBarController.m; sourceTree = "<group>"; };
+		6D5DD77B2308439D0064612A /* NSDate+TUIKIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TUIKIT.m"; sourceTree = "<group>"; };
+		6D5DD77C2308439D0064612A /* UIImage+TUIKIT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+TUIKIT.m"; sourceTree = "<group>"; };
+		6D5DD77D2308439D0064612A /* TPopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPopCell.m; sourceTree = "<group>"; };
+		6D5DD77E2308439D0064612A /* TUnReadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUnReadView.h; sourceTree = "<group>"; };
+		6D5DD77F2308439D0064612A /* THeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THeader.h; sourceTree = "<group>"; };
+		6D5DD7802308439D0064612A /* TModifyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TModifyView.h; sourceTree = "<group>"; };
+		6D5DD7812308439D0064612A /* TAddCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TAddCollectionCell.m; sourceTree = "<group>"; };
+		6D5DD7822308439D0064612A /* TAddCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAddCell.h; sourceTree = "<group>"; };
+		6D5DD7832308439D0064612A /* THelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = THelper.h; sourceTree = "<group>"; };
+		6D5DD7842308439D0064612A /* TPopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPopView.m; sourceTree = "<group>"; };
+		6D5DD7852308439D0064612A /* TUILocalStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUILocalStorage.h; sourceTree = "<group>"; };
+		6D5DD7872308439D0064612A /* TUIGroupConversationListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupConversationListController.h; sourceTree = "<group>"; };
+		6D5DD7882308439D0064612A /* TUIContactSelectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIContactSelectController.m; sourceTree = "<group>"; };
+		6D5DD78A2308439D0064612A /* TContactSelectViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TContactSelectViewModel.m; sourceTree = "<group>"; };
+		6D5DD78B2308439D0064612A /* TUIBlackListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIBlackListViewModel.h; sourceTree = "<group>"; };
+		6D5DD78C2308439D0064612A /* TUINewFriendViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUINewFriendViewModel.h; sourceTree = "<group>"; };
+		6D5DD78D2308439D0064612A /* TContactViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TContactViewModel.m; sourceTree = "<group>"; };
+		6D5DD78E2308439D0064612A /* TUIGroupConversationListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupConversationListViewModel.h; sourceTree = "<group>"; };
+		6D5DD78F2308439D0064612A /* TContactSelectViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TContactSelectViewModel.h; sourceTree = "<group>"; };
+		6D5DD7902308439D0064612A /* TUIBlackListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIBlackListViewModel.m; sourceTree = "<group>"; };
+		6D5DD7912308439D0064612A /* TUINewFriendViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUINewFriendViewModel.m; sourceTree = "<group>"; };
+		6D5DD7922308439D0064612A /* TUIGroupConversationListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupConversationListViewModel.m; sourceTree = "<group>"; };
+		6D5DD7932308439D0064612A /* TContactViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TContactViewModel.h; sourceTree = "<group>"; };
+		6D5DD7942308439D0064612A /* TUIContactListPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIContactListPicker.m; sourceTree = "<group>"; };
+		6D5DD7952308439D0064612A /* TUIContactController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIContactController.m; sourceTree = "<group>"; };
+		6D5DD7962308439D0064612A /* TUINewFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUINewFriendViewController.h; sourceTree = "<group>"; };
+		6D5DD7972308439D0064612A /* TUIBlackListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIBlackListController.m; sourceTree = "<group>"; };
+		6D5DD7992308439D0064612A /* TContactListPickerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TContactListPickerCell.h; sourceTree = "<group>"; };
+		6D5DD79A2308439D0064612A /* TCommonPendencyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonPendencyCell.m; sourceTree = "<group>"; };
+		6D5DD79B2308439D0064612A /* TCommonContactCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonContactCellData.h; sourceTree = "<group>"; };
+		6D5DD79C2308439D0064612A /* TUIContactActionCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIContactActionCellData.m; sourceTree = "<group>"; };
+		6D5DD79D2308439D0064612A /* TCommonContactSelectCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonContactSelectCellData.m; sourceTree = "<group>"; };
+		6D5DD79E2308439D0064612A /* TCommonContactCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonContactCell.m; sourceTree = "<group>"; };
+		6D5DD79F2308439D0064612A /* TUIContactActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIContactActionCell.m; sourceTree = "<group>"; };
+		6D5DD7A02308439D0064612A /* TCommonContactSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonContactSelectCell.m; sourceTree = "<group>"; };
+		6D5DD7A12308439D0064612A /* TCommonPendencyCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonPendencyCellData.h; sourceTree = "<group>"; };
+		6D5DD7A22308439D0064612A /* TCommonContactCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonContactCellData.m; sourceTree = "<group>"; };
+		6D5DD7A32308439D0064612A /* TCommonPendencyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonPendencyCell.h; sourceTree = "<group>"; };
+		6D5DD7A42308439D0064612A /* TContactListPickerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TContactListPickerCell.m; sourceTree = "<group>"; };
+		6D5DD7A52308439D0064612A /* TUIContactActionCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIContactActionCellData.h; sourceTree = "<group>"; };
+		6D5DD7A62308439D0064612A /* TCommonContactSelectCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonContactSelectCellData.h; sourceTree = "<group>"; };
+		6D5DD7A72308439D0064612A /* TCommonPendencyCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCommonPendencyCellData.m; sourceTree = "<group>"; };
+		6D5DD7A82308439D0064612A /* TCommonContactSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonContactSelectCell.h; sourceTree = "<group>"; };
+		6D5DD7A92308439D0064612A /* TUIContactActionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIContactActionCell.h; sourceTree = "<group>"; };
+		6D5DD7AA2308439D0064612A /* TCommonContactCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCommonContactCell.h; sourceTree = "<group>"; };
+		6D5DD7AB2308439D0064612A /* TUIContactListPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIContactListPicker.h; sourceTree = "<group>"; };
+		6D5DD7AC2308439D0064612A /* TUIContactSelectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIContactSelectController.h; sourceTree = "<group>"; };
+		6D5DD7AD2308439D0064612A /* TUIGroupConversationListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupConversationListController.m; sourceTree = "<group>"; };
+		6D5DD7AE2308439D0064612A /* TUIContactController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIContactController.h; sourceTree = "<group>"; };
+		6D5DD7AF2308439D0064612A /* TUINewFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUINewFriendViewController.m; sourceTree = "<group>"; };
+		6D5DD7B02308439D0064612A /* TUIBlackListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIBlackListController.h; sourceTree = "<group>"; };
+		6D5DD7B32308439D0064612A /* TUITextMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUITextMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7B42308439D0064612A /* TUIJoinGroupMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIJoinGroupMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7B52308439D0064612A /* TUIBubbleMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIBubbleMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7B62308439D0064612A /* TUIFileMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIFileMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7B72308439D0064612A /* TUISystemMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUISystemMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7B82308439D0064612A /* TUIVideoMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIVideoMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7B92308439D0064612A /* TUIMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7BA2308439D0064612A /* TUIFaceMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIFaceMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7BB2308439D0064612A /* TUIImageMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIImageMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7BC2308439D0064612A /* TUIVoiceMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIVoiceMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7BD2308439D0064612A /* TUIFileMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIFileMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7BE2308439D0064612A /* TUIBubbleMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIBubbleMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7BF2308439D0064612A /* TUIJoinGroupMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIJoinGroupMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7C02308439D0064612A /* TUITextMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUITextMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7C12308439D0064612A /* TUISystemMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUISystemMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7C22308439D0064612A /* TUIVoiceMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIVoiceMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7C32308439D0064612A /* TUIImageMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIImageMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7C42308439D0064612A /* TUIFaceMessageCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIFaceMessageCellData.h; sourceTree = "<group>"; };
+		6D5DD7C52308439D0064612A /* TUIMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7C62308439D0064612A /* TUIVideoMessageCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIVideoMessageCellData.m; sourceTree = "<group>"; };
+		6D5DD7C92308439D0064612A /* TUIGroupPendencyViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupPendencyViewModel.h; sourceTree = "<group>"; };
+		6D5DD7CA2308439D0064612A /* TUIGroupPendencyCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupPendencyCellData.h; sourceTree = "<group>"; };
+		6D5DD7CB2308439D0064612A /* TUIGroupPendencyViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupPendencyViewModel.m; sourceTree = "<group>"; };
+		6D5DD7CC2308439D0064612A /* TUIGroupPendencyCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupPendencyCellData.m; sourceTree = "<group>"; };
+		6D5DD7CD2308439D0064612A /* TUIGroupPendencyController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupPendencyController.h; sourceTree = "<group>"; };
+		6D5DD7CF2308439D0064612A /* TUIGroupPendencyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupPendencyCell.h; sourceTree = "<group>"; };
+		6D5DD7D02308439D0064612A /* TUIGroupPendencyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupPendencyCell.m; sourceTree = "<group>"; };
+		6D5DD7D12308439D0064612A /* TUIGroupPendencyController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupPendencyController.m; sourceTree = "<group>"; };
+		6D5DD7D22308439D0064612A /* TUIFaceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIFaceCell.h; sourceTree = "<group>"; };
+		6D5DD7D42308439D0064612A /* TUIOutgoingTextCellLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIOutgoingTextCellLayout.m; sourceTree = "<group>"; };
+		6D5DD7D52308439D0064612A /* TUIIncommingTextCellLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIIncommingTextCellLayout.h; sourceTree = "<group>"; };
+		6D5DD7D62308439D0064612A /* TUISystemMessageCellLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUISystemMessageCellLayout.m; sourceTree = "<group>"; };
+		6D5DD7D72308439D0064612A /* TUIMessageCellLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIMessageCellLayout.m; sourceTree = "<group>"; };
+		6D5DD7D82308439D0064612A /* TUIOutgoingTextCellLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIOutgoingTextCellLayout.h; sourceTree = "<group>"; };
+		6D5DD7D92308439D0064612A /* TUIIncommingTextCellLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIIncommingTextCellLayout.m; sourceTree = "<group>"; };
+		6D5DD7DA2308439D0064612A /* TUISystemMessageCellLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUISystemMessageCellLayout.h; sourceTree = "<group>"; };
+		6D5DD7DB2308439D0064612A /* TUIMessageCellLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIMessageCellLayout.h; sourceTree = "<group>"; };
+		6D5DD7DC2308439D0064612A /* TUIMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIMessageCell.h; sourceTree = "<group>"; };
+		6D5DD7DD2308439D0064612A /* TUIFaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIFaceView.h; sourceTree = "<group>"; };
+		6D5DD7DE2308439D0064612A /* TUIChatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIChatController.m; sourceTree = "<group>"; };
+		6D5DD7DF2308439D0064612A /* TUIMoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIMoreView.h; sourceTree = "<group>"; };
+		6D5DD7E12308439D0064612A /* TUIInputController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIInputController.m; sourceTree = "<group>"; };
+		6D5DD7E22308439D0064612A /* TUIInputMoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIInputMoreCell.h; sourceTree = "<group>"; };
+		6D5DD7E32308439D0064612A /* TUIInputBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIInputBar.m; sourceTree = "<group>"; };
+		6D5DD7E42308439D0064612A /* TUIRecordView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIRecordView.m; sourceTree = "<group>"; };
+		6D5DD7E52308439D0064612A /* TUIInputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIInputController.h; sourceTree = "<group>"; };
+		6D5DD7E62308439D0064612A /* TUIInputBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIInputBar.h; sourceTree = "<group>"; };
+		6D5DD7E72308439D0064612A /* TUIInputMoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIInputMoreCell.m; sourceTree = "<group>"; };
+		6D5DD7E82308439D0064612A /* TUIRecordView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIRecordView.h; sourceTree = "<group>"; };
+		6D5DD7E92308439D0064612A /* TUIMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIMenuCell.m; sourceTree = "<group>"; };
+		6D5DD7EA2308439D0064612A /* TUIMessageController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIMessageController.h; sourceTree = "<group>"; };
+		6D5DD7EB2308439D0064612A /* TUIMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIMenuView.m; sourceTree = "<group>"; };
+		6D5DD7EC2308439D0064612A /* TUIFaceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIFaceCell.m; sourceTree = "<group>"; };
+		6D5DD7EE2308439D0064612A /* TUIFaceMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIFaceMessageCell.h; sourceTree = "<group>"; };
+		6D5DD7EF2308439D0064612A /* TUIFileMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIFileMessageCell.m; sourceTree = "<group>"; };
+		6D5DD7F02308439D0064612A /* TUIVideoMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIVideoMessageCell.m; sourceTree = "<group>"; };
+		6D5DD7F12308439D0064612A /* TUIVoiceMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIVoiceMessageCell.h; sourceTree = "<group>"; };
+		6D5DD7F22308439D0064612A /* TUITextMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUITextMessageCell.m; sourceTree = "<group>"; };
+		6D5DD7F32308439D0064612A /* TUIJoinGroupMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIJoinGroupMessageCell.m; sourceTree = "<group>"; };
+		6D5DD7F42308439D0064612A /* TUISystemMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUISystemMessageCell.m; sourceTree = "<group>"; };
+		6D5DD7F52308439D0064612A /* TUIImageMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIImageMessageCell.m; sourceTree = "<group>"; };
+		6D5DD7F62308439D0064612A /* TUIBubbleMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIBubbleMessageCell.h; sourceTree = "<group>"; };
+		6D5DD7F72308439D0064612A /* TUIFileMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIFileMessageCell.h; sourceTree = "<group>"; };
+		6D5DD7F82308439D0064612A /* TUIFaceMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIFaceMessageCell.m; sourceTree = "<group>"; };
+		6D5DD7F92308439D0064612A /* TUITextMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUITextMessageCell.h; sourceTree = "<group>"; };
+		6D5DD7FA2308439D0064612A /* TUIVoiceMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIVoiceMessageCell.m; sourceTree = "<group>"; };
+		6D5DD7FB2308439D0064612A /* TUIVideoMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIVideoMessageCell.h; sourceTree = "<group>"; };
+		6D5DD7FC2308439D0064612A /* TUISystemMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUISystemMessageCell.h; sourceTree = "<group>"; };
+		6D5DD7FD2308439D0064612A /* TUIJoinGroupMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIJoinGroupMessageCell.h; sourceTree = "<group>"; };
+		6D5DD7FE2308439D0064612A /* TUIBubbleMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIBubbleMessageCell.m; sourceTree = "<group>"; };
+		6D5DD7FF2308439D0064612A /* TUIImageMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIImageMessageCell.h; sourceTree = "<group>"; };
+		6D5DD8002308439D0064612A /* TUIChatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIChatController.h; sourceTree = "<group>"; };
+		6D5DD8012308439D0064612A /* TUIFaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIFaceView.m; sourceTree = "<group>"; };
+		6D5DD8022308439D0064612A /* TUIMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIMessageCell.m; sourceTree = "<group>"; };
+		6D5DD8032308439D0064612A /* TUIMessageController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIMessageController.m; sourceTree = "<group>"; };
+		6D5DD8042308439D0064612A /* TUIMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIMenuCell.h; sourceTree = "<group>"; };
+		6D5DD8052308439D0064612A /* TUIMoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIMoreView.m; sourceTree = "<group>"; };
+		6D5DD8062308439D0064612A /* TUIMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIMenuView.h; sourceTree = "<group>"; };
+		6D5DD8082308439D0064612A /* TUIGroupInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupInfoController.m; sourceTree = "<group>"; };
+		6D5DD8092308439D0064612A /* TUIGroupMembersView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupMembersView.h; sourceTree = "<group>"; };
+		6D5DD80A2308439D0064612A /* TUIGroupMembersCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupMembersCell.h; sourceTree = "<group>"; };
+		6D5DD80B2308439D0064612A /* TUIGroupMemberCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupMemberCell.h; sourceTree = "<group>"; };
+		6D5DD80C2308439D0064612A /* TUIGroupMemberController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupMemberController.h; sourceTree = "<group>"; };
+		6D5DD80D2308439D0064612A /* TUIGroupMembersView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupMembersView.m; sourceTree = "<group>"; };
+		6D5DD80E2308439D0064612A /* TUIGroupInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupInfoController.h; sourceTree = "<group>"; };
+		6D5DD80F2308439D0064612A /* TUIGroupMemberCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupMemberCell.m; sourceTree = "<group>"; };
+		6D5DD8102308439D0064612A /* TUIGroupMembersCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupMembersCell.m; sourceTree = "<group>"; };
+		6D5DD8112308439D0064612A /* TUIGroupMemberController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupMemberController.m; sourceTree = "<group>"; };
+		6D5DD8132308439D0064612A /* TUIUserProfileControllerServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIUserProfileControllerServiceProtocol.h; sourceTree = "<group>"; };
+		6D5DD8142308439D0064612A /* TUIGroupInfoDataProviderServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupInfoDataProviderServiceProtocol.h; sourceTree = "<group>"; };
+		6D5DD8152308439D0064612A /* TUIUserProfileDataProviderServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIUserProfileDataProviderServiceProtocol.h; sourceTree = "<group>"; };
+		6D5DD8162308439D0064612A /* TUIMessageDataProviderServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIMessageDataProviderServiceProtocol.h; sourceTree = "<group>"; };
+		6D5DD8172308439D0064612A /* TUIConversationDataProviderServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIConversationDataProviderServiceProtocol.h; sourceTree = "<group>"; };
+		6D5DD8182308439D0064612A /* TUIFriendProfileControllerServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIFriendProfileControllerServiceProtocol.h; sourceTree = "<group>"; };
+		6D5DD81A2308439D0064612A /* TUIGroupInfoDataProviderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIGroupInfoDataProviderService.m; sourceTree = "<group>"; };
+		6D5DD81B2308439D0064612A /* TUIMessageDataProviderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIMessageDataProviderService.h; sourceTree = "<group>"; };
+		6D5DD81C2308439D0064612A /* TUIUserProfileDataProviderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIUserProfileDataProviderService.m; sourceTree = "<group>"; };
+		6D5DD81D2308439D0064612A /* TUIConversationDataProviderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIConversationDataProviderService.m; sourceTree = "<group>"; };
+		6D5DD81E2308439D0064612A /* TUIUserProfileDataProviderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIUserProfileDataProviderService.h; sourceTree = "<group>"; };
+		6D5DD81F2308439D0064612A /* TUIMessageDataProviderService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIMessageDataProviderService.m; sourceTree = "<group>"; };
+		6D5DD8202308439D0064612A /* TUIGroupInfoDataProviderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIGroupInfoDataProviderService.h; sourceTree = "<group>"; };
+		6D5DD8212308439D0064612A /* TUIConversationDataProviderService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIConversationDataProviderService.h; sourceTree = "<group>"; };
+		6D5DD8232308439D0064612A /* TNaviBarIndicatorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TNaviBarIndicatorView.m; sourceTree = "<group>"; };
+		6D5DD8252308439D0064612A /* TConversationListViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TConversationListViewModel.m; sourceTree = "<group>"; };
+		6D5DD8262308439D0064612A /* TConversationListViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TConversationListViewModel.h; sourceTree = "<group>"; };
+		6D5DD8272308439D0064612A /* TUIConversationListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIConversationListController.m; sourceTree = "<group>"; };
+		6D5DD8292308439D0064612A /* TUIConversationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIConversationCell.m; sourceTree = "<group>"; };
+		6D5DD82A2308439D0064612A /* TUIConversationCellData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIConversationCellData.m; sourceTree = "<group>"; };
+		6D5DD82B2308439D0064612A /* TUIConversationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIConversationCell.h; sourceTree = "<group>"; };
+		6D5DD82C2308439D0064612A /* TUIConversationCellData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIConversationCellData.h; sourceTree = "<group>"; };
+		6D5DD82D2308439D0064612A /* TNaviBarIndicatorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TNaviBarIndicatorView.h; sourceTree = "<group>"; };
+		6D5DD82E2308439D0064612A /* TUIConversationListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIConversationListController.h; sourceTree = "<group>"; };
+		6D5DD82F2308439D0064612A /* TUIKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIKit.m; sourceTree = "<group>"; };
+		6D5DD8322308439D0064612A /* TIMUserProfile+DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TIMUserProfile+DataProvider.h"; sourceTree = "<group>"; };
+		6D5DD8332308439D0064612A /* TIMGroupInfo+DataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TIMGroupInfo+DataProvider.m"; sourceTree = "<group>"; };
+		6D5DD8342308439D0064612A /* TIMConversation+DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TIMConversation+DataProvider.h"; sourceTree = "<group>"; };
+		6D5DD8352308439D0064612A /* TIMMessage+DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TIMMessage+DataProvider.h"; sourceTree = "<group>"; };
+		6D5DD8372308439D0064612A /* TIMConversation+DataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TIMConversation+DataProvider.m"; sourceTree = "<group>"; };
+		6D5DD8382308439D0064612A /* TIMGroupInfo+DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TIMGroupInfo+DataProvider.h"; sourceTree = "<group>"; };
+		6D5DD8392308439D0064612A /* TIMUserProfile+DataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TIMUserProfile+DataProvider.m"; sourceTree = "<group>"; };
+		6D5DD83B2308439D0064612A /* TIMMessage+DataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TIMMessage+DataProvider.m"; sourceTree = "<group>"; };
+		6D5DD83D2308439D0064612A /* TCContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCContext.m; sourceTree = "<group>"; };
+		6D5DD83E2308439D0064612A /* TCServiceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCServiceManager.m; sourceTree = "<group>"; };
+		6D5DD83F2308439D0064612A /* TCServiceProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCServiceProtocol.h; sourceTree = "<group>"; };
+		6D5DD8402308439D0064612A /* TCAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TCAnnotation.m; sourceTree = "<group>"; };
+		6D5DD8412308439D0064612A /* TCServiceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCServiceManager.h; sourceTree = "<group>"; };
+		6D5DD8422308439D0064612A /* TCContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCContext.h; sourceTree = "<group>"; };
+		6D5DD8432308439D0064612A /* TCAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TCAnnotation.h; sourceTree = "<group>"; };
+		6D5DD8472308439D0064612A /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
+		6D5DD8482308439D0064612A /* if_rom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = if_rom.h; sourceTree = "<group>"; };
+		6D5DD8492308439D0064612A /* dec_if.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dec_if.h; sourceTree = "<group>"; };
+		6D5DD84A2308439D0064612A /* EMVoiceConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EMVoiceConverter.h; sourceTree = "<group>"; };
+		6D5DD84C2308439D0064612A /* interf_dec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_dec.h; sourceTree = "<group>"; };
+		6D5DD84D2308439D0064612A /* libopencore-amrnb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrnb.a"; sourceTree = "<group>"; };
+		6D5DD84E2308439D0064612A /* interf_enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = interf_enc.h; sourceTree = "<group>"; };
+		6D5DD8502308439D0064612A /* wav.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = wav.mm; sourceTree = "<group>"; };
+		6D5DD8512308439D0064612A /* amrFileCodec.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = amrFileCodec.mm; sourceTree = "<group>"; };
+		6D5DD8522308439D0064612A /* amrFileCodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = amrFileCodec.h; sourceTree = "<group>"; };
+		6D5DD8532308439D0064612A /* wav.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wav.h; sourceTree = "<group>"; };
+		6D5DD8542308439D0064612A /* EMVoiceConverter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EMVoiceConverter.mm; sourceTree = "<group>"; };
+		6D5DD8552308439D0064612A /* TUIKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIKit.h; sourceTree = "<group>"; };
+		6D5DD8572308439D0064612A /* TUIKitConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIKitConfig.h; sourceTree = "<group>"; };
+		6D5DD8582308439D0064612A /* TUIError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIError.m; sourceTree = "<group>"; };
+		6D5DD8592308439D0064612A /* TUIImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIImageCache.m; sourceTree = "<group>"; };
+		6D5DD85A2308439D0064612A /* TUIKitConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TUIKitConfig.m; sourceTree = "<group>"; };
+		6D5DD85B2308439D0064612A /* TUIError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIError.h; sourceTree = "<group>"; };
+		6D5DD85C2308439D0064612A /* TUIImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TUIImageCache.h; sourceTree = "<group>"; };
+		6D5DD85E2308439D0064612A /* TUIKitResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TUIKitResource.bundle; sourceTree = "<group>"; };
+		6D5DD85F2308439D0064612A /* TUIKitFace.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TUIKitFace.bundle; sourceTree = "<group>"; };
+		6D5DD8D7230846510064612A /* JMChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMChatViewController.h; sourceTree = "<group>"; };
+		6D5DD8D8230846510064612A /* JMChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMChatViewController.m; sourceTree = "<group>"; };
 		6D62995E224E1E24007E7DE4 /* JMHTTPManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHTTPManager.h; sourceTree = "<group>"; };
 		6D62995F224E1E24007E7DE4 /* JMHTTPManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPManager.m; sourceTree = "<group>"; };
 		6D629961224E1F92007E7DE4 /* JMHTTPRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMHTTPRequest.h; sourceTree = "<group>"; };
 		6D629962224E1F92007E7DE4 /* JMHTTPRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMHTTPRequest.m; sourceTree = "<group>"; };
+		6D72CE3C23093B2D000BA072 /* matter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "matter@2x.png"; sourceTree = "<group>"; };
+		6D72CE3D23093B2D000BA072 /* matter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "matter@3x.png"; sourceTree = "<group>"; };
+		6D72CE3E23093B2D000BA072 /* photography@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photography@2x.png"; sourceTree = "<group>"; };
+		6D72CE3F23093B2D000BA072 /* photography@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photography@3x.png"; sourceTree = "<group>"; };
 		6D82F284227492CF00B9D2B9 /* JMEducationExperienceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMEducationExperienceViewController.h; sourceTree = "<group>"; };
 		6D82F285227492CF00B9D2B9 /* JMEducationExperienceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMEducationExperienceViewController.m; sourceTree = "<group>"; };
 		6D82F286227492CF00B9D2B9 /* JMEducationExperienceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMEducationExperienceViewController.xib; sourceTree = "<group>"; };
@@ -2175,6 +2505,8 @@
 			files = (
 				4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */,
 				6DBAA26D230500B100631AD3 /* ImSDK.framework in Frameworks */,
+				6D5DD8CD2308439E0064612A /* libopencore-amrwb.a in Frameworks */,
+				6D5DD8CE2308439E0064612A /* libopencore-amrnb.a in Frameworks */,
 				6DBAA26E2305034800631AD3 /* ImSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2366,14 +2698,6 @@
 		040AF59F227833CF0027D7D8 /* ChatViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				040AF5A822783E150027D7D8 /* JMMessageCell.h */,
-				040AF5A922783E150027D7D8 /* JMMessageCell.m */,
-				042C16F722F966B70048F8F2 /* JMTextMessageCell.h */,
-				042C16F822F966B70048F8F2 /* JMTextMessageCell.m */,
-				042C16F422F924C10048F8F2 /* JMImageMessageCell.h */,
-				042C16F522F924C10048F8F2 /* JMImageMessageCell.m */,
-				042C16E922F90E370048F8F2 /* TCommonTableViewCell.h */,
-				042C16EA22F90E370048F8F2 /* TCommonTableViewCell.m */,
 			);
 			path = ChatViewCell;
 			sourceTree = "<group>";
@@ -2519,15 +2843,10 @@
 		040E54CD2276F9FF004AB0F9 /* ChatViewController */ = {
 			isa = PBXGroup;
 			children = (
-				040AF5952277D9350027D7D8 /* JMChatViewViewController.h */,
-				040AF5962277D9350027D7D8 /* JMChatViewViewController.m */,
-				040AF59C2277F4F00027D7D8 /* JMMessageTableViewController.h */,
-				040AF59D2277F4F00027D7D8 /* JMMessageTableViewController.m */,
-				040A3934227DD1B200EDD9E0 /* JMInputController.h */,
-				040A3935227DD1B200EDD9E0 /* JMInputController.m */,
-				040A3936227DD1B200EDD9E0 /* JMInputController.xib */,
 				040A3931227DBEA700EDD9E0 /* JMGreetTableViewController.h */,
 				040A3932227DBEA700EDD9E0 /* JMGreetTableViewController.m */,
+				6D5DD8D7230846510064612A /* JMChatViewController.h */,
+				6D5DD8D8230846510064612A /* JMChatViewController.m */,
 			);
 			path = ChatViewController;
 			sourceTree = "<group>";
@@ -2539,14 +2858,6 @@
 				040E54DF22772A99004AB0F9 /* JMMessageListModel.m */,
 				04196DA3227FE1190000A6AA /* JMAllMessageTableViewCellData.h */,
 				04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */,
-				042C16FD22F968010048F8F2 /* JMMessageCellData.h */,
-				042C16FE22F968010048F8F2 /* JMMessageCellData.m */,
-				042C16FA22F967670048F8F2 /* JMTextMessageCellData.h */,
-				042C16FB22F967670048F8F2 /* JMTextMessageCellData.m */,
-				0419511F22F8476600D64C00 /* JMImageMessageCellData.h */,
-				0419512022F8476600D64C00 /* JMImageMessageCellData.m */,
-				049EF53522FA7448007FD4EB /* JMCustumMessageCellData.h */,
-				049EF53622FA7448007FD4EB /* JMCustumMessageCellData.m */,
 				04C4A18722CCF5040049DA29 /* JMGreetModel.h */,
 				04C4A18822CCF5040049DA29 /* JMGreetModel.m */,
 			);
@@ -2854,6 +3165,7 @@
 		0462C7212244936F003B6639 /* ThridParty */ = {
 			isa = PBXGroup;
 			children = (
+				6D5DD7492308439D0064612A /* TUIKit */,
 				6DBAA26B2305008B00631AD3 /* TIMSDK */,
 				0486F7762293917300114A22 /* Picture */,
 				04C120E0228839EA001BDEBC /* Video */,
@@ -3479,6 +3791,10 @@
 		049555E5227B25A30008AF1C /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				6D72CE3C23093B2D000BA072 /* matter@2x.png */,
+				6D72CE3D23093B2D000BA072 /* matter@3x.png */,
+				6D72CE3E23093B2D000BA072 /* photography@2x.png */,
+				6D72CE3F23093B2D000BA072 /* photography@3x.png */,
 				04A5122B229ABDE100BA2DC5 /* paizhao.png */,
 				04A5122C229ABDE100BA2DC5 /* paizhao@2x.png */,
 				04A5122A229ABDE100BA2DC5 /* paizhao@3x.png */,
@@ -3650,11 +3966,6 @@
 				040A3929227DA9A600EDD9E0 /* JMGreetCell.m */,
 				040A3939227DD1EB00EDD9E0 /* JMFaceView.h */,
 				040A393A227DD1EB00EDD9E0 /* JMFaceView.m */,
-				040A393C227DD20400EDD9E0 /* JMMoreView.h */,
-				040A393D227DD20400EDD9E0 /* JMMoreView.m */,
-				040C8646227E8B8100993490 /* JMMoreCollectionViewCell.h */,
-				040C8647227E8B8100993490 /* JMMoreCollectionViewCell.m */,
-				040C8648227E8B8100993490 /* JMMoreCollectionViewCell.xib */,
 				040C8657227ED71100993490 /* JMChatDetailInfoTableViewCell.h */,
 				040C8658227ED71100993490 /* JMChatDetailInfoTableViewCell.m */,
 				040C8659227ED71100993490 /* JMChatDetailInfoTableViewCell.xib */,
@@ -3674,11 +3985,11 @@
 		04C6013A22604108000B1FE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				6D5DD5B823083CFD0064612A /* JMAllMessageTableViewController.h */,
+				6D5DD5B623083CFC0064612A /* JMAllMessageTableViewController.m */,
+				6D5DD5B723083CFC0064612A /* JMAllMessageTableViewController.xib */,
 				0425CB54228449A000E08587 /* VideoChatViewController */,
 				040E54CD2276F9FF004AB0F9 /* ChatViewController */,
-				04C6013B2260639C000B1FE0 /* JMAllMessageTableViewController.h */,
-				04C6013C2260639C000B1FE0 /* JMAllMessageTableViewController.m */,
-				04C6013D2260639C000B1FE0 /* JMAllMessageTableViewController.xib */,
 				04C4A16E22CC414D0049DA29 /* JMMessageListViewController.h */,
 				04C4A16F22CC414D0049DA29 /* JMMessageListViewController.m */,
 				04C4A17022CC414D0049DA29 /* JMMessageListViewController.xib */,
@@ -4227,6 +4538,513 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		6D5DD7492308439D0064612A /* TUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD74A2308439D0064612A /* Classes */,
+				6D5DD85D2308439D0064612A /* Resources */,
+			);
+			path = TUIKit;
+			sourceTree = "<group>";
+		};
+		6D5DD74A2308439D0064612A /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8562308439D0064612A /* Global */,
+				6D5DD74B2308439D0064612A /* Section */,
+				6D5DD8442308439D0064612A /* Third */,
+				6D5DD8552308439D0064612A /* TUIKit.h */,
+				6D5DD82F2308439D0064612A /* TUIKit.m */,
+				6D5DD8302308439D0064612A /* Util */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6D5DD74B2308439D0064612A /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD74C2308439D0064612A /* Commom */,
+				6D5DD7862308439D0064612A /* Contact */,
+				6D5DD7B12308439D0064612A /* Chat */,
+				6D5DD8072308439D0064612A /* Group */,
+				6D5DD8122308439D0064612A /* Protocol */,
+				6D5DD8192308439D0064612A /* Service */,
+				6D5DD8222308439D0064612A /* Conversation */,
+			);
+			path = Section;
+			sourceTree = "<group>";
+		};
+		6D5DD74C2308439D0064612A /* Commom */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD76C2308439D0064612A /* Cell */,
+				6D5DD75B2308439D0064612A /* Controller */,
+				6D5DD7502308439D0064612A /* NSDate+TUIKIT.h */,
+				6D5DD77B2308439D0064612A /* NSDate+TUIKIT.m */,
+				6D5DD74F2308439D0064612A /* NSString+Common.h */,
+				6D5DD76A2308439D0064612A /* NSString+Common.m */,
+				6D5DD7822308439D0064612A /* TAddCell.h */,
+				6D5DD7592308439D0064612A /* TAddCell.m */,
+				6D5DD75A2308439D0064612A /* TAddCollectionCell.h */,
+				6D5DD7812308439D0064612A /* TAddCollectionCell.m */,
+				6D5DD74D2308439D0064612A /* TAddHelper.h */,
+				6D5DD7792308439D0064612A /* TAddHelper.m */,
+				6D5DD77F2308439D0064612A /* THeader.h */,
+				6D5DD7832308439D0064612A /* THelper.h */,
+				6D5DD7582308439D0064612A /* THelper.m */,
+				6D5DD7802308439D0064612A /* TModifyView.h */,
+				6D5DD7522308439D0064612A /* TModifyView.m */,
+				6D5DD7542308439D0064612A /* TPopCell.h */,
+				6D5DD77D2308439D0064612A /* TPopCell.m */,
+				6D5DD7572308439D0064612A /* TPopView.h */,
+				6D5DD7842308439D0064612A /* TPopView.m */,
+				6D5DD74E2308439D0064612A /* TResponderTextView.h */,
+				6D5DD76B2308439D0064612A /* TResponderTextView.m */,
+				6D5DD7852308439D0064612A /* TUILocalStorage.h */,
+				6D5DD7562308439D0064612A /* TUILocalStorage.m */,
+				6D5DD7512308439D0064612A /* TUITabBarController.h */,
+				6D5DD77A2308439D0064612A /* TUITabBarController.m */,
+				6D5DD77E2308439D0064612A /* TUnReadView.h */,
+				6D5DD7532308439D0064612A /* TUnReadView.m */,
+				6D5DD7552308439D0064612A /* UIImage+TUIKIT.h */,
+				6D5DD77C2308439D0064612A /* UIImage+TUIKIT.m */,
+			);
+			path = Commom;
+			sourceTree = "<group>";
+		};
+		6D5DD75B2308439D0064612A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD75F2308439D0064612A /* TDateEditController.h */,
+				6D5DD7632308439D0064612A /* TDateEditController.m */,
+				6D5DD7672308439D0064612A /* TNavigationController.h */,
+				6D5DD7602308439D0064612A /* TNavigationController.m */,
+				6D5DD7692308439D0064612A /* TTextEditController.h */,
+				6D5DD7622308439D0064612A /* TTextEditController.m */,
+				6D5DD75E2308439D0064612A /* TUIAvatarViewController.h */,
+				6D5DD7642308439D0064612A /* TUIAvatarViewController.m */,
+				6D5DD7662308439D0064612A /* TUIFileViewController.h */,
+				6D5DD75C2308439D0064612A /* TUIFileViewController.m */,
+				6D5DD75D2308439D0064612A /* TUIImageViewController.h */,
+				6D5DD7652308439D0064612A /* TUIImageViewController.m */,
+				6D5DD7682308439D0064612A /* TUIVideoViewController.h */,
+				6D5DD7612308439D0064612A /* TUIVideoViewController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6D5DD76C2308439D0064612A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD76D2308439D0064612A /* TCommonSwitchCell.h */,
+				6D5DD76E2308439D0064612A /* TCommonAvatarCell.h */,
+				6D5DD76F2308439D0064612A /* TUIProfileCardCell.m */,
+				6D5DD7702308439D0064612A /* TCommonCell.h */,
+				6D5DD7712308439D0064612A /* TCommonTextCell.m */,
+				6D5DD7722308439D0064612A /* TUIButtonCell.m */,
+				6D5DD7732308439D0064612A /* TCommonSwitchCell.m */,
+				6D5DD7742308439D0064612A /* TCommonAvatarCell.m */,
+				6D5DD7752308439D0064612A /* TUIProfileCardCell.h */,
+				6D5DD7762308439D0064612A /* TUIButtonCell.h */,
+				6D5DD7772308439D0064612A /* TCommonTextCell.h */,
+				6D5DD7782308439D0064612A /* TCommonCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		6D5DD7862308439D0064612A /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7872308439D0064612A /* TUIGroupConversationListController.h */,
+				6D5DD7882308439D0064612A /* TUIContactSelectController.m */,
+				6D5DD7892308439D0064612A /* ViewModel */,
+				6D5DD7942308439D0064612A /* TUIContactListPicker.m */,
+				6D5DD7952308439D0064612A /* TUIContactController.m */,
+				6D5DD7962308439D0064612A /* TUINewFriendViewController.h */,
+				6D5DD7972308439D0064612A /* TUIBlackListController.m */,
+				6D5DD7982308439D0064612A /* Cell */,
+				6D5DD7AB2308439D0064612A /* TUIContactListPicker.h */,
+				6D5DD7AC2308439D0064612A /* TUIContactSelectController.h */,
+				6D5DD7AD2308439D0064612A /* TUIGroupConversationListController.m */,
+				6D5DD7AE2308439D0064612A /* TUIContactController.h */,
+				6D5DD7AF2308439D0064612A /* TUINewFriendViewController.m */,
+				6D5DD7B02308439D0064612A /* TUIBlackListController.h */,
+			);
+			path = Contact;
+			sourceTree = "<group>";
+		};
+		6D5DD7892308439D0064612A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD78A2308439D0064612A /* TContactSelectViewModel.m */,
+				6D5DD78B2308439D0064612A /* TUIBlackListViewModel.h */,
+				6D5DD78C2308439D0064612A /* TUINewFriendViewModel.h */,
+				6D5DD78D2308439D0064612A /* TContactViewModel.m */,
+				6D5DD78E2308439D0064612A /* TUIGroupConversationListViewModel.h */,
+				6D5DD78F2308439D0064612A /* TContactSelectViewModel.h */,
+				6D5DD7902308439D0064612A /* TUIBlackListViewModel.m */,
+				6D5DD7912308439D0064612A /* TUINewFriendViewModel.m */,
+				6D5DD7922308439D0064612A /* TUIGroupConversationListViewModel.m */,
+				6D5DD7932308439D0064612A /* TContactViewModel.h */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6D5DD7982308439D0064612A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7992308439D0064612A /* TContactListPickerCell.h */,
+				6D5DD79A2308439D0064612A /* TCommonPendencyCell.m */,
+				6D5DD79B2308439D0064612A /* TCommonContactCellData.h */,
+				6D5DD79C2308439D0064612A /* TUIContactActionCellData.m */,
+				6D5DD79D2308439D0064612A /* TCommonContactSelectCellData.m */,
+				6D5DD79E2308439D0064612A /* TCommonContactCell.m */,
+				6D5DD79F2308439D0064612A /* TUIContactActionCell.m */,
+				6D5DD7A02308439D0064612A /* TCommonContactSelectCell.m */,
+				6D5DD7A12308439D0064612A /* TCommonPendencyCellData.h */,
+				6D5DD7A22308439D0064612A /* TCommonContactCellData.m */,
+				6D5DD7A32308439D0064612A /* TCommonPendencyCell.h */,
+				6D5DD7A42308439D0064612A /* TContactListPickerCell.m */,
+				6D5DD7A52308439D0064612A /* TUIContactActionCellData.h */,
+				6D5DD7A62308439D0064612A /* TCommonContactSelectCellData.h */,
+				6D5DD7A72308439D0064612A /* TCommonPendencyCellData.m */,
+				6D5DD7A82308439D0064612A /* TCommonContactSelectCell.h */,
+				6D5DD7A92308439D0064612A /* TUIContactActionCell.h */,
+				6D5DD7AA2308439D0064612A /* TCommonContactCell.h */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		6D5DD7B12308439D0064612A /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7ED2308439D0064612A /* Cell */,
+				6D5DD7B22308439D0064612A /* CellData */,
+				6D5DD7D32308439D0064612A /* CellLayout */,
+				6D5DD7E02308439D0064612A /* Input */,
+				6D5DD7C72308439D0064612A /* Pendency */,
+				6D5DD8002308439D0064612A /* TUIChatController.h */,
+				6D5DD7DE2308439D0064612A /* TUIChatController.m */,
+				6D5DD7D22308439D0064612A /* TUIFaceCell.h */,
+				6D5DD7EC2308439D0064612A /* TUIFaceCell.m */,
+				6D5DD7DD2308439D0064612A /* TUIFaceView.h */,
+				6D5DD8012308439D0064612A /* TUIFaceView.m */,
+				6D5DD8042308439D0064612A /* TUIMenuCell.h */,
+				6D5DD7E92308439D0064612A /* TUIMenuCell.m */,
+				6D5DD8062308439D0064612A /* TUIMenuView.h */,
+				6D5DD7EB2308439D0064612A /* TUIMenuView.m */,
+				6D5DD7DC2308439D0064612A /* TUIMessageCell.h */,
+				6D5DD8022308439D0064612A /* TUIMessageCell.m */,
+				6D5DD7EA2308439D0064612A /* TUIMessageController.h */,
+				6D5DD8032308439D0064612A /* TUIMessageController.m */,
+				6D5DD7DF2308439D0064612A /* TUIMoreView.h */,
+				6D5DD8052308439D0064612A /* TUIMoreView.m */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		6D5DD7B22308439D0064612A /* CellData */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7B52308439D0064612A /* TUIBubbleMessageCellData.h */,
+				6D5DD7BE2308439D0064612A /* TUIBubbleMessageCellData.m */,
+				6D5DD7C42308439D0064612A /* TUIFaceMessageCellData.h */,
+				6D5DD7BA2308439D0064612A /* TUIFaceMessageCellData.m */,
+				6D5DD7B62308439D0064612A /* TUIFileMessageCellData.h */,
+				6D5DD7BD2308439D0064612A /* TUIFileMessageCellData.m */,
+				6D5DD7BB2308439D0064612A /* TUIImageMessageCellData.h */,
+				6D5DD7C32308439D0064612A /* TUIImageMessageCellData.m */,
+				6D5DD7B42308439D0064612A /* TUIJoinGroupMessageCellData.h */,
+				6D5DD7BF2308439D0064612A /* TUIJoinGroupMessageCellData.m */,
+				6D5DD7B92308439D0064612A /* TUIMessageCellData.h */,
+				6D5DD7C52308439D0064612A /* TUIMessageCellData.m */,
+				6D5DD7B72308439D0064612A /* TUISystemMessageCellData.h */,
+				6D5DD7C12308439D0064612A /* TUISystemMessageCellData.m */,
+				6D5DD7B32308439D0064612A /* TUITextMessageCellData.h */,
+				6D5DD7C02308439D0064612A /* TUITextMessageCellData.m */,
+				6D5DD7B82308439D0064612A /* TUIVideoMessageCellData.h */,
+				6D5DD7C62308439D0064612A /* TUIVideoMessageCellData.m */,
+				6D5DD7BC2308439D0064612A /* TUIVoiceMessageCellData.h */,
+				6D5DD7C22308439D0064612A /* TUIVoiceMessageCellData.m */,
+			);
+			path = CellData;
+			sourceTree = "<group>";
+		};
+		6D5DD7C72308439D0064612A /* Pendency */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7C82308439D0064612A /* ViewModel */,
+				6D5DD7CD2308439D0064612A /* TUIGroupPendencyController.h */,
+				6D5DD7CE2308439D0064612A /* Cell */,
+				6D5DD7D12308439D0064612A /* TUIGroupPendencyController.m */,
+			);
+			path = Pendency;
+			sourceTree = "<group>";
+		};
+		6D5DD7C82308439D0064612A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7C92308439D0064612A /* TUIGroupPendencyViewModel.h */,
+				6D5DD7CA2308439D0064612A /* TUIGroupPendencyCellData.h */,
+				6D5DD7CB2308439D0064612A /* TUIGroupPendencyViewModel.m */,
+				6D5DD7CC2308439D0064612A /* TUIGroupPendencyCellData.m */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6D5DD7CE2308439D0064612A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7CF2308439D0064612A /* TUIGroupPendencyCell.h */,
+				6D5DD7D02308439D0064612A /* TUIGroupPendencyCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		6D5DD7D32308439D0064612A /* CellLayout */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7D52308439D0064612A /* TUIIncommingTextCellLayout.h */,
+				6D5DD7D92308439D0064612A /* TUIIncommingTextCellLayout.m */,
+				6D5DD7DB2308439D0064612A /* TUIMessageCellLayout.h */,
+				6D5DD7D72308439D0064612A /* TUIMessageCellLayout.m */,
+				6D5DD7D82308439D0064612A /* TUIOutgoingTextCellLayout.h */,
+				6D5DD7D42308439D0064612A /* TUIOutgoingTextCellLayout.m */,
+				6D5DD7DA2308439D0064612A /* TUISystemMessageCellLayout.h */,
+				6D5DD7D62308439D0064612A /* TUISystemMessageCellLayout.m */,
+			);
+			path = CellLayout;
+			sourceTree = "<group>";
+		};
+		6D5DD7E02308439D0064612A /* Input */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7E62308439D0064612A /* TUIInputBar.h */,
+				6D5DD7E32308439D0064612A /* TUIInputBar.m */,
+				6D5DD7E52308439D0064612A /* TUIInputController.h */,
+				6D5DD7E12308439D0064612A /* TUIInputController.m */,
+				6D5DD7E22308439D0064612A /* TUIInputMoreCell.h */,
+				6D5DD7E72308439D0064612A /* TUIInputMoreCell.m */,
+				6D5DD7E82308439D0064612A /* TUIRecordView.h */,
+				6D5DD7E42308439D0064612A /* TUIRecordView.m */,
+			);
+			path = Input;
+			sourceTree = "<group>";
+		};
+		6D5DD7ED2308439D0064612A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD7F62308439D0064612A /* TUIBubbleMessageCell.h */,
+				6D5DD7FE2308439D0064612A /* TUIBubbleMessageCell.m */,
+				6D5DD7EE2308439D0064612A /* TUIFaceMessageCell.h */,
+				6D5DD7F82308439D0064612A /* TUIFaceMessageCell.m */,
+				6D5DD7F72308439D0064612A /* TUIFileMessageCell.h */,
+				6D5DD7EF2308439D0064612A /* TUIFileMessageCell.m */,
+				6D5DD7FF2308439D0064612A /* TUIImageMessageCell.h */,
+				6D5DD7F52308439D0064612A /* TUIImageMessageCell.m */,
+				6D5DD7FD2308439D0064612A /* TUIJoinGroupMessageCell.h */,
+				6D5DD7F32308439D0064612A /* TUIJoinGroupMessageCell.m */,
+				6D5DD7FC2308439D0064612A /* TUISystemMessageCell.h */,
+				6D5DD7F42308439D0064612A /* TUISystemMessageCell.m */,
+				6D5DD7F92308439D0064612A /* TUITextMessageCell.h */,
+				6D5DD7F22308439D0064612A /* TUITextMessageCell.m */,
+				6D5DD7FB2308439D0064612A /* TUIVideoMessageCell.h */,
+				6D5DD7F02308439D0064612A /* TUIVideoMessageCell.m */,
+				6D5DD7F12308439D0064612A /* TUIVoiceMessageCell.h */,
+				6D5DD7FA2308439D0064612A /* TUIVoiceMessageCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		6D5DD8072308439D0064612A /* Group */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8082308439D0064612A /* TUIGroupInfoController.m */,
+				6D5DD8092308439D0064612A /* TUIGroupMembersView.h */,
+				6D5DD80A2308439D0064612A /* TUIGroupMembersCell.h */,
+				6D5DD80B2308439D0064612A /* TUIGroupMemberCell.h */,
+				6D5DD80C2308439D0064612A /* TUIGroupMemberController.h */,
+				6D5DD80D2308439D0064612A /* TUIGroupMembersView.m */,
+				6D5DD80E2308439D0064612A /* TUIGroupInfoController.h */,
+				6D5DD80F2308439D0064612A /* TUIGroupMemberCell.m */,
+				6D5DD8102308439D0064612A /* TUIGroupMembersCell.m */,
+				6D5DD8112308439D0064612A /* TUIGroupMemberController.m */,
+			);
+			path = Group;
+			sourceTree = "<group>";
+		};
+		6D5DD8122308439D0064612A /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8172308439D0064612A /* TUIConversationDataProviderServiceProtocol.h */,
+				6D5DD8182308439D0064612A /* TUIFriendProfileControllerServiceProtocol.h */,
+				6D5DD8142308439D0064612A /* TUIGroupInfoDataProviderServiceProtocol.h */,
+				6D5DD8162308439D0064612A /* TUIMessageDataProviderServiceProtocol.h */,
+				6D5DD8132308439D0064612A /* TUIUserProfileControllerServiceProtocol.h */,
+				6D5DD8152308439D0064612A /* TUIUserProfileDataProviderServiceProtocol.h */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		6D5DD8192308439D0064612A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8212308439D0064612A /* TUIConversationDataProviderService.h */,
+				6D5DD81D2308439D0064612A /* TUIConversationDataProviderService.m */,
+				6D5DD8202308439D0064612A /* TUIGroupInfoDataProviderService.h */,
+				6D5DD81A2308439D0064612A /* TUIGroupInfoDataProviderService.m */,
+				6D5DD81B2308439D0064612A /* TUIMessageDataProviderService.h */,
+				6D5DD81F2308439D0064612A /* TUIMessageDataProviderService.m */,
+				6D5DD81E2308439D0064612A /* TUIUserProfileDataProviderService.h */,
+				6D5DD81C2308439D0064612A /* TUIUserProfileDataProviderService.m */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6D5DD8222308439D0064612A /* Conversation */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8232308439D0064612A /* TNaviBarIndicatorView.m */,
+				6D5DD8242308439D0064612A /* ViewModel */,
+				6D5DD8272308439D0064612A /* TUIConversationListController.m */,
+				6D5DD8282308439D0064612A /* Cell */,
+				6D5DD82D2308439D0064612A /* TNaviBarIndicatorView.h */,
+				6D5DD82E2308439D0064612A /* TUIConversationListController.h */,
+			);
+			path = Conversation;
+			sourceTree = "<group>";
+		};
+		6D5DD8242308439D0064612A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8252308439D0064612A /* TConversationListViewModel.m */,
+				6D5DD8262308439D0064612A /* TConversationListViewModel.h */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6D5DD8282308439D0064612A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8292308439D0064612A /* TUIConversationCell.m */,
+				6D5DD82A2308439D0064612A /* TUIConversationCellData.m */,
+				6D5DD82B2308439D0064612A /* TUIConversationCell.h */,
+				6D5DD82C2308439D0064612A /* TUIConversationCellData.h */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		6D5DD8302308439D0064612A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8312308439D0064612A /* Category */,
+				6D5DD83C2308439D0064612A /* Service */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		6D5DD8312308439D0064612A /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8342308439D0064612A /* TIMConversation+DataProvider.h */,
+				6D5DD8372308439D0064612A /* TIMConversation+DataProvider.m */,
+				6D5DD8382308439D0064612A /* TIMGroupInfo+DataProvider.h */,
+				6D5DD8332308439D0064612A /* TIMGroupInfo+DataProvider.m */,
+				6D5DD8352308439D0064612A /* TIMMessage+DataProvider.h */,
+				6D5DD83B2308439D0064612A /* TIMMessage+DataProvider.m */,
+				6D5DD8322308439D0064612A /* TIMUserProfile+DataProvider.h */,
+				6D5DD8392308439D0064612A /* TIMUserProfile+DataProvider.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		6D5DD83C2308439D0064612A /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8432308439D0064612A /* TCAnnotation.h */,
+				6D5DD8402308439D0064612A /* TCAnnotation.m */,
+				6D5DD8422308439D0064612A /* TCContext.h */,
+				6D5DD83D2308439D0064612A /* TCContext.m */,
+				6D5DD8412308439D0064612A /* TCServiceManager.h */,
+				6D5DD83E2308439D0064612A /* TCServiceManager.m */,
+				6D5DD83F2308439D0064612A /* TCServiceProtocol.h */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6D5DD8442308439D0064612A /* Third */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8452308439D0064612A /* voiceConvert */,
+			);
+			path = Third;
+			sourceTree = "<group>";
+		};
+		6D5DD8452308439D0064612A /* voiceConvert */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8462308439D0064612A /* opencore-amrwb */,
+				6D5DD84A2308439D0064612A /* EMVoiceConverter.h */,
+				6D5DD84B2308439D0064612A /* opencore-amrnb */,
+				6D5DD84F2308439D0064612A /* amrwapper */,
+				6D5DD8542308439D0064612A /* EMVoiceConverter.mm */,
+			);
+			path = voiceConvert;
+			sourceTree = "<group>";
+		};
+		6D5DD8462308439D0064612A /* opencore-amrwb */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8472308439D0064612A /* libopencore-amrwb.a */,
+				6D5DD8482308439D0064612A /* if_rom.h */,
+				6D5DD8492308439D0064612A /* dec_if.h */,
+			);
+			path = "opencore-amrwb";
+			sourceTree = "<group>";
+		};
+		6D5DD84B2308439D0064612A /* opencore-amrnb */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD84C2308439D0064612A /* interf_dec.h */,
+				6D5DD84D2308439D0064612A /* libopencore-amrnb.a */,
+				6D5DD84E2308439D0064612A /* interf_enc.h */,
+			);
+			path = "opencore-amrnb";
+			sourceTree = "<group>";
+		};
+		6D5DD84F2308439D0064612A /* amrwapper */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD8502308439D0064612A /* wav.mm */,
+				6D5DD8512308439D0064612A /* amrFileCodec.mm */,
+				6D5DD8522308439D0064612A /* amrFileCodec.h */,
+				6D5DD8532308439D0064612A /* wav.h */,
+			);
+			path = amrwapper;
+			sourceTree = "<group>";
+		};
+		6D5DD8562308439D0064612A /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD85B2308439D0064612A /* TUIError.h */,
+				6D5DD8582308439D0064612A /* TUIError.m */,
+				6D5DD85C2308439D0064612A /* TUIImageCache.h */,
+				6D5DD8592308439D0064612A /* TUIImageCache.m */,
+				6D5DD8572308439D0064612A /* TUIKitConfig.h */,
+				6D5DD85A2308439D0064612A /* TUIKitConfig.m */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		6D5DD85D2308439D0064612A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6D5DD85E2308439D0064612A /* TUIKitResource.bundle */,
+				6D5DD85F2308439D0064612A /* TUIKitFace.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		6D62995D224E0468007E7DE4 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -4627,6 +5445,7 @@
 				04A5FD5222C8A5C800850604 /* huangguan@3x.png in Resources */,
 				04AF934122CA29B000D9FCBF /* deimi_login.png in Resources */,
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
+				6D5DD5BA23083CFD0064612A /* JMAllMessageTableViewController.xib in Resources */,
 				041CCF0522A52403002DFED3 /* order_cp@3x.png in Resources */,
 				04C4A17B22CC4B1C0049DA29 /* logo2@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
@@ -4678,6 +5497,7 @@
 				048E6633228574BE00694D86 /* peer_countermand.png in Resources */,
 				04DD1D5C224B6E95007CB11C /* 组 18@2x(1).png in Resources */,
 				040714A5227C6CC70026C368 /* more.png in Resources */,
+				6D72CE4123093B2D000BA072 /* matter@3x.png in Resources */,
 				04072F3A2282B47C0067A05D /* redlining.png in Resources */,
 				049555E9227B25C50008AF1C /* me_bubble.png in Resources */,
 				04DD1D57224B6E95007CB11C /* 组 18@2x.png in Resources */,
@@ -4772,6 +5592,7 @@
 				04ABB7A022B1EF8C00E3F66A /* star_level@3x.png in Resources */,
 				04EA7E4023011BE4005B7CE5 /* JMPostTaskBottomView.xib in Resources */,
 				04072F272282949D0067A05D /* peijing@2x.png in Resources */,
+				6D5DD8D62308439E0064612A /* TUIKitFace.bundle in Resources */,
 				047F8EB7228AC552005E81FA /* C_play@3x.png in Resources */,
 				0495100522AEA24900C3D3FB /* vip_header@2x.png in Resources */,
 				041997C72266C5DC00C6C134 /* post_a_job.png in Resources */,
@@ -4817,6 +5638,7 @@
 				0485AD4122A13F0400B31506 /* SecondModulesHTML in Resources */,
 				04BF6DA922C3368B003032BC /* Friendster@3x.png in Resources */,
 				6D020A2E2250F3F9009BCFE4 /*  Close@2x.png in Resources */,
+				6D72CE4323093B2D000BA072 /* photography@3x.png in Resources */,
 				04DD1D5B224B6E95007CB11C /* 组 18@3x(1).png in Resources */,
 				04C6014E226071B5000B1FE0 /* JMAllMessageTableViewCell.xib in Resources */,
 				048348D92269C01200DE4630 /* JMMangerInterviewTableViewCell.xib in Resources */,
@@ -4840,7 +5662,6 @@
 				04950FE922AE969A00C3D3FB /* stale_dated@3x.png in Resources */,
 				048A0DE722B8DB34006530EC /* demi_home@2x.png in Resources */,
 				04DEB4192296BF530089BD87 /* employ@3x.png in Resources */,
-				040C864A227E8B8100993490 /* JMMoreCollectionViewCell.xib in Resources */,
 				04072F2D2282949D0067A05D /* particulars@3x.png in Resources */,
 				041997D42266CB3500C6C134 /* JMCompanyHomeTableViewCell.xib in Resources */,
 				0494691F2244EEDA00A5BEB7 /* ChooseIdentity.xib in Resources */,
@@ -4855,7 +5676,6 @@
 				6D82F288227492CF00B9D2B9 /* JMEducationExperienceViewController.xib in Resources */,
 				04BE8B3F22924241004EB7EC /* notification@3x.png in Resources */,
 				6D0209F1224FB900009BCFE4 /* upinstall@2x.png in Resources */,
-				040A3938227DD1B200EDD9E0 /* JMInputController.xib in Resources */,
 				04DEB40D22968E840089BD87 /* no_pass.png in Resources */,
 				04DD1D4E224B6E95007CB11C /* WeChat_login@2x.png in Resources */,
 				040CA859225F1EBF006D7A7F /* Location_of_detail_page.png in Resources */,
@@ -4870,6 +5690,7 @@
 				04C6015D2260874A000B1FE0 /* JMLookMeTableViewCell.xib in Resources */,
 				04908B4A22A9089B000B5AB4 /* JMBUserPostSaleJobViewController.xib in Resources */,
 				04ABB79F22B1EF8C00E3F66A /* star_level.png in Resources */,
+				6D72CE4223093B2D000BA072 /* photography@2x.png in Resources */,
 				041CCF0222A52403002DFED3 /* order_annotion.png in Resources */,
 				040E366122681C9A00A7D789 /* girl@2x.png in Resources */,
 				04908AD722A7A361000B5AB4 /* vvip@2x.png in Resources */,
@@ -4892,7 +5713,6 @@
 				048FEE382244853C001160C8 /* Main.storyboard in Resources */,
 				04A64E8D22C452EF006C3ABA /* delivered@2x.png in Resources */,
 				0488E396229F93510071DEE7 /* icon_return_nav.png in Resources */,
-				04C6013F2260639C000B1FE0 /* JMAllMessageTableViewController.xib in Resources */,
 				0485AD1322A1037400B31506 /* bule_upinstall.png in Resources */,
 				040BF07A22719E4E0088697D /* switchover@2x.png in Resources */,
 				041997F3226717D700C6C134 /* JMContactOfPersonDetailViewController.xib in Resources */,
@@ -4977,6 +5797,7 @@
 				04CC5F9622B3B68E00C5DD46 /* JMDiscoverTopView.xib in Resources */,
 				0488E392229F903D0071DEE7 /* burse@3x.png in Resources */,
 				04BE8B4B2292583F004EB7EC /* accretion@3x.png in Resources */,
+				6D72CE4023093B2D000BA072 /* matter@2x.png in Resources */,
 				040E365E22681C9A00A7D789 /* girl.png in Resources */,
 				0485AD1722A10D1900B31506 /* myResume.png in Resources */,
 				04908B2822A7FE31000B5AB4 /* square_icon@3x.png in Resources */,
@@ -5076,6 +5897,7 @@
 				04BBF2C422918E7C0068A9B1 /* C_videos@2x.png in Resources */,
 				040A3930227DAC2B00EDD9E0 /* copyreader.png in Resources */,
 				04908AEF22A7A926000B5AB4 /* B_task.png in Resources */,
+				6D5DD8D52308439E0064612A /* TUIKitResource.bundle in Resources */,
 				040701B6227556A4002BF58D /* JMChooseTimeViewController.xib in Resources */,
 				040C18172264148300456C53 /* JIANMIAN_login.png in Resources */,
 				0488E3C8229F9BED0071DEE7 /* discovery_pitch_on@3x.png in Resources */,
@@ -5172,7 +5994,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				04796AE622D323E30082BD59 /* JMBMineInfoView.m in Sources */,
+				6D5DD8BF2308439E0064612A /* TNaviBarIndicatorView.m in Sources */,
 				0485AD3822A1340D00B31506 /* JMPostPartTimeResumeViewController.m in Sources */,
+				6D5DD8C52308439E0064612A /* TIMGroupInfo+DataProvider.m in Sources */,
+				6D5DD8BA2308439E0064612A /* TUIGroupMemberController.m in Sources */,
 				049C651C22AD30CE00A93DFE /* JMMakeOutBillView.m in Sources */,
 				040701C32275E4A3002BF58D /* JMHTTPManager+CompanyLike.m in Sources */,
 				04EA212122AFEC390035C398 /* JMHTTPManager+FectchMyTaskOrderList.m in Sources */,
@@ -5183,81 +6008,116 @@
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
 				04C4A17622CC4ABF0049DA29 /* JMAboutOursViewController.m in Sources */,
 				0492AE7E22F0463400AB21B3 /* JMWalletViewController.m in Sources */,
+				6D5DD8D32308439E0064612A /* TUIImageCache.m in Sources */,
 				044276DB22F3EDDF00CAE54F /* JMCityListManager.m in Sources */,
 				040B838A2265EC0600F1A37A /* JMCompanyHomeViewController.m in Sources */,
 				04BBF2B022903D090068A9B1 /* JMCompanyVideoView.m in Sources */,
 				04DD1D0F224B6D96007CB11C /* FailedLoadingViewController.m in Sources */,
-				040A3937227DD1B200EDD9E0 /* JMInputController.m in Sources */,
 				045EDD63225D97650054C5F3 /* JMHTTPManager+Captcha.m in Sources */,
+				6D5DD8822308439D0064612A /* TUIContactController.m in Sources */,
 				040CD555226B1FB5000BB230 /* JMBAndCTabBarViewController.m in Sources */,
 				04908AF422A7B89C000B5AB4 /* JMBUserMineSectionView.m in Sources */,
 				04EA7E36230115C1005B7CE5 /* JMSquarePostTaskView.m in Sources */,
 				04EA210B22AF61BC0035C398 /* JMTaskPartTimejobDetailModel.m in Sources */,
+				6D5DD8C02308439E0064612A /* TConversationListViewModel.m in Sources */,
 				04AC6A2B22CDB04C00693424 /* JMNoDataView.m in Sources */,
 				6D0209C8224F38E5009BCFE4 /* JMHTTPManager+Login.m in Sources */,
 				04796AD322D2EC5B0082BD59 /* SJRemoteCommandHandler.m in Sources */,
 				04A4210C22BC92360001A2F0 /* JMHTTPManager+DeleteGoodsImage.m in Sources */,
+				6D5DD8B62308439E0064612A /* TUIGroupInfoController.m in Sources */,
 				04EB6CAF2255F21700CBAF79 /* JMHTTPManager+PositionDesired.m in Sources */,
+				6D5DD8902308439D0064612A /* TUIFileMessageCellData.m in Sources */,
 				04796AE222D31CF50082BD59 /* JMBMineViewController.m in Sources */,
 				048348C6226983C700DE4630 /* NSString+Extension.m in Sources */,
 				04896A0722C07A9B00E674C5 /* JMApplyForProtocolView.m in Sources */,
+				6D5DD8AB2308439E0064612A /* TUITextMessageCell.m in Sources */,
+				6D5DD8BD2308439E0064612A /* TUIConversationDataProviderService.m in Sources */,
+				6D5DD8812308439D0064612A /* TUIContactListPicker.m in Sources */,
 				0493FEEA22CF6ADF00EC7215 /* JMPlaySoundsManager.m in Sources */,
 				041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */,
 				04E25F6D22B509CD00F451C8 /* JMHTTPManager+FectchInvoiceInfo.m in Sources */,
+				6D5DD89A2308439E0064612A /* TUIGroupPendencyCellData.m in Sources */,
+				6D5DD8832308439D0064612A /* TUIBlackListController.m in Sources */,
 				04C4A18122CC55920049DA29 /* JMOpinionViewController.m in Sources */,
 				040A392A227DA9A600EDD9E0 /* JMGreetCell.m in Sources */,
+				6D5DD87F2308439D0064612A /* TUINewFriendViewModel.m in Sources */,
 				04BBF2A3228EC6790068A9B1 /* JMVideoChatView.m in Sources */,
+				6D5DD8AC2308439E0064612A /* TUIJoinGroupMessageCell.m in Sources */,
 				04731DE722A665650013D7CE /* JMHTTPManager+FectchAbility.m in Sources */,
 				6D0209F6224FBEEC009BCFE4 /* JMMineModulesTableViewCell.m in Sources */,
 				04BBF296228E57C50068A9B1 /* JMWaitForAnswerView.m in Sources */,
 				04A9DFA5225AE3D800CD7CC1 /* JMUserInfoModel.m in Sources */,
-				04C6013E2260639C000B1FE0 /* JMAllMessageTableViewController.m in Sources */,
+				6D5DD8C92308439E0064612A /* TIMMessage+DataProvider.m in Sources */,
 				048A0DF422B91A6B006530EC /* JMCDetailModel.m in Sources */,
 				04DA849022E7060B003A218D /* JMJobDetailsViewController.m in Sources */,
+				6D5DD88B2308439D0064612A /* TContactListPickerCell.m in Sources */,
+				6D5DD8A92308439E0064612A /* TUIFileMessageCell.m in Sources */,
 				04C4A18922CCF5040049DA29 /* JMGreetModel.m in Sources */,
+				6D5DD8A02308439E0064612A /* TUIIncommingTextCellLayout.m in Sources */,
 				04BBF299228E67600068A9B1 /* JMAnswerOrHangUpView.m in Sources */,
 				04EA7E2E23011376005B7CE5 /* JMPayFailedViewController.m in Sources */,
 				041C07DA226193FA0088FBE1 /* JMNotificationTableViewCell.m in Sources */,
 				04C6015C2260874A000B1FE0 /* JMLookMeTableViewCell.m in Sources */,
 				04EA7E4923015C96005B7CE5 /* JMHistoryViewController.m in Sources */,
+				6D5DD89C2308439E0064612A /* TUIGroupPendencyController.m in Sources */,
+				6D5DD89B2308439E0064612A /* TUIGroupPendencyCell.m in Sources */,
 				04AC6A2722CDAE4E00693424 /* JMNoDataViewController.m in Sources */,
 				6D0209FF2250F09D009BCFE4 /* JMMyResumeViewController.m in Sources */,
+				6D5DD87B2308439D0064612A /* TUIContactSelectController.m in Sources */,
 				6D020A872259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.m in Sources */,
 				042CA64C22D60B2400ABB7AF /* JMMyCustumWindowView.m in Sources */,
 				6D0209FA224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.m in Sources */,
+				6D5DD8D9230846510064612A /* JMChatViewController.m in Sources */,
 				04C2CF0322D2275B00DAB29B /* JMVideoSingleViewController.m in Sources */,
 				6D629960224E1E24007E7DE4 /* JMHTTPManager.m in Sources */,
 				04908B4922A9089B000B5AB4 /* JMBUserPostSaleJobViewController.m in Sources */,
+				6D5DD8A52308439E0064612A /* TUIInputMoreCell.m in Sources */,
+				6D5DD88E2308439D0064612A /* TUINewFriendViewController.m in Sources */,
 				04EA7E4323014F26005B7CE5 /* JMPostTypeChooseView.m in Sources */,
+				6D5DD8972308439E0064612A /* TUIMessageCellData.m in Sources */,
 				6D020A6F22539FB0009BCFE4 /* CompanyRequirementsView.m in Sources */,
 				040A3927227DA5F900EDD9E0 /* JMGreetView.m in Sources */,
 				048FF0FF22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m in Sources */,
+				6D5DD8672308439D0064612A /* TUIVideoViewController.m in Sources */,
+				6D5DD87A2308439D0064612A /* TPopView.m in Sources */,
 				04EA212522AFF28C0035C398 /* JMTaskOrderListCellData.m in Sources */,
+				6D5DD8602308439D0064612A /* TModifyView.m in Sources */,
 				049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */,
 				040C865A227ED71100993490 /* JMChatDetailInfoTableViewCell.m in Sources */,
+				6D5DD8952308439E0064612A /* TUIVoiceMessageCellData.m in Sources */,
+				6D5DD5B923083CFD0064612A /* JMAllMessageTableViewController.m in Sources */,
+				6D5DD8612308439D0064612A /* TUnReadView.m in Sources */,
 				04380A8E22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m in Sources */,
 				04E129D622F27D520003D58F /* JMMyOrderListViewController.m in Sources */,
 				04908ACD22A773DC000B5AB4 /* JMHTTPManager+DeleteAbilityImage.m in Sources */,
 				04A247D4224CB99800DEB8E3 /* WSDropMenuView.m in Sources */,
+				6D5DD8792308439D0064612A /* TAddCollectionCell.m in Sources */,
 				049C654C22AD854B00A93DFE /* JMPartTimeJobTypeLabsViewController.m in Sources */,
+				6D5DD89F2308439E0064612A /* TUIMessageCellLayout.m in Sources */,
 				045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */,
 				0488E59D2295438100C2E398 /* JMCityModel.m in Sources */,
+				6D5DD8C12308439E0064612A /* TUIConversationListController.m in Sources */,
+				6D5DD88D2308439D0064612A /* TUIGroupConversationListController.m in Sources */,
 				04E129D722F27D520003D58F /* JMLogisticsInfoViewController.m in Sources */,
 				04AF933722C9DD3B00D9FCBF /* JMChoosePartTImeJobTypeLablesViewController.m in Sources */,
 				04FB1A2222A3A70800A8F02C /* JMPartTimeJobResumeFooterView.m in Sources */,
 				6D020A6E22539FB0009BCFE4 /* MapBGView.m in Sources */,
 				04E129C522F27D330003D58F /* JMOrderStatusTableViewCell.m in Sources */,
+				6D5DD8932308439D0064612A /* TUITextMessageCellData.m in Sources */,
+				6D5DD8C32308439E0064612A /* TUIConversationCellData.m in Sources */,
+				6D5DD86F2308439D0064612A /* TCommonTextCell.m in Sources */,
 				041997CE2266C75000C6C134 /* JMPostJobHomeViewController.m in Sources */,
 				04ABB78A22B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m in Sources */,
+				6D5DD8892308439D0064612A /* TCommonContactSelectCell.m in Sources */,
+				6D5DD8A22308439E0064612A /* TUIInputController.m in Sources */,
 				04A64E9122C4C935006C3ABA /* JMMyTopViewNavView.m in Sources */,
 				040701BA2275DB58002BF58D /* JMCompanyLikeViewController.m in Sources */,
-				040AF5B022784BC70027D7D8 /* JMChatViewViewController.m in Sources */,
 				6D82F287227492CF00B9D2B9 /* JMEducationExperienceViewController.m in Sources */,
-				042C16F922F966B70048F8F2 /* JMTextMessageCell.m in Sources */,
 				04908AFF22A7D280000B5AB4 /* JMPositionManageViewController.m in Sources */,
+				6D5DD8732308439D0064612A /* TCommonCell.m in Sources */,
+				6D5DD8682308439D0064612A /* TTextEditController.m in Sources */,
 				049C653722AD6DCA00A93DFE /* JMHTTPManager+CreateTask.m in Sources */,
 				04EA7E3023011376005B7CE5 /* JMTaskManageViewController.m in Sources */,
-				040C8649227E8B8100993490 /* JMMoreCollectionViewCell.m in Sources */,
 				04B4F88222B7A5B300A06E9C /* JMInvoiceModel.m in Sources */,
 				0446E48622E00DF700B3A26C /* JMVIPInvoicePayTableViewCell.m in Sources */,
 				040BF06722719B6A0088697D /* JMUserChangeWindowView.m in Sources */,
@@ -5265,20 +6125,21 @@
 				0491B2612286A07800F1FD3A /* JMLabsChooseViewController.m in Sources */,
 				04A9DFBA225C429B00CD7CC1 /* HomeTableViewCell.m in Sources */,
 				041997EE2267173D00C6C134 /* JMPersonDetailsViewController.m in Sources */,
-				042C16F622F924C10048F8F2 /* JMImageMessageCell.m in Sources */,
 				6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */,
 				040865DD2272E898005BB03E /* JMIDCardModel.m in Sources */,
 				042CA63822D475A500ABB7AF /* JMLabChooseBottomView.m in Sources */,
 				040865E822733B78005BB03E /* JMInterViewModel.m in Sources */,
 				047F8EAB228A6672005E81FA /* JMVideoPlayManager.m in Sources */,
 				040E366922682E5900A7D789 /* JMSelfDescriptionView.m in Sources */,
+				6D5DD8CB2308439E0064612A /* TCServiceManager.m in Sources */,
+				6D5DD8D22308439E0064612A /* TUIError.m in Sources */,
 				04072F702282DBE40067A05D /* JMBankCardData.m in Sources */,
 				04EA211422AFD0040035C398 /* JMHTTPManager+FectchTaskOrderInfo.m in Sources */,
 				04BE8B5E2292A5C2004EB7EC /* JMHTTPManager+CompanyFileDelete.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
 				040807B622A3BF1100C0744F /* JMIndustryWebViewController.m in Sources */,
+				6D5DD8762308439D0064612A /* NSDate+TUIKIT.m in Sources */,
 				04908B2E22A8AEE0000B5AB4 /* JMHTTPManager+FectchTaskList.m in Sources */,
-				040AF5AA22783E150027D7D8 /* JMMessageCell.m in Sources */,
 				04DEB41C2296D96B0089BD87 /* JMFeedBackChooseViewController.m in Sources */,
 				049C655122AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.m in Sources */,
 				04950FCF22AE585600C3D3FB /* JMGoodsDescriptionViewController.m in Sources */,
@@ -5290,8 +6151,12 @@
 				04EA7E2623011376005B7CE5 /* JMTaskCommetViewController.m in Sources */,
 				04EA210F22AFC1710035C398 /* JMBDetailWebViewController.m in Sources */,
 				041997D32266CB3500C6C134 /* JMCompanyHomeTableViewCell.m in Sources */,
+				6D5DD88A2308439D0064612A /* TCommonContactCellData.m in Sources */,
 				0492AE7B22F0463400AB21B3 /* JMMoneyDetailsViewController.m in Sources */,
+				6D5DD8CA2308439E0064612A /* TCContext.m in Sources */,
+				6D5DD8632308439D0064612A /* THelper.m in Sources */,
 				048348C9226984AD00DE4630 /* JMWelfareViewController.m in Sources */,
+				6D5DD8BB2308439E0064612A /* TUIGroupInfoDataProviderService.m in Sources */,
 				049C653D22AD707700A93DFE /* JMHTTPManager+UpdateTask.m in Sources */,
 				047270822248D078005FD1FC /* BaseViewController.m in Sources */,
 				040CD54F226AC0D1000BB230 /* JMCompanyInfoMineViewController.m in Sources */,
@@ -5299,6 +6164,9 @@
 				0485ACEC22A0C07300B31506 /* JMMPersonalCenterHeaderView.m in Sources */,
 				048A0DEB22B8DF57006530EC /* JMHTTPManager+FectchWalletDetails.m in Sources */,
 				040E366E2268531A00A7D789 /* JMEducationView.m in Sources */,
+				6D5DD89D2308439E0064612A /* TUIOutgoingTextCellLayout.m in Sources */,
+				6D5DD8D02308439E0064612A /* amrFileCodec.mm in Sources */,
+				6D5DD8BC2308439E0064612A /* TUIUserProfileDataProviderService.m in Sources */,
 				04EA210522AF541E0035C398 /* JMTaskListCellData.m in Sources */,
 				048348C5226983C700DE4630 /* UIView+Ext.m in Sources */,
 				6D82F28B2274A61900B9D2B9 /* JMHTTPManager+EducationExperience.m in Sources */,
@@ -5306,6 +6174,7 @@
 				041F67282274654400C4F940 /* JMCompanyDesciptionOfMineViewController.m in Sources */,
 				040C8661227F243A00993490 /* JMHTTPManager+CreateConversation.m in Sources */,
 				04A6DF6B22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m in Sources */,
+				6D5DD8772308439D0064612A /* UIImage+TUIKIT.m in Sources */,
 				04AC6A2322CD8E6600693424 /* JMTPLModel.m in Sources */,
 				04A2479F224C7AFF00DEB8E3 /* CALayer+UIColor.m in Sources */,
 				04A247D5224CB99800DEB8E3 /* SearchView.m in Sources */,
@@ -5313,15 +6182,15 @@
 				04908B3F22A8CDA5000B5AB4 /* JMBUserSquareTableViewCell.m in Sources */,
 				6D020A3C2251031D009BCFE4 /* JMMyResumeCareerObjectiveTableViewCell.m in Sources */,
 				04072F6D2282D6150067A05D /* JMHTTPManager+BankCark.m in Sources */,
+				6D5DD8B02308439E0064612A /* TUIVoiceMessageCell.m in Sources */,
 				040865EB22734ADE005BB03E /* JMCompanyInfoModel.m in Sources */,
 				6D82F28F2274BB0E00B9D2B9 /* JMMyDescriptionViewController.m in Sources */,
 				0492AE7522F0463400AB21B3 /* JMChooseCardViewController.m in Sources */,
-				042C16EC22F90E370048F8F2 /* TCommonTableViewCell.m in Sources */,
 				04BF6DBA22C39EE4003032BC /* JMHTTPManager+CreatetLogisticsInfo.m in Sources */,
+				6D5DD8722308439D0064612A /* TCommonAvatarCell.m in Sources */,
 				0492715C22982878008D6E0D /* JMBTypeLikeModel.m in Sources */,
 				6D558663224B564F0037C14E /* JMMineViewController.m in Sources */,
 				048A0DD122B8951B006530EC /* JMMoneyDetailTableViewCell.m in Sources */,
-				040A393E227DD20400EDD9E0 /* JMMoreView.m in Sources */,
 				041F672E22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m in Sources */,
 				048A0DEE22B8E0A2006530EC /* JMWalletDetailsCellData.m in Sources */,
 				040865E5227338E2005BB03E /* JMHTTPManager+InterView.m in Sources */,
@@ -5330,25 +6199,34 @@
 				04FB1A2522A3B70400A8F02C /* JMBaseWebViewController.m in Sources */,
 				6D020A372250FF0D009BCFE4 /* JMMyResumeHeaderTableViewCell.m in Sources */,
 				04256550229C0646000614E7 /* JMBUserInfoViewController.m in Sources */,
+				6D5DD8B22308439E0064612A /* TUIFaceView.m in Sources */,
 				6D020A7322539FB0009BCFE4 /* TwoButtonView.m in Sources */,
 				04072F732283181A0067A05D /* JMPOIAdressData.m in Sources */,
 				040C181D2264210500456C53 /* JMHTTPManager+Vita.m in Sources */,
 				04ABB7A622B232C700E3F66A /* JMHTTPManager+OrderPay.m in Sources */,
+				6D5DD8992308439E0064612A /* TUIGroupPendencyViewModel.m in Sources */,
+				6D5DD8AA2308439E0064612A /* TUIVideoMessageCell.m in Sources */,
 				04C4A18522CCE4850049DA29 /* JMHTTPManager+FectchGreetList.m in Sources */,
 				048348BA22696DC800DE4630 /* JMJobDescriptionViewController.m in Sources */,
+				6D5DD88F2308439D0064612A /* TUIFaceMessageCellData.m in Sources */,
 				040CD54C226AADF6000BB230 /* JMHTTPManager+CompanyCreate.m in Sources */,
 				04CC5F9422B3B67600C5DD46 /* JMDiscoverTopView.m in Sources */,
+				6D5DD8642308439D0064612A /* TAddCell.m in Sources */,
+				6D5DD86A2308439D0064612A /* TUIAvatarViewController.m in Sources */,
 				04A4211022BCF2C30001A2F0 /* JMChatDetailPartTimeJobTableViewCell.m in Sources */,
+				6D5DD8A42308439E0064612A /* TUIRecordView.m in Sources */,
+				6D5DD86B2308439D0064612A /* TUIImageViewController.m in Sources */,
 				048FEE402244853C001160C8 /* main.m in Sources */,
 				04AF933C22C9DE3700D9FCBF /* JMTitleToLabelsTableViewCell.m in Sources */,
 				040C865E227EDDE100993490 /* JMChatViewSectionView.m in Sources */,
 				04896A0C22C0B6F600E674C5 /* UITabBar+XSDExt.m in Sources */,
+				6D5DD8C42308439E0064612A /* TUIKit.m in Sources */,
 				0492AE7922F0463400AB21B3 /* JMDeleteBankCardViewController.m in Sources */,
 				048A0DF122B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m in Sources */,
 				04908AD322A7A06E000B5AB4 /* JMBUserCenterHeaderSubView.m in Sources */,
-				042C16FF22F968010048F8F2 /* JMMessageCellData.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,
 				04B620E722DDC612009C8853 /* JMTaskApplyForView.m in Sources */,
+				6D5DD8AF2308439E0064612A /* TUIFaceMessageCell.m in Sources */,
 				6D020A6C22539FB0009BCFE4 /* JMCompanyIntroduceViewController.m in Sources */,
 				0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */,
 				048FEE322244853C001160C8 /* AppDelegate.m in Sources */,
@@ -5357,64 +6235,91 @@
 				04A9DFA2225AE3C400CD7CC1 /* JMMyResumeCareerStatusTableViewCell.m in Sources */,
 				0492AE7722F0463400AB21B3 /* JMWithdrawViewController.m in Sources */,
 				049A51592248972F007A8068 /* BasicInformationViewController.m in Sources */,
+				6D5DD8A32308439E0064612A /* TUIInputBar.m in Sources */,
+				6D5DD87E2308439D0064612A /* TUIBlackListViewModel.m in Sources */,
 				04908B0422A7E916000B5AB4 /* JMAssignmentSquareViewController.m in Sources */,
 				04A9DFAD225AEEBD00CD7CC1 /* JMHTTPManager+CreateExperience.m in Sources */,
+				6D5DD8872308439D0064612A /* TCommonContactCell.m in Sources */,
 				04C37F1222C72D6500E2A107 /* JMAddVitaJobViewController.m in Sources */,
 				04EA7E3E23011BCD005B7CE5 /* JMPostTaskBottomView.m in Sources */,
+				6D5DD8CC2308439E0064612A /* TCAnnotation.m in Sources */,
+				6D5DD8BE2308439E0064612A /* TUIMessageDataProviderService.m in Sources */,
 				6D020A332250F46F009BCFE4 /* JMMyResumeCellConfigures.m in Sources */,
+				6D5DD87C2308439D0064612A /* TContactSelectViewModel.m in Sources */,
 				6D8C0687226AE94F00F77D98 /* JMVitaDetailModel.m in Sources */,
 				04EA7E2F23011376005B7CE5 /* JMPayDetailViewController.m in Sources */,
+				6D5DD8A62308439E0064612A /* TUIMenuCell.m in Sources */,
+				6D5DD8712308439D0064612A /* TCommonSwitchCell.m in Sources */,
 				04071494227C691D0026C368 /* JMInputTextView.m in Sources */,
 				04EA210822AF61810035C398 /* JMTaskGoodsDetailModel.m in Sources */,
+				6D5DD87D2308439D0064612A /* TContactViewModel.m in Sources */,
 				040701B5227556A4002BF58D /* JMChooseTimeViewController.m in Sources */,
+				6D5DD8B42308439E0064612A /* TUIMessageController.m in Sources */,
 				040B83772265D01800F1A37A /* JMUploadLicenseViewController.m in Sources */,
 				042CA63422D4376400ABB7AF /* JMServiceProtocolWebViewController.m in Sources */,
+				6D5DD8B72308439E0064612A /* TUIGroupMembersView.m in Sources */,
+				6D5DD8702308439D0064612A /* TUIButtonCell.m in Sources */,
 				040B838F2265EF6A00F1A37A /* JMIDCardIdentifyViewController.m in Sources */,
+				6D5DD8982308439E0064612A /* TUIVideoMessageCellData.m in Sources */,
 				04731DED22A6A1C90013D7CE /* JMHTTPManager+UpdateAbility.m in Sources */,
 				041997F72267181A00C6C134 /* JMPictureOfPersonDetailViewController.m in Sources */,
 				04A9DFB8225B67D100CD7CC1 /* JMHTTPManager+UpdateInfo.m in Sources */,
+				6D5DD8A72308439E0064612A /* TUIMenuView.m in Sources */,
+				6D5DD8B32308439E0064612A /* TUIMessageCell.m in Sources */,
+				6D5DD86D2308439D0064612A /* TResponderTextView.m in Sources */,
 				049C652622AD3C0400A93DFE /* JMComfirmPostBottomView.m in Sources */,
 				04A5FD5B22C8A65D00850604 /* JMGradeView.m in Sources */,
+				6D5DD8662308439D0064612A /* TNavigationController.m in Sources */,
+				6D5DD8692308439D0064612A /* TDateEditController.m in Sources */,
 				04E129E322F2D4BD0003D58F /* LoginViewController.m in Sources */,
+				6D5DD8C22308439E0064612A /* TUIConversationCell.m in Sources */,
 				04EA7E2A23011376005B7CE5 /* JMSnapshotWebViewController.m in Sources */,
 				040E367122687B2D00A7D789 /* JMBottomView.m in Sources */,
 				040A40C02265B2480005E0D7 /* JMCompanyInfoViewController.m in Sources */,
+				6D5DD8C62308439E0064612A /* TIMConversation+DataProvider.m in Sources */,
 				040865DA2272C241005BB03E /* JMHTTPManager+IDcard.m in Sources */,
+				6D5DD8622308439D0064612A /* TUILocalStorage.m in Sources */,
 				048A0DCA22B887D5006530EC /* JMHTTPManager+PayMoney.m in Sources */,
 				0492715F22982E3C008D6E0D /* JMCTypeLikeModel.m in Sources */,
 				04950FDC22AE812C00C3D3FB /* JMTaskManageTableViewCell.m in Sources */,
 				04070BAA22B76912007BE031 /* JMCPartTimeJobLikeModel.m in Sources */,
 				041C07D52261891A0088FBE1 /* JMNotificationHeaderTableViewCell.m in Sources */,
 				04A247D2224CB99800DEB8E3 /* PositionDesiredSecondViewController.m in Sources */,
-				0419512122F8476600D64C00 /* JMImageMessageCellData.m in Sources */,
 				04E129D922F27D520003D58F /* JMLogisticsCellData.m in Sources */,
 				6D020A822259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.m in Sources */,
 				04196DA5227FE1190000A6AA /* JMAllMessageTableViewCellData.m in Sources */,
 				04908AD022A79A59000B5AB4 /* JMBUserCenterHeaderView.m in Sources */,
 				041997EB2267173D00C6C134 /* JMVitaOfPersonDetailViewController.m in Sources */,
 				048E662E22850EE900694D86 /* THDatePickerView.m in Sources */,
-				042C16FC22F967670048F8F2 /* JMTextMessageCellData.m in Sources */,
 				04C6013922603F73000B1FE0 /* JMPageView.m in Sources */,
 				6D020A6A22539FB0009BCFE4 /* JobDetailsViewController.m in Sources */,
 				040A393B227DD1EB00EDD9E0 /* JMFaceView.m in Sources */,
+				6D5DD8742308439D0064612A /* TAddHelper.m in Sources */,
 				04E735F822E15D6E00C8E8A2 /* JMHTTPManager+FectchProtocalInfo.m in Sources */,
 				0488E3D5229F9C690071DEE7 /* JMDiscoverHomeViewController.m in Sources */,
 				040E54DC22772382004AB0F9 /* JMHTTPManager+MessageList.m in Sources */,
 				04BBF2AB22901E3F0068A9B1 /* JMCustomAnnotationView.m in Sources */,
 				6D020A6722539FB0009BCFE4 /* HomeViewController.m in Sources */,
+				6D5DD8B92308439E0064612A /* TUIGroupMembersCell.m in Sources */,
 				040BF05E227159B60088697D /* JMChangeIdentityViewController.m in Sources */,
 				6DEA992A2255DFF50029FE8A /* JMSendMyResumeView.m in Sources */,
 				04C0F74022ABC69400C3AA33 /* JMBUserPartTimeJobDetailView.m in Sources */,
+				6D5DD8882308439D0064612A /* TUIContactActionCell.m in Sources */,
 				0491B25E2286794600F1FD3A /* JMLabsScreenView.m in Sources */,
 				04CC5FA422B3C86200C5DD46 /* JMVideoListCellData.m in Sources */,
 				04A9DFB0225B2B5000CD7CC1 /* JMHTTPManager+Work.m in Sources */,
 				0485AD2C22A1164900B31506 /* JMMyResumeHeaderSecondTableViewCell.m in Sources */,
 				048348D32269BE4100DE4630 /* JMManageInterviewViewController.m in Sources */,
+				6D5DD8D42308439E0064612A /* TUIKitConfig.m in Sources */,
 				04ABB7A922B2383200E3F66A /* JMOrderPaymentModel.m in Sources */,
 				04C4A17122CC414D0049DA29 /* JMMessageListViewController.m in Sources */,
+				6D5DD8A82308439E0064612A /* TUIFaceCell.m in Sources */,
+				6D5DD8AD2308439E0064612A /* TUISystemMessageCell.m in Sources */,
 				04908B3A22A8CCB9000B5AB4 /* JMCUserSquareTableViewCell.m in Sources */,
 				0488E59922953B6700C2E398 /* JMCityListViewController.m in Sources */,
+				6D5DD8752308439D0064612A /* TUITabBarController.m in Sources */,
 				040A5115226FF47B0074BD4B /* JMGetCompanyLocationViewController.m in Sources */,
+				6D5DD8962308439E0064612A /* TUIImageMessageCellData.m in Sources */,
 				0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */,
 				0446E48A22E04BBD00B3A26C /* JMInvoiceHeaderView.m in Sources */,
 				04B4F88522B7BFBE00A06E9C /* JMPostGoodsImagesView.m in Sources */,
@@ -5422,39 +6327,52 @@
 				04EA7E2923011376005B7CE5 /* JMPaySucceedViewController.m in Sources */,
 				0492401222F17C940007C8A1 /* JMVIPViewController.m in Sources */,
 				040A40BB226589A50005E0D7 /* JMCompanyBaseInfoViewController.m in Sources */,
+				6D5DD8B12308439E0064612A /* TUIBubbleMessageCell.m in Sources */,
 				044DF25F2244D6F100301243 /* LoginPhoneViewController.m in Sources */,
+				6D5DD86E2308439D0064612A /* TUIProfileCardCell.m in Sources */,
 				04908B5322A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.m in Sources */,
 				049FDBA72289A3C000E9BC25 /* JMPlayerViewController.m in Sources */,
+				6D5DD8C72308439E0064612A /* TIMUserProfile+DataProvider.m in Sources */,
 				049FDBA42289556600E9BC25 /* JMDidUploadVideoView.m in Sources */,
 				0492F00B22C5A93E00C7EFB2 /* JMHTTPManager+FectchTaskAbility.m in Sources */,
-				040AF59E2277F4F00027D7D8 /* JMMessageTableViewController.m in Sources */,
 				040CD552226ACD42000BB230 /* JMHTTPManager+FetchCompanyInfo.m in Sources */,
 				04072F302282978A0067A05D /* JMWalletHeaderView.m in Sources */,
 				04C6014D226071B5000B1FE0 /* JMAllMessageTableViewCell.m in Sources */,
-				049EF53722FA7448007FD4EB /* JMCustumMessageCellData.m in Sources */,
 				04C120D822882B5F001BDEBC /* JMUploadVideoViewController.m in Sources */,
 				049C652122AD3ACC00A93DFE /* JMMakeOutBillHeaderView.m in Sources */,
 				04A247D3224CB99800DEB8E3 /* PositionDesiredViewController.m in Sources */,
+				6D5DD8AE2308439E0064612A /* TUIImageMessageCell.m in Sources */,
+				6D5DD8B82308439E0064612A /* TUIGroupMemberCell.m in Sources */,
 				041F672B22747FE300C4F940 /* JMHTTPManager+CompanyInfoUpdate.m in Sources */,
 				048A0DD622B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.m in Sources */,
+				6D5DD8852308439D0064612A /* TUIContactActionCellData.m in Sources */,
 				040865E12272FAF1005BB03E /* JMPostJobHomeTableViewCell.m in Sources */,
+				6D5DD8652308439D0064612A /* TUIFileViewController.m in Sources */,
 				6D82F2982274C63E00B9D2B9 /* JMHTTPManager+Job.m in Sources */,
+				6D5DD8862308439D0064612A /* TCommonContactSelectCellData.m in Sources */,
 				040E365222680FF800A7D789 /* JMHeaderOfPersonDetailView.m in Sources */,
 				040B83A02265F62300F1A37A /* JMIDCardIdentifySecondViewController.m in Sources */,
 				04C0F72E22AB9E9300C3AA33 /* JMBUserPositionDetailView.m in Sources */,
 				04A9DFA9225AE9B900CD7CC1 /* JMJobExperienceViewController.m in Sources */,
+				6D5DD8B52308439E0064612A /* TUIMoreView.m in Sources */,
 				049C653A22AD706000A93DFE /* JMHTTPManager+DeleteTask.m in Sources */,
 				0492AE8222F04FAD00AB21B3 /* JMSquareHeaderView.m in Sources */,
 				048348D82269C01200DE4630 /* JMMangerInterviewTableViewCell.m in Sources */,
 				04796AE922D324260082BD59 /* JMBMineMoreFunctionView.m in Sources */,
+				6D5DD8942308439D0064612A /* TUISystemMessageCellData.m in Sources */,
+				6D5DD86C2308439D0064612A /* NSString+Common.m in Sources */,
 				040CD558226B230A000BB230 /* JMHTTPManager+VitaPaginate.m in Sources */,
+				6D5DD8A12308439E0064612A /* TUIChatController.m in Sources */,
 				04FB1A1F22A36BD800A8F02C /* JMWeakWebViewScriptMessageDelegate.m in Sources */,
+				6D5DD8912308439D0064612A /* TUIBubbleMessageCellData.m in Sources */,
 				040E3675226890B700A7D789 /* JMPostNewJobViewController.m in Sources */,
 				04E129D822F27D520003D58F /* JMOrderCellData.m in Sources */,
 				04CC5FA122B3C5DC00C5DD46 /* JMHTTPManager+FectchVideoLists.m in Sources */,
 				04256569229D3F61000614E7 /* JMMyResumeFooterView.m in Sources */,
+				6D5DD8802308439D0064612A /* TUIGroupConversationListViewModel.m in Sources */,
 				041997F2226717D700C6C134 /* JMContactOfPersonDetailViewController.m in Sources */,
 				040E54E022772A99004AB0F9 /* JMMessageListModel.m in Sources */,
+				6D5DD8922308439D0064612A /* TUIJoinGroupMessageCellData.m in Sources */,
 				04908B3122A8B22D000B5AB4 /* JMSquareHomeCellData.m in Sources */,
 				6DEA99232255DFE40029FE8A /* JMShareView.m in Sources */,
 				040E36642268205700A7D789 /* JMWorkExperienceView.m in Sources */,
@@ -5473,17 +6391,23 @@
 				6D020A052250F21B009BCFE4 /* JMMyResumeIconTableViewCell.m in Sources */,
 				0486F7792293917900114A22 /* Demo3ViewController.m in Sources */,
 				04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */,
+				6D5DD8CF2308439E0064612A /* wav.mm in Sources */,
 				0492401022F17C940007C8A1 /* JMProtocalWebViewController.m in Sources */,
 				040A3933227DBEA700EDD9E0 /* JMGreetTableViewController.m in Sources */,
 				04731DEA22A66C630013D7CE /* JMAbilityCellData.m in Sources */,
 				048A0DF722B91A8E006530EC /* JMBDetailModel.m in Sources */,
 				040865D72272A919005BB03E /* JMJudgeViewController.m in Sources */,
+				6D5DD8842308439D0064612A /* TCommonPendencyCell.m in Sources */,
+				6D5DD88C2308439D0064612A /* TCommonPendencyCellData.m in Sources */,
 				6D020A782258A408009BCFE4 /* JMEducationalExperienceTableViewCell.m in Sources */,
 				6D020A46225250BB009BCFE4 /* JMMyResumeWorkExperienceTableViewCell.m in Sources */,
 				04380A9222DC15C900EA45C2 /* JMVersionManager.m in Sources */,
+				6D5DD8782308439D0064612A /* TPopCell.m in Sources */,
+				6D5DD89E2308439E0064612A /* TUISystemMessageCellLayout.m in Sources */,
 				6D558669224B58890037C14E /* JMMessageViewController.m in Sources */,
 				6D020A6D22539FB0009BCFE4 /* JMCompanyIntroduceHeaderView.m in Sources */,
 				04CC5F9C22B3BB9A00C5DD46 /* JMDiscoverCollectionViewCell.m in Sources */,
+				6D5DD8D12308439E0064612A /* EMVoiceConverter.mm in Sources */,
 				04ABB79022B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.m in Sources */,
 				049C654022AD709900A93DFE /* JMHTTPManager+FectchTaskInfo.m in Sources */,
 				04C37F0C22C7292E00E2A107 /* JMBottom2View.m in Sources */,
@@ -5662,7 +6586,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = JMian/JMian.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TJ2RYY9984;
+				DEVELOPMENT_TEAM = VJ6YUHCCSV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JMian/ThridParty/TIMSDK",
@@ -5672,6 +6596,13 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/TXIMSDK_TUIKit_iOS/iOS/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
+					"$(PROJECT_DIR)/Pods/TXIMSDK_TUIKit_iOS/iOS/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
+					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
+					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
@@ -5688,7 +6619,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = JMian/JMian.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TJ2RYY9984;
+				DEVELOPMENT_TEAM = VJ6YUHCCSV;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/JMian/ThridParty/TIMSDK",
@@ -5698,6 +6629,13 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/TXIMSDK_TUIKit_iOS/iOS/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
+					"$(PROJECT_DIR)/Pods/TXIMSDK_TUIKit_iOS/iOS/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
+					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
+					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
