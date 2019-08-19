@@ -50,7 +50,7 @@ static NSString *cellIdent = @"infoCellIdent";
 static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 
-@interface TUIMessageController () <TIMMessageListener, TMessageCellDelegate,JMChatDetailPartTimeJobTableViewCellDelegate,JMChatDetailInfoTableViewCellDelegate>
+@interface TUIMessageController () <TIMMessageListener, TMessageCellDelegate,JMChatDetailPartTimeJobTableViewCellDelegate,JMChatDetailInfoTableViewCellDelegate,JMChatViewSectionViewDelegate>
 @property (nonatomic, strong) TIMConversation *conv;
 @property (nonatomic, strong) NSMutableArray *uiMsgs;
 @property (nonatomic, strong) NSMutableArray *heightCache;
@@ -180,7 +180,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                 if(!self.firstLoad){
                     CGFloat visibleHeight = 0;
                     for (NSInteger i = 0; i < uiMsgs.count; ++i) {
-                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:0];
+                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:1];
                         visibleHeight += [self tableView:self.tableView heightForRowAtIndexPath:indexPath];
                     }
                     if(self.noMoreMsg){
@@ -409,25 +409,50 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }
     return nil;
 }
+
+
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (_isScrollBottom == NO) {
-        [self scrollToBottom:NO];
-        if (indexPath.row == _uiMsgs.count-2) {
-            _isScrollBottom = YES;
+
+    if (indexPath.section == 1) {
+
+        if (_isScrollBottom == NO) {
+            [self scrollToBottom:NO];
+            if (indexPath.row == _uiMsgs.count-1) {
+                _isScrollBottom = YES;
+            }
         }
+        
     }
+//    if (_isScrollBottom == NO) {
+//        [self scrollToBottom:NO];
+//        if (indexPath.row == _uiMsgs.count-1) {
+//            _isScrollBottom = YES;
+//        }
+//    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _uiMsgs.count + 1;
+    return (section == 0) ? 1: _uiMsgs.count;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0) {
-//        if (_isDominator) {
-//            return 0;
-//        }
+//    CGFloat height = 0;
+//    if(_heightCache.count > indexPath.row){
+//        return [_heightCache[indexPath.row] floatValue];
+//    }
+//    TUIMessageCellData *data = _uiMsgs[indexPath.row];
+//    height = [data heightOfWidth:Screen_Width];
+//    [_heightCache insertObject:[NSNumber numberWithFloat:height] atIndex:indexPath.row];
+    if (indexPath.section == 0) {
+        
+        if (_isDominator) {
+            return 0;
+        }
         if ([self.myConvModel.type isEqualToString:@"2"]) {
             //兼职对话类型
             JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
@@ -445,22 +470,24 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             
         }
         return 200;
+
         
     }else {
+        
         CGFloat height = 0;
-        if(_heightCache.count > indexPath.row-1){
-            return [_heightCache[indexPath.row-1] floatValue];
+        if(_heightCache.count > indexPath.row){
+            return [_heightCache[indexPath.row] floatValue];
         }
-        TUIMessageCellData *data = _uiMsgs[indexPath.row-1];
+        TUIMessageCellData *data = _uiMsgs[indexPath.row];
         height = [data heightOfWidth:Screen_Width];
-        [_heightCache insertObject:[NSNumber numberWithFloat:height] atIndex:indexPath.row-1];
+        [_heightCache insertObject:[NSNumber numberWithFloat:height] atIndex:indexPath.row];
         return height;
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0) {
+    if (indexPath.section == 0) {
         
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         //兼职类型对话且招聘信息不为空，且是C端用户
@@ -474,8 +501,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             [cell setMyConModel:self.myConvModel];
             return cell;
         }
-        
-        
+
         JMChatDetailInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
         
         if(cell == nil)
@@ -501,64 +527,64 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             
         }else if([self.myConvModel.type isEqualToString:@"1"]){
             
+            
             [cell setMyConModel:self.myConvModel];
         }
         
         cell.backgroundColor = TMessageController_Background_Color;
         return cell;
-        
+
+            
     } else {
         
-        TUIMessageCellData *data = _uiMsgs[indexPath.row-1];
-        TUIMessageCell *cell = nil;
-        if ([self.delegate respondsToSelector:@selector(messageController:onShowMessageData:)]) {
-            cell = [self.delegate messageController:self onShowMessageData:data];
-            if (cell) {
-                return cell;
-            }
+    TUIMessageCellData *data = _uiMsgs[indexPath.row];
+    TUIMessageCell *cell = nil;
+    if ([self.delegate respondsToSelector:@selector(messageController:onShowMessageData:)]) {
+        cell = [self.delegate messageController:self onShowMessageData:data];
+        if (cell) {
+            return cell;
         }
-        if (!data.reuseId) {
-            if([data isKindOfClass:[TUITextMessageCellData class]]) {
-                data.reuseId = TTextMessageCell_ReuseId;
-            }
-            else if([data isKindOfClass:[TUIFaceMessageCellData class]]) {
-                data.reuseId = TFaceMessageCell_ReuseId;
-            }
-            else if([data isKindOfClass:[TUIImageMessageCellData class]]) {
-                data.reuseId = TImageMessageCell_ReuseId;
-            }
-            else if([data isKindOfClass:[TUIVideoMessageCellData class]]) {
-                data.reuseId = TVideoMessageCell_ReuseId;
-            }
-            else if([data isKindOfClass:[TUIVoiceMessageCellData class]]) {
-                data.reuseId = TVoiceMessageCell_ReuseId;
-            }
-            else if([data isKindOfClass:[TUIFileMessageCellData class]]) {
-                data.reuseId = TFileMessageCell_ReuseId;
-            }
-            else if([data isKindOfClass:[TUIJoinGroupMessageCellData class]]){//入群小灰条对应的数据源
-                data.reuseId = TJoinGroupMessageCell_ReuseId;
-            }
-            else if([data isKindOfClass:[TUISystemMessageCellData class]]) {
-                data.reuseId = TSystemMessageCell_ReuseId;
-            } else {
-                return nil;
-            }
-        }
-        cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId forIndexPath:indexPath];
-        //对于入群小灰条，需要进一步设置其委托。
-        if([cell isKindOfClass:[TUIJoinGroupMessageCell class]]){
-            TUIJoinGroupMessageCell *joinCell = (TUIJoinGroupMessageCell *)cell;
-            joinCell.joinGroupDelegate = self;
-            cell = joinCell;
-        }
-        cell.delegate = self;
-        [cell fillWithData:_uiMsgs[indexPath.row-1]];
-        
-        return cell;
     }
+    if (!data.reuseId) {
+        if([data isKindOfClass:[TUITextMessageCellData class]]) {
+            data.reuseId = TTextMessageCell_ReuseId;
+        }
+        else if([data isKindOfClass:[TUIFaceMessageCellData class]]) {
+            data.reuseId = TFaceMessageCell_ReuseId;
+        }
+        else if([data isKindOfClass:[TUIImageMessageCellData class]]) {
+            data.reuseId = TImageMessageCell_ReuseId;
+        }
+        else if([data isKindOfClass:[TUIVideoMessageCellData class]]) {
+            data.reuseId = TVideoMessageCell_ReuseId;
+        }
+        else if([data isKindOfClass:[TUIVoiceMessageCellData class]]) {
+            data.reuseId = TVoiceMessageCell_ReuseId;
+        }
+        else if([data isKindOfClass:[TUIFileMessageCellData class]]) {
+            data.reuseId = TFileMessageCell_ReuseId;
+        }
+        else if([data isKindOfClass:[TUIJoinGroupMessageCellData class]]){//入群小灰条对应的数据源
+            data.reuseId = TJoinGroupMessageCell_ReuseId;
+        }
+        else if([data isKindOfClass:[TUISystemMessageCellData class]]) {
+            data.reuseId = TSystemMessageCell_ReuseId;
+        } else {
+            return nil;
+        }
+    }
+    cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId forIndexPath:indexPath];
+    //对于入群小灰条，需要进一步设置其委托。
+    if([cell isKindOfClass:[TUIJoinGroupMessageCell class]]){
+        TUIJoinGroupMessageCell *joinCell = (TUIJoinGroupMessageCell *)cell;
+        joinCell.joinGroupDelegate = self;
+        cell = joinCell;
+    }
+    cell.delegate = self;
+    [cell fillWithData:_uiMsgs[indexPath.row]];
     
-    
+    return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -568,7 +594,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 - (void)scrollToBottom:(BOOL)animate
 {
     if (_uiMsgs.count > 0) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_uiMsgs.count  inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:animate];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:animate];
     }
 }
 
@@ -599,7 +625,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         NSInteger row = [_uiMsgs indexOfObject:msg];
         [_heightCache removeObjectAtIndex:row];
         [_uiMsgs removeObjectAtIndex:row];
-        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:0]]
+        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:1]]
                               withRowAnimation:UITableViewRowAnimationFade];
     } else {
         [self.tableView endUpdates];
@@ -615,11 +641,11 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     if(dateMsg){
         _msgForDate = imMsg;
         [_uiMsgs addObject:dateMsg];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:0]]
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:1]]
                               withRowAnimation:UITableViewRowAnimationFade];
     }
     [_uiMsgs addObject:msg];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:0]]
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:1]]
                           withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     [self scrollToBottom:YES];
@@ -652,7 +678,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 {
     msg.status = status;
     NSInteger index = [_uiMsgs indexOfObject:msg];
-    TUIMessageCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:0]];
+    TUIMessageCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:1]];
     [cell fillWithData:msg];
 }
 
@@ -797,6 +823,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }
     
 }
+
+- (void)videoInterviewAction {
+    
+}
 #pragma mark - 申请兼职职位
 
 -(void)sendCreateTaskOrderResquest_task_id:(NSString *)task_id{
@@ -921,7 +951,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         NSInteger index = [_uiMsgs indexOfObject:_menuUIMsg];
         [_uiMsgs removeObjectAtIndex:index];
         [_heightCache removeObjectAtIndex:index];
-        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
 
         [self.tableView endUpdates];
     }
@@ -973,10 +1003,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     [_uiMsgs removeObject:msg];
 
     [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     TUISystemMessageCellData *data = [imMsg revokeCellData];
     [_uiMsgs insertObject:data atIndex:index];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     [self scrollToBottom:YES];
 }

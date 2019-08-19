@@ -549,10 +549,10 @@
 		04A64E9122C4C935006C3ABA /* JMMyTopViewNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A64E9022C4C935006C3ABA /* JMMyTopViewNavView.m */; };
 		04A64E9322C4C93F006C3ABA /* JMMyTopViewNavView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A64E9222C4C93F006C3ABA /* JMMyTopViewNavView.xib */; };
 		04A6DF6B22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6DF6A22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m */; };
-		04A92171230A333600AABD0C /* JMAllMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9216E230A333500AABD0C /* JMAllMessageTableViewController.m */; };
-		04A92172230A333600AABD0C /* JMAllMessageTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A92170230A333600AABD0C /* JMAllMessageTableViewController.xib */; };
-		04A92176230A444000AABD0C /* JMCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A92174230A444000AABD0C /* JMCDetailViewController.m */; };
-		04A92177230A444000AABD0C /* JMCDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A92175230A444000AABD0C /* JMCDetailViewController.xib */; };
+		04A9217E230A4A1B00AABD0C /* JMTaskSeachViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A92178230A4A1A00AABD0C /* JMTaskSeachViewController.xib */; };
+		04A9217F230A4A1B00AABD0C /* JMCDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A92179230A4A1A00AABD0C /* JMCDetailViewController.xib */; };
+		04A92180230A4A1B00AABD0C /* JMTaskSeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9217B230A4A1B00AABD0C /* JMTaskSeachViewController.m */; };
+		04A92181230A4A1B00AABD0C /* JMCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9217C230A4A1B00AABD0C /* JMCDetailViewController.m */; };
 		04A9DFA2225AE3C400CD7CC1 /* JMMyResumeCareerStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A3F2251186B009BCFE4 /* JMMyResumeCareerStatusTableViewCell.m */; };
 		04A9DFA5225AE3D800CD7CC1 /* JMUserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9DFA4225AE3D800CD7CC1 /* JMUserInfoModel.m */; };
 		04A9DFA9225AE9B900CD7CC1 /* JMJobExperienceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9DFA7225AE9B900CD7CC1 /* JMJobExperienceViewController.m */; };
@@ -592,8 +592,6 @@
 		04B4F88222B7A5B300A06E9C /* JMInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F88122B7A5B300A06E9C /* JMInvoiceModel.m */; };
 		04B4F88522B7BFBE00A06E9C /* JMPostGoodsImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F88422B7BFBE00A06E9C /* JMPostGoodsImagesView.m */; };
 		04B4F88722B7BFDB00A06E9C /* JMPostGoodsImagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4F88622B7BFDA00A06E9C /* JMPostGoodsImagesView.xib */; };
-		04B53AA123053C93007F0AF2 /* JMTaskSeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B53A9F23053C93007F0AF2 /* JMTaskSeachViewController.m */; };
-		04B53AA223053C93007F0AF2 /* JMTaskSeachViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B53AA023053C93007F0AF2 /* JMTaskSeachViewController.xib */; };
 		04B620E722DDC612009C8853 /* JMTaskApplyForView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B620E622DDC612009C8853 /* JMTaskApplyForView.m */; };
 		04B620E922DDC659009C8853 /* JMTaskApplyForView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B620E822DDC659009C8853 /* JMTaskApplyForView.xib */; };
 		04BBF296228E57C50068A9B1 /* JMWaitForAnswerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BBF295228E57C50068A9B1 /* JMWaitForAnswerView.m */; };
@@ -850,6 +848,8 @@
 		6D020A832259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A812259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.xib */; };
 		6D020A872259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A852259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.m */; };
 		6D020A882259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A862259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib */; };
+		6D4E753D230A39C600F9A24F /* JMAllMessageTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D4E753B230A39C600F9A24F /* JMAllMessageTableViewController.xib */; };
+		6D4E753E230A39C600F9A24F /* JMAllMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E753C230A39C600F9A24F /* JMAllMessageTableViewController.m */; };
 		6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */; };
 		6D558632224B4E340037C14E /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558631224B4E330037C14E /* NavigationViewController.m */; };
 		6D55864B224B54D70037C14E /* Search_Home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558637224B54D70037C14E /* Search_Home@3x.png */; };
@@ -1781,12 +1781,12 @@
 		04A64E9222C4C93F006C3ABA /* JMMyTopViewNavView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMyTopViewNavView.xib; sourceTree = "<group>"; };
 		04A6DF6922B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+FectchOrderList.h"; sourceTree = "<group>"; };
 		04A6DF6A22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchOrderList.m"; sourceTree = "<group>"; };
-		04A9216E230A333500AABD0C /* JMAllMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMAllMessageTableViewController.m; sourceTree = "<group>"; };
-		04A9216F230A333600AABD0C /* JMAllMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMAllMessageTableViewController.h; sourceTree = "<group>"; };
-		04A92170230A333600AABD0C /* JMAllMessageTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMAllMessageTableViewController.xib; sourceTree = "<group>"; };
-		04A92173230A444000AABD0C /* JMCDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCDetailViewController.h; sourceTree = "<group>"; };
-		04A92174230A444000AABD0C /* JMCDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCDetailViewController.m; sourceTree = "<group>"; };
-		04A92175230A444000AABD0C /* JMCDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCDetailViewController.xib; sourceTree = "<group>"; };
+		04A92178230A4A1A00AABD0C /* JMTaskSeachViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMTaskSeachViewController.xib; sourceTree = "<group>"; };
+		04A92179230A4A1A00AABD0C /* JMCDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCDetailViewController.xib; sourceTree = "<group>"; };
+		04A9217A230A4A1B00AABD0C /* JMCDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCDetailViewController.h; sourceTree = "<group>"; };
+		04A9217B230A4A1B00AABD0C /* JMTaskSeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMTaskSeachViewController.m; sourceTree = "<group>"; };
+		04A9217C230A4A1B00AABD0C /* JMCDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCDetailViewController.m; sourceTree = "<group>"; };
+		04A9217D230A4A1B00AABD0C /* JMTaskSeachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMTaskSeachViewController.h; sourceTree = "<group>"; };
 		04A9DFA3225AE3D700CD7CC1 /* JMUserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMUserInfoModel.h; sourceTree = "<group>"; };
 		04A9DFA4225AE3D800CD7CC1 /* JMUserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMUserInfoModel.m; sourceTree = "<group>"; };
 		04A9DFA6225AE9B900CD7CC1 /* JMJobExperienceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMJobExperienceViewController.h; sourceTree = "<group>"; };
@@ -1841,9 +1841,6 @@
 		04B4F88322B7BFBE00A06E9C /* JMPostGoodsImagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPostGoodsImagesView.h; sourceTree = "<group>"; };
 		04B4F88422B7BFBE00A06E9C /* JMPostGoodsImagesView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPostGoodsImagesView.m; sourceTree = "<group>"; };
 		04B4F88622B7BFDA00A06E9C /* JMPostGoodsImagesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPostGoodsImagesView.xib; sourceTree = "<group>"; };
-		04B53A9E23053C93007F0AF2 /* JMTaskSeachViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTaskSeachViewController.h; sourceTree = "<group>"; };
-		04B53A9F23053C93007F0AF2 /* JMTaskSeachViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTaskSeachViewController.m; sourceTree = "<group>"; };
-		04B53AA023053C93007F0AF2 /* JMTaskSeachViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMTaskSeachViewController.xib; sourceTree = "<group>"; };
 		04B620E522DDC612009C8853 /* JMTaskApplyForView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTaskApplyForView.h; sourceTree = "<group>"; };
 		04B620E622DDC612009C8853 /* JMTaskApplyForView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTaskApplyForView.m; sourceTree = "<group>"; };
 		04B620E822DDC659009C8853 /* JMTaskApplyForView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMTaskApplyForView.xib; sourceTree = "<group>"; };
@@ -2194,6 +2191,9 @@
 		6D020A842259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMyResumeTextTableViewCell.h; sourceTree = "<group>"; };
 		6D020A852259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMyResumeTextTableViewCell.m; sourceTree = "<group>"; };
 		6D020A862259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMyResumeTextTableViewCell.xib; sourceTree = "<group>"; };
+		6D4E753A230A39C600F9A24F /* JMAllMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMAllMessageTableViewController.h; sourceTree = "<group>"; };
+		6D4E753B230A39C600F9A24F /* JMAllMessageTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMAllMessageTableViewController.xib; sourceTree = "<group>"; };
+		6D4E753C230A39C600F9A24F /* JMAllMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMAllMessageTableViewController.m; sourceTree = "<group>"; };
 		6D55862D224B4D070037C14E /* UIView+addGradualLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+addGradualLayer.h"; sourceTree = "<group>"; };
 		6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+addGradualLayer.m"; sourceTree = "<group>"; };
 		6D558630224B4E330037C14E /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
@@ -3099,13 +3099,6 @@
 			path = Define;
 			sourceTree = "<group>";
 		};
-		0462C71E2244932D003B6639 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
 		0462C71F2244934C003B6639 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
@@ -3516,12 +3509,12 @@
 				04EA7E38230115DD005B7CE5 /* JMSquareTaskManageViewController.h */,
 				04EA7E37230115DD005B7CE5 /* JMSquareTaskManageViewController.m */,
 				04EA7E39230115DD005B7CE5 /* JMSquareTaskManageViewController.xib */,
-				04B53A9E23053C93007F0AF2 /* JMTaskSeachViewController.h */,
-				04B53A9F23053C93007F0AF2 /* JMTaskSeachViewController.m */,
-				04B53AA023053C93007F0AF2 /* JMTaskSeachViewController.xib */,
-				04A92173230A444000AABD0C /* JMCDetailViewController.h */,
-				04A92174230A444000AABD0C /* JMCDetailViewController.m */,
-				04A92175230A444000AABD0C /* JMCDetailViewController.xib */,
+				04A9217A230A4A1B00AABD0C /* JMCDetailViewController.h */,
+				04A9217C230A4A1B00AABD0C /* JMCDetailViewController.m */,
+				04A92179230A4A1A00AABD0C /* JMCDetailViewController.xib */,
+				04A9217D230A4A1B00AABD0C /* JMTaskSeachViewController.h */,
+				04A9217B230A4A1B00AABD0C /* JMTaskSeachViewController.m */,
+				04A92178230A4A1A00AABD0C /* JMTaskSeachViewController.xib */,
 			);
 			path = Contoller;
 			sourceTree = "<group>";
@@ -3590,7 +3583,6 @@
 				0462C71C2244930A003B6639 /* Category */,
 				0462C71B224492F3003B6639 /* Base */,
 				0462C71D2244931C003B6639 /* Define */,
-				0462C71E2244932D003B6639 /* Manager */,
 				0462C71F2244934C003B6639 /* Modules */,
 				0462C7202244935D003B6639 /* Resource */,
 				0462C7212244936F003B6639 /* ThridParty */,
@@ -4001,9 +3993,9 @@
 		04C6013A22604108000B1FE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				04A9216F230A333600AABD0C /* JMAllMessageTableViewController.h */,
-				04A9216E230A333500AABD0C /* JMAllMessageTableViewController.m */,
-				04A92170230A333600AABD0C /* JMAllMessageTableViewController.xib */,
+				6D4E753A230A39C600F9A24F /* JMAllMessageTableViewController.h */,
+				6D4E753C230A39C600F9A24F /* JMAllMessageTableViewController.m */,
+				6D4E753B230A39C600F9A24F /* JMAllMessageTableViewController.xib */,
 				0425CB54228449A000E08587 /* VideoChatViewController */,
 				040E54CD2276F9FF004AB0F9 /* ChatViewController */,
 				04C4A16E22CC414D0049DA29 /* JMMessageListViewController.h */,
@@ -5304,7 +5296,7 @@
 						CreatedOnToolsVersion = 10.1;
 						SystemCapabilities = {
 							com.apple.ApplePay = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -5452,6 +5444,7 @@
 				040BF07B22719E4E0088697D /* me.png in Resources */,
 				040CA837225F1EB2006D7A7F /* Share_WeChat_friends.png in Resources */,
 				040CA853225F1EBF006D7A7F /* dingwei@2x.png in Resources */,
+				04A9217E230A4A1B00AABD0C /* JMTaskSeachViewController.xib in Resources */,
 				04B620E922DDC659009C8853 /* JMTaskApplyForView.xib in Resources */,
 				04BE8B5822925E45004EB7EC /* pitch_on@2x.png in Resources */,
 				041CCF0922A52403002DFED3 /* icon_return_bule@3x.png in Resources */,
@@ -5461,6 +5454,7 @@
 				04A5FD5222C8A5C800850604 /* huangguan@3x.png in Resources */,
 				04AF934122CA29B000D9FCBF /* deimi_login.png in Resources */,
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
+				6D4E753D230A39C600F9A24F /* JMAllMessageTableViewController.xib in Resources */,
 				041CCF0522A52403002DFED3 /* order_cp@3x.png in Resources */,
 				04C4A17B22CC4B1C0049DA29 /* logo2@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
@@ -5555,7 +5549,6 @@
 				04C2CF0422D2275B00DAB29B /* JMVideoSingleViewController.xib in Resources */,
 				0493FEE622CF697600EC7215 /* money.mp3 in Resources */,
 				0485AD1E22A10F5A00B31506 /* subscribe@3x.png in Resources */,
-				04A92172230A333600AABD0C /* JMAllMessageTableViewController.xib in Resources */,
 				040BF07722719E4E0088697D /* syndicate@2x.png in Resources */,
 				04DD1D49224B6E95007CB11C /* verification_code@3x.png in Resources */,
 				0492AE7C22F0463400AB21B3 /* JMChooseCardViewController.xib in Resources */,
@@ -5597,7 +5590,6 @@
 				6D0209EB224FB900009BCFE4 /* interview@3x.png in Resources */,
 				041CCF0622A52403002DFED3 /* store.png in Resources */,
 				04DEB40B22968E840089BD87 /* no_pass@2x.png in Resources */,
-				04B53AA223053C93007F0AF2 /* JMTaskSeachViewController.xib in Resources */,
 				04DD1D4F224B6E95007CB11C /* phone@3x.png in Resources */,
 				04AB444622BA13F500000E03 /* DEMI_BIG@2x.png in Resources */,
 				04BE8B4A2292583F004EB7EC /* accretion@2x.png in Resources */,
@@ -5675,7 +5667,7 @@
 				040CA85C225F1EBF006D7A7F /* Location_of_detail_page@3x.png in Resources */,
 				04950FF522AEA1AF00C3D3FB /* jianbian@2x.png in Resources */,
 				0492AE7A22F0463400AB21B3 /* JMBindBankCardViewController.xib in Resources */,
-				04A92177230A444000AABD0C /* JMCDetailViewController.xib in Resources */,
+				04A9217F230A4A1B00AABD0C /* JMCDetailViewController.xib in Resources */,
 				04A5FD4522C8A58200850604 /* zhuanshi@2x.png in Resources */,
 				04950FE922AE969A00C3D3FB /* stale_dated@3x.png in Resources */,
 				048A0DE722B8DB34006530EC /* demi_home@2x.png in Resources */,
@@ -6050,7 +6042,7 @@
 				04896A0722C07A9B00E674C5 /* JMApplyForProtocolView.m in Sources */,
 				6D5DD8AB2308439E0064612A /* TUITextMessageCell.m in Sources */,
 				6D5DD8BD2308439E0064612A /* TUIConversationDataProviderService.m in Sources */,
-				04A92176230A444000AABD0C /* JMCDetailViewController.m in Sources */,
+				04A92181230A4A1B00AABD0C /* JMCDetailViewController.m in Sources */,
 				6D5DD8812308439D0064612A /* TUIContactListPicker.m in Sources */,
 				0493FEEA22CF6ADF00EC7215 /* JMPlaySoundsManager.m in Sources */,
 				041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */,
@@ -6095,7 +6087,6 @@
 				04EA7E4323014F26005B7CE5 /* JMPostTypeChooseView.m in Sources */,
 				6D5DD8972308439E0064612A /* TUIMessageCellData.m in Sources */,
 				6D020A6F22539FB0009BCFE4 /* CompanyRequirementsView.m in Sources */,
-				04B53AA123053C93007F0AF2 /* JMTaskSeachViewController.m in Sources */,
 				040A3927227DA5F900EDD9E0 /* JMGreetView.m in Sources */,
 				048FF0FF22C22A4D0093CBF9 /* JMHTTPManager+DeletePartTimeJobVita.m in Sources */,
 				6D5DD8672308439D0064612A /* TUIVideoViewController.m in Sources */,
@@ -6156,6 +6147,7 @@
 				04EA211422AFD0040035C398 /* JMHTTPManager+FectchTaskOrderInfo.m in Sources */,
 				04BE8B5E2292A5C2004EB7EC /* JMHTTPManager+CompanyFileDelete.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
+				04A92180230A4A1B00AABD0C /* JMTaskSeachViewController.m in Sources */,
 				040807B622A3BF1100C0744F /* JMIndustryWebViewController.m in Sources */,
 				6D5DD8762308439D0064612A /* NSDate+TUIKIT.m in Sources */,
 				04908B2E22A8AEE0000B5AB4 /* JMHTTPManager+FectchTaskList.m in Sources */,
@@ -6228,7 +6220,6 @@
 				04C4A18522CCE4850049DA29 /* JMHTTPManager+FectchGreetList.m in Sources */,
 				048348BA22696DC800DE4630 /* JMJobDescriptionViewController.m in Sources */,
 				6D5DD88F2308439D0064612A /* TUIFaceMessageCellData.m in Sources */,
-				04A92171230A333600AABD0C /* JMAllMessageTableViewController.m in Sources */,
 				040CD54C226AADF6000BB230 /* JMHTTPManager+CompanyCreate.m in Sources */,
 				04CC5F9422B3B67600C5DD46 /* JMDiscoverTopView.m in Sources */,
 				6D5DD8642308439D0064612A /* TAddCell.m in Sources */,
@@ -6290,6 +6281,7 @@
 				049C652622AD3C0400A93DFE /* JMComfirmPostBottomView.m in Sources */,
 				04A5FD5B22C8A65D00850604 /* JMGradeView.m in Sources */,
 				6D5DD8662308439D0064612A /* TNavigationController.m in Sources */,
+				6D4E753E230A39C600F9A24F /* JMAllMessageTableViewController.m in Sources */,
 				6D5DD8692308439D0064612A /* TDateEditController.m in Sources */,
 				04E129E322F2D4BD0003D58F /* LoginViewController.m in Sources */,
 				6D5DD8C22308439E0064612A /* TUIConversationCell.m in Sources */,
@@ -6605,7 +6597,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = JMian/JMian.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TJ2RYY9984;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6628,7 +6619,6 @@
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -6640,7 +6630,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = NO;
 				CODE_SIGN_ENTITLEMENTS = JMian/JMian.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TJ2RYY9984;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -6663,7 +6652,6 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -6673,7 +6661,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TJ2RYY9984;
 				INFOPLIST_FILE = JMianTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -6692,7 +6679,6 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TJ2RYY9984;
 				INFOPLIST_FILE = JMianTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
