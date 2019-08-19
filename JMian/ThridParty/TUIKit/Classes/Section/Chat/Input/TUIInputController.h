@@ -13,6 +13,7 @@
 #import "TUIMenuView.h"
 #import "TUIMoreView.h"
 #import "TUIMessageCell.h"
+#import "JMGreetView.h"
 
 @class TUIInputController;
 
@@ -86,6 +87,8 @@
  *  而在本类中，将 InputBar 与上述三个视图实际结合，实现了各个视图的显示与切换的逻辑。
  */
 @interface TUIInputController : UIViewController
+
+@property (strong, nonatomic) JMGreetView *greeView;
 
 /**
  *  输入条

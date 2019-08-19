@@ -43,6 +43,9 @@
 #import "JMHomeWorkModel.h"
 #import "JMHTTPManager+InterView.h"
 #import "JMHTTPManager+CreateTaskOrder.h"
+#import "JMVideoChatView.h"
+#import "THDatePickerView.h"
+
 
 #define MAX_MESSAGE_SEP_DLAY (5 * 60)
 
@@ -64,6 +67,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 @property (nonatomic, assign) BOOL noMoreMsg;
 @property (nonatomic, assign) BOOL firstLoad;
 @property (nonatomic, assign)BOOL isDominator;
+
+@property (weak, nonatomic) THDatePickerView *dateView;
+@property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
+@property (strong, nonatomic) JMVideoChatView *videoChatView;
 
 
 @property id<TUIConversationDataProviderServiceProtocol> conversationDataProviderService;
@@ -108,9 +115,9 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 - (void)setupViews
 {
     
-    if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
-        _isDominator = YES;
-    }
+//    if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
+//        _isDominator = YES;
+//    }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRevokeMessage:) name:TUIKitNotification_TIMMessageRevokeListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUploadMessage:) name:TUIKitNotification_TIMUploadProgressListener object:nil];
@@ -146,6 +153,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 - (void)setConversation:(TIMConversation *)conversation
 {
     _conv = conversation;
+    
+    if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
+        _isDominator = YES;
+    }
     
     self.conversationDataProviderService = [[TCServiceManager shareInstance] createService:@protocol(TUIConversationDataProviderServiceProtocol)];
     [self loadMessage];
@@ -385,6 +396,26 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }
     return uiMsgs;
 }
+
+-(void)initDatePickerView
+{
+    self.BgBtn = [[UIButton alloc] initWithFrame:self.view.bounds];
+    self.BgBtn.backgroundColor = [UIColor blackColor];
+    self.BgBtn.hidden = YES;
+    self.BgBtn.alpha = 0.3;
+    [self.view addSubview:self.BgBtn];
+    
+    THDatePickerView *dateView = [[THDatePickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, SCREEN_WIDTH, 300)];
+    dateView.delegate = self;
+    dateView.title = @"请选择时间";
+    //    dateView.isSlide = NO;
+    //    dateView.date = @"2017-03-23 12:43";
+    //    dateView.minuteInterval = 1;
+    [self.view addSubview:dateView];
+    self.dateView = dateView;
+    
+}
+
 #pragma mark - Table view data source
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -573,16 +604,23 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             return nil;
         }
     }
-    cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId forIndexPath:indexPath];
-    //对于入群小灰条，需要进一步设置其委托。
-    if([cell isKindOfClass:[TUIJoinGroupMessageCell class]]){
-        TUIJoinGroupMessageCell *joinCell = (TUIJoinGroupMessageCell *)cell;
-        joinCell.joinGroupDelegate = self;
-        cell = joinCell;
-    }
-    cell.delegate = self;
-    [cell fillWithData:_uiMsgs[indexPath.row]];
-    
+        cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId forIndexPath:indexPath];
+        //对于入群小灰条，需要进一步设置其委托。
+        if([cell isKindOfClass:[TUIJoinGroupMessageCell class]]){
+            TUIJoinGroupMessageCell *joinCell = (TUIJoinGroupMessageCell *)cell;
+            joinCell.joinGroupDelegate = self;
+            cell = joinCell;
+        }
+        cell.delegate = self;
+        [cell fillWithData:_uiMsgs[indexPath.row]];
+        TUIMessageCellData *cellData = _uiMsgs[indexPath.row];
+        if ([self.conv.getReceiver isEqualToString:@"dominator"]) {
+            cell.avatarView.image = [UIImage imageNamed:@"notification"];
+        }else if(cellData.direction == MsgDirectionIncoming) {
+            [cell.avatarView sd_setImageWithURL:[NSURL URLWithString:self.myConvModel.recipient_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        }else {
+            [cell.avatarView sd_setImageWithURL:[NSURL URLWithString:self.myConvModel.sender_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        }
     return cell;
     }
 }
@@ -825,8 +863,38 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 }
 
 - (void)videoInterviewAction {
+    if ([_myConvModel.type isEqualToString:@"2"]) {
+        
+        [self gotoVideoChatViewWithForeign_key:_myConvModel.work_task_id recipient:_myConvModel.job_user_user_id chatType:@"2"];
+        
+    }else if ([_myConvModel.type isEqualToString:@"1"]) {
+        
+        self.BgBtn.hidden = NO;
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
+            [self.dateView show];
+        }];
+        
+        
+        
+    }
     
+    
+
 }
+-(void)gotoVideoChatViewWithForeign_key:(NSString *)foreign_key
+                              recipient:(NSString *)recipient
+                               chatType:(NSString *)chatType{
+    _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+    _videoChatView.delegate = self;
+    _videoChatView.tag = 222;
+    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
+    //    [_videoChatView setInterviewModel:nil];
+    [self.view addSubview:_videoChatView];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 #pragma mark - 申请兼职职位
 
 -(void)sendCreateTaskOrderResquest_task_id:(NSString *)task_id{

@@ -89,6 +89,9 @@
  *  @param textView 委托者，当前与用户交互的 InputBar。
  */
 - (void)inputBarDidTouchKeyboard:(TUIInputBar *)textView;
+
+
+- (void)textViewDidTouchGreet:(TUIInputBar *)textView;
 @end
 
 
@@ -106,6 +109,8 @@
  *  本类不仅是实现了一个文本输入框中的业务逻辑，同时也是表情、more、和语音视图的逻辑入口。
  */
 @interface TUIInputBar : UIView
+
+@property (nonatomic, strong) UIButton *commonButton;
 
 /**
  *  线视图

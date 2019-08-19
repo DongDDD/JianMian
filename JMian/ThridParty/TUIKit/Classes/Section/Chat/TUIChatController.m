@@ -66,7 +66,7 @@
 - (void)setupViews
 {
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = TMessageController_Background_Color;
     
     @weakify(self)
     //message
@@ -78,17 +78,20 @@
     [self.view addSubview:_messageController.view];
     [_messageController setConversation:_conversation];
     
-    //input
-    _inputController = [[TUIInputController alloc] init];
-    _inputController.view.frame = CGRectMake(0, self.view.frame.size.height - TTextView_Height - Bottom_SafeHeight, self.view.frame.size.width, TTextView_Height + Bottom_SafeHeight);
-    _inputController.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
-    _inputController.delegate = self;
-    [RACObserve(self, moreMenus) subscribeNext:^(NSArray *x) {
-        @strongify(self)
-        [self.inputController.moreView setData:x];
-    }];
-    [self addChildViewController:_inputController];
-    [self.view addSubview:_inputController.view];
+    if (![self.myConvModel.data.convId isEqualToString:@"dominator"]) {
+        
+        //input
+        _inputController = [[TUIInputController alloc] init];
+        _inputController.view.frame = CGRectMake(0, self.view.frame.size.height - TTextView_Height - Bottom_SafeHeight, self.view.frame.size.width, TTextView_Height + Bottom_SafeHeight);
+        _inputController.view.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        _inputController.delegate = self;
+        [RACObserve(self, moreMenus) subscribeNext:^(NSArray *x) {
+            @strongify(self)
+            [self.inputController.moreView setData:x];
+        }];
+        [self addChildViewController:_inputController];
+        [self.view addSubview:_inputController.view];
+    }
     
     TIMMessageDraft *draft = [self.conversation getDraft];
     if(draft){
