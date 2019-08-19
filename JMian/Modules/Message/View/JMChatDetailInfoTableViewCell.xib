@@ -132,7 +132,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.95684510469999995" green="0.95678931469999995" blue="0.96441358330000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="Ebg-Ov-OXS" secondAttribute="bottom" constant="20" id="Dpm-z8-Ly2"/>
                     <constraint firstAttribute="trailing" secondItem="Ebg-Ov-OXS" secondAttribute="trailing" constant="20" id="Z1q-EW-8bd"/>

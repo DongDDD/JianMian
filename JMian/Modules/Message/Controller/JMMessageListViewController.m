@@ -8,17 +8,17 @@
 
 #import "JMMessageListViewController.h"
 #import "JMAllMessageTableViewCell.h"
-#import <TIMManager.h>
-#import <TIMMessage.h>
-#import <IMMessageExt.h>
+#import <ImSDK/TIMManager.h>
+#import <ImSDK/TIMMessage.h>
+#import <ImSDK/IMMessageExt.h>
 #import "JMHTTPManager+MessageList.h"
 #import "JMMessageListModel.h"
 #import "JMAllMessageTableViewCellData.h"
-#import "JMChatViewViewController.h"
+#import "JMChatViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "JMHTTPManager+CreateConversation.h"
 
-@interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource,JMChatViewViewControllerDelegate>
+@interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSArray *modelArray;
@@ -121,12 +121,17 @@ static NSString *cellIdent = @"allMessageCellIdent";
     if (recipient || foreign_key) {
         [[JMHTTPManager sharedInstance]createChat_type:type recipient:recipient foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            JMChatViewController *vc = [[JMChatViewController alloc] init];
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
+
             //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
             //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
             //        [alert show];
-            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-            vc.myConvModel = messageListModel;
-            [self.navigationController pushViewController:vc animated:YES];
+//            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+//            vc.myConvModel = messageListModel;
+//            [self.navigationController pushViewController:vc animated:YES];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
         }];
@@ -464,10 +469,17 @@ static NSString *cellIdent = @"allMessageCellIdent";
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         if ([messagelistModel.data.convId isEqualToString:@"dominator"] && foreign_key == nil) {
-            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+            
+            
+            JMChatViewController *vc = [[JMChatViewController alloc] init];
             vc.myConvModel = messagelistModel;
-            vc.delegate = self;
             [self.navigationController pushViewController:vc animated:YES];
+
+            
+//            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+//            vc.myConvModel = messagelistModel;
+//            vc.delegate = self;
+//            [self.navigationController pushViewController:vc animated:YES];
             
         }else{
             if (userModel.user_id == messagelistModel.sender_user_id) {
@@ -488,11 +500,13 @@ static NSString *cellIdent = @"allMessageCellIdent";
         [self createChatRequstWithType:messagelistModel.type foreign_key:foreign_key recipient:recipient_id];
     }else{
         
-    JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-    vc.myConvModel = messagelistModel;
-    vc.delegate = self;
-//    [self setReadMessageAction_model:[_dataArray objectAtIndex:indexPath.row]];
-    [self.navigationController pushViewController:vc animated:YES];
+        JMChatViewController *vc = [[JMChatViewController alloc] init];
+        vc.myConvModel = messagelistModel;
+        [self.navigationController pushViewController:vc animated:YES];
+//    JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+//    vc.myConvModel = messagelistModel;
+//    vc.delegate = self;
+//    [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

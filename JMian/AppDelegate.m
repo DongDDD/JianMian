@@ -14,7 +14,7 @@
 //#import "JMJobExperienceViewController.h"
 
 #import "NavigationViewController.h"
-#import <TIMManager.h>
+#import <ImSDK/TIMManager.h>
 #import "VendorKeyMacros.h"
 #import "JMUserInfoManager.h"
 #import "JMUserInfoModel.h"
@@ -28,10 +28,7 @@
 #import "JMManageInterviewViewController.h"
 #import "JMPlaySoundsManager.h"
 #import "JMHTTPManager+FectchVersionInfo.h"
-#import "JMCDetailWebViewController.h"
-#import "JMBDetailWebViewController.h"
-#import "JobDetailsViewController.h"
-#import "JMPersonDetailsViewController.h"
+#import "TUIKit.h"
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener>
 
@@ -42,10 +39,12 @@
 - (void)initTimSDK {
     TIMSdkConfig *sdkConfig = [[TIMSdkConfig alloc] init];
     sdkConfig.sdkAppId = TIMSdkAppid.intValue;
-    sdkConfig.accountType = TIMSdkAccountType;
+//    sdkConfig.accountType = TIMSdkAccountType;
     sdkConfig.disableLogPrint = NO; // 是否允许log打印
     sdkConfig.logLevel = TIM_LOG_NONE; //Log输出级别（debug级别会很多）
     [[TIMManager sharedInstance] initSdk:sdkConfig];
+    [[TUIKit sharedInstance] setupWithAppId:TIMSdkAppid.intValue];
+
 }
 
 
@@ -84,11 +83,13 @@
     [self registNotification];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     [self initTimSDK];
+    
     JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
     NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
     [_window setRootViewController:naVC];
     [self.window makeKeyAndVisible];
     [self getVersionData];
+
     
     
     return YES;
@@ -253,90 +254,6 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     return [WXApi handleOpenURL:url delegate:self];
-}
-
--(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
-    //获取Window当前显示的ViewController
-//    NSLog(@"sourceApplication: %@", sourceApplication);
-    if ([url.scheme isEqualToString:@"iosdemi"]) {
-        
-        NSLog(@"URL scheme:%@", url);
-        NSLog(@"URL query: %@", [url query]);
-        NSString *string = [url query];
-        NSArray *array = [string componentsSeparatedByString:@":"]; //从字符A中分隔成2个元素的数组
-        NSString *string2 = array[0];
-        NSArray *array2 = [string2 componentsSeparatedByString:@"="];
-        NSString *typeStr = array2[1];
-        NSString *typeId = array[1];
-        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-        if ([typeStr isEqualToString:@"work_id"]) {
-            NSLog(@"typeId: %@", typeId);
-            if ([userModel.type isEqualToString:C_Type_USER]) {
-                JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
-                vc.work_id = typeId;
-                [[self currentViewController].navigationController pushViewController:vc animated:YES];
-                
-            }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份"delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-                [alert show];
-            }
-        }else if ([typeStr isEqualToString:@"user_job_id"]) {
-            NSLog(@"typeId: %@", typeId);
-            if ([userModel.type isEqualToString:B_Type_UESR]) {
-                JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc]init];
-                vc.user_job_id = typeId;
-                [[self currentViewController].navigationController pushViewController:vc animated:YES];
-            
-            }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-                [alert show];
-            }
-        }else if ([typeStr isEqualToString:@"ability_id"]) {
-            if ([userModel.type isEqualToString:B_Type_UESR]) {
-                JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
-                vc.ability_id = typeId;
-                [[self currentViewController].navigationController pushViewController:vc animated:YES];
-            }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-                [alert show];
-            }
-        }else if ([typeStr isEqualToString:@"task_id"]) {
-            if ([userModel.type isEqualToString:C_Type_USER]) {
-                JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
-                vc.task_id = typeId;
-                [[self currentViewController].navigationController pushViewController:vc animated:YES];
-            }else{
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-                [alert show];
-            }
-        }
-    }else{
-        return  [WXApi handleOpenURL:url delegate:self];
-    }
-
-    return YES;
-}
-
-//获取Window当前显示的ViewController
-- (UIViewController*)currentViewController{
-    //获得当前活动窗口的根视图
-    UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
-    while (1)
-    {
-        //根据不同的页面切换方式，逐步取得最上层的viewController
-        if ([vc isKindOfClass:[UITabBarController class]]) {
-            vc = ((UITabBarController*)vc).selectedViewController;
-        }
-        if ([vc isKindOfClass:[UINavigationController class]]) {
-            vc = ((UINavigationController*)vc).visibleViewController;
-        }
-        if (vc.presentedViewController) {
-            vc = vc.presentedViewController;
-        }else{
-            break;
-        }
-    }
-    return vc;
 }
 
 #pragma mark - 请求

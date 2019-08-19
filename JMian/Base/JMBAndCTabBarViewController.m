@@ -19,7 +19,7 @@
 #import "JMDiscoverHomeViewController.h"
 #import "JMAssignmentSquareViewController.h"
 #import "UITabBar+XSDExt.h"
-#import "JMAllMessageTableViewController.h"
+//#import "JMAllMessageTableViewController.h"
 #import "JMMessageListViewController.h"
 #import "JMBMineViewController.h"
 #import "HomeViewController.h"
