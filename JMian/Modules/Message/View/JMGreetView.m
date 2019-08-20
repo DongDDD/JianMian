@@ -99,7 +99,7 @@ static NSString *cellIdent = @"CellIdent";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-         UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
 //        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 //    }
     JMGreetModel *model = self.listArray[indexPath.row];

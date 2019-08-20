@@ -7,8 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JMTaskDetailHeaderView.h"
+#import "JMTaskDetailHeaderTableViewCell.h"
+
 
 NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, JMTaskDetailTableViewCellType){
+    JMTaskDetailCellTypeHeader = 0,
+    JMTaskDetail2CellType,
+ 
+};
 
 @interface JMCDetailCellConfigures : NSObject
 
