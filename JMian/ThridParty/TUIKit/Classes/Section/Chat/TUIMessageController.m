@@ -67,6 +67,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 @property (nonatomic, assign) BOOL noMoreMsg;
 @property (nonatomic, assign) BOOL firstLoad;
 @property (nonatomic, assign)BOOL isDominator;
+@property (nonatomic, assign) NSInteger section;
 
 @property (weak, nonatomic) THDatePickerView *dateView;
 @property (strong, nonatomic) UIButton *BgBtn;//点击背景  隐藏时间选择器
@@ -175,10 +176,12 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         @strongify(self)
         if(msgs.count != 0){
             self.msgForGet = msgs[msgs.count - 1];
+            self.section = 1;
         }
         NSMutableArray *uiMsgs = [self transUIMsgFromIMMsg:msgs];
         dispatch_async(dispatch_get_main_queue(), ^{
             if(msgs.count < msgCount){
+                self.section = 2;
                 self.noMoreMsg = YES;
                 self.indicatorView.mm_h = 0;
             }
@@ -191,7 +194,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                 if(!self.firstLoad){
                     CGFloat visibleHeight = 0;
                     for (NSInteger i = 0; i < uiMsgs.count; ++i) {
-                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:1];
+                        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:i inSection:self.section-1];
                         visibleHeight += [self tableView:self.tableView heightForRowAtIndexPath:indexPath];
                     }
                     if(self.noMoreMsg){
@@ -423,7 +426,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if (!_isDominator && [userModel.type isEqualToString:B_Type_UESR]) {
         
-        if (section == 0) {
+        if (section == self.section - 2) {
             
             return 43;
         }
@@ -433,7 +436,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (section == 0) {
+    if (section == self.section - 2) {
         JMChatViewSectionView *view=[[JMChatViewSectionView alloc] init];
         view.delegate = self;
         return view ;
@@ -444,7 +447,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 -(void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
 
-    if (indexPath.section == 1) {
+    if (indexPath.section == self.section - 1) {
 
         if (_isScrollBottom == NO) {
             [self scrollToBottom:NO];
@@ -463,11 +466,11 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return (section == 0) ? 1: _uiMsgs.count;
+    return (section == self.section - 1) ? _uiMsgs.count : 1;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return self.section;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -479,7 +482,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 //    TUIMessageCellData *data = _uiMsgs[indexPath.row];
 //    height = [data heightOfWidth:Screen_Width];
 //    [_heightCache insertObject:[NSNumber numberWithFloat:height] atIndex:indexPath.row];
-    if (indexPath.section == 0) {
+    if (indexPath.section == self.section - 2) {
         
         if (_isDominator) {
             return 0;
@@ -518,7 +521,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 0) {
+    if (indexPath.section == self.section - 2) {
         
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         //兼职类型对话且招聘信息不为空，且是C端用户
@@ -616,10 +619,27 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         TUIMessageCellData *cellData = _uiMsgs[indexPath.row];
         if ([self.conv.getReceiver isEqualToString:@"dominator"]) {
             cell.avatarView.image = [UIImage imageNamed:@"notification"];
-        }else if(cellData.direction == MsgDirectionIncoming) {
-            [cell.avatarView sd_setImageWithURL:[NSURL URLWithString:self.myConvModel.recipient_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-        }else {
-            [cell.avatarView sd_setImageWithURL:[NSURL URLWithString:self.myConvModel.sender_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+            
+        }else if([self.conv.getReceiver isEqualToString: _myConvModel.sender_mark]) { //消息接收
+            
+            if (cellData.direction == MsgDirectionIncoming) {
+                [cell.avatarView sd_setImageWithURL:[NSURL URLWithString:self.myConvModel.sender_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+            }else{
+                [cell.avatarView sd_setImageWithURL:[NSURL URLWithString:self.myConvModel.recipient_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+            }
+        
+            
+        }else {  //消息发送
+            
+            
+                if (cellData.direction == MsgDirectionIncoming) {
+                    [cell.avatarView sd_setImageWithURL:[NSURL URLWithString:self.myConvModel.recipient_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+                }else{
+                    [cell.avatarView sd_setImageWithURL:[NSURL URLWithString:self.myConvModel.sender_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+                }
+
+
+            
         }
     return cell;
     }
@@ -632,7 +652,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 - (void)scrollToBottom:(BOOL)animate
 {
     if (_uiMsgs.count > 0) {
-        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:1] atScrollPosition:UITableViewScrollPositionBottom animated:animate];
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:self.section-1] atScrollPosition:UITableViewScrollPositionBottom animated:animate];
     }
 }
 
@@ -663,7 +683,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         NSInteger row = [_uiMsgs indexOfObject:msg];
         [_heightCache removeObjectAtIndex:row];
         [_uiMsgs removeObjectAtIndex:row];
-        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:1]]
+        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:self.section-1]]
                               withRowAnimation:UITableViewRowAnimationFade];
     } else {
         [self.tableView endUpdates];
@@ -679,11 +699,11 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     if(dateMsg){
         _msgForDate = imMsg;
         [_uiMsgs addObject:dateMsg];
-        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:1]]
+        [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:self.section-1]]
                               withRowAnimation:UITableViewRowAnimationFade];
     }
     [_uiMsgs addObject:msg];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:1]]
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:self.section-1]]
                           withRowAnimation:UITableViewRowAnimationFade];
     [self.tableView endUpdates];
     [self scrollToBottom:YES];
@@ -716,7 +736,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 {
     msg.status = status;
     NSInteger index = [_uiMsgs indexOfObject:msg];
-    TUIMessageCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:1]];
+    TUIMessageCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:index inSection:self.section-1]];
     [cell fillWithData:msg];
 }
 
@@ -1019,7 +1039,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         NSInteger index = [_uiMsgs indexOfObject:_menuUIMsg];
         [_uiMsgs removeObjectAtIndex:index];
         [_heightCache removeObjectAtIndex:index];
-        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:self.section-1]] withRowAnimation:UITableViewRowAnimationFade];
 
         [self.tableView endUpdates];
     }
@@ -1071,10 +1091,11 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     [_uiMsgs removeObject:msg];
 
     [self.tableView beginUpdates];
-    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:self.section-1]] withRowAnimation:UITableViewRowAnimationFade];
     TUISystemMessageCellData *data = [imMsg revokeCellData];
     [_uiMsgs insertObject:data atIndex:index];
-    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:1]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:self.section-1]] withRowAnimation:UITableViewRowAnimationFade];
+    [self.heightCache removeObjectAtIndex:index];
     [self.tableView endUpdates];
     [self scrollToBottom:YES];
 }
