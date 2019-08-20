@@ -8,10 +8,12 @@
 
 #import "JMCDetailViewController.h"
 #import "JMTitlesView.h"
+#import "JMTaskDetailHeaderTableViewCell.h"
 
 @interface JMCDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) JMTitlesView *titleView;
+@property (assign, nonatomic) NSUInteger index;
 
 @end
 
@@ -19,6 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -48,7 +51,7 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
-    return nil;
+    return self.titleView;;
     
 }
 
@@ -83,6 +86,18 @@
     return nil;
 }
 #pragma mark - lazy
+- (JMTitlesView *)titleView {
+    if (!_titleView) {
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"任务描述", @"信誉评价"]];
+        __weak JMCDetailViewController *weakSelf = self;
+        _titleView.didTitleClick = ^(NSInteger index) {
+            _index = index;
+//            [weakSelf showPageContentView];
+        };
+    }
+    
+    return _titleView;
+}
 
 - (UITableView *)tableView {
     if (!_tableView) {
@@ -95,7 +110,7 @@
         //        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
         //        _tableView.sectionHeaderHeight = 43;
         //        _tableView.sectionFooterHeight = 0;
-        //        [_tableView registerNib:[UINib nibWithNibName:@"JMSquareHeaderModulesTableViewCell" bundle:nil] forCellReuseIdentifier:headerCellId];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMTaskDetailHeaderTableViewCell.h" bundle:nil] forCellReuseIdentifier:JMTaskDetailHeaderTableViewCellIdentifier];
    
         
     }

@@ -56,17 +56,19 @@
     
     //向微信注册
     [WXApi registerApp:@"wxb42b10e7d84612a9"];
-    [[TIMManager sharedInstance] addMessageListener:self];
+//    [[TIMManager sharedInstance] addMessageListener:self];
      //用户状态变更
-    TIMUserConfig *userConfig = [[TIMUserConfig alloc] init];
-    userConfig.refreshListener = self;
-    userConfig.messageRevokeListener = self;
-    userConfig.uploadProgressListener = self;
-    userConfig.userStatusListener = self;
-//    userConfig.friendshipListener = self;
-    userConfig.messageUpdateListener = self;
-    [[TIMManager sharedInstance] setUserConfig:userConfig];
-
+//    TIMUserConfig *userConfig = [[TIMUserConfig alloc] init];
+//    userConfig.refreshListener = self;
+//    userConfig.messageRevokeListener = self;
+//    userConfig.uploadProgressListener = self;
+//    userConfig.userStatusListener = self;
+////    userConfig.friendshipListener = self;
+//    userConfig.messageUpdateListener = self;
+//    [[TIMManager sharedInstance] setUserConfig:userConfig];
+//    [[TIMManager sharedInstance] addMessageListener:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserStatus:) name:TUIKitNotification_TIMUserStatusListener object:nil];
+    
     
     //MP3播放器
     [[JMPlaySoundsManager sharedInstance] setVideoSounds];
@@ -347,13 +349,12 @@
 }
 
 //IM被踢下线
--(void)onForceOffline{
+-(void)onUserStatus:(NSNotification *)notification{
     NSLog(@"---被踢");
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你被强制下线" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
     [alert show];
     
-    LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
-    
+    LoginViewController *loginVc = [[LoginViewController alloc]init];
     NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
     [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
     

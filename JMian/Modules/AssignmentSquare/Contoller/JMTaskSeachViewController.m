@@ -34,7 +34,6 @@
 }
 
 #pragma mark - getter -
-
 -(SearchView *)searchView{
     if (_searchView == nil) {
         _searchView = [[SearchView alloc]initWithFrame:CGRectMake(20,10, SCREEN_WIDTH-40, 33)];

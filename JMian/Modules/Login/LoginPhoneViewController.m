@@ -32,7 +32,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 //    [self.navigationController setNavigationBarHidden:NO];
-//    [self setIsHiddenBackBtn:NO];
+//    [self setIsHiddenBackBtn:YES];
     _phoneNumText.delegate = self;
     _phoneNumText.keyboardType = UIKeyboardTypeNumberPad;
     _captchaText.keyboardType = UIKeyboardTypeNumberPad;
