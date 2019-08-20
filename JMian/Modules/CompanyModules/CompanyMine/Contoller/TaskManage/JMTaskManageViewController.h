@@ -8,6 +8,7 @@
 
 #import "BaseViewController.h"
 #import "JMTitlesView.h"
+#import "JMMyTitleView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

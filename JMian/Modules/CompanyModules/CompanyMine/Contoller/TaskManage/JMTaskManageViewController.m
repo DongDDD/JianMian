@@ -38,7 +38,7 @@
     NSMutableArray *shippingMethods;
 }
 @property (strong, nonatomic) UITableView *tableView;
-@property (nonatomic, strong) JMTitlesView *titleView;
+@property (nonatomic, strong) JMMyTitleView *titleView;
 @property (assign, nonatomic) NSUInteger index;
 @property (strong, nonatomic) NSMutableArray *listsArray;
 @property (strong, nonatomic) JMShareView *choosePayView;
@@ -998,10 +998,10 @@
 
 #pragma mark - Getter
 
-- (JMTitlesView *)titleView {
+- (JMMyTitleView *)titleView {
     if (!_titleView) {
-        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"待通过", @"进行中", @"已结束"]];
-        _titleView.viewType = JMTitlesViewDefault;
+        _titleView = [[JMMyTitleView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"待通过", @"进行中", @"已结束"]];
+//        _titleView.viewType = JMMyTitleViewTypeDefault;
         [_titleView setCurrentTitleIndex:_index];
         __weak JMTaskManageViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {

@@ -10,7 +10,7 @@
 #import "JMCompanyHomeViewController.h"
 #import "JMPostJobHomeViewController.h"
 #import "NavigationViewController.h"
-#import "JMMessageViewController.h"
+//#import "JMMessageViewController.h"
 #import "JMMineViewController.h"
 #import "JMHTTPManager+MessageList.h"
 #import "JMMessageListModel.h"

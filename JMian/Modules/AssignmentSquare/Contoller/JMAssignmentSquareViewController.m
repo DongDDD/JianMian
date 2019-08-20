@@ -35,7 +35,7 @@
 #import "JMSquareTaskManageViewController.h"
 #import "JMPartTimeJobResumeViewController.h"
 #import "JMTaskSeachViewController.h"
-#import "JMCDetailViewController.h"
+//#import "JMCDetailViewController.h"
 
 
 
