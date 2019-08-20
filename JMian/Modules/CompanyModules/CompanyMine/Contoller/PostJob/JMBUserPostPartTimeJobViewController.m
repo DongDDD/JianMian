@@ -555,6 +555,7 @@
 
 //添加的图片
 -(void)sendAddImgs:(NSMutableArray *)Imgs{
+    _isChange = YES;
     [self updateTaskImagesRequest_images:Imgs.mutableCopy];
     [self.partTimeJobDetailView.postImgBtn setTitle:@"已上传" forState:UIControlStateNormal];
     [self.partTimeJobDetailView.postImgBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
@@ -563,6 +564,7 @@
 
 //删除图片
 -(void)deleteSalePositionImageWithIndex:(NSInteger)index{
+    _isChange = YES;
     if (self.imageDataArr.count > 0) {
         JMImageModel *model = self.imageDataArr[index];
         if (index < self.imageDataArr.count) {

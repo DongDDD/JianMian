@@ -83,7 +83,7 @@ static NSString *cellIdent = @"cellIdent";
 //    [self setIsHiddenBackBtn:YES];
     [self setIsHiddenRightBtn:YES];
     self.view.backgroundColor = BG_COLOR;
-    self.per_page = 15;
+    self.per_page = 10;
     self.page = 1;
 //    [self getData];
     [self setTableView];

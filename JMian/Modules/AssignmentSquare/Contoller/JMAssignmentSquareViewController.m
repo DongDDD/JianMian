@@ -73,7 +73,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [super viewDidLoad];
     [self setTitleViewImageViewName:@"demi_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"不限"];
-    self.per_page = 15;
+    self.per_page = 10;
     self.page = 1;
     
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(hidePartTimeViewSwipeAction)];
@@ -296,8 +296,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 {
     _page += 1;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if ([userModel.type isEqualToString:B_Type_UESR]) {
-        
+    if ([userModel.type isEqualToString:B_Type_UESR]) {        
         [self BToGetData];
         
     }else{

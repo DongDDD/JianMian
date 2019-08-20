@@ -621,6 +621,7 @@
     [self disapearAction];
     [self wxShare:1];
 }
+
 #pragma mark - scrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{

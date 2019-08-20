@@ -66,7 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.page = 1;
-    self.per_page = 15;
+    self.per_page = 10;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         self.title = @"任务管理";

@@ -251,7 +251,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 
 - (void)sendArray_addImageUrls:(NSMutableArray *)addImageUrls {
-    
+    _isChange = YES;
     self.image_arr = addImageUrls;
     NSLog(@"addImageUrls%@",addImageUrls);
     [self.postGoodsImagesView.goodsImageBtn setTitle:@"已上传" forState:UIControlStateNormal];

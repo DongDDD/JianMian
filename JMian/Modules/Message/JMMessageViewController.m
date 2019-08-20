@@ -9,7 +9,7 @@
 #import "JMMessageViewController.h"
 #import "JMTitlesView.h"
 #import "JMPageView.h"
-#import "JMAllMessageTableViewController.h"
+#import "JMMessageTableViewController.h"
 #import "JMLookMeTableViewController.h"
 
 @interface JMMessageViewController ()

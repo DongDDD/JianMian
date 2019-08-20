@@ -67,7 +67,7 @@ static NSString *cellIdent = @"cellIdent";
     // Do any additional setup after loading the view from its nib.
     [self setTitleViewImageViewName:@"demi_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"不限"];
-    self.per_page = 15;
+    self.per_page = 10;
     self.page = 1;
     [self setTableView];
     [self initView];

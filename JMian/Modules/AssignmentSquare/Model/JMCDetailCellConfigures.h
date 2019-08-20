@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "JMTaskDetailHeaderView.h"
 #import "JMTaskDetailHeaderTableViewCell.h"
-
+#import "JMCDetailTaskDecriTableViewCell.h"
+#import "JMCDetailTaskDecri2TableViewCell.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, JMTaskDetailTableViewCellType){

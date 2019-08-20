@@ -15,7 +15,7 @@
 @interface JMCDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 
-@property (nonatomic, strong) UIView *headerTitleView;
+//@property (nonatomic, strong) UIView *headerTitleView;
 @property (nonatomic, strong) JMTaskDetailHeaderView *taskDetailHeaderView;
 
 @property (nonatomic, strong) JMTitlesView *titleView;
@@ -27,44 +27,76 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self ininView];
+    // Do any additional setup after loading the view from its nib.
+}
+
+
+-(void)ininView{
+//    [self.view addSubview:self.taskDetailHeaderView];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.mas_topLayoutGuide);
+        make.top.equalTo(self.view);
         make.width.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view);
         make.centerX.mas_equalTo(self.view);
     }];
-    // Do any additional setup after loading the view from its nib.
+
 }
 
 #pragma mark - UITableViewDataSource
 //- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    return 159;
+//    if (section == 0) {
+//        return  10;
+//    }
+//    return 0;
+//}
+//
+//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section {
+//    if ([view isKindOfClass:[UITableViewHeaderFooterView class]]) {
+//        ((UITableViewHeaderFooterView *)view).backgroundView.backgroundColor = [UIColor redColor];
+//    }
 //}
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        return 1;
-    }else  if (section == 1) {
+         return 1;
+    }else if (section == 1) {
+        return 2;
+    }else if (section == 2) {
         return 10;
     }
-    return 1;
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
- 
-    return 137;
+    if (indexPath.section == 0){
+        return 105;
+    }else if (indexPath.section == 1) {
+        if (indexPath.row == 0) {
+            return 299;
+        }else  if (indexPath.row == 1) {
+            return 364;
+        }
+    }else if (indexPath.section == 2) {
+        return 105;
+        
+    }
+    return 0;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1) {
         return self.titleView;
     }
+//    else if (section == 2) {
+//        return self.titleView;
+//
+//    }
     return [UIView new];
     
 }
@@ -74,29 +106,61 @@
     if (section == 1) {
         return 44;
     }
+//    else if (section == 2) {
+//        return 44;
+//
+//    }
     return 0;
 
 }
 
 #pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    switch (indexPath.section) {
-        case JMTaskDetailCellTypeHeader: {
-            JMTaskDetailHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMTaskDetailHeaderTableViewCellIdentifier forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        JMTaskDetailHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMTaskDetailHeaderTableViewCellIdentifier forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+        //            [cell setUserInfo:[JMUserInfoManager getUserInfo]];
+        return cell;
+        
+    }else if (indexPath.section == 1){
+        if (indexPath.row == 0) {
+            JMCDetailTaskDecriTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailTaskDecriTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//            [cell setUserInfo:[JMUserInfoManager getUserInfo]];
+            //            [cell setUserInfo:[JMUserInfoManager getUserInfo]];
             return cell;
-        }
-        case JMTaskDetail2CellType: {
-            JMTaskDetailHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMTaskDetailHeaderTableViewCellIdentifier forIndexPath:indexPath];
+            
+        }else if (indexPath.row == 1) {
+            JMCDetailTaskDecri2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailTaskDecri2TableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //            [cell setUserInfo:[JMUserInfoManager getUserInfo]];
             return cell;
         }
+    
+    }else if (indexPath.section == 2) {
+        JMTaskDetailHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMTaskDetailHeaderTableViewCellIdentifier forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        //            [cell setUserInfo:[JMUserInfoManager getUserInfo]];
+        return cell;
+    }
+
+    return nil;
+}
+
+
+-(void)showPageContentView{
+    switch (_index) {
+        case 0:
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            break;
+        case 1:
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            break;
         default:
             break;
     }
-    return nil;
+
 }
 
 #pragma mark - lazy
@@ -114,7 +178,7 @@
         __weak JMCDetailViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
-//            [weakSelf showPageContentView];
+            [weakSelf showPageContentView];
         };
     }
     
@@ -134,7 +198,8 @@
         //        _tableView.sectionHeaderHeight = 43;
         //        _tableView.sectionFooterHeight = 0;
         [_tableView registerNib:[UINib nibWithNibName:@"JMTaskDetailHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:JMTaskDetailHeaderTableViewCellIdentifier];
-   
+        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecriTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailTaskDecriTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecri2TableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailTaskDecri2TableViewCellIdentifier];
         
     }
     return _tableView;

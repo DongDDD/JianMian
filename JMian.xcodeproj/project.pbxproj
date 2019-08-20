@@ -96,6 +96,10 @@
 		040B7DC3230B951400766DC3 /* JMTaskDetailHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040B7DC0230B951400766DC3 /* JMTaskDetailHeaderTableViewCell.xib */; };
 		040B7DCB230BA63700766DC3 /* JMTaskDetailHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040B7DCA230BA63700766DC3 /* JMTaskDetailHeaderView.m */; };
 		040B7DCD230BA66D00766DC3 /* JMTaskDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040B7DCC230BA66D00766DC3 /* JMTaskDetailHeaderView.xib */; };
+		040B7DDB230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040B7DD9230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.m */; };
+		040B7DDC230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040B7DDA230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.xib */; };
+		040B7DE5230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 040B7DE3230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.m */; };
+		040B7DE6230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040B7DE4230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.xib */; };
 		040B83772265D01800F1A37A /* JMUploadLicenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040B83752265D01800F1A37A /* JMUploadLicenseViewController.m */; };
 		040B83782265D01800F1A37A /* JMUploadLicenseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040B83762265D01800F1A37A /* JMUploadLicenseViewController.xib */; };
 		040B837C2265D73600F1A37A /* companyCamera.png@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 040B83792265D73600F1A37A /* companyCamera.png@2x.png */; };
@@ -853,8 +857,6 @@
 		6D020A832259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A812259A788009BCFE4 /* JMMyResumeHeader2TableViewCell.xib */; };
 		6D020A872259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D020A852259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.m */; };
 		6D020A882259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D020A862259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib */; };
-		6D4E753D230A39C600F9A24F /* JMAllMessageTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D4E753B230A39C600F9A24F /* JMAllMessageTableViewController.xib */; };
-		6D4E753E230A39C600F9A24F /* JMAllMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E753C230A39C600F9A24F /* JMAllMessageTableViewController.m */; };
 		6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */; };
 		6D558632224B4E340037C14E /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558631224B4E330037C14E /* NavigationViewController.m */; };
 		6D55864B224B54D70037C14E /* Search_Home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D558637224B54D70037C14E /* Search_Home@3x.png */; };
@@ -877,8 +879,6 @@
 		6D55865E224B54D70037C14E /* home_ message@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6D55864A224B54D70037C14E /* home_ message@3x.png */; };
 		6D558663224B564F0037C14E /* JMMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558661224B564F0037C14E /* JMMineViewController.m */; };
 		6D558664224B564F0037C14E /* JMMineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558662224B564F0037C14E /* JMMineViewController.xib */; };
-		6D558669224B58890037C14E /* JMMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D558667224B58890037C14E /* JMMessageViewController.m */; };
-		6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6D558668224B58890037C14E /* JMMessageViewController.xib */; };
 		6D5DD8602308439D0064612A /* TModifyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7522308439D0064612A /* TModifyView.m */; };
 		6D5DD8612308439D0064612A /* TUnReadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7532308439D0064612A /* TUnReadView.m */; };
 		6D5DD8622308439D0064612A /* TUILocalStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D5DD7562308439D0064612A /* TUILocalStorage.m */; };
@@ -1176,6 +1176,12 @@
 		040B7DC9230BA63700766DC3 /* JMTaskDetailHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTaskDetailHeaderView.h; sourceTree = "<group>"; };
 		040B7DCA230BA63700766DC3 /* JMTaskDetailHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTaskDetailHeaderView.m; sourceTree = "<group>"; };
 		040B7DCC230BA66D00766DC3 /* JMTaskDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMTaskDetailHeaderView.xib; sourceTree = "<group>"; };
+		040B7DD8230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCDetailTaskDecriTableViewCell.h; sourceTree = "<group>"; };
+		040B7DD9230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCDetailTaskDecriTableViewCell.m; sourceTree = "<group>"; };
+		040B7DDA230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCDetailTaskDecriTableViewCell.xib; sourceTree = "<group>"; };
+		040B7DE2230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCDetailTaskDecri2TableViewCell.h; sourceTree = "<group>"; };
+		040B7DE3230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCDetailTaskDecri2TableViewCell.m; sourceTree = "<group>"; };
+		040B7DE4230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMCDetailTaskDecri2TableViewCell.xib; sourceTree = "<group>"; };
 		040B83742265D01800F1A37A /* JMUploadLicenseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMUploadLicenseViewController.h; sourceTree = "<group>"; };
 		040B83752265D01800F1A37A /* JMUploadLicenseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMUploadLicenseViewController.m; sourceTree = "<group>"; };
 		040B83762265D01800F1A37A /* JMUploadLicenseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMUploadLicenseViewController.xib; sourceTree = "<group>"; };
@@ -2204,9 +2210,6 @@
 		6D020A842259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMyResumeTextTableViewCell.h; sourceTree = "<group>"; };
 		6D020A852259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMyResumeTextTableViewCell.m; sourceTree = "<group>"; };
 		6D020A862259AA9F009BCFE4 /* JMMyResumeTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMyResumeTextTableViewCell.xib; sourceTree = "<group>"; };
-		6D4E753A230A39C600F9A24F /* JMAllMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMAllMessageTableViewController.h; sourceTree = "<group>"; };
-		6D4E753B230A39C600F9A24F /* JMAllMessageTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMAllMessageTableViewController.xib; sourceTree = "<group>"; };
-		6D4E753C230A39C600F9A24F /* JMAllMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMAllMessageTableViewController.m; sourceTree = "<group>"; };
 		6D55862D224B4D070037C14E /* UIView+addGradualLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+addGradualLayer.h"; sourceTree = "<group>"; };
 		6D55862E224B4D070037C14E /* UIView+addGradualLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+addGradualLayer.m"; sourceTree = "<group>"; };
 		6D558630224B4E330037C14E /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
@@ -2232,9 +2235,6 @@
 		6D558660224B564F0037C14E /* JMMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMineViewController.h; sourceTree = "<group>"; };
 		6D558661224B564F0037C14E /* JMMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMineViewController.m; sourceTree = "<group>"; };
 		6D558662224B564F0037C14E /* JMMineViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMineViewController.xib; sourceTree = "<group>"; };
-		6D558666224B58890037C14E /* JMMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMessageViewController.h; sourceTree = "<group>"; };
-		6D558667224B58890037C14E /* JMMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMMessageViewController.m; sourceTree = "<group>"; };
-		6D558668224B58890037C14E /* JMMessageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMMessageViewController.xib; sourceTree = "<group>"; };
 		6D5DD74D2308439D0064612A /* TAddHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TAddHelper.h; sourceTree = "<group>"; };
 		6D5DD74E2308439D0064612A /* TResponderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TResponderTextView.h; sourceTree = "<group>"; };
 		6D5DD74F2308439D0064612A /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Common.h"; sourceTree = "<group>"; };
@@ -3914,6 +3914,12 @@
 				040B7DC1230B951400766DC3 /* JMTaskDetailHeaderTableViewCell.h */,
 				040B7DBF230B951300766DC3 /* JMTaskDetailHeaderTableViewCell.m */,
 				040B7DC0230B951400766DC3 /* JMTaskDetailHeaderTableViewCell.xib */,
+				040B7DD8230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.h */,
+				040B7DD9230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.m */,
+				040B7DDA230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.xib */,
+				040B7DE2230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.h */,
+				040B7DE3230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.m */,
+				040B7DE4230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.xib */,
 			);
 			path = DetialCells;
 			sourceTree = "<group>";
@@ -4022,9 +4028,6 @@
 		04C6013A22604108000B1FE0 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				6D4E753A230A39C600F9A24F /* JMAllMessageTableViewController.h */,
-				6D4E753C230A39C600F9A24F /* JMAllMessageTableViewController.m */,
-				6D4E753B230A39C600F9A24F /* JMAllMessageTableViewController.xib */,
 				0425CB54228449A000E08587 /* VideoChatViewController */,
 				040E54CD2276F9FF004AB0F9 /* ChatViewController */,
 				04C4A16E22CC414D0049DA29 /* JMMessageListViewController.h */,
@@ -4568,9 +4571,6 @@
 				04C6013A22604108000B1FE0 /* Controller */,
 				04C6013322603956000B1FE0 /* View */,
 				040E54DD22772A75004AB0F9 /* Model */,
-				6D558666224B58890037C14E /* JMMessageViewController.h */,
-				6D558667224B58890037C14E /* JMMessageViewController.m */,
-				6D558668224B58890037C14E /* JMMessageViewController.xib */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -5484,7 +5484,6 @@
 				04A5FD5222C8A5C800850604 /* huangguan@3x.png in Resources */,
 				04AF934122CA29B000D9FCBF /* deimi_login.png in Resources */,
 				6D020A2F2250F3F9009BCFE4 /*  copyreader@3x.png in Resources */,
-				6D4E753D230A39C600F9A24F /* JMAllMessageTableViewController.xib in Resources */,
 				041CCF0522A52403002DFED3 /* order_cp@3x.png in Resources */,
 				04C4A17B22CC4B1C0049DA29 /* logo2@3x.png in Resources */,
 				6D020A2B2250F3F9009BCFE4 /* experience@3x.png in Resources */,
@@ -5511,6 +5510,7 @@
 				04EA7E2823011376005B7CE5 /* JMPayFailedViewController.xib in Resources */,
 				048348AA22695EC000DE4630 /* NO_Data@3x.png in Resources */,
 				040BF07922719E4E0088697D /* me@3x.png in Resources */,
+				040B7DE6230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.xib in Resources */,
 				0495100022AEA21700C3D3FB /* VIP1.png in Resources */,
 				04072F4A2282BA650067A05D /* delete.png in Resources */,
 				04950FFB22AEA1F400C3D3FB /* VIP12@3x.png in Resources */,
@@ -5822,6 +5822,7 @@
 				04256571229EE211000614E7 /* qidong.png in Resources */,
 				6D020A4C22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.xib in Resources */,
 				04DD1D52224B6E95007CB11C /* Webkey.png in Resources */,
+				040B7DDC230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.xib in Resources */,
 				04950FFF22AEA21700C3D3FB /* VIP1@2x.png in Resources */,
 				6D020A7222539FB0009BCFE4 /* HomeTableViewCell.xib in Resources */,
 				6D558664224B564F0037C14E /* JMMineViewController.xib in Resources */,
@@ -5831,7 +5832,6 @@
 				0488E398229F93510071DEE7 /* icon_return_nav@3x.png in Resources */,
 				0488E44A22A023990071DEE7 /* di_icon_return.png in Resources */,
 				041CCF0822A52403002DFED3 /* order_annotion@2x.png in Resources */,
-				6D55866A224B58890037C14E /* JMMessageViewController.xib in Resources */,
 				04BE8B5222925E3A004EB7EC /* Unselected_Vertices@2x.png in Resources */,
 				0488E3A4229F95320071DEE7 /* jobDetailShare@2x.png in Resources */,
 				041CCF0322A52403002DFED3 /* order_cp@2x.png in Resources */,
@@ -6267,6 +6267,7 @@
 				6D5DD8C42308439E0064612A /* TUIKit.m in Sources */,
 				0492AE7922F0463400AB21B3 /* JMDeleteBankCardViewController.m in Sources */,
 				048A0DF122B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m in Sources */,
+				040B7DE5230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.m in Sources */,
 				04908AD322A7A06E000B5AB4 /* JMBUserCenterHeaderSubView.m in Sources */,
 				6D558632224B4E340037C14E /* NavigationViewController.m in Sources */,
 				04B620E722DDC612009C8853 /* JMTaskApplyForView.m in Sources */,
@@ -6315,7 +6316,6 @@
 				049C652622AD3C0400A93DFE /* JMComfirmPostBottomView.m in Sources */,
 				04A5FD5B22C8A65D00850604 /* JMGradeView.m in Sources */,
 				6D5DD8662308439D0064612A /* TNavigationController.m in Sources */,
-				6D4E753E230A39C600F9A24F /* JMAllMessageTableViewController.m in Sources */,
 				6D5DD8692308439D0064612A /* TDateEditController.m in Sources */,
 				04E129E322F2D4BD0003D58F /* LoginViewController.m in Sources */,
 				6D5DD8C22308439E0064612A /* TUIConversationCell.m in Sources */,
@@ -6412,6 +6412,7 @@
 				04FB1A1F22A36BD800A8F02C /* JMWeakWebViewScriptMessageDelegate.m in Sources */,
 				6D5DD8912308439D0064612A /* TUIBubbleMessageCellData.m in Sources */,
 				040E3675226890B700A7D789 /* JMPostNewJobViewController.m in Sources */,
+				040B7DDB230BF4AB00766DC3 /* JMCDetailTaskDecriTableViewCell.m in Sources */,
 				04E129D822F27D520003D58F /* JMOrderCellData.m in Sources */,
 				04CC5FA122B3C5DC00C5DD46 /* JMHTTPManager+FectchVideoLists.m in Sources */,
 				04256569229D3F61000614E7 /* JMMyResumeFooterView.m in Sources */,
@@ -6450,7 +6451,6 @@
 				04380A9222DC15C900EA45C2 /* JMVersionManager.m in Sources */,
 				6D5DD8782308439D0064612A /* TPopCell.m in Sources */,
 				6D5DD89E2308439E0064612A /* TUISystemMessageCellLayout.m in Sources */,
-				6D558669224B58890037C14E /* JMMessageViewController.m in Sources */,
 				6D020A6D22539FB0009BCFE4 /* JMCompanyIntroduceHeaderView.m in Sources */,
 				04CC5F9C22B3BB9A00C5DD46 /* JMDiscoverCollectionViewCell.m in Sources */,
 				6D5DD8D12308439E0064612A /* EMVoiceConverter.mm in Sources */,
