@@ -42,6 +42,14 @@
     _lineView.backgroundColor = TTextView_Line_Color;
     [self addSubview:_lineView];
     
+    _commonButton = [[UIButton alloc] init];
+    _commonButton.layer.cornerRadius = 5;
+    _commonButton.backgroundColor = [UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:1.0];
+    [_commonButton addTarget:self action:@selector(greetUpInside:) forControlEvents:UIControlEventTouchUpInside];
+    [_commonButton setTitle:@"常用语" forState:UIControlStateNormal];
+    _commonButton.titleLabel.font = [UIFont systemFontOfSize:13];
+    [self addSubview:_commonButton];
+    
     _micButton = [[UIButton alloc] init];
     [_micButton addTarget:self action:@selector(clickVoiceBtn:) forControlEvents:UIControlEventTouchUpInside];
     [_micButton setImage:[UIImage tk_imageNamed:@"ToolViewInputVoice"] forState:UIControlStateNormal];
@@ -100,7 +108,11 @@
     _lineView.frame = CGRectMake(0, 0, Screen_Width, TTextView_Line_Height);
     CGSize buttonSize = TTextView_Button_Size;
     CGFloat buttonOriginY = (TTextView_Height - buttonSize.height) * 0.5;
-    _micButton.frame = CGRectMake(TTextView_Margin, buttonOriginY, buttonSize.width, buttonSize.height);
+    
+    _commonButton.frame = CGRectMake(TTextView_Margin, buttonOriginY, 55, 29);
+
+    
+    _micButton.frame = CGRectMake(TTextView_Margin + 60, buttonOriginY, buttonSize.width, buttonSize.height);
     _keyboardButton.frame = _micButton.frame;
     _moreButton.frame = CGRectMake(Screen_Width - buttonSize.width - TTextView_Margin, buttonOriginY, buttonSize.width, buttonSize.height);
     _faceButton.frame = CGRectMake(_moreButton.frame.origin.x - buttonSize.width - TTextView_Margin, buttonOriginY, buttonSize.width, buttonSize.height);
@@ -137,6 +149,12 @@
     
     if(_delegate && [_delegate respondsToSelector:@selector(inputBar:didChangeInputHeight:)]){
         [_delegate inputBar:self didChangeInputHeight:offset];
+    }
+}
+
+-(void)greetUpInside:(UIButton *)btn{
+    if(_delegate && [_delegate respondsToSelector:@selector(textViewDidTouchGreet:)]){
+        [_delegate textViewDidTouchGreet:self];
     }
 }
 

@@ -16,7 +16,9 @@
 #import "THeader.h"
 #import "TUIKit.h"
 #import <AVFoundation/AVFoundation.h>
-
+#import "JMMyCustumWindowView.h"
+#import "DimensMacros.h"
+#import "JMHTTPManager+FectchGreetList.h"
 
 typedef NS_ENUM(NSUInteger, InputStatus) {
     Input_Status_Input,
@@ -24,10 +26,14 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     Input_Status_Input_More,
     Input_Status_Input_Keyboard,
     Input_Status_Input_Talk,
+    Input_Status_Input_Common,
 };
 
-@interface TUIInputController () <TTextViewDelegate, TMenuViewDelegate, TFaceViewDelegate, TMoreViewDelegate>
+@interface TUIInputController () <TTextViewDelegate, TMenuViewDelegate, TFaceViewDelegate, TMoreViewDelegate,JMGreetViewDelegate,JMMyCustumWindowViewDelegate>
 @property (nonatomic, assign) InputStatus status;
+@property (nonatomic, strong) JMMyCustumWindowView *myCustumWindowView;
+@property (nonatomic, strong) UIView *windowViewBGView;
+
 @end
 
 @implementation TUIInputController
@@ -73,6 +79,8 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     }
     else if(_status == Input_Status_Input_More){
         [self hideMoreAnimation];
+    } else if(_status == Input_Status_Input_Common){
+        [self hideGreetAnimation];
     }
     else{
         //[self hideFaceAnimation:NO];
@@ -106,6 +114,26 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
         ws.menuView.alpha = 1.0;
         [ws.menuView removeFromSuperview];
         [ws.faceView removeFromSuperview];
+    }];
+}
+
+- (void)hideGreeAnimation
+{
+    self.greeView.hidden = NO;
+    self.greeView.alpha = 1.0;
+    self.menuView.hidden = NO;
+    self.menuView.alpha = 1.0;
+    __weak typeof(self) ws = self;
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        ws.greeView.alpha = 0.0;
+        ws.menuView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        ws.greeView.hidden = YES;
+        ws.greeView.alpha = 1.0;
+        ws.menuView.hidden = YES;
+        ws.menuView.alpha = 1.0;
+        [ws.menuView removeFromSuperview];
+        [ws.greeView removeFromSuperview];
     }];
 }
 
@@ -166,6 +194,42 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     } completion:nil];
 }
 
+- (void)textViewDidTouchGreet:(TUIInputBar *)textView;
+{
+    if(_status == Input_Status_Input_Common){
+        return;
+    }
+    if(_status == Input_Status_Input_More){
+        [self hideMoreAnimation];
+    }
+    if(_status == Input_Status_Input_Face){
+        [self hideFaceAnimation];
+    }
+    [_inputBar.inputTextView resignFirstResponder];
+        [self showGreetAnimation];
+    _status = Input_Status_Input_Common;
+    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
+        [_delegate inputController:self didChangeHeight:_inputBar.frame.size.height + self.greeView.frame.size.height + Bottom_SafeHeight];
+    }
+
+    
+//    if([TUIKit sharedInstance].config.faceGroups.count == 0){
+//        return;
+//    }
+//    if(_status == Input_Status_Input_More){
+//        [self hideMoreAnimation];
+//    }
+//    [_inputBar.inputTextView resignFirstResponder];
+//    [self showFaceAnimation];
+//    _status = Input_Status_Input_Face;
+//    if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
+//        [_delegate inputController:self didChangeHeight:_inputBar.frame.size.height + self.faceView.frame.size.height + self.menuView.frame.size.height + Bottom_SafeHeight];
+//    }
+
+    
+}
+
+
 - (void)inputBarDidTouchVoice:(TUIInputBar *)textView
 {
     if(_status == Input_Status_Input_Talk){
@@ -174,6 +238,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     [_inputBar.inputTextView resignFirstResponder];
     [self hideFaceAnimation];
     [self hideMoreAnimation];
+    [self hideGreetAnimation];
     _status = Input_Status_Input_Talk;
     if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
         [_delegate inputController:self didChangeHeight:TTextView_Height + Bottom_SafeHeight];
@@ -187,6 +252,9 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     }
     if(_status == Input_Status_Input_Face){
         [self hideFaceAnimation];
+    }
+    if(_status == Input_Status_Input_Common){
+        [self hideGreetAnimation];
     }
     [_inputBar.inputTextView resignFirstResponder];
     [self showMoreAnimation];
@@ -204,6 +272,9 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     if(_status == Input_Status_Input_More){
         [self hideMoreAnimation];
     }
+    if(_status == Input_Status_Input_Common){
+        [self hideGreetAnimation];
+    }
     [_inputBar.inputTextView resignFirstResponder];
     [self showFaceAnimation];
     _status = Input_Status_Input_Face;
@@ -214,6 +285,9 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 
 - (void)inputBarDidTouchKeyboard:(TUIInputBar *)textView
 {
+    if(_status == Input_Status_Input_Common){
+        [self hideGreetAnimation];
+    }
     if(_status == Input_Status_Input_More){
         [self hideMoreAnimation];
     }
@@ -273,6 +347,9 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     else if(_status == Input_Status_Input_Face){
         [self hideFaceAnimation];
     }
+    else if(_status == Input_Status_Input_Common){
+        [self hideGreetAnimation];
+    }
     _status = Input_Status_Input;
     [_inputBar.inputTextView resignFirstResponder];
     if (_delegate && [_delegate respondsToSelector:@selector(inputController:didChangeHeight:)]){
@@ -327,6 +404,89 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     }
 }
 
+
+-(void)didChooseGreetWithStr:(NSString *)str{
+    [_inputBar.inputTextView setText:str];
+}
+
+//添加常用语
+-(void)addGreetAction{
+    self.myCustumWindowView.titleLab.text = @"新增常用语";
+    [[UIApplication sharedApplication].keyWindow addSubview:self.windowViewBGView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.myCustumWindowView];
+    [_myCustumWindowView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self.view).mas_offset(20);
+        make.right.mas_equalTo(self.view).mas_offset(-20);
+        make.height.mas_equalTo(220);
+        make.centerY.mas_equalTo([UIApplication sharedApplication].keyWindow).mas_offset(-100);
+    }];
+    
+    
+    //    [_inputTextView.textView resignFirstResponder];
+    //    [[JMHTTPManager sharedInstance]createGreet_text:_inputTextView.textView.text mode:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    //
+    //        NSLog(@"添加成功！");
+    //        [_greeView.tableView reloadData];
+    //    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+    //
+    //    }];
+    
+}
+
+
+-(void)windowLeftAction{
+    
+    [self.myCustumWindowView removeFromSuperview];
+    [self.windowViewBGView removeFromSuperview];
+    
+}
+
+-(void)windowRightAction{
+    
+    [self.myCustumWindowView removeFromSuperview];
+    [self.windowViewBGView removeFromSuperview];
+    [self.myCustumWindowView.contentTextView resignFirstResponder];
+    [[JMHTTPManager sharedInstance]createGreet_text:self.myCustumWindowView.contentTextView.text mode:@"1" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        NSLog(@"添加成功！");
+        [_greeView getGreetList];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
+- (void)showGreetAnimation
+{
+
+    [self.view addSubview:self.greeView];
+    
+    self.greeView.hidden = NO;
+    CGRect frame = self.greeView.frame;
+    frame.origin.y = SCREEN_HEIGHT;
+    self.greeView.frame = frame;
+    __weak typeof(self) ws = self;
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        CGRect newFrame = ws.greeView.frame;
+        newFrame.origin.y = ws.inputBar.frame.origin.y + ws.inputBar.frame.size.height;
+        ws.greeView.frame = newFrame;
+    } completion:nil];
+}
+
+-(void)hideGreetAnimation{
+    
+    self.greeView.hidden = NO;
+    self.greeView.alpha = 1.0;
+    __weak typeof(self) ws = self;
+    [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+        ws.greeView.alpha = 0.0;
+    } completion:^(BOOL finished) {
+        ws.greeView.hidden = YES;
+        ws.greeView.alpha = 1.0;
+        [ws.greeView removeFromSuperview];
+    }];
+}
+
+
 #pragma mark - more view delegate
 - (void)moreView:(TUIMoreView *)moreView didSelectMoreCell:(TUIInputMoreCell *)cell
 {
@@ -336,6 +496,16 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
 }
 
 #pragma mark - lazy load
+- (JMGreetView *)greeView
+{
+    if(!_greeView){
+        _greeView = [[JMGreetView alloc] initWithFrame:CGRectMake(0, _inputBar.frame.origin.y + _inputBar.frame.size.height, self.view.frame.size.width, 211)];
+        _greeView.delegate = self;
+        
+    }
+    return _greeView;
+}
+
 - (TUIFaceView *)faceView
 {
     if(!_faceView){
@@ -377,4 +547,22 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
     }
     return _menuView;
 }
+-(JMMyCustumWindowView *)myCustumWindowView{
+    if (!_myCustumWindowView) {
+        _myCustumWindowView = [[JMMyCustumWindowView alloc]init];
+        _myCustumWindowView.layer.cornerRadius = 10;
+        _myCustumWindowView.delegate = self;
+    }
+    return _myCustumWindowView;
+}
+-(UIView *)windowViewBGView{
+    if (!_windowViewBGView) {
+        _windowViewBGView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+        _windowViewBGView.backgroundColor = [UIColor blackColor];
+        _windowViewBGView.alpha = 0.3;
+    }
+    return _windowViewBGView;
+}
+
+
 @end

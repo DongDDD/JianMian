@@ -22,13 +22,18 @@
     
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     NSString *receiverID;
-    if (model.user_id == _myConvModel.sender_user_id) {
+    
+    if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
+        receiverID = @"dominator";
+        self.title = @"系统消息";
+    }else if (model.user_id == _myConvModel.sender_user_id) {
         self.title = _myConvModel.recipient_nickname;
         receiverID = self.myConvModel.recipient_mark;
     }else{
         self.title = _myConvModel.sender_nickname;
         receiverID = self.myConvModel.sender_mark;
     }
+    
     
     TIMConversation *conv = [[TIMManager sharedInstance] getConversation:(TIMConversationType)TIM_C2C receiver:receiverID];
     _chat = [[TUIChatController alloc] initWithConversation:conv];
