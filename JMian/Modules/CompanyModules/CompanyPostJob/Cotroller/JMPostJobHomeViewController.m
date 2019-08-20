@@ -7,7 +7,7 @@
 //
 
 #import "JMPostJobHomeViewController.h"
-#import "JMTitlesView.h"
+//#import "JMTitlesView.h"
 #import "JMPageView.h"
 #import "JMPostNewJobViewController.h"
 #import "JMHTTPManager+Work.h"
@@ -21,7 +21,7 @@
 @interface JMPostJobHomeViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *breakBGView;
-@property (nonatomic, strong) JMTitlesView *titleView;
+//@property (nonatomic, strong) JMTitlesView *titleView;
 
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) NSArray *childVCs;
@@ -42,8 +42,7 @@ static NSString *cellIdent = @"cellIdent";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.navigationItem.leftBarButtonItem = nil;
-    self.navigationItem.hidesBackButton = YES;
+
     [self setTitle:@"职位管理"];
 //    [self.view addSubview:self.progressHUD];
     _status = nil;
@@ -308,24 +307,24 @@ static NSString *cellIdent = @"cellIdent";
     
 }
 
-- (JMTitlesView *)titleView {
-    if (!_titleView) {
-        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"已发布", @"已下线"]];
-        __weak JMPostJobHomeViewController *weakSelf = self;
-        
-        _titleView.didTitleClick = ^(NSInteger index) {
-            _index = index;
-            if (index==0) {
-                _status = Position_Online;//已发布职位
-            }else{
-                _status = Position_Downline;//已下线职位
-            }
-            [weakSelf getListData];
-        };
-        
-    }
-    return _titleView;
-}
+//- (JMTitlesView *)titleView {
+//    if (!_titleView) {
+//        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"已发布", @"已下线"]];
+//        __weak JMPostJobHomeViewController *weakSelf = self;
+//
+//        _titleView.didTitleClick = ^(NSInteger index) {
+//            _index = index;
+//            if (index==0) {
+//                _status = Position_Online;//已发布职位
+//            }else{
+//                _status = Position_Downline;//已下线职位
+//            }
+//            [weakSelf getListData];
+//        };
+//
+//    }
+//    return _titleView;
+//}
 //-(MBProgressHUD *)progressHUD{
 //    if (!_progressHUD) {
 //        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
