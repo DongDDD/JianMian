@@ -67,7 +67,6 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.navigationController.navigationBar.translucent = NO;
     self.tableView.hidden = YES;
     self.breakBGView.hidden = YES;
     [self.tableView.mj_header beginRefreshing];

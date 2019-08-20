@@ -678,8 +678,6 @@
 		04C4A18922CCF5040049DA29 /* JMGreetModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C4A18822CCF5040049DA29 /* JMGreetModel.m */; };
 		04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013522603967000B1FE0 /* JMTitlesView.m */; };
 		04C6013922603F73000B1FE0 /* JMPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6013822603F73000B1FE0 /* JMPageView.m */; };
-		04C60143226063E3000B1FE0 /* JMLookMeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C60141226063E3000B1FE0 /* JMLookMeTableViewController.m */; };
-		04C60144226063E3000B1FE0 /* JMLookMeTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C60142226063E3000B1FE0 /* JMLookMeTableViewController.xib */; };
 		04C6014D226071B5000B1FE0 /* JMAllMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6014B226071B5000B1FE0 /* JMAllMessageTableViewCell.m */; };
 		04C6014E226071B5000B1FE0 /* JMAllMessageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04C6014C226071B5000B1FE0 /* JMAllMessageTableViewCell.xib */; };
 		04C6015C2260874A000B1FE0 /* JMLookMeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C6015A2260874A000B1FE0 /* JMLookMeTableViewCell.m */; };
@@ -1960,9 +1958,6 @@
 		04C6013522603967000B1FE0 /* JMTitlesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMTitlesView.m; sourceTree = "<group>"; };
 		04C6013722603F73000B1FE0 /* JMPageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPageView.h; sourceTree = "<group>"; };
 		04C6013822603F73000B1FE0 /* JMPageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPageView.m; sourceTree = "<group>"; };
-		04C60140226063E3000B1FE0 /* JMLookMeTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLookMeTableViewController.h; sourceTree = "<group>"; };
-		04C60141226063E3000B1FE0 /* JMLookMeTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLookMeTableViewController.m; sourceTree = "<group>"; };
-		04C60142226063E3000B1FE0 /* JMLookMeTableViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMLookMeTableViewController.xib; sourceTree = "<group>"; };
 		04C6014A226071B5000B1FE0 /* JMAllMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAllMessageTableViewCell.h; sourceTree = "<group>"; };
 		04C6014B226071B5000B1FE0 /* JMAllMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAllMessageTableViewCell.m; sourceTree = "<group>"; };
 		04C6014C226071B5000B1FE0 /* JMAllMessageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMAllMessageTableViewCell.xib; sourceTree = "<group>"; };
@@ -4030,9 +4025,6 @@
 				04C4A16E22CC414D0049DA29 /* JMMessageListViewController.h */,
 				04C4A16F22CC414D0049DA29 /* JMMessageListViewController.m */,
 				04C4A17022CC414D0049DA29 /* JMMessageListViewController.xib */,
-				04C60140226063E3000B1FE0 /* JMLookMeTableViewController.h */,
-				04C60141226063E3000B1FE0 /* JMLookMeTableViewController.m */,
-				04C60142226063E3000B1FE0 /* JMLookMeTableViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5915,7 +5907,6 @@
 				04DD1D5A224B6E95007CB11C /* 组 18.png in Resources */,
 				04BF6DB222C37966003032BC /* QRCode@2x.png in Resources */,
 				04A5FD4622C8A58200850604 /* zhuanshi.png in Resources */,
-				04C60144226063E3000B1FE0 /* JMLookMeTableViewController.xib in Resources */,
 				04A5122E229ABDE200BA2DC5 /* paizhao.png in Resources */,
 				04AC6A2822CDAE4E00693424 /* JMNoDataViewController.xib in Resources */,
 				04EA7E3123011376005B7CE5 /* JMSnapshotWebViewController.xib in Resources */,
@@ -6270,7 +6261,6 @@
 				6D020A6C22539FB0009BCFE4 /* JMCompanyIntroduceViewController.m in Sources */,
 				0494691E2244EEDA00A5BEB7 /* ChooseIdentity.m in Sources */,
 				048FEE322244853C001160C8 /* AppDelegate.m in Sources */,
-				04C60143226063E3000B1FE0 /* JMLookMeTableViewController.m in Sources */,
 				6D82F2942274C07200B9D2B9 /* JMMyPictureViewController.m in Sources */,
 				04A9DFA2225AE3C400CD7CC1 /* JMMyResumeCareerStatusTableViewCell.m in Sources */,
 				040B7DF6230C137200766DC3 /* JMMyTitleView.m in Sources */,
