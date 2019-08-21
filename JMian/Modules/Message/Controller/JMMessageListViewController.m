@@ -126,12 +126,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
             vc.myConvModel = messageListModel;
             [self.navigationController pushViewController:vc animated:YES];
 
-            //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
-            //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            //        [alert show];
-//            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-//            vc.myConvModel = messageListModel;
-//            [self.navigationController pushViewController:vc animated:YES];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
         }];
@@ -476,11 +470,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
             [self.navigationController pushViewController:vc animated:YES];
 
             
-//            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-//            vc.myConvModel = messagelistModel;
-//            vc.delegate = self;
-//            [self.navigationController pushViewController:vc animated:YES];
-            
         }else{
             if (userModel.user_id == messagelistModel.sender_user_id) {
                 recipient_id = messagelistModel.recipient_user_id;
@@ -503,10 +492,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
         JMChatViewController *vc = [[JMChatViewController alloc] init];
         vc.myConvModel = messagelistModel;
         [self.navigationController pushViewController:vc animated:YES];
-//    JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-//    vc.myConvModel = messagelistModel;
-//    vc.delegate = self;
-//    [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

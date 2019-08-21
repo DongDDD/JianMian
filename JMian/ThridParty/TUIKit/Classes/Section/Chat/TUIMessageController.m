@@ -184,6 +184,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                 self.section = 2;
                 self.noMoreMsg = YES;
                 self.indicatorView.mm_h = 0;
+                [self.tableView reloadData];
             }
             if(uiMsgs.count != 0){
                 NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, uiMsgs.count)];
