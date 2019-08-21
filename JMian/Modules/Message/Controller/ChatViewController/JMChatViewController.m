@@ -7,6 +7,8 @@
 //
 
 #import "JMChatViewController.h"
+#import "TUITextMessageCellData.h"
+#import "TUITextMessageCell.h"
 
 @interface JMChatViewController ()<TUIChatControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentPickerDelegate>
 
@@ -66,14 +68,67 @@
     
 }
 
-/*
-#pragma mark - Navigation
+- (TUIMessageCellData *)chatController:(TUIChatController *)controller onNewMessage:(TIMMessage *)msg
+{
+    TIMElem *elem = [msg getElem:0];
+    if([elem isKindOfClass:[TIMCustomElem class]]){
+        
+//        TUIMessageCellData *cellData = [[TUIMessageCellData alloc] initWithDirection:msg.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming];
+        TUITextMessageCellData *cellData =[[TUITextMessageCellData alloc] initWithDirection:msg.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming];
+        cellData.content = [(TIMCustomElem *)elem desc];
+        
+        if ([msg.getConversation.getReceiver isEqualToString:@"dominator"]) {
+            cellData.avatarImage = [UIImage imageNamed:@"notification"];
+            
+        }else if([msg.getConversation.getReceiver isEqualToString: _myConvModel.sender_mark]) { //消息接收
+            
+            if (cellData.direction == MsgDirectionIncoming) {
+                if(self.myConvModel.sender_avatar && ![self.myConvModel.sender_avatar isEqualToString:@""]) {
+                  cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.sender_avatar];
+                }else {
+                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
+                }
+            }else{
+                if(self.myConvModel.recipient_avatar && ![self.myConvModel.recipient_avatar isEqualToString:@""]) {
+                    cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.recipient_avatar];
+                }else {
+                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
+                }
+            }
+            
+        }else {
+            
+            if (cellData.direction == MsgDirectionIncoming) {
+                if(self.myConvModel.recipient_avatar && ![self.myConvModel.recipient_avatar isEqualToString:@""]) {
+                    cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.recipient_avatar];
+                }else {
+                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
+                }
+                
+            }else{
+                if(self.myConvModel.sender_avatar && ![self.myConvModel.sender_avatar isEqualToString:@""]) {
+                    cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.sender_avatar];
+                }else {
+                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
+                }
+            }
+            
+        }
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+        return cellData;
+    }
+    return nil;
 }
-*/
+
+- (TUIMessageCell *)chatController:(TUIChatController *)controller onShowMessageData:(TUIMessageCellData *)data
+{
+    if ([data isKindOfClass:[TUITextMessageCellData class]]) {
+        TUITextMessageCell *myCell = [[TUITextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyCell"];
+        [myCell fillWithData:(TUITextMessageCellData *)data];
+        return myCell;
+    }
+    return nil;
+}
+
 
 @end
