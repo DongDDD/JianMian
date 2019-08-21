@@ -192,6 +192,7 @@ typedef NS_ENUM(NSUInteger, InputStatus) {
         newFrame.origin.y = ws.inputBar.frame.origin.y + ws.inputBar.frame.size.height;
         ws.moreView.frame = newFrame;
     } completion:nil];
+    
 }
 
 - (void)textViewDidTouchGreet:(TUIInputBar *)textView;

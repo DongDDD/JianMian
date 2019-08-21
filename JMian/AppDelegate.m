@@ -373,7 +373,7 @@
     }
     
       
-    [[NSNotificationCenter defaultCenter] postNotificationName:Notification_JMMMessageListener object:msgs];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TUIKitNotification_TIMMessageListener object:msgs];
 
     NSLog(@"onNewMessage");
 

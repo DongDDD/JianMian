@@ -30,13 +30,15 @@
              @"sender_avatar":@"sender.avatar",
              @"sender_nickname":@"sender.nickname",
              @"sender_company_position":@"sender.company_position",
-             
+             @"sender_phone":@"sender.phone",
+
              @"recipient_user_id":@"recipient.user_id",
              @"recipient_type":@"recipient.type",
              @"recipient_avatar":@"recipient.avatar",
              @"recipient_nickname":@"recipient.nickname",
              @"recipient_company_position":@"recipient.company_position",
-        
+             @"recipient_phone":@"recipient.phone",
+
              @"work_work_id":@"work.work_id",
              @"work_description":@"work.description",
              @"work_salary_max":@"work.salary_max",

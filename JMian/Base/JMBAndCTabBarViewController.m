@@ -25,7 +25,6 @@
 #import "HomeViewController.h"
 
 
-
 @interface JMBAndCTabBarViewController ()
 @property (nonatomic, strong) NSArray *modelArray;
 @property (nonatomic, assign)int unReadNum;
@@ -86,7 +85,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(taskNotification:) name:Notification_TaskListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orderNotification:) name:Notification_OrderListener object:nil];
 

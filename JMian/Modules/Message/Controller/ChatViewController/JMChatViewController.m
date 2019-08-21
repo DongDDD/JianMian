@@ -22,18 +22,38 @@
     
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     NSString *receiverID;
-    
+    NSString *titleStr;
+    NSString *subTitle;
+    if (_myConvModel.work_work_name) {
+        //全职对话
+        subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.work_work_name];
+    }else if (_myConvModel.job_type_label_name) {
+        //兼职对话
+        subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_type_label_name];
+    }else{
+        subTitle = @"";
+    }
     if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
         receiverID = @"dominator";
         self.title = @"系统消息";
     }else if (model.user_id == _myConvModel.sender_user_id) {
-        self.title = _myConvModel.recipient_nickname;
+        if (_myConvModel.recipient_nickname.length > 0) {
+           
+            titleStr = [NSString stringWithFormat:@"%@%@",_myConvModel.recipient_nickname,subTitle];
+        }else{
+            titleStr = [NSString stringWithFormat:@"%@",_myConvModel.recipient_phone];
+        }
         receiverID = self.myConvModel.recipient_mark;
     }else{
-        self.title = _myConvModel.sender_nickname;
-        receiverID = self.myConvModel.sender_mark;
+        if (_myConvModel.sender_nickname.length > 0) {
+           
+            titleStr = [NSString stringWithFormat:@"%@%@",_myConvModel.sender_nickname,subTitle];
+        }else{
+            titleStr = [NSString stringWithFormat:@"%@",_myConvModel.sender_phone];
+        }
+        receiverID = self.myConvModel.recipient_mark;
     }
-    
+    self.title = titleStr;
     
     TIMConversation *conv = [[TIMManager sharedInstance] getConversation:(TIMConversationType)TIM_C2C receiver:receiverID];
     _chat = [[TUIChatController alloc] initWithConversation:conv];

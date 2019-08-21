@@ -1011,9 +1011,8 @@
 		6D82F2982274C63E00B9D2B9 /* JMHTTPManager+Job.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D82F2972274C63E00B9D2B9 /* JMHTTPManager+Job.m */; };
 		6D8C0687226AE94F00F77D98 /* JMVitaDetailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D8C0686226AE94F00F77D98 /* JMVitaDetailModel.m */; };
 		6DAE2376225B901E005E6C01 /* JMSystemLabelsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DAE2375225B901E005E6C01 /* JMSystemLabelsModel.m */; };
-		6DBAA26D230500B100631AD3 /* ImSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBAA26C230500B100631AD3 /* ImSDK.framework */; };
 		6DBAA26E2305034800631AD3 /* ImSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBAA26C230500B100631AD3 /* ImSDK.framework */; };
-		6DBAA26F2305034800631AD3 /* ImSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBAA26C230500B100631AD3 /* ImSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6DBAA26F2305034800631AD3 /* ImSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6DBAA26C230500B100631AD3 /* ImSDK.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6DDA717D225EF3C100A7C8F7 /* JMUserInfoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DDA717C225EF3C100A7C8F7 /* JMUserInfoManager.m */; };
 		6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA99162255ACD00029FE8A /* NSDictionary+NullSafe.m */; };
 		6DEA99232255DFE40029FE8A /* JMShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DEA99202255DFE40029FE8A /* JMShareView.m */; };
@@ -1042,7 +1041,7 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		6DBAA2702305034900631AD3 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
@@ -2520,7 +2519,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F1C234440D54A6945C7221D /* libPods-JMian.a in Frameworks */,
-				6DBAA26D230500B100631AD3 /* ImSDK.framework in Frameworks */,
 				6D5DD8CD2308439E0064612A /* libopencore-amrwb.a in Frameworks */,
 				6D5DD8CE2308439E0064612A /* libopencore-amrnb.a in Frameworks */,
 				6DBAA26E2305034800631AD3 /* ImSDK.framework in Frameworks */,
@@ -2709,13 +2707,6 @@
 				040A40C62265B41A0005E0D7 /* company_logo@3x.png */,
 			);
 			path = Identification;
-			sourceTree = "<group>";
-		};
-		040AF59F227833CF0027D7D8 /* ChatViewCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ChatViewCell;
 			sourceTree = "<group>";
 		};
 		040B837F2265DF7100F1A37A /* Model */ = {
@@ -3972,7 +3963,6 @@
 		04C6013322603956000B1FE0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				040AF59F227833CF0027D7D8 /* ChatViewCell */,
 				04C6013422603967000B1FE0 /* JMTitlesView.h */,
 				04C6013522603967000B1FE0 /* JMTitlesView.m */,
 				040B7DF4230C137200766DC3 /* JMMyTitleView.h */,
@@ -5254,6 +5244,7 @@
 				048FEE2B2244853C001160C8 /* Resources */,
 				F9696212A5B33EE9B967E2B7 /* [CP] Copy Pods Resources */,
 				6DBAA2702305034900631AD3 /* Embed Frameworks */,
+				D8CF73FE68B11785C9FBE932 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -5981,6 +5972,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D8CF73FE68B11785C9FBE932 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-frameworks.sh",
+				"${PODS_ROOT}/TXIMSDK_iOS/iOS/ImSDK/Framework/ImSDK.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImSDK.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F9696212A5B33EE9B967E2B7 /* [CP] Copy Pods Resources */ = {

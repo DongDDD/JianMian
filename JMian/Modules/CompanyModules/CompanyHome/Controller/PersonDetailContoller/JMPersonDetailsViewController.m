@@ -18,7 +18,7 @@
 #import "JMVitaDetailModel.h"
 #import "Masonry.h"
 #import "JMHTTPManager+InterView.h"
-//#import "JMChatViewViewController.h"
+#import "JMChatViewController.h"
 #import "JMHTTPManager+CreateConversation.h"
 #import "THDatePickerView.h"
 #import "JMPlayerViewController.h"
@@ -549,10 +549,10 @@
         [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-//            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-//
-//            vc.myConvModel = messageListModel;
-//            [self.navigationController pushViewController:vc animated:YES];
+            JMChatViewController *vc = [[JMChatViewController alloc]init];
+
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];

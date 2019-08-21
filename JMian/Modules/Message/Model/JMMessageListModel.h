@@ -25,6 +25,7 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property(nonatomic,copy)NSString *sender_avatar;
 @property(nonatomic,copy)NSString *sender_nickname;
 @property(nonatomic,copy)NSString *sender_company_position;
+@property(nonatomic,copy)NSString *sender_phone;
 
 @property(nonatomic,copy)NSString *sender_mark; 
 @property(nonatomic,copy)NSString *recipient_mark;
@@ -35,6 +36,7 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property(nonatomic,copy)NSString *recipient_avatar;
 @property(nonatomic,copy)NSString *recipient_nickname;
 @property(nonatomic,copy)NSString *recipient_company_position;
+@property(nonatomic,copy)NSString *recipient_phone;
 
 @property(nonatomic,copy)NSString *work_work_id;
 @property(nonatomic,copy)NSString *work_description;

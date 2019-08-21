@@ -60,7 +60,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
     }
     [self getMsgList];    //获取自己服务器数据
     [self setupHeaderRefresh];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:Notification_JMMMessageListener object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -126,12 +126,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
             vc.myConvModel = messageListModel;
             [self.navigationController pushViewController:vc animated:YES];
 
-            //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建对话成功"
-            //                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            //        [alert show];
-//            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-//            vc.myConvModel = messageListModel;
-//            [self.navigationController pushViewController:vc animated:YES];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
         }];
@@ -463,51 +457,43 @@ static NSString *cellIdent = @"allMessageCellIdent";
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-    NSString *recipient_id;
-    NSString *foreign_key;
+//    NSString *recipient_id;
+//    NSString *foreign_key;
     JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if ([userModel.type isEqualToString:B_Type_UESR]) {
-        if ([messagelistModel.data.convId isEqualToString:@"dominator"] && foreign_key == nil) {
-            
-            
-            JMChatViewController *vc = [[JMChatViewController alloc] init];
-            vc.myConvModel = messagelistModel;
-            [self.navigationController pushViewController:vc animated:YES];
-
-            
-//            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
+//    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        //系统消息
+//        if ([messagelistModel.data.convId isEqualToString:@"dominator"] && foreign_key == nil) {
+//
+//            JMChatViewController *vc = [[JMChatViewController alloc] init];
 //            vc.myConvModel = messagelistModel;
-//            vc.delegate = self;
 //            [self.navigationController pushViewController:vc animated:YES];
-            
-        }else{
-            if (userModel.user_id == messagelistModel.sender_user_id) {
-                recipient_id = messagelistModel.recipient_user_id;
-            }else{
-                recipient_id = messagelistModel.sender_user_id;
-            }
-            if ([messagelistModel.type isEqualToString:@"1"]) {
-                foreign_key = messagelistModel.work_work_id;
-            }else if ([messagelistModel.type isEqualToString:@"2"]) {
-                foreign_key = messagelistModel.job_ability_id;
-                
-            }
-        
-        
-        }
-        
-        [self createChatRequstWithType:messagelistModel.type foreign_key:foreign_key recipient:recipient_id];
-    }else{
-        
+//
+//        }else{
+//            if (userModel.user_id == messagelistModel.sender_user_id) {
+//                recipient_id = messagelistModel.recipient_user_id;
+//            }else{
+//                recipient_id = messagelistModel.sender_user_id;
+//            }
+//            if ([messagelistModel.type isEqualToString:@"1"]) {
+//                foreign_key = messagelistModel.work_work_id;
+//            }else if ([messagelistModel.type isEqualToString:@"2"]) {
+//                foreign_key = messagelistModel.job_ability_id;
+//            }
+//
+//
+//        }
         JMChatViewController *vc = [[JMChatViewController alloc] init];
         vc.myConvModel = messagelistModel;
         [self.navigationController pushViewController:vc animated:YES];
-//    JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-//    vc.myConvModel = messagelistModel;
-//    vc.delegate = self;
-//    [self.navigationController pushViewController:vc animated:YES];
-    }
+//        [self createChatRequstWithType:messagelistModel.type foreign_key:foreign_key recipient:recipient_id];
+//    }else{
+//
+//        JMChatViewController *vc = [[JMChatViewController alloc] init];
+//        vc.myConvModel = messagelistModel;
+//        [self.navigationController pushViewController:vc animated:YES];
+//
+//    }
     
 }
 
@@ -523,51 +509,46 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
 }
 
--(void)setReadMessageAction_model:(JMMessageListModel *)_myModel{
-    
-    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-    //判断senderid是不是自己
-    BOOL _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
-    NSString *_receiverID;
-    //先判断是否系统消息
-    if ([_myModel.data.convId isEqualToString:@"dominator"]) {
-        _receiverID = @"dominator";
-    }else{
-        //    17817295362
-        if (_isSelfIsSender) {
-            
-            _receiverID = _myModel.recipient_mark;
-        }else{
-            
-            _receiverID = _myModel.sender_mark;
-        }
-    }
-    
-    TIMConversation *conv = [[TIMManager sharedInstance]
-                             getConversation:(TIMConversationType)TIM_C2C
-                             receiver:_receiverID];
-    [conv setReadMessage:nil succ:^{
-        NSLog(@"已读上报");
-//        if (_myModel.data.unRead > 0) {
+//-(void)setReadMessageAction_model:(JMMessageListModel *)_myModel{
 //
-//            self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
+//    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+//    //判断senderid是不是自己
+//    BOOL _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
+//    NSString *_receiverID;
+//    //先判断是否系统消息
+//    if ([_myModel.data.convId isEqualToString:@"dominator"]) {
+//        _receiverID = @"dominator";
+//    }else{
+//        //    17817295362
+//        if (_isSelfIsSender) {
+//
+//            _receiverID = _myModel.recipient_mark;
 //        }else{
-//            self.tabBarItem.badgeValue = nil;
+//
+//            _receiverID = _myModel.sender_mark;
 //        }
-        [self getMsgList];
-        //            !_didReadMessage ? : _didReadMessage(_myModel.data.unRead);
-        
-    } fail:^(int code, NSString *msg) {
-        NSLog(@"已读上报失败");
-        
-    }];
-    
-    
-}
-#pragma mark - MyDelegate
-//-(void)didReadActionWithData:(JMMessageListModel *)data{
-//        [self setReadMessageAction_model:data];
-//    
+//    }
+//
+//    TIMConversation *conv = [[TIMManager sharedInstance]
+//                             getConversation:(TIMConversationType)TIM_C2C
+//                             receiver:_receiverID];
+//    [conv setReadMessage:nil succ:^{
+//        NSLog(@"已读上报");
+////        if (_myModel.data.unRead > 0) {
+////
+////            self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
+////        }else{
+////            self.tabBarItem.badgeValue = nil;
+////        }
+//        [self getMsgList];
+//        //            !_didReadMessage ? : _didReadMessage(_myModel.data.unRead);
+//
+//    } fail:^(int code, NSString *msg) {
+//        NSLog(@"已读上报失败");
+//
+//    }];
+//
+//
 //}
 
 

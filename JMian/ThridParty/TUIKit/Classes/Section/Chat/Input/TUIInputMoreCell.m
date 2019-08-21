@@ -24,8 +24,8 @@ static TUIInputMoreCellData *TUI_File_MoreCell;
 {
     if (!TUI_Picture_MoreCell) {
         TUI_Picture_MoreCell = [[TUIInputMoreCellData alloc] init];
-        TUI_Picture_MoreCell.title = @"拍摄";
-        TUI_Picture_MoreCell.image = [UIImage tk_imageNamed:@"more_camera"];
+        TUI_Picture_MoreCell.title = @"拍照";
+        TUI_Picture_MoreCell.image = [UIImage imageNamed:@"paizhao"];
 
     }
     return TUI_Picture_MoreCell;
@@ -41,7 +41,7 @@ static TUIInputMoreCellData *TUI_File_MoreCell;
     if (!TUI_Photo_MoreCell) {
         TUI_Photo_MoreCell = [[TUIInputMoreCellData alloc] init];
         TUI_Photo_MoreCell.title = @"相册";
-        TUI_Photo_MoreCell.image = [UIImage tk_imageNamed:@"more_picture"];
+        TUI_Photo_MoreCell.image = [UIImage imageNamed:@"Photo"];
     }
     return TUI_Photo_MoreCell;
 }
@@ -55,8 +55,8 @@ static TUIInputMoreCellData *TUI_File_MoreCell;
 {
     if (!TUI_Video_MoreCell) {
         TUI_Video_MoreCell = [[TUIInputMoreCellData alloc] init];
-        TUI_Video_MoreCell.title = @"视频";
-        TUI_Video_MoreCell.image = [UIImage tk_imageNamed:@"more_video"];
+        TUI_Video_MoreCell.title = @"摄影";
+        TUI_Video_MoreCell.image = [UIImage imageNamed:@"photography"];
     }
     return TUI_Video_MoreCell;
 }
@@ -71,7 +71,7 @@ static TUIInputMoreCellData *TUI_File_MoreCell;
     if (!TUI_File_MoreCell) {
         TUI_File_MoreCell = [[TUIInputMoreCellData alloc] init];
         TUI_File_MoreCell.title = @"文件";
-        TUI_File_MoreCell.image = [UIImage tk_imageNamed:@"more_file"];
+        TUI_File_MoreCell.image = [UIImage imageNamed:@"matter"];
     }
     return TUI_File_MoreCell;
 }

@@ -11,7 +11,7 @@
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMHTTPManager+CreateConversation.h"
 #import "JMMessageListModel.h"
-//#import "JMChatViewViewController.h"
+#import "JMChatViewController.h"
 #import "JMVideoChatView.h"
 #import "JMInterViewModel.h"
 #import "JMShareView.h"
@@ -260,10 +260,9 @@
         [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
             
-//            JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-            
-//            vc.myConvModel = messageListModel;
-//            [self.navigationController pushViewController:vc animated:YES];
+            JMChatViewController *vc = [[JMChatViewController alloc]init];            
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];

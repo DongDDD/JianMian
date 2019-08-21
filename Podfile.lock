@@ -41,6 +41,7 @@ PODS:
   - SDWebImage/Core (4.4.6)
   - STPickerView (2.4)
   - Toast (4.0.0)
+  - TXIMSDK_iOS (4.4.900)
   - VIMediaCache (0.4)
   - WechatOpenSDK (1.8.4)
   - YYCache (1.0.4)
@@ -67,6 +68,7 @@ DEPENDENCIES:
   - SDWebImage
   - STPickerView (= 2.4)
   - Toast
+  - TXIMSDK_iOS
   - VIMediaCache
   - WechatOpenSDK
   - YYCache
@@ -95,6 +97,7 @@ SPEC REPOS:
     - SDWebImage
     - STPickerView
     - Toast
+    - TXIMSDK_iOS
     - VIMediaCache
     - WechatOpenSDK
     - YYCache
@@ -122,11 +125,12 @@ SPEC CHECKSUMS:
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   STPickerView: d0e234f230f45bd720a6739d0ae9fbddf038958b
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
+  TXIMSDK_iOS: 3eb300fc9b4fe67670c58c90fed2801b715e8616
   VIMediaCache: aa650f82cb114c68a343beb4e67416cf5eb2f3a2
   WechatOpenSDK: 9b721089507c895d05f997408c30bb6e6f5f9b60
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 0a83359946f8de8dbab9fee42885311368348d82
+PODFILE CHECKSUM: 079adbee023edc8c88a70cacefc21022caadd0bf
 
 COCOAPODS: 1.6.1

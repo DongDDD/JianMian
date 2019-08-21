@@ -833,7 +833,6 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 }
 
 -(void)didClickPartTimeInfoAction{
-    
     //兼职
     JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
     vc.task_id = self.myConvModel.work_task_id;
@@ -870,13 +869,13 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             [self.navigationController pushViewController:vc animated:YES];
             
         }
-        //        else if ([model.type isEqualToString:@"2"]) {
-        //            //兼职
-        //            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
-        //            vc.ability_id = _myModel.job_ability_id;
-        //            [self.navigationController pushViewController:vc animated:YES];
-        //
-        //        }
+//        else if ([model.type isEqualToString:@"2"]) {
+//            //兼职
+//            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+//            vc.ability_id = _myModel.job_ability_id;
+//            [self.navigationController pushViewController:vc animated:YES];
+//
+//        }
         
     }
     

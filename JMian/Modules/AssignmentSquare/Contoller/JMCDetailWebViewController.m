@@ -16,7 +16,7 @@
 #import "WXApi.h"
 #import "JMCDetailModel.h"
 #import "JMMessageListModel.h"
-//#import "JMChatViewViewController.h"
+#import "JMChatViewController.h"
 #import "JMHTTPManager+CreateConversation.h"
 #import "JMIDCardIdentifyViewController.h"
 #import "JMApplyForProtocolView.h"
@@ -444,10 +444,10 @@
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
     
         
-//        JMChatViewViewController *vc = [[JMChatViewViewController alloc]init];
-//
-//        vc.myConvModel = messageListModel;
-//        [self.navigationController pushViewController:vc animated:YES];
+        JMChatViewController *vc = [[JMChatViewController alloc]init];
+
+        vc.myConvModel = messageListModel;
+        [self.navigationController pushViewController:vc animated:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

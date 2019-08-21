@@ -27,6 +27,7 @@
 #import <WebKit/WebKit.h>
 #import "JMNoDataView.h"
 #import "JMVersionManager.h"
+#import "THeader.h"
 
 
 #define STATUS_BAR_HEIGHT 20

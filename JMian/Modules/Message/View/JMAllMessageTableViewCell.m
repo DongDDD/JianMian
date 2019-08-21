@@ -84,15 +84,22 @@
     
     if (model.user_id == data.sender_user_id) {
         //自己是senderID ,那你要显示的信息就在recipient里面
-        self.userNameLabel.text = data.recipient_nickname;
+        if (data.recipient_nickname .length > 0) {
+            self.userNameLabel.text = data.recipient_nickname;
+        }else{
+            self.userNameLabel.text = data.recipient_phone;
+        }
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.recipient_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
 
         
     }else if (model.user_id == data.recipient_user_id){
         //自己是recipientID ,那你要显示的信息就在sender里面
+        if (data.sender_nickname.length > 0) {
+            self.userNameLabel.text = data.sender_nickname;
+        }else{
+            self.userNameLabel.text = data.sender_phone;
+        }
         [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.sender_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-        self.userNameLabel.text = data.sender_nickname;
-        
     }
     
     if (data.data.unRead <= 0) {

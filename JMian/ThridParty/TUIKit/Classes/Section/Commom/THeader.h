@@ -122,9 +122,9 @@
 
 //more view
 #define TMoreView_Column_Count 4
-#define TMoreView_Section_Padding 30
-#define TMoreView_Margin 10
-#define TMoreView_Page_Height 30
+#define TMoreView_Section_Padding 50
+#define TMoreView_Margin 30
+#define TMoreView_Page_Height 100
 #define TMoreView_Page_Color RGBA(188, 188, 188, 1.0)
 #define TMoreView_Line_Height 0.5
 #define TMoreView_Line_Color RGBA(188, 188, 188, 0.6)
@@ -140,8 +140,8 @@
 //more item cell
 #define TMoreCell_ReuseId @"TMoreCell"
 #define TMoreCell_Margin 5
-#define TMoreCell_Image_Size CGSizeMake(70, 70)
-#define TMoreCell_Title_Height 20
+#define TMoreCell_Image_Size CGSizeMake(33, 33)
+#define TMoreCell_Title_Height 45
 
 //face item cell
 #define TFaceCell_ReuseId @"TFaceCell"
