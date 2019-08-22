@@ -70,12 +70,14 @@
 
     
 }
+
 -(void)setCTypeLikeModel:(JMCTypeLikeModel *)CTypeLikeModel{
     _recipient = CTypeLikeModel.work_user_id;
     _foreign_key = CTypeLikeModel.foreign_key;
     _cLike_model = CTypeLikeModel;
     self.nameLab.text = CTypeLikeModel.work_company_company_name;
     self.contentLab.text = CTypeLikeModel.work_description;
+
     self.salaryLab.text = [self getSalaryStrWithMin:CTypeLikeModel.work_salary_min max:CTypeLikeModel.work_salary_max];
 //    NSString *eduStr = [self getEducationStrWithEducation:CTypeLikeModel.ed];
 //    NSString *detailStr = [NSString stringWithFormat:@"%@/%@",eduStr,CTypeLikeModel.job_work_name];
@@ -109,7 +111,12 @@
     _foreign_key = CPartTimeJobLikeModel.foreign_key;
     _myCPartTimeJobLikeModel = CPartTimeJobLikeModel;
     self.nameLab.text = CPartTimeJobLikeModel.company_company_name;
-    self.salaryLab.text = [NSString stringWithFormat:@"%@%@",CPartTimeJobLikeModel.task_payment_money,CPartTimeJobLikeModel.task_unit];
+    if (CPartTimeJobLikeModel.task_payment_money) {
+        self.salaryLab.text = [NSString stringWithFormat:@"%@%@",CPartTimeJobLikeModel.task_payment_money,CPartTimeJobLikeModel.task_unit];
+        
+    }else{
+        self.salaryLab.text = @"任务已下线";
+    }
 //    self.contentLab.text = BPartTimeJobLikeModel.ability_description;
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:CPartTimeJobLikeModel.task_user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     //职位标签

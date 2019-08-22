@@ -53,7 +53,7 @@
         }else{
             titleStr = [NSString stringWithFormat:@"%@",_myConvModel.sender_phone];
         }
-        receiverID = self.myConvModel.recipient_mark;
+        receiverID = self.myConvModel.sender_mark;
     }
     self.title = titleStr;
     

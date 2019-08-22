@@ -84,6 +84,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 {
     [super viewDidLoad];
     [self setupViews];
+    [self initDatePickerView];
 }
 
 
@@ -911,9 +912,16 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     _videoChatView.tag = 222;
     [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
     //    [_videoChatView setInterviewModel:nil];
-    [self.view addSubview:_videoChatView];
+    [[UIApplication sharedApplication].keyWindow addSubview:_videoChatView];
     [self.navigationController setNavigationBarHidden:YES];
 }
+//JMVideoChatViewDelegate 挂断
+-(void)hangupAction_model:(JMInterViewModel *)model{
+    [_videoChatView removeFromSuperview];
+    [self.navigationController setNavigationBarHidden:NO];
+    
+}
+
 
 #pragma mark - 申请兼职职位
 

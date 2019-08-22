@@ -46,6 +46,7 @@
         [self setRightBtnTextName:@"发布全职"];
         
     }
+    [self.postTaskBottomView.postTaskBtn setTitle:@"发布职位" forState:UIControlStateNormal];
     [self setIsHiddenRightBtn:YES];
     [self initView];
     // Do any additional setup after loading the view from its nib.

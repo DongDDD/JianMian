@@ -70,6 +70,11 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 -(void)initView{
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.view);
+    }];
 
 }
 
@@ -566,13 +571,14 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
         _tableView.sectionHeaderHeight = 0;
+        _tableView.sectionFooterHeight = 0;
         _tableView.showsVerticalScrollIndicator = NO;
         [self.tableView registerNib:[UINib nibWithNibName:@"JMAllMessageTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
         self.tableView.rowHeight = 79;
