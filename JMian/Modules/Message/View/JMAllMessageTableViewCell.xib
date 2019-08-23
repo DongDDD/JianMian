@@ -44,11 +44,8 @@
                         <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="空间智能科技     HR" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jq-FL-H8P">
-                        <rect key="frame" x="156.5" y="22.5" width="150" height="15"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="150" id="iOa-33-Fyw"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Jq-FL-H8P">
+                        <rect key="frame" x="156.5" y="22.5" width="103" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -62,9 +59,10 @@
                         <color key="textColor" red="0.50196078430000002" green="0.50196078430000002" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3月15" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIR-Gt-4Uc">
-                        <rect key="frame" x="311" y="19.5" width="33" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3月15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gIR-Gt-4Uc">
+                        <rect key="frame" x="264" y="19.5" width="80" height="21"/>
                         <constraints>
+                            <constraint firstAttribute="width" constant="80" id="QbC-sx-NuA"/>
                             <constraint firstAttribute="height" constant="21" id="vwP-kR-48D"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -121,6 +119,7 @@
                     <constraint firstItem="WYc-DA-HzY" firstAttribute="bottom" secondItem="BTe-Rf-Xjf" secondAttribute="bottom" constant="-35" id="dfv-KK-yHg"/>
                     <constraint firstItem="3Jq-FL-H8P" firstAttribute="leading" secondItem="VJ5-WE-752" secondAttribute="trailing" constant="10" id="ezQ-j8-DWA"/>
                     <constraint firstAttribute="trailing" secondItem="zPy-Y3-P2Y" secondAttribute="trailing" constant="44" id="fUG-w8-SSQ"/>
+                    <constraint firstItem="gIR-Gt-4Uc" firstAttribute="leading" secondItem="3Jq-FL-H8P" secondAttribute="trailing" constant="4.5" id="fWc-fq-sRe"/>
                     <constraint firstItem="3Jq-FL-H8P" firstAttribute="centerY" secondItem="VJ5-WE-752" secondAttribute="centerY" id="gSy-8w-FGJ"/>
                     <constraint firstAttribute="bottom" secondItem="s3P-2k-TEK" secondAttribute="bottom" id="hVb-K0-AVF"/>
                     <constraint firstItem="ftN-EQ-KEb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="yPt-3N-OOF"/>
@@ -138,7 +137,7 @@
                 <outlet property="userLabel" destination="3Jq-FL-H8P" id="UBE-E1-7pT"/>
                 <outlet property="userNameLabel" destination="VJ5-WE-752" id="SNi-kt-XSx"/>
             </connections>
-            <point key="canvasLocation" x="185.50724637681162" y="104.79910714285714"/>
+            <point key="canvasLocation" x="254" y="86"/>
         </tableViewCell>
     </objects>
 </document>

@@ -15,6 +15,9 @@
 #import "JMHTTPManager+Uploads.h"
 #import "LoginViewController.h"
 #import "JMJudgeViewController.h"
+#import "JMCompanyInfoModel.h"
+#import "JMUploadLicenseViewController.h"
+
 
 
 @interface JMCompanyBaseInfoViewController ()<UITextFieldDelegate>
@@ -23,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *myPositionTextField;
 @property (weak, nonatomic) IBOutlet UITextField *companyNameTextField;
 @property (nonatomic,copy)NSString *imageUrl;
+@property (nonatomic, assign)BOOL isHaveHeader;
+
 @property (nonatomic, assign)CGFloat changeHeight;
 @property(nonatomic,strong)UIButton *moreBtn;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -78,6 +83,7 @@
             [_myNameTextField setEnabled:NO];
         }
         if (userInfo.avatar.length > 0) {
+            _isHaveHeader = YES;
             [_headerImg setImage:[self getImageFromURL:userInfo.avatar] forState:UIControlStateNormal];
             [_myNameTextField setEnabled:NO];
 
@@ -156,28 +162,33 @@
     if (userModel.avatar.length > 0 && _imageUrl == nil) {
         if ([userModel.avatar containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
             _imageUrl = [userModel.avatar stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
+            _isHaveHeader = YES;
         }
     }
-    if (_imageUrl == nil) {
+    if (_isHaveHeader == NO) {
         [self showAlertSimpleTips:@"提示" message:@"请上传头像" btnTitle:@"好的"];
         return;
     }
     [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:self.companyNameTextField.text company_position:self.myPositionTextField.text nickname:self.myNameTextField.text avatar:_imageUrl enterprise_step:@"2" abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
+          JMCompanyInfoModel *companyInfoModel = [JMCompanyInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             [JMUserInfoManager saveUserInfo:userInfo];
-            kSaveMyDefault(@"company_name", self.companyNameTextField.text);
-            kSaveMyDefault(@"company_position", self.myPositionTextField.text);
+            if ([companyInfoModel.user_id isEqualToString:userInfo.user_id]) {
+                kSaveMyDefault(@"company_name", self.companyNameTextField.text);
+                kSaveMyDefault(@"company_position", self.myPositionTextField.text);
+                
+                JMCompanyInfoViewController *vc = [[JMCompanyInfoViewController alloc]init];
+                vc.loginViewType = JMLoginViewTypeNextStep;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }else{
+                JMUploadLicenseViewController *vc = [[JMUploadLicenseViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];
             
-            JMCompanyInfoViewController *vc = [[JMCompanyInfoViewController alloc]init];
-
-            [self.navigationController pushViewController:vc animated:YES];
-            
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alert show];
+            }
+        
           
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -322,6 +333,7 @@
         if (responsObject[@"data"]) {
           
             _imageUrl = responsObject[@"data"][0];
+            _isHaveHeader = YES;
         }
         
         

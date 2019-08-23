@@ -25,16 +25,45 @@
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     NSString *receiverID;
     NSString *titleStr;
-    NSString *subTitle;
-    if (_myConvModel.work_work_name) {
-        //全职对话
-        subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.work_work_name];
-    }else if (_myConvModel.job_type_label_name) {
-        //兼职对话
-        subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_type_label_name];
-    }else{
-        subTitle = @"";
+    NSString *subTitle = @"";
+
+//    if ([_myConvModel.type isEqualToString:@"1"]) {
+//        subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.work_work_name];
+//    }else{
+//        subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_type_label_name];
+//    }
+//
+    if([model.type isEqualToString:B_Type_UESR]){
+
+            if ([_myConvModel.type isEqualToString:@"1"]) {
+                if (_myConvModel.work_work_name) {
+                    subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.work_work_name];
+                }
+            }else{
+                if (_myConvModel.job_type_label_name) {
+                    subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_type_label_name];                   
+                }
+            }
+        
+    }else if ([model.type isEqualToString:C_Type_USER]) {
+        //否则相反:我登录了C端账号，判断自己是不是sender就行（最简单的思路，就是跟上面显示的相反就行）
+        if ([_myConvModel.type isEqualToString:@"2"]) {
+            //兼职类型
+            NSString *position;
+            if (model.user_id == _myConvModel.sender_user_id) {
+                position = _myConvModel.recipient_company_position;
+            }else{
+                position = _myConvModel.sender_company_position;
+            }
+            subTitle = [NSString stringWithFormat:@"|%@|%@",_myConvModel.work_task_title,position];
+        }else if ([_myConvModel.type isEqualToString:@"1"]) {
+            //全职类型
+            subTitle = [NSString stringWithFormat:@"|%@",_myConvModel.work_work_name];
+            
+        }
     }
+
+    
     if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
         receiverID = @"dominator";
         self.title = @"系统消息";

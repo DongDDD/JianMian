@@ -17,6 +17,9 @@
 #import "LoginViewController.h"
 #import "STPickerDate.h"
 #import "STPickerSingle.h"
+#import "JMHTTPManager+Vita.h"
+#import "JMVitaDetailModel.h"
+#import "JMHTTPManager+Job.h"
 
 
 
@@ -39,13 +42,17 @@
 @property (nonatomic,strong) STPickerDate *pickerData;
 @property (nonatomic, strong) STPickerSingle *salaryPickerSingle;
 @property (nonatomic, strong) STPickerSingle *educationPickerSingle;
+@property (nonatomic, copy) NSString *user_job_id;
+@property (nonatomic, strong) JMVitaDetailModel *vitaDetailModel;
 
-@property (nonatomic, copy) NSString *job_labelID;
-@property (nonatomic, strong) NSNumber *statusNum;
-@property (nonatomic, copy) NSString *salaryMin;
+
+
+@property (nonatomic, strong) NSString *statusStr;//求职状态
+@property (nonatomic, copy) NSString *job_labelID;//期望职位
+@property (nonatomic, copy) NSString *salaryMin;//薪资要求
 @property (nonatomic, copy) NSString *salaryMax;
-@property (nonatomic, strong) NSString *education;
-@property (nonatomic, strong) NSString *startWorkDate;
+@property (nonatomic, copy) NSString *work_start_date;//参加工作时间
+@property (nonatomic, copy) NSString *education;//我的学历
 
 //@property (strong, nonatomic) UIPickerView *pickerView;
 //@property (strong, nonatomic) NSArray *salaryArray;
@@ -62,20 +69,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO];
-    [self setIsHiddenBackBtn:YES];
+//    [self setIsHiddenBackBtn:YES];
     [self.scrollView addSubview:self.moreBtn];
-
+    if (self.loginViewType == JMJLoginViewTypeMemory) {
+        [self setIsHiddenBackBtn:YES];
+    }else if (self.loginViewType == JMLoginViewTypeNextStep) {
+        [self setIsHiddenBackBtn:NO];
+    }
     [self setRightBtnTextName:@"下一步"];
     
-    self.statusNum = @(1);
-    
+    self.statusStr = @"1";
 //    self.datePicker.backgroundColor = BG_COLOR;
     
 //    [self setPickerVIewUI];
 //    [self.view addSubview:_datePicker];
 
     self.scrollView.delegate = self;
-    
 //    UITapGestureRecognizer *bgTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenDatePickerAction)];
 //    [self.view addGestureRecognizer:bgTap];
     
@@ -83,7 +92,11 @@
     
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self getVitaInfo];
 
+}
 //-(void)setPickerVIewUI{
 //     self.pickerView = [[UIPickerView alloc]init];
 //    self.pickerView.backgroundColor = BG_COLOR;
@@ -110,8 +123,9 @@
     [self.statusBtn2 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
     [self.statusBtn1 setImage:[UIImage imageNamed:@"蓝点"] forState:UIControlStateNormal];
        [self.statusBtn4 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
-    self.statusNum = @1;
-    
+    self.statusStr = @"1";
+    kSaveMyDefault(@"work_status",self.statusStr);
+
 }
 
 
@@ -120,7 +134,9 @@
     [self.statusBtn1 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
        [self.statusBtn4 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
     
-    self.statusNum = @2;
+    self.statusStr = @"2";
+    kSaveMyDefault(@"work_status",self.statusStr);
+
     
 }
 - (IBAction)status4Action:(UIButton *)sender {
@@ -128,7 +144,9 @@
     [self.statusBtn2 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
     [self.statusBtn1 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
     
-    self.statusNum = @2;
+    self.statusStr = @"4";
+    kSaveMyDefault(@"work_status",self.statusStr);
+
 }
 
 
@@ -140,13 +158,14 @@
     
     
 }
+
 //PositionDesiredViewController代理方法
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
     [self.positionBtn setTitle:labStr forState:UIControlStateNormal];
     [self.positionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
- 
     self.job_labelID = labIDStr;
-    
+    kSaveMyDefault(@"position",labStr);
+
 }
 
 - (IBAction)choogseSalaryAction:(UIButton *)sender {
@@ -206,7 +225,18 @@
 #pragma mark - 数据提交
 
 -(void)rightAction{
-    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusNum education:self.education work_start_date:self.startWorkDate job_label_id:self.job_labelID industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:@4 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    //判断有没创建简历
+    if (self.vitaDetailModel.jobs.count > 0) {
+        [self updateVita];
+    }else{
+        [self creatVita];
+    }
+    
+}
+
+-(void)creatVita{
+
+    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusStr education:self.education work_start_date:self.work_start_date job_label_id:self.job_labelID industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:@4 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
@@ -214,22 +244,106 @@
             [JMUserInfoManager saveUserInfo:userInfo];
             
             JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
+            vc.loginViewType = JMLoginViewTypeNextStep;
             [self.navigationController pushViewController:vc animated:YES];
-
+            
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
-
+        
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         
     }];
     
- 
-
     
+
+}
+
+
+-(void)getVitaInfo{
+    [[JMHTTPManager sharedInstance] fetchVitaInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.vitaDetailModel = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            JMMyJobsModel *jobModel = self.vitaDetailModel.jobs[0];
+            self.user_job_id = jobModel.user_job_id;
+//            self.cellConfigures.model = self.model;
+//            self.job_labelID = self.model.job_label_id;
+//            self.salaryMin = @([self.model.salary_min intValue]);
+//            self.salaryMax = @([self.model.salary_max intValue]);
+//            [self initView];
+//            //                [self setPickerVIewUI];
+//            //                [self setupDateKeyPan];
+//            [self.tableView reloadData];
+//
+//            [self.progressHUD setHidden:YES]; //显示进度框
+//
+            if (self.user_job_id) {
+                [self setVitaValues];
+            }
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
+-(void)updateVita{
+    [[JMHTTPManager sharedInstance] updateVitaWith_work_status:self.statusStr education:self.education work_start_date:self.work_start_date description:nil video_path:nil video_cover:nil image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self updateJob];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
+
+-(void)updateJob{
+    [[JMHTTPManager sharedInstance]updateJobWith_user_job_id:self.user_job_id job_label_id:_job_labelID industry_label_id:nil city_id:nil salary_min:_salaryMin salary_max:_salaryMax status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
+        vc.loginViewType = JMLoginViewTypeNextStep;
+        [self.navigationController pushViewController:vc animated:YES];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+
+}
+
+#pragma mark - 赋值
+-(void)setVitaValues{
+    
+    NSString *work_status = kFetchMyDefault(@"work_status");
+    NSString *position = kFetchMyDefault(@"position");
+    NSString *salary = kFetchMyDefault(@"salary");
+    NSString *work_start_date = kFetchMyDefault(@"work_start_date");
+    NSString *educationstr = kFetchMyDefault(@"education");
+    if ([work_status isEqualToString:@"1"]) {
+        [self status1Action:nil];
+    }else if ([work_status isEqualToString:@"2"]) {
+        [self status2Action:nil];
+    }else if ([work_status isEqualToString:@"4"]) {
+        [self status4Action:nil];
+    }
+    
+    [self.positionBtn setTitle:position forState:UIControlStateNormal];
+    [self.positionBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+
+//    JMMyJobsModel *jobModel = self.vitaDetailModel.jobs[0];
+//    NSString *salaryStr = [NSString stringWithFormat:@"%@-%@",jobModel.salary_min,jobModel.salary_max];
+    [self.salaryBtn setTitle:salary forState:UIControlStateNormal];
+    [self.salaryBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+
+    [self.startWorkBtn setTitle:work_start_date forState:UIControlStateNormal];
+    [self.startWorkBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+
+    [self.educationBtn setTitle:educationstr forState:UIControlStateNormal];
+    [self.educationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+
 }
 
 
@@ -242,7 +356,9 @@
 //    // 格式化日期格式
 //    formatter.dateFormat = @"yyyy-MM-dd";
 //    NSString *date = [formatter stringFromDate:title];
-    self.startWorkDate  = title;
+    self.work_start_date  = title;
+    kSaveMyDefault(@"work_start_date",title);
+
 //    [formatter dateFromString:date];
 }
 
@@ -254,14 +370,16 @@
         NSMutableArray *array = [self setSalaryRangeWithSalaryStr:selectedTitle];
         self.salaryMin = array[0];
         self.salaryMax = array[1];
+        kSaveMyDefault(@"salary",selectedTitle);
+
     }else if (pickerSingle == _educationPickerSingle) {
         [self.educationBtn setTitle:selectedTitle forState:UIControlStateNormal];
         [self.educationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     
         self.education = [self getEducationNumWithEducationStr:selectedTitle];
+        kSaveMyDefault(@"education",selectedTitle);
     }
     
-
 }
 
 
@@ -307,7 +425,7 @@
                                          @"20k-30k",
                                          @"30k-40k",
                                          @"40k-50k",
-                                         @"50k-100K",nil];
+                                         @"50k-100k",nil];
     }
     return _salaryPickerSingle;
 }

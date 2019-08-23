@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMHTTPManager (Vita)
 
 
-- (void)createVitaWith_work_status:(NSNumber *)work_status
+- (void)createVitaWith_work_status:(NSString *)work_status
                          education:(NSString *)education
                    work_start_date:(NSString *)work_start_date
                       job_label_id:(NSString *)job_label_id
@@ -27,8 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 - (void)updateVitaWith_work_status:(nullable NSString *)work_status
-                         education:(nullable NSNumber *)education
-                   work_start_date:(nullable NSDate *)work_start_date
+                         education:(nullable NSString *)education
+                   work_start_date:(nullable NSString *)work_start_date
                        description:(nullable NSString *)description
                         video_path:(nullable NSString *)video_path
                        video_cover:(nullable NSString *)video_cover

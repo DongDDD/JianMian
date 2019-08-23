@@ -58,7 +58,12 @@
     [super viewDidLoad];
 //    self.navigationController.navigationBar.translucent = NO;
 //    self.extendedLayoutIncludesOpaqueBars = YES;
-    [self setIsHiddenBackBtn:YES];
+    if (self.loginViewType == JMLoginViewTypeNextStep) {
+        [self setIsHiddenBackBtn:NO];
+    }else if ((self.loginViewType == JMJLoginViewTypeMemory)) {
+        [self setIsHiddenBackBtn:YES];
+
+    }
     [self setRightBtnTextName:@"下一步"];
 //    self.pickerView.delegate = self;
     [self.scrollView addSubview:self.moreBtn];
@@ -76,7 +81,11 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    if (model.company_id) {
+        [self setComInfoValues];
+        
+    }
     
 }
 
@@ -90,7 +99,23 @@
     CGRect rect=CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
     self.view.frame=rect;
 }
+#pragma mark - 赋值
+-(void)setComInfoValues{
+    NSString *abbreviation = kFetchMyDefault(@"abbreviation");
+    NSString *selectedTitle1 = kFetchMyDefault(@"employee");
+    NSString *selectedTitle2 = kFetchMyDefault(@"financing");
+    NSString *selectedTitle3 = kFetchMyDefault(@"industry");
  
+    [self.abbreviationTextField setText:abbreviation];
+    [self.employeeBtn setTitle:selectedTitle1 forState:UIControlStateNormal];
+    [self.employeeBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.financingBtn setTitle:selectedTitle2 forState:UIControlStateNormal];
+    [self.financingBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+    [self.industryBtn setTitle:selectedTitle3 forState:UIControlStateNormal];
+    [self.industryBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+
+}
+
 
 #pragma mark - 点击事件
 
@@ -127,6 +152,11 @@
 
 }
 
+-(BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    kSaveMyDefault(@"abbreviation", textField.text);
+    return YES;
+}
+
 
 #pragma mark - Data
 -(void)getLabsData{
@@ -156,13 +186,13 @@
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             [JMUserInfoManager saveUserInfo:userInfo];
     
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
-                                                          delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-            [alert show];
             JMUploadLicenseViewController *vc = [[JMUploadLicenseViewController alloc]init];
       
             [self.navigationController pushViewController:vc animated:YES];
-            
+            kRemoveMyDefault(@"abbreviation");
+            kRemoveMyDefault(@"employee");
+            kRemoveMyDefault(@"financing");
+            kRemoveMyDefault(@"industry");
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
@@ -251,17 +281,18 @@
     if (pickerSingle == _employeePickerSingle) {
         [self.employeeBtn setTitle:selectedTitle forState:UIControlStateNormal];
         [self.employeeBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-        
+        kSaveMyDefault(@"employee", selectedTitle);
     }else if(pickerSingle == _financingPickerSingle){
         [self.financingBtn setTitle:selectedTitle forState:UIControlStateNormal];
         [self.financingBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-        
+        kSaveMyDefault(@"financing", selectedTitle);
     }else if(pickerSingle == _companyIndustryPickerSingle){
         [self.industryBtn setTitle:selectedTitle forState:UIControlStateNormal];
         [self.industryBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
         JMLabsData *data = _industryDataArray[row];
         self.industry_label_id = data.label_id;
-        
+        kSaveMyDefault(@"industry", selectedTitle);
+
     }
 }
 

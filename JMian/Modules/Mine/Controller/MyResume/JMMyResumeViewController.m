@@ -39,7 +39,7 @@
 @property (nonatomic, strong) NSArray *pickerArray;
 @property (nonatomic, strong) NSNumber *salaryMin;
 @property (nonatomic, strong) NSNumber *salaryMax;
-@property (nonatomic, strong) NSDate *work_start_date;
+@property (nonatomic, copy) NSString *work_start_date;
 @property (nonatomic, copy) NSString *work_status;
 
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
@@ -150,15 +150,13 @@
     formatter.dateFormat = @"yyyy-MM-dd";
 //    NSString *dateStr = [formatter  stringFromDate:datePicker.date];
     
-    self.work_start_date = datePicker.date;
+    self.work_start_date = [formatter  stringFromDate:datePicker.date];
     [self updateVita];
 
 }
 
 -(void)setCurrentIndex{
     __weak typeof(self) ws = self;
-    
-    
     
     [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
         CGRect Frame = ws.BGView.frame;
@@ -532,6 +530,7 @@
     }
     return _cellConfigures;
 }
+
 - (JMTitlesView *)titleView {
     if (!_titleView) {
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全职简历", @"兼职简历"]];

@@ -105,7 +105,7 @@
             
         }else
         {
-            [vc setIsHiddenBackBtn:YES];
+            vc.loginViewType = JMJLoginViewTypeMemory;
             NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
             [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
         }

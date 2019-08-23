@@ -39,6 +39,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
     self.title = @"聊出好机会";
     [self setIsHiddenBackBtn:YES];
     [self initView];
+    [self setupHeaderRefresh];
     //    [self initRefresh];
 }
 
@@ -59,7 +60,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
         return;
     }
     [self getMsgList];    //获取自己服务器数据
-    [self setupHeaderRefresh];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
 }
 
@@ -434,16 +434,22 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
+//    [cell setData:[_dataArray objectAtIndex:indexPath.row]];
+//    JMMessageListModel *model = _dataArray[indexPath.row];
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+////    if ([model.data.convId isEqualToString:@"dominator"]) {
+////
+////        cell.backgroundColor = BG_COLOR;
+////    }
+//    NSLog(@"用户ID：-----%@",model.data.convId);
     JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
-    [cell setData:[_dataArray objectAtIndex:indexPath.row]];
-    JMMessageListModel *model = _dataArray[indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if ([model.data.convId isEqualToString:@"dominator"]) {
-        
-        cell.backgroundColor = BG_COLOR;
+    if (cell == nil) {
+        cell = [[JMAllMessageTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
     }
-    NSLog(@"用户ID：-----%@",model.data.convId);
-    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell setData:[_dataArray objectAtIndex:indexPath.row]];
+
     return cell;
 }
 

@@ -67,6 +67,8 @@
 
         
     }
+
+ 
 //    self.birthDateText.inputView = self.datePicker;
     // Do any additional setup after loading the view from its nib.
 }
@@ -308,11 +310,13 @@
     [imageData writeToFile:fullPath atomically:NO];
     
     NSArray *array = @[currentImage];
+    [self showProgressHUD_view:[UIApplication sharedApplication].keyWindow];
     [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             
             _imageUrl = responsObject[@"data"][0];
         }
+        [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -409,8 +413,9 @@
             if (self.model) {
                 [self.navigationController popViewControllerAnimated:YES];
             }else {
-                JobIntensionViewController *jobIntension = [[JobIntensionViewController alloc]init];
-                [self.navigationController pushViewController:jobIntension animated:YES];
+                JobIntensionViewController *vc = [[JobIntensionViewController alloc]init];
+                vc.loginViewType = JMLoginViewTypeNextStep;
+                [self.navigationController pushViewController:vc animated:YES];
             }
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             

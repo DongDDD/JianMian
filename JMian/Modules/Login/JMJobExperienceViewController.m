@@ -62,12 +62,21 @@
     self.scrollView.delegate = self;
     self.companyNameText.delegate = self;
     [self initView];
-    
+    switch (self.loginViewType) {
+        case JMLoginViewTypeNextStep:
+            [self setIsHiddenBackBtn:NO];
+            break;
+        case JMJLoginViewTypeMemory:
+            [self setIsHiddenBackBtn:YES];
+            break;
+            
+        default:
+            break;
+    }
     switch (self.viewType) {
         case JMJobExperienceViewTypeDefault:
             [self setRightBtnTextName:@"下一步"];
 //            self.title = @"工作经历";
-            [self setIsHiddenBackBtn:YES];
             [self.saveBtn setTitle:@"完成" forState:UIControlStateNormal];
             break;
         case JMJobExperienceViewTypeEdit:
@@ -90,7 +99,6 @@
         case JMJobExperienceViewTypeAdd:
             self.title = @"新增工作经历";
             [self setRightBtnTextName:@"保存"];
-            
             [self.saveBtn setTitle:@"保存" forState:UIControlStateNormal];
             self.headerViewHeightConstraint.constant = 0;
             self.headerView.hidden = YES;
@@ -98,15 +106,13 @@
         default:
             break;
     }
-    
-
-    
+   
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.view layoutIfNeeded];
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.saveBtn.frame.origin.y+self.saveBtn.frame.size.height+50);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, self.saveBtn.frame.origin.y+self.saveBtn.frame.size.height+40);
     
 }
 
@@ -120,7 +126,7 @@
         make.top.mas_equalTo(self.moreBtn.mas_bottom).offset(10);
         make.left.mas_equalTo(self.view).mas_offset(20);
         make.right.mas_equalTo(self.view).mas_offset(-20);
-        make.height.mas_equalTo(37);
+        make.height.mas_equalTo(50);
     }];
 
 }

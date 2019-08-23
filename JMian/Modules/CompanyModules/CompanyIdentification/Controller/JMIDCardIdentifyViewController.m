@@ -164,7 +164,6 @@
     UIImage *savedImage = [[UIImage alloc] initWithContentsOfFile:fullPath];
     //读取路径进行上传
     if (_isFrontImage==YES) {
-        
         _imageView1.image = savedImage;
     
     }else{
@@ -188,6 +187,7 @@
     [imageData writeToFile:fullPath atomically:NO];
     
     NSArray *array = @[currentImage];
+    [self showProgressHUD_view:self.view];
     [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         if (responsObject[@"data"]) {
@@ -200,7 +200,7 @@
             }
             
         }
-        
+        [self hiddenHUD];
         
         //图片赋值显示
 //        if (_isImage1==YES) {

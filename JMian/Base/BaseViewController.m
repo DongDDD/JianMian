@@ -31,7 +31,13 @@
 //    self.extendedLayoutIncludesOpaqueBars = YES;
     self.view.backgroundColor = [UIColor whiteColor];
     [self setBackBtnImageViewName:@"icon_return_nav" textName:@""];
-  
+    [_progressHUD showAnimated:YES whileExecutingBlock:^{
+        NSLog(@"%@",@"do somethings....");
+   
+    } completionBlock:^{
+    
+    }];
+ 
 }
 
 -(void)setIsHiddenBackBtn:(BOOL)isHiddenBackBtn
@@ -39,6 +45,9 @@
     if (isHiddenBackBtn) {
         self.navigationItem.leftBarButtonItem = nil;
         self.navigationItem.hidesBackButton = YES;
+    }else{
+        self.navigationItem.hidesBackButton = NO;
+
     }
     
 }

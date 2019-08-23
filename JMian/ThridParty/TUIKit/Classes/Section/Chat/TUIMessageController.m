@@ -53,7 +53,7 @@ static NSString *cellIdent = @"infoCellIdent";
 static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 
-@interface TUIMessageController () <TIMMessageListener, TMessageCellDelegate,JMChatDetailPartTimeJobTableViewCellDelegate,JMChatDetailInfoTableViewCellDelegate,JMChatViewSectionViewDelegate>
+@interface TUIMessageController () <TIMMessageListener, TMessageCellDelegate,JMChatDetailPartTimeJobTableViewCellDelegate,JMChatDetailInfoTableViewCellDelegate,JMChatViewSectionViewDelegate,THDatePickerViewDelegate>
 @property (nonatomic, strong) TIMConversation *conv;
 @property (nonatomic, strong) NSMutableArray *uiMsgs;
 @property (nonatomic, strong) NSMutableArray *heightCache;
@@ -410,14 +410,16 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     self.BgBtn.alpha = 0.3;
     [self.view addSubview:self.BgBtn];
     
-    THDatePickerView *dateView = [[THDatePickerView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, SCREEN_WIDTH, 300)];
+    THDatePickerView *dateView = [[THDatePickerView alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 300)];
     dateView.delegate = self;
     dateView.title = @"请选择时间";
     //    dateView.isSlide = NO;
     //    dateView.date = @"2017-03-23 12:43";
     //    dateView.minuteInterval = 1;
-    [self.view addSubview:dateView];
+
+    [[UIApplication sharedApplication].keyWindow addSubview:dateView];
     self.dateView = dateView;
+    [self.dateView setHidden:YES];
     
 }
 
@@ -891,7 +893,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }else if ([_myConvModel.type isEqualToString:@"1"]) {
         
         self.BgBtn.hidden = NO;
-        
+        [self.dateView setHidden:NO];
         [UIView animateWithDuration:0.3 animations:^{
             self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);
             [self.dateView show];
@@ -921,7 +923,45 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     [self.navigationController setNavigationBarHidden:NO];
     
 }
+//@param timer 选择的数据
 
+- (void)datePickerViewSaveBtnClickDelegate:(NSString *)timer {
+    NSLog(@"保存点击");
+    //    self.timerLbl.text = timer;
+    
+    self.BgBtn.hidden = YES;
+    [self.dateView setHidden:YES];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 300);
+    }];
+//    NSString *userId;
+    //    if (self.messageController.isSelfIsSender) {
+    //        userId = self.myConvModel.recipient_user_id;
+    //    }else{
+    //        userId = self.myConvModel.sender_user_id;
+    //    }
+    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.myConvModel.job_user_job_id time:timer successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+/**
+ 时间选择取消
+ */
+- (void)datePickerViewCancelBtnClickDelegate {
+    NSLog(@"取消点击");
+    self.BgBtn.hidden = YES;
+    [self.dateView setHidden:YES];
+    [UIView animateWithDuration:0.3 animations:^{
+        self.dateView.frame = CGRectMake(0, SCREEN_HEIGHT, self.view.frame.size.width, 300);
+    }];
+}
 
 #pragma mark - 申请兼职职位
 

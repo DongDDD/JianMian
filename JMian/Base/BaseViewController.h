@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "DimensMacros.h"
-
+typedef NS_ENUM(NSInteger, JMJLoginViewType) {
+    JMLoginViewTypeNextStep,
+    JMJLoginViewTypeMemory,
+};
 
 //屏幕 rect
 #define SCREEN_RECT ([UIScreen mainScreen].bounds)
@@ -35,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)NSString *rightString;
 
+@property(nonatomic,assign)JMJLoginViewType loginViewType;
 -(void)setIsHiddenBackBtn:(BOOL)isHiddenBackBtn;
 //@property(nonatomic,assign)BOOL isHiddenBackBtn;
 -(void)setIsHiddenRightBtn:(BOOL)isHiddenBackBtn;
