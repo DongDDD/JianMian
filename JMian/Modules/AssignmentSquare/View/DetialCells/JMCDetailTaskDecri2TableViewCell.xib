@@ -19,38 +19,42 @@
                 <rect key="frame" x="0.0" y="0.0" width="425" height="336.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会计经济金融英文翻译写作" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjK-6R-vc5">
-                        <rect key="frame" x="20" y="26" width="221" height="22"/>
-                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cjK-6R-vc5">
+                        <rect key="frame" x="20" y="26" width="65.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9PF-BB-2Ev">
-                        <rect key="frame" x="20" y="0.0" width="385" height="1"/>
+                    <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9PF-BB-2Ev">
+                        <rect key="frame" x="20" y="0.0" width="385" height="0.5"/>
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="UrB-tO-IEj"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="1、协助总经理对公司运作各职能部门进行管理、协调 内部各部门关系，尤其是业务部门间的日常工作关系以 及事务处理，必要时可单独召" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fhc-sE-DGL">
-                        <rect key="frame" x="20" y="62" width="385" height="236"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" usesAttributedText="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dUS-Du-XHb">
+                        <rect key="frame" x="15" y="52.5" width="390" height="259.5"/>
+                        <attributedString key="attributedText"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="dUS-Du-XHb" firstAttribute="leading" secondItem="cjK-6R-vc5" secondAttribute="leading" constant="-5" id="1el-ug-8pN"/>
                     <constraint firstItem="cjK-6R-vc5" firstAttribute="top" secondItem="9PF-BB-2Ev" secondAttribute="bottom" constant="25" id="9QE-rj-2fm"/>
                     <constraint firstItem="9PF-BB-2Ev" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Btv-UH-adm"/>
+                    <constraint firstAttribute="bottom" secondItem="dUS-Du-XHb" secondAttribute="bottom" constant="24.5" id="FNj-dm-x6P"/>
                     <constraint firstAttribute="trailing" secondItem="9PF-BB-2Ev" secondAttribute="trailing" constant="20" id="Gcl-zo-uWg"/>
                     <constraint firstItem="cjK-6R-vc5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="Hrc-Lu-Tin"/>
-                    <constraint firstItem="Fhc-sE-DGL" firstAttribute="top" secondItem="cjK-6R-vc5" secondAttribute="bottom" constant="14" id="JuB-EH-mhg"/>
                     <constraint firstItem="9PF-BB-2Ev" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ZBG-ly-pAm"/>
-                    <constraint firstAttribute="trailing" secondItem="Fhc-sE-DGL" secondAttribute="trailing" constant="20" id="lo4-mj-Lm4"/>
-                    <constraint firstItem="Fhc-sE-DGL" firstAttribute="leading" secondItem="cjK-6R-vc5" secondAttribute="leading" id="yVw-ea-Uea"/>
+                    <constraint firstItem="dUS-Du-XHb" firstAttribute="top" secondItem="cjK-6R-vc5" secondAttribute="bottom" constant="7" id="eKd-Vc-CLI"/>
+                    <constraint firstAttribute="trailing" secondItem="dUS-Du-XHb" secondAttribute="trailing" constant="20" id="xfn-0A-NTL"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="textView" destination="dUS-Du-XHb" id="JYU-Kn-oKg"/>
+                <outlet property="titleLab" destination="cjK-6R-vc5" id="ZAl-gX-rLQ"/>
+            </connections>
             <point key="canvasLocation" x="-125.36231884057972" y="57.924107142857139"/>
         </tableViewCell>
     </objects>

@@ -35,7 +35,7 @@
 #import "JMSquareTaskManageViewController.h"
 #import "JMPartTimeJobResumeViewController.h"
 #import "JMTaskSeachViewController.h"
-//#import "JMCDetailViewController.h"
+#import "JMCDetailViewController.h"
 
 
 
@@ -496,12 +496,15 @@ static NSString *C_cellIdent = @"CSquareCellID";
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
-        JMTaskListCellData *model = self.dataArray[indexPath.row];
-        JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
-        vc.task_id = model.task_id;
-        [self.navigationController pushViewController:vc animated:YES];
-//        JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
+//        JMTaskListCellData *model = self.dataArray[indexPath.row];
+//        JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
+//        vc.task_id = model.task_id;
 //        [self.navigationController pushViewController:vc animated:YES];
+        JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
+        JMTaskListCellData *model = self.dataArray[indexPath.row];
+        vc.task_id = model.task_id;
+
+        [self.navigationController pushViewController:vc animated:YES];
     }
     
 }

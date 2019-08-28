@@ -11,8 +11,8 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 //app
 #else
@@ -116,7 +116,8 @@
 
 //发票信息
 #define Fectch_InvoiceInfo_URL @"api/user/invoice"
-
+//C端评价
+#define Fectch_CommentList_URL @"api/task/comment/paginate"
 
 //C端我的任务
 #define Fectch_TaskOrderList_URL @"api/task/order/paginate"

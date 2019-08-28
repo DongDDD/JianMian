@@ -30,6 +30,7 @@
         [_delegate videoRightBtnAction];
     }
 }
+
 - (IBAction)playAction:(UIButton *)sender {
     if (_delegate && [_delegate respondsToSelector:@selector(playBtnAction)]) {
         [_delegate playBtnAction];

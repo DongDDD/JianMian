@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMCDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMCDetailTaskDecri2TableViewCellIdentifier;
 
 @interface JMCDetailTaskDecri2TableViewCell : UITableViewCell
+
+@property(nonatomic,strong)JMCDetailModel *model;
 
 @end
 

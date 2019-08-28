@@ -31,7 +31,7 @@
                         <color key="textColor" red="1" green="0.30588235289999999" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RMB/天" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qId-LA-a9J">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RMB/单" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qId-LA-a9J">
                         <rect key="frame" x="77" y="75" width="42.5" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
@@ -160,6 +160,15 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="city" destination="oWH-Mq-hEm" id="MYY-ZH-pZ4"/>
+                <outlet property="frontMoney" destination="3Ph-sK-V3H" id="0vx-Vn-FYB"/>
+                <outlet property="industry" destination="Sws-jU-v7q" id="lu0-3k-tlA"/>
+                <outlet property="paymentMethod" destination="Uw1-Kl-PV2" id="akH-59-zWU"/>
+                <outlet property="paymentMoney" destination="Hai-hT-QtC" id="yuk-AD-Tgk"/>
+                <outlet property="quantityMax" destination="Bsf-QN-hmf" id="l4M-dM-3au"/>
+                <outlet property="taskTitleLab" destination="YDx-dk-KvR" id="VOJ-aC-Db3"/>
+            </connections>
             <point key="canvasLocation" x="238.40579710144928" y="192.1875"/>
         </tableViewCell>
     </objects>

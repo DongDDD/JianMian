@@ -840,7 +840,6 @@
     }];
     _mapView.scrollEnabled = NO;
     
-    
 }
 
 - (MAAnnotationView *)mapView:(MAMapView *)mapView viewForAnnotation:(id)annotation {

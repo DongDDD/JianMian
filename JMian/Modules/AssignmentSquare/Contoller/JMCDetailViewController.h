@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCDetailViewController : BaseViewController
+@property(nonatomic,copy)NSString *task_id;
 
 @end
 
