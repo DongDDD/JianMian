@@ -38,16 +38,16 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ICl-Rw-FtM">
-                                    <rect key="frame" x="20" y="15" width="62" height="18"/>
+                                    <rect key="frame" x="20" y="15" width="65" height="18"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="65" id="4Vk-Yz-9og"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入职位名称" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lQ7-5G-U7w">
-                                    <rect key="frame" x="239" y="15" width="129" height="18"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="129" id="19v-Ac-shx"/>
-                                    </constraints>
+                                    <rect key="frame" x="105" y="15" width="289" height="18"/>
                                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -58,7 +58,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="lQ7-5G-U7w" secondAttribute="trailing" constant="46" id="AMN-jF-wVS"/>
+                                <constraint firstAttribute="trailing" secondItem="lQ7-5G-U7w" secondAttribute="trailing" constant="20" id="AMN-jF-wVS"/>
                                 <constraint firstItem="ICl-Rw-FtM" firstAttribute="centerY" secondItem="1b8-LT-92a" secondAttribute="centerY" id="ASh-Ta-MIt"/>
                                 <constraint firstItem="dFS-Wo-AO8" firstAttribute="leading" secondItem="1b8-LT-92a" secondAttribute="leading" constant="20" id="EmM-u9-qZl"/>
                                 <constraint firstItem="lQ7-5G-U7w" firstAttribute="centerY" secondItem="1b8-LT-92a" secondAttribute="centerY" id="IuG-BF-ssy"/>
@@ -67,6 +67,7 @@
                                 <constraint firstAttribute="bottom" secondItem="dFS-Wo-AO8" secondAttribute="bottom" id="QwM-an-aVD"/>
                                 <constraint firstAttribute="trailing" secondItem="dFS-Wo-AO8" secondAttribute="trailing" constant="20" id="RLd-sG-FtV"/>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="fKp-ul-daL"/>
+                                <constraint firstItem="lQ7-5G-U7w" firstAttribute="leading" secondItem="ICl-Rw-FtM" secondAttribute="trailing" constant="20" id="hkA-bf-BvT"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X2i-3L-pwh" userLabel="产品价格View">

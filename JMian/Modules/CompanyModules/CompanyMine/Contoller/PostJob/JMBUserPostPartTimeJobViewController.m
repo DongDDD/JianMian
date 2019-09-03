@@ -65,8 +65,10 @@
 @property (copy, nonatomic)NSString *front_money;//任务定金
 @property (copy, nonatomic)NSString *quantity_max;//招募人数
 @property (strong, nonatomic)NSMutableArray *industry_arr;//适合行业
-@property (copy, nonatomic)NSString *city_id;//地区
-@property (copy, nonatomic)NSString *adress;//地区
+@property (copy, nonatomic)NSString *city_id;//城市
+@property (copy, nonatomic)NSString *adress;//地区名称
+@property (copy, nonatomic)NSString *longitude;
+@property (copy, nonatomic)NSString *latitude;
 @property (copy, nonatomic)NSString *myDecription;//职位描述
 @property (copy, nonatomic)NSString *deadline;//有效日期
 
@@ -300,7 +302,9 @@
     NSString *adress = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
     [self.makeOutBillHeaderView.adressBtn setTitle:adress forState:UIControlStateNormal];
     _adress = adress;
-    
+    _longitude = [NSString stringWithFormat:@"%f",data.location.longitude];
+    _latitude = [NSString stringWithFormat:@"%f",data.location.latitude];
+
 }
     
 //是否需要开发票
@@ -402,11 +406,11 @@
     if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
         //编辑状态
         _demo3ViewVC.task_id = self.task_id;//进入界面重新调用接口获得最新图片
-        _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionEdit;
+        _demo3ViewVC.viewType = Demo3ViewPostPartTimeJobEdit;
         
     }else if (_viewType == JMBUserPostPartTimeJobTypeAdd || _viewType == JMBUserPostPartTimeJobTypeHistory) {
         //添加状态
-        _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionAdd;
+        _demo3ViewVC.viewType = Demo3ViewPostPartTimeJobAdd;
         
     }
     if (_image_arr.count > 0) {
@@ -494,18 +498,40 @@
         ws.pickerView.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 350);
     } completion:nil];
 }
+//视频模块
+-(void)videoLeftBtnAction{
+    [self filmVideo];
+}
 
+-(void)videoRightBtnAction{
+    [self uploadVideo];
+    
+}
 
-//-(void)showPickView{
-//    [self hideKeyBoard];
-//    [self.view addSubview:self.pickerView];
-//    __weak typeof(self) ws = self;
-//    [UIView animateWithDuration:0.2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
-//        ws.pickerView.frame = CGRectMake(0, SCREEN_HEIGHT-350, SCREEN_WIDTH, 350);
-//    } completion:nil];
+-(void)playBtnActionWithUrl:(NSString *)url{
+//    [self fetchmyVideo];
+//    NSString * path;
+//    if (_viewType == JMBUserPostPartTimeJobTypeAdd) {
+//        //本地获取链接播放，需要拼接
+//        if (![self.video_path containsString:@"https://jmsp-videos"]) {
+//            path = [NSString stringWithFormat:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com%@",self.video_path];
+//        }else{
+//            path = self.video_path;
 //
-//
-//}
+//        }
+//    }else if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
+//        path = url;
+//    }
+    
+    //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+    //        AVPlayer *player = [AVPlayer playerWithURL:url];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url];
+    [[JMVideoPlayManager sharedInstance] play];
+    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [self presentViewController:playVC animated:YES completion:nil];
+    [[JMVideoPlayManager sharedInstance] play];
+    
+}
 
 -(void)isReadProtocol:(BOOL)isRead{
 
@@ -552,19 +578,23 @@
     
 }
 #pragma mark - 图片
+- (void)sendArray_addImageUrls:(NSMutableArray *)addImageUrls {
+    _isChange = YES;
+    self.image_arr = addImageUrls;
+    NSLog(@"addImageUrls%@",addImageUrls);
+    [self.partTimeJobDetailView.postImgBtn setTitle:@"已上传" forState:UIControlStateNormal];
+    [self.partTimeJobDetailView.postImgBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+    
+}
 
 //添加的图片
 -(void)sendAddImgs:(NSMutableArray *)Imgs{
-    _isChange = YES;
     [self updateTaskImagesRequest_images:Imgs.mutableCopy];
-    [self.partTimeJobDetailView.postImgBtn setTitle:@"已上传" forState:UIControlStateNormal];
-    [self.partTimeJobDetailView.postImgBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     //    [self uploadCompanyWithImages:Imgs.mutableCopy];
 }
 
 //删除图片
 -(void)deleteSalePositionImageWithIndex:(NSInteger)index{
-    _isChange = YES;
     if (self.imageDataArr.count > 0) {
         JMImageModel *model = self.imageDataArr[index];
         if (index < self.imageDataArr.count) {
@@ -575,6 +605,42 @@
         
     }
 }
+
+
+
+
+
+////编辑任务，添加的图片
+//-(void)sendAddImgs:(NSMutableArray *)Imgs{
+//    _isChange = YES;
+//    [self updateTaskImagesRequest_images:Imgs.mutableCopy];
+//    [self.partTimeJobDetailView.postImgBtn setTitle:@"已上传" forState:UIControlStateNormal];
+//    [self.partTimeJobDetailView.postImgBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//    //    [self uploadCompanyWithImages:Imgs.mutableCopy];
+//}
+//
+////发布新任务
+//- (void)sendArray_addImageUrls:(NSMutableArray *)addImageUrls {
+//    _isChange = YES;
+//    self.image_arr = addImageUrls;
+//    NSLog(@"addImageUrls%@",addImageUrls);
+//    [self.partTimeJobDetailView.postImgBtn setTitle:@"已上传" forState:UIControlStateNormal];
+//    [self.partTimeJobDetailView.postImgBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+//}
+//
+////删除图片
+//-(void)deleteSalePositionImageWithIndex:(NSInteger)index{
+//    _isChange = YES;
+//    if (self.imageDataArr.count > 0) {
+//        JMImageModel *model = self.imageDataArr[index];
+//        if (index < self.imageDataArr.count) {
+//            [self deleteGoodsImageRequsetWithFile_id:model.file_id];
+//            [self.imageDataArr removeObject:model];
+//            //        [self.image_arr.mutableCopy removeObjectAtIndex:index];
+//        }
+//
+//    }
+//}
 
 
 #pragma mark - ScrollViewdelegate
@@ -624,14 +690,20 @@
     
     [self.decriptionTextView setContent:model.taskDescription];
 
-    _image_arr = [NSMutableArray array];
-    for (JMImageModel *imgModel in model.images) {
-        [_image_arr addObject:imgModel.file_path];
+//    _image_arr = [NSMutableArray array];
+//    for (JMImageModel *imgModel in model.images) {
+//        [_image_arr addObject:imgModel.file_path];
+//    }
+//    _video_path = model.video_file_path;
+//    _video_cover = model.video_cover;
+    if (model.video_cover.length > 0 && model.video_file_path.length > 0) {
+//        NSURL *url = [NSURL URLWithString:model.video_cover];
+//        [self.videoView.videoImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"NOvideos"]];
+        [self.videoView.playBtn setHidden:NO];
+        [self.videoView setVideo_path:model.video_file_path];
+        [self.videoView setVideo_cover:model.video_cover];
+//        [self.videoView setValusWithVideo_path:model.video_file_path video_cover:model.video_cover];
     }
-    _video_path = model.video_file_path;
-    _video_cover = model.video_cover;
-    NSURL *url = [NSURL URLWithString:model.video_cover];
-    [self.videoView.videoImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"NOvideos"]];
     
     _type_label_id = model.type_labelID;
     _task_title = model.task_title;
@@ -677,7 +749,6 @@
                 if (![responsObject[@"data"][@"invoice"] isEqual:[NSNull null]]) {
 //                    [self setInvoiceValuesWithModel:_invoiceModel];
                     [self didClickBillActionWithTag:1000 isChange:NO];
-
                     
                 }else{
                     [self didClickBillActionWithTag:1001 isChange:NO];
@@ -686,8 +757,6 @@
                 
             }
         }
-            
-        
       
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -698,13 +767,16 @@
 
 
 -(void)sendRequest{
-//    NSString *myfront_money;
-//    if (_front_money.length > 0) {
-//        myfront_money = _front_money;
-//    }else{
-//        myfront_money = @"0";
-//    }
-    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:_adress goods_title:nil goods_price:nil goods_desc:nil video_path:_video_path video_cover:_video_cover image_arr:_image_arr deadline:_deadline status:nil is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    NSMutableArray *imageArr = [NSMutableArray array];
+    for (NSString *url in _image_arr) {
+        if ([url containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
+            NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
+            [imageArr addObject:strUrl];
+            
+        }
+    }
+    
+    [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:_type_label_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude address:_adress goods_title:nil goods_price:nil goods_desc:nil video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self showAlertVCSucceesSingleWithMessage:@"创建任务成功" btnTitle:@"好的"];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -766,7 +838,7 @@
     [self.makeOutBillView.invoiceTitleTextField resignFirstResponder];
     [self.makeOutBillView.invoiceTaxNumTextField resignFirstResponder];
     [self.makeOutBillView.invoiceEmailTextField resignFirstResponder];
-    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:nil industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:_adress goods_title:nil goods_price:nil goods_desc:nil video_path:_video_path video_cover:_video_cover image_arr:nil  is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:nil industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude  address:_adress goods_title:nil goods_price:nil goods_desc:nil video_path:_video_path video_cover:_video_cover image_arr:nil  is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self showAlertVCSucceesSingleWithMessage:@"保存成功" btnTitle:@"好的"];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -776,8 +848,6 @@
 
 -(void)alertSucceesAction{
     [self.navigationController popViewControllerAnimated:YES];
-
-    
 }
 
 //获取兼职职位详情数据
@@ -814,7 +884,8 @@
                 }
                 
             }
-            
+            self.imageDataArr = _partTimejobDetailModel.images.mutableCopy;
+
         }
         [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -829,19 +900,7 @@
 
 
 
--(void)videoLeftBtnAction{
-    [self filmVideo];
-}
 
--(void)videoRightBtnAction{
-    [self uploadVideo];
-    
-}
-
--(void)playBtnAction{
-    [self fetchmyVideo];
-    
-}
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
@@ -975,23 +1034,23 @@
 }
 
 
--(void)fetchmyVideo{
-    NSString * path;
-    if (![self.video_path containsString:@"https://jmsp-videos"]) {
-        path = [NSString stringWithFormat:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com%@",self.video_path];
-    }else{
-        path = self.video_path;
-        
-    }
-    //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
-    //        AVPlayer *player = [AVPlayer playerWithURL:url];
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path];
-    [[JMVideoPlayManager sharedInstance] play];
-    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
-    
-}
+//-(void)fetchmyVideo{
+//    NSString * path;
+//    if (![self.video_path containsString:@"https://jmsp-videos"]) {
+//        path = [NSString stringWithFormat:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com%@",self.video_path];
+//    }else{
+//        path = self.video_path;
+//
+//    }
+//    //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+//    //        AVPlayer *player = [AVPlayer playerWithURL:url];
+//    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path];
+//    [[JMVideoPlayManager sharedInstance] play];
+//    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+//    [self presentViewController:playVC animated:YES completion:nil];
+//    [[JMVideoPlayManager sharedInstance] play];
+//
+//}
 
 /**
  压缩完成调用上传
@@ -1072,16 +1131,11 @@
         
         if (responsObject[@"data"]) {
             _video_cover = responsObject[@"data"][0];
-            
+//            if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
+//                [self.videoView setVideo_cover:_video_cover];
+//            }
+
         }
-        
-        
-        //        if(responsObject[@"data"]){
-        //            NSArray *urlArray = responsObject[@"data"];
-        //            _imageUrl = urlArray[0];
-        //        }
-        
-        
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -1141,8 +1195,8 @@
             NSString *url = responsObject[@"data"][0];
             NSLog(@"urlurlurlurl--%@",url);
             self.video_path = url;
+            [self.videoView setVideo_path:url];
             _isChange = YES;
-            
             //            [self updateInfoData];
             [self hiddenHUD];
             

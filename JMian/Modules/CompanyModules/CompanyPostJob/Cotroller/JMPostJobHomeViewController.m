@@ -18,7 +18,7 @@
 #import "JobDetailsViewController.h"
 
 
-@interface JMPostJobHomeViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface JMPostJobHomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMPostJobHomeTableViewCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *breakBGView;
 //@property (nonatomic, strong) JMTitlesView *titleView;
@@ -268,7 +268,8 @@ static NSString *cellIdent = @"cellIdent";
         cell = [[JMPostJobHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
         //自带有两种基础的tableView样式，UITableViewCellStyleValue1、2. 后面的文章会讲解自定义样式
     }
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.delegate = self;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     JMHomeWorkModel *model = self.dataArray[indexPath.row];
     [cell setModel:model];
@@ -286,7 +287,12 @@ static NSString *cellIdent = @"cellIdent";
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+#pragma mark - myDelegate
+-(void)didClickCopyActionWithHomeWorkModel:(JMHomeWorkModel *)homeWorkModel{
 
+
+
+}
 #pragma mark - lazy
 
 -(UITableView *)tableView{
@@ -294,7 +300,7 @@ static NSString *cellIdent = @"cellIdent";
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 78.0f;
+        _tableView.rowHeight = 120.0f;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
 

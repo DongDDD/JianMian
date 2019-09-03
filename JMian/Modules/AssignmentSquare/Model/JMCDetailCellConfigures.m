@@ -48,8 +48,14 @@
         return 3;
     }else if (section == 2) {
         //图片
+        NSMutableArray *imgArr = [NSMutableArray array];
+        for (JMCDetailImageModel *imgModel in self.model.images) {
+            if ([imgModel.status isEqualToString:@"2"]) {
+                [imgArr addObject:imgModel];
+            }
+        }
         NSLog(@"图片有%lu张",(unsigned long)self.model.images.count);
-        return self.model.images.count;
+        return imgArr.count;
     }else if (section == 3) {
         if (self.model.latitude.length > 0 && self.model.longitude.length > 0) {
             return 1;
@@ -103,16 +109,22 @@
     }else if (indexPath.section == 2) {
         //图片
 //        __weak JMCDetailImageModel *weakSelf = self;
-        JMCDetailImageModel *imgModel = self.model.images[indexPath.row];
+        NSMutableArray *imgArr = [NSMutableArray array];
+        for (JMCDetailImageModel *imgModel in self.model.images) {
+            if ([imgModel.status isEqualToString:@"2"]) {
+                [imgArr addObject:imgModel];
+            }
+        }
+        JMCDetailImageModel *imgModel = imgArr[indexPath.row];
         UIImageView *imageView = [[UIImageView alloc]init];
         [imageView sd_setImageWithURL:[NSURL URLWithString:imgModel.file_path] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             NSLog(@"宽：%f, 高：%f", image.size.width, image.size.height);
-            self.height = image.size.height-400;
+            self.height = image.size.height;
         }];
         return self.height;
     }else if (indexPath.section == 3) {
         //公司地址
-        return 277;
+        return 400;
     }else if (indexPath.section == 4) {
         //信誉评价
         return 139;
@@ -138,13 +150,15 @@
 
 -(CGFloat)getHeightFromDecri{
     if ([self.model.payment_method isEqualToString:@"3"]) {
+        //普通任务
         CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.myDescription andFont:[UIFont systemFontOfSize:14] andLinespace:10];
         NSLog(@"FFFFF:%f",H);
         return H + 100;
     }else if ([self.model.payment_method isEqualToString:@"1"]) {
+        //销售任务
         CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.goods_description andFont:[UIFont systemFontOfSize:14] andLinespace:10];
         NSLog(@"FFFFF:%f",H);
-        return H + 200;
+        return H + 280;
     }else{
         return 0;
     }

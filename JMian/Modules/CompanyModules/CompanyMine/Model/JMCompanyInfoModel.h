@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *type_label_label_id;
 @property (nonatomic, copy) NSString *type_label_name;
 
+
 @property (nonatomic, copy) NSString *industry_label_id;
 @property (nonatomic, copy) NSString *industry_name;
 
@@ -39,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *files;
 @property (nonatomic, strong) NSArray *labels;
 @property (nonatomic, strong) NSArray *subways;
+@property (nonatomic, strong) NSArray *video;
 
 
 @property (nonatomic, copy) NSString *employee;
@@ -67,6 +69,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *files_file_path;
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *file_id;
+@property (nonatomic, copy) NSString *file_cover;
+@property (nonatomic, copy) NSString *denial_reason;
+
 
 
 @end

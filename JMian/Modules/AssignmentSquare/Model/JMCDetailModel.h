@@ -11,6 +11,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCDetailModel : NSObject
+@property(nonatomic, copy)NSString *favorites_id;
+
+
 @property(nonatomic, copy)NSString *share_url;
 @property(nonatomic, copy)NSString *task_title;
 @property(nonatomic, copy)NSString *quantity_max;
@@ -23,7 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *type_label_name;
 @property(nonatomic, copy)NSString *type_label_id;
 @property(nonatomic, copy)NSString *status;
-@property(nonatomic, copy)NSString *favorites;
 @property(nonatomic, copy)NSString *task_id;
 @property(nonatomic, copy)NSString *user_id;
 @property(nonatomic, copy)NSString *user_nickname;
@@ -40,6 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, copy)NSString *latitude;
 @property(nonatomic, copy)NSString *longitude;
+@property(nonatomic, copy)NSString *address;
 @property(nonatomic, copy)NSString *effective_count;
 @property(nonatomic, copy)NSString *city_id;
 @property(nonatomic, copy)NSString *city_name;
@@ -55,6 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMCDetailImageModel : NSObject
 
 @property(nonatomic, copy)NSString *file_path;
+@property(nonatomic, copy)NSString *status;
 
 @end
 

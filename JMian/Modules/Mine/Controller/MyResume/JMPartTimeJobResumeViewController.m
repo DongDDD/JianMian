@@ -20,7 +20,7 @@
 #import "JMHistoryViewController.h"
 
 
-@interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMPostTypeChooseViewDelegate,JMPostTaskBottomViewDelegate>
+@interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMPostTypeChooseViewDelegate,JMPostTaskBottomViewDelegate,JMPostJobHomeTableViewCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *dataArray;
 @property (nonatomic, strong) JMTitlesView *titleView;
@@ -44,11 +44,6 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     if (_viewType == JMPartTimeJobTypeManage) {
 //        [self.view addSubview:self.titleView];
         [self.view addSubview:self.tableView];
-        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.mas_topLayoutGuideTop);
-            make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
-            make.left.and.right.mas_equalTo(self.view);
-        }];
         self.no_dataLab.text = @"你还没有发布任务，快去发布吧！";
         [self.no_dataBtn setTitle:@"发布任务" forState:UIControlStateNormal];
         
@@ -59,6 +54,11 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             make.height.mas_equalTo(64);
         }];
         
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.mas_topLayoutGuideTop);
+            make.bottom.mas_equalTo(self.postTaskBottomView.mas_top);
+            make.left.and.right.mas_equalTo(self.view);
+        }];
         [[UIApplication sharedApplication].keyWindow addSubview:self.chooseViewBgView];
         [self.chooseViewBgView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo([UIApplication sharedApplication].keyWindow);
@@ -250,6 +250,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     if (cell == nil) {
         cell = [[JMPostJobHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdent];
     }
+    cell.delegate = self;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     switch (_viewType) {
         case JMPartTimeJobTypeResume://兼职简历
@@ -257,7 +258,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             [cell setPartTimeJobModel:self.dataArray[indexPath.row]];
             break;
         case JMPartTimeJobTypeManage://任务管理
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
             [cell setTaskListCellData:self.dataArray[indexPath.row]];
 
@@ -272,7 +273,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             }
             break;
         case JMPartTimeJobTypeHistory://历史模版
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             [cell setTaskListCellData:self.dataArray[indexPath.row]];
             break;
         default:
@@ -386,7 +387,11 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 78;
+    if (_viewType == JMPartTimeJobTypeManage || _viewType == JMPartTimeJobTypeHome) {
+        return 120;
+    }else{
+        return 78;
+    }
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -432,6 +437,17 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 -(void)disapearAction{
     [self.postTypeChooseView setHidden:YES];
     [self.chooseViewBgView setHidden:YES];
+}
+-(void)didClickCopyActionWithTaskListCellData:(JMTaskListCellData *)taskListCellData{
+
+    JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+    vc.viewType = JMBUserPostSaleJobViewTypeHistory;
+    vc.task_id = taskListCellData.task_id;
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+-(void)didClickCopyActionWithModel:(JMHomeWorkModel *)model{
+    
 }
 
 #pragma mark - Getter

@@ -278,6 +278,8 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     }
 }
 
+
+
 -(void)gotoLabsVC{
     JMPartTimeJobTypeLabsViewController *vc =  [[JMPartTimeJobTypeLabsViewController alloc]init];
     vc.delegate = self;
@@ -310,18 +312,15 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 }
 
 -(void)gotoUploadImageAction{
- 
     _demo3ViewVC = [[Demo3ViewController alloc]init];
     _demo3ViewVC.delegate = self;
     if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
         //编辑状态
         _demo3ViewVC.task_id = self.task_id;//进入界面重新调用接口获得最新图片
         _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionEdit;
-
     }else if (_viewType == JMBUserPostSaleJobViewTypeAdd || _viewType == JMBUserPostSaleJobViewTypeHistory) {
         //添加状态
         _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionAdd;
-    
     }
     if (_image_arr.count > 0) {
         //选好的图片_image_arr
@@ -806,7 +805,10 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         [self.detailView.quantityMaxTextField resignFirstResponder];
         [self.detailView.paymentMoneyTextField resignFirstResponder];
         [self.detailView.positionNameTextField resignFirstResponder];
-
+        if (_task_title.length > 30) {
+            [self showAlertSimpleTips:@"提示" message:@"职位名称不能超过30个字" btnTitle:@"好的"];
+            return;
+        }
         if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
             [self updateTaskInfoRequest_status:@"1"];//更新
         }else if (_viewType == JMBUserPostSaleJobViewTypeAdd || _viewType == JMBUserPostSaleJobViewTypeHistory){
@@ -867,9 +869,10 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         if ([url containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
             NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
             [imageArr addObject:strUrl];
-            
         }
     }
+    
+  
     
     [[JMHTTPManager sharedInstance]createTask_task_title:_task_title type_label_id:@"1091" payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:nil latitude:nil address:nil goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr deadline:_deadline status:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self showAlertVCSucceesSingleWithMessage:@"创建任务成功" btnTitle:@"好的"];
@@ -897,6 +900,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 //上传图片请求
 -(void)updateTaskImagesRequest_images:(NSArray *)images{
+    self.isChange = YES;
     [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:images is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"成功添加图片" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

@@ -62,13 +62,19 @@
     [self.goodsNameTextfield resignFirstResponder];
     [self.goodsPriceTextField resignFirstResponder];
     [self.decriptionTextView.contentTextView resignFirstResponder];
-    
+    if (_goods_title.length > 30) {
+        [self showAlertSimpleTips:@"提示" message:@"商品名称不能超过30个字" btnTitle:@"好的"];
+        return;
+    }
     if (_goods_title.length > 0 || _goods_price.length > 0 || _goods_desc.length > 0) {
         if(_delegate && [_delegate respondsToSelector:@selector(didWriteGoodsDescWithGoodsName:price:goodsDetaolInfo:)]){
             [_delegate didWriteGoodsDescWithGoodsName:self.goods_title price:self.goods_price goodsDetaolInfo:self.goods_desc];
             [self.navigationController popViewControllerAnimated:YES];
         }
         
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+
     }
     
 
@@ -89,15 +95,18 @@
     
 }
 
-
+-(void)doneClicked{
+    [_decriptionTextView.contentTextView resignFirstResponder];
+}
 
 #pragma mark - Getter
 
 - (JMPartTimeJobResumeFooterView *)decriptionTextView{
     if (_decriptionTextView == nil) {
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
-        _decriptionTextView.frame = CGRectMake(0, self.headerDescView.frame.origin.y+self.headerDescView.frame.size.height , SCREEN_WIDTH, 229);
+        _decriptionTextView.frame = CGRectMake(0, self.headerDescView.frame.origin.y+self.headerDescView.frame.size.height-50, SCREEN_WIDTH, 229);
         _decriptionTextView.delegate = self;
+        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
         [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeGoodsDesc];
         //        _decriptionTextView.contentTextView.delegate = self;
         

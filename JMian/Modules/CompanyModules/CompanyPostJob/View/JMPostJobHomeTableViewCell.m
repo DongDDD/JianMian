@@ -7,7 +7,13 @@
 //
 
 #import "JMPostJobHomeTableViewCell.h"
+@interface JMPostJobHomeTableViewCell ()
 
+@property (nonatomic, strong)JMHomeWorkModel *myModel;
+@property (nonatomic, strong)JMTaskListCellData *myTaskListCellData;
+@property (weak, nonatomic) IBOutlet UIButton *myCopyBtn;
+
+@end
 @implementation JMPostJobHomeTableViewCell
 
 - (void)awakeFromNib {
@@ -17,7 +23,8 @@
 
 //全职职位
 -(void)setModel:(JMHomeWorkModel *)model{
-    
+    _viewType = JMPostJobHomeTableViewCellTypeWork;
+    [self.myCopyBtn setHidden:YES];
     self.workNameLab.text = model.work_name;
     NSString *salary = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
     NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",model.work_experience_min,model.work_experience_max];
@@ -42,6 +49,7 @@
 }
 //兼职简历
 -(void)setPartTimeJobModel:(JMAbilityCellData *)partTimeJobModel{
+    [self.myCopyBtn setHidden:YES];
     self.workNameLab.text = partTimeJobModel.type_name;
     
     self.salaryLab.text = partTimeJobModel.city_cityName;
@@ -63,6 +71,8 @@
 
 //兼职任务管理
 -(void)setTaskListCellData:(JMTaskListCellData *)taskListCellData{
+    _viewType = JMPostJobHomeTableViewCellTypeTask;
+    _myTaskListCellData = taskListCellData;
     self.workNameLab.text = taskListCellData.task_title;
     if (taskListCellData.cityID == nil) {
         self.detailLab.text = [NSString stringWithFormat:@"不限-%@/单",taskListCellData.payment_money];
@@ -77,6 +87,23 @@
     }
     
 }
+
+- (IBAction)copyAction:(id)sender {
+    if (_viewType == JMPostJobHomeTableViewCellTypeWork) {
+        if (_delegate && [_delegate respondsToSelector:@selector(didClickCopyActionWithHomeWorkModel:)]) {
+        
+            [_delegate didClickCopyActionWithHomeWorkModel:_myModel];
+        }
+    }else if (_viewType == JMPostJobHomeTableViewCellTypeTask) {
+        if (_delegate && [_delegate respondsToSelector:@selector(didClickCopyActionWithTaskListCellData:)]) {
+            [_delegate didClickCopyActionWithTaskListCellData:_myTaskListCellData];
+        }
+    }
+
+}
+
+
+
 //工资数据转化，除以1000，转化成k
 -(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
     NSInteger myint = [min integerValue];

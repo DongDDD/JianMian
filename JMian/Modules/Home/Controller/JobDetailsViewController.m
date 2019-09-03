@@ -26,6 +26,7 @@
 #import "JMHTTPManager+Login.h"
 #import "JMIDCardIdentifyViewController.h"
 #import "WXApi.h"
+#import "JMCompanyDetailViewController.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate,MAMapViewDelegate,JMShareViewDelegate>
@@ -600,10 +601,16 @@
 
 //点击事件
 -(void)introduceAvtion{
-    JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
-    vc.model = _myModel;
-    vc.viewType = JMCompanyIntroduceViewControllerDefault;
-    vc.videoUrl = self.homeworkModel.videoFile_path;
+//    JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
+//    vc.model = _myModel;
+//    vc.viewType = JMCompanyIntroduceViewControllerDefault;
+//    vc.videoUrl = self.homeworkModel.videoFile_path;
+//    [self.navigationController pushViewController:vc animated:YES];
+    JMCompanyDetailViewController *vc = [[JMCompanyDetailViewController alloc]init];
+    vc.company_id = self.homeworkModel.company_id;
+    vc.latitude = self.homeworkModel.latitude;
+    vc.longitude = self.homeworkModel.longitude;
+    vc.address = self.homeworkModel.address;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

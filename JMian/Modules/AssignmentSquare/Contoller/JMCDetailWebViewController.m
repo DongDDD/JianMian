@@ -49,6 +49,7 @@
     [self.wkUController addScriptMessageHandler:self.weakScriptMessageDelegate  name:@"ccc"];
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self initView];
+    
     //    _isRead = YES;
     // Do any additional setup after loading the view from its nib.
 }
@@ -150,7 +151,6 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
             [self loginOut];
         }]];
         
@@ -170,7 +170,6 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
             [self loginOut];
         }]];
         
@@ -515,17 +514,6 @@
     return newImage;
 }
 
--(UIImage *) getImageFromURL:(NSString *)fileURL {
-    
-    UIImage * result;
-    
-    NSData * data = [NSData dataWithContentsOfURL:[NSURL URLWithString:fileURL]];
-    
-    result = [UIImage imageWithData:data];
-    
-    return result;
-    
-}
 
 
 

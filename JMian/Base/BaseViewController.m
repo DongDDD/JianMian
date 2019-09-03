@@ -187,6 +187,23 @@
     self.tabBarController.tabBar.hidden = self.navigationController.viewControllers.count > 1 ? YES : NO;
 
 }
+
+-(void)youkeStatus{
+    NSString *str = kFetchMyDefault(@"youke");
+    if ([str isEqualToString:@"1"]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            [self loginOut];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        return;
+    }
+}
+
 -(void)moreAction{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -403,6 +420,7 @@
     [self presentViewController:alert animated:YES completion:nil];
     
 }
+
 -(void)iconAlertLeftAction{
     
 }

@@ -22,6 +22,7 @@
     return @{
              @"files":@"JMFilesModel",
              @"labels":@"JMlabelsModel",
+             @"video":@"JMFilesModel",
              @"subways":@"JMShieldingModel"
              };
 }
@@ -46,7 +47,8 @@
     return @{
              @"files_type":@"type",
              @"files_file_path":@"file_path",
-             @"file_id":@"file_id"
+             @"file_id":@"file_id",
+             @"file_cover":@"cover"
 
              };
 }

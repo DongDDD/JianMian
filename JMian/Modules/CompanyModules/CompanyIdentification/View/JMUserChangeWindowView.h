@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIView *windowView;
 @property (nonatomic,assign)id<JMUserChangeWindowViewDelegate>delegate;
 //+(JMUserChangeWindowView *)sharedUserChangeWindow;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 
 @end
 

@@ -22,8 +22,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tZK-4v-tRN" userLabel="BGView">
                         <rect key="frame" x="10" y="10" width="352" height="120.5"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品区域销售代理/销售助理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKV-b8-h8G">
-                                <rect key="frame" x="14" y="14" width="201" height="16"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品区域销售代理/销售助理产品区域销售代理/销售助理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKV-b8-h8G">
+                                <rect key="frame" x="14" y="14" width="325" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="AgN-mT-TTI"/>
                                 </constraints>
@@ -39,7 +39,7 @@
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <real key="value" value="31.5"/>
+                                        <real key="value" value="2.5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
@@ -89,6 +89,7 @@
                             <constraint firstItem="MvE-zp-i4o" firstAttribute="centerY" secondItem="duZ-yM-w3L" secondAttribute="centerY" id="C0p-25-u0b"/>
                             <constraint firstAttribute="trailing" secondItem="MP5-m5-cZb" secondAttribute="trailing" constant="13" id="Jbv-hX-xY8"/>
                             <constraint firstItem="duZ-yM-w3L" firstAttribute="leading" secondItem="mKV-b8-h8G" secondAttribute="leading" id="JzW-Gc-GUc"/>
+                            <constraint firstAttribute="trailing" secondItem="mKV-b8-h8G" secondAttribute="trailing" constant="13" id="KCe-JM-NDH"/>
                             <constraint firstItem="ps3-lc-jCv" firstAttribute="top" secondItem="MvE-zp-i4o" secondAttribute="bottom" constant="9" id="Mgq-zB-lGg"/>
                             <constraint firstItem="duZ-yM-w3L" firstAttribute="top" secondItem="mKV-b8-h8G" secondAttribute="bottom" constant="13" id="SiM-Yv-JmQ"/>
                             <constraint firstItem="mKV-b8-h8G" firstAttribute="leading" secondItem="tZK-4v-tRN" secondAttribute="leading" constant="14" id="i0D-qY-VCA"/>

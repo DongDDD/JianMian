@@ -14,6 +14,8 @@ typedef enum : NSUInteger {
     Demo3ViewCompanyInfoEdit,
     Demo3ViewPartTimeResumeEdit,
     Demo3ViewPartTimeResumeAdd,
+    Demo3ViewPostPartTimeJobAdd,//发布新任务
+    Demo3ViewPostPartTimeJobEdit,//编辑任务
     Demo3ViewPostGoodsPositionAdd,
     Demo3ViewPostGoodsPositionEdit
 } Demo3ViewType;

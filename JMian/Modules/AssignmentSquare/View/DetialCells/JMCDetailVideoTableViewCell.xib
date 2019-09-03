@@ -44,26 +44,26 @@
                             <action selector="playAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rrG-kr-I7Y"/>
                         </connections>
                     </button>
-                    <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xv9-af-Bc3">
-                        <rect key="frame" x="20" y="0.0" width="310" height="1"/>
+                    <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kd2-EU-T3h">
+                        <rect key="frame" x="20" y="281.5" width="310" height="1"/>
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="5ff-Is-k5V"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="FEh-fS-TKI"/>
+                            <constraint firstAttribute="height" constant="1" id="6xE-hB-OPR"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="8bJ-cU-ot2"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Ekr-Y6-FR8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="38B-gH-xEO"/>
-                    <constraint firstItem="xv9-af-Bc3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="OJt-yv-XRd"/>
+                    <constraint firstAttribute="trailing" secondItem="kd2-EU-T3h" secondAttribute="trailing" constant="20" id="GwD-E4-lR3"/>
+                    <constraint firstItem="kd2-EU-T3h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="MUv-EG-18s"/>
                     <constraint firstItem="LNp-VX-vdv" firstAttribute="leading" secondItem="Ekr-Y6-FR8" secondAttribute="leading" id="S3Z-Qg-kNL"/>
                     <constraint firstItem="jC3-Ga-88u" firstAttribute="centerX" secondItem="LNp-VX-vdv" secondAttribute="centerX" id="UpM-s9-GWC"/>
                     <constraint firstAttribute="bottom" secondItem="LNp-VX-vdv" secondAttribute="bottom" constant="27" id="YYx-ev-wTG"/>
                     <constraint firstItem="LNp-VX-vdv" firstAttribute="top" secondItem="Ekr-Y6-FR8" secondAttribute="bottom" constant="25" id="aov-1q-5Lx"/>
+                    <constraint firstAttribute="bottom" secondItem="kd2-EU-T3h" secondAttribute="bottom" id="b2Y-3s-XHD"/>
                     <constraint firstAttribute="trailing" secondItem="LNp-VX-vdv" secondAttribute="trailing" constant="20" id="c6a-E6-bCV"/>
                     <constraint firstItem="Ekr-Y6-FR8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="gWE-hc-ROa"/>
-                    <constraint firstItem="xv9-af-Bc3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="mJI-op-Nai"/>
-                    <constraint firstAttribute="trailing" secondItem="xv9-af-Bc3" secondAttribute="trailing" constant="20" id="zYG-Y2-gUP"/>
                     <constraint firstItem="jC3-Ga-88u" firstAttribute="centerY" secondItem="LNp-VX-vdv" secondAttribute="centerY" id="zbX-QX-FGs"/>
                 </constraints>
             </tableViewCellContentView>

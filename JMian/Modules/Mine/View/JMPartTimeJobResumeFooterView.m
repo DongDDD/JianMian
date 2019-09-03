@@ -115,12 +115,13 @@
             _placeHolder.text = @"例如\n职位要求、\n性别要求、\n工作时段等等   ";
             break;
         case JMPartTimeJobResumeFooterViewTypeGoodsDesc:
+            _titleLab.text = @"请填写产品详情描述";
             _placeHolder.text = @"例如\n品牌名称:\n品牌型号:\n产品颜色:\n生产企业等等";
-
+//            [self updateContentTextViewConstraints];
             break;
         case JMPartTimeJobResumeFooterViewTypeCommentDesc:
             _placeHolder.text = @"请填写评价";
-            
+           
             break;
         case JMPartTimeJobResumeFooterViewTypeSetting:
             _placeHolder.text = @"请提出你的宝贵意见";
@@ -142,6 +143,15 @@
 //    }
 }
 
+//-(void)updateContentTextViewConstraints{
+//    [_contentTextView mas_updateConstraints:^(MASConstraintMaker *make) {
+//        make.top.mas_equalTo(self).offset(50);
+////        make.left.mas_equalTo(self).offset(20);
+////        make.right.mas_equalTo(self).offset(-20);
+////        make.bottom.mas_equalTo(self).offset(-30);
+//    }];
+//
+//}
 
 -(void)setContent:(NSString *)content{
     _contentTextView.text = content;

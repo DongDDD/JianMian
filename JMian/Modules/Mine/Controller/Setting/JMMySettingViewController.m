@@ -145,7 +145,15 @@
              
              [_myWindowView setHidden:NO];
          }else{
+             JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+             NSString *titleStr;
+             if ([model.type isEqualToString:B_Type_UESR]) {
+                 titleStr = @"切换到个人";
+             }else{
+                 titleStr = @"切换到企业";
+             }
              _myWindowView = [[JMUserChangeWindowView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+             _myWindowView.titleLab.text = titleStr;
              _myWindowView.delegate = self;
              [[UIApplication sharedApplication].keyWindow addSubview:_myWindowView];
          }

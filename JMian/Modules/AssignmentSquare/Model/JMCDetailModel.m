@@ -23,6 +23,9 @@
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     
     return @{
+             @"favorites_id":@"favorites.favorite_id",
+             @"company_company_name":@"company.company_name",
+
              @"company_company_name":@"company.company_name",
              @"company_logo_path":@"company.logo_path",
              @"company_reputation":@"company.reputation",

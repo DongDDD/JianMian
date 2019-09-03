@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
                 abbreviation:(nullable NSString *)abbreviation
                    logo_path:(nullable NSString *)logo_path
                   video_path:(nullable NSString *)video_path
+                 video_cover:(nullable NSString *)video_cover
                    work_time:(nullable NSString *)work_time
                    work_week:(nullable NSString *)work_week
                type_label_id:(nullable NSString *)type_label_id

@@ -23,6 +23,9 @@
 #import "PositionDesiredViewController.h"
 #import "JMCityListViewController.h"
 #import "JMLabChooseBottomView.h"
+#import "JMHTTPManager+FectchSpecialInfo.h"
+#import "JMSpecialModel.h"
+#import "JMSpecialViewController.h"
 
 @interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate,JMCityListViewControllerDelegate,JMLabChooseBottomViewDelegate>
 
@@ -54,6 +57,8 @@
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 
 //@property (nonatomic, copy)NSString *job_lab_id;
+@property (weak, nonatomic) IBOutlet UIImageView *schoolImgView;
+@property(nonatomic,strong)JMSpecialModel *specialModel;
 
 @end
 
@@ -71,10 +76,11 @@ static NSString *cellIdent = @"cellIdent";
     self.page = 1;
     [self setTableView];
     [self initView];
-//    [self setJuhua];
-//    [self getData];
-    
-//    [self loginIM];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(schoolAction)];
+    [self.schoolImgView addGestureRecognizer:tap];
+    self.schoolImgView.userInteractionEnabled = YES;
+    [self getSpecialInfo];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -107,7 +113,7 @@ static NSString *cellIdent = @"cellIdent";
     // 马上进入刷新状态
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.headView.mas_bottom);
+        make.top.mas_equalTo(self.schoolImgView.mas_bottom).offset(10);
         make.bottom.mas_equalTo(self.view);
     }];
     
@@ -138,16 +144,10 @@ static NSString *cellIdent = @"cellIdent";
         make.height.mas_equalTo(37);
         make.left.right.mas_equalTo(self.view);
     }];
-
+    
 }
 #pragma mark - 菊花
-//-(void)setJuhua{
-//    self.progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-//    self.progressHUD.progress = 0.0;
-//    self.progressHUD.dimBackground = NO; //设置有遮罩
-//    [self.progressHUD showAnimated:YES]; //显示进度框
-//    [self.view addSubview:self.progressHUD];
-//}
+
 -(void)setupUpRefresh
 {
     MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
@@ -165,20 +165,8 @@ static NSString *cellIdent = @"cellIdent";
     self.tableView.mj_footer = footer;
     //     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
 }
-//-(void)setupUpRefresh
-//{
-//
-//
-//
-//    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
-//}
-#pragma mark - 刷新数据 -
 
-//-(void)loadNewData
-//{
-//
-//    [self getHomeListData];
-//}
+#pragma mark - 数据 -
 
 -(void)loadMoreBills
 {
@@ -195,29 +183,8 @@ static NSString *cellIdent = @"cellIdent";
   
 }
 
-#pragma mark - 点击事件 -
-
--(void)fanhui{
-    JMCityListViewController *vc = [[JMCityListViewController alloc]init];
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
-}
--(void)didSelectedCity_id:(NSString *)city_id{
-    
-    _city_id = city_id;
-    self.arrDate = [NSMutableArray array];
-    [self.tableView.mj_header beginRefreshing];
-
-}
-
--(void)rightAction{
-    NSLog(@"搜索");
-   
-  
-}
-
 -(void)getHomeListData{
-
+    
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
     NSArray *citys = [NSArray array];
@@ -240,70 +207,50 @@ static NSString *cellIdent = @"cellIdent";
         }
         [self.tableView reloadData];
         [self.progressHUD setHidden:YES];
-
+        
         [self.tableView.mj_footer endRefreshing];
         [self.tableView.mj_header endRefreshing];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
     
-    
-    
-    
-    
-//    [[JMHTTPManager sharedInstance]fetchWorkPaginateWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-////
-////        if (responsObject[@"data"]) {
-////
-////            self.arrDate = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-//////            [[JMVideoPlayManager sharedInstance].C_User_playArray removeAllObjects];
-////
-//////            [self getPlayerArray];
-////            [self.tableView.mj_header endRefreshing];
-////            [self.tableView reloadData];
-////            [self.tableView.mj_footer endRefreshing];
-////            [self.progressHUD setHidden:YES];
-////        }
-//        if (responsObject[@"data"]) {
-//            NSMutableArray *modelArray = [JMCompanyHomeModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-//
-//            if (modelArray.count > 0) {
-//
-//                [self.arrDate addObjectsFromArray:modelArray];
-//                //                [self getPlayerArray];
-//                [self.tableView reloadData];
-//                [self.tableView.mj_header endRefreshing];
-//                [self.tableView.mj_footer endRefreshing];
-//            }else{
-//                _isShowAllData = YES;
-//                [self.tableView.mj_footer setHidden:YES];
-//
-//            }
-//        }
-//
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, NSError  *error) {
-//
-//
-//    }];
-    
+}
+
+-(void)getSpecialInfo{
+    [[JMHTTPManager sharedInstance]getSpecialInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.specialModel =  [JMSpecialModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [self.schoolImgView sd_setImageWithURL:[NSURL URLWithString:self.specialModel.cover_path] placeholderImage:[UIImage imageNamed:@"NO_Data"]];
+
+        }
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 
 }
 
 
-//-(void)resetAction{
-//    [self.labschooseVC.view setHidden:YES];
-//    [self.tableView.mj_header beginRefreshing];
-//
-//}
-//
-//-(void)OKAction
-//{
-//    self.arrDate = [NSMutableArray array];
-//    [self.labschooseVC.view setHidden:YES];
-//    [self.tableView.mj_header beginRefreshing];
-//
-//
-//}
+#pragma mark - 点击事件 -
+
+-(void)fanhui{
+    JMCityListViewController *vc = [[JMCityListViewController alloc]init];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)didSelectedCity_id:(NSString *)city_id{
+    _city_id = city_id;
+    self.arrDate = [NSMutableArray array];
+    [self.tableView.mj_header beginRefreshing];
+
+}
+
+-(void)rightAction{
+    NSLog(@"搜索");
+}
+
 
 //要求筛选
 -(void)labChooseBottomLeftAction{
@@ -346,11 +293,15 @@ static NSString *cellIdent = @"cellIdent";
     [self.bgBtn setHidden:YES];
     [self.labChooseBottomView setHidden:YES];
     [self.labschooseVC.view setHidden:YES];
-    
-    
-    
 }
 
+-(void)schoolAction{
+    NSLog(@"asdf");
+    JMSpecialViewController *vc = [[JMSpecialViewController alloc]init];
+    vc.title = self.specialModel.title;
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
 //-(void)getPlayerArray
 //{
 //    dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -410,8 +361,7 @@ static NSString *cellIdent = @"cellIdent";
     [self.bgBtn setHidden:YES];
     [self.labChooseBottomView setHidden:YES];
     [self.labschooseVC.view setHidden:YES];
-    
-    
+   
 }
 
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{

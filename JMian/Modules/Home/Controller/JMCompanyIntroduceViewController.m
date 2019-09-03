@@ -205,15 +205,9 @@
         make.bottom.mas_equalTo(self.introducetView.contenLab.mas_bottom).offset(30);
         make.top.mas_equalTo(self.headerView.mas_bottom).mas_offset(self.titleView.frame.size.height);
     }];
-    
-    
 
 
 }
-
-
-
-
 
 
 #pragma mark - 公司环境图片 —— 轮播图

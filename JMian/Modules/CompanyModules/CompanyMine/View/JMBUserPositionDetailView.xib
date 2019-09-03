@@ -28,16 +28,18 @@
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="职位名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0v-9P-WZl">
-                            <rect key="frame" x="20" y="15" width="61.5" height="18"/>
+                            <rect key="frame" x="20" y="15" width="65" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="65" id="FWx-aP-3Uz"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入职位名称" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eqe-Ke-2rZ">
-                            <rect key="frame" x="228" y="-1" width="140" height="50"/>
+                            <rect key="frame" x="95" y="-1" width="299" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="5O5-bn-s42"/>
-                                <constraint firstAttribute="width" constant="140" id="ion-GX-sJ2"/>
                             </constraints>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -51,10 +53,11 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="8Fr-m4-bX2"/>
                         <constraint firstItem="l0v-9P-WZl" firstAttribute="centerY" secondItem="KLb-e1-he0" secondAttribute="centerY" id="9hI-ui-p3H"/>
-                        <constraint firstAttribute="trailing" secondItem="eqe-Ke-2rZ" secondAttribute="trailing" constant="46" id="LEi-eW-vOK"/>
                         <constraint firstItem="eqe-Ke-2rZ" firstAttribute="centerY" secondItem="KLb-e1-he0" secondAttribute="centerY" id="OKB-Nk-fzj"/>
                         <constraint firstItem="30k-hH-7LF" firstAttribute="leading" secondItem="KLb-e1-he0" secondAttribute="leading" constant="20" id="QY2-ND-3w8"/>
+                        <constraint firstItem="eqe-Ke-2rZ" firstAttribute="leading" secondItem="l0v-9P-WZl" secondAttribute="trailing" constant="10" id="gBE-xr-dyA"/>
                         <constraint firstAttribute="trailing" secondItem="30k-hH-7LF" secondAttribute="trailing" constant="20" id="h04-TD-nVd"/>
+                        <constraint firstAttribute="trailing" secondItem="eqe-Ke-2rZ" secondAttribute="trailing" constant="20" id="hCH-pA-M0s"/>
                         <constraint firstAttribute="bottom" secondItem="30k-hH-7LF" secondAttribute="bottom" id="jOe-Ns-dFc"/>
                         <constraint firstItem="l0v-9P-WZl" firstAttribute="leading" secondItem="KLb-e1-he0" secondAttribute="leading" constant="20" id="n3p-p7-uT3"/>
                     </constraints>
@@ -105,6 +108,7 @@
                         <constraint firstItem="gq8-Ee-tVu" firstAttribute="leading" secondItem="XV7-oL-8a3" secondAttribute="leading" constant="20" id="M7k-ru-pjN"/>
                         <constraint firstAttribute="trailing" secondItem="git-h7-GSu" secondAttribute="trailing" constant="20" id="SCP-cc-cOp"/>
                         <constraint firstItem="Cnh-Bi-APD" firstAttribute="leading" secondItem="XV7-oL-8a3" secondAttribute="leading" constant="20" id="Zdo-FG-IQ9"/>
+                        <constraint firstAttribute="trailing" secondItem="7eE-NA-kIu" secondAttribute="trailing" constant="46" id="blZ-jM-MtE"/>
                         <constraint firstItem="git-h7-GSu" firstAttribute="centerY" secondItem="XV7-oL-8a3" secondAttribute="centerY" id="hDY-BF-oZQ"/>
                         <constraint firstAttribute="height" constant="48" id="nfT-Y3-P3v"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="rBV-yN-LF0"/>
@@ -421,7 +425,6 @@
                 <constraint firstItem="QnA-f4-BGt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="pwY-id-Iyv"/>
                 <constraint firstItem="JGH-av-JWv" firstAttribute="top" secondItem="XV7-oL-8a3" secondAttribute="bottom" id="qUh-US-KMw"/>
                 <constraint firstItem="7eE-NA-kIu" firstAttribute="height" secondItem="eqe-Ke-2rZ" secondAttribute="height" id="tNP-t3-NdR"/>
-                <constraint firstItem="s7c-op-NcW" firstAttribute="trailing" secondItem="7eE-NA-kIu" secondAttribute="trailing" id="u6I-DT-XEz"/>
                 <constraint firstItem="XV7-oL-8a3" firstAttribute="top" secondItem="KLb-e1-he0" secondAttribute="bottom" id="v58-jB-Qbs"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

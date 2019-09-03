@@ -72,6 +72,8 @@
 
 //C端看公司的职位详情
 #define Info_Work_URL @"api/work/info"
+//活动专题
+#define Special_Activity_URL @"special/info/job_fair"
 
 //B端接口
 #define Create_Company_URL @"api/company/create"

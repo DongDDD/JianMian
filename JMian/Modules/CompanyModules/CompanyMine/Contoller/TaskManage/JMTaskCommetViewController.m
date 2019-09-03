@@ -80,6 +80,10 @@
     
 }
 
+-(void)doneClicked{
+    [_decriptionTextView.contentTextView resignFirstResponder];
+}
+
 #pragma mark - Getter
 
 - (JMPartTimeJobResumeFooterView *)decriptionTextView{
@@ -87,6 +91,7 @@
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
         _decriptionTextView.frame = CGRectMake(0, self.starLevelLab.frame.origin.y+self.starLevelLab.frame.size.height+16, SCREEN_WIDTH, 229);
         _decriptionTextView.delegate = self;
+        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
         [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeCommentDesc];
         //        _decriptionTextView.contentTextView.delegate = self;
         

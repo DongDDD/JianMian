@@ -16,6 +16,7 @@
                 <outlet property="choosePositionBtn" destination="kXY-bM-hPm" id="BDe-NC-Pak"/>
                 <outlet property="companyRequireBtn" destination="bHz-sO-2z9" id="8ZJ-aj-DNV"/>
                 <outlet property="headView" destination="sga-NA-PAh" id="zYn-uy-eo3"/>
+                <outlet property="schoolImgView" destination="YmF-zu-uoi" id="bh7-Z9-wHO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -136,10 +137,20 @@
                         <constraint firstItem="yJE-p8-7KY" firstAttribute="top" secondItem="sga-NA-PAh" secondAttribute="top" id="tJD-3E-4iS"/>
                     </constraints>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YmF-zu-uoi">
+                    <rect key="frame" x="0.0" y="44" width="375" height="0.0"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" id="uCS-UT-bZp"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="YmF-zu-uoi" firstAttribute="top" secondItem="sga-NA-PAh" secondAttribute="bottom" id="7Ws-9P-LKf"/>
+                <constraint firstItem="YmF-zu-uoi" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="HTm-Cd-J0r"/>
                 <constraint firstItem="kXY-bM-hPm" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="RAu-MM-W1m"/>
+                <constraint firstItem="YmF-zu-uoi" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="d8i-vC-3V9"/>
                 <constraint firstItem="sga-NA-PAh" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="fyA-l9-de2"/>
                 <constraint firstItem="sga-NA-PAh" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="mhm-Mo-3vg"/>
                 <constraint firstItem="sga-NA-PAh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="vBT-AE-fej"/>

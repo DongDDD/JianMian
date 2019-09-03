@@ -34,6 +34,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *videoImg;
 @property(nonatomic,copy) NSString *videoURL;
 @property(nonatomic,copy) NSString *imgURL;
+@property(nonatomic,copy) NSString *video_cover;
+
 
 
 
@@ -69,6 +71,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
+@property (weak, nonatomic) IBOutlet UILabel *videoStatus;
 
 @end
 
@@ -159,7 +162,7 @@
 -(void)uploadCompanyWithImages:(NSArray *)images{
     
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:userModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:nil video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:images label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:userModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:nil video_path:nil video_cover:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:images label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片上传成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -176,7 +179,7 @@
     NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
     
     [self.progressHUD setHidden:NO];
-    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:_userInfoModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:_imgURL video_path:self.videoURL work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:self.facingBtn.titleLabel.text employee:self.employBtn.titleLabel.text address:self.companyAdress.titleLabel.text url:nil longitude:longitude latitude:latitude description:self.companyDecriptionBtn.titleLabel.text image_path:self.addImage_paths label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:_userInfoModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:_imgURL video_path:self.videoURL video_cover:_video_cover work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:self.facingBtn.titleLabel.text employee:self.employBtn.titleLabel.text address:self.companyAdress.titleLabel.text url:nil longitude:longitude latitude:latitude description:self.companyDecriptionBtn.titleLabel.text image_path:self.addImage_paths label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"公司信息更新成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -211,28 +214,32 @@
 -(void)initView{
     [self.headerImg sd_setImageWithURL:[NSURL URLWithString:self.model.logo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.companyNameLab.text = self.model.company_name;
-    //公司图片赋值
     
    //获取视频路径
-    self.videoURL = [self getVideoPath];
-    if (self.videoURL != nil) {
-        NSURL *URL = [NSURL URLWithString:self.videoURL];
-        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-            
-            UIImage *image = [self thumbnailImageForVideo:URL atTime:1];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.videoImg.image = image;
-                //    self.headerView.playBtn.hidden = NO;
-                
-            });
-        });
-        
+    if (self.model.video.count > 0) {
+        JMFilesModel *vModel = self.model.video[0];
+        self.videoURL = vModel.files_file_path;
+        if ([vModel.status isEqualToString:@"0"]) {
+            self.videoStatus.text = @"审核中...";
+        }else if ([vModel.status isEqualToString:@"1"]){
+            self.videoStatus.text = [NSString stringWithFormat:@"审核不通过%@",vModel.denial_reason];
+            self.videoStatus.textColor = [UIColor redColor];
+        }else if ([vModel.status isEqualToString:@"2"]) {
+            self.videoStatus.text = @"审核已通过";
+        }
+        //视频封面
+        [self.videoImg sd_setImageWithURL:[NSURL URLWithString:vModel.file_cover] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+  
+        if (self.videoURL.length > 0 && vModel.file_cover.length == 0) {
+            [self showAlertSimpleTips:@"提示" message:@"请更新最新版本后重新上传视频" btnTitle:@"好的"];
+        }
+//        [UIApplication sharedApplication] openURL:[NSURL URLWithSring:@"网址"]];
     }else{
+        //没上传视频
         [self.playBtn setHidden:YES];
         self.videoImg.image = [UIImage imageNamed:@"NOvideos"];
         [self.leftBtn setTitle:@"拍摄视频" forState:UIControlStateNormal];
-         [self.rightBtn setTitle:@"上传视频" forState:UIControlStateNormal];
+        [self.rightBtn setTitle:@"上传视频" forState:UIControlStateNormal];
     }
     [self.companyAdress setTitle:self.model.address forState:UIControlStateNormal];
     [self.industryBtn setTitle:self.model.industry_name forState:UIControlStateNormal];
@@ -247,15 +254,39 @@
 
 }
 
--(NSString *)getVideoPath{
-    if (self.model.files.count > 0) {
-        for (JMFilesModel *filesModel in self.model.files) {
-            if ([filesModel.files_type isEqualToString:@"1"]) {
-                return filesModel.files_file_path;
-            }
+//-(NSString *)getVideoPath{
+//    if (self.model.files.count > 0) {
+//        for (JMFilesModel *filesModel in self.model.files) {
+//            if ([filesModel.files_type isEqualToString:@"1"]) {
+//                return filesModel.files_file_path;
+//            }
+//        }
+//    }
+//    return nil;
+//}
+
+
+-(void)upload_Img:(UIImage *)img{
+    NSArray *array = @[img];
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+            _video_cover = responsObject[@"data"][0];
+            
         }
-    }
-    return nil;
+        
+        
+        //        if(responsObject[@"data"]){
+        //            NSArray *urlArray = responsObject[@"data"];
+        //            _imageUrl = urlArray[0];
+        //        }
+        
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
 }
 #pragma mark - 点击事件
 //- 保存资料
@@ -754,7 +785,6 @@
 
 
 -(void)fetchmyVideo{
-    
     NSString * path = [NSString stringWithFormat:@"%@", self.videoURL ];
     //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
@@ -763,9 +793,7 @@
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
-    
-    
-    
+   
 }
 
 /**
@@ -814,7 +842,8 @@
                          //                         self.bottomLab.text = [NSString stringWithFormat:@"%.2f s, 压缩后大小为：%.2f M",length,size];
                          NSLog(@"%.2f s %.2f M",length,size);
                          [self centerFrameImageWithVideoURL:outputURL completion:^(UIImage *image) {
-                             self.videoImg.image = image;
+                             [self upload_Img:image];
+//                             self.videoImg.image = image;
                              
                          }];
                      });
@@ -880,43 +909,44 @@
         }
     }];
 }
+
 #pragma mark -同步获取帧图片
 // Get the video's center frame as video poster image
-- (UIImage *)frameImageFromVideoURL:(NSURL *)videoURL {
-    // result
-    UIImage *image = nil;
-    
-    // AVAssetImageGenerator
-    AVAsset *asset = [AVAsset assetWithURL:videoURL];
-    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
-    imageGenerator.appliesPreferredTrackTransform = YES;
-    
-    // calculate the midpoint time of video
-    Float64 duration = CMTimeGetSeconds([asset duration]);
-    // 取某个帧的时间，参数一表示哪个时间（秒），参数二表示每秒多少帧
-    // 通常来说，600是一个常用的公共参数，苹果有说明:
-    // 24 frames per second (fps) for film, 30 fps for NTSC (used for TV in North America and
-    // Japan), and 25 fps for PAL (used for TV in Europe).
-    // Using a timescale of 600, you can exactly represent any number of frames in these systems
-    CMTime midpoint = CMTimeMakeWithSeconds(duration / 2.0, 600);
-    
-    // get the image from
-    NSError *error = nil;
-    CMTime actualTime;
-    // Returns a CFRetained CGImageRef for an asset at or near the specified time.
-    // So we should mannully release it
-    CGImageRef centerFrameImage = [imageGenerator copyCGImageAtTime:midpoint
-                                                         actualTime:&actualTime
-                                                              error:&error];
-    
-    if (centerFrameImage != NULL) {
-        image = [[UIImage alloc] initWithCGImage:centerFrameImage];
-        // Release the CFRetained image
-        CGImageRelease(centerFrameImage);
-    }
-    
-    return image;
-}
+//- (UIImage *)frameImageFromVideoURL:(NSURL *)videoURL {
+//    // result
+//    UIImage *image = nil;
+//
+//    // AVAssetImageGenerator
+//    AVAsset *asset = [AVAsset assetWithURL:videoURL];
+//    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+//    imageGenerator.appliesPreferredTrackTransform = YES;
+//
+//    // calculate the midpoint time of video
+//    Float64 duration = CMTimeGetSeconds([asset duration]);
+//    // 取某个帧的时间，参数一表示哪个时间（秒），参数二表示每秒多少帧
+//    // 通常来说，600是一个常用的公共参数，苹果有说明:
+//    // 24 frames per second (fps) for film, 30 fps for NTSC (used for TV in North America and
+//    // Japan), and 25 fps for PAL (used for TV in Europe).
+//    // Using a timescale of 600, you can exactly represent any number of frames in these systems
+//    CMTime midpoint = CMTimeMakeWithSeconds(duration / 2.0, 600);
+//
+//    // get the image from
+//    NSError *error = nil;
+//    CMTime actualTime;
+//    // Returns a CFRetained CGImageRef for an asset at or near the specified time.
+//    // So we should mannully release it
+//    CGImageRef centerFrameImage = [imageGenerator copyCGImageAtTime:midpoint
+//                                                         actualTime:&actualTime
+//                                                              error:&error];
+//
+//    if (centerFrameImage != NULL) {
+//        image = [[UIImage alloc] initWithCGImage:centerFrameImage];
+//        // Release the CFRetained image
+//        CGImageRelease(centerFrameImage);
+//    }
+//
+//    return image;
+//}
 
 
 

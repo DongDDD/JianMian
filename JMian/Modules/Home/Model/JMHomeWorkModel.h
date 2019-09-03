@@ -13,25 +13,25 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMHomeWorkModel : NSObject
 @property (nonatomic, copy) NSString *share_url;
 
-@property (nonatomic, strong) NSString *work_id;
-@property (nonatomic, strong) NSString *company_id;
-@property (nonatomic, strong) NSString *user_id;
-@property (nonatomic, strong) NSString *job_label_id;
+@property (nonatomic, copy) NSString *work_id;
+@property (nonatomic, copy) NSString *company_id;
+@property (nonatomic, copy) NSString *user_id;
+@property (nonatomic, copy) NSString *job_label_id;
 @property (nonatomic, copy) NSString *work_label_label_id;
 @property (nonatomic, copy) NSString *work_label_id;
 @property (nonatomic, copy) NSString *work_label_name;
 @property (nonatomic, copy) NSString *work_name;
-@property (nonatomic, strong) NSString *education;
-@property (nonatomic, strong) NSString *work_experience_min;
-@property (nonatomic, strong) NSString *work_experience_max;
-@property (nonatomic, strong) NSString *salary_min;
-@property (nonatomic, strong) NSString *salary_max;
+@property (nonatomic, copy) NSString *education;
+@property (nonatomic, copy) NSString *work_experience_min;
+@property (nonatomic, copy) NSString *work_experience_max;
+@property (nonatomic, copy) NSString *salary_min;
+@property (nonatomic, copy) NSString *salary_max;
 @property (nonatomic, copy) NSString *Description;
-@property (nonatomic, strong) NSString *status;
+@property (nonatomic, copy) NSString *status;
 
-@property (nonatomic, strong) NSString *address;
-@property (nonatomic, strong) NSString *latitude;
-@property (nonatomic, strong) NSString *longitude;
+@property (nonatomic, copy) NSString *address;
+@property (nonatomic, copy) NSString *latitude;
+@property (nonatomic, copy) NSString *longitude;
 
 @property (nonatomic, copy) NSString *user_avatar;
 @property (nonatomic, copy) NSString *user_nickname;

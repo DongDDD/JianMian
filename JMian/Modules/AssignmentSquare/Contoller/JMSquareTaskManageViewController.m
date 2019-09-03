@@ -12,7 +12,7 @@
 @interface JMSquareTaskManageViewController ()<JMPartTimeJobResumeViewControllerDelegate>
 
 @property(nonatomic, strong)JMPartTimeJobResumeViewController *partTimeJobHomeListVC;
-@property (strong, nonatomic) UITableView *tableView;
+//@property (strong, nonatomic) UITableView *tableView;
 
 @end
 
@@ -32,27 +32,27 @@
 
 
 
-- (UITableView *)tableView {
-    if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
-        _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
-        _tableView.separatorStyle = NO;
-        _tableView.delegate = self;
-        _tableView.dataSource = self;
-        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
-//        if (_viewType == JMPartTimeJobTypeManage) {
-//            _tableView.sectionHeaderHeight = 0;
-//        }else if(_viewType == JMPartTimeJobTypeResume){
-//            _tableView.sectionHeaderHeight = 43;
-//        }else if(_viewType == JMPartTimeJobTypeHome){
-//            _tableView.sectionHeaderHeight = 0;
-//        }
-        _tableView.sectionFooterHeight = 0;
-        [_tableView registerNib:[UINib nibWithNibName:@"JMPostJobHomeTableViewCell" bundle:nil] forCellReuseIdentifier:@""];
-        
-    }
-    return _tableView;
-}
+//- (UITableView *)tableView {
+//    if (!_tableView) {
+//        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0,SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
+//        _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
+//        _tableView.separatorStyle = NO;
+//        _tableView.delegate = self;
+//        _tableView.dataSource = self;
+//        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+////        if (_viewType == JMPartTimeJobTypeManage) {
+////            _tableView.sectionHeaderHeight = 0;
+////        }else if(_viewType == JMPartTimeJobTypeResume){
+////            _tableView.sectionHeaderHeight = 43;
+////        }else if(_viewType == JMPartTimeJobTypeHome){
+////            _tableView.sectionHeaderHeight = 0;
+////        }
+//        _tableView.sectionFooterHeight = 0;
+//        [_tableView registerNib:[UINib nibWithNibName:@"JMPostJobHomeTableViewCell" bundle:nil] forCellReuseIdentifier:@""];
+//        
+//    }
+//    return _tableView;
+//}
 
 //兼职职位
 -(JMPartTimeJobResumeViewController *)partTimeJobHomeListVC{

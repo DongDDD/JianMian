@@ -51,6 +51,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setRightBtnImageViewName:(NSString *)imageName imageNameRight2:(NSString *)imageNameRight2;
 
+-(void)youkeStatus;//判断游客模式
+
 - (void)fanhui;
 
 -(void)rightAction;

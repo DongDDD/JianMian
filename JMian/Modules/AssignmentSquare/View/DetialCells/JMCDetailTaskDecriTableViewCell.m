@@ -29,6 +29,7 @@ NSString *const JMCDetailTaskDecriTableViewCellIdentifier = @"JMCDetailTaskDecri
 
 -(void)setModel:(JMCDetailModel *)model{
     self.taskTitleLab.text = model.task_title;
+    [self.taskTitleLab sizeToFit];
     self.paymentMoney.text = model.payment_money;
     if ([model.payment_method isEqualToString:@"3"]) {
         self.paymentMethod.text = @"完工结";
