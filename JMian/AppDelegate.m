@@ -56,7 +56,7 @@
     
     //向微信注册
     [WXApi registerApp:@"wxb42b10e7d84612a9"];
-//    [[TIMManager sharedInstance] addMessageListener:self];
+    [[TIMManager sharedInstance] addMessageListener:self];
      //用户状态变更
 //    TIMUserConfig *userConfig = [[TIMUserConfig alloc] init];
 //    userConfig.refreshListener = self;
@@ -68,6 +68,7 @@
 //    [[TIMManager sharedInstance] setUserConfig:userConfig];
 //    [[TIMManager sharedInstance] addMessageListener:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserStatus:) name:TUIKitNotification_TIMUserStatusListener object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
     
     
     //MP3播放器
@@ -372,11 +373,10 @@
 //        [self initLocalNotification];
     }
     
-      
-    [[NSNotificationCenter defaultCenter] postNotificationName:TUIKitNotification_TIMMessageListener object:msgs];
-
     NSLog(@"onNewMessage");
-
+    if (msgs.count == 0) {
+        return;
+    }
     TIMMessage *msg = msgs[0];
     TIMElem * elem = [msg getElem:0];
     if ([elem isKindOfClass:[TIMCustomElem class]]) {

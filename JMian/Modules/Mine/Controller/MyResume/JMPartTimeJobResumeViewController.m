@@ -387,7 +387,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (_viewType == JMPartTimeJobTypeManage || _viewType == JMPartTimeJobTypeHome) {
+    if (_viewType == JMPartTimeJobTypeManage || _viewType == JMPartTimeJobTypeHome || _viewType == JMPartTimeJobTypeHistory) {
         return 120;
     }else{
         return 78;
@@ -440,11 +440,20 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 -(void)didClickCopyActionWithTaskListCellData:(JMTaskListCellData *)taskListCellData{
-
-    JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
-    vc.viewType = JMBUserPostSaleJobViewTypeHistory;
-    vc.task_id = taskListCellData.task_id;
-    [self.navigationController pushViewController:vc animated:YES];
+    _viewType = JMPartTimeJobTypeHistory;
+    if ([taskListCellData.payment_method isEqualToString: @"1"]) {
+        //网络销售
+        [self gotoBUserPostPositionVC_task_id:taskListCellData.task_id];
+        
+    }else{
+        //其他兼职
+        [self gotoBUserPostPartTimeJobVC_task_id:taskListCellData.task_id];
+        
+    }
+//    JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+//    vc.viewType = JMBUserPostSaleJobViewTypeHistory;
+//    vc.task_id = taskListCellData.task_id;
+//    [self.navigationController pushViewController:vc animated:YES];
 
 }
 
