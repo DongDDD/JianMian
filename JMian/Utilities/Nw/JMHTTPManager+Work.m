@@ -61,11 +61,11 @@
 - (void)postCreateWorkWith_city_id:(NSString *)city_id
                      work_label_id:(NSString *)work_label_id
                          work_name:(NSString *)work_name
-                         education:(NSNumber *)education
-               work_experience_min:(NSNumber *)work_experience_min
-               work_experience_max:(NSNumber *)work_experience_max
-                        salary_min:(NSNumber *)salary_min
-                        salary_max:(NSNumber *)salary_max
+                         education:(NSString *)education
+               work_experience_min:(NSString *)work_experience_min
+               work_experience_max:(NSString *)work_experience_max
+                        salary_min:(NSString *)salary_min
+                        salary_max:(NSString *)salary_max
                        description:(NSString *)description
                            address:(NSString * )address
                          longitude:(NSString *)longitude
@@ -98,11 +98,11 @@
                  city_id:(NSString *)city_id
             work_label_id:(NSString *)work_label_id
                 work_name:(NSString *)work_name
-                education:(NSNumber *)education
-      work_experience_min:(NSNumber *)work_experience_min
-      work_experience_max:(NSNumber *)work_experience_max
-               salary_min:(NSNumber *)salary_min
-               salary_max:(NSNumber *)salary_max
+                education:(NSString *)education
+      work_experience_min:(NSString *)work_experience_min
+      work_experience_max:(NSString *)work_experience_max
+               salary_min:(NSString *)salary_min
+               salary_max:(NSString *)salary_max
               description:(NSString *)description
                   address:(NSString * )address
                 longitude:(NSString *)longitude

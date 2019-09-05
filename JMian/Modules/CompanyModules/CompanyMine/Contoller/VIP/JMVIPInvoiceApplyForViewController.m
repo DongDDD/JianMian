@@ -18,7 +18,7 @@
 //#import "WXApi.h"
 #import "JMProtocalWebViewController.h"
 #import <StoreKit/StoreKit.h>
-
+#import "JMHTTPManager+ApplePayNotify.h"
 
 @interface JMVIPInvoiceApplyForViewController ()<UITableViewDelegate,UITableViewDataSource,JMMakeOutBillViewDelegate,JMInvoiceHeaderViewDelegate,UITextFieldDelegate,JMVIPInvoicePayTableViewCellDelegate,SKPaymentTransactionObserver,SKProductsRequestDelegate>
 
@@ -59,13 +59,13 @@ static NSString *cellIdent = @"payCellIdent";
     [self initView];
 //    _imagArr = @[@"vvip"];
 //    _labArr = @[@"购买一年VIP"];
+
     [self getInvoiceInfo];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [[SKPaymentQueue defaultQueue] addTransactionObserver:self];
-
 }
     
 -(void)viewWillDisappear:(BOOL)animated{
@@ -116,7 +116,6 @@ static NSString *cellIdent = @"payCellIdent";
                     //                    [self setInvoiceValuesWithModel:_invoiceModel];
                     [self didClickBillActionWithTag:1000];
                     
-                    
                 }else{
                     [self didClickBillActionWithTag:1001];
                     
@@ -130,24 +129,31 @@ static NSString *cellIdent = @"payCellIdent";
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-    
-    
+
 }
 
 - (void)getPayInfoData
 {
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     [self showProgressHUD_view:self.view];
-    [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:userModel.user_id  scenes:@"app" type:@"3" mode:@"3" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:userModel.user_id  scenes:@"app" type:@"3" mode:@"1" is_invoice:_is_invoice successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {            
             self.orderPaymentModel = [JMOrderPaymentModel mj_objectWithKeyValues:responsObject[@"data"]];
-            if ([self.payName isEqualToString:@"微信DEMI001"]) {
-                [self wechatPayWithModel:_orderPaymentModel];
-            }else if ([self.payName isEqualToString:@"宝宝"]) {
-                
+//            if ([self.payName isEqualToString:@"微信DEMI001"]) {
+//                [self wechatPayWithModel:_orderPaymentModel];
+//            }else if ([self.payName isEqualToString:@"宝宝"]) {
+//            }
+            
+            if ([SKPaymentQueue canMakePayments]) {
+                NSArray *arr = @[@"com.hanyue.JianMianTest6"];
+                NSSet * set = [NSSet setWithArray:arr];
+                SKProductsRequest * request = [[SKProductsRequest alloc] initWithProductIdentifiers:set];
+                request.delegate = self;
+                [request start];
+            }else{
+                NSLog(@"失败,用户禁止应用内付费购买");
             }
-
-            [self hiddenHUD];
+//            [self hiddenHUD];
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -172,6 +178,18 @@ static NSString *cellIdent = @"payCellIdent";
     
 }
 
+
+-(void)applePayNotifyWithReceipt_data:(NSString *)receipt_data{
+    [self showHUD];
+    [[JMHTTPManager sharedInstance]fetchAppllePayNotifyWithReceipt_data:receipt_data total_amount:@"1998.00" out_trade_no:self.orderPaymentModel.serial_no SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self hiddenHUD];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
 
 #pragma mark - actoin
 -(void)protocalAction{
@@ -198,18 +216,12 @@ static NSString *cellIdent = @"payCellIdent";
 //    request.delegate = self;
 //    //5. 开始请求可销售的商品
 //    [request start];
-    
-    if ([SKPaymentQueue canMakePayments]) {
-        NSArray *arr = @[@"com.hanyue.JianMianTest6"];
-        NSSet * set = [NSSet setWithArray:arr];
-        SKProductsRequest * request = [[SKProductsRequest alloc] initWithProductIdentifiers:set];
-        request.delegate = self;
-        [request start];
-     }else{
-        NSLog(@"失败,用户禁止应用内付费购买");
-    }
+    [self getPayInfoData];//获取订单信息
+ 
     
 }
+
+#pragma mark - ApplePayDelegate
 
     /**
      代理方法
@@ -242,6 +254,7 @@ static NSString *cellIdent = @"payCellIdent";
      SKPaymentTransactionStateDeferred//用户未决定最终状态(已经有票据)
 */
     //transactions是交易队列里面所有的交易
+    
     for (SKPaymentTransaction *transaction in transactions) {
         switch (transaction.transactionState) {
             case SKPaymentTransactionStatePurchasing:
@@ -270,34 +283,21 @@ static NSString *cellIdent = @"payCellIdent";
             break;
         }
     }
+    [self hiddenHUD];
+
 }
     
 //交易完成后的操作
 -(void)completeTransaction:(SKPaymentTransaction *)transaction{
     
-//    NSString *productIdentifier = transaction.payment.productIdentifier;
-//    NSData *transactionReceiptData = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
-//    NSString *receipt = [transactionReceiptData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    
     NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
-    // 从沙盒中获取到购买凭据
+//    // 从沙盒中获取到购买凭据
     NSData *receiptData = [NSData dataWithContentsOfURL:receiptURL];
 
-    NSLog(@"向自己的服务器验证购买凭证receiptData%@",receiptData);
-
     NSString *encodeStr = [receiptData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    NSString *receipt_data = [receiptData base64EncodedStringWithOptions:0];
-    NSString *StrData = [self toArrayOrNSDictionary:receiptData];
-    NSLog(@"向自己的服务器验证购买凭证StrData%@",StrData);
-    NSLog(@"向自己的服务器验证购买凭证receipt_data%@",receipt_data);
+    NSLog(@"encodeStr_%@",encodeStr);
 
-    NSLog(@"向自己的服务器验证购买凭证%@",encodeStr);
-
-//    if ([productIdentifier length]>0) {
-//        //向自己的服务器验证购买凭证
-//        NSLog(@"向自己的服务器验证购买凭证%@",receipt);
-//    }
-    
+    [self applePayNotifyWithReceipt_data:encodeStr];
     //移除transaction购买操作
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }
@@ -308,8 +308,10 @@ static NSString *cellIdent = @"payCellIdent";
     if (transaction.error.code != SKErrorPaymentCancelled) {
         NSLog(@"购买失败");
     }else{
+        
         NSLog(@"用户取消交易");
     }
+    [self hiddenHUD];
     //移除transaction购买操作
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 }

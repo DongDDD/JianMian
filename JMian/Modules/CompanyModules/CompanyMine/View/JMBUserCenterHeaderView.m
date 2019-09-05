@@ -34,18 +34,11 @@
     //    _barBackgroundImageView = [[UIImageView alloc]init];
     //    _barBackgroundImageView.image = [UIImage imageNamed:@"mine_peijing"];
     //    [self addSubview:_barBackgroundImageView];
-    _VIPImg = [[UIImageView alloc]init];
-    JMVersionModel *model = [JMVersionManager getVersoinInfo];
-    if ([model.test isEqualToString:@"1"]) {
-        _VIPImg.image = [UIImage imageNamed:@""];
-
-    }else{
-        _VIPImg.image = [UIImage imageNamed:@"vvip"];
-    
-    }
+    _VIPImg = [[UIImageView alloc]init];  
+    _VIPImg.image = [UIImage imageNamed:@"vvip"];
+   
     [_VIPImg setHidden:YES];
-//    [self addSubview:_VIPImg];
-
+    [self addSubview:_VIPImg];
     
     _titleLab = [[UILabel alloc]init];
     _titleLab.text = @"企业用户";
@@ -73,11 +66,11 @@
         make.size.mas_equalTo(CGSizeMake(80, 50));
     }];
     
-//    [_VIPImg mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.left.mas_equalTo(self).offset(20);
-//        make.centerY.mas_equalTo(_titleLab);
-//        make.size.mas_equalTo(CGSizeMake(38, 17));
-//    }];
+    [_VIPImg mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(self).offset(20);
+        make.centerY.mas_equalTo(_titleLab);
+        make.size.mas_equalTo(CGSizeMake(38, 17));
+    }];
     
     
 }

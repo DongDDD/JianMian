@@ -34,7 +34,7 @@
 #import "JMBMineMoreFunctionView.h"
 #import "JMShareView.h"
 #import "JMWalletViewController.h"
-//#import "JMVIPViewController.h"
+#import "JMVIPViewController.h"
 #import "JMMyOrderListViewController.h"
 #import "WXApi.h"
 
@@ -124,15 +124,14 @@
     vc.title = @"任务管理";
     [vc setMyIndex:0];
     [_BUserCenterHeaderSubView.taskBadgeView setHidden:YES];
-    
     [self.navigationController pushViewController:vc animated:YES];
     
 }
 
 -(void)BVIPClick{
 
-//    JMVIPViewController *vc = [[JMVIPViewController alloc]init];
-//    [self.navigationController pushViewController:vc animated:YES];
+    JMVIPViewController *vc = [[JMVIPViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 

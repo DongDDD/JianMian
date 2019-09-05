@@ -305,7 +305,7 @@
 -(void)btnAction{
     if ([_status isEqualToString:@"0"]) {
         JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
-        vc.homeworkModel = self.myModel;
+        vc.work_id = self.myModel.work_id;
         vc.viewType = JMPostNewJobViewTypeEdit;
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -342,7 +342,7 @@
         
     }else if ([_status isEqualToString:@"1"]) {
         JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
-        vc.homeworkModel = self.myModel;
+        vc.work_id = self.myModel.work_id;
         vc.viewType = JMPostNewJobViewTypeEdit;
         [self.navigationController pushViewController:vc animated:YES];
         

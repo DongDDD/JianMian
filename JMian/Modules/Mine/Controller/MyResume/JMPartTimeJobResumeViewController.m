@@ -438,6 +438,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     [self.postTypeChooseView setHidden:YES];
     [self.chooseViewBgView setHidden:YES];
 }
+
 -(void)didClickCopyActionWithTaskListCellData:(JMTaskListCellData *)taskListCellData{
 
     JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
@@ -445,9 +446,6 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     vc.task_id = taskListCellData.task_id;
     [self.navigationController pushViewController:vc animated:YES];
 
-}
--(void)didClickCopyActionWithModel:(JMHomeWorkModel *)model{
-    
 }
 
 #pragma mark - Getter

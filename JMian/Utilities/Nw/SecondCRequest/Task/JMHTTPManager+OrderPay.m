@@ -11,10 +11,10 @@
 @implementation JMHTTPManager (OrderPay)
 
 - (void)fectchOrderPaymentInfoWithOrder_id:(NSString *)order_id
-                              scenes:(NSString *)scenes
-                                type:(NSString *)type
-                                mode:(NSString *)mode
-
+                                    scenes:(NSString *)scenes
+                                      type:(NSString *)type
+                                      mode:(NSString *)mode
+                                is_invoice:(NSString *)is_invoice
                          successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
 
     NSDictionary *dic =  @{
@@ -22,6 +22,8 @@
                            @"scenes":scenes,
                            @"type":type,
                            @"mode":mode,
+                           @"is_invoice":is_invoice,
+
                            };
     
     

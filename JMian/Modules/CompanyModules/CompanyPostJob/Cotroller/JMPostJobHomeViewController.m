@@ -16,9 +16,9 @@
 #import "JMHomeWorkModel.h"
 #import "JMPostJobHomeTableViewCell.h"
 #import "JobDetailsViewController.h"
+#import "JMPostTaskBottomView.h"
 
-
-@interface JMPostJobHomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMPostJobHomeTableViewCellDelegate>
+@interface JMPostJobHomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMPostJobHomeTableViewCellDelegate,JMPostTaskBottomViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *breakBGView;
 //@property (nonatomic, strong) JMTitlesView *titleView;
@@ -31,7 +31,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipsLab;
 @property (weak, nonatomic) IBOutlet UIButton *postOrIdentityBtn;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
-
+@property (nonatomic, strong) JMPostTaskBottomView *postTaskBottomView;
 @end
 
 static NSString *cellIdent = @"cellIdent";
@@ -44,25 +44,10 @@ static NSString *cellIdent = @"cellIdent";
     // Do any additional setup after loading the view from its nib.
 
     [self setTitle:@"职位管理"];
-//    [self.view addSubview:self.progressHUD];
     _status = nil;
-//    [self.view addSubview:self.titleView];
-//    [self getUserStatus];
+    
     [self setupDownRefresh];
-//    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-//    model = [JMUserInfoManager getUserInfo];
-//    if ([model.card_status isEqualToString:Card_PassIdentify]) {//“3”代表已通过实名认证，通过才能发布职位
-//
-//        [self getListData];
-//        [self setRightBtnTextName:@"发布职位"];
-//        self.tableView.hidden = YES;
-//
-//    }else if ([model.card_status isEqualToString:Card_NOIdentify]){
-//
-//        self.breakBGView.hidden = NO;
-//        self.tableView.hidden = YES;
-//    }
-  
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -70,78 +55,20 @@ static NSString *cellIdent = @"cellIdent";
     self.tableView.hidden = YES;
     self.breakBGView.hidden = YES;
     [self.tableView.mj_header beginRefreshing];
-//    [self jugdeCard_status];
-
-//    [self getUserInfo];
-    
+    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.postTaskBottomView];
+    [self.postTaskBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+        make.height.mas_equalTo(64);
+    }];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.mas_topLayoutGuideTop);
+        make.bottom.mas_equalTo(self.postTaskBottomView.mas_top);
+        make.left.and.right.mas_equalTo(self.view);
+    }];
 
 }
-
-//-(void)jugdeCard_status{
-//
-//    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-//    model = [JMUserInfoManager getUserInfo];
-//    if ([model.card_status isEqualToString:Card_PassIdentify]) {//“3”代表已通过实名认证，通过才能发布职位
-//
-//        [self getListData];
-//        [self setRightBtnTextName:@"发布职位"];
-//
-//    }else if ([model.card_status isEqualToString:Card_NOIdentify]){
-//
-//        self.breakBGView.hidden = NO;
-//    }
-//    if (self.dataArray.count == 0) {
-//        self.tableView.hidden = YES;
-//
-//    }
-//
-//
-//}
-
-
-//-(void)getUserStatus{
-//
-//    [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//
-//        JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-//        [JMUserInfoManager saveUserInfo:userInfo];
-//
-//        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-//        model = [JMUserInfoManager getUserInfo];
-//
-//        if ([model.card_status isEqualToString:Card_PassIdentify]) {
-////            [self setRightBtnTextName:@"发布职位"];
-//            [self.tableView.mj_header beginRefreshing];
-////            [self setupDownRefresh];
-////            [self getListData];
-//
-//        }else if ([model.card_status isEqualToString:Card_WaitIdentify]){
-//
-//            self.breakBGView.hidden = NO;
-//            [self.postOrIdentityBtn setHidden:YES];
-//            [self setRightBtnTextName:@""];
-//            self.tipsLab.text = @"实名认证审核中\n发布岗位需实名认证";
-//
-//        }else if ([model.card_status isEqualToString:Card_NOIdentify]){
-//            [self.postOrIdentityBtn setTitle:@"去实名认证" forState:UIControlStateNormal];
-////            [self setRightBtnTextName:@"去实名认证"];
-//            self.breakBGView.hidden = NO;
-//            self.tipsLab.text = @"你还没有实名认证 快去认证吧！\n发布岗位需实名认证";
-//
-//        }else{
-//            if (self.dataArray.count == 0) {
-//                self.tableView.hidden = YES;
-//
-//            }
-//
-//        }
-//
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-//    }];
-//
-//
-//}
 
 
 - (IBAction)gotoIdentify:(UIButton *)sender {
@@ -155,12 +82,12 @@ static NSString *cellIdent = @"cellIdent";
         
     }else if ([model.card_status isEqualToString:@"3"]){
   
-        self.hidesBottomBarWhenPushed=YES;
+//        self.hidesBottomBarWhenPushed=YES;
         
         JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
         
-        self.hidesBottomBarWhenPushed=NO;
+//        self.hidesBottomBarWhenPushed=NO;
   
     }else if ([model.card_status isEqualToString:@"2"]){
         
@@ -278,7 +205,6 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
     JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
     JMHomeWorkModel *model = self.dataArray[indexPath.row];
     vc.homeworkModel = model;
@@ -287,30 +213,62 @@ static NSString *cellIdent = @"cellIdent";
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 #pragma mark - myDelegate
 -(void)didClickCopyActionWithHomeWorkModel:(JMHomeWorkModel *)homeWorkModel{
-
-
+    
+    JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
+    vc.work_id = homeWorkModel.work_id;
+    vc.viewType = JMPostNewJobViewTypeHistory;
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
+
+
+-(void)didClickPostAction{
+    JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
+    vc.viewType = JMPostNewJobViewTypeDefault;
+    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+
 #pragma mark - lazy
 
 -(UITableView *)tableView{
     if (!_tableView) {
-        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.rowHeight = 120.0f;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
-
         [self.tableView registerNib:[UINib nibWithNibName:@"JMPostJobHomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
-        [self.view addSubview:_tableView];
         
+       
     }
     return _tableView;
     
 }
+
+
+
+-(JMPostTaskBottomView *)postTaskBottomView{
+    if (!_postTaskBottomView) {
+        _postTaskBottomView = [[JMPostTaskBottomView alloc]init];
+        [_postTaskBottomView.postTaskBtn setTitle:@"发布职位" forState:UIControlStateNormal];
+        _postTaskBottomView.delegate = self;
+    }
+    return _postTaskBottomView;
+}
+
+//-(JMPostTypeChooseView *)postTypeChooseView{
+//    if (!_postTypeChooseView) {
+//        _postTypeChooseView = [[JMPostTypeChooseView alloc]init];
+//        _postTypeChooseView.delegate = self;
+//    }
+//    return _postTypeChooseView;
+//}
 
 //- (JMTitlesView *)titleView {
 //    if (!_titleView) {

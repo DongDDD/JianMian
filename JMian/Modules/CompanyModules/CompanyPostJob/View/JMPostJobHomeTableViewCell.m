@@ -23,8 +23,9 @@
 
 //全职职位
 -(void)setModel:(JMHomeWorkModel *)model{
+    _myModel = model;
     _viewType = JMPostJobHomeTableViewCellTypeWork;
-    [self.myCopyBtn setHidden:YES];
+//    [self.myCopyBtn setHidden:YES];
     self.workNameLab.text = model.work_name;
     NSString *salary = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
     NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",model.work_experience_min,model.work_experience_max];

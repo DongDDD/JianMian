@@ -91,6 +91,8 @@
 #define Update_Interview_URL @"api/work/interview/update"
 #define Feedback_Interview_URL @"api/work/interview/feedback"
 
+//苹果内购
+#define ApplyPay_Notify_URL @"api/payment/notify/apple"
 
 //收藏
 #define Create_Favorite_URL @"api/user/favorite"

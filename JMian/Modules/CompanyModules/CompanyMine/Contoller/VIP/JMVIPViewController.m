@@ -36,21 +36,54 @@
     self.title = @"得米会员";
     [self initView];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if ([userModel.deadline isEqualToString:@"0"]) {
-        self.leftLab1.text = @"到期：";
-        self.leftLab2.text = [self timeStampConversionNSString:userModel.deadline];
-        self.rightLab.text = @"已开通";
-        [self.rightBtn setEnabled:NO];
+    if (![userModel.deadline isEqualToString:@"0"]) {
+    
+        NSDate *currentDate = [NSDate date]; // 获取当前时间，日期
+        
+        double time = [userModel.deadline doubleValue];
+        
+        NSDate *myDate=[NSDate dateWithTimeIntervalSince1970:time];
+        
+        int result = [self compareOneDay:myDate withAnotherDay:currentDate];
+        
+        if (result == -1) {
+            //会员过期
+            NSLog(@"oneDay比 anotherDay时间早");
+            [self.protocalBtn setHidden:YES];
+            self.rightLab.text = @"续费会员";
+            self.leftLab1.text = @"会员已过期，请续费：";
+            self.leftLab1.textColor = UIColorFromHEX(0xFF4E4D);
+            self.leftLab2.text = @"¥1998";
+            [self.rightBtn setEnabled:YES];
+        }else if (result == 1) {
+            //会员有效，无需续费
+            NSLog(@"oneDay比 anotherDay时间晚");
+            [self.protocalBtn setHidden:NO];
+            self.leftLab1.text = @"到期：";
+            self.leftLab2.text = [self timeStampConversionNSString:userModel.deadline];
+            self.rightLab.text = @"已开通";
+            [self.rightBtn setEnabled:NO];
+        }else if (result == 0) {
+            //会员有效,无需续费
+            NSLog(@"两者时间是同一个时间");
+            [self.protocalBtn setHidden:NO];
+            self.leftLab1.text = @"到期：";
+            self.leftLab2.text = [self timeStampConversionNSString:userModel.deadline];
+            self.rightLab.text = @"已开通";
+            [self.rightBtn setEnabled:NO];
+        }
     }else{
+        //没开通会员
         [self.protocalBtn setHidden:YES];
+        self.rightLab.text = @"立即开通";
+        self.leftLab2.text = @"¥1998";
+        [self.rightBtn setEnabled:YES];
     }
- 
+    
     // Do any additional setup after loading the view from its nib.
 }
 
 
-
-    
 
 
 -(void)initView{
@@ -118,25 +151,25 @@
 
 
 #pragma mark - 微信支付
-- (void)getPayInfoData
-{
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    [self showProgressHUD_view:self.view];
-    [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:userModel.user_id  scenes:@"app" type:@"3" mode:@"3" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        if (responsObject[@"data"]) {
-            
-            self.orderPaymentModel = [JMOrderPaymentModel mj_objectWithKeyValues:responsObject[@"data"]];
-            
-            [self hiddenHUD];
-            [self showChoosePayView];
-        }
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-    
-}
+//- (void)getPayInfoData
+//{
+//    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//    [self showProgressHUD_view:self.view];
+//    [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:userModel.user_id  scenes:@"app" type:@"3" mode:@"3" is_invoice:@"0" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        if (responsObject[@"data"]) {
+//            
+//            self.orderPaymentModel = [JMOrderPaymentModel mj_objectWithKeyValues:responsObject[@"data"]];
+//            
+//            [self hiddenHUD];
+//            [self showChoosePayView];
+//        }
+//        
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//        
+//    }];
+//    
+//    
+//}
 
 
 - (void)wechatPayWithModel:(JMOrderPaymentModel *)model{

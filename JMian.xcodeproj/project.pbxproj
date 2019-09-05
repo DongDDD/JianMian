@@ -781,6 +781,7 @@
 		04E129D922F27D520003D58F /* JMLogisticsCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129D322F27D510003D58F /* JMLogisticsCellData.m */; };
 		04E129E222F2D4BD0003D58F /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E129DF22F2D4BD0003D58F /* LoginViewController.xib */; };
 		04E129E322F2D4BD0003D58F /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E129E122F2D4BD0003D58F /* LoginViewController.m */; };
+		04E1FF54231FEA4900C859F3 /* JMHTTPManager+ApplePayNotify.m in Sources */ = {isa = PBXBuildFile; fileRef = 04E1FF53231FEA4900C859F3 /* JMHTTPManager+ApplePayNotify.m */; };
 		04E25F6822B4901D00F451C8 /* purchase_succeeds.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25F6522B4901C00F451C8 /* purchase_succeeds.png */; };
 		04E25F6922B4901D00F451C8 /* purchase_succeeds@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25F6622B4901D00F451C8 /* purchase_succeeds@3x.png */; };
 		04E25F6A22B4901D00F451C8 /* purchase_succeeds@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04E25F6722B4901D00F451C8 /* purchase_succeeds@2x.png */; };
@@ -2120,6 +2121,8 @@
 		04E129DF22F2D4BD0003D58F /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		04E129E022F2D4BD0003D58F /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		04E129E122F2D4BD0003D58F /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		04E1FF52231FEA4900C859F3 /* JMHTTPManager+ApplePayNotify.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+ApplePayNotify.h"; sourceTree = "<group>"; };
+		04E1FF53231FEA4900C859F3 /* JMHTTPManager+ApplePayNotify.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+ApplePayNotify.m"; sourceTree = "<group>"; };
 		04E25F6522B4901C00F451C8 /* purchase_succeeds.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = purchase_succeeds.png; sourceTree = "<group>"; };
 		04E25F6622B4901D00F451C8 /* purchase_succeeds@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchase_succeeds@3x.png"; sourceTree = "<group>"; };
 		04E25F6722B4901D00F451C8 /* purchase_succeeds@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "purchase_succeeds@2x.png"; sourceTree = "<group>"; };
@@ -2905,6 +2908,8 @@
 				041F672D22749C0C00C4F940 /* JMHTTPManager+CompanyUpdateJob.m */,
 				040701C12275E4A3002BF58D /* JMHTTPManager+CompanyLike.h */,
 				040701C22275E4A3002BF58D /* JMHTTPManager+CompanyLike.m */,
+				04E1FF52231FEA4900C859F3 /* JMHTTPManager+ApplePayNotify.h */,
+				04E1FF53231FEA4900C859F3 /* JMHTTPManager+ApplePayNotify.m */,
 			);
 			path = CompanyHTTPManager;
 			sourceTree = "<group>";
@@ -6589,6 +6594,7 @@
 				0486F7792293917900114A22 /* Demo3ViewController.m in Sources */,
 				04C6013622603967000B1FE0 /* JMTitlesView.m in Sources */,
 				6D5DD8CF2308439E0064612A /* wav.mm in Sources */,
+				04E1FF54231FEA4900C859F3 /* JMHTTPManager+ApplePayNotify.m in Sources */,
 				0492401022F17C940007C8A1 /* JMProtocalWebViewController.m in Sources */,
 				040A3933227DBEA700EDD9E0 /* JMGreetTableViewController.m in Sources */,
 				04731DEA22A66C630013D7CE /* JMAbilityCellData.m in Sources */,

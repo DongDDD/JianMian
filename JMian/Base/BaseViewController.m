@@ -595,6 +595,7 @@
     }
     
 }
+#pragma mark ----时间
 
 - (NSString *)timeStampConversionNSString:(NSString *)timeStamp
 {
@@ -617,7 +618,34 @@
     return timeStr;
 }
 
-
+-(int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    
+    NSComparisonResult result = [dateA compare:dateB];
+    
+    if (result == NSOrderedDescending) {
+        NSLog(@"oneDay比 anotherDay时间晚");
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        NSLog(@"oneDay比 anotherDay时间早");
+        return -1;
+    }
+    NSLog(@"两者时间是同一个时间");
+    return 0;
+    
+}
 
 #pragma mark ----加减乘除------------ number1 - number2
 //相乘

@@ -14,49 +14,45 @@
 #import "PositionDesiredViewController.h"
 #import "JMGetCompanyLocationViewController.h"
 #import "STPickerSingle.h"
+#import "JMHTTPManager+Work.h"
 
 
 
 @interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate,JMGetCompanyLocationViewControllerDelegate,UITextFieldDelegate,STPickerSingleDelegate>
+
+@property(nonatomic,strong)JMHomeWorkModel *homeworkModel;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITextField *workNameTextField;
 @property (weak, nonatomic) IBOutlet UIButton *workNameBtn;
-//@property (weak, nonatomic) IBOutlet UIView *pickerBGView;
 @property (weak, nonatomic) IBOutlet UIButton *workPropertyBtn;
-
-
 @property (weak, nonatomic) IBOutlet UIButton *expriencesBtn;
-@property (nonatomic,strong) NSNumber *expriencesMin;
-@property (nonatomic,strong) NSNumber *expriencesMax;
-
 @property (weak, nonatomic) IBOutlet UIButton *educationBtn;
-@property (nonatomic,strong) NSNumber *educationNum;
 
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (nonatomic, strong) STPickerSingle *expPickerSingle;
 @property (nonatomic, strong) STPickerSingle *educationPickerSingle;
 @property (nonatomic, strong) STPickerSingle *salaryPickerSingle;
-
 @property (weak, nonatomic) IBOutlet UIButton *salaryBtn;
-@property (nonatomic,strong) NSNumber *salaryMin;
-@property (nonatomic,strong) NSNumber *salaryMax;
-
 @property (weak, nonatomic) IBOutlet UIButton *welfareBtn;
 @property (nonatomic,strong)UIButton *selectedBtn;
-
 @property (weak, nonatomic) IBOutlet UIButton *workLocationBtn;
 @property (nonatomic, strong)AMapPOI *POIModel;
-
 @property (weak, nonatomic) IBOutlet UIButton *jobDescriptionBtn;
-@property (nonatomic, copy)NSString *jobDescriptionStr;
-
-
 @property (nonatomic, strong)NSArray *pickerArray;
 @property (nonatomic, copy)NSString *pickerStr;
 @property (nonatomic, assign)NSUInteger pickerRow;
 
-@property (nonatomic, copy)NSString *work_label_id;
 
+//参数
+@property (nonatomic,copy)NSString *work_label_id;
+@property (nonatomic,copy)NSString *educationNum;
+@property (nonatomic,copy)NSString *salaryMin;
+@property (nonatomic,copy)NSString *salaryMax;
+@property (nonatomic,copy)NSString *expriencesMin;
+@property (nonatomic,copy)NSString *expriencesMax;
+@property (nonatomic,copy)NSString *jobDescriptionStr;
+@property (nonatomic,copy)NSString *latitude;
+@property (nonatomic,copy)NSString *longitude;
 
 @end
 
@@ -73,11 +69,15 @@
     [self.pickerView selectRow:0 inComponent:0 animated:NO];
     // Do any additional setup after loading the view from its nib.
     if (_viewType == JMPostNewJobViewTypeEdit) {
-        [self setupValues];
+        [self getData];
         [self setRightBtnTextName:@"保存"];
-    }else{
+    }else if (_viewType == JMPostNewJobViewTypeDefault) {
+        [self setRightBtnTextName:@"发布"];
+    }else if (_viewType ==JMPostNewJobViewTypeHistory) {
+        [self getData];
         [self setRightBtnTextName:@"发布"];
     }
+    
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -87,8 +87,8 @@
 
 #pragma mark - 赋值
 -(void)setupValues{
-    [self.workPropertyBtn setTitle:self.homeworkModel.work_label_name forState:UIControlStateNormal];
     [self.workNameBtn setTitle:self.homeworkModel.work_label_name forState:UIControlStateNormal];
+    [self.workPropertyBtn setTitle:self.homeworkModel.work_name forState:UIControlStateNormal];
     self.work_label_id = self.homeworkModel.work_label_id;
     self.workNameTextField.text = self.homeworkModel.work_name;
     NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",self.homeworkModel.work_experience_min,self.homeworkModel.work_experience_max];
@@ -98,8 +98,15 @@
     [self.salaryBtn setTitle:str forState:UIControlStateNormal];
     [self.workLocationBtn setTitle:self.homeworkModel.address forState:UIControlStateNormal];
     [self.jobDescriptionBtn setTitle:self.homeworkModel.Description forState:UIControlStateNormal];
-
-
+    _salaryMin = self.homeworkModel.salary_min;
+    _salaryMax = self.homeworkModel.salary_max;
+    _educationNum = self.homeworkModel.education;
+    _expriencesMin = self.homeworkModel.work_experience_min;
+    _expriencesMax = self.homeworkModel.work_experience_max;
+    _longitude = self.homeworkModel.longitude;
+    _latitude = self.homeworkModel.latitude;
+    _jobDescriptionStr = self.homeworkModel.Description;
+    
 }
 
 #pragma mark - 数据提交
@@ -108,7 +115,7 @@
 
     if (_viewType == JMPostNewJobViewTypeEdit) {
         [self updateJob];
-    }else{
+    }else if (_viewType == JMPostNewJobViewTypeDefault || _viewType ==JMPostNewJobViewTypeHistory){
         [self createJob];
     }
     
@@ -116,9 +123,7 @@
 }
 
 -(void)createJob{
-    NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
-    NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
-    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionStr address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionStr address:self.workLocationBtn.titleLabel.text longitude:_longitude latitude:_latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -135,9 +140,7 @@
 }
 
 -(void)updateJob{
-    NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
-    NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
-    [[JMHTTPManager sharedInstance]updateWorkWith_Id:self.homeworkModel.work_id city_id:@"3" work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:longitude latitude:latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateWorkWith_Id:self.homeworkModel.work_id city_id:@"3" work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionBtn.titleLabel.text address:self.workLocationBtn.titleLabel.text longitude:_longitude latitude:_latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
 //        [self showAlertVCSucceesSingleWithMessage:@"" btnTitle:@""];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:@"更新成功" preferredStyle: UIAlertControllerStyleAlert];
@@ -163,6 +166,24 @@
         
         
     }];
+}
+
+
+-(void)getData{
+    [[JMHTTPManager sharedInstance]fetchWorkInfoWith_Id:_work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+        if (responsObject[@"data"]) {
+            
+            self.homeworkModel = [JMHomeWorkModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [self setupValues];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+        
+    }];
+    
 }
 #pragma mark - 点击事件
 
@@ -199,11 +220,8 @@
     NSString *minStr = array[0];
     NSString *maxStr = array[1];
     
-    NSInteger minNum = [minStr integerValue];
-    NSInteger maxNum = [maxStr integerValue];
-    
-    self.expriencesMin = @(minNum);
-    self.expriencesMax = @(maxNum);
+    self.expriencesMin = minStr;
+    self.expriencesMax = maxStr;
     
 }
 
@@ -295,6 +313,9 @@
     self.POIModel = data;
     NSString *adr = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
     [self.workLocationBtn setTitle:adr forState:UIControlStateNormal];
+    _longitude = [NSString stringWithFormat:@"%f",data.location.longitude];
+    _latitude = [NSString stringWithFormat:@"%f",data.location.latitude];
+
 }
 
 
@@ -325,7 +346,7 @@
     }else if (pickerSingle == _educationPickerSingle) {
         [self.educationBtn setTitle:selectedTitle forState:UIControlStateNormal];
         [self.educationBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-        self.educationNum = @(row);
+        self.educationNum = [NSString stringWithFormat:@"%ld",(long)row];
     
     }else if (pickerSingle == _salaryPickerSingle) {
         NSMutableArray *array = [self setSalaryRangeWithSalaryStr:selectedTitle];

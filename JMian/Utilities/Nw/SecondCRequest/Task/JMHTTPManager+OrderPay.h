@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
                                     scenes:(NSString *)scenes
                                       type:(NSString *)type
                                       mode:(NSString *)mode
-
+                                is_invoice:(NSString *)is_invoice
                               successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 @end
