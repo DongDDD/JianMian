@@ -44,7 +44,6 @@
 @property(nonatomic,copy)NSString *salary_max;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,assign)NSInteger per_page;
-@property(nonatomic,assign)BOOL isShowAllData;
 
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -59,6 +58,7 @@
 //@property (nonatomic, copy)NSString *job_lab_id;
 @property (weak, nonatomic) IBOutlet UIImageView *schoolImgView;
 @property(nonatomic,strong)JMSpecialModel *specialModel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintHeight;
 
 @end
 
@@ -198,11 +198,10 @@ static NSString *cellIdent = @"cellIdent";
         if (responsObject[@"data"]) {
             NSMutableArray *modelArray = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             if (modelArray.count > 0) {
-                
                 [self.arrDate addObjectsFromArray:modelArray];
-                //                [self getPlayerArray];
-            }else{
-                _isShowAllData = YES;
+            }
+            if (modelArray.count < 15) {
+                [self.tableView.mj_footer setHidden:YES];
             }
         }
         [self.tableView reloadData];
@@ -220,7 +219,23 @@ static NSString *cellIdent = @"cellIdent";
     [[JMHTTPManager sharedInstance]getSpecialInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.specialModel =  [JMSpecialModel mj_objectWithKeyValues:responsObject[@"data"]];
-            [self.schoolImgView sd_setImageWithURL:[NSURL URLWithString:self.specialModel.cover_path] placeholderImage:[UIImage imageNamed:@"NO_Data"]];
+            
+            NSDate *currentDate = [NSDate date]; // 获取当前时间，日期
+            NSString *s_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",self.specialModel.s_date];
+            NSString *e_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",self.specialModel.e_date];
+            NSDate *s_Date= [self dateFromString:s_timeStr];
+            NSDate *e_Date= [self dateFromString:e_timeStr];
+            
+            int s_result = [self compareOneDay:currentDate withAnotherDay:s_Date];
+            int e_result = [self compareOneDay:currentDate withAnotherDay:e_Date];
+            //s_Date < current < e_Date
+            if (s_result == 1 && e_result == -1) {
+                [self.schoolImgView sd_setImageWithURL:[NSURL URLWithString:self.specialModel.cover_path] placeholderImage:[UIImage imageNamed:@"break"]];
+                self.constraintHeight.constant = 142;
+            }else{
+                self.constraintHeight.constant = 0;
+            }
+            
 
         }
         
@@ -230,6 +245,8 @@ static NSString *cellIdent = @"cellIdent";
     }];
 
 }
+
+
 
 
 #pragma mark - 点击事件 -

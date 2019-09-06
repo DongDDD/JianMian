@@ -85,9 +85,8 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1~3年" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szk-av-mYM">
-                        <rect key="frame" x="131" y="75.5" width="40" height="15"/>
+                        <rect key="frame" x="131" y="75.5" width="33.5" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="40" id="VIu-Kk-4OA"/>
                             <constraint firstAttribute="height" constant="15" id="YcG-Vp-CMH"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -95,7 +94,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bIN-nk-d3p" userLabel="竖 分割线">
-                        <rect key="frame" x="182" y="80.5" width="1" height="5"/>
+                        <rect key="frame" x="175.5" y="80.5" width="1" height="5"/>
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="D4F-u4-AVV"/>
@@ -103,9 +102,8 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大专" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6G-DK-vbX">
-                        <rect key="frame" x="185" y="75.5" width="65" height="15"/>
+                        <rect key="frame" x="178.5" y="75.5" width="25" height="15"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="65" id="cf2-jr-ArK"/>
                             <constraint firstAttribute="height" constant="15" id="qbI-Zb-sBK"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -113,7 +111,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b6V-YV-np5" userLabel="竖 分割线2">
-                        <rect key="frame" x="249" y="80.5" width="1" height="5"/>
+                        <rect key="frame" x="202.5" y="80.5" width="1" height="5"/>
                         <color key="backgroundColor" red="0.90196078430000004" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="1" id="bJX-eP-DX3"/>
@@ -121,10 +119,9 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="天河区" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lpj-ci-Bdi">
-                        <rect key="frame" x="270" y="75.5" width="42" height="15"/>
+                        <rect key="frame" x="223.5" y="75.5" width="37" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="Nkc-ZJ-Vlg"/>
-                            <constraint firstAttribute="width" constant="42" id="xuF-P8-aNX"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.43137254899999999" green="0.43137254899999999" blue="0.43137254899999999" alpha="1" colorSpace="calibratedRGB"/>

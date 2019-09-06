@@ -112,6 +112,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay;
 //时间戳转化成时间字符串
 - (NSString *)timeStampConversionNSString:(NSString *)timeStamp;
+//字符串转化成NSDate
+- (NSDate *)dateFromString:(NSString *)dateStr;
 @end
 
 NS_ASSUME_NONNULL_END

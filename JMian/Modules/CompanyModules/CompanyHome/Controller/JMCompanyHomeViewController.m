@@ -21,30 +21,29 @@
 #import "JMCityListViewController.h"
 #import "JMVideoSingleViewController.h"
 #import "JMLabChooseBottomView.h"
+#import "JMHTTPManager+FectchSpecialInfo.h"
+#import "JMSpecialModel.h"
+#import "JMSpecialViewController.h"
+
 
 
 @interface JMCompanyHomeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyHomeTableViewCellDelegate,JMLabsChooseViewControllerDelegate,JMChoosePositionTableViewControllerDelegate,JMCityListViewControllerDelegate,JMLabChooseBottomViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headerView;
-
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *arrDate;
-@property(nonatomic,assign)BOOL isShowAllData;
-
-
 @property(nonatomic,strong)NSMutableArray *playerArray;
-
-
 @property (nonatomic, strong) JMChoosePositionTableViewController *choosePositionVC;
 @property (nonatomic, strong) UIButton *bgBtn;
-
 @property (nonatomic, strong) JMLabsChooseViewController *labschooseVC;
 @property (weak, nonatomic) IBOutlet UIButton *choosePositionBtn;
 @property (weak, nonatomic) IBOutlet UIButton *chooseRequireBtn;
 @property(nonatomic,strong)NSMutableArray *choosePositionArray;
 @property (nonatomic, strong)UIView *bottomView;
 @property (nonatomic, strong)JMLabChooseBottomView *labChooseBottomView;
-
+@property (weak, nonatomic) IBOutlet UIImageView *schoolImgView;
+@property (nonatomic, strong)JMSpecialModel *specialModel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintHeight;
 @property (atomic, strong) NSURL *url;
 // -----------筛选------------
 @property(nonatomic,copy)NSString *job_label_id;
@@ -56,18 +55,6 @@
 @property(nonatomic,copy)NSString *salary_max;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,assign)NSInteger per_page;
-
-
-
-//
-//@property (nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
-//@property (nonatomic, strong) AVPlayer *player;
-//@property (nonatomic, strong) AVPlayerItem *playerItem;
-//@property (nonatomic, strong) VIMediaDownloader *downloader;
-//
-
-
-//@property (strong, nonatomic) AVPlayerViewController *playerVC;
 
 @end
 static NSString *cellIdent = @"cellIdent";
@@ -88,20 +75,11 @@ static NSString *cellIdent = @"cellIdent";
 //    [self getData];
     [self setTableView];
     [self initView];
+    [self getSpecialInfo];
     
-//    self.playerView = [[ZFPlayerView alloc] init];
-//    [self.view addSubview:self.playerView];
-//    [self.playerView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.view).offset(20);
-//        make.left.right.equalTo(self.view);
-//        // Here a 16:9 aspect ratio, can customize the video aspect ratio
-//        make.height.equalTo(self.playView.mas_width).multipliedBy(9.0f/16.0f);
-//    }];
-//    self.url = [NSURL URLWithString:@"http://v1.mukewang.com/a45016f4-08d6-4277-abe6-bcfd5244c201/L.mp4"];
-//    ZFPlayerController *controlView = [[ZFPlayerController alloc] init];
-//    // model
-  ;
- 
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(schoolAction)];
+    [self.schoolImgView addGestureRecognizer:tap];
+    self.schoolImgView.userInteractionEnabled = YES;
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -113,7 +91,6 @@ static NSString *cellIdent = @"cellIdent";
 
 #pragma mark - 获取数据
 -(void)getCompanyHomeListData{
- 
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
     [[JMHTTPManager sharedInstance]fetchVitaPaginateWith_city_id:self.city_id job_label_id:self.job_label_id education:self.education work_year_s:self.work_year_s work_year_e:self.work_year_e salary_min:self.salary_min salary_max:self.salary_max page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -124,8 +101,9 @@ static NSString *cellIdent = @"cellIdent";
                 
                 [self.arrDate addObjectsFromArray:modelArray];
                 //                [self getPlayerArray];
-            }else{
-                _isShowAllData = YES;
+            }
+            if (modelArray.count < 15) {
+                [self.tableView.mj_footer setHidden:YES];
             }
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
@@ -159,6 +137,37 @@ static NSString *cellIdent = @"cellIdent";
             
             [self.choosePositionVC setChoosePositionArray:self.choosePositionArray];
             [self.choosePositionVC.tableView reloadData];
+        }
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+-(void)getSpecialInfo{
+    [[JMHTTPManager sharedInstance]getSpecialInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.specialModel =  [JMSpecialModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            NSDate *currentDate = [NSDate date]; // 获取当前时间，日期
+            NSString *s_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",self.specialModel.s_date];
+            NSString *e_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",self.specialModel.e_date];
+            NSDate *s_Date= [self dateFromString:s_timeStr];
+            NSDate *e_Date= [self dateFromString:e_timeStr];
+            
+            int s_result = [self compareOneDay:currentDate withAnotherDay:s_Date];
+            int e_result = [self compareOneDay:currentDate withAnotherDay:e_Date];
+            //s_Date < current < e_Date
+            if (s_result == 1 && e_result == -1) {
+                [self.schoolImgView sd_setImageWithURL:[NSURL URLWithString:self.specialModel.cover_path] placeholderImage:[UIImage imageNamed:@"break"]];
+                self.constraintHeight.constant = 142;
+            }else{
+                self.constraintHeight.constant = 0;
+            }
+            
+            
         }
         
         
@@ -215,7 +224,7 @@ static NSString *cellIdent = @"cellIdent";
     
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.headerView.mas_bottom);
+        make.top.mas_equalTo(self.schoolImgView.mas_bottom);
         make.bottom.mas_equalTo(self.view);
     }];
     [self setupHeaderRefresh];//添加下拉刷新
@@ -352,25 +361,7 @@ static NSString *cellIdent = @"cellIdent";
     [self.tableView.mj_header beginRefreshing];
 }
 
--(void)playAction_cell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model{
-//    SJVideoPlayer *_videoPlayer = [SJVideoPlayer player];
-//    _videoPlayer.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); // 可以使用AutoLayout, 这里为了简便设置的Frame.
-//    [self.view addSubview:_videoPlayer.view];
-//    // 初始化资源
-//    _videoPlayer.URLAsset = [[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:model.video_file_path]];
-//     _player = [SJVideoPlayer player];
-//    _player.URLAsset = [[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:model.video_file_path]];
-//    [[UIApplication sharedApplication].keyWindow  addSubview:_player.view];
-//    [_player.view mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.offset(0);
-//    }];
-
-//    _player.URLAsset.title = model.workName;
- 
-//    JMVideoSingleViewController *vc = [[JMVideoSingleViewController alloc]init];
-//    [self.navigationController pushViewController:vc animated:YES];
-//
-    
+-(void)playAction_comcell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model{
     
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
@@ -467,8 +458,19 @@ static NSString *cellIdent = @"cellIdent";
     }else if ([str isEqualToString:@"工作经验"]) {
         NSString *labStr = [self getArray_index:index];
         [self getExpWithLabStr:labStr];
+    }else if ([str isEqualToString:@"薪资要求"]) {
+//        [self getSalaryStr_index:index];
+        if (index == 0) {
+            self.salary_min = @"";
+            self.salary_max = @"";
+        }else{
+            NSString *salaryStr = [self getSalaryStr_index:index];
+            NSMutableArray *salaryArr = [self setSalaryRangeWithSalaryStr:salaryStr];
+            self.salary_min = salaryArr[0];
+            self.salary_max = salaryArr[1];
+            
+        }
     }
-
 }
 
 
@@ -527,7 +529,8 @@ static NSString *cellIdent = @"cellIdent";
 {
     NSArray *array;
     
-    array = @[@"1k-2k",
+    array = @[@"",
+              @"1k-2k",
               @"2k-4k",
               @"4k-6k",
               @"6k-8k",
@@ -545,6 +548,13 @@ static NSString *cellIdent = @"cellIdent";
     
 }
 
+-(void)schoolAction{
+    NSLog(@"asdf");
+    JMSpecialViewController *vc = [[JMSpecialViewController alloc]init];
+    vc.title = self.specialModel.title;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 
 #pragma mark - lazy
 

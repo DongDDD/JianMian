@@ -165,7 +165,6 @@
     self.emailText.keyboardType = UIKeyboardTypeEmailAddress;
     self.nameText.delegate = self;
     self.scrollView.delegate = self;
-    
 
 }
 
@@ -392,12 +391,10 @@
 }
 
 #pragma mark - 数据提交到服务器
-
-
 -(void)rightAction{
     [self.nameText resignFirstResponder];
     [self.emailText resignFirstResponder];
-    if (_imageUrl.length < 1) {
+    if (_imageUrl.length < 1 && _viewType == BasicInformationViewTypeDefault) {
         [self showAlertSimpleTips:@"提示" message:@"请选择头像" btnTitle:@"好的"];
         return;
     }

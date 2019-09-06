@@ -15,10 +15,13 @@
 #import "JMLabChooseBottomView.h"
 #import "JMLabsChooseViewController.h"
 #import "JMVideoPlayManager.h"
+#import "JMCompanyHomeTableViewCell.h"
+#import "JMPersonDetailsViewController.h"
+#import "JMHTTPManager+VitaPaginate.h"
 
 
 
-@interface JMSpecialViewController ()<UITableViewDelegate,UITableViewDataSource,JMLabsChooseViewControllerDelegate,JMLabChooseBottomViewDelegate,HomeTableViewCellDelegate>
+@interface JMSpecialViewController ()<UITableViewDelegate,UITableViewDataSource,JMLabsChooseViewControllerDelegate,JMLabChooseBottomViewDelegate,HomeTableViewCellDelegate,JMCompanyHomeTableViewCellDelegate>
 @property(nonatomic,strong)JMTitlesView *titleView;
 @property(nonatomic,strong)UITableView *tableView;
 
@@ -32,6 +35,7 @@
 
 //请求参数
 @property(nonatomic,copy)NSString *city_id;
+@property(nonatomic,copy)NSString *job_label_id;//B
 @property(nonatomic,copy)NSString *work_lab_id;
 @property(nonatomic,copy)NSString *education;
 @property(nonatomic,copy)NSString *work_year_s;
@@ -40,6 +44,8 @@
 @property(nonatomic,copy)NSString *salary_max;
 @property(nonatomic,assign)NSInteger page;
 @property(nonatomic,assign)NSInteger per_page;
+
+
 
 @end
 static NSString *CHomeCellID = @"CHomeCellID";
@@ -50,17 +56,21 @@ static NSString *BHomeCellID = @"BHomeCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    [self getCHomeListData];
+//    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//    if ([userModel.type isEqualToString:B_Type_UESR]) {
+//        [self getCompanyHomeListData];
+//    }else{
+//        [self getCHomeListData];
+//    }
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void)initView{
-
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
-        make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuideTop).mas_offset(-20);
     }];
     [self setupUpRefresh];
     [self.labschooseVC.view setHidden:YES];
@@ -115,7 +125,12 @@ static NSString *BHomeCellID = @"BHomeCellID";
 -(void)loadMoreBills
 {
     self.page += 1;
-    [self getCHomeListData];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self getCompanyHomeListData];
+    }else{
+        [self getCHomeListData];
+    }
     
 }
 
@@ -123,12 +138,17 @@ static NSString *BHomeCellID = @"BHomeCellID";
 {
     [self.arrDate removeAllObjects];
     _page = 1;
-    [self getCHomeListData];
-    
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self getCompanyHomeListData];
+    }else{
+        [self getCHomeListData];
+    }
 }
 
+//C端数据
 -(void)getCHomeListData{
-    [self showProgressHUD_view:self.view];
+   
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
     NSArray *citys = [NSArray array];
@@ -147,7 +167,6 @@ static NSString *BHomeCellID = @"BHomeCellID";
             }
         }
         [self.tableView reloadData];
-        [self hiddenHUD];
         [self.tableView.mj_footer endRefreshing];
         [self.tableView.mj_header endRefreshing];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -156,6 +175,36 @@ static NSString *BHomeCellID = @"BHomeCellID";
     
 }
 
+//B端数据
+-(void)getCompanyHomeListData{
+    
+    NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
+    NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
+    [[JMHTTPManager sharedInstance]fetchVitaPaginateWith_city_id:nil job_label_id:self.job_label_id education:self.education work_year_s:self.work_year_s work_year_e:self.work_year_e salary_min:self.salary_min salary_max:self.salary_max page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            NSMutableArray *modelArray = [JMCompanyHomeModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            
+            if (modelArray.count > 0) {
+                [self.arrDate addObjectsFromArray:modelArray];
+                //                [self getPlayerArray];
+            }
+            if (modelArray.count < 10) {
+                [self.tableView.mj_footer setHidden:YES];
+            }else{
+                [self.tableView.mj_footer setHidden:NO];
+
+            }
+            [self.tableView reloadData];
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+    
+}
 #pragma mark - UITableViewDataSource
 
 
@@ -183,36 +232,70 @@ static NSString *BHomeCellID = @"BHomeCellID";
     
     return 44;
 }
+
 #pragma mark - UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CHomeCellID];
-    if (cell == nil) {
-        cell = [[HomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CHomeCellID];
-    }
-
-    cell.indexpath = indexPath;
-    cell.delegate = self;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (self.arrDate.count > 0) {
-        JMHomeWorkModel *model = self.arrDate[indexPath.row];
-
-        [cell setModel:model];
-    }
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        JMCompanyHomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:BHomeCellID];
+        if (cell == nil) {
+            cell = [[JMCompanyHomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:BHomeCellID];
+        }
+        cell.indexPath = indexPath;
+        cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (self.arrDate.count > 0) {
+            JMCompanyHomeModel *model = self.arrDate[indexPath.row];
+            
+            [cell setModel:model];
+        }
+        
+        return cell;
+        
+        
+    }else{
     
-    return cell;
-
-
+        HomeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CHomeCellID];
+        if (cell == nil) {
+            cell = [[HomeTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CHomeCellID];
+        }
+        cell.indexpath = indexPath;
+        cell.delegate = self;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (self.arrDate.count > 0) {
+            JMHomeWorkModel *model = self.arrDate[indexPath.row];
+            
+            [cell setModel:model];
+        }
+        return cell;
+    }
+    return nil;
+ 
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
-    JMHomeWorkModel *model = self.arrDate[indexPath.row];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
+        if(self.arrDate.count > 0 ){
+            JMCompanyHomeModel *model = self.arrDate[indexPath.row];
+            vc.companyModel = model;
+            
+        }
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
     
-    vc.homeworkModel = model;
+        JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
+        JMHomeWorkModel *model = self.arrDate[indexPath.row];
+        
+        vc.homeworkModel = model;
+        
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
-    [self.navigationController pushViewController:vc animated:YES];
     
     
 }
@@ -242,48 +325,27 @@ static NSString *BHomeCellID = @"BHomeCellID";
 #pragma mark - MyDelegate
 
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
-    _work_lab_id = labIDStr;
+    _work_lab_id = labIDStr;//C
+    _job_label_id = labIDStr;//B
     [self.arrDate removeAllObjects];
     [self.tableView.mj_header beginRefreshing];
 }
-//人才要求
--(void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index{
-    
-    if ([str isEqualToString:@"最低学历"]) {
-        self.education = [NSString stringWithFormat:@"%ld",(long)(index)];
-        
-        NSLog(@"学历：%@",self.education);
-        
-        
-    }else if ([str isEqualToString:@"工作经历"]) {
-        NSString *exp = [self getArray_index:index];
-        if (![exp isEqualToString:@"全部"] && ![exp isEqualToString:@"应届生"]) {
-            self.work_year_e = [exp substringToIndex:0];
-            self.work_year_s = [exp substringToIndex:3];
-            
-        }else if([exp isEqualToString:@"应届生"]){
-            
-            
-            
-        }
-        //        self.work_year_s
-    }
-    
-}
--(NSString *)getArray_index:(NSInteger )index
-{
-    NSArray *array;
-    
-    array = @[@"全部",@"应届生",@"1年",@"1～3年",@"3～5年",@"5～10年",@"10年以上"];
-    
-    return array[index];
-    
-}
+
+
 
 -(void)playAction_cell:(HomeTableViewCell *)cell model:(JMHomeWorkModel *)model{
-    
+
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.videoFile_path];
     [[JMVideoPlayManager sharedInstance] play];
+    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [self presentViewController:playVC animated:YES completion:nil];
+    [[JMVideoPlayManager sharedInstance] play];
+
+}
+
+-(void)playAction_comcell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model{
+    
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
@@ -317,9 +379,101 @@ static NSString *BHomeCellID = @"BHomeCellID";
     [self.labChooseBottomView setHidden:YES];
     [_bgBtn setHidden:YES];
     [self.tableView.mj_header beginRefreshing];
+}
+
+//人才要求
+-(void)didChooseLabsTitle_str:(NSString *)str index:(NSInteger)index{
     
+    if ([str isEqualToString:@"最低学历"]) {
+        NSString *strIndex = [NSString stringWithFormat:@"%ld",(long)index];
+        self.education = strIndex;
+        
+        NSLog(@"学历---%@",self.education);
+    }else if ([str isEqualToString:@"工作经验"]) {
+        NSString *labStr = [self getArray_index:index];
+        [self getExpWithLabStr:labStr];
+    }else if ([str isEqualToString:@"薪资要求"]) {
+        //        [self getSalaryStr_index:index];
+        if (index == 0) {
+            self.salary_min = @"";
+            self.salary_max = @"";
+        }else{
+            NSString *salaryStr = [self getSalaryStr_index:index];
+            NSMutableArray *salaryArr = [self setSalaryRangeWithSalaryStr:salaryStr];
+            self.salary_min = salaryArr[0];
+            self.salary_max = salaryArr[1];
+        
+        }
+    }
     
 }
+-(NSString *)getArray_index:(NSInteger )index
+{
+    NSArray *array;
+    
+    array = @[@"全部",@"应届生",@"1年",@"1～3年",@"3～5年",@"5～10年",@"10年以上"];
+    
+    return array[index];
+    
+}
+
+-(void)getExpWithLabStr:(NSString *)labStr{
+    if ([labStr isEqualToString:@"应届生"]) {
+        self.work_year_s = @"0";
+        self.work_year_e = @"1";
+        
+    }else if ([labStr isEqualToString:@"1年"]) {
+        self.work_year_s = @"1";
+        self.work_year_e = @"2";
+    }else if ([labStr isEqualToString:@"1～3年"]) {
+        self.work_year_s = @"1";
+        self.work_year_e = @"3";
+        
+    }else if ([labStr isEqualToString:@"3～5年"]) {
+        self.work_year_s = @"3";
+        self.work_year_e = @"5";
+        
+        
+    }else if ([labStr isEqualToString:@"5～10年"]) {
+        self.work_year_s = @"5";
+        self.work_year_e = @"10";
+        
+        
+    }else if ([labStr isEqualToString:@"10年以上"]) {
+        self.work_year_s = @"10";
+        self.work_year_e = @"30";
+        
+        
+    }else if ([labStr isEqualToString:@"全部"]) {
+        self.work_year_s = nil;
+        self.work_year_e = nil;
+    }
+}
+
+
+-(NSString *)getSalaryStr_index:(NSInteger )index
+{
+    NSArray *array;
+    
+    array = @[@"",
+              @"1k-2k",
+              @"2k-4k",
+              @"4k-6k",
+              @"6k-8k",
+              @"8k-10k",
+              @"10k-15k",
+              @"15k-20k",
+              @"20k-30k",
+              @"30k-40k",
+              @"40k-50k",
+              @"50k-100k"];
+    
+    
+    
+    return array[index];
+    
+}
+
 #pragma mark - getter
 
 - (JMTitlesView *)titleView {
@@ -361,7 +515,7 @@ static NSString *BHomeCellID = @"BHomeCellID";
         //        _tableView.sectionHeaderHeight = 43;
         _tableView.sectionFooterHeight = 5;
         [_tableView registerNib:[UINib nibWithNibName:@"HomeTableViewCell" bundle:nil] forCellReuseIdentifier:CHomeCellID];
-//        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecriTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailTaskDecriTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMCompanyHomeTableViewCell" bundle:nil] forCellReuseIdentifier:BHomeCellID];
      
         
     }

@@ -597,6 +597,18 @@
 }
 #pragma mark ----时间
 
+- (NSDate *)dateFromString:(NSString *)dateStr{
+    
+    NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
+    // 注意的是下面给格式的时候,里面一定要和字符串里面的统一
+    // 比如:   dateStr为2017-07-24 17:38:27   那么必须设置成yyyy-MM-dd HH:mm:ss, 如果你设置成yyyy--MM--dd HH:mm:ss, 那么date就是null, 这是需要注意的
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSDate * date = [formatter dateFromString:dateStr];
+    return date;
+    
+}
+
 - (NSString *)timeStampConversionNSString:(NSString *)timeStamp
 {
     //将对象类型的时间转换为NSDate类型

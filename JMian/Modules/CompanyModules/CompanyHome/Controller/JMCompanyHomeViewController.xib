@@ -14,7 +14,9 @@
             <connections>
                 <outlet property="choosePositionBtn" destination="iuz-yQ-9Rc" id="MvX-Ld-aYQ"/>
                 <outlet property="chooseRequireBtn" destination="Qsa-nh-upw" id="cfy-Ze-kK3"/>
+                <outlet property="constraintHeight" destination="qTc-km-gfT" id="0zs-qC-IeG"/>
                 <outlet property="headerView" destination="gJl-Mb-KDq" id="att-yv-UJI"/>
+                <outlet property="schoolImgView" destination="ffr-dE-Gl0" id="Q9o-5a-XYD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -109,7 +111,7 @@
                     </constraints>
                 </view>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1FK-8L-hZk">
-                    <rect key="frame" x="0.0" y="128" width="414" height="768"/>
+                    <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="营业执照认证中。。。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5no-ev-iRj">
                             <rect key="frame" x="160.5" y="296" width="93" height="16"/>
@@ -153,15 +155,25 @@
                         <constraint firstItem="aCT-qR-iCw" firstAttribute="top" secondItem="1FK-8L-hZk" secondAttribute="top" constant="272" id="y4J-sC-Pbg"/>
                     </constraints>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ffr-dE-Gl0">
+                    <rect key="frame" x="0.0" y="88" width="414" height="142"/>
+                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="142" id="qTc-km-gfT"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="ffr-dE-Gl0" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="BPj-gs-I5b"/>
+                <constraint firstItem="ffr-dE-Gl0" firstAttribute="top" secondItem="gJl-Mb-KDq" secondAttribute="bottom" id="LyZ-d8-BQI"/>
                 <constraint firstAttribute="bottom" secondItem="1FK-8L-hZk" secondAttribute="bottom" id="MFj-ON-CTy"/>
                 <constraint firstItem="gJl-Mb-KDq" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Sbo-l7-NMD"/>
                 <constraint firstItem="gJl-Mb-KDq" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="TN2-Dj-gfn"/>
+                <constraint firstItem="ffr-dE-Gl0" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="VkT-fD-Wed"/>
                 <constraint firstItem="1FK-8L-hZk" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Xl1-qK-igU"/>
-                <constraint firstItem="1FK-8L-hZk" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="84" id="fJc-LI-cdm"/>
                 <constraint firstAttribute="trailing" secondItem="gJl-Mb-KDq" secondAttribute="trailing" id="tmB-kJ-zZJ"/>
+                <constraint firstItem="1FK-8L-hZk" firstAttribute="top" secondItem="ffr-dE-Gl0" secondAttribute="top" id="x5d-y8-dvT"/>
                 <constraint firstItem="1FK-8L-hZk" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="xrf-qL-cpi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

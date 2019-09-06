@@ -136,6 +136,9 @@ static NSString *cellIdent = @"payCellIdent";
 {
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     [self showProgressHUD_view:self.view];
+    self.myProgressHUD.dimBackground = YES; //设置有遮罩
+    self.myProgressHUD.label.text = @"请求苹果支付"; //设置进度框中的提示文字
+    self.myProgressHUD.alpha = 1;//设置遮罩透明度 = 1;
     [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:userModel.user_id  scenes:@"app" type:@"3" mode:@"1" is_invoice:_is_invoice successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {            
             self.orderPaymentModel = [JMOrderPaymentModel mj_objectWithKeyValues:responsObject[@"data"]];
@@ -183,11 +186,16 @@ static NSString *cellIdent = @"payCellIdent";
     [self showHUD];
     [[JMHTTPManager sharedInstance]fetchAppllePayNotifyWithReceipt_data:receipt_data total_amount:@"1998.00" out_trade_no:self.orderPaymentModel.serial_no SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self hiddenHUD];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self showAlertVCSucceesSingleWithMessage:@"购买得米VIP成功!" btnTitle:@"好的"];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+
+}
+
+-(void)alertSucceesAction{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 
 }
 
@@ -268,7 +276,9 @@ static NSString *cellIdent = @"payCellIdent";
             //2 .请求给用户商品
             break;
             case SKPaymentTransactionStateFailed:
-            NSLog(@"用户正购买失败");
+            [self hiddenHUD];
+
+            NSLog(@"用户购买失败");
             break;
             case SKPaymentTransactionStateRestored:
             NSLog(@"用户恢复购买成功");
@@ -283,7 +293,7 @@ static NSString *cellIdent = @"payCellIdent";
             break;
         }
     }
-    [self hiddenHUD];
+  
 
 }
     
