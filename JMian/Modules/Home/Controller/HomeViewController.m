@@ -432,14 +432,50 @@ static NSString *cellIdent = @"cellIdent";
             
         }
         //        self.work_year_s
+    }else if ([str isEqualToString:@"薪资要求"]) {
+        //        [self getSalaryStr_index:index];
+        if (index == 0) {
+            self.salary_min = @"";
+            self.salary_max = @"";
+        }else{
+            NSString *salaryStr = [self getSalaryStr_index:index];
+            NSMutableArray *salaryArr = [self setSalaryRangeWithSalaryStr:salaryStr];
+            self.salary_min = salaryArr[0];
+            self.salary_max = salaryArr[1];
+            
+        }
     }
     
 }
+
 -(NSString *)getArray_index:(NSInteger )index
 {
     NSArray *array;
     
     array = @[@"全部",@"应届生",@"1年",@"1～3年",@"3～5年",@"5～10年",@"10年以上"];
+    
+    return array[index];
+    
+}
+
+-(NSString *)getSalaryStr_index:(NSInteger )index
+{
+    NSArray *array;
+    
+    array = @[@"",
+              @"1k-2k",
+              @"2k-4k",
+              @"4k-6k",
+              @"6k-8k",
+              @"8k-10k",
+              @"10k-15k",
+              @"15k-20k",
+              @"20k-30k",
+              @"30k-40k",
+              @"40k-50k",
+              @"50k-100k"];
+    
+    
     
     return array[index];
     
