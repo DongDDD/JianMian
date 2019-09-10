@@ -233,7 +233,7 @@
 
 - (JMTitlesView *)titleView {
     if (!_titleView) {
-        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全职职位", @"兼职职位"]];
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全职职位", @"任务职位"]];
         _titleView.viewType = JMTitlesViewPositionManage;
         [_titleView setCurrentTitleIndex:0];
         __weak JMPositionManageViewController *weakSelf = self;

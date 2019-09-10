@@ -46,7 +46,7 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="M6H-aj-LlS"/>
                     </constraints>
-                    <state key="normal" title="发布兼职类">
+                    <state key="normal" title="发布任务类">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>

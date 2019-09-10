@@ -46,8 +46,6 @@
 @property(nonatomic,strong)JMShareView *shareView;//分享
 @property(nonatomic,strong)UIView *shareBgView;//灰色背景
 
-
-
 @end
 
 @implementation JMMineViewController
@@ -55,6 +53,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationController.navigationBar.translucent = NO;
     [self setIsHiddenBackBtn:YES];
     self.view.backgroundColor = [UIColor whiteColor];
     _userInfoModel = [JMUserInfoManager getUserInfo];

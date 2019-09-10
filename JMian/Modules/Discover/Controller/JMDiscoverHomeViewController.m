@@ -347,7 +347,7 @@
         NSString *str2;
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         if ([userModel.type isEqualToString:B_Type_UESR]) {
-            str1 = @"兼职";
+            str1 = @"任务";
             str2 = @"全职";
         }else{
             str1 = @"企业";

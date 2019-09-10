@@ -419,7 +419,7 @@
         }];
         
     }else{
-        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
+        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请任务" leftTitle:@"返回" rightTitle:@"去实名认证"];
         
     }
 }

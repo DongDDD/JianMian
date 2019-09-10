@@ -22,6 +22,7 @@
 #import "JMHTTPManager+DeleteAbilityImage.h"
 #import "JMHTTPManager+DeletePartTimeJobVita.h"
 #import "JMChoosePartTImeJobTypeLablesViewController.h"
+#import "JMBAndCTabBarViewController.h"
 
 
 
@@ -69,6 +70,10 @@ static NSString *cellIdent = @"cellIdent";
     }else if (_viewType == JMPostPartTimeResumeViewAdd) {
         self.title = @"发布兼职简历";
         [self setRightBtnTextName:@"发布"];
+    }else if (_viewType == JMPostPartTimeResumeViewLogin) {
+        self.title = @"接任务简历";
+        [self setIsHiddenBackBtn:YES];
+        [self setRightBtnTextName:@"下一步"];
     }
     
 
@@ -259,7 +264,13 @@ static NSString *cellIdent = @"cellIdent";
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"创建成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
-        [self.navigationController popViewControllerAnimated:YES];
+        if (_viewType == JMPostPartTimeResumeViewLogin) {
+            JMBAndCTabBarViewController *vc = [[JMBAndCTabBarViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            [self.navigationController popViewControllerAnimated:YES];
+        
+        }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -451,7 +462,7 @@ static NSString *cellIdent = @"cellIdent";
 //            }
             vc.ability_id = self.ability_id;
             vc.viewType = Demo3ViewPartTimeResumeEdit;
-        }else if (_viewType == JMPostPartTimeResumeViewAdd){//添加兼职简历
+        }else if (_viewType == JMPostPartTimeResumeViewAdd || _viewType == JMPostPartTimeResumeViewLogin){//添加兼职简历
             vc.viewType = Demo3ViewPartTimeResumeAdd;
             //选好的图片_image_arr
             vc.image_paths = _image_arr.mutableCopy;

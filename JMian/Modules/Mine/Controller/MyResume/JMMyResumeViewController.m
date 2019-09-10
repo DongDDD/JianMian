@@ -24,8 +24,11 @@
 #import "JMTitlesView.h"
 #import "JMPartTimeJobResumeViewController.h"
 #import "STPickerSingle.h"
+#import "JMNoResumeDataView.h"
+#import "JobIntensionViewController.h"
 
-@interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMMyResumeFooterViewDelegate,JMMyResumeCareerStatusTableViewCellDelegate,STPickerSingleDelegate>
+
+@interface JMMyResumeViewController ()<UITableViewDelegate,UITableViewDataSource,PositionDesiredDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMMyResumeFooterViewDelegate,JMMyResumeCareerStatusTableViewCellDelegate,STPickerSingleDelegate,JMNoResumeDataViewDelegate>
 
 @property (strong, nonatomic) JMMyResumeCellConfigures *cellConfigures;
 @property (strong, nonatomic) JMTitlesView *titleView;
@@ -45,6 +48,7 @@
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) STPickerSingle *jobStatusPickerSingle;
+@property (nonatomic, strong)JMNoResumeDataView *noResmuseDataView;
 
 @end
 
@@ -87,21 +91,28 @@
 
     [[JMHTTPManager sharedInstance] fetchVitPaginateWithCity_id:nil education:nil job_label_id:nil work_year_s:nil work_year_e:nil salary_min:nil salary_max:nil page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-//        int jobId = [responsObject[@"data"][0][@"user_job_id"] intValue];
         [[JMHTTPManager sharedInstance] fetchVitaInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            if (responsObject[@"data"]) {
+            if (responsObject[@"data"] != NULL) {
                 self.model = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
                 self.cellConfigures.model = self.model;
                 self.job_labelID = self.model.job_label_id;
                 self.salaryMin = @([self.model.salary_min intValue]);
                 self.salaryMax = @([self.model.salary_max intValue]);
                 [self initView];
-//                [self setPickerVIewUI];
-//                [self setupDateKeyPan];
                 [self.tableView reloadData];
-                
                 [self.progressHUD setHidden:YES]; //显示进度框
-
+                if (self.model.jobs.count == 0) {
+                    [self.tableView addSubview:self.noResmuseDataView];
+                    [self.noResmuseDataView mas_makeConstraints:^(MASConstraintMaker *make) {
+                        make.left.right.mas_equalTo(self.view);
+                        make.top.mas_equalTo(self.view).offset(98+44);
+                        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+                    }];
+                    self.tableView.scrollEnabled = NO;
+                }else{
+                    self.tableView.scrollEnabled = YES;
+                    [self.noResmuseDataView setHidden:YES];
+                }
             }
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
@@ -190,6 +201,15 @@
 -(void)fanhui{
     [self.navigationController popViewControllerAnimated:NO];
 }
+
+#pragma mark - myDelegate
+
+-(void)didClickCreateResumeAction{
+    JobIntensionViewController *vc = [[JobIntensionViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
 //#pragma mark - PickerViewDelegate
 //
 ////返回有几列
@@ -533,7 +553,7 @@
 
 - (JMTitlesView *)titleView {
     if (!_titleView) {
-        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全职简历", @"兼职简历"]];
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全职简历", @"任务简历"]];
         __weak JMMyResumeViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;
@@ -589,4 +609,13 @@
     }
     return _jobStatusPickerSingle;
 }
+
+-(JMNoResumeDataView *)noResmuseDataView{
+    if (!_noResmuseDataView) {
+        _noResmuseDataView = [[JMNoResumeDataView alloc]initWithFrame:CGRectMake(0, 300, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _noResmuseDataView.delegate = self;
+    }
+    return _noResmuseDataView;
+}
+
 @end

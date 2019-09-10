@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, JMPostPartTimeResumeViewType) {
     JMPostPartTimeResumeVieweEdit,
     JMPostPartTimeResumeViewAdd,
+    JMPostPartTimeResumeViewLogin,
 };
 
 @interface JMPostPartTimeResumeViewController : BaseViewController

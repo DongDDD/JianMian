@@ -126,8 +126,8 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
                 [self.no_dataBtn setTitle:@"发布任务" forState:UIControlStateNormal];
             }else{
                 [self getAbilityListData];
-                self.no_dataLab.text = @"你还没有兼职简历，快去发布吧！";
-                [self.no_dataBtn setTitle:@"发布兼职简历" forState:UIControlStateNormal];
+                self.no_dataLab.text = @"你还没有任务简历，快去发布吧！";
+                [self.no_dataBtn setTitle:@"发布任务简历" forState:UIControlStateNormal];
             }
             break;
         case JMPartTimeJobTypeHistory:
@@ -398,7 +398,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
     if (_viewType == JMPartTimeJobTypeResume) {
         UIButton *headerBtn = [[UIButton alloc]init];
         headerBtn.backgroundColor = [UIColor colorWithRed:245/255.0 green:245/255.0 blue:246/255.0 alpha:1.0];
-        [headerBtn setTitle:@"再发一份兼职简历 + " forState:UIControlStateNormal];
+        [headerBtn setTitle:@"再发一份任务简历 + " forState:UIControlStateNormal];
         [headerBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
         headerBtn.titleLabel.font = [UIFont systemFontOfSize:13];
         [headerBtn addTarget:self action:@selector(addPartTimeJobResume) forControlEvents:UIControlEventTouchUpInside];

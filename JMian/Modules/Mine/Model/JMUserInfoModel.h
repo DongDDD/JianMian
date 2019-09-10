@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *realStatus;
 @property (nonatomic, copy) NSString *usersig;
 @property (nonatomic, copy) NSString *deadline;
+@property (nonatomic, copy) NSString *ability_count;
 
 @property (nonatomic, copy) NSString *card_status;
 @property (nonatomic, copy) NSString *card_sex;

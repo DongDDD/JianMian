@@ -17,6 +17,7 @@
                 <outlet property="headerImg" destination="xz1-PU-svB" id="xSJ-iC-Xl6"/>
                 <outlet property="manBtn" destination="NQ1-fX-nFI" id="0Jb-RB-em7"/>
                 <outlet property="nameText" destination="vqL-lE-2Xj" id="eAn-Yd-fgU"/>
+                <outlet property="partTimeJobView" destination="2Se-zH-AG4" id="LPf-Ib-Hco"/>
                 <outlet property="scrollView" destination="apJ-xv-pVX" id="Yly-Ay-iRV"/>
                 <outlet property="topToView" destination="0mw-Xk-Gv6" id="qow-kq-nE4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -148,8 +149,8 @@
                                         <constraint firstAttribute="width" constant="7" id="SMM-uU-Fms"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2G-Vq-3Up">
-                                    <rect key="frame" x="20" y="347" width="306" height="44"/>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R2G-Vq-3Up">
+                                    <rect key="frame" x="20" y="347" width="335" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="YPt-Pm-JmD"/>
                                     </constraints>
@@ -191,6 +192,14 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                 </textField>
+                                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Se-zH-AG4" userLabel="partTimeJobView">
+                                    <rect key="frame" x="20" y="324" width="335" height="166"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="166" id="1Tp-wm-9Cb"/>
+                                        <constraint firstAttribute="width" constant="335" id="X1h-eq-Hn2"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -200,8 +209,10 @@
                                 <constraint firstItem="vqL-lE-2Xj" firstAttribute="leading" secondItem="xpq-lF-yuU" secondAttribute="leading" id="Fuf-xt-jBw"/>
                                 <constraint firstItem="R2G-Vq-3Up" firstAttribute="top" secondItem="x1i-38-ECw" secondAttribute="bottom" id="OJI-Vg-Bv5"/>
                                 <constraint firstItem="mKC-aC-BuO" firstAttribute="leading" secondItem="NQ1-fX-nFI" secondAttribute="trailing" constant="34" id="QQg-Zy-QaC"/>
+                                <constraint firstItem="2Se-zH-AG4" firstAttribute="top" secondItem="UOB-pA-r3i" secondAttribute="bottom" constant="7.5" id="R8S-va-9kD"/>
                                 <constraint firstItem="mKC-aC-BuO" firstAttribute="width" secondItem="NQ1-fX-nFI" secondAttribute="width" id="RnV-iO-yzp"/>
                                 <constraint firstItem="x1i-38-ECw" firstAttribute="top" secondItem="xpq-lF-yuU" secondAttribute="bottom" constant="72" id="TIV-QQ-AkS"/>
+                                <constraint firstAttribute="trailing" secondItem="2Se-zH-AG4" secondAttribute="trailing" constant="20" id="Usl-LI-VsF"/>
                                 <constraint firstItem="2PF-62-fNQ" firstAttribute="centerX" secondItem="dD7-ED-Jwg" secondAttribute="centerX" id="Vzl-P3-TdK"/>
                                 <constraint firstItem="XUv-Ia-0tb" firstAttribute="leading" secondItem="dD7-ED-Jwg" secondAttribute="leading" constant="20" id="Xrp-jJ-kFN"/>
                                 <constraint firstItem="xz1-PU-svB" firstAttribute="leading" secondItem="NQ1-fX-nFI" secondAttribute="trailing" constant="-25" id="YLX-OA-eA0"/>
@@ -226,6 +237,7 @@
                                 <constraint firstAttribute="trailing" secondItem="NWm-LS-4BT" secondAttribute="trailing" constant="20" id="skk-qK-RrY"/>
                                 <constraint firstItem="vqL-lE-2Xj" firstAttribute="top" secondItem="xpq-lF-yuU" secondAttribute="bottom" constant="-15" id="uL3-aD-Hv0"/>
                                 <constraint firstItem="NQ1-fX-nFI" firstAttribute="top" secondItem="xz1-PU-svB" secondAttribute="bottom" constant="30" id="vXb-Bv-6ML"/>
+                                <constraint firstItem="2Se-zH-AG4" firstAttribute="leading" secondItem="dD7-ED-Jwg" secondAttribute="leading" constant="20" id="x3N-t8-lnW"/>
                                 <constraint firstAttribute="trailing" secondItem="XUv-Ia-0tb" secondAttribute="trailing" constant="20" id="xxZ-Jl-TNr"/>
                                 <constraint firstItem="mKC-aC-BuO" firstAttribute="height" secondItem="NQ1-fX-nFI" secondAttribute="height" id="zEO-LO-SZ3"/>
                                 <constraint firstAttribute="trailing" secondItem="UOB-pA-r3i" secondAttribute="trailing" constant="20" id="zdb-Kt-cEx"/>

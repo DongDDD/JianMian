@@ -202,10 +202,10 @@ static NSString *cellIdent = @"CellIdent";
         NSString *str1;NSString *str2;
         if ([userModel.type isEqualToString:B_Type_UESR]) {
             str1 = @"全职人才";
-            str2 = @"兼职人才";
+            str2 = @"任务";
         }else{
             str1 = @"全职职位";
-            str2 = @"兼职职位";
+            str2 = @"任务";
         }
         
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[str1,str2]];

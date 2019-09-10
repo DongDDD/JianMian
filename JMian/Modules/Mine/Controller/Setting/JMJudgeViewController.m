@@ -11,8 +11,12 @@
 #import "JMHTTPManager+Login.h"
 #import "NavigationViewController.h"
 #import "LoginViewController.h"
+#import "JMPostPartTimeResumeViewController.h"
+#import "BasicInformationViewController.h"
 #import "LoginPhoneViewController.h"
 #import <ImSDK/TIMFriendshipDefine.h>
+#import "JMBAndCTabBarViewController.h"
+
 
 @interface JMJudgeViewController ()
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
@@ -88,7 +92,23 @@
     //用户已经选择了C端身份，user_step判断用户填写信息步骤
     if ([model.type isEqualToString:C_Type_USER])
     {
-        vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+        if ([model.ability_count isEqualToString:@"0"]) {
+            if (![model.user_step isEqualToString:@"1"]) {
+                //走兼职简历步骤
+                [self getPersonPartTimeJobStep];
+                return;
+            }else{
+                //正在走全职简历注册步骤
+                vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+            
+            }
+ 
+            
+        }else{
+            JMBAndCTabBarViewController *vc = [[JMBAndCTabBarViewController alloc]init];
+            [UIApplication sharedApplication].delegate.window.rootViewController = vc;
+
+        }
     }
     
     //用户选择了B端身份，enterprise_step判断用户填写信息步骤
@@ -113,6 +133,7 @@
     }
     
 }
+
 #pragma mark - 判断注册到哪步
 
 - (NSString *)getCompanyStepWhereWitnEnterprise_step:(NSString *)enterprise_step{
@@ -144,7 +165,7 @@
 }
 
 
-//获取个人用户填写信息步骤
+//获取个人用户全职填写信息步骤
 - (NSString *)getPersonStepWhereWitnUser_step:(NSString *)user_step{
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
 
@@ -166,11 +187,29 @@
         return vcArray[1];
     }else if (CstepInt < vcArray.count) {
         //正常判断步骤
-        return vcArray[CstepInt];
+        return vcArray[CstepInt-1];
     }
     
     return nil;
 }
+
+//获取个人用户兼职任务填写信息步骤
+- (void)getPersonPartTimeJobStep{
+    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+    if (userInfoModel.nickname && userInfoModel.avatar && userInfoModel.card_sex) {
+        JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
+        vc.viewType = JMPostPartTimeResumeViewLogin;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
+        vc.viewType = BasicInformationViewTypePartTimeJob;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
+  
+}
+
+
 
 #pragma mark - 登录腾讯云
 

@@ -70,6 +70,7 @@ static NSString *cellIdent = @"cellIdent";
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.navigationController.navigationBar.translucent = NO;
     [self setTitleViewImageViewName:@"demi_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"不限"];
     self.per_page = 10;
@@ -103,13 +104,17 @@ static NSString *cellIdent = @"cellIdent";
     self.tableView.dataSource = self;
     self.tableView.rowHeight = 141;
     [self.tableView registerNib:[UINib nibWithNibName:@"HomeTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
-
+    [self.view addSubview:self.headView];
     [self.view addSubview:self.tableView];
 //    self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
 //        [self getData];
 //
 //    }];
-
+    [self.headView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view).offset(64);
+//        make.bottom.mas_equalTo(self.view);
+    }];
     // 马上进入刷新状态
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);

@@ -43,6 +43,7 @@
 @property(nonatomic,strong) UIView *bgView;
 @property(nonatomic,strong)UIButton *moreBtn;
 @property(nonatomic,strong)STPickerDate *pickerData;
+@property (weak, nonatomic) IBOutlet UIView *partTimeJobView;
 @end
 
 @implementation BasicInformationViewController
@@ -52,8 +53,11 @@
     self.view.backgroundColor = [UIColor whiteColor];
     if (self.viewType == BasicInformationViewTypeEdit) {
         [self setIsHiddenBackBtn:NO];
+    }else if (self.viewType == BasicInformationViewTypePartTimeJob) {
+        [self.partTimeJobView setHidden:NO];
+        [self.scrollView addSubview:self.moreBtn];
     }else{
-        [self setIsHiddenBackBtn:YES];
+        [self setIsHiddenBackBtn:NO];
         [self.scrollView addSubview:self.moreBtn];
     }
     self.nameText.delegate = self;
@@ -64,11 +68,8 @@
     if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
         [self.nameText setEnabled:NO];
         [self.birtnDateBtn setEnabled:NO];
-
-        
+    
     }
-
- 
 //    self.birthDateText.inputView = self.datePicker;
     // Do any additional setup after loading the view from its nib.
 }
@@ -398,13 +399,23 @@
         [self showAlertSimpleTips:@"提示" message:@"请选择头像" btnTitle:@"好的"];
         return;
     }
-    [[JMHTTPManager sharedInstance] updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:_imageUrl nickname:self.nameText.text email:self.emailText.text name:self.nameText.text sex:self.sex ethnic:nil birthday:_birtnDateStr address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-   
+    [self saveData];
+  
+}
+
+#pragma mark - data
+-(void)saveData{
+    NSString *emailStr;
+    if (self.emailText.text.length > 0) {
+        emailStr = self.emailText.text;
+    }
+    [[JMHTTPManager sharedInstance] updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:_imageUrl nickname:self.nameText.text email:emailStr name:self.nameText.text sex:self.sex ethnic:nil birthday:_birtnDateStr address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             [JMUserInfoManager saveUserInfo:userInfo];
-         
+            
             if (self.model) {
                 [self.navigationController popViewControllerAnimated:YES];
             }else {
@@ -420,10 +431,9 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-  
+    
+
 }
-
-
 
 #pragma mark - lazy
 

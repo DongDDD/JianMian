@@ -39,7 +39,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"兼职人才详情";
+    self.title = @"个人详情";
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self setHTMLPath:@"SecondModulesHTML/B/Bdetail.html"];
     [self initView];

@@ -275,7 +275,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         
         JMPartTimeJobResumeViewController *vc = [[JMPartTimeJobResumeViewController alloc]init];
         vc.viewType = JMPartTimeJobTypeResume;
-        vc.title = @"兼职简历";
+        vc.title = @"任务简历";
         [self.navigationController pushViewController:vc animated:YES];
         NSLog(@"didClickPostTaskAction");
         
@@ -631,8 +631,8 @@ static NSString *C_cellIdent = @"CSquareCellID";
             str2 = @"职位筛选";
             
         }else{
-            str1 = @"推荐兼职";
-            str2 = @"兼职分类";
+            str1 = @"推荐任务";
+            str2 = @"任务分类";
         }
         
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[str1, str2,@"与我匹配"]];

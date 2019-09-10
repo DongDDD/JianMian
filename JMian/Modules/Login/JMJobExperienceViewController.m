@@ -94,7 +94,7 @@
             [self.startDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
             [self.endDateBtn setTitle:self.model.end_date forState:UIControlStateNormal];
             [self.endDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-
+            [self.decriptionTextView setContent:self.model.experiences_description];
             break;
         case JMJobExperienceViewTypeAdd:
             self.title = @"新增工作经历";

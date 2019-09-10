@@ -22,7 +22,7 @@ static CGFloat kMagin = 10.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.title = @"选择兼职类型";
+    self.title = @"选择任务类型";
     [self.view addSubview:self.collectionView];
     [self getData];
     // Do any additional setup after loading the view from its nib.

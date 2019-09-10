@@ -28,7 +28,6 @@
 #define Login_URL @"api/login"
 //发送验证码
 #define Login_Captcha_URL @"sms/captcha"
-
 #define User_info_URL @"api/user/info"
 #define Update_info_URL @"api/user/update"
 #define Position_label_URL @"labels"

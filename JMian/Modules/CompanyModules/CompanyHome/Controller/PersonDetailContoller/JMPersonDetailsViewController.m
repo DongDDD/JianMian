@@ -557,9 +557,30 @@
             
         }];
         
-    }else{
+    }else if ([userModel.card_status isEqualToString:Card_NOIdentify]){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实名认证通过后才能申请任务" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去实名认证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }]];
         
-        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
+        [self presentViewController:alert animated:YES completion:nil];
+//        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
+    }else if ([userModel.card_status isEqualToString:Card_RefuseIdentify]){
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实名认证审核不通过，请重新认证" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去实名认证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    
+    }else if ([userModel.card_status isEqualToString:Card_WaitIdentify]) {
+        [self showAlertSimpleTips:@"提示" message:@"实名认证审核中，通过后才能申请任务" btnTitle:@"好的"];
     }
     
 }
