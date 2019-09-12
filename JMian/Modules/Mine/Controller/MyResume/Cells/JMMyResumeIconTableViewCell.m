@@ -34,7 +34,7 @@ NSString *const JMMyResumeIconTableViewCellIdentifier = @"JMMyResumeIconTableVie
 
 - (void)setUserInfo:(JMUserInfoModel *)model {
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    self.userNameLabel.text = model.card_name;
+    self.userNameLabel.text = model.nickname;
     if ([model.card_status isEqualToString:Card_PassIdentify]) {
         self.subLab.text = @"基本信息查看";
     }

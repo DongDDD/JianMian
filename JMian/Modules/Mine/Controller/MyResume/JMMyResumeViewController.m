@@ -383,8 +383,7 @@
         {
             [self.view addSubview:self.jobStatusPickerSingle];
             [self.jobStatusPickerSingle show];
-            
-            
+        
             break;
 
         }
@@ -473,7 +472,9 @@
         }
         case JMMyResumeCellTypyText:
         {
-            
+            JMMyDescriptionViewController *vc = [[JMMyDescriptionViewController alloc] init];
+            vc.myDescription = self.cellConfigures.model.myDescription;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         default:

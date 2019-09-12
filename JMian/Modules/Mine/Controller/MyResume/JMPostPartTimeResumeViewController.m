@@ -40,6 +40,7 @@
 @property (nonatomic, assign)BOOL isUpLoadVideo;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property(nonatomic,strong)UIButton *moreBtn;
 
 //提交请求参数
 @property (nonatomic,strong)NSString *city_id;
@@ -61,19 +62,23 @@ static NSString *cellIdent = @"cellIdent";
     self.view.backgroundColor = BG_COLOR;
     [self.view addSubview:self.tableView];
     [self.tableView addSubview:self.footerView];
-    
+    [self.tableView addSubview:self.moreBtn];
+
     if (_viewType == JMPostPartTimeResumeVieweEdit) {
         [self setRightBtnTextName:@"保存"];
-        self.title = @"编辑兼职简历";
+        self.title = @"编辑接任务简历";
         [self.bottomView setHidden:NO];
         [self.view addSubview:self.bottomView];
     }else if (_viewType == JMPostPartTimeResumeViewAdd) {
-        self.title = @"发布兼职简历";
+        self.title = @"创建接任务简历";
         [self setRightBtnTextName:@"发布"];
     }else if (_viewType == JMPostPartTimeResumeViewLogin) {
         self.title = @"接任务简历";
-        [self setIsHiddenBackBtn:YES];
         [self setRightBtnTextName:@"下一步"];
+    }
+    if (_isHideBackBtn) {
+        [self setIsHiddenBackBtn:YES];
+        
     }
     
 
@@ -87,9 +92,9 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [IQKeyboardManager sharedManager].enable = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+//    [IQKeyboardManager sharedManager].enable = YES;
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     //    第二版：C端 获取个人兼职简历
     if (_viewType == JMPostPartTimeResumeVieweEdit) {
         
@@ -99,39 +104,39 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [IQKeyboardManager sharedManager].enable = YES;
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [IQKeyboardManager sharedManager].enable = YES;
+//
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
 }
 
 
-- (void)keyboardWillShow:(NSNotification *)aNotification {
-    NSDictionary *userInfo = aNotification.userInfo;
-    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//- (void)keyboardWillShow:(NSNotification *)aNotification {
+//    NSDictionary *userInfo = aNotification.userInfo;
+//    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+//
+//    CGRect keyboardRect = aValue.CGRectValue;
+//    CGRect frame = self.footerView.frame;
+//    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
+//    CGRect rect= CGRectMake(0,_changeHeight+100,SCREEN_WIDTH,SCREEN_HEIGHT);
+//    if (_changeHeight < 0) {
+//
+//        [UIView animateWithDuration:0.3 animations:^ {
+//            self.view.frame = rect;
+//
+//        }];
+//    }
+//
+//}
 
-    CGRect keyboardRect = aValue.CGRectValue;
-    CGRect frame = self.footerView.frame;
-    self.changeHeight = keyboardRect.size.height - (frame.origin.y+frame.size.height);
-    CGRect rect= CGRectMake(0,_changeHeight+100,SCREEN_WIDTH,SCREEN_HEIGHT);
-    if (_changeHeight < 0) {
-        
-        [UIView animateWithDuration:0.3 animations:^ {
-            self.view.frame = rect;
-            
-        }];
-    }
-
-}
-
-- (void)keyboardWillHide:(NSNotification *)aNotification {
-    [UIView animateWithDuration:0.3 animations:^ {
-        self.view.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-    }];
-
-
-}
+//- (void)keyboardWillHide:(NSNotification *)aNotification {
+//    [UIView animateWithDuration:0.3 animations:^ {
+//        self.view.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT);
+//
+//    }];
+//
+//
+//}
 
 #pragma mark - 赋值
 
@@ -499,7 +504,7 @@ static NSString *cellIdent = @"cellIdent";
 
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    [self.footerView.contentTextView resignFirstResponder];
+//    [self.footerView.contentTextView resignFirstResponder];
 
 }
 
@@ -517,13 +522,13 @@ static NSString *cellIdent = @"cellIdent";
     return 70;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-//    return 229;
-//}
-
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 700;
+}
+//
 //-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
 //
-//    return self.footerView;
+//    return self.moreBtn;
 //}
 
 
@@ -570,6 +575,18 @@ static NSString *cellIdent = @"cellIdent";
         
     }
     return _footerView;
+}
+
+-(UIButton *)moreBtn{
+    if (_moreBtn == nil) {
+        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.footerView.frame.origin.y+self.footerView.frame.size.height+20, SCREEN_WIDTH, 40)];
+        _moreBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+        
+        [_moreBtn setTitle:@"更多操作" forState:UIControlStateNormal];
+        [_moreBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [_moreBtn addTarget:self action:@selector(moreAction) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _moreBtn;
 }
 
 /*

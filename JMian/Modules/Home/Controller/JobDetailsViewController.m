@@ -70,9 +70,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //    self.navigationController.navigationBar.translucent = NO;
+//        self.navigationController.navigationBar.translucent = YES;
     //
-    //    self.extendedLayoutIncludesOpaqueBars = NO;
+//        self.extendedLayoutIncludesOpaqueBars = NO;
     if (_work_id == nil) {
         _work_id = self.homeworkModel.work_id;
         

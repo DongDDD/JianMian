@@ -57,8 +57,11 @@
 }
 
 -(void)setMyDescription:(NSString *)myDescription {
-    [self.decriptionTextView setContent:myDescription];
-    [self.decriptionTextView.placeHolder setHidden:YES];
+    if (![myDescription containsString:@"这个人很懒，没有填写自己的特长描述"]) {
+        [self.decriptionTextView setContent:myDescription];
+        [self.decriptionTextView.placeHolder setHidden:YES];
+        
+    }
 }
 
 //-(BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{

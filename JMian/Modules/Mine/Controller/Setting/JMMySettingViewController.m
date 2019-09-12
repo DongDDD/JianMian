@@ -15,6 +15,7 @@
 #import "JMVideoPlayManager.h"
 #import "JMAboutOursViewController.h"
 #import "JMOpinionViewController.h"
+#import "ChooseIdentity.h"
 
 @interface JMMySettingViewController ()<UITableViewDelegate,UITableViewDataSource,JMUserChangeWindowViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -170,7 +171,7 @@
         }else if (indexPath.row ==1) {
             JMOpinionViewController *vc = [JMOpinionViewController alloc];
             [self.navigationController pushViewController:vc animated:NO];
-
+            
         }
     }
     
@@ -212,8 +213,18 @@
         [JMUserInfoManager saveUserInfo:userInfo];
         kSaveMyDefault(@"usersig", userInfo.usersig);
         NSLog(@"usersig-----:%@",userInfo.usersig);
-        JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([userInfo.ability_count isEqualToString:@"0"] && [userInfo.user_step isEqualToString:@"0"]) {
+            //C端新用户
+            ChooseIdentity *vc = [[ChooseIdentity alloc]init];
+            vc.isChangeType = YES;
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+            
+        }else{
+            JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
         
         [[TIMManager sharedInstance] logout:^() {
             NSLog(@"logout succ");
@@ -224,6 +235,7 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+    
     
 }
 

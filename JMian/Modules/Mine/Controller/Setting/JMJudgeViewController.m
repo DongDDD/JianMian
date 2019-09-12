@@ -16,6 +16,7 @@
 #import "LoginPhoneViewController.h"
 #import <ImSDK/TIMFriendshipDefine.h>
 #import "JMBAndCTabBarViewController.h"
+#import "ChooseIdentity.h"
 
 
 @interface JMJudgeViewController ()
@@ -92,22 +93,43 @@
     //用户已经选择了C端身份，user_step判断用户填写信息步骤
     if ([model.type isEqualToString:C_Type_USER])
     {
-        if ([model.ability_count isEqualToString:@"0"]) {
-            if (![model.user_step isEqualToString:@"1"]) {
-                //走兼职简历步骤
-                [self getPersonPartTimeJobStep];
+//        if ([model.ability_count isEqualToString:@"0"]) {
+//            if (![model.user_step isEqualToString:@"1"]) {
+//                 int stepInt = [model.user_step intValue];
+//                if (stepInt > 1) {
+//                     vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+//                }else{
+//                    //走兼职简历步骤
+//
+//                    [self getPersonPartTimeJobStep];
+//                }
+//            }else{
+//                //正在走全职简历注册步骤
+//                vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
+//
+//            }
+//
+//
+//        }else{
+//            JMBAndCTabBarViewController *vc = [[JMBAndCTabBarViewController alloc]init];
+//            [UIApplication sharedApplication].delegate.window.rootViewController = vc;
+//
+//        }
+        
+        if ([model.ability_count isEqualToString:@"0"]){
+            if ([model.user_step isEqualToString:@"0"]) {
+                ChooseIdentity *vc = [[ChooseIdentity alloc]init];
+                NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:vc];
+                [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
                 return;
             }else{
-                //正在走全职简历注册步骤
                 vcStr = [self getPersonStepWhereWitnUser_step:model.user_step];
             
             }
- 
-            
         }else{
             JMBAndCTabBarViewController *vc = [[JMBAndCTabBarViewController alloc]init];
             [UIApplication sharedApplication].delegate.window.rootViewController = vc;
-
+            return;
         }
     }
     
@@ -145,7 +167,6 @@
                          @"JMUploadLicenseViewController",  //当enterprise_step=3
                          @"JMChangeIdentityViewController", //当enterprise_step=4
                          @"JMBAndCTabBarViewController"   //当enterprise_step=5
-                         
                          ];
     
     int BstepInt = [enterprise_step intValue];
@@ -187,7 +208,7 @@
         return vcArray[1];
     }else if (CstepInt < vcArray.count) {
         //正常判断步骤
-        return vcArray[CstepInt-1];
+        return vcArray[CstepInt];
     }
     
     return nil;
@@ -196,13 +217,15 @@
 //获取个人用户兼职任务填写信息步骤
 - (void)getPersonPartTimeJobStep{
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
-    if (userInfoModel.nickname && userInfoModel.avatar && userInfoModel.card_sex) {
+    if (userInfoModel.nickname.length > 0 && userInfoModel.avatar.length > 0 && userInfoModel.card_sex.length > 0) {
         JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
         vc.viewType = JMPostPartTimeResumeViewLogin;
+        vc.isHideBackBtn = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
         vc.viewType = BasicInformationViewTypePartTimeJob;
+        vc.isHideBackBtn = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 

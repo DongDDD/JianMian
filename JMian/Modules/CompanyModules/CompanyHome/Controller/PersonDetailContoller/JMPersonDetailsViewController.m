@@ -68,7 +68,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    self.navigationController.navigationBar.translucent = NO;
     [self setTitle:@"个人详情"];
     if (_user_job_id == nil) {
         _user_job_id = self.companyModel.user_job_id;

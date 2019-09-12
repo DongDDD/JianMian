@@ -22,6 +22,7 @@ typedef NS_ENUM(NSInteger, JMPostPartTimeResumeViewType) {
 //@property(nonatomic, strong)JMPartTimeJobModel *partTimeVitaModel;
 @property(nonatomic,copy)NSString *ability_id;
 @property(nonatomic,assign)JMPostPartTimeResumeViewType viewType;
+@property(nonatomic,assign)BOOL isHideBackBtn;
 @end
 
 NS_ASSUME_NONNULL_END

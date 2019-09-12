@@ -357,6 +357,7 @@ static NSString *cellIdent = @"cellIdent";
 -(void)didSelectedCity_id:(NSString *)city_id city_name:(nonnull NSString *)city_name{
 
     _city_id = city_id;
+    [self setBackBtnImageViewName:@"site_Home" textName:city_name];
     self.arrDate = [NSMutableArray array];
     [self.tableView.mj_header beginRefreshing];
 }

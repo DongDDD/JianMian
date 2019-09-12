@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ChooseIdentity : BaseViewController
 
+@property(nonatomic,assign)BOOL isChangeType;
+
 @end
 
 NS_ASSUME_NONNULL_END

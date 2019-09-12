@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcj-hb-5o0">
-                        <rect key="frame" x="20" y="10" width="280" height="132.5"/>
+                        <rect key="frame" x="20" y="0.0" width="280" height="142.5"/>
                         <string key="text">本人性格热情开朗，待人友好，为人诚实谦虚。工作勤
 奋认真负责，能吃苦耐劳，尽职尽责，有耐心。具有亲
 和力，平易近人，善于与人沟通。 学习刻苦认真，成
@@ -34,7 +34,7 @@
                     <constraint firstAttribute="bottom" secondItem="qcj-hb-5o0" secondAttribute="bottom" constant="5" id="WcW-ei-Tf1"/>
                     <constraint firstItem="qcj-hb-5o0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="b9X-FU-0GN"/>
                     <constraint firstAttribute="trailing" secondItem="qcj-hb-5o0" secondAttribute="trailing" constant="20" id="maY-Z6-ceX"/>
-                    <constraint firstItem="qcj-hb-5o0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="rGJ-We-HZg"/>
+                    <constraint firstItem="qcj-hb-5o0" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="rGJ-We-HZg"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

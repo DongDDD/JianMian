@@ -18,6 +18,9 @@
 #import "JMJudgeViewController.h"
 #import "IQKeyboardManager.h"
 #import "STPickerDate.h"
+#import "JMPostPartTimeResumeViewController.h"
+#import "JMJudgeViewController.h"
+
 
 
 
@@ -28,6 +31,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailText;
 @property (nonatomic,copy)NSString *imageUrl;
 @property (weak, nonatomic) IBOutlet UIButton *headerImg;
+@property (nonatomic, assign)BOOL isHaveHeaderImg;
+
 //@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIButton *birtnDateBtn;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -60,9 +65,16 @@
         [self setIsHiddenBackBtn:NO];
         [self.scrollView addSubview:self.moreBtn];
     }
+    //
+    if (_isHideBackBtn) {
+        [self setIsHiddenBackBtn:YES];
+        [self.scrollView addSubview:self.moreBtn];
+
+    }
+
     self.nameText.delegate = self;
   //  [self.view addSubview:_datePicker];
-    self.sex = @(1);
+//    self.sex = @(1);
     [self getNewUserInfo];
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
     if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
@@ -70,6 +82,9 @@
         [self.birtnDateBtn setEnabled:NO];
     
     }
+//    if ([self.baseVC isKindOfClass:[JMJudgeViewController class]) {
+//        
+//    }
 //    self.birthDateText.inputView = self.datePicker;
     // Do any additional setup after loading the view from its nib.
 }
@@ -120,13 +135,19 @@
 #pragma mark - 赋值
 -(void)setValuesAction{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if (userModel.card_name) {
-        self.nameText.text = userModel.card_name;
+    if (userModel.nickname) {
+        self.nameText.text = userModel.nickname;
         self.emailText.text = userModel.email;
-        [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-        [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];
-        [self.headerImg sd_setImageWithURL:[NSURL URLWithString:userModel.avatar] forState:UIControlStateNormal];
-        if ([self.model.card_sex isEqualToString:@"1"]) {
+        if (userModel.card_birthday.length > 0) {
+            [self.birtnDateBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+            [self.birtnDateBtn setTitle:userModel.card_birthday forState:UIControlStateNormal];            
+        }
+        if (userModel.avatar.length > 0) {
+            [self.headerImg sd_setImageWithURL:[NSURL URLWithString:userModel.avatar] forState:UIControlStateNormal];
+            _isHaveHeaderImg = YES;
+            
+        }
+        if ([userModel.card_sex isEqualToString:@"1"]) {
             [self.womanBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
             self.womanBtn.layer.masksToBounds = YES;
             self.womanBtn.layer.borderColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0].CGColor;
@@ -136,7 +157,7 @@
             [self.manBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
             self.manBtn.layer.borderColor = [UIColor whiteColor].CGColor;
             self.manBtn.backgroundColor = MASTER_COLOR;
-        }else if ([self.model.card_sex isEqualToString:@"2"]) {
+        }else if ([userModel.card_sex isEqualToString:@"2"]) {
             // 恢复上一个按钮颜色
             [self.manBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
             self.manBtn.layer.masksToBounds = YES;
@@ -148,7 +169,6 @@
             self.womanBtn.layer.borderColor = [UIColor whiteColor].CGColor;
             self.womanBtn.backgroundColor = MASTER_COLOR;
         }
-        
     }
     
     if (_viewType == BasicInformationViewTypeEdit) {
@@ -157,9 +177,7 @@
     }else {
         [self setRightBtnTextName:@"下一步"];
     }
-    
-    
-    
+ 
     [self.navigationController setNavigationBarHidden:NO];
    // self.datePicker.backgroundColor = [UIColor whiteColor];
     self.emailText.delegate = self;
@@ -168,9 +186,6 @@
     self.scrollView.delegate = self;
 
 }
-
-
-
 
 
 - (IBAction)headerAction:(id)sender {
@@ -315,6 +330,7 @@
         if (responsObject[@"data"]) {
             
             _imageUrl = responsObject[@"data"][0];
+            _isHaveHeaderImg = YES;
         }
         [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -395,9 +411,18 @@
 -(void)rightAction{
     [self.nameText resignFirstResponder];
     [self.emailText resignFirstResponder];
-    if (_imageUrl.length < 1 && _viewType == BasicInformationViewTypeDefault) {
+    if (!_isHaveHeaderImg) {
         [self showAlertSimpleTips:@"提示" message:@"请选择头像" btnTitle:@"好的"];
         return;
+    }
+    if (self.nameText.text.length == 0) {
+        [self showAlertSimpleTips:@"提示" message:@"请填写姓名" btnTitle:@"好的"];
+        return;
+    }
+    if (!self.sex) {
+        [self showAlertSimpleTips:@"提示" message:@"请选择性别" btnTitle:@"好的"];
+        return;
+        
     }
     [self saveData];
   
@@ -409,7 +434,14 @@
     if (self.emailText.text.length > 0) {
         emailStr = self.emailText.text;
     }
-    [[JMHTTPManager sharedInstance] updateUserInfoWithCompany_position:nil type:@(1) password:nil avatar:_imageUrl nickname:self.nameText.text email:emailStr name:self.nameText.text sex:self.sex ethnic:nil birthday:_birtnDateStr address:nil number:nil image_front:nil image_behind:nil user_step:@"3" enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    NSString *user_step;
+    if (_viewType == BasicInformationViewTypeDefault) {
+        user_step = @"3";
+    }else if (_viewType == BasicInformationViewTypePartTimeJob) {
+        user_step = @"";
+    }
+    
+    [[JMHTTPManager sharedInstance] updateUserInfoWithCompany_position:nil type:@"1" password:nil avatar:_imageUrl nickname:self.nameText.text email:emailStr name:nil sex:self.sex ethnic:nil birthday:_birtnDateStr address:nil number:nil image_front:nil image_behind:nil user_step:user_step enterprise_step:nil real_status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
@@ -417,11 +449,21 @@
             [JMUserInfoManager saveUserInfo:userInfo];
             
             if (self.model) {
+                //编辑状态
                 [self.navigationController popViewControllerAnimated:YES];
             }else {
-                JobIntensionViewController *vc = [[JobIntensionViewController alloc]init];
-                vc.loginViewType = JMLoginViewTypeNextStep;
-                [self.navigationController pushViewController:vc animated:YES];
+                //创建状态
+                if (_viewType == BasicInformationViewTypeDefault) {
+                    JobIntensionViewController *vc = [[JobIntensionViewController alloc]init];
+                    vc.loginViewType = JMLoginViewTypeNextStep;
+                    [self.navigationController pushViewController:vc animated:YES];
+                   
+                }else if (_viewType == BasicInformationViewTypePartTimeJob) {
+                    JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
+                    vc.viewType = JMPostPartTimeResumeViewLogin;
+                    [self.navigationController pushViewController:vc animated:YES];
+                    
+                }
             }
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             

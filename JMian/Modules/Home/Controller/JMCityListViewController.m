@@ -33,7 +33,7 @@ static NSString *cellIdent = @"cellIdent";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"工作城市";
-//    [self setRightBtnTextName:@"保存"];
+    [self setRightBtnTextName:@"保存"];
     [self getData];
     [self.view addSubview:self.tableView1];
     [self.view addSubview:self.tableView2];
@@ -55,8 +55,6 @@ static NSString *cellIdent = @"cellIdent";
             [self getHomeCityList];
             
         }
-        
-        
         [_tableView1 reloadData];
         [_tableView2 reloadData];
     }else{
@@ -199,7 +197,6 @@ static NSString *cellIdent = @"cellIdent";
  
     if (tableView == _tableView1) {
         //选择城市一级
-        [self setRightBtnTextName:@""];
         self.leve3ModelArray = [NSMutableArray array];
         //选择第一层的哪个城市，选择完获取到区数组
         JMCityModel *cityModel = self.leve2ModelArray[indexPath.row];
@@ -208,18 +205,18 @@ static NSString *cellIdent = @"cellIdent";
                 JMCityModel *model = [JMCityModel mj_objectWithKeyValues:dic];
                 [self.leve3ModelArray addObject:model];
             }
+            _city_id = cityModel.city_id;
+            _city_name = cityModel.city_name;
         }else{
             //--------选择全部---------，清空第二层级的数组
             self.leve3ModelArray = [NSMutableArray array];
             _city_id = @"0";
             _city_name = @"不限";
-            [self setRightBtnTextName:@"保存"];
         }
         
         [_tableView2 reloadData];
     }else if (tableView == _tableView2) {
         //选择区，二级 传这个层级的city_id
-        [self setRightBtnTextName:@"保存"];
         if (self.leve3ModelArray.count > 0) {
             JMCityModel *model = self.leve3ModelArray[indexPath.row];
             _city_id = model.city_id;

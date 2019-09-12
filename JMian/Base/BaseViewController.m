@@ -93,12 +93,12 @@
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.frame = CGRectMake(-30 , 0, 100, 28);
+    leftBtn.frame = CGRectMake(-40 , 0, 120, 28);
 //    leftBtn.backgroundColor = [UIColor redColor];
     [leftBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
     [leftBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     
-    UILabel *leftLab = [[UILabel alloc]initWithFrame:CGRectMake(leftBtn.frame.origin.x+leftBtn.frame.size.width-30, 0, 100,leftBtn.frame.size.height)];
+    UILabel *leftLab = [[UILabel alloc]initWithFrame:CGRectMake(leftBtn.frame.origin.x+leftBtn.frame.size.width-40, 0, 100,leftBtn.frame.size.height)];
     leftLab.text = textName;
     leftLab.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
     leftLab.font = [UIFont systemFontOfSize:13];

@@ -43,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@property(nonatomic,assign)BOOL isHiddenBackBtn;
 -(void)setIsHiddenRightBtn:(BOOL)isHiddenBackBtn;
 
+@property(nonatomic,assign)BOOL _isHideBackBtn;
 -(void)setRightBtnTextName:(NSString *)rightLabName;
 
 -(void)setTitleViewImageViewName:(NSString *)imageName;

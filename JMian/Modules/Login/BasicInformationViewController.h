@@ -15,7 +15,6 @@ typedef NS_ENUM(NSInteger, BasicInformationViewType) {
     BasicInformationViewTypeDefault,
     BasicInformationViewTypeEdit,
     BasicInformationViewTypePartTimeJob,
-
 };
 
 
@@ -23,6 +22,7 @@ typedef NS_ENUM(NSInteger, BasicInformationViewType) {
 
 @property (strong, nonatomic)JMUserInfoModel *model;
 @property (assign, nonatomic)BasicInformationViewType viewType;
+@property (nonatomic, assign)BOOL isHideBackBtn;
 @end
 
 NS_ASSUME_NONNULL_END
