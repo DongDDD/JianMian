@@ -352,7 +352,7 @@
 //IM被踢下线
 -(void)onUserStatus:(NSNotification *)notification{
     NSLog(@"---被踢");
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你被强制下线" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"你的账号在别处登录，你被强制下线" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
     [alert show];
     
     LoginViewController *loginVc = [[LoginViewController alloc]init];
@@ -441,7 +441,7 @@
 //        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:title message:self.videoChatDic[Sub_TITLE]
 //                                                      delegate:self cancelButtonTitle:@"接受" otherButtonTitles: @"拒绝", nil];
 //        [alert show];
-    }else{
+    }else if ([elem isKindOfClass:[TIMTextElem class]]) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         AudioServicesPlaySystemSound(1007);
     }

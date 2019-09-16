@@ -66,7 +66,7 @@
     
     if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
         receiverID = @"dominator";
-        self.title = @"系统消息";
+        titleStr = @"系统消息";
     }else if (model.user_id == _myConvModel.sender_user_id) {
         if (_myConvModel.recipient_nickname.length > 0) {
            

@@ -24,6 +24,10 @@
 #import "JMHTTPManager+CreateTaskOrder.h"
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMCompanyDetailViewController.h"
+#import "JMPostPartTimeResumeViewController.h"
+#import "JMIDCardIdentifyViewController.h"
+
+
 @interface JMCDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMCDetailVideoTableViewCellDelegate,JMShareViewDelegate,JMTaskApplyForViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -49,6 +53,11 @@
     self.title = @"任务详情";
     [self getData];
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self upDateUserData];
 }
 
 -(void)initView{
@@ -359,8 +368,20 @@
     if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
         [self createChatRequstWithForeign_key:self.task_id user_id:self.configures.model.user_id];
         
-    }else{
-        [self showAlertWithTitle:@"提示" message:@"实名认证后才能聊天" leftTitle:@"返回" rightTitle:@"去实名认证"];
+    }else if ([userModel.card_status isEqualToString:Card_NOIdentify] || [userModel.card_status isEqualToString:Card_RefuseIdentify]){
+        //是否通过实名认证
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实名认证通过后才能发起聊天" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去实名认证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }else if ([userModel.card_status isEqualToString:Card_WaitIdentify]){
+        //审核中状态
+        [self showAlertSimpleTips:@"提示" message:@"实名认证审核中，暂时无法发起聊天" btnTitle:@"好的"];
     }
 }
 
@@ -386,11 +407,50 @@
     }
     NSString *isRead = kFetchMyDefault(@"isRead");
     if ([isRead isEqualToString:@"1"]) {
-        [self sendResquest];
+        //判断有是否符合申请条件
+        [self applyForAction];
+        
     }else{
+        //服务提醒
         [self showApplyForView];
     }
     
+}
+
+//判断有是否符合申请任务条件
+-(void)applyForAction{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+
+    if ([userModel.ability_count isEqualToString:@"0"]) {
+        //是否有任务简历
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"你还没有发布任务简历" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"发布任务简历" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
+            vc.viewType = JMPostPartTimeResumeViewAdd;
+            [self.navigationController pushViewController:vc animated:YES];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    }else if ([userModel.card_status isEqualToString:Card_NOIdentify] || [userModel.card_status isEqualToString:Card_RefuseIdentify]){
+        //是否通过实名认证
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实名认证通过后才能申请任务" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"去实名认证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }else if ([userModel.card_status isEqualToString:Card_WaitIdentify]){
+        //审核中状态
+        [self showAlertSimpleTips:@"提示" message:@"实名认证审核中，暂时无法申请任务" btnTitle:@"好的"];
+    }else{
+        [self sendResquest];
+    
+    }
 }
 
 -(void)showShareView{
@@ -446,6 +506,18 @@
 }
 
 
+-(void)isReadProtocol:(BOOL)isRead{
+    if (isRead) {
+        //不再提醒
+        kSaveMyDefault(@"isRead", @"1");
+        
+    }else{
+        kSaveMyDefault(@"isRead", @"0");
+        
+    }
+    
+}
+
 -(void)applyForViewDeleteAction{
     [self hiddenApplyForView];
     
@@ -453,7 +525,7 @@
 
 -(void)applyForViewComfirmAction{
     [self hiddenApplyForView];
-    [self sendResquest];
+    [self applyForAction];
     
 }
 

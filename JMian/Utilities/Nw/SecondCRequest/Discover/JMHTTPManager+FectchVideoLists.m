@@ -12,6 +12,7 @@
 
 - (void)fectchVideoList_mode:(NSString *)mode
                      city_id:(nullable NSString *)city_id
+                        type:(nullable NSString *)type
                contact_phone:(nullable NSString *)contact_phone
                     per_page:(nullable NSString *)per_page
                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
@@ -19,6 +20,7 @@
     NSDictionary *dic =  @{
                            @"mode":mode,
                            @"city_id":city_id,
+                           @"type":type,
                            @"contact_phone":contact_phone,
                            @"per_page":per_page,
                            };

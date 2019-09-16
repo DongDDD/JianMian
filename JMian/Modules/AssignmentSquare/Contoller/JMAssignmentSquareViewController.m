@@ -98,6 +98,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [super viewWillAppear:animated];
     [self getUserData];
 }
+
 -(void)fanhui{
     JMCityListViewController *vc = [[JMCityListViewController alloc]init];
     vc.viewType = JMCityListViewPartTime;
@@ -306,6 +307,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     }
     
 }
+
 -(void)refreshData
 {
     self.dataArray = [NSMutableArray array];
@@ -396,7 +398,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
             array = [JMAbilityCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
             [self.dataArray addObjectsFromArray:array];
-            if (array.count < 15) {
+            if (array.count < 10) {
                 [self.tableView.mj_footer setHidden:YES];
             }else{
                 [self.tableView.mj_footer setHidden:NO];
@@ -422,7 +424,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
             array = [JMTaskListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
             [self.dataArray addObjectsFromArray:array];
-            if (array.count < 15) {
+            if (array.count < 10) {
                 [self.tableView.mj_footer setHidden:YES];
             }else{
                 [self.tableView.mj_footer setHidden:NO];

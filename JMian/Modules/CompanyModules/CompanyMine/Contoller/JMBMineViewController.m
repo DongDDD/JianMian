@@ -55,7 +55,7 @@
     [super viewDidLoad];
     self.view.backgroundColor = BG_COLOR;
     
-  
+   self.navigationController.navigationBar.translucent = NO;
    
     [self initView];
 

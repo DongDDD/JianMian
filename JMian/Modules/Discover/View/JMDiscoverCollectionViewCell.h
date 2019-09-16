@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, strong)JMVideoListCellData *data;
 @property(nonatomic, weak)id<JMDiscoverCollectionViewCellDelegate>delegate;
 @property(nonatomic, strong)UIImage *videoImage;
-
+-(void)setData:(JMVideoListCellData *)data titleIndex:(NSInteger)titleIndex;
 @end
 
 NS_ASSUME_NONNULL_END

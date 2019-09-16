@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)youkeStatus;//判断游客模式
 
+-(void)upDateUserData;//更新用户信息
+
 - (void)fanhui;
 
 -(void)rightAction;

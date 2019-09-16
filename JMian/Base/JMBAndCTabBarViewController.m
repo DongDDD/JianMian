@@ -42,6 +42,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+   
     [self getMsgList];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {

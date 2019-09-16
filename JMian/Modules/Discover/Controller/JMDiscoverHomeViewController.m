@@ -111,33 +111,82 @@
 
 -(void)loadMoreBills
 {
+//    [self getData_mode:self.mode type:@""];;//全职
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self BsendRequst];
+        
+    }else if ([userModel.type isEqualToString:C_Type_USER]) {
+        [self CsendRequst];
+        
+    }
     
-    [self getData_mode:self.mode];;//全职
-
+ 
 }
+
 -(void)refreshData
 {
     [self.videoDataList removeAllObjects];
     [self.imageArray removeAllObjects];
-    [self getData_mode:self.mode];;//全职
-
+//    [self getData_mode:self.mode type:@""];;//全职
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self BsendRequst];
+        
+    }else if ([userModel.type isEqualToString:C_Type_USER]) {
+        [self CsendRequst];
+        
+    }
+    
 }
 
--(void)setCurrentIndex{
-    [self.videoDataList removeAllObjects];
-    [self.imageArray removeAllObjects];
+-(void)CsendRequst{
     switch (_index) {
         case 0:
-            self.mode = @"2";
+            self.mode = @"1";
+            [self getData_mode:@"1" type:B_Type_UESR];;
+            
             break;
         case 1:
             self.mode = @"1";
+            [self getData_mode:@"1" type:C_Type_USER];;
             break;
             
         default:
             break;
     }
-    [self getData_mode:self.mode];;
+
+}
+-(void)BsendRequst{
+    switch (_index) {
+        case 0:
+            self.mode = @"1";
+            [self getData_mode:@"1" type:@""];;
+            
+            break;
+        case 1:
+            self.mode = @"1";
+            [self getData_mode:@"1" type:B_Type_UESR];;
+            break;
+            
+        default:
+            break;
+    }
+    
+    
+}
+
+-(void)setCurrentIndex{
+    [self.videoDataList removeAllObjects];
+    [self.imageArray removeAllObjects];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self BsendRequst];
+        
+    }else if ([userModel.type isEqualToString:C_Type_USER]) {
+        [self CsendRequst];
+        
+    }
 
 
 }
@@ -229,18 +278,18 @@
 //    [controller dismissViewControllerAnimated:YES completion:nil];
 //}
 #pragma mark   getData
--(void)getData_mode:(NSString *)mode{
+-(void)getData_mode:(NSString *)mode type:(NSString *)type{
     [self showProgressHUD_view:self.view];
-    [[JMHTTPManager sharedInstance]fectchVideoList_mode:mode city_id:_city_id contact_phone:nil per_page:@"10" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fectchVideoList_mode:mode city_id:_city_id type:type contact_phone:nil per_page:@"10" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
 //            NSMutableArray *array = [NSMutableArray array];
             self.videoDataList = [JMVideoListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
 //            [self.videoDataList addObjectsFromArray:array]
-            if (self.videoDataList.count < 10) {
-                [self.collectionView.mj_footer setHidden:YES];
+//            if (self.videoDataList.count < 10) {
+//                [self.collectionView.mj_footer setHidden:YES];
 //                _isShowAllData = YES;
-            }
+//            }
             
 //            [self.videoDataList addObjectsFromArray:array];
             [self.collectionView reloadData];
@@ -263,12 +312,22 @@
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     NSString *videoUrl;
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        videoUrl = data.video_file_path;
-    }else{
-        JMCVideoModel *CVideoModel = data.video[0];
- 
-        videoUrl = CVideoModel.file_path;
+        if (_index == 0) {
+            videoUrl = data.video_file_path;
+            
+        }else if (_index == 1) {
+            JMCVideoModel *CVideoModel = data.video[0];
+            videoUrl = CVideoModel.file_path;
+        }
         
+    }else{
+        if (_index == 0) {
+            JMCVideoModel *CVideoModel = data.video[0];
+            videoUrl = CVideoModel.file_path;
+            
+        }else if (_index == 1) {
+            videoUrl = data.video_file_path;
+        }
     
     }
 
@@ -301,14 +360,13 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JMDiscoverCollectionViewCell *cell = (JMDiscoverCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
-    [cell setData:self.videoDataList[indexPath.row]];
+    [cell setData:self.videoDataList[indexPath.row] titleIndex:_index];
 //    if (self.imageArray.count > 0) {
 //        [cell setVideoImage:self.imageArray[indexPath.row]];
 //    }
    
      return cell;
 }
-
 
 
 
@@ -347,11 +405,11 @@
         NSString *str2;
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         if ([userModel.type isEqualToString:B_Type_UESR]) {
-            str1 = @"任务";
-            str2 = @"全职";
+            str1 = @"求职达人";
+            str2 = @"企业视频";
         }else{
-            str1 = @"企业";
-            str2 = @"最新";
+            str1 = @"推荐企业";
+            str2 = @"求职达人";
         }
         
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, SafeAreaTopHeight-40, SCREEN_WIDTH, 43} titles:@[str1, str2]];

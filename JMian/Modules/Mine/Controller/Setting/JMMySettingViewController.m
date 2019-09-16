@@ -177,25 +177,33 @@
     
     
     if (indexPath.section == 3) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要退出吗" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"退出" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self loginOut];
+            
+        }]];
         
-        [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            
-            kRemoveMyDefault(@"token");
-            kRemoveMyDefault(@"usersig");
-            //token为空执行
-            
-            [[TIMManager sharedInstance] logout:^() {
-                NSLog(@"logout succ");
-            } fail:^(int code, NSString * err) {
-                NSLog(@"logout fail: code=%d err=%@", code, err);
-            }];
-            LoginViewController *login = [[LoginViewController alloc] init];
-            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-            
-        }];
+        [self presentViewController:alert animated:YES completion:nil];
+//        [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//            kRemoveMyDefault(@"token");
+//            kRemoveMyDefault(@"usersig");
+//            //token为空执行
+//
+//            [[TIMManager sharedInstance] logout:^() {
+//                NSLog(@"logout succ");
+//            } fail:^(int code, NSString * err) {
+//                NSLog(@"logout fail: code=%d err=%@", code, err);
+//            }];
+//            LoginViewController *login = [[LoginViewController alloc] init];
+//            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+//            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+//        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//
+//        }];
     }
     
 }
