@@ -94,11 +94,11 @@
     if (imageNameRight2 != nil) {
         UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         shareBtn.frame = CGRectMake(0, 0, 25, 25);
-        JMVersionModel *model = [JMVersionManager getVersoinInfo];
-        if ([model.test isEqualToString:@"1"]) {
-            [shareBtn setHidden:YES];
-            
-        }
+//        JMVersionModel *model = [JMVersionManager getVersoinInfo];
+//        if ([model.test isEqualToString:@"1"]) {
+//            [shareBtn setHidden:YES];
+//
+//        }
         [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
         [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
         [bgView addSubview:shareBtn];
@@ -125,6 +125,7 @@
 -(void)shareViewLeftAction{
     [self wxShare:0];
     [self hiddenChoosePayView];
+//    [self shareMiniProgram];
     
 }
 
@@ -208,6 +209,33 @@
     [WXApi sendReq:sendReq];
     
 }
+
+-(void)shareMiniProgram {
+    WXMiniProgramObject *object = [WXMiniProgramObject object];
+    object.webpageUrl = self.detailModel.share_url;
+    object.userName = MiniProgramUserName;
+    object.path = [NSString stringWithFormat:@"pages/ability_info/ability_info?id=%@",self.ability_id];
+    //缩略图,压缩图片,不超过 32 KB
+    UIImage *image = [self handleImageWithURLStr:self.detailModel.user_avatar];
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    object.hdImageData = thumbData;
+    object.withShareTicket = @"";
+    object.miniProgramType = WXMiniProgramTypePreview;
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = self.detailModel.user_nickname;
+    message.description = @"";
+    message.thumbData = thumbData;  //兼容旧版本节点的图片，小于32KB，新版本优先
+    //使用WXMiniProgramObject的hdImageData属性
+    message.mediaObject = object;
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;  //目前只支持会话
+    [WXApi sendReq:req];
+    
+}
+
+
 //压缩处理
 - (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
     NSURL *url = [NSURL URLWithString:imageURLStr];

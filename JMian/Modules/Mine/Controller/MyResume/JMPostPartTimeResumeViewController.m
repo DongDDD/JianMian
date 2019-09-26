@@ -270,9 +270,12 @@ static NSString *cellIdent = @"cellIdent";
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
         [alert show];
         if (_viewType == JMPostPartTimeResumeViewLogin) {
+            //登录注册流程
             JMBAndCTabBarViewController *vc = [[JMBAndCTabBarViewController alloc]init];
-            [self.navigationController pushViewController:vc animated:YES];
+            [UIApplication sharedApplication].delegate.window.rootViewController = vc;
+
         }else{
+            //常规流程
             [self.navigationController popViewControllerAnimated:YES];
         
         }

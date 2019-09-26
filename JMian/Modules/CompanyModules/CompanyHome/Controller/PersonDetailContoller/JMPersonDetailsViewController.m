@@ -332,9 +332,7 @@
     urlMessage.title = self.vitaModel.user_nickname;
     urlMessage.description = self.vitaModel.vita_description ;
     
-    //    UIImageView *imgView = [[UIImageView alloc]init];
-    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
-    //
+ 
     
     UIImage *image = [self getImageFromURL:self.vitaModel.user_avatar];   //缩略图,压缩图片,不超过 32 KB
     NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
@@ -347,6 +345,34 @@
     sendReq.message = urlMessage;
     //发送分享
     [WXApi sendReq:sendReq];
+    
+}
+
+-(void)shareMiniProgram {
+    WXMiniProgramObject *object = [WXMiniProgramObject object];
+    object.webpageUrl = self.vitaModel.share_url;
+    object.userName = MiniProgramUserName;
+    object.path = [NSString stringWithFormat:@"pages/person/person?id=%@",self.user_job_id];
+    UIImage *image = [self getImageFromURL:self.vitaModel.user_avatar];   //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    //缩略图,压缩图片,不超过 32 KB
+//    UIImage *image = [self handleImageWithURLStr:url];
+//    NSData *thumbData = UIImageJPEGRepresentation(image, 0.1);
+    
+    object.hdImageData = thumbData;
+    object.withShareTicket = @"";
+    object.miniProgramType = WXMiniProgramTypePreview;
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = self.vitaModel.user_nickname;
+//    message.description = self.configures.model.myDescription;
+    message.thumbData = nil;  //兼容旧版本节点的图片，小于32KB，新版本优先
+    //使用WXMiniProgramObject的hdImageData属性
+    message.mediaObject = object;
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;  //目前只支持会话
+    [WXApi sendReq:req];
     
 }
 
@@ -458,21 +484,6 @@
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
-    //    [[UIApplication sharedApplication].keyWindow addSubview:playVC.view];
-    //    [playVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-    //        make.edges.offset(0);
-    //    }];
-    
-    //    SJVideoPlayer *_videoPlayer = [SJVideoPlayer player];
-    //    _videoPlayer.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT); // 可以使用AutoLayout, 这里为了简便设置的Frame.
-    //    [self.view addSubview:_videoPlayer.view];
-    //    // 初始化资源
-    //    _videoPlayer.URLAsset = [[SJVideoPlayerURLAsset alloc] initWithURL:[NSURL URLWithString:self.companyModel.video_file_path]];
-    //    [_videoPlayer play];
-    //    JMPlayerViewController *vc = [[JMPlayerViewController alloc]init];
-    //    vc.player = self.player;
-    //    vc.topTitle = self.companyModel.userNickname;
-    //    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -635,7 +646,7 @@
 -(void)shareViewLeftAction{
     [self disapearAction];
     [self wxShare:0];
-    
+//    [self shareMiniProgram];
 }
 
 -(void)shareViewRightAction{

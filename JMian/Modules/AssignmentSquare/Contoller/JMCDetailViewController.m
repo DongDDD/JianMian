@@ -26,6 +26,9 @@
 #import "JMCompanyDetailViewController.h"
 #import "JMPostPartTimeResumeViewController.h"
 #import "JMIDCardIdentifyViewController.h"
+#import "JMHTTPManager+UpdateTask.h"
+#import "JMBUserPostSaleJobViewController.h"
+#import "JMBUserPostPartTimeJobViewController.h"
 
 
 @interface JMCDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMCDetailVideoTableViewCellDelegate,JMShareViewDelegate,JMTaskApplyForViewDelegate>
@@ -43,6 +46,8 @@
 @property (nonatomic, strong) JMTaskApplyForView *taskApplyForView;
 @property (nonatomic, strong) JMShareView *shareView;
 @property (nonatomic ,strong) UIView *BGShareView;
+@property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
+@property (weak, nonatomic) IBOutlet UIButton *bottomRightBtn;
 
 @end
 
@@ -51,18 +56,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"任务详情";
-    [self getData];
+    if (_viewType == JMCDetailShowType) {
+        [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+        
+    }else if (_viewType == JMCDetailPreviewType) {
+    
+        [self setRightBtnImageViewName:@"jobDetailShare"];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self getData];
     [self upDateUserData];
 }
 
 -(void)initView{
     //    [self.view addSubview:self.taskDetailHeaderView];
-    [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.bottomView];
     [self.view addSubview:self.shareView];
@@ -82,9 +93,25 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenChoosePayView)];
     [self.BGShareView addGestureRecognizer:tap];
+
+}
+//预览状态分享按钮
+- (void)setRightBtnImageViewName:(NSString *)imageName{
+    
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 19)];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtn.frame = CGRectMake(-20 , 0, 120, 28);
+    //    leftBtn.backgroundColor = [UIColor redColor];
+    [rightBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    
+    [bgView addSubview:rightBtn];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+    self.navigationItem.rightBarButtonItem = rightItem;
     
 }
-
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
     
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
@@ -147,7 +174,29 @@
 //                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
 //                
 //            }
-            [self getCommentInfo];
+            if (_viewType == JMCDetailPreviewType) {
+                [self initView];
+                [self.tableView reloadData];
+
+            }else
+                if (_viewType == JMCDetailShowType) {
+                [self getCommentInfo];
+            
+            }
+            
+            if (_viewType == JMCDetailPreviewType) {
+                if ([self.configures.model.status isEqualToString:Position_Online]) {
+                    [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
+                    [self.bottomRightBtn setTitle:@"编辑任务" forState:UIControlStateNormal];
+                    
+                }else if (([self.configures.model.status isEqualToString:Position_Downline])) {
+                    [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
+                    [self.bottomRightBtn setTitle:@"编辑任务" forState:UIControlStateNormal];
+                    
+                }
+            }else if (_viewType == JMCDetailShowType) {
+                
+            }
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -223,6 +272,30 @@
     }
 }
 
+//更新任务上下线
+-(void)updateTaskStatusRequestWithStatus:(NSString *)status{
+    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:nil unit:nil payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        NSString *title;
+        if ([status isEqualToString:Position_Downline]) {
+            title  = @"已上线";
+        }else if ([status isEqualToString:Position_Online]) {
+            title  = @"已下线";
+
+        
+        }
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:title preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+
 #pragma mark -- 微信分享的是链接
 - (void)wxShare:(int)n
 {   //检测是否安装微信
@@ -267,6 +340,48 @@
     [WXApi sendReq:sendReq];
     
 }
+
+-(void)shareMiniProgram {
+    WXMiniProgramObject *object = [WXMiniProgramObject object];
+    object.webpageUrl = self.configures.model.share_url;
+    object.userName = MiniProgramUserName;
+    object.path = [NSString stringWithFormat:@"pages/ability_work/ability_work?id=%@",self.configures.model.task_id];
+    
+    NSString *url;
+    if (self.configures.model.images.count > 0) {
+        for (int i = 0; i < self.configures.model.images.count; i++) {
+            JMCDetailImageModel *imgModel = self.configures.model.images[0];
+            url = imgModel.file_path;
+        }
+        
+    }else if (self.configures.model.company_logo_path){
+        url= self.configures.model.company_logo_path;
+    }
+    
+    //    UIImage *image = [self getImageFromURL:url];
+    //    UIImage *image = [UIImage imageNamed:@"demi_home"];
+    //NSData *thumbData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    //缩略图,压缩图片,不超过 32 KB
+    UIImage *image = [self handleImageWithURLStr:url];
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.1);
+    
+    object.hdImageData = thumbData;
+    object.withShareTicket = @"";
+    object.miniProgramType = WXMiniProgramTypePreview;
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = self.configures.model.task_title;
+    message.description = self.configures.model.myDescription;
+    message.thumbData = nil;  //兼容旧版本节点的图片，小于32KB，新版本优先
+    //使用WXMiniProgramObject的hdImageData属性
+    message.mediaObject = object;
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;  //目前只支持会话
+    [WXApi sendReq:req];
+
+}
+
 
 - (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
     NSURL *url = [NSURL URLWithString:imageURLStr];
@@ -359,29 +474,40 @@
 }
 
 - (IBAction)bottomLeftAction:(id)sender {
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        [self loginAlert];
-        return;
-    }
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
-        [self createChatRequstWithForeign_key:self.task_id user_id:self.configures.model.user_id];
-        
-    }else if ([userModel.card_status isEqualToString:Card_NOIdentify] || [userModel.card_status isEqualToString:Card_RefuseIdentify]){
-        //是否通过实名认证
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实名认证通过后才能发起聊天" preferredStyle: UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"去实名认证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }]];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-    }else if ([userModel.card_status isEqualToString:Card_WaitIdentify]){
-        //审核中状态
-        [self showAlertSimpleTips:@"提示" message:@"实名认证审核中，暂时无法发起聊天" btnTitle:@"好的"];
+    if (_viewType == JMCDetailPreviewType) {
+        if ([self.configures.model.status isEqualToString:Position_Online]) {
+            [self updateTaskStatusRequestWithStatus:Position_Downline];
+            
+        }else if ([self.configures.model.status isEqualToString:Position_Downline]) {
+            [self updateTaskStatusRequestWithStatus:Position_Online];
+
+        }
+    }else if (_viewType == JMCDetailShowType) {
+        NSString *str = kFetchMyDefault(@"youke");
+        if ([str isEqualToString:@"1"]) {
+            [self loginAlert];
+            return;
+        }
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+            [self createChatRequstWithForeign_key:self.task_id user_id:self.configures.model.user_id];
+            
+        }else if ([userModel.card_status isEqualToString:Card_NOIdentify] || [userModel.card_status isEqualToString:Card_RefuseIdentify]){
+            //是否通过实名认证
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实名认证通过后才能发起聊天" preferredStyle: UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"去实名认证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
+                [self.navigationController pushViewController:vc animated:YES];
+            }]];
+            
+            [self presentViewController:alert animated:YES completion:nil];
+        }else if ([userModel.card_status isEqualToString:Card_WaitIdentify]){
+            //审核中状态
+            [self showAlertSimpleTips:@"提示" message:@"实名认证审核中，暂时无法发起聊天" btnTitle:@"好的"];
+        }
+    
     }
 }
 
@@ -400,19 +526,39 @@
 }
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        [self loginAlert];
-        return;
-    }
-    NSString *isRead = kFetchMyDefault(@"isRead");
-    if ([isRead isEqualToString:@"1"]) {
-        //判断有是否符合申请条件
-        [self applyForAction];
+    if (_viewType == JMCDetailPreviewType) {
+        NSString *task_id;
+        NSString *payment_method;
         
-    }else{
-        //服务提醒
-        [self showApplyForView];
+        
+        payment_method = self.configures.model.payment_method;
+        task_id = self.configures.model.task_id;
+        if ([payment_method isEqualToString: @"1"]) {
+            //网络销售
+            [self gotoBUserPostPositionVC_task_id:task_id];
+            
+        }else{
+            //其他兼职
+            [self gotoBUserPostPartTimeJobVC_task_id:task_id];
+            
+        }
+    }else if (_viewType == JMCDetailShowType) {
+        NSString *str = kFetchMyDefault(@"youke");
+        if ([str isEqualToString:@"1"]) {
+            [self loginAlert];
+            return;
+        }
+        NSString *isRead = kFetchMyDefault(@"isRead");
+        if ([isRead isEqualToString:@"1"]) {
+            //判断有是否符合申请条件
+            [self applyForAction];
+            
+        }else{
+            //服务提醒
+            [self showApplyForView];
+        }
+    
+    
     }
     
 }
@@ -488,6 +634,24 @@
     [self.windowViewBGView setHidden:NO];
     
 }
+
+//B端发布网络销售任务
+-(void)gotoBUserPostPositionVC_task_id:(NSString *)task_id{
+    JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+    vc.viewType = JMBUserPostSaleJobViewTypeEdit;
+    vc.task_id = task_id;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    
+}
+
+//B端发布普通任务
+-(void)gotoBUserPostPartTimeJobVC_task_id:(NSString *)task_id{
+    JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
+    vc.viewType = JMBUserPostPartTimeJobTypeEdit;
+    vc.task_id = task_id;
+    [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - myDelegate
 
 -(void)shareViewCancelAction{
@@ -497,6 +661,7 @@
 -(void)shareViewLeftAction{
     [self wxShare:0];
     [self hiddenChoosePayView];
+//    [self shareMiniProgram];
     
 }
 -(void)shareViewRightAction{
@@ -734,7 +899,13 @@
                 cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"nilCell"];
             }
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.textLabel.text = @"  暂无评论";
+            if (_viewType == JMCDetailPreviewType) {
+                cell.textLabel.text = @"  预览模式不显示评论";
+
+            }else if (_viewType == JMCDetailShowType){
+                cell.textLabel.text = @"  暂无评论";
+            
+            }
             cell.textLabel.font = kFont(14);
             cell.textLabel.textColor = TEXT_GRAY_COLOR;
             return cell;

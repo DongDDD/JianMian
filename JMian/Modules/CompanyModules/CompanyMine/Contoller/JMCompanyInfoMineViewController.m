@@ -21,7 +21,9 @@
 #import "JMGetCompanyLocationViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "JMHTTPManager+CompanyFileDelete.h"
-
+#import "STPickerSingle.h"
+#import "JMHTTPManager+GetLabels.h"
+#import "JMLabsData.h"
 
 
 @interface JMCompanyInfoMineViewController ()<UIImagePickerControllerDelegate,UIPickerViewDelegate,JMCompanyDesciptionOfMineViewDelegate,Demo3ViewControllerDelegate,UINavigationControllerDelegate,JMGetCompanyLocationViewControllerDelegate>
@@ -37,13 +39,13 @@
 @property(nonatomic,copy) NSString *video_cover;
 
 
-
-
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLab;
 @property (nonatomic, strong) NSMutableArray *addImage_paths;//公司图片数组
 @property (nonatomic, strong) NSMutableArray *filesModelArray;//服务器文件数组（包含视频和图片）
 @property (nonatomic, strong) NSMutableArray *imageDataArray;//服务器图片数组 （提取到这里）
-
+@property(nonatomic,strong) NSMutableArray *industryLabsArray;//公司行业数组
+@property(nonatomic,strong) NSMutableArray *industryDataArray;
+@property(nonatomic,copy) NSString *industry_label_id;
 
 @property (weak, nonatomic) IBOutlet UIButton *myPositionBtn;
 
@@ -55,13 +57,16 @@
 @property (weak, nonatomic) IBOutlet UIButton *facingBtn;
 @property (weak, nonatomic) IBOutlet UIView *facingView;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (nonatomic, strong) STPickerSingle *companyIndustryPickerSingle;
+@property (nonatomic, strong) STPickerSingle *employeePickerSingle;
+@property (nonatomic, strong) STPickerSingle *financingPickerSingle;
 
 @property (nonatomic, strong)AMapPOI *POIModel;
-@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
-@property(nonatomic,strong) NSArray *pickerArray;
-@property (nonatomic,strong)UIButton *selectedBtn;
-@property (nonatomic, assign)NSUInteger pickerRow;
-@property (weak, nonatomic) IBOutlet UIView *pickerBGView;
+//@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+//@property(nonatomic,strong) NSArray *pickerArray;
+//@property (nonatomic,strong)UIButton *selectedBtn;
+//@property (nonatomic, assign)NSUInteger pickerRow;
+//@property (weak, nonatomic) IBOutlet UIView *pickerBGView;
 
 @property(nonatomic,strong)JMUserInfoModel *userInfoModel;
 
@@ -84,12 +89,14 @@
     self.title = @"公司信息";
     [self setRightBtnTextName:@"保存"];
     [self getData];
-    self.pickerView.delegate = self;
-    [self.pickerView selectRow:0 inComponent:0 animated:NO];
+    [self getLabsData];
+//    self.pickerView.delegate = self;
+//    [self.pickerView selectRow:0 inComponent:0 animated:NO];
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(headerImgAction)];
-    [self.topView addGestureRecognizer:tap];
-    
+    [self.headerImg addGestureRecognizer:tap];
+    self.headerImg.userInteractionEnabled = YES;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -158,6 +165,22 @@
     
 }
 
+-(void)getLabsData{
+    [[JMHTTPManager sharedInstance]getLabels_Id:@"992" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            _industryDataArray = [JMLabsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            
+        }
+        for (JMLabsData *data in _industryDataArray) {
+            [self.industryLabsArray addObject:data.name];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+}
 //公司上传图片
 -(void)uploadCompanyWithImages:(NSArray *)images{
     
@@ -179,7 +202,7 @@
     NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
     
     [self.progressHUD setHidden:NO];
-    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:_userInfoModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:_imgURL video_path:self.videoURL video_cover:_video_cover work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:self.facingBtn.titleLabel.text employee:self.employBtn.titleLabel.text address:self.companyAdress.titleLabel.text url:nil longitude:longitude latitude:latitude description:self.companyDecriptionBtn.titleLabel.text image_path:self.addImage_paths label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:_userInfoModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:_imgURL video_path:self.videoURL video_cover:_video_cover work_time:nil work_week:nil type_label_id:nil industry_label_id:_industry_label_id financing:self.facingBtn.titleLabel.text employee:self.employBtn.titleLabel.text address:self.companyAdress.titleLabel.text url:nil longitude:longitude latitude:latitude description:self.companyDecriptionBtn.titleLabel.text image_path:self.addImage_paths label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"公司信息更新成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -288,16 +311,17 @@
     }];
     
 }
+
 #pragma mark - 点击事件
 //- 保存资料
 -(void)fanhui{
-    
     [self.navigationController popViewControllerAnimated:YES];
     if(_isChange){
         _videoURL = nil;//不用上传视频了，选择完视频就上传完了
         [self updateInfoData];
     }
 }
+
 -(void)rightAction{
     [self fanhui];
 }
@@ -312,9 +336,10 @@
     [self uploadVideo];
 }
 
-- (IBAction)pickerViewDeleteAction:(id)sender {
-    [self.pickerBGView setHidden:YES];
-}
+//- (IBAction)pickerViewDeleteAction:(id)sender {
+//    [self.pickerBGView setHidden:YES];
+//}
+
 
 - (IBAction)myPositionActoin:(UIButton *)sender {
     _isChange = YES;
@@ -368,7 +393,10 @@
     JMCompanyDesciptionOfMineViewController *vc = [[JMCompanyDesciptionOfMineViewController alloc]init];
     
     vc.delegate = self;
-    vc.comDesc = self.companyDecriptionBtn.titleLabel.text;
+    if (![self.companyDecriptionBtn.titleLabel.text isEqualToString:@"请填写"]) {
+        vc.comDesc = self.companyDecriptionBtn.titleLabel.text;
+        
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -386,46 +414,46 @@
 
 
 - (IBAction)industryAction:(UIButton *)sender {
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"公司行业暂时不提供修改功能"
-                                                  delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-    [alert show];
+    [self.companyIndustryPickerSingle show];
 }
 
 - (IBAction)employeeAction:(UIButton *)sender {
-    [self.pickerBGView setHidden:NO];
-    self.pickerArray = [NSArray arrayWithObjects:@"15人以下",@"15～50人",@"50～100人",@"500人以上",nil];
-    [self.pickerView reloadAllComponents];
-    self.selectedBtn = sender;
+//    [self.pickerBGView setHidden:NO];
+//    self.pickerArray = [NSArray arrayWithObjects:@"15人以下",@"15～50人",@"50～100人",@"500人以上",nil];
+//    [self.pickerView reloadAllComponents];
+//    self.selectedBtn = sender;
+    [self.employeePickerSingle show];
 }
 
 
 - (IBAction)financingStep:(UIButton *)sender {
-    [self.pickerBGView setHidden:NO];
-    self.pickerArray = [NSArray arrayWithObjects:@"天使轮",@"A轮",@"B轮",@"C轮",@"D轮",@"不需要融资",nil];
-    [self.pickerView reloadAllComponents];
-    self.selectedBtn = sender;
+//    [self.pickerBGView setHidden:NO];
+//    self.pickerArray = [NSArray arrayWithObjects:@"天使轮",@"A轮",@"B轮",@"C轮",@"D轮",@"不需要融资",nil];
+//    [self.pickerView reloadAllComponents];
+//    self.selectedBtn = sender;
+    [self.financingPickerSingle show];
     
 }
 
-- (IBAction)pickerOKAction:(UIButton *)sender {
-    
-    _isChange = YES;
-    switch (_selectedBtn.tag) {
-        case 1:
-            [self.employBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-            [self.employBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-            break;
-            
-        case 2:
-            [self.facingBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
-            break;
-            
-        default:
-            break;
-    }
-    [self.pickerBGView setHidden:YES];
-    
-}
+//- (IBAction)pickerOKAction:(UIButton *)sender {
+//
+//    _isChange = YES;
+//    switch (_selectedBtn.tag) {
+//        case 1:
+//            [self.employBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+//            [self.employBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+//            break;
+//
+//        case 2:
+//            [self.facingBtn setTitle:self.pickerArray[_pickerRow] forState:UIControlStateNormal];
+//            break;
+//
+//        default:
+//            break;
+//    }
+//    [self.pickerBGView setHidden:YES];
+//
+//}
 #pragma mark - myDelegate
 -(void)sendTextView_textData:(NSString *)textData{
     if (![self.companyDecriptionBtn.titleLabel.text isEqualToString:textData]) {
@@ -435,7 +463,12 @@
         }
         
     }
+    
+    if (textData.length == 0) {
+        [self.companyDecriptionBtn setTitle:@"请填写" forState:UIControlStateNormal];
+    }
 }
+
 //删除兼职图片
 -(void)deleteCompanyImageWithIndex:(NSInteger)index{
     _isChange = YES;
@@ -466,37 +499,54 @@
 
 #pragma mark - pickerViewDelegate
 
--(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
-    
-    _pickerRow = row;
-    
+- (void)pickerSingle:(STPickerSingle *)pickerSingle selectedTitle:(NSString *)selectedTitle row:(NSInteger)row{
+    _isChange = YES;
+    if (pickerSingle == _employeePickerSingle) {
+        [self.employBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.employBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    }else if(pickerSingle == _financingPickerSingle){
+        [self.facingBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.facingBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    }else if(pickerSingle == _companyIndustryPickerSingle){
+        [self.industryBtn setTitle:selectedTitle forState:UIControlStateNormal];
+        [self.industryBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        JMLabsData *data = _industryDataArray[row];
+        self.industry_label_id = data.label_id;
+        
+    }
 }
 
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-
-{
-    
-    return 1;
-    
-}
-
-//返回指定列的行数
-
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-
-{
-    
-    return [self.pickerArray count];
-    
-}
+//-(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
 //
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    
-    NSString *str = [self.pickerArray objectAtIndex:row];
-    
-    return str;
-    
-}
+//    _pickerRow = row;
+//
+//}
+//
+//-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+//
+//{
+//
+//    return 1;
+//
+//}
+//
+////返回指定列的行数
+//
+//-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+//
+//{
+//
+//    return [self.pickerArray count];
+//
+//}
+////
+//- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+//
+//    NSString *str = [self.pickerArray objectAtIndex:row];
+//
+//    return str;
+//
+//}
 
 #pragma mark - 获取图片
 
@@ -1039,6 +1089,13 @@
 
 #pragma mark - lazy
 
+-(NSMutableArray *)industryLabsArray{
+    if (_industryLabsArray.count == 0) {
+        _industryLabsArray = [NSMutableArray array];
+    }
+    return _industryLabsArray;
+}
+
 - (NSMutableArray *)imageDataArray {
     if (!_imageDataArray) {
         _imageDataArray = [NSMutableArray array];
@@ -1063,6 +1120,41 @@
         [self.view addSubview:_progressHUD];
     }
     return _progressHUD;
+}
+
+-(STPickerSingle *)employeePickerSingle{
+    if (_employeePickerSingle == nil) {
+        _employeePickerSingle = [[STPickerSingle alloc]init];
+        _employeePickerSingle.delegate = self;
+        _employeePickerSingle.title = @"人员规模";
+        _employeePickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _employeePickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"15人以下",@"15～50人",@"50～100人",@"500人以上",nil];
+    }
+    return _employeePickerSingle;
+}
+
+
+-(STPickerSingle *)financingPickerSingle{
+    if (_financingPickerSingle == nil) {
+        _financingPickerSingle = [[STPickerSingle alloc]init];
+        _financingPickerSingle.delegate = self;
+        _financingPickerSingle.title = @"发展阶段";
+        _financingPickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _financingPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"天使轮",@"A轮",@"B轮",@"C轮",@"D轮",@"不需要融资",nil];
+    }
+    return _financingPickerSingle;
+}
+
+
+-(STPickerSingle *)companyIndustryPickerSingle{
+    if (_companyIndustryPickerSingle == nil) {
+        _companyIndustryPickerSingle = [[STPickerSingle alloc]init];
+        _companyIndustryPickerSingle.delegate = self;
+        _companyIndustryPickerSingle.title = @"公司行业";
+        _companyIndustryPickerSingle.widthPickerComponent = SCREEN_WIDTH;
+        _companyIndustryPickerSingle.arrayData = self.industryLabsArray;
+    }
+    return _companyIndustryPickerSingle;
 }
 
 /*

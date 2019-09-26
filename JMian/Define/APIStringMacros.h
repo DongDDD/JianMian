@@ -11,8 +11,8 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 //app
 #else
@@ -157,6 +157,8 @@
 #define Fetch_GreetList_URL @"api/greet/paginate"
 #define Create_Greet_URL @"api/greet/create"
 #define Delete_Greet_URL @"api/greet/delete"
+//未读通知（小程序用）
+#define Unread_Notice_URL @"unread/notice"
 
 //模版
 #define Fectch_TplList_URL @"tpl/paginate"

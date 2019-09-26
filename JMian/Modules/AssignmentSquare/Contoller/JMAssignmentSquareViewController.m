@@ -75,7 +75,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self setBackBtnImageViewName:@"site_Home" textName:@"不限"];
     self.per_page = 10;
     self.page = 1;
-    
+    self.navigationController.navigationBar.translucent = NO;
     UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(hidePartTimeViewSwipeAction)];
     [swipe setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self.view addGestureRecognizer:swipe];
@@ -451,6 +451,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
     }];
     
 }
+
 #pragma mark - UITableViewDelegate
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
@@ -505,7 +506,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
         JMTaskListCellData *model = self.dataArray[indexPath.row];
         vc.task_id = model.task_id;
-
+        vc.viewType = JMCDetailShowType;
         [self.navigationController pushViewController:vc animated:YES];
     }
     

@@ -28,7 +28,12 @@
 #import "JMManageInterviewViewController.h"
 #import "JMPlaySoundsManager.h"
 #import "JMHTTPManager+FectchVersionInfo.h"
+#import "JMCDetailWebViewController.h"
+#import "JMBDetailWebViewController.h"
+#import "JobDetailsViewController.h"
+#import "JMPersonDetailsViewController.h"
 #import "TUIKit.h"
+#import "JMVideoPlayManager.h"
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener>
 
@@ -92,9 +97,7 @@
     [_window setRootViewController:naVC];
     [self.window makeKeyAndVisible];
     [self getVersionData];
-
-    
-    
+ 
     return YES;
 }
 
@@ -161,6 +164,7 @@
 }
 
 
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     NSLog(@"userInfouserInfo%@", userInfo);
@@ -179,12 +183,27 @@
     //记录下 Apple 返回的 deviceToken
 //    _deviceToken = deviceToken;
     NSLog(@"deviceTokendeviceToken---%@",deviceToken);
-//    JMJudgeViewController *judgevc = [[JMJudgeViewController alloc]init];
-//    judgevc.deviceToken = deviceToken;
-//    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
-//    [_window setRootViewController:naVC];
-//    [self.window makeKeyAndVisible];
-    
+    __weak typeof(self) ws = self;
+    TIMTokenParam *param = [[TIMTokenParam alloc] init];
+    /* 用户自己到苹果注册开发者证书，在开发者帐号中下载并生成证书(p12 文件)，将生成的 p12 文件传到腾讯证书管理控制台，控制台会自动生成一个证书 ID，将证书 ID 传入一下 busiId 参数中。*/
+#if kAppStoreVersion
+    // App Store 版本
+#if DEBUG
+    param.busiId = 13888;
+#else
+    param.busiId = 13888;
+#endif
+#else
+    //企业证书 ID
+    param.busiId = 13888;
+#endif
+    [param setToken:deviceToken];
+    //            [UIApplication sharedApplication]
+    [[TIMManager sharedInstance] setToken:param succ:^{
+        NSLog(@"-----> 上传 deviceToken 成功 ");
+    } fail:^(int code, NSString *msg) {
+        NSLog(@"-----> 上传 deviceToken 失败 ");
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -229,17 +248,22 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    [[TIMManager sharedInstance] doForeground:^() {
-        NSLog(@"doForegroud Succ");
-        self.isBackgroundTask = NO;
-    } fail:^(int code, NSString * err) {
-        NSLog(@"Fail: %d->%@", code, err);
-    }];
+//    [[TIMManager sharedInstance] doForeground:^() {
+//        NSLog(@"doForegroud Succ");
+//        self.isBackgroundTask = NO;
+//    } fail:^(int code, NSString * err) {
+//        NSLog(@"Fail: %d->%@", code, err);
+//    }];
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [[TIMManager sharedInstance] doForeground:^() {
+        NSLog(@"doForegroud Succ");
+    } fail:^(int code, NSString * err) {
+        NSLog(@"Fail: %d->%@", code, err);
+    }];
 }
 
 
@@ -258,6 +282,99 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     return [WXApi handleOpenURL:url delegate:self];
 }
+
+#pragma mark - H5打开APP
+
+-(BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options{
+    //获取Window当前显示的ViewController
+    //    NSLog(@"sourceApplication: %@", sourceApplication);
+    if ([url.scheme isEqualToString:@"iosdemi"]) {
+        
+        NSLog(@"URL scheme:%@", url);
+        NSLog(@"URL query: %@", [url query]);
+        NSString *string = [url query];
+        NSArray *array = [string componentsSeparatedByString:@":"]; //从字符A中分隔成2个元素的数组
+        NSString *string2 = array[0];
+        NSArray *array2 = [string2 componentsSeparatedByString:@"="];
+        NSString *typeStr = array2[1];
+        NSString *typeId = array[1];
+        [self gotoMyVCWithtypeStr:typeStr typeId:typeId];
+    }else{
+        return  [WXApi handleOpenURL:url delegate:self];
+    }
+    
+    return YES;
+}
+
+//获取Window当前显示的ViewController
+- (UIViewController*)currentViewController{
+    //获得当前活动窗口的根视图
+    UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (1)
+    {
+        //根据不同的页面切换方式，逐步取得最上层的viewController
+        if ([vc isKindOfClass:[UITabBarController class]]) {
+            vc = ((UITabBarController*)vc).selectedViewController;
+        }
+        if ([vc isKindOfClass:[UINavigationController class]]) {
+            vc = ((UINavigationController*)vc).visibleViewController;
+        }
+        if (vc.presentedViewController) {
+            vc = vc.presentedViewController;
+        }else{
+            break;
+        }
+    }
+    return vc;
+}
+
+-(void)gotoMyVCWithtypeStr:(NSString *)typeStr typeId:(NSString *)typeId{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([typeStr isEqualToString:@"work_id"]) {
+        NSLog(@"typeId: %@", typeId);
+        if ([userModel.type isEqualToString:C_Type_USER]) {
+            JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
+            vc.work_id = typeId;
+            [[self currentViewController].navigationController pushViewController:vc animated:YES];
+            
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份"delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }else if ([typeStr isEqualToString:@"user_job_id"]) {
+        NSLog(@"typeId: %@", typeId);
+        if ([userModel.type isEqualToString:B_Type_UESR]) {
+            JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc]init];
+            vc.user_job_id = typeId;
+            [[self currentViewController].navigationController pushViewController:vc animated:YES];
+            
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }else if ([typeStr isEqualToString:@"ability_id"]) {
+        if ([userModel.type isEqualToString:B_Type_UESR]) {
+            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+            vc.ability_id = typeId;
+            [[self currentViewController].navigationController pushViewController:vc animated:YES];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }else if ([typeStr isEqualToString:@"task_id"]) {
+        if ([userModel.type isEqualToString:C_Type_USER]) {
+            JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
+            vc.task_id = typeId;
+            [[self currentViewController].navigationController pushViewController:vc animated:YES];
+        }else{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            [alert show];
+        }
+    }
+    
+    
+}
+
 
 #pragma mark - 请求
 -(void)loginRequestWithCode:(NSString *)code{
@@ -306,6 +423,23 @@
 }
 
 #pragma mark - 网络回调
+//小程序打开APP
+-(void) onReq:(BaseReq*)reqonReq{
+    if ([reqonReq isKindOfClass:[LaunchFromWXReq class]]) {
+        LaunchFromWXReq *smallProgram = (LaunchFromWXReq *)reqonReq;
+        WXMediaMessage *message = smallProgram.message;
+        NSLog(@"messageExt %@",message.messageExt);
+        NSString *string = message.messageExt;
+        if ([string containsString:@":"] || string.length > 0) {
+            NSArray *array = [string componentsSeparatedByString:@":"]; //从字符A中分隔成2个元素的数组
+            NSString *typeStr = array[0];
+            NSString *typeId = array[1];
+            [self gotoMyVCWithtypeStr:typeStr typeId:typeId];
+            
+        }
+    }
+
+}
 
 // 微信支付成功或者失败回调
 -(void) onResp:(BaseResp*)resp
@@ -366,8 +500,6 @@
 - (void)onNewMessage:(NSArray *)msgs
 {
 //    [_window addSubview:self.feedBackChooseVC.view];
-
-  
     if (self.isBackgroundTask) {
         
 //        [self initLocalNotification];
@@ -405,9 +537,6 @@
             self.videoChatDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
         }
         
-    
-        
-        
         NSLog(@"视频自定义消息%@",self.videoChatDic);
         if (self.videoChatDic && [custom_elem.desc isEqualToString:@"[邀请视频聊天]"]) {
             [self.answerOrHangUpView setHidden:NO];
@@ -444,6 +573,8 @@
     }else if ([elem isKindOfClass:[TIMTextElem class]]) {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
         AudioServicesPlaySystemSound(1007);
+        [self initLocalNotification_alertBody:@"你有一条消息"];
+
     }
     
     

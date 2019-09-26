@@ -209,7 +209,7 @@ static NSString *cellIdent = @"cellIdent";
     JMHomeWorkModel *model = self.dataArray[indexPath.row];
     vc.homeworkModel = model;
     vc.status = model.status;
-    vc.viewType = JobDetailsViewTypeEdit;
+    vc.viewType = JobDetailsViewTypePreview;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

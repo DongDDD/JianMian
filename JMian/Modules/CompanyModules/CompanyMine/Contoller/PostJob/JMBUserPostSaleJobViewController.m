@@ -361,7 +361,30 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [self.detailView.deadLineBtn setTitle:dateStr forState:UIControlStateNormal];
     [self.detailView.deadLineBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
 }
-
+//播放视频
+-(void)playBtnActionWithUrl:(NSString *)url{
+    //    [self fetchmyVideo];
+    //    NSString * path;
+    //    if (_viewType == JMBUserPostPartTimeJobTypeAdd) {
+    //        //本地获取链接播放，需要拼接
+    //        if (![self.video_path containsString:@"https://jmsp-videos"]) {
+    //            path = [NSString stringWithFormat:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com%@",self.video_path];
+    //        }else{
+    //            path = self.video_path;
+    //
+    //        }
+    //    }else if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
+    //        path = url;
+    //    }
+    
+    //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
+    //        AVPlayer *player = [AVPlayer playerWithURL:url];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url];
+    [[JMVideoPlayManager sharedInstance] play];
+    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [self presentViewController:playVC animated:YES completion:nil];
+    
+}
 
 
 -(void)isReadProtocol:(BOOL)isRead{
@@ -698,7 +721,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
             NSLog(@"urlurlurlurl--%@",url);
             self.video_path = url;
             _isChange = YES;
-            
+            [self.videoView setVideo_path:url];
 //            [self updateInfoData];
             [self hiddenHUD];
  
@@ -751,18 +774,16 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         [self.detailView.goodsDescrptionBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
         
     }
-    
-    _video_path = model.video_file_path;
-    _video_cover = model.video_cover;
-    NSURL *url = [NSURL URLWithString:model.video_cover];
-    [self.videoView.videoImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"NoVideos"]];
-    
-    if (model.images.count > 0) {
-        [self.postGoodsImagesView.goodsImageBtn setTitle:@"已上传" forState:UIControlStateNormal];
-        [self.postGoodsImagesView.goodsImageBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
-        
-        
+
+    if (model.video_cover.length > 0 && model.video_file_path.length > 0) {
+        //        NSURL *url = [NSURL URLWithString:model.video_cover];
+        //        [self.videoView.videoImg sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"NOvideos"]];
+        [self.videoView.playBtn setHidden:NO];
+        [self.videoView setVideo_path:model.video_file_path];
+        [self.videoView setVideo_cover:model.video_cover];
+        //        [self.videoView setValusWithVideo_path:model.video_file_path video_cover:model.video_cover];
     }
+    
     
     if (model.video_file_path == nil) {
         self.videoView.videoImg.image = [UIImage imageNamed:@"Novideos"];
@@ -776,6 +797,12 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
     }
     
+    if (model.images.count > 0) {
+        [self.postGoodsImagesView.goodsImageBtn setTitle:@"已上传" forState:UIControlStateNormal];
+        [self.postGoodsImagesView.goodsImageBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+        
+        
+    }
     
     
 }
@@ -788,11 +815,14 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除吗，删除后数据将不可恢复！" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:([UIAlertAction actionWithTitle:@"确认删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self deleteTaskRequest];
-
-        [self.navigationController popViewControllerAnimated:YES];
-    }])];
-    [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
         
+    }])];
+    [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        if (self.navigationController.viewControllers.count >=2) {
+            UIViewController *listViewController =self.navigationController.viewControllers[1];
+            [self.navigationController popToViewController:listViewController animated:YES];
+            
+        }
     }])];
     [self presentViewController:alertController animated:YES completion:nil];
 
@@ -886,12 +916,25 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 -(void)deleteTaskRequest{
     [[JMHTTPManager sharedInstance]deleteTask_Id:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:@"删除成功" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (self.navigationController.viewControllers.count >=2) {
+                UIViewController *listViewController =self.navigationController.viewControllers[1];
+                [self.navigationController popToViewController:listViewController animated:YES];
+            }
+            
+        }]];
+        UIImageView *icon = [[UIImageView alloc] init];
+        icon.image = [UIImage imageNamed:@"purchase_succeeds"];
+        [alert.view addSubview:icon];
+        [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(alert.view).mas_offset(23);
+            make.centerX.mas_equalTo(alert.view);
+            make.size.mas_equalTo(CGSizeMake(75, 64));
+            
+        }];
+        [self presentViewController:alert animated:YES completion:nil];
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"已删除" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            [self.navigationController popViewControllerAnimated:YES];
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

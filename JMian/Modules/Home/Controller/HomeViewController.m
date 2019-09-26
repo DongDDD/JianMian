@@ -205,7 +205,7 @@ static NSString *cellIdent = @"cellIdent";
             if (modelArray.count > 0) {
                 [self.arrDate addObjectsFromArray:modelArray];
             }
-            if (modelArray.count < 15) {
+            if (modelArray.count < 10) {
                 [self.tableView.mj_footer setHidden:YES];
             }
         }

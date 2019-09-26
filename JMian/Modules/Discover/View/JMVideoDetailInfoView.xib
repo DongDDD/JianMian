@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JMVideoDetailInfoView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3h-UC-8U6">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="74"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hSL-GH-SCg">
+                    <rect key="frame" x="20" y="13" width="33" height="33"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="33" id="Tbj-rp-UtX"/>
+                        <constraint firstAttribute="width" constant="33" id="dzm-LL-dTI"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <real key="value" value="16.5"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Uc-C9-KU5">
+                    <rect key="frame" x="66" y="18" width="46.5" height="23"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnG-D8-ack">
+                    <rect key="frame" x="66" y="49" width="37.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_returnw.png" translatesAutoresizingMaskIntoConstraints="NO" id="veV-xx-BGg">
+                    <rect key="frame" x="378" y="31" width="16" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="0hb-Eg-A58"/>
+                        <constraint firstAttribute="width" constant="16" id="ohG-aR-VZC"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6-8k" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwk-rZ-Rc4">
+                    <rect key="frame" x="337.5" y="33" width="33.5" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="dwk-rZ-Rc4" firstAttribute="centerY" secondItem="veV-xx-BGg" secondAttribute="centerY" id="28f-RY-eZE"/>
+                <constraint firstItem="i3h-UC-8U6" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="8dg-9a-25N"/>
+                <constraint firstItem="LnG-D8-ack" firstAttribute="leading" secondItem="3Uc-C9-KU5" secondAttribute="leading" id="SaF-Le-PSH"/>
+                <constraint firstItem="veV-xx-BGg" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="Zwf-ij-eSz"/>
+                <constraint firstItem="veV-xx-BGg" firstAttribute="leading" secondItem="dwk-rZ-Rc4" secondAttribute="trailing" constant="7" id="ah1-8Z-2f1"/>
+                <constraint firstItem="3Uc-C9-KU5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="18" id="d6I-A5-I5V"/>
+                <constraint firstItem="i3h-UC-8U6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="f0H-YQ-osh"/>
+                <constraint firstItem="LnG-D8-ack" firstAttribute="top" secondItem="3Uc-C9-KU5" secondAttribute="bottom" constant="8" id="gn8-Rb-GED"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="veV-xx-BGg" secondAttribute="trailing" constant="20" id="nc7-78-Ywo"/>
+                <constraint firstItem="3Uc-C9-KU5" firstAttribute="leading" secondItem="hSL-GH-SCg" secondAttribute="trailing" constant="13" id="uUx-qM-dI7"/>
+                <constraint firstItem="hSL-GH-SCg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="13" id="x51-Jx-R31"/>
+                <constraint firstItem="i3h-UC-8U6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xsj-ob-sH8"/>
+                <constraint firstItem="hSL-GH-SCg" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="z5S-GC-y4O"/>
+                <constraint firstAttribute="bottom" secondItem="i3h-UC-8U6" secondAttribute="bottom" id="zki-qn-KB3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="headerIcon" destination="hSL-GH-SCg" id="PJJ-dz-T9F"/>
+                <outlet property="nameLab" destination="3Uc-C9-KU5" id="C2v-Gw-7hc"/>
+                <outlet property="salaryLab" destination="dwk-rZ-Rc4" id="wRd-B7-OLM"/>
+                <outlet property="suTitleLab" destination="LnG-D8-ack" id="YMa-Cq-Hor"/>
+            </connections>
+            <point key="canvasLocation" x="-110.14492753623189" y="1.3392857142857142"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_returnw.png" width="15.5" height="21.5"/>
+    </resources>
+</document>

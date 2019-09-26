@@ -106,12 +106,12 @@
 }
 
 - (void)addJobInfoWithJob_label_id:(NSString *)job_label_id
-                      industry_label_id:(nullable NSString *)industry_label_id
-                      city_id:(NSString *)city_id
-                      salary_min:(NSString *)salary_min
-                      salary_max:(NSString *)salary_max
-                      status:(nullable NSString *)status
-            successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+                 industry_label_id:(nullable NSString *)industry_label_id
+                           city_id:(NSString *)city_id
+                        salary_min:(NSString *)salary_min
+                        salary_max:(NSString *)salary_max
+                            status:(nullable NSString *)status
+                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     NSDictionary *dic = @{@"job_label_id":job_label_id,
                           @"industry_label_id":industry_label_id,
                           @"city_id":city_id,

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@end
 typedef NS_ENUM(NSInteger, JobDetailsViewType) {
     JobDetailsViewTypeDefault,
-    JobDetailsViewTypeEdit,
+    JobDetailsViewTypePreview,
 };
 
 

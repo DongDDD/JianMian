@@ -27,6 +27,7 @@
 #import "JMHTTPManager+FectchTaskOrderInfo.h"
 #import "JMBDetailWebViewController.h"
 #import "JMHTTPManager+FectchTaskAbility.h"
+#import "JMHTTPManager+UnReadNotice.h"
 //#import <PassKit/PassKit.h>                                 //用户绑定的银行卡信息
 //#import <PassKit/PKPaymentAuthorizationViewController.h>    //Apple pay的展示控件
 //#import <AddressBook/AddressBook.h>                         //用户联系信息相关
@@ -470,6 +471,7 @@
     
 }
 
+
 //用于B端获取兼职简历ID创建聊天
 -(void)getTaskAbilityIDToChatWithUser_id:(NSString *)user_id  type_label_id:(NSString *)type_label_id {
     [[JMHTTPManager sharedInstance]fetchTaskAbilityWithUser_id:user_id type_label_id:type_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -618,6 +620,21 @@
     
 }
 
+//小程序推送消息用
+//-(void)unReadNoticeRequestWithTitle:(NSString *)title{
+//    NSString *receiver = self.receiver_id;
+//
+//    NSString *message = title;
+//
+//
+//    [[JMHTTPManager sharedInstance]unreadNoticeCardWithUser_id:receiver message:message successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//}
 
 #pragma mark -  （自定义消息）
 
@@ -643,6 +660,7 @@
     [msg addElem:custom_elem];
     [conv sendMessage:msg succ:^(){
         NSLog(@"SendMsg Succ");
+//        [self unReadNoticeRequestWithTitle:title];
 //        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"申请成功" leftTitle:@"返回" rightTitle:@"查看任务"];
     }fail:^(int code, NSString * err) {
         NSLog(@"SendMsg Failed:%d->%@", code, err);

@@ -66,8 +66,6 @@
 @implementation JobDetailsViewController
 
 
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 //        self.navigationController.navigationBar.translucent = YES;
@@ -82,14 +80,32 @@
     //右上角分享 收藏按钮
     [self getData];
     
-    if (_viewType != JobDetailsViewTypeEdit) {
-        
+    if (_viewType == JMPostNewJobViewTypeDefault) {
         [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+    }else if (_viewType == JobDetailsViewTypePreview) {
+        [self setRightBtnImageViewName:@"jobDetailShare"];
+
     }
     [self setTitle:@"职位详情"];
 }
 
-
+//预览状态分享按钮
+- (void)setRightBtnImageViewName:(NSString *)imageName{
+    
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 19)];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtn.frame = CGRectMake(-20 , 0, 120, 28);
+    //    leftBtn.backgroundColor = [UIColor redColor];
+    [rightBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    
+    [bgView addSubview:rightBtn];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+}
 
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
@@ -105,11 +121,7 @@
     if (imageNameRight2 != nil) {
         UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         shareBtn.frame = CGRectMake(0, 0, 25, 25);
-        JMVersionModel *model = [JMVersionManager getVersoinInfo];
-        if ([model.test isEqualToString:@"1"]) {
-            [shareBtn setHidden:YES];
-            
-        }
+    
         [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
         [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
         [bgView addSubview:shareBtn];
@@ -234,11 +246,13 @@
     
     
 }
+
 -(void)alertRightAction{
     JMIDCardIdentifyViewController *vc = [[JMIDCardIdentifyViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 -(void)rightAction:(UIButton *)sender{
     NSLog(@"收藏");
     NSString *str = kFetchMyDefault(@"youke");
@@ -389,7 +403,7 @@
 -(void)shareViewLeftAction{
     [self disapearAction];
     [self wxShare:0];
-    
+//    [self shareMiniProgram];
 }
 
 -(void)shareViewRightAction{
@@ -397,6 +411,7 @@
     [self wxShare:1];
     
 }
+
 #pragma mark - 数据请求
 -(void)getData{
     [[JMHTTPManager sharedInstance]fetchWorkInfoWith_Id:_work_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -998,6 +1013,34 @@
     sendReq.message = urlMessage;
     //发送分享
     [WXApi sendReq:sendReq];
+    
+}
+
+-(void)shareMiniProgram {
+    WXMiniProgramObject *object = [WXMiniProgramObject object];
+    object.webpageUrl = self.myModel.share_url;
+    object.userName = MiniProgramUserName;
+    object.path = [NSString stringWithFormat:@"pages/work_info/work_info?id=%@",self.work_id];
+    UIImage *image = [self getImageFromURL:self.myModel.companyLogo_path];   //缩略图,压缩图片,不超过 32 KB
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+    //缩略图,压缩图片,不超过 32 KB
+    //    UIImage *image = [self handleImageWithURLStr:url];
+    //    NSData *thumbData = UIImageJPEGRepresentation(image, 0.1);
+    
+    object.hdImageData = thumbData;
+    object.withShareTicket = @"";
+    object.miniProgramType = WXMiniProgramTypePreview;
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = self.myModel.work_name;
+    //    message.description = self.configures.model.myDescription;
+    message.thumbData = nil;  //兼容旧版本节点的图片，小于32KB，新版本优先
+    //使用WXMiniProgramObject的hdImageData属性
+    message.mediaObject = object;
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;  //目前只支持会话
+    [WXApi sendReq:req];
     
 }
 

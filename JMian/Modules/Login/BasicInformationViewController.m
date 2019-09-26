@@ -80,7 +80,6 @@
     if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
         [self.nameText setEnabled:NO];
         [self.birtnDateBtn setEnabled:NO];
-    
     }
 //    if ([self.baseVC isKindOfClass:[JMJudgeViewController class]) {
 //        
@@ -157,6 +156,7 @@
             [self.manBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
             self.manBtn.layer.borderColor = [UIColor whiteColor].CGColor;
             self.manBtn.backgroundColor = MASTER_COLOR;
+            self.sex = @(1);
         }else if ([userModel.card_sex isEqualToString:@"2"]) {
             // 恢复上一个按钮颜色
             [self.manBtn setTitleColor:TEXT_GRAY_COLOR forState:UIControlStateNormal];
@@ -168,6 +168,7 @@
             [self.womanBtn setTitleColor:[UIColor whiteColor]  forState:UIControlStateNormal];
             self.womanBtn.layer.borderColor = [UIColor whiteColor].CGColor;
             self.womanBtn.backgroundColor = MASTER_COLOR;
+            self.sex = @(2);
         }
     }
     

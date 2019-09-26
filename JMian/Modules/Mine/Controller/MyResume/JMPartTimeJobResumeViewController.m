@@ -18,6 +18,8 @@
 #import "JMPostTaskBottomView.h"
 #import "JMPostTypeChooseView.h"
 #import "JMHistoryViewController.h"
+#import "JMCDetailViewController.h"
+
 
 
 @interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMPostTypeChooseViewDelegate,JMPostTaskBottomViewDelegate,JMPostJobHomeTableViewCellDelegate>
@@ -175,8 +177,8 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 
 
 -(void)getTaskListData_status:(NSString *)status{
-  
-    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:nil city_id:nil type_label_id:nil industry_arr:nil keyword:@"" status:status page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    [[JMHTTPManager sharedInstance]fectchTaskList_user_id:model.user_id city_id:nil type_label_id:nil industry_arr:nil keyword:@"" status:status page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.dataArray = [JMTaskListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             //上线状态下才需要隐藏
@@ -186,10 +188,7 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
                 }
             }else{
                 [self.tableView setHidden:NO];
-                
             }
-            
-            
         }
         [self.tableView reloadData];
         [self.myProgressHUD setHidden:YES];
@@ -317,21 +316,24 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 -(void)gotoBUserPostPartTimeVC__indexPath:(NSIndexPath *)indexPath{
-    NSString *task_id;
-    NSString *payment_method;
+//    NSString *task_id;
+//    NSString *payment_method;
     JMTaskListCellData *data = self.dataArray[indexPath.row];
-    payment_method = data.payment_method;
-    task_id = data.task_id;
-    if ([payment_method isEqualToString: @"1"]) {
-        //网络销售
-        [self gotoBUserPostPositionVC_task_id:task_id];
-        
-    }else{
-        //其他兼职
-        [self gotoBUserPostPartTimeJobVC_task_id:task_id];
-        
-    }
-    
+//    payment_method = data.payment_method;
+//    task_id = data.task_id;
+//    if ([payment_method isEqualToString: @"1"]) {
+//        //网络销售
+//        [self gotoBUserPostPositionVC_task_id:task_id];
+//
+//    }else{
+//        //其他兼职
+//        [self gotoBUserPostPartTimeJobVC_task_id:task_id];
+//
+//    }
+    JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
+    vc.task_id = data.task_id;
+    vc.viewType = JMCDetailPreviewType;
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 

@@ -102,7 +102,7 @@ static NSString *cellIdent = @"cellIdent";
                 [self.arrDate addObjectsFromArray:modelArray];
                 //                [self getPlayerArray];
             }
-            if (modelArray.count < 15) {
+            if (modelArray.count < 10) {
                 [self.tableView.mj_footer setHidden:YES];
             }
             [self.tableView reloadData];

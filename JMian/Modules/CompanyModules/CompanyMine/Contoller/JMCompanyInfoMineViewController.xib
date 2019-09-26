@@ -23,8 +23,6 @@
                 <outlet property="industryBtn" destination="5UA-2r-I7m" id="xAL-mI-FTe"/>
                 <outlet property="leftBtn" destination="4nG-Pu-yKH" id="dkU-1p-KM8"/>
                 <outlet property="myPositionBtn" destination="FDU-8Q-k1n" id="32S-se-auy"/>
-                <outlet property="pickerBGView" destination="XVW-qn-Ufw" id="w2d-bH-mZm"/>
-                <outlet property="pickerView" destination="sXA-dX-bYm" id="HZR-DA-w7p"/>
                 <outlet property="playBtn" destination="MAn-hY-D8F" id="nix-Zp-uEa"/>
                 <outlet property="rightBtn" destination="6jh-bw-voh" id="lbb-fL-lzX"/>
                 <outlet property="scrollView" destination="npc-ff-X5C" id="xB6-HF-ISr"/>
@@ -661,51 +659,11 @@
                         <constraint firstItem="5UA-2r-I7m" firstAttribute="height" secondItem="NOk-CV-Cod" secondAttribute="height" id="yFS-wj-V0Q"/>
                     </constraints>
                 </scrollView>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XVW-qn-Ufw">
-                    <rect key="frame" x="0.0" y="772" width="414" height="255"/>
-                    <subviews>
-                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXA-dX-bYm">
-                            <rect key="frame" x="0.0" y="40" width="414" height="215"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="215" id="HWP-fu-bWo"/>
-                                <constraint firstAttribute="width" constant="414" id="ztN-5M-FAQ"/>
-                            </constraints>
-                        </pickerView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4c-rX-JOJ">
-                            <rect key="frame" x="363" y="20" width="31" height="30"/>
-                            <state key="normal" title="确认"/>
-                            <connections>
-                                <action selector="pickerOKAction:" destination="-1" eventType="touchUpInside" id="c4m-gv-eck"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M89-m9-et8">
-                            <rect key="frame" x="20" y="20" width="31" height="30"/>
-                            <state key="normal" title="取消"/>
-                            <connections>
-                                <action selector="pickerViewDeleteAction:" destination="-1" eventType="touchUpInside" id="8o6-Eu-aai"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstItem="x4c-rX-JOJ" firstAttribute="top" secondItem="XVW-qn-Ufw" secondAttribute="top" constant="20" id="19b-rd-RH2"/>
-                        <constraint firstAttribute="trailing" secondItem="sXA-dX-bYm" secondAttribute="trailing" id="1u6-2B-PUQ"/>
-                        <constraint firstItem="M89-m9-et8" firstAttribute="leading" secondItem="XVW-qn-Ufw" secondAttribute="leading" constant="20" id="VWH-cI-ban"/>
-                        <constraint firstItem="sXA-dX-bYm" firstAttribute="leading" secondItem="XVW-qn-Ufw" secondAttribute="leading" id="WeB-Xn-Dxp"/>
-                        <constraint firstAttribute="height" constant="255" id="f1O-XW-gYt"/>
-                        <constraint firstAttribute="trailing" secondItem="x4c-rX-JOJ" secondAttribute="trailing" constant="20" id="fI1-gn-iER"/>
-                        <constraint firstAttribute="bottom" secondItem="sXA-dX-bYm" secondAttribute="bottom" id="vzx-zO-HmF"/>
-                        <constraint firstItem="M89-m9-et8" firstAttribute="top" secondItem="XVW-qn-Ufw" secondAttribute="top" constant="20" id="xry-32-EjW"/>
-                    </constraints>
-                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="npc-ff-X5C" secondAttribute="bottom" id="8Pq-YT-RRT"/>
-                <constraint firstItem="XVW-qn-Ufw" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Avm-vE-94C"/>
-                <constraint firstItem="XVW-qn-Ufw" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="BED-CH-rHO"/>
                 <constraint firstItem="npc-ff-X5C" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="PUh-PT-AJD"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="XVW-qn-Ufw" secondAttribute="bottom" id="XRA-dX-jrd"/>
                 <constraint firstItem="nZJ-fo-Vvm" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="dhE-uv-psN"/>
                 <constraint firstItem="nZJ-fo-Vvm" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="iNj-yq-zC7"/>
                 <constraint firstItem="nZJ-fo-Vvm" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="iPz-Wp-DjP"/>

@@ -110,6 +110,29 @@
     
 }
 
+- (void)setRightBtnImageViewName:(NSString *)imageName textName:(NSString *)textName{
+    
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 19)];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtn.frame = CGRectMake(-40 , 0, 120, 28);
+    //    leftBtn.backgroundColor = [UIColor redColor];
+    [rightBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    
+    UILabel *leftLab = [[UILabel alloc]initWithFrame:CGRectMake(rightBtn.frame.origin.x+rightBtn.frame.size.width-40, 0, 100,rightBtn.frame.size.height)];
+    leftLab.text = textName;
+    leftLab.textColor = [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1.0];
+    leftLab.font = [UIFont systemFontOfSize:13];
+    
+    [bgView addSubview:leftLab];
+    [bgView addSubview:rightBtn];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+}
+
 -(void)setRightBtnTextName:(NSString *)rightLabName{
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];

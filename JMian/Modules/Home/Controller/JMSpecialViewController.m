@@ -162,7 +162,7 @@ static NSString *BHomeCellID = @"BHomeCellID";
         if (responsObject[@"data"]) {
             NSMutableArray *modelArray = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
                 [self.arrDate addObjectsFromArray:modelArray];
-            if (modelArray.count < 15) {
+            if (modelArray.count < 10) {
                 [self.tableView.mj_footer setHidden:YES];
             }
         }
@@ -201,8 +201,7 @@ static NSString *BHomeCellID = @"BHomeCellID";
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-    
-    
+
     
 }
 #pragma mark - UITableViewDataSource

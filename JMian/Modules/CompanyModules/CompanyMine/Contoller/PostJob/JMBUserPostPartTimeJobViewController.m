@@ -135,7 +135,6 @@
         [self.comfirmPostBottomView setHidden:YES];
     }else if (_viewType == JMBUserPostPartTimeJobTypeAdd) {
         [self.comfirmPostBottomView setHidden:NO];
-
     }else if (_viewType == JMBUserPostPartTimeJobTypeHistory) {
         [self getData];
         [self.comfirmPostBottomView setHidden:NO];
@@ -529,21 +528,19 @@
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
+//    [[JMVideoPlayManager sharedInstance] play];
     
 }
 
--(void)isReadProtocol:(BOOL)isRead{
 
+-(void)isReadProtocol:(BOOL)isRead{
     if (!isRead) {
         [self.comfirmPostBottomView.OKBtn setBackgroundColor:TEXT_GRAY_COLOR];
         self.isReadProtocol = NO;
-
     }else{
         [self.comfirmPostBottomView.OKBtn setBackgroundColor:MASTER_COLOR];
         self.isReadProtocol = YES;
     }
-
 }
 
 -(void)OKAction{
@@ -577,6 +574,7 @@
     [self.navigationController pushViewController:vc animated:YES];
     
 }
+
 #pragma mark - 图片
 - (void)sendArray_addImageUrls:(NSMutableArray *)addImageUrls {
     _isChange = YES;
@@ -655,7 +653,10 @@
     [self.partTimeJobDetailView.jobTypeBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
     
     [self.partTimeJobDetailView.jobNameTextField setText:model.task_title];
-    [self.partTimeJobDetailView.jobNameTextField setEnabled:NO];
+    if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
+        [self.partTimeJobDetailView.jobNameTextField setEnabled:NO];
+        
+    }
 
     [self.partTimeJobDetailView.paymentMoneyTextField setText:model.payment_money];
     [self.partTimeJobDetailView.downPaymentTextField setText:model.front_money];
@@ -710,9 +711,14 @@
     _payment_money = model.payment_money;
     _front_money = model.front_money;
     _quantity_max = model.quantity_max;
-    _city_id = model.cityID;
     _adress = model.address;
     _myDecription = model.taskDescription;
+    if (model.cityID == nil) {
+        _city_id = @"0";
+        
+    }else{
+        _city_id = model.cityID;
+    }
 
 }
 
@@ -733,6 +739,11 @@
         
     }])];
     [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        if (self.navigationController.viewControllers.count >=2) {
+            UIViewController *listViewController =self.navigationController.viewControllers[1];
+            [self.navigationController popToViewController:listViewController animated:YES];
+            
+        }
     }])];
     [self presentViewController:alertController animated:YES completion:nil];
   
@@ -789,13 +800,26 @@
 
 -(void)deleteTaskRequest{
     [[JMHTTPManager sharedInstance]deleteTask_Id:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        [self.navigationController popViewControllerAnimated:YES];
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"下线成功" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:@"删除成功" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (self.navigationController.viewControllers.count >=2) {
+                UIViewController *listViewController =self.navigationController.viewControllers[1];
+                [self.navigationController popToViewController:listViewController animated:YES];
+            }
             
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
+        }]];
+        UIImageView *icon = [[UIImageView alloc] init];
+        icon.image = [UIImage imageNamed:@"purchase_succeeds"];
+        [alert.view addSubview:icon];
+        [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(alert.view).mas_offset(23);
+            make.centerX.mas_equalTo(alert.view);
+            make.size.mas_equalTo(CGSizeMake(75, 64));
+            
+        }];
+        [self presentViewController:alert animated:YES completion:nil];
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

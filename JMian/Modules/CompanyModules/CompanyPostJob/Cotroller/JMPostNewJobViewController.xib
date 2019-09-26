@@ -45,7 +45,7 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="ohT-JT-wna">
+                                <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="ohT-JT-wna">
                                     <rect key="frame" x="387" y="24.5" width="7" height="11"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="11" id="9r0-og-kBL"/>
@@ -295,7 +295,7 @@
                             <rect key="frame" x="0.0" y="355" width="414" height="60"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="工作地点" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5s-vH-Q1h">
-                                    <rect key="frame" x="21" y="19.5" width="70" height="21"/>
+                                    <rect key="frame" x="21" y="19.5" width="89.5" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="bsH-SW-qEv"/>
                                     </constraints>
@@ -311,7 +311,7 @@
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqV-8Q-4oS">
-                                    <rect key="frame" x="91" y="8.5" width="285" height="43"/>
+                                    <rect key="frame" x="110.5" y="8.5" width="265.5" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="V43-j9-aBr"/>
                                     </constraints>
@@ -356,7 +356,7 @@
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPe-dX-PMY">
-                                    <rect key="frame" x="91" y="8.5" width="285" height="43"/>
+                                    <rect key="frame" x="110.5" y="8.5" width="265.5" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="vV8-q3-R0k"/>
                                     </constraints>
@@ -410,6 +410,7 @@
                         <constraint firstItem="4xp-1M-2ww" firstAttribute="leading" secondItem="UjL-FQ-c6i" secondAttribute="leading" id="B54-Ha-ZfN"/>
                         <constraint firstItem="KPe-dX-PMY" firstAttribute="leading" secondItem="QqV-8Q-4oS" secondAttribute="leading" id="EEb-fc-PNe"/>
                         <constraint firstItem="fIz-pQ-at0" firstAttribute="top" secondItem="eO7-YD-SVB" secondAttribute="bottom" id="HsD-DV-b3u"/>
+                        <constraint firstItem="QqV-8Q-4oS" firstAttribute="leading" secondItem="YKI-Un-e3x" secondAttribute="leading" id="K09-5V-evn"/>
                         <constraint firstAttribute="trailing" secondItem="4iU-jd-fpq" secondAttribute="trailing" id="LGa-sp-1xE"/>
                         <constraint firstItem="bEN-ls-9vA" firstAttribute="leading" secondItem="fIz-pQ-at0" secondAttribute="leading" id="Log-v3-IId"/>
                         <constraint firstItem="eO7-YD-SVB" firstAttribute="leading" secondItem="UjL-FQ-c6i" secondAttribute="leading" id="MWr-ee-VDd"/>

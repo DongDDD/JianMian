@@ -45,6 +45,7 @@
 #import "JMHTTPManager+CreateTaskOrder.h"
 #import "JMVideoChatView.h"
 #import "THDatePickerView.h"
+#import "JMHTTPManager+UnReadNotice.h"
 
 
 #define MAX_MESSAGE_SEP_DLAY (5 * 60)
@@ -717,6 +718,9 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         dispatch_async(dispatch_get_main_queue(), ^{
             [ws changeMsg:msg status:Msg_Status_Succ];
         });
+        
+        [self  unReadNoticeRequestWithData:msg];
+        
     } fail:^(int code, NSString *desc) {
         NSLog(@"====== %d",imMsg.status);
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -735,6 +739,8 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         }
     });
 }
+
+
 
 - (void)changeMsg:(TUIMessageCellData *)msg status:(TMsgStatus)status
 {
@@ -799,6 +805,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     return msg;
     
 }
+
 - (TUISystemMessageCellData *)transSystemMsgFromDate:(NSDate *)date
 {
     if(_msgForDate == nil || fabs([date timeIntervalSinceDate:_msgForDate.timestamp]) > MAX_MESSAGE_SEP_DLAY){
@@ -963,7 +970,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }];
 }
 
-#pragma mark - 申请兼职职位
+#pragma mark - 发送请求
 
 -(void)sendCreateTaskOrderResquest_task_id:(NSString *)task_id{
     [[JMHTTPManager sharedInstance]createTaskOrder_taskID:task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -976,7 +983,35 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }];
 }
 
-
+//小程序推送消息用
+-(void)unReadNoticeRequestWithData:(TUIMessageCellData *)data{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    NSString *receiver;
+    if ([userModel.user_id isEqualToString:self.myConvModel.sender_user_id]) {
+        receiver = self.myConvModel.recipient_user_id;
+        
+    }else{
+        receiver = self.myConvModel.sender_user_id;
+        
+        
+    }
+    NSString *message;
+    if([data isKindOfClass:[TUITextMessageCellData class]]){
+//        TIMTextElem *imText = [[TIMTextElem alloc] init];
+        TUITextMessageCellData *text = (TUITextMessageCellData *)data;
+        message = text.content;
+    }else{
+        message = @"当前端口暂不支持查看此消息，请在得米APP上查看。";
+    }
+    
+    [[JMHTTPManager sharedInstance]unreadNoticeCardWithUser_id:receiver message:message successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
 #pragma mark - message cell delegate
 
 - (void)onSelectMessage:(TUIMessageCell *)cell

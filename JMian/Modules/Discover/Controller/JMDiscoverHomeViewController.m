@@ -35,6 +35,9 @@
 @property (nonatomic, copy)NSString *city_id;
 @property (nonatomic, assign)BOOL isShowAllData;
 @property (nonatomic, strong)NSMutableArray *imageArray;
+
+@property(nonatomic,strong)UIButton *likeBtn;
+
 @end
 
 @implementation JMDiscoverHomeViewController
@@ -190,6 +193,7 @@
 
 
 }
+
 #pragma mark Action
 -(void)changeCityAction{
     JMCityListViewController *vc = [[JMCityListViewController alloc]init];
@@ -335,9 +339,16 @@
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
-    
-
+    [[JMVideoPlayManager sharedInstance] setVideoListCellData:data];
+//    [playVC.view addSubview:self.likeBtn];
+ 
 }
+
+-(void)likeAction:(UIButton *)sender{
+    sender.selected = !sender.selected;
+ 
+}
+
 -(void)didSelectedCity_id:(NSString *)city_id city_name:(NSString *)city_name{
     
     _city_id = city_id;
@@ -449,6 +460,19 @@
     }
     return _imageArray;
     
+}
+
+-(UIButton *)likeBtn{
+    if (!_likeBtn) {
+        _likeBtn = [[UIButton alloc]init];
+        _likeBtn.frame = CGRectMake(100, 200, 100, 100);
+        UIImage* icon1 = [UIImage imageNamed:@"enshrine2"];
+        UIImage* icon2 = [UIImage imageNamed:@"To_share_the_selected"];
+        [_likeBtn addTarget:self action:@selector(likeAction:) forControlEvents:UIControlEventTouchUpInside];
+        [_likeBtn setImage:icon1 forState:UIControlStateNormal];
+        [_likeBtn setImage:icon2 forState:UIControlStateSelected];
+    }
+    return _likeBtn;
 }
 
 /*

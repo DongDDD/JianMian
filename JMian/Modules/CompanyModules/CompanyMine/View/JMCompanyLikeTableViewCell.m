@@ -35,19 +35,19 @@
 
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-   if( self = [super initWithStyle:style reuseIdentifier:reuseIdentifier] )
-   {
-       JMUserInfoModel *userinfoModel = [JMUserInfoManager getUserInfo];
-       
-       if ([userinfoModel.type isEqualToString:C_Type_USER]) {
-           
-           
-       }else if ([userinfoModel.type isEqualToString:B_Type_UESR]){
-           
-           
-       }
-       
-   }
+    if( self = [super initWithStyle:style reuseIdentifier:reuseIdentifier] )
+    {
+        JMUserInfoModel *userinfoModel = [JMUserInfoManager getUserInfo];
+        
+        if ([userinfoModel.type isEqualToString:C_Type_USER]) {
+            
+            
+        }else if ([userinfoModel.type isEqualToString:B_Type_UESR]){
+            
+            
+        }
+        
+    }
     
     return self;
 }
@@ -118,7 +118,7 @@
         self.salaryLab.text = @"任务已下线";
     }
 //    self.contentLab.text = BPartTimeJobLikeModel.ability_description;
-    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:CPartTimeJobLikeModel.task_user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:CPartTimeJobLikeModel.company_logo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     //职位标签
     NSMutableArray *industryNameArray = [NSMutableArray array];
     for (JMCLikeIndustryModel *IndustryData in CPartTimeJobLikeModel.task_industry) {

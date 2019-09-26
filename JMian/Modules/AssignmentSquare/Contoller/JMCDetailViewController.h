@@ -9,10 +9,13 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef enum : NSUInteger {
+    JMCDetailShowType,
+    JMCDetailPreviewType,
+} JMCDetailViewType;
 @interface JMCDetailViewController : BaseViewController
 @property(nonatomic,copy)NSString *task_id;
-
+@property(nonatomic,assign)JMCDetailViewType viewType;
 @end
 
 NS_ASSUME_NONNULL_END

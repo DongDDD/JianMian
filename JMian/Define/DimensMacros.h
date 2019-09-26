@@ -205,6 +205,7 @@ _Pragma("clang diagnostic pop")
 
 
 
+#define MiniProgramUserName @"gh_13551d20d138"
 #define AMapAPIKey @"38e2ca286abf181c06a69ebba0dc5d6f"
 #define VideoAgoraAPIKey @"a046b14ce976410ab008d99924892a6a"
 #define Is_Iphone (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
