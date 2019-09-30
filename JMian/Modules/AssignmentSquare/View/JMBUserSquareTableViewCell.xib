@@ -23,7 +23,7 @@
                         <rect key="frame" x="10" y="10" width="355" height="126.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="周末导游" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="367-8H-7hc">
-                                <rect key="frame" x="14" y="15" width="65.5" height="16"/>
+                                <rect key="frame" x="14" y="15" width="321" height="16"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="16" id="gFs-l0-ExU"/>
                                 </constraints>
@@ -113,6 +113,7 @@
                             <constraint firstItem="Dbz-L8-x8h" firstAttribute="leading" secondItem="1KT-L1-7Mo" secondAttribute="leading" id="Rak-tR-bLt"/>
                             <constraint firstAttribute="trailing" secondItem="Uaf-Vq-9ta" secondAttribute="trailing" constant="100" id="d0F-I7-qEs"/>
                             <constraint firstItem="Dbz-L8-x8h" firstAttribute="top" secondItem="1KT-L1-7Mo" secondAttribute="bottom" constant="9" id="gdL-ol-go9"/>
+                            <constraint firstAttribute="trailing" secondItem="367-8H-7hc" secondAttribute="trailing" constant="20" id="koF-bA-pvW"/>
                             <constraint firstItem="1KT-L1-7Mo" firstAttribute="leading" secondItem="6U1-A8-1em" secondAttribute="trailing" constant="11" id="lDP-MI-q2e"/>
                             <constraint firstItem="Uaf-Vq-9ta" firstAttribute="centerY" secondItem="Dbz-L8-x8h" secondAttribute="centerY" id="lst-yx-51T"/>
                             <constraint firstItem="6U1-A8-1em" firstAttribute="leading" secondItem="367-8H-7hc" secondAttribute="leading" id="wBt-gi-lMz"/>

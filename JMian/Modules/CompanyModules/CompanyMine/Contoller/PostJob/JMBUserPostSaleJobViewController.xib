@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMBUserPostSaleJobViewController">
             <connections>
-                <outlet property="bottomLeftBtn" destination="u9d-RF-aJr" id="HfI-Nh-Nvq"/>
+                <outlet property="bottomH" destination="k8E-WV-NNM" id="Lo0-gV-osK"/>
                 <outlet property="bottomView" destination="sNI-uY-KZ5" id="fzu-ue-1N8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,39 +32,11 @@
                                 <constraint firstAttribute="height" constant="1" id="ax5-tX-Rd8"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9d-RF-aJr">
-                            <rect key="frame" x="17" y="13" width="136" height="37"/>
-                            <color key="backgroundColor" red="0.98039215686274506" green="0.99607843137254903" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="37" id="d9g-fl-gGo"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="136" id="dyH-gb-dR5"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="加载中">
-                                <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <real key="value" value="0.5"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
-                                    <color key="value" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskstoBorder" value="NO"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <real key="value" value="17.5"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="bottomLeftBtnAction:" destination="-1" eventType="touchUpInside" id="aMO-fx-jOI"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wfO-5Z-NYR">
-                            <rect key="frame" x="211" y="13" width="186" height="37"/>
+                            <rect key="frame" x="17" y="12" width="380" height="37"/>
                             <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="37" id="FAM-An-ukd"/>
-                                <constraint firstAttribute="width" constant="186" id="Pvc-Mh-pz7"/>
                             </constraints>
                             <state key="normal" title="保存编辑">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -82,14 +54,12 @@
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="wfO-5Z-NYR" secondAttribute="trailing" constant="17" id="ECt-Ms-emV"/>
-                        <constraint firstItem="wfO-5Z-NYR" firstAttribute="centerY" secondItem="u9d-RF-aJr" secondAttribute="centerY" id="G3s-dz-AeF"/>
+                        <constraint firstItem="wfO-5Z-NYR" firstAttribute="leading" secondItem="sNI-uY-KZ5" secondAttribute="leading" constant="17" id="IVU-bu-ebd"/>
                         <constraint firstAttribute="trailing" secondItem="9V4-0z-ZYA" secondAttribute="trailing" id="KcX-Fl-YIB"/>
                         <constraint firstItem="9V4-0z-ZYA" firstAttribute="top" secondItem="sNI-uY-KZ5" secondAttribute="top" id="LCu-4t-Y90"/>
                         <constraint firstItem="9V4-0z-ZYA" firstAttribute="leading" secondItem="sNI-uY-KZ5" secondAttribute="leading" id="Qhz-bu-r0S"/>
-                        <constraint firstItem="u9d-RF-aJr" firstAttribute="leading" secondItem="sNI-uY-KZ5" secondAttribute="leading" constant="17" id="hOb-Jc-I6C"/>
-                        <constraint firstItem="u9d-RF-aJr" firstAttribute="top" secondItem="9V4-0z-ZYA" secondAttribute="bottom" constant="12" id="iQH-4k-ZmO"/>
+                        <constraint firstItem="wfO-5Z-NYR" firstAttribute="top" secondItem="sNI-uY-KZ5" secondAttribute="top" constant="12" id="bnX-5j-op7"/>
                         <constraint firstAttribute="height" constant="61" id="k8E-WV-NNM"/>
-                        <constraint firstItem="wfO-5Z-NYR" firstAttribute="leading" secondItem="u9d-RF-aJr" secondAttribute="trailing" constant="58" id="zec-1K-WFb"/>
                     </constraints>
                 </view>
             </subviews>

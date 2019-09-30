@@ -358,8 +358,8 @@
 
 -(void)shareViewLeftAction{
     [self disapearAction];
-    //    [self shareMiniProgram];
-    [self wxShare:0];
+        [self shareMiniProgram];
+//    [self wxShare:0];
 }
 
 -(void)shareViewRightAction{
@@ -408,7 +408,7 @@
     
     object.hdImageData = thumbData;
     object.withShareTicket = @"";
-    object.miniProgramType = WXMiniProgramTypePreview;
+    object.miniProgramType = WXMiniProgramTypeRelease;
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = self.vitaModel.user_nickname;
     //    message.description = self.configures.model.myDescription;

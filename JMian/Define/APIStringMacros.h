@@ -11,8 +11,8 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 //app
 #else
@@ -64,10 +64,11 @@
 #define Create_EducationExperience_URL @"api/education/create"
 #define Update_EducationExperience_URL @"api/education/update"
 #define Delete_EducationExperience_URL @"api/education/delete"
-
+//全职
 #define Paginate_Work_URL @"api/work/paginate"
 #define Create_Work_URL @"api/work/create"
 #define Update_Work_URL @"api/work/update"
+#define Delete_Work_URL @"api/work/delete"
 
 //C端看公司的职位详情
 #define Info_Work_URL @"api/work/info"

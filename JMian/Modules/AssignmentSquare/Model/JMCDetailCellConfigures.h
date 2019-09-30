@@ -17,6 +17,7 @@
 #import "JMCDetailCommentTableViewCell.h"//评论
 #import "JMCDetailModel.h"
 #import "JMCommentCellData.h"
+#import "JMNoDataTableViewCell.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, JMTaskDetailTableViewCellType){
     JMTaskDetailCellTypeHeader = 0,

@@ -36,6 +36,7 @@
 #import "JMPartTimeJobResumeViewController.h"
 #import "JMTaskSeachViewController.h"
 #import "JMCDetailViewController.h"
+#import "JMBDetailViewController.h"
 
 
 
@@ -494,7 +495,11 @@ static NSString *C_cellIdent = @"CSquareCellID";
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         JMAbilityCellData *model = self.dataArray[indexPath.row];
-        JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+//        JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+//        vc.ability_id = model.ability_id;
+//        [self.navigationController pushViewController:vc animated:YES];
+        
+        JMBDetailViewController *vc = [[JMBDetailViewController alloc]init];
         vc.ability_id = model.ability_id;
         [self.navigationController pushViewController:vc animated:YES];
         
@@ -506,7 +511,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
         JMTaskListCellData *model = self.dataArray[indexPath.row];
         vc.task_id = model.task_id;
-        vc.viewType = JMCDetailShowType;
+        vc.viewType = JMCDetailDefaultType;
         [self.navigationController pushViewController:vc animated:YES];
     }
     
@@ -559,10 +564,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
             
             
         }
-        //        }else{
-        //            return [UIView new];
-        //
-        //        }
+
     }
     
     if (section==1) {

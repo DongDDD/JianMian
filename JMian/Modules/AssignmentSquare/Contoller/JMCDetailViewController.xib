@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMCDetailViewController">
             <connections>
+                <outlet property="bottomH" destination="8FT-cX-SnQ" id="4Ce-jJ-R9Y"/>
                 <outlet property="bottomLeftBtn" destination="OwX-4a-J8R" id="C8s-Yc-8Nj"/>
                 <outlet property="bottomRightBtn" destination="xVH-Ui-9Wa" id="Xk5-oW-DVW"/>
                 <outlet property="bottomView" destination="yuu-Ty-ELc" id="pFm-dm-yYH"/>
@@ -29,7 +30,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwX-4a-J8R">
                             <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
                             <color key="backgroundColor" red="0.96862745100000003" green="0.99215686270000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="咨询雇主">
+                            <state key="normal">
                                 <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <userDefinedRuntimeAttributes>
@@ -48,7 +49,10 @@
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xVH-Ui-9Wa">
                             <rect key="frame" x="207" y="0.0" width="207" height="50"/>
                             <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" title="立即申请">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="aQ8-Df-3r5"/>
+                            </constraints>
+                            <state key="normal">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -61,11 +65,10 @@
                         <constraint firstItem="OwX-4a-J8R" firstAttribute="width" secondItem="xVH-Ui-9Wa" secondAttribute="width" id="5Ai-EA-nwf"/>
                         <constraint firstAttribute="height" constant="50" id="8FT-cX-SnQ"/>
                         <constraint firstItem="xVH-Ui-9Wa" firstAttribute="leading" secondItem="OwX-4a-J8R" secondAttribute="trailing" id="Vw1-zI-vCM"/>
-                        <constraint firstAttribute="bottom" secondItem="OwX-4a-J8R" secondAttribute="bottom" id="d7F-ci-e3v"/>
                         <constraint firstItem="OwX-4a-J8R" firstAttribute="leading" secondItem="yuu-Ty-ELc" secondAttribute="leading" id="etE-yu-sMA"/>
                         <constraint firstItem="OwX-4a-J8R" firstAttribute="top" secondItem="yuu-Ty-ELc" secondAttribute="top" id="lr2-1M-AEC"/>
                         <constraint firstAttribute="trailing" secondItem="xVH-Ui-9Wa" secondAttribute="trailing" id="uRv-D4-KRw"/>
-                        <constraint firstAttribute="bottom" secondItem="xVH-Ui-9Wa" secondAttribute="bottom" id="xy5-yN-oao"/>
+                        <constraint firstItem="OwX-4a-J8R" firstAttribute="height" secondItem="xVH-Ui-9Wa" secondAttribute="height" id="unI-kb-IwS"/>
                         <constraint firstItem="xVH-Ui-9Wa" firstAttribute="top" secondItem="yuu-Ty-ELc" secondAttribute="top" id="zht-Xc-eh8"/>
                     </constraints>
                 </view>

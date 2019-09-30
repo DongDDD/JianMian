@@ -52,7 +52,7 @@
 @property (nonatomic ,assign)BOOL isChange;
 @property (nonatomic, strong)AMapPOI *POIModel;
 @property (nonatomic, strong)JMInvoiceModel *invoiceModel;
-@property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
 @property (nonatomic, strong)JMTaskPartTimejobDetailModel *partTimejobDetailModel;
 @property (nonatomic,strong)NSMutableArray *imageDataArr;;
 
@@ -80,6 +80,7 @@
 @property (copy, nonatomic)NSString *invoice_title;//发票抬头
 @property (copy, nonatomic)NSString *invoice_tax_number;//税务编号
 @property (copy, nonatomic)NSString *invoice_email;//邮箱
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomH;
 
 //
 @property (copy, nonatomic)NSString *cityName;//地区
@@ -106,13 +107,12 @@
 
     }else if (_viewType == JMBUserPostPartTimeJobTypeAdd || _viewType == JMBUserPostPartTimeJobTypeHistory) {
         self.title = @"发布任务";
-    
-    
     }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
     UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hideKeyBoard)];
     [self.view addGestureRecognizer:tap2];
+    self.bottomH.constant = 61 + SafeAreaBottomHeight;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -154,21 +154,21 @@
 }
 #pragma mark - myAction
 
-- (IBAction)bottomLeftAction:(UIButton *)sender {
-    if ([_partTimejobDetailModel.status isEqualToString:Position_Online]) {
-        
-        
-        //下线
-        [self updateTaskInfoRequest_status:Position_Downline];
-        
-    }else if ([_partTimejobDetailModel.status isEqualToString:Position_Downline]){
-        //上线
-        [self updateTaskInfoRequest_status:Position_Online];
-        
-        
-    }
-    
-}
+//- (IBAction)bottomLeftAction:(UIButton *)sender {
+//    if ([_partTimejobDetailModel.status isEqualToString:Position_Online]) {
+//
+//
+//        //下线
+//        [self updateTaskInfoRequest_status:Position_Downline];
+//
+//    }else if ([_partTimejobDetailModel.status isEqualToString:Position_Downline]){
+//        //上线
+//        [self updateTaskInfoRequest_status:Position_Online];
+//
+//
+//    }
+//
+//}
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
     //保存编辑
@@ -739,11 +739,7 @@
         
     }])];
     [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        if (self.navigationController.viewControllers.count >=2) {
-            UIViewController *listViewController =self.navigationController.viewControllers[1];
-            [self.navigationController popToViewController:listViewController animated:YES];
-            
-        }
+ 
     }])];
     [self presentViewController:alertController animated:YES completion:nil];
   
@@ -862,7 +858,7 @@
     [self.makeOutBillView.invoiceTitleTextField resignFirstResponder];
     [self.makeOutBillView.invoiceTaxNumTextField resignFirstResponder];
     [self.makeOutBillView.invoiceEmailTextField resignFirstResponder];
-    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:nil industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude  address:_adress goods_title:nil goods_price:nil goods_desc:nil video_path:_video_path video_cover:_video_cover image_arr:nil  is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"3" unit:@"元" payment_money:_payment_money front_money:_front_money quantity_max:_quantity_max myDescription:_myDecription industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude  address:_adress goods_title:nil goods_price:nil goods_desc:nil video_path:_video_path video_cover:_video_cover image_arr:nil  is_invoice:_is_invoice invoice_title:_invoice_title invoice_tax_number:_invoice_tax_number invoice_email:_invoice_email status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self showAlertVCSucceesSingleWithMessage:@"保存成功" btnTitle:@"好的"];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -880,13 +876,13 @@
         if (responsObject[@"data"]) {
             _partTimejobDetailModel = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
        
-            if ([_partTimejobDetailModel.status isEqualToString:Position_Downline]) {
-                [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
-
-            }else if ([_partTimejobDetailModel.status isEqualToString:Position_Online]) {
-                [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
-
-            }
+//            if ([_partTimejobDetailModel.status isEqualToString:Position_Downline]) {
+//                [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
+//
+//            }else if ([_partTimejobDetailModel.status isEqualToString:Position_Online]) {
+//                [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
+//
+//            }
             
             //赋值
             [self setRightBtnValues_model:_partTimejobDetailModel];

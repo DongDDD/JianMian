@@ -27,8 +27,8 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="视频介绍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekr-Y6-FR8">
-                        <rect key="frame" x="20" y="25" width="65.5" height="20"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="视频介绍:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekr-Y6-FR8">
+                        <rect key="frame" x="20" y="25" width="70.5" height="20"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -55,12 +55,12 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Ekr-Y6-FR8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="38B-gH-xEO"/>
+                    <constraint firstItem="LNp-VX-vdv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="70" id="3Wi-F6-byG"/>
                     <constraint firstAttribute="trailing" secondItem="kd2-EU-T3h" secondAttribute="trailing" constant="20" id="GwD-E4-lR3"/>
                     <constraint firstItem="kd2-EU-T3h" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="MUv-EG-18s"/>
                     <constraint firstItem="LNp-VX-vdv" firstAttribute="leading" secondItem="Ekr-Y6-FR8" secondAttribute="leading" id="S3Z-Qg-kNL"/>
                     <constraint firstItem="jC3-Ga-88u" firstAttribute="centerX" secondItem="LNp-VX-vdv" secondAttribute="centerX" id="UpM-s9-GWC"/>
                     <constraint firstAttribute="bottom" secondItem="LNp-VX-vdv" secondAttribute="bottom" constant="27" id="YYx-ev-wTG"/>
-                    <constraint firstItem="LNp-VX-vdv" firstAttribute="top" secondItem="Ekr-Y6-FR8" secondAttribute="bottom" constant="25" id="aov-1q-5Lx"/>
                     <constraint firstAttribute="bottom" secondItem="kd2-EU-T3h" secondAttribute="bottom" id="b2Y-3s-XHD"/>
                     <constraint firstAttribute="trailing" secondItem="LNp-VX-vdv" secondAttribute="trailing" constant="20" id="c6a-E6-bCV"/>
                     <constraint firstItem="Ekr-Y6-FR8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="gWE-hc-ROa"/>

@@ -44,7 +44,7 @@
 @property (nonatomic,strong)UIDatePicker *dataPickerView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic ,assign)BOOL isChange;
-@property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
+//@property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
 @property (nonatomic, strong)JMTaskPartTimejobDetailModel *partTimeModel;
 
 //---请求参数-------------------------------------------
@@ -72,6 +72,8 @@
 @property (copy, nonatomic)NSString *cityName;//地区
 @property (nonatomic,copy)NSString *labsJson;
 @property (assign, nonatomic)BOOL isReadProtocol;//是否阅读了协议
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomH;
+
 
 @end
 static NSString *cellIdent = @"BUserPostPositionCell";
@@ -92,7 +94,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     }
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
-  
+    self.bottomH.constant = 61 + SafeAreaBottomHeight;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -818,11 +820,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         
     }])];
     [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-        if (self.navigationController.viewControllers.count >=2) {
-            UIViewController *listViewController =self.navigationController.viewControllers[1];
-            [self.navigationController popToViewController:listViewController animated:YES];
-            
-        }
+      
     }])];
     [self presentViewController:alertController animated:YES completion:nil];
 
@@ -858,29 +856,29 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     
 }
 //下线任务
-- (IBAction)bottomLeftBtnAction:(UIButton *)sender {
-    if ([_partTimeModel.status isEqualToString:Position_Online]) {
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你要确认下线该职位吗？" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"确认下线" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self downLineTaskInfoRequest_status:Position_Downline];
-        }])];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
-        
-    }else if ([_partTimeModel.status isEqualToString:Position_Downline]) {
-        
-        [self onLineTaskInfoRequest_status:Position_Online];
-        
-        
-    }
-    
-
-
-}
+//- (IBAction)bottomLeftBtnAction:(UIButton *)sender {
+//    if ([_partTimeModel.status isEqualToString:Position_Online]) {
+//
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"你要确认下线该职位吗？" preferredStyle:UIAlertControllerStyleAlert];
+//        [alertController addAction:([UIAlertAction actionWithTitle:@"确认下线" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//            [self downLineTaskInfoRequest_status:Position_Downline];
+//        }])];
+//        [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//        }])];
+//        [self presentViewController:alertController animated:YES completion:nil];
+//
+//    }else if ([_partTimeModel.status isEqualToString:Position_Downline]) {
+//
+//        [self onLineTaskInfoRequest_status:Position_Online];
+//
+//
+//    }
+//
+//
+//
+//}
 //保存编辑
 - (IBAction)saveUpdateAction:(UIButton *)sender {
     [self.detailView.quantityMaxTextField resignFirstResponder];
@@ -1033,13 +1031,13 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             _partTimeModel = [JMTaskPartTimejobDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
-            if ([_partTimeModel.status isEqualToString:Position_Downline]) {
-                [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
-
-            }else if ([_partTimeModel.status isEqualToString:Position_Online]) {
-                [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
-
-            }
+//            if ([_partTimeModel.status isEqualToString:Position_Downline]) {
+////                [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
+//
+//            }else if ([_partTimeModel.status isEqualToString:Position_Online]) {
+////                [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
+//
+//            }
             self.imageDataArr = _partTimeModel.images.mutableCopy;
             
             //赋值

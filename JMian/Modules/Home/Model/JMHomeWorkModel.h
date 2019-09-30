@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *salary_max;
 @property (nonatomic, copy) NSString *Description;
 @property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *favorite_id;
 
 @property (nonatomic, copy) NSString *address;
 @property (nonatomic, copy) NSString *latitude;

@@ -22,8 +22,10 @@ NSString *const JMCDetailTaskDecri2TableViewCellIdentifier = @"JMCDetailTaskDecr
     // Initialization code
 }
 
+//C 端
 -(void)setModel:(JMCDetailModel *)model{
 //    self.contentLab.text = model.myDescription;
+     self.titleLab.text = @"任务描述";
     if (model.myDescription.length == 0) {
         [self.textView setText:@"暂无描述"];
     }else{
@@ -38,11 +40,33 @@ NSString *const JMCDetailTaskDecri2TableViewCellIdentifier = @"JMCDetailTaskDecr
                                      };
         
         self.textView.attributedText = [[NSAttributedString alloc] initWithString:self.textView.text attributes:attributes];
+    }
+    
+}
+
+//B 端
+-(void)setContentDecri:(NSString *)contentDecri{
+    self.titleLab.text = @"自我介绍";
+    if (contentDecri.length == 0) {
+        [self.textView setText:@"暂无描述"];
+    }else{
+        [self.textView setText:contentDecri];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        
+        paragraphStyle.lineSpacing = 5;// 字体的行间距
+        
+        NSDictionary *attributes = @{
+                                     NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                     NSParagraphStyleAttributeName:paragraphStyle
+                                     };
+        
+        self.textView.attributedText = [[NSAttributedString alloc] initWithString:self.textView.text attributes:attributes];
         
     }
     
-    
 }
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

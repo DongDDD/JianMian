@@ -18,6 +18,8 @@
              @"user_nickname":@"user.nickname",
              @"user_avatar":@"user.avatar",
              @"task_title":@"task.task_title",
+             @"company_company_name":@"company.company_name",
+             @"company_logo_path":@"company.logo_path",
 
              };
     

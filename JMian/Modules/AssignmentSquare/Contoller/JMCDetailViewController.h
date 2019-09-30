@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 typedef enum : NSUInteger {
-    JMCDetailShowType,
+    JMCDetailDefaultType,
     JMCDetailPreviewType,
 } JMCDetailViewType;
 @interface JMCDetailViewController : BaseViewController

@@ -47,6 +47,8 @@
              @"videoDenial_reason":@"video.denial_reason",
              
              @"user_avatar":@"user.avatar",
+             @"favorite_id":@"favorites.favorite_id",
+
              @"user_nickname":@"user.nickname"
              };
     

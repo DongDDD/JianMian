@@ -29,6 +29,7 @@
 #import "JMHTTPManager+UpdateTask.h"
 #import "JMBUserPostSaleJobViewController.h"
 #import "JMBUserPostPartTimeJobViewController.h"
+#import "JMHTTPManager+DeleteTask.h"
 
 
 @interface JMCDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMCDetailVideoTableViewCellDelegate,JMShareViewDelegate,JMTaskApplyForViewDelegate>
@@ -48,6 +49,7 @@
 @property (nonatomic ,strong) UIView *BGShareView;
 @property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *bottomRightBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomH;
 
 @end
 
@@ -56,13 +58,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"任务详情";
-    if (_viewType == JMCDetailShowType) {
-        [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-        
-    }else if (_viewType == JMCDetailPreviewType) {
-    
-        [self setRightBtnImageViewName:@"jobDetailShare"];
-    }
+
+    self.bottomH.constant = 50+SafeAreaBottomHeight;
+
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -90,28 +88,29 @@
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
     }];
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenChoosePayView)];
     [self.BGShareView addGestureRecognizer:tap];
 
 }
+
 //预览状态分享按钮
-- (void)setRightBtnImageViewName:(NSString *)imageName{
-    
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 19)];
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(-20 , 0, 120, 28);
-    //    leftBtn.backgroundColor = [UIColor redColor];
-    [rightBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    
-    [bgView addSubview:rightBtn];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
-    self.navigationItem.rightBarButtonItem = rightItem;
-    
-}
+//- (void)setRightBtnImageViewName:(NSString *)imageName{
+//
+//    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 19)];
+//
+//    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+//    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    rightBtn.frame = CGRectMake(-20 , 0, 120, 28);
+//    //    leftBtn.backgroundColor = [UIColor redColor];
+//    [rightBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+//    [rightBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+//
+//    [bgView addSubview:rightBtn];
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+//    self.navigationItem.rightBarButtonItem = rightItem;
+//
+//}
+
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
     
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
@@ -171,31 +170,35 @@
 //            //判断是否有被收藏过
 //            if (![dic[@"favorites"] isEqual:[NSNull null]]) {
 //                self.favorites_id = dic[@"favorites"][@"favorite_id"];
-//                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-//                
+                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+//
 //            }
             if (_viewType == JMCDetailPreviewType) {
                 [self initView];
+                [self setRightBtnImageViewName:@"jobDetailShare" imageNameRight2:@"Bdelete"];
+
                 [self.tableView reloadData];
 
-            }else
-                if (_viewType == JMCDetailShowType) {
+            }else  if (_viewType == JMCDetailDefaultType) {
+
+                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
                 [self getCommentInfo];
             
             }
             
             if (_viewType == JMCDetailPreviewType) {
                 if ([self.configures.model.status isEqualToString:Position_Online]) {
-                    [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
-                    [self.bottomRightBtn setTitle:@"编辑任务" forState:UIControlStateNormal];
+                    [self.bottomLeftBtn setTitle:@"任务下线" forState:UIControlStateNormal];
+                    [self.bottomRightBtn setTitle:@"编辑更新" forState:UIControlStateNormal];
                     
                 }else if (([self.configures.model.status isEqualToString:Position_Downline])) {
-                    [self.bottomLeftBtn setTitle:@"重新上线" forState:UIControlStateNormal];
-                    [self.bottomRightBtn setTitle:@"编辑任务" forState:UIControlStateNormal];
+                    [self.bottomLeftBtn setTitle:@"编辑更新" forState:UIControlStateNormal];
+                    [self.bottomRightBtn setTitle:@"重新发布" forState:UIControlStateNormal];
                     
                 }
-            }else if (_viewType == JMCDetailShowType) {
-                
+            }else if (_viewType == JMCDetailDefaultType) {
+                [self.bottomLeftBtn setTitle:@"咨询雇主" forState:UIControlStateNormal];
+                [self.bottomRightBtn setTitle:@"立即申请" forState:UIControlStateNormal];
             }
         }
         
@@ -277,11 +280,9 @@
     [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:nil unit:nil payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         NSString *title;
         if ([status isEqualToString:Position_Downline]) {
-            title  = @"已上线";
-        }else if ([status isEqualToString:Position_Online]) {
             title  = @"已下线";
-
-        
+        }else if ([status isEqualToString:Position_Online]) {
+            title  = @"已上线";
         }
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:title preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
@@ -295,6 +296,32 @@
     
 }
 
+-(void)deleteTaskRequest{
+    [[JMHTTPManager sharedInstance]deleteTask_Id:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:@"删除成功" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (self.navigationController.viewControllers.count >=2) {
+                UIViewController *listViewController =self.navigationController.viewControllers[1];
+                [self.navigationController popToViewController:listViewController animated:YES];
+            }
+            
+        }]];
+        UIImageView *icon = [[UIImageView alloc] init];
+        icon.image = [UIImage imageNamed:@"purchase_succeeds"];
+        [alert.view addSubview:icon];
+        [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(alert.view).mas_offset(23);
+            make.centerX.mas_equalTo(alert.view);
+            make.size.mas_equalTo(CGSizeMake(75, 64));
+            
+        }];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
 
 #pragma mark -- 微信分享的是链接
 - (void)wxShare:(int)n
@@ -367,7 +394,7 @@
     
     object.hdImageData = thumbData;
     object.withShareTicket = @"";
-    object.miniProgramType = WXMiniProgramTypePreview;
+    object.miniProgramType = WXMiniProgramTypeRelease;
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = self.configures.model.task_title;
     message.description = self.configures.model.myDescription;
@@ -440,7 +467,21 @@
         [self loginAlert];
         return;
     }
-    [self showShareView];
+    if (_viewType == JMCDetailPreviewType) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除吗，删除后数据将不可恢复！" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"确认删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self deleteTaskRequest];
+
+        }])];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+          
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+    }else if (_viewType == JMCDetailDefaultType) {
+        [self showShareView];
+    
+    }
     
 }
 
@@ -450,25 +491,30 @@
         [self loginAlert];
         return;
     }
-    sender.selected = !sender.selected;
-    if (sender.selected) {
-        [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.task_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    if (_viewType == JMCDetailPreviewType) {
+        [self showShareView];
+    }else if (_viewType == JMCDetailDefaultType) {
+        sender.selected = !sender.selected;
+        if (sender.selected) {
+            [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.task_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                
+                [self showAlertSimpleTips:@"提示" message:@"收藏成功" btnTitle:@"好的"];
+                
+            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                
+            }];
             
-            [self showAlertSimpleTips:@"提示" message:@"收藏成功" btnTitle:@"好的"];
+        }else{
             
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-        }];
+            [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.configures.model.favorites_id  mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                
+                [self showAlertSimpleTips:@"提示" message:@"已取消收藏" btnTitle:@"好的"];
+                
+            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                
+            }];
+        }
         
-    }else{
-        
-        [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.configures.model.favorites_id  mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            
-            [self showAlertSimpleTips:@"提示" message:@"已取消收藏" btnTitle:@"好的"];
-            
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-        }];
     }
     
 }
@@ -476,13 +522,27 @@
 - (IBAction)bottomLeftAction:(id)sender {
     if (_viewType == JMCDetailPreviewType) {
         if ([self.configures.model.status isEqualToString:Position_Online]) {
+            //下线
             [self updateTaskStatusRequestWithStatus:Position_Downline];
             
         }else if ([self.configures.model.status isEqualToString:Position_Downline]) {
-            [self updateTaskStatusRequestWithStatus:Position_Online];
+            //编辑
+            NSString *task_id;
+            NSString *payment_method;
+            payment_method = self.configures.model.payment_method;
+            task_id = self.configures.model.task_id;
+            if ([payment_method isEqualToString: @"1"]) {
+                //网络销售
+                [self gotoBUserPostPositionVC_task_id:task_id];
+                
+            }else{
+                //其他兼职
+                [self gotoBUserPostPartTimeJobVC_task_id:task_id];
+                
+            }
 
         }
-    }else if (_viewType == JMCDetailShowType) {
+    }else if (_viewType == JMCDetailDefaultType) {
         NSString *str = kFetchMyDefault(@"youke");
         if ([str isEqualToString:@"1"]) {
             [self loginAlert];
@@ -527,22 +587,26 @@
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
     if (_viewType == JMCDetailPreviewType) {
-        NSString *task_id;
-        NSString *payment_method;
-        
-        
-        payment_method = self.configures.model.payment_method;
-        task_id = self.configures.model.task_id;
-        if ([payment_method isEqualToString: @"1"]) {
-            //网络销售
-            [self gotoBUserPostPositionVC_task_id:task_id];
+        if ([self.configures.model.status isEqualToString:Position_Online]) {
+            //上线状态
+            NSString *task_id;
+            NSString *payment_method;
+            payment_method = self.configures.model.payment_method;
+            task_id = self.configures.model.task_id;
+            if ([payment_method isEqualToString: @"1"]) {
+                //网络销售
+                [self gotoBUserPostPositionVC_task_id:task_id];
+            }else{
+                //其他兼职
+                [self gotoBUserPostPartTimeJobVC_task_id:task_id];
+            }
             
-        }else{
-            //其他兼职
-            [self gotoBUserPostPartTimeJobVC_task_id:task_id];
+        }else if ([self.configures.model.status isEqualToString:Position_Downline]) {
+            //下线状态
+            [self updateTaskStatusRequestWithStatus:Position_Online];
             
         }
-    }else if (_viewType == JMCDetailShowType) {
+    }else if (_viewType == JMCDetailDefaultType) {
         NSString *str = kFetchMyDefault(@"youke");
         if ([str isEqualToString:@"1"]) {
             [self loginAlert];
@@ -557,8 +621,7 @@
             //服务提醒
             [self showApplyForView];
         }
-    
-    
+  
     }
     
 }
@@ -659,9 +722,9 @@
 }
 
 -(void)shareViewLeftAction{
-    [self wxShare:0];
+//    [self wxShare:0];
     [self hiddenChoosePayView];
-//    [self shareMiniProgram];
+    [self shareMiniProgram];
     
 }
 -(void)shareViewRightAction{
@@ -737,22 +800,14 @@
     if (section == 1) {
         return self.titleView;
     }else if (section == 2) {
-        NSMutableArray *imgArr = [NSMutableArray array];
-        for (JMCDetailImageModel *imgModel in self.configures.model.images) {
-            if ([imgModel.status isEqualToString:@"2"]) {
-                [imgArr addObject:imgModel];
-            }
-        }
-        if (imgArr.count > 0) {
-            UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH, 44)];
-            lab.text = @"     图片介绍";
-            lab.font = [UIFont boldSystemFontOfSize:16];
-            lab.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
-            lab.backgroundColor = [UIColor whiteColor];
-            return lab;
-        }else{
-            return [UIView new];
-        }
+        
+        UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH, 44)];
+        lab.text = @"     图片介绍";
+        lab.font = [UIFont boldSystemFontOfSize:16];
+        lab.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
+        lab.backgroundColor = [UIColor whiteColor];
+        return lab;
+        
     }else if (section == 3) {
         if (self.configures.model.latitude.length > 0 && self.configures.model.longitude.length > 0) {
             UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH, 44)];
@@ -788,11 +843,8 @@
     if (section == 1) {
         return 44;
     }else if (section == 2) {
-        if (self.configures.model.images.count > 0) {
-            return 44;
-        }else{
-            return 1;
-        }
+        //图片
+        return 44;
     }else if (section == 3) {
         if (self.configures.model.latitude.length > 0 && self.configures.model.longitude.length > 0) {
             return 44;
@@ -858,20 +910,26 @@
     
     }else if (indexPath.section == 2) {
         //图片
-        JMCDetailImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailImageTableViewCellIdentifier forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        NSMutableArray *imgArr = [NSMutableArray array];
-        for (JMCDetailImageModel *imgModel in self.configures.model.images) {
-            if ([imgModel.status isEqualToString:@"2"]) {
-                
-                [imgArr addObject:imgModel];
+        if (self.configures.model.images.count > 0) {
+            JMCDetailImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailImageTableViewCellIdentifier forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            NSMutableArray *imgArr = [NSMutableArray array];
+            for (JMCDetailImageModel *imgModel in self.configures.model.images) {
+                if ([imgModel.status isEqualToString:@"2"]) {
+                    
+                    [imgArr addObject:imgModel];
+                }
             }
+            JMCDetailImageModel *imgModel = imgArr[indexPath.row];
+            [cell setUrl:imgModel.file_path];
+            return cell;
+            
+        }else{
+            //没有图片
+            JMNoDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMNoDataTableViewCellIdentifier forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            return cell;
         }
-        JMCDetailImageModel *imgModel = imgArr[indexPath.row];
-        [cell setUrl:imgModel.file_path];
-        
-        //            [cell setUserInfo:[JMUserInfoManager getUserInfo]];
-        return cell;
     }else if (indexPath.section == 3) {
         //公司地址
         JMMapTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMapTableViewCellIdentifier forIndexPath:indexPath];
@@ -902,9 +960,9 @@
             if (_viewType == JMCDetailPreviewType) {
                 cell.textLabel.text = @"  预览模式不显示评论";
 
-            }else if (_viewType == JMCDetailShowType){
-                cell.textLabel.text = @"  暂无评论";
-            
+            }else if (_viewType == JMCDetailDefaultType){
+                cell.textLabel.text = @"  暂无评价";
+
             }
             cell.textLabel.font = kFont(14);
             cell.textLabel.textColor = TEXT_GRAY_COLOR;
@@ -986,6 +1044,8 @@
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailCommentTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailCommentTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailProduceTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailProduceTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMapTableViewCell" bundle:nil] forCellReuseIdentifier:JMMapTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMNoDataTableViewCell" bundle:nil] forCellReuseIdentifier:JMNoDataTableViewCellIdentifier];
+
         
     }
     return _tableView;

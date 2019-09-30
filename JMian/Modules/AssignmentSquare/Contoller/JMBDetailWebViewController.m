@@ -123,9 +123,9 @@
 }
 
 -(void)shareViewLeftAction{
-    [self wxShare:0];
+//    [self wxShare:0];
     [self hiddenChoosePayView];
-//    [self shareMiniProgram];
+    [self shareMiniProgram];
     
 }
 
@@ -220,7 +220,7 @@
     NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
     object.hdImageData = thumbData;
     object.withShareTicket = @"";
-    object.miniProgramType = WXMiniProgramTypePreview;
+    object.miniProgramType = WXMiniProgramTypeRelease;
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = self.detailModel.user_nickname;
     message.description = @"";
@@ -313,7 +313,7 @@
                 
             }
             //获取该用户ID
-            _user_id = self.detailModel.user_id ;
+            _user_id = self.detailModel.user_userId ;
             if (!_user_id) {
                 //异常处理
                 UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"该用户已被删除" preferredStyle:UIAlertControllerStyleAlert];

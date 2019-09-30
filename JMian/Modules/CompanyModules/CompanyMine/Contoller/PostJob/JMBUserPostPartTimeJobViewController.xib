@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMBUserPostPartTimeJobViewController">
             <connections>
-                <outlet property="bottomLeftBtn" destination="X7I-tr-eo6" id="Jpz-aG-6YO"/>
+                <outlet property="bottomH" destination="7oz-LE-8ah" id="A4Z-mP-Ox7"/>
                 <outlet property="twoBtnBottomView" destination="TGy-TR-Zfo" id="9xD-fG-Ekx"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,39 +32,11 @@
                                 <constraint firstAttribute="height" constant="1" id="zJd-u6-Qg9"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X7I-tr-eo6">
-                            <rect key="frame" x="17" y="13" width="174" height="37"/>
-                            <color key="backgroundColor" red="0.98039215690000003" green="0.99607843139999996" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="37" id="PlM-7q-fLY"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="136" id="pzc-kM-tn8"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <state key="normal" title="下线">
-                                <color key="titleColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
-                                    <real key="value" value="0.5"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
-                                    <color key="value" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskstoBorder" value="NO"/>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <real key="value" value="18.5"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
-                            <connections>
-                                <action selector="bottomLeftAction:" destination="-1" eventType="touchUpInside" id="vZS-GE-Krt"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EdQ-sx-45s">
-                            <rect key="frame" x="211" y="13" width="186" height="37"/>
+                            <rect key="frame" x="17" y="12" width="380" height="37"/>
                             <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="37" id="EGq-uh-K5D"/>
-                                <constraint firstAttribute="width" constant="186" id="LUW-RA-nAs"/>
                             </constraints>
                             <state key="normal" title="保存编辑">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -81,12 +53,10 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="EdQ-sx-45s" firstAttribute="top" secondItem="TGy-TR-Zfo" secondAttribute="top" constant="12" id="0AY-MT-l9E"/>
                         <constraint firstAttribute="height" constant="61" id="7oz-LE-8ah"/>
-                        <constraint firstItem="EdQ-sx-45s" firstAttribute="leading" secondItem="X7I-tr-eo6" secondAttribute="trailing" constant="20" id="9vb-0f-5UZ"/>
                         <constraint firstAttribute="trailing" secondItem="EdQ-sx-45s" secondAttribute="trailing" constant="17" id="GmD-hU-Dzj"/>
-                        <constraint firstItem="X7I-tr-eo6" firstAttribute="leading" secondItem="TGy-TR-Zfo" secondAttribute="leading" constant="17" id="Iq7-CI-gCa"/>
-                        <constraint firstItem="X7I-tr-eo6" firstAttribute="top" secondItem="l27-Rf-dSx" secondAttribute="bottom" constant="12" id="fdZ-Yv-Fkz"/>
-                        <constraint firstItem="EdQ-sx-45s" firstAttribute="centerY" secondItem="X7I-tr-eo6" secondAttribute="centerY" id="rbr-zq-Ihc"/>
+                        <constraint firstItem="EdQ-sx-45s" firstAttribute="leading" secondItem="TGy-TR-Zfo" secondAttribute="leading" constant="17" id="osB-Ve-fZr"/>
                         <constraint firstAttribute="trailing" secondItem="l27-Rf-dSx" secondAttribute="trailing" id="sDm-Zd-YAF"/>
                         <constraint firstItem="l27-Rf-dSx" firstAttribute="top" secondItem="TGy-TR-Zfo" secondAttribute="top" id="vFL-F8-5Xx"/>
                         <constraint firstItem="l27-Rf-dSx" firstAttribute="leading" secondItem="TGy-TR-Zfo" secondAttribute="leading" id="ztX-Mk-64h"/>

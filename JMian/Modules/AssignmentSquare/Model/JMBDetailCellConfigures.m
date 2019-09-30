@@ -1,25 +1,27 @@
 //
-//  JMCDetailCellConfigures.m
+//  JMBDetailCellConfigures.m
 //  JMian
 //
-//  Created by mac on 2019/8/19.
+//  Created by mac on 2019/9/28.
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMCDetailCellConfigures.h"
+#import "JMBDetailCellConfigures.h"
 #import "DimensMacros.h"
+@interface JMBDetailCellConfigures ()
+@property (assign, nonatomic) CGFloat height;
 
-@implementation JMCDetailCellConfigures
-
+@end
+@implementation JMBDetailCellConfigures
 
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
-        //公司信息
+        // 个人信息
         return 1;
     }else if (section == 1) {
-        //详情描述，视频
-        return 3;
+        //工作描述
+        return 1;
     }else if (section == 2) {
         //图片
         if (self.model.images.count > 0) {
@@ -31,17 +33,12 @@
             }
             NSLog(@"图片有%lu张",(unsigned long)self.model.images.count);
             return imgArr.count;
+            
         }else{
             return 1;
         }
     }else if (section == 3) {
-        if (self.model.latitude.length > 0 && self.model.longitude.length > 0) {
-            return 1;
-        }else{
-            return 0;
-        }
-    }else if (section == 4) {
-        //信誉评价
+        //评论
         NSLog(@"评论有%lu条",(unsigned long)self.commentListArray.count);
         if (self.commentListArray.count) {
             return self.commentListArray.count;
@@ -53,103 +50,71 @@
     return 0;
 }
 
+
 - (CGFloat)heightForRowsInSection:(NSIndexPath *)indexPath {
     
     if (indexPath.section == 0){
-        return 95;
+        //个人信息
+        return 163;;
+        
     }else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            //任务描述
-            return 299;
-        }else  if (indexPath.row == 1) {
-            //任务描述或者产品描述
-//            NSLog(@"FFFFF:%f",F);
-            return [self getHeightFromDecri];
-        }else if (indexPath.row == 2) {
-            //视频
-            if (self.model.video_file_path) {
-                return 300;
-            }else{
-                return 0;
-            }
-        }
+        //自我介绍
+        return [self getHeightFromDecri];
+        
     }else if (indexPath.section == 2) {
-        //图片
-//        __weak JMCDetailImageModel *weakSelf = self;
+        //图片作品
         if (self.model.images.count > 0) {
+            __weak JMCDetailImageModel *weakSelf = self;
             NSMutableArray *imgArr = [NSMutableArray array];
-            for (JMCDetailImageModel *imgModel in self.model.images) {
+            for (JMBDetailImageModel *imgModel in self.model.images) {
                 if ([imgModel.status isEqualToString:@"2"]) {
                     [imgArr addObject:imgModel];
                 }
             }
+            
             JMCDetailImageModel *imgModel = imgArr[indexPath.row];
             UIImageView *imageView = [[UIImageView alloc]init];
+
             [imageView sd_setImageWithURL:[NSURL URLWithString:imgModel.file_path] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 NSLog(@"宽：%f, 高：%f", image.size.width, image.size.height);
                 CGFloat imgHeight = image.size.height * SCREEN_WIDTH / image.size.width;
                 self.height = imgHeight;
             }];
+ 
+            
+            //手动计算cell
             return self.height;
+
             
         }else{
-            //没有图片 默认高度
-            return 188;
+            return 200;
 
         }
     }else if (indexPath.section == 3) {
-        //公司地址
-        return 400;
-    }else if (indexPath.section == 4) {
-        //信誉评价
         if (self.commentListArray.count > 0) {
             return 139;
             
         }else{
             return 44;
-
+            
         }
     }
     return 0;
 }
 
-- (NSString *)cellIdForSection:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0){
-        return JMTaskDetailHeaderTableViewCellIdentifier;
-    }else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            return JMTaskDetailHeaderTableViewCellIdentifier;
-        }else  if (indexPath.row == 1) {
-            return JMTaskDetailHeaderTableViewCellIdentifier;
-        }
-    }else if (indexPath.section == 2) {
-        return JMTaskDetailHeaderTableViewCellIdentifier;
-        
-    }
-    return self.cellId;
-}
 
+//自我介绍描述高度
 -(CGFloat)getHeightFromDecri{
-    if ([self.model.payment_method isEqualToString:@"3"]) {
-        //普通任务
+    //销售任务
         CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.myDescription andFont:[UIFont systemFontOfSize:14] andLinespace:10];
         NSLog(@"FFFFF:%f",H);
-        return H + 100;
-    }else if ([self.model.payment_method isEqualToString:@"1"]) {
-        //销售任务
-        CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.goods_description andFont:[UIFont systemFontOfSize:14] andLinespace:10];
-        NSLog(@"FFFFF:%f",H);
-        return H + 280;
-    }else{
-        return 0;
-    }
+        return H+75;
     
 }
 
 
 - (CGFloat)boundingRectWithSize:(CGSize)size WithStr:(NSString*)string andFont:(UIFont *)font andLinespace:(CGFloat)space
 {
-    
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
     [style setLineSpacing:space];
     NSDictionary *attribute = @{NSFontAttributeName:font,NSParagraphStyleAttributeName:style};

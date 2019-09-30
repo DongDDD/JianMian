@@ -27,6 +27,7 @@
 #import "JMIDCardIdentifyViewController.h"
 #import "WXApi.h"
 #import "JMCompanyDetailViewController.h"
+#import "JMHTTPManager+DeleteWork.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate,MAMapViewDelegate,JMShareViewDelegate>
@@ -80,32 +81,33 @@
     //右上角分享 收藏按钮
     [self getData];
     
-    if (_viewType == JMPostNewJobViewTypeDefault) {
-        [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-    }else if (_viewType == JobDetailsViewTypePreview) {
-        [self setRightBtnImageViewName:@"jobDetailShare"];
-
-    }
+//    if (_viewType == JMPostNewJobViewTypeDefault) {
+//        [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+//    }else if (_viewType == JobDetailsViewTypePreview) {
+//        [self setRightBtnImageViewName:@"jobDetailShare" imageNameRight2:@"Bdelete"];
+////        [self setRightBtnImageViewName:@"jobDetailShare"];
+//
+//    }
     [self setTitle:@"职位详情"];
 }
 
 //预览状态分享按钮
-- (void)setRightBtnImageViewName:(NSString *)imageName{
-    
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 19)];
-    
-    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
-    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    rightBtn.frame = CGRectMake(-20 , 0, 120, 28);
-    //    leftBtn.backgroundColor = [UIColor redColor];
-    [rightBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
-    [rightBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
-    
-    [bgView addSubview:rightBtn];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
-    self.navigationItem.rightBarButtonItem = rightItem;
-    
-}
+//- (void)setRightBtnImageViewName:(NSString *)imageName{
+//
+//    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 50, 19)];
+//
+//    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+//    UIButton *rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    rightBtn.frame = CGRectMake(-20 , 0, 120, 28);
+//    //    leftBtn.backgroundColor = [UIColor redColor];
+//    [rightBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+//    [rightBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+//
+//    [bgView addSubview:rightBtn];
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+//    self.navigationItem.rightBarButtonItem = rightItem;
+//
+//}
 
 - (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
     UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
@@ -117,6 +119,12 @@
     [colectBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
     [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
     
+    if (self.myModel.favorite_id) {
+        colectBtn.selected = YES;
+    }else{
+        colectBtn.selected = NO;
+
+    }
     [bgView addSubview:colectBtn];
     if (imageNameRight2 != nil) {
         UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -254,6 +262,7 @@
 }
 
 -(void)rightAction:(UIButton *)sender{
+    sender.selected = !sender.selected;
     NSLog(@"收藏");
     NSString *str = kFetchMyDefault(@"youke");
     if ([str isEqualToString:@"1"]) {
@@ -268,51 +277,103 @@
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-    sender.selected = !sender.selected;
-    [[JMHTTPManager sharedInstance]createLikeWith_type:@"1" Id:self.myModel.work_id mode:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+    if (_viewType == JobDetailsViewTypeDefault) {
+  
+        if (sender.selected == YES) {
+            [[JMHTTPManager sharedInstance]createLikeWith_type:@"1" Id:self.myModel.work_id  mode:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"收藏成功"
+                                                              delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+                [alert show];
+                [self.progressHUD showAnimated:NO];
+                
+            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                
+            }];
+            
+        }else{
+            if (self.myModel.favorite_id !=nil) {
+                [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.myModel.favorite_id mode:@"1"  SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"取消收藏"
+                                                                  delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+                    [alert show];
+                    [self.progressHUD showAnimated:NO];
+                    
+                } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                    
+                }];
+                
+            }
+        }
     
+    }else if (_viewType == JobDetailsViewTypePreview) {
+        if (self.shareView == nil) {
+            [self.view addSubview:self.shareBgView];
+            [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.view);
+                make.left.and.right.equalTo(self.view);
+                make.height.equalTo(self.view);
+            }];
+            
+            self.shareView = [[JMShareView alloc]init];
+            self.shareView.delegate = self;
+            [self.view addSubview:self.shareView];
+            
+            [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(self.view);
+                make.left.and.right.equalTo(self.view);
+                make.height.mas_equalTo(184+20);
+            }];
+            NSLog(@"分享");
+            
+        }
+        
+        if (self.shareBgView.hidden == YES) {
+            [self.shareBgView setHidden:NO];
+            [self.shareView setHidden:NO];
+        }
+    }
 }
 
 
-
-
 -(void)right2Action{
-    
-    if (self.shareView == nil) {
-        
-        [self.view addSubview:self.shareBgView];
-        
-        [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.view);
-            make.left.and.right.equalTo(self.view);
-            make.height.equalTo(self.view);
-        }];
-        
-        self.shareView = [[JMShareView alloc]init];
-        self.shareView.delegate = self;
-        [self.view addSubview:self.shareView];
-        
-        [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.view);
-            make.left.and.right.equalTo(self.view);
-            make.height.mas_equalTo(184+20);
+    if (_viewType == JobDetailsViewTypeDefault) {
+        if (self.shareView == nil) {
+            [self.view addSubview:self.shareBgView];
+            [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.equalTo(self.view);
+                make.left.and.right.equalTo(self.view);
+                make.height.equalTo(self.view);
+            }];
             
-        }];
-        NSLog(@"分享");
+            self.shareView = [[JMShareView alloc]init];
+            self.shareView.delegate = self;
+            [self.view addSubview:self.shareView];
+            
+            [self.shareView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.equalTo(self.view);
+                make.left.and.right.equalTo(self.view);
+                make.height.mas_equalTo(184+20);
+            }];
+            NSLog(@"分享");
+            
+        }
+        
+        if (self.shareBgView.hidden == YES) {
+            [self.shareBgView setHidden:NO];
+            [self.shareView setHidden:NO];
+        }
+    }else if (_viewType == JobDetailsViewTypePreview) {
+        //删除任务
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除吗，删除后数据将不可恢复！" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"确认删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self deleteRequest];
+        }])];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
         
     }
-    
-    if (self.shareBgView.hidden == YES) {
-        [self.shareBgView setHidden:NO];
-        [self.shareView setHidden:NO];
-    }
-    
     
 }
 
@@ -323,7 +384,7 @@
         vc.viewType = JMPostNewJobViewTypeEdit;
         [self.navigationController pushViewController:vc animated:YES];
         
-    }else if ([_status isEqualToString:@"1"]) {//
+    }else if ([_status isEqualToString:@"1"]) {
         [[JMHTTPManager sharedInstance]updateJobInfoWith_Id:self.myModel.work_id job_label_id:nil industry_label_id:nil city_id:nil salary_min:nil salary_max:nil status:@"0" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位下线成功"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -335,10 +396,6 @@
         }];
         
     }
-    
-    
-    
-    
 }
 
 -(void)btn2Action{
@@ -353,17 +410,12 @@
             
         }];
         
-        
     }else if ([_status isEqualToString:@"1"]) {
         JMPostNewJobViewController *vc = [[JMPostNewJobViewController alloc]init];
         vc.work_id = self.myModel.work_id;
         vc.viewType = JMPostNewJobViewTypeEdit;
         [self.navigationController pushViewController:vc animated:YES];
-        
-        
     }
-    
-    
 }
 
 //投个简历
@@ -402,8 +454,8 @@
 
 -(void)shareViewLeftAction{
     [self disapearAction];
-    [self wxShare:0];
-//    [self shareMiniProgram];
+//    [self wxShare:0];
+    [self shareMiniProgram];
 }
 
 -(void)shareViewRightAction{
@@ -423,12 +475,48 @@
             NSLog(@"%@",self.myModel.companyName);
             [self setUI];
             [self.juhua stopAnimating];
+            if (_viewType == JMPostNewJobViewTypeDefault) {
+                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+            }else if (_viewType == JobDetailsViewTypePreview) {
+                [self setRightBtnImageViewName:@"jobDetailShare" imageNameRight2:@"Bdelete"];
+                //        [self setRightBtnImageViewName:@"jobDetailShare"];
+                
+            }
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
         
     }];
+    
+}
+
+-(void)deleteRequest{
+    [[JMHTTPManager sharedInstance]deleteWorkWithId:_work_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:@"删除成功" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            if (self.navigationController.viewControllers.count >=2) {
+                UIViewController *listViewController =self.navigationController.viewControllers[1];
+                [self.navigationController popToViewController:listViewController animated:YES];
+            }
+            
+        }]];
+        UIImageView *icon = [[UIImageView alloc] init];
+        icon.image = [UIImage imageNamed:@"purchase_succeeds"];
+        [alert.view addSubview:icon];
+        [icon mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(alert.view).mas_offset(23);
+            make.centerX.mas_equalTo(alert.view);
+            make.size.mas_equalTo(CGSizeMake(75, 64));
+            
+        }];
+        [self presentViewController:alert animated:YES completion:nil];
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
     
 }
 
@@ -1029,7 +1117,7 @@
     
     object.hdImageData = thumbData;
     object.withShareTicket = @"";
-    object.miniProgramType = WXMiniProgramTypePreview;
+    object.miniProgramType = WXMiniProgramTypeRelease;
     WXMediaMessage *message = [WXMediaMessage message];
     message.title = self.myModel.work_name;
     //    message.description = self.configures.model.myDescription;

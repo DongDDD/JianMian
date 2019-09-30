@@ -34,6 +34,9 @@
 #import "JMPersonDetailsViewController.h"
 #import "TUIKit.h"
 #import "JMVideoPlayManager.h"
+#import "JMBDetailViewController.h"
+#import "JMCDetailViewController.h"
+
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener>
 
@@ -354,16 +357,17 @@
         }
     }else if ([typeStr isEqualToString:@"ability_id"]) {
         if ([userModel.type isEqualToString:B_Type_UESR]) {
-            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+            JMBDetailViewController *vc = [[JMBDetailViewController alloc]init];
             vc.ability_id = typeId;
             [[self currentViewController].navigationController pushViewController:vc animated:YES];
+           
         }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
             [alert show];
         }
     }else if ([typeStr isEqualToString:@"task_id"]) {
         if ([userModel.type isEqualToString:C_Type_USER]) {
-            JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
+            JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
             vc.task_id = typeId;
             [[self currentViewController].navigationController pushViewController:vc animated:YES];
         }else{

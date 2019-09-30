@@ -36,8 +36,16 @@ NSString *const JMCDetailCommentTableViewCellIdentifier = @"JMCDetailCommentTabl
 }
 
 -(void)setData:(JMCommentCellData *)data{
-    [self.headerAvart sd_setImageWithURL:[NSURL URLWithString:data.user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    self.titleLab.text = data.user_nickname;
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:C_Type_USER]) {
+        [self.headerAvart sd_setImageWithURL:[NSURL URLWithString:data.user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        self.titleLab.text = data.user_nickname;
+        
+    }else if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self.headerAvart sd_setImageWithURL:[NSURL URLWithString:data.company_logo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+        self.titleLab.text = data.company_company_name;
+
+    }
     self.subTitleLab.text = [NSString stringWithFormat:@"任务：%@",data.task_title];
     [self.textView setText:data.myDescription];
     

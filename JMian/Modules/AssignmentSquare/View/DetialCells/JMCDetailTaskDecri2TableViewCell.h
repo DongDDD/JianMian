@@ -15,6 +15,7 @@ extern NSString *const JMCDetailTaskDecri2TableViewCellIdentifier;
 @interface JMCDetailTaskDecri2TableViewCell : UITableViewCell
 
 @property(nonatomic,strong)JMCDetailModel *model;
+@property(nonatomic,copy)NSString *contentDecri;
 
 @end
 

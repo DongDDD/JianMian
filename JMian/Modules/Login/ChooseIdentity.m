@@ -66,7 +66,6 @@
     if (_isChangeType) {
         type = @"";
         step = @"";
-     
     }else{
         type = @"2";
         step = @"1";
@@ -81,7 +80,6 @@
         if ( [userModel.enterprise_step isEqualToString:@"0"]) {
             //当前为C端，需切换身份，选择C端类型后后退会出现这种情况
             [[JMHTTPManager sharedInstance]userChangeWithType:type step:step  successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-                
                 JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
                 [JMUserInfoManager saveUserInfo:userInfo];
                 kSaveMyDefault(@"usersig", userInfo.usersig);
@@ -123,8 +121,6 @@
         }];
     }
         NSLog(@"我要招人");
-    
-   
 }
 
 -(void)hideJobTypeViewAction{
@@ -236,14 +232,9 @@
 -(void)loginIM{
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     TIMLoginParam * login_param = [[TIMLoginParam alloc ]init];
-    
-    NSString *userIDstr;
-    if ([model.type isEqualToString:C_Type_USER]) {
-        userIDstr = [NSString stringWithFormat:@"%@a",model.user_id];
-    }else if ([model.type isEqualToString:B_Type_UESR]){
-        userIDstr = [NSString stringWithFormat:@"%@b",model.user_id];
-    }
-    
+   
+    NSString *userIDstr = [NSString stringWithFormat:@"%@a",model.user_id];
+   
     if (userIDstr) {
         // identifier 为用户名，userSig 为用户登录凭证
         login_param.identifier = userIDstr;
@@ -251,11 +242,10 @@
         login_param.appidAt3rd = @"1400193090";
         [[TIMManager sharedInstance] login: login_param succ:^(){
             NSLog(@"Login Succ");
-            
         } fail:^(int code, NSString * err) {
             [self loginOut];
         }];
-        
+
     }
     
     

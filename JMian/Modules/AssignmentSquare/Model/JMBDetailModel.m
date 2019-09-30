@@ -12,27 +12,45 @@
 
 + (NSDictionary *)mj_objectClassInArray {
     return @{
-             @"images":@"JMBDetailImageModel",
+             @"industry":@"JMBDetailIndustryModel",
+             @"images":@"JMBDetailImageModel"
+             
              
              };
 }
 
-
-+(NSDictionary *)mj_replacedKeyFromPropertyName{
-    
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
+             @"user_userId":@"user.user_id",
+             @"myDescription":@"description",
+             @"user_companyId":@"user_company_id",
              @"user_nickname":@"user.nickname",
+             @"user_reputation":@"user.reputation",
              @"user_avatar":@"user.avatar",
-             @"user_id":@"user.user_id",
-
-             @"type_label_name":@"type.label_name",
+             @"city_cityId":@"city.city_id",
+             @"type_labelId":@"type_label.label_id",
+             @"type_name":@"type_label.name",
+             @"city_cityName":@"city.city_name",
              
+             @"video_file_id":@"video.file_id",
+             @"video_type":@"video.type",
+             @"video_cover":@"video.cover",
+             @"video_file_path":@"video.file_path",
+             @"video_status":@"video.status",
+             @"video_denial_reason":@"video.denial_reason",
+             @"favorites_id":@"favorites.favorite_id",
+
              };
-    
 }
+
+@end
+
+
+@implementation JMBDetailIndustryModel
+
+
 @end
 
 @implementation JMBDetailImageModel
-
 
 @end
