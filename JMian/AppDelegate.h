@@ -12,6 +12,7 @@
 #import "JMVideoChatView.h"
 #import "JMFeedBackChooseViewController.h"
 #import "WXApi.h"
+#import "JMVersionDetailsView.h"
 
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate,AVAudioPlayerDelegate,WXApiDelegate>
@@ -25,6 +26,7 @@
 @property (nonatomic, assign)BOOL isBackgroundTask;
 //@property (strong, nonatomic) NSData *deviceToken;
 @property(nonatomic,strong)JMFeedBackChooseViewController *feedBackChooseVC;
+@property(nonatomic,strong)JMVersionDetailsView *versionDetailsView;
 
 
 @end

@@ -34,8 +34,16 @@
 
     
     }
-    //    self.sexImageView =
-    //    self.experiencesLab.text
+
+    NSString *expStr1 = [self getExpWithWork_start_date:model.vita_work_start_date];
+      NSString *expStr2;
+      if (![expStr1 isEqualToString:@"0"]) {
+          expStr2 = [NSString stringWithFormat:@"%@年",expStr1];
+          
+      }else{
+          expStr2 = @"应届生";
+      }
+    self.experiencesLab.text = expStr2;
     self.educationLab.text = [self getEducationStrWithEducation:model.vita_education];
 //    self.cityLab.text
     self.workNameLab.text = model.work_name;
@@ -65,7 +73,34 @@
     
 }
 
-
+-(NSString *)getExpWithWork_start_date:(NSString *)work_start_date{
+    //创建两个日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *startDate = [dateFormatter dateFromString:work_start_date];
+    NSDate *endDate = [NSDate date];
+    
+    //利用NSCalendar比较日期的差异
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    /**
+     * 要比较的时间单位,常用如下,可以同时传：
+     *    NSCalendarUnitDay : 天
+     *    NSCalendarUnitYear : 年
+     *    NSCalendarUnitMonth : 月
+     *    NSCalendarUnitHour : 时
+     *    NSCalendarUnitMinute : 分
+     *    NSCalendarUnitSecond : 秒
+     */
+    NSCalendarUnit unit = NSCalendarUnitYear;//只比较天数差异
+    //比较的结果是NSDateComponents类对象
+    NSDateComponents *delta = [calendar components:unit fromDate:startDate toDate:endDate options:0];
+    //打印
+    NSLog(@"%@",delta);
+    //获取其中的"年"
+    NSLog(@"----年：%ld",delta.year);
+    NSString *expYear = [NSString stringWithFormat:@"%ld",(long)delta.year];
+    return expYear;
+}
 
 
 //工资数据转化，除以1000，转化成k
@@ -122,10 +157,10 @@
             return @"不限";
             break;
         case 1:
-            return @"初中及以下";
+            return @"初中";
             break;
         case 2:
-            return @"中专/中技";
+            return @"中专";
             break;
         case 3:
             return @"高中";

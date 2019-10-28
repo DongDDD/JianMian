@@ -50,6 +50,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *bottomRightBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomH;
+@property (weak, nonatomic) IBOutlet UILabel *haveApply;
 
 @end
 
@@ -59,7 +60,7 @@
     [super viewDidLoad];
     self.title = @"任务详情";
 
-    self.bottomH.constant = 50+SafeAreaBottomHeight;
+//    self.bottomH.constant = 50+SafeAreaBottomHeight;
 
     // Do any additional setup after loading the view from its nib.
 }
@@ -164,23 +165,16 @@
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.configures.model = [JMCDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
-//
-//            
-//            NSDictionary *dic = responsObject[@"data"];
-//            //判断是否有被收藏过
-//            if (![dic[@"favorites"] isEqual:[NSNull null]]) {
-//                self.favorites_id = dic[@"favorites"][@"favorite_id"];
+            self.haveApply.text = [NSString stringWithFormat:@"%@人已报名", self.configures.model.effective_count];
                 [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
 //
 //            }
             if (_viewType == JMCDetailPreviewType) {
                 [self initView];
                 [self setRightBtnImageViewName:@"jobDetailShare" imageNameRight2:@"Bdelete"];
-
                 [self.tableView reloadData];
 
             }else  if (_viewType == JMCDetailDefaultType) {
-
                 [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
                 [self getCommentInfo];
             

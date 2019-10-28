@@ -553,10 +553,18 @@
     [self.makeOutBillView.invoiceTaxNumTextField resignFirstResponder];
     [self.makeOutBillView.invoiceEmailTextField resignFirstResponder];
     
+    if (self.decriptionTextView.contentTextView.text.length == 0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请完善职位描述信息" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+        return;
+    }
+    
+    
     if (self.isReadProtocol == YES) {
             [self sendRequest];
-
-        
     }else{
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请阅读并同意《平台服务协议》" preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

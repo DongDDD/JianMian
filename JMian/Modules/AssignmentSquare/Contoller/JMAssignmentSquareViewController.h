@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMAssignmentSquareViewController : BaseViewController
-
+//@property(nonatomic,assign)BOOL isLogin;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -51,7 +51,7 @@
     
 //    [self setIsHiddenBackBtn:YES];
 
-    NSArray *educationArr = [NSArray arrayWithObjects:@"不限",@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
+    NSArray *educationArr = [NSArray arrayWithObjects:@"不限",@"初中",@"中专",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
     switch (self.viewType) {
         case JMEducationExperienceViewTypeAdd:
             self.title = @"新增教育经历";
@@ -293,8 +293,8 @@
         _educationPickerSingle.delegate = self;
         _educationPickerSingle.title = @"最高学历";
         _educationPickerSingle.widthPickerComponent = SCREEN_WIDTH;
-        _educationPickerSingle.arrayData = [NSMutableArray arrayWithObjects:                                            @"初中及以下",
-                                            @"中专/中技",
+        _educationPickerSingle.arrayData = [NSMutableArray arrayWithObjects:                                            @"初中",
+                                            @"中专",
                                             @"高中",
                                             @"大专",
                                             @"本科",

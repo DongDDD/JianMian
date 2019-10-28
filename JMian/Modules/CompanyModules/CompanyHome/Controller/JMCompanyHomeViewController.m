@@ -93,7 +93,7 @@ static NSString *cellIdent = @"cellIdent";
 -(void)getCompanyHomeListData{
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-    [[JMHTTPManager sharedInstance]fetchVitaPaginateWith_city_id:self.city_id job_label_id:self.job_label_id education:self.education work_year_s:self.work_year_s work_year_e:self.work_year_e salary_min:self.salary_min salary_max:self.salary_max page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fetchVitaPaginateWith_city_id:self.city_id job_label_id:self.job_label_id education:self.education work_year_s:self.work_year_s work_year_e:self.work_year_e salary_min:self.salary_min salary_max:self.salary_max special_id:@"" page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSMutableArray *modelArray = [JMCompanyHomeModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
@@ -104,6 +104,9 @@ static NSString *cellIdent = @"cellIdent";
             }
             if (modelArray.count < 10) {
                 [self.tableView.mj_footer setHidden:YES];
+            }else{
+                [self.tableView.mj_footer setHidden:NO];
+
             }
             [self.tableView reloadData];
             [self.tableView.mj_header endRefreshing];
@@ -490,8 +493,7 @@ static NSString *cellIdent = @"cellIdent";
     }else if ([labStr isEqualToString:@"3～5年"]) {
         self.work_year_s = @"3";
         self.work_year_e = @"5";
-        
-        
+
     }else if ([labStr isEqualToString:@"5～10年"]) {
         self.work_year_s = @"5";
         self.work_year_e = @"10";
@@ -553,6 +555,7 @@ static NSString *cellIdent = @"cellIdent";
     NSLog(@"asdf");
     JMSpecialViewController *vc = [[JMSpecialViewController alloc]init];
     vc.title = self.specialModel.title;
+    vc.special_id = self.specialModel.myId;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

@@ -32,6 +32,7 @@
 
     // Do any additional setup after loading the view from its nib.
 }
+
 -(void)getData{
     [[JMHTTPManager sharedInstance]getLabels_Id:@"1027" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
@@ -45,6 +46,7 @@
     }];
     
 }
+
 #pragma mark - myDelegate
 -(void)didSelectItemWithData:(JMLabsData *)data{
       if (_delegate && [_delegate respondsToSelector:@selector(didChooseWithType_id:typeName:)]) {
@@ -71,8 +73,9 @@
     JMTitleToLabelsTableViewCell *cell = [[JMTitleToLabelsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
     [cell setLabsData:self.dataArray[indexPath.row] myVc:self.myVC];
     cell.delegate = self;
-  
+    cell.backgroundColor = [UIColor whiteColor];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
 //    [cell setData:self.listsArray[indexPath.row]];
 //    cell.delegate = self;
 //    cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -125,6 +128,7 @@
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.showsVerticalScrollIndicator = NO;
+        
         //        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
         //        _tableView.sectionHeaderHeight = 43;
         //        _tableView.sectionFooterHeight = 0;

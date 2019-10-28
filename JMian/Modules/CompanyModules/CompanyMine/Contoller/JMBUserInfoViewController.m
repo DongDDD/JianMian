@@ -39,7 +39,11 @@
         [JMUserInfoManager saveUserInfo:userInfo];
         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
         self.nameText.text = userModel.nickname;
-        self.positionText.text = userModel.company_position;
+        if (userModel.company_position) {
+            self.positionText.text = userModel.company_position;
+        }else{
+            self.positionText.text = userModel.company_real_company_position;
+        }
         NSURL *url = [NSURL URLWithString:userModel.avatar];
         [self.headerImg sd_setImageWithURL:url];
         if ([userInfo.card_status isEqualToString:Card_PassIdentify]) {
@@ -50,8 +54,9 @@
     }];
     
 }
-- (IBAction)headerAction:(UIButton *)sender {
 
+
+- (IBAction)headerAction:(UIButton *)sender {
 
     //选取照片上传
     UIActionSheet *sheet;

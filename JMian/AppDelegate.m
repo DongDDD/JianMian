@@ -36,6 +36,7 @@
 #import "JMVideoPlayManager.h"
 #import "JMBDetailViewController.h"
 #import "JMCDetailViewController.h"
+#import "iVersion.h"
 
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener>
@@ -55,7 +56,30 @@
 
 }
 
+- (void)iVersionDidDetectNewVersion:(NSString *)version details:(NSString *)versionDetails{
+//    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+//    NSString *nowVersionStr = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+//    BOOL isNeedUpDate = [self compareVersion:version toVersion:nowVersionStr];
+//    if (isNeedUpDate) {
+        NSLog(@"versionDetails:%@ %@",version,versionDetails);
+//        [_window addSubview:self.versionDetailsView];
+        JMVersionModel *versionModel = [[JMVersionModel alloc]init];
+        versionModel.version = version;
+        versionModel.updateDescription = versionDetails;
+        [JMVersionManager saveVersionInfo:versionModel];
+    
+//        [[UIApplication sharedApplication].keyWindow addSubview:self.versionDetailsView];
+//    }
+    
+}
 
+//- (BOOL)iVersionShouldDisplayNewVersion:(NSString *)version details:(NSString *)versionDetails{
+//
+//}
+//
+//- (BOOL)iVersionShouldDisplayCurrentVersionDetails:(NSString *)versionDetails{
+//
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     //高德地图
@@ -71,14 +95,26 @@
 //    userConfig.messageRevokeListener = self;
 //    userConfig.uploadProgressListener = self;
 //    userConfig.userStatusListener = self;
-////    userConfig.friendshipListener = self;
+//    userConfig.friendshipListener = self;
 //    userConfig.messageUpdateListener = self;
 //    [[TIMManager sharedInstance] setUserConfig:userConfig];
 //    [[TIMManager sharedInstance] addMessageListener:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserStatus:) name:TUIKitNotification_TIMUserStatusListener object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
-    
-    
+//    [iVersion sharedInstance].applicationBundleID = [[NSBundle mainBundle] bundleIdentifier];
+//   [iVersion sharedInstance].updatePriority=iVersionUpdatePriorityMedium;
+//    [iVersion sharedInstance].delegate = self;
+//    [iVersion sharedInstance].showOnFirstLaunch = NO;
+//    [iVersion sharedInstance].groupNotesByVersion = NO;
+//    [iVersion sharedInstance].useUIAlertControllerIfAvailable = NO;
+//    [iVersion sharedInstance].useAllAvailableLanguages = NO;
+//    [iVersion sharedInstance].onlyPromptIfMainWindowIsAvailable = NO;
+//    [iVersion sharedInstance].useAppStoreDetailsIfNoPlistEntryFound = NO;
+//    [iVersion sharedInstance].checkAtLaunch = NO;
+//    [iVersion sharedInstance].verboseLogging = NO;
+//    [iVersion sharedInstance].previewMode = NO;
+
+   
     //MP3播放器
     [[JMPlaySoundsManager sharedInstance] setVideoSounds];
     [[JMPlaySoundsManager sharedInstance] setMoneySounds];
@@ -99,16 +135,36 @@
     NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
     [_window setRootViewController:naVC];
     [self.window makeKeyAndVisible];
-    [self getVersionData];
+//    [judgevc.view addSubview:self.versionDetailsView];
+
+//    [self getVersionData];
  
     return YES;
 }
 
-
+- (BOOL)compareVersion:(NSString *)version1 toVersion:(NSString *)version2
+{
+    NSArray *list1 = [version1 componentsSeparatedByString:@"."];
+    NSArray *list2 = [version2 componentsSeparatedByString:@"."];
+    for (int i = 0; i < list1.count || i < list2.count; i++)
+    {
+        NSInteger a = 0, b = 0;
+        if (i < list1.count) {
+            a = [list1[i] integerValue];
+        }
+        if (i < list2.count) {
+            b = [list2[i] integerValue];
+        }
+        if (a > b) {
+            return YES;//version1大于version2
+        } else if (a < b) {
+            return NO;//version1小于version2
+        }
+    }
+    return NO;//version1等于version2
+    
+}
 -(void)initLocalNotification_alertBody:(NSString *)alertBody{
-    
-    
-    
     // 1.创建一个本地通知
     UILocalNotification *localNote = [[UILocalNotification alloc] init];
     
@@ -292,7 +348,6 @@
     //获取Window当前显示的ViewController
     //    NSLog(@"sourceApplication: %@", sourceApplication);
     if ([url.scheme isEqualToString:@"iosdemi"]) {
-        
         NSLog(@"URL scheme:%@", url);
         NSLog(@"URL query: %@", [url query]);
         NSString *string = [url query];
@@ -414,17 +469,17 @@
 }
 
 
--(void)getVersionData{
-    [[JMHTTPManager sharedInstance] fectchVersionWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        if (responsObject[@"data"]) {
-            JMVersionModel *model = [JMVersionModel mj_objectWithKeyValues:responsObject[@"data"]];
-            [JMVersionManager saveVersionInfo:model];
-        }
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-}
+//-(void)getVersionData{
+//    [[JMHTTPManager sharedInstance] fectchVersionWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        if (responsObject[@"data"]) {
+//            JMVersionModel *model = [JMVersionModel mj_objectWithKeyValues:responsObject[@"data"]];
+//            [JMVersionManager saveVersionInfo:model];
+//        }
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//}
 
 #pragma mark - 网络回调
 //小程序打开APP
@@ -822,5 +877,15 @@
         _feedBackChooseVC.viewType = JMFeedBackChooseViewAppdelegate;
     }
     return _feedBackChooseVC;
+}
+
+
+-(JMVersionDetailsView *)versionDetailsView{
+    if (_versionDetailsView == nil) {
+        _versionDetailsView = [[JMVersionDetailsView alloc]init];
+        _versionDetailsView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+    }
+    return _versionDetailsView;
 }
 @end

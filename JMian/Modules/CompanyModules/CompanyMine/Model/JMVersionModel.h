@@ -19,8 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *version;
 @property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *appDescription;
+@property (nonatomic, copy) NSString *updateDescription;
 @property (nonatomic, copy) NSString *path;
 @property (nonatomic, copy) NSString *updated_at;
+
 
 @end
 

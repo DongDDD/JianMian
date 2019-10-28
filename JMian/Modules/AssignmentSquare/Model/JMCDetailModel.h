@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *share_url;
 @property(nonatomic, copy)NSString *task_title;
 @property(nonatomic, copy)NSString *quantity_max;
+@property(nonatomic, copy)NSString *effective_count;
 
 @property(nonatomic, copy)NSString *company_company_name;
 @property(nonatomic, copy)NSString *company_logo_path;
@@ -43,7 +44,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *latitude;
 @property(nonatomic, copy)NSString *longitude;
 @property(nonatomic, copy)NSString *address;
-@property(nonatomic, copy)NSString *effective_count;
 @property(nonatomic, copy)NSString *city_id;
 @property(nonatomic, copy)NSString *city_name;
 

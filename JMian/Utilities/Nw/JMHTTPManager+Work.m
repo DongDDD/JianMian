@@ -38,11 +38,11 @@
                                  @"label_id":label_id,
                                  @"work_label_id":work_label_id,
                                  @"education":education,
-                                 @":experience_min":experience_min,
+                                 @"experience_min":experience_min,
                                  @"experience_max":experience_max,
                                  @"salary_min":salary_min,
                                  @"salary_max":salary_max,
-                                 @":subway_names":subway_names,
+                                 @"subway_names":subway_names,
                                  @"status":status,
                                  @"page":page,
                                  @"per_page":per_page

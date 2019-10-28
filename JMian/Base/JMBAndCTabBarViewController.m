@@ -23,9 +23,10 @@
 #import "JMMessageListViewController.h"
 #import "JMBMineViewController.h"
 #import "HomeViewController.h"
+#import "iVersion.h"
+#import "JMVersionDetailsView.h"
 
-
-@interface JMBAndCTabBarViewController ()
+@interface JMBAndCTabBarViewController ()<iVersionDelegate>
 @property (nonatomic, strong) NSArray *modelArray;
 @property (nonatomic, assign)int unReadNum;
 //@property (nonatomic ,strong)JMMessageViewController *message;
@@ -34,6 +35,7 @@
 
 @property (nonatomic ,strong)JMBMineViewController *Bmine;
 @property(nonatomic,strong)UIView *taskBadgeView;
+@property(nonatomic,strong)JMVersionDetailsView *versionDetailsView;
 
 @end
 
@@ -42,7 +44,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-   
+//    [iVersion sharedInstance].delegate = self;
+
     [self getMsgList];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
@@ -69,6 +72,9 @@
         self.message = [[JMMessageListViewController alloc] init];
         [self addChildVc:self.message title:@"消息" image:@"home_ message" selectedImage:@"home_ message_pitch_on"];
         JMAssignmentSquareViewController *square = [[JMAssignmentSquareViewController alloc]init];
+//        if (_viewType == JMBAndCTabBarViewTypeLogin) {
+//            square.isLogin = YES;
+//        }
         [self addChildVc:square title:@"任务广场" image:@"mission" selectedImage:@"garden_pich_on"];
        
         JMDiscoverHomeViewController *discover = [[JMDiscoverHomeViewController alloc]init];
@@ -93,6 +99,43 @@
 
 -(void)viewDidDisappear:(BOOL)animated{
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
+//- (void)iVersionDidDetectNewVersion:(NSString *)version details:(NSString *)versionDetails{
+//    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+//    NSString *nowVersionStr = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+//    BOOL isNeedUpDate = [self compareVersion:version toVersion:nowVersionStr];
+//    if (isNeedUpDate) {
+//        NSLog(@"需要更新");
+//        NSLog(@"versionDetails:%@ %@",version,versionDetails);
+//        [self.view addSubview:self.versionDetailsView];
+//
+//        //        [[UIApplication sharedApplication].keyWindow addSubview:self.versionDetailsView];
+//    }
+//    
+//}
+
+- (BOOL)compareVersion:(NSString *)version1 toVersion:(NSString *)version2
+{
+    NSArray *list1 = [version1 componentsSeparatedByString:@"."];
+    NSArray *list2 = [version2 componentsSeparatedByString:@"."];
+    for (int i = 0; i < list1.count || i < list2.count; i++)
+    {
+        NSInteger a = 0, b = 0;
+        if (i < list1.count) {
+            a = [list1[i] integerValue];
+        }
+        if (i < list2.count) {
+            b = [list2[i] integerValue];
+        }
+        if (a > b) {
+            return YES;//version1大于version2
+        } else if (a < b) {
+            return NO;//version1小于version2
+        }
+    }
+    return NO;//version1等于version2
     
 }
 
@@ -256,6 +299,15 @@
 }
 
 
+-(JMVersionDetailsView *)versionDetailsView{
+    if (_versionDetailsView == nil) {
+        _versionDetailsView = [[JMVersionDetailsView alloc]init];
+        _versionDetailsView.backgroundColor = [UIColor redColor];
+        _versionDetailsView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
+    }
+    return _versionDetailsView;
+}
 /*
 #pragma mark - Navigation
 

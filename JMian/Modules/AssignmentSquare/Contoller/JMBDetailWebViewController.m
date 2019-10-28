@@ -177,6 +177,7 @@
     [self.view addSubview:_videoChatView];
     [self.navigationController setNavigationBarHidden:YES];
 }
+
 //JMVideoChatViewDelegate 挂断
 -(void)hangupAction_model:(JMInterViewModel *)model{
     

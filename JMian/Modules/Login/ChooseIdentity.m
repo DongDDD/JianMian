@@ -19,6 +19,7 @@
 #import "JMJobTypeChooseView.h"
 #import "JMPostPartTimeResumeViewController.h"
 #import "JMBAndCTabBarViewController.h"
+#import "VendorKeyMacros.h"
 
 
 
@@ -239,7 +240,7 @@
         // identifier 为用户名，userSig 为用户登录凭证
         login_param.identifier = userIDstr;
         login_param.userSig = kFetchMyDefault(@"usersig");
-        login_param.appidAt3rd = @"1400193090";
+        login_param.appidAt3rd = TIMSdkAppid;
         [[TIMManager sharedInstance] login: login_param succ:^(){
             NSLog(@"Login Succ");
         } fail:^(int code, NSString * err) {

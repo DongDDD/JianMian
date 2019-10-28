@@ -93,6 +93,7 @@
     
     
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -180,11 +181,8 @@
         [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
         [bgView addSubview:shareBtn];
     }
-    
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
-    
-    
 }
 
 -(void)initView{
@@ -210,6 +208,7 @@
     [self.view addSubview:_scrollView];
     
 }
+
 -(void)setHeaderVieUI{
     CGFloat H = 0.0;
     if (self.companyModel.video_file_path) {
@@ -299,25 +298,25 @@
     }];
     
     
-    [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.vitaModel.user_job_id time:timer successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        
         //同时创建会话
         [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.vitaModel.user_id foreign_key:self.vitaModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             //发送消息推送
-            NSString *receiver_id = [NSString stringWithFormat:@"%@a",self.vitaModel.user_id];
-            [self setCustumMessage_receiverID:receiver_id dic:nil title:@"[面试邀请通知]"];
+            [[JMHTTPManager sharedInstance]createInterViewWith_user_job_id:self.vitaModel.user_job_id time:timer successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"邀请成功"
+                                                              delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+                [alert show];
+                NSString *receiver_id = [NSString stringWithFormat:@"%@a",self.vitaModel.user_id];
+                [self setCustumMessage_receiverID:receiver_id dic:nil title:@"[面试邀请]"];
+            } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                
+            }];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
-        
-        
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+    
+    
+    
+    
     
 }
 

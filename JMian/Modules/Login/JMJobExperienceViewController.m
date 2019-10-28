@@ -17,6 +17,8 @@
 #import "STPickerDate.h"
 #import "JMPartTimeJobResumeFooterView.h"
 #import "PositionDesiredViewController.h"
+#import "JMBAndCTabBarViewController.h"
+
 
 //typedef enum _PickerState_Exp {
 //    startWorkState,
@@ -126,15 +128,13 @@
         make.top.mas_equalTo(self.moreBtn.mas_bottom).offset(10);
         make.left.mas_equalTo(self.view).mas_offset(20);
         make.right.mas_equalTo(self.view).mas_offset(-20);
-        make.height.mas_equalTo(50);
+        make.height.mas_equalTo(41);
     }];
 
 }
 
 
 #pragma mark - 点击事件
-
-
 //-(void)hiddenDatePickerAction{
 ////    self.datePckerView.hidden = YES;
 //    [_companyNameText resignFirstResponder];
@@ -174,8 +174,12 @@
         
         switch (self.viewType) {
             case JMJobExperienceViewTypeDefault: {
-                JMJudgeViewController *vc = [[JMJudgeViewController alloc]init];
-                [self.navigationController pushViewController:vc animated:YES];
+                JMBAndCTabBarViewController *vc = [[JMBAndCTabBarViewController alloc]init];
+//                vc.viewType = JMBAndCTabBarViewTypeLogin;
+                JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+                userModel.isNewUser = YES;
+                [JMUserInfoManager saveUserInfo:userModel];
+                [UIApplication sharedApplication].delegate.window.rootViewController = vc;
                 break;
             }
             default:
@@ -255,20 +259,7 @@
 //
 //}
 -(void)saveBtnAction{
-    [_companyNameText resignFirstResponder];
-    [_decriptionTextView.contentTextView resignFirstResponder];
-    [self.decriptionTextView.contentTextView resignFirstResponder];
-    switch (self.viewType) {
-        case JMJobExperienceViewTypeDefault:
-            [self createExperience];
-            break;
-        case JMJobExperienceViewTypeEdit:
-            [self updateExperience];
-            break;
-        case JMJobExperienceViewTypeAdd:
-            [self createExperience];
-            break;
-    }
+    [self rightAction];
 }
 
 
@@ -402,7 +393,7 @@
 /*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+// In a storyboard-  based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.

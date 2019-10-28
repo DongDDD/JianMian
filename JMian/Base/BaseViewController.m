@@ -16,7 +16,6 @@
 
 @interface BaseViewController ()
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
-@property (nonatomic, strong) UIView *HUDbackgroundView;
 @property (nonatomic, strong)UIToolbar *myToolbar;
 @property (nonatomic, strong)JMNoDataView *noDataView;
 
@@ -347,7 +346,8 @@
 -(void)showProgressHUD_view:(UIView *)view{
     _HUDbackgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
     _HUDbackgroundView.backgroundColor = [UIColor whiteColor];
-//    [view addSubview:_HUDbackgroundView];
+    _HUDbackgroundView.alpha = 0;
+    [view addSubview:_HUDbackgroundView];
     _myProgressHUD = [[MBProgressHUD alloc] initWithView:view];
 //    _progressHUD.progress = 0.6;
     //        _progressHUD.dimBackground = NO; //设置有遮罩
@@ -531,10 +531,10 @@
             return @"不限";
             break;
         case 1:
-            return @"初中及以下";
+            return @"初中";
             break;
         case 2:
-            return @"中专/中技";
+            return @"中专";
             break;
         case 3:
             return @"高中";
@@ -563,10 +563,10 @@
 -(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr{
     
     
-    if ([educationStr isEqualToString:@"初中及以下"]) {
+    if ([educationStr isEqualToString:@"初中"]) {
         return @"1";
 
-    }else if ([educationStr isEqualToString:@"中专/中技"]){
+    }else if ([educationStr isEqualToString:@"中专"]){
         return @"2";
 
         

@@ -12,6 +12,7 @@
 - (void)fectchOrderList_order_id:(nullable NSArray *)order_id
                    contact_city:(nullable NSString *)contact_city
                   contact_phone:(nullable NSString *)contact_phone
+                         keyword:(nullable NSString *)keyword
                          status:(nullable NSString *)status
                          s_date:(nullable NSString *)s_date
                          e_date:(nullable NSString *)e_date
@@ -23,6 +24,7 @@
                            @"order_id":order_id,
                            @"contact_city":contact_city,
                            @"contact_phone":contact_phone,
+                           @"keyword":keyword,
                            @"status":status,
                            @"s_date":s_date,
                            @"e_date":e_date,

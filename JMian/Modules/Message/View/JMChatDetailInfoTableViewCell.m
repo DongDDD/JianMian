@@ -132,10 +132,10 @@
             return @"不限";
             break;
         case 1:
-            return @"初中及以下";
+            return @"初中";
             break;
         case 2:
-            return @"中专/中技";
+            return @"中专";
             break;
         case 3:
             return @"高中";

@@ -215,49 +215,19 @@
 
 
 
-- (NSDictionary *)generateDicFromArray:(NSArray *)array {
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    for (id object in array) {
-        NSString *key = [NSString stringWithFormat:@"%@",object];
-        dic[key] = object;
-    }
-    return dic.copy;
-}
+//- (NSDictionary *)generateDicFromArray:(NSArray *)array {
+//    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+//    for (id object in array) {
+//        NSString *key = [NSString stringWithFormat:@"%@",object];
+//        dic[key] = object;
+//    }
+//    return dic.copy;
+//}
 
 
 #pragma mark - UITableViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-//    if (indexPath.section == 0) {
-//        cell.accessoryType = UITableViewCellStyleSubtitle;
-//        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-//        if ([userModel.type isEqualToString:B_Type_UESR]) {
-//            cell.detailTextLabel.text = self.userInfoModel.company_position;
-//        }else{
-//            cell.detailTextLabel.text = @"完善简历，让机遇找到你  90%";
-//
-//        }
-//            cell.textLabel.text = [NSString stringWithFormat:@"%@",self.userInfoModel.nickname];
-//
-//        cell.textLabel.numberOfLines = 0;
-//        cell.textLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:18];
-//        cell.textLabel.textColor = UIColorFromHEX(0x4d4d4d);
-//
-//        cell.detailTextLabel.textColor = UIColorFromHEX(0x808080);
-//        //改变头像大小
-//        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:self.userInfoModel.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-//
-//        CGSize itemSize = CGSizeMake(74, 74);
-//        cell.imageView.layer.cornerRadius = 37;
-//        cell.imageView.layer.masksToBounds = YES;
-//        UIGraphicsBeginImageContextWithOptions(itemSize, NO, UIScreen.mainScreen.scale);
-//        CGRect imageRect = CGRectMake(0.0, 0.0, itemSize.width, itemSize.height);
-//        [cell.imageView.image drawInRect:imageRect];
-//        cell.imageView.image = UIGraphicsGetImageFromCurrentImageContext();
-//        UIGraphicsEndImageContext();
-        
-//    }
     if (indexPath.section == 0) {
         JMMineModulesTableViewCell *modulesCell = [[JMMineModulesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
         modulesCell.delegate = self;
@@ -265,9 +235,10 @@
     }
     
     if (indexPath.section == 1) {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.textLabel.text = self.labelStrArr[indexPath.row];
         cell.textLabel.font = [UIFont fontWithName:@"MicrosoftYaHei" size:14];
         cell.textLabel.textColor = UIColorFromHEX(0x4d4d4d);
@@ -330,15 +301,6 @@
     
 }
 
-- (UIImage*)convertViewToImage:(UIView*)view{
-    CGSize s = view.bounds.size;
-    // 下面方法，第一个参数表示区域大小。第二个参数表示是否是非透明的。如果需要显示半透明效果，需要传NO，否则传YES。第三个参数就是屏幕密度了
-    UIGraphicsBeginImageContextWithOptions(s, NO, [UIScreen mainScreen].scale);
-    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return image;
-}
 
 
 #pragma mark - UITableViewDataSource

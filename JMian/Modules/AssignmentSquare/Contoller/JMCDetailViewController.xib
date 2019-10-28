@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,6 +14,7 @@
                 <outlet property="bottomLeftBtn" destination="OwX-4a-J8R" id="C8s-Yc-8Nj"/>
                 <outlet property="bottomRightBtn" destination="xVH-Ui-9Wa" id="Xk5-oW-DVW"/>
                 <outlet property="bottomView" destination="yuu-Ty-ELc" id="pFm-dm-yYH"/>
+                <outlet property="haveApply" destination="isR-Ra-shD" id="izG-3i-Fue"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,7 +24,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yuu-Ty-ELc">
-                    <rect key="frame" x="0.0" y="846" width="414" height="50"/>
+                    <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OwX-4a-J8R">
                             <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
@@ -59,11 +58,19 @@
                                 <action selector="bottomRightAction:" destination="-1" eventType="touchUpInside" id="Meu-KC-wLa"/>
                             </connections>
                         </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="isR-Ra-shD">
+                            <rect key="frame" x="297" y="34" width="27" height="12"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="OwX-4a-J8R" firstAttribute="width" secondItem="xVH-Ui-9Wa" secondAttribute="width" id="5Ai-EA-nwf"/>
                         <constraint firstAttribute="height" constant="50" id="8FT-cX-SnQ"/>
+                        <constraint firstAttribute="bottom" secondItem="isR-Ra-shD" secondAttribute="bottom" constant="4" id="CKo-Pe-ZWC"/>
+                        <constraint firstItem="isR-Ra-shD" firstAttribute="centerX" secondItem="xVH-Ui-9Wa" secondAttribute="centerX" id="Cco-n1-oFV"/>
                         <constraint firstItem="xVH-Ui-9Wa" firstAttribute="leading" secondItem="OwX-4a-J8R" secondAttribute="trailing" id="Vw1-zI-vCM"/>
                         <constraint firstItem="OwX-4a-J8R" firstAttribute="leading" secondItem="yuu-Ty-ELc" secondAttribute="leading" id="etE-yu-sMA"/>
                         <constraint firstItem="OwX-4a-J8R" firstAttribute="top" secondItem="yuu-Ty-ELc" secondAttribute="top" id="lr2-1M-AEC"/>
@@ -77,10 +84,10 @@
             <constraints>
                 <constraint firstItem="yuu-Ty-ELc" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="KkA-at-P6R"/>
                 <constraint firstItem="yuu-Ty-ELc" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="Tbc-cT-54D"/>
-                <constraint firstAttribute="bottom" secondItem="yuu-Ty-ELc" secondAttribute="bottom" id="ra9-cO-Hsb"/>
+                <constraint firstItem="yuu-Ty-ELc" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="dVN-XF-Tvx"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-139" y="-107"/>
+            <point key="canvasLocation" x="-194" y="-177"/>
         </view>
     </objects>
 </document>

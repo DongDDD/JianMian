@@ -37,10 +37,14 @@
 #import "JMTaskSeachViewController.h"
 #import "JMCDetailViewController.h"
 #import "JMBDetailViewController.h"
+#import "JMVersionDetailsView.h"
+#import "iVersion.h"
+#import "JMloginsucceedView.h"
+#import "JMUploadVideoViewController.h"
 
 
 
-@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate,JMSquarePostTaskViewDelegate,JMTaskSeachViewControllerDelegate>
+@interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate,JMSquarePostTaskViewDelegate,JMTaskSeachViewControllerDelegate,iVersionDelegate,JMVersionDetailsViewDelegate,JMloginsucceedViewDelegate>
 @property (nonatomic, strong) UIView *titleAndPostTaskView;
 @property (nonatomic, strong) JMTitlesView *titleView;
 @property (nonatomic, strong) JMSquarePostTaskView *postTaskView;
@@ -52,7 +56,8 @@
 //@property (strong, nonatomic) JMPartTimeJobTypeLabsViewController *partTimeJobTypeLabsVC;
 @property (strong, nonatomic) UIView *tapView;
 @property (strong, nonatomic) NSMutableArray *dataArray;
-
+@property(nonatomic,strong)JMVersionDetailsView *versionDetailsView;
+@property(nonatomic,strong)JMloginsucceedView *loginsucceedView;
 
 @property (copy, nonatomic)NSString *keyword;//搜索关键字
 @property(nonatomic,assign)NSInteger page;
@@ -72,6 +77,9 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [iVersion sharedInstance].applicationBundleID = [[NSBundle mainBundle] bundleIdentifier];
+//    //    [iVersion sharedInstance].updatePriority=iVersionUpdatePriorityMedium;
+//    [iVersion sharedInstance].delegate = self;
     [self setTitleViewImageViewName:@"demi_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"不限"];
     self.per_page = 10;
@@ -109,7 +117,6 @@ static NSString *C_cellIdent = @"CSquareCellID";
 }
 
 -(void)rightAction{
-    
     JMTaskSeachViewController *vc = [[JMTaskSeachViewController alloc]init];
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
@@ -124,12 +131,40 @@ static NSString *C_cellIdent = @"CSquareCellID";
         make.top.mas_equalTo(self.mas_topLayoutGuideTop);
         make.left.and.right.mas_equalTo(self.view);
     }];
-    
     [self.view addSubview:self.tapView];
     [self.view addSubview:self.partTimeJobHomeListVC.view];
+ 
     [self setupHeaderRefresh];
     [self setupFooterRefresh];
-    
+    [self setUpdateDetailsView];
+    [self setLoginsucceedView];
+}
+
+-(void)setUpdateDetailsView{
+    JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
+    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+    NSString *nowVersionStr = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    BOOL isNeedUpDate = [self compareVersion:versionModel.version toVersion:nowVersionStr];
+    if (isNeedUpDate) {
+        NSLog(@"需要更新");
+        //        NSLog(@"versionDetails:%@ %@",version,versionDetails);
+        //        [_window addSubview:self.versionDetailsView];
+        //        JMVersionModel *versionModel = [[JMVersionModel alloc]init];
+        //        versionModel.version = version;
+        //        versionModel.updateDescription = versionDetails;
+        //        [JMVersionManager saveVersionInfo:versionModel];
+        [[UIApplication sharedApplication].keyWindow addSubview:self.versionDetailsView];
+        [self.versionDetailsView.versionDetailTextView setText:versionModel.updateDescription];
+    }
+       
+}
+
+//注册成功
+-(void)setLoginsucceedView{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if (userModel.isNewUser) {
+        [[UIApplication sharedApplication].keyWindow addSubview:self.loginsucceedView];
+    }
 }
 
 #pragma mark - 刷新 -
@@ -209,7 +244,6 @@ static NSString *C_cellIdent = @"CSquareCellID";
     self.page = 1;
     [_industryLabIDArray removeAllObjects];
     [self.tableView.mj_header beginRefreshing];
-    
 }
 
 -(void)didClickCellWithTaskData:(JMTaskListCellData *)taskData{
@@ -281,8 +315,6 @@ static NSString *C_cellIdent = @"CSquareCellID";
         [self.navigationController pushViewController:vc animated:YES];
         NSLog(@"didClickPostTaskAction");
         
-        
-        
     }
 }
 
@@ -292,6 +324,44 @@ static NSString *C_cellIdent = @"CSquareCellID";
     [self.tableView.mj_header beginRefreshing];
 
 }
+
+-(void)deleteAction{
+    [self.versionDetailsView setHidden:YES];
+    
+}
+
+-(void)updateAction{
+    
+    [[iVersion sharedInstance] openAppPageInAppStore];
+    
+}
+
+-(void)deleteLoginsucceedViewAction{
+   [self.loginsucceedView setHidden:YES];
+}
+
+-(void)gotoVideoViewAction{
+    [self.loginsucceedView setHidden:YES];
+    JMUploadVideoViewController *vc = [[JMUploadVideoViewController alloc]init];
+              vc.title = @"视频简历";
+              vc.viewType = JMUploadVideoViewTypeJobEdit;
+              [self.navigationController pushViewController:vc animated:YES];
+
+}
+//- (void)iVersionDidDetectNewVersion:(NSString *)version details:(NSString *)versionDetails{
+////    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+////    NSString *nowVersionStr = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+////    BOOL isNeedUpDate = [self compareVersion:version toVersion:nowVersionStr];
+////    if (isNeedUpDate) {
+////        NSLog(@"需要更新");
+////        NSLog(@"versionDetails:%@ %@",version,versionDetails);
+////        [_window addSubview:self.versionDetailsView];
+////
+//////        [[UIApplication sharedApplication].keyWindow addSubview:self.versionDetailsView];
+////    }
+//
+//}
+
 #pragma mark - Action -
 
 -(void)loadMoreBills
@@ -334,6 +404,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
         self.tapView.hidden = YES;
     } completion:nil];
 }
+
 //侧拉手势
 -(void)hidePartTimeViewSwipeAction{
     __weak typeof(self) ws = self;
@@ -385,6 +456,32 @@ static NSString *C_cellIdent = @"CSquareCellID";
     //    NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
     //    [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
     //    [self presentViewController:l animated:YES completion:nil];
+}
+
+
+
+
+- (BOOL)compareVersion:(NSString *)version1 toVersion:(NSString *)version2
+{
+    NSArray *list1 = [version1 componentsSeparatedByString:@"."];
+    NSArray *list2 = [version2 componentsSeparatedByString:@"."];
+    for (int i = 0; i < list1.count || i < list2.count; i++)
+    {
+        NSInteger a = 0, b = 0;
+        if (i < list1.count) {
+            a = [list1[i] integerValue];
+        }
+        if (i < list2.count) {
+            b = [list2[i] integerValue];
+        }
+        if (a > b) {
+            return YES;//version1大于version2
+        } else if (a < b) {
+            return NO;//version1小于version2
+        }
+    }
+    return NO;//version1等于version2
+    
 }
 
 #pragma mark - GetData
@@ -724,6 +821,26 @@ static NSString *C_cellIdent = @"CSquareCellID";
         _dataArray = [NSMutableArray array];
     }
     return _dataArray;
+}
+
+-(JMVersionDetailsView *)versionDetailsView{
+    if (_versionDetailsView == nil) {
+        _versionDetailsView = [[JMVersionDetailsView alloc]init];
+        _versionDetailsView.frame = [UIApplication sharedApplication].keyWindow.frame;
+        _versionDetailsView.delegate = self;
+    }
+    return _versionDetailsView;
+}
+
+-(JMloginsucceedView *)loginsucceedView{
+    
+    if (_loginsucceedView == nil) {
+           _loginsucceedView = [[JMloginsucceedView alloc]init];
+           _loginsucceedView.frame = [UIApplication sharedApplication].keyWindow.frame;
+           _loginsucceedView.delegate = self;
+    }
+       return _loginsucceedView;
+    
 }
 
 //兼职职位

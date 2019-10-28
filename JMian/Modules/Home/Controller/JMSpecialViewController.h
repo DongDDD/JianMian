@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMSpecialViewController : BaseViewController
-
+@property(nonatomic,copy)NSString *special_id;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -644,7 +644,13 @@
     
     UILabel *yearsEduLab = [[UILabel alloc]init];
     NSString *education = [self getEducationStrWithEducation:_myModel.education];
-    NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年      %@ ",_myModel.work_experience_min,_myModel.work_experience_max,education];
+    NSString *experienceStr;
+    if ([_myModel.work_experience_min isEqualToString:@"0"] || [_myModel.work_experience_max isEqualToString:@"0"]) {
+        experienceStr = [NSString stringWithFormat:@"不限      %@ ",education];
+    }else{
+        experienceStr = [NSString stringWithFormat:@"%@~%@年      %@ ",_myModel.work_experience_min,_myModel.work_experience_max,education];
+        
+    }
     yearsEduLab.text = experienceStr;
     yearsEduLab.textColor = [UIColor colorWithRed:128/255.0 green:128/255.0 blue:128/255.0 alpha:1.0];
     yearsEduLab.font = [UIFont systemFontOfSize:15];

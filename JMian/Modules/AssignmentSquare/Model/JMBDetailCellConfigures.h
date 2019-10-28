@@ -17,6 +17,12 @@
 #import "JMBDetailModel.h"
 #import "JMCommentCellData.h"
 NS_ASSUME_NONNULL_BEGIN
+//@protocol JMBDetailCellConfiguresDelegate <NSObject>
+//
+//-(void)didGetPicH;
+//
+//@end
+
 
 @interface JMBDetailCellConfigures : NSObject
 
@@ -35,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSString *)cellIdForSection:(NSIndexPath *)indexPath;
 
-
+//@property(nonatomic,weak)id<JMBDetailCellConfiguresDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

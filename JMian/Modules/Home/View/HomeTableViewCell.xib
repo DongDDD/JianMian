@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,7 +13,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="klg-uP-pSV" id="qNp-TQ-hZQ">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0000.png" translatesAutoresizingMaskIntoConstraints="NO" id="Loy-mV-JkR">
@@ -38,7 +36,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sd1-L6-MHL" userLabel="footView">
-                        <rect key="frame" x="0.0" y="130.5" width="375" height="10"/>
+                        <rect key="frame" x="0.0" y="131" width="375" height="10"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="NZH-2H-Pvc"/>
@@ -141,6 +139,7 @@
                         </connections>
                     </button>
                 </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="bIN-nk-d3p" firstAttribute="centerY" secondItem="Szk-av-mYM" secondAttribute="centerY" id="1mw-x8-jX2"/>
                     <constraint firstItem="HBh-FO-Wdx" firstAttribute="leading" secondItem="RTG-ST-Bvu" secondAttribute="leading" id="7V8-v6-pzf"/>
@@ -183,7 +182,7 @@
                 <outlet property="workExperienceLab" destination="Szk-av-mYM" id="r29-h4-1g5"/>
                 <outlet property="workNameLab" destination="RTG-ST-Bvu" id="Vtw-Lw-npU"/>
             </connections>
-            <point key="canvasLocation" x="-172" y="108.39580209895054"/>
+            <point key="canvasLocation" x="-172" y="150"/>
         </tableViewCell>
     </objects>
     <resources>

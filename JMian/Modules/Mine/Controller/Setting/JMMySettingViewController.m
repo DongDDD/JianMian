@@ -81,16 +81,14 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    
-    
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:TTextMessageCell_ReuseId];
     
     if(cell == nil){
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:TTextMessageCell_ReuseId];
         //            cell.delegate = self;
     }
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.textLabel.text = _titleArray[indexPath.row];
     cell.textLabel.textColor = TITLE_COLOR;

@@ -151,6 +151,7 @@ static NSString *cellIdent = @"cellIdent";
     }];
     
 }
+
 #pragma mark - 菊花
 
 -(void)setupUpRefresh
@@ -189,7 +190,6 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 -(void)getHomeListData{
-    
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
     NSArray *citys = [NSArray array];
@@ -199,7 +199,6 @@ static NSString *cellIdent = @"cellIdent";
         citys = @[];
     }
     [[JMHTTPManager sharedInstance]fetchWorkPaginateWith_city_ids:citys company_id:nil label_id:nil work_label_id:_work_lab_id education:self.education experience_min:_work_year_s experience_max:_work_year_e salary_min:self.salary_min salary_max:self.salary_max subway_names:nil status:@"1" page:page per_page:per_page SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
         if (responsObject[@"data"]) {
             NSMutableArray *modelArray = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             if (modelArray.count > 0) {
@@ -207,6 +206,9 @@ static NSString *cellIdent = @"cellIdent";
             }
             if (modelArray.count < 10) {
                 [self.tableView.mj_footer setHidden:YES];
+            }else{
+                [self.tableView.mj_footer setHidden:NO];
+
             }
         }
         [self.tableView reloadData];
@@ -301,7 +303,6 @@ static NSString *cellIdent = @"cellIdent";
     [self.labChooseBottomView setHidden:YES];
     [_bgBtn setHidden:YES];
     [self.tableView.mj_header beginRefreshing];
-    
     
 }
 
@@ -425,31 +426,22 @@ static NSString *cellIdent = @"cellIdent";
         NSLog(@"学历：%@",self.education);
     
         
-    }else if ([str isEqualToString:@"工作经历"]) {
-        NSString *exp = [self getArray_index:index];
-        if (![exp isEqualToString:@"全部"] && ![exp isEqualToString:@"应届生"]) {
-            self.work_year_e = [exp substringToIndex:0];
-            self.work_year_s = [exp substringToIndex:3];
-            
-        }else if([exp isEqualToString:@"应届生"]){
-            
-            
-            
+    }else if ([str isEqualToString:@"工作经验"]) {
+            NSString *labStr = [self getArray_index:index];
+            [self getExpWithLabStr:labStr];
+        }else if ([str isEqualToString:@"薪资要求"]) {
+    //        [self getSalaryStr_index:index];
+            if (index == 0) {
+                self.salary_min = @"";
+                self.salary_max = @"";
+            }else{
+                NSString *salaryStr = [self getSalaryStr_index:index];
+                NSMutableArray *salaryArr = [self setSalaryRangeWithSalaryStr:salaryStr];
+                self.salary_min = salaryArr[0];
+                self.salary_max = salaryArr[1];
+                
+            }
         }
-        //        self.work_year_s
-    }else if ([str isEqualToString:@"薪资要求"]) {
-        //        [self getSalaryStr_index:index];
-        if (index == 0) {
-            self.salary_min = @"";
-            self.salary_max = @"";
-        }else{
-            NSString *salaryStr = [self getSalaryStr_index:index];
-            NSMutableArray *salaryArr = [self setSalaryRangeWithSalaryStr:salaryStr];
-            self.salary_min = salaryArr[0];
-            self.salary_max = salaryArr[1];
-            
-        }
-    }
     
 }
 
@@ -496,6 +488,42 @@ static NSString *cellIdent = @"cellIdent";
     
 }
 
+
+-(void)getExpWithLabStr:(NSString *)labStr{
+    if ([labStr isEqualToString:@"应届生"]) {
+        self.work_year_s = @"0";
+        self.work_year_e = @"1";
+
+    }else if ([labStr isEqualToString:@"1年"]) {
+         self.work_year_s = @"1";
+        self.work_year_e = @"2";
+    }else if ([labStr isEqualToString:@"1～3年"]) {
+        self.work_year_s = @"1";
+        self.work_year_e = @"3";
+        
+    }else if ([labStr isEqualToString:@"3～5年"]) {
+        self.work_year_s = @"3";
+        self.work_year_e = @"5";
+
+    }else if ([labStr isEqualToString:@"5～10年"]) {
+        self.work_year_s = @"5";
+        self.work_year_e = @"10";
+        
+        
+    }else if ([labStr isEqualToString:@"10年以上"]) {
+        self.work_year_s = @"10";
+        self.work_year_e = @"30";
+        
+        
+    }else if ([labStr isEqualToString:@"全部"]) {
+        self.work_year_s = nil;
+        self.work_year_e = nil;
+        
+        
+    }
+ 
+
+}
 
 #pragma mark - tableView DataSource -
 

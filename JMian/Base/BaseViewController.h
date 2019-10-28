@@ -65,6 +65,8 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)right2Action;
 
 @property (nonatomic, strong) MBProgressHUD *myProgressHUD;
+@property (nonatomic, strong) UIView *HUDbackgroundView;
+
 -(void)showProgressHUD_view:(UIView *)view;
 -(void)showHUD;
 -(void)hiddenHUD;

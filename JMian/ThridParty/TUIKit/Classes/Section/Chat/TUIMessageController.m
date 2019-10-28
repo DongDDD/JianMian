@@ -37,7 +37,9 @@
 #import "JMChatDetailPartTimeJobTableViewCell.h"
 #import "JMChatViewSectionView.h"
 #import "JMCDetailWebViewController.h"
+#import "JMCDetailViewController.h"
 #import "JMBDetailWebViewController.h"
+#import "JMBDetailViewController.h"
 #import "JMPersonDetailsViewController.h"
 #import "JobDetailsViewController.h"
 #import "JMHomeWorkModel.h"
@@ -845,7 +847,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 -(void)didClickPartTimeInfoAction{
     //兼职
-    JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
+    JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
     vc.task_id = self.myConvModel.work_task_id;
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -864,7 +866,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             
         }else if ([self.myConvModel.type isEqualToString:@"2"]) {
             //兼职
-            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+            JMBDetailViewController *vc = [[JMBDetailViewController alloc]init];
             vc.ability_id = self.myConvModel.job_ability_id;
             [self.navigationController pushViewController:vc animated:YES];
             

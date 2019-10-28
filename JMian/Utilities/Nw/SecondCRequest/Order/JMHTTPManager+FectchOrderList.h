@@ -12,14 +12,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHTTPManager (FectchOrderList)
 - (void)fectchOrderList_order_id:(nullable NSArray *)order_id
-                   contact_city:(nullable NSString *)contact_city
-                  contact_phone:(nullable NSString *)contact_phone
-                         status:(nullable NSString *)status
-                         s_date:(nullable NSString *)s_date
-                         e_date:(nullable NSString *)e_date
-                           page:(nullable NSString *)page
-                       per_page:(nullable NSString *)per_page
-                   successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+                    contact_city:(nullable NSString *)contact_city
+                   contact_phone:(nullable NSString *)contact_phone
+                         keyword:(nullable NSString *)keyword
+                          status:(nullable NSString *)status
+                          s_date:(nullable NSString *)s_date
+                          e_date:(nullable NSString *)e_date
+                            page:(nullable NSString *)page
+                        per_page:(nullable NSString *)per_page
+                    successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -381,8 +381,8 @@
         _educationPickerSingle.title = @"学历要求";
         _educationPickerSingle.widthPickerComponent = SCREEN_WIDTH;
         _educationPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"不限",
-                                            @"初中及以下",
-                                            @"中专/中技",
+                                            @"初中",
+                                            @"中专",
                                             @"高中",
                                             @"大专",
                                             @"本科",

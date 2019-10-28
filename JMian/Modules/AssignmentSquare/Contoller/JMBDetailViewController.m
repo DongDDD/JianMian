@@ -15,14 +15,20 @@
 #import "JMBDetailVideoView.h"
 #import "JMHTTPManager+CompanyLike.h"
 #import "WXApi.h"
+#import "JMHTTPManager+CreateConversation.h"
+#import "JMMessageListModel.h"
+#import "JMChatViewController.h"
+#import "JMVideoChatView.h"
 
-@interface JMBDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMBDetailVideoTableViewCellDelegate,JMBDetailVideoViewDelegate,JMShareViewDelegate>
+@interface JMBDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMBDetailVideoTableViewCellDelegate,JMBDetailVideoViewDelegate,JMShareViewDelegate,JMVideoChatViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) JMShareView *shareView;
 @property (nonatomic ,strong) UIView *BGShareView;
 @property (nonatomic, strong) JMBDetailVideoView *videoView;
 
 @property (nonatomic ,strong) JMBDetailCellConfigures *configures;
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
+@property (nonatomic, strong) JMVideoChatView *videoChatView;
 
 @end
 
@@ -32,7 +38,6 @@
     [super viewDidLoad];
     [self initView];
     self.title = @"个人任务简历";
-
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -43,10 +48,16 @@
 
 -(void)initView{
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.bottomView];
     [self.view addSubview:self.shareView];
     [self.view addSubview:self.BGShareView];
     [self.BGShareView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.shareView.mas_top);
+        make.bottom.mas_equalTo(self.shareView.mas_top).mas_offset(-10);
+        make.left.and.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.mas_topLayoutGuide);
+    }];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.bottomView.mas_top);
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
     }];
@@ -89,9 +100,7 @@
 
 #pragma mark - Action
 -(void)right2Action{
-
     [self showShareView];
-        
     
 }
 -(void)rightAction:(UIButton *)sender{
@@ -142,9 +151,33 @@
 //    }];
     
 }
+
+- (IBAction)bottomLeftAction:(UIButton *)sender {
+    [self createChatRequstWithForeign_key:self.ability_id user_id:self.configures.model.user_userId];
+}
+
+- (IBAction)bottomRightAction:(UIButton *)sender {
+    [self gotoVideoChatViewWithForeign_key:self.ability_id recipient:self.configures.model.user_userId chatType:@"2"];
+}
+
+-(void)gotoVideoChatViewWithForeign_key:(NSString *)foreign_key
+                              recipient:(NSString *)recipient
+                               chatType:(NSString *)chatType{
+    _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+    _videoChatView.delegate = self;
+    _videoChatView.tag = 222;
+    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
+    //[_videoChatView setInterviewModel:nil];
+    [self.view addSubview:_videoChatView];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+
 #pragma mark - data
 
 -(void)getData{
+    [self showProgressHUD_view:self.view];
+    self.HUDbackgroundView.alpha = 1;
+
     [[JMHTTPManager sharedInstance]fectchAbilityDetailInfo_Id:self.ability_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             
@@ -162,7 +195,25 @@
                 self.tableView.tableHeaderView =  [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
             }
             [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
-
+            
+//            NSMutableArray *imgArr = [NSMutableArray array];
+//            for (JMBDetailImageModel *imgModel in self.configures.model.images) {
+//                if ([imgModel.status isEqualToString:@"2"]) {
+//                    [imgArr addObject:imgModel];
+//                }
+//            }
+//            JMCDetailImageModel *imgModel;
+//            for (JMBDetailImageModel *imgModel in imgArr) {
+//                UIImageView *imageView = [[UIImageView alloc]init];
+//
+//                [imageView sd_setImageWithURL:[NSURL URLWithString:imgModel.file_path] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//                    CGFloat imgHeight = image.size.height * SCREEN_WIDTH / image.size.width;
+////                    NSLog(@"宽：%f, 高：%f", image.size.width, self.height);
+//                    NSLog(@"图片加载完了1");
+//
+//                }];
+//
+//            }
             [self getCommentInfo];
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -176,12 +227,28 @@
         if (responsObject[@"data"]) {
             self.configures.commentListArray = [JMCommentCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             [self.tableView reloadData];
-         
+            [self hiddenHUD];
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
     
+}
+
+//创建聊天
+-(void)createChatRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
+    if (user_id && foreign_key) {
+        [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+            
+            JMChatViewController *vc = [[JMChatViewController alloc]init];
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+        
+    }
 }
 
 #pragma mark - myDelegate
@@ -210,6 +277,11 @@
     [self hiddenChoosePayView];
     
 }
+
+//-(void)didGetPicH{
+//    [self.tableView reloadData];
+//
+//}
 
 #pragma mark - UITableViewDataSource
 
@@ -294,27 +366,27 @@
         
     }else if (indexPath.section == 2) {
         //图片
-        if (self.configures.model.images.count > 0) {
-        JMCDetailImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailImageTableViewCellIdentifier forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            NSMutableArray *imgArr = [NSMutableArray array];
-            for (JMBDetailImageModel *imgModel in self.configures.model.images) {
-                if ([imgModel.status isEqualToString:@"2"]) {
-                    
-                    [imgArr addObject:imgModel];
-                }
+        NSMutableArray *imgArr = [NSMutableArray array];
+        for (JMBDetailImageModel *imgModel in self.configures.model.images) {
+            if ([imgModel.status isEqualToString:@"2"]) {
+                
+                [imgArr addObject:imgModel];
             }
-            JMBDetailImageModel *imgModel = imgArr[indexPath.row];
-            [cell setUrl:imgModel.file_path];
-                        
-            return cell;
+        }
+        //审核通过后的图片
+        if (imgArr.count > 0 ) {
+                JMCDetailImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailImageTableViewCellIdentifier forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                JMBDetailImageModel *imgModel = imgArr[indexPath.row];
+                [cell setUrl:imgModel.file_path];
+                return cell;
+            
         }else{
-            //没有图片
+            //没有图片或者没有审核通过的图片
             JMNoDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMNoDataTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
-
       
     }else if (indexPath.section == 3) {
         //接单记录

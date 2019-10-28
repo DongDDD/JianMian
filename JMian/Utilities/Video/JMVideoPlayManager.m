@@ -79,8 +79,17 @@
 
 
 -(void)setCUI{
-    [self.likeBtn setHidden:NO];
-    [self.shareBtn setHidden:NO];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self.likeBtn setHidden:NO];
+        [self.shareBtn setHidden:NO];
+        
+    }else{
+        
+        [self.likeBtn setHidden:YES];
+        [self.shareBtn setHidden:NO];
+        
+    }
     [self.comVideoDetailInfoView setHidden:YES];
     [self.videoDetailInfoView setHidden:NO];
     if (self.vitaModel.favorites_favorite_id) {
@@ -195,10 +204,10 @@
             return @"不限";
             break;
         case 1:
-            return @"初中及以下";
+            return @"初中";
             break;
         case 2:
-            return @"中专/中技";
+            return @"中专";
             break;
         case 3:
             return @"高中";

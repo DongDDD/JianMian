@@ -19,8 +19,10 @@ NS_ASSUME_NONNULL_BEGIN
                           work_year_e:(nullable NSString *)work_year_e
                            salary_min:(nullable NSString *)salary_min
                            salary_max:(nullable NSString *)salary_max
+                           special_id:(nullable NSString *)special_id
                                  page:(nullable NSString *)page
                              per_page:(nullable NSString *)per_page
+
                          SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 @end

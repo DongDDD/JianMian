@@ -105,6 +105,7 @@
     }];
     
 }
+
 -(UIImage *) getImageFromURL:(NSString *)fileURL {
     
     UIImage * result;

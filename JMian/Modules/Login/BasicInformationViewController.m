@@ -420,6 +420,10 @@
         [self showAlertSimpleTips:@"提示" message:@"请填写姓名" btnTitle:@"好的"];
         return;
     }
+    if (self.emailText.text.length == 0) {
+        [self showAlertSimpleTips:@"提示" message:@"请填写邮箱" btnTitle:@"好的"];
+        return;
+    }
     if (!self.sex) {
         [self showAlertSimpleTips:@"提示" message:@"请选择性别" btnTitle:@"好的"];
         return;

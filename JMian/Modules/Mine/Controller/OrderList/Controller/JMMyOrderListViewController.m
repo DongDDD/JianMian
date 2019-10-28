@@ -13,7 +13,7 @@
 #import "JMHTTPManager+FectchOrderList.h"
 #import "JMOrderCellData.h"
 #import "JMLogisticsInfoViewController.h"
-
+#import "JMSearchOrderViewController.h"
 @interface JMMyOrderListViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,JMOrderStatusTableViewCellDelegate>
 @property (strong, nonatomic) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
@@ -35,6 +35,8 @@ static NSString *cellID = @"statusCellID";
     [super viewDidLoad];
     [self initView];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
+  
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         self.title = @"订单列表";
         
@@ -57,7 +59,7 @@ static NSString *cellID = @"statusCellID";
 -(void)getData_status:(NSString *)status{
     NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
     NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
-    [[JMHTTPManager sharedInstance]fectchOrderList_order_id:nil contact_city:nil contact_phone:nil status:status s_date:nil e_date:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]fectchOrderList_order_id:nil contact_city:nil contact_phone:nil keyword:@"" status:status s_date:nil e_date:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSMutableArray *array = [NSMutableArray array];
             array = [JMOrderCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
@@ -182,7 +184,12 @@ static NSString *cellID = @"statusCellID";
     
 }
 
-
+#pragma mark - action
+-(void)rightAction{
+    NSLog(@"asdf");
+    JMSearchOrderViewController *vc = [[JMSearchOrderViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 #pragma mark - Table view data source
 

@@ -17,7 +17,7 @@
 #import <ImSDK/TIMFriendshipDefine.h>
 #import "JMBAndCTabBarViewController.h"
 #import "ChooseIdentity.h"
-
+#import "VendorKeyMacros.h"
 
 @interface JMJudgeViewController ()
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
@@ -68,9 +68,14 @@
         NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
         [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
     }else{
-//        [self jugdeStepToVCWithModel:model];
+        if ([model.email isEqualToString:@"379247111@qq.com"]) {
+            [self jugdeStepToVCWithModel:model];
+        
+        }else{
+            [self loginIM_tpye:model.type];
+        
+        }
         //根据用户类型登录腾讯云腾讯云登录。先登录腾讯云再登录账号
-        [self loginIM_tpye:model.type];
         
     }
     
@@ -256,21 +261,17 @@
         // identifier 为用户名，userSig 为用户登录凭证
         login_param.identifier = userIDstr;
         login_param.userSig = kFetchMyDefault(@"usersig");
-        login_param.appidAt3rd = @"1400193090";
+        login_param.appidAt3rd = TIMSdkAppid;
         [[TIMManager sharedInstance] login: login_param succ:^(){
             NSLog(@"Login Succ");
             [self.progressHUD setHidden:YES];
             [self jugdeStepToVCWithModel:model];//根据step跳页面
             [self upLoadDeviceToken];//申请离线推送
-            
             [[TIMFriendshipManager sharedInstance] modifySelfProfile:@{TIMProfileTypeKey_FaceUrl:model.avatar} succ:nil fail:nil];
-            
         } fail:^(int code, NSString * err) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请重新登录"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
             [alert show];
-            
-            
             NSLog(@"Login Failed: %d->%@", code, err);
             [self gotoLoginViewVC];
         }];

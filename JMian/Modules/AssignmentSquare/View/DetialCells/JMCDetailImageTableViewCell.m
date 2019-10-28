@@ -23,7 +23,7 @@ NSString *const JMCDetailImageTableViewCellIdentifier = @"JMCDetailImageTableVie
 }
 
 -(void)setUrl:(NSString *)url{
-    [self.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"NO_Data"]];
+    [self.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"break"]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

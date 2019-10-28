@@ -62,7 +62,7 @@
         if ([data.type isEqualToString:@"2"]) {
             //兼职类型
             if (data.job_type_label_name) {
-                self.userLabel.text = data.work_task_title;
+                self.userLabel.text = data.job_type_label_name;
             }
 
         }else if ([data.type isEqualToString:@"1"]) {

@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *usersig;
 @property (nonatomic, copy) NSString *deadline;
 @property (nonatomic, copy) NSString *ability_count;
+@property (nonatomic, copy) NSString *sdkAppid;
+
+@property (nonatomic, assign) BOOL isNewUser;
 
 @property (nonatomic, copy) NSString *card_status;
 @property (nonatomic, copy) NSString *card_sex;
