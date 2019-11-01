@@ -109,8 +109,8 @@
             [self initView];
             
         }
-                [self hiddenHUD];
-
+        [self hiddenHUD];
+        
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -246,10 +246,10 @@
   
   
     
-    //         --- 模拟加载延迟
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//    //         --- 模拟加载延迟
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         cycleScrollView2.imageURLStringsGroup = imagesURLStrings;
-    });
+//    });
     
     
     cycleScrollView2.clickItemOperationBlock = ^(NSInteger index) {

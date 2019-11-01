@@ -24,7 +24,7 @@ PODS:
     - AMapFoundation (~> 1.4)
   - HXWeiboPhotoPicker (2.1.5):
     - SDWebImage (~> 4.0)
-  - IQKeyboardManager (3.3.7)
+  - IQKeyboardManager (6.4.0)
   - ISVImageScrollView (0.1.2)
   - iVersion (1.11.5)
   - Masonry (1.1.0)
@@ -54,7 +54,7 @@ DEPENDENCIES:
   - AMapLocation
   - AMapSearch
   - HXWeiboPhotoPicker (~> 2.1.5)
-  - IQKeyboardManager (= 3.3.7)
+  - IQKeyboardManager (= 6.4.0)
   - ISVImageScrollView
   - iVersion
   - Masonry (~> 1.1.0)
@@ -111,7 +111,7 @@ SPEC CHECKSUMS:
   AMapLocation: 89a7e4eb6040d32ba73c77a4966ecc66e46aa7c3
   AMapSearch: def5983c8ca1a6d7430970046dc814f6e337621d
   HXWeiboPhotoPicker: b389ed6a2f854270aa391c55591d0616a519c881
-  IQKeyboardManager: 249c3946acf61345c18b038eb50863fe2793e3a8
+  IQKeyboardManager: fcef267266379c003181fc3592f6bdb8bf4db839
   ISVImageScrollView: ba511d12a1661b40feb8921309c0854bf93ec749
   iVersion: 3a93a89259eb3b52b0a8ba52c46a0027fa6b4d30
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
@@ -131,6 +131,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 079adbee023edc8c88a70cacefc21022caadd0bf
+PODFILE CHECKSUM: 097dd8ca48f87d11f0c8102883ed29a4ecae4f23
 
 COCOAPODS: 1.6.1

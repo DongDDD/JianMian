@@ -28,6 +28,7 @@
 #import "JMBDetailWebViewController.h"
 #import "JMHTTPManager+FectchTaskAbility.h"
 #import "JMHTTPManager+UnReadNotice.h"
+#import "JMBDetailViewController.h"
 //#import <PassKit/PassKit.h>                                 //用户绑定的银行卡信息
 //#import <PassKit/PKPaymentAuthorizationViewController.h>    //Apple pay的展示控件
 //#import <AddressBook/AddressBook.h>                         //用户联系信息相关
@@ -163,25 +164,25 @@
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         _receiver_id = [NSString stringWithFormat:@"%@a",data.user_user_id];
 
-        if ([data.status isEqualToString:Task_WaitDealWith] && _index == 0) {
+        if ([data.status isEqualToString:Task_WaitDealWith]) {
             //B拒绝
             [self changeTaskStatusRequestWithStatus:Task_Refuse task_order_id:data.task_order_id];
-        }else if ([data.status isEqualToString:Task_Finish] && _index == 1) {
+        }else if ([data.status isEqualToString:Task_Finish]) {
             //B：C任务已完成 和C聊聊
             
             [self createChatJudge];
-        }else if ([data.status isEqualToString:Task_Pass] && _index == 1) {
+        }else if ([data.status isEqualToString:Task_Pass]) {
             //B：销售任务进行中 和C聊聊
 //            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
             [self createChatJudge];
       
-        }else if ([data.status isEqualToString:Task_Finish] && _index == 1) {
+        }else if ([data.status isEqualToString:Task_Finish]) {
             //B：普通任务进行中 和C聊聊
             //            [self changeTaskStatusRequestWithStatus:Task_DidComfirm task_order_id:data.task_order_id];
             [self createChatJudge];
             
         }
-    }else if ([userModel.type isEqualToString:C_Type_USER] && _index == 1){
+    }else if ([userModel.type isEqualToString:C_Type_USER]){
         _receiver_id = [NSString stringWithFormat:@"%@a",data.user_user_id];
         [self createChatJudge];
     }
@@ -198,7 +199,7 @@
 //B端=============待通过=================================
 
         //B现在状态：待处理or待通过
-        if ([data.status isEqualToString:Task_WaitDealWith] && _index == 0) {
+        if ([data.status isEqualToString:Task_WaitDealWith]) {
             
             //B改状态------B端通过任务申请&&支付定金
             if ([data.payment_method isEqualToString:@"3"]) {
@@ -230,7 +231,7 @@
 //                }
                 
            //B改状态------B端通过网络销售任务，直接改状态
-            }else if ([data.payment_method isEqualToString:@"1"] && _index == 0){
+            }else if ([data.payment_method isEqualToString:@"1"]){
                 
                 _task_order_id = data.task_order_id;
                 _user_id = data.user_user_id;
@@ -240,7 +241,7 @@
             return;
 //B端=============进行中=================================
 
-        }else if ([data.status isEqualToString:Task_Finish] && _index == 1) {
+        }else if ([data.status isEqualToString:Task_Finish]) {
             //B改状态------B端确认完成任务&支付尾款@"3"
             JMPayDetailViewController *vc = [[JMPayDetailViewController alloc]init];
             vc.data = data;
@@ -252,7 +253,7 @@
         }else if ([data.status isEqualToString:Task_Pass]) {
             //进行中
             //B---销售分成任务的 结束任务
-            if ([data.payment_method isEqualToString:@"1"] && _index == 1){
+            if ([data.payment_method isEqualToString:@"1"]){
                 //销售任务和他聊聊
 //                [self getGoodsUrlToShareDataWithTask_order_id:data.task_order_id];
 //                self createChatRequstWithTask_order_id:data.snapshot_type_label_id user_id:<#(NSString *)#>
@@ -262,7 +263,7 @@
             return;
 //B端=============已结束=================================
 
-        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_boss isEqualToString:@"0"]  && _index == 2) {
+        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_boss isEqualToString:@"0"]) {
             //B——创建评价
             JMTaskCommetViewController *vc = [[JMTaskCommetViewController alloc]init];
             [vc setData:data];
@@ -276,7 +277,7 @@
     }else if ([userModel.type isEqualToString:C_Type_USER]) {
         _receiver_id = [NSString stringWithFormat:@"%@b",data.boss_user_id];
         //C----进行中----
-        if ([data.status isEqualToString:Task_Pass]  && _index == 1) {
+        if ([data.status isEqualToString:Task_Pass]) {
             if (![data.payment_method isEqualToString:@"1"]) {//不是销售分成才有这操作
                 //C---点"已完成"（C 唯一操作）-----status change to  '3'
                 [self changeTaskStatusRequestWithStatus:Task_Finish task_order_id:data.task_order_id];
@@ -286,7 +287,7 @@
                 [self getGoodsUrlToShareDataWithTask_order_id:data.task_order_id];
 
             }
-        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_user isEqualToString:@"0"] && _index == 2){
+        }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_user isEqualToString:@"0"]){
             //C——-创建评价
             JMTaskCommetViewController *vc = [[JMTaskCommetViewController alloc]init];
             [vc setData:data];
@@ -459,7 +460,7 @@
     [[JMHTTPManager sharedInstance]fetchTaskAbilityWithUser_id:user_id type_label_id:type_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSString *ability_id = responsObject[@"data"][@"ability_id"];
-            JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
+            JMBDetailViewController *vc = [[JMBDetailViewController alloc]init];
             vc.ability_id = ability_id;
             [self.navigationController pushViewController:vc animated:YES];
         }
@@ -852,19 +853,24 @@
     switch (_index) {
         case 0:
             //待处理
-            self.currentStatusArray = @[Task_WaitDealWith];
+            self.currentStatusArray = [NSArray array];
             break;
         case 1:
             //进行中
-            self.currentStatusArray = @[Task_Pass,Task_Finish];
+            self.currentStatusArray = @[Task_WaitDealWith];
+
             
             break;
         case 2:
             //已结束
+            self.currentStatusArray = @[Task_Pass,Task_Finish];
+            
+            break;
+        case 3:
+            //已结束
             self.currentStatusArray = @[Task_Refuse,Task_DidComfirm];
             
             break;
-            
         default:
             break;
     }
@@ -949,6 +955,7 @@
 //    NSLog(@"image = %.3f %@",dataLength,typeArray[index]);
 //
 //}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -984,9 +991,7 @@
         [self getTaskAbilityIDInfoWithUser_id:data.user_user_id type_label_id:data.snapshot_type_label_id];
     }else{
         //去快照
-        
         [self getTaskInfoDataWithTask_order_id:data.task_order_id];
-        
     }
 //    JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];
 //    vc.ability_id = data.ability_id;
@@ -1018,7 +1023,7 @@
 
 - (JMMyTitleView *)titleView {
     if (!_titleView) {
-        _titleView = [[JMMyTitleView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"待通过", @"进行中", @"已结束"]];
+        _titleView = [[JMMyTitleView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全部",@"待处理", @"进行中", @"已结束"]];
 //        _titleView.viewType = JMMyTitleViewTypeDefault;
         [_titleView setCurrentTitleIndex:_index];
         __weak JMTaskManageViewController *weakSelf = self;

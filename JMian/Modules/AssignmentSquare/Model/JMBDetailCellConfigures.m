@@ -109,7 +109,6 @@
         NSLog(@"宽：%f, 高：%f", image.size.width, self.height);
         self.height = imgHeight;
         NSLog(@"图片加载完了1");
-        
     }];
 //    if (!_isGetH && self.height == 0) {
 //        if (_delegate && [_delegate respondsToSelector:@selector(didGetPicH)]) {
@@ -118,7 +117,6 @@
 //        _isGetH = YES;
 //    }
     return self.height;
-    
 }
 
 
@@ -128,7 +126,6 @@
         CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.myDescription andFont:[UIFont systemFontOfSize:14] andLinespace:10];
         NSLog(@"FFFFF:%f",H);
         return H+90;
-    
 }
 
 

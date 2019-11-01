@@ -55,7 +55,7 @@
     self.moneyLab.text = [NSString stringWithFormat:@"%@%@",data.payment_money,data.unit];
     self.infoLab1.text = data.user_nickname;
     if (data.snapshot_cityName == nil) {
-        self.infoLab2.text = @"不限地区";
+        self.infoLab2.text = @"不限";
     }else{
         self.infoLab2.text = data.snapshot_cityName;
     }
@@ -92,8 +92,6 @@
                 str = @"通过";
             }else{
                 str = @"通过&支付定金";
-   
-                
             }
             [self.rightBtn setTitle:str forState:UIControlStateNormal];
             [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -154,9 +152,7 @@
             titleStr = @"确认对方完成&支付尾款";
             
         }
-        
-        
-        
+     
         [self.rightBtn setTitle:titleStr forState:UIControlStateNormal];
         [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         self.rightBtn.backgroundColor = MASTER_COLOR;
@@ -208,7 +204,6 @@
 }
 
 
-
 //C端上部分赋值
 -(void)setCHeaderView_data:(JMTaskOrderListCellData *)data{
     
@@ -219,18 +214,18 @@
     if ([data.payment_method isEqualToString:@"1"] ) {
         //网络销售
         self.infoLab1.text = data.goodsTitle;
-        self.infoLab2.text = @" 即结  ";
         if (data.snapshot_cityName == nil) {
-            self.infoLab3.text =  @" 不限地区  ";
+            self.infoLab2.text =  @" 不限  ";
         }else{
             
-            self.infoLab3.text =  [NSString stringWithFormat:@" %@  ", data.snapshot_cityName];
+            self.infoLab2.text =  [NSString stringWithFormat:@" %@  ", data.snapshot_cityName];
         }
+        self.infoLab3.text = @" 即结  ";
     }else{
         //其他兼职
         self.infoLab1.text = data.snapshot_companyName;
         if (data.snapshot_cityName == nil) {
-            self.infoLab2.text = @" 不限地区  ";
+            self.infoLab2.text = @" 不限  ";
         }else{
             
             self.infoLab2.text = [NSString stringWithFormat:@" %@  ", data.snapshot_cityName];
@@ -252,7 +247,6 @@
         [self.rightBtn setHidden:YES];
         //进行中：已通过
     }else if (([data.status isEqualToString:Task_Pass])){
-        
         [self.leftBtn setHidden:NO];
         [self.rightBtn setHidden:NO];
         if ([data.payment_method isEqualToString:@"1"] ) {
@@ -279,11 +273,8 @@
             self.rightBtn.layer.borderWidth = 0.5;
             [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
             self.rightBtn.layer.borderColor = MASTER_COLOR.CGColor;
-            
         }
-        
-        
-        
+      
         //进行中：已完成
     } else if ([data.status isEqualToString:Task_Finish]) {
         [self.leftBtn setHidden:NO];
@@ -293,10 +284,8 @@
         self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
         self.leftBtn.layer.borderWidth = 0.5;
         self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
-      
         [self.rightBtn setTitle:@"等待对方确认付尾款" forState:UIControlStateNormal];
-            
-       
+                   
         self.rightBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
         self.rightBtn.layer.borderWidth = 0.5;
         [self.rightBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
@@ -336,10 +325,8 @@
         self.rightBtn.backgroundColor = TEXT_GRAYmin_COLOR;
         self.rightBtn.layer.borderWidth = 0;
         self.rightBtn.layer.borderColor = TEXT_GRAYmin_COLOR.CGColor;
-        
     }
-    
-    
+        
 }
 
 - (IBAction)leftBtnAction:(UIButton *)sender {

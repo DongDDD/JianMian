@@ -52,7 +52,7 @@
     [self.view addSubview:self.shareView];
     [self.view addSubview:self.BGShareView];
     [self.BGShareView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(self.shareView.mas_top).mas_offset(-10);
+        make.bottom.mas_equalTo(self.shareView.mas_top);
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
     }];
@@ -101,8 +101,8 @@
 #pragma mark - Action
 -(void)right2Action{
     [self showShareView];
-    
 }
+
 -(void)rightAction:(UIButton *)sender{
         sender.selected = !sender.selected;
         if (sender.selected) {
@@ -124,9 +124,7 @@
                 
             }];
         }
-        
-    
-    
+   
 }
 
 -(void)showShareView{
@@ -135,8 +133,6 @@
     
     [UIView animateWithDuration:0.18 animations:^{
         self.shareView.frame =CGRectMake(0, self.view.frame.size.height-205, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
-        
-        
     }];
     
 }
@@ -275,6 +271,14 @@
 -(void)shareViewRightAction{
     [self wxShare:1];
     [self hiddenChoosePayView];
+    
+}
+
+//JMVideoChatViewDelegate 挂断
+-(void)hangupAction_model:(JMInterViewModel *)model{
+    
+    [_videoChatView removeFromSuperview];
+    [self.navigationController setNavigationBarHidden:NO];
     
 }
 

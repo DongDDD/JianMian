@@ -62,7 +62,6 @@ static NSString *cellIdent = @"cellIdent";
     self.view.backgroundColor = BG_COLOR;
     [self.view addSubview:self.tableView];
     [self.tableView addSubview:self.footerView];
-    [self.tableView addSubview:self.moreBtn];
 
     if (_viewType == JMPostPartTimeResumeVieweEdit) {
         [self setRightBtnTextName:@"保存"];
@@ -75,6 +74,8 @@ static NSString *cellIdent = @"cellIdent";
     }else if (_viewType == JMPostPartTimeResumeViewLogin) {
         self.title = @"接任务简历";
         [self setRightBtnTextName:@"下一步"];
+        [self.tableView addSubview:self.moreBtn];
+
     }
     if (_isHideBackBtn) {
         [self setIsHiddenBackBtn:YES];
@@ -141,33 +142,39 @@ static NSString *cellIdent = @"cellIdent";
 #pragma mark - 赋值
 
 -(void)setRightText_model:(JMAbilityCellData *)model{
-        NSString *city = model.city_cityName;
-        NSString *type_name = model.type_name;
-        NSMutableArray *industryNameArray = [NSMutableArray array];
-        for (JMIndustryModel *data in model.industry) {
-            [industryNameArray addObject:data.name];
-        }
-        NSString *insdutry = [industryNameArray componentsJoinedByString:@","];
-        NSString *videoStr;
-        NSString *imgsStr;
-        if (model.images.count > 0) {
-            imgsStr = @"已上传";
-        }else{
-            imgsStr = @"上传图片作品";
-            
-        }
-        if (model.video_file_path) {
-            videoStr = @"已上传";
-        }else{
-            videoStr = @"上传视频作品";
-            
-        }
-        self.rightArray = [NSMutableArray arrayWithObjects:city,type_name,insdutry,imgsStr,videoStr, nil];
+    NSString *city;
+    if (model.city_cityName != nil) {
+        city = model.city_cityName;
+    }else{
+        city = @"不限";
+    }
+    NSString *type_name = model.type_name;
+    NSMutableArray *industryNameArray = [NSMutableArray array];
+    for (JMIndustryModel *data in model.industry) {
+        [industryNameArray addObject:data.name];
+    }
+    NSString *insdutry = [industryNameArray componentsJoinedByString:@","];
+    NSString *videoStr;
+    NSString *imgsStr;
+    if (model.images.count > 0) {
+        imgsStr = @"已上传";
+    }else{
+        imgsStr = @"上传图片作品";
+        
+    }
+    if (model.video_file_path) {
+        videoStr = @"已上传";
+    }else{
+        videoStr = @"上传视频作品";
+        
+    }
+    self.rightArray = [NSMutableArray array];
+    self.rightArray = [NSMutableArray arrayWithObjects:city,type_name,insdutry,imgsStr,videoStr, nil];
     
     [self.footerView.contentTextView setText:model.myDescription];
     [self.footerView.placeHolder setHidden:YES];
     
-   
+    
 }
 
 #pragma mark - 点击事件
@@ -573,7 +580,7 @@ static NSString *cellIdent = @"cellIdent";
         _footerView.frame = CGRectMake(0, 350 , SCREEN_WIDTH, 229);
         _footerView.viewType = JMPartTimeJobResumeFooterViewTypeDefault;
         _footerView.delegate = self;
-        _footerView.contentTextView.inputAccessoryView = self.myToolbar;
+//        _footerView.contentTextView.inputAccessoryView = self.myToolbar;
 //        _footerView.contentTextView.delegate = self;
         
     }

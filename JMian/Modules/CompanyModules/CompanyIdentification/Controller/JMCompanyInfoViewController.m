@@ -62,20 +62,22 @@
         [self setIsHiddenBackBtn:NO];
     }else if ((self.loginViewType == JMJLoginViewTypeMemory)) {
         [self setIsHiddenBackBtn:YES];
-
     }
     [self setRightBtnTextName:@"下一步"];
 //    self.pickerView.delegate = self;
     [self.scrollView addSubview:self.moreBtn];
 //    [self.view addSubview:self.pickerView];
-    self.companyNameLab.text = kFetchMyDefault(@"company_name");
-        
+    NSString *company_name = kFetchMyDefault(@"company_name");
+      if (company_name == nil) {
+          JMUserInfoModel *useModel = [JMUserInfoManager getUserInfo];
+          company_name = useModel.company_real_company_name;
+      }
+    
+    self.companyNameLab.text = company_name;
     self.scrollView.delegate = self;
     self.abbreviationTextField.delegate = self;
     [self getLabsData];
     // Do any additional setup after loading the view from its nib.
-
-
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -101,6 +103,7 @@
 }
 #pragma mark - 赋值
 -(void)setComInfoValues{
+    
     NSString *abbreviation = kFetchMyDefault(@"abbreviation");
     NSString *selectedTitle1 = kFetchMyDefault(@"employee");
     NSString *selectedTitle2 = kFetchMyDefault(@"financing");
@@ -160,27 +163,37 @@
 
 #pragma mark - Data
 -(void)getLabsData{
+    [self showProgressHUD_view:self.view];
     [[JMHTTPManager sharedInstance]getLabels_Id:@"992" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             _industryDataArray = [JMLabsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            
         }
         for (JMLabsData *data in _industryDataArray) {
             [self.industryLabsArray addObject:data.name];
         }
-        
+        [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-    
-    
 }
+
 -(void)rightAction{
     if (_imageUrl == nil) {
         [self showAlertSimpleTips:@"提示" message:@"请上传公司logo" btnTitle:@"好的"];
         return;
     }
-    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:kFetchMyDefault(@"company_name") company_position:kFetchMyDefault(@"company_position") nickname:nil avatar:nil enterprise_step:@"3" abbreviation:self.abbreviationTextField.text logo_path:self.imageUrl video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:@"1" financing:nil employee:self.employeeBtn.titleLabel.text      city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    if (self.abbreviationTextField.text.length > 10) {
+        [self showAlertSimpleTips:@"提示" message:@"公司简称不能超过10个字" btnTitle:@"好的"];
+              return;
+    }
+    NSString *company_name = kFetchMyDefault(@"company_name");
+    NSString *company_position = kFetchMyDefault(@"company_position");
+    if (company_name == nil ) {
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        company_name = userModel.company_real_company_name;
+        company_position = userModel.company_position;
+    }
+    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:company_name company_position:company_position nickname:nil avatar:nil enterprise_step:@"3" abbreviation:self.abbreviationTextField.text logo_path:self.imageUrl video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:@"1" financing:nil employee:self.employeeBtn.titleLabel.text      city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];

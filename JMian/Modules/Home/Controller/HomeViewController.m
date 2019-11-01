@@ -26,8 +26,9 @@
 #import "JMHTTPManager+FectchSpecialInfo.h"
 #import "JMSpecialModel.h"
 #import "JMSpecialViewController.h"
+#import "SDCycleScrollView.h"
 
-@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate,JMCityListViewControllerDelegate,JMLabChooseBottomViewDelegate>
+@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate,JMCityListViewControllerDelegate,JMLabChooseBottomViewDelegate,SDCycleScrollViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIButton *allOfPositionBtn; //所有职位
@@ -58,6 +59,11 @@
 //@property (nonatomic, copy)NSString *job_lab_id;
 @property (weak, nonatomic) IBOutlet UIImageView *schoolImgView;
 @property(nonatomic,strong)JMSpecialModel *specialModel;
+
+@property(nonatomic,strong)SDCycleScrollView *SDCScrollView;
+
+@property(nonatomic,strong)NSMutableArray *specialModelArray;
+
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintHeight;
 
 @end
@@ -77,8 +83,8 @@ static NSString *cellIdent = @"cellIdent";
     self.page = 1;
     [self setTableView];
     [self initView];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(schoolAction)];
-    [self.schoolImgView addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(schoolAction)];
+//    [self.schoolImgView addGestureRecognizer:tap];
     self.schoolImgView.userInteractionEnabled = YES;
     [self getSpecialInfo];
 
@@ -149,8 +155,56 @@ static NSString *cellIdent = @"cellIdent";
         make.height.mas_equalTo(37);
         make.left.right.mas_equalTo(self.view);
     }];
+   
     
 }
+
+-(void)setSDCScrollView{
+      NSMutableArray *imagesURLStrings = [NSMutableArray array];
+        for (JMSpecialModel *model in self.specialModelArray) {
+            
+            [imagesURLStrings addObject:model.cover_path];
+            
+        }
+//        
+//        NSArray *imagesURLStrings = @[
+//                                      @"https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a4b3d7085dee3d6d2293d48b252b5910/0e2442a7d933c89524cd5cd4d51373f0830200ea.jpg",
+//                                      @"https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/super/whfpf%3D425%2C260%2C50/sign=a41eb338dd33c895a62bcb3bb72e47c2/5fdf8db1cb134954a2192ccb524e9258d1094a1e.jpg",
+//                                      @"http://c.hiphotos.baidu.com/image/w%3D400/sign=c2318ff84334970a4773112fa5c8d1c0/b7fd5266d0160924c1fae5ccd60735fae7cd340d.jpg"
+//                                      ];
+
+        
+
+        // 网络加载 --- 创建带标题的图片轮播器
+        SDCycleScrollView *cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.schoolImgView.frame.size.height) delegate:self placeholderImage:[UIImage imageNamed:@"break"]];
+        
+        cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
+        cycleScrollView2.currentPageDotColor = [UIColor whiteColor]; // 自定义分页控件小圆标颜色
+        [self.schoolImgView addSubview:cycleScrollView2];
+      
+      
+        
+        //         --- 模拟加载延迟
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            cycleScrollView2.imageURLStringsGroup = imagesURLStrings;
+//        });
+        
+        
+        cycleScrollView2.clickItemOperationBlock = ^(NSInteger index) {
+            NSLog(@">>>>>  %ld", (long)index);
+            JMSpecialViewController *vc = [[JMSpecialViewController alloc]init];
+            JMSpecialModel *model = self.specialModelArray[index];
+            vc.title = model.title;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        };
+        
+    
+
+}
+
+
+
 
 #pragma mark - 菊花
 
@@ -208,7 +262,6 @@ static NSString *cellIdent = @"cellIdent";
                 [self.tableView.mj_footer setHidden:YES];
             }else{
                 [self.tableView.mj_footer setHidden:NO];
-
             }
         }
         [self.tableView reloadData];
@@ -223,33 +276,71 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 -(void)getSpecialInfo{
-    [[JMHTTPManager sharedInstance]getSpecialInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]getSpecialInfoWithMode:@"list" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            self.specialModel =  [JMSpecialModel mj_objectWithKeyValues:responsObject[@"data"]];
+            NSArray *arrayData =  [JMSpecialModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
-            NSDate *currentDate = [NSDate date]; // 获取当前时间，日期
-            NSString *s_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",self.specialModel.s_date];
-            NSString *e_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",self.specialModel.e_date];
-            NSDate *s_Date= [self dateFromString:s_timeStr];
-            NSDate *e_Date= [self dateFromString:e_timeStr];
-            
-            int s_result = [self compareOneDay:currentDate withAnotherDay:s_Date];
-            int e_result = [self compareOneDay:currentDate withAnotherDay:e_Date];
-            //s_Date < current < e_Date
-            if (s_result == 1 && e_result == -1) {
-                [self.schoolImgView sd_setImageWithURL:[NSURL URLWithString:self.specialModel.cover_path] placeholderImage:[UIImage imageNamed:@"break"]];
+            for (JMSpecialModel *model in arrayData) {
+                NSDate *currentDate = [NSDate date]; // 获取当前时间，日期
+                NSString *s_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",model.s_date];
+                NSString *e_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",model.e_date];
+                NSDate *s_Date= [self dateFromString:s_timeStr];
+                NSDate *e_Date= [self dateFromString:e_timeStr];
+                
+                int s_result = [self compareOneDay:currentDate withAnotherDay:s_Date];
+                int e_result = [self compareOneDay:currentDate withAnotherDay:e_Date];
+                //s_Date < current < e_Date 在活动时间内
+                if (s_result == 1 && e_result == -1) {
+                    [self.specialModelArray addObject:model];
+                    //                    [self.schoolImgView sd_setImageWithURL:[NSURL URLWithString:self.specialModel.cover_path] placeholderImage:[UIImage imageNamed:@"break"]];
+                }else if((s_result == 0 || e_result == 0)){
+                    [self.specialModelArray addObject:model];
+                    
+                }
+               
+            }
+            if (self.specialModelArray.count > 0) {
                 self.constraintHeight.constant = 142;
+                [self setSDCScrollView];
+                 
             }else{
                 self.constraintHeight.constant = 0;
+            
             }
             
-
         }
-        
-        
+              
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+    
+//    [[JMHTTPManager sharedInstance]getSpecialInfoWithModel:@"model"  SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        if (responsObject[@"data"]) {
+//            self.specialModel =  [JMSpecialModel mj_objectWithKeyValues:responsObject[@"data"]];
+//
+//            NSDate *currentDate = [NSDate date]; // 获取当前时间，日期
+//            NSString *s_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",self.specialModel.s_date];
+//            NSString *e_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",self.specialModel.e_date];
+//            NSDate *s_Date= [self dateFromString:s_timeStr];
+//            NSDate *e_Date= [self dateFromString:e_timeStr];
+//
+//            int s_result = [self compareOneDay:currentDate withAnotherDay:s_Date];
+//            int e_result = [self compareOneDay:currentDate withAnotherDay:e_Date];
+//            //s_Date < current < e_Date
+//            if (s_result == 1 && e_result == -1) {
+//                [self.schoolImgView sd_setImageWithURL:[NSURL URLWithString:self.specialModel.cover_path] placeholderImage:[UIImage imageNamed:@"break"]];
+//                self.constraintHeight.constant = 142;
+//            }else{
+//                self.constraintHeight.constant = 0;
+//            }
+//
+//
+//        }
+//
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
 
 }
 
@@ -318,13 +409,13 @@ static NSString *cellIdent = @"cellIdent";
     [self.labschooseVC.view setHidden:YES];
 }
 
--(void)schoolAction{
-    NSLog(@"asdf");
-    JMSpecialViewController *vc = [[JMSpecialViewController alloc]init];
-    vc.title = self.specialModel.title;
-    [self.navigationController pushViewController:vc animated:YES];
-
-}
+//-(void)schoolAction{
+//    NSLog(@"asdf");
+//    JMSpecialViewController *vc = [[JMSpecialViewController alloc]init];
+//    vc.title = self.specialModel.title;
+//    [self.navigationController pushViewController:vc animated:YES];
+//
+//}
 //-(void)getPlayerArray
 //{
 //    dispatch_async(dispatch_get_global_queue(0, 0), ^{
@@ -638,11 +729,19 @@ static NSString *cellIdent = @"cellIdent";
     }
     return _bgBtn;
 }
+
 -(NSMutableArray *)arrDate{
     if (!_arrDate) {
         _arrDate = [NSMutableArray array];
     }
     return _arrDate;
+}
+
+-(NSMutableArray *)specialModelArray{
+    if (!_specialModelArray) {
+        _specialModelArray = [NSMutableArray array];
+    }
+    return _specialModelArray;
 }
 
 /*

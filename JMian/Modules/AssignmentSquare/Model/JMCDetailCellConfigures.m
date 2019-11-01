@@ -132,12 +132,12 @@
 -(CGFloat)getHeightFromDecri{
     if ([self.model.payment_method isEqualToString:@"3"]) {
         //普通任务
-        CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.myDescription andFont:[UIFont systemFontOfSize:14] andLinespace:10];
+        CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.myDescription andFont:[UIFont systemFontOfSize:14] andLinespace:8];
         NSLog(@"FFFFF:%f",H);
         return H + 100;
     }else if ([self.model.payment_method isEqualToString:@"1"]) {
         //销售任务
-        CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.goods_description andFont:[UIFont systemFontOfSize:14] andLinespace:10];
+        CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.goods_description andFont:[UIFont systemFontOfSize:14] andLinespace:8];
         NSLog(@"FFFFF:%f",H);
         return H + 280;
     }else{

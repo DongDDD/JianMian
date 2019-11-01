@@ -34,9 +34,7 @@
 - (void)updateVita {
     [self.decriptionTextView.contentTextView resignFirstResponder];
     [[JMHTTPManager sharedInstance] updateVitaWith_work_status:nil education:nil work_start_date:nil description:self.decriptionTextView.contentTextView.text video_path:nil video_cover:nil  image_paths:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-       
         [self.navigationController popViewControllerAnimated:YES];
-        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -48,7 +46,6 @@
         [self updateVita];
     }else{
         [self showAlertSimpleTips:@"提示" message:@"描述太短啦" btnTitle:@"好的"];
-        
     }
 }
 
@@ -81,10 +78,8 @@
         NSArray *labs = @[@"超强管理能力",@"协调沟通能力强",@"责任心强",@"团队意识强",@"动手能力强",@"工作经验丰富",@"有相关技能证书",@"我英语贼6"];
         [_labsScreenView createLabUI_title:@"" labsArray:labs];
         _labsScreenView.delegate = self;
-
     }
     return  _labsScreenView;
-    
 }
 
 - (void)didChooseLabsTitle_str:(nonnull NSString *)str index:(NSInteger)index {
@@ -108,7 +103,7 @@
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
 //        _decriptionTextView.contentTextView.delegate = self;
         _decriptionTextView.frame = CGRectMake(0, 10, SCREEN_WIDTH, 229);
-        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
+//        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
         [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeMyAdvantage];
         //        _decriptionTextView.contentTextView.delegate = self;
         

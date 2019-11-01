@@ -85,6 +85,7 @@
     }];
     
 }
+
 - (IBAction)loginPhoneBtn:(id)sender {
 //    [self.view addSubview:self.progressHUD];
     [[JMHTTPManager sharedInstance]loginWithMode:@"sms" phone:self.phoneNumText.text captcha:self.captchaText.text sign_id:self.sign_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

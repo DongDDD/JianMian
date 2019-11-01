@@ -319,13 +319,13 @@
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+//    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
         [self createChatRequstWithForeign_key:self.task_id user_id:_user_id];
         
-    }else{
-        [self showAlertWithTitle:@"提示" message:@"实名认证后才能聊天" leftTitle:@"返回" rightTitle:@"去实名认证"];
-    }
+//    }else{
+//        [self showAlertWithTitle:@"提示" message:@"实名认证后才能聊天" leftTitle:@"返回" rightTitle:@"去实名认证"];
+//    }
     
 }
 
@@ -403,9 +403,9 @@
 
 //申请职位
 -(void)sendResquest{
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     
-    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
+//    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
         [[JMHTTPManager sharedInstance]createTaskOrder_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             //            [self showAlertSimpleTips:@"提示" message:@"申请成功" btnTitle:@"好的"];
             
@@ -418,10 +418,10 @@
             
         }];
         
-    }else{
-        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请任务" leftTitle:@"返回" rightTitle:@"去实名认证"];
-        
-    }
+//    }else{
+//        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请任务" leftTitle:@"返回" rightTitle:@"去实名认证"];
+//
+//    }
 }
 //申请任务后的创建聊天，用来发送自定义消息
 -(void)createChatToSendCustumMessageRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{

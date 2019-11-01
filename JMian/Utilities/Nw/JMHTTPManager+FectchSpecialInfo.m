@@ -10,9 +10,11 @@
 
 @implementation JMHTTPManager (FectchSpecialInfo)
 
-- (void)getSpecialInfoWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
-    
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Special_Activity_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+- (void)getSpecialInfoWithMode:(nullable NSString *)mode
+                          SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSDictionary *dic =  @{@"mode":mode};
+
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Special_Activity_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
 

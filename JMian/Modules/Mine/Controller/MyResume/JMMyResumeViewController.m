@@ -56,7 +56,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"我的简历";
     [self.view addSubview:self.progressHUD];
 //    [self.view addSubview:self.BGView];
@@ -68,6 +67,7 @@
     [super viewWillAppear:animated];
     [self sendRequest];
 }
+
 
 - (void)initView {
     [self.view addSubview:self.BGView];

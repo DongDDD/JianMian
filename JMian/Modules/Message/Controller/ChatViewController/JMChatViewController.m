@@ -55,7 +55,13 @@
             }else{
                 position = _myConvModel.sender_company_position;
             }
-            subTitle = [NSString stringWithFormat:@"|%@|%@",_myConvModel.work_task_title,position];
+            if (_myConvModel.work_task_title.length > 0) {
+                subTitle = [NSString stringWithFormat:@"|%@|%@",_myConvModel.work_task_title,position];
+
+            }else{
+                subTitle = [NSString stringWithFormat:@"|%@",position];
+                
+            }
         }else if ([_myConvModel.type isEqualToString:@"1"]) {
             //全职类型
             subTitle = [NSString stringWithFormat:@"|%@",_myConvModel.work_work_name];

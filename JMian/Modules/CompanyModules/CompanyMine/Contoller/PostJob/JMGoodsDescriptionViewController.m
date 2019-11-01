@@ -106,7 +106,7 @@
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
         _decriptionTextView.frame = CGRectMake(0, self.headerDescView.frame.origin.y+self.headerDescView.frame.size.height-50, SCREEN_WIDTH, 229);
         _decriptionTextView.delegate = self;
-        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
+//        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
         [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeGoodsDesc];
         //        _decriptionTextView.contentTextView.delegate = self;
         

@@ -193,8 +193,7 @@
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         //后期优化这个页面直接用messageListModel赋值,
         [self setMessageListModel:messageListModel];
-        
-        
+                
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -321,8 +320,7 @@
     // 转换为 NSData
     if (dic) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-        [custom_elem setData:data];
-        
+        [custom_elem setData:data];        
     }
     //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
     

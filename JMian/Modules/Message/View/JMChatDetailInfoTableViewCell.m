@@ -97,9 +97,18 @@
             for (JMChatInfoIndustry *industryModel in _myModel.job_industry) {
                 [array addObject:industryModel.name];
             }
-            self.lab1.text = array[0];
-            self.lab2.text = array[1];
-            self.lab3.text = array[2];
+            if (array.count == 1) {
+                self.lab1.text = array[0];
+            }else if (array.count == 2) {
+                self.lab1.text = array[0];
+                self.lab2.text = array[1];
+                
+            }else if (array.count == 3) {
+                self.lab1.text = array[0];
+                self.lab2.text = array[1];
+                self.lab3.text = array[2];
+            }
+
         
         }
         

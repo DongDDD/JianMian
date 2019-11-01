@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMHTTPManager (FectchSpecialInfo)
 
-- (void)getSpecialInfoWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+- (void)getSpecialInfoWithMode:(nullable NSString *)mode
+                  SuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -557,18 +557,35 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         
         //兼职对话类型
         if ([self.myConvModel.type isEqualToString:@"2"]) {
-            if (!self.myConvModel.job_ability_id) {
-                //兼职简历为空
-                [cell setHidden:YES];
+//            if (!self.myConvModel.job_ability_id) {
+//                //兼职简历为空
+//            }else{
+//                [cell setHidden:NO];
+//                [cell setMyConModel:self.myConvModel];
+//            }
+            
+            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+            if ([userModel.type isEqualToString:B_Type_UESR]) {
+                //兼职对话，兼职简历为空
+                if (!self.myConvModel.job_ability_id) {
+                    [cell setHidden:YES];
+                }else{
+                    [cell setHidden:NO];
+                    [cell setMyConModel:self.myConvModel];
+                }
             }else{
-                [cell setHidden:NO];
-                [cell setMyConModel:self.myConvModel];
-                
+                //兼职对话，招聘信息为空
+                if (!self.myConvModel.work_task_id) {
+                    [cell setHidden:YES];
+                }else{
+                    [cell setHidden:NO];
+                    [cell setMyConModel:self.myConvModel];
+                }
             }
             
+            
+            
         }else if([self.myConvModel.type isEqualToString:@"1"]){
-            
-            
             [cell setMyConModel:self.myConvModel];
         }
         

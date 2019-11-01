@@ -29,7 +29,7 @@ NSString *const JMCDetailProduceTableViewCellIdentifier = @"JMCDetailProduceTabl
     [self.textView setText:data.goods_description];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     
-    paragraphStyle.lineSpacing = 10;// 字体的行间距
+    paragraphStyle.lineSpacing = 6;// 字体的行间距
     
     NSDictionary *attributes = @{
                                  NSFontAttributeName:[UIFont systemFontOfSize:14],

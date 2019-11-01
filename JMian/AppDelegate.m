@@ -102,7 +102,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUserStatus:) name:TUIKitNotification_TIMUserStatusListener object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
 //    [iVersion sharedInstance].applicationBundleID = [[NSBundle mainBundle] bundleIdentifier];
-//   [iVersion sharedInstance].updatePriority=iVersionUpdatePriorityMedium;
+//    [iVersion sharedInstance].updatePriority=iVersionUpdatePriorityMedium;
 //    [iVersion sharedInstance].delegate = self;
 //    [iVersion sharedInstance].showOnFirstLaunch = NO;
 //    [iVersion sharedInstance].groupNotesByVersion = NO;
@@ -123,9 +123,14 @@
     //    [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition]; //输入框自动上移
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;//不显示工具条
-    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemImage = [UIImage imageNamed:@"icon_return "];
+    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;//显示工具条
+//    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemImage = [UIImage imageNamed:@"icon_return "];
+    [IQKeyboardManager sharedManager].toolbarTintColor = MASTER_COLOR;;
+    [IQKeyboardManager sharedManager].toolbarNextBarButtonItemImage = [UIImage imageNamed:@"down"];
+    [IQKeyboardManager sharedManager].toolbarPreviousBarButtonItemImage = [UIImage imageNamed:@"up"];
 
+    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemText = @"完成";
+    
     [IQKeyboardManager sharedManager].keyboardDistanceFromTextField = 10.0f;
     [self registNotification];
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
@@ -769,12 +774,9 @@
             }else{
                 [_window addSubview:self.feedBackChooseVC.view];
                 str = @"面试结束了，请进行面试反馈吧！";
-                
-
             }
         }else if ([status isEqualToString:@"4"] && [userModel.type isEqualToString:B_Type_UESR]){
             if(isPT){
-           
                 str = @"视频结束了！";
             }else{
 

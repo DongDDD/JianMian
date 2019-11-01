@@ -58,7 +58,7 @@
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
 /*****这里思路是假设一种情况先，我登录了B端账号，判断自己是不是sender就行，是的话我要去n哪边的值才是合理的，！！否则相反！！ ！否则相反,没可能我是B端我把B端的东西赋值上去吧*****/
     if([model.type isEqualToString:B_Type_UESR]){
-        //B端情况下,你显示的永远只是work_name，我是企业看到的肯定是工作职位
+        //B端情况下,你显示只是work_name，我是企业看到的肯定是工作职位
         if ([data.type isEqualToString:@"2"]) {
             //兼职类型
             if (data.job_type_label_name) {
@@ -73,7 +73,6 @@
             }
         }
     }else if ([model.type isEqualToString:C_Type_USER]) {
-        //否则相反:我登录了C端账号，判断自己是不是sender就行（最简单的思路，就是跟上面显示的相反就行）
         if ([data.type isEqualToString:@"2"]) {
             //兼职类型
             NSString *position;
@@ -83,7 +82,7 @@
                 position = data.sender_company_position;
             }
             
-             self.userLabel.text = [NSString stringWithFormat:@"%@-%@",data.work_task_title,position];
+             self.userLabel.text = [NSString stringWithFormat:@"%@",position];
         }else if ([data.type isEqualToString:@"1"]) {
             //全职类型
             self.userLabel.text = [NSString stringWithFormat:@"%@-%@",data.workInfo_company_name,data.work_work_name];
