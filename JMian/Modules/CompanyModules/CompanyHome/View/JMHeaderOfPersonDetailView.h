@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)playAction;
 
+-(void)clicHeaderActionWithImageView:(UIImageView *)imageView;
 @end
 
 @interface JMHeaderOfPersonDetailView : UIView

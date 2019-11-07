@@ -12,7 +12,6 @@
 #import "JMHTTPManager+FetchCompanyInfo.h"
 #import "WXApi.h"
 
-
 @implementation JMVideoPlayManager
 
 + (instancetype)sharedInstance {

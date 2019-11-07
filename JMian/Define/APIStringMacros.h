@@ -172,7 +172,8 @@
 #define Delete_BankCard_URL @"api/bank/card/delete"
 //获取会员协议
 #define Fectch_Protocal_URL @"member/contract"
-
+//获取城市ID
+#define Get_CityID_URL @"city/location"
 
 //接口
 #define Get_Labels_URL @"/labels"

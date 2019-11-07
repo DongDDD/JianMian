@@ -15,7 +15,7 @@
 #import "JMGetCompanyLocationViewController.h"
 #import "STPickerSingle.h"
 #import "JMHTTPManager+Work.h"
-
+#import "JMHTTPManager+GetCityID.h"
 
 
 @interface JMPostNewJobViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,JMWelfareDelegate,PositionDesiredDelegate,JMJobDescriptionDelegate,JMGetCompanyLocationViewControllerDelegate,UITextFieldDelegate,STPickerSingleDelegate>
@@ -44,6 +44,7 @@
 
 
 //参数
+@property (nonatomic,copy)NSString *city_id;
 @property (nonatomic,copy)NSString *work_label_id;
 @property (nonatomic,copy)NSString *educationNum;
 @property (nonatomic,copy)NSString *salaryMin;
@@ -112,7 +113,12 @@
 #pragma mark - 数据提交
 -(void)rightAction{
     [self.workNameTextField resignFirstResponder];
-
+    if (_workNameTextField.text.length > 20) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"职位名称不能超过20个字"
+                                                             delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+        return;
+    }
     if (_viewType == JMPostNewJobViewTypeEdit) {
         [self updateJob];
     }else if (_viewType == JMPostNewJobViewTypeDefault || _viewType ==JMPostNewJobViewTypeHistory){
@@ -123,7 +129,7 @@
 }
 
 -(void)createJob{
-    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:@"3" work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionStr address:self.workLocationBtn.titleLabel.text longitude:_longitude latitude:_latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]postCreateWorkWith_city_id:self.city_id work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionStr address:self.workLocationBtn.titleLabel.text longitude:_longitude latitude:_latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -184,6 +190,18 @@
         
     }];
     
+}
+
+-(void)getCityIdRequstWithCityName:(NSString *)cityName{
+    [[JMHTTPManager sharedInstance]getCityIdWithcity_name:cityName successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        self.city_id = responsObject[@"data"][@"city_id"];
+//        NSString *city_id =
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
 }
 #pragma mark - 点击事件
 
@@ -315,7 +333,7 @@
     [self.workLocationBtn setTitle:adr forState:UIControlStateNormal];
     _longitude = [NSString stringWithFormat:@"%f",data.location.longitude];
     _latitude = [NSString stringWithFormat:@"%f",data.location.latitude];
-
+    [self getCityIdRequstWithCityName:data.city];
 }
 
 

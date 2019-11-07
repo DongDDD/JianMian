@@ -39,7 +39,7 @@
 #import "iVersion.h"
 
 
-@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener>
+@interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener,iVersionDelegate>
 
 @end
 
@@ -103,16 +103,14 @@
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
 //    [iVersion sharedInstance].applicationBundleID = [[NSBundle mainBundle] bundleIdentifier];
 //    [iVersion sharedInstance].updatePriority=iVersionUpdatePriorityMedium;
-//    [iVersion sharedInstance].delegate = self;
-//    [iVersion sharedInstance].showOnFirstLaunch = NO;
-//    [iVersion sharedInstance].groupNotesByVersion = NO;
-//    [iVersion sharedInstance].useUIAlertControllerIfAvailable = NO;
-//    [iVersion sharedInstance].useAllAvailableLanguages = NO;
-//    [iVersion sharedInstance].onlyPromptIfMainWindowIsAvailable = NO;
-//    [iVersion sharedInstance].useAppStoreDetailsIfNoPlistEntryFound = NO;
-//    [iVersion sharedInstance].checkAtLaunch = NO;
-//    [iVersion sharedInstance].verboseLogging = NO;
-//    [iVersion sharedInstance].previewMode = NO;
+//      [iVersion sharedInstance].delegate = self;
+    [iVersion sharedInstance].downloadButtonLabel = @"更新版本";
+    [iVersion sharedInstance].remindButtonLabel = @"晚点提醒我";
+    [iVersion sharedInstance].ignoreButtonLabel = @"忽略";
+    [iVersion sharedInstance].updateAvailableTitle = @"更新内容";
+    [iVersion sharedInstance].showOnFirstLaunch = NO;
+
+  
 
    
     //MP3播放器
@@ -123,11 +121,11 @@
     //    [[IQKeyboardManager sharedManager] setToolbarManageBehaviour:IQAutoToolbarByPosition]; //输入框自动上移
     [IQKeyboardManager sharedManager].enable = YES;
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
-    [IQKeyboardManager sharedManager].enableAutoToolbar = YES;//显示工具条
+    [IQKeyboardManager sharedManager].enableAutoToolbar = NO;//显示工具条
 //    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemImage = [UIImage imageNamed:@"icon_return "];
     [IQKeyboardManager sharedManager].toolbarTintColor = MASTER_COLOR;;
-    [IQKeyboardManager sharedManager].toolbarNextBarButtonItemImage = [UIImage imageNamed:@"down"];
-    [IQKeyboardManager sharedManager].toolbarPreviousBarButtonItemImage = [UIImage imageNamed:@"up"];
+//    [IQKeyboardManager sharedManager].toolbarNextBarButtonItemImage = [UIImage imageNamed:@"down"];
+//    [IQKeyboardManager sharedManager].toolbarPreviousBarButtonItemImage = [UIImage imageNamed:@"up"];
 
     [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemText = @"完成";
     
@@ -247,27 +245,28 @@
     //记录下 Apple 返回的 deviceToken
 //    _deviceToken = deviceToken;
     NSLog(@"deviceTokendeviceToken---%@",deviceToken);
-    __weak typeof(self) ws = self;
-    TIMTokenParam *param = [[TIMTokenParam alloc] init];
-    /* 用户自己到苹果注册开发者证书，在开发者帐号中下载并生成证书(p12 文件)，将生成的 p12 文件传到腾讯证书管理控制台，控制台会自动生成一个证书 ID，将证书 ID 传入一下 busiId 参数中。*/
-#if kAppStoreVersion
-    // App Store 版本
-#if DEBUG
-    param.busiId = 13888;
-#else
-    param.busiId = 13888;
-#endif
-#else
-    //企业证书 ID
-    param.busiId = 13888;
-#endif
-    [param setToken:deviceToken];
-    //            [UIApplication sharedApplication]
-    [[TIMManager sharedInstance] setToken:param succ:^{
-        NSLog(@"-----> 上传 deviceToken 成功 ");
-    } fail:^(int code, NSString *msg) {
-        NSLog(@"-----> 上传 deviceToken 失败 ");
-    }];
+    kSaveMyDefault(@"deviceToken", deviceToken);
+//    __weak typeof(self) ws = self;
+//    TIMTokenParam *param = [[TIMTokenParam alloc] init];
+//    /* 用户自己到苹果注册开发者证书，在开发者帐号中下载并生成证书(p12 文件)，将生成的 p12 文件传到腾讯证书管理控制台，控制台会自动生成一个证书 ID，将证书 ID 传入一下 busiId 参数中。*/
+//#if kAppStoreVersion
+//    // App Store 版本
+//#if DEBUG
+//    param.busiId = 13888;
+//#else
+//    param.busiId = 13888;
+//#endif
+//#else
+//    //企业证书 ID
+//    param.busiId = 13888;
+//#endif
+//    [param setToken:deviceToken];
+//    //            [UIApplication sharedApplication]
+//    [[TIMManager sharedInstance] setToken:param succ:^{
+//        NSLog(@"-----> 上传 deviceToken 成功 ");
+//    } fail:^(int code, NSString *msg) {
+//        NSLog(@"-----> 上传 deviceToken 失败 ");
+//    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -779,7 +778,6 @@
             if(isPT){
                 str = @"视频结束了！";
             }else{
-
                 str = @"面试结束了，可以去面试管理录用人才";
             }
 

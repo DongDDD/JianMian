@@ -56,7 +56,7 @@ DEPENDENCIES:
   - HXWeiboPhotoPicker (~> 2.1.5)
   - IQKeyboardManager (= 6.4.0)
   - ISVImageScrollView
-  - iVersion
+  - iVersion (~> 1.11.5)
   - Masonry (~> 1.1.0)
   - MBProgressHUD (~> 1.1.0)
   - MJExtension
@@ -131,6 +131,6 @@ SPEC CHECKSUMS:
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
   YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 097dd8ca48f87d11f0c8102883ed29a4ecae4f23
+PODFILE CHECKSUM: 71caf09617c9996701e383e770833d15500b3be2
 
 COCOAPODS: 1.6.1

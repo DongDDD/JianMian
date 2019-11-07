@@ -29,12 +29,13 @@
 #import "JMHTTPManager+FectchTaskAbility.h"
 #import "JMHTTPManager+UnReadNotice.h"
 #import "JMBDetailViewController.h"
+#import "JMMyShareView.h"
 //#import <PassKit/PassKit.h>                                 //用户绑定的银行卡信息
 //#import <PassKit/PKPaymentAuthorizationViewController.h>    //Apple pay的展示控件
 //#import <AddressBook/AddressBook.h>                         //用户联系信息相关
 
 
-@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate>
+@interface JMTaskManageViewController ()<UITableViewDelegate,UITableViewDataSource,JMTaskManageTableViewCellDelegate,JMTaskCommetViewControllerDelegate,JMShareViewDelegate,JMPayDetailViewControllerDelegate,JMMyShareViewDelegate>
 {
     NSMutableArray *summaryItems;
     NSMutableArray *shippingMethods;
@@ -45,6 +46,7 @@
 @property (strong, nonatomic) NSMutableArray *listsArray;
 @property (strong, nonatomic) JMShareView *choosePayView;
 @property (strong, nonatomic) JMShareView *shareView;
+@property (strong, nonatomic) JMMyShareView *myShareView;
 
 
 @property (strong, nonatomic) JMOrderPaymentModel *orderPaymentModel;
@@ -106,8 +108,9 @@
 -(void)initView{
     [self.view addSubview:self.titleView];
     [self.view addSubview:self.tableView];
-    [self.view addSubview:self.choosePayView];
     [self.view addSubview:self.BGPayView];
+    [self.view addSubview:self.choosePayView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.myShareView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.mas_topLayoutGuideTop).mas_offset(44);
         make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
@@ -118,6 +121,13 @@
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.mas_topLayoutGuide);
     }];
+    [self.myShareView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo([UIApplication sharedApplication].keyWindow);
+        make.left.and.right.mas_equalTo([UIApplication sharedApplication].keyWindow);
+        make.top.mas_equalTo([UIApplication sharedApplication].keyWindow);
+    }];
+    [self.myShareView setHidden:YES];
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenChoosePayView)];
     [self.BGPayView addGestureRecognizer:tap];
     [self setupHeaderRefresh];
@@ -284,7 +294,9 @@
                 return;
             }else{
                 NSLog(@"分享");
-                [self getGoodsUrlToShareDataWithTask_order_id:data.task_order_id];
+                [self.myShareView setHidden:NO];
+                self.task_order_id = data.task_order_id;
+//                [self getGoodsUrlToShareDataWithTask_order_id:data.task_order_id];
 
             }
         }else if ([data.status isEqualToString:Task_DidComfirm] && [data.is_comment_user isEqualToString:@"0"]){
@@ -319,13 +331,28 @@
    
 }
 
+
+-(void)showShareView{
+    [self.shareView setHidden:NO];
+    [self.BGPayView setHidden:NO];
+    
+    [UIView animateWithDuration:0.18 animations:^{
+        self.shareView.frame =CGRectMake(0, self.view.frame.size.height-205, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
+    }];
+   
+}
+
+
+
 -(void)hiddenChoosePayView{
     [self.choosePayView setHidden:YES];
     [self.BGPayView setHidden:YES];
     [UIView animateWithDuration:0.18 animations:^{
         self.choosePayView.frame =CGRectMake(0,SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
     }];
-    
+    [UIView animateWithDuration:0.18 animations:^{
+        self.shareView.frame =CGRectMake(0,SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight);
+    }];
 }
 
 //取消
@@ -358,6 +385,25 @@
     }
 }
 
+
+-(void)myShareWechat1{
+    [self.myShareView setHidden:YES];
+    //分享朋友列表
+    [self getGoodsUrlToShareDataWithTask_order_id:self.task_order_id wxShare:0];
+}
+
+-(void)myShareWechat2{
+    [self.myShareView setHidden:YES];
+    //分享朋友圈
+    [self getGoodsUrlToShareDataWithTask_order_id:self.task_order_id wxShare:1];
+
+}
+
+-(void)myShareDeleteAction{
+    [self.myShareView setHidden:YES];
+
+
+}
 //和他聊聊
 -(void)iconAlertRightAction{
     [self createChatJudge];
@@ -370,6 +416,9 @@
 -(void)didComment{
     [self.tableView.mj_header beginRefreshing];
 }
+
+
+
 
 #pragma mark - PKPaymentAuthorizationViewControllerDelegate
 
@@ -487,13 +536,14 @@
 
 }
 
--(void)getGoodsUrlToShareDataWithTask_order_id:(NSString *)task_order_id{
+-(void)getGoodsUrlToShareDataWithTask_order_id:(NSString *)task_order_id wxShare:(int)wxShare{
     [[JMHTTPManager sharedInstance]fectchTaskOrderInfo_taskID:task_order_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             JMTaskOrderListCellData *taskInfoData = [JMTaskOrderListCellData mj_objectWithKeyValues:responsObject[@"data"]];
+            
             if([WXApi isWXAppInstalled])
             {
-                [self wxShare:0 data1:taskInfoData];
+                [self wxShare:wxShare data1:taskInfoData];
             }
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -1079,6 +1129,16 @@
         _shareView.lab2.text = @"朋友圈";
     }
     return _shareView;
+}
+
+-(JMMyShareView *)myShareView{
+    if (!_myShareView) {
+           _myShareView = [[JMMyShareView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+           _myShareView.delegate = self;
+
+       }
+       return _myShareView;
+
 }
 
 -(UIView *)BGPayView{

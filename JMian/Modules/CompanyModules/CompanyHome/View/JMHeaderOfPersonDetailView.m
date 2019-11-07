@@ -8,9 +8,11 @@
 
 #import "JMHeaderOfPersonDetailView.h"
 #import "DimensMacros.h"
+@interface JMHeaderOfPersonDetailView ()
+@property(nonatomic,copy)NSString *url;
 
+@end
 @implementation JMHeaderOfPersonDetailView
-
 
 - (instancetype)initWithFrame:(CGRect)frame {
     
@@ -19,8 +21,10 @@
     if (self) {
         self.frame = frame;
     }
+
     return self;
 }
+
 
 -(void)setModel:(JMVitaDetailModel *)model{
     [self.headerImageView sd_setImageWithURL:[NSURL URLWithString:model.user_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
@@ -63,12 +67,25 @@
         
     }
 
-
 }
 
 - (IBAction)playAction:(UIButton *)sender {
-    if (_delegate && [_delegate respondsToSelector:@selector(playAction)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(playAction)]){
         [_delegate playAction];
+    }
+    
+}
+
+//-(void)tapHeaderAction{
+//    NSLog(@"asd");
+//    if (_delegate && [_delegate respondsToSelector:@selector(clicHeaderActionWithImageView:)]){
+//        [_delegate clicHeaderActionWithImageView:self.headerImageView];
+//    }
+//}
+- (IBAction)tapImageAction:(id)sender {
+    NSLog(@"asd");
+    if (_delegate && [_delegate respondsToSelector:@selector(clicHeaderActionWithImageView:)]){
+        [_delegate clicHeaderActionWithImageView:self.headerImageView];
     }
     
 }

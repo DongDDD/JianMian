@@ -27,6 +27,7 @@
 @property (nonatomic ,strong)AMapPOIKeywordsSearchRequest *request;
 @property (nonatomic,assign)BOOL isHaveLocation;
 @property (nonatomic ,strong)AMapPOI *POIModel;
+@property (nonatomic ,copy)NSString *city;
 
 @end
 
@@ -234,8 +235,10 @@
     POIModel = self.dataArray[indexPath.row];
     cell.textLabel.text = POIModel.name;
     cell.detailTextLabel.text = POIModel.address;
+    self.city = POIModel.city;
     NSLog(@"cell-----------%@",POIModel.name);
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
     return cell;
     
     

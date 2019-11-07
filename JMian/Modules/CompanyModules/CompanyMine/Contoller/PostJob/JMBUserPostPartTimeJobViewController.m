@@ -300,7 +300,9 @@
     self.POIModel = data;
     NSString *adress = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
     [self.makeOutBillHeaderView.adressBtn setTitle:adress forState:UIControlStateNormal];
-    _adress = adress;
+    if (adress.length > 0) {
+        _adress = adress;
+     }
     _longitude = [NSString stringWithFormat:@"%f",data.location.longitude];
     _latitude = [NSString stringWithFormat:@"%f",data.location.latitude];
 
@@ -719,7 +721,10 @@
     _payment_money = model.payment_money;
     _front_money = model.front_money;
     _quantity_max = model.quantity_max;
-    _adress = model.address;
+    if (model.address.length > 0) {
+        _adress = model.address;
+        
+    }
     _myDecription = model.taskDescription;
     if (model.cityID == nil) {
         _city_id = @"0";
@@ -796,7 +801,6 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-
 }
 
 
@@ -1272,7 +1276,7 @@
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
         _decriptionTextView.frame = CGRectMake(0, 350 , SCREEN_WIDTH, 229);
         _decriptionTextView.viewType = JMPartTimeJobResumeFooterViewTypePartTimeJob;
-//        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
+        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
         _decriptionTextView.delegate = self;
         //        _decriptionTextView.contentTextView.delegate = self;
         

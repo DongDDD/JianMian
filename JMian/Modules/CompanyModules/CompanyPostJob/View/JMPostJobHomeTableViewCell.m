@@ -39,7 +39,6 @@
     
     self.detailLab.text = [NSString stringWithFormat:@"%@ / %@ / %@ %@",experienceStr,educationStr,cityStr,salary];
    
-    
     if ([model.status isEqualToString:@"0"]) {
         self.salaryLab.text = @"已下线";
         [self.salaryLab setHidden:NO];
@@ -48,6 +47,7 @@
     }
 
 }
+
 //兼职简历
 -(void)setPartTimeJobModel:(JMAbilityCellData *)partTimeJobModel{
     [self.myCopyBtn setHidden:YES];

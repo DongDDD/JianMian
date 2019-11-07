@@ -18,9 +18,10 @@
 #import "STPickerSingle.h"
 #import "JMHTTPManager+GetLabels.h"
 #import "JMLabsData.h"
+#import "JMGetCompanyLocationViewController.h"
 
 
-@interface JMCompanyInfoViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,STPickerSingleDelegate,UITextFieldDelegate>
+@interface JMCompanyInfoViewController ()<UIPickerViewDelegate,UIScrollViewDelegate,STPickerSingleDelegate,UITextFieldDelegate,JMGetCompanyLocationViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *headerImg;
 
@@ -32,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *industryBtn;
 @property (weak, nonatomic) IBOutlet UIButton *employeeBtn;
 @property (weak, nonatomic) IBOutlet UIButton *financingBtn;
+@property (weak, nonatomic) IBOutlet UIButton *adressBtn;
 
 @property(nonatomic,strong) NSMutableArray *industryLabsArray;
 @property(nonatomic,strong) NSMutableArray *industryDataArray;
@@ -40,8 +42,9 @@
 //@property(nonatomic,strong) NSArray *pickerArray;
 
 //@property(nonatomic,strong) UIButton *selectedBtn;
-
+@property (nonatomic, strong)AMapPOI *POIModel;
 @property (nonatomic,copy)NSString *imageUrl;
+@property (nonatomic,copy)NSString *companyAdressStr;
 
 @property (nonatomic, assign)CGFloat changeHeight;
 @property(nonatomic,strong)UIButton *moreBtn;
@@ -92,15 +95,15 @@
 }
 
 
--(void)keyboardHide:(UITapGestureRecognizer*)tap{
-    [_abbreviationTextField resignFirstResponder];
-//    self.pickerView.hidden = YES;
-//    [_bgView setHidden:YES];
-
-    //上移n个单位，按实际情况设置
-    CGRect rect=CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
-    self.view.frame=rect;
-}
+//-(void)keyboardHide:(UITapGestureRecognizer*)tap{
+//    [_abbreviationTextField resignFirstResponder];
+////    self.pickerView.hidden = YES;
+////    [_bgView setHidden:YES];
+//
+//    //上移n个单位，按实际情况设置
+//    CGRect rect=CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT);
+//    self.view.frame=rect;
+//}
 #pragma mark - 赋值
 -(void)setComInfoValues{
     
@@ -108,7 +111,9 @@
     NSString *selectedTitle1 = kFetchMyDefault(@"employee");
     NSString *selectedTitle2 = kFetchMyDefault(@"financing");
     NSString *selectedTitle3 = kFetchMyDefault(@"industry");
- 
+    NSString *selectedTitle4 = kFetchMyDefault(@"companyAdress");
+    self.companyAdressStr = selectedTitle4;
+    
     [self.abbreviationTextField setText:abbreviation];
     [self.employeeBtn setTitle:selectedTitle1 forState:UIControlStateNormal];
     [self.employeeBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
@@ -116,7 +121,9 @@
     [self.financingBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     [self.industryBtn setTitle:selectedTitle3 forState:UIControlStateNormal];
     [self.industryBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-
+    [self.adressBtn setTitle:selectedTitle4 forState:UIControlStateNormal];
+    [self.adressBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+   
 }
 
 
@@ -143,11 +150,14 @@
     [_abbreviationTextField resignFirstResponder];
     [self.view addSubview:self.financingPickerSingle];
     [self.financingPickerSingle show];
-
-    
-  
-
 }
+
+- (IBAction)companyAdress:(id)sender {
+    JMGetCompanyLocationViewController *vc = [[JMGetCompanyLocationViewController alloc]init];
+      vc.delegate = self;
+      [self.navigationController pushViewController:vc animated:YES];
+}
+
 #pragma mark - textFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -193,7 +203,11 @@
         company_name = userModel.company_real_company_name;
         company_position = userModel.company_position;
     }
-    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:company_name company_position:company_position nickname:nil avatar:nil enterprise_step:@"3" abbreviation:self.abbreviationTextField.text logo_path:self.imageUrl video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:@"1" financing:nil employee:self.employeeBtn.titleLabel.text      city_id:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    
+    NSString *longitude = [NSString stringWithFormat:@"%f",self.POIModel.location.longitude];
+    NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
+    
+    [[JMHTTPManager sharedInstance]createCompanyWithCompany_name:company_name company_position:company_position nickname:nil avatar:nil enterprise_step:@"3" abbreviation:self.abbreviationTextField.text logo_path:self.imageUrl video_path:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:self.industry_label_id financing:self.financingBtn.titleLabel.text employee:self.employeeBtn.titleLabel.text      city_id:nil address:self.companyAdressStr url:nil longitude:longitude latitude:latitude description:nil image_path:nil label_id:nil subway:nil line:nil station:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
@@ -309,6 +323,16 @@
     }
 }
 
+//公司地址回传
+-(void)sendAdress_Data:(AMapPOI *)data
+{
+    self.POIModel = data;
+    NSString *adr = [NSString stringWithFormat:@"%@-%@-%@-%@",data.city,data.district,data.name,data.address];
+    [self.adressBtn setTitle:adr forState:UIControlStateNormal];
+    self.companyAdressStr = adr;
+      kSaveMyDefault(@"companyAdress", adr);
+}
+
 //- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 //
 //    self.pickerView.hidden = YES;
@@ -383,7 +407,7 @@
 
 -(UIButton *)moreBtn{
     if (_moreBtn == nil) {
-        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.financingBtn.frame.origin.y+self.financingBtn.frame.size.height+150, SCREEN_WIDTH, 40)];
+        _moreBtn = [[UIButton alloc]initWithFrame:CGRectMake(0,self.adressBtn.frame.origin.y+self.adressBtn.frame.size.height+110, SCREEN_WIDTH, 40)];
         _moreBtn.titleLabel.font = [UIFont systemFontOfSize:14];
 
         [_moreBtn setTitle:@"更多操作" forState:UIControlStateNormal];

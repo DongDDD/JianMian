@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="442" id="KGk-i7-Jjw" customClass="JMPersonWorkExpTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="348" height="442"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="348" height="441.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="项目经理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YmX-Ho-Upx">
+                        <rect key="frame" x="20" y="36.5" width="61.5" height="18"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" usesAttributedText="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MaO-gL-1Gb">
+                        <rect key="frame" x="15" y="61.5" width="10" height="30"/>
+                        <attributedString key="attributedText"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州空间智能科技有限公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OFW-jk-HGP">
+                        <rect key="frame" x="20" y="0.0" width="196" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.14117647059999999" green="0.69803921570000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016年7月-2019年3月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sG-bU-t2U">
+                        <rect key="frame" x="20" y="76.5" width="135" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3ym-so-Vte">
+                        <rect key="frame" x="20" y="119" width="303" height="302.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="2sG-bU-t2U" firstAttribute="top" secondItem="YmX-Ho-Upx" secondAttribute="bottom" constant="22" id="6ym-XZ-vsC"/>
+                    <constraint firstItem="MaO-gL-1Gb" firstAttribute="leading" secondItem="YmX-Ho-Upx" secondAttribute="leading" constant="-5" id="NEN-8c-pKW"/>
+                    <constraint firstAttribute="bottom" secondItem="3ym-so-Vte" secondAttribute="bottom" constant="20" id="cmo-97-AWW"/>
+                    <constraint firstAttribute="trailing" secondItem="3ym-so-Vte" secondAttribute="trailing" constant="25" id="e4p-nc-WmQ"/>
+                    <constraint firstItem="2sG-bU-t2U" firstAttribute="leading" secondItem="YmX-Ho-Upx" secondAttribute="leading" id="ge7-xn-3hD"/>
+                    <constraint firstItem="YmX-Ho-Upx" firstAttribute="top" secondItem="OFW-jk-HGP" secondAttribute="bottom" constant="17" id="hLG-yG-j7z"/>
+                    <constraint firstItem="3ym-so-Vte" firstAttribute="leading" secondItem="2sG-bU-t2U" secondAttribute="leading" id="iJM-t2-73X"/>
+                    <constraint firstItem="OFW-jk-HGP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="lu0-H6-2OY"/>
+                    <constraint firstItem="YmX-Ho-Upx" firstAttribute="leading" secondItem="OFW-jk-HGP" secondAttribute="leading" id="o1l-Iw-y2T"/>
+                    <constraint firstItem="OFW-jk-HGP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vbf-hu-nnc"/>
+                    <constraint firstItem="MaO-gL-1Gb" firstAttribute="top" secondItem="YmX-Ho-Upx" secondAttribute="bottom" constant="7" id="wzl-df-ew6"/>
+                    <constraint firstItem="3ym-so-Vte" firstAttribute="top" secondItem="2sG-bU-t2U" secondAttribute="bottom" constant="26.5" id="zR0-4D-fk9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="-149.27536231884059" y="121.20535714285714"/>
+        </tableViewCell>
+    </objects>
+</document>

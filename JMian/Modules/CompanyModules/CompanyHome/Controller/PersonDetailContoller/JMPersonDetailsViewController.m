@@ -29,9 +29,10 @@
 #import "WXApi.h"
 #import "JMShareView.h"
 #import "JMMessageListModel.h"
+#import "ZJImageMagnification.h"
 
 
-@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate,JMHeaderOfPersonDetailViewDelegate,JMShareViewDelegate>
+@interface JMPersonDetailsViewController ()<UIScrollViewDelegate,BottomViewDelegate,THDatePickerViewDelegate,JMHeaderOfPersonDetailViewDelegate,JMShareViewDelegate,JMHeaderOfPersonDetailViewDelegate>
 
 
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -102,16 +103,12 @@
 #pragma mark - 获取数据
 -(void)getData{
     [[JMHTTPManager sharedInstance] fetchJobInfoWithId:_user_job_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        //
         if (responsObject[@"data"]) {
-            
             self.vitaModel = [JMVitaDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
             [self initView];
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
     }];
-    
 }
 
 #pragma mark - 同步获取
@@ -191,13 +188,7 @@
     [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
     [self setScrollViewUI];
     [self setHeaderVieUI];
-    self.titleView.frame = CGRectMake(self.titleView.frame.origin.x, _headerView.frame.origin.y+_headerView.frame.size.height-43, self.titleView.frame.size.width, self.titleView.frame.size.height);
-    _pageView.frame = CGRectMake(_pageView.frame.origin.x,_titleView.frame.origin.y+_titleView.frame.size.height, _pageView.frame.size.width, _pageView.frame.size.height);
-    [self.scrollView addSubview:self.titleView];
-    [self setPageUI];
-    
-    [self setBottomViewUI];
-    [self initDatePickerView];
+  
       
 }
 
@@ -218,6 +209,7 @@
         
     }
     self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, H)];
+    self.headerView.delegate = self;
     if (self.companyModel.video_file_path) {
         if (self.companyModel.video_cover) {
             
@@ -230,6 +222,13 @@
     [self.headerView setModel:self.vitaModel];
     [self.headerView setCompanyHomeModel:self.companyModel];
     [self.scrollView addSubview:_headerView];
+    
+    self.titleView.frame = CGRectMake(self.titleView.frame.origin.x, _headerView.frame.origin.y+_headerView.frame.size.height-43, self.titleView.frame.size.width, self.titleView.frame.size.height);
+    _pageView.frame = CGRectMake(_pageView.frame.origin.x,_titleView.frame.origin.y+_titleView.frame.size.height, _pageView.frame.size.width, _pageView.frame.size.height);
+    [self.scrollView addSubview:self.titleView];
+    [self setPageUI];
+    
+ 
 }
 
 
@@ -240,6 +239,8 @@
     [self.pageContentView addSubview:self.contactVc.view];
     [self.pageContentView addSubview:self.pictureVc.view];
     
+    [self setBottomViewUI];
+    [self initDatePickerView];
     //    [self.scrollView addSubview:self.contactVc.view];
     //    [self.scrollView addSubview:self.pageView];
     //    [self.pageView setCurrentIndex:1];//添加子视图”谁看过我“
@@ -651,6 +652,12 @@
 -(void)shareViewRightAction{
     [self disapearAction];
     [self wxShare:1];
+}
+
+-(void)clicHeaderActionWithImageView:(UIImageView *)imageView{
+    
+    [ZJImageMagnification scanBigImageWithImageView:imageView alpha:1];
+
 }
 
 #pragma mark - scrollViewDelegate
