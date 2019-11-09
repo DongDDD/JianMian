@@ -7,6 +7,7 @@
 //
 
 #import "JMPesonEducationTableViewCell.h"
+#import "DimensMacros.h"
 NSString *const JMPesonEducationTableViewCellIdentifier = @"JMPesonEducationTableViewCellIdentifier";
 
 @implementation JMPesonEducationTableViewCell
@@ -14,6 +15,15 @@ NSString *const JMPesonEducationTableViewCellIdentifier = @"JMPesonEducationTabl
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+}
+
+-(void)setModel:(JMEducationModel *)model{
+    self.titleLab.text = model.school_school_name;
+    NSString *eduStr = [JMDataTransform getEducationStrWithEducation:model.education];
+
+    self.subTitleLab.text = [NSString stringWithFormat:@"%@/%@",eduStr,model.major];
+    self.subTitleLab2.text = [NSString stringWithFormat:@"%@ ~ %@",model.s_date,model.e_date];
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

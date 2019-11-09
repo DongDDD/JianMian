@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMVitaDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMPesonDescTableViewCellIdentifier;
 
 @interface JMPesonDescTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UITextView *textView;
+@property(nonatomic,strong)JMVitaDetailModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

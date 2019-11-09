@@ -36,14 +36,16 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *work_start_date;
 @property (copy, nonatomic) NSString *work_label_id;
 @property (copy, nonatomic) NSString *work_name;
+@property (copy, nonatomic) NSString *work_year;
 @property (copy, nonatomic) NSString *city_city_id;
-@property (copy, nonatomic) NSString *city_name;
+@property (copy, nonatomic) NSString *city_city_name;
 @property (copy, nonatomic) NSString *city_is_hot;
 @property (copy, nonatomic) NSString *city_label_id;
 
 @property (copy, nonatomic) NSString *video_file_path;
 @property (copy, nonatomic) NSString *video_status;
 @property (copy, nonatomic) NSString *video_type;
+@property (copy, nonatomic) NSString *video_cover;
 
 @property (copy, nonatomic) NSString *real_sex;
 @property (copy, nonatomic) NSString *real_ethnic;

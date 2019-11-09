@@ -158,9 +158,9 @@
 }
 
 - (void)updateExperience {
-    [[JMHTTPManager sharedInstance] updateExperienceWith_experienceId:self.model.experience_id company_name:self.companyNameText.text job_label_id:@"1" start_date:self.startDate end_date:self.endDate description:self.jobDescStr successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance] updateExperienceWith_experienceId:self.model.experience_id company_name:self.companyNameText.text job_label_id:self.positionLabId start_date:self.startDate end_date:self.endDate description:self.jobDescStr successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
-            [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:YES];
        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -259,7 +259,10 @@
 //
 //}
 -(void)saveBtnAction{
-    [self rightAction];
+    [self.companyNameText resignFirstResponder];
+    [_decriptionTextView.contentTextView resignFirstResponder];
+
+    [self updateExperience];
 }
 
 
@@ -324,6 +327,7 @@
 #pragma mark - UIscrollView
 
 -(void)doneClicked{
+    [self.companyNameText resignFirstResponder];
     [_decriptionTextView.contentTextView resignFirstResponder];
 }
 
@@ -367,7 +371,7 @@
 -(JMPartTimeJobResumeFooterView *)decriptionTextView{
     if (_decriptionTextView == nil) {
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
-        _decriptionTextView.frame = CGRectMake(0, self.jobLabelId.frame.origin.y+self.jobLabelId.frame.size.height+20, SCREEN_WIDTH, 150);
+        _decriptionTextView.frame = CGRectMake(0, self.jobLabelId.frame.origin.y+self.jobLabelId.frame.size.height+20, SCREEN_WIDTH, 250);
         _decriptionTextView.delegate = self;
         _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
         [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeJobExpDescription];

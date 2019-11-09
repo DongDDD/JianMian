@@ -20,11 +20,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="求职意向" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ff-hj-hnN">
-                        <rect key="frame" x="20" y="30" width="70" height="21"/>
+                        <rect key="frame" x="20" y="30" width="82" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="blE-DG-OIk"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" red="0.1019607843" green="0.1019607843" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -53,25 +53,25 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UI设计师" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhR-71-N98">
-                        <rect key="frame" x="151" y="80.5" width="61" height="18"/>
+                        <rect key="frame" x="163" y="80.5" width="61" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="离职-随时到岗" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ewd-Ks-RXz">
-                        <rect key="frame" x="151" y="116.5" width="99" height="18"/>
+                        <rect key="frame" x="163" y="116.5" width="99" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8-12k" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnq-jG-UI2">
-                        <rect key="frame" x="151" y="188.5" width="40" height="18"/>
+                        <rect key="frame" x="163" y="188.5" width="40" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018年9月" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vd1-SF-dRE">
-                        <rect key="frame" x="151" y="152.5" width="75" height="18"/>
+                        <rect key="frame" x="163" y="152.5" width="75" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="6cS-bQ-LCn"/>
                         </constraints>
@@ -103,6 +103,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="salaryLab" destination="tnq-jG-UI2" id="ELZ-kk-xql"/>
+                <outlet property="workNameLab" destination="qhR-71-N98" id="643-QX-q8a"/>
+                <outlet property="workStatusLab" destination="ewd-Ks-RXz" id="RmP-pN-kt4"/>
+                <outlet property="workTimeLab" destination="vd1-SF-dRE" id="W4M-Af-aFe"/>
+            </connections>
             <point key="canvasLocation" x="-133" y="71"/>
         </tableViewCell>
     </objects>

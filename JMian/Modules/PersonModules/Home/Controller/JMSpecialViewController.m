@@ -18,7 +18,7 @@
 #import "JMCompanyHomeTableViewCell.h"
 #import "JMPersonDetailsViewController.h"
 #import "JMHTTPManager+VitaPaginate.h"
-
+#import "JMPersonInfoViewController.h"
 
 
 @interface JMSpecialViewController ()<UITableViewDelegate,UITableViewDataSource,JMLabsChooseViewControllerDelegate,JMLabChooseBottomViewDelegate,HomeTableViewCellDelegate,JMCompanyHomeTableViewCellDelegate>
@@ -277,10 +277,10 @@ static NSString *BHomeCellID = @"BHomeCellID";
 {
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
+        JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc] init];
         if(self.arrDate.count > 0 ){
             JMCompanyHomeModel *model = self.arrDate[indexPath.row];
-            vc.companyModel = model;
+            vc.user_job_id = model.user_job_id;
             
         }
         

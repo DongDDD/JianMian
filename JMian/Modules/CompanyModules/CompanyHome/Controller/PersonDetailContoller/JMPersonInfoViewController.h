@@ -11,6 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMPersonInfoViewController : BaseViewController
+@property(nonatomic,strong)NSString *user_job_id;
 
 @end
 

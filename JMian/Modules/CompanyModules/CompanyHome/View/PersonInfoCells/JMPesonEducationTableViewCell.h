@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMVitaDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMPesonEducationTableViewCellIdentifier;
 
 @interface JMPesonEducationTableViewCell : UITableViewCell
+@property(nonatomic, strong)JMEducationModel *model;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
+
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *subTitleLab2;
 
 @end
 

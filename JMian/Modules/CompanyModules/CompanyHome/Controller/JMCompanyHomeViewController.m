@@ -25,6 +25,7 @@
 #import "JMSpecialModel.h"
 #import "JMSpecialViewController.h"
 #import "SDCycleScrollView.h"
+#import "JMPersonInfoViewController.h"
 
 
 
@@ -392,13 +393,15 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
-    if(self.arrDate.count > 0 ){
-        JMCompanyHomeModel *model = self.arrDate[indexPath.row];
-        vc.companyModel = model;
-        
-    }
-
+//    JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
+//    if(self.arrDate.count > 0 ){
+//        JMCompanyHomeModel *model = self.arrDate[indexPath.row];
+//        vc.companyModel = model;
+//        
+//    }
+    JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc]init];
+    JMCompanyHomeModel *model = self.arrDate[indexPath.row];
+    vc.user_job_id = model.user_job_id;
     [self.navigationController pushViewController:vc animated:YES];
     
 }

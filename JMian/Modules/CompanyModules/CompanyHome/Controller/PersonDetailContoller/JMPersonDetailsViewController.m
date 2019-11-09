@@ -211,12 +211,10 @@
     self.headerView = [[JMHeaderOfPersonDetailView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, H)];
     self.headerView.delegate = self;
     if (self.companyModel.video_file_path) {
-        if (self.companyModel.video_cover) {
-            
+        if (self.companyModel.video_cover) {            
             [self.headerView.videoImg sd_setImageWithURL:[NSURL URLWithString:self.companyModel.video_cover] placeholderImage:[UIImage imageNamed:@"loading"]];
         }
         self.headerView.playBtn.hidden = NO;
-
     }
     self.headerView.delegate = self;
     [self.headerView setModel:self.vitaModel];
@@ -569,7 +567,7 @@
         }];
         
     }else if ([userModel.card_status isEqualToString:Card_NOIdentify]){
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实名认证通过后才能申请任务" preferredStyle: UIAlertControllerStyleAlert];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"实名认证通过后才能聊天" preferredStyle: UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"去实名认证" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {

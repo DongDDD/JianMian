@@ -44,6 +44,9 @@
                             <constraint firstAttribute="height" constant="124" id="9gr-vc-aw7"/>
                         </constraints>
                         <state key="normal" title="Button" image="play.png"/>
+                        <connections>
+                            <action selector="playActoin:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="jaB-rf-Yzu"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
@@ -56,6 +59,10 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="playBtn" destination="2IM-ey-ug2" id="7Gt-t5-PtY"/>
+                <outlet property="videoImageView" destination="kEC-p1-bLP" id="gKl-Wl-Ve5"/>
+            </connections>
             <point key="canvasLocation" x="118.84057971014494" y="106.80803571428571"/>
         </tableViewCell>
     </objects>

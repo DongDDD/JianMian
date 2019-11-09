@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "JMVitaDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMPersonWorkExpTableViewCellIdentifier;
 
 @interface JMPersonWorkExpTableViewCell : UITableViewCell
-
+@property(nonatomic,strong)JMExperiencesModel *model;
 @end
 
 NS_ASSUME_NONNULL_END

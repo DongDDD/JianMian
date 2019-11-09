@@ -20,13 +20,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州美术学院" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="71N-rp-JW1">
-                        <rect key="frame" x="20" y="0.0" width="104" height="21"/>
+                        <rect key="frame" x="20" y="0.0" width="280" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="本科 / 计算机应用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8H5-PR-Wwe">
-                        <rect key="frame" x="20" y="29" width="112.5" height="17"/>
+                        <rect key="frame" x="20" y="29" width="200" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="ILC-ks-QL7"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -42,12 +45,18 @@
                     <constraint firstAttribute="trailing" secondItem="GQw-fK-R9Z" secondAttribute="trailing" constant="20" id="J8I-sE-hzq"/>
                     <constraint firstItem="GQw-fK-R9Z" firstAttribute="centerY" secondItem="8H5-PR-Wwe" secondAttribute="centerY" id="YLx-vJ-fY0"/>
                     <constraint firstItem="8H5-PR-Wwe" firstAttribute="top" secondItem="71N-rp-JW1" secondAttribute="bottom" constant="8" id="mvw-5G-uNT"/>
+                    <constraint firstAttribute="trailing" secondItem="71N-rp-JW1" secondAttribute="trailing" constant="20" id="oOX-nU-AHp"/>
                     <constraint firstItem="71N-rp-JW1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="rxk-mQ-tlp"/>
                     <constraint firstItem="71N-rp-JW1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="vKc-vH-CRf"/>
                     <constraint firstItem="8H5-PR-Wwe" firstAttribute="leading" secondItem="71N-rp-JW1" secondAttribute="leading" id="xdr-Vy-iGB"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="subTitleLab" destination="8H5-PR-Wwe" id="1z4-cu-tKe"/>
+                <outlet property="subTitleLab2" destination="GQw-fK-R9Z" id="xNA-Wb-KCJ"/>
+                <outlet property="titleLab" destination="71N-rp-JW1" id="fnY-8h-3qq"/>
+            </connections>
             <point key="canvasLocation" x="-222" y="50"/>
         </tableViewCell>
     </objects>

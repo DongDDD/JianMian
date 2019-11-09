@@ -48,7 +48,7 @@
 #import "JMVideoChatView.h"
 #import "THDatePickerView.h"
 #import "JMHTTPManager+UnReadNotice.h"
-
+#import "JMPersonInfoViewController.h"
 
 #define MAX_MESSAGE_SEP_DLAY (5 * 60)
 
@@ -875,10 +875,11 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         if ([self.myConvModel.type isEqualToString:@"1"]) {
             //全职
-            JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
+//            JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
+            JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc] init];
             JMCompanyHomeModel *model2 = [[JMCompanyHomeModel alloc]init];
             model2.user_job_id = self.myConvModel.job_user_job_id;
-            vc.companyModel = model2;
+            vc.user_job_id = model2.user_job_id;
             [self.navigationController pushViewController:vc animated:YES];
             
         }else if ([self.myConvModel.type isEqualToString:@"2"]) {

@@ -62,11 +62,12 @@
         make.left.mas_equalTo(self).offset(20);
     }];
     [_contentTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(_titleLab).offset(20);
+        make.top.mas_equalTo(_titleLab).offset(30);
         make.left.mas_equalTo(self).offset(20);
         make.right.mas_equalTo(self).offset(-20);
         make.bottom.mas_equalTo(self).offset(-30);
     }];
+    
     [_placeHolder mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(_contentTextView).mas_offset(10);
         make.left.mas_equalTo(_contentTextView);
@@ -84,8 +85,9 @@
         case JMPartTimeJobResumeFooterViewTypeJobExpDescription:
             _placeHolder.text = @"请输入";
             _titleLab.text = @"工作描述";
-            _wordsLenghLabel.hidden = YES;
-            
+//            _wordsLenghLabel.hidden = YES;
+            _wordsLenghLabel.text = @"0/2000";
+
             break;
         case JMPartTimeJobResumeFooterViewTypeJobDescription:
             _placeHolder.text = @"例如\n职位要求、\n性别要求、\n工作时段等等   ";
@@ -102,29 +104,39 @@
         case JMPartTimeJobResumeFooterViewTypeMyAdvantage:
             _placeHolder.text = @"请填写你的优势，500字以内... ";
 //            _titleLab.text = @"自我评价";
+            _wordsLenghLabel.text = @"0/500";
 
             break;
         case JMPartTimeJobResumeFooterViewTypeDefault:
             _titleLab.text = @"自我介绍";
             _placeHolder.text = @"可描述你的工作技能、岗位职责、特长等等.. ";
-            
+            _wordsLenghLabel.text = @"0/500";
+
             break;
             
         case JMPartTimeJobResumeFooterViewTypePartTimeJob:
             _titleLab.text = @"职位描述";
             _placeHolder.text = @"例如\n职位要求、\n性别要求、\n工作时段等等   ";
+            _wordsLenghLabel.text = @"0/500";
+
             break;
         case JMPartTimeJobResumeFooterViewTypeGoodsDesc:
             _titleLab.text = @"请填写产品详情描述";
             _placeHolder.text = @"例如\n品牌名称:\n品牌型号:\n产品颜色:\n生产企业等等";
+            _wordsLenghLabel.text = @"0/500";
+
 //            [self updateContentTextViewConstraints];
             break;
         case JMPartTimeJobResumeFooterViewTypeCommentDesc:
             _placeHolder.text = @"请填写评价";
+            _wordsLenghLabel.text = @"0/500";
+
            
             break;
         case JMPartTimeJobResumeFooterViewTypeSetting:
             _placeHolder.text = @"请提出你的宝贵意见";
+            _wordsLenghLabel.text = @"0/500";
+
             
             break;
 
@@ -155,17 +167,27 @@
 
 -(void)setContent:(NSString *)content{
     _contentTextView.text = content;
-    if (_viewType == JMPartTimeJobResumeFooterViewTypeMyAdvantage) {
-        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/150", (unsigned long)content.length];
-        
-    }else if (_viewType == JMPartTimeJobResumeFooterViewTypeJobDescription){
-        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)content.length];
-
-        
-    }else{
-        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)content.length];
-        
-    }
+//    if (_viewType == JMPartTimeJobResumeFooterViewTypeMyAdvantage) {
+//        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/150", (unsigned long)content.length];
+//
+//    }else if (_viewType == JMPartTimeJobResumeFooterViewTypeJobDescription){
+//        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)content.length];
+//
+//    }else if (_viewType == JMPartTimeJobResumeFooterViewTypeJobExpDescription){
+//        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/2000", (unsigned long)content.length];
+//
+//    }
+    
+    NSString *wordsLenghStr = self.wordsLenghLabel.text;
+    NSArray *array = [wordsLenghStr componentsSeparatedByString:@"/"]; //从字符A中分隔成2个元素的数组
+    NSString *worksLength = array[1];
+    NSString *nowLength = [NSString stringWithFormat:@"%lu", (unsigned long)content.length];
+    self.wordsLenghLabel.text = [NSString stringWithFormat:@"%@/%@", nowLength,worksLength];
+//    else{
+//        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)content.length];
+//
+//    }
+    
     if (content.length > 0) {
         self.placeHolder.hidden = YES;
     }
@@ -201,10 +223,21 @@
     }else if (_viewType == JMPartTimeJobResumeFooterViewTypeJobDescription){
         self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/500", (unsigned long)textView.text.length];
         
-        if (textView.text.length >= 3000) {
+        if (textView.text.length >= 500) {
             
-            textView.text = [textView.text substringToIndex:3000];
+            textView.text = [textView.text substringToIndex:500];
             _wordsLenghLabel.text = @"500/500";
+            
+        }
+        
+    }else if (_viewType == JMPartTimeJobResumeFooterViewTypeJobExpDescription){
+        //工作经历
+        self.wordsLenghLabel.text = [NSString stringWithFormat:@"%lu/2000", (unsigned long)textView.text.length];
+        
+        if (textView.text.length >= 2000) {
+            
+            textView.text = [textView.text substringToIndex:2000];
+            _wordsLenghLabel.text = @"2000/2000";
             
         }
         

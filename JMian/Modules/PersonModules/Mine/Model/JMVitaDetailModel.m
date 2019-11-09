@@ -26,7 +26,6 @@
     return @{
              
              @"myDescription":@"description",
-
              @"vita_status":@"vita.status",
              @"user_nickname":@"user.nickname",
              @"user_avatar":@"user.avatar",
@@ -43,6 +42,7 @@
              @"video_file_path":@"video.file_path",
              @"video_status":@"video.status",
              @"video_type":@"video.type",
+             @"video_cover":@"video.cover",          
              @"favorites_favorite_id":@"favorites.favorite_id",
              @"city_is_hot":@"city.is_hot",
              
@@ -78,23 +78,6 @@
              @"experiences_description":@"description"
              };
     
-//    return @{
-//             @"company_id":@"company.company_id",
-//             @"company_name":@"company.company_name",
-//             @"work_label_id":@"work.label_id",
-//             @"work_name":@"work.name",
-//             @"shielding_id":@"shielding.shielding_id",
-//             @"shielding_company":@"shielding.company",
-//             @"shielding_company_id":@"shielding.company_id",
-//             @"shielding_company_name":@"shielding.company_name",
-//             @"education_id":@"education.education_id",
-//             @"education":@"education.education",
-//             @"education_major":@"education.major",
-//             @"education_s_date":@"education.s_date",
-//             @"education_e_date":@"education.e_date",
-//             @"education_description":@"education.description",
-//             @"school_name":@"school.school_name"
-//             };
     
 }
 

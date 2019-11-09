@@ -24,7 +24,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSNumber *salary_min;
 @property (nonatomic, copy) NSNumber *salary_max;
 
-
 @property (nonatomic, copy) NSString *userNickname;
 @property (nonatomic, copy) NSString *userAvatar;
 

@@ -11,8 +11,8 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 //app
 #else

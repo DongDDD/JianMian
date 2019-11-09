@@ -16,6 +16,21 @@ NSString *const JMPesonDescTableViewCellIdentifier = @"JMPesonDescTableViewCellI
     // Initialization code
 }
 
+-(void)setModel:(JMVitaDetailModel *)model{
+    [self.textView setText:model.vita_description];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    
+    paragraphStyle.lineSpacing = 5;// 字体的行间距
+    
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                 NSParagraphStyleAttributeName:paragraphStyle
+                                 };
+    
+    self.textView.attributedText = [[NSAttributedString alloc] initWithString:self.textView.text attributes:attributes];
+    
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

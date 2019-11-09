@@ -42,10 +42,11 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3ym-so-Vte">
-                        <rect key="frame" x="20" y="119" width="303" height="302.5"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3ym-so-Vte">
+                        <rect key="frame" x="20" y="112.5" width="303" height="309"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
@@ -62,10 +63,16 @@
                     <constraint firstItem="YmX-Ho-Upx" firstAttribute="leading" secondItem="OFW-jk-HGP" secondAttribute="leading" id="o1l-Iw-y2T"/>
                     <constraint firstItem="OFW-jk-HGP" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="vbf-hu-nnc"/>
                     <constraint firstItem="MaO-gL-1Gb" firstAttribute="top" secondItem="YmX-Ho-Upx" secondAttribute="bottom" constant="7" id="wzl-df-ew6"/>
-                    <constraint firstItem="3ym-so-Vte" firstAttribute="top" secondItem="2sG-bU-t2U" secondAttribute="bottom" constant="26.5" id="zR0-4D-fk9"/>
+                    <constraint firstItem="3ym-so-Vte" firstAttribute="top" secondItem="2sG-bU-t2U" secondAttribute="bottom" constant="20" id="zR0-4D-fk9"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="companyNameLab" destination="OFW-jk-HGP" id="BGQ-g8-ere"/>
+                <outlet property="textView" destination="3ym-so-Vte" id="YoB-6X-e6D"/>
+                <outlet property="workPositionLab" destination="YmX-Ho-Upx" id="ee8-2O-A8f"/>
+                <outlet property="workTimeLab" destination="2sG-bU-t2U" id="IYb-32-l40"/>
+            </connections>
             <point key="canvasLocation" x="-149.27536231884059" y="121.20535714285714"/>
         </tableViewCell>
     </objects>

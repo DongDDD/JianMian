@@ -19,19 +19,19 @@
                 <rect key="frame" x="0.0" y="0.0" width="413" height="345.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="任务描述" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAM-RI-N0D">
-                        <rect key="frame" x="20" y="0.0" width="82" height="24"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="自我介绍" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PAM-RI-N0D">
+                        <rect key="frame" x="15" y="0.0" width="82" height="24"/>
                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" usesAttributedText="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bfx-R1-Y1M">
-                        <rect key="frame" x="15" y="31" width="10" height="30"/>
+                        <rect key="frame" x="10" y="31" width="10" height="30"/>
                         <attributedString key="attributedText"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0r3-BP-c2O">
-                        <rect key="frame" x="20" y="54" width="373" height="271.5"/>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0r3-BP-c2O">
+                        <rect key="frame" x="15" y="54" width="378" height="271.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -45,12 +45,15 @@
                     <constraint firstItem="0r3-BP-c2O" firstAttribute="leading" secondItem="PAM-RI-N0D" secondAttribute="leading" id="e2x-M2-Fhz"/>
                     <constraint firstItem="PAM-RI-N0D" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="iAD-0h-nRk"/>
                     <constraint firstAttribute="trailing" secondItem="0r3-BP-c2O" secondAttribute="trailing" constant="20" id="oGr-p9-4Xb"/>
-                    <constraint firstItem="PAM-RI-N0D" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="uTv-xb-GRd"/>
+                    <constraint firstItem="PAM-RI-N0D" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="uTv-xb-GRd"/>
                     <constraint firstItem="0r3-BP-c2O" firstAttribute="top" secondItem="PAM-RI-N0D" secondAttribute="bottom" constant="30" id="vNU-OW-nDx"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
-            <point key="canvasLocation" x="199.27536231884059" y="75.669642857142847"/>
+            <connections>
+                <outlet property="textView" destination="0r3-BP-c2O" id="DzH-cN-YyM"/>
+            </connections>
+            <point key="canvasLocation" x="85" y="75"/>
         </tableViewCell>
     </objects>
 </document>

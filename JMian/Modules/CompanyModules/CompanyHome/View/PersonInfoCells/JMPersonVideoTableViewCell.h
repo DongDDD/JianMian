@@ -7,12 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMVitaDetailModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
+
 extern NSString *const JMPersonVideoTableViewCellIdentifier;
 
-@interface JMPersonVideoTableViewCell : UITableViewCell
+@protocol JMPersonVideoTableViewCellDelegate <NSObject>
 
+-(void)playVideoAction;
+
+@end
+@interface JMPersonVideoTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *videoImageView;
+@property (weak, nonatomic) IBOutlet UIButton *playBtn;
+@property (nonatomic,strong)JMVitaDetailModel *model;
+@property (nonatomic, weak)id<JMPersonVideoTableViewCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

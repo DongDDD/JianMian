@@ -232,7 +232,7 @@
                 <outlet property="workStartDate" destination="F9z-aw-qaC" id="FNb-pJ-pfQ"/>
                 <outlet property="workStatusLab" destination="tUv-Xb-jcc" id="Eed-aO-xd4"/>
             </connections>
-            <point key="canvasLocation" x="34.782608695652179" y="-0.6696428571428571"/>
+            <point key="canvasLocation" x="-225" y="-21"/>
         </view>
     </objects>
     <resources>
