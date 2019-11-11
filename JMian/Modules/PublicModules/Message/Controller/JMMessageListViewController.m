@@ -88,11 +88,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 
-
-
 -(void)loadNewData{
     [self getMsgList];    //获取自己服务器数据
-    
 }
 
 - (void)onNewMessage:(NSNotification *)notification
@@ -116,9 +113,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         [self.tableView.mj_header endRefreshing];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
-        
     }];
-    
     
 }
 //创建聊天

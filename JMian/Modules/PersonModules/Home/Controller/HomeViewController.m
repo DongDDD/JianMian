@@ -93,7 +93,6 @@ static NSString *cellIdent = @"cellIdent";
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
 }
 
 #pragma mark - 布局UI

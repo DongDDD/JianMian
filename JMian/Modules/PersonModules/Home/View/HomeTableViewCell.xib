@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -13,7 +15,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="klg-uP-pSV" id="qNp-TQ-hZQ">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="141"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="140.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0000.png" translatesAutoresizingMaskIntoConstraints="NO" id="Loy-mV-JkR">
@@ -36,7 +38,7 @@
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sd1-L6-MHL" userLabel="footView">
-                        <rect key="frame" x="0.0" y="131" width="375" height="10"/>
+                        <rect key="frame" x="0.0" y="130.5" width="375" height="10"/>
                         <color key="backgroundColor" red="0.96078431372549022" green="0.96078431372549022" blue="0.96470588235294119" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="10" id="NZH-2H-Pvc"/>
@@ -126,7 +128,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州空间智能科技有限公司" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBh-FO-Wdx">
-                        <rect key="frame" x="131" y="103.5" width="160" height="16"/>
+                        <rect key="frame" x="131" y="103.5" width="224" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -158,6 +160,7 @@
                     <constraint firstItem="xbj-IG-grN" firstAttribute="width" secondItem="Loy-mV-JkR" secondAttribute="width" id="ZbR-ob-SjG"/>
                     <constraint firstItem="sd1-L6-MHL" firstAttribute="leading" secondItem="qNp-TQ-hZQ" secondAttribute="leading" id="bU9-kR-LXx"/>
                     <constraint firstItem="RTG-ST-Bvu" firstAttribute="top" secondItem="qNp-TQ-hZQ" secondAttribute="top" constant="27" id="cIE-4a-0qj"/>
+                    <constraint firstAttribute="trailing" secondItem="HBh-FO-Wdx" secondAttribute="trailing" constant="20" id="d74-jK-tc3"/>
                     <constraint firstItem="b6V-YV-np5" firstAttribute="leading" secondItem="S6G-DK-vbX" secondAttribute="trailing" constant="-1" id="g1Z-a4-KHZ"/>
                     <constraint firstItem="HBh-FO-Wdx" firstAttribute="top" secondItem="Szk-av-mYM" secondAttribute="bottom" constant="13" id="g8u-Go-d5O"/>
                     <constraint firstItem="Loy-mV-JkR" firstAttribute="centerY" secondItem="qNp-TQ-hZQ" secondAttribute="centerY" id="gPI-f8-Gxb"/>
@@ -182,7 +185,7 @@
                 <outlet property="workExperienceLab" destination="Szk-av-mYM" id="r29-h4-1g5"/>
                 <outlet property="workNameLab" destination="RTG-ST-Bvu" id="Vtw-Lw-npU"/>
             </connections>
-            <point key="canvasLocation" x="-172" y="150"/>
+            <point key="canvasLocation" x="-129" y="144"/>
         </tableViewCell>
     </objects>
     <resources>

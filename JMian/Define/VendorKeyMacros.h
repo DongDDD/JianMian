@@ -10,7 +10,7 @@
 #define VendorKeyMacros_h
 //1400193090 测试
 //1400241696 正式
-#define TIMSdkAppid @"1400241696"
+#define TIMSdkAppid @"1400193090"
 #define TIMSdkAccountType @"36862"
 
 #endif /* VendorKeyMacros_h */

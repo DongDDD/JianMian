@@ -70,7 +70,7 @@
                 <outlet property="sexImg" destination="zEq-dT-x0l" id="OPm-UR-hAC"/>
                 <outlet property="suTitleLab" destination="LGZ-k2-zsR" id="xQa-0l-2lE"/>
             </connections>
-            <point key="canvasLocation" x="-307.24637681159425" y="27.790178571428569"/>
+            <point key="canvasLocation" x="-322" y="24"/>
         </tableViewCell>
     </objects>
 </document>

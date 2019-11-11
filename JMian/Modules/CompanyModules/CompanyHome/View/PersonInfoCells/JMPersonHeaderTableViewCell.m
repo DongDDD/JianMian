@@ -26,6 +26,9 @@ NSString *const JMPersonHeaderTableViewCellIdentifier = @"JMPersonHeaderTableVie
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapImgAction)];
+    [self.iconImage addGestureRecognizer:tap];
+    self.iconImage.userInteractionEnabled = YES;
 }
 
 -(void)setModel:(JMVitaDetailModel *)model{
@@ -41,31 +44,29 @@ NSString *const JMPersonHeaderTableViewCellIdentifier = @"JMPersonHeaderTableVie
     if ([model.work_year isEqualToString:@"-1年"] || [model.work_year isEqualToString:@"低于1年"]) {
         workYear = @"应届生";
     }else{
-        
         workYear = model.work_year;
     }
+    
     //年龄
-
     //学历
-    NSString *eduStr = [JMDataTransform getEducationStrWithEducation:model.vita_education];
+    NSString *eduStr = [JMDataTransform getEducationNumWithEducationStr:model.vita_education];
     //城市
     NSString *cityName;
     if (model.city_city_name.length > 0) {
         cityName = model.city_city_name;
-        
     }else{
         cityName = @"不限";
     }
-    
-    
     self.suTitleLab.text = [NSString stringWithFormat:@"%@ |  %@  | %@",workYear,eduStr,cityName];
-    
 }
-
+-(void)tapImgAction{
+    if (_delegate && [_delegate respondsToSelector:@selector(clickHeaderActionWithImageView:)]) {
+        [_delegate clickHeaderActionWithImageView:self.iconImage];
+    }
+}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 

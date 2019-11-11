@@ -19,8 +19,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="374" height="264.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空间智能科技" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxL-eD-alo">
-                        <rect key="frame" x="131.5" y="143" width="111" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="空间智能科技" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QxL-eD-alo">
+                        <rect key="frame" x="20" y="143" width="334" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="qDJ-2l-WYc"/>
                         </constraints>
@@ -46,6 +46,7 @@
                     </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="QxL-eD-alo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="7D7-pp-Ypf"/>
                     <constraint firstItem="QxL-eD-alo" firstAttribute="top" secondItem="efX-cU-R7l" secondAttribute="bottom" constant="24" id="7ya-76-Ufr"/>
                     <constraint firstItem="lTn-rc-ryG" firstAttribute="centerX" secondItem="QxL-eD-alo" secondAttribute="centerX" id="ANC-ZS-ms6"/>
                     <constraint firstItem="efX-cU-R7l" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="L2c-fB-pbb"/>

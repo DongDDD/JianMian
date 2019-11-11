@@ -74,8 +74,8 @@
 //        self.extendedLayoutIncludesOpaqueBars = NO;
     if (_work_id == nil) {
         _work_id = self.homeworkModel.work_id;
-        
     }
+    
     [self setJuhua];
     [self getUserInfo];
     //右上角分享 收藏按钮
@@ -764,6 +764,7 @@
     [companyNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(iconImage.mas_right).offset(14);
         make.top.mas_equalTo(self.companyIntroductionView.mas_top).offset(26);
+        make.right.mas_equalTo(self.companyIntroductionView.mas_right).offset(-40);
     }];
     
     UILabel * companyMessageLab = [[UILabel alloc]init];

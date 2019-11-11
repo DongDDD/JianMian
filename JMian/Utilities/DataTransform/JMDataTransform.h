@@ -11,8 +11,10 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMDataTransform : NSObject
-
-+(NSString *)getEducationStrWithEducation:(NSString *)education;
+//数字-文字
++(NSString *)getEducationStrWithEducationNum:(NSString *)educationNum;
+//文字-数字
++(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr;
 @end
 
 NS_ASSUME_NONNULL_END

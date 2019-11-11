@@ -20,7 +20,8 @@
 #import "JMHTTPManager+Vita.h"
 #import "JMVitaDetailModel.h"
 #import "JMHTTPManager+Job.h"
-
+#import "JMBAndCTabBarViewController.h"
+#import "JMDataTransform.h"
 
 
 //typedef enum _PickerState {
@@ -119,6 +120,7 @@
 //}
 
 #pragma mark - 点击事件
+//在职
 - (IBAction)status1Action:(UIButton *)sender {
     [self.statusBtn2 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
     [self.statusBtn1 setImage:[UIImage imageNamed:@"蓝点"] forState:UIControlStateNormal];
@@ -128,7 +130,7 @@
 
 }
 
-
+//离职
 - (IBAction)status2Action:(UIButton *)sender {
     [self.statusBtn2 setImage:[UIImage imageNamed:@"蓝点"] forState:UIControlStateNormal];
     [self.statusBtn1 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
@@ -139,6 +141,7 @@
 
     
 }
+//应届生
 - (IBAction)status4Action:(UIButton *)sender {
      [self.statusBtn4 setImage:[UIImage imageNamed:@"蓝点"] forState:UIControlStateNormal];
     [self.statusBtn2 setImage:[UIImage imageNamed:@"椭圆 3"] forState:UIControlStateNormal];
@@ -149,7 +152,7 @@
 
 }
 
-
+//期望职位
 - (IBAction)wantToJob:(id)sender {
     
     PositionDesiredViewController *vc = [[PositionDesiredViewController alloc]init];
@@ -169,24 +172,7 @@
 }
 
 - (IBAction)choogseSalaryAction:(UIButton *)sender {
-//    self.pickerArray = @[@"1k-2k",
-//                         @"2k-4k",
-//                         @"4k-6k",
-//                         @"6k-8k",
-//                         @"8k-10k",
-//                         @"10k-15k",
-//                         @"15k-20k",
-//                         @"20k-30k",
-//                         @"30k-40k",
-//                         @"40k-50k",
-//                         @"50k-100K",
-//                         ];
-//    [self.datePicker setHidden:YES];
-//    [self.pickerView setHidden:NO];
 
-//    self.pickerState = SalaryState;
-    
-//    [self.pickerView reloadAllComponents];
     [self.view addSubview:self.salaryPickerSingle];
 
     [self.salaryPickerSingle show];
@@ -195,20 +181,11 @@
 - (IBAction)chooseStartWorkAction:(id)sender {
     [self.view addSubview:self.pickerData];
     [self.pickerData show];
-//    self.datePicker.hidden = NO;
-//    [self.pickerView setHidden:YES];
-    
+  
 }
 
 
 - (IBAction)chooseEducationAction:(UIButton *)sender {
-//    self.pickerArray = [NSArray arrayWithObjects:@"初中及以下",@"中专/中技",@"高中",@"大专",@"本科",@"硕士",@"博士",nil];
-//
-//    [self.pickerView setHidden:NO];
-////    [self.datePicker setHidden:YES];
-//
-//    self.pickerState = EducationState;
-//    [self.pickerView reloadAllComponents];
     [self.view addSubview:self.educationPickerSingle];
     
     [self.educationPickerSingle show];
@@ -216,11 +193,6 @@
 }
 
 
-//-(void)hiddenDatePickerAction{
-////    self.datePicker.hidden = YES;
-//    self.pickerView.hidden = YES;
-//
-//}
 
 #pragma mark - 数据提交
 
@@ -243,9 +215,18 @@
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             [JMUserInfoManager saveUserInfo:userInfo];
             
-            JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
-            vc.loginViewType = JMLoginViewTypeNextStep;
-            [self.navigationController pushViewController:vc animated:YES];
+            if ([self.statusStr isEqualToString:@"4"]) {
+                JMBAndCTabBarViewController *vc = [[JMBAndCTabBarViewController alloc]init];
+                JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+                userModel.isNewUser = YES;
+                [JMUserInfoManager saveUserInfo:userModel];
+                [UIApplication sharedApplication].delegate.window.rootViewController = vc;
+            }else{
+                JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
+                vc.loginViewType = JMLoginViewTypeNextStep;
+                [self.navigationController pushViewController:vc animated:YES];
+            
+            }
             
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -375,8 +356,8 @@
     }else if (pickerSingle == _educationPickerSingle) {
         [self.educationBtn setTitle:selectedTitle forState:UIControlStateNormal];
         [self.educationBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
-    
-        self.education = [self getEducationNumWithEducationStr:selectedTitle];
+        self.education = [JMDataTransform getEducationNumWithEducationStr:selectedTitle];
+        NSLog(@"%@",selectedTitle);
         kSaveMyDefault(@"education",selectedTitle);
     }
     

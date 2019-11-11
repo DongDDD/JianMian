@@ -30,7 +30,9 @@
 
 //VIP
 #import "JMVIPViewController.h"
-@interface JMPersonInfoViewController ()<UITableViewDelegate,UITableViewDataSource,THDatePickerViewDelegate,JMMyShareViewDelegate,JMPersonVideoTableViewCellDelegate,JMPersonContactTableViewCellDelegate>
+
+#import "ZJImageMagnification.h"
+@interface JMPersonInfoViewController ()<UITableViewDelegate,UITableViewDataSource,THDatePickerViewDelegate,JMMyShareViewDelegate,JMPersonVideoTableViewCellDelegate,JMPersonContactTableViewCellDelegate,JMPersonHeaderTableViewCellDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)JMPersonInfoConfigures *configures;
@@ -368,6 +370,10 @@
     [self.navigationController pushViewController:vc animated:YES];
 
 }
+-(void)clickHeaderActionWithImageView:(UIImageView *)imageView{
+    [ZJImageMagnification scanBigImageWithImageView:imageView alpha:1];
+}
+
 #pragma mark - UITableViewDataSource
 
 
@@ -448,6 +454,7 @@
         //个人简介
         JMPersonHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMPersonHeaderTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
         [cell setModel:self.configures.model];
         return cell;
         

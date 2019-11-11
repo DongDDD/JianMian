@@ -22,6 +22,8 @@ NSString *const JMComDetailHeaderTableViewCellIdentifier = @"JMComDetailHeaderTa
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.companyName.adjustsFontSizeToFitWidth = YES;
+
 }
 
 -(void)setModel:(JMCompanyInfoModel *)model{

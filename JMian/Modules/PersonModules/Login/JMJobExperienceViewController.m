@@ -71,7 +71,6 @@
         case JMJLoginViewTypeMemory:
             [self setIsHiddenBackBtn:YES];
             break;
-            
         default:
             break;
     }
@@ -87,6 +86,7 @@
             [self setRightBtnTextName:@"删除"];
             [self.saveBtn setTitle:@"保存" forState:UIControlStateNormal];
             self.headerViewHeightConstraint.constant = 0;
+            self.companyNameText.enabled = NO;
             self.headerView.hidden = YES;
             self.companyNameText.text = self.model.company_name;
 //            self.jobDescriptionText.text = self.model.experiences_description;
@@ -139,16 +139,14 @@
 ////    self.datePckerView.hidden = YES;
 //    [_companyNameText resignFirstResponder];
 //    [_jobDescriptionText resignFirstResponder];
-//
 //}
 
 - (void)deleteExperience {
     [self showAlertWithTitle:@"提醒⚠️" message:@"删除后数据将不可恢复" leftTitle:@"返回" rightTitle:@"确认删除"];
-
 }
 
--(void)alertRightAction{
 
+-(void)alertRightAction{
     [[JMHTTPManager sharedInstance] deleteExperienceWith_experienceId:self.model.experience_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self.navigationController popViewControllerAnimated:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -258,11 +256,16 @@
 //    }
 //
 //}
+
 -(void)saveBtnAction{
     [self.companyNameText resignFirstResponder];
     [_decriptionTextView.contentTextView resignFirstResponder];
-
-    [self updateExperience];
+    if (_viewType == JMJobExperienceViewTypeDefault) {
+        [self createExperience];
+    }else if (_viewType == JMJobExperienceViewTypeEdit) {
+        [self updateExperience];
+        
+    }
 }
 
 

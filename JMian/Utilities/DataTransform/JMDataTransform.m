@@ -11,8 +11,8 @@
 @implementation JMDataTransform
 
 //学历数据转化 数字 转 文字
-+(NSString *)getEducationStrWithEducation:(NSString *)education{
-    NSInteger myInt = [education integerValue];
++(NSString *)getEducationStrWithEducationNum:(NSString *)educationNum{
+    NSInteger myInt = [educationNum integerValue];
     
     switch (myInt) {
         case 0:
@@ -44,6 +44,36 @@
             break;
     }
     return @"不限";
+    
+}
+
+
+//学历数据转化 文字 转 数字
++(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr{
+    if ([educationStr isEqualToString:@"初中及以下"]) {
+        return @"1";
+        
+    }else if ([educationStr isEqualToString:@"中专/中技"]){
+        return @"2";
+        
+    }else if ([educationStr isEqualToString:@"高中"]){
+        return @"3";
+        
+    }else if ([educationStr isEqualToString:@"大专"]){
+        return @"4";
+        
+    }else if ([educationStr isEqualToString:@"本科"]){
+        return @"5";
+        
+    }else if ([educationStr isEqualToString:@"硕士"]){
+        return @"6";
+        
+    }else if ([educationStr isEqualToString:@"博士"]){
+        return @"7";
+        
+    }
+    
+    return @"5";
     
 }
 @end

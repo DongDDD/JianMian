@@ -11,9 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMPersonHeaderTableViewCellIdentifier;
+@protocol JMPersonHeaderTableViewCellDelegate <NSObject>
 
+-(void)clickHeaderActionWithImageView:(UIImageView *)ImageView;
+
+@end
 @interface JMPersonHeaderTableViewCell : UITableViewCell
 @property(nonatomic,strong)JMVitaDetailModel *model;
+@property(nonatomic,weak)id<JMPersonHeaderTableViewCellDelegate>delegate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -81,7 +81,7 @@
     
     [titleText setText:title];
     
-    self.navigationItem.titleView=titleText;
+    self.navigationItem.titleView = titleText;
     
 }
 
@@ -568,28 +568,22 @@
 
     }else if ([educationStr isEqualToString:@"中专"]){
         return @"2";
-
         
     }else if ([educationStr isEqualToString:@"高中"]){
         return @"3";
-
         
     }else if ([educationStr isEqualToString:@"大专"]){
         return @"4";
         
-        
     }else if ([educationStr isEqualToString:@"本科"]){
         return @"5";
-        
         
     }else if ([educationStr isEqualToString:@"硕士"]){
         return @"6";
         
-        
     }else if ([educationStr isEqualToString:@"博士"]){
         return @"7";
-        
-        
+                
     }
 
     return @"0";
