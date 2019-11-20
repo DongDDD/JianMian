@@ -288,8 +288,6 @@
 		044DF2602244D6F100301243 /* LoginPhoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044DF25E2244D6F100301243 /* LoginPhoneViewController.xib */; };
 		045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */ = {isa = PBXBuildFile; fileRef = 045EDD5E225D8A210054C5F3 /* JMHTTPManager+Uploads.m */; };
 		045EDD63225D97650054C5F3 /* JMHTTPManager+Captcha.m in Sources */ = {isa = PBXBuildFile; fileRef = 045EDD62225D97650054C5F3 /* JMHTTPManager+Captcha.m */; };
-		0460216A237CFC3700697FCC /* JMBofMineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04602168237CFC3700697FCC /* JMBofMineViewController.m */; };
-		0460216B237CFC3700697FCC /* JMBofMineViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04602169237CFC3700697FCC /* JMBofMineViewController.xib */; };
 		046227DF2376CA990041B70D /* JMPersonContactTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 046227DD2376CA990041B70D /* JMPersonContactTableViewCell.m */; };
 		046227E02376CA990041B70D /* JMPersonContactTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046227DE2376CA990041B70D /* JMPersonContactTableViewCell.xib */; };
 		046227E42376E5F50041B70D /* JMDataTransform.m in Sources */ = {isa = PBXBuildFile; fileRef = 046227E32376E5F50041B70D /* JMDataTransform.m */; };
@@ -1570,9 +1568,6 @@
 		045EDD5E225D8A210054C5F3 /* JMHTTPManager+Uploads.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+Uploads.m"; sourceTree = "<group>"; };
 		045EDD61225D97650054C5F3 /* JMHTTPManager+Captcha.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+Captcha.h"; sourceTree = "<group>"; };
 		045EDD62225D97650054C5F3 /* JMHTTPManager+Captcha.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+Captcha.m"; sourceTree = "<group>"; };
-		04602167237CFC3700697FCC /* JMBofMineViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMBofMineViewController.h; sourceTree = "<group>"; };
-		04602168237CFC3700697FCC /* JMBofMineViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMBofMineViewController.m; sourceTree = "<group>"; };
-		04602169237CFC3700697FCC /* JMBofMineViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMBofMineViewController.xib; sourceTree = "<group>"; };
 		046227DC2376CA990041B70D /* JMPersonContactTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPersonContactTableViewCell.h; sourceTree = "<group>"; };
 		046227DD2376CA990041B70D /* JMPersonContactTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPersonContactTableViewCell.m; sourceTree = "<group>"; };
 		046227DE2376CA990041B70D /* JMPersonContactTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMPersonContactTableViewCell.xib; sourceTree = "<group>"; };
@@ -3692,9 +3687,6 @@
 				04796ADF22D31CF50082BD59 /* JMBMineViewController.h */,
 				04796AE022D31CF50082BD59 /* JMBMineViewController.m */,
 				04796AE122D31CF50082BD59 /* JMBMineViewController.xib */,
-				04602167237CFC3700697FCC /* JMBofMineViewController.h */,
-				04602168237CFC3700697FCC /* JMBofMineViewController.m */,
-				04602169237CFC3700697FCC /* JMBofMineViewController.xib */,
 				048348D02269BE4100DE4630 /* JMManageInterviewViewController.h */,
 				048348D12269BE4100DE4630 /* JMManageInterviewViewController.m */,
 				048348D22269BE4100DE4630 /* JMManageInterviewViewController.xib */,
@@ -6092,7 +6084,6 @@
 				04256558229C2CCD000614E7 /* jop@2x.png in Resources */,
 				04EA7E2723011376005B7CE5 /* JMTaskCommetViewController.xib in Resources */,
 				04EA7E35230115C1005B7CE5 /* JMSquarePostTaskView.xib in Resources */,
-				0460216B237CFC3700697FCC /* JMBofMineViewController.xib in Resources */,
 				04AB7AAD2350223E009A30C0 /* new_version@2x.png in Resources */,
 				04EA210222AF39690035C398 /* NOvideos@2x.png in Resources */,
 				0485AD0022A0D03F00B31506 /* mineBottom@3x.png in Resources */,
@@ -7142,7 +7133,6 @@
 				0436A26923137BF000FF75D2 /* JMCDetailVideoTableViewCell.m in Sources */,
 				6D5DD8782308439D0064612A /* TPopCell.m in Sources */,
 				6D5DD89E2308439E0064612A /* TUISystemMessageCellLayout.m in Sources */,
-				0460216A237CFC3700697FCC /* JMBofMineViewController.m in Sources */,
 				04CC5F9C22B3BB9A00C5DD46 /* JMDiscoverCollectionViewCell.m in Sources */,
 				6D5DD8D12308439E0064612A /* EMVoiceConverter.mm in Sources */,
 				04ABB79022B134DD00E3F66A /* JMHTTPManager+CreateTaskComment.m in Sources */,

@@ -25,7 +25,6 @@
 #import "HomeViewController.h"
 #import "iVersion.h"
 #import "JMVersionDetailsView.h"
-#import "JMBofMineViewController.h"
 
 @interface JMBAndCTabBarViewController ()<iVersionDelegate>
 @property (nonatomic, strong) NSArray *modelArray;
@@ -35,7 +34,6 @@
 @property (nonatomic ,strong)JMMineViewController *Cmine;
 
 @property (nonatomic ,strong)JMBMineViewController *Bmine;
-//@property (nonatomic ,strong)JMBofMineViewController *Bmine;
 
 @property(nonatomic,strong)UIView *taskBadgeView;
 @property(nonatomic,strong)JMVersionDetailsView *versionDetailsView;
