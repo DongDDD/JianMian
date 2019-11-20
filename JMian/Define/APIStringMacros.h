@@ -11,8 +11,8 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 //app
 #else
@@ -144,6 +144,9 @@
 
 //视频列表
 #define Fectch_VideoList_URL @"api/video/lists"
+//播放次数记录
+#define Record_VideoLook_URL @"api/look/file"
+
 //明细
 #define Fectch_MoneyDetails_URL @"api/user/money/details"
 #define Fectch_WalletDetails_URL @"api/user/wallet/details"
@@ -174,6 +177,8 @@
 #define Fectch_Protocal_URL @"member/contract"
 //获取城市ID
 #define Get_CityID_URL @"city/location"
+//获取客服ID
+#define Get_CityID_URL @"api/service"
 
 //接口
 #define Get_Labels_URL @"/labels"

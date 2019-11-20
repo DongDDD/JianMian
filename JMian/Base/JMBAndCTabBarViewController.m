@@ -25,6 +25,7 @@
 #import "HomeViewController.h"
 #import "iVersion.h"
 #import "JMVersionDetailsView.h"
+#import "JMBofMineViewController.h"
 
 @interface JMBAndCTabBarViewController ()<iVersionDelegate>
 @property (nonatomic, strong) NSArray *modelArray;
@@ -34,6 +35,8 @@
 @property (nonatomic ,strong)JMMineViewController *Cmine;
 
 @property (nonatomic ,strong)JMBMineViewController *Bmine;
+//@property (nonatomic ,strong)JMBofMineViewController *Bmine;
+
 @property(nonatomic,strong)UIView *taskBadgeView;
 @property(nonatomic,strong)JMVersionDetailsView *versionDetailsView;
 
@@ -155,7 +158,7 @@
 //        self.Bmine.tabBarItem.badgeValue = @"1";
 //
 //    }
-    [self.Bmine.BUserCenterHeaderSubView.orderBadgeView setHidden:NO];
+//    [self.Bmine.BUserCenterHeaderSubView.orderBadgeView setHidden:NO];
     //C端
 //    if (self.Cmine.personalCenterHeaderView.taskBadgeView.hidden == NO) {
 //        self.Cmine.tabBarItem.badgeValue = @"2";
@@ -177,7 +180,7 @@
 //        self.Bmine.tabBarItem.badgeValue = @"1";
 //
 //    }
-    [self.Bmine.BUserCenterHeaderSubView.taskBadgeView setHidden:NO];
+//    [self.Bmine.BUserCenterHeaderSubView.taskBadgeView setHidden:NO];
     //C端
 //    if (self.Cmine.personalCenterHeaderView.orderBadgeView.hidden == NO) {
 //        self.Cmine.tabBarItem.badgeValue = @"2";

@@ -381,7 +381,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     
     //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
@@ -566,7 +566,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     }
      //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];

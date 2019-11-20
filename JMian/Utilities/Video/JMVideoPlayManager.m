@@ -11,6 +11,8 @@
 #import "JMHTTPManager+CompanyLike.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
 #import "WXApi.h"
+#import "JMHTTPManager+FectchVideoLists.h"
+#import "JMPersonInfoViewController.h"
 
 @implementation JMVideoPlayManager
 
@@ -74,7 +76,11 @@
         make.width.mas_equalTo(self.view);
         make.height.mas_equalTo(58);
     }];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lookBAction)];
+    [self.comVideoDetailInfoView addGestureRecognizer:tap];
 }
+
+
 
 
 -(void)setCUI{
@@ -84,7 +90,6 @@
         [self.shareBtn setHidden:NO];
         
     }else{
-        
         [self.likeBtn setHidden:YES];
         [self.shareBtn setHidden:NO];
         
@@ -117,11 +122,34 @@
         make.height.mas_equalTo(74);
     }];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lookCAction)];
+    [self.videoDetailInfoView addGestureRecognizer:tap];
 }
+
+#pragma mark - Action
+-(void)lookBAction{
+    NSLog(@"lookB");
+}
+
+-(void)lookCAction{
+    NSLog(@"lookC");
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(lookCActionDelegateWithUser_job_id:)]) {
+//        [self.delegate lookCActionDelegateWithUser_job_id:self.vitaModel.user_job_id];
+//    }
+//    JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc] init];
+//    vc.user_job_id = self.vitaModel.user_job_id;
+//    vc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+//
+//    [self addChildViewController:vc];
+//    [self.view addSubview:vc.view];
+ //    [self presentViewController:vc animated:YES completion:nil];
+////    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 #pragma mark - Setup
 
-- (void)setupPlayer_UrlStr:(NSString *)urlStr {
+- (void)setupPlayer_UrlStr:(NSString *)urlStr videoID:(NSString *)videoID{
 //    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
     self.title = @"视频播放";
@@ -148,6 +176,13 @@
     [self.comVideoDetailInfoView setHidden:YES];
     [self.likeBtn setHidden:YES];
     [self.shareBtn setHidden:YES];
+    
+//    [[JMHTTPManager sharedInstance]recordLookTimesWithVideoID:videoID successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
 }
 
 -(void)setVideoListCellData:(JMVideoListCellData *)videoListCellData{
@@ -349,6 +384,8 @@
 
 -(void)play{
     [self.player play];
+    
+    
 }
 
 -(void)disapearAction{

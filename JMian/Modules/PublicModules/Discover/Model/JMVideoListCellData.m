@@ -37,6 +37,7 @@
              @"video_user_id":@"video.user_id",
              @"video_type":@"video.type",
              @"video_file_path":@"video.file_path",
+             @"video_file_id":@"video.file_id",
              @"vita_description":@"vita.description",
              @"video_file_path":@"video.file_path",
              @"video_status":@"video.status",

@@ -65,7 +65,6 @@
 
 - (void)setupViews
 {
-    
     self.view.backgroundColor = TMessageController_Background_Color;
     
     @weakify(self)
@@ -242,13 +241,13 @@
     return nil;
 }
 
-- (TUIMessageCell *)messageController:(TUIMessageController *)controller onShowMessageData:(TUIMessageCellData *)data
-{
-    if ([self.delegate respondsToSelector:@selector(chatController:onShowMessageData:)]) {
-        return [self.delegate chatController:self onShowMessageData:data];
-    }
-    return nil;
-}
+//- (TUIMessageCell *)messageController:(TUIMessageController *)controller onShowMessageData:(TUIMessageCellData *)data
+//{
+//    if ([self.delegate respondsToSelector:@selector(chatController:onShowMessageData:)]) {
+//        return [self.delegate chatController:self onShowMessageData:data];
+//    }
+//    return nil;
+//}
 
 - (void)messageController:(TUIMessageController *)controller onSelectMessageAvatar:(TUIMessageCell *)cell
 {

@@ -424,7 +424,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)playAction_comcell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model{
     
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path videoID:@"666"];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];

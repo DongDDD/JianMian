@@ -52,7 +52,6 @@
  *  @param cell 委托者，消息单元
  */
 - (void)onSelectMessage:(TUIMessageCell *)cell;
-
 /**
  *  点击消息单元中消息头像的回调
  *  您可以通过该回调实现：响应用户点击，跳转到相应用户的详细信息界面。

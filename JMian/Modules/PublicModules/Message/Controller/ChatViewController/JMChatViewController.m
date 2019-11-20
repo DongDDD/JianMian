@@ -9,6 +9,7 @@
 #import "JMChatViewController.h"
 #import "TUITextMessageCellData.h"
 #import "TUITextMessageCell.h"
+#import "JMHTTPManager+CreateConversation.h"
 
 @interface JMChatViewController ()<TUIChatControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentPickerDelegate>
 
@@ -33,20 +34,21 @@
 //        subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_type_label_name];
 //    }
 //
-    if([model.type isEqualToString:B_Type_UESR]){
 
-            if ([_myConvModel.type isEqualToString:@"1"]) {
-                if (_myConvModel.work_work_name) {
-                    subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.work_work_name];
-                }
-            }else{
-                if (_myConvModel.job_type_label_name) {
-                    subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_type_label_name];                   
-                }
+    if([model.type isEqualToString:B_Type_UESR]){
+        
+        if ([_myConvModel.type isEqualToString:@"1"]) {
+            if (_myConvModel.work_work_name) {
+                subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.work_work_name];
             }
+        }else{
+            if (_myConvModel.job_type_label_name) {
+                subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_type_label_name];
+            }
+        }
         
     }else if ([model.type isEqualToString:C_Type_USER]) {
-        //否则相反:我登录了C端账号，判断自己是不是sender就行（最简单的思路，就是跟上面显示的相反就行）
+        //判断自己是不是sender
         if ([_myConvModel.type isEqualToString:@"2"]) {
             //兼职类型
             NSString *position;
@@ -90,6 +92,12 @@
         }
         receiverID = self.myConvModel.sender_mark;
     }
+    
+    if (_myConvModel.service_name) {
+        titleStr = @"在线客服";
+        receiverID = [NSString stringWithFormat:@"%@b",_myConvModel.service_id];
+        [self createChatRequstWithForeign_key:@"0" recipient:_myConvModel.service_id chatType:@"3"];
+    }
     self.title = titleStr;
     
     TIMConversation *conv = [[TIMManager sharedInstance] getConversation:(TIMConversationType)TIM_C2C receiver:receiverID];
@@ -103,67 +111,78 @@
     
 }
 
-- (TUIMessageCellData *)chatController:(TUIChatController *)controller onNewMessage:(TIMMessage *)msg
-{
-    TIMElem *elem = [msg getElem:0];
-    if([elem isKindOfClass:[TIMCustomElem class]]){
+-(void)createChatRequstWithForeign_key:(NSString *)foreign_key recipient:(NSString *)recipient chatType:(NSString *)chatType{
+    
+    [[JMHTTPManager sharedInstance]createChat_type:chatType recipient:recipient foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         
-//        TUIMessageCellData *cellData = [[TUIMessageCellData alloc] initWithDirection:msg.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming];
-        TUITextMessageCellData *cellData =[[TUITextMessageCellData alloc] initWithDirection:msg.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming];
-        cellData.content = [(TIMCustomElem *)elem desc];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
-        if ([msg.getConversation.getReceiver isEqualToString:@"dominator"]) {
-            cellData.avatarImage = [UIImage imageNamed:@"notification"];
-            
-        }else if([msg.getConversation.getReceiver isEqualToString: _myConvModel.sender_mark]) { //消息接收
-            
-            if (cellData.direction == MsgDirectionIncoming) {
-                if(self.myConvModel.sender_avatar && ![self.myConvModel.sender_avatar isEqualToString:@""]) {
-                  cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.sender_avatar];
-                }else {
-                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
-                }
-            }else{
-                if(self.myConvModel.recipient_avatar && ![self.myConvModel.recipient_avatar isEqualToString:@""]) {
-                    cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.recipient_avatar];
-                }else {
-                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
-                }
-            }
-            
-        }else {
-            
-            if (cellData.direction == MsgDirectionIncoming) {
-                if(self.myConvModel.recipient_avatar && ![self.myConvModel.recipient_avatar isEqualToString:@""]) {
-                    cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.recipient_avatar];
-                }else {
-                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
-                }
-                
-            }else{
-                if(self.myConvModel.sender_avatar && ![self.myConvModel.sender_avatar isEqualToString:@""]) {
-                    cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.sender_avatar];
-                }else {
-                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
-                }
-            }
-            
-        }
-
-        return cellData;
-    }
-    return nil;
+    }];
 }
 
-- (TUIMessageCell *)chatController:(TUIChatController *)controller onShowMessageData:(TUIMessageCellData *)data
-{
-    if ([data isKindOfClass:[TUITextMessageCellData class]]) {
-        TUITextMessageCell *myCell = [[TUITextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyCell"];
-        [myCell fillWithData:(TUITextMessageCellData *)data];
-        return myCell;
-    }
-    return nil;
-}
+
+//- (TUIMessageCellData *)chatController:(TUIChatController *)controller onNewMessage:(TIMMessage *)msg
+//{
+//    TIMElem *elem = [msg getElem:0];
+//    if([elem isKindOfClass:[TIMCustomElem class]]){
+//
+////        TUIMessageCellData *cellData = [[TUIMessageCellData alloc] initWithDirection:msg.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming];
+//        TUITextMessageCellData *cellData =[[TUITextMessageCellData alloc] initWithDirection:msg.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming];
+//        cellData.content = [(TIMCustomElem *)elem desc];
+//
+//        if ([msg.getConversation.getReceiver isEqualToString:@"dominator"]) {
+//            cellData.avatarImage = [UIImage imageNamed:@"notification"];
+//
+//        }else if([msg.getConversation.getReceiver isEqualToString: _myConvModel.sender_mark]) { //消息接收
+//
+//            if (cellData.direction == MsgDirectionIncoming) {
+//                if(self.myConvModel.sender_avatar && ![self.myConvModel.sender_avatar isEqualToString:@""]) {
+//                  cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.sender_avatar];
+//                }else {
+//                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
+//                }
+//            }else{
+//                if(self.myConvModel.recipient_avatar && ![self.myConvModel.recipient_avatar isEqualToString:@""]) {
+//                    cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.recipient_avatar];
+//                }else {
+//                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
+//                }
+//            }
+//
+//        }else {
+//
+//            if (cellData.direction == MsgDirectionIncoming) {
+//                if(self.myConvModel.recipient_avatar && ![self.myConvModel.recipient_avatar isEqualToString:@""]) {
+//                    cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.recipient_avatar];
+//                }else {
+//                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
+//                }
+//
+//            }else{
+//                if(self.myConvModel.sender_avatar && ![self.myConvModel.sender_avatar isEqualToString:@""]) {
+//                    cellData.avatarUrl =  [NSURL URLWithString:self.myConvModel.sender_avatar];
+//                }else {
+//                    cellData.avatarImage = [UIImage imageNamed:@"default_avatar"];
+//                }
+//            }
+//
+//        }
+//
+//        return cellData;
+//    }
+//    return nil;
+//}
+
+//- (TUIMessageCell *)chatController:(TUIChatController *)controller onShowMessageData:(TUIMessageCellData *)data
+//{
+//    if ([data isKindOfClass:[TUITextMessageCellData class]]) {
+//        TUITextMessageCell *myCell = [[TUITextMessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"MyCell"];
+//        [myCell fillWithData:(TUITextMessageCellData *)data];
+//        return myCell;
+//    }
+//    return nil;
+//}
 
 
 @end

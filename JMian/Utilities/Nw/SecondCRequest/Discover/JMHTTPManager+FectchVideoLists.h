@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
                     per_page:(nullable NSString *)per_page
                 successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
+-(void)recordLookTimesWithVideoID:(NSString *)videoID
+                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

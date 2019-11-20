@@ -45,10 +45,9 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="产品经理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTG-ST-Bvu">
-                        <rect key="frame" x="131" y="27" width="179" height="21"/>
+                        <rect key="frame" x="131" y="27" width="154" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="AAb-zu-a8Y"/>
-                            <constraint firstAttribute="width" constant="179" id="VD3-3n-Lat"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
@@ -161,6 +160,7 @@
                     <constraint firstItem="sd1-L6-MHL" firstAttribute="leading" secondItem="qNp-TQ-hZQ" secondAttribute="leading" id="bU9-kR-LXx"/>
                     <constraint firstItem="RTG-ST-Bvu" firstAttribute="top" secondItem="qNp-TQ-hZQ" secondAttribute="top" constant="27" id="cIE-4a-0qj"/>
                     <constraint firstAttribute="trailing" secondItem="HBh-FO-Wdx" secondAttribute="trailing" constant="20" id="d74-jK-tc3"/>
+                    <constraint firstItem="Xae-ME-Uww" firstAttribute="leading" secondItem="RTG-ST-Bvu" secondAttribute="trailing" constant="10" id="dtk-6U-2aH"/>
                     <constraint firstItem="b6V-YV-np5" firstAttribute="leading" secondItem="S6G-DK-vbX" secondAttribute="trailing" constant="-1" id="g1Z-a4-KHZ"/>
                     <constraint firstItem="HBh-FO-Wdx" firstAttribute="top" secondItem="Szk-av-mYM" secondAttribute="bottom" constant="13" id="g8u-Go-d5O"/>
                     <constraint firstItem="Loy-mV-JkR" firstAttribute="centerY" secondItem="qNp-TQ-hZQ" secondAttribute="centerY" id="gPI-f8-Gxb"/>
@@ -185,7 +185,7 @@
                 <outlet property="workExperienceLab" destination="Szk-av-mYM" id="r29-h4-1g5"/>
                 <outlet property="workNameLab" destination="RTG-ST-Bvu" id="Vtw-Lw-npU"/>
             </connections>
-            <point key="canvasLocation" x="-129" y="144"/>
+            <point key="canvasLocation" x="-47.200000000000003" y="124.58770614692655"/>
         </tableViewCell>
     </objects>
     <resources>

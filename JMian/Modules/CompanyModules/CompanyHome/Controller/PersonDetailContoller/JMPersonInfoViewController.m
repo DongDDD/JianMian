@@ -43,6 +43,8 @@
 //时间选择
 @property (weak, nonatomic) THDatePickerView *dateView;
 @property (strong, nonatomic) UIButton *BgBtn;
+@property (strong, nonatomic) UIButton *titleButton1;
+@property (strong, nonatomic) UIButton *titleButton2;
 
 @end
 
@@ -58,6 +60,26 @@
     [self initDatePickerView];
 
 }
+
+-(UIView *)setTitleView{
+    self.titleButton1 = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.titleButton1.frame=CGRectMake(0, 0, 80, 40);
+    self.titleButton1.titleLabel.font = kFont(15);
+    [self.titleButton1 setTitle:@"在线简历  " forState:UIControlStateNormal];
+    [self.titleButton1 addTarget:self action:@selector(titleButton1Action:) forControlEvents:UIControlEventTouchUpInside];
+
+    self.titleButton2 = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.titleButton2.frame = CGRectMake(70, 0, 80, 40);
+    self.titleButton2.titleLabel.font = kFont(15);
+    [self.titleButton2 setTitle:@"|  联系方式" forState:UIControlStateNormal];
+    [self.titleButton2 addTarget:self action:@selector(titleButton2Action:) forControlEvents:UIControlEventTouchUpInside];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH*0.4, 40)];
+    [view addSubview:self.titleButton1];
+    [view addSubview:self.titleButton2];
+    
+    return view;
+}
+
 
 -(void)initView{
 
@@ -167,6 +189,7 @@
 
 
 }
+
 -(void)rightAction:(UIButton *)sender{
     sender.selected = !sender.selected;
     if (sender.selected == YES) {
@@ -223,6 +246,17 @@
     
 }
 
+-(void)titleButton1Action:(UIButton *)btn{
+  
+    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+  
+}
+
+-(void)titleButton2Action:(UIButton *)btn{
+      [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:6] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+
+    
+}
 
 #pragma mark -- 微信分享的是链接
 - (void)wxShare:(int)n
@@ -356,7 +390,7 @@
 //播放视频
 -(void)playVideoAction
 {
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.configures.model.video_file_path];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.configures.model.video_file_path videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
@@ -382,12 +416,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
     return [self.configures numberOfRowsInSection:section];
 }
 //
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
     return [self.configures heightForRowsInSection:indexPath];;
 }
 
@@ -506,6 +538,36 @@
         
     }
     return nil;
+}
+
+#pragma mark - scrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+
+    CGFloat offsetY = scrollView.contentOffset.y;
+
+    if (offsetY > 400) {
+        self.navigationItem.titleView = [self setTitleView];;
+    }else{
+        self.title = @"个人详情";
+    }
+    CGFloat height = scrollView.frame.size.height;
+    CGFloat contentOffsetY = scrollView.contentOffset.y;
+    CGFloat bottomOffset = scrollView.contentSize.height - contentOffsetY;
+    if (bottomOffset <= height+100)
+    {
+        //在最底部
+        [self.titleButton2 setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [self.titleButton1 setTitleColor:UIColorFromHEX(0x999999) forState:UIControlStateNormal];
+
+    }
+    else
+    {
+        [self.titleButton1 setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [self.titleButton2 setTitleColor:UIColorFromHEX(0x999999) forState:UIControlStateNormal];
+
+    }
+    
 
 }
 
@@ -552,6 +614,8 @@
     return _myShareView;
     
 }
+
+
 
 
 /*

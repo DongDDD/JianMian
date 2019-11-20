@@ -396,7 +396,7 @@
 
 #pragma mark - 播放
 -(void)playAction{
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.videoUrl];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.videoUrl videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
@@ -404,7 +404,6 @@
 }
 
 #pragma mark - lazy
-
 ///初始化地图
 -(MAMapView *)mapView{
     

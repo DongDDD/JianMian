@@ -33,8 +33,8 @@ NSString *const JMPersonIntensionTableViewCellIdentifier = @"JMPersonIntensionTa
     //薪资
 //    self.salaryLab.text = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
     
-    
 }
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

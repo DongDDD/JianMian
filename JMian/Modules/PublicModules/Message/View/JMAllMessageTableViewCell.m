@@ -53,63 +53,71 @@
         [self.iconImageView setImage:[UIImage imageNamed:@"notification"]];
         [self.userLabel setHidden:YES];
     }
-    
-    
-    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-/*****这里思路是假设一种情况先，我登录了B端账号，判断自己是不是sender就行，是的话我要去n哪边的值才是合理的，！！否则相反！！ ！否则相反,没可能我是B端我把B端的东西赋值上去吧*****/
-    if([model.type isEqualToString:B_Type_UESR]){
-        //B端情况下,你显示只是work_name，我是企业看到的肯定是工作职位
-        if ([data.type isEqualToString:@"2"]) {
-            //兼职类型
-            if (data.job_type_label_name) {
-                self.userLabel.text = data.job_type_label_name;
+    //客服消息
+    if (data.service_name) {
+        self.userNameLabel.text = data.service_name;
+        [self.iconImageView setImage:[UIImage imageNamed:@"kf"]];
+        self.lastChatLabel.text = @"得米在线答疑";
+        [self.userLabel setHidden:YES];
+    }else{
+        //正常用户消息
+        JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+        /*****判断自己是不是sender，*****/
+        if([model.type isEqualToString:B_Type_UESR]){
+            //B端情况下,你显示只是work_name，我是企业看到的肯定是工作职位
+            if ([data.type isEqualToString:@"2"]) {
+                //兼职类型
+                if (data.job_type_label_name) {
+                    self.userLabel.text = data.job_type_label_name;
+                }
+                
+            }else if ([data.type isEqualToString:@"1"]) {
+                //全职类型
+                if (data.work_work_name) {
+                    self.userLabel.text = data.work_work_name;
+                }
             }
-
-        }else if ([data.type isEqualToString:@"1"]) {
-            //全职类型
-            if (data.work_work_name) {
-                self.userLabel.text = data.work_work_name;
+        }else if ([model.type isEqualToString:C_Type_USER]) {
+            if ([data.type isEqualToString:@"2"]) {
+                //兼职类型
+                NSString *position;
+                if (model.user_id == data.sender_user_id) {
+                    position = data.recipient_company_position;
+                }else{
+                    position = data.sender_company_position;
+                }
+                
+                self.userLabel.text = [NSString stringWithFormat:@"%@",position];
+            }else if ([data.type isEqualToString:@"1"]) {
+                //全职类型
+                self.userLabel.text = [NSString stringWithFormat:@"%@-%@",data.workInfo_company_name,data.work_work_name];
                 
             }
+            
         }
-    }else if ([model.type isEqualToString:C_Type_USER]) {
-        if ([data.type isEqualToString:@"2"]) {
-            //兼职类型
-            NSString *position;
-            if (model.user_id == data.sender_user_id) {
-                position = data.recipient_company_position;
+        
+        if (model.user_id == data.sender_user_id) {
+            //自己是senderID ,那你要显示的信息就在recipient里面
+            if (data.recipient_nickname .length > 0) {
+                self.userNameLabel.text = data.recipient_nickname;
             }else{
-                position = data.sender_company_position;
+                self.userNameLabel.text = data.recipient_phone;
             }
+            [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.recipient_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
             
-             self.userLabel.text = [NSString stringWithFormat:@"%@",position];
-        }else if ([data.type isEqualToString:@"1"]) {
-            //全职类型
-            self.userLabel.text = [NSString stringWithFormat:@"%@-%@",data.workInfo_company_name,data.work_work_name];
             
+        }else if (model.user_id == data.recipient_user_id){
+            //自己是recipientID ,那你要显示的信息就在sender里面
+            if (data.sender_nickname.length > 0) {
+                self.userNameLabel.text = data.sender_nickname;
+            }else{
+                self.userNameLabel.text = data.sender_phone;
+            }
+            [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.sender_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
         }
         
     }
     
-    if (model.user_id == data.sender_user_id) {
-        //自己是senderID ,那你要显示的信息就在recipient里面
-        if (data.recipient_nickname .length > 0) {
-            self.userNameLabel.text = data.recipient_nickname;
-        }else{
-            self.userNameLabel.text = data.recipient_phone;
-        }
-        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.recipient_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-
-        
-    }else if (model.user_id == data.recipient_user_id){
-        //自己是recipientID ,那你要显示的信息就在sender里面
-        if (data.sender_nickname.length > 0) {
-            self.userNameLabel.text = data.sender_nickname;
-        }else{
-            self.userNameLabel.text = data.sender_phone;
-        }
-        [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:data.sender_avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    }
     
     if (data.data.unRead <= 0) {
         [self.unReadLab setHidden:YES];

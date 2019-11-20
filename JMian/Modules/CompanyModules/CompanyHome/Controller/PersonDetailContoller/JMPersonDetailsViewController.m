@@ -477,7 +477,7 @@
 //播放视频
 -(void)playAction
 {
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.companyModel.video_file_path];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.companyModel.video_file_path videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];

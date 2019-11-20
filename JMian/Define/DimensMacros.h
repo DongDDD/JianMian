@@ -163,6 +163,9 @@ _Pragma("clang diagnostic pop")
 #define TTextView_Height (50)
 #define JMMoreView_Height (100)
 #define JMGreetView_Height (211)
+//push cell (custum)
+#define JMPushtMessageCell_ReuseId @"JMPushtMessageCell"
+
 //image cell
 #define TImageMessageCell_ReuseId @"TImageMessageCell"
 #define TImageMessageCell_Image_Width_Max (SCREEN_WIDTH * 0.4)

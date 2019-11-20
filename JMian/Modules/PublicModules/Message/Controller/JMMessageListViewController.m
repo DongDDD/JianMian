@@ -24,6 +24,7 @@
 @property (nonatomic, strong) NSArray *modelArray;
 //@property (nonatomic, strong) MBProgressHUD *progressHUD;
 @property (nonatomic, strong)JMMessageListModel *dominatorModel;
+@property (nonatomic, strong)JMMessageListModel *serviceModel;
 
 @end
 
@@ -99,6 +100,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 #pragma mark - data
 
+
 -(void)getMsgList{
     
     self.title = @"收取中...";
@@ -116,6 +118,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
     }];
     
 }
+
 //创建聊天
 -(void)createChatRequstWithType:(NSString *)type foreign_key:(NSString *)foreign_key recipient:(NSString *)recipient{
     if (recipient || foreign_key) {
@@ -141,6 +144,12 @@ static NSString *cellIdent = @"allMessageCellIdent";
     self.unReadNum = 0;
     TIMManager *manager = [TIMManager sharedInstance];
     NSArray *convs = [manager getConversationList];
+    
+    //用来装服务器用户的客服Model
+    JMMessageListModel *serviceModel = [[JMMessageListModel alloc]init];
+    NSString *service_id = kFetchMyDefault(@"service_id");
+    NSString *servicer_idB = [NSString stringWithFormat:@"%@b",service_id];
+    
     NSLog(@"腾讯云数据%@",convs);
     for (TIMConversation *conv in convs) {
         if([conv getType] == TIM_SYSTEM){
@@ -161,9 +170,17 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     data.subTitle = [self getLastDisplayString:conv];
                     
                     model.data = data;
-                    [converArray addObject:model];
-                    NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
-
+                    //过滤客服用户
+                    if (servicer_idB != [conv getReceiver]) {
+                        [converArray addObject:model];
+                        NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
+                    }else{
+                        //捉取客服model
+                        model.service_name = @"在线客服";
+                        model.service_id = service_id;
+                        serviceModel = model;
+                        
+                    }
                     
                 }
                 
@@ -179,19 +196,26 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     model.data = data;
                     data.time = [self getDateDisplayString:msg.timestamp];
                     data.subTitle = [self getLastDisplayString:conv];
-                    
                     model.data = data;
-                    [converArray addObject:model];
-                    NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
-
-                    
+                    //过滤客服用户
+                    if (servicer_idB != [conv getReceiver]) {
+                        [converArray addObject:model];
+                        NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
+                        
+                    }else{
+                        model.service_name = @"在线客服";
+                        model.service_id = service_id;
+                        serviceModel = model;
+                    }
                 }
                 
             }
-            
-            
+    
         }
+        //置顶 系统消息 和 在线客服
         
+        
+        //1 系统消息
         if ([[conv getReceiver] isEqualToString:@"dominator"]) {
             JMMessageListModel *model = [[JMMessageListModel alloc]init];
             JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
@@ -206,16 +230,51 @@ static NSString *cellIdent = @"allMessageCellIdent";
             NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
 
         }
+        //2 客服
+        if (service_id) {
+            if (serviceModel.service_id == nil) {
+                JMMessageListModel *model = [[JMMessageListModel alloc]init];
+                JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
+                data.convId = [conv getReceiver];
+                data.unRead = [conv getUnReadMessageNum];
+                _unReadNum += [conv getUnReadMessageNum];
+                //            data.time = [self getDateDisplayString:msg.timestamp];
+                data.subTitle = @"在线答疑";
+                model.data = data;
+                model.service_name = @"在线客服";
+                model.service_id = service_id;
+                self.serviceModel = model;
+
+            }else{
+                self.serviceModel = serviceModel;
+            }
+        }
         
     }
+    //把在线客服置顶
+    if (service_id != nil) {
+        if (self.serviceModel) {
+            [self.dataArray addObject:self.serviceModel];
+            
+        }else{
+            JMMessageListModel *model = [[JMMessageListModel alloc]init];
+            JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
+            data.subTitle = @"在线答疑";
+            model.service_name = @"在线客服";
+            model.service_id = service_id;
+            self.serviceModel = model;
+            [self.dataArray addObject:self.serviceModel];
+
+        }
+    }
+    
     //把系统消息置顶
     if (self.dominatorModel) {
-        
         [self.dataArray addObject:self.dominatorModel];
     }
+    
     if (converArray) {
         [self.dataArray addObjectsFromArray:converArray];
-        
     }
     
     //    [self.tableView.mj_header endRefreshing];
@@ -463,41 +522,18 @@ static NSString *cellIdent = @"allMessageCellIdent";
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-//    NSString *recipient_id;
-//    NSString *foreign_key;
+    
     JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];
-//    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-//    if ([userModel.type isEqualToString:B_Type_UESR]) {
-        //系统消息
-//        if ([messagelistModel.data.convId isEqualToString:@"dominator"] && foreign_key == nil) {
-//
-//            JMChatViewController *vc = [[JMChatViewController alloc] init];
-//            vc.myConvModel = messagelistModel;
-//            [self.navigationController pushViewController:vc animated:YES];
-//
-//        }else{
-//            if (userModel.user_id == messagelistModel.sender_user_id) {
-//                recipient_id = messagelistModel.recipient_user_id;
-//            }else{
-//                recipient_id = messagelistModel.sender_user_id;
-//            }
-//            if ([messagelistModel.type isEqualToString:@"1"]) {
-//                foreign_key = messagelistModel.work_work_id;
-//            }else if ([messagelistModel.type isEqualToString:@"2"]) {
-//                foreign_key = messagelistModel.job_ability_id;
-//            }
-//
-//
-//        }
-        JMChatViewController *vc = [[JMChatViewController alloc] init];
-        vc.myConvModel = messagelistModel;
-        [self.navigationController pushViewController:vc animated:YES];
-//        [self createChatRequstWithType:messagelistModel.type foreign_key:foreign_key recipient:recipient_id];
-//    }else{
-//
-//        JMChatViewController *vc = [[JMChatViewController alloc] init];
-//        vc.myConvModel = messagelistModel;
-//        [self.navigationController pushViewController:vc animated:YES];
+    
+    JMChatViewController *vc = [[JMChatViewController alloc] init];
+    vc.myConvModel = messagelistModel;
+    [self.navigationController pushViewController:vc animated:YES];
+    //[self createChatRequstWithType:messagelistModel.type foreign_key:foreign_key recipient:recipient_id];
+    //    }else{
+    //
+    //        JMChatViewController *vc = [[JMChatViewController alloc] init];
+    //        vc.myConvModel = messagelistModel;
+    //        [self.navigationController pushViewController:vc animated:YES];
 //
 //    }
     

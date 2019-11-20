@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class TUIVideoMessageCellData;
 @class TUIFileMessageCellData;
 @class TUISystemMessageCellData;
+@class JMPushMessageCellData;
 
 @protocol TUIMessageDataProviderServiceProtocol <NSObject>
 
@@ -49,6 +50,10 @@ NS_ASSUME_NONNULL_BEGIN
 - (TUIVideoMessageCellData *) getVideoCellData:(TIMMessage *)message fromElem:(TIMVideoElem *)elem;
 
 - (TUIFileMessageCellData *) getFileCellData:(TIMMessage *)message fromElem:(TIMFileElem *)elem;
+
+- (TUITextMessageCellData *) getPushCellData:(TIMMessage *)message fromElem:(TIMCustomElem *)elem;
+
+- (JMPushMessageCellData *) getPush2CellData:(TIMMessage *)message fromElem:(TIMCustomElem *)elem;
 
 - (TUISystemMessageCellData *) getSystemCellData:(TIMMessage *)message formElem:(TIMElem *)elem;
 

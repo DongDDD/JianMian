@@ -61,7 +61,7 @@
         return 100;
     }else if (indexPath.section == 6) {
         //联系方式
-        return 300;
+        return SCREEN_HEIGHT-100;
     }
     return 0;
 }

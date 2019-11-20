@@ -49,7 +49,7 @@ NSString *const JMPersonHeaderTableViewCellIdentifier = @"JMPersonHeaderTableVie
     
     //年龄
     //学历
-    NSString *eduStr = [JMDataTransform getEducationNumWithEducationStr:model.vita_education];
+    NSString *eduStr = [JMDataTransform getEducationStrWithEducationNum:model.vita_education];
     //城市
     NSString *cityName;
     if (model.city_city_name.length > 0) {

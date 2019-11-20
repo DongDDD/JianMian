@@ -85,6 +85,7 @@
                 <constraint firstItem="T0R-0E-nIF" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Thb-zU-sEQ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="113" y="85"/>
         </view>
     </objects>
 </document>

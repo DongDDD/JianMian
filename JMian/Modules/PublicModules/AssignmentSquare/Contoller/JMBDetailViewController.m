@@ -251,7 +251,7 @@
 
 #pragma mark - myDelegate
 -(void)playVideoActionWithUrl:(NSString *)url{
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];

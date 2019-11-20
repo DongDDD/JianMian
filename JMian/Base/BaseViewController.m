@@ -92,7 +92,7 @@
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    leftBtn.frame = CGRectMake(-40 , 0, 120, 28);
+    leftBtn.frame = CGRectMake(-40 , -5, 120, 28);
 //    leftBtn.backgroundColor = [UIColor redColor];
     [leftBtn addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
     [leftBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];

@@ -198,8 +198,6 @@ static NSString *cellIdent = @"cellIdent";
             
         };
         
-    
-
 }
 
 
@@ -529,7 +527,6 @@ static NSString *cellIdent = @"cellIdent";
                 NSMutableArray *salaryArr = [self setSalaryRangeWithSalaryStr:salaryStr];
                 self.salary_min = salaryArr[0];
                 self.salary_max = salaryArr[1];
-                
             }
         }
     
@@ -569,13 +566,11 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 -(void)playAction_cell:(HomeTableViewCell *)cell model:(JMHomeWorkModel *)model{
-    
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.videoFile_path];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.videoFile_path videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
-    
 }
 
 
@@ -608,7 +603,6 @@ static NSString *cellIdent = @"cellIdent";
     }else if ([labStr isEqualToString:@"全部"]) {
         self.work_year_s = nil;
         self.work_year_e = nil;
-        
         
     }
  

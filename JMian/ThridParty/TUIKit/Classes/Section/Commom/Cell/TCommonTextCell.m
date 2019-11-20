@@ -89,13 +89,13 @@
  */
 
 
-/*
+ 
   - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch{
     if(touch.phase == UITouchPhaseBegan && self.changeColorWhenTouched)
         self.backgroundColor = self.colorWhenTouched;
     return  YES;
 }
-*/
+ 
 
 
 -(void) touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{

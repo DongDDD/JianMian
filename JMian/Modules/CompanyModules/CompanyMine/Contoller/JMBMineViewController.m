@@ -84,7 +84,6 @@
     NSLog(@"222");
     [self.shareBgView setHidden:YES];
     [self.shareView setHidden:YES];
-    
 }
 #pragma mark - data
 
@@ -301,7 +300,7 @@
         _scrollView = [[UIScrollView alloc]init];
         _scrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         _scrollView.showsVerticalScrollIndicator = NO;
-        _scrollView.scrollEnabled = NO;
+//        _scrollView.scrollEnabled = NO;
         _scrollView.backgroundColor = BG_COLOR;
     }
     return _scrollView;

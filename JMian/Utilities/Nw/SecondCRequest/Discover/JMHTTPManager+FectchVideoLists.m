@@ -28,4 +28,18 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Fectch_VideoList_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
+
+-(void)recordLookTimesWithVideoID:(NSString *)videoID
+                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+//    NSString *urlStr = [Record_VideoLook_URL stringByAppendingFormat:@"/%@",videoID];
+    NSDictionary *dic =  @{
+                           @"videoID":videoID,
+                           };
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Record_VideoLook_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
+
+
+
 @end

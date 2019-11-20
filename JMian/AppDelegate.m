@@ -39,7 +39,6 @@
 #import "JMCDetailViewController.h"
 #import "iVersion.h"
 
-
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener,iVersionDelegate>
 
 @end
@@ -141,7 +140,7 @@
     [self.window makeKeyAndVisible];
 //    [judgevc.view addSubview:self.versionDetailsView];
 
-//    [self getVersionData];
+//    [self getServiceRequest];
  
     return YES;
 }
@@ -168,18 +167,20 @@
     return NO;//version1等于version2
     
 }
+
 -(void)initLocalNotification_alertBody:(NSString *)alertBody{
     // 1.创建一个本地通知
+
     UILocalNotification *localNote = [[UILocalNotification alloc] init];
     
     // 1.1.设置通知发出的时间
     localNote.fireDate = [NSDate dateWithTimeIntervalSinceNow:5];
     
     // 1.2.设置通知内容
-    localNote.alertBody = @"你有一条消息";
+    localNote.alertBody = alertBody;
     
     // 1.3.设置锁屏时,字体下方显示的一个文字
-    localNote.alertAction = @"你有一条消息";
+    localNote.alertAction = alertBody;
     localNote.hasAction = YES;
     
     // 1.4.设置启动图片(通过通知打开的)
@@ -399,7 +400,6 @@
             JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
             vc.work_id = typeId;
             [[self currentViewController].navigationController pushViewController:vc animated:YES];
-            
         }else{
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请先切换身份：我的-右上角设置-切换身份"delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
             [alert show];
@@ -473,6 +473,7 @@
         
     }];
 }
+
 
 
 //-(void)getVersionData{
@@ -622,13 +623,17 @@
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_TaskListener object:msgs];
             AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
             AudioServicesPlaySystemSound(1007);
+             [self initLocalNotification_alertBody:@"任务状态更新"];
+        }else if ([custom_elem.desc containsString:@"得米快找"]){
+            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+            AudioServicesPlaySystemSound(1007);
+            [self initLocalNotification_alertBody:@"收到得米推荐消息"];
+
         }
         
         if ([custom_elem.ext containsString:@"createOrder"]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:Notification_OrderListener object:msgs];
             [[JMPlaySoundsManager sharedInstance].moneySoundsPlayer play];
-
-            
         }
 //        NSString *title = [NSString stringWithFormat:@" %@ 邀请你视频面试",self.videoChatDic[TITLE]];
 //
@@ -636,12 +641,10 @@
 //                                                      delegate:self cancelButtonTitle:@"接受" otherButtonTitles: @"拒绝", nil];
 //        [alert show];
     }else if ([elem isKindOfClass:[TIMTextElem class]]) {
-        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-        AudioServicesPlaySystemSound(1007);
+
         [self initLocalNotification_alertBody:@"你有一条消息"];
 
     }
-    
     
     
 }
@@ -746,7 +749,6 @@
     if (!isPT) {
         //改状态成4 这个状态才可以评价
         [self updateInterviewStatus_interviewID:self.videoChatDic[Channel_ID] status:@"4"];
-        
     }
 
 }
@@ -791,6 +793,7 @@
         
     }];
 }
+
 #pragma mark - 发送拒绝接听视频命令（自定义消息）
 
 -(void)setVideoInvite_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{

@@ -46,7 +46,7 @@
         UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPress:)];
         [_container addGestureRecognizer:longPress];
         [self addSubview:_container];
-        
+
         //indicator
         _indicator = [[UIActivityIndicatorView alloc] init];
         _indicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleGray;
@@ -60,6 +60,10 @@
         [self addSubview:_retryView];
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+//        UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSelectMessage2:)];
+//        [_container addGestureRecognizer:tap2];
     }
     return self;
 }
@@ -164,7 +168,10 @@
             [_delegate onLongPressMessage:self];
         }
     }
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"onLongPressNotification" object:self];
+
 }
+
 
 - (void)onRetryMessage:(UIGestureRecognizer *)recognizer
 {
@@ -180,7 +187,16 @@
     if(_delegate && [_delegate respondsToSelector:@selector(onSelectMessage:)]){
         [_delegate onSelectMessage:self];
     }
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"onSelectMessageNotification" object:self];
 }
+
+//- (void)onSelectMessage2:(UIGestureRecognizer *)recognizer
+//{
+//    if(_delegate && [_delegate respondsToSelector:@selector(onSelectMessage2:)]){
+//        [_delegate onSelectMessage2:self];
+//    }
+//}
+
 
 - (void)onSelectMessageAvatar:(UIGestureRecognizer *)recognizer
 {

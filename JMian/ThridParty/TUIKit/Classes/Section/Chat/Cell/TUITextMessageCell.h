@@ -7,7 +7,11 @@
  ******************************************************************************/
 #import "TUIBubbleMessageCell.h"
 #import "TUITextMessageCellData.h"
-
+//@protocol TUITextMessageCellDelegate <NSObject>
+//
+//-(void)selectBubbleAction;
+//
+//@end
 /**
  * 【模块名称】TUITextMessageCell
  * 【功能说明】文本消息单元
@@ -15,6 +19,8 @@
  *  文本消息单元继承自气泡消息单元（TUIBubbleMessageCell），在气泡消息单元提供的气泡视图基础上填充文本信息并显示。
  */
 @interface TUITextMessageCell : TUIBubbleMessageCell
+
+//@property(nonatomic,weak)id<TUITextMessageCellDelegate>TUITextDelegate;
 
 /**
  *  内容标签

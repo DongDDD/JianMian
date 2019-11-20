@@ -22,11 +22,18 @@
         _content = [[UILabel alloc] init];
         _content.numberOfLines = 0;
         [self.bubbleView addSubview:_content];
+//        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onSelectMessage)];
+//        [self addGestureRecognizer:tap];
     }
     return self;
 }
 
-
+//-(void)onSelectMessage{
+//    NSLog(@"onSelectMessageCell");
+////    if (_TUITextDelegate && [_TUITextDelegate respondsToSelector:@selector(selectBubbleAction)]) {
+////        [_TUITextDelegate selectBubbleAction];
+////    }
+//}
 
 - (void)fillWithData:(TUITextMessageCellData *)data;
 {

@@ -14,6 +14,7 @@
 #import "TUIFaceMessageCell.h"
 #import "TUIVideoMessageCell.h"
 #import "TUIFileMessageCell.h"
+#import "JMPushMessageCell.h"
 #import "TUIFaceView.h"
 #import "TUIKit.h"
 #import "NSString+Common.h"
@@ -209,6 +210,11 @@
         
         data = [self getFileCellData:message fromElem:(TIMFileElem *)elem];
         
+    }else if([elem isKindOfClass:[TIMCustomElem class]]){
+        
+        data = [self getPushCustumCellData:message fromElem:(TIMCustomElem *)elem];
+
+        
     }else{
         data = [self getSystemCellData:message formElem:elem];
     }
@@ -222,10 +228,32 @@
     TIMTextElem *text = (TIMTextElem *)elem;
     TUITextMessageCellData *textData = [[TUITextMessageCellData alloc] initWithDirection:(message.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming)];
     textData.content = text.text;
-
     
     return textData;
 }
+
+- (JMPushMessageCellData *) getPushCustumCellData:(TIMMessage *)message  fromElem:(TIMCustomElem *)elem{
+    TIMCustomElem *custum = (TIMCustomElem *)elem;
+    JMPushMessageCellData *custumData = [[JMPushMessageCellData alloc] initWithDirection:(message.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming)];
+    custumData.desc = custum.desc;
+    custumData.data = custum.data;
+    custumData.content = custum.desc;
+    custumData.ext = custum.ext;
+
+//
+//
+    return custumData;
+}
+
+//- (JMPushMessageCellData *)getPush2CellData:(TIMMessage *)message fromElem:(TIMCustomElem *)elem{
+//    TIMCustomElem *custum = (TIMCustomElem *)elem;
+//
+//
+//
+//
+//}
+
+
 
 - (TUIFaceMessageCellData *) getFaceCellData:(TIMMessage *)message  fromElem:(TIMFaceElem *)elem{
     

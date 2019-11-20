@@ -18,7 +18,11 @@
 #import "JMShareView.h"
 
 NS_ASSUME_NONNULL_BEGIN
+@protocol JMVideoPlayManagerDelegate <NSObject>
 
+-(void)lookCActionDelegateWithUser_job_id:(NSString *)user_job_id;
+
+@end
 
 @interface JMVideoPlayManager : AVPlayerViewController<JMShareViewDelegate>
 
@@ -26,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)NSMutableArray *C_User_playArray;
 @property (strong, nonatomic) AVPlayer *player;
 @property (nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
-- (void)setupPlayer_UrlStr:(NSString *)urlStr;
+- (void)setupPlayer_UrlStr:(NSString *)urlStr videoID:(NSString *)videoID;
 - (void)play;
 + (instancetype)sharedInstance;
 
@@ -41,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)JMVideoListCellData *videoListCellData;
 @property (nonatomic, strong)JMVitaDetailModel *vitaModel;
 @property (nonatomic, strong)JMCompanyInfoModel *companyInfoModel;
-
+@property (nonatomic, weak)id<JMVideoPlayManagerDelegate>delegate;
 
 @end
 

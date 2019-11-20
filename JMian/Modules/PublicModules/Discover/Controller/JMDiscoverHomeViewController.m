@@ -14,6 +14,7 @@
 #import "JMVideoListCellData.h"
 #import "JMVideoPlayManager.h"
 #import "JMCityListViewController.h"
+#import "JMPersonInfoViewController.h"
 
 //#import <PassKit/PassKit.h>                                 //用户绑定的银行卡信息
 //#import <PassKit/PKPaymentAuthorizationViewController.h>    //Apple pay的展示控件
@@ -286,10 +287,24 @@
     [self showProgressHUD_view:self.view];
     [[JMHTTPManager sharedInstance]fectchVideoList_mode:mode city_id:_city_id type:type contact_phone:nil per_page:@"10" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-//            NSMutableArray *array = [NSMutableArray array];
-            self.videoDataList = [JMVideoListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            NSMutableArray *array = [NSMutableArray array];
+            array = [JMVideoListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
-//            [self.videoDataList addObjectsFromArray:array]
+            for (JMVideoListCellData *data in array) {
+                if (data.video.count > 0) {
+                    //企业视频
+                    JMCVideoModel *videoModel = data.video[0];
+                    if ([videoModel.status isEqualToString:@"2"]) {
+                        [self.videoDataList addObject:data];
+                    }
+                }else{
+                    //个人视频
+                    if ([data.video_status isEqualToString:@"2"]) {
+                        [self.videoDataList addObject:data];
+                    }
+                }
+            }
+            //            [self.videoDataList addObjectsFromArray:array]
 //            if (self.videoDataList.count < 10) {
 //                [self.collectionView.mj_footer setHidden:YES];
 //                _isShowAllData = YES;
@@ -335,7 +350,7 @@
     
     }
 
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:videoUrl];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:videoUrl videoID:data.video_file_id];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
@@ -344,9 +359,16 @@
  
 }
 
+//-(void)lookCActionDelegateWithUser_job_id:(NSString *)user_job_id{
+//    JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc] init];
+//
+//    vc.user_job_id = user_job_id;
+//    [self presentViewController:vc animated:YES completion:nil];
+////        [self.navigationController pushViewController:vc animated:YES];
+//}
+
 -(void)likeAction:(UIButton *)sender{
     sender.selected = !sender.selected;
- 
 }
 
 -(void)didSelectedCity_id:(NSString *)city_id city_name:(NSString *)city_name{
@@ -383,14 +405,13 @@
 
 - (UICollectionView *)collectionView {
     if (!_collectionView) {
-        
         //自动网格布局
         UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc]init];
         
         CGFloat itemWidth = (SCREEN_WIDTH ) / 2.00;
         
         //设置单元格大小
-        flowLayout.itemSize = CGSizeMake(itemWidth, 265);
+        flowLayout.itemSize = CGSizeMake(itemWidth, 275);
         //最小行间距(默认为10)
         flowLayout.minimumLineSpacing = 0;
         //最小item间距（默认为10）

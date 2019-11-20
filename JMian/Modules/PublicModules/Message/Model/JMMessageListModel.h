@@ -18,6 +18,8 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 
 @interface JMMessageListModel : NSObject
 @property(nonatomic,copy)NSString *type;//1-全职聊天。2-兼职聊天
+@property(nonatomic,copy)NSString *service_name;
+@property(nonatomic,copy)NSString *service_id;
 
 //后台数据
 @property(nonatomic,copy)NSString *sender_user_id;

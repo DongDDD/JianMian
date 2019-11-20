@@ -35,6 +35,8 @@
     self.bubbleView.highlightedImage = data.highlightedBubble;
 }
 
+
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
