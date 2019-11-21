@@ -24,5 +24,6 @@
 - (void)fillWithData:(JMPushMessageCellData *)data;
 {
     [super fillWithData:data];
+    self.pushData = data;
 }
 @end

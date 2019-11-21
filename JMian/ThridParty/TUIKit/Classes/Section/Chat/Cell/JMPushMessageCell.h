@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMPushMessageCell : TUITextMessageCell
 
-
+@property(nonatomic,strong)JMPushMessageCellData *pushData;
 - (void)fillWithData:(JMPushMessageCellData *)data;
 
 @end

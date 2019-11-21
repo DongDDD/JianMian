@@ -99,7 +99,7 @@ static NSString *cellIdent = @"CellIdent";
 //创建聊天
 -(void)createChatRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
     
-    [[JMHTTPManager sharedInstance]createChat_type:self.mode recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createChat_type:self.mode recipient:user_id foreign_key:foreign_key sender_mark:@"" recipient_mark:@""successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
  
         JMChatViewController *vc = [[JMChatViewController alloc]init];

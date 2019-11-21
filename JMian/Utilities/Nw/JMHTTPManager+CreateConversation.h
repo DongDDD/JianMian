@@ -15,6 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)createChat_type:(NSString *)type
               recipient:(NSString *)recipient
             foreign_key:(NSString *)foreign_key
+            sender_mark:(NSString *)sender_mark
+         recipient_mark:(NSString *)recipient_mark
+
            successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 @end

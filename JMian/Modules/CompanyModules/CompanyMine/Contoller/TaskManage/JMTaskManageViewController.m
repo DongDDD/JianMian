@@ -657,7 +657,8 @@
 
 -(void)createChatRequestWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
     //Chat_type：2 灵活就业
-    [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key sender_mark:@"" recipient_mark:@""
+                                       successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         
         

@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property(nonatomic,copy)NSString *work_work_experience_min;
 @property(nonatomic,copy)NSString *work_work_experience_max;
 
-
+@property(nonatomic,copy)NSString *foreign_key;
 
 
 //招聘信息

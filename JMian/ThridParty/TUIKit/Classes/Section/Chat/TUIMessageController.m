@@ -165,8 +165,8 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 - (void)setConversation:(TIMConversation *)conversation
 {
     _conv = conversation;
-    //系统消息 或者 客服 隐藏头部信息
-    if ([self.myConvModel.data.convId isEqualToString:@"dominator"] || self.myConvModel.service_name) {
+    //1 系统消息   2 客服  3 招客服Type = 3   三种情况隐藏头部信息
+    if ([self.myConvModel.data.convId isEqualToString:@"dominator"] || self.myConvModel.service_name || [self.myConvModel.type isEqualToString:@"3"]) {
         _isHiddenHeaderInfo = YES;
     }
     
@@ -396,21 +396,24 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                     default:
                         break;
                 }
-                if (data.direction == MsgDirectionIncoming) {
-                    //消息接收方
-                    NSString *avartStr = [self getAvartUrlWithConvModel:self.myConvModel];
-                    data.avatarUrl = [NSURL URLWithString:avartStr];
-                    
-                }else if (data.direction == MsgDirectionOutgoing) {
-                    //自己
-                    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-                    NSString *avartStr =  userModel.avatar;
-                    data.avatarUrl = [NSURL URLWithString:avartStr];
-                }
                 //客服
-                if (self.myConvModel.service_name) {
+                if (self.myConvModel.service_id.length > 0) {
                     data.avatarImage = [UIImage imageNamed:@"kf"];
+                }else{
+                    if (data.direction == MsgDirectionIncoming) {
+                        //消息接收方
+                        NSString *avartStr = [self getAvartUrlWithConvModel:self.myConvModel];
+                        data.avatarUrl = [NSURL URLWithString:avartStr];
+                        
+                    }else if (data.direction == MsgDirectionOutgoing) {
+                        //自己
+                        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+                        NSString *avartStr =  userModel.avatar;
+                        data.avatarUrl = [NSURL URLWithString:avartStr];
+                    }
+                    
                 }
+                
                 //系统消息
                 if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
                     data.avatarImage = [UIImage imageNamed:@"notification"];
@@ -590,20 +593,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             cell = [[JMChatDetailInfoTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdent];
         }
         cell.delegate = self;
-        //管理员隐藏头部对话信息详情
-        if (_isHiddenHeaderInfo) {
-            [cell setHidden:YES];
-        }
+    
         
         //兼职对话类型
         if ([self.myConvModel.type isEqualToString:@"2"]) {
-            //            if (!self.myConvModel.job_ability_id) {
-            //                //兼职简历为空
-            //            }else{
-            //                [cell setHidden:NO];
-            //                [cell setMyConModel:self.myConvModel];
-            //            }
-            
             JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
             if ([userModel.type isEqualToString:B_Type_UESR]) {
                 //兼职对话，兼职简历为空
@@ -628,7 +621,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         }else if([self.myConvModel.type isEqualToString:@"1"]){
             [cell setMyConModel:self.myConvModel];
         }
-        
+        //管理员隐藏头部对话信息详情
+        if (_isHiddenHeaderInfo) {
+            [cell setHidden:YES];
+        }
         cell.backgroundColor = TMessageController_Background_Color;
         return cell;
         
@@ -1076,6 +1072,8 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         [self showFileMessage:(TUIFileMessageCell *)cell];
     }
     if ([cell isKindOfClass:[JMPushMessageCell class]]) {
+        JMPushMessageCell *pushCell = cell;
+        NSString *receiveStr = [[NSString alloc]initWithData:pushCell.pushData.data encoding:NSUTF8StringEncoding];
         NSLog(@"onSelectMessage_JMPushMessageCell");
     }
 }

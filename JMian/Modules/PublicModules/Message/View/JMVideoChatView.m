@@ -189,7 +189,7 @@
 
 -(void)createChatRequstWithForeign_key:(NSString *)foreign_key recipient:(NSString *)recipient chatType:(NSString *)chatType{
     
-    [[JMHTTPManager sharedInstance]createChat_type:chatType recipient:recipient foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createChat_type:chatType recipient:recipient foreign_key:foreign_key  sender_mark:@"" recipient_mark:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         //后期优化这个页面直接用messageListModel赋值,
         [self setMessageListModel:messageListModel];

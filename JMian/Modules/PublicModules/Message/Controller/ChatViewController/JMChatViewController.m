@@ -93,13 +93,18 @@
         receiverID = self.myConvModel.sender_mark;
     }
     
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    //B端客服用户情况，这种业务情况是唯一的
+    NSString *str1 = [NSString stringWithFormat:@"%@b",userModel.user_id];
+    if ([receiverID isEqualToString:str1]) {
+        receiverID = [NSString stringWithFormat:@"%@a",userModel.user_id];
+    }
+    
     if (_myConvModel.service_name) {
-        titleStr = @"在线客服";
         receiverID = [NSString stringWithFormat:@"%@b",_myConvModel.service_id];
-        [self createChatRequstWithForeign_key:@"0" recipient:_myConvModel.service_id chatType:@"3"];
+        titleStr = @"在线客服";
     }
     self.title = titleStr;
-    
     TIMConversation *conv = [[TIMManager sharedInstance] getConversation:(TIMConversationType)TIM_C2C receiver:receiverID];
     _chat = [[TUIChatController alloc] initWithConversation:conv];
     _chat.delegate = self;
@@ -113,7 +118,7 @@
 
 -(void)createChatRequstWithForeign_key:(NSString *)foreign_key recipient:(NSString *)recipient chatType:(NSString *)chatType{
     
-    [[JMHTTPManager sharedInstance]createChat_type:chatType recipient:recipient foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]createChat_type:chatType recipient:recipient foreign_key:foreign_key sender_mark:@"" recipient_mark:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 //        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {

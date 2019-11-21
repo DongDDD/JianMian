@@ -226,7 +226,7 @@
     
     if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
         
-        [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.myModel.user_id foreign_key:self.myModel.work_label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.myModel.user_id foreign_key:self.myModel.work_label_id sender_mark:@"" recipient_mark:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             if(responsObject[@"data"]){
                 

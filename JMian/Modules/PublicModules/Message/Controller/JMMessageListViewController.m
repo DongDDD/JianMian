@@ -120,13 +120,13 @@ static NSString *cellIdent = @"allMessageCellIdent";
 }
 
 //创建聊天
--(void)createChatRequstWithType:(NSString *)type foreign_key:(NSString *)foreign_key recipient:(NSString *)recipient{
+-(void)createChatRequstWithType:(NSString *)type foreign_key:(NSString *)foreign_key recipient:(NSString *)recipient sender_mark:(NSString *)sender_mark recipient_mark:(NSString *)recipient_mark model:(JMMessageListModel *)model{
     if (recipient || foreign_key) {
-        [[JMHTTPManager sharedInstance]createChat_type:type recipient:recipient foreign_key:foreign_key successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+        [[JMHTTPManager sharedInstance]createChat_type:type recipient:recipient foreign_key:foreign_key sender_mark:sender_mark recipient_mark:recipient_mark successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
             
             JMChatViewController *vc = [[JMChatViewController alloc] init];
-            vc.myConvModel = messageListModel;
+            vc.myConvModel = model;
             [self.navigationController pushViewController:vc animated:YES];
 
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -149,6 +149,14 @@ static NSString *cellIdent = @"allMessageCellIdent";
     JMMessageListModel *serviceModel = [[JMMessageListModel alloc]init];
     NSString *service_id = kFetchMyDefault(@"service_id");
     NSString *servicer_idB = [NSString stringWithFormat:@"%@b",service_id];
+    NSString *my_IM_id;
+    if ([userInfomodel.type isEqualToString:B_Type_UESR]) {
+        my_IM_id = [NSString stringWithFormat:@"%@b",userInfomodel.user_id];
+        
+    }else{
+        my_IM_id = [NSString stringWithFormat:@"%@a",userInfomodel.user_id];
+        
+    }
     
     NSLog(@"腾讯云数据%@",convs);
     for (TIMConversation *conv in convs) {
@@ -158,8 +166,11 @@ static NSString *cellIdent = @"allMessageCellIdent";
         TIMMessage *msg = [conv getLastMsg];
         NSLog(@"%@",msg);
         for (JMMessageListModel *model in self.modelArray) {
-            if (model.sender_user_id == userInfomodel.user_id) {
+            if (model.sender_mark == my_IM_id) {
                 //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
+                NSLog(@"getReceiver%@",[conv getReceiver]);
+                NSLog(@"recipient_mark%@",model.recipient_mark);
+
                 if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
                     data.unRead = [conv getUnReadMessageNum];
@@ -184,9 +195,11 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     
                 }
                 
-            }else if(model.recipient_user_id == userInfomodel.user_id){
+            }else if(model.recipient_mark == my_IM_id){
                 //判断recipient是自己的话，拿sender_mark去跟腾讯云的ReceiverID配对接收者
-                
+                NSLog(@"getReceiver%@",[conv getReceiver]);
+                NSLog(@"recipient_mark%@",model.recipient_user_id);
+
                 if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
                     
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
@@ -210,6 +223,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
                 }
                 
             }
+            
     
         }
         //置顶 系统消息 和 在线客服
@@ -243,6 +257,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
                 model.data = data;
                 model.service_name = @"在线客服";
                 model.service_id = service_id;
+//                model.sender_mark = NSString stringWithFormat:@"%@a",userInfomodel.u
+//                model.recipient_mark = NSString stringWithFormat:@"%@",
                 self.serviceModel = model;
 
             }else{
@@ -522,12 +538,99 @@ static NSString *cellIdent = @"allMessageCellIdent";
         [self presentViewController:alert animated:YES completion:nil];
         return;
     }
-    
     JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];
+    NSString *recipient_id;
+    NSString *foreign_key = messagelistModel.foreign_key;
+    NSString *chat_type = messagelistModel.type;
+    NSString *sender_mark = messagelistModel.sender_mark;
+    NSString *recipient_mark = messagelistModel.recipient_mark;
+
+    //系统消息不用创建对话
+    if ([messagelistModel.data.convId isEqualToString:@"dominator"]) {
+        
+        JMChatViewController *vc = [[JMChatViewController alloc] init];
+        vc.myConvModel = messagelistModel;
+        [self.navigationController pushViewController:vc animated:YES];
+        return;
+    }
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     
-    JMChatViewController *vc = [[JMChatViewController alloc] init];
-    vc.myConvModel = messagelistModel;
-    [self.navigationController pushViewController:vc animated:YES];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        
+        if ([messagelistModel.type isEqualToString:@"3"] || messagelistModel.service_id){
+            foreign_key = @"0";
+            chat_type = @"3";
+            sender_mark = [NSString stringWithFormat:@"%@b",userModel.user_id];
+            recipient_mark = [NSString stringWithFormat:@"%@b",messagelistModel.service_id];
+
+//            sender_mark = messagelistModel.sender_mark;
+//            recipient_mark = messagelistModel.recipient_mark;
+            
+        }else{
+            if (userModel.user_id == messagelistModel.sender_user_id) {
+                recipient_id = messagelistModel.recipient_user_id;
+            }else{
+                recipient_id = messagelistModel.sender_user_id;
+            }
+            
+        }
+        
+        [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
+        
+    }else if ([userModel.type isEqualToString:C_Type_USER]){
+        //C 端不用创建对话，在线客服才要创建对话
+        if (messagelistModel.service_id){
+            foreign_key = @"0";
+            chat_type = @"3";
+            if (userModel.user_id == messagelistModel.sender_user_id) {
+                recipient_id = messagelistModel.recipient_user_id;
+            }else{
+                recipient_id = messagelistModel.sender_user_id;
+            }
+            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+            NSString *sender_mark = [NSString stringWithFormat:@"%@a",userModel.user_id];
+            NSString *recipient_mark = [NSString stringWithFormat:@"%@b",messagelistModel.service_id];
+
+            [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
+
+        }else{
+            JMChatViewController *vc = [[JMChatViewController alloc] init];
+            vc.myConvModel = messagelistModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        
+        }
+    
+    }
+    
+    
+    
+    
+//    JMChatViewController *vc = [[JMChatViewController alloc] init];
+//    vc.myConvModel = messagelistModel;
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    //    }else{
+    //
+    //        JMChatViewController *vc = [[JMChatViewController alloc] init];
+    //        vc.myConvModel = messagelistModel;
+    //        [self.navigationController pushViewController:vc animated:YES];
+
+    
+    
+    
+    
+    
+    
+    
+//    JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];
+//
+//    JMChatViewController *vc = [[JMChatViewController alloc] init];
+//    vc.myConvModel = messagelistModel;
+//    [self.navigationController pushViewController:vc animated:YES];
+//
+//
+//    [self createChatRequstWithType:messagelistModel.type foreign_key:<#(NSString *)#> recipient:<#(NSString *)#>]
+    
     //[self createChatRequstWithType:messagelistModel.type foreign_key:foreign_key recipient:recipient_id];
     //    }else{
     //
