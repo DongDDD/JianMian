@@ -107,6 +107,7 @@
     _longitude = self.homeworkModel.longitude;
     _latitude = self.homeworkModel.latitude;
     _jobDescriptionStr = self.homeworkModel.Description;
+    _city_id = self.homeworkModel.cityId;
     
 }
 
@@ -192,11 +193,13 @@
     
 }
 
+//获取默认城市
 -(void)getCityIdRequstWithCityName:(NSString *)cityName{
+    [self showProgressHUD_view:self.view];
     [[JMHTTPManager sharedInstance]getCityIdWithcity_name:cityName successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         self.city_id = responsObject[@"data"][@"city_id"];
 //        NSString *city_id =
-        
+        [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

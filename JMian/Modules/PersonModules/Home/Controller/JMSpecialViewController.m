@@ -334,20 +334,21 @@ static NSString *BHomeCellID = @"BHomeCellID";
 
 -(void)playAction_cell:(HomeTableViewCell *)cell model:(JMHomeWorkModel *)model{
 
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.videoFile_path videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.videoFile_path videoID:@""];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
 
 }
 
 -(void)playAction_comcell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model{
     
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path videoID:@""];
+    [[JMVideoPlayManager sharedInstance] play];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
     
 }
 

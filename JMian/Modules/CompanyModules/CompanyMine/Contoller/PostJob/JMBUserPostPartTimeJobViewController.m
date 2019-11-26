@@ -528,9 +528,9 @@
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
-//    [[JMVideoPlayManager sharedInstance] play];
     
 }
 

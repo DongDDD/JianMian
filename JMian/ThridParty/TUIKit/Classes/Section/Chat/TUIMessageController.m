@@ -50,7 +50,7 @@
 #import "THDatePickerView.h"
 #import "JMHTTPManager+UnReadNotice.h"
 #import "JMPersonInfoViewController.h"
-
+#import "JMPushVCAction.h"
 #define MAX_MESSAGE_SEP_DLAY (5 * 60)
 
 static NSString *cellIdent = @"infoCellIdent";
@@ -397,14 +397,19 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                         break;
                 }
                 //客服
-                if (self.myConvModel.service_id.length > 0) {
-                    data.avatarImage = [UIImage imageNamed:@"kf"];
-                }else{
+//                if (self.myConvModel.service_id.length > 0) {
+//                    data.avatarImage = [UIImage imageNamed:@"kf"];
+//                }else{
                     if (data.direction == MsgDirectionIncoming) {
                         //消息接收方
-                        NSString *avartStr = [self getAvartUrlWithConvModel:self.myConvModel];
-                        data.avatarUrl = [NSURL URLWithString:avartStr];
-                        
+                        if (self.myConvModel.service_id.length > 0) {
+//                            data.avatarImage = [UIImage imageNamed:@"kf"];
+                            data.avatarUrl = [NSURL URLWithString:@"http://produce.jmzhipin.com/h5/images/customer.png"];
+//                            data.name = @"在线客服";
+                        }else{
+                            NSString *avartStr = [self getAvartUrlWithConvModel:self.myConvModel];
+                            data.avatarUrl = [NSURL URLWithString:avartStr];
+                        }
                     }else if (data.direction == MsgDirectionOutgoing) {
                         //自己
                         JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
@@ -412,14 +417,14 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                         data.avatarUrl = [NSURL URLWithString:avartStr];
                     }
                     
-                }
+//                }
                 
                 //系统消息
                 if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
                     data.avatarImage = [UIImage imageNamed:@"notification"];
                 }
-                [uiMsgs addObject:data];
                 data.innerMessage = msg;
+                [uiMsgs addObject:data];
             }
 //            if ([self.delegate respondsToSelector:@selector(messageController:onNewMessage:)]) {
 //                TUIMessageCellData *data = [self.delegate messageController:self onNewMessage:msg];
@@ -485,7 +490,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (section == self.section - 2) {
+    if (section == self.section - 2 && ![self.myConvModel.type isEqualToString:@"3"]) {
         JMChatViewSectionView *view=[[JMChatViewSectionView alloc] init];
         view.delegate = self;
         return view ;
@@ -680,6 +685,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 //        }
         cell.delegate = self;
         TUIMessageCellData *cellData = _uiMsgs[indexPath.row];
+
         [cell fillWithData:cellData];
 //        if ([self.conv.getReceiver isEqualToString:@"dominator"]) {
 //            cell.avatarView.image = [UIImage imageNamed:@"notification"];
@@ -1073,7 +1079,14 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }
     if ([cell isKindOfClass:[JMPushMessageCell class]]) {
         JMPushMessageCell *pushCell = cell;
-        NSString *receiveStr = [[NSString alloc]initWithData:pushCell.pushData.data encoding:NSUTF8StringEncoding];
+        NSString *string = [[NSString alloc]initWithData:pushCell.pushData.data encoding:NSUTF8StringEncoding];
+        if ([string containsString:@":"] || string.length > 0) {
+            NSArray *array = [string componentsSeparatedByString:@":"]; //从字符A中分隔成2个元素的数组
+            NSString *typeStr = array[0];
+            NSString *typeId = array[1];
+            [JMPushVCAction gotoMyVCWithtypeStr:typeStr typeId:typeId];
+            
+        }
         NSLog(@"onSelectMessage_JMPushMessageCell");
     }
 }

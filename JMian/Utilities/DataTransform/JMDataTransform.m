@@ -76,4 +76,19 @@
     return @"5";
     
 }
+
+//工资数据转化，除以1000，转化成k
++(NSString *)getSalaryStrWithMin:(id)min max:(id)max{
+    NSInteger myint = [min integerValue];
+    NSInteger intMin = myint/1000;
+    
+    NSInteger myint2 = [max integerValue];
+    NSInteger intMax = myint2/1000;
+    
+    NSString *salaryStr;
+    salaryStr = [NSString stringWithFormat:@"%dk~%dk",  (int)intMin, (int)intMax];
+    
+    return salaryStr;
+}
+
 @end

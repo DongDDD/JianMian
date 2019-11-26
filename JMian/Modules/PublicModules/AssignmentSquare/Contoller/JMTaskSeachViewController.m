@@ -12,6 +12,7 @@
 @interface JMTaskSeachViewController ()<UITextFieldDelegate>
 
 @property(nonatomic,strong)SearchView *searchView;
+@property (weak, nonatomic) IBOutlet UIView *tipsView;
 
 @end
 
@@ -20,6 +21,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.searchView];
+    if (_viewType == JMTaskSeachViewTypePartimeJob) {
+        [self.tipsView setHidden:NO];
+    }else if (_viewType == JMTaskSeachViewTypeJob){
+        [self.tipsView setHidden:YES];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 

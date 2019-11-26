@@ -365,24 +365,11 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 }
 //播放视频
 -(void)playBtnActionWithUrl:(NSString *)url{
-    //    [self fetchmyVideo];
-    //    NSString * path;
-    //    if (_viewType == JMBUserPostPartTimeJobTypeAdd) {
-    //        //本地获取链接播放，需要拼接
-    //        if (![self.video_path containsString:@"https://jmsp-videos"]) {
-    //            path = [NSString stringWithFormat:@"https://jmsp-videos-1257721067.cos.ap-guangzhou.myqcloud.com%@",self.video_path];
-    //        }else{
-    //            path = self.video_path;
-    //
-    //        }
-    //    }else if (_viewType == JMBUserPostPartTimeJobTypeEdit) {
-    //        path = url;
-    //    }
-    
     //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url videoID:@""];
     [[JMVideoPlayManager sharedInstance] play];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
     
@@ -566,11 +553,11 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     }
      //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path videoID:@""];
     [[JMVideoPlayManager sharedInstance] play];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
     
 }
 

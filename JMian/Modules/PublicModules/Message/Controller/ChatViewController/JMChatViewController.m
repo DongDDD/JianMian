@@ -102,7 +102,7 @@
     
     if (_myConvModel.service_name) {
         receiverID = [NSString stringWithFormat:@"%@b",_myConvModel.service_id];
-        titleStr = @"在线客服";
+        titleStr = @"得米客服";
     }
     self.title = titleStr;
     TIMConversation *conv = [[TIMManager sharedInstance] getConversation:(TIMConversationType)TIM_C2C receiver:receiverID];

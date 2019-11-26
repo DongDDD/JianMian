@@ -113,9 +113,9 @@
         }else if (indexPath.row == 2) {
             JMMapTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMapTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.latitude = self.latitude;
-            cell.longitude = self.longitude;
-            cell.address = self.address;
+            cell.latitude = self.configures.model.latitude;
+            cell.longitude = self.configures.model.longitude;
+            cell.address = self.configures.model.address;
             [cell setComModel:self.configures.model];
             return cell;
         }else if (indexPath.row == 3) {
@@ -149,11 +149,11 @@
 #pragma mark - myDelegate
 
 -(void)playVideoActionWithUrl:(NSString *)url{
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url videoID:@""];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
 
 }
 

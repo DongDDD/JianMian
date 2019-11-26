@@ -19,7 +19,6 @@
 #import "JMHTTPManager+Work.h"
 #import "JMHomeWorkModel.h"
 #import "JMCityListViewController.h"
-#import "JMVideoSingleViewController.h"
 #import "JMLabChooseBottomView.h"
 #import "JMHTTPManager+FectchSpecialInfo.h"
 #import "JMSpecialModel.h"
@@ -424,10 +423,11 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)playAction_comcell:(JMCompanyHomeTableViewCell *)cell model:(JMCompanyHomeModel *)model{
     
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.video_file_path videoID:@""];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    [self presentViewController:playVC animated:YES completion:nil];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     [[JMVideoPlayManager sharedInstance] play];
+    [self presentViewController:playVC animated:YES completion:nil];
     
 }
 

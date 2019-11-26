@@ -79,8 +79,12 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 
 //简历
 @property (copy, nonatomic) NSString *job_ability_id;
-@property (copy, nonatomic) NSString *job_description;
 @property (copy, nonatomic) NSString *job_status;
+
+@property (copy, nonatomic) NSString *job_description;
+@property (copy, nonatomic) NSString *job_work_name;
+@property (copy, nonatomic) NSString *job_work_label_id;
+
 @property (copy, nonatomic) NSString *job_look;
 @property (copy, nonatomic) NSString *job_user_user_id;
 @property (copy, nonatomic) NSString *job_user_company_id;
@@ -90,6 +94,14 @@ typedef NS_ENUM(NSUInteger, TConvType) {
 @property (copy, nonatomic) NSString *job_type_label_label_id;
 @property (copy, nonatomic) NSString *job_type_label_name;
 @property (strong, nonatomic) NSArray *job_industry;
+
+@property (copy, nonatomic) NSString *job_salary_max;
+@property (copy, nonatomic) NSString *job_salary_min;
+
+@property (copy, nonatomic) NSString *job_vita_education;
+@property (copy, nonatomic) NSString *job_vita_work_status;
+@property (copy, nonatomic) NSString *job_vita_work_start_date;
+@property (copy, nonatomic) NSString *job_vita_description;
 
 
 @property(nonatomic,copy)NSString *job_user_job_id;

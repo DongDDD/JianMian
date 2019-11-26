@@ -30,13 +30,15 @@
 }
 
 -(void)recordLookTimesWithVideoID:(NSString *)videoID
+                             mode:(NSString *)mode
                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
-//    NSString *urlStr = [Record_VideoLook_URL stringByAppendingFormat:@"/%@",videoID];
+    NSString *urlStr = [Record_VideoLook_URL stringByAppendingFormat:@"/%@",videoID];
     NSDictionary *dic =  @{
-                           @"videoID":videoID,
+                           @"mode":mode,
+
                            };
     
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Record_VideoLook_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
 

@@ -25,17 +25,21 @@
 #import "JMLabChooseBottomView.h"
 #import "JMHTTPManager+FectchSpecialInfo.h"
 #import "JMSpecialModel.h"
-#import "JMSpecialViewController.h"
-#import "SDCycleScrollView.h"
+#import "JMSpecialViewController.h"//活动专题界面
+#import "SDCycleScrollView.h"//活动专题轮播图
+#import "JMTaskSeachViewController.h"//搜索
 
-@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate,JMCityListViewControllerDelegate,JMLabChooseBottomViewDelegate,SDCycleScrollViewDelegate>
+@interface HomeViewController ()<UITableViewDataSource,UITableViewDelegate,JMLabsChooseViewControllerDelegate,HomeTableViewCellDelegate,PositionDesiredDelegate,JMCityListViewControllerDelegate,JMLabChooseBottomViewDelegate,SDCycleScrollViewDelegate,JMTaskSeachViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *headView;
 @property (weak, nonatomic) IBOutlet UIButton *allOfPositionBtn; //所有职位
 @property (weak, nonatomic) IBOutlet UIButton *choosePositionBtn;//职位筛选
 @property (weak, nonatomic) IBOutlet UIButton *companyRequireBtn;//公司要求
 
-@property (nonatomic, strong) NSMutableArray *arrDate;
+@property (nonatomic, strong) NSMutableArray *dataArray;
+@property(nonatomic,strong)NSMutableArray *seachdataArray;//搜索数据源
+
+@property(nonatomic,copy)NSString *keyword;
 @property(nonatomic,copy)NSString *city_id;
 @property(nonatomic,copy)NSString *work_lab_id;
 @property(nonatomic,copy)NSString *education;
@@ -79,6 +83,8 @@ static NSString *cellIdent = @"cellIdent";
     self.navigationController.navigationBar.translucent = NO;
     [self setTitleViewImageViewName:@"demi_home"];
     [self setBackBtnImageViewName:@"site_Home" textName:@"不限"];
+    [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
+
     self.per_page = 10;
     self.page = 1;
     [self setTableView];
@@ -234,7 +240,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)refreshData
 {
-    [self.arrDate removeAllObjects];
+    [self.dataArray removeAllObjects];
     _page = 1;
     [self getHomeListData];
   
@@ -253,7 +259,7 @@ static NSString *cellIdent = @"cellIdent";
         if (responsObject[@"data"]) {
             NSMutableArray *modelArray = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             if (modelArray.count > 0) {
-                [self.arrDate addObjectsFromArray:modelArray];
+                [self.dataArray addObjectsFromArray:modelArray];
             }
             if (modelArray.count < 10) {
                 [self.tableView.mj_footer setHidden:YES];
@@ -263,7 +269,7 @@ static NSString *cellIdent = @"cellIdent";
         }
         [self.tableView reloadData];
         [self.progressHUD setHidden:YES];
-        
+        self.seachdataArray = self.dataArray;
         [self.tableView.mj_footer endRefreshing];
         [self.tableView.mj_header endRefreshing];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -354,19 +360,22 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)didSelectedCity_id:(NSString *)city_id{
     _city_id = city_id;
-    self.arrDate = [NSMutableArray array];
+    self.dataArray = [NSMutableArray array];
     [self.tableView.mj_header beginRefreshing];
 
 }
 
 -(void)rightAction{
-    NSLog(@"搜索");
+    JMTaskSeachViewController *vc = [[JMTaskSeachViewController alloc]init];
+    vc.delegate = self;
+    vc.viewType = JMTaskSeachViewTypeJob;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
 //要求筛选
 -(void)labChooseBottomLeftAction{
-    self.arrDate = [NSMutableArray array];
+    self.dataArray = [NSMutableArray array];
     [self.labschooseVC.view setHidden:YES];
     [self.labChooseBottomView setHidden:YES];
     [_bgBtn setHidden:YES];
@@ -386,7 +395,7 @@ static NSString *cellIdent = @"cellIdent";
 //确认
 -(void)labChooseBottomRightAction
 {
-    self.arrDate = [NSMutableArray array];
+    self.dataArray = [NSMutableArray array];
     [self.labschooseVC.view setHidden:YES];
     [self.labChooseBottomView setHidden:YES];
     [_bgBtn setHidden:YES];
@@ -404,6 +413,22 @@ static NSString *cellIdent = @"cellIdent";
     [self.bgBtn setHidden:YES];
     [self.labChooseBottomView setHidden:YES];
     [self.labschooseVC.view setHidden:YES];
+}
+
+#pragma mark - delegate
+
+-(void)didInputKeywordWithStr:(NSString *)str{
+    _keyword = str;
+    NSMutableArray *arr = [NSMutableArray array];
+    for (JMHomeWorkModel *model in self.seachdataArray) {
+        if ([model.work_name containsString:str]) {
+            [arr addObject:model];
+        }
+    }
+    self.dataArray = [NSMutableArray array];
+    self.dataArray = arr;
+    [self.tableView reloadData];
+    
 }
 
 //-(void)schoolAction{
@@ -477,7 +502,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void)sendPositoinData:(NSString *)labStr labIDStr:(NSString *)labIDStr{
     _work_lab_id = labIDStr;
-    [self.arrDate removeAllObjects];
+    [self.dataArray removeAllObjects];
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -501,7 +526,7 @@ static NSString *cellIdent = @"cellIdent";
 -(void)didSelectedCity_id:(NSString *)city_id city_name:(NSString *)city_name{
     _city_id = city_id;
     _page = 1;
-    [self.arrDate removeAllObjects];
+    [self.dataArray removeAllObjects];
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -566,11 +591,11 @@ static NSString *cellIdent = @"cellIdent";
 }
 
 -(void)playAction_cell:(HomeTableViewCell *)cell model:(JMHomeWorkModel *)model{
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.videoFile_path videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:model.videoFile_path videoID:@""];
     [[JMVideoPlayManager sharedInstance] play];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
 }
 
 
@@ -618,7 +643,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.arrDate.count;
+    return self.dataArray.count;
 }
 
 
@@ -634,8 +659,8 @@ static NSString *cellIdent = @"cellIdent";
     cell.indexpath = indexPath;
     cell.delegate = self;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if (self.arrDate.count > 0) {
-        JMHomeWorkModel *model = self.arrDate[indexPath.row];
+    if (self.dataArray.count > 0) {
+        JMHomeWorkModel *model = self.dataArray[indexPath.row];
         
         [cell setModel:model];
     }
@@ -648,7 +673,7 @@ static NSString *cellIdent = @"cellIdent";
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
-    JMHomeWorkModel *model = self.arrDate[indexPath.row];
+    JMHomeWorkModel *model = self.dataArray[indexPath.row];
 
     vc.homeworkModel = model;
     
@@ -723,11 +748,11 @@ static NSString *cellIdent = @"cellIdent";
     return _bgBtn;
 }
 
--(NSMutableArray *)arrDate{
-    if (!_arrDate) {
-        _arrDate = [NSMutableArray array];
+-(NSMutableArray *)dataArray{
+    if (!_dataArray) {
+        _dataArray = [NSMutableArray array];
     }
-    return _arrDate;
+    return _dataArray;
 }
 
 -(NSMutableArray *)specialModelArray{

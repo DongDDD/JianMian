@@ -405,8 +405,8 @@
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.videoURL videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
 
 
     
@@ -838,11 +838,11 @@
     NSString * path = [NSString stringWithFormat:@"%@", self.videoURL ];
     //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:path videoID:@""];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
    
 }
 

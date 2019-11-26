@@ -390,11 +390,16 @@
 //播放视频
 -(void)playVideoAction
 {
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.configures.model.video_file_path videoID:@"666"];
-    [[JMVideoPlayManager sharedInstance] play];
-    AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
+    if (_viewType == JMPersonInfoViewTypeDefault) {
+        [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.configures.model.video_file_path videoID:@"666"];
+        [[JMVideoPlayManager sharedInstance] play];
+        AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+        [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
+        [self presentViewController:playVC animated:YES completion:nil];
+        
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
 }
 

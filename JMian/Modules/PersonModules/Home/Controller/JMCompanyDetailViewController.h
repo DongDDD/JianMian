@@ -12,9 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMCompanyDetailViewController : BaseViewController
 @property(nonatomic,copy)NSString *company_id;
-@property(nonatomic,copy)NSString *longitude;
-@property(nonatomic,copy)NSString *latitude;
-@property(nonatomic,copy)NSString *address;
+//@property(nonatomic,copy)NSString *longitude;
+//@property(nonatomic,copy)NSString *latitude;
+//@property(nonatomic,copy)NSString *address;
 
 @end
 

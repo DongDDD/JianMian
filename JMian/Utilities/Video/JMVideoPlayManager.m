@@ -13,6 +13,8 @@
 #import "WXApi.h"
 #import "JMHTTPManager+FectchVideoLists.h"
 #import "JMPersonInfoViewController.h"
+#import "JMPostJobHomeViewController.h"
+#import "JMVideoJobListViewController.h"
 
 @implementation JMVideoPlayManager
 
@@ -21,13 +23,34 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _manager = [[JMVideoPlayManager alloc] init];
-//        _manager.B_User_playArray = [NSMutableArray array];
-//        _manager.C_User_playArray = [NSMutableArray array];
-        [_manager setBackBtnImageViewName:@"icon_return_nav" textName:@""];
-//        [_manager setUI];
-//        [_manager initCloseBtn];
+
     });
     return _manager;
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = YES;
+    self.tabBarController.tabBar.hidden = YES;
+    if (_viewType == JMVideoPlayManagerTypeVideo) {
+        [self.fanhuiView setHidden:NO];
+        
+    }else{
+        [self.fanhuiView setHidden:YES];
+    }
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+
+//    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, SCREEN_HEIGHT)];
+//    [self.view addSubview:view];
+//    UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(taphidFHBtn)];
+//    [view addGestureRecognizer:tap2];
+//    view.userInteractionEnabled = YES;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    self.navigationController.navigationBarHidden = NO;
+
 }
 
 - (void)fanhui {
@@ -64,7 +87,13 @@
     
 }
 
+
 -(void)setBUI{
+    if (_viewType == JMVideoPlayManagerTypeVideo) {
+        [self.view addSubview:self.fanhuiView];
+        
+    }
+    
     [self.likeBtn setHidden:YES];
     [self.shareBtn setHidden:YES];
     [self.comVideoDetailInfoView setHidden:NO];
@@ -84,6 +113,11 @@
 
 
 -(void)setCUI{
+    if (_viewType == JMVideoPlayManagerTypeVideo) {
+        [self.view addSubview:self.fanhuiView];
+
+    }
+    
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         [self.likeBtn setHidden:NO];
@@ -124,11 +158,17 @@
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lookCAction)];
     [self.videoDetailInfoView addGestureRecognizer:tap];
+    
+
 }
+
 
 #pragma mark - Action
 -(void)lookBAction{
     NSLog(@"lookB");
+    JMVideoJobListViewController *vc = [[JMVideoJobListViewController alloc]init];
+    vc.company_id = self.company_id;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)lookCAction{
@@ -136,14 +176,14 @@
 //    if (self.delegate && [self.delegate respondsToSelector:@selector(lookCActionDelegateWithUser_job_id:)]) {
 //        [self.delegate lookCActionDelegateWithUser_job_id:self.vitaModel.user_job_id];
 //    }
-//    JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc] init];
-//    vc.user_job_id = self.vitaModel.user_job_id;
+    JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc] init];
+    vc.user_job_id = self.vitaModel.user_job_id;
+    vc.viewType = JMPersonInfoViewTypeVideo;
 //    vc.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 //
 //    [self addChildViewController:vc];
 //    [self.view addSubview:vc.view];
- //    [self presentViewController:vc animated:YES completion:nil];
-////    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -152,7 +192,6 @@
 - (void)setupPlayer_UrlStr:(NSString *)urlStr videoID:(NSString *)videoID{
 //    [self.navigationController setNavigationBarHidden:NO animated:YES];
     
-    self.title = @"视频播放";
     self.showsPlaybackControls = YES;
     //        NSURL *url = [NSURL URLWithString:@"http://gedftnj8mkvfefuaefm.exp.bcevod.com/mda-hc2s2difdjz6c5y9/hd/mda-hc2s2difdjz6c5y9.mp4?playlist%3D%5B%22hd%22%5D&auth_key=1500559192-0-0-dcb501bf19beb0bd4e0f7ad30c380763&bcevod_channel=searchbox_feed&srchid=3ed366b1b0bf70e0&channel_id=2&d_t=2&b_v=9.1.0.0"];
     NSURL *url = [NSURL URLWithString:urlStr];
@@ -183,6 +222,14 @@
 //    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 //
 //    }];
+    if (videoID.length > 0) {
+        [[JMHTTPManager sharedInstance]recordLookTimesWithVideoID:videoID mode:@"user" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+        
+    }
 }
 
 -(void)setVideoListCellData:(JMVideoListCellData *)videoListCellData{
@@ -273,6 +320,7 @@
             self.companyInfoModel = [JMCompanyInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             self.comVideoDetailInfoView.titleLab.text = self.companyInfoModel.company_name;
             [self setBUI];
+            self.company_id = company_id;
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -393,6 +441,26 @@
 
     [self.shareView setHidden:YES];
     [self.shareBgView setHidden:YES];
+}
+
+-(void)hiddenFHBtn{
+ 
+//    [self.fanhuiView setHidden:YES];
+ 
+    
+}
+
+-(void)taphidFHBtn{
+    if (self.fanhuiView.hidden) {
+        [self.fanhuiView setHidden:NO];
+
+    }else{
+        [self.fanhuiView setHidden:YES];
+
+    }
+
+    NSLog(@"taphidFHBtn");
+
 }
 #pragma mark  delegate
 
@@ -541,6 +609,29 @@
     
     return _shareBgView;
     
+}
+
+-(UIView *)fanhuiView{
+    if (!_fanhuiView) {
+        _fanhuiView = [[UIView alloc]initWithFrame:CGRectMake(5, SafeAreaStatusHeight, 80, 55)];
+        _fanhuiView.backgroundColor = TITLE_COLOR;
+        _fanhuiView.alpha = 1;
+        _fanhuiView.layer.cornerRadius = 15;
+        UIButton *fanhui = [[UIButton alloc]init];
+        [fanhui addTarget:self action:@selector(fanhui) forControlEvents:UIControlEventTouchUpInside];
+        [fanhui setImage:[UIImage imageNamed:@"di_icon_return"] forState:UIControlStateNormal];
+        [_fanhuiView addSubview:fanhui];
+        [fanhui mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.mas_equalTo(_fanhuiView);
+            make.centerY.mas_equalTo(_fanhuiView);
+            make.size.mas_equalTo(CGSizeMake(50, 50));
+
+        }];
+//        NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(hiddenFHBtn) userInfo:nil repeats:YES];
+//        UITapGestureRecognizer *tap2 = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(taphidFHBtn)];
+//        [self.view addGestureRecognizer:tap2];
+    }
+    return _fanhuiView;
 }
 
 @end

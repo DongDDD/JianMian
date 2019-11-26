@@ -147,12 +147,12 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
     //用来装服务器用户的客服Model
     JMMessageListModel *serviceModel = [[JMMessageListModel alloc]init];
+    
     NSString *service_id = kFetchMyDefault(@"service_id");
     NSString *servicer_idB = [NSString stringWithFormat:@"%@b",service_id];
     NSString *my_IM_id;
     if ([userInfomodel.type isEqualToString:B_Type_UESR]) {
         my_IM_id = [NSString stringWithFormat:@"%@b",userInfomodel.user_id];
-        
     }else{
         my_IM_id = [NSString stringWithFormat:@"%@a",userInfomodel.user_id];
         
@@ -168,13 +168,9 @@ static NSString *cellIdent = @"allMessageCellIdent";
         for (JMMessageListModel *model in self.modelArray) {
             if (model.sender_mark == my_IM_id) {
                 //判断sender是不是自己,是自己的话，拿recipient_mark去跟腾讯云的ID配对接收者
-                NSLog(@"getReceiver%@",[conv getReceiver]);
-                NSLog(@"recipient_mark%@",model.recipient_mark);
-
                 if ([model.recipient_mark isEqualToString:[conv getReceiver]]) {
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
                     data.unRead = [conv getUnReadMessageNum];
-                    _unReadNum += [conv getUnReadMessageNum];
                     data.convId = [conv getReceiver];
                     model.data = data;
                     data.time = [self getDateDisplayString:msg.timestamp];
@@ -183,11 +179,12 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     model.data = data;
                     //过滤客服用户
                     if (servicer_idB != [conv getReceiver]) {
+                        _unReadNum += [conv getUnReadMessageNum];
                         [converArray addObject:model];
                         NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
                     }else{
                         //捉取客服model
-                        model.service_name = @"在线客服";
+                        model.service_name = @"得米客服";
                         model.service_id = service_id;
                         serviceModel = model;
                         
@@ -197,26 +194,23 @@ static NSString *cellIdent = @"allMessageCellIdent";
                 
             }else if(model.recipient_mark == my_IM_id){
                 //判断recipient是自己的话，拿sender_mark去跟腾讯云的ReceiverID配对接收者
-                NSLog(@"getReceiver%@",[conv getReceiver]);
-                NSLog(@"recipient_mark%@",model.recipient_user_id);
-
                 if ([model.sender_mark isEqualToString:[conv getReceiver]]) {
                     
                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
                     data.convId = [conv getReceiver];
                     data.unRead = [conv getUnReadMessageNum];
-                    _unReadNum += [conv getUnReadMessageNum];
                     model.data = data;
                     data.time = [self getDateDisplayString:msg.timestamp];
                     data.subTitle = [self getLastDisplayString:conv];
                     model.data = data;
                     //过滤客服用户
                     if (servicer_idB != [conv getReceiver]) {
+                        _unReadNum += [conv getUnReadMessageNum];
                         [converArray addObject:model];
                         NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
                         
                     }else{
-                        model.service_name = @"在线客服";
+                        model.service_name = @"得米客服";
                         model.service_id = service_id;
                         serviceModel = model;
                     }
@@ -247,21 +241,23 @@ static NSString *cellIdent = @"allMessageCellIdent";
         //2 客服
         if (service_id) {
             if (serviceModel.service_id == nil) {
+                //为了方便理解，这里模拟一个死数据model 来展示客服
                 JMMessageListModel *model = [[JMMessageListModel alloc]init];
                 JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
                 data.convId = [conv getReceiver];
                 data.unRead = [conv getUnReadMessageNum];
-                _unReadNum += [conv getUnReadMessageNum];
                 //            data.time = [self getDateDisplayString:msg.timestamp];
                 data.subTitle = @"在线答疑";
                 model.data = data;
-                model.service_name = @"在线客服";
+                model.service_name = @"得米客服";
                 model.service_id = service_id;
 //                model.sender_mark = NSString stringWithFormat:@"%@a",userInfomodel.u
 //                model.recipient_mark = NSString stringWithFormat:@"%@",
                 self.serviceModel = model;
 
             }else{
+                //客服消息
+                _unReadNum += [conv getUnReadMessageNum];
                 self.serviceModel = serviceModel;
             }
         }
@@ -276,7 +272,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
             JMMessageListModel *model = [[JMMessageListModel alloc]init];
             JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
             data.subTitle = @"在线答疑";
-            model.service_name = @"在线客服";
+            model.service_name = @"得米客服";
             model.service_id = service_id;
             self.serviceModel = model;
             [self.dataArray addObject:self.serviceModel];

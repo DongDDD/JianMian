@@ -10,6 +10,7 @@
 #import "JMUserInfoModel.h"
 #import "JMUserInfoManager.h"
 #import "DimensMacros.h"
+#import "JMDataTransform.h"
 @interface JMChatDetailInfoTableViewCell ()
 
 @property(nonatomic,strong)JMMessageListModel *myModel;
@@ -64,18 +65,17 @@
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([chatType isEqualToString:@"1"]) {//全职对话赋值
         if ([userModel.type isEqualToString:B_Type_UESR]) {
-            self.lab1.text = [self getEducationStrWithEducation:_myModel.work_education];
-            self.salary.text = [self getSalaryStrWithMin:_myModel.work_salary_min max:_myModel.work_salary_max];
-            self.myDescription.text = _myModel.work_description;
-            self.lab3.text = _myModel.work_work_name;
-            self.salary.text = [self getSalaryStrWithMin:_myModel.work_salary_min max:_myModel.work_salary_max];
+            self.lab1.text = [JMDataTransform getEducationStrWithEducationNum:_myModel.job_vita_education];
+            self.salary.text = [self getSalaryStrWithMin:_myModel.job_salary_min max:_myModel.job_salary_max];
+            self.myDescription.text = _myModel.job_vita_description;
+            self.lab3.text = _myModel.job_work_name;
+     
         }else{
             self.lab1.text = [self getEducationStrWithEducation:_myModel.work_education];
             self.salary.text = [self getSalaryStrWithMin:_myModel.work_salary_min max:_myModel.work_salary_max];
             self.myDescription.text = _myModel.work_description;
             self.lab3.text = _myModel.work_work_name;
-            self.salary.text = [self getSalaryStrWithMin:_myModel.work_salary_min max:_myModel.work_salary_max];
-            
+
         }
         
     }else if ([chatType isEqualToString:@"2"]){//兼职对话赋值

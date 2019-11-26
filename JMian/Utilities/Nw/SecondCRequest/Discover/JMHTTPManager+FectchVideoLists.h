@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
                 successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
 -(void)recordLookTimesWithVideoID:(NSString *)videoID
+                             mode:(NSString *)mode
                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 

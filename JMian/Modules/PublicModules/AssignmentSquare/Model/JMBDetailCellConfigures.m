@@ -71,23 +71,31 @@
             }
         }
         if (imgArr.count > 0) {
-//            __weak JMCDetailImageModel *weakSelf = self;
+            //            __weak JMCDetailImageModel *weakSelf = self;
             //审核通过的照片数组imgArr
-                JMCDetailImageModel *imgModel = imgArr[indexPath.row];
-                NSLog(@"图片加载完了2");
-                NSLog(@"高：%f", self.height);
-                if (self.height == 0) {
-                    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgModel.file_path]];
-                    UIImage *showimage = [UIImage imageWithData:data];
-                    self.height = showimage.size.height * SCREEN_WIDTH / showimage.size.width;
-                }
+            JMCDetailImageModel *imgModel = imgArr[indexPath.row];
+            NSLog(@"图片加载完了2");
+            NSLog(@"高：%f", self.height);
+            if (self.height == 0) {
+                NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:imgModel.file_path]];
+                UIImage *showimage = [UIImage imageWithData:data];
+                self.height = showimage.size.height * SCREEN_WIDTH / showimage.size.width;
+            }
+            NSLog(@"height高：%f", self.height);
+            if (self.height > 0) {
+                
                 return self.height;
+            }else{
+                return 0;
+                
+            }
+            
             //手动计算cell
-//            return [self getHeightFromImgWithUrl:imgModel.file_path];
+            //            return [self getHeightFromImgWithUrl:imgModel.file_path];
             
         }else{
             return 200;
-
+            
         }
     }else if (indexPath.section == 3) {
         if (self.commentListArray.count > 0) {

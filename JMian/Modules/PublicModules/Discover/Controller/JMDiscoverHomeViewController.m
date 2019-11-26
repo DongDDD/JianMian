@@ -47,6 +47,7 @@
     [super viewDidLoad];
     [self initView];
     self.navigationController.navigationBarHidden = YES;
+
     self.mode = @"2";
     // Do any additional setup after loading the view from its nib.
 }
@@ -351,10 +352,12 @@
     }
 
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:videoUrl videoID:data.video_file_id];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeVideo;
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
-    [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
     [[JMVideoPlayManager sharedInstance] setVideoListCellData:data];
+    [self.navigationController pushViewController:playVC animated:YES];
+//    [self presentViewController:playVC animated:YES completion:nil];
 //    [playVC.view addSubview:self.likeBtn];
  
 }

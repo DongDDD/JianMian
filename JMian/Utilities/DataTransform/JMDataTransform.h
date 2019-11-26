@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(NSString *)getEducationStrWithEducationNum:(NSString *)educationNum;
 //文字-数字
 +(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr;
+//工资数据转化，除以1000，转化成k
++(NSString *)getSalaryStrWithMin:(id)min max:(id)max;
 @end
 
 NS_ASSUME_NONNULL_END

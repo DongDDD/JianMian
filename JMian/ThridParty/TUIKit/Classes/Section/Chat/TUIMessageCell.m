@@ -12,6 +12,7 @@
 #import "ReactiveObjC/ReactiveObjC.h"
 #import "TUIKit.h"
 #import "MMLayout/UIView+MMLayout.h"
+#import "DimensMacros.h"
 
 @interface TUIMessageCell()
 @property (nonatomic, strong) TUIMessageCellData *messageData;
@@ -72,13 +73,24 @@
 {
     [super fillWithData:data];
     self.messageData = data;
-    
-    [self.avatarView setImage:data.avatarImage];
-    @weakify(self)
-    [[[RACObserve(data, avatarUrl) takeUntil:self.rac_prepareForReuseSignal] ignore:nil] subscribeNext:^(NSURL *url) {
-        @strongify(self)
-        [self.avatarView sd_setImageWithURL:url placeholderImage:self.messageData.avatarImage];
-    }];
+//    NSString *service = kFetchMyDefault(@"service_id");
+//    NSString *strB = [NSString stringWithFormat:@"%@b",service];
+//
+//    if ([data.name isEqualToString:@"在线客服"] || [data.name isEqualToString:strB]) {
+//        self.avatarView.image = [UIImage imageNamed:@"kf"];
+////        self.messageData.avatarUrl = [NSURL URLWithString:@"http://produce.jmzhipin.com/h5/images/customer.png"];
+//    }else{
+//
+        [self.avatarView setImage:data.avatarImage];
+        if (self.messageData.avatarUrl) {
+            @weakify(self)
+            [[[RACObserve(data, avatarUrl) takeUntil:self.rac_prepareForReuseSignal] ignore:nil] subscribeNext:^(NSURL *url) {
+                @strongify(self)
+                [self.avatarView sd_setImageWithURL:url placeholderImage:self.messageData.avatarImage];
+            }];
+            
+        }
+//    }
     
     
     if ([TUIKit sharedInstance].config.avatarType == TAvatarTypeRounded) {

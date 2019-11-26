@@ -7,6 +7,7 @@
 //
 
 #import "JMPersonIntensionTableViewCell.h"
+#import "JMDataTransform.h"
 NSString *const JMPersonIntensionTableViewCellIdentifier = @"JMPersonIntensionTableViewCellIdentifier";
 @interface JMPersonIntensionTableViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *workNameLab;
@@ -31,7 +32,7 @@ NSString *const JMPersonIntensionTableViewCellIdentifier = @"JMPersonIntensionTa
     //参加工作时间
     self.workTimeLab.text = model.vita_work_start_date;
     //薪资
-//    self.salaryLab.text = [self getSalaryStrWithMin:model.salary_min max:model.salary_max];
+    self.salaryLab.text = [JMDataTransform getSalaryStrWithMin:model.salary_min max:model.salary_max];
     
 }
 

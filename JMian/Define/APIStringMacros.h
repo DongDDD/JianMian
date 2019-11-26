@@ -11,8 +11,8 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 //app
 #else
@@ -178,7 +178,8 @@
 //获取城市ID
 #define Get_CityID_URL @"city/location"
 //获取客服ID
-#define Get_CityID_URL @"api/service"
+#define Get_ServiceID_URL @"api/service"
+
 
 //接口
 #define Get_Labels_URL @"/labels"

@@ -17,7 +17,14 @@
 #import "JMCompanyInfoModel.h"
 #import "JMShareView.h"
 
+
 NS_ASSUME_NONNULL_BEGIN
+typedef NS_ENUM(NSInteger, JMVideoPlayManagerType) {
+    JMVideoPlayManagerTypeDefault,
+    JMVideoPlayManagerTypeVideo,
+};
+
+
 @protocol JMVideoPlayManagerDelegate <NSObject>
 
 -(void)lookCActionDelegateWithUser_job_id:(NSString *)user_job_id;
@@ -28,8 +35,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,strong)NSMutableArray *B_User_playArray;
 @property(nonatomic,strong)NSMutableArray *C_User_playArray;
-@property (strong, nonatomic) AVPlayer *player;
-@property (nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
+@property(strong, nonatomic) AVPlayer *player;
+@property(nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
+@property(nonatomic,copy)NSString *company_id;
+@property(nonatomic,assign)JMVideoPlayManagerType viewType;
 - (void)setupPlayer_UrlStr:(NSString *)urlStr videoID:(NSString *)videoID;
 - (void)play;
 + (instancetype)sharedInstance;
@@ -40,12 +49,13 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)JMComVideoDetailInfoView *comVideoDetailInfoView;
 @property(nonatomic,strong)JMShareView *shareView;//分享
 @property(nonatomic,strong)UIView *shareBgView;//分享
+@property(nonatomic,strong)UIView *fanhuiView;//返回
 
 
 @property(nonatomic,strong)JMVideoListCellData *videoListCellData;
 @property (nonatomic, strong)JMVitaDetailModel *vitaModel;
 @property (nonatomic, strong)JMCompanyInfoModel *companyInfoModel;
-@property (nonatomic, weak)id<JMVideoPlayManagerDelegate>delegate;
+//@property (nonatomic, weak)id<JMVideoPlayManagerDelegate>delegate;
 
 @end
 

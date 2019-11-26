@@ -7,6 +7,10 @@
 //
 
 #import "BaseViewController.h"
+typedef NS_ENUM(NSInteger, JMTaskSeachViewType) {
+    JMTaskSeachViewTypePartimeJob,
+    JMTaskSeachViewTypeJob,
+};
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol JMTaskSeachViewControllerDelegate <NSObject>
@@ -16,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @interface JMTaskSeachViewController : BaseViewController
 @property (nonatomic,weak)id<JMTaskSeachViewControllerDelegate>delegate;
+@property (nonatomic,assign)JMTaskSeachViewType viewType;
+
 @end
 
 NS_ASSUME_NONNULL_END

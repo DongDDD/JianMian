@@ -757,8 +757,8 @@
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:url videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
 }
 
 
@@ -975,9 +975,9 @@
         NSLog(@"asd");
         JMCompanyDetailViewController *vc = [[JMCompanyDetailViewController alloc]init];
         vc.company_id = self.configures.model.user_company_id;
-        vc.address = self.configures.model.address;
-        vc.latitude = self.configures.model.latitude;
-        vc.longitude = self.configures.model.longitude;
+//        vc.address = self.configures.model.address;
+//        vc.latitude = self.configures.model.latitude;
+//        vc.longitude = self.configures.model.longitude;
         [self.navigationController pushViewController:vc animated:YES];
     }
 

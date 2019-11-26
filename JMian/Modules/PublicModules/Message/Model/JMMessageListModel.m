@@ -84,6 +84,15 @@
              @"job_user_reputation":@"job.user.reputation",
              @"job_type_label_label_id":@"job.type_label.label_id",
              @"job_type_label_name":@"job.type_label.name",
+             @"job_work_name":@"job.work.name",
+
+             @"job_salary_max":@"job.salary_max",
+             @"job_salary_min":@"job.salary_min",
+             @"job_vita_education":@"job.vita.education",
+             @"job_vita_work_status":@"job.vita.work_status",
+             @"job_vita_description":@"job.vita.description",
+
+             
              @"job_industry":@"job.industry"
 
              };

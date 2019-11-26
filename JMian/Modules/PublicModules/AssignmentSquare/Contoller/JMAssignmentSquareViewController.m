@@ -119,6 +119,7 @@ static NSString *C_cellIdent = @"CSquareCellID";
 -(void)rightAction{
     JMTaskSeachViewController *vc = [[JMTaskSeachViewController alloc]init];
     vc.delegate = self;
+    vc.viewType = JMTaskSeachViewTypePartimeJob;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

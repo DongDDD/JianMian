@@ -716,10 +716,10 @@
 //    vc.videoUrl = self.homeworkModel.videoFile_path;
 //    [self.navigationController pushViewController:vc animated:YES];
     JMCompanyDetailViewController *vc = [[JMCompanyDetailViewController alloc]init];
-    vc.company_id = self.homeworkModel.company_id;
-    vc.latitude = self.homeworkModel.latitude;
-    vc.longitude = self.homeworkModel.longitude;
-    vc.address = self.homeworkModel.address;
+    vc.company_id = self.myModel.company_id;
+//    vc.latitude = self.homeworkModel.latitude;
+//    vc.longitude = self.homeworkModel.longitude;
+//    vc.address = self.homeworkModel.address;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

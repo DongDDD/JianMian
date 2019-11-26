@@ -128,8 +128,7 @@
                         
                     }else if ([self.model.video_status isEqualToString:@"1"]){
                         self.title = @"视频审核不通过";
-                        [_didUploadVideoView.leftBtn setHidden:YES];
-                        [_didUploadVideoView.rightBtn setHidden:YES];
+
                     }else if ([self.model.video_status isEqualToString:@"2"]){
                         self.title = @"视频审核已通过";
    
@@ -364,11 +363,11 @@
 
     //直接创建AVPlayer，它内部也是先创建AVPlayerItem，这个只是快捷方法
     //        AVPlayer *player = [AVPlayer playerWithURL:url];
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:_myVideoUrl videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:_myVideoUrl videoID:@""];
     [[JMVideoPlayManager sharedInstance] play];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
     
 
 }

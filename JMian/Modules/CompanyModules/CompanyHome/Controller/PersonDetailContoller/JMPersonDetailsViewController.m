@@ -480,8 +480,8 @@
     [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.companyModel.video_file_path videoID:@"666"];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     [self presentViewController:playVC animated:YES completion:nil];
-    [[JMVideoPlayManager sharedInstance] play];
     
 }
 

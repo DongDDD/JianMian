@@ -396,9 +396,10 @@
 
 #pragma mark - 播放
 -(void)playAction{
-    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.videoUrl videoID:@"666"];
+    [[JMVideoPlayManager sharedInstance] setupPlayer_UrlStr:self.videoUrl videoID:@""];
     [[JMVideoPlayManager sharedInstance] play];
     AVPlayerViewController *playVC = [JMVideoPlayManager sharedInstance];
+    [JMVideoPlayManager sharedInstance].viewType = JMVideoPlayManagerTypeDefault;
     [self presentViewController:playVC animated:YES completion:nil];
     [[JMVideoPlayManager sharedInstance] play];
 }
