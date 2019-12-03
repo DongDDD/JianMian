@@ -23,6 +23,7 @@
              @"files":@"JMFilesModel",
              @"labels":@"JMlabelsModel",
              @"video":@"JMFilesModel",
+             @"work":@"JMWorkModel",
              @"subways":@"JMShieldingModel"
              };
 }
@@ -60,6 +61,19 @@
     return @{
              @"subways_line":@"line",
              @"subways_station":@"station",
+             };
+}
+
+@end
+
+@implementation JMWorkModel
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{
+             @"city_name":@"city.city_name",
+             @"workDescription":@"description",
+
+             
              };
 }
 

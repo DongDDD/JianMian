@@ -34,6 +34,7 @@
 #import "JMWalletViewController.h"
 #import "JMMyOrderListViewController.h"
 #import "WXApi.h"
+#import "JMYoukeAction.h"//游客登陆
 
 
 
@@ -179,32 +180,29 @@
 }
 #pragma mark - C端个人的中心
 -(void)didClickSetting{
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
+    if ([JMYoukeAction youkelimit]) {
         return;
     }
+    
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)didClickMyOrder{
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
+    if ([JMYoukeAction youkelimit]) {
         return;
     }
+    
     JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
 
 -(void)didClickMyTask{
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
+    if ([JMYoukeAction youkelimit]) {
         return;
     }
+    
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     [vc setMyIndex:0];
     [self.personalCenterHeaderView.taskBadgeView setHidden:YES];
@@ -254,11 +252,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
+    if ([JMYoukeAction youkelimit]) {
         return;
     }
+    
     if (indexPath.section == 1) {
         
         if (indexPath.row == 0) {
@@ -358,11 +355,10 @@
 }
 
 - (void)didSelectItemWithRow:(NSInteger)row {
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        [self showAlertWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" leftTitle:@"返回" rightTitle:@"去登录"];
+    if ([JMYoukeAction youkelimit]) {
         return;
     }
+    
     if (row == 0) {
         if ([_userInfoModel.type isEqualToString:C_Type_USER]) {
             JMMyResumeViewController *vc = [[JMMyResumeViewController alloc]init];

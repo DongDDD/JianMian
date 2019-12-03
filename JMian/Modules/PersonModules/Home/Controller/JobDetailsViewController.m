@@ -28,6 +28,7 @@
 #import "WXApi.h"
 #import "JMCompanyDetailViewController.h"
 #import "JMHTTPManager+DeleteWork.h"
+#import "JMYoukeAction.h"
 
 
 @interface JobDetailsViewController ()<TwoButtonViewDelegate,MAMapViewDelegate,JMShareViewDelegate>
@@ -208,19 +209,10 @@
 
 
 -(void)chatAction{
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self loginOut];
-        }]];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-        return;
-    }
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     
@@ -262,21 +254,11 @@
 }
 
 -(void)rightAction:(UIButton *)sender{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
     sender.selected = !sender.selected;
-    NSLog(@"收藏");
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self loginOut];
-        }]];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-        return;
-    }
+
     if (_viewType == JobDetailsViewTypeDefault) {
   
         if (sender.selected == YES) {
@@ -336,6 +318,10 @@
 
 
 -(void)right2Action{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     if (_viewType == JobDetailsViewTypeDefault) {
         if (self.shareView == nil) {
             [self.view addSubview:self.shareBgView];

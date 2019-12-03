@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *work_salary_max;
 @property (nonatomic, copy) NSString *work_description;
 @property (nonatomic, copy) NSString *work_user_id;
+@property (nonatomic, copy) NSString *work_work_id;
+;
 
 @property (nonatomic, copy) NSString *work_work_name;
 @property (nonatomic, copy) NSString *work_address;

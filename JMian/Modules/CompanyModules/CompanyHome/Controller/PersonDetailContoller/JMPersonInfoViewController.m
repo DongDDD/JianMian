@@ -32,6 +32,8 @@
 #import "JMVIPViewController.h"
 
 #import "ZJImageMagnification.h"
+
+#import "JMYoukeAction.h"
 @interface JMPersonInfoViewController ()<UITableViewDelegate,UITableViewDataSource,THDatePickerViewDelegate,JMMyShareViewDelegate,JMPersonVideoTableViewCellDelegate,JMPersonContactTableViewCellDelegate,JMPersonHeaderTableViewCellDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -185,12 +187,20 @@
 #pragma mark - Action
 
 -(void)right2Action{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     [self.myShareView setHidden:NO];
 
 
 }
 
 -(void)rightAction:(UIButton *)sender{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     sender.selected = !sender.selected;
     if (sender.selected == YES) {
         [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.configures.model.user_job_id  mode:@"1" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -224,6 +234,10 @@
 }
 
 - (IBAction)bottomLeftAction:(id)sender {
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.configures.model.user_id foreign_key:self.configures.model.work_label_id sender_mark:@"" recipient_mark:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
@@ -238,6 +252,10 @@
 }
 
 - (IBAction)bottomRightAction:(id)sender {
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     self.BgBtn.hidden = NO;
     [UIView animateWithDuration:0.3 animations:^{
         self.dateView.frame = CGRectMake(0, self.view.frame.size.height - 300, self.view.frame.size.width, 300);

@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *job_salary_max;
 @property (nonatomic, copy) NSString *job_user_nickname;
 @property (nonatomic, copy) NSString *job_user_avatar;
+@property (nonatomic, copy) NSString *job_user_job_id;
 
 @property (nonatomic, copy) NSString *job_vita_education;
 @property (nonatomic, copy) NSString *job_vita_description;

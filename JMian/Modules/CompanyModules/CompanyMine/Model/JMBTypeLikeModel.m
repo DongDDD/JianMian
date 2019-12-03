@@ -20,6 +20,9 @@
              @"job_vita_education":@"job.vita.education",
              @"job_vita_description":@"job.vita.description",
              @"job_work_name":@"job.work.name",
+             @"job_user_job_id":@"job.user_job_id",
+
+
              @"user_user_id":@"user.user_id",
              @"user_email":@"user.email",
              @"user_phone":@"user.phone",

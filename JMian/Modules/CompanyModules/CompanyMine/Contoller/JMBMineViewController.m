@@ -37,6 +37,7 @@
 #import "JMVIPViewController.h"
 #import "JMMyOrderListViewController.h"
 #import "WXApi.h"
+#import "JMYoukeAction.h"
 
 @interface JMBMineViewController ()<JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMBMineInfoViewDelegate,JMBMineMoreFunctionViewDelegate,JMShareViewDelegate>
 
@@ -81,7 +82,7 @@
 #pragma mark - Action
 
 -(void)disapearAction{
-    NSLog(@"222");
+ 
     [self.shareBgView setHidden:YES];
     [self.shareView setHidden:YES];
 }
@@ -119,6 +120,10 @@
 #pragma mark - myDelegate
 // - B端个人的中心
 -(void)BTaskClick{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
     vc.title = @"任务管理";
     [vc setMyIndex:0];
@@ -128,24 +133,38 @@
 }
 
 -(void)BVIPClick{
-
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     JMVIPViewController *vc = [[JMVIPViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 
 }
 
 -(void)BOrderClick{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)didClickSetting{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void)didSelectItemWithRow:(NSInteger)row{
-    
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     if (row == 0) {
         //职位管理
         JMPositionManageViewController *vc = [[JMPositionManageViewController alloc]init];
@@ -168,6 +187,10 @@
 }
 
 -(void)didSelectCellWithRow:(NSInteger)row{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     if (row == 0) {
         [[UIApplication sharedApplication].keyWindow addSubview:self.shareBgView];
         [_shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {

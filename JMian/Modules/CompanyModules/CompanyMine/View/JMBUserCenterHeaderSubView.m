@@ -67,14 +67,14 @@
     _rightLab.text = @"VIP会员";
     _rightLab.font = kFont(12);
     [self addSubview:_rightLab];
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    if ([userModel.email isEqualToString:@"379247111@qq.com"]) {
-        [_rightBtn setHidden:YES];
-        [_rightLab setHidden:YES];
-    }else{
-        [_rightBtn setHidden:NO];
-        [_rightLab setHidden:NO];
-    }
+//    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//    if ([userModel.email isEqualToString:@"379247111@qq.com"]) {
+//        [_rightBtn setHidden:YES];
+//        [_rightLab setHidden:YES];
+//    }else{
+//        [_rightBtn setHidden:NO];
+//        [_rightLab setHidden:NO];
+//    }
     
     
     _taskBadgeView = [[UIView alloc]init];

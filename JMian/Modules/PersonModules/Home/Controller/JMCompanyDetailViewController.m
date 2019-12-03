@@ -12,6 +12,7 @@
 #import "JMPlayerViewController.h"
 #import "JMComDetailCellConfigures.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
+ 
 
 @interface JMCompanyDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMComDetailVideoTableViewCellDelegate>
 

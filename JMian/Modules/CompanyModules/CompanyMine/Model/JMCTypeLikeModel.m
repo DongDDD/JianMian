@@ -17,7 +17,7 @@
              @"work_work_name":@"work.work_name",
              @"work_address":@"work.address",
              @"work_user_id":@"work.user_id",
-
+             @"work_work_id":@"work.work_id",
              @"work_company_logo_path":@"work.company.logo_path",
              @"work_company_company_name":@"work.company.company_name"
              };

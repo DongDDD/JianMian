@@ -21,6 +21,7 @@
 #import "JMVideoChatView.h"
 #import "JMPictureViewController.h"
 #import "ZJImageMagnification.h"
+#import "JMYoukeAction.h"
 
 @interface JMBDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMBDetailVideoTableViewCellDelegate,JMBDetailVideoViewDelegate,JMShareViewDelegate,JMVideoChatViewDelegate,JMBDetailHeaderInfoTableViewCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -102,10 +103,18 @@
 
 #pragma mark - Action
 -(void)right2Action{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     [self showShareView];
 }
 
 -(void)rightAction:(UIButton *)sender{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
         sender.selected = !sender.selected;
         if (sender.selected) {
             [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.ability_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -151,10 +160,18 @@
 }
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     [self createChatRequstWithForeign_key:self.ability_id user_id:self.configures.model.user_userId];
 }
 
 - (IBAction)bottomRightAction:(UIButton *)sender {
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     [self gotoVideoChatViewWithForeign_key:self.ability_id recipient:self.configures.model.user_userId chatType:@"2"];
 }
 
@@ -265,11 +282,19 @@
 
 -(void)shareViewLeftAction{
     //    [self wxShare:0];
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     [self hiddenChoosePayView];
     [self shareMiniProgram];
     
 }
 -(void)shareViewRightAction{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     [self wxShare:1];
     [self hiddenChoosePayView];
     

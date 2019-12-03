@@ -14,7 +14,7 @@ PODS:
   - AFNetworking/Serialization (3.2.1)
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
-  - AgoraRtcEngine_iOS (2.4.0.1)
+  - AgoraRtcEngine_iOS (2.9.0)
   - AMap2DMap (5.6.1):
     - AMapFoundation (~> 1.4)
   - AMapFoundation (1.5.6)
@@ -105,7 +105,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
-  AgoraRtcEngine_iOS: be7eee187e0cf9bc67d67645cd0b75cd60b9503a
+  AgoraRtcEngine_iOS: b316f64bc07f7973f0239316b2b4f79ec369e25c
   AMap2DMap: cac76bc057de18a1641f34df6b50bf5bc6b23571
   AMapFoundation: 20fce2a12cd152e1092afdd04379cdac21932185
   AMapLocation: 89a7e4eb6040d32ba73c77a4966ecc66e46aa7c3

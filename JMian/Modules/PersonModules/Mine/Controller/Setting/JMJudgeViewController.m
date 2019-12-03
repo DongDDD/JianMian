@@ -66,24 +66,20 @@
             JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
             NSString *service_id_B = [NSString stringWithFormat:@"%@b",serviceId];
             NSString *im_id_B = [NSString stringWithFormat:@"%@b",userModel.user_id];
-            if ([userModel.type isEqualToString:B_Type_UESR]) {
-                if (![im_id_B isEqualToString:service_id_B]) {
-                    kSaveMyDefault(@"service_id", serviceId);
-                    NSLog(@"ServiceId%@",serviceId);
+            if (![serviceId isKindOfClass:[NSNull class]]) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    if (![im_id_B isEqualToString:service_id_B]) {
+                        kSaveMyDefault(@"service_id", serviceId);
+                        NSLog(@"ServiceId%@",serviceId);
+                        
+                    }
                     
                 }else{
-                    kRemoveMyDefault(@"service_id");
-                    NSString *str = [NSString stringWithFormat:@"得米客服 %@ 你好，请用心为用户解决疑难",im_id_B];
-                    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:str
-                                                                  delegate:nil cancelButtonTitle:@"为人民服务!" otherButtonTitles: nil];
-                    [alert show];
+                    kSaveMyDefault(@"service_id", serviceId);
                     
                 }
-                
-            }else{
-                kSaveMyDefault(@"service_id", serviceId);
-                
             }
+            
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -103,7 +99,7 @@
         NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
         [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
     }else{
-        if ([model.email isEqualToString:@"379247111ffff@qq.com"]) {
+        if ([model.email isEqualToString:@"379247111ffff@qq.com"] || [model.phone isEqualToString:@"17011116666"]|| [model.phone isEqualToString:@"13246841721"] || [model.phone isEqualToString:@"17817295362"] ) {
             [self jugdeStepToVCWithModel:model];
         }else{
             [self loginIM_tpye:model.type];

@@ -41,8 +41,7 @@
 #import "iVersion.h"
 #import "JMloginsucceedView.h"
 #import "JMUploadVideoViewController.h"
-
-
+#import "JMYoukeAction.h"
 
 @interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate,JMSquarePostTaskViewDelegate,JMTaskSeachViewControllerDelegate,iVersionDelegate,JMVersionDetailsViewDelegate,JMloginsucceedViewDelegate>
 @property (nonatomic, strong) UIView *titleAndPostTaskView;
@@ -65,7 +64,6 @@
 @property (copy, nonatomic)NSString *city_id;//城市ID
 @property (copy, nonatomic)NSString *type_label_id;//职位ID
 @property (strong, nonatomic)NSMutableArray *industryLabIDArray;//根据行业标签筛选
-
 
 @end
 
@@ -293,6 +291,10 @@ static NSString *C_cellIdent = @"CSquareCellID";
 }
 
 -(void)didClickPostTaskAction{
+    if ([JMYoukeAction youkelimit]) {
+         return;
+     }
+     
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         

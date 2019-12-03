@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSArray *labels;
 @property (nonatomic, strong) NSArray *subways;
 @property (nonatomic, strong) NSArray *video;
+@property (nonatomic, strong) NSArray *work;
 
 
 @property (nonatomic, copy) NSString *employee;
@@ -89,5 +90,21 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface JMWorkModel : NSObject
+
+@property (nonatomic, copy) NSString *company_id;
+@property (nonatomic, copy) NSString *work_label_id;
+@property (nonatomic, copy) NSString *work_id;
+@property (nonatomic, copy) NSString *work_name;
+@property (nonatomic, copy) NSString *education;
+@property (nonatomic, copy) NSString *work_experience_min;
+@property (nonatomic, copy) NSString *work_experience_max;
+@property (nonatomic, copy) NSString *salary_min;
+@property (nonatomic, copy) NSString *salary_max;
+@property (nonatomic, copy) NSString *workDescription;
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *city_name;
+
+@end
 
 NS_ASSUME_NONNULL_END

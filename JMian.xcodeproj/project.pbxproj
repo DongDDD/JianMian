@@ -277,6 +277,9 @@
 		04380A8E22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A8D22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m */; };
 		04380A9222DC15C900EA45C2 /* JMVersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A9122DC15C900EA45C2 /* JMVersionManager.m */; };
 		04380A9522DC167C00EA45C2 /* JMVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A9422DC167C00EA45C2 /* JMVersionModel.m */; };
+		043D0F9123966A94005C69DD /* JMYoukeAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D0F8F23966A93005C69DD /* JMYoukeAction.m */; };
+		043D0F9523966B9A005C69DD /* JMYoukeChooseTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D0F9223966B99005C69DD /* JMYoukeChooseTypeViewController.m */; };
+		043D0F9623966B9A005C69DD /* JMYoukeChooseTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043D0F9423966B9A005C69DD /* JMYoukeChooseTypeViewController.xib */; };
 		044276DB22F3EDDF00CAE54F /* JMCityListManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 044276DA22F3EDDF00CAE54F /* JMCityListManager.m */; };
 		0446E47A22E0031F00B3A26C /* JMVIPInvoiceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0446E47922E0031F00B3A26C /* JMVIPInvoiceView.m */; };
 		0446E47C22E0032A00B3A26C /* JMVIPInvoiceView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0446E47B22E0032A00B3A26C /* JMVIPInvoiceView.xib */; };
@@ -1553,6 +1556,11 @@
 		04380A9122DC15C900EA45C2 /* JMVersionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVersionManager.m; sourceTree = "<group>"; };
 		04380A9322DC167C00EA45C2 /* JMVersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVersionModel.h; sourceTree = "<group>"; };
 		04380A9422DC167C00EA45C2 /* JMVersionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVersionModel.m; sourceTree = "<group>"; };
+		043D0F8F23966A93005C69DD /* JMYoukeAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMYoukeAction.m; sourceTree = "<group>"; };
+		043D0F9023966A94005C69DD /* JMYoukeAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMYoukeAction.h; sourceTree = "<group>"; };
+		043D0F9223966B99005C69DD /* JMYoukeChooseTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMYoukeChooseTypeViewController.m; sourceTree = "<group>"; };
+		043D0F9323966B9A005C69DD /* JMYoukeChooseTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMYoukeChooseTypeViewController.h; sourceTree = "<group>"; };
+		043D0F9423966B9A005C69DD /* JMYoukeChooseTypeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMYoukeChooseTypeViewController.xib; sourceTree = "<group>"; };
 		044276D922F3EDDF00CAE54F /* JMCityListManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMCityListManager.h; sourceTree = "<group>"; };
 		044276DA22F3EDDF00CAE54F /* JMCityListManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMCityListManager.m; sourceTree = "<group>"; };
 		0446E47822E0031F00B3A26C /* JMVIPInvoiceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVIPInvoiceView.h; sourceTree = "<group>"; };
@@ -3388,6 +3396,9 @@
 				0494691B2244EEDA00A5BEB7 /* ChooseIdentity.h */,
 				0494691C2244EEDA00A5BEB7 /* ChooseIdentity.m */,
 				0494691D2244EEDA00A5BEB7 /* ChooseIdentity.xib */,
+				043D0F9323966B9A005C69DD /* JMYoukeChooseTypeViewController.h */,
+				043D0F9223966B99005C69DD /* JMYoukeChooseTypeViewController.m */,
+				043D0F9423966B9A005C69DD /* JMYoukeChooseTypeViewController.xib */,
 				049A51562248972F007A8068 /* BasicInformationViewController.h */,
 				04BD327223742DB0005C096E /* BasicInformationViewController.m */,
 				049A51582248972F007A8068 /* BasicInformationViewController.xib */,
@@ -3424,6 +3435,8 @@
 				046227E72376FB440041B70D /* JMSendCustumMsg.m */,
 				0498B7982387C24800CC8F3E /* JMPushVCAction.h */,
 				0498B7992387C24800CC8F3E /* JMPushVCAction.m */,
+				043D0F9023966A94005C69DD /* JMYoukeAction.h */,
+				043D0F8F23966A93005C69DD /* JMYoukeAction.m */,
 			);
 			name = PublicAction;
 			path = JMian/Utilities/PublicAction;
@@ -5810,7 +5823,7 @@
 				048FEE2B2244853C001160C8 /* Resources */,
 				F9696212A5B33EE9B967E2B7 /* [CP] Copy Pods Resources */,
 				6DBAA2702305034900631AD3 /* Embed Frameworks */,
-				D8CF73FE68B11785C9FBE932 /* [CP] Embed Pods Frameworks */,
+				22A518D1ED310235DD3A81AD /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -6556,6 +6569,7 @@
 				04072F492282BA650067A05D /* redlining_2.png in Resources */,
 				040B839C2265F3E700F1A37A /* IDCard1@2x.png in Resources */,
 				04A247DF224CE70E00DEB8E3 /* play@3x.png in Resources */,
+				043D0F9623966B9A005C69DD /* JMYoukeChooseTypeViewController.xib in Resources */,
 				04C120D922882B5F001BDEBC /* JMUploadVideoViewController.xib in Resources */,
 				04BBF2C422918E7C0068A9B1 /* C_videos@2x.png in Resources */,
 				040A3930227DAC2B00EDD9E0 /* copyreader.png in Resources */,
@@ -6598,6 +6612,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		22A518D1ED310235DD3A81AD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-frameworks.sh",
+				"${PODS_ROOT}/TXIMSDK_iOS/iOS/ImSDK/Framework/ImSDK.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImSDK.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7B7824ACBD1F1FF3F1486D0B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -6618,28 +6654,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D8CF73FE68B11785C9FBE932 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-frameworks.sh",
-				"${PODS_ROOT}/TXIMSDK_iOS/iOS/ImSDK/Framework/ImSDK.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ImSDK.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JMian/Pods-JMian-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F9696212A5B33EE9B967E2B7 /* [CP] Copy Pods Resources */ = {
@@ -6729,6 +6743,7 @@
 				6D5DD8BD2308439E0064612A /* TUIConversationDataProviderService.m in Sources */,
 				6D5DD8812308439D0064612A /* TUIContactListPicker.m in Sources */,
 				0493FEEA22CF6ADF00EC7215 /* JMPlaySoundsManager.m in Sources */,
+				043D0F9523966B9A005C69DD /* JMYoukeChooseTypeViewController.m in Sources */,
 				041EB2F8226C41F2002BD54B /* JMCompanyHomeModel.m in Sources */,
 				04E25F6D22B509CD00F451C8 /* JMHTTPManager+FectchInvoiceInfo.m in Sources */,
 				6D5DD89A2308439E0064612A /* TUIGroupPendencyCellData.m in Sources */,
@@ -7080,6 +7095,7 @@
 				048A0DD622B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.m in Sources */,
 				6D5DD8852308439D0064612A /* TUIContactActionCellData.m in Sources */,
 				04BD32582373F6B5005C096E /* JMPersonIntensionTableViewCell.m in Sources */,
+				043D0F9123966A94005C69DD /* JMYoukeAction.m in Sources */,
 				040865E12272FAF1005BB03E /* JMPostJobHomeTableViewCell.m in Sources */,
 				6D5DD8652308439D0064612A /* TUIFileViewController.m in Sources */,
 				6D82F2982274C63E00B9D2B9 /* JMHTTPManager+Job.m in Sources */,

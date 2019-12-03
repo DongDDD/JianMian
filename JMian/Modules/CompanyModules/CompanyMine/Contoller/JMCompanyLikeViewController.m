@@ -20,6 +20,11 @@
 #import "JMMessageListModel.h"
 #import "JMChatViewController.h"
 
+#import "JMPersonInfoViewController.h"
+#import "JobDetailsViewController.h"
+#import "JMBDetailViewController.h"
+#import "JMCDetailViewController.h"
+
 
 @interface JMCompanyLikeViewController ()<UITableViewDelegate,UITableViewDataSource,JMCompanyLikeTableViewCellDelegate>
 @property (nonatomic, strong) JMTitlesView *titleView;
@@ -163,6 +168,48 @@ static NSString *cellIdent = @"CellIdent";
     
 }
 
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    #import "JMPersonInfoViewController.h"
+//    #import "JobDetailsViewController.h"
+//    #import "JMBDetailViewController.h"
+//    #import "JMCDetailViewController.h"
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        if (_index == 0) {
+            JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc]init];
+            JMBTypeLikeModel *model = self.listsArray[indexPath.row];
+            vc.user_job_id = model.job_user_job_id;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else{
+            JMBDetailViewController *vc = [[JMBDetailViewController alloc]init];
+            JMBPartTimeJobLikeModel *model = self.listsArray[indexPath.row];
+            vc.ability_id = model.ability_ability_id;;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+         
+    }else{
+    if (_index == 0) {
+        JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
+        JMCTypeLikeModel *model = self.listsArray[indexPath.row];
+        vc.work_id = model.work_work_id;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
+        JMCPartTimeJobLikeModel *model = self.listsArray[indexPath.row];
+        vc.task_id= model.task_ability_id;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+     
+    
+    
+    }
+
+}
 
 -(void)deleteActionWithFavorite_id:(NSString *)favorite_id{
     [[JMHTTPManager sharedInstance]deleteLikeWith_Id:favorite_id  mode:self.mode SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
