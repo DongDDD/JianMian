@@ -442,12 +442,14 @@
         if ([userModel.type isEqualToString:B_Type_UESR]) {
             str1 = @"求职达人";
             str2 = @"企业视频";
+            _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, SafeAreaTopHeight-40, SCREEN_WIDTH, 43} titles:@[str1, str2]];
+
         }else{
             str1 = @"推荐企业";
-            str2 = @"求职达人";
+            _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, SafeAreaTopHeight-40, SCREEN_WIDTH, 43} titles:@[str1,]];
+
         }
         
-        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, SafeAreaTopHeight-40, SCREEN_WIDTH, 43} titles:@[str1, str2]];
         _titleView.viewType = JMTitlesViewDefault;
         [_titleView setCurrentTitleIndex:0];
         __weak JMDiscoverHomeViewController *weakSelf = self;

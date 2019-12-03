@@ -40,6 +40,11 @@
 @property (nonatomic, strong)JMDidUploadVideoView *didUploadVideoView;//有视频数据就显示
 @property (nonatomic, strong)JMVitaDetailModel *model;//全职
 @property (nonatomic, strong)JMAbilityCellData *partTimeJobModel;//兼职
+@property (weak, nonatomic) IBOutlet UIButton *btn1;
+@property (weak, nonatomic) IBOutlet UIButton *btn2;
+@property (weak, nonatomic) IBOutlet UIButton *agreeShowBtn;
+@property(nonatomic,assign)BOOL isAgreeShow;
+
 @end
 
 @implementation JMUploadVideoViewController
@@ -61,7 +66,11 @@
         //获取全职视频
         [self getJobData];
     }
-   
+    
+    self.agreeShowBtn.selected = NO;
+    [self.agreeShowBtn setImage:[UIImage imageNamed:@"YES_Post"] forState:UIControlStateSelected];
+    [self.agreeShowBtn setImage:[UIImage imageNamed:@"gou_partTime"] forState:UIControlStateNormal];
+
 }
 
 
@@ -171,7 +180,12 @@
 - (IBAction)chooseVideoFromPhoto:(UIButton *)sender {
 //    FMImagePicker *picker = [[FMImagePicker alloc] init];
 //    [self presentViewController:picker animated:YES completion:nil];
-    [self uploadVideo];
+    if (_isAgreeShow) {
+        [self uploadVideo];
+        
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"请同意此视频向企业展示" btnTitle:@"好的"];
+    }
 }
 
 /**
@@ -180,7 +194,12 @@
  @param sender btn
  */
 - (IBAction)recordVideo:(id)sender {
-    [self filmVideo];
+    if (_isAgreeShow) {
+          [self filmVideo];
+
+      }else{
+          [self showAlertSimpleTips:@"提示" message:@"请同意此视频向企业展示" btnTitle:@"好的"];
+      }
 }
 //重新上传
 -(void)leftAction{
@@ -250,6 +269,23 @@
         
     }];
     
+    
+}
+ 
+- (IBAction)isAgreeShowAction:(UIButton *)sender {
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+        self.isAgreeShow = YES;
+        self.btn1.backgroundColor = MASTER_COLOR;
+        self.btn2.backgroundColor = MASTER_COLOR;
+        
+    }else{
+        self.isAgreeShow = NO;
+        self.btn1.backgroundColor = TEXT_GRAY_COLOR;
+        self.btn2.backgroundColor = TEXT_GRAY_COLOR;
+        
+        
+    }
     
 }
 

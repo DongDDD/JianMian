@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +11,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMUploadVideoViewController">
             <connections>
                 <outlet property="FrameImageView" destination="NJQ-6u-Ddz" id="JcI-RN-e9g"/>
+                <outlet property="agreeShowBtn" destination="uiL-re-1Wn" id="1Sh-Yu-1zg"/>
                 <outlet property="bottomLab" destination="w4f-vv-eqP" id="KNt-kg-IqT"/>
+                <outlet property="btn1" destination="OsU-9C-Pea" id="uBU-u6-xF8"/>
+                <outlet property="btn2" destination="yCQ-dF-PYJ" id="Bpk-X7-rQE"/>
                 <outlet property="scrollView" destination="cxa-JP-Jvm" id="esj-Jx-uJ4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -46,7 +47,7 @@
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yCQ-dF-PYJ">
                                     <rect key="frame" x="13" y="298" width="327" height="50"/>
-                                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.75686274509999996" green="0.75294117650000003" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="AXR-IQ-Dv7"/>
                                     </constraints>
@@ -65,7 +66,7 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OsU-9C-Pea">
                                     <rect key="frame" x="13" y="228" width="327" height="50"/>
-                                    <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="backgroundColor" red="0.75686274509999996" green="0.75294117650000003" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="kFc-Te-6ye"/>
                                     </constraints>
@@ -82,6 +83,15 @@
                                         <action selector="chooseVideoFromPhoto:" destination="-1" eventType="touchUpInside" id="8XW-FS-nRJ"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uiL-re-1Wn">
+                                    <rect key="frame" x="46" y="381" width="260" height="30"/>
+                                    <state key="normal" title="  同意此视频简历向企业展示" image="gou_partTime.png">
+                                        <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="isAgreeShowAction:" destination="-1" eventType="touchUpInside" id="6pk-w0-pIC"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
@@ -90,9 +100,11 @@
                                 <constraint firstAttribute="trailing" secondItem="NJQ-6u-Ddz" secondAttribute="trailing" constant="31" id="67p-l7-c4V"/>
                                 <constraint firstAttribute="height" constant="484" id="A7n-O0-Hmy"/>
                                 <constraint firstItem="yCQ-dF-PYJ" firstAttribute="trailing" secondItem="OsU-9C-Pea" secondAttribute="trailing" id="D5J-bg-Toc"/>
+                                <constraint firstItem="uiL-re-1Wn" firstAttribute="top" secondItem="yCQ-dF-PYJ" secondAttribute="bottom" constant="33" id="ETR-nw-dEm"/>
                                 <constraint firstItem="OsU-9C-Pea" firstAttribute="top" secondItem="NJQ-6u-Ddz" secondAttribute="bottom" constant="22" id="Nvd-i6-fc4"/>
                                 <constraint firstItem="NJQ-6u-Ddz" firstAttribute="leading" secondItem="TIE-VJ-OrX" secondAttribute="leading" constant="31" id="U8O-Du-RxL"/>
                                 <constraint firstItem="NJQ-6u-Ddz" firstAttribute="top" secondItem="TIE-VJ-OrX" secondAttribute="top" constant="67" id="VBA-md-cIu"/>
+                                <constraint firstItem="uiL-re-1Wn" firstAttribute="leading" secondItem="TIE-VJ-OrX" secondAttribute="leading" constant="46" id="joD-u5-clo"/>
                                 <constraint firstAttribute="trailing" secondItem="OsU-9C-Pea" secondAttribute="trailing" constant="20" id="tC9-bH-oS8"/>
                                 <constraint firstItem="yCQ-dF-PYJ" firstAttribute="leading" secondItem="OsU-9C-Pea" secondAttribute="leading" id="xmY-N7-N9u"/>
                             </constraints>
@@ -121,12 +133,12 @@
                     </subviews>
                     <constraints>
                         <constraint firstItem="TIE-VJ-OrX" firstAttribute="centerX" secondItem="cxa-JP-Jvm" secondAttribute="centerX" id="20I-sw-jiU"/>
-                        <constraint firstItem="Vlp-ru-IlY" firstAttribute="top" secondItem="TIE-VJ-OrX" secondAttribute="bottom" constant="20" id="2gh-ip-Njq"/>
                         <constraint firstItem="TIE-VJ-OrX" firstAttribute="leading" secondItem="cxa-JP-Jvm" secondAttribute="leading" constant="27" id="Gxa-Bp-uJH"/>
                         <constraint firstItem="w4f-vv-eqP" firstAttribute="centerX" secondItem="Vlp-ru-IlY" secondAttribute="centerX" id="V2c-Zp-e0H"/>
                         <constraint firstItem="Vlp-ru-IlY" firstAttribute="centerX" secondItem="cxa-JP-Jvm" secondAttribute="centerX" id="X2i-UY-Y8E"/>
                         <constraint firstAttribute="trailing" secondItem="TIE-VJ-OrX" secondAttribute="trailing" constant="27" id="ZGs-Lx-pKK"/>
                         <constraint firstItem="w4f-vv-eqP" firstAttribute="top" secondItem="Vlp-ru-IlY" secondAttribute="bottom" constant="9" id="cun-9o-4kH"/>
+                        <constraint firstItem="Vlp-ru-IlY" firstAttribute="top" secondItem="TIE-VJ-OrX" secondAttribute="bottom" constant="20" id="e2U-Cb-lQL"/>
                         <constraint firstAttribute="bottom" secondItem="w4f-vv-eqP" secondAttribute="bottom" constant="183" id="hHf-SD-dK3"/>
                         <constraint firstItem="TIE-VJ-OrX" firstAttribute="top" secondItem="cxa-JP-Jvm" secondAttribute="top" constant="50" id="oSc-16-QgD"/>
                     </constraints>
@@ -144,6 +156,7 @@
         </view>
     </objects>
     <resources>
+        <image name="gou_partTime.png" width="15" height="15"/>
         <image name="my_videos_2.png" width="259" height="139"/>
     </resources>
 </document>
