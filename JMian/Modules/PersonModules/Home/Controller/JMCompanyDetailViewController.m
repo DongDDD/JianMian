@@ -12,7 +12,11 @@
 #import "JMPlayerViewController.h"
 #import "JMComDetailCellConfigures.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
- 
+ #import "JMVideoJoblistTableViewCell.h"
+#import "JMNoDataTableViewCell.h"
+#import "JobDetailsViewController.h"
+
+
 
 @interface JMCompanyDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMComDetailVideoTableViewCellDelegate>
 
@@ -55,16 +59,13 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        return 1;
-    }else if (section == 1) {
-        return 4;
-    }
-    return 1;
+
+    return [self.configures numberOfRowsInSection:section];
+
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -99,52 +100,84 @@
         return cell;
 
     }else if (indexPath.section == 1) {
-        if (indexPath.row == 0) {
-            //公司介绍
-            JMComDetailContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMComDetailContentTableViewCellIdentifier forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell setModel:self.configures.model];
-            return cell;
-        }else if (indexPath.row == 1) {
-            //公司图片
-            JMScrollviewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMScrollviewTableViewCellIdentifier forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell setModel:self.configures.model];
-            return cell;
-        }else if (indexPath.row == 2) {
-            JMMapTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMapTableViewCellIdentifier forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.latitude = self.configures.model.latitude;
-            cell.longitude = self.configures.model.longitude;
-            cell.address = self.configures.model.address;
-            [cell setComModel:self.configures.model];
-            return cell;
-        }else if (indexPath.row == 3) {
-            JMComDetailVideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMComDetailVideoTableViewCellIdentifier forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.delegate = self;
-            [cell setModel:self.configures.model];
-            return cell;
+
+            if (self.configures.model.work.count > 0) {
+                JMVideoJoblistTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMVideoJoblistTableViewCellIdentifier forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                JMWorkModel *model = self.configures.model.work[indexPath.row];
+                
+                [cell setModel:model];
+                return cell;
+                 
+            }else{
+                JMNoDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMNoDataTableViewCellIdentifier forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.textLabel.text = @"该企业还没发布职位";
+                
+                return cell;
+                
+            
+            }
+            
+            
+        }else if (indexPath.section == 2) {
+            if (indexPath.row == 0) {
+                //公司介绍
+                JMComDetailContentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMComDetailContentTableViewCellIdentifier forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell setModel:self.configures.model];
+                return cell;
+            }else if (indexPath.row == 1) {
+                //公司图片
+                JMScrollviewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMScrollviewTableViewCellIdentifier forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                [cell setModel:self.configures.model];
+                return cell;
+            }else if (indexPath.row == 2) {
+                JMMapTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMapTableViewCellIdentifier forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.latitude = self.configures.model.latitude;
+                cell.longitude = self.configures.model.longitude;
+                cell.address = self.configures.model.address;
+                [cell setComModel:self.configures.model];
+                return cell;
+            }else if (indexPath.row == 3) {
+                JMComDetailVideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMComDetailVideoTableViewCellIdentifier forIndexPath:indexPath];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.delegate = self;
+                [cell setModel:self.configures.model];
+                return cell;
+            }
         }
     
     
-    }
- 
-      return nil;
+    
+    return nil;
 }
 
 -(void)showPageContentView{
     switch (_index) {
         case 0:
-            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             break;
         case 1:
-            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:3 inSection:1] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+            [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:2] atScrollPosition:UITableViewScrollPositionTop animated:YES];
             break;
         default:
             break;
     }
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1) {
+        JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
+        JMWorkModel *model = self.configures.model.work[indexPath.row];
+        vc.work_id = model.work_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
+
 }
 
 #pragma mark - myDelegate
@@ -191,6 +224,10 @@
         [_tableView registerNib:[UINib nibWithNibName:@"JMScrollviewTableViewCell" bundle:nil] forCellReuseIdentifier:JMComDetailVideoTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMComDetailVideoTableViewCell" bundle:nil] forCellReuseIdentifier:JMComDetailVideoTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMMapTableViewCell" bundle:nil] forCellReuseIdentifier:JMMapTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMVideoJoblistTableViewCell" bundle:nil] forCellReuseIdentifier:JMVideoJoblistTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMNoDataTableViewCell" bundle:nil] forCellReuseIdentifier:JMNoDataTableViewCellIdentifier];
+
+
 
 //        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecri2TableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailTaskDecri2TableViewCellIdentifier];
 //        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailVideoTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailVideoTableViewCellIdentifier];

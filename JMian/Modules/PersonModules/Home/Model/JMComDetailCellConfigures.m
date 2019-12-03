@@ -14,7 +14,12 @@
     if (indexPath.section == 0) {
         return 217;
     }
-    if (indexPath.section == 1) {
+    if (indexPath.section ==1) {
+        return 142;
+    }
+    
+    
+    if (indexPath.section ==2) {
         if (indexPath.row == 0) {
             return [self getHeightFromDecri];
             
@@ -50,6 +55,24 @@
         }
     }
     return 0;
+}
+
+
+- (NSInteger)numberOfRowsInSection:(NSInteger)section{
+    if (section == 0) {
+        return 1;
+    }else if (section == 1) {
+        if (self.model.work.count > 0) {
+            return self.model.work.count;
+             
+        }else{
+            return 1;
+        }
+    }else if (section == 2) {
+        return 4;
+    }
+    return 0;
+    
 }
 
 -(CGFloat)getHeightFromDecri{

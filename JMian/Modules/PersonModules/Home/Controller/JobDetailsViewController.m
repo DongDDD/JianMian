@@ -73,9 +73,9 @@
 //        self.navigationController.navigationBar.translucent = YES;
     //
 //        self.extendedLayoutIncludesOpaqueBars = NO;
-    if (_work_id == nil) {
-        _work_id = self.homeworkModel.work_id;
-    }
+//    if (_work_id == nil) {
+//        _work_id = self.homeworkModel.work_id;
+//    }
     
     [self setJuhua];
     [self getUserInfo];

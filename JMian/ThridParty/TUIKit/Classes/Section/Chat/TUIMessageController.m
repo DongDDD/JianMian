@@ -769,7 +769,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         }
         
     } fail:^(int code, NSString *desc) {
-        NSLog(@"====== %d",imMsg.status);
+        NSLog(@"====== %ld",(long)imMsg.status);
         dispatch_async(dispatch_get_main_queue(), ^{
             [THelper makeToastError:code msg:desc];
             [ws changeMsg:msg status:Msg_Status_Fail];
@@ -923,9 +923,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         if ([model.type isEqualToString:@"1"]) {
             //全职
             JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
-            JMHomeWorkModel *model2 = [[JMHomeWorkModel alloc]init];
-            model2.work_id = self.myConvModel.work_work_id;
-            vc.homeworkModel = model2;
+            vc.work_id = self.myConvModel.work_work_id;
             [self.navigationController pushViewController:vc animated:YES];
             
         }

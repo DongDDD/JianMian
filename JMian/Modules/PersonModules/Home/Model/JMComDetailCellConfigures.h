@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMComDetailCellConfigures : NSObject
 
-//- (NSInteger)numberOfRowsInSection:(NSInteger)section;
+- (NSInteger)numberOfRowsInSection:(NSInteger)section;
 
 //- (CGFloat)heightForFooterInSection:(NSInteger)section;
 

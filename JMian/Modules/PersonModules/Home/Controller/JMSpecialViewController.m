@@ -290,7 +290,7 @@ static NSString *BHomeCellID = @"BHomeCellID";
         JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
         JMHomeWorkModel *model = self.arrDate[indexPath.row];
         
-        vc.homeworkModel = model;
+        vc.work_id = model.work_id;
         
         [self.navigationController pushViewController:vc animated:YES];
     }

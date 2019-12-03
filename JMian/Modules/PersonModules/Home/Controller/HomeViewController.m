@@ -675,7 +675,7 @@ static NSString *cellIdent = @"cellIdent";
     JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
     JMHomeWorkModel *model = self.dataArray[indexPath.row];
 
-    vc.homeworkModel = model;
+    vc.work_id = model.work_id;
     
     [self.navigationController pushViewController:vc animated:YES];
     

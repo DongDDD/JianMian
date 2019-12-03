@@ -36,7 +36,7 @@ static NSString *cellIdent = @"cellIdent";
 -(void)getData{
     [[JMHTTPManager sharedInstance]fetchCompanyInfo_Id:self.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            self.dataArray = [JMHomeWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"][@"work"]];
+            self.dataArray = [JMWorkModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"][@"work"]];
             [self.tableView reloadData];
             if (self.dataArray.count == 0) {
                 [self.view addSubview:self.noDataView];
@@ -72,7 +72,7 @@ static NSString *cellIdent = @"cellIdent";
     //    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 //    cell.delegate = self;
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-    JMHomeWorkModel *model = self.dataArray[indexPath.row];
+    JMWorkModel *model = self.dataArray[indexPath.row];
     [cell setModel:model];
 
     return cell;
@@ -83,7 +83,7 @@ static NSString *cellIdent = @"cellIdent";
     JobDetailsViewController *vc = [[JobDetailsViewController alloc] init];
     JMHomeWorkModel *model = self.dataArray[indexPath.row];
     
-    vc.homeworkModel = model;
+    vc.work_id = model.work_id;
     
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -95,7 +95,7 @@ static NSString *cellIdent = @"cellIdent";
         _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.rowHeight = 120.0f;
+        _tableView.rowHeight = 142.0f;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
         [self.tableView registerNib:[UINib nibWithNibName:@"JMVideoJoblistTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];

@@ -208,7 +208,7 @@ static NSString *cellIdent = @"cellIdent";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     JobDetailsViewController *vc = [[JobDetailsViewController alloc]init];
     JMHomeWorkModel *model = self.dataArray[indexPath.row];
-    vc.homeworkModel = model;
+    vc.work_id = model.work_id;
     vc.status = model.status;
     vc.viewType = JobDetailsViewTypePreview;
     [self.navigationController pushViewController:vc animated:YES];
