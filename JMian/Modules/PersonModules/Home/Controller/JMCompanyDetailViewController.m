@@ -112,7 +112,7 @@
             }else{
                 JMNoDataTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMNoDataTableViewCellIdentifier forIndexPath:indexPath];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                cell.textLabel.text = @"该企业还没发布职位";
+                cell.titleLab.text = @"该企业还没发布职位";
                 
                 return cell;
                 

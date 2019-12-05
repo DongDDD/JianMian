@@ -66,16 +66,10 @@
         make.left.right.bottom.equalTo(self.view);
     }];
     
-//    JMVersionModel *model = [JMVersionManager getVersoinInfo];
-//    if (![model.test isEqualToString:@"1"]) {
+
         self.imageNameArr = @[@"mine_share",@"burse",@"autonym"];
         self.labelStrArr = @[@"分享APP",@"我的钱包",@"实名认证"];
-//
-//    }else{
-//        self.imageNameArr = @[@"burse",@"autonym"];
-//        self.labelStrArr = @[@"我的钱包",@"实名认证"];
 
-//    }
     
 }
 

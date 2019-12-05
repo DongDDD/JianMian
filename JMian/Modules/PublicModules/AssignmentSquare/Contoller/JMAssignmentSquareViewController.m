@@ -42,6 +42,8 @@
 #import "JMloginsucceedView.h"
 #import "JMUploadVideoViewController.h"
 #import "JMYoukeAction.h"
+ #import "JMHTTPManager+FectchVersionInfo.h"
+
 
 @interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate,JMSquarePostTaskViewDelegate,JMTaskSeachViewControllerDelegate,iVersionDelegate,JMVersionDetailsViewDelegate,JMloginsucceedViewDelegate>
 @property (nonatomic, strong) UIView *titleAndPostTaskView;
@@ -98,6 +100,8 @@ static NSString *C_cellIdent = @"CSquareCellID";
         [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
         [self CToGetData];
     }
+    
+    [self getVersionData];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -135,9 +139,8 @@ static NSString *C_cellIdent = @"CSquareCellID";
  
     [self setupHeaderRefresh];
     [self setupFooterRefresh];
-    [self setUpdateDetailsView];
     [self setLoginsucceedView];
-}
+ }
 
 -(void)setUpdateDetailsView{
     JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
@@ -145,11 +148,14 @@ static NSString *C_cellIdent = @"CSquareCellID";
     NSString *nowVersionStr = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
     BOOL isNeedUpDate = [self compareVersion:versionModel.version toVersion:nowVersionStr];
     if (isNeedUpDate) {
-        NSLog(@"需要更新");     
+        NSLog(@"需要更新");
         [[UIApplication sharedApplication].keyWindow addSubview:self.versionDetailsView];
-        [self.versionDetailsView.versionDetailTextView setText:versionModel.updateDescription];
+        [self.versionDetailsView.versionDetailTextView setText:versionModel.appDescription];
     }
-       
+    if (![versionModel.enforce isEqualToString:@"0"]) {
+        [self.versionDetailsView.deleteBtn setHidden:YES];
+    }
+
 }
 
 //注册成功
@@ -324,13 +330,13 @@ static NSString *C_cellIdent = @"CSquareCellID";
 
 -(void)deleteAction{
     [self.versionDetailsView setHidden:YES];
-    
+
 }
 
 -(void)updateAction{
-    
+
     [[iVersion sharedInstance] openAppPageInAppStore];
-    
+
 }
 
 -(void)deleteLoginsucceedViewAction{
@@ -545,6 +551,20 @@ static NSString *C_cellIdent = @"CSquareCellID";
         
     }];
     
+}
+
+
+-(void)getVersionData{
+    [[JMHTTPManager sharedInstance] fectchVersionWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMVersionModel *model = [JMVersionModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [JMVersionManager saveVersionInfo:model];
+            [self setUpdateDetailsView];
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+
+    }];
+
 }
 
 #pragma mark - UITableViewDelegate

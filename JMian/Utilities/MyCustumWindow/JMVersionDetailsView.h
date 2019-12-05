@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 @interface JMVersionDetailsView : UIView
 @property (weak, nonatomic) IBOutlet UITextView *versionDetailTextView;
+@property (weak, nonatomic) IBOutlet UIButton *deleteBtn;
 @property(nonatomic,weak)id<JMVersionDetailsViewDelegate>delegate;
 @end
 

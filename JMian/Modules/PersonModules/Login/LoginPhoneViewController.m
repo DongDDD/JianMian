@@ -23,6 +23,7 @@
 @property (nonatomic, assign)CGFloat changeHeight;
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
 
+
 @property (weak, nonatomic) IBOutlet UIButton *youkeBtn;
 
 @end
@@ -36,7 +37,6 @@
     _phoneNumText.delegate = self;
     _phoneNumText.keyboardType = UIKeyboardTypeNumberPad;
     _captchaText.keyboardType = UIKeyboardTypeNumberPad;
-
     // Do any additional setup after loading the view from its nib.
 }
 -(void)viewWillAppear:(BOOL)animated{
@@ -49,6 +49,7 @@
 {
     [super viewDidDisappear:animated];
 }
+
 
 
 #pragma mark - 数据请求
@@ -84,6 +85,7 @@
     }];
     
 }
+
 
 - (IBAction)loginPhoneBtn:(id)sender {
 //    [self.view addSubview:self.progressHUD];
@@ -191,6 +193,9 @@
     }
     return _progressHUD;
 }
+
+
+
 
 /*
 #pragma mark - Navigation

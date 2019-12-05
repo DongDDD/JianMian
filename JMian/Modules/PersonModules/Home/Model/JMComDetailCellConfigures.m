@@ -15,7 +15,12 @@
         return 217;
     }
     if (indexPath.section ==1) {
-        return 142;
+        if (self.model.work.count > 0) {
+            return 142;
+        }else{
+            return 200;
+            
+        }
     }
     
     

@@ -39,6 +39,8 @@
 #import "JMCDetailViewController.h"
 #import "iVersion.h"
 #import "JMPushVCAction.h"
+#import "JMServiceProtocolWebViewController.h"
+
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener,iVersionDelegate>
 
@@ -56,23 +58,56 @@
     [[TUIKit sharedInstance] setupWithAppId:TIMSdkAppid.intValue];
 
 }
+#pragma mark -delegate
 
-- (void)iVersionDidDetectNewVersion:(NSString *)version details:(NSString *)versionDetails{
+//- (void)iVersionDidDetectNewVersion:(NSString *)version details:(NSString *)versionDetails{
 //    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
 //    NSString *nowVersionStr = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
 //    BOOL isNeedUpDate = [self compareVersion:version toVersion:nowVersionStr];
-//    if (isNeedUpDate) {
-        NSLog(@"versionDetails:%@ %@",version,versionDetails);
-//        [_window addSubview:self.versionDetailsView];
-        JMVersionModel *versionModel = [[JMVersionModel alloc]init];
-        versionModel.version = version;
-        versionModel.updateDescription = versionDetails;
-        [JMVersionManager saveVersionInfo:versionModel];
+    //    if (isNeedUpDate) {
+//    NSLog(@"versionDetails:%@ %@",version,versionDetails);
+//    //        [_window addSubview:self.versionDetailsView];
+//    JMVersionModel *versionModel = [[JMVersionModel alloc]init];
+//    versionModel.version = version;
+//    versionModel.updateDescription = versionDetails;
+//    [JMVersionManager saveVersionInfo:versionModel];
+//    [self getVersionData];
+//    [self setUpdateDetailsView];
+    //        [[UIApplication sharedApplication].keyWindow addSubview:self.versionDetailsView];
+    //    }
     
-//        [[UIApplication sharedApplication].keyWindow addSubview:self.versionDetailsView];
-//    }
+//}
+
+-(void)deleteAction{
+    [self.versionDetailsView setHidden:YES];
     
 }
+
+-(void)updateAction{
+    [[iVersion sharedInstance] openAppPageInAppStore];
+    
+}
+
+//-(void)setUpdateDetailsView{
+//    JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
+//    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+//    NSString *nowVersionStr = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+//    BOOL isNeedUpDate = [self compareVersion:versionModel.version toVersion:nowVersionStr];
+//    if (isNeedUpDate) {
+//        NSLog(@"需要更新");
+//        [[UIApplication sharedApplication].keyWindow addSubview:self.versionDetailsView];
+////        [UIApplication sharedApplication].keyWindow.b
+////        self.versionDetailsView.
+//        [[UIApplication sharedApplication].keyWindow bringSubviewToFront:self.versionDetailsView];
+//        [self.versionDetailsView.versionDetailTextView setText:versionModel.updateDescription];
+//
+//
+//    }
+//    if (versionModel.enforce) {
+//        [self.versionDetailsView.deleteBtn setHidden:YES];
+//    }
+//}
+
 
 //- (BOOL)iVersionShouldDisplayNewVersion:(NSString *)version details:(NSString *)versionDetails{
 //
@@ -139,6 +174,7 @@
     NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:judgevc];
     [_window setRootViewController:naVC];
     [self.window makeKeyAndVisible];
+//    [self  getVersionData];
 //    [judgevc.view addSubview:self.versionDetailsView];
 
 //    [self getServiceRequest];
@@ -405,6 +441,7 @@
     }];
 }
 
+//- 版本检测
 
 
 //-(void)getVersionData{
@@ -412,6 +449,7 @@
 //        if (responsObject[@"data"]) {
 //            JMVersionModel *model = [JMVersionModel mj_objectWithKeyValues:responsObject[@"data"]];
 //            [JMVersionManager saveVersionInfo:model];
+////            [self setUpdateDetailsView];
 //        }
 //    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 //
@@ -595,20 +633,6 @@
 // 接听视频聊天
 -(void)answerAction{
     [[[UIApplication sharedApplication].keyWindow viewWithTag:221] removeFromSuperview];
-//    self.window=[[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
-//    JMVideoChatViewController *vc = [[JMVideoChatViewController alloc]init];
-//    vc.view.frame = self.answerOrHangUpView.bounds;
-//    vc.videoChatDic = self.videoChatDic;
-//    vc.view.tag = 754;
-//    [self.answerOrHangUpView addSubview:vc.view];
-//    [_window addSubview:vc.controlButtons];
-    
-//    [vc.controlButtons mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.mas_equalTo(_window);
-//        make.height.mas_equalTo(200);
-//        make.left.and.right.mas_equalTo(_window);
-//    }];
-//    [_window makeKeyAndVisible];
     [[JMPlaySoundsManager sharedInstance].videoSoundsPlayer stop];
     [_window addSubview:self.videoChatView];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];

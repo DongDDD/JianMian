@@ -249,11 +249,11 @@ static const CGFloat kPhotoViewMargin = 12.0;
         
     }
     
-     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImage:) name:@"SendImageNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getImage:) name:@"SendImageNotification" object:nil];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDeleteImage:) name:@"SendDeleteImageNotification" object:nil];
+    //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDeleteImage:) name:@"SendDeleteImageNotification" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteImage:) name:@"DeleteImgNotification" object:nil];
-
+    
     
 }
 
