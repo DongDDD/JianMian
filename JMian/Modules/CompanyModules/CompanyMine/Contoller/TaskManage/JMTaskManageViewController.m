@@ -25,7 +25,6 @@
 #import "JMPaySucceedViewController.h"
 #import "JMPayFailedViewController.h"
 #import "JMHTTPManager+FectchTaskOrderInfo.h"
-#import "JMBDetailWebViewController.h"
 #import "JMHTTPManager+FectchTaskAbility.h"
 #import "JMHTTPManager+UnReadNotice.h"
 #import "JMBDetailViewController.h"

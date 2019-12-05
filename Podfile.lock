@@ -45,7 +45,6 @@ PODS:
   - VIMediaCache (0.4)
   - WechatOpenSDK (1.8.4)
   - YYCache (1.0.4)
-  - YYText (1.0.7)
 
 DEPENDENCIES:
   - AFNetworking
@@ -72,7 +71,6 @@ DEPENDENCIES:
   - VIMediaCache
   - WechatOpenSDK
   - YYCache
-  - YYText
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -101,7 +99,6 @@ SPEC REPOS:
     - VIMediaCache
     - WechatOpenSDK
     - YYCache
-    - YYText
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -125,12 +122,11 @@ SPEC CHECKSUMS:
   SDWebImage: 3f3f0c02f09798048c47a5ed0a13f17b063572d8
   STPickerView: d0e234f230f45bd720a6739d0ae9fbddf038958b
   Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
-  TXIMSDK_iOS: 3eb300fc9b4fe67670c58c90fed2801b715e8616
+  TXIMSDK_iOS: 54c04c0807ccf0c406366ef86cff663ea277e235
   VIMediaCache: aa650f82cb114c68a343beb4e67416cf5eb2f3a2
   WechatOpenSDK: 9b721089507c895d05f997408c30bb6e6f5f9b60
   YYCache: 8105b6638f5e849296c71f331ff83891a4942952
-  YYText: 5c461d709e24d55a182d1441c41dc639a18a4849
 
-PODFILE CHECKSUM: 71caf09617c9996701e383e770833d15500b3be2
+PODFILE CHECKSUM: 67ca8a7af635cc906ce5bffb49cc9b875d01291f
 
 COCOAPODS: 1.6.1

@@ -7,7 +7,7 @@
 //
 
 #import "JMSnapshotWebViewController.h"
-#import "JMCDetailWebViewController.h"
+#import "JMCDetailViewController.h"
 
 @interface JMSnapshotWebViewController ()
 
@@ -60,7 +60,7 @@
     //JS调用OC
     if([message.name isEqualToString:@"aaa"]){
         NSLog(@"message.body%@",message.body);
-        JMCDetailWebViewController *vc = [[JMCDetailWebViewController alloc]init];
+        JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
         vc.task_id = self.data.task_id;
         [self.navigationController pushViewController:vc animated:YES];
         //        self.labsJson = message.body;

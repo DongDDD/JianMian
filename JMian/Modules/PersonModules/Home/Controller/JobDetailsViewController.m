@@ -10,7 +10,6 @@
 #import "Masonry.h"
 #import "MapBGView.h"
 #import "TwoButtonView.h"
-#import "JMCompanyIntroduceViewController.h"
 #import "JMShareView.h"
 #import "JMSendMyResumeView.h"
 #import "JMHTTPManager+Work.h"
@@ -696,16 +695,9 @@
 
 //点击事件
 -(void)introduceAvtion{
-//    JMCompanyIntroduceViewController *vc = [[JMCompanyIntroduceViewController alloc]init];
-//    vc.model = _myModel;
-//    vc.viewType = JMCompanyIntroduceViewControllerDefault;
-//    vc.videoUrl = self.homeworkModel.videoFile_path;
-//    [self.navigationController pushViewController:vc animated:YES];
+
     JMCompanyDetailViewController *vc = [[JMCompanyDetailViewController alloc]init];
     vc.company_id = self.myModel.company_id;
-//    vc.latitude = self.homeworkModel.latitude;
-//    vc.longitude = self.homeworkModel.longitude;
-//    vc.address = self.homeworkModel.address;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

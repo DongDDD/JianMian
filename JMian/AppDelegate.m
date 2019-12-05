@@ -28,8 +28,6 @@
 #import "JMManageInterviewViewController.h"
 #import "JMPlaySoundsManager.h"
 #import "JMHTTPManager+FectchVersionInfo.h"
-#import "JMCDetailWebViewController.h"
-#import "JMBDetailWebViewController.h"
 #import "JobDetailsViewController.h"
 #import "JMPersonDetailsViewController.h"
 #import "JMPersonInfoViewController.h"

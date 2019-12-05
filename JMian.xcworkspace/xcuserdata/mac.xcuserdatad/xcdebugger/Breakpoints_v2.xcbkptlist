@@ -413,8 +413,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "-userContentController:didReceiveScriptMessage:"
-            landmarkType = "7">
+            landmarkName = "JMSnapshotWebViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3170,8 +3170,8 @@
             timestampString = "596714889.964798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1154"
-            endingLineNumber = "1154"
+            startingLineNumber = "1153"
+            endingLineNumber = "1153"
             landmarkName = "-onRetryMessage:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3255,8 +3255,8 @@
             timestampString = "596714889.964975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "751"
-            endingLineNumber = "751"
+            startingLineNumber = "750"
+            endingLineNumber = "750"
             landmarkName = "-sendMessage:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3272,8 +3272,8 @@
             timestampString = "596714889.965039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "796"
-            endingLineNumber = "796"
+            startingLineNumber = "795"
+            endingLineNumber = "795"
             landmarkName = "-changeMsg:status:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3289,8 +3289,8 @@
             timestampString = "596714889.9651"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1254"
-            endingLineNumber = "1254"
+            startingLineNumber = "1253"
+            endingLineNumber = "1253"
             landmarkName = "-revokeMsg:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3306,8 +3306,8 @@
             timestampString = "596714889.965167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "689"
-            endingLineNumber = "689"
+            startingLineNumber = "688"
+            endingLineNumber = "688"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3438,8 +3438,8 @@
             filePath = "JMian/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "AppDelegate"
             landmarkType = "3">
          </BreakpointContent>

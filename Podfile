@@ -5,7 +5,6 @@ pod 'MJExtension'
 pod 'SDWebImage'
 pod 'MJRefresh'
 pod 'SDCycleScrollView'
-pod 'YYText'
 pod ‘YYCache’
 pod 'PrintBeautifulLog'
 pod 'AMap2DMap'
