@@ -38,6 +38,7 @@
 #import "iVersion.h"
 #import "JMPushVCAction.h"
 #import "JMServiceProtocolWebViewController.h"
+#import "JMLogoutAction.h"
 
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener,iVersionDelegate>
@@ -56,6 +57,7 @@
     [[TUIKit sharedInstance] setupWithAppId:TIMSdkAppid.intValue];
 
 }
+
 #pragma mark -delegate
 
 //- (void)iVersionDidDetectNewVersion:(NSString *)version details:(NSString *)versionDetails{
@@ -176,7 +178,12 @@
 //    [judgevc.view addSubview:self.versionDetailsView];
 
 //    [self getServiceRequest];
- 
+    NSString *isLogout =  kFetchMyDefault(@"isLogout");
+    if (![isLogout isEqualToString:@"1"]) {
+        [JMLogoutAction loginOut];
+        kSaveMyDefault(@"isLogout", @"1");
+    }
+
     return YES;
 }
 

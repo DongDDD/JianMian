@@ -619,6 +619,7 @@
 		04A6DF6B22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6DF6A22B34E3800F23BE6 /* JMHTTPManager+FectchOrderList.m */; };
 		04A9161B2398F51C00D1CA9A /* JMCDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A916192398F51B00D1CA9A /* JMCDetailViewController.xib */; };
 		04A9161C2398F51C00D1CA9A /* JMCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9161A2398F51B00D1CA9A /* JMCDetailViewController.m */; };
+		04A9161F2399620000D1CA9A /* JMLogoutAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9161E2399620000D1CA9A /* JMLogoutAction.m */; };
 		04A9217E230A4A1B00AABD0C /* JMTaskSeachViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A92178230A4A1A00AABD0C /* JMTaskSeachViewController.xib */; };
 		04A92180230A4A1B00AABD0C /* JMTaskSeachViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9217B230A4A1B00AABD0C /* JMTaskSeachViewController.m */; };
 		04A92190230ACAC900AABD0C /* JMCDetailCellConfigures.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9218F230ACAC900AABD0C /* JMCDetailCellConfigures.m */; };
@@ -2013,6 +2014,8 @@
 		04A916182398F51A00D1CA9A /* JMCDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMCDetailViewController.h; sourceTree = "<group>"; };
 		04A916192398F51B00D1CA9A /* JMCDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMCDetailViewController.xib; sourceTree = "<group>"; };
 		04A9161A2398F51B00D1CA9A /* JMCDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMCDetailViewController.m; sourceTree = "<group>"; };
+		04A9161D2399620000D1CA9A /* JMLogoutAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMLogoutAction.h; sourceTree = "<group>"; };
+		04A9161E2399620000D1CA9A /* JMLogoutAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMLogoutAction.m; sourceTree = "<group>"; };
 		04A92178230A4A1A00AABD0C /* JMTaskSeachViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JMTaskSeachViewController.xib; sourceTree = "<group>"; };
 		04A9217B230A4A1B00AABD0C /* JMTaskSeachViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMTaskSeachViewController.m; sourceTree = "<group>"; };
 		04A9217D230A4A1B00AABD0C /* JMTaskSeachViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMTaskSeachViewController.h; sourceTree = "<group>"; };
@@ -3419,6 +3422,8 @@
 				0498B7992387C24800CC8F3E /* JMPushVCAction.m */,
 				043D0F9023966A94005C69DD /* JMYoukeAction.h */,
 				043D0F8F23966A93005C69DD /* JMYoukeAction.m */,
+				04A9161D2399620000D1CA9A /* JMLogoutAction.h */,
+				04A9161E2399620000D1CA9A /* JMLogoutAction.m */,
 			);
 			name = PublicAction;
 			path = JMian/Utilities/PublicAction;
@@ -6796,6 +6801,7 @@
 				6D5DD86F2308439D0064612A /* TCommonTextCell.m in Sources */,
 				041997CE2266C75000C6C134 /* JMPostJobHomeViewController.m in Sources */,
 				04ABB78A22B08DED00E3F66A /* JMHTTPManager+CreateTaskOrder.m in Sources */,
+				04A9161F2399620000D1CA9A /* JMLogoutAction.m in Sources */,
 				6D5DD8892308439D0064612A /* TCommonContactSelectCell.m in Sources */,
 				6D5DD8A22308439E0064612A /* TUIInputController.m in Sources */,
 				04A64E9122C4C935006C3ABA /* JMMyTopViewNavView.m in Sources */,
@@ -7327,7 +7333,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.2;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -7361,7 +7367,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.3.0;
+				MARKETING_VERSION = 1.4.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

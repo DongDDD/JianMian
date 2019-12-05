@@ -247,7 +247,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
                 data.convId = [conv getReceiver];
                 data.unRead = [conv getUnReadMessageNum];
                 //            data.time = [self getDateDisplayString:msg.timestamp];
-                data.subTitle = @"在线答疑";
+                data.subTitle = @"遇上问题？戳我解决！";
                 model.data = data;
                 model.service_name = @"得米客服";
                 model.service_id = service_id;
@@ -271,7 +271,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         }else{
             JMMessageListModel *model = [[JMMessageListModel alloc]init];
             JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
-            data.subTitle = @"在线答疑";
+            data.subTitle = @"遇上问题？戳我解决！";
             model.service_name = @"得米客服";
             model.service_id = service_id;
             self.serviceModel = model;

@@ -100,9 +100,9 @@
         [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
     }else{
 //        if ([model.email isEqualToString:@"379247111ffff@qq.com"] || [model.phone isEqualToString:@"17011116666"]|| [model.phone isEqualToString:@"13246841721"] || [model.phone isEqualToString:@"17817295362"] ) {
-            [self jugdeStepToVCWithModel:model];
+//            [self jugdeStepToVCWithModel:model];
 //        }else{
-//            [self loginIM_tpye:model.type];
+            [self loginIM_tpye:model.type];
 //
 //        }
         //根据用户类型登录腾讯云腾讯云登录。先登录腾讯云再登录账号

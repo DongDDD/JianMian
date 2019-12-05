@@ -57,7 +57,7 @@
     if (data.service_name) {
         self.userNameLabel.text = data.service_name;
         [self.iconImageView setImage:[UIImage imageNamed:@"kf"]];
-        self.lastChatLabel.text = @"得米在线答疑";
+        self.lastChatLabel.text = @"遇上问题？戳我解决！";
         [self.userLabel setHidden:YES];
     }else{
         //正常用户消息
