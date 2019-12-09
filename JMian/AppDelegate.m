@@ -178,11 +178,7 @@
 //    [judgevc.view addSubview:self.versionDetailsView];
 
 //    [self getServiceRequest];
-    NSString *isLogout =  kFetchMyDefault(@"isLogout");
-    if (![isLogout isEqualToString:@"1"]) {
-        [JMLogoutAction loginOut];
-        kSaveMyDefault(@"isLogout", @"1");
-    }
+
 
     return YES;
 }

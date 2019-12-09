@@ -38,8 +38,8 @@
     if([model.type isEqualToString:B_Type_UESR]){
         
         if ([_myConvModel.type isEqualToString:@"1"]) {
-            if (_myConvModel.work_work_name) {
-                subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.work_work_name];
+            if (_myConvModel.job_work_name) {
+                subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_work_name];
             }
         }else{
             if (_myConvModel.job_type_label_name) {

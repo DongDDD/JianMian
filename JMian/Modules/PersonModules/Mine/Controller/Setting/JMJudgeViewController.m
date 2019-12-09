@@ -19,6 +19,7 @@
 #import "ChooseIdentity.h"
 #import "VendorKeyMacros.h"
 #import "JMHTTPManager+GetServiceID.h"
+#import "JMLogoutAction.h"
 
 @interface JMJudgeViewController ()
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
@@ -92,22 +93,35 @@
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     model = [JMUserInfoManager getUserInfo];
     //腾讯云返回的usersig是否为空
-    if (kFetchMyDefault(@"usersig") == nil) {
-        //腾讯云的usersig为空执行，跳转登录界面获取
-        LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
-        
-        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
-        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-    }else{
-//        if ([model.email isEqualToString:@"379247111ffff@qq.com"] || [model.phone isEqualToString:@"17011116666"]|| [model.phone isEqualToString:@"13246841721"] || [model.phone isEqualToString:@"17817295362"] ) {
-//            [self jugdeStepToVCWithModel:model];
-//        }else{
-            [self loginIM_tpye:model.type];
-//
-//        }
-        //根据用户类型登录腾讯云腾讯云登录。先登录腾讯云再登录账号
-        
-    }
+    
+
+        if (kFetchMyDefault(@"usersig") == nil) {
+            //腾讯云的usersig为空执行，跳转登录界面获取
+            LoginPhoneViewController *loginVc = [[LoginPhoneViewController alloc]init];
+            
+            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
+            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+        }else{
+            //        if ([model.email isEqualToString:@"379247111ffff@qq.com"] || [model.phone isEqualToString:@"17011116666"]|| [model.phone isEqualToString:@"13246841721"] || [model.phone isEqualToString:@"17817295362"] ) {
+            //            [self jugdeStepToVCWithModel:model];
+            //        }else{
+            NSString *isLogout = kFetchMyDefault(@"isLogout");
+            if (![isLogout isEqualToString:@"YES"]) {
+                kSaveMyDefault(@"isLogout", @"YES");
+                [JMLogoutAction loginOut];
+            } else{
+                [self loginIM_tpye:model.type];
+            }
+            
+            //
+            //        }
+            //根据用户类型登录腾讯云腾讯云登录。先登录腾讯云再登录账号
+            
+        }
+         
+    
+    
+    
     
 }
 

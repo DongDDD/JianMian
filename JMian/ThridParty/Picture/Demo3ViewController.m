@@ -112,7 +112,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
 
 //获取公司最新图片数据
 -(void)getCompanyImagesData{
-     JMUserInfoModel *_userInfoModel = [JMUserInfoManager getUserInfo];
+    JMUserInfoModel *_userInfoModel = [JMUserInfoManager getUserInfo];
     [[JMHTTPManager sharedInstance]fetchCompanyInfo_Id:_userInfoModel.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.companyInfoModel = [JMCompanyInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
