@@ -23,14 +23,14 @@
     }else if (section == 2) {
         //图片
         if (self.model.images.count > 0) {
-            NSMutableArray *imgArr = [NSMutableArray array];
-            for (JMCDetailImageModel *imgModel in self.model.images) {
-                if ([imgModel.status isEqualToString:@"2"]) {
-                    [imgArr addObject:imgModel];
-                }
-            }
+//            NSMutableArray *imgArr = [NSMutableArray array];
+//            for (JMCDetailImageModel *imgModel in self.model.images) {
+//                if ([imgModel.status isEqualToString:@"2"]) {
+//                    [imgArr addObject:imgModel];
+//                }
+//            }
             NSLog(@"图片有%lu张",(unsigned long)self.model.images.count);
-            return imgArr.count;
+            return self.model.images.count;
         }else{
             return 1;
         }
@@ -77,13 +77,13 @@
         //图片
 //        __weak JMCDetailImageModel *weakSelf = self;
         if (self.model.images.count > 0) {
-            NSMutableArray *imgArr = [NSMutableArray array];
-            for (JMCDetailImageModel *imgModel in self.model.images) {
-                if ([imgModel.status isEqualToString:@"2"]) {
-                    [imgArr addObject:imgModel];
-                }
-            }
-            JMCDetailImageModel *imgModel = imgArr[indexPath.row];
+//            NSMutableArray *imgArr = [NSMutableArray array];
+//            for (JMCDetailImageModel *imgModel in self.model.images) {
+//                if ([imgModel.status isEqualToString:@"2"]) {
+//                    [imgArr addObject:imgModel];
+//                }
+//            }
+            JMCDetailImageModel *imgModel = self.model.images[indexPath.row];
             UIImageView *imageView = [[UIImageView alloc]init];
             [imageView sd_setImageWithURL:[NSURL URLWithString:imgModel.file_path] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 NSLog(@"宽：%f, 高：%f", image.size.width, image.size.height);

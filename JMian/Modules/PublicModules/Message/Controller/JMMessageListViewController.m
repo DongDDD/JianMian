@@ -18,6 +18,7 @@
 #import "JMHTTPManager+Login.h"
 #import "JMHTTPManager+CreateConversation.h"
 
+
 @interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
@@ -36,11 +37,11 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"聊出好机会";
     [self setIsHiddenBackBtn:YES];
     [self initView];
     [self setupHeaderRefresh];
+    [self setRightBtnImageViewName:@"top-more" imageNameRight2:@""];
     //    [self initRefresh];
 }
 
@@ -66,6 +67,23 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 -(void)viewDidDisappear:(BOOL)animated{
 //    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+}
+
+
+-(void)rightAction{
+//    NSArray *titles = @[@"发起群聊",@"添加朋友",@"我的群组",@"新的联系人"];
+//    NSArray *images = @[@"scan",@"scan",@"scan",@"scan"];
+//
+//    MLMenuView *menuView = [[MLMenuView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 100 - 10, 0, 100, 44 * 4)  WithTitles:titles WithImageNames:images WithMenuViewOffsetTop:64];
+////    [menuView setCoverViewBackgroundColor:[UIColor blackColor]];
+//    [menuView setSeparatorAlpha:0.5];
+//
+//
+//    menuView.didSelectBlock = ^(NSInteger index) {
+//        NSLog(@"%zd",index);
+//    };
+//    [menuView showMenuEnterAnimation:MLAnimationStyleRight];
     
 }
 

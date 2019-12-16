@@ -450,10 +450,10 @@ static const CGFloat kPhotoViewMargin = 12.0;
 //    [[YYWebImageManager sharedManager].cache.diskCache removeAllObjects];
 //    [[YYWebImageManager sharedManager].cache.memoryCache removeAllObjects];
 
-    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
-
-    }];
-    [[SDImageCache sharedImageCache] clearMemory];
+//    [[SDImageCache sharedImageCache] clearDiskOnCompletion:^{
+//
+//    }];
+//    [[SDImageCache sharedImageCache] clearMemory];
 //#if SDWebImageEmbed
 //#endif
     return;
@@ -499,10 +499,10 @@ static const CGFloat kPhotoViewMargin = 12.0;
     }];
     
     
-    [self.view showLoadingHUDText:nil];
+//    [self.view showLoadingHUDText:nil];
     __weak typeof(self) weakSelf = self;
     [self.toolManager getSelectedImageList:allList success:^(NSArray<UIImage *> *imageList) {
-        [weakSelf.view handleLoading];
+//        [weakSelf.view handleLoading];
         NSSLog(@"imageListimageList%@",imageList);
         if (_viewType == Demo3ViewPartTimeResumeAdd || _viewType == Demo3ViewPostGoodsPositionAdd || _viewType == Demo3ViewPostPartTimeJobAdd) {
 //        if (_isChange) {
@@ -531,7 +531,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
 //        [self sendRequst2_imgArray:imageList];
 //        [self sendRequst3_imgArray:imageList];
     } failed:^{
-        [weakSelf.view handleLoading];
+//        [weakSelf.view handleLoading];
     }];
     
     

@@ -27,6 +27,8 @@
               video_path:(nullable NSString *)video_path
              video_cover:(nullable NSString *)video_cover
                image_arr:(nullable NSArray *)image_arr
+                     ids:(nullable NSArray *)ids
+                   sorts:(nullable NSArray *)sorts
               is_invoice:(nullable NSString *)is_invoice
            invoice_title:(nullable NSString *)invoice_title
       invoice_tax_number:(nullable NSString *)invoice_tax_number
@@ -53,6 +55,8 @@
                            @"video_path":video_path,
                            @"video_cover":video_cover,
                            @"image_arr":image_arr,
+                           @"ids":ids,
+                           @"sorts":sorts,
                            @"is_invoice":is_invoice,
                            @"invoice_title":invoice_title,
                            @"invoice_tax_number":invoice_tax_number,

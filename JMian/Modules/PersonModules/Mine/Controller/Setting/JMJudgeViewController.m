@@ -102,23 +102,29 @@
             NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:loginVc];
             [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
         }else{
-            //        if ([model.email isEqualToString:@"379247111ffff@qq.com"] || [model.phone isEqualToString:@"17011116666"]|| [model.phone isEqualToString:@"13246841721"] || [model.phone isEqualToString:@"17817295362"] ) {
-            //            [self jugdeStepToVCWithModel:model];
-            //        }else{
-            NSString *isLogout = kFetchMyDefault(@"isLogout");
-            if (![isLogout isEqualToString:@"YES"]) {
-                kSaveMyDefault(@"isLogout", @"YES");
-                [JMLogoutAction loginOut];
-            } else{
-                [self loginIM_tpye:model.type];
+            {
+                NSString *isLogout = kFetchMyDefault(@"isLogout");
+                if (![isLogout isEqualToString:@"YES"]) {
+                    kSaveMyDefault(@"isLogout", @"YES");
+                    [JMLogoutAction loginOut];
+                } else{
+                    NSString *isYouke = kFetchMyDefault(@"youke");
+                   //游客模式用默认账号
+                    if (([model.phone isEqualToString:@"17011116666"] || [model.phone isEqualToString:@"13246841721"]) && [isYouke isEqualToString:@"1"]) {
+                        [self jugdeStepToVCWithModel:model];
+                    }else{
+                        [self loginIM_tpye:model.type];
+                        
+                    }
+                    
+                }
             }
-            
             //
             //        }
             //根据用户类型登录腾讯云腾讯云登录。先登录腾讯云再登录账号
             
         }
-         
+    
     
     
     

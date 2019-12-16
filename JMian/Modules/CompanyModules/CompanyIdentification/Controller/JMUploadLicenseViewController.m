@@ -31,13 +31,16 @@
 //        self.navigationController.navigationBar.translucent = NO;
 //
 //        self.extendedLayoutIncludesOpaqueBars = YES;
-    [self setIsHiddenBackBtn:YES];
+//    [self setIsHiddenBackBtn:YES];
     [self getUserInfo];
     [self.scrollView addSubview:self.moreBtn];
     // Do any additional setup after loading the view from its nib.
     
 }
+-(void)fanhui{
+    [self moreAction];
 
+}
 -(void)getUserInfo{
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         

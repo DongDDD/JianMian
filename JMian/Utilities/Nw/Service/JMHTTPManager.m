@@ -126,13 +126,16 @@
             if ([request.parameters[@"files"][i] isKindOfClass:[UIImage class]]) {
                 UIImage *image = request.parameters[@"files"][i];
                 
-                data = UIImageJPEGRepresentation(image, 0.1);
-            }
-            
-            else{
+                data = UIImageJPEGRepresentation(image, 1);
+ 
+                
+            }else{
                 
                 NSString *url = request.parameters[@"files"][i];
                 data =[url dataUsingEncoding:NSUTF8StringEncoding];
+                NSString *str = [self data:data value:1];
+                NSLog(@"图片大小b %@",str);
+
 //                NSData *data = [NSJSONSerialization dataWithJSONObject:url options:NSJSONWritingPrettyPrinted error:nil];
             }
             [formData appendPartWithFileData:data name:@"files" fileName:fileName mimeType:@"image/jpg"];;//file改为后台接收的字段或参数
@@ -142,6 +145,21 @@
     
     return urlRequest;
 }
+
+
+- (NSString *)data:(NSData *)data value:(float)value {
+    double dataLength = [data length] * 1.0;
+    double orgrionLenght = dataLength;
+    NSArray *typeArray = @[@"bytes",@"KB",@"MB",@"GB",@"TB",@"PB", @"EB",@"ZB",@"YB"];
+    NSInteger index = 0;
+    while (dataLength > 1024) {
+        dataLength /= 1024.0;
+        index ++;
+    }
+    NSString *str = [NSString stringWithFormat:@"%.3f，%.1f字节，%.3f%@\n",value,orgrionLenght,dataLength,typeArray[index]];
+    return str;
+}
+
 
 - (NSMutableURLRequest *)urlRequestForUploadMP4Request:(JMHTTPRequest *)request {
     NSError *serializationError = nil;

@@ -165,6 +165,20 @@
     [[JMHTTPManager sharedInstance]fectchTaskInfo_taskID:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.configures.model = [JMCDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
+            if (self.viewType == JMCDetailDefaultType) {
+                //过滤
+                NSMutableArray *imgArr = [NSMutableArray array];
+                for (JMCDetailImageModel *imgModel in self.configures.model.images) {
+                    if ([imgModel.status isEqualToString:@"2"]) {
+                        [imgArr addObject:imgModel];
+                    }
+                }
+                 
+                self.configures.model.images = imgArr.mutableCopy;
+            }
+
+            
+
             self.haveApply.text = [NSString stringWithFormat:@"%@人已报名", self.configures.model.effective_count];
                 [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
 //
@@ -183,10 +197,10 @@
             if (_viewType == JMCDetailPreviewType) {
                 if ([self.configures.model.status isEqualToString:Position_Online]) {
                     [self.bottomLeftBtn setTitle:@"任务下线" forState:UIControlStateNormal];
-                    [self.bottomRightBtn setTitle:@"编辑更新" forState:UIControlStateNormal];
+                    [self.bottomRightBtn setTitle:@"编辑任务" forState:UIControlStateNormal];
                     
                 }else if (([self.configures.model.status isEqualToString:Position_Downline])) {
-                    [self.bottomLeftBtn setTitle:@"编辑更新" forState:UIControlStateNormal];
+                    [self.bottomLeftBtn setTitle:@"编辑任务" forState:UIControlStateNormal];
                     [self.bottomRightBtn setTitle:@"重新发布" forState:UIControlStateNormal];
                     
                 }
@@ -271,7 +285,7 @@
 
 //更新任务上下线
 -(void)updateTaskStatusRequestWithStatus:(NSString *)status{
-    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:nil unit:nil payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:nil unit:nil payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:nil   ids:nil  sorts:nil  is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         NSString *title;
         if ([status isEqualToString:Position_Downline]) {
             title  = @"已下线";
@@ -909,14 +923,14 @@
         if (self.configures.model.images.count > 0) {
             JMCDetailImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailImageTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            NSMutableArray *imgArr = [NSMutableArray array];
-            for (JMCDetailImageModel *imgModel in self.configures.model.images) {
-                if ([imgModel.status isEqualToString:@"2"]) {
-                    
-                    [imgArr addObject:imgModel];
-                }
-            }
-            JMCDetailImageModel *imgModel = imgArr[indexPath.row];
+//            NSMutableArray *imgArr = [NSMutableArray array];
+//            for (JMCDetailImageModel *imgModel in self.configures.model.images) {
+//                if ([imgModel.status isEqualToString:@"2"]) {
+//
+//                    [imgArr addObject:imgModel];
+//                }
+//            }
+            JMCDetailImageModel *imgModel = self.configures.model.images[indexPath.row];
             [cell setUrl:imgModel.file_path];
             return cell;
             
