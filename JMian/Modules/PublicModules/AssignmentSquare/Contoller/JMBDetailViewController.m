@@ -353,7 +353,6 @@
         lab.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
         lab.backgroundColor = [UIColor whiteColor];
         return lab;
-        
     }if (section == 3) {
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH, 44)];
         lab.text = @"     接单记录";
@@ -361,7 +360,6 @@
         lab.textColor = [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0];
         lab.backgroundColor = [UIColor whiteColor];
         return lab;
-        
     }
     return [UIView new];
 

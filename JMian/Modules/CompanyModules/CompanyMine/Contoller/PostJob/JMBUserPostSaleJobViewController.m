@@ -28,9 +28,13 @@
 #import "JMPostGoodsImagesView.h"
 #import "JMChoosePartTImeJobTypeLablesViewController.h"
 #import "JMServiceProtocolWebViewController.h"
+#import "JMPictureManagerViewController.h"
+#import "JMPictureAddViewController.h"
+#import "HXPhotoTools.h"
+
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
 
-@interface JMBUserPostSaleJobViewController ()<JMBUserPositionDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMGoodsDescriptionViewControllerDelegate,JMBUserPositionVideoViewDelegate,UIImagePickerControllerDelegate,JMPostGoodsImagesViewDelegate,Demo3ViewControllerDelegate,UITextFieldDelegate>
+@interface JMBUserPostSaleJobViewController ()<JMBUserPositionDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMGoodsDescriptionViewControllerDelegate,JMBUserPositionVideoViewDelegate,UIImagePickerControllerDelegate,JMPostGoodsImagesViewDelegate,Demo3ViewControllerDelegate,UITextFieldDelegate,JMPictureAddViewControllerDelegate,JMPictureManagerViewControllerDelegate>
 
 @property (strong, nonatomic)UIScrollView *scrollView;
 
@@ -66,7 +70,13 @@
 
 @property (copy, nonatomic)NSString *video_path;
 @property (copy, nonatomic)NSString *video_cover;
-@property (copy, nonatomic)NSMutableArray *image_arr;
+@property (strong, nonatomic)NSMutableArray *imageUrl_arr;//图片链接
+@property (strong, nonatomic)NSMutableArray *imageUrl_arr2;//正确顺序
+@property (nonatomic,strong)NSMutableArray *photoModel_arr;
+
+@property (strong, nonatomic)NSArray *image_arr;//增加的图片
+@property (strong, nonatomic)NSMutableArray *ids;//图片链接(增加的)或者图片file_id(原来的)
+@property (strong, nonatomic)NSMutableArray *sorts;//排序
 
 //--------------------------------------------------
 @property (copy, nonatomic)NSString *cityName;//地区
@@ -261,12 +271,53 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     
 }
 
-//添加的图片
--(void)sendAddImgs:(NSMutableArray *)Imgs{
-    [self updateTaskImagesRequest_images:Imgs.mutableCopy];
-//    [self uploadCompanyWithImages:Imgs.mutableCopy];
+////添加的图片
+//-(void)sendAddImgs:(NSMutableArray *)Imgs{
+//    [self updateTaskImagesRequest_images:Imgs.mutableCopy];
+////    [self uploadCompanyWithImages:Imgs.mutableCopy];
+//}
+-(void)pictureAddWithImage_arr:(NSArray *)image_arr{
+    _image_arr = image_arr;//用户选择后的图片数组
+    //self.imageUrl_arr2//用来正确排序的数组，装服务器返回的链接
+    for (int i = 0; i < self.image_arr.count; i++) {
+        [self.imageUrl_arr2 addObject:[NSNull null]];
+        UIImage *img = self.image_arr[i];
+        [self uploadImgRequest:img index:i];//上传图片请求
+    }
+    
+//     [self.partTimeJobDetailView.postImgBtn setTitle:@"已上传" forState:UIControlStateNormal];
+//     [self.partTimeJobDetailView.postImgBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+    
 }
 
+
+-(void)pictureManagerWithPhotoModel_arr:(NSMutableArray *)photoModel_arr{
+    _isChange = YES;
+    self.photoModel_arr = photoModel_arr;
+    
+    self.ids = [NSMutableArray array];
+    self.sorts = [NSMutableArray array];
+    self.imageUrl_arr = [NSMutableArray array];
+    for (int i = 0; i < photoModel_arr.count; i++) {
+        HXPhotoModel *model = photoModel_arr[i];
+        //self.sorts 用于服务器排序
+        [self.sorts addObject:[NSString stringWithFormat:@"%ld",(long)i]];
+        //self.ids用于服务器排序，没有(file_id)就是新增加的图片数据
+        if (model.file_id) {
+            //旧图
+            [self.ids addObject:model.file_id];
+        }else if(model.networkPhotoUrl){
+            //新图
+            [self.ids addObject:[model.networkPhotoUrl absoluteString]];
+            //self.imageUrl_arr新增加的图片，用于上传给服务器新增图片
+            [self.imageUrl_arr addObject:[model.networkPhotoUrl absoluteString]];
+        }
+  
+    }
+//     [self.partTimeJobDetailView.postImgBtn setTitle:@"已上传" forState:UIControlStateNormal];
+//     [self.partTimeJobDetailView.postImgBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+    
+}
 //删除图片
 -(void)deleteSalePositionImageWithIndex:(NSInteger)index{
     if (self.imageDataArr.count > 0) {
@@ -314,23 +365,25 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 }
 
 -(void)gotoUploadImageAction{
-    _demo3ViewVC = [[Demo3ViewController alloc]init];
-    _demo3ViewVC.delegate = self;
     if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
-        //编辑状态
-        _demo3ViewVC.task_id = self.task_id;//进入界面重新调用接口获得最新图片
-        _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionEdit;
+
+            JMPictureManagerViewController *vc = [[JMPictureManagerViewController alloc]init];
+    //        vc.imgUrl_arr = self.imageUrl_arr;
+            vc.delegate = self;
+            vc.photoModel_arr = self.photoModel_arr;
+            [self.navigationController pushViewController:vc animated:YES];
+
     }else if (_viewType == JMBUserPostSaleJobViewTypeAdd || _viewType == JMBUserPostSaleJobViewTypeHistory) {
-        //添加状态
-        _demo3ViewVC.viewType = Demo3ViewPostGoodsPositionAdd;
-    }
-    if (_image_arr.count > 0) {
-        //选好的图片_image_arr
-        _demo3ViewVC.image_paths = _image_arr.mutableCopy;
-    }
-    [self.navigationController pushViewController:_demo3ViewVC animated:YES];
- 
-   
+            //添加状态
+    //        _demo3ViewVC.viewType = Demo3ViewPostPartTimeJobAdd;
+    //        JMPictureManagerViewController *vc = [[JMPictureManagerViewController alloc]init];
+            JMPictureAddViewController *vc = [[JMPictureAddViewController alloc]init];
+            vc.delegate = self;
+            vc.image_arr = self.image_arr;
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
+
 
 }
 
@@ -927,19 +980,19 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 
 //上传图片请求
--(void)updateTaskImagesRequest_images:(NSArray *)images{
-    self.isChange = YES;
-    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:images  ids:nil  sorts:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"成功添加图片" preferredStyle:UIAlertControllerStyleAlert];
-        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-        }])];
-        [self presentViewController:alertController animated:YES completion:nil];
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-}
+//-(void)updateTaskImagesRequest_images:(NSArray *)images{
+//    self.isChange = YES;
+//    [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:nil front_money:nil quantity_max:nil myDescription:nil industry_arr:nil city_id:nil longitude:nil latitude:nil address:nil goods_title:nil goods_price:nil goods_desc:nil video_path:nil video_cover:nil image_arr:images  ids:nil  sorts:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"成功添加图片" preferredStyle:UIAlertControllerStyleAlert];
+//        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//        }])];
+//        [self presentViewController:alertController animated:YES completion:nil];
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//
+//}
 
 -(void)deleteGoodsImageRequsetWithFile_id:(NSString *)file_id{
     [[JMHTTPManager sharedInstance]deleteGoodsImageWithFile_id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -955,13 +1008,48 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 }
 
+-(void)uploadImgRequest:(UIImage *)img index:(int)index{
+    NSArray *array = @[img];
+
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+            NSString *url = responsObject[@"data"][0];
+            if (self.imageUrl_arr2.count > 0) {
+                [self.imageUrl_arr2 replaceObjectAtIndex:index withObject:url];
+                _imageUrl_arr = _imageUrl_arr2;
+                 
+            }
+
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+
 //更新任务请求
 -(void)updateTaskInfoRequest_status:(NSString *)status{
-    
-//    if ([_video_path containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
-//        _video_path = [_video_path stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
-//
-//    }
+        NSMutableArray *imageArr = [NSMutableArray array];
+    for (NSString *url in _imageUrl_arr) {
+        if ([url containsString:@"http://produce.jmzhipin.com"] || [url containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
+            if ([url containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
+                NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
+                [imageArr addObject:strUrl];
+                 
+            }else if ([url containsString:@"http://produce.jmzhipin.com"]){
+                NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"http://produce.jmzhipin.com" withString:@""];
+                      [imageArr addObject:strUrl];
+                       
+            }
+            
+        }else{
+            [imageArr addObject:url];
+
+        }
+    }
     //没更改
     if ([_video_path isEqualToString:_partTimeModel.video_file_path]) {
         _video_path = nil;
@@ -972,7 +1060,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
     }
     
-        [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude address:_address goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:_image_arr ids:nil  sorts:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [[JMHTTPManager sharedInstance]updateTaskWithId:self.task_id payment_method:@"1" unit:@"元" payment_money:_payment_money front_money:nil quantity_max:_quantity_max myDescription:_goods_desc industry_arr:_industry_arr city_id:_city_id longitude:_longitude latitude:_latitude address:_address goods_title:_goods_title goods_price:_goods_price goods_desc:_goods_desc video_path:_video_path video_cover:_video_cover image_arr:imageArr ids:nil  sorts:nil is_invoice:nil invoice_title:nil invoice_tax_number:nil invoice_email:nil status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             [self showAlertVCSucceesSingleWithMessage:@"保存成功" btnTitle:@"好的"];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
@@ -1025,8 +1113,13 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 ////                [self.bottomLeftBtn setTitle:@"下线" forState:UIControlStateNormal];
 //
 //            }
-            self.imageDataArr = _partTimeModel.images.mutableCopy;
-            
+            for (JMImageModel *imgModel in _partTimeModel.images) {
+                HXPhotoModel *photoModel = [[HXPhotoModel alloc]init];
+                photoModel.networkPhotoUrl = [NSURL URLWithString:imgModel.file_path];
+                photoModel.file_id = imgModel.file_id;
+                [self.photoModel_arr addObject:photoModel];
+            }
+
             //赋值
             [self setRightBtnValues_model:_partTimeModel];
             
@@ -1051,15 +1144,37 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 }
 
 #pragma mark - Getter
--(NSMutableArray *)image_arr{
+-(NSArray *)image_arr{
     if (_image_arr == nil) {
-        _image_arr = [NSMutableArray array];
+        _image_arr = [NSArray array];
  
     }
     return _image_arr;
 }
 
+-(NSMutableArray *)photoModel_arr{
+    if (_photoModel_arr == nil) {
+        _photoModel_arr = [NSMutableArray array];
+    }
+    return _photoModel_arr;
+    
+}
 
+-(NSMutableArray *)imageUrl_arr{
+    if (_imageUrl_arr == nil) {
+        _imageUrl_arr = [NSMutableArray array];
+    }
+    return _imageUrl_arr;
+    
+}
+
+-(NSMutableArray *)imageUrl_arr2{
+    if (_imageUrl_arr2 == nil) {
+        _imageUrl_arr2 = [NSMutableArray array];
+    }
+    return _imageUrl_arr2;
+    
+}
 -(JMBUserPositionDetailView *)detailView{
     if (_detailView == nil) {
         _detailView = [[JMBUserPositionDetailView alloc]init];

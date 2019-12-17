@@ -700,7 +700,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "546"
             endingLineNumber = "546"
-            landmarkName = "-fetchmyVideo"
+            landmarkName = "-filmVideo"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -717,8 +717,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "549"
             endingLineNumber = "549"
-            landmarkName = "-fetchmyVideo"
-            landmarkType = "7">
+            landmarkName = "JMBUserPostSaleJobViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -734,8 +734,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "548"
             endingLineNumber = "548"
-            landmarkName = "-fetchmyVideo"
-            landmarkType = "7">
+            landmarkName = "JMBUserPostSaleJobViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2173,8 +2173,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "409"
             endingLineNumber = "409"
-            landmarkName = "-playBtnAction"
-            landmarkType = "7">
+            landmarkName = "JMBUserPostSaleJobViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2190,7 +2190,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "367"
             endingLineNumber = "367"
-            landmarkName = "-playBtnActionWithUrl:"
+            landmarkName = "-gotoUploadImageAction"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2207,7 +2207,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "460"
             endingLineNumber = "460"
-            landmarkName = "-filmVideo"
+            landmarkName = "-videoRightBtnAction"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2241,7 +2241,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "404"
             endingLineNumber = "404"
-            landmarkName = "-videoRightBtnAction"
+            landmarkName = "-hidePickView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2258,7 +2258,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "400"
             endingLineNumber = "400"
-            landmarkName = "-videoLeftBtnAction"
+            landmarkName = "-hidePickView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2275,38 +2275,38 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "975"
             endingLineNumber = "975"
-            landmarkName = "-updateTaskInfoRequest_status:"
+            landmarkName = "-deleteTaskRequest"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "293A7BAB-F57D-4FE1-B1B6-E5ADF85EDADB - d0b49c58669cec60"
+                  uuid = "293A7BAB-F57D-4FE1-B1B6-E5ADF85EDADB - 1ada99aeb8028273"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "-[JMBUserPostSaleJobViewController updateTaskInfoRequest_status:]"
+                  symbolName = "__53-[JMBUserPostSaleJobViewController deleteTaskRequest]_block_invoke"
                   moduleName = "JMian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostSaleJobViewController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "975"
-                  endingLineNumber = "975"
-                  offsetFromSymbolStart = "424">
+                  startingLineNumber = "976"
+                  endingLineNumber = "976"
+                  offsetFromSymbolStart = "760">
                </Location>
                <Location
-                  uuid = "293A7BAB-F57D-4FE1-B1B6-E5ADF85EDADB - 74c4c188c41eedb"
+                  uuid = "293A7BAB-F57D-4FE1-B1B6-E5ADF85EDADB - 3171b08331a93006"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "__65-[JMBUserPostSaleJobViewController updateTaskInfoRequest_status:]_block_invoke"
+                  symbolName = "__53-[JMBUserPostSaleJobViewController deleteTaskRequest]_block_invoke_4"
                   moduleName = "JMian"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostSaleJobViewController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "975"
-                  endingLineNumber = "975"
-                  offsetFromSymbolStart = "16">
+                  startingLineNumber = "978"
+                  endingLineNumber = "978"
+                  offsetFromSymbolStart = "72">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3330,6 +3330,70 @@
             endingLineNumber = "478"
             landmarkName = "-pictureManagerWithPhotoModel_arr:"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C25A632C-DCF2-463B-98BC-614D0A609654"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PublicModules/Message/Controller/JMAddFriendViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "-searchBarSearchButtonClicked:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "90DD5560-3DBB-4A80-B675-9F219D56C33A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PublicModules/Message/Controller/JMAddFriendViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "-searchBarSearchButtonClicked:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "90DD5560-3DBB-4A80-B675-9F219D56C33A - 59c11628e10543b0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JMAddFriendViewController searchBarSearchButtonClicked:]"
+                  moduleName = "JMian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac/JianMian/JMian/Modules/PublicModules/Message/Controller/JMAddFriendViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "54"
+                  endingLineNumber = "54"
+                  offsetFromSymbolStart = "56">
+               </Location>
+               <Location
+                  uuid = "90DD5560-3DBB-4A80-B675-9F219D56C33A - 64ac59c8d30a1d41"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__58-[JMAddFriendViewController searchBarSearchButtonClicked:]_block_invoke"
+                  moduleName = "JMian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac/JianMian/JMian/Modules/PublicModules/Message/Controller/JMAddFriendViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "88">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

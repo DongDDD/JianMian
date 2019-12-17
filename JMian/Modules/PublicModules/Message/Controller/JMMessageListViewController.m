@@ -17,6 +17,8 @@
 #import "JMChatViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "JMHTTPManager+CreateConversation.h"
+#import "MLMenu.h"
+#import "JMAddFriendViewController.h"
 
 
 @interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -72,18 +74,22 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 
 -(void)rightAction{
-//    NSArray *titles = @[@"发起群聊",@"添加朋友",@"我的群组",@"新的联系人"];
-//    NSArray *images = @[@"scan",@"scan",@"scan",@"scan"];
-//
-//    MLMenuView *menuView = [[MLMenuView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 100 - 10, 0, 100, 44 * 4)  WithTitles:titles WithImageNames:images WithMenuViewOffsetTop:64];
-////    [menuView setCoverViewBackgroundColor:[UIColor blackColor]];
-//    [menuView setSeparatorAlpha:0.5];
-//
-//
-//    menuView.didSelectBlock = ^(NSInteger index) {
-//        NSLog(@"%zd",index);
-//    };
-//    [menuView showMenuEnterAnimation:MLAnimationStyleRight];
+    NSArray *titles = @[@" 发起群聊",@" 添加朋友",@" 我的群组",@" 新的联系人"];
+    NSArray *images = @[@"creatGroup",@"addFriend",@"myGroup",@"newFriend"];
+
+    MLMenuView *menuView = [[MLMenuView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 130 - 10, 0, 130, 44 * 4) WithTitles:titles WithImageNames:images WithMenuViewOffsetTop:k_StatusBarAndNavigationBarHeight WithTriangleOffsetLeft:100];
+//    [menuView setCoverViewBackgroundColor:[UIColor blackColor]];
+//    [menuView setMenuViewBackgroundColor:[UIColor whiteColor]];
+
+    
+      menuView.didSelectBlock = ^(NSInteger index) {
+          NSLog(@"%zd",index);
+          if (index == 1) {
+              JMAddFriendViewController *vc = [[JMAddFriendViewController alloc]init];
+              [self.navigationController pushViewController:vc animated:YES];
+          }
+      };
+      [menuView showMenuEnterAnimation:MLEnterAnimationStyleRight];
     
 }
 

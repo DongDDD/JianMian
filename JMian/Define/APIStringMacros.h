@@ -11,8 +11,8 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
 //app
 #else
@@ -152,6 +152,11 @@
 #define Fectch_WalletDetails_URL @"api/user/wallet/details"
 //提现
 #define Money_Withdraw_URL @"api/user/money/withdraw"
+//好友列表
+#define Get_FriendList_URL @"api/friend/lists"
+#define Add_Friend_URL @"api/friend/create"
+#define Delete_Friend_URL @"api/friend/delete"
+#define Search_Friend_URL @"api/friend/search"
 
 //会话列表
 #define Chat_List_URL @"converse/lists"
