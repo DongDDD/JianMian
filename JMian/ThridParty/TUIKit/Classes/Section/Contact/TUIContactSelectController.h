@@ -6,6 +6,7 @@
  ******************************************************************************/
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 #import "TCommonContactSelectCellData.h"
 #import "TContactSelectViewModel.h"
 
@@ -17,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  * 【模块名称】好友选择界面（TUIContactSelectController）
  * 【功能说明】为用户提供好友选择功能，在创建群聊/讨论组时能够快速选择群组成员。
  */
-@interface TUIContactSelectController : UIViewController
+@interface TUIContactSelectController : BaseViewController
 
 @property (nonatomic) TContactSelectViewModel *viewModel;
 

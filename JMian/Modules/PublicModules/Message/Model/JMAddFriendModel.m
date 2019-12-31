@@ -6,9 +6,9 @@
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMFriendListModel.h"
+#import "JMAddFriendModel.h"
 
-@implementation JMFriendListModel
+@implementation JMAddFriendModel
 
 +(NSDictionary *)mj_replacedKeyFromPropertyName{
     

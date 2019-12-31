@@ -60,6 +60,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (strong, nonatomic) NSArray *jobs;
 @property (strong, nonatomic) NSArray *education;//B看个人详情 的
 
+@property (copy, nonatomic) NSString *diploma_education;//
+@property (copy, nonatomic) NSString *diploma_major;//
+@property (copy, nonatomic) NSString *diploma_school_name;//
+
 
 
 

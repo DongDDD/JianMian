@@ -18,13 +18,14 @@
 #import "THelper.h"
 #import "TIMGroupInfo+DataProvider.h"
 #import "TUIAvatarViewController.h"
+#import "JMGroupIntroduceViewController.h"
 
 #define ADD_TAG @"-1"
 #define DEL_TAG @"-2"
 
 @import ImSDK;
 
-@interface TUIGroupInfoController () <TModifyViewDelegate, TGroupMembersCellDelegate>
+@interface TUIGroupInfoController () <TModifyViewDelegate, TGroupMembersCellDelegate,JMGroupIntroduceViewControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) NSMutableArray *memberData;
 @property (nonatomic, strong) TIMGroupInfo *groupInfo;
@@ -102,21 +103,21 @@
     _data = [NSMutableArray array];
     if (self.groupInfo) {
         
-        NSMutableArray *commonArray = [NSMutableArray array];
-        TUIProfileCardCellData *commonData = [[TUIProfileCardCellData alloc] init];
-        commonData.avatarUrl = [NSURL URLWithString:self.groupInfo.faceURL];
-        commonData.name = self.groupInfo.groupName;
-        commonData.identifier = self.groupInfo.group;
-        commonData.signature = self.groupInfo.notification;
-        
-        if([self.groupInfo isMeOwner] || [self.groupInfo isPrivate]){
-            commonData.cselector = @selector(didSelectCommon);
-            commonData.showAccessory = YES;
-        }
-        self.profileCellData = commonData;
-
-        [commonArray addObject:commonData];
-        [self.data addObject:commonArray];
+//        NSMutableArray *commonArray = [NSMutableArray array];
+//        TUIProfileCardCellData *commonData = [[TUIProfileCardCellData alloc] init];
+//        commonData.avatarUrl = [NSURL URLWithString:self.groupInfo.faceURL];
+//        commonData.name = self.groupInfo.groupName;
+//        commonData.identifier = self.groupInfo.group;
+//        commonData.signature = self.groupInfo.notification;
+//
+//        if([self.groupInfo isMeOwner] || [self.groupInfo isPrivate]){
+//            commonData.cselector = @selector(didSelectCommon);
+//            commonData.showAccessory = YES;
+//        }
+//        self.profileCellData = commonData;
+//
+//        [commonArray addObject:commonData];
+//        [self.data addObject:commonArray];
         
         
         NSMutableArray *memberArray = [NSMutableArray array];
@@ -139,48 +140,55 @@
         //group info
         NSMutableArray *groupInfoArray = [NSMutableArray array];
         TCommonTextCellData *typeData = [[TCommonTextCellData alloc] init];
-        typeData.key = @"群类型";
-        typeData.value = [self.groupInfo showGroupType];
+        typeData.key = @"群名称";
+        typeData.value = [self.groupInfo groupName];
+        if ([self.groupInfo isMeOwner]) {
+            typeData.cselector = @selector(didSelectGroupNameOption:);
+        }
         [groupInfoArray addObject:typeData];
         
         TCommonTextCellData *addOptionData = [[TCommonTextCellData alloc] init];
-        addOptionData.key = @"加群方式";
-        
-        //私有群禁止加入，只能邀请
-        if ([self.groupInfo.groupType isEqualToString:@"Private"]) {
-            addOptionData.value = @"邀请加入";
-        } else if ([self.groupInfo.groupType isEqualToString:@"ChatRoom"]) {
-            addOptionData.value = @"自动审批";
-        } else {
-            if ([self.groupInfo isMeOwner]) {
-                addOptionData.cselector = @selector(didSelectAddOption:);
-                addOptionData.showAccessory = YES;
-            }
-            addOptionData.value = [self.groupInfo showAddOption];
-        }
+        addOptionData.key = @"群公告";
+        addOptionData.value = [self.groupInfo showNotification];
+        //        if ([self.groupInfo isMeOwner]) {
+        addOptionData.cselector = @selector(didSelectNotificationOption:);
+        addOptionData.showAccessory = YES;
+        //        }
+//        //私有群禁止加入，只能邀请
+//        if ([self.groupInfo.groupType isEqualToString:@"Private"]) {
+//            addOptionData.value = @"邀请加入";
+//        } else if ([self.groupInfo.groupType isEqualToString:@"ChatRoom"]) {
+//            addOptionData.value = @"自动审批";
+//        } else {
+//            if ([self.groupInfo isMeOwner]) {
+//                addOptionData.cselector = @selector(didSelectAddOption:);
+//                addOptionData.showAccessory = YES;
+//            }
+//            addOptionData.value = [self.groupInfo showAddOption];
+//        }
         [groupInfoArray addObject:addOptionData];
         self.addOptionData = addOptionData;
         [self.data addObject:groupInfoArray];
         
         //personal info
-        NSMutableArray *personalArray = [NSMutableArray array];
-        TCommonTextCellData *nickData = [[TCommonTextCellData alloc] init];
-        nickData.key = @"我的群昵称";
-        nickData.value = self.selfInfo.nameCard;
-        nickData.cselector = @selector(didSelectGroupNick:);
-        nickData.showAccessory = YES;
-        self.groupNickNameCellData = nickData;
-        [personalArray addObject:nickData];
+//        NSMutableArray *personalArray = [NSMutableArray array];
+//        TCommonTextCellData *nickData = [[TCommonTextCellData alloc] init];
+//        nickData.key = @"我的群昵称";
+//        nickData.value = self.selfInfo.nameCard;
+//        nickData.cselector = @selector(didSelectGroupNick:);
+//        nickData.showAccessory = YES;
+//        self.groupNickNameCellData = nickData;
+//        [personalArray addObject:nickData];
         
-        TCommonSwitchCellData *switchData = [[TCommonSwitchCellData alloc] init];
-        if ([[[TUILocalStorage sharedInstance] topConversationList] containsObject:self.groupId]) {
-            switchData.on = YES;
-        }
-        switchData.title = @"置顶聊天";
-        switchData.cswitchSelector = @selector(didSelectOnTop:);
-        [personalArray addObject:switchData];
+//        TCommonSwitchCellData *switchData = [[TCommonSwitchCellData alloc] init];
+//        if ([[[TUILocalStorage sharedInstance] topConversationList] containsObject:self.groupId]) {
+//            switchData.on = YES;
+//        }
+//        switchData.title = @"置顶聊天";
+//        switchData.cswitchSelector = @selector(didSelectOnTop:);
+//        [personalArray addObject:switchData];
         
-        [self.data addObject:personalArray];
+//        [self.data addObject:personalArray];
         
         NSMutableArray *buttonArray = [NSMutableArray array];
         
@@ -191,14 +199,14 @@
         quitButton.cbuttonSelector = @selector(deleteGroup:);
         [buttonArray addObject:quitButton];
         
-        //群解散按钮
-        if ([self.groupInfo canDelete]) {
-              TUIButtonCellData *Deletebutton = [[TUIButtonCellData alloc] init];
-              Deletebutton.title = @"解散该群";
-              Deletebutton.style = ButtonRedText;
-              Deletebutton.cbuttonSelector = @selector(deleteGroup:);
-              [buttonArray addObject:Deletebutton];
-        }
+//        //群解散按钮
+//        if ([self.groupInfo canDelete]) {
+//              TUIButtonCellData *Deletebutton = [[TUIButtonCellData alloc] init];
+//              Deletebutton.title = @"解散该群";
+//              Deletebutton.style = ButtonRedText;
+//              Deletebutton.cbuttonSelector = @selector(deleteGroup:);
+//              [buttonArray addObject:Deletebutton];
+//        }
        
         [self.data addObject:buttonArray];
         
@@ -233,10 +241,10 @@
 {
     NSMutableArray *array = _data[indexPath.section];
     NSObject *data = array[indexPath.row];
-    if([data isKindOfClass:[TUIProfileCardCellData class]]){
-        return [(TUIProfileCardCellData *)data heightOfWidth:Screen_Width];
-    }
-    else if([data isKindOfClass:[TGroupMembersCellData class]]){
+//    if([data isKindOfClass:[TUIProfileCardCellData class]]){
+//        return [(TUIProfileCardCellData *)data heightOfWidth:Screen_Width];
+//    }
+     if([data isKindOfClass:[TGroupMembersCellData class]]){
         return [TUIGroupMembersCell getHeight:(TGroupMembersCellData *)data];
     }
     else if([data isKindOfClass:[TUIButtonCellData class]]){
@@ -248,17 +256,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSMutableArray *array = _data[indexPath.section];
     NSObject *data = array[indexPath.row];
-    if([data isKindOfClass:[TUIProfileCardCellData class]]){
-        TUIProfileCardCell *cell = [tableView dequeueReusableCellWithIdentifier:TGroupCommonCell_ReuseId];
-        if(!cell){
-            cell = [[TUIProfileCardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TGroupCommonCell_ReuseId];
-        }
-        //设置 profileCard 的委托
-        cell.delegate = self;
-        [cell fillWithData:(TUIProfileCardCellData *)data];
-        return cell;
-    }
-    else if([data isKindOfClass:[TCommonTextCellData class]]){
+//    if([data isKindOfClass:[TUIProfileCardCellData class]]){
+//        TUIProfileCardCell *cell = [tableView dequeueReusableCellWithIdentifier:TGroupCommonCell_ReuseId];
+//        if(!cell){
+//            cell = [[TUIProfileCardCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TGroupCommonCell_ReuseId];
+//        }
+//        //设置 profileCard 的委托
+//        cell.delegate = self;
+//        [cell fillWithData:(TUIProfileCardCellData *)data];
+//        return cell;
+//    }
+     if([data isKindOfClass:[TCommonTextCellData class]]){
         TCommonTextCell *cell = [tableView dequeueReusableCellWithIdentifier:TKeyValueCell_ReuseId];
         if(!cell){
             cell = [[TCommonTextCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TKeyValueCell_ReuseId];
@@ -275,14 +283,14 @@
         [cell setData:(TGroupMembersCellData *)data];
         return cell;
     }
-    else if([data isKindOfClass:[TCommonSwitchCellData class]]){
-        TCommonSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:TSwitchCell_ReuseId];
-        if(!cell){
-            cell = [[TCommonSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TSwitchCell_ReuseId];
-        }
-        [cell fillWithData:(TCommonSwitchCellData *)data];
-        return cell;
-    }
+//    else if([data isKindOfClass:[TCommonSwitchCellData class]]){
+//        TCommonSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:TSwitchCell_ReuseId];
+//        if(!cell){
+//            cell = [[TCommonSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:TSwitchCell_ReuseId];
+//        }
+//        [cell fillWithData:(TCommonSwitchCellData *)data];
+//        return cell;
+//    }
     else if([data isKindOfClass:[TUIButtonCellData class]]){
         TUIButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:TButtonCell_ReuseId];
         if(!cell){
@@ -308,21 +316,45 @@
     }
 }
 
-- (void)didSelectAddOption:(UITableViewCell *)cell
+
+- (void)didSelectGroupNameOption:(UITableViewCell *)cell{
+    TModifyViewData *data = [[TModifyViewData alloc] init];
+    data.title = @"修改群名称";
+    TModifyView *modify = [[TModifyView alloc] init];
+    modify.tag = 0;
+    modify.delegate = self;
+    [modify setData:data];
+    [modify showInWindow:self.view.window];
+}
+
+- (void)didSelectNotificationOption:(UITableViewCell *)cell
 {
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"加群方式" preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    [ac addAction:[UIAlertAction actionWithTitle:@"禁止加入" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setGroupAddOpt:TIM_GROUP_ADD_FORBID];
-    }]];
-    [ac addAction:[UIAlertAction actionWithTitle:@"管理员审批" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setGroupAddOpt:TIM_GROUP_ADD_AUTH];
-    }]];
-    [ac addAction:[UIAlertAction actionWithTitle:@"自动审批" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self setGroupAddOpt:TIM_GROUP_ADD_ANY];
-    }]];
-    [ac addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
-    [self presentViewController:ac animated:YES completion:nil];
+    JMGroupIntroduceViewController *vc = [[JMGroupIntroduceViewController alloc]init];
+    vc.title = @"群公告";
+    vc.delegate = self;
+    vc.isMeOwner = [self.groupInfo isMeOwner];
+    vc.groupIntroduce = [self.groupInfo showNotification];
+    [self.navigationController pushViewController:vc animated:YES];
+//    TModifyViewData *data = [[TModifyViewData alloc] init];
+//    data.title = @"修改群公告";
+//    TModifyView *modify = [[TModifyView alloc] init];
+//    modify.tag = 1;
+//    modify.delegate = self;
+//    [modify setData:data];
+//    [modify showInWindow:self.view.window];
+//    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:@"加群方式" preferredStyle:UIAlertControllerStyleActionSheet];
+//
+//    [ac addAction:[UIAlertAction actionWithTitle:@"禁止加入" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [self setGroupAddOpt:TIM_GROUP_ADD_FORBID];
+//    }]];
+//    [ac addAction:[UIAlertAction actionWithTitle:@"管理员审批" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [self setGroupAddOpt:TIM_GROUP_ADD_AUTH];
+//    }]];
+//    [ac addAction:[UIAlertAction actionWithTitle:@"自动审批" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [self setGroupAddOpt:TIM_GROUP_ADD_ANY];
+//    }]];
+//    [ac addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+//    [self presentViewController:ac animated:YES completion:nil];
 }
 
 - (void)setGroupAddOpt:(TIMGroupAddOpt)opt
@@ -347,57 +379,69 @@
     [modify showInWindow:self.view.window];
 }
 
-- (void)didSelectCommon
-{
-    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    if ([self.groupInfo isPrivate] || [self.groupInfo isMeOwner]) {
-        [ac addAction:[UIAlertAction actionWithTitle:@"修改群名称" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//- (void)didSelectCommon
+//{
+//    UIAlertController *ac = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+//
+//    if ([self.groupInfo isPrivate] || [self.groupInfo isMeOwner]) {
+//        [ac addAction:[UIAlertAction actionWithTitle:@"修改群名称" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//            TModifyViewData *data = [[TModifyViewData alloc] init];
+//            data.title = @"修改群名称";
+//            TModifyView *modify = [[TModifyView alloc] init];
+//            modify.tag = 0;
+//            modify.delegate = self;
+//            [modify setData:data];
+//            [modify showInWindow:self.view.window];
+//
+//        }]];
+//    }
+//    if ([self.groupInfo isMeOwner]) {
+//        [ac addAction:[UIAlertAction actionWithTitle:@"修改群公告" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//
+//            TModifyViewData *data = [[TModifyViewData alloc] init];
+//            data.title = @"修改群公告";
+//            TModifyView *modify = [[TModifyView alloc] init];
+//            modify.tag = 1;
+//            modify.delegate = self;
+//            [modify setData:data];
+//            [modify showInWindow:self.view.window];
+//        }]];
+//    }
+//
+//    if ([self.delegate respondsToSelector:@selector(groupInfoController:didSelectChangeAvatar:)]) {
+//        if ([self.groupInfo isMeOwner]) {
+//            [ac addAction:[UIAlertAction actionWithTitle:@"修改头像" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                [self.delegate groupInfoController:self didSelectChangeAvatar:self.groupId];
+//            }]];
+//        }
+//    }
+//    [ac addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+//
+//    [self presentViewController:ac animated:YES completion:nil];
+//}
 
-            TModifyViewData *data = [[TModifyViewData alloc] init];
-            data.title = @"修改群名称";
-            TModifyView *modify = [[TModifyView alloc] init];
-            modify.tag = 0;
-            modify.delegate = self;
-            [modify setData:data];
-            [modify showInWindow:self.view.window];
-            
-        }]];
-    }
-    if ([self.groupInfo isMeOwner]) {
-        [ac addAction:[UIAlertAction actionWithTitle:@"修改群公告" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//- (void)didSelectOnTop:(TCommonSwitchCell *)cell
+//{
+//    if (cell.switcher.on) {
+//        [[TUILocalStorage sharedInstance] addTopConversation:_groupId];
+//    } else {
+//        [[TUILocalStorage sharedInstance] removeTopConversation:_groupId];
+//    }
+//}
 
-            TModifyViewData *data = [[TModifyViewData alloc] init];
-            data.title = @"修改群公告";
-            TModifyView *modify = [[TModifyView alloc] init];
-            modify.tag = 1;
-            modify.delegate = self;
-            [modify setData:data];
-            [modify showInWindow:self.view.window];
-        }]];
-    }
+-(void)groupIntroduceController:(JMGroupIntroduceViewController *)modifyView didModiyContent:(NSString *)content{
+    @weakify(self)
     
-    if ([self.delegate respondsToSelector:@selector(groupInfoController:didSelectChangeAvatar:)]) {
-        if ([self.groupInfo isMeOwner]) {
-            [ac addAction:[UIAlertAction actionWithTitle:@"修改头像" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                [self.delegate groupInfoController:self didSelectChangeAvatar:self.groupId];
-            }]];
-        }
-    }
-    [ac addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil]];
+    [[TIMGroupManager sharedInstance] modifyGroupNotification:_groupId notification:content succ:^{
+        @strongify(self)
+        self.profileCellData.signature = content;
+        [self updateData];
+    } fail:^(int code, NSString *msg) {
+        [THelper makeToastError:code msg:msg];
+    }];
     
-    [self presentViewController:ac animated:YES completion:nil];
 }
-
-- (void)didSelectOnTop:(TCommonSwitchCell *)cell
-{
-    if (cell.switcher.on) {
-        [[TUILocalStorage sharedInstance] addTopConversation:_groupId];
-    } else {
-        [[TUILocalStorage sharedInstance] removeTopConversation:_groupId];
-    }
-}
-
 
 - (void)modifyView:(TModifyView *)modifyView didModiyContent:(NSString *)content
 {

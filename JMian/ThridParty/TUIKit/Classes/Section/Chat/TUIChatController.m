@@ -19,13 +19,18 @@
 #import "Toast/Toast.h"
 #import "THelper.h"
 #import <IQKeyboardManager.h>
+#import "JMBUserProfileViewController.h"
+#import "JMCUserProfileViewController.h"
 
+#import "TIMFriendshipManager.h"
 @interface TUIChatController () <TMessageControllerDelegate, TInputControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate>
 @property (nonatomic, strong) TIMConversation *conversation;
 @property UIView *tipsView;
 @property UILabel *pendencyLabel;
 @property UIButton *pendencyBtn;
 @property TUIGroupPendencyViewModel *pendencyViewModel;
+@property(nonatomic,assign) BOOL isMyFriend;
+
 @end
 
 @implementation TUIChatController
@@ -253,37 +258,83 @@
 {
     if (cell.messageData.identifier == nil)
         return;
-    
-    if ([self.delegate respondsToSelector:@selector(chatController:onSelectMessageAvatar:)]) {
-        [self.delegate chatController:self onSelectMessageAvatar:cell];
-        return;
-    }
-    
-    @weakify(self)
-    TIMFriend *friend = [[TIMFriendshipManager sharedInstance] queryFriend:cell.messageData.identifier];
-    if (friend) {
-        id<TUIFriendProfileControllerServiceProtocol> vc = [[TCServiceManager shareInstance] createService:@protocol(TUIFriendProfileControllerServiceProtocol)];
-        if ([vc isKindOfClass:[UIViewController class]]) {
-            vc.friendProfile = friend;
-            [self.navigationController pushViewController:(UIViewController *)vc animated:YES];
-            return;
-        }
-    }
-    
-    [[TIMFriendshipManager sharedInstance] getUsersProfile:@[cell.messageData.identifier] forceUpdate:YES succ:^(NSArray<TIMUserProfile *> *profiles) {
-        @strongify(self)
-        if (profiles.count > 0) {
-            id<TUIUserProfileControllerServiceProtocol> vc = [[TCServiceManager shareInstance] createService:@protocol(TUIUserProfileControllerServiceProtocol)];
-            if ([vc isKindOfClass:[UIViewController class]]) {
-                vc.userProfile = profiles[0];
-                vc.actionType = PCA_ADD_FRIEND;
-                [self.navigationController pushViewController:(UIViewController *)vc animated:YES];
-                return;
+        @weakify(self)
+    [[TIMFriendshipManager sharedInstance] getFriendList:^(NSArray<TIMFriend *> *friends) {
+         @strongify(self)
+        for (TIMFriend *friend in friends) {
+            if (cell.messageData.identifier == friend.identifier) {
+                self.isMyFriend = YES;
             }
         }
     } fail:^(int code, NSString *msg) {
-        [THelper makeToastError:code msg:msg];
     }];
+    
+    
+    NSString *user_id = [cell.messageData.identifier substringToIndex:[cell.messageData.identifier length]-1];
+    NSString *user_type =[cell.messageData.identifier substringFromIndex:[cell.messageData.identifier length]-1];
+    
+    if ([user_type isEqualToString:@"a"]) {
+        JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
+        vc.user_id =  user_id;
+        vc.isMyFriend = self.isMyFriend;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
+        vc.user_id =  user_id;
+        vc.isMyFriend = self.isMyFriend;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
+    
+    
+//    NSMutableArray * arr = [[NSMutableArray alloc] init];
+//    [arr addObject:cell.messageData.identifier ];
+////    NSLog(@"%@",user_id);
+//    [[TIMFriendshipManager sharedInstance] getUsersProfile:arr forceUpdate:NO succ:^(NSArray * arr) {
+////        @strongify(self)
+//        TIMUserProfile *profile = arr[0];
+//        NSDictionary *dic = profile.customInfo;
+////        for (TIMUserProfile * profile in arr) {
+//            NSLog(@"dic=%@", dic);
+//        JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
+//            vc.user_id =  user_id;
+//        [self.navigationController pushViewController:vc animated:YES];
+////        }
+//    }fail:^(int code, NSString * err) {
+//        NSLog(@"GetFriendsProfile fail: code=%d err=%@", code, err);
+//    }];
+//
+    
+//    if ([self.delegate respondsToSelector:@selector(chatController:onSelectMessageAvatar:)]) {
+//        [self.delegate chatController:self onSelectMessageAvatar:cell];
+//        return;
+//    }
+    
+//    @weakify(self)
+//    TIMFriend *friend = [[TIMFriendshipManager sharedInstance] queryFriend:cell.messageData.identifier];
+//    if (friend) {
+//        id<TUIFriendProfileControllerServiceProtocol> vc = [[TCServiceManager shareInstance] createService:@protocol(TUIFriendProfileControllerServiceProtocol)];
+//        if ([vc isKindOfClass:[UIViewController class]]) {
+//            vc.friendProfile = friend;
+//            [self.navigationController pushViewController:(UIViewController *)vc animated:YES];
+//            return;
+//        }
+//    }
+//
+//    [[TIMFriendshipManager sharedInstance] getUsersProfile:@[cell.messageData.identifier] forceUpdate:YES succ:^(NSArray<TIMUserProfile *> *profiles) {
+//        @strongify(self)
+//        if (profiles.count > 0) {
+//            id<TUIUserProfileControllerServiceProtocol> vc = [[TCServiceManager shareInstance] createService:@protocol(TUIUserProfileControllerServiceProtocol)];
+//            if ([vc isKindOfClass:[UIViewController class]]) {
+//                vc.userProfile = profiles[0];
+//                vc.actionType = PCA_ADD_FRIEND;
+//                [self.navigationController pushViewController:(UIViewController *)vc animated:YES];
+//                return;
+//            }
+//        }
+//    } fail:^(int code, NSString *msg) {
+//        [THelper makeToastError:code msg:msg];
+//    }];
 }
 
 - (void)messageController:(TUIMessageController *)controller onSelectMessageContent:(TUIMessageCell *)cell

@@ -659,8 +659,9 @@
     [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key sender_mark:@"" recipient_mark:@""
                                        successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-        
-        
+        JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+        data.convType = TConv_Type_C2C;
+        messageListModel.data =data;
         JMChatViewController *vc = [[JMChatViewController alloc]init];
         vc.myConvModel = messageListModel;
         [self.navigationController pushViewController:vc animated:YES];

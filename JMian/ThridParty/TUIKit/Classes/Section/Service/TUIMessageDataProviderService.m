@@ -211,8 +211,17 @@
         data = [self getFileCellData:message fromElem:(TIMFileElem *)elem];
         
     }else if([elem isKindOfClass:[TIMCustomElem class]]){
-        
-        data = [self getPushCustumCellData:message fromElem:(TIMCustomElem *)elem];
+        TIMCustomElem *elem1 = (TIMCustomElem *)elem;
+        NSString *string = [[NSString alloc]initWithData:elem1.data encoding:NSUTF8StringEncoding];
+
+        if ( [string isEqualToString:@"group_create"]) {
+            data = [self getSystemCellData:message formElem:elem];
+
+        }else{
+            data = [self getPushCustumCellData:message fromElem:(TIMCustomElem *)elem];
+            
+        }
+       
 
         
     }else{

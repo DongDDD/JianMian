@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="57" id="KGk-i7-Jjw" customClass="JMUserProfileAdressTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dingwei.png" translatesAutoresizingMaskIntoConstraints="NO" id="ndi-cF-uFj">
+                        <rect key="frame" x="20" y="18.5" width="16" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="UMe-cS-dlC"/>
+                            <constraint firstAttribute="width" constant="16" id="faG-7X-p7u"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="广州市天河区天河路383号太古汇二栋E座3639号" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uq5-O0-30m">
+                        <rect key="frame" x="46" y="21" width="240.5" height="15"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="Kpi-e1-lAx">
+                        <rect key="frame" x="291.5" y="22" width="8.5" height="13"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="13" id="7mc-2i-rKD"/>
+                            <constraint firstAttribute="width" constant="8.5" id="HUs-FA-Nv5"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="ndi-cF-uFj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="EiQ-PX-aXG"/>
+                    <constraint firstItem="ndi-cF-uFj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="F6c-WM-HWs"/>
+                    <constraint firstItem="Uq5-O0-30m" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="HaV-Yz-QwF"/>
+                    <constraint firstItem="Kpi-e1-lAx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Q20-MK-L2I"/>
+                    <constraint firstItem="Uq5-O0-30m" firstAttribute="leading" secondItem="ndi-cF-uFj" secondAttribute="trailing" constant="10" id="Vzp-U8-fjJ"/>
+                    <constraint firstItem="Kpi-e1-lAx" firstAttribute="leading" secondItem="Uq5-O0-30m" secondAttribute="trailing" constant="5" id="aJm-Q8-WG8"/>
+                    <constraint firstAttribute="trailing" secondItem="Kpi-e1-lAx" secondAttribute="trailing" constant="20" id="ul8-Nt-GHu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="adressLab" destination="Uq5-O0-30m" id="rSj-WD-SEd"/>
+            </connections>
+            <point key="canvasLocation" x="118.84057971014494" y="90.736607142857139"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="dingwei.png" width="10" height="12"/>
+        <image name="icon_return .png" width="6.5" height="11"/>
+    </resources>
+</document>

@@ -9,6 +9,8 @@
 #import "JMFriendInfoViewController.h"
 
 @interface JMFriendInfoViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *headerImg;
+@property (weak, nonatomic) IBOutlet UILabel *nameLab;
 
 @end
 
@@ -17,6 +19,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    self.nameLab.text = self.model.nickname;
+    [self.headerImg sd_setImageWithURL:[NSURL URLWithString:self.model.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self.navigationController setNavigationBarHidden:YES];
+
+
+}
+- (IBAction)backAction:(UIButton *)sender {
+    [super fanhui];
+    
 }
 
 /*

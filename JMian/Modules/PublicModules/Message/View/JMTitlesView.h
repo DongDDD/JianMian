@@ -11,6 +11,8 @@
 typedef NS_ENUM(NSInteger, JMTitlesViewType) {
     JMTitlesViewDefault,
     JMTitlesViewPositionManage,
+    JMTitlesViewBlackText,
+
 };
 
 

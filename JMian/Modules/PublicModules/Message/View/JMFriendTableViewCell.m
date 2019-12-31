@@ -12,7 +12,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *subTitleLab;
 @property (weak, nonatomic) IBOutlet UIImageView *headerIconImg;
-@property(nonatomic,strong)JMFriendListModel *myModel;
+@property(nonatomic,strong)JMAddFriendModel *myModel;
 
 @end
 
@@ -23,7 +23,7 @@
     // Initialization code
 }
 
--(void)setModel:(JMFriendListModel *)model{
+-(void)setModel:(JMAddFriendModel *)model{
     _myModel = model;
     [self.headerIconImg sd_setImageWithURL:[NSURL URLWithString:model.avatar] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.titleLab.text = model.nickname;

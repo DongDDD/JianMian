@@ -8,14 +8,15 @@
 
 #import "JMAddFriendViewController.h"
 #import "JMHTTPManager+AddFriend.h"
-#import "JMFriendListModel.h"
+#import "JMAddFriendModel.h"
 #import "JMFriendTableViewCell.h"
+#import "JMFriendInfoViewController.h"
 
 @interface JMAddFriendViewController ()<UISearchBarDelegate,UITableViewDelegate,UITableViewDataSource,JMFriendTableViewCellDelegate>
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (nonatomic,strong)UITableView *tableView;
 @property (nonatomic,strong)NSArray *dataArray;
-
+@property (nonatomic,strong)UILabel *noDataLab;
 @end
 
 static NSString *cellIdent = @"friendID";
@@ -51,10 +52,18 @@ static NSString *cellIdent = @"friendID";
 }
 
 -(void)searchBarSearchButtonClicked:(UISearchBar *)searchBar{
+    [self showProgressHUD_view:self.view];
     [[JMHTTPManager sharedInstance]searchFriendtWithPhone:searchBar.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            self.dataArray = [JMFriendListModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            self.dataArray = [JMAddFriendModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             [self.tableView reloadData];
+            if (self.dataArray.count == 0) {
+                [self.view addSubview:self.noDataLab];
+                [self.noDataLab mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.centerX.centerY.mas_equalTo(self.view);
+                }];
+            }
+            [self hiddenHUD];
             
         }
         
@@ -75,7 +84,7 @@ static NSString *cellIdent = @"friendID";
 
  
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 61;
+    return 79;
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
@@ -91,7 +100,7 @@ static NSString *cellIdent = @"friendID";
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    return 44;
+    return 25;
     
     
 }
@@ -101,15 +110,6 @@ static NSString *cellIdent = @"friendID";
 
 #pragma mark - tableViewDataSource
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
-//    [cell setData:[_dataArray objectAtIndex:indexPath.row]];
-//    JMMessageListModel *model = _dataArray[indexPath.row];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-////    if ([model.data.convId isEqualToString:@"dominator"]) {
-////
-////        cell.backgroundColor = BG_COLOR;
-////    }
-//    NSLog(@"用户ID：-----%@",model.data.convId);
     JMFriendTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
     if (cell == nil) {
         cell = [[JMFriendTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdent];
@@ -122,10 +122,26 @@ static NSString *cellIdent = @"friendID";
     return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JMAddFriendModel *model = self.dataArray[indexPath.row];
+    JMFriendInfoViewController *vc = [[JMFriendInfoViewController alloc]init];
+    vc.model = model;
+    [self.navigationController pushViewController:vc animated:YES];
+
+
+}
+
 #pragma mark - myDelegate
 
--(void)addFriendActionWithModel:(JMFriendListModel *)model{
-    
+-(void)addFriendActionWithModel:(JMAddFriendModel *)model{
+    [[JMHTTPManager sharedInstance]addFriendtWithRelation_id:model.user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.navigationController popViewControllerAnimated:YES];
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"成功添加好友" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+             [alert show];
+             
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+         
+    }];
 
 
 }
@@ -158,6 +174,15 @@ static NSString *cellIdent = @"friendID";
         _dataArray = [NSArray array];
     }
     return _dataArray;
+}
+
+-(UILabel *)noDataLab{
+    if (!_noDataLab) {
+        _noDataLab = [[UILabel alloc]init];
+        _noDataLab.text = @"无结果";
+        _noDataLab.textColor = TITLE_COLOR;
+    }
+    return _noDataLab;
 }
 /*
 #pragma mark - Navigation

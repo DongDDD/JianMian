@@ -10,6 +10,7 @@
 #import "TUITextMessageCellData.h"
 #import "TUITextMessageCell.h"
 #import "JMHTTPManager+CreateConversation.h"
+#import "JMGroupInfoViewController.h"
 
 @interface JMChatViewController ()<TUIChatControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentPickerDelegate>
 
@@ -71,8 +72,9 @@
         }
     }
 
+
     
-    if ([self.myConvModel.data.convId isEqualToString:@"dominator"]) {
+    if (self.myConvModel.viewType == JMMessageList_Type_System) {
         receiverID = @"dominator";
         titleStr = @"系统消息";
     }else if (model.user_id == _myConvModel.sender_user_id) {
@@ -100,31 +102,44 @@
         receiverID = [NSString stringWithFormat:@"%@a",userModel.user_id];
     }
     
-    if (_myConvModel.service_name) {
+    if (_myConvModel.viewType == JMMessageList_Type_Service) {
         receiverID = [NSString stringWithFormat:@"%@b",_myConvModel.service_id];
         titleStr = @"得米客服";
+    }else  if (_myConvModel.viewType == JMMessageList_Type_Group) {
+        receiverID = _myConvModel.data.convId;
+        titleStr = _myConvModel.data.title;
+        [self setRightBtnImageViewName:@"icon-top3-more"  imageNameRight2:@""];
     }
+    
     self.title = titleStr;
-    TIMConversation *conv = [[TIMManager sharedInstance] getConversation:(TIMConversationType)TIM_C2C receiver:receiverID];
+    TIMConversation *conv = [[TIMManager sharedInstance] getConversation:_myConvModel.data.convType receiver:receiverID];
     _chat = [[TUIChatController alloc] initWithConversation:conv];
     _chat.delegate = self;
     _chat.myConvModel = self.myConvModel;
     [self addChildViewController:_chat];
 //    _chat.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-SafeAreaTopHeight);
     [self.view addSubview:_chat.view];
-
+    
     
 }
 
--(void)createChatRequstWithForeign_key:(NSString *)foreign_key recipient:(NSString *)recipient chatType:(NSString *)chatType{
+-(void)rightAction{
+    JMGroupInfoViewController *vc = [[JMGroupInfoViewController alloc]init];
+    vc.groupId = _myConvModel.data.convId;
+    [self.navigationController pushViewController:vc animated:YES];
     
-    [[JMHTTPManager sharedInstance]createChat_type:chatType recipient:recipient foreign_key:foreign_key sender_mark:@"" recipient_mark:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
+    
 }
+
+//-(void)createChatRequstWithForeign_key:(NSString *)foreign_key recipient:(NSString *)recipient chatType:(NSString *)chatType{
+//
+//    [[JMHTTPManager sharedInstance]createChat_type:chatType recipient:recipient foreign_key:foreign_key sender_mark:@"" recipient_mark:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+////        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//}
 
 
 //- (TUIMessageCellData *)chatController:(TUIChatController *)controller onNewMessage:(TIMMessage *)msg

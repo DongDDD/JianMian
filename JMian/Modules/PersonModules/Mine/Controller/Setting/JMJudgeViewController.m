@@ -20,6 +20,7 @@
 #import "VendorKeyMacros.h"
 #import "JMHTTPManager+GetServiceID.h"
 #import "JMLogoutAction.h"
+#import "JMPostIMProfileAction.h"
 
 @interface JMJudgeViewController ()
 @property (nonatomic, strong) MBProgressHUD *progressHUD;
@@ -317,7 +318,7 @@
             [self.progressHUD setHidden:YES];
             [self jugdeStepToVCWithModel:model];//根据step跳页面
             [self upLoadDeviceToken];//申请离线推送
-            [[TIMFriendshipManager sharedInstance] modifySelfProfile:@{TIMProfileTypeKey_FaceUrl:model.avatar} succ:nil fail:nil];
+            [JMPostIMProfileAction postIMProfileActionWithUserModel:model];
         } fail:^(int code, NSString * err) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请重新登录"
                                                           delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];

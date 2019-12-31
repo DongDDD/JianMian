@@ -19,6 +19,13 @@
 #import "JMHTTPManager+CreateConversation.h"
 #import "MLMenu.h"
 #import "JMAddFriendViewController.h"
+#import "JMBFriendViewController.h"
+#import "JMCFriendViewController.h"
+#import "JMCreateGroupViewController.h"
+#import "TUIContactSelectController.h"
+#import "THelper.h"
+#import "JMTitlesView.h"
+#import "TIMUserProfile+DataProvider.h"
 
 
 @interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -28,6 +35,13 @@
 //@property (nonatomic, strong) MBProgressHUD *progressHUD;
 @property (nonatomic, strong)JMMessageListModel *dominatorModel;
 @property (nonatomic, strong)JMMessageListModel *serviceModel;
+
+@property(nonatomic,strong)JMTitlesView *titleView;
+@property(nonatomic,assign)NSInteger index;
+@property(nonatomic,strong)UIView *BGView;
+
+@property(nonatomic,strong)JMBFriendViewController *BFriendsVC;
+@property(nonatomic,strong)JMCFriendViewController *CFriendsVC;
 
 @end
 
@@ -74,7 +88,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 
 -(void)rightAction{
-    NSArray *titles = @[@" 发起群聊",@" 添加朋友",@" 我的群组",@" 新的联系人"];
+    NSArray *titles = @[@" 发起群聊",@" 添加朋友",@" 我的群组"];
     NSArray *images = @[@"creatGroup",@"addFriend",@"myGroup",@"newFriend"];
 
     MLMenuView *menuView = [[MLMenuView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 130 - 10, 0, 130, 44 * 4) WithTitles:titles WithImageNames:images WithMenuViewOffsetTop:k_StatusBarAndNavigationBarHeight WithTriangleOffsetLeft:100];
@@ -84,7 +98,16 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
       menuView.didSelectBlock = ^(NSInteger index) {
           NSLog(@"%zd",index);
-          if (index == 1) {
+          if (index == 0) {
+//              JMCreateGroupViewController *vc = [[JMCreateGroupViewController alloc]init];
+//              [self.navigationController pushViewController:vc animated:YES];
+              TUIContactSelectController *vc = [TUIContactSelectController new];
+              vc.title = @"选择联系人";
+              [self.navigationController pushViewController:vc animated:YES];
+              vc.finishBlock = ^(NSArray<TCommonContactSelectCellData *> *array) {
+                  [self addGroup:@"Private" addOption:0 withContacts:array];
+              };
+          }else if (index == 1) {
               JMAddFriendViewController *vc = [[JMAddFriendViewController alloc]init];
               [self.navigationController pushViewController:vc animated:YES];
           }
@@ -92,14 +115,108 @@ static NSString *cellIdent = @"allMessageCellIdent";
       [menuView showMenuEnterAnimation:MLEnterAnimationStyleRight];
     
 }
+/**
+ *创建讨论组、群聊、聊天室的函数
+ *groupType:创建的具体类型 Private--讨论组  Public--群聊 ChatRoom--聊天室
+ *addOption:创建后加群时的选项          TIM_GROUP_ADD_FORBID       禁止任何人加群
+                                     TIM_GROUP_ADD_AUTH        加群需要管理员审批
+                                     TIM_GROUP_ADD_ANY         任何人可以加群
+ *withContacts:群成员的信息数组。数组内每一个元素分别包含了对应成员的头像、ID等信息。具体信息可参照 TCommonContactSelectCellData 定义
+ */
+- (void)addGroup:(NSString *)groupType addOption:(TIMGroupAddOpt)addOption withContacts:(NSArray<TCommonContactSelectCellData *>  *)contacts
+{
+    NSMutableString *groupName = [[[TIMFriendshipManager sharedInstance] querySelfProfile] showName].mutableCopy;
+    NSMutableArray *members = [NSMutableArray array];
+    //遍历contacts，初始化群组成员信息、群组名称信息
+    for (TCommonContactSelectCellData *item in contacts) {
+        TIMCreateGroupMemberInfo *member = [[TIMCreateGroupMemberInfo alloc] init];
+        member.member = item.identifier;
+        member.role = TIM_GROUP_MEMBER_ROLE_MEMBER;
+        [groupName appendFormat:@"、%@", item.title];
+        [members addObject:member];
+    }
+
+    //群组名称默认长度不超过10，如有需求可在此更改，但可能会出现UI上的显示bug
+    if ([groupName length] > 10) {
+        groupName = [groupName substringToIndex:10].mutableCopy;
+    }
+
+    TIMCreateGroupInfo *info = [[TIMCreateGroupInfo alloc] init];
+    info.groupName = groupName;
+    info.groupType = groupType;
+    if([info.groupType isEqualToString:@"Private"]){
+        info.setAddOpt = false;
+    }
+    else{
+        info.setAddOpt = true;
+        info.addOpt = addOption;
+    }
+    info.membersInfo = members;
+
+    //发送创建请求后的回调函数
+//    @weakify(self)
+    [[TIMGroupManager sharedInstance] createGroup:info succ:^(NSString *groupId) {
+        //创建成功后，在群内推送创建成功的信息
+//        @strongify(self)
+        TIMMessage *tip = [[TIMMessage alloc] init];
+        TIMCustomElem *custom = [[TIMCustomElem alloc] init]; 
+        custom.data = [@"group_create" dataUsingEncoding:NSUTF8StringEncoding];
+
+        //对于创建群消息时的名称显示（此时还未设置群名片），优先显示用户昵称。
+        NSString *userId = [[TIMManager sharedInstance] getLoginUser];
+        TIMUserProfile *user = [[TIMFriendshipManager sharedInstance] queryUserProfile:userId];
+        custom.ext = [NSString stringWithFormat:@"\"%@\"创建群聊",user.showName];
+        [tip addElem:custom];
+        TIMConversation *conv = [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:groupId];
+        [conv sendMessage:tip succ:nil fail:nil];
+
+      
+        //创建成功后，默认跳转到群组对应的聊天界面
+        JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+        data.convId = groupId;
+        data.convType = TConv_Type_Group;
+        data.title = groupName;
+        JMMessageListModel *messagelistModel =[[JMMessageListModel alloc]init];
+        messagelistModel.data = data;
+        JMChatViewController *chat = [[JMChatViewController alloc] init];
+        chat.myConvModel = messagelistModel;
+        [self.navigationController pushViewController:chat animated:YES];
+
+        NSMutableArray *tempArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+        [tempArray removeObjectAtIndex:tempArray.count-2];
+        self.navigationController.viewControllers = tempArray;
+
+    } fail:^(int code, NSString *msg) {
+        [THelper makeToastError:code msg:msg];
+    }];
+}
+
+
+
+
 
 -(void)initView{
     [self.view addSubview:self.tableView];
+    [self.view addSubview:self.titleView];
+//    [self.view addSubview:self.BGView];
+    [self.view addSubview:self.BFriendsVC.view];
+    [self.view addSubview:self.CFriendsVC.view];
+
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.titleView.mas_bottom);
         make.bottom.mas_equalTo(self.view);
         make.left.right.mas_equalTo(self.view);
     }];
+    [self.BFriendsVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.top.mas_equalTo(self.titleView.mas_bottom);
+          make.bottom.mas_equalTo(self.view);
+          make.left.right.mas_equalTo(self.view);
+      }];
+    [self.CFriendsVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.titleView.mas_bottom);
+            make.bottom.mas_equalTo(self.view);
+            make.left.right.mas_equalTo(self.view);
+        }];
 
 }
 
@@ -184,10 +301,24 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
     NSLog(@"腾讯云数据%@",convs);
     for (TIMConversation *conv in convs) {
+        TIMMessage *msg = [conv getLastMsg];
         if([conv getType] == TIM_SYSTEM){
             continue;
+        }else if ([conv getType] == TIM_GROUP){
+            JMMessageListModel *model = [[JMMessageListModel alloc]init];
+            JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
+            data.convId = [conv getReceiver];
+            data.unRead = [conv getUnReadMessageNum];
+            _unReadNum += [conv getUnReadMessageNum];
+            data.time = [self getDateDisplayString:msg.timestamp];
+            data.subTitle = [self getLastDisplayString:conv];
+            data.title = [conv getGroupName];
+            data.convType = [conv getType];
+            model.data = data;
+            model.viewType = JMMessageList_Type_Group;
+           [converArray addObject:model];
+            
         }
-        TIMMessage *msg = [conv getLastMsg];
         NSLog(@"%@",msg);
         for (JMMessageListModel *model in self.modelArray) {
             if (model.sender_mark == my_IM_id) {
@@ -199,20 +330,23 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     model.data = data;
                     data.time = [self getDateDisplayString:msg.timestamp];
                     data.subTitle = [self getLastDisplayString:conv];
-                    
+                    data.convType = [conv getType];
                     model.data = data;
-                    //过滤客服用户
-                    if (servicer_idB != [conv getReceiver]) {
-                        _unReadNum += [conv getUnReadMessageNum];
-                        [converArray addObject:model];
-                        NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
-                    }else{
+                    if (servicer_idB == [conv getReceiver]) {
                         //捉取客服model
                         model.service_name = @"得米客服";
                         model.service_id = service_id;
                         serviceModel = model;
+                        model.viewType = JMMessageList_Type_Service;
+                    }else{
+                        //过滤客服用户
+                        model.viewType = JMMessageList_Type_C2C;
+                        _unReadNum += [conv getUnReadMessageNum];
+                        [converArray addObject:model];
+                        NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
                         
                     }
+                    
                     
                 }
                 
@@ -226,17 +360,22 @@ static NSString *cellIdent = @"allMessageCellIdent";
                     model.data = data;
                     data.time = [self getDateDisplayString:msg.timestamp];
                     data.subTitle = [self getLastDisplayString:conv];
+                    data.convType = [conv getType];
                     model.data = data;
+                    model.viewType = JMMessageList_Type_C2C;
                     //过滤客服用户
-                    if (servicer_idB != [conv getReceiver]) {
+                    if (servicer_idB == [conv getReceiver]) {
+                        //捉取客服model
+                        model.service_name = @"得米客服";
+                        model.service_id = service_id;
+                        serviceModel = model;
+                        model.viewType = JMMessageList_Type_Service;
+                    }else{
+                        model.viewType = JMMessageList_Type_C2C;
                         _unReadNum += [conv getUnReadMessageNum];
                         [converArray addObject:model];
                         NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
                         
-                    }else{
-                        model.service_name = @"得米客服";
-                        model.service_id = service_id;
-                        serviceModel = model;
                     }
                 }
                 
@@ -244,9 +383,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
             
     
         }
+        
         //置顶 系统消息 和 在线客服
-        
-        
         //1 系统消息
         if ([[conv getReceiver] isEqualToString:@"dominator"]) {
             JMMessageListModel *model = [[JMMessageListModel alloc]init];
@@ -256,25 +394,28 @@ static NSString *cellIdent = @"allMessageCellIdent";
             _unReadNum += [conv getUnReadMessageNum];
             data.time = [self getDateDisplayString:msg.timestamp];
             data.subTitle = [self getLastDisplayString:conv];
-            
+            data.convType = TConv_Type_C2C;
+            model.viewType = JMMessageList_Type_System;
             model.data = data;
             self.dominatorModel = model;
             NSLog(@" %@未读消息 :%d",data.convId,[conv getUnReadMessageNum]);
 
         }
-        //2 客服
+        //2 客服（就是一个按钮）
         if (service_id) {
             if (serviceModel.service_id == nil) {
                 //为了方便理解，这里模拟一个死数据model 来展示客服
                 JMMessageListModel *model = [[JMMessageListModel alloc]init];
                 JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
-                data.convId = [conv getReceiver];
+                data.convId = servicer_idB;
                 data.unRead = [conv getUnReadMessageNum];
                 //            data.time = [self getDateDisplayString:msg.timestamp];
                 data.subTitle = @"遇上问题？戳我解决！";
                 model.data = data;
                 model.service_name = @"得米客服";
                 model.service_id = service_id;
+                model.data.convType = JMMessageList_Type_C2C;
+                model.viewType = JMMessageList_Type_Service;
 //                model.sender_mark = NSString stringWithFormat:@"%@a",userInfomodel.u
 //                model.recipient_mark = NSString stringWithFormat:@"%@",
                 self.serviceModel = model;
@@ -296,8 +437,10 @@ static NSString *cellIdent = @"allMessageCellIdent";
             JMMessageListModel *model = [[JMMessageListModel alloc]init];
             JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc] init];
             data.subTitle = @"遇上问题？戳我解决！";
+            data.convType = TConv_Type_Service;
             model.service_name = @"得米客服";
             model.service_id = service_id;
+            model.viewType = JMMessageList_Type_Service;
             self.serviceModel = model;
             [self.dataArray addObject:self.serviceModel];
 
@@ -323,7 +466,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
         }else{
             self.unReadNum = _unReadNum;
             self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
-            
         }
     }else{
         self.tabBarItem.badgeValue = nil;
@@ -374,7 +516,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
         else if([elem isKindOfClass:[TIMCustomElem class]]){
             TIMCustomElem *custom = (TIMCustomElem *)elem;
             str = custom.desc;
-            
             break;
         }
         else if([elem isKindOfClass:[TIMImageElem class]]){
@@ -522,16 +663,20 @@ static NSString *cellIdent = @"allMessageCellIdent";
     return self.dataArray.count;
 }
 
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//
+//    return self.titleView;
+//
+//
+//}
+//
+//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+//    return 44;
+//
+//
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
-//    [cell setData:[_dataArray objectAtIndex:indexPath.row]];
-//    JMMessageListModel *model = _dataArray[indexPath.row];
-//    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-////    if ([model.data.convId isEqualToString:@"dominator"]) {
-////
-////        cell.backgroundColor = BG_COLOR;
-////    }
 //    NSLog(@"用户ID：-----%@",model.data.convId);
     JMAllMessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent forIndexPath:indexPath];
     if (cell == nil) {
@@ -545,121 +690,87 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSString *str = kFetchMyDefault(@"youke");
-    if ([str isEqualToString:@"1"]) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"当前为游客状态，请先进行登录" preferredStyle: UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        }]];
-        [alert addAction:[UIAlertAction actionWithTitle:@"去登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            [self loginOut];
-        }]];
-        
-        [self presentViewController:alert animated:YES completion:nil];
-        return;
-    }
     JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];
     NSString *recipient_id;
     NSString *foreign_key = messagelistModel.foreign_key;
     NSString *chat_type = messagelistModel.type;
     NSString *sender_mark = messagelistModel.sender_mark;
     NSString *recipient_mark = messagelistModel.recipient_mark;
-
-    //系统消息不用创建对话
-    if ([messagelistModel.data.convId isEqualToString:@"dominator"]) {
-        
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if (messagelistModel.viewType== JMMessageList_Type_Group) {
+        //群聊(不用创建对话)
+        JMChatViewController *vc = [[JMChatViewController alloc] init];
+        vc.myConvModel = messagelistModel;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if (messagelistModel.viewType == JMMessageList_Type_System) {
+        //系统消息(不用创建对话)
         JMChatViewController *vc = [[JMChatViewController alloc] init];
         vc.myConvModel = messagelistModel;
         [self.navigationController pushViewController:vc animated:YES];
         return;
-    }
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    
-    if ([userModel.type isEqualToString:B_Type_UESR]) {
+    }else if (messagelistModel.viewType == JMMessageList_Type_Service) {
+        //客服
+        foreign_key = @"0";
+        chat_type = @"3";
+        recipient_mark = [NSString stringWithFormat:@"%@b",messagelistModel.service_id];
+        recipient_id = messagelistModel.service_id;
+        NSString *str_b = [NSString stringWithFormat:@"%@b",userModel.user_id];
+        NSString *str_a = [NSString stringWithFormat:@"%@a",userModel.user_id];
+        sender_mark = ([userModel.type isEqualToString:B_Type_UESR]) ? str_b : str_a;
+         [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
+        return;
+    }else{
         
-        if ([messagelistModel.type isEqualToString:@"3"] || messagelistModel.service_id){
-            foreign_key = @"0";
-            chat_type = @"3";
-            sender_mark = [NSString stringWithFormat:@"%@b",userModel.user_id];
-            recipient_mark = [NSString stringWithFormat:@"%@b",messagelistModel.service_id];
-
-//            sender_mark = messagelistModel.sender_mark;
-//            recipient_mark = messagelistModel.recipient_mark;
+        if ([userModel.type isEqualToString:B_Type_UESR]) {
             
-        }else{
-            if (userModel.user_id == messagelistModel.sender_user_id) {
-                recipient_id = messagelistModel.recipient_user_id;
+            if ([messagelistModel.type isEqualToString:@"3"] || messagelistModel.service_id){
+                foreign_key = @"0";
+                chat_type = @"3";
+                sender_mark = [NSString stringWithFormat:@"%@b",userModel.user_id];
+                recipient_mark = [NSString stringWithFormat:@"%@b",messagelistModel.service_id];
+                
+                //            sender_mark = messagelistModel.sender_mark;
+                //            recipient_mark = messagelistModel.recipient_mark;
+                
             }else{
-                recipient_id = messagelistModel.sender_user_id;
+                JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+                if (userModel.user_id == messagelistModel.sender_user_id) {
+                    recipient_id = messagelistModel.recipient_user_id;
+                }else{
+                    recipient_id = messagelistModel.sender_user_id;
+                }
+                
             }
-            
-        }
-        
-        [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
-        
-    }else if ([userModel.type isEqualToString:C_Type_USER]){
-        //C 端不用创建对话，在线客服才要创建对话
-        if (messagelistModel.service_id){
-            foreign_key = @"0";
-            chat_type = @"3";
-            if (userModel.user_id == messagelistModel.sender_user_id) {
-                recipient_id = messagelistModel.recipient_user_id;
-            }else{
-                recipient_id = messagelistModel.sender_user_id;
-            }
-            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-            NSString *sender_mark = [NSString stringWithFormat:@"%@a",userModel.user_id];
-            NSString *recipient_mark = [NSString stringWithFormat:@"%@b",messagelistModel.service_id];
-
+                      
             [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
-
-        }else{
-            JMChatViewController *vc = [[JMChatViewController alloc] init];
-            vc.myConvModel = messagelistModel;
-            [self.navigationController pushViewController:vc animated:YES];
-        
+            
+        }else if ([userModel.type isEqualToString:C_Type_USER]){
+            //C 端不用创建对话，在线客服才要创建对话
+            if (messagelistModel.service_id){
+                foreign_key = @"0";
+                chat_type = @"3";
+                if (userModel.user_id == messagelistModel.sender_user_id) {
+                    recipient_id = messagelistModel.recipient_user_id;
+                }else{
+                    recipient_id = messagelistModel.sender_user_id;
+                }
+                JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+                NSString *sender_mark = [NSString stringWithFormat:@"%@a",userModel.user_id];
+                NSString *recipient_mark = [NSString stringWithFormat:@"%@b",messagelistModel.service_id];
+                
+                [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
+                
+            }else{
+                JMChatViewController *vc = [[JMChatViewController alloc] init];
+                vc.myConvModel = messagelistModel;
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }
+            
         }
+        
     
     }
-    
-    
-    
-    
-//    JMChatViewController *vc = [[JMChatViewController alloc] init];
-//    vc.myConvModel = messagelistModel;
-//    [self.navigationController pushViewController:vc animated:YES];
-    
-    //    }else{
-    //
-    //        JMChatViewController *vc = [[JMChatViewController alloc] init];
-    //        vc.myConvModel = messagelistModel;
-    //        [self.navigationController pushViewController:vc animated:YES];
-
-    
-    
-    
-    
-    
-    
-    
-//    JMMessageListModel *messagelistModel = [_dataArray objectAtIndex:indexPath.row];
-//
-//    JMChatViewController *vc = [[JMChatViewController alloc] init];
-//    vc.myConvModel = messagelistModel;
-//    [self.navigationController pushViewController:vc animated:YES];
-//
-//
-//    [self createChatRequstWithType:messagelistModel.type foreign_key:<#(NSString *)#> recipient:<#(NSString *)#>]
-    
-    //[self createChatRequstWithType:messagelistModel.type foreign_key:foreign_key recipient:recipient_id];
-    //    }else{
-    //
-    //        JMChatViewController *vc = [[JMChatViewController alloc] init];
-    //        vc.myConvModel = messagelistModel;
-    //        [self.navigationController pushViewController:vc animated:YES];
-//
-//    }
-    
 }
 
 -(void)getUserInfo{
@@ -674,72 +785,70 @@ static NSString *cellIdent = @"allMessageCellIdent";
     
 }
 
-//-(void)setReadMessageAction_model:(JMMessageListModel *)_myModel{
-//
-//    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-//    //判断senderid是不是自己
-//    BOOL _isSelfIsSender = [model.user_id isEqualToString: _myModel.sender_user_id];
-//    NSString *_receiverID;
-//    //先判断是否系统消息
-//    if ([_myModel.data.convId isEqualToString:@"dominator"]) {
-//        _receiverID = @"dominator";
-//    }else{
-//        //    17817295362
-//        if (_isSelfIsSender) {
-//
-//            _receiverID = _myModel.recipient_mark;
-//        }else{
-//
-//            _receiverID = _myModel.sender_mark;
-//        }
-//    }
-//
-//    TIMConversation *conv = [[TIMManager sharedInstance]
-//                             getConversation:(TIMConversationType)TIM_C2C
-//                             receiver:_receiverID];
-//    [conv setReadMessage:nil succ:^{
-//        NSLog(@"已读上报");
-////        if (_myModel.data.unRead > 0) {
-////
-////            self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",self.unReadNum];
-////        }else{
-////            self.tabBarItem.badgeValue = nil;
-////        }
-//        [self getMsgList];
-//        //            !_didReadMessage ? : _didReadMessage(_myModel.data.unRead);
-//
-//    } fail:^(int code, NSString *msg) {
-//        NSLog(@"已读上报失败");
-//
-//    }];
+-(void)setCurrentIndex{
+    __weak typeof(self) ws = self;
+    if (_index == 0) {
+//        [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//                       CGRect Frame = ws.BGView.frame;
+//                       Frame.origin.x = 1 * SCREEN_WIDTH;
+//                       ws.BGView.frame = Frame;
+//               //        CGRect Frame2 = ws.partTimeJobVC.view.frame;
+//               //        Frame2.origin.x = -_index * SCREEN_WIDTH;
+//               //        ws.partTimeJobVC.view.frame = Frame2;
 //
 //
-//}
+//                   } completion:nil];
+        [self.BFriendsVC.view setHidden:YES];
+        [self.CFriendsVC.view setHidden:YES];
+
+    }else if (_index == 1){
+        [self.BFriendsVC.view setHidden:NO];
+        [self.CFriendsVC.view setHidden:YES];
+
+//            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//                CGRect Frame = ws.BGView.frame;
+//                Frame.origin.x = -  SCREEN_WIDTH;
+//                ws.BGView.frame = Frame;
+//        //        CGRect Frame2 = ws.partTimeJobVC.view.frame;
+//        //        Frame2.origin.x = -_index * SCREEN_WIDTH;
+//        //        ws.partTimeJobVC.view.frame = Frame2;
+//
+//
+//            } completion:nil];
+
+    }else if (_index == 2){
+            [self.BFriendsVC.view setHidden:YES];
+        [self.CFriendsVC.view setHidden:NO];
+
+    //            [UIView animateWithDuration:0.3 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+    //                CGRect Frame = ws.BGView.frame;
+    //                Frame.origin.x = -  SCREEN_WIDTH;
+    //                ws.BGView.frame = Frame;
+    //        //        CGRect Frame2 = ws.partTimeJobVC.view.frame;
+    //        //        Frame2.origin.x = -_index * SCREEN_WIDTH;
+    //        //        ws.partTimeJobVC.view.frame = Frame2;
+    //
+    //
+    //            } completion:nil];
+
+        }
+}
+
 
 
 #pragma mark - lazy
 
-//-(MBProgressHUD *)progressHUD{
-//    if (!_progressHUD) {
-//        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-//        _progressHUD.progress = 0.6;
-//        _progressHUD.dimBackground = NO; //设置有遮罩
-//        [_progressHUD showAnimated:YES]; //显示进度框
-//    }
-//    return _progressHUD;
-//}
-
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 44, SCREEN_WIDTH, self.view.frame.size.height-BottomHeight_Status) style:UITableViewStylePlain];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;
         _tableView.dataSource = self;
-        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
-        _tableView.sectionHeaderHeight = 0;
-        _tableView.sectionFooterHeight = 0;
-        _tableView.showsVerticalScrollIndicator = NO;
+//        _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+//        _tableView.sectionHeaderHeight = 0;
+//        _tableView.sectionFooterHeight = 0;
+        _tableView.showsVerticalScrollIndicator = YES;
         [self.tableView registerNib:[UINib nibWithNibName:@"JMAllMessageTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
         self.tableView.rowHeight = 79;
         self.tableView.separatorStyle = UITableViewCellAccessoryNone;
@@ -748,6 +857,54 @@ static NSString *cellIdent = @"allMessageCellIdent";
     }
     return _tableView;
 }
+
+- (JMTitlesView *)titleView {
+    if (!_titleView) {
+        _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, SafeAreaTopHeight, SCREEN_WIDTH, 43} titles:@[@"全部消息", @"企业用户",@"个人用户"]];
+        __weak JMMessageListViewController *weakSelf = self;
+        _titleView.didTitleClick = ^(NSInteger index) {
+            _index = index;
+            [weakSelf setCurrentIndex];
+        };
+    }
+    
+    return _titleView;
+}
+
+//-(UIView *)BGView{
+//    if (!_BGView) {
+//        _BGView = [[UIView alloc]initWithFrame:CGRectMake(0,60+44, SCREEN_WIDTH, self.view.frame.size.height)];
+//        _BGView.backgroundColor = BG_COLOR;
+//        [_BGView setHidden:YES];
+//
+//    }
+//    return _BGView;
+//}
+
+-(JMBFriendViewController *)BFriendsVC{
+    if (!_BFriendsVC) {
+        _BFriendsVC = [[JMBFriendViewController alloc]init];
+        [_BFriendsVC.view setHidden:YES];
+        _BFriendsVC.viewType = JMBFriendViewControllerViewTypeFriendList;
+        _BFriendsVC.view.frame = self.tableView.frame;
+        [self addChildViewController:_BFriendsVC];
+        
+    }
+    return _BFriendsVC;
+}
+
+-(JMCFriendViewController *)CFriendsVC{
+    if (!_CFriendsVC) {
+        _CFriendsVC = [[JMCFriendViewController alloc]init];
+        [_CFriendsVC.view setHidden:YES];
+        _CFriendsVC.viewType = JMBFriendViewControllerViewTypeFriendList;
+        _CFriendsVC.view.frame = self.tableView.frame;
+        [self addChildViewController:_CFriendsVC];
+        
+    }
+    return _CFriendsVC;
+}
+
 
 /*
  #pragma mark - Table view delegate

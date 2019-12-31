@@ -7,6 +7,7 @@
  ******************************************************************************/
 #import <UIKit/UIKit.h>
 #import "TUIGroupMembersView.h"
+#import "BaseViewController.h"
 
 @class TUIGroupMemberController;
 
@@ -54,7 +55,7 @@
  * 【功能说明】群成员单元，作为在 collectionView 中的显示单元。
  *  负责显示群成员信息，同时作为用户点击操作的响应单元。
  */
-@interface TUIGroupMemberController : UIViewController
+@interface TUIGroupMemberController : BaseViewController
 
 /**
  *  群成员视图

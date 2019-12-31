@@ -119,6 +119,12 @@
     }
     
     
+    //群聊
+    if (data.viewType == JMMessageList_Type_Group) {
+        self.userNameLabel.text = data.data.title;;
+        self.iconImageView.image = [UIImage imageNamed:@"group_header.jpg"];
+    }
+    
     if (data.data.unRead <= 0) {
         [self.unReadLab setHidden:YES];
     }else{
@@ -129,6 +135,7 @@
     
     self.lastChatTimeLbel.text = data.data.time;
     self.lastChatLabel.text = data.data.subTitle;
+    
     NSLog(@"*********%@ / %@",self.userNameLabel.text,self.userLabel.text);
 
 }

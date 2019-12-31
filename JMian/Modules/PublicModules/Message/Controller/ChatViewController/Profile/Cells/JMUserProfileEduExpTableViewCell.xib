@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="213" id="KGk-i7-Jjw" customClass="JMUserProfileEduExpTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="213"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IQq-ZR-AKc">
+                        <rect key="frame" x="16" y="10" width="39.5" height="19.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="专业" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hut-Ih-1d9">
+                        <rect key="frame" x="16" y="39.5" width="25" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="学历" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F1E-RY-VQg">
+                        <rect key="frame" x="16" y="74" width="25" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在校时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybw-jI-G7G">
+                        <rect key="frame" x="111" y="39.5" width="49.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在校时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8B8-JY-0uz">
+                        <rect key="frame" x="111" y="74" width="49.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="hut-Ih-1d9" firstAttribute="top" secondItem="IQq-ZR-AKc" secondAttribute="bottom" constant="10" id="6e7-fG-7aO"/>
+                    <constraint firstItem="Ybw-jI-G7G" firstAttribute="leading" secondItem="hut-Ih-1d9" secondAttribute="trailing" constant="70" id="Euc-J0-DgA"/>
+                    <constraint firstItem="Ybw-jI-G7G" firstAttribute="centerY" secondItem="hut-Ih-1d9" secondAttribute="centerY" id="Hzp-jc-274"/>
+                    <constraint firstItem="IQq-ZR-AKc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="TNS-ef-u19"/>
+                    <constraint firstItem="hut-Ih-1d9" firstAttribute="leading" secondItem="IQq-ZR-AKc" secondAttribute="leading" id="XgE-eP-TWK"/>
+                    <constraint firstItem="8B8-JY-0uz" firstAttribute="centerY" secondItem="F1E-RY-VQg" secondAttribute="centerY" id="Xye-JI-gg0"/>
+                    <constraint firstItem="F1E-RY-VQg" firstAttribute="top" secondItem="hut-Ih-1d9" secondAttribute="bottom" constant="20" id="Z89-yn-We2"/>
+                    <constraint firstItem="F1E-RY-VQg" firstAttribute="leading" secondItem="hut-Ih-1d9" secondAttribute="leading" id="b7K-Lk-xeb"/>
+                    <constraint firstItem="IQq-ZR-AKc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="o06-AJ-CQb"/>
+                    <constraint firstItem="8B8-JY-0uz" firstAttribute="leading" secondItem="Ybw-jI-G7G" secondAttribute="leading" id="s2f-tT-qzn"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="eduLab" destination="8B8-JY-0uz" id="d99-6i-mrJ"/>
+                <outlet property="majorLab" destination="Ybw-jI-G7G" id="Gbc-fQ-OL1"/>
+                <outlet property="schoolNameLab" destination="IQq-ZR-AKc" id="xO1-L2-vH5"/>
+            </connections>
+            <point key="canvasLocation" x="-68.115942028985515" y="66.629464285714278"/>
+        </tableViewCell>
+    </objects>
+</document>

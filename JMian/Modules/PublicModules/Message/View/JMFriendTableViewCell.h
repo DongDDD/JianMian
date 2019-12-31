@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "JMFriendListModel.h"
+#import "JMAddFriendModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol JMFriendTableViewCellDelegate <NSObject>
 
--(void)addFriendActionWithModel:(JMFriendListModel *)model;
+-(void)addFriendActionWithModel:(JMAddFriendModel *)model;
 
 @end
 @interface JMFriendTableViewCell : UITableViewCell
 
-@property(nonatomic,strong)JMFriendListModel *model;
+@property(nonatomic,strong)JMAddFriendModel *model;
 @property(nonatomic,weak)id<JMFriendTableViewCellDelegate>delegate;
 @end
 

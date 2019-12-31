@@ -122,6 +122,7 @@
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
 #pragma mark - My delegate
 -(void)shareViewCancelAction{
     [self disapearAction];
@@ -172,6 +173,7 @@
     [WXApi sendReq:sendReq];
     
 }
+
 #pragma mark - C端个人的中心
 -(void)didClickSetting{
     if ([JMYoukeAction youkelimit]) {

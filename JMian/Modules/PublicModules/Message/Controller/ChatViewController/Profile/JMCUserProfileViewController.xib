@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="JMCUserProfileViewController">
+            <connections>
+                <outlet property="bottomView" destination="yek-hv-oyg" id="qf8-HF-f95"/>
+                <outlet property="leftBottomBtn" destination="U1e-0c-Ac4" id="WO8-gO-PSJ"/>
+                <outlet property="rightBottomBtn" destination="zUe-N2-H1f" id="OKG-Ke-fGb"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yek-hv-oyg">
+                    <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U1e-0c-Ac4">
+                            <rect key="frame" x="20" y="12.5" width="151" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="151" id="PVw-Sg-8dN"/>
+                                <constraint firstAttribute="height" constant="35" id="pHs-nx-ARw"/>
+                            </constraints>
+                            <state key="normal" title="聊一聊">
+                                <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUe-N2-H1f">
+                            <rect key="frame" x="243" y="12.5" width="151" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="151" id="ac8-gW-t4A"/>
+                                <constraint firstAttribute="height" constant="35" id="gcR-tl-nFb"/>
+                            </constraints>
+                            <state key="normal" title="加好友">
+                                <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="zUe-N2-H1f" secondAttribute="trailing" constant="20" id="01D-og-MrZ"/>
+                        <constraint firstItem="U1e-0c-Ac4" firstAttribute="leading" secondItem="yek-hv-oyg" secondAttribute="leading" constant="20" id="7io-R8-xTT"/>
+                        <constraint firstItem="zUe-N2-H1f" firstAttribute="centerY" secondItem="yek-hv-oyg" secondAttribute="centerY" id="FSG-Vi-a4L"/>
+                        <constraint firstAttribute="height" constant="60" id="M1q-Xt-NGB"/>
+                        <constraint firstItem="U1e-0c-Ac4" firstAttribute="centerY" secondItem="yek-hv-oyg" secondAttribute="centerY" id="XE9-dk-FM8"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="yek-hv-oyg" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="X5j-Iq-aoA"/>
+                <constraint firstItem="yek-hv-oyg" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="tBP-2s-pCm"/>
+                <constraint firstItem="yek-hv-oyg" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="vrD-JD-6Y8"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="132" y="108"/>
+        </view>
+    </objects>
+</document>

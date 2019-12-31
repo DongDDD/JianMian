@@ -222,9 +222,10 @@
             if(responsObject[@"data"]){
                 
                 JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-                
+                JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+                data.convType = TConv_Type_C2C;
+                messageListModel.data =data;
                 JMChatViewController *vc = [[JMChatViewController alloc]init];
-                
                 vc.myConvModel = messageListModel;
                 [self.navigationController pushViewController:vc animated:YES];
                 

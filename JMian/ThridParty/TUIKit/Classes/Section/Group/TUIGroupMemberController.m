@@ -73,28 +73,28 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     //left
-    UIButton *leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [leftButton addTarget:self action:@selector(leftBarButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [leftButton setImage:[UIImage imageNamed:TUIKitResource(@"back")] forState:UIControlStateNormal];
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
-    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    spaceItem.width = -10.0f;
-    if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0)) {
-        leftButton.contentEdgeInsets =UIEdgeInsetsMake(0, -15, 0, 0);
-        leftButton.imageEdgeInsets =UIEdgeInsetsMake(0, -15, 0, 0);
-    }
-    self.navigationItem.leftBarButtonItems = @[spaceItem,leftItem];
-    self.parentViewController.navigationItem.leftBarButtonItems = @[spaceItem,leftItem];
+//    UIButton *leftButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    [leftButton addTarget:self action:@selector(leftBarButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//    [leftButton setImage:[UIImage imageNamed:TUIKitResource(@"back")] forState:UIControlStateNormal];
+//    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithCustomView:leftButton];
+//    UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+//    spaceItem.width = -10.0f;
+//    if (([[[UIDevice currentDevice] systemVersion] floatValue] >= 11.0)) {
+//        leftButton.contentEdgeInsets =UIEdgeInsetsMake(0, -15, 0, 0);
+//        leftButton.imageEdgeInsets =UIEdgeInsetsMake(0, -15, 0, 0);
+//    }
+//    self.navigationItem.leftBarButtonItems = @[spaceItem,leftItem];
+//    self.parentViewController.navigationItem.leftBarButtonItems = @[spaceItem,leftItem];
     
     //right
-    UIButton *rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-    [rightButton addTarget:self action:@selector(rightBarButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [rightButton setTitle:@"管理" forState:UIControlStateNormal];
-    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    rightButton.titleLabel.font = [UIFont systemFontOfSize:16];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
-    self.navigationItem.rightBarButtonItem = rightItem;
-    self.parentViewController.navigationItem.rightBarButtonItem = rightItem;
+//    UIButton *rightButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    [rightButton addTarget:self action:@selector(rightBarButtonClick) forControlEvents:UIControlEventTouchUpInside];
+//    [rightButton setTitle:@"管理" forState:UIControlStateNormal];
+//    [rightButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//    rightButton.titleLabel.font = [UIFont systemFontOfSize:16];
+//    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:rightButton];
+//    self.navigationItem.rightBarButtonItem = rightItem;
+//    self.parentViewController.navigationItem.rightBarButtonItem = rightItem;
     
     _groupMembersView = [[TUIGroupMembersView alloc] initWithFrame:CGRectMake(0, StatusBar_Height + NavBar_Height, self.view.bounds.size.width, self.view.bounds.size.height - StatusBar_Height - NavBar_Height)];
     _groupMembersView.delegate = self;

@@ -521,13 +521,11 @@ static NSString *C_cellIdent = @"CSquareCellID";
         if (responsObject[@"data"]) {
             NSMutableArray *array = [NSMutableArray array];
             array = [JMTaskListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            
             [self.dataArray addObjectsFromArray:array];
             if (array.count < 10) {
                 [self.tableView.mj_footer setHidden:YES];
             }else{
                 [self.tableView.mj_footer setHidden:NO];
-                
             }
         }
         [self.tableView reloadData];

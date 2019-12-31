@@ -50,7 +50,12 @@
              @"real_ethnic":@"real.ethnic",
              @"real_name":@"real.name",
              @"real_birthday":@"real.birthday",
+             
+             @"diploma_education":@"diploma.education",
+             @"diploma_major":@"diploma.major",
+             @"diploma_school_name":@"diploma.school.school_name",
              };
+
 }
 
 @end

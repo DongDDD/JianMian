@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMFriendListModel : NSObject
+@interface JMAddFriendModel : NSObject
 
 @property(nonatomic,copy)NSString *avatar;
 @property(nonatomic,copy)NSString *phone;

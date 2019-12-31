@@ -10,13 +10,16 @@
 #import "JMAllMessageTableViewCellData.h"
 
 NS_ASSUME_NONNULL_BEGIN
-typedef NS_ENUM(NSUInteger, TConvType) {
-    TConv_Type_C2C      = 1,
-    TConv_Type_Group    = 2,
-    TConv_Type_System   = 3,
+typedef NS_ENUM(NSUInteger, JMMessageListType) {
+    JMMessageList_Type_C2C      = 1,
+    JMMessageList_Type_Group    = 2,
+    JMMessageList_Type_System   = 3,
+    JMMessageList_Type_Service   = 4,
 };
 
 @interface JMMessageListModel : NSObject
+@property(nonatomic,assign)JMMessageListType viewType;
+
 @property(nonatomic,copy)NSString *type;//1-全职聊天。2-兼职聊天
 @property(nonatomic,copy)NSString *service_name;
 @property(nonatomic,copy)NSString *service_id;

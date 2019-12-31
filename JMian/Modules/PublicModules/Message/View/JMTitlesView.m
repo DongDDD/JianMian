@@ -53,9 +53,12 @@
         [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [btn setBackgroundColor:MASTER_COLOR];
 
+    }else  if (_viewType == JMTitlesViewBlackText){
+        [btn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
+
     }else{
-        
         [btn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        
     }
     
     

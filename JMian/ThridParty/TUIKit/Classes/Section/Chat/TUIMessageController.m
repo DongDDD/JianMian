@@ -164,7 +164,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 {
     _conv = conversation;
     //1 系统消息   2 客服  3 招客服Type = 3   三种情况隐藏头部信息
-    if ([self.myConvModel.data.convId isEqualToString:@"dominator"] || self.myConvModel.service_name || [self.myConvModel.type isEqualToString:@"3"]) {
+    if ([self.myConvModel.data.convId isEqualToString:@"dominator"] || self.myConvModel.viewType == JMMessageList_Type_Service || [self.myConvModel.type isEqualToString:@"3"] || self.myConvModel.viewType == JMMessageList_Type_Group) {
         _isHiddenHeaderInfo = YES;
     }
     
@@ -378,7 +378,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                 
                 
                 //此处改为 群名片>昵称>ID。当高优先级为空时在使用低优先级变量。
-                //TIMUserProfile *userProfile = [[TIMFriendshipManager sharedInstance] queryUserProfile:msg.sender];
+                TIMUserProfile *userProfile = [[TIMFriendshipManager sharedInstance] queryUserProfile:msg.sender];
                 //data.name = nameCard.length ? nameCard : userProfile.showName;
                 
                 switch (msg.status) {
@@ -398,6 +398,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 //                if (self.myConvModel.service_id.length > 0) {
 //                    data.avatarImage = [UIImage imageNamed:@"kf"];
 //                }else{
+                
                     if (data.direction == MsgDirectionIncoming) {
                         //消息接收方
                         if (self.myConvModel.service_id.length > 0) {
@@ -405,8 +406,8 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                             data.avatarUrl = [NSURL URLWithString:@"http://produce.jmzhipin.com/h5/images/customer.png"];
 //                            data.name = @"在线客服";
                         }else{
-                            NSString *avartStr = [self getAvartUrlWithConvModel:self.myConvModel];
-                            data.avatarUrl = [NSURL URLWithString:avartStr];
+//                            NSString *avartStr = [self getAvartUrlWithConvModel:self.myConvModel];
+                            data.avatarUrl = [NSURL URLWithString:userProfile.faceURL];
                         }
                     }else if (data.direction == MsgDirectionOutgoing) {
                         //自己
@@ -676,11 +677,11 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         }
         cell = [tableView dequeueReusableCellWithIdentifier:data.reuseId forIndexPath:indexPath];
         //对于入群小灰条，需要进一步设置其委托。
-//        if([cell isKindOfClass:[TUIJoinGroupMessageCell class]]){
-//            TUIJoinGroupMessageCell *joinCell = (TUIJoinGroupMessageCell *)cell;
-//            joinCell.joinGroupDelegate = self;
-//            cell = joinCell;
-//        }
+        if([cell isKindOfClass:[TUIJoinGroupMessageCell class]]){
+            TUIJoinGroupMessageCell *joinCell = (TUIJoinGroupMessageCell *)cell;
+            joinCell.joinGroupDelegate = self;
+            cell = joinCell;
+        }
         cell.delegate = self;
         TUIMessageCellData *cellData = _uiMsgs[indexPath.row];
 
@@ -761,9 +762,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         dispatch_async(dispatch_get_main_queue(), ^{
             [ws changeMsg:msg status:Msg_Status_Succ];
         });
-        if (!self.myConvModel.service_id) {
+        if (self.myConvModel.viewType == JMMessageList_Type_C2C) {
+            // 小程序推送
             [self  unReadNoticeRequestWithData:msg];
-            
+
         }
         
     } fail:^(int code, NSString *desc) {
@@ -1074,9 +1076,11 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         [self showFileMessage:(TUIFileMessageCell *)cell];
     }
     if ([cell isKindOfClass:[JMPushMessageCell class]]) {
-        JMPushMessageCell *pushCell = cell;
+        JMPushMessageCell *pushCell = (JMPushMessageCell *)cell;
         NSString *string = [[NSString alloc]initWithData:pushCell.pushData.data encoding:NSUTF8StringEncoding];
-        if ([string containsString:@":"] || string.length > 0) {
+        if ([string isEqualToString:@"message"]) {
+            return;
+        }else if ([string containsString:@":"] || string.length > 0) {
             NSArray *array = [string componentsSeparatedByString:@":"]; //从字符A中分隔成2个元素的数组
             NSString *typeStr = array[0];
             NSString *typeId = array[1];
@@ -1085,6 +1089,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         }
         NSLog(@"onSelectMessage_JMPushMessageCell");
     }
+    
 }
 
 //-(void)onSelectMessageNotification:(NSNotification *)notification{

@@ -39,10 +39,11 @@
 }
 
 - (void)logoutWithSuccessBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
-    
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:logout_URL parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
-    
 }
+
+
+
 
 
 @end

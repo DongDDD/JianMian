@@ -10,11 +10,11 @@
 #import "SDCycleScrollView.h"
 #import "DimensMacros.h"
 #import "ZJImageMagnification.h"
-
 NSString *const JMScrollviewTableViewCellIdentifier = @"JMCDetailImageTableViewCellIdentifier";
 @interface JMScrollviewTableViewCell ()<SDCycleScrollViewDelegate>
-
 @property(nonatomic,strong)SDCycleScrollView *cycleScrollView2;
+@property (weak, nonatomic) IBOutlet UIView *noDataView;
+
 @end
 
 @implementation JMScrollviewTableViewCell
@@ -39,9 +39,11 @@ NSString *const JMScrollviewTableViewCellIdentifier = @"JMCDetailImageTableViewC
     // 网络加载 --- 创建带标题的图片轮播器
     if (imagesURLStrings.count > 0) {
         [self.cycleScrollView2 setHidden:NO];
+        [self.noDataView setHidden:YES];
     }else{
         [self.cycleScrollView2 setHidden:YES];
-
+        [self.noDataView setHidden:NO];
+         
     }
     [self addSubview:self.cycleScrollView2];
  
@@ -75,5 +77,7 @@ NSString *const JMScrollviewTableViewCellIdentifier = @"JMCDetailImageTableViewC
     return _cycleScrollView2;
     
 }
+
+
 
 @end
