@@ -11,6 +11,8 @@
 #import "JMFriendListData.h"
 #import "JMBCFriendTableViewCell.h"
 #import "NSString+Common.h"
+#import "JMCUserProfileViewController.h"
+#import "JMBUserProfileViewController.h"
 
 @interface JMCFriendViewController ()<UITableViewDelegate,UITableViewDataSource,JMBCFriendTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -45,7 +47,9 @@ static NSString *cellIdent = @"BfriendID";
 
             for (JMFriendListData *data in arr) {
                 NSInteger step = [data.friend_user_step integerValue];
-                if (step > 4) {
+                NSInteger ability_count = [data.friend_ability_count integerValue];
+
+                if (step > 5 || ability_count > 0) {
                     NSString *group = [[data.friend_nickname firstPinYin] uppercaseString];
                     NSMutableArray *list = [dataDict objectForKey:group];
                     if (!list) {
@@ -134,15 +138,24 @@ static NSString *cellIdent = @"BfriendID";
 }
 #pragma mark - myDelegate
 
--(void)didSelectedFriendWithModel:(JMFriendListData *)data{
-       if (_delegate && [_delegate respondsToSelector:@selector(CFriendViewControllerDidSelectedFriendWithModel:)]) {
-             [_delegate CFriendViewControllerDidSelectedFriendWithModel:data];
-         }
-}
+//-(void)didSelectedFriendWithModel:(JMFriendListData *)data{
+//       if (_delegate && [_delegate respondsToSelector:@selector(CFriendViewControllerDidSelectedFriendWithModel:)]) {
+//             [_delegate CFriendViewControllerDidSelectedFriendWithModel:data];
+//         }
+//}
+//
+//-(void)didCancelFriendWithModel:(JMFriendListData *)data{
+//       if (_delegate && [_delegate respondsToSelector:@selector(CFriendViewControllerDidCancelFriendWithModel:)]) {
+//             [_delegate CFriendViewControllerDidCancelFriendWithModel:data];
+//         }
+//}
 
--(void)didCancelFriendWithModel:(JMFriendListData *)data{
-       if (_delegate && [_delegate respondsToSelector:@selector(CFriendViewControllerDidCancelFriendWithModel:)]) {
-             [_delegate CFriendViewControllerDidCancelFriendWithModel:data];
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *group = self.groupList[indexPath.section];
+    NSArray *list = self.dataDict[group];
+    JMFriendListData *data = list[indexPath.row];
+    if (_delegate && [_delegate respondsToSelector:@selector(CFriendViewControllerDidSelectedFriendWithModel:)]) {
+             [_delegate CFriendViewControllerDidSelectedFriendWithModel:data];
          }
 }
 

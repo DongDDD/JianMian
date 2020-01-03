@@ -68,7 +68,6 @@
         }else if ([_myConvModel.type isEqualToString:@"1"]) {
             //全职类型
             subTitle = [NSString stringWithFormat:@"|%@",_myConvModel.work_work_name];
-            
         }
     }
 
@@ -111,6 +110,7 @@
         [self setRightBtnImageViewName:@"icon-top3-more"  imageNameRight2:@""];
     }
     
+    _myConvModel.data.convId = receiverID;
     self.title = titleStr;
     TIMConversation *conv = [[TIMManager sharedInstance] getConversation:_myConvModel.data.convType receiver:receiverID];
     _chat = [[TUIChatController alloc] initWithConversation:conv];
@@ -120,15 +120,12 @@
 //    _chat.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-SafeAreaTopHeight);
     [self.view addSubview:_chat.view];
     
-    
 }
 
 -(void)rightAction{
     JMGroupInfoViewController *vc = [[JMGroupInfoViewController alloc]init];
     vc.groupId = _myConvModel.data.convId;
     [self.navigationController pushViewController:vc animated:YES];
-    
-    
 }
 
 //-(void)createChatRequstWithForeign_key:(NSString *)foreign_key recipient:(NSString *)recipient chatType:(NSString *)chatType{

@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,copy)NSString *friend_nickname;
 @property(nonatomic,copy)NSString *friend_company_id;
+@property(nonatomic,copy)NSString *friend_ability_count;
 @property(nonatomic,copy)NSString *friend_user_step;
 @property(nonatomic,copy)NSString *friend_enterprise_step;
 @property(nonatomic,copy)NSString *friend_user_id;

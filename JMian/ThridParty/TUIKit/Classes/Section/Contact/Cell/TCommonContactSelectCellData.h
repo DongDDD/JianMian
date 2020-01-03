@@ -17,6 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property NSString *title;
 @property UIImage *avatarImage;
 @property NSString *identifier;
+@property NSString *user_step;
+@property NSString *ability_count;
+;@property NSString *company_name;
+
 
 @property (nonatomic,getter=isSelected) BOOL selected;
 @property (nonatomic,getter=isEnabled) BOOL enabled;

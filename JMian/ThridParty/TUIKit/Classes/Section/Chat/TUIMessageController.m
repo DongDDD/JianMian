@@ -16,6 +16,7 @@
 #import "TUIVideoMessageCell.h"
 #import "TUIFileMessageCell.h"
 #import "TUIJoinGroupMessageCell.h"
+#import "JMTransferTableViewCell.h"
 #import "TUIKitConfig.h"
 #import "TUIFaceView.h"
 #import "THeader.h"
@@ -49,6 +50,8 @@
 #import "JMHTTPManager+UnReadNotice.h"
 #import "JMPersonInfoViewController.h"
 #import "JMPushVCAction.h"
+#import "JMHTTPManager+Transfer.h"//转账
+#import "JMMoneyDetailsViewController.h"
 #define MAX_MESSAGE_SEP_DLAY (5 * 60)
 
 static NSString *cellIdent = @"infoCellIdent";
@@ -126,6 +129,8 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRevokeMessage:) name:TUIKitNotification_TIMMessageRevokeListener object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUploadMessage:) name:TUIKitNotification_TIMUploadProgressListener object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onTransferActoin) name:Notification_Transfer object:nil];
+
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSelectMessageNotification:) name:@"onSelectMessageNotification" object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onLongPressNotification:) name:@"onLongPressNotification" object:nil];
 
@@ -145,6 +150,8 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     [self.tableView registerClass:[TUIVideoMessageCell class] forCellReuseIdentifier:TVideoMessageCell_ReuseId];
     [self.tableView registerClass:[TUIFileMessageCell class] forCellReuseIdentifier:TFileMessageCell_ReuseId];
     [self.tableView registerClass:[TUIJoinGroupMessageCell class] forCellReuseIdentifier:TJoinGroupMessageCell_ReuseId];
+    [self.tableView registerClass:[JMTransferTableViewCell class] forCellReuseIdentifier:JMtransferMessageCell_ReuseId];
+
     [self.tableView registerNib:[UINib nibWithNibName:@"JMChatDetailInfoTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
     [self.tableView registerNib:[UINib nibWithNibName:@"JMChatDetailPartTimeJobTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent2];
     
@@ -164,7 +171,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 {
     _conv = conversation;
     //1 系统消息   2 客服  3 招客服Type = 3   三种情况隐藏头部信息
-    if ([self.myConvModel.data.convId isEqualToString:@"dominator"] || self.myConvModel.viewType == JMMessageList_Type_Service || [self.myConvModel.type isEqualToString:@"3"] || self.myConvModel.viewType == JMMessageList_Type_Group) {
+    if ([self.myConvModel.data.convId isEqualToString:@"dominator"] || self.myConvModel.viewType == JMMessageList_Type_Service || [self.myConvModel.type isEqualToString:@"3"] || self.myConvModel.viewType == JMMessageList_Type_Group || [self.myConvModel.type isEqualToString:@"4"]) {
         _isHiddenHeaderInfo = YES;
     }
     
@@ -467,10 +474,12 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
         return _myConvModel.recipient_avatar;
     }
-    
-    
+        
 }
 
+-(void)onTransferActoin{
+    [self.navigationController pushViewController:[[JMMoneyDetailsViewController alloc]init] animated:YES];
+}
 
 #pragma mark - Table view data source
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -566,7 +575,15 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             return [_heightCache[indexPath.row] floatValue];
         }
         TUIMessageCellData *data = _uiMsgs[indexPath.row];
-        height = [data heightOfWidth:Screen_Width];
+//        if ([data isKindOfClass:JMTransferMessageCellData cla]) {
+//            return 110;
+//        }
+        if ([data isKindOfClass:[JMTransferMessageCellData class]]) {
+            height = 110;
+        }else{
+            height = [data heightOfWidth:Screen_Width];
+            
+        }
         [_heightCache insertObject:[NSNumber numberWithFloat:height] atIndex:indexPath.row];
         return height;
     }
@@ -671,6 +688,10 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             else if([data isKindOfClass:[TUISystemMessageCellData class]]) {
                 data.reuseId = TSystemMessageCell_ReuseId;
             }
+            else if([data isKindOfClass:[JMTransferMessageCellData class]]) {
+                data.reuseId = JMtransferMessageCell_ReuseId;
+            }
+            
             else {
                 return nil;
             }
@@ -684,7 +705,6 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         }
         cell.delegate = self;
         TUIMessageCellData *cellData = _uiMsgs[indexPath.row];
-
         [cell fillWithData:cellData];
 //        if ([self.conv.getReceiver isEqualToString:@"dominator"]) {
 //            cell.avatarView.image = [UIImage imageNamed:@"notification"];
@@ -700,7 +720,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 
 - (void)scrollToBottom:(BOOL)animate
 {
-    if (_uiMsgs.count > 0) {
+    if (_uiMsgs.count > 0 && self.section > 0) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:_uiMsgs.count - 1 inSection:self.section-1] atScrollPosition:UITableViewScrollPositionBottom animated:animate];
     }
 }
@@ -848,6 +868,13 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         imFile.fileSize = uiFile.length;
         imFile.filename = uiFile.fileName;
         [msg addElem:imFile];
+    }
+    else if([data isKindOfClass:[JMTransferMessageCellData class]]){
+        TIMCustomElem *imCustom = [[TIMCustomElem alloc] init];
+        JMTransferMessageCellData *uiTransfer = (JMTransferMessageCellData *)data;
+        imCustom.data = uiTransfer.data;
+        imCustom.desc = uiTransfer.desc;
+        [msg addElem:imCustom];
     }
     data.innerMessage = msg;
     return msg;
@@ -1088,6 +1115,13 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             
         }
         NSLog(@"onSelectMessage_JMPushMessageCell");
+    }
+    
+    if ([cell isKindOfClass:[JMTransferTableViewCell class]]) {
+         
+        NSLog(@"JMTransferTableViewCell");
+
+        
     }
     
 }
@@ -1332,6 +1366,17 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         }
     }];
     [url stopAccessingSecurityScopedResource];
+}
+
+-(void)sendTransferMessage:(NSString *)money remark:(NSString *)remark{
+    [[JMHTTPManager sharedInstance]transferWithAccount:_myConvModel.data.convId amount:money remark:remark successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+ 
+
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+
+    }];
+    
+    
 }
 
 - (void)playVoiceMessage:(TUIVoiceMessageCell *)cell

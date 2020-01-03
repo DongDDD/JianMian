@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property UIButton *selectButton;
 @property UIImageView *avatarView;
 @property UILabel *titleLabel;
+@property UILabel *suTitleLabel;
+
 
 @property (readonly) TCommonContactSelectCellData *selectData;
 

@@ -11,6 +11,10 @@
 #import "JMHTTPManager+GetProfileInfo.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
 #import "JMCompanyHomeModel.h"
+#import "JMHTTPManager+DeleteFriend.h"
+#import "JMHTTPManager+CreateConversation.h"
+#import "JMChatViewController.h"
+#import "JMHTTPManager+AddFriend.h"
 
 @interface JMCUserProfileViewController ()<UITableViewDelegate,UITableViewDataSource,JMCUserProfileConfigureDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -27,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    self.userIM_id = [NSString stringWithFormat:@"%@a",_user_id];
     [self initView];
     [self getData];
     [self getPartTimeJobData];
@@ -96,6 +101,58 @@
     
 
 }
+
+#pragma mark - action
+- (IBAction)leftBottomAction:(UIButton *)sender {
+    if (_isMyFriend == YES ) {
+        [[JMHTTPManager sharedInstance]deleteFriendWithId:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+    }else{
+        [self chatAction];
+    
+    }
+}
+
+- (IBAction)rightBottomAction:(UIButton *)sender {
+       if (_isMyFriend == YES ) {
+           [self chatAction];
+       }else{
+           [self addFriendAction];
+       }
+    
+}
+
+-(void)chatAction{
+    [[JMHTTPManager sharedInstance]createFriendChatWithType:@"4" account:_userIM_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+            JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+            data.convType = TConv_Type_C2C;
+            messageListModel.data =data;
+            JMChatViewController *vc = [[JMChatViewController alloc]init];
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
+-(void)addFriendAction{
+    [[JMHTTPManager sharedInstance]addFriendtWithRelation_id:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.navigationController popViewControllerAnimated:YES];
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"成功添加好友" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+             [alert show];
+             
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+         
+    }];
+}
+
 #pragma mark - Data
 -(void)getData{
     [[JMHTTPManager sharedInstance]getCUserProfileWithUser_id:_user_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
@@ -137,6 +194,16 @@
     }];
 }
 
+-(void)addFriendRequest{
+    [[JMHTTPManager sharedInstance]addFriendtWithRelation_id:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.navigationController popViewControllerAnimated:YES];
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"成功添加好友" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+             [alert show];
+             
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+         
+    }];
+}
 
 
 #pragma mark - delegate

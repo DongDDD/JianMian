@@ -50,7 +50,7 @@ NSString *const JMUserProfileJobTableViewCellIdentifier = @"JMUserProfileJobTabl
     if (vitaCModel.city_city_name) {
         city = [NSString stringWithFormat:@"期望城市: %@",vitaCModel.city_city_name];
     }else{
-        city = @"期望城市: %@ 不限";
+        city = @"期望城市:  不限";
     }
     
     self.subTitleLab2.text = city;

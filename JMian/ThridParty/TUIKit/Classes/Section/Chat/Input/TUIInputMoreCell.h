@@ -57,6 +57,10 @@
  */
 @property (class, nonatomic, assign) TUIInputMoreCellData *fileData;
 
+/**
+*  “转账”单元所对应的数据源。用于存放转账单元所需的各类信息与数据。
+*/
+@property (class, nonatomic, assign) TUIInputMoreCellData *transferData;
 @end
 
 /////////////////////////////////////////////////////////////////////////////////

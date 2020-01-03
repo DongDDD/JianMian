@@ -84,6 +84,9 @@
 #define TVideoMessageCell_Play_Size CGSizeMake(35, 35)
 #define TVideoMessageCell_Progress_Color  RGBA(0, 0, 0, 0.5)
 
+//transfer cell
+#define JMtransferMessageCell_ReuseId @"JMTransferMessageCell"
+
 //voice cell
 #define TVoiceMessageCell_ReuseId @"TVoiceMessaageCell"
 #define TVoiceMessageCell_Max_Duration 60.0

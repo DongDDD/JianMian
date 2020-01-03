@@ -136,19 +136,29 @@ static NSString *cellIdent = @"BfriendID";
     
     return cell;
 }
-#pragma mark - myDelegate
 
--(void)didSelectedFriendWithModel:(JMFriendListData *)data{
-       if (_delegate && [_delegate respondsToSelector:@selector(BFriendViewControllerDidSelectedFriendWithModel:)]) {
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSString *group = self.groupList[indexPath.section];
+    NSArray *list = self.dataDict[group];
+    JMFriendListData *data = list[indexPath.row];
+    if (_delegate && [_delegate respondsToSelector:@selector(BFriendViewControllerDidSelectedFriendWithModel:)]) {
              [_delegate BFriendViewControllerDidSelectedFriendWithModel:data];
          }
 }
 
--(void)didCancelFriendWithModel:(JMFriendListData *)data{
-       if (_delegate && [_delegate respondsToSelector:@selector(BFriendViewControllerDidCancelFriendWithModel:)]) {
-             [_delegate BFriendViewControllerDidCancelFriendWithModel:data];
-         }
-}
+#pragma mark - myDelegate
+
+//-(void)didSelectedFriendWithModel:(JMFriendListData *)data{
+//       if (_delegate && [_delegate respondsToSelector:@selector(BFriendViewControllerDidSelectedFriendWithModel:)]) {
+//             [_delegate BFriendViewControllerDidSelectedFriendWithModel:data];
+//         }
+//}
+//
+//-(void)didCancelFriendWithModel:(JMFriendListData *)data{
+//       if (_delegate && [_delegate respondsToSelector:@selector(BFriendViewControllerDidCancelFriendWithModel:)]) {
+//             [_delegate BFriendViewControllerDidCancelFriendWithModel:data];
+//         }
+//}
 
 
 #pragma mark - lazy

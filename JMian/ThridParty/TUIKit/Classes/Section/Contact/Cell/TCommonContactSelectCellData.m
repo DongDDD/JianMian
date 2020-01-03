@@ -20,8 +20,10 @@
 }
 
 - (void)setProfile:(TIMUserProfile *)profile {
-
+    NSData *data = profile.customInfo[@"gsname"];
+    NSString *company_name = [[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     self.title = [profile showName];
+    self.company_name = company_name;
     if (profile.faceURL.length) {
         self.avatarUrl = [NSURL URLWithString:profile.faceURL];
     }

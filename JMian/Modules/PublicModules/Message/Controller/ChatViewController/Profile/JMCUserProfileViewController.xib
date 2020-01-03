@@ -33,6 +33,9 @@
                             <state key="normal" title="聊一聊">
                                 <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="leftBottomAction:" destination="-1" eventType="touchUpInside" id="e15-lr-JR9"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUe-N2-H1f">
                             <rect key="frame" x="243" y="12.5" width="151" height="35"/>
@@ -43,6 +46,9 @@
                             <state key="normal" title="加好友">
                                 <color key="titleColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <action selector="rightBottomAction:" destination="-1" eventType="touchUpInside" id="sTg-nn-K7s"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

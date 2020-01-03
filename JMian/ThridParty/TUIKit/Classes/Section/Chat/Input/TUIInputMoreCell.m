@@ -15,6 +15,7 @@ static TUIInputMoreCellData *TUI_Photo_MoreCell;
 static TUIInputMoreCellData *TUI_Picture_MoreCell;
 static TUIInputMoreCellData *TUI_Video_MoreCell;
 static TUIInputMoreCellData *TUI_File_MoreCell;
+static TUIInputMoreCellData *TUI_Transfer_MoreCell;
 
 @implementation TUIInputMoreCellData
 
@@ -74,6 +75,16 @@ static TUIInputMoreCellData *TUI_File_MoreCell;
         TUI_File_MoreCell.image = [UIImage imageNamed:@"matter"];
     }
     return TUI_File_MoreCell;
+}
+
++ (TUIInputMoreCellData *)transferData
+{
+    if (!TUI_Transfer_MoreCell) {
+        TUI_Transfer_MoreCell = [[TUIInputMoreCellData alloc] init];
+        TUI_Transfer_MoreCell.title = @"转账";
+        TUI_Transfer_MoreCell.image = [UIImage imageNamed:@"transfer"];
+    }
+    return TUI_Transfer_MoreCell;
 }
 
 + (void)setFileData:(TUIInputMoreCellData *)fileData

@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMJudgeViewController : UIViewController
 
-@property (strong, nonatomic) NSData *deviceToken;
+@property (strong, nonatomic) NSData *deviceToken; 
 
 @end
 

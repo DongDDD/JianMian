@@ -18,10 +18,18 @@ NSString *const JMUserProfileEduExpTableViewCellIdentifier = @"JMUserProfileEduE
 }
 
 -(void)setModel:(JMVitaDetailModel *)model{
-    self.schoolNameLab.text = model.diploma_school_name;
+    if (model.diploma_school_name) {
+        self.schoolNameLab.text = model.diploma_school_name;
+    }
 //    self.timeLab.text = [NSString stringWithFormat:@"%@- %@",model.s_date,model.e_date];
-    self.majorLab.text = model.diploma_major;
-    self.eduLab.text = [JMDataTransform getEducationStrWithEducationNum:model.diploma_education];
+    if (model.diploma_major) {
+        self.majorLab.text = model.diploma_major;
+         
+    }
+    if (model.diploma_education) {
+        self.eduLab.text = [JMDataTransform getEducationStrWithEducationNum:model.diploma_education];
+         
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -87,6 +87,7 @@
             }else{
                 TIMUserProfile *user = [[TIMFriendshipManager sharedInstance] queryUserProfile:member.member];
                 data.name = user.showName;
+                
             }
             
             

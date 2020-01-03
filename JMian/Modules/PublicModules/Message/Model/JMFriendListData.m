@@ -20,10 +20,13 @@
         @"friend_user_step":@"friend.user_step",
         @"friend_enterprise_step":@"friend.enterprise_step",
         @"friend_user_id":@"friend.user_id",
+        @"friend_ability_count":@"friend.ability_count",
+
         
         @"friend_agency_company_name":@"friend.agency.company_name",
         @"friend_agency_logo_path":@"friend.agency.logo_path",
         @"friend_agency_company_id":@"friend.agency.company_id",
+        
     };
     
 }

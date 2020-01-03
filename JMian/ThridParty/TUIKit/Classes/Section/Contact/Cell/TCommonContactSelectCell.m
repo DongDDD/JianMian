@@ -11,6 +11,7 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "ReactiveObjC/ReactiveObjC.h"
 #import "TUIKit.h"
+#import "DimensMacros.h"
 
 @interface TCommonContactSelectCell()
 @property TCommonContactSelectCellData *selectData;
@@ -48,10 +49,25 @@
         self.avatarView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:self.titleLabel];
         self.titleLabel.textColor = [UIColor darkTextColor];
-        self.titleLabel.mm_left(self.avatarView.mm_maxX+12).mm_height(20).mm__centerY(self.avatarView.mm_centerY).mm_flexToRight(0);
+        self.titleLabel.mm_left(self.avatarView.mm_maxX+12).mm_height(20).mm__centerY(self.avatarView.mm_centerY-5).mm_flexToRight(0);
         self.titleLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        
+        self.suTitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        self.suTitleLabel.font = [UIFont systemFontOfSize:12];
+        self.suTitleLabel.textColor = [UIColor grayColor];
+        self.suTitleLabel.backgroundColor = BG_COLOR;
+        [self.contentView addSubview:self.suTitleLabel];
+        [self.suTitleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(self.titleLabel.mas_left);
+            make.top.mas_equalTo(self.titleLabel.mas_bottom).mas_offset(5);
+            make.height.mas_equalTo(14);
+        }];
+//        self.suTitleLabel.mm_left(self.avatarView.mm_maxX+12).mm_height(18).mm__centerY(self.avatarView.mm_centerY+10).mm_flexToRight(0);
+        self.suTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+        
         
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -68,6 +84,12 @@
     [super fillWithData:selectData];
     self.selectData = selectData;
     self.titleLabel.text = selectData.title;
+    if (selectData.company_name.length > 0) {
+        self.suTitleLabel.text = [NSString stringWithFormat:@"  %@  ",selectData.company_name];
+        [self.suTitleLabel setHidden:NO];
+    }else{
+        [self.suTitleLabel setHidden:YES];
+    }
     if (selectData.avatarUrl) {
         [self.avatarView sd_setImageWithURL:selectData.avatarUrl placeholderImage:DefaultAvatarImage];
     } else if (selectData.avatarImage) {

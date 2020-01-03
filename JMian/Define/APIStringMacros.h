@@ -184,6 +184,8 @@
 #define Get_CityID_URL @"city/location"
 //获取客服ID
 #define Get_ServiceID_URL @"api/service"
+//转账
+#define Transfer_Money_URL @"api/user/transfer"
 
 
 //接口

@@ -19,17 +19,17 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedAction)];
-    [self addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectedAction)];
+//    [self addGestureRecognizer:tap];
 
 }
 
 -(void)setData:(JMFriendListData *)data{
-    if (_viewType2 == JMFriendTableViewCellFriendList) {
-        [self.selectedImageView setHidden:YES];
-    }else if (_viewType2 == JMFriendTableViewCellCreateGroup) {
-        [self.selectedImageView setHidden:NO];
-    }
+//    if (_viewType2 == JMFriendTableViewCellFriendList) {
+//        [self.selectedImageView setHidden:YES];
+//    }else if (_viewType2 == JMFriendTableViewCellCreateGroup) {
+//        [self.selectedImageView setHidden:NO];
+//    }
     _myData = data;
     if (_viewType == JMBFriendTableViewCell) {
         [self.headerImg sd_setImageWithURL:[NSURL URLWithString:data.friend_agency_logo_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
@@ -43,38 +43,38 @@
     
 }
 
--(void)selectedAction{
-    if (_viewType2 == JMFriendTableViewCellCreateGroup) {
-        _isSelected = !_isSelected;
-        if (_isSelected) {
-            
-            self.selectedImageView.image = [UIImage imageNamed:@"icon-Checklist"];
-            if (_delegate && [_delegate respondsToSelector:@selector(didSelectedFriendWithModel:)]) {
-                if (_viewType == JMBFriendTableViewCell) {
-                    _myData.type = B_Type_UESR;
-                }else if (_viewType == JMCFriendTableViewCell){
-                    _myData.type = C_Type_USER;
-                    
-                }
-                [_delegate didSelectedFriendWithModel:_myData];
-            }
-            
-        }else{
-            self.selectedImageView.image = [UIImage imageNamed:@"椭圆 3"];
-            if (_delegate && [_delegate respondsToSelector:@selector(didCancelFriendWithModel:)]) {
-                if (_viewType == JMBFriendTableViewCell) {
-                    _myData.type = B_Type_UESR;
-                }else if (_viewType == JMCFriendTableViewCell){
-                    _myData.type = C_Type_USER;
-                    
-                }
-                [_delegate didCancelFriendWithModel:_myData];
-            }
-        }
-    }
-   
-
-}
+//-(void)selectedAction{
+//    if (_viewType2 == JMFriendTableViewCellCreateGroup) {
+//        _isSelected = !_isSelected;
+//        if (_isSelected) {
+//            
+//            self.selectedImageView.image = [UIImage imageNamed:@"icon-Checklist"];
+//            if (_delegate && [_delegate respondsToSelector:@selector(didSelectedFriendWithModel:)]) {
+//                if (_viewType == JMBFriendTableViewCell) {
+//                    _myData.type = B_Type_UESR;
+//                }else if (_viewType == JMCFriendTableViewCell){
+//                    _myData.type = C_Type_USER;
+//                    
+//                }
+//                [_delegate didSelectedFriendWithModel:_myData];
+//            }
+//            
+//        }else{
+//            self.selectedImageView.image = [UIImage imageNamed:@"椭圆 3"];
+//            if (_delegate && [_delegate respondsToSelector:@selector(didCancelFriendWithModel:)]) {
+//                if (_viewType == JMBFriendTableViewCell) {
+//                    _myData.type = B_Type_UESR;
+//                }else if (_viewType == JMCFriendTableViewCell){
+//                    _myData.type = C_Type_USER;
+//                    
+//                }
+//                [_delegate didCancelFriendWithModel:_myData];
+//            }
+//        }
+//    }
+//   
+//
+//}
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

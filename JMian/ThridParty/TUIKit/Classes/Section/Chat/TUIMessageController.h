@@ -192,4 +192,12 @@
  *  @param url 需要发送的文件url
  */
 - (void)sendFileMessage:(NSURL *)url;
+
+/**
+ *  发送转账信息：remark是备注
+ *  本函数整合调用了得米后台 的发送接口，后台帮前端发送自定义消息。
+ 
+ *  @param money 需要发送的金额
+ */
+- (void)sendTransferMessage:(NSString *)money remark:(NSString *)remark;
 @end

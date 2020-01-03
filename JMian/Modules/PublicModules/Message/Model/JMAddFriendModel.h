@@ -23,6 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,copy)NSString *user_step;
 @property(nonatomic,copy)NSString *enterprise_step;
 @property(nonatomic,copy)NSString *user_id;
+@property(nonatomic,copy)NSString *amigo_type;
+@property(nonatomic,copy)NSString *amigo_friend_id;
+
 
 
 @end

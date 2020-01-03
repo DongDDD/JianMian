@@ -15,6 +15,7 @@
 #import "TUIVideoMessageCell.h"
 #import "TUIFileMessageCell.h"
 #import "JMPushMessageCell.h"
+#import "JMTransferMessageCellData.h"
 #import "TUIFaceView.h"
 #import "TUIKit.h"
 #import "NSString+Common.h"
@@ -217,9 +218,11 @@
         if ( [string isEqualToString:@"group_create"]) {
             data = [self getSystemCellData:message formElem:elem];
 
+        }else if ([elem1.ext isEqualToString:@"transfer"]) {
+            data = [self getTransferCustumCellData:message fromElem:(TIMCustomElem *)elem];
+
         }else{
             data = [self getPushCustumCellData:message fromElem:(TIMCustomElem *)elem];
-            
         }
        
 
@@ -241,6 +244,7 @@
     return textData;
 }
 
+//消息推送
 - (JMPushMessageCellData *) getPushCustumCellData:(TIMMessage *)message  fromElem:(TIMCustomElem *)elem{
     TIMCustomElem *custum = (TIMCustomElem *)elem;
     JMPushMessageCellData *custumData = [[JMPushMessageCellData alloc] initWithDirection:(message.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming)];
@@ -253,6 +257,19 @@
 //
     return custumData;
 }
+
+//转账
+- (JMTransferMessageCellData *) getTransferCustumCellData:(TIMMessage *)message  fromElem:(TIMCustomElem *)elem{
+    TIMCustomElem *custum = (TIMCustomElem *)elem;
+    JMTransferMessageCellData *custumData = [[JMTransferMessageCellData alloc] initWithDirection:(message.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming)];
+    custumData.desc = custum.desc;
+    custumData.data = custum.data;
+    custumData.ext = custum.ext;
+//
+//
+    return custumData;
+}
+
 
 //- (JMPushMessageCellData *)getPush2CellData:(TIMMessage *)message fromElem:(TIMCustomElem *)elem{
 //    TIMCustomElem *custum = (TIMCustomElem *)elem;

@@ -17,6 +17,10 @@
              @"agency_company_name":@"agency.company_name",
              @"agency_logo_path":@"agency.logo_path",
              @"agency_company_id":@"agency.company_id",
+             
+             @"amigo_type":@"agency.type",
+             @"amigo_friend_id":@"agency.friend_id",
+
              };
     
 }

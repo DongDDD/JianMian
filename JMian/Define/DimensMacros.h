@@ -194,6 +194,8 @@ _Pragma("clang diagnostic pop")
 #define Notification_TaskListener @"Notification_TaskListener"
 //订单
 #define Notification_OrderListener @"Notification_OrderListener"
+//转账
+#define Notification_Transfer @"Notification_Transfer"
 
 //发起视频
 #define Channel_ID @"Channel_ID"

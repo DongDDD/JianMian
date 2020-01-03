@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, JMCFriendViewControllerViewType) {
     JMCFriendViewControllerViewTypeFriendList,
     JMCFriendViewControllerViewTypeGroup,
 };
+
 @protocol JMCFriendViewControllerDelegate <NSObject>
 
 -(void)CFriendViewControllerDidSelectedFriendWithModel:(JMFriendListData *)data;

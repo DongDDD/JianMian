@@ -20,6 +20,10 @@ NS_ASSUME_NONNULL_BEGIN
 
            successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 
+- (void)createFriendChatWithType:(NSString *)type
+        account:(NSString *)account
+                    successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END

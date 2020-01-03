@@ -26,9 +26,11 @@
 #import "THelper.h"
 #import "JMTitlesView.h"
 #import "TIMUserProfile+DataProvider.h"
+#import "JMCUserProfileViewController.h"
+#import "JMBUserProfileViewController.h"
 
 
-@interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource,JMCFriendViewControllerDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArray;
 @property (nonatomic, strong) NSArray *modelArray;
@@ -178,6 +180,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         data.title = groupName;
         JMMessageListModel *messagelistModel =[[JMMessageListModel alloc]init];
         messagelistModel.data = data;
+        messagelistModel.viewType = JMMessageList_Type_Group;        
         JMChatViewController *chat = [[JMChatViewController alloc] init];
         chat.myConvModel = messagelistModel;
         [self.navigationController pushViewController:chat animated:YES];
@@ -239,6 +242,23 @@ static NSString *cellIdent = @"allMessageCellIdent";
     [self getMsgList];    //获取自己服务器数据
 }
 
+#pragma mark - delegate
+-(void)CFriendViewControllerDidSelectedFriendWithModel:(JMFriendListData *)data{
+    JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
+    vc.user_id = data.friend_user_id;
+    vc.isMyFriend = YES;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+-(void)BFriendViewControllerDidSelectedFriendWithModel:(JMFriendListData *)data{
+    JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
+    vc.user_id = data.friend_user_id;
+    vc.isMyFriend = YES;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+
 #pragma mark - data
 
 
@@ -264,7 +284,6 @@ static NSString *cellIdent = @"allMessageCellIdent";
 -(void)createChatRequstWithType:(NSString *)type foreign_key:(NSString *)foreign_key recipient:(NSString *)recipient sender_mark:(NSString *)sender_mark recipient_mark:(NSString *)recipient_mark model:(JMMessageListModel *)model{
     if (recipient || foreign_key) {
         [[JMHTTPManager sharedInstance]createChat_type:type recipient:recipient foreign_key:foreign_key sender_mark:sender_mark recipient_mark:recipient_mark successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
             
             JMChatViewController *vc = [[JMChatViewController alloc] init];
             vc.myConvModel = model;
@@ -275,6 +294,24 @@ static NSString *cellIdent = @"allMessageCellIdent";
         }];
 
     }
+}
+
+-(void)creatCustumChatWithType:(NSString *)type account:(NSString *)account{
+    [[JMHTTPManager sharedInstance]createFriendChatWithType:type account:account successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+            JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+            data.convType = TConv_Type_C2C;
+            messageListModel.data =data;
+            JMChatViewController *vc = [[JMChatViewController alloc]init];
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
 }
 
 - (void)updateConversations {
@@ -717,7 +754,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         NSString *str_b = [NSString stringWithFormat:@"%@b",userModel.user_id];
         NSString *str_a = [NSString stringWithFormat:@"%@a",userModel.user_id];
         sender_mark = ([userModel.type isEqualToString:B_Type_UESR]) ? str_b : str_a;
-         [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
+        [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
         return;
     }else{
         
@@ -741,8 +778,12 @@ static NSString *cellIdent = @"allMessageCellIdent";
                 }
                 
             }
-                      
-            [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
+            if ([chat_type isEqualToString:@"4"]) {
+                [self creatCustumChatWithType:chat_type account:messagelistModel.data.convId];
+            }else{
+                [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
+            
+            }
             
         }else if ([userModel.type isEqualToString:C_Type_USER]){
             //C 端不用创建对话，在线客服才要创建对话
@@ -887,6 +928,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         [_BFriendsVC.view setHidden:YES];
         _BFriendsVC.viewType = JMBFriendViewControllerViewTypeFriendList;
         _BFriendsVC.view.frame = self.tableView.frame;
+        _BFriendsVC.delegate = self;
         [self addChildViewController:_BFriendsVC];
         
     }
@@ -899,6 +941,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
         [_CFriendsVC.view setHidden:YES];
         _CFriendsVC.viewType = JMBFriendViewControllerViewTypeFriendList;
         _CFriendsVC.view.frame = self.tableView.frame;
+        _CFriendsVC.delegate = self;
         [self addChildViewController:_CFriendsVC];
         
     }

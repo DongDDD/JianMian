@@ -141,7 +141,7 @@ NS_ASSUME_NONNULL_BEGIN
 //@property (strong, nonatomic) NSDate *s_date;
 //@property (strong, nonatomic) NSDate *e_date;
 @property (copy, nonatomic) NSString *education;
-@property (copy, nonatomic) NSString *description;
+//@property (copy, nonatomic) NSString *Cescription;
 
 @end
 

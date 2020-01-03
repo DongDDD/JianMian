@@ -55,7 +55,7 @@
                 self.rowsNum = 0;
             }
             self.footerheight = 10;
-            self.height = 110;
+            self.height = 160;
             self.cellId = JMUserProfileEduExpTableViewCellIdentifier;
             break;
         case JMCUserProfileCellTypeIntroduce:

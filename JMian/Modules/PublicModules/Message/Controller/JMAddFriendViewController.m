@@ -124,10 +124,11 @@ static NSString *cellIdent = @"friendID";
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     JMAddFriendModel *model = self.dataArray[indexPath.row];
-    JMFriendInfoViewController *vc = [[JMFriendInfoViewController alloc]init];
-    vc.model = model;
-    [self.navigationController pushViewController:vc animated:YES];
-
+    if (model.amigo_type) {
+        JMFriendInfoViewController *vc = [[JMFriendInfoViewController alloc]init];
+        vc.model = model;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 
 }
 
@@ -142,8 +143,6 @@ static NSString *cellIdent = @"friendID";
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
          
     }];
-
-
 }
 
 

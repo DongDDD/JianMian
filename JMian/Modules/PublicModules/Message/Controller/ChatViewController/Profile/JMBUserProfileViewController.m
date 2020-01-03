@@ -12,6 +12,9 @@
 #import "JMUserInfoModel.h"
 #import "JMHTTPManager+FetchCompanyInfo.h"
 #import "JMTaskOrderListCellData.h"
+#import "JMHTTPManager+CreateConversation.h"
+#import "JMHTTPManager+DeleteFriend.h"
+#import "JMChatViewController.h"
 
 @interface JMBUserProfileViewController ()<UITableViewDelegate,UITableViewDataSource,JMUserProfileConfigureDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -138,11 +141,33 @@
 #pragma mark - action
 
 - (IBAction)leftbottomAction:(UIButton *)sender {
-    
+    if (_isMyFriend == YES ) {
+        [[JMHTTPManager sharedInstance]deleteFriendWithId:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+            [self.navigationController popViewControllerAnimated:YES];
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+    }
 }
 
 - (IBAction)rightBottomAction:(UIButton *)sender {
-    
+    if (_isMyFriend == YES ) {
+             [[JMHTTPManager sharedInstance]createFriendChatWithType:@"4" account:_userIM_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+                 if (responsObject[@"data"]) {
+                     JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+                     data.convType = TConv_Type_C2C;
+                     messageListModel.data =data;
+                     JMChatViewController *vc = [[JMChatViewController alloc]init];
+                     vc.myConvModel = messageListModel;
+                     [self.navigationController pushViewController:vc animated:YES];
+                 }
+                 
+             } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+                 
+             }];
+         
+         }
 }
 
 #pragma mark - delegate

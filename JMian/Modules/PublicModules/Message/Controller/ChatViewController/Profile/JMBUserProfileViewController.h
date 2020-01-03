@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMBUserProfileViewController : UIViewController
 @property(nonatomic,copy)NSString *user_id;
+@property(nonatomic,copy)NSString *userIM_id;
 @property(nonatomic,assign)BOOL isMyFriend;
 @end
 

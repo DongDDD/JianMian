@@ -31,5 +31,16 @@
     
 }
 
+- (void)createFriendChatWithType:(NSString *)type
+                         account:(NSString *)account
 
+                 successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    
+    NSDictionary *dic =  @{@"type":type,
+                           @"account":account,
+                           };
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:Create_Chat_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
 @end

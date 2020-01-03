@@ -21,9 +21,10 @@
 #import <IQKeyboardManager.h>
 #import "JMBUserProfileViewController.h"
 #import "JMCUserProfileViewController.h"
+#import "JMTransferViewController.h"
 
 #import "TIMFriendshipManager.h"
-@interface TUIChatController () <TMessageControllerDelegate, TInputControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate>
+@interface TUIChatController () <TMessageControllerDelegate, TInputControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate,JMTransferViewControllerDelegate>
 @property (nonatomic, strong) TIMConversation *conversation;
 @property UIView *tipsView;
 @property UILabel *pendencyLabel;
@@ -46,6 +47,10 @@
         [moreMenus addObject:[TUIInputMoreCellData pictureData]];
         [moreMenus addObject:[TUIInputMoreCellData videoData]];
         [moreMenus addObject:[TUIInputMoreCellData fileData]];
+        if ([_conversation getType] == TConv_Type_C2C) {
+            [moreMenus addObject:[TUIInputMoreCellData transferData]];
+        }
+
         _moreMenus = moreMenus;
         
         if (_conversation.getType == TIM_GROUP) {
@@ -219,6 +224,9 @@
     if (cell.data == [TUIInputMoreCellData pictureData]) {
         [self takePictureForSend];
     }
+    if (cell.data == [TUIInputMoreCellData transferData]) {
+        [self takeTransferForSend];
+    }
     if(_delegate && [_delegate respondsToSelector:@selector(chatController:onSelectMoreCell:)]){
         [_delegate chatController:self onSelectMoreCell:cell];
     }
@@ -258,6 +266,8 @@
 {
     if (cell.messageData.identifier == nil)
         return;
+    if (cell.messageData.direction == MsgDirectionOutgoing)
+        return;
         @weakify(self)
     [[TIMFriendshipManager sharedInstance] getFriendList:^(NSArray<TIMFriend *> *friends) {
          @strongify(self)
@@ -269,18 +279,20 @@
     } fail:^(int code, NSString *msg) {
     }];
     
-    
+ 
     NSString *user_id = [cell.messageData.identifier substringToIndex:[cell.messageData.identifier length]-1];
     NSString *user_type =[cell.messageData.identifier substringFromIndex:[cell.messageData.identifier length]-1];
     
     if ([user_type isEqualToString:@"a"]) {
         JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
         vc.user_id =  user_id;
+        vc.userIM_id = cell.messageData.identifier;
         vc.isMyFriend = self.isMyFriend;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
         vc.user_id =  user_id;
+        vc.userIM_id = cell.messageData.identifier;
         vc.isMyFriend = self.isMyFriend;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -365,6 +377,12 @@
 - (void)sendFileMessage:(NSURL *)url
 {
     [_messageController sendFileMessage:url];
+}
+
+-(void)sendTransferMessage:(NSString *)message remark:(NSString *)remark{
+    
+    [_messageController sendTransferMessage:message remark:remark];
+    
 }
 
 // ----------------------------------
@@ -452,5 +470,13 @@
 - (void)documentPickerWasCancelled:(UIDocumentPickerViewController *)controller
 {
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)takeTransferForSend{
+    JMTransferViewController *vc = [[JMTransferViewController alloc]init];
+    vc.user_id = self.myConvModel.data.convId;
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 @end
