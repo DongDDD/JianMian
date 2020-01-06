@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 #import "TUIConversationCell.h"
 #import "TUIGroupConversationListViewModel.h"
-
+#import "BaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  * 【功能说明】负责拉取用户的所在的群组信息，并在界面中显示。
  *  用户可以通过群列表界面查看自己所在的所有群，群组展示顺序按首字母开头从 A 到 Z 展示，特殊符号的群名在最后显示。
  */
-@interface TUIGroupConversationListController : UIViewController
+@interface TUIGroupConversationListController : BaseViewController
 
 /**
  *  群列表的 TableView

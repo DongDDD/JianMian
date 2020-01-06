@@ -15,6 +15,8 @@
 #import "JMHTTPManager+CreateConversation.h"
 #import "JMChatViewController.h"
 #import "JMHTTPManager+AddFriend.h"
+#import "JMAddFriendModel.h"
+
 
 @interface JMCUserProfileViewController ()<UITableViewDelegate,UITableViewDataSource,JMCUserProfileConfigureDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -24,6 +26,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *rightBottomBtn;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property(nonatomic,assign)NSInteger index;
+@property(nonatomic,assign)BOOL myIsMyFriend;
+
 @end
 
 @implementation JMCUserProfileViewController
@@ -65,8 +69,12 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     [self.view addSubview:self.bottomView];
-    
-    if (_isMyFriend) {
+
+}
+
+-(void)setIsMyFriend:(BOOL)isMyFriend{
+    _myIsMyFriend = isMyFriend;
+    if (isMyFriend) {
         self.leftBottomBtn.layer.cornerRadius = 5;
         self.leftBottomBtn.layer.borderWidth = 1;
         self.leftBottomBtn.layer.borderColor = UIColorFromHEX(0xF4333C).CGColor;
@@ -80,7 +88,16 @@
         self.rightBottomBtn.backgroundColor = UIColorFromHEX(0xF7FDFF);
         [self.rightBottomBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
         [self.rightBottomBtn setTitle:@"聊一聊" forState:UIControlStateNormal];
-
+        if (_viewType == JMCUserProfileView_Type_C2C) {
+             [self.rightBottomBtn setHidden:YES];
+             [self.leftBottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                 make.centerX.mas_equalTo(self.bottomView);
+                 make.centerY.mas_equalTo(self.bottomView);
+                 make.left.mas_equalTo(self.bottomView).mas_offset(80);
+                 make.right.mas_equalTo(self.bottomView).mas_offset(-80);
+                 make.height.mas_equalTo(35);
+             }];
+         }
     }else{
         
         self.leftBottomBtn.layer.cornerRadius = 5;
@@ -96,15 +113,23 @@
         self.rightBottomBtn.backgroundColor = MASTER_COLOR;
         [self.rightBottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self.rightBottomBtn setTitle:@"加好友" forState:UIControlStateNormal];
+        if (_viewType == JMCUserProfileView_Type_C2C) {
+            [self.leftBottomBtn setHidden:YES];
+            [self.rightBottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.mas_equalTo(self.bottomView);
+//                make.centerY.mas_equalTo(self.bottomView);
+//                make.left.mas_equalTo(self.bottomView).mas_offset(80);
+//                make.right.mas_equalTo(self.bottomView).mas_offset(-80);
+//                make.height.mas_equalTo(35);
+            }];
+        }
         
     }
-    
-
 }
 
 #pragma mark - action
 - (IBAction)leftBottomAction:(UIButton *)sender {
-    if (_isMyFriend == YES ) {
+    if (_myIsMyFriend == YES ) {
         [[JMHTTPManager sharedInstance]deleteFriendWithId:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             [self.navigationController popViewControllerAnimated:YES];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -117,10 +142,10 @@
 }
 
 - (IBAction)rightBottomAction:(UIButton *)sender {
-       if (_isMyFriend == YES ) {
+       if (_myIsMyFriend == YES ) {
            [self chatAction];
        }else{
-           [self addFriendAction];
+           [self addFriendRequest];
        }
     
 }
@@ -142,18 +167,29 @@
     }];
 }
 
--(void)addFriendAction{
-    [[JMHTTPManager sharedInstance]addFriendtWithRelation_id:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        [self.navigationController popViewControllerAnimated:YES];
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"成功添加好友" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-             [alert show];
-             
+
+
+
+#pragma mark - Data
+
+-(void)getIsMyFriendRequest{
+    [[JMHTTPManager sharedInstance]searchFriendtWithPhone:self.userModel .phone successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+           NSArray *arr = [JMAddFriendModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            JMAddFriendModel *model = arr[0];
+            if (model.amigo_friend_id) {
+                [self setIsMyFriend:YES];
+            }else{
+                [self setIsMyFriend:NO];
+
+            }
+        }
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-         
+        
     }];
 }
 
-#pragma mark - Data
 -(void)getData{
     [[JMHTTPManager sharedInstance]getCUserProfileWithUser_id:_user_id SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
@@ -170,9 +206,11 @@
 -(void)getUserInfo{
     [[JMHTTPManager sharedInstance]getBUserProfileWithUser_id:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-                  self.userModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
-                [self.tableView reloadData];
-            }
+            self.userModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [self getIsMyFriendRequest];
+            
+            [self.tableView reloadData];
+        }
 
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
 
@@ -194,6 +232,7 @@
     }];
 }
 
+//添加好友
 -(void)addFriendRequest{
     [[JMHTTPManager sharedInstance]addFriendtWithRelation_id:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self.navigationController popViewControllerAnimated:YES];
@@ -204,7 +243,6 @@
          
     }];
 }
-
 
 #pragma mark - delegate
 -(void)userProfileJobTypeWithIndex:(NSInteger)index{
@@ -226,7 +264,12 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    JMUserInfoModel *myUserModel = [JMUserInfoManager getUserInfo];
+    if ([myUserModel.type isEqualToString:C_Type_USER] ) {
+        return 1;
+    }else{
+        return 5;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

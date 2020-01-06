@@ -20,7 +20,7 @@
 @end
 
 static NSString *cellIdent = @"friendID";
-
+ 
 @implementation JMAddFriendViewController
 
 - (void)viewDidLoad {
@@ -122,15 +122,15 @@ static NSString *cellIdent = @"friendID";
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    JMAddFriendModel *model = self.dataArray[indexPath.row];
-    if (model.amigo_type) {
-        JMFriendInfoViewController *vc = [[JMFriendInfoViewController alloc]init];
-        vc.model = model;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-
-}
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    JMAddFriendModel *model = self.dataArray[indexPath.row];
+//    if (model.amigo_type) {
+//        JMFriendInfoViewController *vc = [[JMFriendInfoViewController alloc]init];
+//        vc.model = model;
+//        [self.navigationController pushViewController:vc animated:YES];
+//    }
+//
+//}
 
 #pragma mark - myDelegate
 

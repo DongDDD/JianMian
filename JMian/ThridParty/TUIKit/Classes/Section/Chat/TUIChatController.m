@@ -22,8 +22,10 @@
 #import "JMBUserProfileViewController.h"
 #import "JMCUserProfileViewController.h"
 #import "JMTransferViewController.h"
-
 #import "TIMFriendshipManager.h"
+#import "JMCompanyDetailViewController.h"
+#import "JMHTTPManager+GetProfileInfo.h"
+
 @interface TUIChatController () <TMessageControllerDelegate, TInputControllerDelegate, UIImagePickerControllerDelegate, UIDocumentPickerDelegate, UINavigationControllerDelegate,JMTransferViewControllerDelegate>
 @property (nonatomic, strong) TIMConversation *conversation;
 @property UIView *tipsView;
@@ -64,7 +66,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupViews];
-    }
+
+}
 
 - (void)willMoveToParentViewController:(UIViewController *)parent
 {
@@ -268,34 +271,30 @@
         return;
     if (cell.messageData.direction == MsgDirectionOutgoing)
         return;
-        @weakify(self)
-    [[TIMFriendshipManager sharedInstance] getFriendList:^(NSArray<TIMFriend *> *friends) {
-         @strongify(self)
-        for (TIMFriend *friend in friends) {
-            if (cell.messageData.identifier == friend.identifier) {
-                self.isMyFriend = YES;
-            }
-        }
-    } fail:^(int code, NSString *msg) {
-    }];
-    
- 
     NSString *user_id = [cell.messageData.identifier substringToIndex:[cell.messageData.identifier length]-1];
     NSString *user_type =[cell.messageData.identifier substringFromIndex:[cell.messageData.identifier length]-1];
+    
     
     if ([user_type isEqualToString:@"a"]) {
         JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
         vc.user_id =  user_id;
         vc.userIM_id = cell.messageData.identifier;
-        vc.isMyFriend = self.isMyFriend;
+        vc.viewType = JMCUserProfileView_Type_C2C;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
-        JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
-        vc.user_id =  user_id;
-        vc.userIM_id = cell.messageData.identifier;
-        vc.isMyFriend = self.isMyFriend;
-        [self.navigationController pushViewController:vc animated:YES];
+        if (self.myConvModel.viewType == JMMessageList_Type_C2C) {
+            [self getCompanyIDRequestWithUser_id:user_id];
+        }else if (self.myConvModel.viewType == JMMessageList_Type_Group) {
+            JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
+            vc.user_id =  user_id;
+            vc.userIM_id = cell.messageData.identifier;
+            vc.viewType = JMBUserProfileView_Type_C2C;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
     }
+    
+    
     
     
     
@@ -478,5 +477,19 @@
     vc.delegate = self;
     [self.navigationController pushViewController:vc animated:YES];
     
+}
+
+-(void)getCompanyIDRequestWithUser_id:(NSString *)user_id{
+    [[JMHTTPManager sharedInstance]getBUserProfileWithUser_id:user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMUserInfoModel *userModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            JMCompanyDetailViewController *vc = [[JMCompanyDetailViewController alloc]init];
+            vc.company_id = userModel.company_id;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+
+    }];
+
 }
 @end

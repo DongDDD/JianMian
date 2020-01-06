@@ -122,7 +122,7 @@
     //群聊
     if (data.viewType == JMMessageList_Type_Group) {
         self.userNameLabel.text = data.data.title;;
-        self.iconImageView.image = [UIImage imageNamed:@"group_header.jpg"];
+        self.iconImageView.image = [UIImage imageNamed:@"group_icon"];
     }
     
     if (data.data.unRead <= 0) {

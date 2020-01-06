@@ -15,6 +15,8 @@
 #import "JMHTTPManager+CreateConversation.h"
 #import "JMHTTPManager+DeleteFriend.h"
 #import "JMChatViewController.h"
+#import "JMHTTPManager+AddFriend.h"
+#import "JMAddFriendModel.h"
 
 @interface JMBUserProfileViewController ()<UITableViewDelegate,UITableViewDataSource,JMUserProfileConfigureDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -24,6 +26,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *rightBottomBtn;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property(nonatomic,assign)NSInteger index;
+
+@property(nonatomic,assign)BOOL myIsMyFriend;
+
 @end
 
 @implementation JMBUserProfileViewController
@@ -31,12 +36,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
-
+    self.userIM_id = [NSString stringWithFormat:@"%@a",_user_id];
     [self initView];
     [self getData];
     [self getTaskListData];
     // Do any additional setup after loading the view from its nib.
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     
     //设置导航栏背景图片为一个空的image，这样就透明了
@@ -65,54 +71,37 @@
         self.automaticallyAdjustsScrollViewInsets = NO;
     }
     [self.view addSubview:self.bottomView];
-    
-    if (_isMyFriend) {
-        self.leftBottomBtn.layer.cornerRadius = 5;
-         self.leftBottomBtn.layer.borderWidth = 1;
-         self.leftBottomBtn.layer.borderColor = MASTER_COLOR.CGColor;
-         self.leftBottomBtn.backgroundColor = UIColorFromHEX(0xF7FDFF);
-         [self.leftBottomBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-         [self.leftBottomBtn setTitle:@"聊一聊" forState:UIControlStateNormal];
-        //
-        self.rightBottomBtn.layer.cornerRadius = 5;
-        self.rightBottomBtn.layer.borderWidth = 1;
-        self.leftBottomBtn.layer.borderColor = MASTER_COLOR.CGColor;
-        self.rightBottomBtn.backgroundColor = MASTER_COLOR;
-        [self.rightBottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [self.rightBottomBtn setTitle:@"加好友" forState:UIControlStateNormal];
-
-    }else{
-        
-        self.leftBottomBtn.layer.cornerRadius = 5;
-        self.leftBottomBtn.layer.borderWidth = 1;
-        self.leftBottomBtn.layer.borderColor = UIColorFromHEX(0xF4333C).CGColor;
-        self.leftBottomBtn.backgroundColor = [UIColor whiteColor];
-        [self.leftBottomBtn setTitleColor:UIColorFromHEX(0xF4333C) forState:UIControlStateNormal];
-        [self.leftBottomBtn setTitle:@"删除" forState:UIControlStateNormal];
-        
-        //
-        self.rightBottomBtn.layer.cornerRadius = 5;
-        self.rightBottomBtn.layer.borderWidth = 1;
-        self.rightBottomBtn.layer.borderColor = MASTER_COLOR.CGColor;
-        self.rightBottomBtn.backgroundColor = UIColorFromHEX(0xF7FDFF);
-        [self.rightBottomBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
-        [self.rightBottomBtn setTitle:@"聊一聊" forState:UIControlStateNormal];
-        
-    }
-    
 
 }
+
 #pragma mark - Data
+-(void)getIsMyFriendRequest{
+    [[JMHTTPManager sharedInstance]searchFriendtWithPhone:self.userModel.phone successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            NSArray *arr = [JMAddFriendModel mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            JMAddFriendModel *model = arr[0];
+            if (model.amigo_friend_id) {
+                [self setIsMyFriend:YES];
+            }else{
+                [self setIsMyFriend:NO];
+
+            }
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
 -(void)getData{
     [[JMHTTPManager sharedInstance]getBUserProfileWithUser_id:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.userModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [self getIsMyFriendRequest];
             [[JMHTTPManager sharedInstance]fetchCompanyInfo_Id: self.userModel.company_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
                 if (responsObject[@"data"]) {
                     self.cellConfigures.model  = [JMCompanyInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
                     [self.tableView reloadData];
-                    
-                    
                 }
             } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
                 
@@ -130,7 +119,6 @@
     [[JMHTTPManager sharedInstance]getBUserProfileTaskListWithUser_id:self.userModel.user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.cellConfigures.taskListArr = [JMTaskListCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -138,10 +126,81 @@
     }];
 
 }
+
+-(void)addFriendRequest{
+    [[JMHTTPManager sharedInstance]addFriendtWithRelation_id:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.navigationController popViewControllerAnimated:YES];
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"成功添加好友" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+             [alert show];
+             
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+         
+    }];
+}
+
 #pragma mark - action
 
+-(void)setIsMyFriend:(BOOL)isMyFriend{
+    _myIsMyFriend = isMyFriend;
+    if (isMyFriend) {
+        self.leftBottomBtn.layer.cornerRadius = 5;
+        self.leftBottomBtn.layer.borderWidth = 1;
+        self.leftBottomBtn.layer.borderColor = UIColorFromHEX(0xF4333C).CGColor;
+        self.leftBottomBtn.backgroundColor = [UIColor whiteColor];
+        [self.leftBottomBtn setTitleColor:UIColorFromHEX(0xF4333C) forState:UIControlStateNormal];
+        [self.leftBottomBtn setTitle:@"删除" forState:UIControlStateNormal];
+        //
+        self.rightBottomBtn.layer.cornerRadius = 5;
+        self.rightBottomBtn.layer.borderWidth = 1;
+        self.rightBottomBtn.layer.borderColor = MASTER_COLOR.CGColor;
+        self.rightBottomBtn.backgroundColor = UIColorFromHEX(0xF7FDFF);
+        [self.rightBottomBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [self.rightBottomBtn setTitle:@"聊一聊" forState:UIControlStateNormal];
+        
+        if (_viewType == JMBUserProfileView_Type_C2C) {
+            [self.rightBottomBtn setHidden:YES];
+            [self.leftBottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.mas_equalTo(self.bottomView);
+                make.centerY.mas_equalTo(self.bottomView);
+                make.left.mas_equalTo(self.bottomView).mas_offset(80);
+                make.right.mas_equalTo(self.bottomView).mas_offset(-80);
+                make.height.mas_equalTo(35);
+            }];
+        }
+
+    }else{
+        
+        self.leftBottomBtn.layer.cornerRadius = 5;
+        self.leftBottomBtn.layer.borderWidth = 1;
+        self.leftBottomBtn.layer.borderColor = MASTER_COLOR.CGColor;
+        self.leftBottomBtn.backgroundColor = UIColorFromHEX(0xF7FDFF);
+        [self.leftBottomBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [self.leftBottomBtn setTitle:@"聊一聊" forState:UIControlStateNormal];
+        //
+        self.rightBottomBtn.layer.cornerRadius = 5;
+        self.rightBottomBtn.layer.borderWidth = 1;
+        self.rightBottomBtn.layer.borderColor = MASTER_COLOR.CGColor;
+        self.rightBottomBtn.backgroundColor = MASTER_COLOR;
+        [self.rightBottomBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.rightBottomBtn setTitle:@"加好友" forState:UIControlStateNormal];
+        
+        if (_viewType == JMBUserProfileView_Type_C2C) {
+            [self.leftBottomBtn setHidden:YES];
+            [self.rightBottomBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.mas_equalTo(self.bottomView);
+                make.centerY.mas_equalTo(self.bottomView);
+                make.left.mas_equalTo(self.bottomView).mas_offset(80);
+                make.right.mas_equalTo(self.bottomView).mas_offset(-80);
+                make.height.mas_equalTo(35);
+            }];
+        }
+    }
+
+    
+}
+ 
 - (IBAction)leftbottomAction:(UIButton *)sender {
-    if (_isMyFriend == YES ) {
+    if (_myIsMyFriend == YES ) {
         [[JMHTTPManager sharedInstance]deleteFriendWithId:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             [self.navigationController popViewControllerAnimated:YES];
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -151,23 +210,29 @@
 }
 
 - (IBAction)rightBottomAction:(UIButton *)sender {
-    if (_isMyFriend == YES ) {
-             [[JMHTTPManager sharedInstance]createFriendChatWithType:@"4" account:_userIM_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-                 if (responsObject[@"data"]) {
-                     JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
-                     JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
-                     data.convType = TConv_Type_C2C;
-                     messageListModel.data =data;
-                     JMChatViewController *vc = [[JMChatViewController alloc]init];
-                     vc.myConvModel = messageListModel;
-                     [self.navigationController pushViewController:vc animated:YES];
-                 }
-                 
-             } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-                 
-             }];
-         
-         }
+           if (_myIsMyFriend == YES ) {
+               [self chatAction];
+           }else{
+               [self addFriendRequest];
+           }
+        
+}
+
+-(void)chatAction{
+    [[JMHTTPManager sharedInstance]createFriendChatWithType:@"4" account:_userIM_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+            JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+            data.convType = TConv_Type_C2C;
+            messageListModel.data =data;
+            JMChatViewController *vc = [[JMChatViewController alloc]init];
+            vc.myConvModel = messageListModel;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 }
 
 #pragma mark - delegate
@@ -191,7 +256,12 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 5;
+    JMUserInfoModel *myUserModel = [JMUserInfoManager getUserInfo];
+    if ([myUserModel.type isEqualToString:B_Type_UESR] ) {
+        return 1;
+    }else{
+        return 5;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

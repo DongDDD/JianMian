@@ -28,7 +28,7 @@
 #import "TIMUserProfile+DataProvider.h"
 #import "JMCUserProfileViewController.h"
 #import "JMBUserProfileViewController.h"
-
+#import "TUIGroupConversationListController.h"
 
 @interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource,JMCFriendViewControllerDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -56,11 +56,20 @@ static NSString *cellIdent = @"allMessageCellIdent";
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"聊出好机会";
+
     [self setIsHiddenBackBtn:YES];
     [self initView];
     [self setupHeaderRefresh];
     [self setRightBtnImageViewName:@"top-more" imageNameRight2:@""];
-    //    [self initRefresh];
+    
+}
+
+- (void)setNavgationBarColor:(UIColor *)color {
+    //去掉黑线
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setBarTintColor:color];
+    
 }
 
 
@@ -81,6 +90,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
     }
     [self getMsgList];    //获取自己服务器数据
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onNewMessage:) name:TUIKitNotification_TIMMessageListener object:nil];
+    [self setNavgationBarColor:[UIColor whiteColor]];
+
 }
 
 -(void)viewDidDisappear:(BOOL)animated{
@@ -91,7 +102,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 -(void)rightAction{
     NSArray *titles = @[@" 发起群聊",@" 添加朋友",@" 我的群组"];
-    NSArray *images = @[@"creatGroup",@"addFriend",@"myGroup",@"newFriend"];
+    NSArray *images = @[@"creatGroup",@"addFriend",@"myGroup"];
 
     MLMenuView *menuView = [[MLMenuView alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width - 130 - 10, 0, 130, 44 * 4) WithTitles:titles WithImageNames:images WithMenuViewOffsetTop:k_StatusBarAndNavigationBarHeight WithTriangleOffsetLeft:100];
 //    [menuView setCoverViewBackgroundColor:[UIColor blackColor]];
@@ -112,6 +123,13 @@ static NSString *cellIdent = @"allMessageCellIdent";
           }else if (index == 1) {
               JMAddFriendViewController *vc = [[JMAddFriendViewController alloc]init];
               [self.navigationController pushViewController:vc animated:YES];
+          }else if (index == 2) {
+              TUIGroupConversationListController *vc = [[TUIGroupConversationListController alloc]init];
+              self.hidesBottomBarWhenPushed=YES;
+              vc.title = @"我的群组";
+              [self.navigationController pushViewController:vc animated:YES];
+              self.hidesBottomBarWhenPushed=NO;
+
           }
       };
       [menuView showMenuEnterAnimation:MLEnterAnimationStyleRight];
@@ -247,15 +265,19 @@ static NSString *cellIdent = @"allMessageCellIdent";
     JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
     vc.user_id = data.friend_user_id;
     vc.isMyFriend = YES;
-    vc.hidesBottomBarWhenPushed = YES;
+    self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+
 }
 -(void)BFriendViewControllerDidSelectedFriendWithModel:(JMFriendListData *)data{
     JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
     vc.user_id = data.friend_user_id;
     vc.isMyFriend = YES;
-    vc.hidesBottomBarWhenPushed = YES;
+    self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+    self.hidesBottomBarWhenPushed = NO;
+
 }
 
 

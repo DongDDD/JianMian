@@ -409,7 +409,6 @@
 		047F8EB6228AC552005E81FA /* C_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F8EB3228AC551005E81FA /* C_play.png */; };
 		047F8EB7228AC552005E81FA /* C_play@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 047F8EB4228AC552005E81FA /* C_play@3x.png */; };
 		0480CDE423B1BA7200D64356 /* JMPostIMProfileAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0480CDE323B1BA7200D64356 /* JMPostIMProfileAction.m */; };
-		0480CDE623B2026200D64356 /* group_header.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0480CDE523B2026100D64356 /* group_header.jpg */; };
 		048348AA22695EC000DE4630 /* NO_Data@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348A722695EC000DE4630 /* NO_Data@3x.png */; };
 		048348AB22695EC000DE4630 /* NO_Data.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348A822695EC000DE4630 /* NO_Data.png */; };
 		048348AC22695EC000DE4630 /* NO_Data@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 048348A922695EC000DE4630 /* NO_Data@2x.png */; };
@@ -637,6 +636,7 @@
 		0495100722AEA24900C3D3FB /* vip_header@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0495100422AEA24900C3D3FB /* vip_header@3x.png */; };
 		049555E8227B25C50008AF1C /* other_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 049555E6227B25C50008AF1C /* other_bubble.png */; };
 		049555E9227B25C50008AF1C /* me_bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 049555E7227B25C50008AF1C /* me_bubble.png */; };
+		0495DBA223C2E903008D0A62 /* group_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0495DBA123C2E902008D0A62 /* group_icon.png */; };
 		0496A28C236699110075FA29 /* JMSearchOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0496A28A236699110075FA29 /* JMSearchOrderViewController.m */; };
 		0496A28D236699110075FA29 /* JMSearchOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0496A28B236699110075FA29 /* JMSearchOrderViewController.xib */; };
 		0498B79A2387C24800CC8F3E /* JMPushVCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498B7992387C24800CC8F3E /* JMPushVCAction.m */; };
@@ -1864,7 +1864,6 @@
 		047F8EB4228AC552005E81FA /* C_play@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "C_play@3x.png"; sourceTree = "<group>"; };
 		0480CDE223B1BA7200D64356 /* JMPostIMProfileAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPostIMProfileAction.h; sourceTree = "<group>"; };
 		0480CDE323B1BA7200D64356 /* JMPostIMProfileAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPostIMProfileAction.m; sourceTree = "<group>"; };
-		0480CDE523B2026100D64356 /* group_header.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = group_header.jpg; sourceTree = "<group>"; };
 		048348A722695EC000DE4630 /* NO_Data@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NO_Data@3x.png"; sourceTree = "<group>"; };
 		048348A822695EC000DE4630 /* NO_Data.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = NO_Data.png; sourceTree = "<group>"; };
 		048348A922695EC000DE4630 /* NO_Data@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "NO_Data@2x.png"; sourceTree = "<group>"; };
@@ -2162,6 +2161,7 @@
 		0495100422AEA24900C3D3FB /* vip_header@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "vip_header@3x.png"; sourceTree = "<group>"; };
 		049555E6227B25C50008AF1C /* other_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = other_bubble.png; sourceTree = "<group>"; };
 		049555E7227B25C50008AF1C /* me_bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_bubble.png; sourceTree = "<group>"; };
+		0495DBA123C2E902008D0A62 /* group_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = group_icon.png; sourceTree = "<group>"; };
 		0496A289236699110075FA29 /* JMSearchOrderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMSearchOrderViewController.h; sourceTree = "<group>"; };
 		0496A28A236699110075FA29 /* JMSearchOrderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMSearchOrderViewController.m; sourceTree = "<group>"; };
 		0496A28B236699110075FA29 /* JMSearchOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMSearchOrderViewController.xib; sourceTree = "<group>"; };
@@ -3894,7 +3894,7 @@
 				04B0D90423A7929300950C6A /* newFriend.png */,
 				04B0D90523A7929300950C6A /* newFriend@2x.png */,
 				04B0D90323A7929300950C6A /* newFriend@3x.png */,
-				0480CDE523B2026100D64356 /* group_header.jpg */,
+				0495DBA123C2E902008D0A62 /* group_icon.png */,
 				04072F1B2282949D0067A05D /* Wallet_slices */,
 				049555E5227B25A30008AF1C /* Message */,
 				040A40C22265B41A0005E0D7 /* Company_slice */,
@@ -6611,7 +6611,6 @@
 				040D034F2334861F00B37EE6 /* enshrine2@3x.png in Resources */,
 				0485AD1D22A10F5A00B31506 /* subscribe.png in Resources */,
 				040D035A2334D1E500B37EE6 /* JMVideoDetailInfoView.xib in Resources */,
-				0480CDE623B2026200D64356 /* group_header.jpg in Resources */,
 				0485AD3922A1340D00B31506 /* JMPostPartTimeResumeViewController.xib in Resources */,
 				048FEE3A2244853C001160C8 /* Assets.xcassets in Resources */,
 				0495100122AEA21700C3D3FB /* VIP1@3x.png in Resources */,
@@ -6781,6 +6780,7 @@
 				048A0DD222B8951B006530EC /* JMMoneyDetailTableViewCell.xib in Resources */,
 				0488E3CA229F9BED0071DEE7 /* discovery_pitch_on.png in Resources */,
 				041CCF0A22A52403002DFED3 /* icon_return_bule@2x.png in Resources */,
+				0495DBA223C2E903008D0A62 /* group_icon.png in Resources */,
 				040FB7D923A87EAE008CE33B /* JMAddFriendViewController.xib in Resources */,
 				0492AE7D22F0463400AB21B3 /* JMWithdrawViewController.xib in Resources */,
 				0488E39C229F93C80071DEE7 /* icon_return @3x.png in Resources */,
@@ -7997,7 +7997,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.4;
+				MARKETING_VERSION = 1.4.5;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8031,7 +8031,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.4;
+				MARKETING_VERSION = 1.4.5;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -13,6 +13,7 @@
 #import "TIMUserProfile+DataProvider.h"
 #import "ReactiveObjC/ReactiveObjC.h"
 #import "MMLayout/UIView+MMLayout.h"
+#import "JMChatViewController.h"
 @import ImSDK;
 
 static NSString *kConversationCell_ReuseId = @"TConversationCell";
@@ -25,7 +26,7 @@ static NSString *kConversationCell_ReuseId = @"TConversationCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onRefreshConversations:) name:TUIKitNotification_TIMRefreshListener object:nil];
     
     
@@ -62,6 +63,7 @@ static NSString *kConversationCell_ReuseId = @"TConversationCell";
 
 - (void)viewWillAppear:(BOOL)animated
 {
+//    [self.navigationController setNavigationBarHidden:NO];
     [self updateConversations];
 }
 
@@ -154,12 +156,16 @@ static NSString *kConversationCell_ReuseId = @"TConversationCell";
 
 - (void)didSelectConversation:(TCommonContactCell *)cell
 {
-    
-    TIMConversation *conv = [[TIMManager sharedInstance] getConversation:TIM_GROUP receiver:cell.contactData.identifier];
-    
-    TUIChatController *chat = [[TUIChatController alloc] initWithConversation:conv];
-    chat.title = cell.contactData.title;
-    [self.navigationController pushViewController:chat animated:YES];
+    JMMessageListModel *messageListModel = [[JMMessageListModel alloc]init];
+    JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+    data.convType = TConv_Type_Group;
+    data.convId = cell.contactData.identifier;
+    data.title = cell.contactData.title;
+    messageListModel.data =data;
+    messageListModel.viewType = JMMessageList_Type_Group;
+    JMChatViewController *vc = [[JMChatViewController alloc]init];
+    vc.myConvModel = messageListModel;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

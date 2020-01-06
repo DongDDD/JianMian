@@ -31,7 +31,7 @@
     if(self){
         _avatarCornerRadius = 21;
         _defaultAvatarImage = [UIImage imageNamed:@"default_avatar"];
-        _defaultGroupAvatarImage = [UIImage tk_imageNamed:@"default_group"];
+        _defaultGroupAvatarImage =[UIImage imageNamed:@"group_icon"];
         self.avatarType = TAvatarTypeRadiusCorner;
         [self defaultResourceCache];
         [self defaultFace];
