@@ -989,6 +989,7 @@
         NSLog(@"asd");
         JMCompanyDetailViewController *vc = [[JMCompanyDetailViewController alloc]init];
         vc.company_id = self.configures.model.user_company_id;
+        vc.user_id = self.configures.model.user_id;
 //        vc.address = self.configures.model.address;
 //        vc.latitude = self.configures.model.latitude;
 //        vc.longitude = self.configures.model.longitude;

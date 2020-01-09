@@ -15,6 +15,7 @@
  #import "JMVideoJoblistTableViewCell.h"
 #import "JMNoDataTableViewCell.h"
 #import "JobDetailsViewController.h"
+#import "JMHTTPManager+AddFriend.h"
 
 
 
@@ -41,6 +42,19 @@
         make.width.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view);
         make.centerX.mas_equalTo(self.view);
+    }];
+    
+    [self setRightBtnTextName:@"添加好友"];
+}
+
+-(void)rightAction{
+    [self showProgressHUD_view:self.view];
+    [[JMHTTPManager sharedInstance]addFriendtWithRelation_id:_user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"成功添加好友" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        [alert show];
+        [self hiddenHUD];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
     }];
 }
 

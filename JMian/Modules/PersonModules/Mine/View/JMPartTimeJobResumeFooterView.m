@@ -10,7 +10,6 @@
 #import "DimensMacros.h"
 @interface JMPartTimeJobResumeFooterView ()<UITextViewDelegate>
 
-@property(nonatomic,strong)UILabel *wordsLenghLabel;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,assign)JMPartTimeJobResumeFooterViewType myViewType;
 
@@ -136,7 +135,10 @@
         case JMPartTimeJobResumeFooterViewTypeSetting:
             _placeHolder.text = @"请提出你的宝贵意见";
             _wordsLenghLabel.text = @"0/500";
-
+        case JMPartTimeJobResumeFooterViewTypeGroup:
+            _placeHolder.text = @"请输入群公告";
+            _wordsLenghLabel.text = @"0/500";
+            
             
             break;
 

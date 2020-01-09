@@ -207,11 +207,15 @@
 }
 
 -(void)creatVita{
-
-    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusStr education:self.education work_start_date:self.work_start_date job_label_id:self.job_labelID industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:@4 successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
+    
+    NSString *user_step;
+    if ([self.statusStr isEqualToString:@"4"] ) {
+        user_step = @"6";
+    }else{
+        user_step = @"4";
+    }
+    [[JMHTTPManager sharedInstance]createVitaWith_work_status:self.statusStr education:self.education work_start_date:self.work_start_date job_label_id:self.job_labelID industry_label_id:nil city_id:nil salary_min:self.salaryMin salary_max:self.salaryMax description:nil status:nil user_step:user_step successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-            
             JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             [JMUserInfoManager saveUserInfo:userInfo];
             
@@ -225,10 +229,8 @@
                 JMJobExperienceViewController *vc = [[JMJobExperienceViewController alloc]init];
                 vc.loginViewType = JMLoginViewTypeNextStep;
                 [self.navigationController pushViewController:vc animated:YES];
-            
             }
-            
-            
+                        
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];

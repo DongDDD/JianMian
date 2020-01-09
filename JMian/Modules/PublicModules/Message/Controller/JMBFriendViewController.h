@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, JMBFriendViewControllerViewType) {
 
 -(void)BFriendViewControllerDidSelectedFriendWithModel:(JMFriendListData *)data;
 -(void)BFriendViewControllerDidCancelFriendWithModel:(JMFriendListData *)data;
-
+-(void)BFriendViewControllerFriendList:(NSMutableArray *)arr;
 @end
 
 @interface JMBFriendViewController : BaseViewController

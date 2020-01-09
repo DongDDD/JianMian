@@ -30,7 +30,6 @@
     }else if ([typeStr isEqualToString:@"user_job_id"]) {
         NSLog(@"typeId: %@", typeId);
         if ([userModel.type isEqualToString:B_Type_UESR]) {
-            //            JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc]init];
             JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc]init];
             vc.user_job_id = typeId;
             [[self currentViewController].navigationController pushViewController:vc animated:YES];

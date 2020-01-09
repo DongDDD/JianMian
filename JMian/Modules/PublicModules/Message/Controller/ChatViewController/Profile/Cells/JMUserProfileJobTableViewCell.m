@@ -34,7 +34,13 @@ NSString *const JMUserProfileJobTableViewCellIdentifier = @"JMUserProfileJobTabl
 
 -(void)setTaskListData:(JMTaskListCellData *)taskListData{
     self.titleLab.text = taskListData.task_title;
-    self.subTitleLab.text  = [NSString stringWithFormat:@"工作地点: %@",taskListData.cityName];
+    NSString *city ;
+    if (taskListData.cityName) {
+        city = taskListData.cityName;
+    }else{
+        city = @"不限";
+    }
+    self.subTitleLab.text  = [NSString stringWithFormat:@"工作地点: %@",city];
     self.subTitleLab2.text  = [NSString stringWithFormat:@"单价:  %@ 元 ",taskListData.payment_money];
 
     

@@ -6,15 +6,15 @@
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMUserProfileConfigure.h"
+#import "JMBUserProfileConfigure.h"
 #import "JMTitlesView.h"
 
-@interface JMUserProfileConfigure ()
+@interface JMBUserProfileConfigure ()
 @property(nonatomic,strong)JMTitlesView *titleView;
 @property(nonatomic,assign)NSInteger index;
  
 @end
-@implementation JMUserProfileConfigure
+@implementation JMBUserProfileConfigure
 //JMUserProfileCellTypeHeader = 0 ,
 //JMUserProfileCellTypePersonInfo,
 //JMUserProfileCellTypeImage,
@@ -43,7 +43,7 @@
             self.height = 228;
             self.cellId = JMUserProfileImageTableViewCellIdentifier;
             break;
-        case JMUserProfileCellTypeJob:
+        case JMBUserProfileCellTypeJob:
             if (_viewType == JMUserProfileCellTypeJobArr) {
                 self.rowsNum = self.model.work.count;
             }else{
@@ -108,7 +108,7 @@
         lab.backgroundColor = [UIColor whiteColor];
         lab.font = [UIFont systemFontOfSize:16];
         return lab;
-    }else if (section == JMUserProfileCellTypeJob) {
+    }else if (section == JMBUserProfileCellTypeJob) {
         return self.titleView;
 //        UILabel *lab = [[UILabel alloc]init];
 //        lab.text = @"    公司介绍";
@@ -124,7 +124,7 @@
         return 55;
     }else if (section == JMUserProfileCellTypeIntroduce) {
         return 55;
-    }else if (section == JMUserProfileCellTypeJob) {
+    }else if (section == JMBUserProfileCellTypeJob) {
         return 55;
     }
     return 0;
@@ -144,7 +144,7 @@
 - (JMTitlesView *)titleView {
     if (!_titleView) {
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH/2, 43} titles:@[@"招聘职位", @"兼职任务"]];
-        __weak JMUserProfileConfigure *weakSelf = self;
+        __weak JMBUserProfileConfigure *weakSelf = self;
         _titleView.viewType = JMTitlesViewBlackText;
         _titleView.didTitleClick = ^(NSInteger index) {
             _index = index;

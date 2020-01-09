@@ -13,6 +13,7 @@
 #import "NSString+Common.h"
 #import "JMCUserProfileViewController.h"
 #import "JMBUserProfileViewController.h"
+#import "TCommonContactSelectCellData.h"
 
 @interface JMCFriendViewController ()<UITableViewDelegate,UITableViewDataSource,JMBCFriendTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -44,12 +45,22 @@ static NSString *cellIdent = @"BfriendID";
             self.dataArray = [NSMutableArray array];
             self.groupList = [NSMutableArray array];
             NSMutableDictionary *dataDict = @{}.mutableCopy;
-
+            NSMutableArray *contactSelectCellDataArr = [NSMutableArray array];
             for (JMFriendListData *data in arr) {
                 NSInteger step = [data.friend_user_step integerValue];
                 NSInteger ability_count = [data.friend_ability_count integerValue];
 
                 if (step > 5 || ability_count > 0) {
+                    //把C端用户存到本地好友列表
+                    //                    TCommonContactSelectCellData *data2 = [TCommonContactSelectCellData new];
+                    //                    data2.identifier = [NSString stringWithFormat:@"%@b",data.friend_user_id];
+                    //                    data2.avatarUrl = [NSURL URLWithString:data.friend_avatar];
+                    //                    data2.title = data.friend_nickname;
+                    //                    data2.company_name = data.friend_agency_company_name;
+                    NSString *identifier = [NSString stringWithFormat:@"%@a",data.friend_user_id];
+                    [contactSelectCellDataArr addObject:identifier];
+                    
+                    
                     NSString *group = [[data.friend_nickname firstPinYin] uppercaseString];
                     NSMutableArray *list = [dataDict objectForKey:group];
                     if (!list) {
@@ -63,6 +74,9 @@ static NSString *cellIdent = @"BfriendID";
                 
             }
             
+            if (_delegate && [_delegate respondsToSelector:@selector(CFriendViewControllerFriendList:)]) {
+                [_delegate CFriendViewControllerFriendList:contactSelectCellDataArr];
+            }
             self.dataDict = dataDict;
             [self.tableView reloadData];
             

@@ -699,6 +699,7 @@
 
     JMCompanyDetailViewController *vc = [[JMCompanyDetailViewController alloc]init];
     vc.company_id = self.myModel.company_id;
+    vc.user_id = self.myModel.user_id;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

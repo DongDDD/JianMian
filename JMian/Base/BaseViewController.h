@@ -54,6 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)setRightBtnImageViewName:(NSString *)imageName textName:(NSString *)textName;
 
+-(void)setTitle:(NSString *)title color:(UIColor *)color;//标题
+
 -(void)youkeStatus;//判断游客模式
 
 -(void)upDateUserData;//更新用户信息

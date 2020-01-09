@@ -41,7 +41,7 @@
     _money = [[UILabel alloc]init];
     _money.text = @"00.00";
     _money.textColor = [UIColor whiteColor];
-    _money.font = [UIFont systemFontOfSize:30];
+//    _money.font = [UIFont systemFontOfSize:30];
     [self addSubview:_money];
     
     UILabel *moneyBottomLab = [[UILabel alloc]init];
@@ -53,7 +53,8 @@
     _money2 = [[UILabel alloc]init];
     _money2.text = @"00.00";
     _money2.textColor = [UIColor whiteColor];
-    _money2.font = [UIFont systemFontOfSize:30];
+    [_money2 sizeToFit];
+//    _money2.font = [UIFont systemFontOfSize:30];
     [self addSubview:_money2];
     
     UILabel *moneyBottomLab2 = [[UILabel alloc]init];
@@ -83,6 +84,7 @@
     [_money mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(BGImgView);
         make.left.mas_equalTo(self.mas_left).offset(SCREEN_WIDTH*0.2);
+        make.right.mas_equalTo(BGImgView.mas_centerX);
         
     }];
     

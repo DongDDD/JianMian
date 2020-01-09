@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *videoImageView;
 @property (weak, nonatomic) IBOutlet UIButton *playBtn;
 
+@property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic, strong) JMVideoListCellData *myData;
 @end
 
@@ -22,16 +23,27 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
+    [self.bottomView addGestureRecognizer:tap];
+    
     // Initialization code
 }
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil].lastObject;
-  
+     
         
     }
     return self;
+}
+
+-(void)tapAction{
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickBottomActionWithData:)]) {
+        [_delegate didClickBottomActionWithData:_myData];
+    }
+    
+    
 }
 
 -(void)setVideoImage:(UIImage *)videoImage{

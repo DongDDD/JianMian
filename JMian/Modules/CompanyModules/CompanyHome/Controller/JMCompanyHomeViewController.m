@@ -8,7 +8,6 @@
 
 #import "JMCompanyHomeViewController.h"
 #import "JMCompanyHomeTableViewCell.h"
-#import "JMPersonDetailsViewController.h"
 #import "JMHTTPManager+VitaPaginate.h"
 #import "JMHTTPManager+PositionDesired.h"
 #import "JMCompanyHomeModel.h"
@@ -392,12 +391,7 @@ static NSString *cellIdent = @"cellIdent";
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
-//    if(self.arrDate.count > 0 ){
-//        JMCompanyHomeModel *model = self.arrDate[indexPath.row];
-//        vc.companyModel = model;
-//        
-//    }
+
     JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc]init];
     JMCompanyHomeModel *model = self.arrDate[indexPath.row];
     vc.user_job_id = model.user_job_id;

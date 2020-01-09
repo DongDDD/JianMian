@@ -38,6 +38,7 @@
 #import "JMMyOrderListViewController.h"
 #import "WXApi.h"
 #import "JMYoukeAction.h"
+#import "DimensMacros.h"
 
 @interface JMBMineViewController ()<JMMineModulesTableViewCellDelegate,JMMPersonalCenterHeaderViewDelegate,JMBUserCenterHeaderViewDelegate,JMBUserCenterHeaderSubViewDelegate,JMBMineInfoViewDelegate,JMBMineMoreFunctionViewDelegate,JMShareViewDelegate>
 
@@ -56,8 +57,13 @@
     [super viewDidLoad];
     self.view.backgroundColor = BG_COLOR;
     
-   self.navigationController.navigationBar.translucent = NO;
-   
+//   self.navigationController.navigationBar.translucent = NO;
+    if (@available(iOS 11.0, *)) {
+        self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+    }else {
+        self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+
     [self initView];
 
     // Do any additional setup after loading the view from its nib.
@@ -159,7 +165,7 @@
     JMMySettingViewController *vc = [[JMMySettingViewController alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
+//公司信息
 -(void)didSelectItemWithRow:(NSInteger)row{
     if ([JMYoukeAction youkelimit]) {
          return;
@@ -186,6 +192,7 @@
     
 }
 
+//更多功能
 -(void)didSelectCellWithRow:(NSInteger)row{
     if ([JMYoukeAction youkelimit]) {
          return;
@@ -211,16 +218,18 @@
         JMWalletViewController *vc = [[JMWalletViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
     }else  if (row == 2) {
+        
+
+    
+    }else  if (row == 3) {
     
         //实名认证
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         if ([model.card_status isEqualToString:Card_PassIdentify]) {
             [self showAlertVCSucceesSingleWithMessage:@"你已通过实名认证" btnTitle:@"好的"];
-            
         }else if (([model.card_status isEqualToString:Card_WaitIdentify])){
             [self showAlertSimpleTips:@"提示" message:@"审核实名认证中" btnTitle:@"好的"];
         }else{
-            
             [self.navigationController pushViewController:[[JMIDCardIdentifyViewController alloc] init] animated:YES];
         }
     
@@ -295,7 +304,8 @@
         
         [_BUserCenterHeaderView addSubview:_BUserCenterHeaderSubView];
         //
-        
+ 
+
         
     }
     return _BUserCenterHeaderView;
@@ -312,7 +322,7 @@
 
 -(JMBMineMoreFunctionView *)BMineMoreFunctionView{
     if (!_BMineMoreFunctionView) {
-        _BMineMoreFunctionView = [[JMBMineMoreFunctionView alloc]initWithFrame:CGRectMake(0, self.BMineInfoView.frame.origin.y+self.BMineInfoView.frame.size.height, SCREEN_WIDTH, 274)];
+        _BMineMoreFunctionView = [[JMBMineMoreFunctionView alloc]initWithFrame:CGRectMake(0, self.BMineInfoView.frame.origin.y+self.BMineInfoView.frame.size.height, SCREEN_WIDTH, 400)];
         _BMineMoreFunctionView.delegate = self;
     }
     return _BMineMoreFunctionView;

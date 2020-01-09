@@ -29,7 +29,6 @@ static NSString *cellIdent = @"friendID";
     self.searchBar.delegate = self;
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view from its nib.
-//    [self getData];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -37,14 +36,7 @@ static NSString *cellIdent = @"friendID";
 
 }
 #pragma mark - Data
--(void)getData{
-    [[JMHTTPManager sharedInstance]addFriendtWithRelation_id:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
 
-}
 
 #pragma mark - searchBarDelegate
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
@@ -135,11 +127,12 @@ static NSString *cellIdent = @"friendID";
 #pragma mark - myDelegate
 
 -(void)addFriendActionWithModel:(JMAddFriendModel *)model{
+    [self showProgressHUD_view:self.view];
     [[JMHTTPManager sharedInstance]addFriendtWithRelation_id:model.user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self.navigationController popViewControllerAnimated:YES];
              UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"成功添加好友" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
              [alert show];
-             
+        [self hiddenHUD];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
          
     }];

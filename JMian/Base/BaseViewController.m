@@ -85,6 +85,20 @@
     
 }
 
+-(void)setTitle:(NSString *)title color:(UIColor *)color{
+    UILabel *titleText = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 80, 50)];
+    
+    titleText.textAlignment = NSTextAlignmentCenter;
+    titleText.textColor = color;
+    
+    [titleText setFont:[UIFont systemFontOfSize:16.0]];
+    
+    [titleText setText:title];
+    
+    self.navigationItem.titleView = titleText;
+    
+}
+
 
 - (void)setBackBtnImageViewName:(NSString *)imageName textName:(NSString *)textName{
     

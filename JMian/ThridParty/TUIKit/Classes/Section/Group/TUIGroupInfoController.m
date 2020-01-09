@@ -19,13 +19,16 @@
 #import "TIMGroupInfo+DataProvider.h"
 #import "TUIAvatarViewController.h"
 #import "JMGroupIntroduceViewController.h"
+#import "JMGroupNameViewController.h"
+#import "JMBUserProfileViewController.h"
+#import "JMCUserProfileViewController.h"
 
 #define ADD_TAG @"-1"
 #define DEL_TAG @"-2"
 
 @import ImSDK;
 
-@interface TUIGroupInfoController () <TModifyViewDelegate, TGroupMembersCellDelegate,JMGroupIntroduceViewControllerDelegate>
+@interface TUIGroupInfoController () <TModifyViewDelegate, TGroupMembersCellDelegate,JMGroupIntroduceViewControllerDelegate,JMGroupNameViewControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) NSMutableArray *memberData;
 @property (nonatomic, strong) TIMGroupInfo *groupInfo;
@@ -150,13 +153,19 @@
         
         TCommonTextCellData *addOptionData = [[TCommonTextCellData alloc] init];
         addOptionData.key = @"群公告";
-        addOptionData.value = [self.groupInfo showNotification];
-        //        if ([self.groupInfo isMeOwner]) {
-        addOptionData.cselector = @selector(didSelectNotificationOption:);
-        addOptionData.showAccessory = YES;
-        //        }
-//        //私有群禁止加入，只能邀请
-//        if ([self.groupInfo.groupType isEqualToString:@"Private"]) {
+        NSString *str =  [self.groupInfo showNotification];
+        if (str.length > 0) {
+            addOptionData.value = str;
+            addOptionData.cselector = @selector(didSelectNotificationOption:);
+            addOptionData.showAccessory = YES;
+        }else{
+            addOptionData.value =@"未设置";
+
+        }
+//        if ([self.groupInfo isMeOwner]) {
+//        }
+        //        //私有群禁止加入，只能邀请
+        //        if ([self.groupInfo.groupType isEqualToString:@"Private"]) {
 //            addOptionData.value = @"邀请加入";
 //        } else if ([self.groupInfo.groupType isEqualToString:@"ChatRoom"]) {
 //            addOptionData.value = @"自动审批";
@@ -319,13 +328,18 @@
 
 
 - (void)didSelectGroupNameOption:(UITableViewCell *)cell{
-    TModifyViewData *data = [[TModifyViewData alloc] init];
-    data.title = @"修改群名称";
-    TModifyView *modify = [[TModifyView alloc] init];
-    modify.tag = 0;
-    modify.delegate = self;
-    [modify setData:data];
-    [modify showInWindow:self.view.window];
+//    TModifyViewData *data = [[TModifyViewData alloc] init];
+//    data.title = @"修改群名称";
+//    TModifyView *modify = [[TModifyView alloc] init];
+//    modify.tag = 0;
+//    modify.delegate = self;
+//    [modify setData:data];
+//    [modify showInWindow:self.view.window];
+    JMGroupNameViewController *vc = [[JMGroupNameViewController alloc]init];
+    vc.title = @"群名称";
+    vc.delegate = self;
+    vc.groupName = [self.groupInfo groupName];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 - (void)didSelectNotificationOption:(UITableViewCell *)cell
@@ -334,7 +348,12 @@
     vc.title = @"群公告";
     vc.delegate = self;
     vc.isMeOwner = [self.groupInfo isMeOwner];
-    vc.groupIntroduce = [self.groupInfo showNotification];
+    if ( [self.groupInfo showNotification].length > 0) {
+        vc.groupIntroduce = [self.groupInfo showNotification];
+         
+    }else{
+        vc.groupIntroduce = @"未设置";
+    }
     [self.navigationController pushViewController:vc animated:YES];
 //    TModifyViewData *data = [[TModifyViewData alloc] init];
 //    data.title = @"修改群公告";
@@ -431,6 +450,20 @@
 //    }
 //}
 
+-(void)groupNameController:(JMGroupNameViewController *)modifyView didModiyContent:(NSString *)content{
+    @weakify(self)
+    
+    [[TIMGroupManager sharedInstance] modifyGroupName:_groupId groupName:content succ:^{
+        @strongify(self)
+        self.profileCellData.name = content;
+        [self updateData];
+    } fail:^(int code, NSString *msg) {
+        [THelper makeToastError:code msg:msg];
+       }];
+    
+    
+}
+
 -(void)groupIntroduceController:(JMGroupIntroduceViewController *)modifyView didModiyContent:(NSString *)content{
     @weakify(self)
     
@@ -444,6 +477,7 @@
     
 }
 
+
 - (void)modifyView:(TModifyView *)modifyView didModiyContent:(NSString *)content
 {
     @weakify(self)
@@ -452,6 +486,7 @@
         [[TIMGroupManager sharedInstance] modifyGroupName:_groupId groupName:content succ:^{
             @strongify(self)
             self.profileCellData.name = content;
+               [self updateData];
         } fail:^(int code, NSString *msg) {
             [THelper makeToastError:code msg:msg];
         }];
@@ -473,6 +508,7 @@
             [THelper makeToastError:code msg:msg];
         }];
     }
+    
 }
 
 - (void)deleteGroup:(TUIButtonCell *)cell
@@ -531,8 +567,23 @@
     }
     else
     {
-        // TODO:
+    
+        NSString *user_type =[mem.identifier substringFromIndex:[mem.identifier  length]-1];
+        if ([user_type isEqualToString:@"a"]) {
+            JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
+            vc.user_id =  mem.identifier;
+            vc.viewType = JMBUserProfileView_Type_Group;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
+            vc.user_id =  mem.identifier;
+            vc.viewType = JMBUserProfileView_Type_Group;
+            [self.navigationController pushViewController:vc animated:YES];
+
+        }
     }
+    // TODO:
+ 
 }
 
 - (void)addMembers:(NSArray *)members

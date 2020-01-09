@@ -29,6 +29,7 @@
 #import "JMCUserProfileViewController.h"
 #import "JMBUserProfileViewController.h"
 #import "TUIGroupConversationListController.h"
+#import "JMFriendListManager.h"
 
 @interface JMMessageListViewController ()<UITableViewDelegate,UITableViewDataSource,JMCFriendViewControllerDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -44,6 +45,9 @@
 
 @property(nonatomic,strong)JMBFriendViewController *BFriendsVC;
 @property(nonatomic,strong)JMCFriendViewController *CFriendsVC;
+@property(nonatomic,strong)NSMutableArray *friendBSourceIds;
+@property(nonatomic,strong)NSMutableArray *friendCSourceIds;
+
 
 @end
 
@@ -93,10 +97,19 @@ static NSString *cellIdent = @"allMessageCellIdent";
     [self setNavgationBarColor:[UIColor whiteColor]];
 
 }
+-(void)viewWillDisappear:(BOOL)animated{
+    NSMutableArray *arr = [NSMutableArray array];
+    [arr addObjectsFromArray:self.friendBSourceIds];
+    [arr addObjectsFromArray:self.friendCSourceIds];
+    
+    //把好友列表存到本地好友列表
+    [JMFriendListManager saveFriendList:arr];
+    
+
+}
 
 -(void)viewDidDisappear:(BOOL)animated{
 //    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
 }
 
 
@@ -109,30 +122,33 @@ static NSString *cellIdent = @"allMessageCellIdent";
 //    [menuView setMenuViewBackgroundColor:[UIColor whiteColor]];
 
     
-      menuView.didSelectBlock = ^(NSInteger index) {
-          NSLog(@"%zd",index);
-          if (index == 0) {
-//              JMCreateGroupViewController *vc = [[JMCreateGroupViewController alloc]init];
-//              [self.navigationController pushViewController:vc animated:YES];
-              TUIContactSelectController *vc = [TUIContactSelectController new];
-              vc.title = @"选择联系人";
-              [self.navigationController pushViewController:vc animated:YES];
-              vc.finishBlock = ^(NSArray<TCommonContactSelectCellData *> *array) {
-                  [self addGroup:@"Private" addOption:0 withContacts:array];
-              };
-          }else if (index == 1) {
-              JMAddFriendViewController *vc = [[JMAddFriendViewController alloc]init];
-              [self.navigationController pushViewController:vc animated:YES];
-          }else if (index == 2) {
-              TUIGroupConversationListController *vc = [[TUIGroupConversationListController alloc]init];
-              self.hidesBottomBarWhenPushed=YES;
-              vc.title = @"我的群组";
-              [self.navigationController pushViewController:vc animated:YES];
-              self.hidesBottomBarWhenPushed=NO;
-
-          }
-      };
-      [menuView showMenuEnterAnimation:MLEnterAnimationStyleRight];
+    menuView.didSelectBlock = ^(NSInteger index) {
+        NSLog(@"%zd",index);
+        if (index == 0) {
+            //              JMCreateGroupViewController *vc = [[JMCreateGroupViewController alloc]init];
+            //              [self.navigationController pushViewController:vc animated:YES];
+            TUIContactSelectController *vc = [TUIContactSelectController new];
+            vc.title = @"选择联系人";
+            [self.navigationController pushViewController:vc animated:YES];
+            vc.finishBlock = ^(NSArray<TCommonContactSelectCellData *> *array) {
+                [self addGroup:@"Private" addOption:0 withContacts:array];
+            };
+        }else if (index == 1) {
+            JMAddFriendViewController *vc = [[JMAddFriendViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (index == 2) {
+            TUIGroupConversationListController *vc = [[TUIGroupConversationListController alloc]init];
+            self.hidesBottomBarWhenPushed=YES;
+            vc.title = @"我的群组";
+            [self.navigationController pushViewController:vc animated:YES];
+            self.hidesBottomBarWhenPushed=NO;
+//            [[UIApplication sharedApplication]openURL: [NSURL URLWithString:@"https://xp.apple.com"]options:@{} completionHandler:^(BOOL success) {
+             
+//            }];
+            
+        }
+    };
+    [menuView showMenuEnterAnimation:MLEnterAnimationStyleRight];
     
 }
 /**
@@ -268,8 +284,8 @@ static NSString *cellIdent = @"allMessageCellIdent";
     self.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
     self.hidesBottomBarWhenPushed = NO;
-
 }
+
 -(void)BFriendViewControllerDidSelectedFriendWithModel:(JMFriendListData *)data{
     JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
     vc.user_id = data.friend_user_id;
@@ -280,6 +296,21 @@ static NSString *cellIdent = @"allMessageCellIdent";
 
 }
 
+-(void)CFriendViewControllerFriendList:(NSMutableArray *)arr{
+//    NSMutableArray *myArr = [JMFriendListManager getFriendList];
+//    [myArr addObjectsFromArray:arr];
+//    [JMFriendListManager saveFriendList:myArr];
+    
+    self.friendBSourceIds = arr;
+}
+
+-(void)BFriendViewControllerFriendList:(NSMutableArray *)arr{
+//    NSMutableArray *myArr = [JMFriendListManager getFriendList];
+//    [myArr addObjectsFromArray:arr];
+//    [JMFriendListManager saveFriendList:myArr];
+    self.friendCSourceIds = arr;
+
+}
 
 #pragma mark - data
 
@@ -325,6 +356,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
             JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
             data.convType = TConv_Type_C2C;
             messageListModel.data =data;
+            messageListModel.viewType = JMMessageList_Type_C2C;
             JMChatViewController *vc = [[JMChatViewController alloc]init];
             vc.myConvModel = messageListModel;
             [self.navigationController pushViewController:vc animated:YES];

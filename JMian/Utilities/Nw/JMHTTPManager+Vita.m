@@ -21,7 +21,7 @@
                         salary_max:(NSString *)salary_max
                        description:(nullable NSString *)description
                             status:(nullable NSNumber *)status
-                            user_step:(nullable NSNumber *)user_step
+                            user_step:(nullable NSString *)user_step
                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     

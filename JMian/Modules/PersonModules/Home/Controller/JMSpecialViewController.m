@@ -16,7 +16,6 @@
 #import "JMLabsChooseViewController.h"
 #import "JMVideoPlayManager.h"
 #import "JMCompanyHomeTableViewCell.h"
-#import "JMPersonDetailsViewController.h"
 #import "JMHTTPManager+VitaPaginate.h"
 #import "JMPersonInfoViewController.h"
 

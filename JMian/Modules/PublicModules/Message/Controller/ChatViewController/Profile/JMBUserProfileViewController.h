@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "DimensMacros.h"
+#import "BaseViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, JMBUserProfileViewControllerType) {
     JMBUserProfileView_Type_C2C      = 1,
@@ -16,9 +17,8 @@ typedef NS_ENUM(NSUInteger, JMBUserProfileViewControllerType) {
     JMBUserProfileView_Type_Service   = 4,
 };
 
-@interface JMBUserProfileViewController : UIViewController
+@interface JMBUserProfileViewController : BaseViewController
 @property(nonatomic,copy)NSString *user_id;
-@property(nonatomic,copy)NSString *userIM_id;
 @property(nonatomic,assign)BOOL isMyFriend;
 @property(nonatomic,assign)JMBUserProfileViewControllerType viewType;
 

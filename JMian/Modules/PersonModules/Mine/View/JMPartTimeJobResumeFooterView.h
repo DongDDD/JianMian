@@ -20,6 +20,8 @@ typedef NS_ENUM(NSInteger, JMPartTimeJobResumeFooterViewType) {
     JMPartTimeJobResumeFooterViewTypeGoodsDesc,
     JMPartTimeJobResumeFooterViewTypeCommentDesc,
     JMPartTimeJobResumeFooterViewTypeSetting,
+    JMPartTimeJobResumeFooterViewTypeGroup,
+
 
 };
 
@@ -35,6 +37,8 @@ typedef NS_ENUM(NSInteger, JMPartTimeJobResumeFooterViewType) {
 @property(nonatomic,copy)NSString * content;
 @property(nonatomic,strong)UILabel *placeHolder;
 @property(nonatomic,strong)UITextView *contentTextView;
+@property(nonatomic,strong)UILabel *wordsLenghLabel;
+
 -(void)setContent:(NSString *)content;
 @property(nonatomic,weak)id<JMPartTimeJobResumeFooterViewDelegate>delegate;
 

@@ -40,7 +40,6 @@
 #import "JMChatViewSectionView.h"
 #import "JMCDetailViewController.h"
 #import "JMBDetailViewController.h"
-#import "JMPersonDetailsViewController.h"
 #import "JobDetailsViewController.h"
 #import "JMHomeWorkModel.h"
 #import "JMHTTPManager+InterView.h"
@@ -931,11 +930,8 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     if ([userModel.type isEqualToString:B_Type_UESR]) {
         if ([self.myConvModel.type isEqualToString:@"1"]) {
             //全职
-            //            JMPersonDetailsViewController *vc = [[JMPersonDetailsViewController alloc] init];
             JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc] init];
-            JMCompanyHomeModel *model2 = [[JMCompanyHomeModel alloc]init];
-            model2.user_job_id = self.myConvModel.job_user_job_id;
-            vc.user_job_id = model2.user_job_id;
+            vc.user_job_id = self.myConvModel.job_user_job_id;
             [self.navigationController pushViewController:vc animated:YES];
             
         }else if ([self.myConvModel.type isEqualToString:@"2"]) {
@@ -967,9 +963,9 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 }
 
 - (void)videoInterviewAction {
-    if ([_myConvModel.type isEqualToString:@"2"]) {
+    if (_myConvModel.type) {
         
-        [self gotoVideoChatViewWithForeign_key:_myConvModel.work_task_id recipient:_myConvModel.job_user_user_id chatType:@"2"];
+        [self gotoVideoChatViewWithForeign_key:_myConvModel.work_task_id recipient:_myConvModel.job_user_user_id chatType:_myConvModel.type];
         
     }else if ([_myConvModel.type isEqualToString:@"1"]) {
         
@@ -989,8 +985,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
     _videoChatView.delegate = self;
     _videoChatView.tag = 222;
-    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
-    //    [_videoChatView setInterviewModel:nil];
+//    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];//先隐藏
     [[UIApplication sharedApplication].keyWindow addSubview:_videoChatView];
     [self.navigationController setNavigationBarHidden:YES];
 }

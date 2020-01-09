@@ -24,6 +24,8 @@
     [self setNavgationBarColor:[UIColor whiteColor]];
     
 }
+
+
     
 - (void)setNavgationBarColor:(UIColor *)color {
     //去掉黑线

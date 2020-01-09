@@ -25,7 +25,8 @@
              @"user_nickname":@"user.nickname",
              @"user_avatar":@"user.avatar",
              @"user_reputation":@"user.reputation",
-             
+             @"user_amigo":@"user.amigo",
+
              @"vita_work_start_date":@"vita.work_start_date",
              @"vita_work_status":@"vita.work_status",
              @"vita_education":@"vita.education",

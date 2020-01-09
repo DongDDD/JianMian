@@ -23,10 +23,10 @@ static NSString *cellId = @"FunctionCell";
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
-    
-    self.imageNameArr = @[@"mine_share",@"burse",@"autonym"];
-    self.labelStrArr = @[@"分享APP",@"我的钱包",@"实名认证"];
-
+        
+        self.imageNameArr = @[@"mine_share",@"burse",@"subscribe",@"autonym"];
+        self.labelStrArr = @[@"分享APP",@"我的钱包",@"我的店铺",@"实名认证"];
+        
         [self initView];
         [self initLayout];
         
@@ -74,7 +74,7 @@ static NSString *cellId = @"FunctionCell";
     [self.BGView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(self).offset(13);
         make.right.mas_equalTo(self).offset(-13);
-        make.height.mas_equalTo(200);
+        make.height.mas_equalTo(270);
         make.top.mas_equalTo(_titleLab.mas_bottom).offset(13);
     }];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, copy)NSString *user_nickname;
 @property(nonatomic, copy)NSString *user_avatar;
 @property(nonatomic, copy)NSString *user_reputation;
+@property(nonatomic, copy)NSString *user_amigo;
 
 @property(nonatomic, copy)NSString *vita_work_start_date;
 @property(nonatomic, copy)NSString *vita_work_status;

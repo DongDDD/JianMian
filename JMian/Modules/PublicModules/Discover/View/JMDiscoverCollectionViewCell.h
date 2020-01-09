@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol JMDiscoverCollectionViewCellDelegate <NSObject>
 
 -(void)didClickPlayAction_data:(JMVideoListCellData *)data;
+-(void)didClickBottomActionWithData:(JMVideoListCellData *)data;
 
 @end
 

@@ -53,6 +53,8 @@ typedef BOOL(^ContactSelectFilterBlock)(TCommonContactSelectCellData *data);
 
 - (void)loadContacts;
 
+-(void)loadDemiContacts;
+
 - (void)setSourceIds:(NSArray<NSString *> *)ids;
 
 @end

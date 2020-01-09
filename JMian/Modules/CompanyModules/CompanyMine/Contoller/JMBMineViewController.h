@@ -6,13 +6,13 @@
 //  Copyright © 2019 mac. All rights reserved.
 //
 
-#import "JMBaseWebViewController.h"
+#import "BaseViewController.h"
 #import "JMBUserCenterHeaderSubView.h"
 #import "JMMPersonalCenterHeaderView.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface JMBMineViewController : JMBaseWebViewController
+@interface JMBMineViewController : BaseViewController
 @property (strong, nonatomic) JMBUserCenterHeaderSubView *BUserCenterHeaderSubView;
 
 @end

@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,6 +20,10 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMT-h1-sla">
                         <rect key="frame" x="10" y="10" width="161" height="265"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOi-q1-dl6">
+                                <rect key="frame" x="0.0" y="222" width="161" height="43"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zED-2C-LaV">
                                 <rect key="frame" x="0.0" y="0.0" width="161" height="222"/>
                                 <constraints>
@@ -72,18 +74,22 @@
                         <constraints>
                             <constraint firstItem="zED-2C-LaV" firstAttribute="top" secondItem="GMT-h1-sla" secondAttribute="top" id="2bN-P9-YIG"/>
                             <constraint firstItem="zED-2C-LaV" firstAttribute="leading" secondItem="GMT-h1-sla" secondAttribute="leading" id="4JR-MY-Brw"/>
+                            <constraint firstItem="ZOi-q1-dl6" firstAttribute="top" secondItem="zED-2C-LaV" secondAttribute="bottom" id="Dtz-vJ-Pgb"/>
                             <constraint firstItem="Aoo-gO-dSX" firstAttribute="top" secondItem="zED-2C-LaV" secondAttribute="bottom" constant="9" id="FF9-27-YIQ"/>
                             <constraint firstItem="Aoo-gO-dSX" firstAttribute="leading" secondItem="111-89-7Fo" secondAttribute="trailing" constant="10" id="GoQ-yo-asB"/>
                             <constraint firstAttribute="trailing" secondItem="FrZ-Gy-C6N" secondAttribute="trailing" constant="10" id="HYV-Hd-85e"/>
                             <constraint firstItem="FrZ-Gy-C6N" firstAttribute="leading" secondItem="Aoo-gO-dSX" secondAttribute="leading" id="Hq5-uu-g1p"/>
                             <constraint firstItem="111-89-7Fo" firstAttribute="top" secondItem="zED-2C-LaV" secondAttribute="bottom" constant="10" id="JIe-Gi-TCt"/>
                             <constraint firstAttribute="trailing" secondItem="zED-2C-LaV" secondAttribute="trailing" id="LvZ-VX-YZZ"/>
+                            <constraint firstAttribute="bottom" secondItem="ZOi-q1-dl6" secondAttribute="bottom" id="OK1-Kw-NBP"/>
                             <constraint firstItem="TcF-gp-hp8" firstAttribute="centerX" secondItem="zED-2C-LaV" secondAttribute="centerX" id="aLn-kh-A7A"/>
                             <constraint firstItem="FrZ-Gy-C6N" firstAttribute="top" secondItem="Aoo-gO-dSX" secondAttribute="bottom" constant="4.5" id="cEB-95-thH"/>
                             <constraint firstItem="111-89-7Fo" firstAttribute="leading" secondItem="GMT-h1-sla" secondAttribute="leading" constant="6" id="eK8-rq-sSu"/>
                             <constraint firstItem="TcF-gp-hp8" firstAttribute="centerY" secondItem="zED-2C-LaV" secondAttribute="centerY" id="gu5-1q-lcM"/>
+                            <constraint firstItem="ZOi-q1-dl6" firstAttribute="leading" secondItem="zED-2C-LaV" secondAttribute="leading" id="jI9-II-0mQ"/>
                             <constraint firstAttribute="height" constant="265" id="qml-Xb-MAH"/>
                             <constraint firstAttribute="trailing" secondItem="Aoo-gO-dSX" secondAttribute="trailing" constant="10" id="t2b-c4-LJO"/>
+                            <constraint firstItem="ZOi-q1-dl6" firstAttribute="trailing" secondItem="zED-2C-LaV" secondAttribute="trailing" id="zj0-vN-GGg"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
@@ -109,13 +115,14 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="181" height="301"/>
             <connections>
+                <outlet property="bottomView" destination="ZOi-q1-dl6" id="AYe-OZ-fCu"/>
                 <outlet property="iconImagView" destination="111-89-7Fo" id="fNU-zl-nnQ"/>
                 <outlet property="infoLab" destination="FrZ-Gy-C6N" id="B8i-TL-qhY"/>
                 <outlet property="nameLab" destination="Aoo-gO-dSX" id="gRd-hy-fQN"/>
                 <outlet property="playBtn" destination="TcF-gp-hp8" id="aBe-Dg-Dvb"/>
                 <outlet property="videoImageView" destination="zED-2C-LaV" id="LZB-Ke-efS"/>
             </connections>
-            <point key="canvasLocation" x="61.594202898550726" y="120.20089285714285"/>
+            <point key="canvasLocation" x="-244.20289855072465" y="103.45982142857143"/>
         </collectionViewCell>
     </objects>
     <resources>

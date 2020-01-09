@@ -181,7 +181,7 @@
     _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
     _videoChatView.delegate = self;
     _videoChatView.tag = 222;
-    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
+//    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
     //[_videoChatView setInterviewModel:nil];
     [self.view addSubview:_videoChatView];
     [self.navigationController setNavigationBarHidden:YES];

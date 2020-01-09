@@ -23,9 +23,12 @@
     NSData *data = profile.customInfo[@"gsname"];
     NSString *company_name = [[ NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     self.title = [profile showName];
-    self.company_name = company_name;
     if (profile.faceURL.length) {
         self.avatarUrl = [NSURL URLWithString:profile.faceURL];
+    }
+    NSString *user_type =[profile.identifier substringFromIndex:[profile.identifier length]-1];
+    if ([user_type isEqualToString:@"b"]) {
+        self.company_name = company_name;         
     }
     self.identifier = profile.identifier;
 }

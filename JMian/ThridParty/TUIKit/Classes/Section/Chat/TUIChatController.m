@@ -278,7 +278,7 @@
     if ([user_type isEqualToString:@"a"]) {
         JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
         vc.user_id =  user_id;
-        vc.userIM_id = cell.messageData.identifier;
+//        vc.userIM_id = cell.messageData.identifier;
         vc.viewType = JMCUserProfileView_Type_C2C;
         [self.navigationController pushViewController:vc animated:YES];
     }else{
@@ -287,7 +287,7 @@
         }else if (self.myConvModel.viewType == JMMessageList_Type_Group) {
             JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
             vc.user_id =  user_id;
-            vc.userIM_id = cell.messageData.identifier;
+//            vc.userIM_id = cell.messageData.identifier;
             vc.viewType = JMBUserProfileView_Type_C2C;
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -485,6 +485,7 @@
             JMUserInfoModel *userModel = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
             JMCompanyDetailViewController *vc = [[JMCompanyDetailViewController alloc]init];
             vc.company_id = userModel.company_id;
+            vc.user_id = user_id;
             [self.navigationController pushViewController:vc animated:YES];
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {

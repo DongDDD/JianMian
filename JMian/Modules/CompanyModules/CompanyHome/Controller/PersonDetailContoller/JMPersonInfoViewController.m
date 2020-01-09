@@ -218,7 +218,7 @@
         }];
         
     }else{
-        if (self.favorite_id.length > 0) {
+        if (self.favorite_id) {
             [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.favorite_id mode:@"1"  SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"已取消收藏"
                                                               delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];

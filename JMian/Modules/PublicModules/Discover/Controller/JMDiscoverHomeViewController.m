@@ -15,6 +15,7 @@
 #import "JMVideoPlayManager.h"
 #import "JMCityListViewController.h"
 #import "JMPersonInfoViewController.h"
+#import "JMCUserProfileViewController.h"
 
 //#import <PassKit/PassKit.h>                                 //用户绑定的银行卡信息
 //#import <PassKit/PKPaymentAuthorizationViewController.h>    //Apple pay的展示控件
@@ -381,6 +382,23 @@
 //    self.arrDate = [NSMutableArray array];
     [self.collectionView.mj_header beginRefreshing];
     
+}
+
+-(void)didClickBottomActionWithData:(JMVideoListCellData *)data{
+    //点击C端用户
+    if (data.user_job_id) {
+        JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
+        vc.user_id = data.user_id;
+        vc.viewType = JMCUserProfileView_Type_Video;
+        if (data.user_amigo) {
+            vc.isMyFriend = YES;
+        }
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
+
+    }
+
 }
 
 #pragma mark  UICollectionViewDelegate

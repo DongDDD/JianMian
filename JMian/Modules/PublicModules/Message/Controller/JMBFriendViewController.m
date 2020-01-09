@@ -11,14 +11,13 @@
 #import "JMFriendListData.h"
 #import "JMBCFriendTableViewCell.h"
 #import "NSString+Common.h"
+#import "TCommonContactSelectCellData.h"
 
 @interface JMBFriendViewController ()<UITableViewDelegate,UITableViewDataSource,JMBCFriendTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)NSMutableArray *dataArray;
 @property(nonatomic,strong)NSMutableArray *groupList;
 @property NSDictionary<NSString *, NSArray<JMFriendListData *> *> *dataDict;
-
-
 
 @end
 static NSString *cellIdent = @"BfriendID";
@@ -43,10 +42,21 @@ static NSString *cellIdent = @"BfriendID";
             self.dataArray = [NSMutableArray array];
             self.groupList = [NSMutableArray array];
             NSMutableDictionary *dataDict = @{}.mutableCopy;
-
+            NSMutableArray *contactSelectCellDataArr = [NSMutableArray array];
             for (JMFriendListData *data in arr) {
+                
                 NSInteger step = [data.friend_enterprise_step integerValue];
                 if (step > 4) {
+                    //把B端用户存到本地好友列表
+//                    TCommonContactSelectCellData *data2 = [TCommonContactSelectCellData new];
+//                    data2.identifier = [NSString stringWithFormat:@"%@b",data.friend_user_id];
+//                    data2.avatarUrl = [NSURL URLWithString:data.friend_avatar];
+//                    data2.title = data.friend_nickname;
+//                    data2.company_name = data.friend_agency_company_name;
+                    //                    [contactSelectCellDataArr addObject:data2];
+                    NSString *identifier = [NSString stringWithFormat:@"%@b",data.friend_user_id];
+                    [contactSelectCellDataArr addObject:identifier];
+                    
                     NSString *group = [[data.friend_agency_company_name firstPinYin] uppercaseString];
                     NSMutableArray *list = [dataDict objectForKey:group];
                     if (!list) {
@@ -59,7 +69,9 @@ static NSString *cellIdent = @"BfriendID";
                 }
                 
             }
-            
+            if (_delegate && [_delegate respondsToSelector:@selector(BFriendViewControllerFriendList:)]) {
+                [_delegate BFriendViewControllerFriendList:contactSelectCellDataArr];
+            }
             self.dataDict = dataDict;
             [self.tableView reloadData];
             
@@ -69,6 +81,8 @@ static NSString *cellIdent = @"BfriendID";
     }];
 
 }
+
+ 
 
 #pragma mark - Table view data source
 

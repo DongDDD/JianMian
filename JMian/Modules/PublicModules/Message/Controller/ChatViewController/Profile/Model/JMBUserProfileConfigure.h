@@ -26,7 +26,7 @@ typedef NS_ENUM(NSInteger, JMUserProfileCellType){
     JMUserProfileCellTypeHeader = 0 ,
 //    JMUserProfileCellTypePersonInfo,
     JMUserProfileCellTypeImage,
-    JMUserProfileCellTypeJob,
+    JMBUserProfileCellTypeJob,
 //    JMUserProfileCellTypeEduExp,
     JMUserProfileCellTypeIntroduce,
     JMUserProfileCellTypeAdress
@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, JMUserProfileCellJobType){
 -(void)userProfileJobTypeWithIndex:(NSInteger)index;
 
 @end
-@interface JMUserProfileConfigure : NSObject
+@interface JMBUserProfileConfigure : NSObject
 @property (assign, nonatomic) CGFloat height;
 @property (assign, nonatomic) CGFloat footerheight;
 

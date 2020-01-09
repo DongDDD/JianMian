@@ -16,7 +16,8 @@
 #import "JMChatViewController.h"
 #import "JMHTTPManager+AddFriend.h"
 #import "JMAddFriendModel.h"
-
+#import "JMBDetailViewController.h"
+#import "JMPersonInfoViewController.h"
 
 @interface JMCUserProfileViewController ()<UITableViewDelegate,UITableViewDataSource,JMCUserProfileConfigureDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -27,6 +28,9 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property(nonatomic,assign)NSInteger index;
 @property(nonatomic,assign)BOOL myIsMyFriend;
+@property(nonatomic,copy)NSString *userIM_id;
+@property(nonatomic,assign)CGFloat navAlpha;
+
 
 @end
 
@@ -39,21 +43,42 @@
     [self initView];
     [self getData];
     [self getPartTimeJobData];
+    [self setBackBtnImageViewName:@"di_icon_return" textName:@""];
+
     // Do any additional setup after loading the view from its nib.
 }
 - (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.translucent = YES;
+
+    UIImage *image = [self imageWithColor:[UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:_navAlpha] andSize:CGSizeMake(1, 1)];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
-    //设置导航栏背景图片为一个空的image，这样就透明了
-    [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     
-    //去掉透明后导航栏下边的黑边
-    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
 }
 
+#pragma mark 根据尺寸，颜色生成对应的图片
+
+- (UIImage *)imageWithColor:(UIColor *)color andSize:(CGSize)size {
+    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    CGContextAddEllipseInRect(context, rect);
+    UIGraphicsEndImageContext();
+    return image;
+    
+}
+
+
 - (void)viewWillDisappear:(BOOL)animated{
-    //    如果不想让其他页面的导航栏变为透明 需要重置
     [self.navigationController.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:nil];
+    [self.navigationController.navigationBar setShadowImage:[[UIImage alloc] init]];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    [self.navigationController.navigationBar setBarTintColor:[UIColor whiteColor]];
+    
 }
 
 -(void)initView{
@@ -314,10 +339,10 @@
                                                                                   forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
-            if (_index == 0) {
+            if (_index == JMCUserProfileCellTypeJobArr) {
                 JMVitaDetailModel *model = self.cellConfigures.job_Arr[indexPath.row];
                 [cell setVitaCModel:model];
-            }else if (_index == 1){
+            }else if (_index == JMCUserProfileCellTypeAbilityArr){
                 JMAbilityCellData *model = self.cellConfigures.abilityListArr[indexPath.row];
                 [cell setAbilityCellData:model];
             }
@@ -372,9 +397,53 @@
 
 #pragma mark - tableViewDelegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
- 
+    if (indexPath.section == JMCUserProfileCellTypeJob) {
+        if (_index == JMCUserProfileCellTypeJobArr) {            
+            JMVitaDetailModel *model = self.cellConfigures.job_Arr[indexPath.row];
+            JMPersonInfoViewController *vc = [[JMPersonInfoViewController alloc]init];
+            vc.user_job_id = model.user_job_id;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if (_index ==JMCUserProfileCellTypeAbilityArr) {
+            JMAbilityCellData *model = self.cellConfigures.abilityListArr[indexPath.row];
+            JMBDetailViewController *vc = [[JMBDetailViewController alloc]init];
+            vc.ability_id = model.ability_id;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 
 }
+
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    NSLog(@"offset---scroll:%f",self.tableView.contentOffset.y);
+//    UIColor *color= MASTER_COLOR;
+//    CGFloat offset=scrollView.contentOffset.y;
+//    if (offset<0){
+//       self.navigationController.navigationBar.backgroundColor = [color colorWithAlphaComponent:0];
+//    }else {
+//     CGFloat alpha=1-((200-offset)/200);
+//   self.navigationController.navigationBar.backgroundColor=[color colorWithAlphaComponent:alpha];
+//
+//    }
+//}
+#pragma mark 滑动
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGFloat offset = scrollView.contentOffset.y/50;
+    offset = offset < 0 ? 0 : offset;
+    offset = offset > 1 ? 1 : offset;
+    UIImage *image = [self imageWithColor:[UIColor colorWithRed:59/255.0 green:199/255.0 blue:255/255.0 alpha:offset] andSize:CGSizeMake(1, 1)];
+    [self.navigationController.navigationBar setBackgroundImage:image forBarMetrics:UIBarMetricsDefault];
+    _navAlpha = offset;
+
+
+    if (_navAlpha < 1)
+    {
+        [self setTitle:@"" color:[UIColor whiteColor]];
+    }else{
+        [self setTitle:self.userModel.nickname color:[UIColor whiteColor]];
+    }
+}
+
 
 #pragma mark - Lazy
 

@@ -29,7 +29,6 @@
 #import "JMPlaySoundsManager.h"
 #import "JMHTTPManager+FectchVersionInfo.h"
 #import "JobDetailsViewController.h"
-#import "JMPersonDetailsViewController.h"
 #import "JMPersonInfoViewController.h"
 #import "TUIKit.h"
 #import "JMVideoPlayManager.h"
