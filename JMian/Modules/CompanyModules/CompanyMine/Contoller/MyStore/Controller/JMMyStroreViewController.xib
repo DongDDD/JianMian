@@ -34,27 +34,55 @@
                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="http://www.jmzhipin.com/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aQ1-tW-cmC">
-                    <rect key="frame" x="124.5" y="319.5" width="165" height="17"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="http://www.jmzhipin.com/" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tAO-X6-n4w">
+                    <rect key="frame" x="102" y="319.5" width="210" height="28"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="28" id="Akw-D4-Uke"/>
+                        <constraint firstAttribute="width" constant="210" id="Nof-Sb-WNa"/>
+                    </constraints>
                     <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="店铺首页" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nM-rw-OnX">
+                    <rect key="frame" x="44" y="418" width="53.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="fCp-dI-1I3">
+                    <rect key="frame" x="294" y="420" width="7.5" height="12"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="12" id="4nS-iF-Ad1"/>
+                        <constraint firstAttribute="width" constant="7.5" id="p2H-2X-M9v"/>
+                    </constraints>
+                </imageView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon-indes.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zfx-Em-FCv">
+                    <rect key="frame" x="20" y="418" width="15" height="15"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="15" id="2rO-D3-ItI"/>
+                        <constraint firstAttribute="height" constant="15" id="V5q-Ck-YOL"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="FsC-qu-zr7" firstAttribute="top" secondItem="5AV-8u-EoC" secondAttribute="bottom" constant="18" id="1Wd-Rn-vNq"/>
-                <constraint firstItem="aQ1-tW-cmC" firstAttribute="centerX" secondItem="FsC-qu-zr7" secondAttribute="centerX" id="AtR-P8-yTk"/>
+                <constraint firstItem="tAO-X6-n4w" firstAttribute="top" secondItem="FsC-qu-zr7" secondAttribute="bottom" constant="5" id="2zk-dN-Ki3"/>
+                <constraint firstItem="tAO-X6-n4w" firstAttribute="centerX" secondItem="FsC-qu-zr7" secondAttribute="centerX" id="O9P-93-GgM"/>
                 <constraint firstItem="FsC-qu-zr7" firstAttribute="centerX" secondItem="5AV-8u-EoC" secondAttribute="centerX" id="Xn6-2Y-Oce"/>
                 <constraint firstItem="5AV-8u-EoC" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="87" id="bhY-si-kN5"/>
                 <constraint firstItem="5AV-8u-EoC" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="nsW-sh-InB"/>
-                <constraint firstItem="aQ1-tW-cmC" firstAttribute="top" secondItem="FsC-qu-zr7" secondAttribute="bottom" constant="5" id="sbT-UO-JRH"/>
+                <constraint firstItem="3nM-rw-OnX" firstAttribute="leading" secondItem="Zfx-Em-FCv" secondAttribute="trailing" constant="9" id="vJA-bs-Dtg"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="-77" y="76"/>
+            <point key="canvasLocation" x="-78.260869565217391" y="75.669642857142847"/>
         </view>
     </objects>
     <resources>
+        <image name="icon-indes.png" width="14.5" height="15.5"/>
         <image name="icon-no_store.png" width="132.5" height="132.5"/>
+        <image name="icon_return .png" width="6.5" height="11"/>
     </resources>
 </document>

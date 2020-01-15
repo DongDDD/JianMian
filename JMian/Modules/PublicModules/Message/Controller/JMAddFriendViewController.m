@@ -26,6 +26,8 @@ static NSString *cellIdent = @"friendID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
+    [self.searchBar.searchTextField becomeFirstResponder];
+
     self.searchBar.delegate = self;
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view from its nib.

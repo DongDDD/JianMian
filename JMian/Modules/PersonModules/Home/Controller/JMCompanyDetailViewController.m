@@ -16,6 +16,7 @@
 #import "JMNoDataTableViewCell.h"
 #import "JobDetailsViewController.h"
 #import "JMHTTPManager+AddFriend.h"
+#import "JMFriendListManager.h"
 
 
 
@@ -25,6 +26,7 @@
 @property (strong, nonatomic) JMTitlesView *titleView;
 @property (strong, nonatomic) JMComDetailCellConfigures *configures;
 @property (assign, nonatomic) NSInteger index;
+@property(nonatomic,copy) NSString *userIM_id;
 
 
 @end
@@ -35,6 +37,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"公司介绍";
+    self.userIM_id = [NSString stringWithFormat:@"%@b",_user_id];
     [self getData];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,8 +46,21 @@
         make.bottom.mas_equalTo(self.view);
         make.centerX.mas_equalTo(self.view);
     }];
+    NSArray *arr = [JMFriendListManager getFriendList];
+    BOOL isFriend = false;
+    for (NSString *identify in arr) {
+        if ([identify isEqualToString: self.userIM_id]) {
+            isFriend = YES;
+            continue;
+        }else{
+            isFriend = NO;
+
+        }
+    }
     
-    [self setRightBtnTextName:@"添加好友"];
+    if (isFriend) {
+        [self setRightBtnTextName:@"添加好友"];
+    }
 }
 
 -(void)rightAction{

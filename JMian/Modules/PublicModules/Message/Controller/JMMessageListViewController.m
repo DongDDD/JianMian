@@ -97,6 +97,9 @@ static NSString *cellIdent = @"allMessageCellIdent";
     [self setNavgationBarColor:[UIColor whiteColor]];
 
 }
+
+
+
 -(void)viewWillDisappear:(BOOL)animated{
     NSMutableArray *arr = [NSMutableArray array];
     [arr addObjectsFromArray:self.friendBSourceIds];
@@ -125,10 +128,16 @@ static NSString *cellIdent = @"allMessageCellIdent";
     menuView.didSelectBlock = ^(NSInteger index) {
         NSLog(@"%zd",index);
         if (index == 0) {
-            //              JMCreateGroupViewController *vc = [[JMCreateGroupViewController alloc]init];
-            //              [self.navigationController pushViewController:vc animated:YES];
+            NSMutableArray *arr = [NSMutableArray array];
+            [arr addObjectsFromArray:self.friendBSourceIds];
+            [arr addObjectsFromArray:self.friendCSourceIds];
+            //把好友列表存到本地好友列表
+            [JMFriendListManager saveFriendList:arr];
+            
             TUIContactSelectController *vc = [TUIContactSelectController new];
             vc.title = @"选择联系人";
+            NSArray *sourceIds = [JMFriendListManager getFriendList];
+            [vc setSourceIds:sourceIds];
             [self.navigationController pushViewController:vc animated:YES];
             vc.finishBlock = ^(NSArray<TCommonContactSelectCellData *> *array) {
                 [self addGroup:@"Private" addOption:0 withContacts:array];
@@ -161,6 +170,7 @@ static NSString *cellIdent = @"allMessageCellIdent";
  */
 - (void)addGroup:(NSString *)groupType addOption:(TIMGroupAddOpt)addOption withContacts:(NSArray<TCommonContactSelectCellData *>  *)contacts
 {
+
     NSMutableString *groupName = [[[TIMFriendshipManager sharedInstance] querySelfProfile] showName].mutableCopy;
     NSMutableArray *members = [NSMutableArray array];
     //遍历contacts，初始化群组成员信息、群组名称信息
@@ -238,22 +248,22 @@ static NSString *cellIdent = @"allMessageCellIdent";
 //    [self.view addSubview:self.BGView];
     [self.view addSubview:self.BFriendsVC.view];
     [self.view addSubview:self.CFriendsVC.view];
-
+    
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.titleView.mas_bottom);
         make.bottom.mas_equalTo(self.view);
         make.left.right.mas_equalTo(self.view);
     }];
     [self.BFriendsVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-          make.top.mas_equalTo(self.titleView.mas_bottom);
-          make.bottom.mas_equalTo(self.view);
-          make.left.right.mas_equalTo(self.view);
-      }];
+        make.top.mas_equalTo(self.titleView.mas_bottom);
+        make.bottom.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.view);
+    }];
     [self.CFriendsVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(self.titleView.mas_bottom);
-            make.bottom.mas_equalTo(self.view);
-            make.left.right.mas_equalTo(self.view);
-        }];
+        make.top.mas_equalTo(self.titleView.mas_bottom);
+        make.bottom.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.view);
+    }];
 
 }
 

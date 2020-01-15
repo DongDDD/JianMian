@@ -15,6 +15,7 @@
 #import "THelper.h"
 #import <ImSDK/ImSDK.h>
 #import "TUIGroupMemberController.h"
+#import "JMFriendListManager.h"
 
 @interface JMGroupInfoViewController () <TGroupInfoControllerDelegate,TGroupMemberControllerDelegagte>
 
@@ -56,6 +57,8 @@
 {
     TUIContactSelectController *vc = [[TUIContactSelectController alloc] initWithNibName:nil bundle:nil];
     vc.title = @"添加联系人";
+    NSArray *sourceIds = [JMFriendListManager getFriendList];
+    [vc setSourceIds:sourceIds];
     vc.viewModel.disableFilter = ^BOOL(TCommonContactSelectCellData *data) {
         for (TGroupMemberCellData *cd in members) {
             if ([cd.identifier isEqualToString:data.identifier])
@@ -84,7 +87,7 @@
 - (void)groupInfoController:(TUIGroupInfoController *)controller didDeleteMembersInGroup:(NSString *)groupId members:(NSArray<TGroupMemberCellData *> *)members
 {
     TUIContactSelectController *vc = [[TUIContactSelectController alloc] initWithNibName:nil bundle:nil];
-    vc.title = @"删除联系人";
+    vc.title = @"删除群成员";
     NSMutableArray *ids = NSMutableArray.new;
     for (TGroupMemberCellData *cd in members) {
         if (![cd.identifier isEqualToString:[[TIMManager sharedInstance] getLoginUser]]) {

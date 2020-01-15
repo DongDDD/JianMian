@@ -186,6 +186,8 @@
 #define Get_ServiceID_URL @"api/service"
 //转账
 #define Transfer_Money_URL @"api/user/transfer"
+//发布宝贝
+#define Get_CategoryList_URL @"api/sort/paginate"
 
 
 //接口

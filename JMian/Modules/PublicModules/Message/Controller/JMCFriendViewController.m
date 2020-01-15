@@ -30,6 +30,12 @@ static NSString *cellIdent = @"BfriendID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.view);
+    }];
+ 
 //    self.view.backgroundColor = [UIColor redColor];
     // Do any additional setup after loading the view from its nib.
 }
@@ -177,7 +183,7 @@ static NSString *cellIdent = @"BfriendID";
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height-BottomHeight_Status) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
         _tableView.separatorStyle = YES;
         _tableView.delegate = self;

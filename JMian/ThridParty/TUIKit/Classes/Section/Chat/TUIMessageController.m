@@ -375,7 +375,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
                     }
                     //更新 profile
                     if (nameCard.length == 0)
-                        data.name = [profile showName];
+                        data.name = [profile nickname];
                     if (profile.faceURL)
                         data.avatarUrl = [NSURL URLWithString:[profile faceURL]];
                 };
@@ -985,7 +985,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
     _videoChatView.delegate = self;
     _videoChatView.tag = 222;
-//    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];//先隐藏
+    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
     [[UIApplication sharedApplication].keyWindow addSubview:_videoChatView];
     [self.navigationController setNavigationBarHidden:YES];
 }

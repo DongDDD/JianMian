@@ -88,7 +88,6 @@ static NSString *kReuseIdentifier = @"ContactSelectCell";
     [_pickerView.accessoryBtn addTarget:self action:@selector(finishTask) forControlEvents:UIControlEventTouchUpInside];
     
     [self setupBinds];
-    self.sourceIds = [JMFriendListManager getFriendList];
     if (self.sourceIds) {
         [self.viewModel setSourceIds:self.sourceIds];
     } else {

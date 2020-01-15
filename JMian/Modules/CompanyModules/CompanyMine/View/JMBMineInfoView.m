@@ -116,12 +116,10 @@
     cell.imageView.image = [UIImage imageNamed:self.imageNameArr[indexPath.row]];
     //    [cell.iconBtn setImage:[UIImage imageNamed:self.imageNameArr[indexPath.row]] forState:UIControlStateNormal];
     cell.titleLabel.text = self.labelStrArr[indexPath.row];
-    
     return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (self.delegate && [self.delegate respondsToSelector:@selector(didSelectItemWithRow:)] ) {
         [self.delegate didSelectItemWithRow:indexPath.row];
     }

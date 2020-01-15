@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="179" id="KGk-i7-Jjw" customClass="JMGoodsDetialTitleTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="153"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="153"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="¥" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mao-YX-aHJ">
+                        <rect key="frame" x="20" y="22" width="11" height="28"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="28.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d2h-i1-WNY">
+                        <rect key="frame" x="43" y="14" width="80.5" height="36"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                        <color key="textColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="佣金：¥100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XpN-cK-Gqc">
+                        <rect key="frame" x="20" y="55" width="65.5" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOBANG魔棒 支持OPPO手机VOOC闪充车载充 电器快充R15 R11 R9 R9S R17 PLUS闪冲车充一 拖二通" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNm-Co-maT">
+                        <rect key="frame" x="20" y="82.5" width="276" height="54"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="54" id="OD7-Qk-HBm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="PNm-Co-maT" firstAttribute="top" secondItem="XpN-cK-Gqc" secondAttribute="bottom" constant="13" id="5EL-kv-KX8"/>
+                    <constraint firstItem="XpN-cK-Gqc" firstAttribute="top" secondItem="d2h-i1-WNY" secondAttribute="bottom" constant="5" id="6xz-Q5-b2t"/>
+                    <constraint firstAttribute="trailing" secondItem="PNm-Co-maT" secondAttribute="trailing" constant="24" id="8Mn-Zn-fzi"/>
+                    <constraint firstItem="Mao-YX-aHJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="BgY-Rb-Bo2"/>
+                    <constraint firstItem="PNm-Co-maT" firstAttribute="leading" secondItem="XpN-cK-Gqc" secondAttribute="leading" id="XHJ-Ga-gEb"/>
+                    <constraint firstItem="d2h-i1-WNY" firstAttribute="leading" secondItem="Mao-YX-aHJ" secondAttribute="trailing" constant="12" id="ZZy-nF-yGb"/>
+                    <constraint firstItem="Mao-YX-aHJ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="bBN-Zr-BMk"/>
+                    <constraint firstItem="d2h-i1-WNY" firstAttribute="bottom" secondItem="Mao-YX-aHJ" secondAttribute="bottom" id="dU7-CP-DYP"/>
+                    <constraint firstItem="d2h-i1-WNY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="gOa-C9-xPg"/>
+                    <constraint firstItem="XpN-cK-Gqc" firstAttribute="leading" secondItem="Mao-YX-aHJ" secondAttribute="leading" id="yFS-Th-IXc"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <point key="canvasLocation" x="125" y="122"/>
+        </tableViewCell>
+    </objects>
+</document>

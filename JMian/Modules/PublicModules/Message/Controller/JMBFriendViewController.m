@@ -27,6 +27,11 @@ static NSString *cellIdent = @"BfriendID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.view);
+        make.left.right.mas_equalTo(self.view);
+    }];
 //    self.view.backgroundColor = [UIColor redColor];
     // Do any additional setup after loading the view from its nib.
 }

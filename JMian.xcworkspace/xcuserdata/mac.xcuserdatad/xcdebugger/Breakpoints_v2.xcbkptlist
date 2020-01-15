@@ -2826,23 +2826,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "74FD19B4-B8E9-4709-9521-8907F8B79B6A"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PublicModules/Discover/Controller/JMDiscoverHomeViewController.m"
-            timestampString = "596373639.1192"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
-            landmarkName = "JMDiscoverHomeViewController"
-            landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A59BD5E8-B654-4D25-818F-7A44C0C3E0EC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -2922,22 +2905,6 @@
             startingLineNumber = "428"
             endingLineNumber = "428"
             landmarkName = "-didInputKeywordWithStr:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "96772174-1508-422D-BB30-A83FECA0D166"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PublicModules/Discover/View/JMVideoJoblistTableViewCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "-setModel:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3184,22 +3151,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CE35B76A-1F86-4A8B-ABD3-77BD6C9EC607"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/ThridParty/TUIKit/Classes/Section/Group/TUIGroupMemberController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
-            landmarkName = "-updateData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "C97DE891-9A51-4B9F-B4C5-0BD4A081B9C7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -3255,8 +3206,8 @@
             filePath = "JMian/Modules/PublicModules/Message/Controller/ChatViewController/Profile/JMCUserProfileViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
             landmarkName = "JMCUserProfileViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -3264,48 +3215,64 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "43CCD281-A984-401B-8469-3EC08747E880"
+            uuid = "2D8514E4-E6E4-4531-B5E3-AC37BE5AE8CE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/CompanyModules/CompanyMine/Contoller/JMBMineViewController.m"
+            filePath = "JMian/Modules/PublicModules/Message/Controller/ChatViewController/Profile/JMCUserProfileViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
-            landmarkName = "-didSelectCellWithRow:"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "-addFriendRequest"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "02B849B7-8478-40E5-9463-38D750F6ACE7"
+            uuid = "7C20864E-1405-4416-8F30-1BA47C2A9ABB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JMian/ThridParty/TUIKit/Classes/Section/Contact/TUIContactSelectController.m"
+            filePath = "JMian/Modules/PublicModules/Message/Controller/ChatViewController/JMGroupInfoViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "-groupInfoController:didDeleteMembersInGroup:members:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "166DB4E7-5E44-42F6-8FFB-A55E5F8FFA49"
+            uuid = "0C8E3976-2642-4A0A-B0D9-8579CF923AEA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "JMian/ThridParty/TUIKit/Classes/Section/Contact/ViewModel/TContactSelectViewModel.m"
+            filePath = "JMian/Modules/PublicModules/Message/Controller/JMMessageListViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-fillList:"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "-addGroup:addOption:withContacts:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CFB96F74-D751-41C7-92CF-16F2E76D2084"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PublicModules/Message/Controller/JMMessageListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "-viewWillDisappear:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

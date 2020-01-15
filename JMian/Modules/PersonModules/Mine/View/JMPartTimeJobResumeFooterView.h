@@ -34,6 +34,7 @@ typedef NS_ENUM(NSInteger, JMPartTimeJobResumeFooterViewType) {
 
 @interface JMPartTimeJobResumeFooterView : UIView
 
+@property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,copy)NSString * content;
 @property(nonatomic,strong)UILabel *placeHolder;
 @property(nonatomic,strong)UITextView *contentTextView;

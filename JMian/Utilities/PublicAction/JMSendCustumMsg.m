@@ -11,7 +11,7 @@
 
 @implementation JMSendCustumMsg
 
-+(void)setCustumMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
++(void)setCustumMessage_receiverID:(NSString *)receiverID dic:(NSDictionary * __nonnull)dic title:(NSString *)title{
     
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
@@ -24,7 +24,6 @@
     if (dic) {
         NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
         [custom_elem setData:data];
-        
     }
     //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
     
@@ -36,8 +35,6 @@
         //        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"申请成功" leftTitle:@"返回" rightTitle:@"查看任务"];
     }fail:^(int code, NSString * err) {
         NSLog(@"SendMsg Failed:%d->%@", code, err);
-        
-        
     }];
     
     

@@ -278,8 +278,11 @@
     if ([user_type isEqualToString:@"a"]) {
         JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
         vc.user_id =  user_id;
-//        vc.userIM_id = cell.messageData.identifier;
-        vc.viewType = JMCUserProfileView_Type_C2C;
+        if (self.myConvModel.viewType == JMMessageList_Type_C2C) {
+            vc.viewType = JMCUserProfileView_Type_C2C;
+        }else if (self.myConvModel.viewType == JMMessageList_Type_Group){
+            vc.viewType = JMCUserProfileView_Type_Group;
+        }
         [self.navigationController pushViewController:vc animated:YES];
     }else{
         if (self.myConvModel.viewType == JMMessageList_Type_C2C) {
@@ -287,8 +290,7 @@
         }else if (self.myConvModel.viewType == JMMessageList_Type_Group) {
             JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
             vc.user_id =  user_id;
-//            vc.userIM_id = cell.messageData.identifier;
-            vc.viewType = JMBUserProfileView_Type_C2C;
+            vc.viewType = JMBUserProfileView_Type_Group;
             [self.navigationController pushViewController:vc animated:YES];
             
         }

@@ -40,7 +40,8 @@
 #import "JMloginsucceedView.h"
 #import "JMUploadVideoViewController.h"
 #import "JMYoukeAction.h"
- #import "JMHTTPManager+FectchVersionInfo.h"
+#import "JMHTTPManager+FectchVersionInfo.h"
+#import "JMCTypeSaleDetailViewController.h"
 
 
 @interface JMAssignmentSquareViewController ()<UITableViewDelegate,UITableViewDataSource,JMChoosePositionTableViewControllerDelegate,JMSquareHeaderViewDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,JMPartTimeJobResumeViewControllerDelegate,JMCityListViewControllerDelegate,JMChoosePartTImeJobTypeLablesViewControllerDelegate,JMSquarePostTaskViewDelegate,JMTaskSeachViewControllerDelegate,iVersionDelegate,JMVersionDetailsViewDelegate,JMloginsucceedViewDelegate>
@@ -614,12 +615,19 @@ static NSString *C_cellIdent = @"CSquareCellID";
         [self.navigationController pushViewController:vc animated:YES];
         
     }else{
-
-        JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
         JMTaskListCellData *model = self.dataArray[indexPath.row];
-        vc.task_id = model.task_id;
-        vc.viewType = JMCDetailDefaultType;
-        [self.navigationController pushViewController:vc animated:YES];
+        if ([model.payment_method isEqualToString:@"1"]) {
+            JMCTypeSaleDetailViewController *vc = [[JMCTypeSaleDetailViewController alloc]init];
+            vc.task_id = model.task_id;
+            vc.viewType = CTypeSaleViewDefaultType;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
+            vc.task_id = model.task_id;
+            vc.viewType = JMCDetailDefaultType;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
     }
     
 }

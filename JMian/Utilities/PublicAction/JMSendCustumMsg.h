@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMSendCustumMsg : NSObject
 
-+(void)setCustumMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title;
++(void)setCustumMessage_receiverID:(NSString *)receiverID dic:(NSDictionary * __nonnull)dic title:(NSString *)title;
 
 @end
 

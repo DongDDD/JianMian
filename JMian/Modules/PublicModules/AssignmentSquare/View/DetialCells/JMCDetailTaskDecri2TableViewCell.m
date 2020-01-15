@@ -7,7 +7,7 @@
 //
 
 #import "JMCDetailTaskDecri2TableViewCell.h"
-NSString *const JMCDetailTaskDecri2TableViewCellIdentifier = @"JMCDetailTaskDecri2TableViewCellIdentifier";
+NSString *const JMCDetailDecri2TableViewCellIdentifier = @"JMCDetailTaskDecri2TableViewCellIdentifier";
 @interface JMCDetailTaskDecri2TableViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *contentLab;

@@ -662,6 +662,7 @@
         JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
         data.convType = TConv_Type_C2C;
         messageListModel.data =data;
+        messageListModel.viewType = JMMessageList_Type_C2C;
         JMChatViewController *vc = [[JMChatViewController alloc]init];
         vc.myConvModel = messageListModel;
         [self.navigationController pushViewController:vc animated:YES];

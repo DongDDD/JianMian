@@ -89,7 +89,7 @@
                 data.name = member.nameCard;
             }else{
                 TIMUserProfile *user = [[TIMFriendshipManager sharedInstance] queryUserProfile:member.member];
-                data.name = user.showName;
+                data.name = user.nickname;
                 
             }
             
@@ -156,12 +156,15 @@
         NSString *str =  [self.groupInfo showNotification];
         if (str.length > 0) {
             addOptionData.value = str;
-            addOptionData.cselector = @selector(didSelectNotificationOption:);
             addOptionData.showAccessory = YES;
         }else{
             addOptionData.value =@"未设置";
 
         }
+        
+        addOptionData.cselector = @selector(didSelectNotificationOption:);
+  
+        
 //        if ([self.groupInfo isMeOwner]) {
 //        }
         //        //私有群禁止加入，只能邀请
@@ -351,9 +354,10 @@
     if ( [self.groupInfo showNotification].length > 0) {
         vc.groupIntroduce = [self.groupInfo showNotification];
          
-    }else{
-        vc.groupIntroduce = @"未设置";
     }
+//    else{
+//        vc.groupIntroduce = @"";
+//    }
     [self.navigationController pushViewController:vc animated:YES];
 //    TModifyViewData *data = [[TModifyViewData alloc] init];
 //    data.title = @"修改群公告";
@@ -567,16 +571,16 @@
     }
     else
     {
-    
+        NSString *user_id = [mem.identifier substringToIndex:[mem.identifier length]-1];
         NSString *user_type =[mem.identifier substringFromIndex:[mem.identifier  length]-1];
         if ([user_type isEqualToString:@"a"]) {
             JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
-            vc.user_id =  mem.identifier;
+            vc.user_id =  user_id;
             vc.viewType = JMBUserProfileView_Type_Group;
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             JMBUserProfileViewController *vc = [[JMBUserProfileViewController alloc]init];
-            vc.user_id =  mem.identifier;
+            vc.user_id =  user_id;
             vc.viewType = JMBUserProfileView_Type_Group;
             [self.navigationController pushViewController:vc animated:YES];
 

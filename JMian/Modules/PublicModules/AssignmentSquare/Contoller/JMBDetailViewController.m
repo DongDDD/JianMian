@@ -181,7 +181,7 @@
     _videoChatView = [[JMVideoChatView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
     _videoChatView.delegate = self;
     _videoChatView.tag = 222;
-//    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
+    [_videoChatView createChatRequstWithForeign_key:foreign_key recipient:recipient chatType:chatType];
     //[_videoChatView setInterviewModel:nil];
     [self.view addSubview:_videoChatView];
     [self.navigationController setNavigationBarHidden:YES];
@@ -258,6 +258,7 @@
             JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
             data.convType = TConv_Type_C2C;
             messageListModel.data =data;
+            messageListModel.viewType = JMMessageList_Type_C2C;
             JMChatViewController *vc = [[JMChatViewController alloc]init];
             vc.myConvModel = messageListModel;
             [self.navigationController pushViewController:vc animated:YES];
@@ -398,7 +399,7 @@
         
     }else if (indexPath.section == 1) {
         //自我介绍
-        JMCDetailTaskDecri2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailTaskDecri2TableViewCellIdentifier forIndexPath:indexPath];
+        JMCDetailTaskDecri2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailDecri2TableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.contentDecri = self.configures.model.myDescription;
         return cell;
@@ -553,7 +554,7 @@
         _tableView.sectionFooterHeight = 5;
 //        [_tableView registerNib:[UINib nibWithNibName:@"JMBDetailVideoTableViewCell" bundle:nil] forCellReuseIdentifier:JMBDetailVideoTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMBDetailHeaderInfoTableViewCell" bundle:nil] forCellReuseIdentifier:JMBDetailHeaderInfoTableViewCellIdentifier];
-        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecri2TableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailTaskDecri2TableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecri2TableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailDecri2TableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailImageTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailImageTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailCommentTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailCommentTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMNoDataTableViewCell" bundle:nil] forCellReuseIdentifier:JMNoDataTableViewCellIdentifier];

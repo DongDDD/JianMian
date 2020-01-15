@@ -10,7 +10,6 @@
 #import "DimensMacros.h"
 @interface JMPartTimeJobResumeFooterView ()<UITextViewDelegate>
 
-@property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,assign)JMPartTimeJobResumeFooterViewType myViewType;
 
 @end

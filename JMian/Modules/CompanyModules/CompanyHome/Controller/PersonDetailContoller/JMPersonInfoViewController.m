@@ -34,6 +34,25 @@
 #import "ZJImageMagnification.h"
 
 #import "JMYoukeAction.h"
+//个人信息
+#import "JMCUserProfileViewController.h"
+
+//-(void)didClickBottomActionWithData:(JMVideoListCellData *)data{
+//    //点击C端用户
+//    if (data.user_job_id) {
+//        JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
+//        vc.user_id = data.user_id;
+//        vc.viewType = JMCUserProfileView_Type_Video;
+//        if (data.user_amigo) {
+//            vc.isMyFriend = YES;
+//        }
+//        self.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
+//        self.hidesBottomBarWhenPushed = NO;
+//
+//    }
+//
+//}
 @interface JMPersonInfoViewController ()<UITableViewDelegate,UITableViewDataSource,THDatePickerViewDelegate,JMMyShareViewDelegate,JMPersonVideoTableViewCellDelegate,JMPersonContactTableViewCellDelegate,JMPersonHeaderTableViewCellDelegate>
 
 @property(nonatomic,strong)UITableView *tableView;
@@ -244,6 +263,7 @@
        JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
        data.convType = TConv_Type_C2C;
        messageListModel.data =data;
+        messageListModel.viewType = JMMessageList_Type_C2C;
        JMChatViewController *vc = [[JMChatViewController alloc]init];
        vc.myConvModel = messageListModel;
        [self.navigationController pushViewController:vc animated:YES];
@@ -563,6 +583,18 @@
         
     }
     return nil;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        JMCUserProfileViewController *vc = [[JMCUserProfileViewController alloc]init];
+        vc.user_id = self.configures.model.user_id;
+//        vc.viewType = JMCUserProfileView_Type_Video;
+        self.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+        self.hidesBottomBarWhenPushed = NO;
+    }
+    
 }
 
 #pragma mark - scrollViewDelegate

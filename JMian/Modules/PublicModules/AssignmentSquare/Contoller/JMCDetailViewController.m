@@ -30,6 +30,7 @@
 #import "JMBUserPostSaleJobViewController.h"
 #import "JMBUserPostPartTimeJobViewController.h"
 #import "JMHTTPManager+DeleteTask.h"
+#import "JMSendCustumMsg.h"//发送自定义消息
 
 
 @interface JMCDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMCDetailVideoTableViewCellDelegate,JMShareViewDelegate,JMTaskApplyForViewDelegate>
@@ -239,6 +240,7 @@
         JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
         data.convType = TConv_Type_C2C;
         messageListModel.data =data;
+        messageListModel.viewType = JMMessageList_Type_C2C;
         JMChatViewController *vc = [[JMChatViewController alloc]init];
         vc.myConvModel = messageListModel;
         [self.navigationController pushViewController:vc animated:YES];
@@ -254,8 +256,8 @@
         //        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         //
         NSString *receiverId = [NSString stringWithFormat:@"%@b",_user_id];
-        [self setTaskMessage_receiverID:receiverId dic:nil title:@"[任务申请]"];
-        
+         [JMSendCustumMsg setCustumMessage_receiverID:receiverId dic:nil title:@"[任务申请]"];
+
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
@@ -277,10 +279,7 @@
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
             
         }];
-        
-//    }else{
-//        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请兼职" leftTitle:@"返回" rightTitle:@"去实名认证"];
-//    }
+
 }
 
 //更新任务上下线
@@ -435,39 +434,7 @@
     return newImage;
 }
 
-#pragma mark -  （自定义消息）
 
--(void)setTaskMessage_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
-    
-    TIMConversation *conv = [[TIMManager sharedInstance]
-                             getConversation:(TIMConversationType)TIM_C2C
-                             receiver:receiverID];
-    
-    // 转换为 NSData
-    
-    TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
-    //    [custom_elem setData:data];
-    if (dic) {
-        NSData *data = [NSJSONSerialization dataWithJSONObject:dic options:NSJSONWritingPrettyPrinted error:nil];
-        [custom_elem setData:data];
-        
-    }
-    //    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
-    
-    [custom_elem setDesc:title];
-    TIMMessage * msg = [[TIMMessage alloc] init];
-    [msg addElem:custom_elem];
-    [conv sendMessage:msg succ:^(){
-        NSLog(@"SendMsg Succ");
-        [self showAlertVCWithHeaderIcon:@"purchase_succeeds" message:@"申请成功" leftTitle:@"返回" rightTitle:@"查看任务"];
-    }fail:^(int code, NSString * err) {
-        NSLog(@"SendMsg Failed:%d->%@", code, err);
-        
-        
-    }];
-    
-    
-}
 #pragma mark -- Action
 -(void)right2Action{
     NSString *str = kFetchMyDefault(@"youke");
@@ -903,7 +870,7 @@
                 [cell setData:self.configures.model];
                 return cell;
             }else {
-                JMCDetailTaskDecri2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailTaskDecri2TableViewCellIdentifier forIndexPath:indexPath];
+                JMCDetailTaskDecri2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailDecri2TableViewCellIdentifier forIndexPath:indexPath];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 [cell setModel:self.configures.model];
                 return cell;
@@ -1049,7 +1016,7 @@
                 _tableView.sectionFooterHeight = 5;
         [_tableView registerNib:[UINib nibWithNibName:@"JMTaskDetailHeaderTableViewCell" bundle:nil] forCellReuseIdentifier:JMTaskDetailHeaderTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecriTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailTaskDecriTableViewCellIdentifier];
-        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecri2TableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailTaskDecri2TableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecri2TableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailDecri2TableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailVideoTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailVideoTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailImageTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailImageTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailCommentTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailCommentTableViewCellIdentifier];

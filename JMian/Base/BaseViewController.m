@@ -328,6 +328,7 @@
         
     }];
 }
+
 //更新用户信息
 -(void)upDateUserData{
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {

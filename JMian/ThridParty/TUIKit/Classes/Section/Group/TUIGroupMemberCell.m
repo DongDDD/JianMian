@@ -58,7 +58,7 @@
     if (data.name.length) {
         self.name.text = data.name;
     } else {
-        self.name.text = data.identifier;
+//        self.name.text = data.identifier;
     }
     [self defaultLayout];
 }

@@ -61,38 +61,6 @@
     NSMutableArray *nonameList = @[].mutableCopy;
     
     for (TIMUserProfile *profile in profiles) {
-//        NSString *user_type =[profile.identifier substringFromIndex:[profile.identifier length]-1];
-//
-//        NSData *bstepData = profile.customInfo[@"bstep"];
-//        NSData *cstepData = profile.customInfo[@"astep"];
-//        NSData *abilityData = profile.customInfo[@"jianzhi"];
-//
-//        NSString *company_stepStr = [[ NSString alloc] initWithData:bstepData encoding:NSUTF8StringEncoding];
-//        NSString *user_stepStr = [[ NSString alloc] initWithData:cstepData encoding:NSUTF8StringEncoding];
-//        NSString *ability = [[ NSString alloc] initWithData:abilityData encoding:NSUTF8StringEncoding];
-//
-//        NSInteger company_stepInt = [company_stepStr integerValue];
-//        NSInteger user_stepInt = [user_stepStr integerValue];
-//        NSInteger ability_count = [ability integerValue];
-//
-//        if ([user_type isEqualToString:@"a"]) {
-//            if (!(user_stepInt > 5 || ability_count > 0)) {
-//                    continue;         
-//            }
-//        }
-////
-////        if ([user_type isEqualToString:@"b"]) {
-////            if (company_stepInt < 5) {
-////                return;
-////            }
-////        }
-//        if ([user_type isEqualToString:@"b"]) {
-//            if (company_stepInt < 4) {
-//                continue;
-//            }
-//            
-//        }
-        
         TCommonContactSelectCellData *data = [TCommonContactSelectCellData new];
         [data setProfile:profile];
         

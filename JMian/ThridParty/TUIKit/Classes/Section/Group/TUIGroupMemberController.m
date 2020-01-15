@@ -54,7 +54,7 @@
                 user.name = member.nameCard;
             }else{
                 TIMUserProfile *userProfile = [[TIMFriendshipManager sharedInstance] queryUserProfile:member.member];
-                user.name = userProfile.showName;
+                user.name = userProfile.nickname;
             }
           
             [self.members addObject:user];
