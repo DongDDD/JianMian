@@ -60,7 +60,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
-            <point key="canvasLocation" x="-65" y="140"/>
+            <connections>
+                <outlet property="goodsCount" destination="TT6-cC-x2Q" id="uT0-sE-84B"/>
+                <outlet property="logoImage" destination="kN4-g7-lm2" id="MTt-Wx-m6G"/>
+                <outlet property="titleLab" destination="621-YK-6CE" id="tcZ-AP-XbR"/>
+            </connections>
+            <point key="canvasLocation" x="33" y="127"/>
         </tableViewCell>
     </objects>
     <resources>

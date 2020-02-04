@@ -31,7 +31,8 @@
 #import "JMPictureManagerViewController.h"
 #import "JMPictureAddViewController.h"
 #import "HXPhotoTools.h"
-
+#import "JMPartTimeJobResumeFooterView.h"
+#import "JMHTTPManager+Login.h"
 #define RightTITLE_COLOR [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
 
 @interface JMBUserPostSaleJobViewController ()<JMBUserPositionDetailViewDelegate,JMCityListViewControllerDelegate,JMIndustryWebViewControllerDelegate,JMPartTimeJobTypeLabsViewControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,JMComfirmPostBottomViewDelegate,UIScrollViewDelegate,JMGoodsDescriptionViewControllerDelegate,JMBUserPositionVideoViewDelegate,UIImagePickerControllerDelegate,JMPostGoodsImagesViewDelegate,Demo3ViewControllerDelegate,UITextFieldDelegate,JMPictureAddViewControllerDelegate,JMPictureManagerViewControllerDelegate>
@@ -39,6 +40,7 @@
 @property (strong, nonatomic)UIScrollView *scrollView;
 
 @property (strong, nonatomic)JMBUserPositionDetailView *detailView;
+@property (nonatomic,strong)JMPartTimeJobResumeFooterView *decriptionTextView;
 @property (strong, nonatomic)JMBUserPositionVideoView *videoView;
 @property (strong, nonatomic)Demo3ViewController *demo3ViewVC;
 @property (strong, nonatomic)JMPostGoodsImagesView *postGoodsImagesView;
@@ -105,6 +107,10 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hidePickView)];
     [self.view addGestureRecognizer:tap];
     self.bottomH.constant = 61 + SafeAreaBottomHeight;
+    
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    self.detailView.storeTitle.text = userModel.shop_name;
+
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -116,11 +122,12 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 -(void)initView{
     [self.view addSubview:self.scrollView];
     [self.scrollView addSubview:self.detailView];
-    [self.scrollView addSubview:self.videoView];
-    [self.scrollView addSubview:self.postGoodsImagesView];
+    [self.scrollView addSubview:self.decriptionTextView];//任务描述
+
+//    [self.scrollView addSubview:self.videoView];
+//    [self.scrollView addSubview:self.postGoodsImagesView];
 //    [self.scrollView addSubview:self.demo3ViewVC.view];
     [self.scrollView addSubview:self.comfirmPostBottomView];
-    
     
     //编辑模式
     if (_viewType == JMBUserPostSaleJobViewTypeEdit) {
@@ -134,8 +141,6 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         [self.comfirmPostBottomView setHidden:NO];
 
     }
-    
-   
 }
 
 -(void)initLayout{
@@ -148,38 +153,47 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [self.detailView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.scrollView.mas_top);
-        make.height.mas_equalTo(357);
+        make.height.mas_equalTo(264);
     }];
-    [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.decriptionTextView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.detailView.mas_bottom).mas_offset(1);
-        make.height.mas_equalTo(304);
+        make.top.mas_equalTo(self.detailView.mas_bottom);
+        make.height.mas_equalTo(222);
     }];
-//    self.demo3ViewVC.view.backgroundColor = [UIColor redColor];
-//    [self.demo3ViewVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+    //    [self.videoView mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.left.and.right.mas_equalTo(self.view);
+    //        make.top.mas_equalTo(self.detailView.mas_bottom).mas_offset(1);
+    //        make.height.mas_equalTo(304);
+    //    }];
+    //    self.demo3ViewVC.view.backgroundColor = [UIColor redColor];
+    //    [self.demo3ViewVC.view mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.left.and.right.mas_equalTo(self.view);
+    //        make.top.mas_equalTo(self.videoView.mas_bottom).mas_offset(1);
+    //        make.height.mas_equalTo(408);
+    //    }];
+    
+//    [self.postGoodsImagesView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.and.right.mas_equalTo(self.view);
 //        make.top.mas_equalTo(self.videoView.mas_bottom).mas_offset(1);
-//        make.height.mas_equalTo(408);
+//        make.height.mas_equalTo(86);
 //    }];
-    
-    [self.postGoodsImagesView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.and.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.videoView.mas_bottom).mas_offset(1);
-        make.height.mas_equalTo(86);
-    }];
     [self.comfirmPostBottomView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.mas_equalTo(self.view);
-        make.top.mas_equalTo(self.postGoodsImagesView.mas_bottom).mas_offset(10);
+        make.top.mas_equalTo(self.decriptionTextView.mas_bottom).mas_offset(10);
         make.height.mas_equalTo(127);
     }];
     
 }
 #pragma mark - textFieldDelegate
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
-  
     [textField resignFirstResponder];
     return YES;
 }
+
+-(void)doneClicked{
+    [self.decriptionTextView.contentTextView resignFirstResponder];
+}
+
 
 #pragma mark - myDelegate
 
@@ -852,6 +866,8 @@ static NSString *cellIdent = @"BUserPostPositionCell";
 
 #pragma mark -  提交数据
 
+
+
 -(void)rightAction{
  //删除任务
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"确认删除吗，删除后数据将不可恢复！" preferredStyle:UIAlertControllerStyleAlert];
@@ -1187,6 +1203,21 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     return _detailView;
 }
 
+- (JMPartTimeJobResumeFooterView *)decriptionTextView{
+    if (_decriptionTextView == nil) {
+        _decriptionTextView = [JMPartTimeJobResumeFooterView new];
+//        _decriptionTextView.frame = CGRectMake(0, 350 , SCREEN_WIDTH, 229);
+        _decriptionTextView.titleLab.text = @"任务描述";
+        _decriptionTextView.contentTextView.backgroundColor = BG_COLOR;
+        _decriptionTextView.layer.cornerRadius = 5;
+        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
+        _decriptionTextView.delegate = self;
+        //        _decriptionTextView.contentTextView.delegate = self;
+        
+    }
+    return _decriptionTextView;
+}
+
 -(JMBUserPositionVideoView *)videoView{
     if (_videoView == nil) {
         _videoView = [[JMBUserPositionVideoView alloc]init];
@@ -1229,6 +1260,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     if (_scrollView == nil) {
         _scrollView = [[UIScrollView alloc]init];
         _scrollView.delegate = self;
+        _scrollView.showsVerticalScrollIndicator = NO;
     }
     return _scrollView;
 }

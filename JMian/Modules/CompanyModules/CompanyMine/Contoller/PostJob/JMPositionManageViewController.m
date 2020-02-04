@@ -115,8 +115,7 @@
         [alert addAction:[UIAlertAction actionWithTitle:@"发布任务" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
             vc.viewType = JMBUserPostPartTimeJobTypeAdd;
-            [self.navigationController pushViewController:vc animated:YES];
-            
+            [self.navigationController pushViewController:vc animated:YES];            
         }]];
         [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
 

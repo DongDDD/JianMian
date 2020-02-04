@@ -91,6 +91,9 @@
             <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
             <size key="customSize" width="141" height="207"/>
             <connections>
+                <outlet property="imageView" destination="EkX-kc-kxa" id="vNg-pI-qxg"/>
+                <outlet property="priceLab" destination="Ha3-fp-4hD" id="97e-y8-aIm"/>
+                <outlet property="titleLab" destination="Pqz-PH-p7u" id="0oP-PV-Aqu"/>
                 <outlet property="topLeftLab" destination="g9I-DL-wD1" id="Rsb-zD-fJg"/>
             </connections>
             <point key="canvasLocation" x="-96.376811594202906" y="73.995535714285708"/>

@@ -82,11 +82,19 @@
     _viewType = JMPostJobHomeTableViewCellTypeTask;
     _myTaskListCellData = taskListCellData;
     self.workNameLab.text = taskListCellData.task_title;
+    NSString *city;
+    NSString *payment_money;
     if (taskListCellData.cityID == nil) {
-        self.detailLab.text = [NSString stringWithFormat:@"不限-%@/单",taskListCellData.payment_money];
+        city = @"城市不限";
     }else{
-        self.detailLab.text =[NSString stringWithFormat:@"%@-%@/单",taskListCellData.cityName,taskListCellData.payment_money] ;
+        city = taskListCellData.cityName;
     }
+    if (![taskListCellData.payment_money isEqualToString:@"0"]) {
+        payment_money =[NSString stringWithFormat:@"%@ 元/单",taskListCellData.payment_money] ;
+    }else{
+        payment_money = @"";
+    }
+    self.detailLab.text =[NSString stringWithFormat:@"%@    %@",city,payment_money];
     if ([taskListCellData.status isEqualToString:@"0"]) {
         self.salaryLab.text = @"已下线";
         [self.salaryLab setHidden:NO];

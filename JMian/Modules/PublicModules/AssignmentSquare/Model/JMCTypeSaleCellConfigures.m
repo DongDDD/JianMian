@@ -24,7 +24,7 @@
             self.rowsNum = 1;
             self.footerheight = 0;
             self.headerheight = 44;
-            self.height = 299;
+            self.height = 220;
           //  self.cellId = JMMyStoreOrderStatusTableViewCellIdentifier;
             break;
         case JMCTypeSaleCellTypeTaskDesc2:

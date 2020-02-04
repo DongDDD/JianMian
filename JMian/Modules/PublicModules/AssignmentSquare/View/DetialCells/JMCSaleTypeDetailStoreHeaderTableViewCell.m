@@ -16,6 +16,11 @@ NSString *const JMCSaleTypeDetailStoreHeaderTableViewCellIdentifier = @"JMCSaleT
     // Initialization code
 }
 
+-(void)setModel:(JMShopModel *)model{
+    self.titleLab.text  = model.shop_name;
+    
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

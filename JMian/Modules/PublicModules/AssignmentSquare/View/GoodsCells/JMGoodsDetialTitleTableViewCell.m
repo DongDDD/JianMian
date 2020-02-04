@@ -16,6 +16,14 @@ NSString *const JMGoodsDetialTitleTableViewCellIdentifier = @"JMGoodsDetialTitle
     // Initialization code
 }
 
+-(void)setModel:(JMGoodsInfoModel *)model{
+    self.titleLab.text = model.title;
+    self.priceLab.text = model.price;
+    self.salarylab.text = [NSString stringWithFormat:@"佣金: ¥%@",model.salary];
+    
+}
+
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

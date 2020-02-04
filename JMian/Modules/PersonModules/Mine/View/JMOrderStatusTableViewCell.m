@@ -20,6 +20,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *adressLab;//收货地址
 //@property (weak, nonatomic) IBOutlet UIImageView *detailImg;//详情按钮右面箭头
 @property (weak, nonatomic) IBOutlet UIButton *logisticsNumBtn;
+@property (weak, nonatomic) IBOutlet UIButton *refundBtn;
+@property (weak, nonatomic) IBOutlet UIButton *contactBtn;
+@property (weak, nonatomic) IBOutlet UIButton *comfirmBtn;
+@property (weak, nonatomic) IBOutlet UIButton *payBtn;
 
 //@property (nonatomic, strong)UIView *detailContentView;//快递
 //@property (nonatomic, strong)UIImageView *cpImage;//复制图标
@@ -89,8 +93,16 @@
         [self.rightTopBtn setTitle:@"未付款" forState:UIControlStateNormal];
         [self.didSendGoodsImageView setHidden:YES];
         [self.rightTopBtn setEnabled:NO];
-        
+        [self.refundBtn setHidden:YES];
+        [self.contactBtn setHidden:NO];
+        [self.comfirmBtn setHidden:YES];
+        [self.payBtn setHidden:NO];
     }else if ([orderCellData.status isEqualToString:@"2"]) {
+        [self.refundBtn setHidden:NO];
+        [self.contactBtn setHidden:NO];
+        [self.comfirmBtn setHidden:NO];
+        [self.payBtn setHidden:YES];
+        
         //已付款,未发货
         NSString *rightTopBtnTitle;
         if ([userModel.type isEqualToString:B_Type_UESR]) {
@@ -103,7 +115,6 @@
                 [self.rightTopBtn setEnabled:YES];
                 
             }
-
         }else if ([userModel.type isEqualToString:C_Type_USER]){
             //任务接受者或消费者
             rightTopBtnTitle = @"已付款，待发货";
@@ -171,6 +182,11 @@
     }
 
     
+}
+- (IBAction)bottomBtnAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickBottomBtnActionWithTag:)]) {
+        [_delegate didClickBottomBtnActionWithTag:sender.tag];
+    }
 }
 
 

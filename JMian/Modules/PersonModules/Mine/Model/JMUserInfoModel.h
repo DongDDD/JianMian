@@ -65,9 +65,39 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *unusable_amount_b;
 @property (nonatomic, copy) NSString *task_completed_count;
 @property (nonatomic, copy) NSString *task_processing_count;
+//店铺
+@property (nonatomic, copy) NSString *shop_address;
+@property (nonatomic, copy) NSString *shop_description;
+@property (nonatomic, copy) NSString *shop_logo;
+@property (nonatomic, copy) NSString *shop_name;
+@property (nonatomic, copy) NSString *shop_business_hours_start;
+@property (nonatomic, copy) NSString *shop_poster;
+@property (nonatomic, copy) NSString *shop_phone;
+@property (nonatomic, copy) NSString *shop_business_hours_end;
+@property (nonatomic, copy) NSString *shop_area_id;
+@property (nonatomic, copy) NSString *shop_sort;
+@property (nonatomic, copy) NSString *shop_status;
+@property (nonatomic, copy) NSString *shop_shop_id;
+
+
+
+
+
 
 
 @end
-
+//"shop_address" : "",
+// "description" : null,
+// "shop_logo" : "",
+// "shop_name" : "魔兽专卖店",
+// "business_hours_start" : null,
+// "created_at" : "2020-01-10 09:27:31",
+// "shop_poster" : "魔兽专卖",
+// "shop_phone" : "16626407541",
+// "business_hours_end" : null,
+// "area_id" : 0,
+// "sort" : 50,
+// "status" : 0,
+// "shop_id" : 2
 
 NS_ASSUME_NONNULL_END

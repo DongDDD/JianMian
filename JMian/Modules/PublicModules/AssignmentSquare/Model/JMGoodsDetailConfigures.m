@@ -31,9 +31,8 @@
             self.rowsNum = 1;
             self.footerheight = 1;
             self.headerheight = 0;
-            self.height = 215;
+            self.height = 298;
 
-//            self.height = [self getHeightFromDecri];
             //self.cellId = JMMyStoreManager1TableViewCellIdentifier;
             break;
         case JMGoodsDetailCellTypeVideo:
@@ -43,13 +42,13 @@
             self.height = 260;
             //self.cellId = JMMyStoreManager2TableViewCellIdentifier;
             break;
-        case JMGoodsDetailCellTypeImages:
-            self.rowsNum = 1;
-            self.footerheight = 1;
-            self.headerheight = 1;
-            self.height = 500;
-            //self.cellId = JMMyStoreManager2TableViewCellIdentifier;
-            break;
+//        case JMGoodsDetailCellTypeImages:
+//            self.rowsNum = self.model.images.count;
+//            self.footerheight = 1;
+//            self.headerheight = 1;
+//            self.height = 500;
+//            //self.cellId = JMMyStoreManager2TableViewCellIdentifier;
+//            break;
         case JMGoodsDetailCellTypeMicrotitle:
             self.rowsNum = 1;
             self.footerheight = 1;
@@ -98,17 +97,26 @@
  }
 
 -(CGFloat)getHeightFromDecri{
-    //销售任务
     CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:@"" andFont:[UIFont systemFontOfSize:14] andLinespace:8];
     NSLog(@"FFFFF:%f",H);
     return H+100;
 }
 
+//-(CGFloat)getHeightFromImage{
+//    JMGoodsInfoImageModel *imgModel = self.model.images[indexPath.row];
+//    UIImageView *imageView = [[UIImageView alloc]init];
+//    [imageView sd_setImageWithURL:[NSURL URLWithString:imgModel.file_path] placeholderImage:nil options:SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+//        NSLog(@"宽：%f, 高：%f", image.size.width, image.size.height);
+//        CGFloat imgHeight = image.size.height * SCREEN_WIDTH / image.size.width;
+//        self.height = imgHeight;
+//    }];
+//
+//}
+
 
 
 - (CGFloat)boundingRectWithSize:(CGSize)size WithStr:(NSString*)string andFont:(UIFont *)font andLinespace:(CGFloat)space
-{
-    
+{    
     NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc]init];
     [style setLineSpacing:space];
     NSDictionary *attribute = @{NSFontAttributeName:font,NSParagraphStyleAttributeName:style};

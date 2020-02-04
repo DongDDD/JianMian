@@ -13,6 +13,7 @@ NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDet
 
 @interface JMCSaleTypeDetailGoodsTableViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property(nonatomic,strong)UICollectionView *collectionView;
+@property(nonatomic,strong)NSArray *myGoodsArray;
 
 @end
 
@@ -31,13 +32,14 @@ NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDet
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
--(void)setModel:(JMCDetailModel *)model{
+
+-(void)setGoodsArray:(NSArray *)goodsArray{
+    _myGoodsArray = goodsArray;
     [self addSubview:self.collectionView];
-    
+    [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -46,20 +48,22 @@ NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDet
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section{
-    return 3;
+    return self.myGoodsArray.count;
 }
 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JMGoodsCollectionViewCell *cell = (JMGoodsCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:JMGoodsCollectionViewCellIdentifier forIndexPath:indexPath];
-    
+    JMGoodsData *data = self.myGoodsArray[indexPath.row];
+    [cell setData:data];
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     if (_delegate && [_delegate respondsToSelector:@selector(didSelectedGoodsItemsWithModel:)]) {
-        [_delegate didSelectedGoodsItemsWithModel:nil];
+        JMGoodsData *data = self.myGoodsArray[indexPath.row];
+        [_delegate didSelectedGoodsItemsWithModel:data];
     }
      NSLog(@"asdf");
     //    [collectionView selectItemAtIndexPath:indexPath animated:YES scrollPosition:nil];

@@ -8,10 +8,17 @@
 
 #import "JMGoodsDetailViewController.h"
 #import "JMGoodsDetailConfigures.h"
+#import "JMHTTPManager+GetGoodsInfo.h"
+#import "JMHTTPManager+GetGoodsList.h"
 
-@interface JMGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "DimensMacros.h"
+
+@interface JMGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMGoodsDescTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)JMGoodsDetailConfigures *configures;
+@property(nonatomic,strong)UIWebView *webView;
+
+
 @end
 
 @implementation JMGoodsDetailViewController
@@ -24,7 +31,45 @@
         make.top.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.view);
     }];
+    [self getData];
     // Do any additional setup after loading the view from its nib.
+}
+
+#pragma mark - data
+
+-(void)getData{
+    [[JMHTTPManager sharedInstance]getGoodsInfoWithGoods_id:self.goods_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.configures.model = [JMGoodsInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+//             self getGoodsListWithShop_id:self.configures.model
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
+-(void)getGoodsListWithShop_id:(NSString *)shop_id{
+    [[JMHTTPManager sharedInstance]getGoodsListWithShop_id:shop_id status:@"" keyword:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+
+        if (responsObject[@"data"]) {
+            self.configures.goodsListArray = [JMGoodsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            [self.tableView reloadData];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
+#pragma mark - delegate
+-(void)getGoodsH:(CGFloat)H {
+    if (self.configures.height == 0) {
+        self.configures.height = H;
+        [self.tableView reloadData];
+         
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -54,45 +99,57 @@
     if (indexPath.section == JMGoodsDetailCellTypeSDC) {
         JMScrollviewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMScrollviewTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [cell setModel:self.configures.model];
+        NSMutableArray *imagesURLStrings = [NSMutableArray array];
+        for (JMGoodsInfoImageModel *model in self.configures.model.images) {
+            NSString *url = [NSString stringWithFormat:@"%@%@",API_BASE_URL_ImageSTRING,model.file_path];
+            [imagesURLStrings addObject:url];
+        }
+        if (imagesURLStrings.count > 0) {
+            [cell setImagesArr:imagesURLStrings];
+
+        }
         return cell;
     }
     else if (indexPath.section == JMGoodsDetailCellTypeTitle){
         JMGoodsDetialTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMGoodsDetialTitleTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setModel:self.configures.model];
 //        [cell setModel:self.configures.model];
         return cell;
     }
     else if (indexPath.section == JMGoodsDetailCellTypeDesc){
-        JMCDetailTaskDecri2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailDecri2TableViewCellIdentifier forIndexPath:indexPath];
+        JMGoodsDescTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMGoodsDescTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
+        [cell setDescStr:self.configures.model.goods_description];
 //        [cell setModel:self.configures.model];
         return cell;
     }
     else if (indexPath.section == JMGoodsDetailCellTypeVideo){
         JMCDetailVideoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailVideoTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [cell setGoodInfoModel:self.configures.model];
         //        [cell setModel:self.configures.model];
         return cell;
     }
-    else if (indexPath.section == JMGoodsDetailCellTypeImages){
-        JMCSaleTypeDetailGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCSaleTypeDetailGoodsTableViewCellIdentifier forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //        [cell setModel:self.configures.model];
-        return cell;
-    }
+//    else if (indexPath.section == JMGoodsDetailCellTypeImages){
+//        JMCDetailImageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCDetailImageTableViewCellIdentifier forIndexPath:indexPath];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        //        [cell setModel:self.configures.model];
+//        return cell;
+//    }
     else if (indexPath.section == JMGoodsDetailCellTypeMicrotitle){
         JMGoodsDetailMicrotitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMGoodsDetailMicrotitleTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         //            [cell setModel:self.configures.model];
         return cell;
     }
-    //        else if (indexPath.section == JMGoodsDetailCellTypeStoreGoods){
-    //            JMCSaleTypeDetailGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCSaleTypeDetailGoodsTableViewCellIdentifier forIndexPath:indexPath];
-    //            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    //            [cell setModel:self.configures.model];
-    //            return cell;
-//        }
+    else if (indexPath.section == JMGoodsDetailCellTypeStoreGoods){
+        JMCSaleTypeDetailGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCSaleTypeDetailGoodsTableViewCellIdentifier forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        [cell setModel:self.configures.model];
+        return cell;
+    }
     
     return nil;
 }
@@ -119,12 +176,16 @@
         //        _tableView.sectionHeaderHeight = 43;
                 _tableView.sectionFooterHeight = 5;
         [_tableView registerNib:[UINib nibWithNibName:@"JMScrollviewTableViewCell" bundle:nil] forCellReuseIdentifier:JMScrollviewTableViewCellIdentifier];
-        [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecriTableViewCell" bundle:nil] forCellReuseIdentifier:JMGoodsDetialTitleTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMGoodsDetialTitleTableViewCell" bundle:nil] forCellReuseIdentifier:JMGoodsDetialTitleTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailTaskDecri2TableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailDecri2TableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMGoodsDescTableViewCell" bundle:nil] forCellReuseIdentifier:JMGoodsDescTableViewCellIdentifier];
+
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailVideoTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailVideoTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCDetailImageTableViewCell" bundle:nil] forCellReuseIdentifier:JMCDetailImageTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMCSaleTypeDetailGoodsTableViewCell" bundle:nil] forCellReuseIdentifier:JMCSaleTypeDetailGoodsTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMGoodsDetailMicrotitleTableViewCell" bundle:nil] forCellReuseIdentifier:JMGoodsDetailMicrotitleTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMCSaleTypeDetailGoodsTableViewCell" bundle:nil] forCellReuseIdentifier:JMCSaleTypeDetailGoodsTableViewCellIdentifier];
+
 
         
     }

@@ -19,7 +19,7 @@
 #import "JMPostTypeChooseView.h"
 #import "JMHistoryViewController.h"
 #import "JMCDetailViewController.h"
-
+#import "JMCTypeSaleDetailViewController.h"
 
 
 @interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMPostTypeChooseViewDelegate,JMPostTaskBottomViewDelegate,JMPostJobHomeTableViewCellDelegate>
@@ -330,10 +330,18 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 //        [self gotoBUserPostPartTimeJobVC_task_id:task_id];
 //
 //    }
-    JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
-    vc.task_id = data.task_id;
-    vc.viewType = JMCDetailPreviewType;
-    [self.navigationController pushViewController:vc animated:YES];
+        if ([data.payment_method isEqualToString:@"1"]) {
+            JMCTypeSaleDetailViewController *vc = [[JMCTypeSaleDetailViewController alloc]init];
+            vc.task_id = data.task_id;
+            vc.viewType = CTypeSaleViewPreviewType;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
+            vc.task_id = data.task_id;
+            vc.viewType = JMCDetailPreviewType;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
 
 }
 

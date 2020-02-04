@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JMCDetailModel.h"
+#import "JMGoodsInfoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMCDetailVideoTableViewCellIdentifier;
@@ -20,6 +21,8 @@ extern NSString *const JMCDetailVideoTableViewCellIdentifier;
 @interface JMCDetailVideoTableViewCell : UITableViewCell
 
 @property(nonatomic,strong)JMCDetailModel *model;
+@property(nonatomic,strong)JMGoodsInfoModel *goodInfoModel;
+
 @property(nonatomic,weak)id<JMCDetailVideoTableViewCellDelegate>delegate;
 
 

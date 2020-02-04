@@ -10,17 +10,20 @@
 #import "JMScrollviewTableViewCell.h"
 #import "JMGoodsDetialTitleTableViewCell.h"
 #import "JMCDetailTaskDecri2TableViewCell.h"//商品介绍
+#import "JMGoodsDescTableViewCell.h"
 #import "JMCDetailVideoTableViewCell.h"
 #import "JMCDetailImageTableViewCell.h"
 #import "JMGoodsDetailMicrotitleTableViewCell.h"//小提示
 #import "JMCSaleTypeDetailGoodsTableViewCell.h"//店铺商品
+#import "JMGoodsDescTableViewCell.h"
+#import "JMGoodsInfoModel.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, JMGoodsDetailCellType){
     JMGoodsDetailCellTypeSDC = 0,
     JMGoodsDetailCellTypeTitle,
     JMGoodsDetailCellTypeDesc,
     JMGoodsDetailCellTypeVideo,
-    JMGoodsDetailCellTypeImages,
+//    JMGoodsDetailCellTypeImages,
     JMGoodsDetailCellTypeMicrotitle,
     JMGoodsDetailCellTypeStoreGoods,
 
@@ -36,6 +39,8 @@ typedef NS_ENUM(NSInteger, JMGoodsDetailCellType){
 @property (assign, nonatomic) NSInteger rowsNum;
 @property (assign, nonatomic) NSInteger section;
 @property (copy, nonatomic) NSString *cellId;
+@property (strong, nonatomic) JMGoodsInfoModel *model;
+@property (strong, nonatomic) NSArray *goodsListArray;
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 

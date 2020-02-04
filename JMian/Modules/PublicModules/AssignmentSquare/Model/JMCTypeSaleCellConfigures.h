@@ -14,6 +14,8 @@
 #import "JMCSaleTypeDetailGoodsTableViewCell.h"//店铺商品
 #import "JMCDetailCommentTableViewCell.h"//评论
 #import "JMCDetailModel.h"
+#import "JMShopModel.h"
+#import "JMGoodsData.h"
 #import "JMCommentCellData.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, JMCTypeSaleCellType){
@@ -49,6 +51,9 @@ typedef NS_ENUM(NSInteger, JMCTypeSaleCellType){
 - (void)didSelectedRowAtSection:(NSInteger)section;
 
 @property (strong, nonatomic) JMCDetailModel *model;
+@property (strong, nonatomic) JMShopModel *shopModel;
+@property (strong, nonatomic) NSArray *goodsListArray;
+
 @property (strong, nonatomic) NSArray *commentListArray;
 @end
 

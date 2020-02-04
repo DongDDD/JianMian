@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UITextField *quantityMaxTextField;
 @property (weak, nonatomic) IBOutlet UIButton *industryBtn;
 @property (weak, nonatomic) IBOutlet UIButton *goodsDescrptionBtn;
+@property (weak, nonatomic) IBOutlet UILabel *storeTitle;
+
 @property (weak, nonatomic) id<JMBUserPositionDetailViewDelegate>delegate;
 @end
 

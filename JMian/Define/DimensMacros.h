@@ -246,6 +246,7 @@ isPhoneX = [[UIApplication sharedApplication] delegate].window.safeAreaInsets.bo
 #define TIMER_INTERVAL 0.05         //计时器刷新频率
 #define VIDEO_FOLDER @"videoFolder" //视频录制存放文件夹
 
+#define API_BASE_URL_ImageSTRING     @"http://app.jmzhipin.com"
 
 
 #endif /* DimensMacros_h */

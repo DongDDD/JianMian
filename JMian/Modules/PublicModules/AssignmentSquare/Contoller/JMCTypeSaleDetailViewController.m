@@ -33,10 +33,11 @@
 #import "JMSendCustumMsg.h"//发送自定义消息
 #import "JMCreatChatAction.h"//创建聊天
 #import "JMGoodsDetailViewController.h"
+#import "JMHTTPManager+GetGoodsList.h"
+#import "JMHTTPManager+GetShopInfo.h"
 
 @interface JMCTypeSaleDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMShareViewDelegate,JMTaskApplyForViewDelegate,JMCSaleTypeDetailGoodsTableViewCellDelegate>
 @property (strong, nonatomic) UITableView *tableView;
-
 //@property (nonatomic, strong) UIView *headerTitleView;
 @property (nonatomic, strong) JMTaskDetailHeaderView *taskDetailHeaderView;
 
@@ -55,12 +56,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self getData];
     [self upDateUserData];
+
 }
 
 -(void)initView{
@@ -98,6 +101,7 @@
     
     
 }
+
 #pragma mark -- Data
 
 -(void)getData{
@@ -147,12 +151,13 @@
 //                [self.bottomRightBtn setTitle:@"立即申请" forState:UIControlStateNormal];
             }
         }
-        
+            [self getShopInfo];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
     
 }
+
 -(void)getCommentInfo{
     [[JMHTTPManager sharedInstance]fectchCommentInfoWithTask_order_id:nil order_id:nil user_id:nil company_id:self.configures.model.user_company_id page:nil per_page:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
@@ -219,6 +224,39 @@
     }];
     
 }
+
+
+
+-(void)getGoodsListWithShop_id:(NSString *)shop_id{
+    [[JMHTTPManager sharedInstance]getGoodsListWithShop_id:shop_id status:@"" keyword:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+
+        if (responsObject[@"data"]) {
+            self.configures.goodsListArray = [JMGoodsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            [self.tableView reloadData];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
+-(void)getShopInfo{
+    [[JMHTTPManager sharedInstance]getShopInfoWithUser_id:self.configures.model.user_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.configures.shopModel = [JMShopModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [self getGoodsListWithShop_id: self.configures.shopModel.shop_id];
+            
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
+
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 5;
@@ -242,10 +280,10 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    if (section == 1) {
+    if (section == 1 && _viewType == CTypeSaleViewDefaultType) {
         return self.titleView;
     }
- 
+    
     return [UIView new];
     
 }
@@ -270,19 +308,22 @@
     }else if (indexPath.section == JMCTypeSaleCellTypeMyStoreHeader){
         JMCSaleTypeDetailStoreHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCSaleTypeDetailStoreHeaderTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        [cell setModel:self.configures.model];
+        [cell setModel:self.configures.shopModel];
         return cell;
     }else if (indexPath.section == JMCTypeSaleCellTypeMyStoreGoods){
         JMCSaleTypeDetailGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCSaleTypeDetailGoodsTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
-        [cell setModel:self.configures.model];
+        [cell setGoodsArray:self.configures.goodsListArray];
+//        [cell setModel:self.configures.goodsListArray];
         return cell;
     }
     
     return nil;
 }
 
+
+ 
 //-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 //  return  se
 //
@@ -302,9 +343,10 @@
 
 }
 #pragma mark - delegate
--(void)didSelectedGoodsItemsWithModel:(JMCDetailModel *)model{
+-(void)didSelectedGoodsItemsWithModel:(JMGoodsData *)model{
     JMGoodsDetailViewController *vc = [[JMGoodsDetailViewController alloc]init];
     vc.title = @"产品详情";
+    vc.goods_id = model.goods_id;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

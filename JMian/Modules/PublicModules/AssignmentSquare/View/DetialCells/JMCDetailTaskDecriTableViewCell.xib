@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +14,7 @@
             <rect key="frame" x="0.0" y="0.0" width="467" height="336"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="467" height="335.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="467" height="336"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="会计经济金融英文翻译写作" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YDx-dk-KvR">
@@ -117,7 +115,7 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="***/***/***" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sws-jU-v7q">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="不限" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sws-jU-v7q">
                         <rect key="frame" x="106.5" y="251" width="340.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -137,7 +135,6 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Uw1-Kl-PV2" firstAttribute="top" secondItem="Hai-hT-QtC" secondAttribute="bottom" constant="11" id="0nc-DQ-pPB"/>
                     <constraint firstItem="3Ph-sK-V3H" firstAttribute="leading" secondItem="Uw1-Kl-PV2" secondAttribute="trailing" constant="10" id="14d-CL-i84"/>
                     <constraint firstItem="GuG-2j-xxn" firstAttribute="leading" secondItem="tDK-kq-PNP" secondAttribute="leading" id="2xl-Ao-xaH"/>
                     <constraint firstItem="Cf1-mD-hJ3" firstAttribute="leading" secondItem="GuG-2j-xxn" secondAttribute="trailing" constant="15" id="42L-TI-nyQ"/>
@@ -161,6 +158,7 @@
                     <constraint firstItem="3Ph-sK-V3H" firstAttribute="centerY" secondItem="Uw1-Kl-PV2" secondAttribute="centerY" id="mDS-Ms-rPc"/>
                     <constraint firstItem="oWH-Mq-hEm" firstAttribute="centerY" secondItem="LDd-u0-bWD" secondAttribute="centerY" id="mKj-FR-fLl"/>
                     <constraint firstItem="PbT-Sb-GCE" firstAttribute="leading" secondItem="Uw1-Kl-PV2" secondAttribute="leading" id="nnk-kI-XxQ"/>
+                    <constraint firstItem="Uw1-Kl-PV2" firstAttribute="top" secondItem="YDx-dk-KvR" secondAttribute="bottom" constant="61" id="opt-Gu-jVO"/>
                     <constraint firstItem="qId-LA-a9J" firstAttribute="centerY" secondItem="Hai-hT-QtC" secondAttribute="centerY" id="rcc-Ru-c4L"/>
                     <constraint firstItem="Uw1-Kl-PV2" firstAttribute="leading" secondItem="Hai-hT-QtC" secondAttribute="leading" id="ryR-dG-gvK"/>
                     <constraint firstAttribute="trailing" secondItem="YDx-dk-KvR" secondAttribute="trailing" constant="20" id="v4n-6u-KVV"/>
@@ -172,12 +170,15 @@
                 <outlet property="city" destination="oWH-Mq-hEm" id="MYY-ZH-pZ4"/>
                 <outlet property="frontMoney" destination="3Ph-sK-V3H" id="0vx-Vn-FYB"/>
                 <outlet property="industry" destination="Sws-jU-v7q" id="lu0-3k-tlA"/>
+                <outlet property="industryTitle" destination="tDK-kq-PNP" id="aV6-hi-fPM"/>
+                <outlet property="moneyConstrant" destination="opt-Gu-jVO" id="3Vo-dW-ukT"/>
                 <outlet property="paymentMethod" destination="Uw1-Kl-PV2" id="akH-59-zWU"/>
                 <outlet property="paymentMoney" destination="Hai-hT-QtC" id="yuk-AD-Tgk"/>
                 <outlet property="quantityMax" destination="Bsf-QN-hmf" id="l4M-dM-3au"/>
                 <outlet property="taskTitleLab" destination="YDx-dk-KvR" id="VOJ-aC-Db3"/>
+                <outlet property="unitLab" destination="qId-LA-a9J" id="HL4-1R-ySq"/>
             </connections>
-            <point key="canvasLocation" x="209" y="193"/>
+            <point key="canvasLocation" x="207.97101449275365" y="192.85714285714286"/>
         </tableViewCell>
     </objects>
 </document>

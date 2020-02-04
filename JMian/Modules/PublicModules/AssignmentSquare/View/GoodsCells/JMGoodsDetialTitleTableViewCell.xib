@@ -35,18 +35,15 @@
                         <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOBANG魔棒 支持OPPO手机VOOC闪充车载充 电器快充R15 R11 R9 R9S R17 PLUS闪冲车充一 拖二通" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNm-Co-maT">
-                        <rect key="frame" x="20" y="82.5" width="276" height="54"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="54" id="OD7-Qk-HBm"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MOBANG魔棒 支持OPPO手机VOOC闪充车载充 电器快充R15 R11 R9 R9S R17 PLUS闪冲车充一 拖二通" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PNm-Co-maT">
+                        <rect key="frame" x="20" y="80.5" width="276" height="36"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="PNm-Co-maT" firstAttribute="top" secondItem="XpN-cK-Gqc" secondAttribute="bottom" constant="13" id="5EL-kv-KX8"/>
+                    <constraint firstItem="PNm-Co-maT" firstAttribute="top" secondItem="XpN-cK-Gqc" secondAttribute="bottom" constant="11" id="5EL-kv-KX8"/>
                     <constraint firstItem="XpN-cK-Gqc" firstAttribute="top" secondItem="d2h-i1-WNY" secondAttribute="bottom" constant="5" id="6xz-Q5-b2t"/>
                     <constraint firstAttribute="trailing" secondItem="PNm-Co-maT" secondAttribute="trailing" constant="24" id="8Mn-Zn-fzi"/>
                     <constraint firstItem="Mao-YX-aHJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="BgY-Rb-Bo2"/>
@@ -59,6 +56,11 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="priceLab" destination="d2h-i1-WNY" id="adz-AP-UwM"/>
+                <outlet property="salarylab" destination="XpN-cK-Gqc" id="kC6-dp-SJG"/>
+                <outlet property="titleLab" destination="PNm-Co-maT" id="ffD-Gb-3bD"/>
+            </connections>
             <point key="canvasLocation" x="125" y="122"/>
         </tableViewCell>
     </objects>

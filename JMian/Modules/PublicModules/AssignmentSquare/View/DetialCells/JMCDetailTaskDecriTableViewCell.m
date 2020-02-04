@@ -10,12 +10,15 @@
 NSString *const JMCDetailTaskDecriTableViewCellIdentifier = @"JMCDetailTaskDecriTableViewCellIdentifier";
 @interface JMCDetailTaskDecriTableViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *taskTitleLab;
+@property (weak, nonatomic) IBOutlet UILabel *unitLab;
 @property (weak, nonatomic) IBOutlet UILabel *paymentMoney;
 @property (weak, nonatomic) IBOutlet UILabel *frontMoney;
 @property (weak, nonatomic) IBOutlet UILabel *quantityMax;
 @property (weak, nonatomic) IBOutlet UILabel *city;
 @property (weak, nonatomic) IBOutlet UILabel *industry;
 @property (weak, nonatomic) IBOutlet UILabel *paymentMethod;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *moneyConstrant;
+@property (weak, nonatomic) IBOutlet UILabel *industryTitle;
 
 @end
 
@@ -30,11 +33,25 @@ NSString *const JMCDetailTaskDecriTableViewCellIdentifier = @"JMCDetailTaskDecri
 -(void)setModel:(JMCDetailModel *)model{
     self.taskTitleLab.text = model.task_title;
     [self.taskTitleLab sizeToFit];
-    self.paymentMoney.text = model.payment_money;
+    
+    if ([model.payment_money isEqualToString:@"0"]) {
+        self.moneyConstrant.constant = 20;
+        [self.paymentMoney setHidden:YES];
+        [self.unitLab setHidden:YES];
+    }else{
+        [self.paymentMoney setHidden:NO];
+        [self.unitLab setHidden:NO];
+        self.moneyConstrant.constant = 61;
+        self.paymentMoney.text = model.payment_money;
+    }
+    
+    
+     
     if ([model.payment_method isEqualToString:@"3"]) {
         self.paymentMethod.text = @"完工结";
     }else if ([model.payment_method isEqualToString:@"1"]){
-        self.paymentMethod.text = @"日结";
+        self.paymentMethod.text = @"即结";
+        [self.industryTitle  setHidden:YES];
     }
     if ([model.front_money isEqualToString:@"0"]) {
         self.frontMoney.text = @"无定金";

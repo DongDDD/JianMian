@@ -14,6 +14,7 @@
 #import "JMOrderCellData.h"
 #import "JMLogisticsInfoViewController.h"
 #import "JMSearchOrderViewController.h"
+#import "JMApplyForRefundViewController.h"
 @interface JMMyOrderListViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,JMOrderStatusTableViewCellDelegate>
 @property (strong, nonatomic) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
@@ -213,9 +214,9 @@ static NSString *cellID = @"statusCellID";
     
     _orderCellData = self.listDataArray[indexPath.row];
     if (_orderCellData.isSpread) {
-        return 256;
+        return 256+54;
     }
-    return 164;
+    return 164+54;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -230,6 +231,8 @@ static NSString *cellID = @"statusCellID";
     // Configure the cell...
     return cell;
 }
+
+
 
 #pragma mark - myDelegate
 
@@ -249,6 +252,14 @@ static NSString *cellID = @"statusCellID";
     JMLogisticsInfoViewController *vc = [[JMLogisticsInfoViewController alloc]init];
     vc.order_id = data.order_id;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)didClickBottomBtnActionWithTag:(NSInteger)tag{
+    JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+
+
+
 }
 
 #pragma mark - Getter
@@ -278,7 +289,7 @@ static NSString *cellID = @"statusCellID";
             titleArray = @[@"全部", @"已付款", @"未付款",@"已发货"];
             
         }else if ([model.type isEqualToString:C_Type_USER]){
-            titleArray = @[@"全部", @"已付款", @"未付款"];
+            titleArray = @[@"全部", @"已付款", @"未付款",@"退款中"];
         
         }
    

@@ -66,6 +66,27 @@ NSString *const JMCDetailDecri2TableViewCellIdentifier = @"JMCDetailTaskDecri2Ta
     
 }
 
+-(void)setGoodsDesc:(NSString *)goodsDesc{
+    self.titleLab.text = @"商品介绍";
+        if (goodsDesc.length == 0) {
+        [self.textView setText:@"暂无描述"];
+    }else{
+        [self.textView setText:goodsDesc];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        
+        paragraphStyle.lineSpacing = 5;// 字体的行间距
+        
+        NSDictionary *attributes = @{
+                                     NSFontAttributeName:[UIFont systemFontOfSize:14],
+                                     NSParagraphStyleAttributeName:paragraphStyle
+                                     };
+        
+        self.textView.attributedText = [[NSAttributedString alloc] initWithString:self.textView.text attributes:attributes];
+        
+    }
+    
+}
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

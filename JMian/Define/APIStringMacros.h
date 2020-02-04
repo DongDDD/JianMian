@@ -188,6 +188,10 @@
 #define Transfer_Money_URL @"api/user/transfer"
 //发布宝贝
 #define Get_CategoryList_URL @"api/sort/paginate"
+//店铺
+#define Get_GoodsList_URL @"api/goods/paginate"
+#define Get_ShopInfo_URL @"api/shop"
+#define Get_GoodsInfo_URL @"api/goods/info"
 
 
 //接口

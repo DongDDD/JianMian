@@ -161,7 +161,15 @@
                 //公司图片
                 JMScrollviewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMScrollviewTableViewCellIdentifier forIndexPath:indexPath];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
-                [cell setModel:self.configures.model];
+                NSMutableArray *imagesURLStrings = [NSMutableArray array];
+                    for (JMFilesModel *model in self.configures.model.files) {
+                        [imagesURLStrings addObject:model.files_file_path];
+                    }
+                    if (imagesURLStrings.count > 0) {
+                        [cell setImagesArr:imagesURLStrings];
+
+                    }
+//                [cell setModel:self.configures.model];
                 return cell;
             }else if (indexPath.row == 2) {
                 JMMapTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMapTableViewCellIdentifier forIndexPath:indexPath];

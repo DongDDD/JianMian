@@ -324,7 +324,15 @@
         {
             JMScrollviewTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMScrollviewTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell setModel:self.cellConfigures.model];
+            NSMutableArray *imagesURLStrings = [NSMutableArray array];
+                for (JMFilesModel *model in self.self.cellConfigures.model.files) {
+                    [imagesURLStrings addObject:model.files_file_path];
+                }
+                if (imagesURLStrings.count > 0) {
+                    [cell setImagesArr:imagesURLStrings];
+
+                }
+//            [cell setModel:self.cellConfigures.model];
             return cell;
         }
         case JMBUserProfileCellTypeJob:

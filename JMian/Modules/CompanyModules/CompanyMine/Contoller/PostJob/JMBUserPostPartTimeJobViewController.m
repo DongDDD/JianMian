@@ -190,6 +190,7 @@
 -(void)doneClicked{
     [self.decriptionTextView.contentTextView resignFirstResponder];
 }
+
 #pragma mark - MyDelegate
 -(void)didChooseWithType_id:(NSString *)type_id typeName:(NSString *)typeName{
     _isChange = YES;
@@ -1399,10 +1400,9 @@
         _decriptionTextView = [JMPartTimeJobResumeFooterView new];
         _decriptionTextView.frame = CGRectMake(0, 350 , SCREEN_WIDTH, 229);
         _decriptionTextView.viewType = JMPartTimeJobResumeFooterViewTypePartTimeJob;
-        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
+//        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
         _decriptionTextView.delegate = self;
         //        _decriptionTextView.contentTextView.delegate = self;
-        
     }
     return _decriptionTextView;
 }

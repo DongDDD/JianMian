@@ -463,7 +463,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "173"
                   endingLineNumber = "173"
-                  offsetFromSymbolStart = "184">
+                  offsetFromSymbolStart = "164">
                </Location>
                <Location
                   uuid = "9C198BB8-33A9-4087-BD11-DF991D3F39D0 - f27013da4a2ec1a8"
@@ -478,7 +478,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "173"
                   endingLineNumber = "173"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -698,8 +698,8 @@
             timestampString = "596373639.1145591"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "546"
-            endingLineNumber = "546"
+            startingLineNumber = "560"
+            endingLineNumber = "560"
             landmarkName = "-filmVideo"
             landmarkType = "7">
          </BreakpointContent>
@@ -715,8 +715,8 @@
             timestampString = "596373639.11463"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "549"
-            endingLineNumber = "549"
+            startingLineNumber = "563"
+            endingLineNumber = "563"
             landmarkName = "JMBUserPostSaleJobViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -732,8 +732,8 @@
             timestampString = "596373639.114694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "548"
-            endingLineNumber = "548"
+            startingLineNumber = "562"
+            endingLineNumber = "562"
             landmarkName = "JMBUserPostSaleJobViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -835,7 +835,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
                   endingLineNumber = "66"
-                  offsetFromSymbolStart = "228">
+                  offsetFromSymbolStart = "188">
                </Location>
                <Location
                   uuid = "9BBE6739-FE57-48AA-8147-AD329301933F - d1d5903c24074940"
@@ -850,7 +850,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
                   endingLineNumber = "66"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -903,23 +903,6 @@
             startingLineNumber = "75"
             endingLineNumber = "75"
             landmarkName = "-gotoIdentify:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4571DCB5-3F89-4008-976D-6AF7CB9B2622"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMPositionManageViewController.m"
-            timestampString = "596362901.1703579"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "-getUserInfo"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -986,7 +969,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "389"
                   endingLineNumber = "389"
-                  offsetFromSymbolStart = "476">
+                  offsetFromSymbolStart = "426">
                </Location>
                <Location
                   uuid = "66620285-F829-4A63-90DC-94A264D4915C - 18409b0af885be06"
@@ -1001,7 +984,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "390"
                   endingLineNumber = "390"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "23">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1859,23 +1842,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "67C5FAE8-23D6-4CD0-992F-251C7D2BBA4E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMPositionManageViewController.m"
-            timestampString = "596362901.172585"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "-setCurrentIndex"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "AFFB2154-952B-4BB7-8653-FBB1D9B4FBCB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -2122,8 +2088,8 @@
             timestampString = "596373639.117462"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "409"
-            endingLineNumber = "409"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "JMBUserPostSaleJobViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -2139,8 +2105,8 @@
             timestampString = "596373639.117582"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "367"
-            endingLineNumber = "367"
+            startingLineNumber = "381"
+            endingLineNumber = "381"
             landmarkName = "-gotoUploadImageAction"
             landmarkType = "7">
          </BreakpointContent>
@@ -2156,8 +2122,8 @@
             timestampString = "596373639.11764"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "460"
-            endingLineNumber = "460"
+            startingLineNumber = "474"
+            endingLineNumber = "474"
             landmarkName = "-videoRightBtnAction"
             landmarkType = "7">
          </BreakpointContent>
@@ -2190,8 +2156,8 @@
             timestampString = "596373639.11773"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "404"
-            endingLineNumber = "404"
+            startingLineNumber = "418"
+            endingLineNumber = "418"
             landmarkName = "-hidePickView"
             landmarkType = "7">
          </BreakpointContent>
@@ -2207,8 +2173,8 @@
             timestampString = "596373639.1177959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "400"
-            endingLineNumber = "400"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "-hidePickView"
             landmarkType = "7">
          </BreakpointContent>
@@ -2224,8 +2190,8 @@
             timestampString = "596373639.118096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "975"
-            endingLineNumber = "975"
+            startingLineNumber = "991"
+            endingLineNumber = "991"
             landmarkName = "-deleteTaskRequest"
             landmarkType = "7">
             <Locations>
@@ -2240,9 +2206,9 @@
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostSaleJobViewController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "976"
-                  endingLineNumber = "976"
-                  offsetFromSymbolStart = "760">
+                  startingLineNumber = "992"
+                  endingLineNumber = "992"
+                  offsetFromSymbolStart = "813">
                </Location>
                <Location
                   uuid = "293A7BAB-F57D-4FE1-B1B6-E5ADF85EDADB - 3171b08331a93006"
@@ -2255,9 +2221,9 @@
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostSaleJobViewController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "978"
-                  endingLineNumber = "978"
-                  offsetFromSymbolStart = "72">
+                  startingLineNumber = "994"
+                  endingLineNumber = "994"
+                  offsetFromSymbolStart = "73">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2970,6 +2936,38 @@
             endingLineNumber = "1267"
             landmarkName = "-uploadImgRequest:index:"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8DB72323-4C48-468D-B467-65628E6989E9 - 852a9b8c6f1956b6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JMBUserPostPartTimeJobViewController uploadImgRequest:index:]"
+                  moduleName = "JMian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostPartTimeJobViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1267"
+                  endingLineNumber = "1267"
+                  offsetFromSymbolStart = "120">
+               </Location>
+               <Location
+                  uuid = "8DB72323-4C48-468D-B467-65628E6989E9 - 288c85187ce0cdc9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__63-[JMBUserPostPartTimeJobViewController uploadImgRequest:index:]_block_invoke"
+                  moduleName = "JMian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostPartTimeJobViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1269"
+                  endingLineNumber = "1269"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3014,9 +3012,9 @@
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostPartTimeJobViewController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "968"
-                  endingLineNumber = "968"
-                  offsetFromSymbolStart = "1728">
+                  startingLineNumber = "969"
+                  endingLineNumber = "969"
+                  offsetFromSymbolStart = "1864">
                </Location>
                <Location
                   uuid = "82D92B74-4C66-434A-9E48-E3D0254F2565 - 52b9902bde9240c"
@@ -3029,9 +3027,9 @@
                   urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostPartTimeJobViewController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "968"
-                  endingLineNumber = "968"
-                  offsetFromSymbolStart = "16">
+                  startingLineNumber = "969"
+                  endingLineNumber = "969"
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3050,38 +3048,6 @@
             endingLineNumber = "950"
             landmarkName = "-updateTaskInfoRequest_status:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "56DF4212-6F17-40C2-8F77-866351CEDB4F - e80847fbf01151ff"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JMBUserPostPartTimeJobViewController updateTaskInfoRequest_status:]"
-                  moduleName = "JMian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostPartTimeJobViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "950"
-                  endingLineNumber = "950"
-                  offsetFromSymbolStart = "984">
-               </Location>
-               <Location
-                  uuid = "56DF4212-6F17-40C2-8F77-866351CEDB4F - e80847fbf01151ff"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JMBUserPostPartTimeJobViewController updateTaskInfoRequest_status:]"
-                  moduleName = "JMian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/JianMian/JMian/Modules/CompanyModules/CompanyMine/Contoller/PostJob/JMBUserPostPartTimeJobViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "950"
-                  endingLineNumber = "950"
-                  offsetFromSymbolStart = "1020">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

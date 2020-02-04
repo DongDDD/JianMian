@@ -10,7 +10,7 @@
 #import "SDCycleScrollView.h"
 #import "DimensMacros.h"
 #import "ZJImageMagnification.h"
-NSString *const JMScrollviewTableViewCellIdentifier = @"JMCDetailImageTableViewCellIdentifier";
+NSString *const JMScrollviewTableViewCellIdentifier = @"JMScrollviewTableViewCellIdentifier";
 @interface JMScrollviewTableViewCell ()<SDCycleScrollViewDelegate>
 @property(nonatomic,strong)SDCycleScrollView *cycleScrollView2;
 @property (weak, nonatomic) IBOutlet UIView *noDataView;
@@ -25,17 +25,14 @@ NSString *const JMScrollviewTableViewCellIdentifier = @"JMCDetailImageTableViewC
  
 }
 
--(void)setModel:(JMCompanyInfoModel *)model{
+
+-(void)setImagesArr:(NSArray *)imagesArr{
     NSMutableArray *imagesURLStrings = [NSMutableArray array];
-    for (JMFilesModel *filesModel in model.files) {
-        if ([filesModel.files_type isEqualToString:@"2"]) {
-            [imagesURLStrings addObject:filesModel.files_file_path];
-        }
-
-    }
-   
-
-    
+    imagesURLStrings = imagesArr.mutableCopy;
+//    for (JMGoodsInfoImageModel *model in imagesArr) {
+//        [imagesURLStrings addObject:model.file_path];
+//        
+//    }
     // 网络加载 --- 创建带标题的图片轮播器
     if (imagesURLStrings.count > 0) {
         [self.cycleScrollView2 setHidden:NO];
@@ -43,15 +40,14 @@ NSString *const JMScrollviewTableViewCellIdentifier = @"JMCDetailImageTableViewC
     }else{
         [self.cycleScrollView2 setHidden:YES];
         [self.noDataView setHidden:NO];
-         
+        
     }
     [self addSubview:self.cycleScrollView2];
- 
-    //         --- 模拟加载延迟
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        _cycleScrollView2.imageURLStringsGroup = imagesURLStrings;
-//    });
     
+    //         --- 模拟加载延迟
+    //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    _cycleScrollView2.imageURLStringsGroup = imagesURLStrings;
+    //    });
     
     _cycleScrollView2.clickItemOperationBlock = ^(NSInteger index) {
         NSLog(@">>>>>  %ld", (long)index);
@@ -70,7 +66,7 @@ NSString *const JMScrollviewTableViewCellIdentifier = @"JMCDetailImageTableViewC
 
 -(SDCycleScrollView *)cycleScrollView2{
     if (!_cycleScrollView2) {
-        _cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 180) delegate:self placeholderImage:[UIImage imageNamed:@"break"]];
+        _cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.contentView.frame.size.height) delegate:self placeholderImage:[UIImage imageNamed:@"break"]];
         _cycleScrollView2.pageControlAliment = SDCycleScrollViewPageContolAlimentCenter;
         _cycleScrollView2.currentPageDotColor = [UIColor whiteColor]; // 自定义分页控件小圆标颜色
     }
