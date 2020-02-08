@@ -16,6 +16,11 @@ NSString *const JMMyStoreTitleHeaderTableViewCellIdentifier = @"JMMyStoreTitleHe
     // Initialization code
 }
 
+-(void)setModel:(JMUserInfoModel *)model{
+    [self.iconImage sd_setImageWithURL:[NSURL URLWithString:model.shop_logo] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    self.storeNameLab.text = model.shop_name;
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     // Configure the view for the selected state

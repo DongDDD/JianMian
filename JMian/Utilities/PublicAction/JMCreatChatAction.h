@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
                                     user_id:(NSString *)user_id
                                 sender_mark:(nullable NSString *)sender_mark
                              recipient_mark:(nullable NSString *)recipient_mark;
++(void)create4TypeChatRequstWithAccount:(NSString *)account;
 @end
 
 NS_ASSUME_NONNULL_END

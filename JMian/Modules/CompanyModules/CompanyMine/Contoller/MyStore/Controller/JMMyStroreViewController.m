@@ -26,6 +26,11 @@
     [self.view addSubview:self.tableView];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self upDateUserData];
+
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -60,7 +65,8 @@
             JMMyStoreTitleHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyStoreTitleHeaderTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //        self.userModel.company_real_company_name = self.cellConfigures.model.company_name;
-            //        [cell setModel:self.userModel viewType:JMUserProfileHeaderCellTypeB];
+            JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+            [cell setModel:model];
             return cell;
         }
         case JMMyStoreTypeOrderStatus: {
@@ -92,10 +98,20 @@
 
 #pragma mark - delegate
 -(void)didSelectStoreManager1ItemWithRow:(NSInteger)row{
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     if (row == 0) {
-        
+        JMStroreNotificationViewController *vc = [[JMStroreNotificationViewController alloc]init];
+        vc.viewType = JMStroreNotificationViewPoster;
+        vc.title = @"店铺简介";
+        vc.content = model.shop_poster;
+            [self.navigationController pushViewController:vc animated:YES];
+            
     }else if (row == 1) {
         JMStroreNotificationViewController *vc = [[JMStroreNotificationViewController alloc]init];
+        vc.viewType = JMStroreNotificationViewDesc;
+        vc.title = @"店铺公告";
+        vc.content = model.shop_description;
+
         [self.navigationController pushViewController:vc animated:YES];
         
     }
@@ -115,7 +131,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
 //        _tableView.backgroundColor = [UIColor whiteColor];;
 

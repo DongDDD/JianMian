@@ -21,6 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *salary;
 @property (copy, nonatomic) NSString *sort_id;
 @property (copy, nonatomic) NSString *quantity_sold;
+@property (copy, nonatomic) NSString *status;
+
 
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *price;

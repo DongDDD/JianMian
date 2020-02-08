@@ -17,6 +17,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="368" height="310"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ObG-74-INQ">
+                        <rect key="frame" x="0.0" y="0.0" width="368" height="10"/>
+                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="Q2u-Lv-C5Z"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNM-fB-NAZ" userLabel="BGView">
                         <rect key="frame" x="0.0" y="10" width="368" height="246"/>
                         <subviews>
@@ -313,19 +320,24 @@
                         </constraints>
                     </stackView>
                 </subviews>
-                <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="YpY-O6-9DN" firstAttribute="top" secondItem="bNM-fB-NAZ" secondAttribute="bottom" constant="10" id="6ZF-tw-0PC"/>
                     <constraint firstAttribute="trailingMargin" secondItem="YpY-O6-9DN" secondAttribute="trailing" id="9WW-KK-dJf"/>
+                    <constraint firstAttribute="trailing" secondItem="ObG-74-INQ" secondAttribute="trailing" id="DSL-kY-XWW"/>
                     <constraint firstAttribute="trailing" secondItem="bNM-fB-NAZ" secondAttribute="trailing" id="JND-uk-T25"/>
-                    <constraint firstAttribute="bottom" secondItem="YpY-O6-9DN" secondAttribute="bottom" id="T5A-rZ-uDN"/>
+                    <constraint firstItem="ObG-74-INQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="NVA-lD-5jU"/>
+                    <constraint firstAttribute="bottom" secondItem="YpY-O6-9DN" secondAttribute="bottom" constant="20" id="T5A-rZ-uDN"/>
                     <constraint firstItem="bNM-fB-NAZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="aQK-ja-eBK"/>
                     <constraint firstItem="bNM-fB-NAZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cCN-Uf-GMu"/>
+                    <constraint firstItem="ObG-74-INQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="idG-mU-NvL"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="adressLab" destination="NWz-YK-Uyi" id="3tY-Nj-yYd"/>
+                <outlet property="bottomView" destination="YpY-O6-9DN" id="gPw-mX-d7i"/>
+                <outlet property="bottomViewH" destination="xKT-Qe-7BZ" id="Aes-98-vR6"/>
                 <outlet property="comfirmBtn" destination="NE0-3n-X9T" id="IHf-k9-RMI"/>
                 <outlet property="contactBGView" destination="66R-eN-A25" id="ZBc-2p-xhH"/>
                 <outlet property="contactBtn" destination="vBr-sg-7uV" id="RaN-qK-Veg"/>

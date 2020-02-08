@@ -33,6 +33,26 @@
     }];
 }
 
++(void)create4TypeChatRequstWithAccount:(NSString *)account{
+    [[JMHTTPManager sharedInstance]createFriendChatWithType:@"4" account:account successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+            JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+            data.convType = TConv_Type_C2C;
+            messageListModel.data =data;
+            messageListModel.viewType = JMMessageList_Type_C2C;
+            JMChatViewController *vc = [[JMChatViewController alloc]init];
+            vc.myConvModel = messageListModel;
+            [[self currentViewController].navigationController pushViewController:vc animated:YES];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+}
+
 //获取Window当前显示的ViewController
 + (UIViewController*)currentViewController{
     //获得当前活动窗口的根视图

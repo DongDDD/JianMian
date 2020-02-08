@@ -339,6 +339,11 @@
 		045BC91323E9894300EFF70C /* JMRefundGoodsStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045BC91223E9894300EFF70C /* JMRefundGoodsStatusView.xib */; };
 		045BC91723E9C42F00EFF70C /* JMRefundGoodsStatusTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BC91523E9C42F00EFF70C /* JMRefundGoodsStatusTableViewCell.m */; };
 		045BC91823E9C42F00EFF70C /* JMRefundGoodsStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045BC91623E9C42F00EFF70C /* JMRefundGoodsStatusTableViewCell.xib */; };
+		045BC92123EC1D5B00EFF70C /* JMBOrderListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BC91F23EC1D5B00EFF70C /* JMBOrderListTableViewCell.m */; };
+		045BC92223EC1D5B00EFF70C /* JMBOrderListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 045BC92023EC1D5B00EFF70C /* JMBOrderListTableViewCell.xib */; };
+		045BC92523EC4A3700EFF70C /* JMHTTPManager+ChangeOrderStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BC92423EC4A3700EFF70C /* JMHTTPManager+ChangeOrderStatus.m */; };
+		045BC92923ED762600EFF70C /* JMHTTPManager+UpdateShopInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BC92823ED762600EFF70C /* JMHTTPManager+UpdateShopInfo.m */; };
+		045BC93223EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 045BC93123EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.m */; };
 		045EDD5F225D8A210054C5F3 /* JMHTTPManager+Uploads.m in Sources */ = {isa = PBXBuildFile; fileRef = 045EDD5E225D8A210054C5F3 /* JMHTTPManager+Uploads.m */; };
 		045EDD63225D97650054C5F3 /* JMHTTPManager+Captcha.m in Sources */ = {isa = PBXBuildFile; fileRef = 045EDD62225D97650054C5F3 /* JMHTTPManager+Captcha.m */; };
 		045FB42923D1BBD2009D55C4 /* JMHTTPManager+GetGoodsList.m in Sources */ = {isa = PBXBuildFile; fileRef = 045FB42823D1BBD2009D55C4 /* JMHTTPManager+GetGoodsList.m */; };
@@ -1874,6 +1879,15 @@
 		045BC91423E9C42F00EFF70C /* JMRefundGoodsStatusTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMRefundGoodsStatusTableViewCell.h; sourceTree = "<group>"; };
 		045BC91523E9C42F00EFF70C /* JMRefundGoodsStatusTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMRefundGoodsStatusTableViewCell.m; sourceTree = "<group>"; };
 		045BC91623E9C42F00EFF70C /* JMRefundGoodsStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMRefundGoodsStatusTableViewCell.xib; sourceTree = "<group>"; };
+		045BC91E23EC1D5B00EFF70C /* JMBOrderListTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMBOrderListTableViewCell.h; sourceTree = "<group>"; };
+		045BC91F23EC1D5B00EFF70C /* JMBOrderListTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMBOrderListTableViewCell.m; sourceTree = "<group>"; };
+		045BC92023EC1D5B00EFF70C /* JMBOrderListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMBOrderListTableViewCell.xib; sourceTree = "<group>"; };
+		045BC92323EC4A3700EFF70C /* JMHTTPManager+ChangeOrderStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+ChangeOrderStatus.h"; sourceTree = "<group>"; };
+		045BC92423EC4A3700EFF70C /* JMHTTPManager+ChangeOrderStatus.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+ChangeOrderStatus.m"; sourceTree = "<group>"; };
+		045BC92723ED762600EFF70C /* JMHTTPManager+UpdateShopInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+UpdateShopInfo.h"; sourceTree = "<group>"; };
+		045BC92823ED762600EFF70C /* JMHTTPManager+UpdateShopInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+UpdateShopInfo.m"; sourceTree = "<group>"; };
+		045BC93023EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+GetManageGoodsList.h"; sourceTree = "<group>"; };
+		045BC93123EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+GetManageGoodsList.m"; sourceTree = "<group>"; };
 		045EDD5D225D8A210054C5F3 /* JMHTTPManager+Uploads.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+Uploads.h"; sourceTree = "<group>"; };
 		045EDD5E225D8A210054C5F3 /* JMHTTPManager+Uploads.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+Uploads.m"; sourceTree = "<group>"; };
 		045EDD61225D97650054C5F3 /* JMHTTPManager+Captcha.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+Captcha.h"; sourceTree = "<group>"; };
@@ -4003,6 +4017,17 @@
 			path = JMian/Modules/PublicModules/AssignmentSquare/View/GoodsCells;
 			sourceTree = SOURCE_ROOT;
 		};
+		045BC92623ED754400EFF70C /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				045BC92723ED762600EFF70C /* JMHTTPManager+UpdateShopInfo.h */,
+				045BC92823ED762600EFF70C /* JMHTTPManager+UpdateShopInfo.m */,
+				045BC93023EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.h */,
+				045BC93123EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.m */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
 		046227E12376E5130041B70D /* DataTransform */ = {
 			isa = PBXGroup;
 			children = (
@@ -4216,6 +4241,7 @@
 				04908B2B22A8AE82000B5AB4 /* Task */,
 				04731DDE22A644180013D7CE /* Ability */,
 				04CC5F9E22B3C55900C5DD46 /* Discover */,
+				045BC92623ED754400EFF70C /* Shop */,
 			);
 			path = SecondCRequest;
 			sourceTree = "<group>";
@@ -5057,6 +5083,8 @@
 				04BF6DB922C39EE4003032BC /* JMHTTPManager+CreatetLogisticsInfo.m */,
 				04E735F622E15D6E00C8E8A2 /* JMHTTPManager+FectchProtocalInfo.h */,
 				04E735F722E15D6E00C8E8A2 /* JMHTTPManager+FectchProtocalInfo.m */,
+				045BC92323EC4A3700EFF70C /* JMHTTPManager+ChangeOrderStatus.h */,
+				045BC92423EC4A3700EFF70C /* JMHTTPManager+ChangeOrderStatus.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -6705,6 +6733,9 @@
 				04E129C322F27D330003D58F /* JMOrderStatusTableViewCell.h */,
 				04E129C222F27D320003D58F /* JMOrderStatusTableViewCell.m */,
 				04E129C422F27D330003D58F /* JMOrderStatusTableViewCell.xib */,
+				045BC91E23EC1D5B00EFF70C /* JMBOrderListTableViewCell.h */,
+				045BC91F23EC1D5B00EFF70C /* JMBOrderListTableViewCell.m */,
+				045BC92023EC1D5B00EFF70C /* JMBOrderListTableViewCell.xib */,
 				04908AF222A7B89C000B5AB4 /* JMBUserMineSectionView.h */,
 				04908AF322A7B89C000B5AB4 /* JMBUserMineSectionView.m */,
 				04CC5F9222B3B67600C5DD46 /* JMDiscoverTopView.h */,
@@ -7475,6 +7506,7 @@
 				6D0209E6224FB900009BCFE4 /* enshrine@2x.png in Resources */,
 				0488E44922A023990071DEE7 /* di_icon_return@3x.png in Resources */,
 				04AA900723B4878A00AE0FFC /* JMUserProfileAdressTableViewCell.xib in Resources */,
+				045BC92223EC1D5B00EFF70C /* JMBOrderListTableViewCell.xib in Resources */,
 				6D558653224B54D70037C14E /* pitch_on_home@2x.png in Resources */,
 				040714A6227C6CC70026C368 /* default_avatar.png in Resources */,
 				0488E59A22953B6700C2E398 /* JMCityListViewController.xib in Resources */,
@@ -8005,6 +8037,7 @@
 				04A92180230A4A1B00AABD0C /* JMTaskSeachViewController.m in Sources */,
 				040807B622A3BF1100C0744F /* JMIndustryWebViewController.m in Sources */,
 				04E072392327C2510004B5F8 /* JMNoResumeDataView.m in Sources */,
+				045BC93223EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.m in Sources */,
 				6D5DD8762308439D0064612A /* NSDate+TUIKIT.m in Sources */,
 				04908B2E22A8AEE0000B5AB4 /* JMHTTPManager+FectchTaskList.m in Sources */,
 				047AE39123AB249400940496 /* JMCreateGroupViewController.m in Sources */,
@@ -8063,6 +8096,7 @@
 				040865EB22734ADE005BB03E /* JMCompanyInfoModel.m in Sources */,
 				6D82F28F2274BB0E00B9D2B9 /* JMMyDescriptionViewController.m in Sources */,
 				0492AE7522F0463400AB21B3 /* JMChooseCardViewController.m in Sources */,
+				045BC92123EC1D5B00EFF70C /* JMBOrderListTableViewCell.m in Sources */,
 				04BF6DBA22C39EE4003032BC /* JMHTTPManager+CreatetLogisticsInfo.m in Sources */,
 				6D5DD8722308439D0064612A /* TCommonAvatarCell.m in Sources */,
 				0492715C22982878008D6E0D /* JMBTypeLikeModel.m in Sources */,
@@ -8235,6 +8269,7 @@
 				6D5DD8962308439E0064612A /* TUIImageMessageCellData.m in Sources */,
 				0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */,
 				045BC90223E5C0A600EFF70C /* JMGoodsDescTableViewCell.m in Sources */,
+				045BC92923ED762600EFF70C /* JMHTTPManager+UpdateShopInfo.m in Sources */,
 				0454642E23CEEF500008513D /* JMGoodsDetailMicrotitleTableViewCell.m in Sources */,
 				0446E48A22E04BBD00B3A26C /* JMInvoiceHeaderView.m in Sources */,
 				04B4F88522B7BFBE00A06E9C /* JMPostGoodsImagesView.m in Sources */,
@@ -8353,6 +8388,7 @@
 				6D5DD8782308439D0064612A /* TPopCell.m in Sources */,
 				6D5DD89E2308439E0064612A /* TUISystemMessageCellLayout.m in Sources */,
 				049D506F23D44CAB009FAB9D /* JMGoodsInfoModel.m in Sources */,
+				045BC92523EC4A3700EFF70C /* JMHTTPManager+ChangeOrderStatus.m in Sources */,
 				04CC5F9C22B3BB9A00C5DD46 /* JMDiscoverCollectionViewCell.m in Sources */,
 				6D5DD8D12308439E0064612A /* EMVoiceConverter.mm in Sources */,
 				04AA900A23B4A32200AE0FFC /* JMHTTPManager+GetProfileInfo.m in Sources */,

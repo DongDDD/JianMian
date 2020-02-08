@@ -9,9 +9,14 @@
 #import "BaseViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
+typedef enum : NSUInteger {
+    JMStroreNotificationViewPoster,
+    JMStroreNotificationViewDesc,
+} JMStroreNotificationViewType;
 
 @interface JMStroreNotificationViewController : BaseViewController
-
+@property(nonatomic,copy)NSString *content;
+@property(nonatomic,assign)JMStroreNotificationViewType viewType;
 @end
 
 NS_ASSUME_NONNULL_END

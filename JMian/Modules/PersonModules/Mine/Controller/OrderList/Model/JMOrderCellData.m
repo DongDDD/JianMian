@@ -61,6 +61,10 @@
              @"company_reputation":@"company_reputation",
              @"logistics_label_id":@"logistics.label_id",
              @"logistics_name":@"logistics.name",
+             @"shop_shop_name":@"shop.shop_name",
+             @"shop_user_id":@"shop.user_id",
+
+
              
              };
 }

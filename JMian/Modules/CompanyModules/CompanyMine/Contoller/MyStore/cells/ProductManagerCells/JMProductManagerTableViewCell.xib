@@ -13,12 +13,12 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="154" id="KGk-i7-Jjw" customClass="JMProductManagerTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hcW-NK-jsu">
-                        <rect key="frame" x="0.0" y="10" width="375" height="134"/>
+                        <rect key="frame" x="0.0" y="10" width="375" height="139"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="qWc-k6-mZm">
                                 <rect key="frame" x="20" y="20" width="55" height="55"/>
@@ -43,7 +43,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="p1R-ae-uzf">
-                                <rect key="frame" x="156" y="96" width="209" height="28"/>
+                                <rect key="frame" x="156" y="101" width="209" height="28"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e8o-nO-ChL">
                                         <rect key="frame" x="0.0" y="0.0" width="56.5" height="28"/>
@@ -113,7 +113,6 @@
                             <constraint firstAttribute="trailing" secondItem="p1R-ae-uzf" secondAttribute="trailing" constant="10" id="Nzi-bO-EJU"/>
                             <constraint firstItem="lTg-rV-Rcz" firstAttribute="top" secondItem="sQu-NU-8Ah" secondAttribute="bottom" id="Sxu-EM-fqy"/>
                             <constraint firstItem="qWc-k6-mZm" firstAttribute="leading" secondItem="hcW-NK-jsu" secondAttribute="leading" constant="20" id="TGH-oV-OUI"/>
-                            <constraint firstAttribute="height" constant="134" id="iyI-GJ-kXG"/>
                             <constraint firstItem="qWc-k6-mZm" firstAttribute="top" secondItem="hcW-NK-jsu" secondAttribute="top" constant="20" id="m2U-31-uMF"/>
                             <constraint firstItem="sQu-NU-8Ah" firstAttribute="leading" secondItem="qWc-k6-mZm" secondAttribute="trailing" constant="11" id="msj-2U-4pH"/>
                             <constraint firstItem="sQu-NU-8Ah" firstAttribute="top" secondItem="qWc-k6-mZm" secondAttribute="top" id="pOr-sP-pCd"/>
@@ -132,9 +131,12 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
-                <outlet property="BottomBtn3" destination="F9x-Ie-Rmp" id="wPZ-NG-6Sk"/>
                 <outlet property="bottomBtn1" destination="e8o-nO-ChL" id="ot7-1x-dlF"/>
                 <outlet property="bottomBtn2" destination="370-zh-xLu" id="nQ5-8l-yMF"/>
+                <outlet property="bottomBtn3" destination="F9x-Ie-Rmp" id="wPZ-NG-6Sk"/>
+                <outlet property="imageIcon" destination="qWc-k6-mZm" id="3pS-Kz-yuM"/>
+                <outlet property="priceLab" destination="lTg-rV-Rcz" id="AsS-sF-aHz"/>
+                <outlet property="titleLab" destination="sQu-NU-8Ah" id="GJR-td-XaG"/>
             </connections>
             <point key="canvasLocation" x="54" y="128"/>
         </tableViewCell>

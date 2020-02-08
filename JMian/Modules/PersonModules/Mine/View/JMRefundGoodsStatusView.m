@@ -19,7 +19,6 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
         
-        self = [[[NSBundle mainBundle] loadNibNamed:NSStringFromClass([self class]) owner:self options:nil] lastObject];
         self.titleArray = @[@"未收到货",@"已收到货"];
         
         UILabel *title =[[UILabel alloc]init];
@@ -49,6 +48,7 @@
     JMRefundGoodsStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMRefundGoodsStatusTableViewCellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.textLabel.text = self.titleArray[indexPath.row];
+    cell.textLabel.font = kFont(15);
     // Configure the cell...
     return cell;
 }

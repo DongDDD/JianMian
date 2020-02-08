@@ -76,6 +76,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *company_logo_path;
 @property (nonatomic, copy) NSString *company_reputation;
 
+@property (nonatomic, copy) NSString *shop_shop_name;
+@property (nonatomic, copy) NSString *shop_user_id;
+
 
 @end
 @interface JMSnapshotImageModel : NSObject

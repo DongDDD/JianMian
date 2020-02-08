@@ -33,6 +33,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *orderRemakeLab;//订单备注
 @property (weak, nonatomic) IBOutlet UIButton *rightTopBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *didSendGoodsImageView;
+@property (weak, nonatomic) IBOutlet UIStackView *bottomView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewH;
 
 
 @property (nonatomic, strong)JMOrderCellData *myData;
@@ -76,8 +78,8 @@
     //获取产品第一张图片
     JMSnapshotImageModel *imgModel = orderCellData.snapshot_images[0];
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:imgModel.file_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
-    self.infoLab2.text = [NSString stringWithFormat:@"¥ %@",orderCellData.goods_price];
-    self.infoLab3.text = [NSString stringWithFormat:@"X %@",orderCellData.buy_quantity];
+    self.infoLab2.text = [NSString stringWithFormat:@"¥ %@",orderCellData.order_amount];
+    self.infoLab3.text = [NSString stringWithFormat:@"X %@",@"1"];
     //------是否有物流信息，有则已发货
 
     if (orderCellData.logistics_name) {
@@ -126,8 +128,19 @@
         [self.rightTopBtn setHidden:NO];
         [self.didSendGoodsImageView setHidden:YES];
         
+    }else if ([orderCellData.status isEqualToString:@"12"] || [orderCellData.status isEqualToString:@"13"]) {
+        
+        [self.refundBtn setHidden:YES];
+        [self.contactBtn setHidden:NO];
+        [self.comfirmBtn setHidden:YES];
+        [self.payBtn setHidden:YES];
+        //确认收货后
+        [self.rightTopBtn setTitle:@"订单已完成" forState:UIControlStateNormal];
+        
+        
     }
- 
+    
+    
     
     self.orderRemakeLab.text = orderCellData.remark;//---备注
     self.nameLab.text = orderCellData.contact_name;//---联系人
@@ -137,15 +150,17 @@
     for (NSString *str in orderCellData.city_name_relation) {
         [adrArr addObject:str];
     }
-    NSString *adrStr = [adrArr componentsJoinedByString:@""];
-    NSString *adrStr2 = [NSString stringWithFormat:@"%@%@",adrStr,orderCellData.city_city_name];
-    NSString *adrStr3 = [NSString stringWithFormat:@"%@%@",adrStr2,orderCellData.contact_address];
+//    NSString *adrStr = [adrArr componentsJoinedByString:@""];
+//    NSString *adrStr2 = [NSString stringWithFormat:@"%@%@",adrStr,orderCellData.city_city_name];
+    NSString *adrStr3 = [NSString stringWithFormat:@"%@",orderCellData.contact_address];
     self.adressLab.text = adrStr3;
     
     
     //订单状态
     if ([userModel.type isEqualToString: B_Type_UESR]) {
-        NSString *str = [NSString stringWithFormat:@"销售：%@ >",orderCellData.referrer_nickname];
+        [self.bottomView setHidden:YES];
+        self.bottomViewH.constant = 0;
+        NSString *str = [NSString stringWithFormat:@"销售：%@ >",@""];
         [self.titleBtn setTitle:str forState:UIControlStateNormal];
         self.infoLab1.text = orderCellData.title;
 //        if ([orderCellData.status isEqualToString:@"2"]) {
@@ -175,7 +190,7 @@
 //        }
 
     }else if ([userModel.type isEqualToString: C_Type_USER]){
-        NSString *str = [NSString stringWithFormat:@"%@ >",orderCellData.snapshot_company_company_name];
+        NSString *str = [NSString stringWithFormat:@"%@ >",orderCellData.shop_shop_name];
         [self.titleBtn setTitle:str forState:UIControlStateNormal];
         self.infoLab1.text = orderCellData.snapshot_goods_goods_title;
         
@@ -184,8 +199,8 @@
     
 }
 - (IBAction)bottomBtnAction:(UIButton *)sender {
-    if (_delegate && [_delegate respondsToSelector:@selector(didClickBottomBtnActionWithTag:)]) {
-        [_delegate didClickBottomBtnActionWithTag:sender.tag];
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickBottomBtnActionWithTag:data:)]) {
+        [_delegate didClickBottomBtnActionWithTag:sender.tag data:self.myData];
     }
 }
 

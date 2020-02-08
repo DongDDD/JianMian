@@ -21,6 +21,10 @@ NS_ASSUME_NONNULL_BEGIN
                             page:(nullable NSString *)page
                         per_page:(nullable NSString *)per_page
                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+
+- (void)changeOrderStatusWithOrder_id:(NSString *)order_id
+                status:(NSString *)status
+                         successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

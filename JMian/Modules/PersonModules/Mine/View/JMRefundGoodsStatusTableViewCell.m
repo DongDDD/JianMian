@@ -20,10 +20,10 @@ NSString *const JMRefundGoodsStatusTableViewCellIdentifier = @"JMRefundGoodsStat
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     if (selected) {
-        [self.imageRight setImage:[UIImage imageNamed:@"add_selected"]];
+        self.imageRight.image = [UIImage imageNamed:@"dingwei"];
         
     }else{
-        [self.imageRight setImage:[UIImage imageNamed:@"圆角矩形 5"]];
+        self.imageRight.image = [UIImage imageNamed:@"圆角矩形 5"];
     }
     // Configure the view for the selected state
 }

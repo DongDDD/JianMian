@@ -141,6 +141,14 @@
 #define Fectch_OrderList_URL @"api/order/paginate"
 //物流信息
 #define Create_LogisticsInfo_URL @"api/order/logistics"
+//订单状态
+#define Change_OrderStatus_URL @"api/order/update"
+//
+#define Update_ShopInfo_URL @"api/shop/update"
+//
+#define Fectch_GoodsMangerList_URL @"//manager/goods"
+
+
 
 //视频列表
 #define Fectch_VideoList_URL @"api/video/lists"

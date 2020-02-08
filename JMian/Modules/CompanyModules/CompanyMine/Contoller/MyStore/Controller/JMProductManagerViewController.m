@@ -10,9 +10,13 @@
 #import "JMTitlesView.h"
 #import "JMProductManagerTableViewCell.h"
 #import "JMSelectProductCategoriesViewController.h"
+#import "JMHTTPManager+GetManageGoodsList.h"
+#import "JMGoodsData.h"
 @interface JMProductManagerViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)JMTitlesView *titleView;
 @property(nonatomic,strong)UITableView *tableView;
+@property(nonatomic,strong)NSArray *listArray;
+@property(nonatomic,assign)NSInteger index;
 @end
 
 @implementation JMProductManagerViewController
@@ -22,43 +26,81 @@
     self.title = @"商品";
     [self setRightBtnTextName:@"发布"];
     [self.view addSubview:self.tableView];
+    
     // Do any additional setup after loading the view from its nib.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [self getDataWithStatus:@""];
 }
 
 -(void)rightAction{
     [self.navigationController pushViewController:[JMSelectProductCategoriesViewController new] animated:YES];
 
 }
+
+-(void)getDataWithStatus:(NSString *)status{
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+    [[JMHTTPManager sharedInstance]getManagerGoodsLIstWithKeyword:@"" shop_id:model.shop_shop_id status:status page:@"" per_page:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            self.listArray = [JMGoodsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            
+            [self.tableView reloadData];
+            
+            
+            
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
+
+}
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
- 
         return 1;
- 
 }
 
  - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-     return 3;
+     return self.listArray.count;
  }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-        JMProductManagerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMProductManagerTableViewCellIdentifier forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //        self.userModel.company_real_company_name = self.cellConfigures.model.company_name;
-        //        [cell setModel:self.userModel viewType:JMUserProfileHeaderCellTypeB];
-        return cell;
- 
+    JMProductManagerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMProductManagerTableViewCellIdentifier forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    [cell setData:self.listArray[indexPath.row]];
+    //        self.userModel.company_real_company_name = self.cellConfigures.model.company_name;
+    //        [cell setModel:self.userModel viewType:JMUserProfileHeaderCellTypeB];
+    return cell;
+    
+    
+}
 
+-(void)showPageContentView{
+    if (_index == 0) {
+        [self getDataWithStatus:@""];
+        
+    }else if (_index == 1) {
+        [self getDataWithStatus:@"0"];
+        
+    }else if (_index == 2) {
+        [self getDataWithStatus:@"1"];
+        
+    }
+    
 }
 #pragma mark - lazy
 
 - (JMTitlesView *)titleView {
     if (!_titleView) {
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:@[@"全部", @"未上架", @"已上架"]];
-//        __weak JMCompanyDetailViewController *weakSelf = self;
+        __weak JMProductManagerViewController *weakSelf = self;
         _titleView.didTitleClick = ^(NSInteger index) {
-//            _index = index;
-//            [weakSelf showPageContentView];
+            _index = index;
+            [weakSelf showPageContentView];
         };
     }
     
@@ -67,7 +109,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
 //        _tableView.backgroundColor = [UIColor whiteColor];;
 

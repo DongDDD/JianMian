@@ -15,6 +15,7 @@
 #import "JMLogisticsInfoViewController.h"
 #import "JMSearchOrderViewController.h"
 #import "JMApplyForRefundViewController.h"
+#import "JMCreatChatAction.h"
 @interface JMMyOrderListViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,JMOrderStatusTableViewCellDelegate>
 @property (strong, nonatomic) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
@@ -213,10 +214,18 @@ static NSString *cellID = @"statusCellID";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     _orderCellData = self.listDataArray[indexPath.row];
-    if (_orderCellData.isSpread) {
-        return 256+54;
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    CGFloat bottomH;
+    if ([userModel.type isEqualToString:C_Type_USER]) {
+        bottomH = 54;
+    }else{
+        bottomH = 0;
+
     }
-    return 164+54;
+    if (_orderCellData.isSpread) {
+        return 276+bottomH;
+    }
+    return 200+bottomH;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -254,9 +263,28 @@ static NSString *cellID = @"statusCellID";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
--(void)didClickBottomBtnActionWithTag:(NSInteger)tag{
-    JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
-    [self.navigationController pushViewController:vc animated:YES];
+-(void)didClickBottomBtnActionWithTag:(NSInteger)tag data:(nonnull JMOrderCellData *)data{
+    if (tag == 101) {
+        NSString *user_id = [NSString stringWithFormat:@"%@b",data.shop_user_id];
+        [JMCreatChatAction create4TypeChatRequstWithAccount:user_id];
+   
+    }if (tag == 102){
+        [[JMHTTPManager sharedInstance]changeOrderStatusWithOrder_id:data.order_id status:@"12" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//            if (responsObject[@"data"]) {
+//            [self.tableView.mj_header beginRefreshing];
+//
+//            }
+            
+            
+        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+            
+        }];
+    
+    
+    }
+    
+//    JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
+//    [self.navigationController pushViewController:vc animated:YES];
 
 
 
