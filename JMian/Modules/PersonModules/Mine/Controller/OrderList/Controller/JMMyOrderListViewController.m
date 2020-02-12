@@ -54,7 +54,6 @@ static NSString *cellID = @"statusCellID";
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.tableView.mj_header beginRefreshing];
 }
 
 #pragma mark - 数据请求
@@ -265,7 +264,7 @@ static NSString *cellID = @"statusCellID";
 
 -(void)didClickBottomBtnActionWithTag:(NSInteger)tag data:(nonnull JMOrderCellData *)data{
     if (tag == 101) {
-        NSString *user_id = [NSString stringWithFormat:@"%@b",data.shop_user_id];
+        NSString *user_id = [NSString stringWithFormat:@"%@b",data.user_id];
         [JMCreatChatAction create4TypeChatRequstWithAccount:user_id];
    
     }if (tag == 102){
@@ -331,6 +330,7 @@ static NSString *cellID = @"statusCellID";
     
     return _titleView;
 }
+
 
 -(NSMutableArray *)listDataArray{
     if (_listDataArray.count == 0) {

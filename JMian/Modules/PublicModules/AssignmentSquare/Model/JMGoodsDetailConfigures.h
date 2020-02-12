@@ -21,8 +21,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, JMGoodsDetailCellType){
     JMGoodsDetailCellTypeSDC = 0,
     JMGoodsDetailCellTypeTitle,
-    JMGoodsDetailCellTypeDesc,
     JMGoodsDetailCellTypeVideo,
+    JMGoodsDetailCellTypeDesc,
 //    JMGoodsDetailCellTypeImages,
     JMGoodsDetailCellTypeMicrotitle,
     JMGoodsDetailCellTypeStoreGoods,
@@ -33,6 +33,8 @@ typedef NS_ENUM(NSInteger, JMGoodsDetailCellType){
 @interface JMGoodsDetailConfigures : NSObject
 
 @property (assign, nonatomic) CGFloat height;
+@property (assign, nonatomic) CGFloat webViewHeight;
+
 @property (assign, nonatomic) CGFloat footerheight;
 @property (assign, nonatomic) CGFloat headerheight;
 

@@ -23,6 +23,7 @@
              @"video_file_path":@"video.file_path",
              @"video_file_id":@"video.file_id",
              @"video_cover_path":@"video.cover_path",
+             @"shop_user_id":@"shop.user_id",
 
              };
     

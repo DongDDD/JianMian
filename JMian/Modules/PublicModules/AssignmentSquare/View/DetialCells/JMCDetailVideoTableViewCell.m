@@ -37,7 +37,6 @@ NSString *const JMCDetailVideoTableViewCellIdentifier = @"JMCDetailVideoTableVie
         [self.playBtn setHidden:YES];
     }else{
         [self.playBtn setHidden:NO];
-
     }
     
 }
@@ -58,8 +57,9 @@ NSString *const JMCDetailVideoTableViewCellIdentifier = @"JMCDetailVideoTableVie
 
 - (IBAction)playAction:(id)sender {
     if ([_delegate respondsToSelector:@selector(playVideoActionWithUrl:)]) {
-        
-        [_delegate playVideoActionWithUrl:_video_file_path];
+        NSString *url = [NSString stringWithFormat:@"http://produce.jmzhipin.com%@",_video_file_path];
+
+        [_delegate playVideoActionWithUrl:url];
     }
 }
 

@@ -16,10 +16,10 @@
                         keyword:(NSString *)keyword
 
                    successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+//    NSString *urlStr = [Get_GoodsList_URL stringByAppendingFormat:@"/%@",shop_id];
     
-    NSDictionary *dic = @{@"shop_id":shop_id,
-                          @"status":status,
-                          @"keyword":keyword
+    NSDictionary *dic = @{
+        @"shop_id":shop_id,
     };
     
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Get_GoodsList_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];

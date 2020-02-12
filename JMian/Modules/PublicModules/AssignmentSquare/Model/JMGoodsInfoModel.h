@@ -16,11 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *price;
 @property (copy, nonatomic) NSString *salary;
+@property (copy, nonatomic) NSString *goods_no;
+@property (copy, nonatomic) NSString *goods_id;
+
 
 @property (copy, nonatomic) NSString *video_file_path;
 @property (copy, nonatomic) NSString *video_file_id;
 @property (copy, nonatomic) NSString *video_cover_path;
 @property (copy, nonatomic) NSString *shop_id;
+@property (copy, nonatomic) NSString *shop_user_id;
 
 
 @property(nonatomic,strong)NSArray *images;

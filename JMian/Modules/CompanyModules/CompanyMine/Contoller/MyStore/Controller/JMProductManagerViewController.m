@@ -40,15 +40,12 @@
 }
 
 -(void)getDataWithStatus:(NSString *)status{
-    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-    [[JMHTTPManager sharedInstance]getManagerGoodsLIstWithKeyword:@"" shop_id:model.shop_shop_id status:status page:@"" per_page:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]getManagerGoodsLIstWithKeyword:@"" shop_id:@"" status:status page:@"" per_page:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             self.listArray = [JMGoodsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
             [self.tableView reloadData];
-            
-            
-            
+        
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {

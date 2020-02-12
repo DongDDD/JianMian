@@ -20,9 +20,10 @@
 #import "JMHistoryViewController.h"
 #import "JMCDetailViewController.h"
 #import "JMCTypeSaleDetailViewController.h"
+#import "JMSelectTaskTypeView.h"
 
 
-@interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMPostTypeChooseViewDelegate,JMPostTaskBottomViewDelegate,JMPostJobHomeTableViewCellDelegate>
+@interface JMPartTimeJobResumeViewController ()<UITableViewDelegate,UITableViewDataSource,JMPostTypeChooseViewDelegate,JMPostTaskBottomViewDelegate,JMPostJobHomeTableViewCellDelegate,JMSelectTaskTypeViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *dataArray;
 @property (nonatomic, strong) JMTitlesView *titleView;
@@ -30,6 +31,7 @@
 @property (nonatomic, strong) JMPostTaskBottomView *postTaskBottomView;
 @property (nonatomic, strong) JMPostTypeChooseView *postTypeChooseView;
 @property (nonatomic, strong) UIView *chooseViewBgView;
+@property (nonatomic, strong) JMSelectTaskTypeView *selectTaskTypeView;
 
 //@property (strong, nonatomic) NSString *status;
 @property (weak, nonatomic) IBOutlet UILabel *no_dataLab;
@@ -61,22 +63,21 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             make.bottom.mas_equalTo(self.postTaskBottomView.mas_top);
             make.left.and.right.mas_equalTo(self.view);
         }];
-        [[UIApplication sharedApplication].keyWindow addSubview:self.chooseViewBgView];
-        [self.chooseViewBgView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo([UIApplication sharedApplication].keyWindow);
+        
+        [[UIApplication sharedApplication].keyWindow addSubview:self.selectTaskTypeView];
+        [self.selectTaskTypeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.bottom.equalTo([UIApplication sharedApplication].keyWindow);
             make.left.and.right.equalTo([UIApplication sharedApplication].keyWindow);
-            make.height.mas_equalTo(SCREEN_HEIGHT-217-SafeAreaBottomHeight);
-            
         }];
-        [self.view addSubview:self.postTypeChooseView];
-        [self.postTypeChooseView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.equalTo(self.view);
-            make.left.and.right.equalTo(self.view);
-            make.height.mas_equalTo(217+SafeAreaBottomHeight);
-            
-        }];
-        [self.postTypeChooseView setHidden:YES];
-        [self.chooseViewBgView setHidden:YES];
+        [self.selectTaskTypeView setHidden:YES];
+//        [self.view addSubview:self.postTypeChooseView];
+//        [self.postTypeChooseView mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.bottom.equalTo(self.view);
+//            make.left.and.right.equalTo(self.view);
+//            make.height.mas_equalTo(217+SafeAreaBottomHeight);
+//        }];
+//        [self.postTypeChooseView setHidden:YES];
+//        [self.chooseViewBgView setHidden:YES];
         
     }else if (_viewType == JMPartTimeJobTypeResume){
         [self.view addSubview:self.tableView];
@@ -161,7 +162,6 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
             if (self.dataArray.count == 0) {
                 [self.tableView setHidden:YES];
             }else{
-            
                 [self.tableView setHidden:NO];
             }
         }
@@ -421,8 +421,9 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 #pragma mark - MyDelegate
 
 -(void)didClickPostAction{
-    [self.postTypeChooseView setHidden:NO];
-    [self.chooseViewBgView setHidden:NO];
+    [self.selectTaskTypeView setHidden:NO];
+//    [self.postTypeChooseView setHidden:NO];
+//    [self.chooseViewBgView setHidden:NO];
 }
 
 -(void)didSelectedPostTypeWithTag:(NSInteger)tag{
@@ -445,8 +446,10 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 }
 
 -(void)disapearAction{
-    [self.postTypeChooseView setHidden:YES];
-    [self.chooseViewBgView setHidden:YES];
+    [self.selectTaskTypeView setHidden:YES];
+
+//    [self.postTypeChooseView setHidden:YES];
+//    [self.chooseViewBgView setHidden:YES];
 }
 
 -(void)didClickCopyActionWithTaskListCellData:(JMTaskListCellData *)taskListCellData{
@@ -464,6 +467,23 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
 //    vc.viewType = JMBUserPostSaleJobViewTypeHistory;
 //    vc.task_id = taskListCellData.task_id;
 //    [self.navigationController pushViewController:vc animated:YES];
+
+}
+
+-(void)didClickTaskTypeWithTag:(NSInteger)tag{
+    if (tag == 1000) {
+         JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+         vc.viewType = JMBUserPostSaleJobViewTypeAdd;
+         [self.navigationController pushViewController:vc animated:YES];
+     }else if (tag == 1001) {
+         JMBUserPostPartTimeJobViewController *vc = [[JMBUserPostPartTimeJobViewController alloc]init];
+         vc.viewType = JMBUserPostPartTimeJobTypeAdd;
+         [self.navigationController pushViewController:vc animated:YES];
+     }else if (tag == 1002) {
+         [self.selectTaskTypeView setHidden:YES];
+  
+     }
+    [self.selectTaskTypeView setHidden:YES];
 
 }
 
@@ -518,6 +538,15 @@ static NSString *cellIdent = @"PartTimePostJobCellID";
         _postTypeChooseView.delegate = self;
     }
     return _postTypeChooseView;
+}
+
+-(JMSelectTaskTypeView *)selectTaskTypeView{
+    if (!_selectTaskTypeView) {
+        _selectTaskTypeView = [[JMSelectTaskTypeView alloc]init];
+        _selectTaskTypeView.delegate = self;
+        
+    }
+    return  _selectTaskTypeView;
 }
 
 -(UIView *)chooseViewBgView{

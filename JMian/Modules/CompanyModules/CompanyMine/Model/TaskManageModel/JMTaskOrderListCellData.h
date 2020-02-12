@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "JMCDetailModel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMTaskOrderListCellData : NSObject
@@ -57,7 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *snapshot_share_url;
 @property (nonatomic, copy) NSString *snapshot_invoice;
 @property (nonatomic, strong) NSArray *snapshot_images;
+@property (nonatomic, strong) NSArray *goods;
 
+@property (nonatomic, strong) JMCDetailModel *snapshot;
 
 
 
@@ -95,6 +97,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMTaskOrderImageModel : NSObject
 @property (nonatomic, copy) NSString *file_path;
 @property (nonatomic, copy) NSString *file_id;
+
+
+@end
+
+@interface JMTaskOrderGoodsData : NSObject
+@property (nonatomic, copy) NSString *inventory;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *price;
+@property (nonatomic, copy) NSString *salary;
+@property (nonatomic, copy) NSString *shop_id;
 
 
 @end

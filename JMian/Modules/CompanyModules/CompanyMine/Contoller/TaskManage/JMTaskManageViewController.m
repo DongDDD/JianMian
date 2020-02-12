@@ -29,6 +29,8 @@
 #import "JMHTTPManager+UnReadNotice.h"
 #import "JMBDetailViewController.h"
 #import "JMMyShareView.h"
+#import "JMCTypeSaleDetailViewController.h"
+#import "JMCDetailViewController.h"
 //#import <PassKit/PassKit.h>                                 //用户绑定的银行卡信息
 //#import <PassKit/PKPaymentAuthorizationViewController.h>    //Apple pay的展示控件
 //#import <AddressBook/AddressBook.h>                         //用户联系信息相关
@@ -492,9 +494,27 @@
         if (responsObject[@"data"]) {
             JMTaskOrderListCellData *taskInfoData = [JMTaskOrderListCellData mj_objectWithKeyValues:responsObject[@"data"]];
             
-            JMSnapshotWebViewController *vc = [[JMSnapshotWebViewController alloc]init];
-            vc.data = taskInfoData;
-            [self.navigationController pushViewController:vc animated:YES];
+//            JMSnapshotWebViewController *vc = [[JMSnapshotWebViewController alloc]init];
+//            vc.data = taskInfoData;
+//            [self.navigationController pushViewController:vc animated:YES];
+            if ([taskInfoData.payment_method isEqualToString:@"1"]) {
+                JMCTypeSaleDetailViewController *vc = [[JMCTypeSaleDetailViewController alloc]init];
+                vc.viewType = CTypeSaleViewSnapshootType;
+                vc.model = taskInfoData.snapshot;
+                vc.title = @"订单快照";
+                vc.task_order_id = taskInfoData.task_order_id;
+                //            vc.model = taskInfoData.
+                [self.navigationController pushViewController:vc animated:YES];
+                 
+            }else{
+                
+                JMCDetailViewController *vc = [[JMCDetailViewController alloc]init];
+                vc.viewType = JMCDetailSnapshootViewType;
+                vc.model = taskInfoData.snapshot;
+                vc.title = @"订单快照";
+                //            vc.model = taskInfoData.
+                [self.navigationController pushViewController:vc animated:YES];
+            }
         }
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         

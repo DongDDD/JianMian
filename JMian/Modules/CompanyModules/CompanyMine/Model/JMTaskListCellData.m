@@ -10,6 +10,13 @@
 #import <MJExtension.h>
 
 @implementation JMTaskListCellData
++ (NSDictionary *)mj_objectClassInArray {
+    return @{
+             @"goods":@"JMGoodsData",
+
+             };
+}
+
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
              @"type_labelID":@"type_label.label_id",

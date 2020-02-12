@@ -24,14 +24,14 @@
             self.rowsNum = 1;
             self.footerheight = 0;
             self.headerheight = 44;
-            self.height = 220;
+          [self getHeightForDesc1];
           //  self.cellId = JMMyStoreOrderStatusTableViewCellIdentifier;
             break;
         case JMCTypeSaleCellTypeTaskDesc2:
             self.rowsNum = 1;
             self.footerheight = 1;
             self.headerheight = 0;
-            self.height = [self getHeightFromDecri];
+            self.height = [self getHeightForDesc2];
             //self.cellId = JMMyStoreManager1TableViewCellIdentifier;
             break;
         case JMCTypeSaleCellTypeMyStoreHeader:
@@ -45,7 +45,8 @@
             self.rowsNum = 1;
             self.footerheight = 1;
             self.headerheight = 1;
-            self.height = 500;
+            self.height = 700;
+            [self getHeightFromGoods];
             //self.cellId = JMMyStoreManager2TableViewCellIdentifier;
             break;
         default:
@@ -80,7 +81,7 @@
      return self.cellId;
  }
 
--(CGFloat)getHeightFromDecri{
+-(CGFloat)getHeightForDesc2{
      if ([self.model.payment_method isEqualToString:@"1"]) {
         //销售任务
         CGFloat H = [self boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, 0) WithStr:self.model.goods_description andFont:[UIFont systemFontOfSize:14] andLinespace:8];
@@ -89,6 +90,30 @@
     }else{
         return 0;
     }
+    
+}
+
+-(void)getHeightFromGoods{
+    if (self.goodsListArray.count > 0) {
+        CGFloat f = self.goodsListArray.count/2;
+        int i = ceil(f);
+        if (i > 0) {
+            self.height = i * 240+240;
+        }else{
+            self.height = 240;            
+        }
+    }
+}
+
+-(void)getHeightForDesc1{
+    if (self.model.goods.count > 0) {
+          
+        self.height = 270;
+    }else{
+        self.height = 220;
+        
+    }
+    
     
 }
 

@@ -19,7 +19,7 @@
                            };
     
     
-    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:nil] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
 @end

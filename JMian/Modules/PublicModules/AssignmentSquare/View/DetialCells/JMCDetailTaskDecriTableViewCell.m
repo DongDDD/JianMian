@@ -34,10 +34,29 @@ NSString *const JMCDetailTaskDecriTableViewCellIdentifier = @"JMCDetailTaskDecri
     self.taskTitleLab.text = model.task_title;
     [self.taskTitleLab sizeToFit];
     
-    if ([model.payment_money isEqualToString:@"0"]) {
-        self.moneyConstrant.constant = 20;
-        [self.paymentMoney setHidden:YES];
-        [self.unitLab setHidden:YES];
+    if ([model.payment_method isEqualToString:@"1"]) {
+        if (model.goods.count > 0) {
+            NSMutableArray *arr = [NSMutableArray array];
+            for (JMGoodsData *data in model.goods) {
+                [arr addObject:data.salary];
+            }
+            //最大值
+            double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+            int max_value2 =  fabs(max_value);
+            //最小值
+            double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+            int min_value2 =  fabs(min_value);
+            self.paymentMoney.text = [NSString stringWithFormat:@"%d ~ %d",min_value2,max_value2];
+        }else{
+            self.moneyConstrant.constant = 20;
+            [self.paymentMoney setHidden:YES];
+            [self.unitLab setHidden:YES];
+            
+        }
+        
+        
+        
+        
     }else{
         [self.paymentMoney setHidden:NO];
         [self.unitLab setHidden:NO];

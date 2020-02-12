@@ -12,11 +12,21 @@
 + (NSDictionary *)mj_objectClassInArray {
     return @{
              @"industry":@"JMTaskOrderIndustryModel",
+             @"snapshot_images":@"JMTaskOrderImageModel",
+             @"goods":@"JMTaskOrderGoodsData",
+
+             };
+}
+
++ (NSDictionary *)mj_objectClassIn {
+    return @{
+             @"industry":@"JMTaskOrderIndustryModel",
+             @"snapshot":@"JMCDetailModel",
+
              @"snapshot_images":@"JMTaskOrderImageModel"
          
              };
 }
-
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
     return @{
@@ -72,14 +82,12 @@
 
 @implementation JMTaskOrderIndustryModel
 
-
-
-
 @end
 
 @implementation JMTaskOrderImageModel
 
+@end
 
-
+@implementation JMTaskOrderGoodsData
 
 @end

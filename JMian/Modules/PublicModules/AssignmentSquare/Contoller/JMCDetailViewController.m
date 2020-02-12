@@ -31,7 +31,7 @@
 #import "JMBUserPostPartTimeJobViewController.h"
 #import "JMHTTPManager+DeleteTask.h"
 #import "JMSendCustumMsg.h"//发送自定义消息
-
+#import "JMSnapshootView.h"
 
 @interface JMCDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMCDetailVideoTableViewCellDelegate,JMShareViewDelegate,JMTaskApplyForViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
@@ -46,6 +46,8 @@
 @property (copy, nonatomic) NSString *user_id;
 @property (nonatomic, strong) UIView *windowViewBGView;
 @property (nonatomic, strong) JMTaskApplyForView *taskApplyForView;
+@property (nonatomic, strong) JMSnapshootView *snapshootView;
+
 @property (nonatomic, strong) JMShareView *shareView;
 @property (nonatomic ,strong) UIView *BGShareView;
 @property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
@@ -68,8 +70,18 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self getData];
-    [self upDateUserData];
+    if (_viewType == JMCDetailSnapshootViewType) {
+         self.configures.model = self.model;
+         [self initView];
+         [self.bottomView setHidden:YES];
+         [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
+             make.bottom.mas_equalTo(self.view);
+         }];
+    }else{
+        [self getData];
+        [self upDateUserData];
+    
+    }
 }
 
 -(void)initView{
@@ -366,7 +378,8 @@
     [urlMessage setThumbData:thumbData];
     //分享实例
     WXWebpageObject *webObj = [WXWebpageObject object];
-    webObj.webpageUrl = self.configures.model.share_url;
+//    NSString *url = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=12&task_order_id=1",
+//    webObj.webpageUrl = self.configures.model.share_url;
     
     urlMessage.mediaObject = webObj;
     sendReq.message = urlMessage;
@@ -775,7 +788,13 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1) {
-        return self.titleView;
+              if (_viewType == JMCDetailSnapshootViewType) {
+                  return self.snapshootView;
+              }else{                  
+                  return self.titleView;
+              }
+
+          return [UIView new];
     }else if (section == 2) {
         
         UILabel *lab = [[UILabel alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH, 44)];
@@ -1046,6 +1065,14 @@
         _configures = [[JMCDetailCellConfigures alloc]init];
     }
     return _configures;
+}
+
+-(JMSnapshootView *)snapshootView{
+    if (!_snapshootView) {
+        _snapshootView = [[JMSnapshootView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    }
+    return _snapshootView;
+
 }
 
 -(JMTaskApplyForView *)taskApplyForView{

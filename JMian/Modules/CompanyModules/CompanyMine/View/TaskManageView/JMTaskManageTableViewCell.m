@@ -35,16 +35,19 @@
     _myData = data;
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        
         [self setBHeaderView_data:data];
         [self setBButton_data:data];
         
     }else{
-        
         [self setCHeaderView_data:data];
         [self setCButton_data:data];
         
     }
+    
+    
+    
+    
+
     
 }
 
@@ -210,8 +213,16 @@
     NSURL *url = [NSURL URLWithString:data.snapshot_companyLogo_path];
     [self.iconImgView sd_setImageWithURL:url placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.headerLab.text = data.task_title;
-    self.moneyLab.text = [NSString stringWithFormat:@"%@%@",data.payment_money,data.unit];
     if ([data.payment_method isEqualToString:@"1"] ) {
+        //获取佣金范围
+        if (data.goods.count > 0) {
+            NSString *salary = [self getRangeForSalary];
+            self.moneyLab.text = [NSString stringWithFormat:@"%@%@",salary,data.unit];
+            [self.moneyLab setHidden:NO];
+        }else{
+            [self.moneyLab setHidden:YES];
+
+        }
         //网络销售
         self.infoLab1.text = data.goodsTitle;
         if (data.snapshot_cityName == nil) {
@@ -222,6 +233,9 @@
         }
         self.infoLab3.text = @" 即结  ";
     }else{
+         [self.moneyLab setHidden:NO];
+        self.moneyLab.text = [NSString stringWithFormat:@"%@%@",data.payment_money,data.unit];
+
         //其他兼职
         self.infoLab1.text = data.snapshot_companyName;
         if (data.snapshot_cityName == nil) {
@@ -327,6 +341,21 @@
         self.rightBtn.layer.borderColor = TEXT_GRAYmin_COLOR.CGColor;
     }
         
+}
+
+-(NSString *)getRangeForSalary{
+    NSMutableArray *arr = [NSMutableArray array];
+    for (JMGoodsData *goodsData in _myData.goods) {
+        [arr addObject:goodsData.salary];
+    }
+    //最大值
+    double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+    int max_value2 =  fabs(max_value);
+    //最小值
+    double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+    int min_value2 =  fabs(min_value);
+    NSString *str= [NSString stringWithFormat:@"%d~%d",min_value2,max_value2];
+    return str;
 }
 
 - (IBAction)leftBtnAction:(UIButton *)sender {

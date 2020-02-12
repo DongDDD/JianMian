@@ -37,6 +37,11 @@ NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDet
 
 
 -(void)setGoodsArray:(NSArray *)goodsArray{
+    [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self);
+        make.top.mas_equalTo(self);
+        make.bottom.mas_equalTo(self);
+    }];
     _myGoodsArray = goodsArray;
     [self addSubview:self.collectionView];
     [self.collectionView reloadData];

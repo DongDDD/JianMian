@@ -66,8 +66,34 @@
         self.jobLabs.text = @"有定金";
 
     }
-    self.paymentLab.text = model.payment_money;
-    self.unitLab.text = model.unit;
+    if ([model.payment_method isEqualToString:@"1"]) {
+        NSMutableArray *arr = [NSMutableArray array];
+        if (model.goods.count > 0) {
+            for (JMGoodsData *data in model.goods) {
+                [arr addObject:data.salary];
+            }
+            //最大值
+            double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+            int max_value2 =  fabs(max_value);
+            //最小值
+            double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+            int min_value2 =  fabs(min_value);
+            self.paymentLab.text = [NSString stringWithFormat:@"%d~%d",min_value2,max_value2];
+            self.unitLab.text = model.unit;
+            [self.paymentLab setHidden:NO];
+            [self.unitLab setHidden:NO];
+        }else{
+            [self.paymentLab setHidden:YES];
+            [self.unitLab setHidden:YES];
+
+        }
+    }else{
+        [self.paymentLab setHidden:NO];
+        [self.unitLab setHidden:NO];
+        self.paymentLab.text = model.payment_money;
+        self.unitLab.text = model.unit;
+        
+    }
     
     [self addSubview:self.gradeView];
     _gradeView.gradeStr = _myModel.companyReputation;
@@ -78,6 +104,7 @@
         make.height.mas_equalTo(18);
     }];
   
+    
  
 
 }

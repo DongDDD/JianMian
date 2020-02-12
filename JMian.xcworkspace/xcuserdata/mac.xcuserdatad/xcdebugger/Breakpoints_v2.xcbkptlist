@@ -413,8 +413,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
             endingLineNumber = "56"
-            landmarkName = "JMSnapshotWebViewController"
-            landmarkType = "3">
+            landmarkName = "-userContentController:didReceiveScriptMessage:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -463,7 +463,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "173"
                   endingLineNumber = "173"
-                  offsetFromSymbolStart = "164">
+                  offsetFromSymbolStart = "184">
                </Location>
                <Location
                   uuid = "9C198BB8-33A9-4087-BD11-DF991D3F39D0 - f27013da4a2ec1a8"
@@ -478,7 +478,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "173"
                   endingLineNumber = "173"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -835,7 +835,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
                   endingLineNumber = "66"
-                  offsetFromSymbolStart = "188">
+                  offsetFromSymbolStart = "228">
                </Location>
                <Location
                   uuid = "9BBE6739-FE57-48AA-8147-AD329301933F - d1d5903c24074940"
@@ -850,7 +850,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
                   endingLineNumber = "66"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -969,7 +969,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "389"
                   endingLineNumber = "389"
-                  offsetFromSymbolStart = "426">
+                  offsetFromSymbolStart = "476">
                </Location>
                <Location
                   uuid = "66620285-F829-4A63-90DC-94A264D4915C - 18409b0af885be06"
@@ -984,7 +984,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "390"
                   endingLineNumber = "390"
-                  offsetFromSymbolStart = "23">
+                  offsetFromSymbolStart = "20">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -1799,8 +1799,8 @@
             timestampString = "596617645.508948"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "955"
-            endingLineNumber = "955"
+            startingLineNumber = "973"
+            endingLineNumber = "973"
             landmarkName = "-wxShare:data1:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2208,7 +2208,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "992"
                   endingLineNumber = "992"
-                  offsetFromSymbolStart = "813">
+                  offsetFromSymbolStart = "760">
                </Location>
                <Location
                   uuid = "293A7BAB-F57D-4FE1-B1B6-E5ADF85EDADB - 3171b08331a93006"
@@ -2223,7 +2223,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "994"
                   endingLineNumber = "994"
-                  offsetFromSymbolStart = "73">
+                  offsetFromSymbolStart = "72">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2647,8 +2647,8 @@
             timestampString = "596617645.510211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "-leftActionWithData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2664,8 +2664,8 @@
             timestampString = "596617645.510481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "398"
-            endingLineNumber = "398"
+            startingLineNumber = "399"
+            endingLineNumber = "399"
             landmarkName = "-myShareWechat2"
             landmarkType = "7">
          </BreakpointContent>
@@ -2681,8 +2681,8 @@
             timestampString = "596617645.510728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
             landmarkName = "-myShareWechat1"
             landmarkType = "7">
          </BreakpointContent>
@@ -2950,7 +2950,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1267"
                   endingLineNumber = "1267"
-                  offsetFromSymbolStart = "120">
+                  offsetFromSymbolStart = "168">
                </Location>
                <Location
                   uuid = "8DB72323-4C48-468D-B467-65628E6989E9 - 288c85187ce0cdc9"
@@ -2965,7 +2965,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1269"
                   endingLineNumber = "1269"
-                  offsetFromSymbolStart = "76">
+                  offsetFromSymbolStart = "88">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3014,7 +3014,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "969"
                   endingLineNumber = "969"
-                  offsetFromSymbolStart = "1864">
+                  offsetFromSymbolStart = "1728">
                </Location>
                <Location
                   uuid = "82D92B74-4C66-434A-9E48-E3D0254F2565 - 52b9902bde9240c"
@@ -3029,7 +3029,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "969"
                   endingLineNumber = "969"
-                  offsetFromSymbolStart = "12">
+                  offsetFromSymbolStart = "16">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3229,38 +3229,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CFB96F74-D751-41C7-92CF-16F2E76D2084"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PublicModules/Message/Controller/JMMessageListViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "-viewWillDisappear:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "158A8093-0B5E-4A50-92BB-F7C12FC21D2F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMMyOrderListViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "271"
-            endingLineNumber = "271"
-            landmarkName = "-didClickBottomBtnActionWithTag:data:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5C3FE8A1-D2A3-4D78-B6E4-16B9CCDEC0DE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -3270,38 +3238,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
             endingLineNumber = "44"
-            landmarkName = "-changeOrderStatusWithOrder_id:status:successBlock:failureBlock:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3AD46BF2-93D7-4085-8BCC-F5D626C92E5B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMMyOrderListViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "266"
-            endingLineNumber = "266"
-            landmarkName = "-didClickBottomBtnActionWithTag:data:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CE258425-D81D-4E5B-81CE-EB79856BAEB2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Utilities/Nw/SecondCRequest/Order/JMHTTPManager+ChangeOrderStatus.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
             landmarkName = "-changeOrderStatusWithOrder_id:status:successBlock:failureBlock:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3334,7 +3270,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "39"
                   endingLineNumber = "39"
-                  offsetFromSymbolStart = "351">
+                  offsetFromSymbolStart = "400">
                </Location>
                <Location
                   uuid = "143A3F3E-02BC-4488-B079-06B4BE7CBE0B - 6cbc100ad91cfffb"
@@ -3349,7 +3285,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "40"
                   endingLineNumber = "40"
-                  offsetFromSymbolStart = "79">
+                  offsetFromSymbolStart = "88">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3367,6 +3303,38 @@
             startingLineNumber = "57"
             endingLineNumber = "57"
             landmarkName = "-sendContent:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "77A9259A-02DD-4E85-83BF-9EA27164B480"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PublicModules/AssignmentSquare/View/GoodsCells/JMGoodsDescTableViewCell.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "JMGoodsDescTableViewCell"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F3ECF6A8-26BE-4258-BBBA-69F8B68B50B7"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PublicModules/AssignmentSquare/Contoller/JMGoodsDetailViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
+            landmarkName = "-wxShare:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

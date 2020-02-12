@@ -15,6 +15,8 @@
              @"images":@"JMCDetailImageModel",
              @"industry":@"JMCDetailindustryModel",
              @"video":@"JMCDetailVideoModel",
+             @"goods":@"JMGoodsData",
+
 
              };
 }

@@ -27,20 +27,21 @@
             self.height = 153;
           //  self.cellId = JMMyStoreOrderStatusTableViewCellIdentifier;
             break;
-        case JMGoodsDetailCellTypeDesc:
-            self.rowsNum = 1;
-            self.footerheight = 1;
-            self.headerheight = 0;
-            self.height = 298;
-
-            //self.cellId = JMMyStoreManager1TableViewCellIdentifier;
-            break;
         case JMGoodsDetailCellTypeVideo:
             self.rowsNum = 1;
             self.footerheight = 1;
             self.headerheight = 0;
             self.height = 260;
             //self.cellId = JMMyStoreManager2TableViewCellIdentifier;
+            break;
+        case JMGoodsDetailCellTypeDesc:
+            self.rowsNum = 1;
+            self.footerheight = 1;
+            self.headerheight = 0;
+            self.height = self.webViewHeight;
+            //            self.height = 100;
+            
+            //self.cellId = JMMyStoreManager1TableViewCellIdentifier;
             break;
 //        case JMGoodsDetailCellTypeImages:
 //            self.rowsNum = self.model.images.count;
@@ -60,7 +61,8 @@
             self.rowsNum = 1;
             self.footerheight = 1;
             self.headerheight = 1;
-            self.height = 300;
+//            self.height = 300;
+            [self getHeightFromGoods];
             //self.cellId = JMMyStoreManager2TableViewCellIdentifier;
             break;
             
@@ -102,6 +104,17 @@
     return H+100;
 }
 
+-(void)getHeightFromGoods{
+    if (self.goodsListArray.count > 0) {
+        CGFloat f = self.goodsListArray.count/2;
+        int i = ceil(f);
+        if (i > 0) {
+            self.height = i * 240+240;
+        }else{
+            self.height = 240;
+        }
+    }
+}
 //-(CGFloat)getHeightFromImage{
 //    JMGoodsInfoImageModel *imgModel = self.model.images[indexPath.row];
 //    UIImageView *imageView = [[UIImageView alloc]init];

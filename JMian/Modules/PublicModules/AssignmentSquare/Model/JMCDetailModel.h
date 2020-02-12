@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "JMGoodsData.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -49,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, strong)NSArray *images;
 @property(nonatomic, strong)NSArray *industry;
+@property(nonatomic, strong)NSArray *goods;
+
 @property(nonatomic, strong)NSString *video_file_path;
 @property(nonatomic, strong)NSString *video_cover;
 

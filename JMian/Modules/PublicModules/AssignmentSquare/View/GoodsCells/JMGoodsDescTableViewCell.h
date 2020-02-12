@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+ #import <WebKit/WebKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMGoodsDescTableViewCellIdentifier;
@@ -16,10 +17,10 @@ extern NSString *const JMGoodsDescTableViewCellIdentifier;
 
 @end
 @interface JMGoodsDescTableViewCell : UITableViewCell<UIWebViewDelegate>
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
-@property (weak, nonatomic) IBOutlet UILabel *lab;
 @property(nonatomic,copy)NSString *descStr;
 @property(nonatomic,weak)id<JMGoodsDescTableViewCellDelegate>delegate;
+@property(nonatomic,strong)WKWebView *webView;
+
 @end
 
 NS_ASSUME_NONNULL_END

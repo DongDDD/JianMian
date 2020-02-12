@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="JMSelectTaskTypeView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Mc-n9-naf">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="demiGray.png" translatesAutoresizingMaskIntoConstraints="NO" id="EoZ-8J-TwX">
+                            <rect key="frame" x="60" y="60" width="143" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="0Cj-Q5-XyW"/>
+                                <constraint firstAttribute="width" constant="143" id="Wbo-TZ-Jsc"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="聚天下英才而用之" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fff-fD-tKZ">
+                            <rect key="frame" x="60" y="140" width="243" height="36"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                            <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AQ5-Wp-01Q">
+                            <rect key="frame" x="67" y="601" width="67" height="67"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="67" id="4G3-UL-gY8"/>
+                                <constraint firstAttribute="width" constant="67" id="Qaq-2F-6Lb"/>
+                            </constraints>
+                            <state key="normal" title=" icon-sales" image="icon-sales.png"/>
+                            <connections>
+                                <action selector="postTaskAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="L4t-JE-X3B"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="销售任务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vgG-wt-e9C">
+                            <rect key="frame" x="65.5" y="683" width="70" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布销售类任务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="92f-Rw-oK2">
+                            <rect key="frame" x="57.5" y="711" width="86" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EKj-GM-YdP">
+                            <rect key="frame" x="280" y="601" width="67" height="67"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="67" id="m5e-fq-qVv"/>
+                                <constraint firstAttribute="height" constant="67" id="ubc-hd-Ey4"/>
+                            </constraints>
+                            <state key="normal" title=" " image="icon-ordinary.png"/>
+                            <connections>
+                                <action selector="postTaskAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="YZ0-fH-IEk"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="普通任务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgs-Bp-D7H">
+                            <rect key="frame" x="278.5" y="683" width="70" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="发布普通类型任务" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDx-mD-8Ei">
+                            <rect key="frame" x="264.5" y="711" width="98.5" height="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iCB-Q0-Wpp">
+                            <rect key="frame" x="198" y="760" width="18" height="18"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="18" id="bW2-kQ-fof"/>
+                                <constraint firstAttribute="width" constant="18" id="zb5-z5-evY"/>
+                            </constraints>
+                            <state key="normal" title="Button" image="icon-cancel.png"/>
+                            <connections>
+                                <action selector="postTaskAction:" destination="iN0-l3-epB" eventType="touchUpInside" id="nlN-su-CBe"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="iCB-Q0-Wpp" firstAttribute="top" secondItem="AQ5-Wp-01Q" secondAttribute="bottom" constant="92" id="7T0-Br-2fU"/>
+                        <constraint firstItem="EoZ-8J-TwX" firstAttribute="top" secondItem="1Mc-n9-naf" secondAttribute="top" constant="60" id="B7c-Of-8BC"/>
+                        <constraint firstItem="lgs-Bp-D7H" firstAttribute="centerX" secondItem="EKj-GM-YdP" secondAttribute="centerX" id="FIs-j4-Ajk"/>
+                        <constraint firstItem="Fff-fD-tKZ" firstAttribute="leading" secondItem="EoZ-8J-TwX" secondAttribute="leading" id="J0k-U2-okh"/>
+                        <constraint firstItem="EKj-GM-YdP" firstAttribute="centerY" secondItem="AQ5-Wp-01Q" secondAttribute="centerY" id="LGY-ik-xhs"/>
+                        <constraint firstItem="vgG-wt-e9C" firstAttribute="centerX" secondItem="AQ5-Wp-01Q" secondAttribute="centerX" id="PjK-vB-eDt"/>
+                        <constraint firstItem="AQ5-Wp-01Q" firstAttribute="leading" secondItem="1Mc-n9-naf" secondAttribute="leading" constant="67" id="QUX-pp-Df5"/>
+                        <constraint firstItem="Fff-fD-tKZ" firstAttribute="top" secondItem="EoZ-8J-TwX" secondAttribute="bottom" constant="20" id="VGB-5B-SKN"/>
+                        <constraint firstAttribute="bottom" secondItem="iCB-Q0-Wpp" secondAttribute="bottom" constant="40" id="WT6-pG-mhz"/>
+                        <constraint firstItem="hDx-mD-8Ei" firstAttribute="centerX" secondItem="lgs-Bp-D7H" secondAttribute="centerX" id="fxt-dP-C7d"/>
+                        <constraint firstAttribute="trailing" secondItem="EKj-GM-YdP" secondAttribute="trailing" constant="67" id="hAl-zg-bpW"/>
+                        <constraint firstItem="92f-Rw-oK2" firstAttribute="top" secondItem="vgG-wt-e9C" secondAttribute="bottom" constant="7" id="kWy-0g-qM1"/>
+                        <constraint firstItem="EoZ-8J-TwX" firstAttribute="leading" secondItem="1Mc-n9-naf" secondAttribute="leading" constant="60" id="msl-3E-0uJ"/>
+                        <constraint firstItem="vgG-wt-e9C" firstAttribute="top" secondItem="AQ5-Wp-01Q" secondAttribute="bottom" constant="15" id="op0-2G-gei"/>
+                        <constraint firstItem="iCB-Q0-Wpp" firstAttribute="centerX" secondItem="1Mc-n9-naf" secondAttribute="centerX" id="qLk-39-3BB"/>
+                        <constraint firstItem="92f-Rw-oK2" firstAttribute="centerX" secondItem="vgG-wt-e9C" secondAttribute="centerX" id="sFc-fc-hl4"/>
+                        <constraint firstItem="hDx-mD-8Ei" firstAttribute="top" secondItem="lgs-Bp-D7H" secondAttribute="bottom" constant="7" id="tua-jJ-3ek"/>
+                        <constraint firstItem="lgs-Bp-D7H" firstAttribute="top" secondItem="EKj-GM-YdP" secondAttribute="bottom" constant="15" id="tvo-nt-3wC"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="1Mc-n9-naf" secondAttribute="bottom" id="Atc-4M-0gZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="1Mc-n9-naf" secondAttribute="trailing" id="PwL-Z0-4gp"/>
+                <constraint firstItem="1Mc-n9-naf" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="eYV-ks-9ac"/>
+                <constraint firstItem="1Mc-n9-naf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="wdC-ey-Apd"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="bgView" destination="1Mc-n9-naf" id="8ED-bl-w8Z"/>
+            </connections>
+            <point key="canvasLocation" x="-322" y="35"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="demiGray.png" width="142.5" height="60"/>
+        <image name="icon-cancel.png" width="18" height="18.5"/>
+        <image name="icon-ordinary.png" width="67" height="67"/>
+        <image name="icon-sales.png" width="67" height="67"/>
+    </resources>
+</document>

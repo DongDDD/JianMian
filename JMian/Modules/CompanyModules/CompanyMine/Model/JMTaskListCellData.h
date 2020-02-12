@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "JMGoodsData.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMTaskListCellData : NSObject
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *goodsTitle;
 @property (nonatomic, copy) NSString *goodsPrice;
 @property (nonatomic, copy) NSString *goodsDescription;
-
+@property (nonatomic, strong) NSArray *goods;
 
 
 @end
