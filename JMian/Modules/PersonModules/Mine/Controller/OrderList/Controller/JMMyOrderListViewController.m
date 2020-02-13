@@ -16,6 +16,10 @@
 #import "JMSearchOrderViewController.h"
 #import "JMApplyForRefundViewController.h"
 #import "JMCreatChatAction.h"
+#import "WXApi.h"
+#import "JMHTTPManager+OrderPay.h"
+#import "JMOrderPaymentModel.h"
+
 @interface JMMyOrderListViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,JMOrderStatusTableViewCellDelegate>
 @property (strong, nonatomic) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
@@ -68,8 +72,7 @@ static NSString *cellID = @"statusCellID";
                 _isShowAllData = YES;
                 [self.tableView.mj_footer setHidden:YES];
             }
-            
-            
+                        
             [self.listDataArray addObjectsFromArray:array];
 
             [self.tableView.mj_header endRefreshing];
@@ -240,6 +243,12 @@ static NSString *cellID = @"statusCellID";
     return cell;
 }
 
+#pragma mark - Table view data delegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+     
+    
+
+}
 
 
 #pragma mark - myDelegate
@@ -262,24 +271,21 @@ static NSString *cellID = @"statusCellID";
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+//100取消订单  101联系卖/买家  102确认收货 103去付款
 -(void)didClickBottomBtnActionWithTag:(NSInteger)tag data:(nonnull JMOrderCellData *)data{
-    if (tag == 101) {
-        NSString *user_id = [NSString stringWithFormat:@"%@b",data.user_id];
+    if (tag == 100) {
+        [self changOrderStatus:@"1" order_id:data.order_id];
+
+    }else if (tag == 101) {
+        NSString *user_id = [NSString stringWithFormat:@"%@b",data.shop_user_id];
         [JMCreatChatAction create4TypeChatRequstWithAccount:user_id];
-   
-    }if (tag == 102){
-        [[JMHTTPManager sharedInstance]changeOrderStatusWithOrder_id:data.order_id status:@"12" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//            if (responsObject[@"data"]) {
-//            [self.tableView.mj_header beginRefreshing];
-//
-//            }
-            
-            
-        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-            
-        }];
+        
+    }else if (tag == 102){
+        [self changOrderStatus:@"12" order_id:data.order_id];
     
-    
+    }else if (tag == 103){
+        [self payWithData:data mode:@""];
+         
     }
     
 //    JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
@@ -289,6 +295,46 @@ static NSString *cellID = @"statusCellID";
 
 }
 
+-(void)changOrderStatus:(NSString *)status order_id:(NSString *)order_id{
+    [[JMHTTPManager sharedInstance]changeOrderStatusWithOrder_id:order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.tableView.mj_header beginRefreshing];
+        
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
+- (void)payWithData:(JMOrderCellData *)data mode:(NSString *)mode
+{
+    [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:data.order_id scenes:@"app" type:@"2" mode:mode is_invoice:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            JMOrderPaymentModel *model = [JMOrderPaymentModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [self wechatPayWithModel:model];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+    
+}
+//拉起微信支付
+- (void)wechatPayWithModel:(JMOrderPaymentModel *)model{
+    
+    PayReq* req = [[PayReq alloc] init];
+    req.partnerId = model.wx_partnerid;
+    req.prepayId = model.wx_prepayid;
+    req.nonceStr = model.wx_noncestr;
+    req.timeStamp = model.wx_timestamp;
+    req.package = model.wx_package;
+    req.sign = model.wx_sign;
+    [WXApi sendReq:req];
+    
+//    [self payMoneyRequestWithNo:model.serial_no amount:@"130"];
+    
+    
+}
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {

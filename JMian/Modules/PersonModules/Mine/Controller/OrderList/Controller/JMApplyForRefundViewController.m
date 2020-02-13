@@ -20,24 +20,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    _BGView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    _BGView.backgroundColor = [UIColor blackColor];
-    _BGView.alpha = 0.5;
-    [_BGView setHidden:YES];
-    [[UIApplication sharedApplication].keyWindow addSubview:_BGView];
+//    _BGView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//    _BGView.backgroundColor = [UIColor blackColor];
+//    _BGView.alpha = 0.5;
+//    [_BGView setHidden:YES];
+//    [[UIApplication sharedApplication].keyWindow addSubview:_BGView];
     [[UIApplication sharedApplication].keyWindow addSubview:self.refundCauseView];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(BGAction)];
     [_BGView addGestureRecognizer:tap];
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)goodsStatusBtnAction:(UIButton *)sender {
-    [_BGView setHidden:NO];
     [UIView animateWithDuration:0.2 animations:^{
              self.refundCauseView.frame = CGRectMake(0, self.view.frame.size.height-380, SCREEN_WIDTH, 460);
     }];
 }
 -(void)BGAction{
-    [_BGView setHidden:YES];
       [UIView animateWithDuration:0.2 animations:^{
                self.refundCauseView.frame = CGRectMake(0, self.view.frame.size.height+380, SCREEN_WIDTH, 460);
       }];

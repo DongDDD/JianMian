@@ -235,7 +235,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="pIK-Cn-kyE"/>
                                 </constraints>
-                                <state key="normal" title="退款">
+                                <state key="normal" title="取消订单">
                                     <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -338,6 +338,7 @@
                 <outlet property="adressLab" destination="NWz-YK-Uyi" id="3tY-Nj-yYd"/>
                 <outlet property="bottomView" destination="YpY-O6-9DN" id="gPw-mX-d7i"/>
                 <outlet property="bottomViewH" destination="xKT-Qe-7BZ" id="Aes-98-vR6"/>
+                <outlet property="cancelOrderBtn" destination="hit-zW-YNB" id="QiX-ax-mrg"/>
                 <outlet property="comfirmBtn" destination="NE0-3n-X9T" id="IHf-k9-RMI"/>
                 <outlet property="contactBGView" destination="66R-eN-A25" id="ZBc-2p-xhH"/>
                 <outlet property="contactBtn" destination="vBr-sg-7uV" id="RaN-qK-Veg"/>
@@ -351,12 +352,11 @@
                 <outlet property="orderRemakeLab" destination="JW6-uW-PJU" id="Tj5-48-El3"/>
                 <outlet property="payBtn" destination="Kue-wQ-9cZ" id="y7m-Cn-0xT"/>
                 <outlet property="phoneNumLab" destination="0fq-7I-VpV" id="SdV-oq-gOq"/>
-                <outlet property="refundBtn" destination="hit-zW-YNB" id="8Q3-en-nEe"/>
                 <outlet property="remakeDetailBGView" destination="jPk-kr-2ii" id="VyL-bn-sCx"/>
                 <outlet property="rightTopBtn" destination="TOz-mC-FAP" id="754-7C-G5m"/>
                 <outlet property="titleBtn" destination="45G-2Y-dxr" id="mCX-cI-t5g"/>
             </connections>
-            <point key="canvasLocation" x="-168.11594202898553" y="60.9375"/>
+            <point key="canvasLocation" x="-297" y="86"/>
         </tableViewCell>
     </objects>
     <resources>

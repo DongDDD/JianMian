@@ -12,7 +12,6 @@
 #import "JMPartTimeJobResumeFooterView.h"
 @interface JMRefundCauseView ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *titleArray;
 @property(nonatomic,strong)JMPartTimeJobResumeFooterView *otherCauseTextView;
 @end
 @implementation JMRefundCauseView
@@ -26,18 +25,18 @@
 }
 
 -(void)initView{
-    UILabel *title =[[UILabel alloc]init];
-    title.text = @"退款原因";
-    title.textColor = TITLE_COLOR;
-    [self addSubview:title];
-    [title mas_makeConstraints:^(MASConstraintMaker *make) {
+    self.titleLab =[[UILabel alloc]init];
+    self.titleLab.text = @"退款原因";
+    self.titleLab.textColor = TITLE_COLOR;
+    [self addSubview:self.titleLab];
+    [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.mas_equalTo(self);
         make.top.mas_equalTo(self).offset(20);
         make.height.mas_equalTo(17);
     }];
     [self addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(title.mas_bottom);
+        make.top.mas_equalTo(self.titleLab.mas_bottom);
         make.bottom.mas_equalTo(self.mas_bottom);
         make.left.right.mas_equalTo(self);
     }];
@@ -74,10 +73,11 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     return 200;
 }
+
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, self.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.frame.size.height+380, SCREEN_WIDTH, 460) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;

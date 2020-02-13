@@ -12,6 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMRefundCauseView : UIView
 
+@property(nonatomic,strong)NSArray *titleArray;
+@property(nonatomic,strong)UILabel *titleLab;
+
 @end
 
 NS_ASSUME_NONNULL_END
