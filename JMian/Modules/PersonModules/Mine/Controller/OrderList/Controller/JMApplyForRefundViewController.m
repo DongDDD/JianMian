@@ -9,10 +9,13 @@
 #import "JMApplyForRefundViewController.h"
 #import "JMRefundGoodsStatusView.h"
 #import "JMRefundCauseView.h"
-@interface JMApplyForRefundViewController ()
+#import "JMHTTPManager+ChangeOrderStatus.h"
+
+@interface JMApplyForRefundViewController ()<JMRefundCauseViewDelegate>
 //@property(nonatomic,strong)JMRefundGoodsStatusView *refundGoodsStatusView;
 @property(nonatomic,strong)JMRefundCauseView *refundCauseView;
 
+@property (weak, nonatomic) IBOutlet UIView *uploadImageVIew;
 @property(nonatomic,strong)UIView *BGView;
 @end
 
@@ -20,25 +23,47 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = BG_COLOR;
 //    _BGView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
 //    _BGView.backgroundColor = [UIColor blackColor];
 //    _BGView.alpha = 0.5;
 //    [_BGView setHidden:YES];
 //    [[UIApplication sharedApplication].keyWindow addSubview:_BGView];
     [[UIApplication sharedApplication].keyWindow addSubview:self.refundCauseView];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(BGAction)];
-    [_BGView addGestureRecognizer:tap];
+    [self.refundCauseView hide];
+    if (_viewType == JMApplyForRefundViewTypeRefund) {
+        [self.uploadImageVIew setHidden:YES];
+    }
     // Do any additional setup after loading the view from its nib.
 }
 - (IBAction)goodsStatusBtnAction:(UIButton *)sender {
-    [UIView animateWithDuration:0.2 animations:^{
-             self.refundCauseView.frame = CGRectMake(0, self.view.frame.size.height-380, SCREEN_WIDTH, 460);
+
+}
+
+- (IBAction)caseAction:(UIButton *)sender {
+    [self.refundCauseView show];
+}
+- (IBAction)submitAction:(UIButton *)sender {
+    [self changOrderStatus:@"7" order_id:self.data.order_id];
+
+}
+
+-(void)submitActionWithMsg:(NSString *)msg{
+
+}
+
+
+-(void)changOrderStatus:(NSString *)status order_id:(NSString *)order_id{
+    [[JMHTTPManager sharedInstance]changeOrderStatusWithOrder_id:order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self showAlertVCSucceesSingleWithMessage:@"提交成功" btnTitle:@"好的"];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
     }];
 }
--(void)BGAction{
-      [UIView animateWithDuration:0.2 animations:^{
-               self.refundCauseView.frame = CGRectMake(0, self.view.frame.size.height+380, SCREEN_WIDTH, 460);
-      }];
+
+-(void)alertSucceesAction{
+    [self.navigationController popViewControllerAnimated:YES];
+
 }
 
 #pragma mark - lazy
@@ -56,9 +81,8 @@
 -(JMRefundCauseView *)refundCauseView{
     if (!_refundCauseView) {
         _refundCauseView = [[JMRefundCauseView alloc]init];
-        _refundCauseView.backgroundColor = [UIColor whiteColor];
-        _refundCauseView.frame = CGRectMake(0, self.view.frame.size.height+460, SCREEN_WIDTH, 460);
-        _refundCauseView.layer.cornerRadius = 10;
+        _refundCauseView.delegate = self;
+        _refundCauseView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
         
     }
     return _refundCauseView;

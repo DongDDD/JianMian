@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMOrderCellData : NSObject
@@ -80,6 +79,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *shop_user_id;
 @property (nonatomic, copy) NSString *user_id;
 
+@property (nonatomic, copy) NSString *after_sale_record_id;
+@property (nonatomic, copy) NSString *after_sale_message;
+@property (nonatomic, copy) NSString *after_sale_user_id;
+@property (nonatomic, copy) NSString *after_sale_boss_id;
+@property (nonatomic, copy) NSString *after_sale_created_at;
+@property (nonatomic, copy) NSArray *goods;
 
 @end
 @interface JMSnapshotImageModel : NSObject
@@ -90,7 +95,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy, nonatomic) NSString *file_id;
 @property (copy, nonatomic) NSString *file_path;
 
+@end
 
+@interface JMGoodsInfoCellData : NSObject
+@property (nonatomic, copy) NSString *cover_path;
+@property (nonatomic, copy) NSString *quantity;
+@property (nonatomic, copy) NSString *salary;
+@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *price;
 
 @end
 

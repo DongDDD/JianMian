@@ -19,7 +19,9 @@
 #import "WXApi.h"
 #import "JMHTTPManager+OrderPay.h"
 #import "JMOrderPaymentModel.h"
-
+#import "JMRefundCauseView.h"
+#import "JMRefundDetailViewController.h"
+#import "JMOrderInfoViewController.h"
 @interface JMMyOrderListViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,JMOrderStatusTableViewCellDelegate>
 @property (strong, nonatomic) JMTitlesView *titleView;
 @property (strong, nonatomic) UITableView *tableView;
@@ -32,6 +34,8 @@
 @property(nonatomic,assign) NSInteger page;
 @property(nonatomic,assign) NSInteger per_page;
 @property(nonatomic,assign) BOOL isShowAllData;
+@property(nonatomic,strong)JMRefundCauseView *refundCauseView;
+
 @end
 static NSString *cellID = @"statusCellID";
 
@@ -137,6 +141,8 @@ static NSString *cellID = @"statusCellID";
     [self.view addSubview:self.titleView];
 //    [self.view addSubview:self.BGView];
     [self.view addSubview:self.tableView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.refundCauseView];
+    [self.refundCauseView setHidden:YES];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(self.mas_topLayoutGuideTop).offset(self.titleView.frame.size.height);
         make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
@@ -245,9 +251,47 @@ static NSString *cellID = @"statusCellID";
 
 #pragma mark - Table view data delegate
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-     
-    
+    _orderCellData = self.listDataArray[indexPath.row];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        if ([_orderCellData.status isEqualToString:@"11"]) {
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeDidRefund;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if([_orderCellData.status isEqualToString:@"8"]){
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeWaitSalesReturn;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if([_orderCellData.status isEqualToString:@"2"]){
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeWaitDeliverGoods;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
 
+    }else{
+        if ([_orderCellData.status isEqualToString:@"6"]) {
+            JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
+            vc.data = _orderCellData;
+            [self.navigationController pushViewController:vc animated:YES];
+        }  if ([_orderCellData.status isEqualToString:@"7"]) {
+            JMRefundDetailViewController *vc = [[JMRefundDetailViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMRefundDetailViewTypeWait;
+            [self.navigationController pushViewController:vc animated:YES];
+        } if ([_orderCellData.status isEqualToString:@"8"]) {
+            JMRefundDetailViewController *vc = [[JMRefundDetailViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMRefundDetailViewTypeRefuse;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
+    
 }
 
 
@@ -274,8 +318,8 @@ static NSString *cellID = @"statusCellID";
 //100取消订单  101联系卖/买家  102确认收货 103去付款
 -(void)didClickBottomBtnActionWithTag:(NSInteger)tag data:(nonnull JMOrderCellData *)data{
     if (tag == 100) {
-        [self changOrderStatus:@"1" order_id:data.order_id];
-
+//        [self changOrderStatus:@"1" order_id:data.order_id];
+        [self.refundCauseView show];
     }else if (tag == 101) {
         NSString *user_id = [NSString stringWithFormat:@"%@b",data.shop_user_id];
         [JMCreatChatAction create4TypeChatRequstWithAccount:user_id];
@@ -360,7 +404,6 @@ static NSString *cellID = @"statusCellID";
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         if ([model.type isEqualToString:B_Type_UESR]) {
             titleArray = @[@"全部", @"已付款", @"未付款",@"已发货"];
-            
         }else if ([model.type isEqualToString:C_Type_USER]){
             titleArray = @[@"全部", @"已付款", @"未付款",@"退款中"];
         
@@ -386,6 +429,14 @@ static NSString *cellID = @"statusCellID";
 }
 
 
+-(JMRefundCauseView *)refundCauseView{
+    if (!_refundCauseView) {
+        _refundCauseView = [[JMRefundCauseView alloc]init];
+        _refundCauseView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
+    }
+    return _refundCauseView;
+}
 //
 //-(UIView *)BGView{
 //    if (!_BGView) {

@@ -147,6 +147,8 @@
 #define Update_ShopInfo_URL @"api/shop/update"
 //
 #define Fectch_GoodsMangerList_URL @"//manager/goods"
+//订单详情
+#define Fectch_OrderInfo_URL @"api/order/info"
 
 
 

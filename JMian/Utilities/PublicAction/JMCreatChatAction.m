@@ -33,6 +33,28 @@
     }];
 }
 
+
++(void)createServiceTypeChatRequstWithChat_type:(NSString *)chat_type
+                                foreign_key:(NSString *)foreign_key
+                                    user_id:(NSString *)user_id
+                                sender_mark:(nullable NSString *)sender_mark
+                             recipient_mark:(nullable NSString *)recipient_mark {
+    
+    [[JMHTTPManager sharedInstance]createChat_type:chat_type recipient:user_id foreign_key:foreign_key sender_mark:sender_mark recipient_mark:recipient_mark successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+        JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+        data.convType = TConv_Type_C2C;
+        messageListModel.data =data;
+        messageListModel.viewType = JMMessageList_Type_Service;
+        JMChatViewController *vc = [[JMChatViewController alloc]init];
+        vc.myConvModel = messageListModel;
+        vc.myConvModel.service_id = kFetchMyDefault(@"service_id");
+        [[self currentViewController].navigationController pushViewController:vc animated:YES];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
+
 +(void)create4TypeChatRequstWithAccount:(NSString *)account{
     [[JMHTTPManager sharedInstance]createFriendChatWithType:@"4" account:account successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {

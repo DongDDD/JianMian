@@ -13,6 +13,7 @@
 @interface JMRefundCauseView ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)JMPartTimeJobResumeFooterView *otherCauseTextView;
+@property(nonatomic,copy)NSString *msg;
 @end
 @implementation JMRefundCauseView
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -25,27 +26,42 @@
 }
 
 -(void)initView{
-    self.titleLab =[[UILabel alloc]init];
-    self.titleLab.text = @"退款原因";
-    self.titleLab.textColor = TITLE_COLOR;
-    [self addSubview:self.titleLab];
-    [self.titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self);
-        make.top.mas_equalTo(self).offset(20);
-        make.height.mas_equalTo(17);
-    }];
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    view.backgroundColor = [UIColor blackColor];
+    view.alpha = 0.5;
+    [self addSubview:view];
     [self addSubview:self.tableView];
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.titleLab.mas_bottom);
-        make.bottom.mas_equalTo(self.mas_bottom);
-        make.left.right.mas_equalTo(self);
+    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-50, SCREEN_WIDTH, 50)];
+    btn.backgroundColor = MASTER_COLOR;
+    [btn setTitle:@"提交" forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(submit) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btn];
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hide)];
+    [view addGestureRecognizer:tap];
+}
+
+-(void)submit{
+    [self hide];
+    if (_delegate && [_delegate respondsToSelector:@selector(submitActionWithMsg:)]) {
+        [_delegate submitActionWithMsg:self.msg];
+    }
+    
+}
+
+-(void)show{
+    [UIView animateWithDuration:0.2 animations:^{
+        _tableView.frame = CGRectMake(0, self.frame.size.height-500, self.frame.size.width, 500);
+        [self setHidden:NO];
+
     }];
-//    [self addSubview:self.otherCauseTextView];
-//    [self.otherCauseTextView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.mas_equalTo(_tableView.mas_bottom);
-//        make.bottom.mas_equalTo(self.mas_bottom);
-//        make.left.right.mas_equalTo(self);
-//    }];
+}
+
+-(void)hide{
+    [self setHidden:YES];
+    [UIView animateWithDuration:0.2 animations:^{
+        _tableView.frame = CGRectMake(0, self.frame.size.height + 500, self.frame.size.width, 500);
+    }];
     
 }
 
@@ -71,13 +87,33 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 200;
+    return 160;
 }
+
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    self.titleLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 70)];
+    self.titleLab.text = @"退款原因";
+    self.titleLab.font = kFont(20);
+    self.titleLab.textAlignment = NSTextAlignmentCenter;
+    self.titleLab.textColor = [UIColor blackColor];
+    return self.titleLab;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 60;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    self.msg = self.titleArray[indexPath.row];
+    
+}
+
 
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.frame.size.height+380, SCREEN_WIDTH, 460) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.frame.size.height+380, SCREEN_WIDTH, 600) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = [UIColor whiteColor];
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;
@@ -85,6 +121,8 @@
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
         _tableView.sectionHeaderHeight = 0;
         _tableView.showsVerticalScrollIndicator = NO;
+        _tableView.rowHeight = 34;
+        _tableView.scrollEnabled = NO;
         [_tableView registerNib:[UINib nibWithNibName:@"JMRefundGoodsStatusTableViewCell" bundle:nil] forCellReuseIdentifier:JMRefundGoodsStatusTableViewCellIdentifier];
 
     }
@@ -94,10 +132,10 @@
 -(JMPartTimeJobResumeFooterView *)otherCauseTextView{
     if (_otherCauseTextView == nil) {
         _otherCauseTextView = [JMPartTimeJobResumeFooterView new];
-        _otherCauseTextView.frame = CGRectMake(10, -50, SCREEN_WIDTH-20, 200);
+        _otherCauseTextView.frame = CGRectMake(10, 0, SCREEN_WIDTH-20, 200);
         _otherCauseTextView.delegate = self;
 //        _decriptionTextView.contentTextView.inputAccessoryView = self.myToolbar;
-//        _otherCauseTextView.titleLab.text = @"商品描述";
+//        _otherCauseTextView.titleLab.text = @"请输入";
 //        _otherCauseTextView.wordsLenghLabel.text = @"0/200";
         _otherCauseTextView.contentTextView.backgroundColor = BG_COLOR;
 //        [_decriptionTextView setViewType:JMPartTimeJobResumeFooterViewTypeGroup];
@@ -106,4 +144,5 @@
     }
     return _otherCauseTextView;
 }
+
 @end

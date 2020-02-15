@@ -91,78 +91,13 @@
 //        [self.logisticsNumBtn setTitle:logisticsInfo forState:UIControlStateNormal];
 //
     //    }else
-    //已下单
-    if ([orderCellData.status isEqualToString:@"0"]) {
-        [self.cancelOrderBtn setHidden:NO];
-        [self.rightTopBtn setHidden:YES];
-//        [self.rightTopBtn setTitle:@"未付款" forState:UIControlStateNormal];
-        [self.didSendGoodsImageView setHidden:YES];
-        [self.rightTopBtn setEnabled:NO];
-        [self.contactBtn setHidden:NO];
-        [self.comfirmBtn setHidden:YES];
-        [self.payBtn setHidden:NO];
-    }else if ([orderCellData.status isEqualToString:@"2"] || [orderCellData.status isEqualToString:@"6"]) {
-        if ([orderCellData.status isEqualToString:@"2"]) {
-            [self.cancelOrderBtn setHidden:NO];
-        }else{
-            [self.cancelOrderBtn setHidden:YES];
-        }
-        [self.contactBtn setHidden:NO];
-        [self.comfirmBtn setHidden:NO];
-        [self.payBtn setHidden:YES];
-        
-//        //已付款,未发货
-        //        NSString *rightTopBtnTitle;
-//        if ([userModel.type isEqualToString:B_Type_UESR]) {
-//            //商家
-//            if ([orderCellData.boss_user_id isEqualToString:userModel.user_id]) {
-//                [self.rightTopBtn setHidden:YES];
-//                [self.rightTopBtn setEnabled:NO];
-//            }else{
-//                rightTopBtnTitle = @"已付款,去发货";
-//                [self.rightTopBtn setEnabled:YES];
-//
-//            }
-//        }else if ([userModel.type isEqualToString:C_Type_USER]){
-//            //任务接受者或消费者
-//
-//        }
-
-        [self.rightTopBtn setTitle:@"" forState:UIControlStateNormal];
-        [self.rightTopBtn setHidden:NO];
-        [self.didSendGoodsImageView setHidden:YES];
-        
-    }else if ([orderCellData.status isEqualToString:@"12"]) {
-        [self.cancelOrderBtn setHidden:YES];
-        [self.contactBtn setHidden:NO];
-        [self.comfirmBtn setHidden:YES];
-        [self.payBtn setHidden:YES];
-        //确认收货后
-        [self.rightTopBtn setTitle:@"买家已收货" forState:UIControlStateNormal];
-        [self.rightTopBtn setEnabled:NO];
-        [self.rightTopBtn setHidden:NO];
-
-        
-    }else if ([orderCellData.status isEqualToString:@"1"]) {
-        [self.cancelOrderBtn setHidden:YES];
-        [self.contactBtn setHidden:NO];
-        [self.comfirmBtn setHidden:YES];
-        [self.payBtn setHidden:YES];
-        [self.rightTopBtn setTitle:@"订单已取消" forState:UIControlStateNormal];
-        [self.rightTopBtn setEnabled:NO];
-        [self.rightTopBtn setHidden:NO];
-
-    }else if ([orderCellData.status isEqualToString:@"11"]) {
-        [self.cancelOrderBtn setHidden:YES];
-        [self.contactBtn setHidden:NO];
-        [self.comfirmBtn setHidden:YES];
-        [self.payBtn setHidden:YES];
-        [self.rightTopBtn setTitle:@"订单已退款" forState:UIControlStateNormal];
-        [self.rightTopBtn setEnabled:NO];
-        [self.rightTopBtn setHidden:NO];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self setB_BottomViewBtn];
+    }else{
+        [self setC_BottomViewBtn];
         
     }
-    
+ 
     
     
     self.orderRemakeLab.text = orderCellData.remark;//---备注
@@ -173,59 +108,138 @@
     for (NSString *str in orderCellData.city_name_relation) {
         [adrArr addObject:str];
     }
-//    NSString *adrStr = [adrArr componentsJoinedByString:@""];
-//    NSString *adrStr2 = [NSString stringWithFormat:@"%@%@",adrStr,orderCellData.city_city_name];
+    //    NSString *adrStr = [adrArr componentsJoinedByString:@""];
+    //    NSString *adrStr2 = [NSString stringWithFormat:@"%@%@",adrStr,orderCellData.city_city_name];
     NSString *adrStr3 = [NSString stringWithFormat:@"%@",orderCellData.contact_address];
     self.adressLab.text = adrStr3;
     
+    NSString *str = [NSString stringWithFormat:@"%@ >",orderCellData.shop_shop_name];
+    [self.titleBtn setTitle:str forState:UIControlStateNormal];
+    self.infoLab1.text = orderCellData.snapshot_goods_goods_title;
     
-    //订单状态
-//    if ([userModel.type isEqualToString: B_Type_UESR]) {
-//        [self.bottomView setHidden:YES];
-//        self.bottomViewH.constant = 0;
-//        NSString *str = [NSString stringWithFormat:@"销售：%@ >",@""];
-//        [self.titleBtn setTitle:str forState:UIControlStateNormal];
-//        self.infoLab1.text = orderCellData.title;
-//        if ([orderCellData.status isEqualToString:@"2"]) {
-//            [self.rightTopBtn setHidden:NO];
-//            [self.didSendGoodsImageView setHidden:YES];
-//            [self.rightTopBtn setTitle:@"已付款,去发货" forState:UIControlStateNormal];
-//            [self.rightTopBtn setEnabled:YES];
-//        }
-        //        if (orderCellData.logistics_label_id) {
-        //            [self.deliverGoodsBtn setHidden:YES];
-//            [self.deliverGoodsBtn setTitle:@"已发货" forState:UIControlStateNormal];
-//            [self.deiveredImageView setHidden:NO];
-//            [self.deliverGoodsBtn setEnabled:NO];
-//
-//        }else if ([orderCellData.status isEqualToString:@"2"]) {
-//            [self.deliverGoodsBtn setHidden:NO];
-//            [self.deliverGoodsBtn setTitle:@"去发货" forState:UIControlStateNormal];
-//            [self.deiveredImageView setHidden:YES];
-//            [self.deliverGoodsBtn setEnabled:YES];
-//
-//        }else if ([orderCellData.status isEqualToString:@"0"]) {
-//            [self.deliverGoodsBtn setHidden:NO];
-//            [self.deliverGoodsBtn setTitle:@"未付款" forState:UIControlStateNormal];
-//            [self.deiveredImageView setHidden:YES];
-//            [self.deliverGoodsBtn setEnabled:NO];
-//
-//        }
-
-//    }else
-//if ([userModel.type isEqualToString: C_Type_USER]){
-        NSString *str = [NSString stringWithFormat:@"%@ >",orderCellData.shop_shop_name];
-        [self.titleBtn setTitle:str forState:UIControlStateNormal];
-        self.infoLab1.text = orderCellData.snapshot_goods_goods_title;
-        
-//    }
-
+    
     
 }
 - (IBAction)bottomBtnAction:(UIButton *)sender {
     if (_delegate && [_delegate respondsToSelector:@selector(didClickBottomBtnActionWithTag:data:)]) {
         [_delegate didClickBottomBtnActionWithTag:sender.tag data:self.myData];
     }
+}
+
+-(void)setB_BottomViewBtn{
+    [self.bottomView setHidden:YES];
+    self.bottomViewH.constant = 0;
+    [self.rightTopBtn setTitleColor:[UIColor systemRedColor] forState:UIControlStateNormal];
+
+    if ([_myData.status isEqualToString:@"7"]) {
+        [self.rightTopBtn setTitle:@"对方发起退款" forState:UIControlStateNormal];
+        [self.rightTopBtn setEnabled:NO];
+        [self.rightTopBtn setHidden:NO];
+    } else if ([_myData.status isEqualToString:@"8"]) {
+        [self.rightTopBtn setTitle:@"等待退货" forState:UIControlStateNormal];
+        [self.rightTopBtn setEnabled:NO];
+        [self.rightTopBtn setHidden:NO];
+        
+    } else if ([_myData.status isEqualToString:@"11"]) {
+             [self.rightTopBtn setTitle:@"已退款" forState:UIControlStateNormal];
+        [self.rightTopBtn setEnabled:NO];
+        [self.rightTopBtn setHidden:NO];
+        
+    } else if ([_myData.status isEqualToString:@"2"]) {
+        [self.rightTopBtn setTitle:@"去发货" forState:UIControlStateNormal];
+        [self.rightTopBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [self.rightTopBtn setEnabled:YES];
+        [self.rightTopBtn setHidden:NO];
+        
+    }
+    
+}
+-(void)setC_BottomViewBtn{
+       //已下单
+        if ([_myData.status isEqualToString:@"0"]) {
+            [self.cancelOrderBtn setHidden:NO];
+            [self.rightTopBtn setHidden:YES];
+    //        [self.rightTopBtn setTitle:@"未付款" forState:UIControlStateNormal];
+            [self.didSendGoodsImageView setHidden:YES];
+            [self.rightTopBtn setEnabled:NO];
+            [self.contactBtn setHidden:NO];
+            [self.comfirmBtn setHidden:YES];
+            [self.payBtn setHidden:NO];
+        }else if ([_myData.status isEqualToString:@"2"] || [_myData.status isEqualToString:@"6"]) {
+            if ([_myData.status isEqualToString:@"2"]) {
+                [self.cancelOrderBtn setHidden:NO];
+            }else{
+                [self.cancelOrderBtn setHidden:YES];
+            }
+            [self.contactBtn setHidden:NO];
+            [self.comfirmBtn setHidden:NO];
+            [self.payBtn setHidden:YES];
+
+            [self.rightTopBtn setTitle:@"" forState:UIControlStateNormal];
+            [self.rightTopBtn setHidden:NO];
+            [self.didSendGoodsImageView setHidden:YES];
+            
+        }else if ([_myData.status isEqualToString:@"12"]) {
+            [self.cancelOrderBtn setHidden:YES];
+            [self.contactBtn setHidden:NO];
+            [self.comfirmBtn setHidden:YES];
+            [self.payBtn setHidden:YES];
+            //确认收货后
+            [self.rightTopBtn setTitle:@"买家已收货" forState:UIControlStateNormal];
+            [self.rightTopBtn setEnabled:NO];
+            [self.rightTopBtn setHidden:NO];
+
+            
+        }else if ([_myData.status isEqualToString:@"1"]) {
+            [self.cancelOrderBtn setHidden:YES];
+            [self.contactBtn setHidden:NO];
+            [self.comfirmBtn setHidden:YES];
+            [self.payBtn setHidden:YES];
+            [self.rightTopBtn setTitle:@"订单已取消" forState:UIControlStateNormal];
+            [self.rightTopBtn setEnabled:NO];
+            [self.rightTopBtn setHidden:NO];
+
+        }else if ([_myData.status isEqualToString:@"11"]) {
+              //订单已退款
+            [self.cancelOrderBtn setHidden:YES];
+            [self.contactBtn setHidden:NO];
+            [self.comfirmBtn setHidden:YES];
+            [self.payBtn setHidden:YES];
+            [self.rightTopBtn setTitle:@"订单已退款" forState:UIControlStateNormal];
+            [self.rightTopBtn setEnabled:NO];
+            [self.rightTopBtn setHidden:NO];
+            
+        }else if ([_myData.status isEqualToString:@"7"]) {
+            //申请退款中
+            [self.cancelOrderBtn setHidden:YES];
+            [self.contactBtn setHidden:NO];
+            [self.comfirmBtn setHidden:YES];
+            [self.payBtn setHidden:YES];
+            [self.rightTopBtn setTitle:@"售后中" forState:UIControlStateNormal];
+            [self.rightTopBtn setEnabled:NO];
+            [self.rightTopBtn setHidden:NO];
+            
+        }else if ([_myData.status isEqualToString:@"9"]) {
+            //卖家拒绝退款
+            [self.cancelOrderBtn setHidden:YES];
+            [self.contactBtn setHidden:NO];
+            [self.comfirmBtn setHidden:YES];
+            [self.payBtn setHidden:YES];
+            [self.rightTopBtn setTitle:@"卖家拒绝退款" forState:UIControlStateNormal];
+            [self.rightTopBtn setEnabled:NO];
+            [self.rightTopBtn setHidden:NO];
+            
+        }else if ([_myData.status isEqualToString:@"8"]) {
+            //等待退货
+            [self.cancelOrderBtn setHidden:YES];
+            [self.contactBtn setHidden:NO];
+            [self.comfirmBtn setHidden:YES];
+            [self.payBtn setHidden:YES];
+            [self.rightTopBtn setTitle:@"等待退货" forState:UIControlStateNormal];
+            [self.rightTopBtn setEnabled:NO];
+            [self.rightTopBtn setHidden:NO];
+            
+        }
 }
 
 

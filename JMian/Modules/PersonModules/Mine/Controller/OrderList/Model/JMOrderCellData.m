@@ -12,9 +12,13 @@
 
 + (NSDictionary *)mj_objectClassInArray {
     return @{
-             @"snapshot_images":@"JMSnapshotImageModel"
+             @"snapshot_images":@"JMSnapshotImageModel",
+             @"goods":@"JMGoodsInfoCellData",
+
+
              };
 }
+
 
 
 + (NSDictionary *)mj_replacedKeyFromPropertyName {
@@ -63,7 +67,12 @@
              @"logistics_name":@"logistics.name",
              @"shop_shop_name":@"shop.shop_name",
              @"shop_user_id":@"shop.user_id",
-
+             
+             @"after_sale_record_id":@"after_sale.record_id",
+             @"after_sale_message":@"after_sale.message",
+             @"after_sale_user_id":@"after_sale.user_id",
+             @"after_sale_boss_id":@"after_sale.boss_id",
+             @"after_sale_created_at":@"after_sale.created_at",
 
              
              };
@@ -81,3 +90,9 @@
 
 
 @end
+@implementation JMGoodsInfoCellData
+
+
+
+@end
+

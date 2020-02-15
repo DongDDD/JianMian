@@ -17,11 +17,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="圆角矩形 5.png" translatesAutoresizingMaskIntoConstraints="NO" id="j1v-yj-og5">
-                        <rect key="frame" x="293" y="18.5" width="7" height="7"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-task-hook.png" translatesAutoresizingMaskIntoConstraints="NO" id="j1v-yj-og5">
+                        <rect key="frame" x="288" y="16" width="12" height="12"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="7" id="D9d-Vj-u9I"/>
-                            <constraint firstAttribute="width" constant="7" id="cWA-Wg-yqN"/>
+                            <constraint firstAttribute="height" constant="12" id="D9d-Vj-u9I"/>
+                            <constraint firstAttribute="width" constant="12" id="cWA-Wg-yqN"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -38,6 +38,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="圆角矩形 5.png" width="11.5" height="12.5"/>
+        <image name="icon-task-hook.png" width="12" height="12"/>
     </resources>
 </document>
