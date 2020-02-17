@@ -16,11 +16,15 @@
 @property(nonatomic,strong)UIButton *settingBtn;
 
 @property(nonatomic,strong)UIButton *leftBtn;
+@property(nonatomic,strong)UIButton *centerBtn;
 @property(nonatomic,strong)UIButton *rightBtn;
+
 @property(nonatomic,strong)UIImageView *bottomImg;
 
 @property(nonatomic,strong)UILabel *leftLab;
+@property(nonatomic,strong)UILabel *centerLab;
 @property(nonatomic,strong)UILabel *rightLab;
+
 @property (strong, nonatomic) UIView *barBackgroundView;
 @property (strong, nonatomic)UIImageView *barBackgroundImageView;
 @end
@@ -179,16 +183,27 @@
     [self addSubview:_leftLab];
 
     
+    _centerBtn = [[UIButton alloc]init];
+    [_centerBtn addTarget:self action:@selector(orderBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [_centerBtn setImage:[UIImage imageNamed:@"C_indent"] forState:UIControlStateNormal];
+    [self addSubview:_centerBtn];
+    _centerLab = [[UILabel alloc]init];
+    _centerLab.textColor = [UIColor whiteColor];
+    _centerLab.text = @"我的订单";
+    _centerLab.font = kFont(12);
+    [self addSubview:_centerLab];
+    
     _rightBtn = [[UIButton alloc]init];
-    [_rightBtn addTarget:self action:@selector(orderBtnAction) forControlEvents:UIControlEventTouchUpInside];
-    [_rightBtn setImage:[UIImage imageNamed:@"C_indent"] forState:UIControlStateNormal];
+    [_rightBtn addTarget:self action:@selector(rightBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [_rightBtn setImage:[UIImage imageNamed:@"icon-top-Extension"] forState:UIControlStateNormal];
     [self addSubview:_rightBtn];
     _rightLab = [[UILabel alloc]init];
     _rightLab.textColor = [UIColor whiteColor];
-    _rightLab.text = @"我的订单";
- 
+    _rightLab.text = @"推广订单";
     _rightLab.font = kFont(12);
     [self addSubview:_rightLab];
+    
+    
     _taskBadgeView = [[UIView alloc]init];
     _taskBadgeView.backgroundColor = [UIColor redColor];
     _taskBadgeView.layer.cornerRadius = 5;
@@ -222,7 +237,7 @@
 
     
     [_leftBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self).offset(-SCREEN_WIDTH*0.2);;
+        make.centerX.mas_equalTo(self).offset(-SCREEN_WIDTH*0.3);;
         make.bottom.mas_equalTo(self).offset(-55);
         make.size.mas_equalTo(CGSizeMake(29, 28));
         
@@ -234,9 +249,20 @@
         
     }];
     
-    [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.mas_equalTo(self).offset(SCREEN_WIDTH*0.2);
+    [_centerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self);
         make.top.mas_equalTo(_leftBtn);
+        make.size.mas_equalTo(CGSizeMake(29, 28));
+    }];
+
+    [_centerLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(_centerBtn);
+        make.top.mas_equalTo(_centerBtn.mas_bottom).offset(10);
+    }];
+    
+    [_rightBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.mas_equalTo(self).offset(SCREEN_WIDTH*0.3);
+        make.top.mas_equalTo(_centerBtn);
         make.size.mas_equalTo(CGSizeMake(29, 28));
     }];
 
@@ -245,6 +271,9 @@
         make.top.mas_equalTo(_rightBtn.mas_bottom).offset(10);
     }];
     
+    
+    
+    
     [_bottomImg mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.mas_equalTo(self);
         make.bottom.mas_equalTo(self);
@@ -252,8 +281,8 @@
     }];
     
     [_orderBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.mas_equalTo(_rightBtn).mas_offset(5);
-        make.top.mas_equalTo(_rightBtn).mas_offset(-5);
+        make.right.mas_equalTo(_centerBtn).mas_offset(5);
+        make.top.mas_equalTo(_centerBtn).mas_offset(-5);
         make.size.mas_equalTo(CGSizeMake(10,10));
     }];
     [_taskBadgeView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -280,6 +309,13 @@
     if (_delegate && [_delegate respondsToSelector:@selector(didClickMyOrder)]) {
         [_delegate didClickMyOrder];
     }
+}
+
+-(void)rightBtnAction{
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickMyExtension)]) {
+         [_delegate didClickMyExtension];
+     }
+
 }
 
 /*

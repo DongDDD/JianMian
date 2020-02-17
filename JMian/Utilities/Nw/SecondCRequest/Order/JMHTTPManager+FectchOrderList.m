@@ -50,4 +50,35 @@
     
 }
 
+- (void)fectchC_OrderList_order_id:(nullable NSArray *)order_id
+                      contact_city:(nullable NSString *)contact_city
+                       referrer_id:(nullable NSString *)referrer_id
+                           user_id:(nullable NSString *)user_id
+                     contact_phone:(nullable NSString *)contact_phone
+                           keyword:(nullable NSString *)keyword
+                            status:(nullable NSString *)status
+                         s_date:(nullable NSString *)s_date
+                         e_date:(nullable NSString *)e_date
+                           page:(nullable NSString *)page
+                       per_page:(nullable NSString *)per_page
+                   successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    
+    NSDictionary *dic =  @{
+                           @"order_id":order_id,
+                           @"referrer_id":referrer_id,
+                           @"user_id":user_id,
+                           @"contact_city":contact_city,
+                           @"contact_phone":contact_phone,
+                           @"keyword":keyword,
+                           @"status":status,
+                           @"s_date":s_date,
+                           @"e_date":e_date,
+                           @"page":page,
+                           @"per_page":per_page,
+                           };
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Fectch_OrderList_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
+
 @end

@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *contact_phone;
 @property (nonatomic, copy) NSString *contact_name;
 @property (nonatomic, copy) NSString *order_no;
+@property (nonatomic, copy) NSString *order_id;
 @property (nonatomic, copy) NSString *user_id;
 @property (nonatomic, copy) NSString *logistics_at;
 @property (nonatomic, copy) NSString *order_amount;

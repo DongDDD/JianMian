@@ -32,6 +32,7 @@ typedef NS_ENUM(NSInteger, JMPartTimeJobResumeFooterViewType) {
 
 @end
 
+/// 通用输入框 （字数限制）
 @interface JMPartTimeJobResumeFooterView : UIView
 
 @property(nonatomic,strong)UILabel *titleLab;

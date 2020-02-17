@@ -10,10 +10,18 @@
 #import "JMRefundGoodsStatusView.h"
 #import "JMRefundCauseView.h"
 #import "JMHTTPManager+ChangeOrderStatus.h"
+#import "JMGoodsListView.h"
 
 @interface JMApplyForRefundViewController ()<JMRefundCauseViewDelegate>
 //@property(nonatomic,strong)JMRefundGoodsStatusView *refundGoodsStatusView;
 @property(nonatomic,strong)JMRefundCauseView *refundCauseView;
+@property(nonatomic,strong)JMGoodsListView *goodsListView;
+@property (weak, nonatomic) IBOutlet UIStackView *stackView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *stackViewConstrainTop;
+@property (weak, nonatomic) IBOutlet UIButton *caseBtn;
+@property (weak, nonatomic) IBOutlet UIButton *uploadImagBtn;
+@property (weak, nonatomic) IBOutlet UILabel *priceLab;
 
 @property (weak, nonatomic) IBOutlet UIView *uploadImageVIew;
 @property(nonatomic,strong)UIView *BGView;
@@ -29,6 +37,12 @@
 //    _BGView.alpha = 0.5;
 //    [_BGView setHidden:YES];
 //    [[UIApplication sharedApplication].keyWindow addSubview:_BGView];
+    self.goodsListView.goods = self.model.goods;
+    [self.view addSubview:self.goodsListView];
+ 
+    self.stackViewConstrainTop.constant = self.model.goods.count * 60;
+    
+    self.priceLab.text = [NSString stringWithFormat:@"¥ %@",self.model.pay_amount];
     [[UIApplication sharedApplication].keyWindow addSubview:self.refundCauseView];
     [self.refundCauseView hide];
     if (_viewType == JMApplyForRefundViewTypeRefund) {
@@ -36,6 +50,7 @@
     }
     // Do any additional setup after loading the view from its nib.
 }
+
 - (IBAction)goodsStatusBtnAction:(UIButton *)sender {
 
 }
@@ -44,12 +59,12 @@
     [self.refundCauseView show];
 }
 - (IBAction)submitAction:(UIButton *)sender {
-    [self changOrderStatus:@"7" order_id:self.data.order_id];
+    [self changOrderStatus:@"7" order_id:self.model.order_id];
 
 }
 
 -(void)submitActionWithMsg:(NSString *)msg{
-
+    [self.caseBtn setTitle:msg forState:UIControlStateNormal];
 }
 
 
@@ -86,6 +101,13 @@
         
     }
     return _refundCauseView;
+}
+
+-(JMGoodsListView *)goodsListView{
+    if (!_goodsListView) {
+        _goodsListView = [[JMGoodsListView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.model.goods.count * 60)];
+    }
+    return _goodsListView;
 }
 /*
 #pragma mark - Navigation

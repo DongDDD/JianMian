@@ -79,7 +79,7 @@
             double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
             int min_value2 =  fabs(min_value);
             self.paymentLab.text = [NSString stringWithFormat:@"%d~%d",min_value2,max_value2];
-            self.unitLab.text = model.unit;
+            self.unitLab.text = @"元 / 单";
             [self.paymentLab setHidden:NO];
             [self.unitLab setHidden:NO];
         }else{

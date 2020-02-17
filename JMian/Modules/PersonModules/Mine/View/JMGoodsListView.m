@@ -8,7 +8,9 @@
 
 #import "JMGoodsListView.h"
 #import "DimensMacros.h"
-#import "JMGoodsInfoTableViewCell.h"
+#import "JMOrderGoodsListTableViewCell.h"
+#import "JMOrderCellData.h"
+
 @interface JMGoodsListView ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UITableView *tableView;
 @end
@@ -31,15 +33,16 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    return 110;
+    return 79;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    JMGoodsInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMGoodsInfoTableViewCellIdentifier forIndexPath:indexPath];
+    JMOrderGoodsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOrderGoodsListTableViewCellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-    [cell setData:self.goods[indexPath.row]];
+    JMGoodsInfoCellData *data = self.goods[indexPath.row];
+    [cell setValuesWithImageUrl:data.cover_path title:data.title price:data.price quantity:data.quantity];
+    
+//    [cell setData:self.goods[indexPath.row]];
     // Configure the cell...
     return cell;
 }
@@ -54,7 +57,8 @@
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
         _tableView.sectionHeaderHeight = 0;
         _tableView.showsVerticalScrollIndicator = NO;
-        [_tableView registerNib:[UINib nibWithNibName:@"JMGoodsInfoTableViewCell" bundle:nil] forCellReuseIdentifier:JMGoodsInfoTableViewCellIdentifier];
+        _tableView.scrollEnabled = NO;
+        [_tableView registerNib:[UINib nibWithNibName:@"JMOrderGoodsListTableViewCell" bundle:nil] forCellReuseIdentifier:JMOrderGoodsListTableViewCellIdentifier];
 
     }
     return _tableView;

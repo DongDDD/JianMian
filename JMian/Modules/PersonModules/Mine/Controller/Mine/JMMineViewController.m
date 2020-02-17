@@ -66,7 +66,6 @@
         make.left.right.bottom.equalTo(self.view);
     }];
     
-
         self.imageNameArr = @[@"mine_share",@"burse",@"autonym"];
         self.labelStrArr = @[@"分享APP",@"我的钱包",@"实名认证"];
 
@@ -190,7 +189,19 @@
     }
     
     JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
+    vc.viewType = JMMyOrderListViewControllerCUser;
     [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+-(void)didClickMyExtension{
+    if ([JMYoukeAction youkelimit]) {
+        return;
+    }
+    JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
+    vc.viewType = JMMyOrderListViewControllerCUserExtension;
+    [self.navigationController pushViewController:vc animated:YES];
+    
     
 }
 
@@ -387,7 +398,6 @@
     }else if (row == 3) {
         JMCompanyLikeViewController *vc = [[JMCompanyLikeViewController alloc]init];
         vc.title = @"职位收藏";
-        
         [self.navigationController pushViewController:vc animated:YES];
     }
 

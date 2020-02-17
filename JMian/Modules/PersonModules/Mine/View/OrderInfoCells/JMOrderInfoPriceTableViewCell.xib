@@ -40,8 +40,9 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="priceLab" destination="Xc5-3E-cz3" id="KjI-9e-Jsb"/>
+                <outlet property="titleLab" destination="Fz3-xZ-hDC" id="BMU-RU-Vbh"/>
             </connections>
-            <point key="canvasLocation" x="132" y="125"/>
+            <point key="canvasLocation" x="125" y="139"/>
         </tableViewCell>
     </objects>
 </document>

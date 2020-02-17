@@ -22,4 +22,22 @@
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
     
 }
+
+- (void)deliverGoodsWithOrder_id:(NSString *)order_id
+                          status:(NSString *)status
+                    logistics_no:(NSString *)logistics_no
+                    logistics_id:(NSString *)logistics_id
+                    successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSString *urlStr = [Change_OrderStatus_URL stringByAppendingFormat:@"/%@",order_id];
+    
+    NSDictionary *dic =  @{
+        @"status":status,
+         @"logistics_no":logistics_no,
+        @"logistics_id":logistics_id,
+    };
+    
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
 @end

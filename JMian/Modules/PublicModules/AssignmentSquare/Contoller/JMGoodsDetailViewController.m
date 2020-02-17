@@ -285,7 +285,7 @@
     [urlMessage setThumbData:thumbData];
     //分享实例
     WXWebpageObject *webObj = [WXWebpageObject object];
-    NSString *shareUrl = [NSString stringWithFormat:@"http://www.jianmian.com/static/shop/#/shop_info?id=%@&task_order_id=%@",self.configures.model.goods_id,self.task_order_id];
+    NSString *shareUrl = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=%@&task_order_id=%@",self.configures.model.goods_id,self.task_order_id];
 
     webObj.webpageUrl = shareUrl;
     

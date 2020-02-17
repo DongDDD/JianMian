@@ -7,7 +7,8 @@
 //
 
 #import "BaseViewController.h"
-#import "JMOrderCellData.h"
+//#import "JMOrderCellData.h"
+#import "JMOrderInfoModel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 typedef enum : NSUInteger {
@@ -17,7 +18,12 @@ typedef enum : NSUInteger {
 
 @interface JMApplyForRefundViewController : BaseViewController
 @property(nonatomic,assign)JMApplyForRefundViewType viewType;
-@property(nonatomic,strong)JMOrderCellData *data;
+//@property(nonatomic,strong)JMOrderCellData *data;
+@property (strong, nonatomic) JMOrderInfoModel *model;
+
+//@property(nonatomic,strong)NSArray *goods;
+@property(nonatomic,copy)NSString *order_id;
+
 @end
 
 NS_ASSUME_NONNULL_END

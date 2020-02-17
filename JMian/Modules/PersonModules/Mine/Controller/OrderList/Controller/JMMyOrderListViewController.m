@@ -20,7 +20,7 @@
 #import "JMHTTPManager+OrderPay.h"
 #import "JMOrderPaymentModel.h"
 #import "JMRefundCauseView.h"
-#import "JMRefundDetailViewController.h"
+#import "JMAfterSalesInfoViewController.h"
 #import "JMOrderInfoViewController.h"
 @interface JMMyOrderListViewController ()<UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,JMOrderStatusTableViewCellDelegate>
 @property (strong, nonatomic) JMTitlesView *titleView;
@@ -35,7 +35,7 @@
 @property(nonatomic,assign) NSInteger per_page;
 @property(nonatomic,assign) BOOL isShowAllData;
 @property(nonatomic,strong)JMRefundCauseView *refundCauseView;
-
+@property(nonatomic,strong)UILabel *topLab;
 @end
 static NSString *cellID = @"statusCellID";
 
@@ -44,19 +44,21 @@ static NSString *cellID = @"statusCellID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initView];
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     [self setRightBtnImageViewName:@"Search_Home" imageNameRight2:@""];
-  
-    if ([userModel.type isEqualToString:B_Type_UESR]) {
-        self.title = @"订单列表";
-        
-    }else{
-        self.title = @"我的订单";
 
-    }
     self.per_page = 10;
     self.page = 1;
-    [self getData_status:self.currentStatus];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self getData_status:self.currentStatus];
+        self.title = @"订单列表";
+    }else{
+        [self getC_data_status:self.currentStatus];
+        self.title = @"我的订单";
+        
+        
+    }
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -90,16 +92,59 @@ static NSString *cellID = @"statusCellID";
 
 }
 
+-(void)getC_data_status:(NSString *)status{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    NSString *referrer_id = @"";
+    NSString *user_id = @"";
+    if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+        referrer_id = userModel.user_id;
+    }else if (_viewType == JMMyOrderListViewControllerCUser){
+        user_id = userModel.user_id;
+    }
+    NSString *per_page = [NSString stringWithFormat:@"%ld",(long)self.per_page];
+    NSString *page = [NSString stringWithFormat:@"%ld",(long)self.page];
+    [[JMHTTPManager sharedInstance]fectchC_OrderList_order_id:nil contact_city:nil referrer_id:referrer_id  user_id:user_id  contact_phone:nil keyword:@"" status:status s_date:nil e_date:nil page:page per_page:per_page successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            NSMutableArray *array = [NSMutableArray array];
+            array = [JMOrderCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+            if (array.count == 0) {
+                _isShowAllData = YES;
+                [self.tableView.mj_footer setHidden:YES];
+            }
+                        
+            [self.listDataArray addObjectsFromArray:array];
+
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
+            [self.tableView reloadData];
+
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+}
+
 -(void)refreshData{
     [self.listDataArray removeAllObjects];
     self.page = 1;
-    [self getData_status:self.currentStatus];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        [self getData_status:self.currentStatus];
+    }else{
+        [self getC_data_status:self.currentStatus];
+    }
 }
 
 -(void)loadMoreBills{
     if (!_isShowAllData) {
         self.page += 1;
-        [self getData_status:self.currentStatus];
+        JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+        if ([userModel.type isEqualToString:B_Type_UESR]) {
+            [self getData_status:self.currentStatus];
+        }else{
+            [self getC_data_status:self.currentStatus];
+        }
         
     }
 
@@ -110,7 +155,7 @@ static NSString *cellID = @"statusCellID";
     header.lastUpdatedTimeLabel.hidden = YES;
     header.stateLabel.hidden = YES;
     self.tableView.mj_header = header;
-    [self.tableView.mj_header beginRefreshing];
+//    [self.tableView.mj_header beginRefreshing];
 }
 
 -(void)setupFooterRefresh
@@ -150,6 +195,13 @@ static NSString *cellID = @"statusCellID";
     }];
     [self setupHeaderRefresh];
     [self setupFooterRefresh];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+        self.tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
+    }else if (_viewType == JMMyOrderListViewControllerCUser && [userModel.type isEqualToString:C_Type_USER]) {
+        self.tableView.tableHeaderView = self.topLab;
+    }
+    
 //    [self.BGView addSubview:self.tableView2];
 //    [self.BGView addSubview:self.tableView3];
 
@@ -224,16 +276,17 @@ static NSString *cellID = @"statusCellID";
     _orderCellData = self.listDataArray[indexPath.row];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     CGFloat bottomH;
-    if ([userModel.type isEqualToString:C_Type_USER]) {
-        bottomH = 54;
-    }else{
-        bottomH = 0;
-
-    }
+    CGFloat goodsViewH;
+//    if ([userModel.type isEqualToString:C_Type_USER]) {
+        bottomH = 59;
+//    }else{
+//        bottomH = 0;
+//    }
+    goodsViewH = _orderCellData.goods.count * 60;
     if (_orderCellData.isSpread) {
-        return 276+bottomH;
+        return 180+bottomH+goodsViewH;
     }
-    return 200+bottomH;
+    return 100+bottomH+goodsViewH;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -272,24 +325,71 @@ static NSString *cellID = @"statusCellID";
             vc.viewType = JMOrderInfoViewTypeWaitDeliverGoods;
             [self.navigationController pushViewController:vc animated:YES];
             
+        }else if([_orderCellData.status isEqualToString:@"0"]){
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeNoPay;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }else if([_orderCellData.status isEqualToString:@"7"]){
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewSetRefund;
+            [self.navigationController pushViewController:vc animated:YES];
+            
         }
-
+        
     }else{
         if ([_orderCellData.status isEqualToString:@"6"]) {
-            JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
-            vc.data = _orderCellData;
-            [self.navigationController pushViewController:vc animated:YES];
-        }  if ([_orderCellData.status isEqualToString:@"7"]) {
-            JMRefundDetailViewController *vc = [[JMRefundDetailViewController alloc]init];
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMRefundDetailViewTypeWait;
+            vc.viewType = JMOrderInfoViewDidDeliverGoods;
+            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+                vc.isExtension = YES;
+            }
             [self.navigationController pushViewController:vc animated:YES];
-        } if ([_orderCellData.status isEqualToString:@"8"]) {
-            JMRefundDetailViewController *vc = [[JMRefundDetailViewController alloc]init];
+        }else  if ([_orderCellData.status isEqualToString:@"7"]) {
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMRefundDetailViewTypeRefuse;
+            vc.viewType = JMOrderInfoViewAfterSales;
+            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+                vc.isExtension = YES;
+            }
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([_orderCellData.status isEqualToString:@"8"]) {//等待退货
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewWaitRefund;
+            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+                vc.isExtension = YES;
+            }
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([_orderCellData.status isEqualToString:@"12"]) {//已收货
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTakeDeliveryGoods;
+            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+                vc.isExtension = YES;
+            }
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([_orderCellData.status isEqualToString:@"13"]) {
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType =  JMOrderInfoViewFinish;
+            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+                vc.isExtension = YES;
+            }
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([_orderCellData.status isEqualToString:@"9"]) {
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType =  JMOrderInfoViewTypeRefuseRefund;
+            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+                vc.isExtension = YES;
+            }
             [self.navigationController pushViewController:vc animated:YES];
         }
+        
     }
     
 }
@@ -304,8 +404,15 @@ static NSString *cellID = @"statusCellID";
     }else{
         _orderCellData.isSpread = NO;
     }
-    [self.listDataArray replaceObjectAtIndex:indexPath.row withObject:_orderCellData];
+        [self.listDataArray replaceObjectAtIndex:indexPath.row withObject:_orderCellData];
     [self.tableView reloadData];
+//    [self.tableView beginUpdates];
+//    NSIndexPath *indexRow = [NSIndexPath indexPathForRow:indexPath.row inSection:0];
+//
+//     [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexRow] withRowAnimation:UITableViewRowAnimationNone];
+//
+//    [self.tableView endUpdates];
+//    [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:indexPath.row] withRowAnimation:(UITableViewRowAnimationFade)];
     
 }
 
@@ -342,7 +449,6 @@ static NSString *cellID = @"statusCellID";
 -(void)changOrderStatus:(NSString *)status order_id:(NSString *)order_id{
     [[JMHTTPManager sharedInstance]changeOrderStatusWithOrder_id:order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self.tableView.mj_header beginRefreshing];
-        
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -397,6 +503,7 @@ static NSString *cellID = @"statusCellID";
 }
 
 
+
         
 - (JMTitlesView *)titleView {
     if (!_titleView) {
@@ -405,8 +512,12 @@ static NSString *cellID = @"statusCellID";
         if ([model.type isEqualToString:B_Type_UESR]) {
             titleArray = @[@"全部", @"已付款", @"未付款",@"已发货"];
         }else if ([model.type isEqualToString:C_Type_USER]){
-            titleArray = @[@"全部", @"已付款", @"未付款",@"退款中"];
-        
+            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+                 titleArray = @[@"全部", @"即将到账",@"已到账"];
+            }else if (_viewType == JMMyOrderListViewControllerCUser) {
+                titleArray = @[@"全部", @"已付款", @"未付款",@"售后中"];
+            
+            }
         }
    
         _titleView = [[JMTitlesView alloc] initWithFrame:(CGRect){0, 0, SCREEN_WIDTH, 43} titles:titleArray];
@@ -436,6 +547,19 @@ static NSString *cellID = @"statusCellID";
         
     }
     return _refundCauseView;
+}
+
+-(UILabel *)topLab{
+    if (!_topLab) {
+        _topLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+        _topLab.text = @"消费者自成交日起十五天内退货，佣金将原路退回消费者";
+        _topLab.textAlignment = NSTextAlignmentCenter;
+        _topLab.backgroundColor = UIColorFromHEX(0xFEF9E5);
+        _topLab.textColor = UIColorFromHEX(0xF2822E);
+        _topLab.font = kFont(12);
+    }
+    return _topLab;
+
 }
 //
 //-(UIView *)BGView{

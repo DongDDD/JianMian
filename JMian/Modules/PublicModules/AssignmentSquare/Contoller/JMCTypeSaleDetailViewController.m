@@ -545,6 +545,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         [cell setGoodsArray:self.configures.goodsListArray];
+  
 //        [cell setModel:self.configures.goodsListArray];
         return cell;
     }

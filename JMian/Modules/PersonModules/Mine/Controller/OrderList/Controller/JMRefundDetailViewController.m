@@ -91,10 +91,10 @@
 
 //再次申请
 - (IBAction)btn3Action:(UIButton *)sender {
-    JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
-    vc.data = self.model;
-    vc.viewType = JMApplyForRefundViewTypeRefund;
-    [self.navigationController pushViewController:vc animated:YES];
+//    JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
+//    vc.model = self.model;
+//    vc.viewType = JMApplyForRefundViewTypeRefund;
+//    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

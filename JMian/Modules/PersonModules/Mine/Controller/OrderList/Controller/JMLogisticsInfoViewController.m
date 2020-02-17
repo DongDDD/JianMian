@@ -10,7 +10,7 @@
 #import "JMHTTPManager+GetLabels.h"
 #import "JMLogisticsCellData.h"
 #import "JMHTTPManager+CreatetLogisticsInfo.h"
-
+#import "JMHTTPManager+ChangeOrderStatus.h"
 
 @interface JMLogisticsInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *expressageNumTextField;
@@ -33,6 +33,7 @@ static NSString *cellIdent = @"wuliucellIdent";
     [self.view addSubview:self.tableView];
     [self getLabsData];
 }
+
 - (IBAction)chooseExpressCompany:(UIButton *)sender {
     [self showListView];
 }
@@ -89,8 +90,14 @@ static NSString *cellIdent = @"wuliucellIdent";
 
 -(void)sendGoodsRequst{
     [self.expressageNumTextField resignFirstResponder];
-    [[JMHTTPManager sharedInstance]createLogisticsInfoWithId:_order_id Logistics_label_id:_logisticsCelldata.label_id logistics_no:self.expressageNumTextField.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//    [[JMHTTPManager sharedInstance]createLogisticsInfoWithId:_order_id Logistics_label_id:_logisticsCelldata.label_id logistics_no:self.expressageNumTextField.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        [self showAlertVCSucceesSingleWithMessage:@"物流信息提交成功" btnTitle:@"返回"];
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+    //    }];
+    [[JMHTTPManager sharedInstance]deliverGoodsWithOrder_id:_order_id status:@"6" logistics_no:self.expressageNumTextField.text logistics_id:_logisticsCelldata.label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self showAlertVCSucceesSingleWithMessage:@"物流信息提交成功" btnTitle:@"返回"];
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];

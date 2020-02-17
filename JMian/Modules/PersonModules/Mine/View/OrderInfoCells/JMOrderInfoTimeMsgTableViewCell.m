@@ -18,7 +18,11 @@ NSString *const JMOrderInfoTimeMsgTableViewCellIdentifier = @"JMOrderInfoTimeMsg
 -(void)setValuesWithTime1:(NSString *)time1 time2:(NSString *)time2{
     
     self.time1Lab.text =  [NSString stringWithFormat:@"创建时间 :%@",time1];
-    self.time2Lab.text =  [NSString stringWithFormat:@"付款时间 :%@",time2];
+    if (time2) {
+        self.time2Lab.text =  [NSString stringWithFormat:@"付款时间 :%@",time2];
+    }else{
+        [self.time2Lab setHidden:YES];
+    }
     
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -14,6 +14,7 @@ extern NSString *const JMOrderInfoPriceTableViewCellIdentifier;
 @interface JMOrderInfoPriceTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
 @property (copy, nonatomic) NSString *price;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab;
 
 @end
 
