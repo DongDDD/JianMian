@@ -9,7 +9,11 @@
 #import "JMGoodsCollectionViewCell.h"
 #import "DimensMacros.h"
 NSString *const JMGoodsCollectionViewCellIdentifier = @"JMGoodsCollectionViewCellIdentifier";
+@interface JMGoodsCollectionViewCell ()
 
+@property(nonatomic,strong)JMGoodsData *myData;
+
+@end
 @implementation JMGoodsCollectionViewCell
 
 - (void)awakeFromNib {
@@ -18,6 +22,7 @@ NSString *const JMGoodsCollectionViewCellIdentifier = @"JMGoodsCollectionViewCel
 }
 
 -(void)setData:(JMGoodsData *)data{
+    _myData = data;
     self.titleLab.text = data.title;
     self.priceLab.text = data.price;
     self.topLeftLab.text = [NSString stringWithFormat:@"  佣金:¥ %@   ",data.salary];
@@ -27,5 +32,10 @@ NSString *const JMGoodsCollectionViewCellIdentifier = @"JMGoodsCollectionViewCel
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:file_path] placeholderImage:[UIImage imageNamed:@"break"]];
     }
 
+}
+- (IBAction)shareAction:(id)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickShareActionWithData:)]) {
+        [_delegate didClickShareActionWithData:_myData];
+    }
 }
 @end

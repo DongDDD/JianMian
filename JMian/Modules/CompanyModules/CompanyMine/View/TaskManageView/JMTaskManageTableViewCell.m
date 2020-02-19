@@ -270,11 +270,11 @@
             self.leftBtn.backgroundColor = [UIColor colorWithRed:247/255.0 green:253/255.0 blue:255/255.0 alpha:1.0];
             self.leftBtn.layer.borderWidth = 0.5;
             self.leftBtn.layer.borderColor = MASTER_COLOR.CGColor;
+            [self.rightBtn setHidden:YES];
+//            [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
+//            [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//            self.rightBtn.backgroundColor = MASTER_COLOR;
             
-            [self.rightBtn setTitle:@"分享产品链接" forState:UIControlStateNormal];
-            [self.rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            self.rightBtn.backgroundColor = MASTER_COLOR;
-         
         }else{
             [self.leftBtn setTitle:@"和他聊聊" forState:UIControlStateNormal];
             [self.leftBtn setTitleColor:MASTER_COLOR forState:UIControlStateNormal];

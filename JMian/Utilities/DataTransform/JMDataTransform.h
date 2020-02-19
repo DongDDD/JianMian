@@ -11,12 +11,17 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMDataTransform : NSObject
-//数字-文字
+///数字-文字
 +(NSString *)getEducationStrWithEducationNum:(NSString *)educationNum;
-//文字-数字
+///文字-数字
 +(NSString *)getEducationNumWithEducationStr:(NSString *)educationStr;
-//工资数据转化，除以1000，转化成k
+/// 工资范围数据转化，除以1000，转化成k
+/// @param min 最小值
+/// @param max 最大值
 +(NSString *)getSalaryStrWithMin:(id)min max:(id)max;
+ 
+/// @param stringNumber 保留两位小数
++(NSString*)returnFormatter:(NSString*)stringNumber;
 @end
 
 NS_ASSUME_NONNULL_END

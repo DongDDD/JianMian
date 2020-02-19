@@ -23,7 +23,11 @@
         case JMCTypeSaleCellTypeTaskDesc1:
             self.rowsNum = 1;
             self.footerheight = 0;
-            self.headerheight = 44;
+            if (_isSnapshoot) {
+                self.headerheight = 60;
+            }else{
+                self.headerheight = 44;
+            }
           [self getHeightForDesc1];
           //  self.cellId = JMMyStoreOrderStatusTableViewCellIdentifier;
             break;

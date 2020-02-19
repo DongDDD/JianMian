@@ -193,7 +193,7 @@
             
 
             self.haveApply.text = [NSString stringWithFormat:@"%@人已报名", self.configures.model.effective_count];
-                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+//                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
 //
 //            }
             if (_viewType == JMCDetailPreviewType) {

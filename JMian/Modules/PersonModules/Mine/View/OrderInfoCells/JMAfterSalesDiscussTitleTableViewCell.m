@@ -1,15 +1,15 @@
 //
-//  JMDiscussHistoryTableViewCell.m
+//  JMAfterSalesDiscussTitleTableViewCell.m
 //  JMian
 //
-//  Created by mac on 2020/2/15.
+//  Created by mac on 2020/2/18.
 //  Copyright © 2020 mac. All rights reserved.
 //
 
-#import "JMDiscussHistoryTableViewCell.h"
-NSString *const JMDiscussHistoryTableViewCellIdentifier = @"JMDiscussHistoryTableViewCellIdentifier";
+#import "JMAfterSalesDiscussTitleTableViewCell.h"
+NSString *const JMAfterSalesDiscussTitleTableViewCellIdentifier = @"JMAfterSalesDiscussTitleTableViewCellIdentifier";
 
-@implementation JMDiscussHistoryTableViewCell
+@implementation JMAfterSalesDiscussTitleTableViewCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];

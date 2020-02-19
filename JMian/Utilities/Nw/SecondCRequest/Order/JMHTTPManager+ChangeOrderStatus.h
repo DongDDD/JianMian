@@ -20,6 +20,15 @@ NS_ASSUME_NONNULL_BEGIN
                     logistics_no:(NSString *)logistics_no
                     logistics_id:(NSString *)logistics_id
                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+- (void)deleteOrderWithOrder_id:(NSString *)order_id
+                           status:(NSString *)status
+                              msg:(NSString *)msg
+                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
+- (void)refundRequestWithOrder_id:(NSString *)order_id
+      status:(NSString *)status
+         msg:(NSString *)msg
+         files:(NSArray *)files
+                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 
 NS_ASSUME_NONNULL_END

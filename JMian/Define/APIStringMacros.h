@@ -149,7 +149,8 @@
 #define Fectch_GoodsMangerList_URL @"//manager/goods"
 //订单详情
 #define Fectch_OrderInfo_URL @"api/order/info"
-
+//协商历史
+#define Fectch_DiscussList_URL @"api/order/refund/lists"
 
 
 //视频列表

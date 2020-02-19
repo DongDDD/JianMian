@@ -10,15 +10,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="234" id="KGk-i7-Jjw" customClass="JMOrderListExtensionTableViewCell">
-            <rect key="frame" x="0.0" y="0.0" width="410" height="234"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="235" id="KGk-i7-Jjw" customClass="JMOrderListExtensionTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="410" height="235"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="410" height="234"/>
+                <rect key="frame" x="0.0" y="0.0" width="410" height="235"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4hQ-XO-W4K">
-                        <rect key="frame" x="0.0" y="0.0" width="410" height="40"/>
+                        <rect key="frame" x="0.0" y="5" width="410" height="40"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="store.png" translatesAutoresizingMaskIntoConstraints="NO" id="N07-ly-siW">
                                 <rect key="frame" x="20" y="13.5" width="14" height="13"/>
@@ -68,8 +68,22 @@
                             <constraint firstAttribute="trailing" secondItem="vsB-PT-HPi" secondAttribute="trailing" id="vRe-gs-zSk"/>
                         </constraints>
                     </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jRI-pw-rWg">
+                        <rect key="frame" x="0.0" y="0.0" width="410" height="5"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="5" id="DnU-6N-2dM"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S8d-Zn-z4Z">
+                        <rect key="frame" x="0.0" y="230" width="410" height="5"/>
+                        <color key="backgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="5" id="ABW-Mc-lf6"/>
+                        </constraints>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JOi-a8-xD2">
-                        <rect key="frame" x="0.0" y="173" width="410" height="61"/>
+                        <rect key="frame" x="0.0" y="169" width="410" height="61"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="下单时间 ：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnm-P9-pqb">
                                 <rect key="frame" x="20" y="5" width="75.5" height="17"/>
@@ -120,22 +134,30 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="JOi-a8-xD2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2Wx-iX-afr"/>
+                    <constraint firstItem="S8d-Zn-z4Z" firstAttribute="top" secondItem="JOi-a8-xD2" secondAttribute="bottom" id="8Rq-GI-bI6"/>
                     <constraint firstAttribute="trailing" secondItem="4hQ-XO-W4K" secondAttribute="trailing" id="CQw-Fw-IT0"/>
                     <constraint firstAttribute="trailing" secondItem="JOi-a8-xD2" secondAttribute="trailing" id="Mk8-6B-EsJ"/>
-                    <constraint firstItem="4hQ-XO-W4K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Usy-h1-VhN"/>
+                    <constraint firstAttribute="trailing" secondItem="jRI-pw-rWg" secondAttribute="trailing" id="R8Y-mm-LcX"/>
+                    <constraint firstAttribute="trailing" secondItem="S8d-Zn-z4Z" secondAttribute="trailing" id="WUZ-WJ-QEi"/>
                     <constraint firstItem="4hQ-XO-W4K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XCb-75-ycY"/>
-                    <constraint firstAttribute="bottom" secondItem="JOi-a8-xD2" secondAttribute="bottom" id="aPG-pn-12A"/>
+                    <constraint firstItem="4hQ-XO-W4K" firstAttribute="top" secondItem="jRI-pw-rWg" secondAttribute="bottom" id="cCF-cD-5Gy"/>
+                    <constraint firstItem="jRI-pw-rWg" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="i8b-3o-m44"/>
+                    <constraint firstItem="S8d-Zn-z4Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="pQq-xg-iKA"/>
+                    <constraint firstItem="jRI-pw-rWg" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="ppF-R0-NXX"/>
+                    <constraint firstAttribute="bottom" secondItem="S8d-Zn-z4Z" secondAttribute="bottom" id="qHu-tu-gvD"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
+                <outlet property="detailView" destination="JOi-a8-xD2" id="2sk-5C-isC"/>
                 <outlet property="didSendGoodsImageView" destination="vsB-PT-HPi" id="Xp7-2a-vPj"/>
                 <outlet property="salaryLab" destination="fXb-TW-z8R" id="oY3-EB-9An"/>
                 <outlet property="statusRightTopLab" destination="qqZ-6g-ZiV" id="MVL-d6-gK1"/>
                 <outlet property="timeLab" destination="oGM-eM-O6r" id="qoY-8Z-i8c"/>
                 <outlet property="titleLab" destination="9Fa-B5-2nj" id="CAo-Gh-SBp"/>
+                <outlet property="titleView" destination="4hQ-XO-W4K" id="tUl-cm-XxJ"/>
             </connections>
-            <point key="canvasLocation" x="-104.34782608695653" y="52.232142857142854"/>
+            <point key="canvasLocation" x="-314.49275362318843" y="61.272321428571423"/>
         </tableViewCell>
     </objects>
     <resources>

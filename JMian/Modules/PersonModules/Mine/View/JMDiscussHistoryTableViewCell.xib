@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="133" id="KGk-i7-Jjw" customClass="JMDiscussHistoryTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="133"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="133"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2N-8h-P2x">
+                        <rect key="frame" x="20" y="10" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySR-SJ-P8G">
+                        <rect key="frame" x="20" y="37" width="31" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款原因" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIS-Jo-4LC">
+                        <rect key="frame" x="20" y="59" width="57.5" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="57.5" id="nN5-kG-gs5"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="退款原因" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOC-fC-Sf1">
+                        <rect key="frame" x="91" y="59" width="233" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="nIS-Jo-4LC" firstAttribute="leading" secondItem="ySR-SJ-P8G" secondAttribute="leading" id="8da-vO-RYC"/>
+                    <constraint firstItem="x2N-8h-P2x" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="BBi-l0-yMB"/>
+                    <constraint firstItem="lOC-fC-Sf1" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" constant="20" id="Hgu-oF-6ep"/>
+                    <constraint firstItem="x2N-8h-P2x" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="P7P-QS-3Ov"/>
+                    <constraint firstItem="ySR-SJ-P8G" firstAttribute="leading" secondItem="x2N-8h-P2x" secondAttribute="leading" id="Tc4-1R-XbQ"/>
+                    <constraint firstItem="lOC-fC-Sf1" firstAttribute="leading" secondItem="nIS-Jo-4LC" secondAttribute="trailing" constant="13.5" id="ZRc-bi-fB5"/>
+                    <constraint firstItem="ySR-SJ-P8G" firstAttribute="top" secondItem="x2N-8h-P2x" secondAttribute="bottom" constant="6" id="igP-fl-NKe"/>
+                    <constraint firstItem="lOC-fC-Sf1" firstAttribute="top" secondItem="nIS-Jo-4LC" secondAttribute="top" id="l4t-Vp-oCn"/>
+                    <constraint firstItem="nIS-Jo-4LC" firstAttribute="top" secondItem="ySR-SJ-P8G" secondAttribute="bottom" constant="7.5" id="zIC-3A-ZLW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="msgLab" destination="lOC-fC-Sf1" id="8P5-eg-QUM"/>
+                <outlet property="nameLab" destination="x2N-8h-P2x" id="Aix-88-Mf5"/>
+                <outlet property="timeLab" destination="ySR-SJ-P8G" id="C4l-5a-PL3"/>
+            </connections>
+            <point key="canvasLocation" x="77" y="35"/>
+        </tableViewCell>
+    </objects>
+</document>

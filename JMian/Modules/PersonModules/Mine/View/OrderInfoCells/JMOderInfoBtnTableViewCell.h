@@ -42,6 +42,7 @@ extern NSString *const JMOderInfoBtnTableViewCellIdentifier;
 @property (weak, nonatomic) IBOutlet UIButton *btn10;//撤销申请
 @property (weak, nonatomic) IBOutlet UIButton *btn11;//联系卖家
 @property (weak, nonatomic) IBOutlet UIButton *btn12;//同意申请
+@property (weak, nonatomic) IBOutlet UIButton *btn13;//取消订单
 
 @end
 

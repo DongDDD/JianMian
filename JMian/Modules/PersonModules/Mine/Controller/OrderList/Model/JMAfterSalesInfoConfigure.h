@@ -11,7 +11,7 @@
 #import "JMAfterSalesRefundTitleTableViewCell.h"
 #import "JMGoodsInfoTableViewCell.h"
 #import "JMAfterSalesDetailTableViewCell.h"
-#import "JMDiscussHistoryTableViewCell.h"
+#import "JMAfterSalesDiscussTitleTableViewCell.h"
 #import "JMOderInfoBtnTableViewCell.h"
 #import "JMOrderInfoModel.h"
 NS_ASSUME_NONNULL_BEGIN

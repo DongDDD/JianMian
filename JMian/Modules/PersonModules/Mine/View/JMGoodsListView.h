@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMGoodsListView : UIView
 @property(nonatomic,strong)NSArray *goods;
+@property(nonatomic,strong)UITableView *tableView;
+
 //@property(nonatomic,assign)JMGoodsListViewType viewType;
 @end
 

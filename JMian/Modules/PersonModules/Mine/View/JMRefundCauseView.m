@@ -19,7 +19,10 @@
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self == [super initWithFrame:frame]) {
         
-        self.titleArray = @[@"不喜欢/不想要",@"货物破损" ,@"卖家发错货",@"生产日期/保质与商品描述不符",@"其他原因"];
+        self.titleLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 70)];
+        self.titleLab.font = kFont(20);
+        self.titleLab.textAlignment = NSTextAlignmentCenter;
+        self.titleLab.textColor = [UIColor blackColor];
         [self initView];
     }
     return self;
@@ -91,11 +94,7 @@
 }
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-    self.titleLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, 70)];
-    self.titleLab.text = @"退款原因";
-    self.titleLab.font = kFont(20);
-    self.titleLab.textAlignment = NSTextAlignmentCenter;
-    self.titleLab.textColor = [UIColor blackColor];
+
     return self.titleLab;
 }
 

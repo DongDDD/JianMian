@@ -3357,129 +3357,97 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CB45E288-87CE-4D9E-8F44-71E6C41EADDA"
+            uuid = "41F9816E-7D56-421F-8B79-183B440B12E5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMApplyForRefundViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "-changOrderStatus:order_id:msg:files:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "41F9816E-7D56-421F-8B79-183B440B12E5 - 649af3a73d26ab14"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[JMApplyForRefundViewController changOrderStatus:order_id:msg:files:]"
+                  moduleName = "JMian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac/JianMian/JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMApplyForRefundViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "41F9816E-7D56-421F-8B79-183B440B12E5 - 5a4bc1f5a225f3a1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__70-[JMApplyForRefundViewController changOrderStatus:order_id:msg:files:]_block_invoke"
+                  moduleName = "JMian"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/mac/JianMian/JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMApplyForRefundViewController.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98"
+                  offsetFromSymbolStart = "16">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "50E5C14F-3566-45E1-AEB2-64FC28C91F99"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMApplyForRefundViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-uploadImgRequest:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EEA42417-E0EF-4F0C-9BD2-A51204449D97"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMMyOrderListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "572"
+            endingLineNumber = "572"
+            landmarkName = "-submitActionWithMsg:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "499A923D-6F26-4327-A6C7-C24A56DE7133"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "JMian/Modules/PublicModules/AssignmentSquare/Contoller/JMCTypeSaleDetailViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "641"
-            endingLineNumber = "641"
-            landmarkName = "-wxShare:"
+            startingLineNumber = "260"
+            endingLineNumber = "260"
+            landmarkName = "-rightAction:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "388C5792-49D7-4538-9C8D-DF80D6EAD964"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PublicModules/AssignmentSquare/View/DetialCells/JMCSaleTypeDetailGoodsTableViewCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DED8AFC3-4DBD-4C95-A9E0-958DDE1848E8"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PublicModules/AssignmentSquare/View/DetialCells/JMCSaleTypeDetailGoodsTableViewCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "74A45EFC-3A88-483D-82F9-D54BB4009AE6"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PublicModules/AssignmentSquare/View/DetialCells/JMGoodsCollectionViewCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
-            landmarkName = "-setData:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AA1ACB3F-3DDC-44C1-AF55-C8301F0959C3"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PersonModules/Mine/Controller/Mine/JMMineViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
-            landmarkName = "-didClickMyExtension"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C22DAB29-6CF1-4379-8567-D24FD0C34598"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMOrderInfoViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-didClickBtnWithBtnTtitle:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "C22DAB29-6CF1-4379-8567-D24FD0C34598 - ec559ae57201baa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JMOrderInfoViewController didClickBtnWithBtnTtitle:]"
-                  moduleName = "JMian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/JianMian/JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMOrderInfoViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "1896">
-               </Location>
-               <Location
-                  uuid = "C22DAB29-6CF1-4379-8567-D24FD0C34598 - ec559ae57201baa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[JMOrderInfoViewController didClickBtnWithBtnTtitle:]"
-                  moduleName = "JMian"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mac/JianMian/JMian/Modules/PersonModules/Mine/Controller/OrderList/Controller/JMOrderInfoViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "1916">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

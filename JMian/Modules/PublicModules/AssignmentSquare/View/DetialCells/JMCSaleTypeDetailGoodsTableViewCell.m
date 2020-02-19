@@ -11,7 +11,7 @@
 #import "DimensMacros.h"
 NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDetailGoodsTableViewCellIdentifier";
 
-@interface JMCSaleTypeDetailGoodsTableViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface JMCSaleTypeDetailGoodsTableViewCell ()<UICollectionViewDelegate,UICollectionViewDataSource,JMGoodsCollectionViewCellDelegate>
 @property(nonatomic,strong)UICollectionView *collectionView;
 @property(nonatomic,strong)NSArray *myGoodsArray;
 
@@ -37,6 +37,7 @@ NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDet
 
 
 -(void)setGoodsArray:(NSArray *)goodsArray{
+ 
     [_collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self);
         make.top.mas_equalTo(self);
@@ -60,6 +61,13 @@ NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDet
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JMGoodsCollectionViewCell *cell = (JMGoodsCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:JMGoodsCollectionViewCellIdentifier forIndexPath:indexPath];
     JMGoodsData *data = self.myGoodsArray[indexPath.row];
+    cell.delegate = self;
+    if (_viewType == JMCSaleTypeDetailGoodsDefaultType) {
+        [cell.shareBtn setHidden:YES];
+    }else if (_viewType == JMCSaleTypeDetailGoodsSnapshootType) {
+        [cell.shareBtn setHidden:NO];
+
+    }
     [cell setData:data];
     return cell;
 }
@@ -89,6 +97,12 @@ NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDet
 //
 //return YES;
 //}
+-(void)didClickShareActionWithData:(JMGoodsData *)data{
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectedGoodsShareActionWithModel:)]) {
+        [_delegate didSelectedGoodsShareActionWithModel:data];
+    }
+    
+}
 
 #pragma mark - Navigation
 

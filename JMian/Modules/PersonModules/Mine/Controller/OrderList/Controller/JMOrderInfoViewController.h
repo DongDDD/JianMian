@@ -10,13 +10,16 @@
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, JMOrderInfoViewType){
     JMOrderInfoViewTypeSuccessfully = 0,
+    JMOrderInfoViewTypeDidRefund,//已退款
+    JMOrderInfoViewTypeDidDeleteOrder,//订单已取消 1
      JMOrderInfoViewSetRefund,//对方发起退款
     JMOrderInfoViewTypeRefuseRefund,//卖家拒绝退款
-    JMOrderInfoViewTypeDidRefund,
+    JMOrderInfoViewTypeWaitGoodsReturn,//等待退货
     JMOrderInfoViewTypeWaitSalesReturn,
     JMOrderInfoViewTypeWaitDeliverGoods,
-    JMOrderInfoViewTypeNoPay,
-    JMOrderInfoViewDidDeliverGoods,
+    JMOrderInfoViewTypeNoPay,//0
+    JMOrderInfoViewTypeDidPay,
+    JMOrderInfoViewDidDeliverGoods,//已发货 6
     JMOrderInfoViewTakeDeliveryGoods,//已收货
     JMOrderInfoViewFinish,//交易完成
     JMOrderInfoViewWaitRefund,//等待退货

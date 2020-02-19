@@ -143,6 +143,10 @@
     
 -(void)changOrderStatus:(NSString *)status order_id:(NSString *)order_id{
     [[JMHTTPManager sharedInstance]changeOrderStatusWithOrder_id:order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
+                                                         delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+           [alert show];
+           [self.navigationController popViewControllerAnimated:YES];
         [self.navigationController popViewControllerAnimated:YES];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {

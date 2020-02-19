@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,assign)BOOL isSpread;
 
+@property (nonatomic, copy) NSString *order_no;
 
 @property (nonatomic, copy) NSString *order_id;
 @property (nonatomic, copy) NSString *title;
@@ -84,6 +85,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *after_sale_user_id;
 @property (nonatomic, copy) NSString *after_sale_boss_id;
 @property (nonatomic, copy) NSString *after_sale_created_at;
+@property (nonatomic, copy) NSString *salary_amount;
+
+
 @property (nonatomic, copy) NSArray *goods;
 
 @end

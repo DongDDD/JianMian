@@ -36,8 +36,10 @@
 #import "JMHTTPManager+GetGoodsList.h"
 #import "JMHTTPManager+GetShopInfo.h"
 #import "JMSnapshootView.h"
+#import "JMPublicShareView.h"
+#import "JMWXShareAction.h"
 
-@interface JMCTypeSaleDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMShareViewDelegate,JMTaskApplyForViewDelegate,JMCSaleTypeDetailGoodsTableViewCellDelegate>
+@interface JMCTypeSaleDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMShareViewDelegate,JMTaskApplyForViewDelegate,JMCSaleTypeDetailGoodsTableViewCellDelegate,JMPublicShareViewDelegate>
 @property (strong, nonatomic) UITableView *tableView;
 //@property (nonatomic, strong) UIView *headerTitleView;
 @property (nonatomic, strong) JMTaskDetailHeaderView *taskDetailHeaderView;
@@ -49,12 +51,16 @@
 @property (copy, nonatomic) NSString *user_id;
 @property (nonatomic, strong) UIView *windowViewBGView;
 @property (nonatomic, strong) JMTaskApplyForView *taskApplyForView;
-@property (nonatomic, strong) JMShareView *shareView;
+//@property (nonatomic, strong) JMShareView *shareView;
 @property (weak, nonatomic) IBOutlet UIButton *bottomLeftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *bottomRightBtn;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (weak, nonatomic) IBOutlet UILabel *haveApply;
 @property (nonatomic ,strong) UIView *BGShareView;
+@property (nonatomic, strong) JMPublicShareView *shareView;
+@property (nonatomic,assign)BOOL isShareGoods;
+@property(nonatomic,strong)JMGoodsData *seletedGoodsData;
+
 @end
 
 @implementation JMCTypeSaleDetailViewController
@@ -70,6 +76,7 @@
     self.title = @"任务详情";
     if (_viewType == CTypeSaleViewSnapshootType) {
         self.configures.model = self.model;
+        self.configures.isSnapshoot = YES;
         [self initView];
         [self.bottomView setHidden:YES];
         [self getShopInfo];
@@ -93,8 +100,10 @@
     //    [self.view addSubview:self.taskDetailHeaderView];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.bottomView];
-    [self.view addSubview:self.BGShareView];
-    [self.view addSubview:self.shareView];
+    [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
+      [self.shareView hide];
+//    [self.view addSubview:self.BGShareView];
+//    [self.view addSubview:self.shareView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view);
         make.width.mas_equalTo(self.view);
@@ -107,8 +116,8 @@
 //        make.left.and.right.mas_equalTo(self.view);
 //        make.top.mas_equalTo(self.view);
 //    }];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenChoosePayView)];
-    [self.BGShareView addGestureRecognizer:tap];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(hiddenChoosePayView)];
+//    [self.BGShareView addGestureRecognizer:tap];
 
 }
 
@@ -240,7 +249,10 @@
         [self presentViewController:alertController animated:YES completion:nil];
         
     }else if (_viewType == CTypeSaleViewDefaultType) {
-    
+        self.isShareGoods = NO;
+        [self.shareView show];
+        
+        
     }
     
 }
@@ -254,6 +266,7 @@
         if (sender.selected) {
             [[JMHTTPManager sharedInstance]createLikeWith_type:nil Id:self.task_id mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
                 
+                [self showAlertSimpleTips:@"提示" message:@"收藏成功" btnTitle:@"好的"];
 
             } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
                 
@@ -263,7 +276,8 @@
             
             [[JMHTTPManager sharedInstance]deleteLikeWith_Id:self.configures.model.favorites_id  mode:@"2" SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
                 
-                
+                [self showAlertSimpleTips:@"提示" message:@"已取消收藏" btnTitle:@"好的"];
+
             } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
                 
             }];
@@ -381,7 +395,6 @@
             [self showAlertVCSucceesSingleWithMessage:@"申请已发出" btnTitle:@"好的"];
             //创建自定义消息
             [self createChatToSendCustumMessageRequstWithForeign_key:self.task_id user_id:self.configures.model.user_id];
-            //            [self setTaskMessage_receiverID:receiverId dic:nil title:@"任务提醒"];
             
             
         } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -395,7 +408,7 @@
     [[JMHTTPManager sharedInstance]createChat_type:@"2" recipient:user_id foreign_key:foreign_key sender_mark:@"" recipient_mark:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         //        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
         //
-        NSString *receiverId = [NSString stringWithFormat:@"%@b",_user_id];
+        NSString *receiverId = [NSString stringWithFormat:@"%@b",user_id];
         [JMSendCustumMsg setCustumMessage_receiverID:receiverId dic:nil title:@"[任务申请]"];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -545,8 +558,12 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
         [cell setGoodsArray:self.configures.goodsListArray];
-  
-//        [cell setModel:self.configures.goodsListArray];
+        if (_viewType == CTypeSaleViewDefaultType) {
+            cell.viewType = JMCSaleTypeDetailGoodsDefaultType;
+        }else if (_viewType == CTypeSaleViewSnapshootType) {
+            cell.viewType = JMCSaleTypeDetailGoodsSnapshootType;
+        }
+        //        [cell setModel:self.configures.goodsListArray];
         return cell;
     }
     
@@ -600,68 +617,75 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark -- 微信分享的是链接
-- (void)wxShare:(int)n
-{   //检测是否安装微信
-    
-    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
-    sendReq.bText = NO; //不使用文本信息
-    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
-    
-    WXMediaMessage *urlMessage = [WXMediaMessage message];
-    urlMessage.title = self.configures.model.task_title;
-    urlMessage.description = self.configures.model.myDescription;
-    
-    //    UIImageView *imgView = [[UIImageView alloc]init];
-    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
-    //
-    
-    NSString *url;
-    if (self.configures.model.images.count > 0) {
-        for (int i = 0; i < self.configures.model.images.count; i++) {
-            JMCDetailImageModel *imgModel = self.configures.model.images[0];
-            url = imgModel.file_path;
-        }
-        
-    }else if (self.configures.model.company_logo_path){
-        url= self.configures.model.company_logo_path;
-    }
-    
-    //    UIImage *image = [self getImageFromURL:url];
-    //    UIImage *image = [UIImage imageNamed:@"demi_home"];
-    //NSData *thumbData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-    //缩略图,压缩图片,不超过 32 KB
-    UIImage *image = [self handleImageWithURLStr:url];
-    NSData *thumbData = UIImageJPEGRepresentation(image, 0.1);
-    [urlMessage setThumbData:thumbData];
-    //分享实例
-    WXWebpageObject *webObj = [WXWebpageObject object];
-//        NSString *url = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=12&task_order_id=1",
+-(void)didSelectedGoodsShareActionWithModel:(JMGoodsData *)model{
+    self.isShareGoods = YES;
+    self.seletedGoodsData = model;
+    [self.shareView show];
 
-    webObj.webpageUrl = self.configures.model.share_url;
-    
-    urlMessage.mediaObject = webObj;
-    sendReq.message = urlMessage;
-    //发送分享
-    [WXApi sendReq:sendReq];
-    
+
 }
 
-- (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
-    NSURL *url = [NSURL URLWithString:imageURLStr];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    NSData *newImageData = imageData;
-    // 压缩图片data大小
-    newImageData = UIImageJPEGRepresentation([UIImage imageWithData:newImageData scale:0.1], 0.1f);
-    UIImage *image = [UIImage imageWithData:newImageData];
+-(void)didClickShareActoinWithTag:(NSInteger)tag{
+    [self.shareView hide];
+    if (tag == 1000) {
+        if (_isShareGoods) {
+            //分享商品
+            [self setShareGoodsDataWithType:0];
+        }else{
+            //分享任务
+            [self setShareTaskDataWithType:0];
+        }
+        
+    }else {
+        if (_isShareGoods) {
+            [self setShareGoodsDataWithType:1];
+        }else{
+            [self setShareTaskDataWithType:1];
+            
+        }
+        
+    }
     
-    // 压缩图片分辨率(因为data压缩到一定程度后，如果图片分辨率不缩小的话还是不行)
-    CGSize newSize = CGSizeMake(200, 200);
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0,0,(NSInteger)newSize.width, (NSInteger)newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
+}
+//分享商品
+-(void)setShareGoodsDataWithType:(int)type{
+    NSString *title;
+       NSString *desc;
+       NSString *imageUrl;
+       NSString *shareUrl;
+       title = self.seletedGoodsData.title;
+       NSRange startRange = [self.seletedGoodsData.goods_description rangeOfString:@"<p>"];
+        NSRange endRange = [self.seletedGoodsData.goods_description rangeOfString:@"</p>"];
+        NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
+        NSString *result = [self.seletedGoodsData.goods_description substringWithRange:range];
+       desc = result;
+       NSString *url;
+       if (self.seletedGoodsData.images.count > 0) {
+           for (int i = 0; i < self.seletedGoodsData.images.count; i++) {
+               JMCDetailImageModel *imgModel = self.seletedGoodsData.images[0];
+               url = imgModel.file_path;
+           }
+       }
+       //缩略图,压缩图片,不超过 32 KB
+       imageUrl =  [NSString stringWithFormat:@"http://app.jmzhipin.com%@",url];
+       shareUrl = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=%@&task_order_id=%@",self.seletedGoodsData.goods_id,self.task_order_id];
+       [JMWXShareAction wxShare:type title:title desc:desc imageUrl:imageUrl shareUrl:shareUrl];
+    
+
+}
+
+-(void)setShareTaskDataWithType:(int)type{
+    NSString *title;
+    NSString *desc;
+    NSString *imageUrl;
+    NSString *shareUrl;
+    title = self.configures.model.task_title;;
+    desc = self.configures.model.myDescription;
+    imageUrl = self.configures.model.company_logo_path;
+    shareUrl =  self.configures.model.share_url;
+    [JMWXShareAction wxShare:type title:title desc:desc imageUrl:imageUrl shareUrl:shareUrl];
+    
+    
 }
 
 #pragma mark - lazy
@@ -715,17 +739,17 @@
 
 }
 
--(JMShareView *)shareView{
-    if (!_shareView) {
-        _shareView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
-        _shareView.delegate = self;
-        [_shareView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
-        [_shareView.btn2 setImage:[UIImage imageNamed:@"Friendster"] forState:UIControlStateNormal];
-        _shareView.lab1.text = @"微信分享";
-        _shareView.lab2.text = @"朋友圈";
-    }
-    return _shareView;
-}
+//-(JMShareView *)shareView{
+//    if (!_shareView) {
+//        _shareView = [[JMShareView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 205+SafeAreaBottomHeight)];
+//        _shareView.delegate = self;
+//        [_shareView.btn1 setImage:[UIImage imageNamed:@"WeChat"] forState:UIControlStateNormal];
+//        [_shareView.btn2 setImage:[UIImage imageNamed:@"Friendster"] forState:UIControlStateNormal];
+//        _shareView.lab1.text = @"微信分享";
+//        _shareView.lab2.text = @"朋友圈";
+//    }
+//    return _shareView;
+//}
 
 -(JMCTypeSaleCellConfigures *)configures{
     if (!_configures) {
@@ -745,24 +769,33 @@
 }
 
 
--(UIView *)windowViewBGView{
-    if (!_windowViewBGView) {
-        _windowViewBGView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
-        _windowViewBGView.backgroundColor = [UIColor blackColor];
-        [_windowViewBGView setHidden:YES];
-        _windowViewBGView.alpha = 0.3;
+//-(UIView *)windowViewBGView{
+//    if (!_windowViewBGView) {
+//        _windowViewBGView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+//        _windowViewBGView.backgroundColor = [UIColor blackColor];
+//        [_windowViewBGView setHidden:YES];
+//        _windowViewBGView.alpha = 0.3;
+//    }
+//    return _windowViewBGView;
+//}
+//-(UIView *)BGShareView{
+//    if (!_BGShareView) {
+//        _BGShareView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
+//        _BGShareView.backgroundColor = [UIColor blackColor];
+//        _BGShareView.alpha = 0.5;
+//        _BGShareView.hidden = YES;
+//    }
+//    return  _BGShareView;
+//
+//}
+
+-(JMPublicShareView *)shareView{
+    if (!_shareView) {
+        _shareView = [[JMPublicShareView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        _shareView.delegate = self;
     }
-    return _windowViewBGView;
-}
--(UIView *)BGShareView{
-    if (!_BGShareView) {
-        _BGShareView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.frame];
-        _BGShareView.backgroundColor = [UIColor blackColor];
-        _BGShareView.alpha = 0.5;
-        _BGShareView.hidden = YES;
-    }
-    return  _BGShareView;
-    
+    return _shareView;
+
 }
 /*
 #pragma mark - Navigation

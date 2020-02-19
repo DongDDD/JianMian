@@ -15,6 +15,13 @@
              
              };
 }
+
++ (NSDictionary *)mj_replacedKeyFromPropertyName {
+    return @{
+        @"goods_description":@"description",
+
+    };
+}
 @end
 
 

@@ -91,4 +91,52 @@
     return salaryStr;
 }
 
++(NSString*)returnFormatter:(NSString*)stringNumber
+
+{
+    
+    stringNumber =[NSString stringWithFormat:@"%@",stringNumber];
+    
+    if([stringNumber rangeOfString:@"."].location==NSNotFound) {
+        
+        NSString* string_comp=[NSString stringWithFormat:@"%@.00",stringNumber];
+        
+        return string_comp;
+        
+    }
+    
+    else
+        
+    {
+        
+        NSArray* arrays= [stringNumber componentsSeparatedByString:@"."];
+        
+        NSString* s_f= [arrays objectAtIndex:0];
+        
+        NSString* s_e = [arrays objectAtIndex:1];
+        
+        if(s_e.length>2) {
+            
+            s_e=[s_e substringWithRange:NSMakeRange(0,2)];
+            
+        }
+        
+        else if(s_e.length==1)
+            
+        {
+            
+            s_e=[NSString stringWithFormat:@"%@0",s_e];
+            
+        }
+        
+        NSString* string_combine=[NSString stringWithFormat:@"%@.%@",s_f,s_e];
+        
+        return string_combine;
+        
+    }
+    
+    return @"";
+    
+}
+
 @end

@@ -14,9 +14,12 @@
 #import "JMRefundDetailViewController.h"
 #import "JMApplyForRefundViewController.h"
 #import "JMAfterSalesInfoViewController.h"
-@interface JMOrderInfoViewController ()<UITableViewDelegate,UITableViewDataSource,JMOderInfoBtnTableViewCellDelegate>
+#import "JMRefundCauseView.h"
+@interface JMOrderInfoViewController ()<UITableViewDelegate,UITableViewDataSource,JMOderInfoBtnTableViewCellDelegate,JMRefundCauseViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)JMOrderInfoConfigure *cellConfigures;
+@property(nonatomic,strong)JMRefundCauseView *refundCauseView;
+
 
 @end
 
@@ -26,9 +29,20 @@
     [super viewDidLoad];
     self.title = @"订单详情";
     [self.view addSubview:self.tableView];
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+    }];
+    
+    [[UIApplication sharedApplication].keyWindow addSubview:self.refundCauseView];
+     [self.refundCauseView setHidden:YES];
     [self getData];
-    // Do any additional setup after loading the view from its nib.
+
 }
+
+
+
 
 #pragma mark - data
 -(void)getData{
@@ -44,7 +58,22 @@
     
 }
 
+-(void)deleteOrderStatus:(NSString *)status order_id:(NSString *)order_id msg:(NSString *)msg{
+    [[JMHTTPManager sharedInstance]deleteOrderWithOrder_id:order_id status:status msg:msg successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+}
 
+//-(void)changOrderStatus:(NSString *)status order_id:(NSString *)order_id{
+//    [[JMHTTPManager sharedInstance]changeOrderStatusWithOrder_id:order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+//        [self.tableView.mj_header beginRefreshing];
+//
+//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+//
+//    }];
+//}
 
 #pragma mark - Delegate
 -(void)didClickBtnWithBtnTtitle:(NSString *)btnTtitle{
@@ -65,25 +94,37 @@
         }else if (_viewType == JMOrderInfoViewAfterSales) {
             vc.viewType = JMAfterSalesInfoViewTypeBeingAfterSales;
         
+        }else if (_viewType == JMOrderInfoViewTypeWaitGoodsReturn) {
+            vc.viewType = JMAfterSalesInfoViewTypeWaitGoodsReturn;
+        
         }
         vc.order_id = self.cellConfigures.model.order_id;
         [self.navigationController pushViewController:vc animated:YES];
     }else if ([btnTtitle isEqualToString:@"申请售后"]){
         JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
-        vc.viewType = JMApplyForRefundViewTypeRefund;
-        vc.order_id =self.cellConfigures.model.order_id;
-        vc.title = @"申请退款";
+        vc.viewType = JMApplyForRefundViewTypeAfterSales;
+        vc.model  = self.cellConfigures.model;
+        vc.title = @"申请售后";
         [self.navigationController pushViewController:vc animated:YES];
     }else if ([btnTtitle isEqualToString:@"联系卖家"]){
         NSString *user_id = [NSString stringWithFormat:@"%@b",self.cellConfigures.model.after_sale_boss_id];
         [JMCreatChatAction create4TypeChatRequstWithAccount:user_id];
     }else if ([btnTtitle isEqualToString:@"再次申请"]){
         JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
-        vc.viewType = JMApplyForRefundViewTypeRefund;
-        vc.order_id =self.cellConfigures.model.order_id;
+        vc.viewType = JMApplyForRefundViewTypeAfterSales;
+        vc.model  = self.cellConfigures.model;
         vc.title = @"申请退款";
         [self.navigationController pushViewController:vc animated:YES];
+    }else if ([btnTtitle isEqualToString:@"取消订单"]){
+        [self.refundCauseView show];
+
     }
+}
+
+-(void)submitActionWithMsg:(NSString *)msg{
+    [self deleteOrderStatus:@"1" order_id:self.order_id msg:msg];
+    
+
 }
 
 #pragma mark - UITableViewDataSource
@@ -134,18 +175,30 @@
                 cell.titleLab.text = @"未付款";
             }else if (_viewType == JMOrderInfoViewDidDeliverGoods) {
                 cell.titleLab.text = @"已发货";
+                if (!_isExtension) {
+                    [cell setOverTime:10];
+                }
             }else if (_viewType == JMOrderInfoViewFinish) {
                 cell.titleLab.text = @"交易完成";
             }else if (_viewType == JMOrderInfoViewWaitRefund) {
-                cell.titleLab.text = @"等待退货";
+                cell.titleLab.text = @"等待退款";
             }else if (_viewType == JMOrderInfoViewTakeDeliveryGoods) {
                 cell.titleLab.text = @"已收货";
+                if (!_isExtension) {
+                    [cell setOverTime:15];
+                }      
             }else if (_viewType == JMOrderInfoViewAfterSales) {
                 cell.titleLab.text = @"售后中";
             }else if (_viewType == JMOrderInfoViewSetRefund) {
                 cell.titleLab.text = @"对方发起退款";
             }else if (_viewType == JMOrderInfoViewTypeRefuseRefund) {
                 cell.titleLab.text = @"卖家拒绝退款";
+            }else if (_viewType == JMOrderInfoViewTypeDidPay) {
+                cell.titleLab.text = @"已付款";
+            }else if (_viewType == JMOrderInfoViewTypeDidDeleteOrder) {
+                cell.titleLab.text = @"已取消";
+            }else if (_viewType == JMOrderInfoViewTypeWaitGoodsReturn) {
+                cell.titleLab.text = @"等待退货";
             }
             //        self.userModel.company_real_company_name = self.cellConfigures.model.company_name;
 //            [cell setModel:model];
@@ -189,42 +242,132 @@
             JMOderInfoBtnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOderInfoBtnTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
+            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+            
             if (_viewType == JMOrderInfoViewTypeSuccessfully) {
-                [cell.btn2 setHidden:NO];
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];                    
+                }
             }else if (_viewType == JMOrderInfoViewTypeDidRefund) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    
+                }
             }else if (_viewType == JMOrderInfoViewTypeWaitSalesReturn) {
             }else if (_viewType == JMOrderInfoViewTypeWaitDeliverGoods) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];                    
+                }
+                [cell.btn8 setHidden:NO];
+
+                
             }else if (_viewType == JMOrderInfoViewTypeNoPay) {
-                [cell.btn2 setHidden:NO];
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    [cell.btn13 setHidden:NO];
+
+                }
             }else if (_viewType == JMOrderInfoViewDidDeliverGoods) {
-                [cell.btn2 setHidden:NO];
-                [cell.btn4 setHidden:NO];
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    [cell.btn4 setHidden:NO];
+                    
+                }
                 
             }else if (_viewType == JMOrderInfoViewTakeDeliveryGoods) {
-                [cell.btn11 setHidden:NO];
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    
+                }
                 [cell.btn9 setHidden:NO];
                 [cell.btn4 setHidden:NO];
 
             }else if (_viewType == JMOrderInfoViewFinish) {
-                [cell.btn2 setHidden:NO];
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    
+                }
                 
             }else if (_viewType == JMOrderInfoViewWaitRefund) {
-                [cell.btn11 setHidden:NO];
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    
+                }
                 [cell.btn8 setHidden:NO];
                 
             }else if (_viewType == JMOrderInfoViewAfterSales) {
-                [cell.btn11 setHidden:NO];
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    
+                }
                 [cell.btn8 setHidden:NO];
                 
             }else if (_viewType == JMOrderInfoViewSetRefund) {
-                [cell.btn2 setHidden:NO];
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    
+                }
                 [cell.btn8 setHidden:NO];
                 
             }else if (_viewType == JMOrderInfoViewTypeRefuseRefund) {
-                [cell.btn11 setHidden:NO];
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    
+                }
+                [cell.btn8 setHidden:NO];
+                
+            }else if (_viewType == JMOrderInfoViewTypeDidPay) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                    [cell.btn6 setHidden:NO];
+
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    [cell.btn13 setHidden:NO];
+
+                }
+                
+            }else if (_viewType == JMOrderInfoViewTypeDidDeleteOrder) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+
+                }
+                
+            }else if (_viewType == JMOrderInfoViewTypeWaitGoodsReturn) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                }else{
+                    [cell.btn11 setHidden:NO];
+
+                }
                 [cell.btn8 setHidden:NO];
                 
             }
+
             
             return cell;
         }
@@ -240,7 +383,7 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height) style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, self.view.frame.size.height-30) style:UITableViewStyleGrouped];
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
 //        _tableView.backgroundColor = [UIColor whiteColor];;
 
@@ -273,6 +416,17 @@
     return _cellConfigures;
 }
 
+-(JMRefundCauseView *)refundCauseView{
+    if (!_refundCauseView) {
+        _refundCauseView = [[JMRefundCauseView alloc]init];
+        _refundCauseView.delegate = self;
+        _refundCauseView.titleArray = @[@"不想买了",@"信息填写错误，重新拍" ,@"卖家缺货",@"点错了",@"其他原因"];
+        _refundCauseView.titleLab.text = @"取消原因";
+        _refundCauseView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        
+    }
+    return _refundCauseView;
+}
 /*
 #pragma mark - Navigation
 

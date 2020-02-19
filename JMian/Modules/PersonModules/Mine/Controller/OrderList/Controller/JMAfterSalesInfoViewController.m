@@ -13,8 +13,9 @@
 #import "JMRefundDetailViewController.h"
 #import "JMApplyForRefundViewController.h"
 #import "JMAfterSalesInfoConfigure.h"
+#import "JMDiscussHistoryViewController.h"
 
-@interface JMAfterSalesInfoViewController ()
+@interface JMAfterSalesInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 /// 333
 @property(nonatomic,strong)JMAfterSalesInfoConfigure *cellConfigures;
@@ -46,6 +47,9 @@
 
 -(void)changOrderStatus:(NSString *)status order_id:(NSString *)order_id{
     [[JMHTTPManager sharedInstance]changeOrderStatusWithOrder_id:order_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
         [self.navigationController popViewControllerAnimated:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -69,7 +73,6 @@
     }else if ([btnTtitle isEqualToString:@"申请售后"]){
         JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
         vc.viewType = JMApplyForRefundViewTypeAfterSales;
-        vc.order_id = self.order_id;
         vc.title = @"申请退款";
         [self.navigationController pushViewController:vc animated:YES];
     }else if ([btnTtitle isEqualToString:@"联系卖家"]){
@@ -96,6 +99,10 @@
         vc.model = self.cellConfigures.model;
         vc.title = @"申请退款";
         [self.navigationController pushViewController:vc animated:YES];
+        
+    }else if ([btnTtitle isEqualToString:@"确认退款"]){
+        [self changOrderStatus:@"11" order_id:self.order_id];
+
         
     }
 }
@@ -136,6 +143,9 @@
             }else if (_viewType == JMAfterSalesInfoViewTypeRefuseRefund) {
                 cell.titleLab.text = @"卖家拒绝退款";
 
+            }else if (_viewType == JMAfterSalesInfoViewTypeWaitGoodsReturn) {
+                cell.titleLab.text = @"等待退货";
+
             }
             //        self.userModel.company_real_company_name = self.cellConfigures.model.company_name;
 //            [cell setModel:model];
@@ -162,13 +172,14 @@
             return cell;
         }
         case JMAfterSalesInfoTypeHistory: {
-            JMDiscussHistoryTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMDiscussHistoryTableViewCellIdentifier forIndexPath:indexPath];
+            JMAfterSalesDiscussTitleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMAfterSalesDiscussTitleTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
         case JMAfterSalesInfoTypeBtn: {
             JMOderInfoBtnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOderInfoBtnTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
             cell.delegate = self;
             if (_viewType == JMAfterSalesInfoViewTypeWait) {
                 [cell.btn2 setHidden:NO];
@@ -178,7 +189,6 @@
                 [cell.btn3 setHidden:NO];
                 [cell.btn10 setHidden:NO];
             }else if (_viewType == JMAfterSalesInfoViewTypeBeingAfterSales) {
-                JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
                 if ([userModel.type isEqualToString:B_Type_UESR]) {
                     [cell.btn1 setHidden:NO];
                     [cell.btn2 setHidden:NO];
@@ -194,6 +204,15 @@
                 [cell.btn11 setHidden:NO];
                 [cell.btn3 setHidden:NO];
                 [cell.btn0 setHidden:NO];
+            }else if (_viewType == JMAfterSalesInfoViewTypeWaitGoodsReturn) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                    [cell.btn3 setHidden:NO];
+                    [cell.btn5 setHidden:NO];
+                }else{
+                    
+                    
+                }
             }
             
             
@@ -205,6 +224,15 @@
     
     return [UITableViewCell new];
     
+}
+#pragma mark - UITableViewDataDelegate
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == JMAfterSalesInfoTypeHistory) {
+        JMDiscussHistoryViewController *vc = [[JMDiscussHistoryViewController alloc]init];
+        vc.order_id = self.order_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+
 }
 
 #pragma mark - lazy
@@ -225,7 +253,7 @@
         [_tableView registerNib:[UINib nibWithNibName:@"JMAfterSalesRefundTitleTableViewCell" bundle:nil] forCellReuseIdentifier:JMAfterSalesRefundTitleTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMGoodsInfoTableViewCell" bundle:nil] forCellReuseIdentifier:JMGoodsInfoTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMAfterSalesDetailTableViewCell" bundle:nil] forCellReuseIdentifier:JMAfterSalesDetailTableViewCellIdentifier];
-        [_tableView registerNib:[UINib nibWithNibName:@"JMDiscussHistoryTableViewCell" bundle:nil] forCellReuseIdentifier:JMDiscussHistoryTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"JMAfterSalesDiscussTitleTableViewCell" bundle:nil] forCellReuseIdentifier:JMAfterSalesDiscussTitleTableViewCellIdentifier];
         [_tableView registerNib:[UINib nibWithNibName:@"JMOderInfoBtnTableViewCell" bundle:nil] forCellReuseIdentifier:JMOderInfoBtnTableViewCellIdentifier];
         
     }

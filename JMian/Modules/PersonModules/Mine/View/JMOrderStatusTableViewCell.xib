@@ -13,7 +13,7 @@
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="272" id="KGk-i7-Jjw" customClass="JMOrderStatusTableViewCell">
             <rect key="frame" x="0.0" y="0.0" width="542" height="376"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="542" height="376"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -89,13 +89,13 @@
                                 <rect key="frame" x="0.0" y="118" width="542" height="73"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="麻烦老板给我发一个黑色的和一个白色的，还要一个红色的 谢谢老板" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JW6-uW-PJU">
-                                        <rect key="frame" x="20" y="34" width="503" height="16"/>
+                                        <rect key="frame" x="20" y="59" width="503" height="16"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                         <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3NG-XE-G3m">
-                                        <rect key="frame" x="20" y="8" width="209" height="14"/>
+                                        <rect key="frame" x="20" y="33" width="209" height="14"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="209" id="OdS-jg-jAE"/>
                                             <constraint firstAttribute="height" constant="14" id="nmJ-eP-qrJ"/>
@@ -106,21 +106,29 @@
                                         </state>
                                     </button>
                                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="order_cp.png" translatesAutoresizingMaskIntoConstraints="NO" id="S44-0M-SoH">
-                                        <rect key="frame" x="230" y="8.5" width="13" height="13"/>
+                                        <rect key="frame" x="230" y="33.5" width="13" height="13"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="13" id="Nk2-vE-q9a"/>
                                             <constraint firstAttribute="width" constant="13" id="pH6-Sh-IkL"/>
                                         </constraints>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YjX-4d-jVH">
+                                        <rect key="frame" x="20" y="5" width="33" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="JW6-uW-PJU" firstAttribute="top" secondItem="3NG-XE-G3m" secondAttribute="bottom" constant="12" id="18X-nY-AWb"/>
                                     <constraint firstAttribute="trailing" secondItem="JW6-uW-PJU" secondAttribute="trailing" constant="19" id="5mJ-aS-QnN"/>
                                     <constraint firstAttribute="height" constant="73" id="K8p-v2-bh2"/>
-                                    <constraint firstItem="3NG-XE-G3m" firstAttribute="top" secondItem="jPk-kr-2ii" secondAttribute="top" constant="8" id="RJy-LX-an4"/>
+                                    <constraint firstItem="YjX-4d-jVH" firstAttribute="top" secondItem="jPk-kr-2ii" secondAttribute="top" constant="5" id="P3z-6h-blI"/>
                                     <constraint firstItem="S44-0M-SoH" firstAttribute="centerY" secondItem="3NG-XE-G3m" secondAttribute="centerY" id="gLR-bn-qNn"/>
+                                    <constraint firstItem="YjX-4d-jVH" firstAttribute="leading" secondItem="JW6-uW-PJU" secondAttribute="leading" id="guf-pd-WwA"/>
                                     <constraint firstItem="S44-0M-SoH" firstAttribute="leading" secondItem="3NG-XE-G3m" secondAttribute="trailing" constant="1" id="paR-O9-URC"/>
                                     <constraint firstItem="3NG-XE-G3m" firstAttribute="leading" secondItem="JW6-uW-PJU" secondAttribute="leading" id="tYG-uZ-Eal"/>
+                                    <constraint firstItem="3NG-XE-G3m" firstAttribute="top" secondItem="YjX-4d-jVH" secondAttribute="bottom" constant="12" id="uZY-wc-Igw"/>
                                     <constraint firstItem="3NG-XE-G3m" firstAttribute="leading" secondItem="jPk-kr-2ii" secondAttribute="leading" constant="20" id="vE7-pH-Yqh"/>
                                 </constraints>
                             </view>
@@ -281,7 +289,6 @@
                     <constraint firstAttribute="trailing" secondItem="ObG-74-INQ" secondAttribute="trailing" id="DSL-kY-XWW"/>
                     <constraint firstAttribute="trailing" secondItem="bNM-fB-NAZ" secondAttribute="trailing" id="JND-uk-T25"/>
                     <constraint firstItem="ObG-74-INQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="NVA-lD-5jU"/>
-                    <constraint firstAttribute="bottom" secondItem="YpY-O6-9DN" secondAttribute="bottom" constant="20" id="T5A-rZ-uDN"/>
                     <constraint firstItem="bNM-fB-NAZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="aQK-ja-eBK"/>
                     <constraint firstItem="bNM-fB-NAZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="cCN-Uf-GMu"/>
                     <constraint firstItem="ObG-74-INQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="idG-mU-NvL"/>
@@ -300,6 +307,7 @@
                 <outlet property="didSendGoodsImageView" destination="I2E-pk-kx2" id="6Wn-ZX-4dv"/>
                 <outlet property="logisticsNumBtn" destination="3NG-XE-G3m" id="fxJ-ZN-Jlt"/>
                 <outlet property="nameLab" destination="GdG-4Q-2mz" id="Q6g-87-ry8"/>
+                <outlet property="orderNoLab" destination="YjX-4d-jVH" id="yD0-Nl-mGT"/>
                 <outlet property="orderRemakeLab" destination="JW6-uW-PJU" id="Tj5-48-El3"/>
                 <outlet property="payBtn" destination="Kue-wQ-9cZ" id="y7m-Cn-0xT"/>
                 <outlet property="phoneNumLab" destination="0fq-7I-VpV" id="SdV-oq-gOq"/>

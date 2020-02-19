@@ -38,6 +38,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomViewH;
 @property(nonatomic,strong)JMGoodsListView *goodsView;
 @property (weak, nonatomic) IBOutlet UIButton *detailBtn;
+@property (weak, nonatomic) IBOutlet UILabel *orderNoLab;
 
 @property (weak, nonatomic) IBOutlet UIImageView *storeImage;
 @property (nonatomic, strong)JMOrderCellData *myData;
@@ -74,6 +75,9 @@
     _myData = orderCellData;
     self.goodsView.goods = orderCellData.goods;
     [self.contentView addSubview:self.goodsView];
+    [self.goodsView.tableView reloadData];
+    self.goodsView.tableView.frame = CGRectMake(0, 0, SCREEN_WIDTH, orderCellData.goods.count*80);
+    self.goodsView.frame = CGRectMake(0, 44, SCREEN_WIDTH, orderCellData.goods.count*80);
     if (orderCellData.isSpread == YES) {
         [self.remakeDetailBGView setHidden:NO];
     }else{
@@ -99,10 +103,12 @@
         }
    
     if ([userModel.type isEqualToString:B_Type_UESR]) {
+        self.orderNoLab.text =[ NSString stringWithFormat:@"订单编号：%@",_myData.order_no];
         [self setB_StatusBtn];
         [self.storeImage setHidden:YES];
         [self.titleBtn setHidden:YES];
     }else{
+        [self.orderNoLab setHidden:YES];
         [self setC_StatusBtn];
     }
 
@@ -117,6 +123,7 @@
     [self.iconImageView sd_setImageWithURL:[NSURL URLWithString:imgModel.file_path] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
 //    self.infoLab2.text = [NSString stringWithFormat:@"¥ %@",_myData.order_amount];
 //    self.infoLab3.text = [NSString stringWithFormat:@"X %@",@"1"];
+
     self.orderRemakeLab.text = _myData.remark;//---备注
     self.nameLab.text = _myData.contact_name;//---联系人
     self.phoneNumLab.text = _myData.contact_phone;//---联系电话
@@ -138,7 +145,7 @@
 
 -(void)initLayout{
     [self.detailBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.goodsView.mas_bottom);
+        make.top.mas_equalTo(self.goodsView.mas_bottom).mas_offset(10);
         make.right.mas_equalTo(self).offset(-20);
         make.height.mas_equalTo(40);
     }];
@@ -151,12 +158,14 @@
 //        make.top.mas_equalTo(self.remakeDetailBGView.mas_bottom);
         make.height.mas_equalTo(51);
         make.left.right.mas_equalTo(self);
-        make.bottom.mas_equalTo(self.contentView).offset(-self.bottomViewH.constant);
+        make.bottom.mas_equalTo(self.contentView).offset(-self.bottomViewH.constant-20);
     }];
     [self.bottomView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.contactBGView.mas_bottom);
+        make.top.mas_equalTo(self.contactBGView.mas_bottom).offset(10);
         make.right.mas_equalTo(self).offset(-20);
-        make.bottom.mas_equalTo(self).offset(-5);
+        make.bottom.mas_equalTo(self).offset(-10);
+//        make.height.mas_equalTo(self).offset(30);
+
     }];
     
 }
@@ -171,6 +180,7 @@
     [self.bottomView setHidden:YES];
      self.bottomViewH.constant = 0;
      [self.statusRightTopLab setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    [self.didSendGoodsImageView setHidden:YES];
 
     if ([_myData.status isEqualToString:@"7"]) {
         [self.statusRightTopLab setTitle:@"对方发起退款" forState:UIControlStateNormal];
@@ -198,6 +208,10 @@
         [self.statusRightTopLab setEnabled:NO];
         [self.statusRightTopLab setHidden:NO];
         
+    }else if ([_myData.status isEqualToString:@"6"]) {
+        [self.statusRightTopLab setHidden:YES];
+        [self.didSendGoodsImageView setHidden:NO];
+        
     }
     
 }
@@ -214,11 +228,14 @@
             [self.payBtn setHidden:NO];
         }else if ([_myData.status isEqualToString:@"2"] || [_myData.status isEqualToString:@"6"]) {
             if ([_myData.status isEqualToString:@"2"]) {
+                [self.statusRightTopLab setTitle:@"已付款" forState:UIControlStateNormal];
+                [self.statusRightTopLab setHidden:NO];
                 [self.cancelOrderBtn setHidden:NO];
                 [self.comfirmBtn setHidden:YES];
                 [self.didSendGoodsImageView setHidden:YES];
 
             }else{
+                [self.statusRightTopLab setHidden:YES];
                 [self.comfirmBtn setHidden:NO];
                 [self.cancelOrderBtn setHidden:YES];
                 [self.didSendGoodsImageView setHidden:NO];
@@ -226,8 +243,6 @@
             [self.contactBtn setHidden:NO];
             [self.payBtn setHidden:YES];
 
-            [self.statusRightTopLab setTitle:@"" forState:UIControlStateNormal];
-            [self.statusRightTopLab setHidden:NO];
             
         }else if ([_myData.status isEqualToString:@"12"]) {
             [self.didSendGoodsImageView setHidden:YES];
@@ -246,7 +261,7 @@
             [self.contactBtn setHidden:NO];
             [self.comfirmBtn setHidden:YES];
             [self.payBtn setHidden:YES];
-            [self.statusRightTopLab setTitle:@"订单已取消" forState:UIControlStateNormal];
+            [self.statusRightTopLab setTitle:@"已取消" forState:UIControlStateNormal];
             [self.statusRightTopLab setEnabled:NO];
             [self.statusRightTopLab setHidden:NO];
             [self.didSendGoodsImageView setHidden:YES];
@@ -257,7 +272,7 @@
             [self.contactBtn setHidden:NO];
             [self.comfirmBtn setHidden:YES];
             [self.payBtn setHidden:YES];
-            [self.statusRightTopLab setTitle:@"订单已退款" forState:UIControlStateNormal];
+            [self.statusRightTopLab setTitle:@"已退款" forState:UIControlStateNormal];
             [self.statusRightTopLab setEnabled:NO];
             [self.statusRightTopLab setHidden:NO];
             [self.didSendGoodsImageView setHidden:YES];

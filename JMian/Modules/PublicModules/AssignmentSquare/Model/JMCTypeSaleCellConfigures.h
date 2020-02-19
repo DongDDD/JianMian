@@ -34,7 +34,7 @@ typedef NS_ENUM(NSInteger, JMCTypeSaleCellType){
 @property (assign, nonatomic) NSInteger rowsNum;
 @property (assign, nonatomic) NSInteger section;
 @property (copy, nonatomic) NSString *cellId;
-
+@property  (nonatomic, assign)BOOL isSnapshoot;
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 
 - (CGFloat)heightForFooterInSection:(NSInteger)section;

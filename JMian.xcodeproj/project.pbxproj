@@ -204,6 +204,20 @@
 		040FB7F423A8CB2F008CE33B /* JMAddFriendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 040FB7F323A8CB2F008CE33B /* JMAddFriendModel.m */; };
 		040FB7F823A8FC59008CE33B /* JMFriendInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 040FB7F623A8FC59008CE33B /* JMFriendInfoViewController.m */; };
 		040FB7F923A8FC59008CE33B /* JMFriendInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040FB7F723A8FC59008CE33B /* JMFriendInfoViewController.xib */; };
+		0411C17C23FBCBF600178BE5 /* JMDiscussHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411C17A23FBCBF600178BE5 /* JMDiscussHistoryViewController.m */; };
+		0411C17D23FBCBF600178BE5 /* JMDiscussHistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0411C17B23FBCBF600178BE5 /* JMDiscussHistoryViewController.xib */; };
+		0411C18123FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411C17F23FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.m */; };
+		0411C18223FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0411C18023FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.xib */; };
+		0411C18623FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411C18423FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.m */; };
+		0411C18723FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0411C18523FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.xib */; };
+		0411C18A23FBD2C500178BE5 /* JMHTTPManager+FectchDiscussHistoryList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411C18923FBD2C500178BE5 /* JMHTTPManager+FectchDiscussHistoryList.m */; };
+		0411C18E23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411C18C23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.m */; };
+		0411C18F23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0411C18D23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.xib */; };
+		0411C19223FBDB4500178BE5 /* JMDiscussHistoryCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411C19123FBDB4500178BE5 /* JMDiscussHistoryCellData.m */; };
+		0411C19623FD1D8200178BE5 /* icon-chare@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0411C19323FD1D8100178BE5 /* icon-chare@2x.png */; };
+		0411C19723FD1D8200178BE5 /* icon-chare@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0411C19423FD1D8200178BE5 /* icon-chare@3x.png */; };
+		0411C19823FD1D8200178BE5 /* icon-chare.png in Resources */ = {isa = PBXBuildFile; fileRef = 0411C19523FD1D8200178BE5 /* icon-chare.png */; };
+		0411C19B23FD37E700178BE5 /* JMWXShareAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411C19A23FD37E700178BE5 /* JMWXShareAction.m */; };
 		04196DA5227FE1190000A6AA /* JMAllMessageTableViewCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */; };
 		04196DAF22805C450000A6AA /* JMMySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04196DAD22805C450000A6AA /* JMMySettingViewController.m */; };
 		04196DB022805C450000A6AA /* JMMySettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04196DAE22805C450000A6AA /* JMMySettingViewController.xib */; };
@@ -1199,8 +1213,6 @@
 		04EE3C6D23F7995A00C88105 /* JMOrderInfoTimeMsgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EE3C6B23F7995A00C88105 /* JMOrderInfoTimeMsgTableViewCell.xib */; };
 		04EE3C7123F79EA900C88105 /* JMOderInfoBtnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE3C6F23F79EA900C88105 /* JMOderInfoBtnTableViewCell.m */; };
 		04EE3C7223F79EA900C88105 /* JMOderInfoBtnTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EE3C7023F79EA900C88105 /* JMOderInfoBtnTableViewCell.xib */; };
-		04EE3C7623F7B73400C88105 /* JMDiscussHistoryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE3C7423F7B73400C88105 /* JMDiscussHistoryTableViewCell.m */; };
-		04EE3C7723F7B73400C88105 /* JMDiscussHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EE3C7523F7B73400C88105 /* JMDiscussHistoryTableViewCell.xib */; };
 		04EE3C8023F809A300C88105 /* JMOrderInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE3C7E23F809A300C88105 /* JMOrderInfoViewController.m */; };
 		04EE3C8123F809A300C88105 /* JMOrderInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04EE3C7F23F809A300C88105 /* JMOrderInfoViewController.xib */; };
 		04EE3C8423F80A4000C88105 /* JMOrderInfoConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EE3C8323F80A4000C88105 /* JMOrderInfoConfigure.m */; };
@@ -1750,6 +1762,27 @@
 		040FB7F523A8FC59008CE33B /* JMFriendInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMFriendInfoViewController.h; sourceTree = "<group>"; };
 		040FB7F623A8FC59008CE33B /* JMFriendInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMFriendInfoViewController.m; sourceTree = "<group>"; };
 		040FB7F723A8FC59008CE33B /* JMFriendInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMFriendInfoViewController.xib; sourceTree = "<group>"; };
+		0411C17923FBCBF600178BE5 /* JMDiscussHistoryViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMDiscussHistoryViewController.h; sourceTree = "<group>"; };
+		0411C17A23FBCBF600178BE5 /* JMDiscussHistoryViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMDiscussHistoryViewController.m; sourceTree = "<group>"; };
+		0411C17B23FBCBF600178BE5 /* JMDiscussHistoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMDiscussHistoryViewController.xib; sourceTree = "<group>"; };
+		0411C17E23FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMDiscussHistoryTableViewCell.h; sourceTree = "<group>"; };
+		0411C17F23FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMDiscussHistoryTableViewCell.m; sourceTree = "<group>"; };
+		0411C18023FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMDiscussHistoryTableViewCell.xib; sourceTree = "<group>"; };
+		0411C18323FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMDiscussHistoryImageCollectionViewCell.h; sourceTree = "<group>"; };
+		0411C18423FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMDiscussHistoryImageCollectionViewCell.m; sourceTree = "<group>"; };
+		0411C18523FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMDiscussHistoryImageCollectionViewCell.xib; sourceTree = "<group>"; };
+		0411C18823FBD2C500178BE5 /* JMHTTPManager+FectchDiscussHistoryList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+FectchDiscussHistoryList.h"; sourceTree = "<group>"; };
+		0411C18923FBD2C500178BE5 /* JMHTTPManager+FectchDiscussHistoryList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+FectchDiscussHistoryList.m"; sourceTree = "<group>"; };
+		0411C18B23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAfterSalesDiscussTitleTableViewCell.h; sourceTree = "<group>"; };
+		0411C18C23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAfterSalesDiscussTitleTableViewCell.m; sourceTree = "<group>"; };
+		0411C18D23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMAfterSalesDiscussTitleTableViewCell.xib; sourceTree = "<group>"; };
+		0411C19023FBDB4500178BE5 /* JMDiscussHistoryCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMDiscussHistoryCellData.h; sourceTree = "<group>"; };
+		0411C19123FBDB4500178BE5 /* JMDiscussHistoryCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMDiscussHistoryCellData.m; sourceTree = "<group>"; };
+		0411C19323FD1D8100178BE5 /* icon-chare@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-chare@2x.png"; sourceTree = "<group>"; };
+		0411C19423FD1D8200178BE5 /* icon-chare@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-chare@3x.png"; sourceTree = "<group>"; };
+		0411C19523FD1D8200178BE5 /* icon-chare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-chare.png"; sourceTree = "<group>"; };
+		0411C19923FD37E700178BE5 /* JMWXShareAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMWXShareAction.h; sourceTree = "<group>"; };
+		0411C19A23FD37E700178BE5 /* JMWXShareAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMWXShareAction.m; sourceTree = "<group>"; };
 		04196DA3227FE1190000A6AA /* JMAllMessageTableViewCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAllMessageTableViewCellData.h; sourceTree = "<group>"; };
 		04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAllMessageTableViewCellData.m; sourceTree = "<group>"; };
 		04196DAC22805C450000A6AA /* JMMySettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMySettingViewController.h; sourceTree = "<group>"; };
@@ -3109,9 +3142,6 @@
 		04EE3C6E23F79EA900C88105 /* JMOderInfoBtnTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMOderInfoBtnTableViewCell.h; sourceTree = "<group>"; };
 		04EE3C6F23F79EA900C88105 /* JMOderInfoBtnTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMOderInfoBtnTableViewCell.m; sourceTree = "<group>"; };
 		04EE3C7023F79EA900C88105 /* JMOderInfoBtnTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMOderInfoBtnTableViewCell.xib; sourceTree = "<group>"; };
-		04EE3C7323F7B73400C88105 /* JMDiscussHistoryTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMDiscussHistoryTableViewCell.h; sourceTree = "<group>"; };
-		04EE3C7423F7B73400C88105 /* JMDiscussHistoryTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMDiscussHistoryTableViewCell.m; sourceTree = "<group>"; };
-		04EE3C7523F7B73400C88105 /* JMDiscussHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMDiscussHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		04EE3C7D23F809A300C88105 /* JMOrderInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMOrderInfoViewController.h; sourceTree = "<group>"; };
 		04EE3C7E23F809A300C88105 /* JMOrderInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMOrderInfoViewController.m; sourceTree = "<group>"; };
 		04EE3C7F23F809A300C88105 /* JMOrderInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMOrderInfoViewController.xib; sourceTree = "<group>"; };
@@ -3838,6 +3868,9 @@
 		040CA83A225F1EBF006D7A7F /* 04职位详情_slices */ = {
 			isa = PBXGroup;
 			children = (
+				0411C19523FD1D8200178BE5 /* icon-chare.png */,
+				0411C19323FD1D8100178BE5 /* icon-chare@2x.png */,
+				0411C19423FD1D8200178BE5 /* icon-chare@3x.png */,
 				040CA83B225F1EBF006D7A7F /* dingwei@3x.png */,
 				040CA841225F1EBF006D7A7F /* dingwei@2x.png */,
 				040CA847225F1EBF006D7A7F /* Location_of_detail_page.png */,
@@ -4213,6 +4246,8 @@
 				0480CDE323B1BA7200D64356 /* JMPostIMProfileAction.m */,
 				049E9C5F23CDA2D200D91D91 /* JMCreatChatAction.h */,
 				049E9C6023CDA2D200D91D91 /* JMCreatChatAction.m */,
+				0411C19923FD37E700178BE5 /* JMWXShareAction.h */,
+				0411C19A23FD37E700178BE5 /* JMWXShareAction.m */,
 			);
 			name = PublicAction;
 			path = JMian/Utilities/PublicAction;
@@ -5273,6 +5308,8 @@
 				045BC92423EC4A3700EFF70C /* JMHTTPManager+ChangeOrderStatus.m */,
 				04C98A8223F680610067A094 /* JMHTTPManager+FectchOrderInfo.h */,
 				04C98A8323F680610067A094 /* JMHTTPManager+FectchOrderInfo.m */,
+				0411C18823FBD2C500178BE5 /* JMHTTPManager+FectchDiscussHistoryList.h */,
+				0411C18923FBD2C500178BE5 /* JMHTTPManager+FectchDiscussHistoryList.m */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -5827,6 +5864,9 @@
 				044A34DD23FAD262001997A1 /* JMRefuseRefundViewController.h */,
 				044A34DE23FAD262001997A1 /* JMRefuseRefundViewController.m */,
 				044A34DF23FAD262001997A1 /* JMRefuseRefundViewController.xib */,
+				0411C17923FBCBF600178BE5 /* JMDiscussHistoryViewController.h */,
+				0411C17A23FBCBF600178BE5 /* JMDiscussHistoryViewController.m */,
+				0411C17B23FBCBF600178BE5 /* JMDiscussHistoryViewController.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -5844,6 +5884,8 @@
 				04EE3C8623F8161A00C88105 /* JMOrderInfoModel.m */,
 				0484B8C423FA52520061EBB0 /* JMAfterSalesInfoConfigure.h */,
 				0484B8C523FA52520061EBB0 /* JMAfterSalesInfoConfigure.m */,
+				0411C19023FBDB4500178BE5 /* JMDiscussHistoryCellData.h */,
+				0411C19123FBDB4500178BE5 /* JMDiscussHistoryCellData.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -5903,9 +5945,9 @@
 				04EE3C6E23F79EA900C88105 /* JMOderInfoBtnTableViewCell.h */,
 				04EE3C6F23F79EA900C88105 /* JMOderInfoBtnTableViewCell.m */,
 				04EE3C7023F79EA900C88105 /* JMOderInfoBtnTableViewCell.xib */,
-				04EE3C7323F7B73400C88105 /* JMDiscussHistoryTableViewCell.h */,
-				04EE3C7423F7B73400C88105 /* JMDiscussHistoryTableViewCell.m */,
-				04EE3C7523F7B73400C88105 /* JMDiscussHistoryTableViewCell.xib */,
+				0411C18B23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.h */,
+				0411C18C23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.m */,
+				0411C18D23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.xib */,
 				044A34C823FA6AE2001997A1 /* JMAfterSalesDetailTableViewCell.h */,
 				044A34C923FA6AE2001997A1 /* JMAfterSalesDetailTableViewCell.m */,
 				044A34CA23FA6AE2001997A1 /* JMAfterSalesDetailTableViewCell.xib */,
@@ -7022,6 +7064,12 @@
 				0484B8BA23FA29D20061EBB0 /* JMOrderGoodsListTableViewCell.h */,
 				0484B8BB23FA29D20061EBB0 /* JMOrderGoodsListTableViewCell.m */,
 				0484B8BC23FA29D20061EBB0 /* JMOrderGoodsListTableViewCell.xib */,
+				0411C17E23FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.h */,
+				0411C17F23FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.m */,
+				0411C18023FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.xib */,
+				0411C18323FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.h */,
+				0411C18423FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.m */,
+				0411C18523FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -7190,6 +7238,7 @@
 				04BE8B4422924262004EB7EC /* my_location.png in Resources */,
 				047F8EAF228AC11B005E81FA /* transmit.png in Resources */,
 				047F8EB0228AC11B005E81FA /* transmit@3x.png in Resources */,
+				0411C19623FD1D8200178BE5 /* icon-chare@2x.png in Resources */,
 				04BE8B5122925E3A004EB7EC /* Unselected_Vertices@3x.png in Resources */,
 				04950FF322AEA1AF00C3D3FB /* jianbian@3x.png in Resources */,
 				049420B223C6C33E005357B3 /* JMMyStroreViewController.xib in Resources */,
@@ -7202,6 +7251,7 @@
 				04E129C622F27D330003D58F /* JMOrderStatusTableViewCell.xib in Resources */,
 				040B83902265EF6A00F1A37A /* JMIDCardIdentifyViewController.xib in Resources */,
 				0485ACF722A0C94200B31506 /* my_task@3x.png in Resources */,
+				0411C19723FD1D8200178BE5 /* icon-chare@3x.png in Resources */,
 				04E02E77228BF4BF00924130 /* minloading.png in Resources */,
 				04C37F1322C72D6500E2A107 /* JMAddVitaJobViewController.xib in Resources */,
 				04BD32592373F6B5005C096E /* JMPersonIntensionTableViewCell.xib in Resources */,
@@ -7365,9 +7415,11 @@
 				040701AA22753755002BF58D /* autonym@3x.png in Resources */,
 				04D816A4231678F20071C857 /* JMMapTableViewCell.xib in Resources */,
 				04DD1D6D224B6E95007CB11C /* 圆角矩形 5.png in Resources */,
+				0411C18723FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.xib in Resources */,
 				0452679E23A9C2F500631CFD /* friend_top@3x.png in Resources */,
 				04B0D91323A792F000950C6A /* addFriend.png in Resources */,
 				04DD1D55224B6E95007CB11C /* WeChat_login.png in Resources */,
+				0411C17D23FBCBF600178BE5 /* JMDiscussHistoryViewController.xib in Resources */,
 				040CA838225F1EB2006D7A7F /* Share_WeChat_friends@3x.png in Resources */,
 				04F355DA23C8548900857F67 /* icon-indes@3x.png in Resources */,
 				04DD1D61224B6E95007CB11C /* camera@2x.png in Resources */,
@@ -7462,6 +7514,7 @@
 				0488E44B22A023990071DEE7 /* di_icon_return@2x.png in Resources */,
 				04B8C7AB236C112900FE82B7 /* down@3x.png in Resources */,
 				048348BB22696DC800DE4630 /* JMJobDescriptionViewController.xib in Resources */,
+				0411C18223FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.xib in Resources */,
 				04072F462282BA650067A05D /* redlining_2@3x.png in Resources */,
 				042CA64E22D60B3A00ABB7AF /* JMMyCustumWindowView.xib in Resources */,
 				04C120DF22882E97001BDEBC /* my_videos_2.png in Resources */,
@@ -7638,6 +7691,7 @@
 				0495EDE423F3B65100E3B081 /* JMSnapshootView.xib in Resources */,
 				048348AB22695EC000DE4630 /* NO_Data.png in Resources */,
 				04EA7E3B230115DE005B7CE5 /* JMSquareTaskManageViewController.xib in Resources */,
+				0411C18F23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.xib in Resources */,
 				041E885D23BB2E2C00D78540 /* IM-turn-right.png in Resources */,
 				040B838B2265EC0600F1A37A /* JMCompanyHomeViewController.xib in Resources */,
 				0488E3CE229F9C120071DEE7 /* discovery.png in Resources */,
@@ -7699,6 +7753,7 @@
 				6D72CE4223093B2D000BA072 /* photography@2x.png in Resources */,
 				041CCF0222A52403002DFED3 /* order_annotion.png in Resources */,
 				04E0722E232749B90004B5F8 /* Full-time@3x.png in Resources */,
+				0411C19823FD1D8200178BE5 /* icon-chare.png in Resources */,
 				040E366122681C9A00A7D789 /* girl@2x.png in Resources */,
 				0474C92B239DFE0F00EEF110 /* hx_alert_failed@2x.png in Resources */,
 				04908AD722A7A361000B5AB4 /* vvip@2x.png in Resources */,
@@ -7995,7 +8050,6 @@
 				0425655B229C2CCD000614E7 /* talent@3x.png in Resources */,
 				040BF06922719B920088697D /* JMUserChangeWindowView.xib in Resources */,
 				0492401422F17C940007C8A1 /* JMProtocalWebViewController.xib in Resources */,
-				04EE3C7723F7B73400C88105 /* JMDiscussHistoryTableViewCell.xib in Resources */,
 				0474C927239DFE0F00EEF110 /* hx_compose_photo_photograph@2x.png in Resources */,
 				040701A422753755002BF58D /* share2@3x.png in Resources */,
 				042CA65422D626AD00ABB7AF /* juyingcai.png in Resources */,
@@ -8226,6 +8280,7 @@
 				041B418223409ABF00B6FE88 /* JMBDetailVideoView.m in Sources */,
 				048A0DF422B91A6B006530EC /* JMCDetailModel.m in Sources */,
 				6D5DD88B2308439D0064612A /* TContactListPickerCell.m in Sources */,
+				0411C18A23FBD2C500178BE5 /* JMHTTPManager+FectchDiscussHistoryList.m in Sources */,
 				6D5DD8A92308439E0064612A /* TUIFileMessageCell.m in Sources */,
 				04C4A18922CCF5040049DA29 /* JMGreetModel.m in Sources */,
 				04AF887F23CAFC3100ACE66C /* JMSelectProductConfigures.m in Sources */,
@@ -8346,6 +8401,7 @@
 				04BE8B5E2292A5C2004EB7EC /* JMHTTPManager+CompanyFileDelete.m in Sources */,
 				6D55862F224B4D080037C14E /* UIView+addGradualLayer.m in Sources */,
 				04A92180230A4A1B00AABD0C /* JMTaskSeachViewController.m in Sources */,
+				0411C17C23FBCBF600178BE5 /* JMDiscussHistoryViewController.m in Sources */,
 				040807B622A3BF1100C0744F /* JMIndustryWebViewController.m in Sources */,
 				04E072392327C2510004B5F8 /* JMNoResumeDataView.m in Sources */,
 				045BC93223EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.m in Sources */,
@@ -8354,6 +8410,7 @@
 				047AE39123AB249400940496 /* JMCreateGroupViewController.m in Sources */,
 				049D506623D42DA7009FAB9D /* JMGoodsData.m in Sources */,
 				04DEB41C2296D96B0089BD87 /* JMFeedBackChooseViewController.m in Sources */,
+				0411C19B23FD37E700178BE5 /* JMWXShareAction.m in Sources */,
 				049C655122AD864500A93DFE /* JMPartTimeJobLabsCollectionViewCell.m in Sources */,
 				04950FCF22AE585600C3D3FB /* JMGoodsDescriptionViewController.m in Sources */,
 				040701BF2275DB7A002BF58D /* JMCompanyLikeTableViewCell.m in Sources */,
@@ -8453,7 +8510,6 @@
 				6D5DD8C42308439E0064612A /* TUIKit.m in Sources */,
 				0492AE7922F0463400AB21B3 /* JMDeleteBankCardViewController.m in Sources */,
 				0433968D2383D7E60010F650 /* JMPushMessageCellData.m in Sources */,
-				04EE3C7623F7B73400C88105 /* JMDiscussHistoryTableViewCell.m in Sources */,
 				048A0DF122B8E6C3006530EC /* JMHTTPManager+MoneyWithDraw.m in Sources */,
 				040B7DE5230BFC9400766DC3 /* JMCDetailTaskDecri2TableViewCell.m in Sources */,
 				04908AD322A7A06E000B5AB4 /* JMBUserCenterHeaderSubView.m in Sources */,
@@ -8590,6 +8646,7 @@
 				6D5DD8962308439E0064612A /* TUIImageMessageCellData.m in Sources */,
 				0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */,
 				045BC90223E5C0A600EFF70C /* JMGoodsDescTableViewCell.m in Sources */,
+				0411C18123FBCCE300178BE5 /* JMDiscussHistoryTableViewCell.m in Sources */,
 				045BC92923ED762600EFF70C /* JMHTTPManager+UpdateShopInfo.m in Sources */,
 				0454642E23CEEF500008513D /* JMGoodsDetailMicrotitleTableViewCell.m in Sources */,
 				0446E48A22E04BBD00B3A26C /* JMInvoiceHeaderView.m in Sources */,
@@ -8605,6 +8662,7 @@
 				04908B5322A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.m in Sources */,
 				049FDBA72289A3C000E9BC25 /* JMPlayerViewController.m in Sources */,
 				0484B8C223FA4E290061EBB0 /* JMAfterSalesInfoViewController.m in Sources */,
+				0411C18E23FBD54F00178BE5 /* JMAfterSalesDiscussTitleTableViewCell.m in Sources */,
 				6D5DD8C72308439E0064612A /* TIMUserProfile+DataProvider.m in Sources */,
 				04ABFA9923B5EFB2008F3A60 /* JMCUserProfileConfigure.m in Sources */,
 				049FDBA42289556600E9BC25 /* JMDidUploadVideoView.m in Sources */,
@@ -8649,6 +8707,7 @@
 				0406768A2315167500562CDB /* JMCDetailCommentTableViewCell.m in Sources */,
 				04796AE922D324260082BD59 /* JMBMineMoreFunctionView.m in Sources */,
 				045BC91723E9C42F00EFF70C /* JMRefundGoodsStatusTableViewCell.m in Sources */,
+				0411C18623FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.m in Sources */,
 				6D5DD8942308439D0064612A /* TUISystemMessageCellData.m in Sources */,
 				04B1169D23B34C700000D01A /* JMBUserProfileViewController.m in Sources */,
 				6D5DD86C2308439D0064612A /* NSString+Common.m in Sources */,
@@ -8671,6 +8730,7 @@
 				041997F2226717D700C6C134 /* JMContactOfPersonDetailViewController.m in Sources */,
 				04BD32532373F5F1005C096E /* JMPersonVideoTableViewCell.m in Sources */,
 				040E54E022772A99004AB0F9 /* JMMessageListModel.m in Sources */,
+				0411C19223FBDB4500178BE5 /* JMDiscussHistoryCellData.m in Sources */,
 				6D5DD8922308439D0064612A /* TUIJoinGroupMessageCellData.m in Sources */,
 				04908B3122A8B22D000B5AB4 /* JMSquareHomeCellData.m in Sources */,
 				04B959E623AC654F00EB80A3 /* JMGroupInfoViewController.m in Sources */,
@@ -8917,7 +8977,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.84;
+				MARKETING_VERSION = 1.4.87;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -8951,7 +9011,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.84;
+				MARKETING_VERSION = 1.4.87;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

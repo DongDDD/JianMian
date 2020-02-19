@@ -23,7 +23,7 @@
             self.height = 64;
             break;
         case JMOrderInfoTypeGoodsList:
-            self.rowsNum = 1;
+            self.rowsNum = self.model.goods.count;
             self.footerheight = 10;
             self.height = 110;
             break;
@@ -35,7 +35,7 @@
         case JMOrderInfoTypeTimeMsg:
             self.rowsNum = 1;
             self.footerheight = 0;
-            self.height = 121;
+            self.height = 100;
             break;
             case JMOrderInfoTypeBtn:
                 self.rowsNum = 1;

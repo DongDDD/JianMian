@@ -21,9 +21,9 @@
 #import "JMSendCustumMsg.h"
 #import "WXApi.h"
 #import "JMPublicShareView.h"
+#import "JMWXShareAction.h"
 
-
-@interface JMGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMGoodsDescTableViewCellDelegate,WKNavigationDelegate,JMCDetailVideoTableViewCellDelegate,JMPublicShareViewDelegate>
+@interface JMGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMGoodsDescTableViewCellDelegate,WKNavigationDelegate,JMCDetailVideoTableViewCellDelegate,JMPublicShareViewDelegate,JMCSaleTypeDetailGoodsTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)JMGoodsDetailConfigures *configures;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -240,15 +240,52 @@
 }
 
 -(void)didClickShareActoinWithTag:(NSInteger)tag{
+    NSString *title;
+    NSString *desc;
+    NSString *imageUrl;
+    NSString *shareUrl;
+    int shareTypeInt;
+    title = self.configures.model.title;
+    NSRange startRange = [self.configures.model.goods_description rangeOfString:@"<p>"];
+    NSRange endRange = [self.configures.model.goods_description rangeOfString:@"</p>"];
+    NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
+    NSString *result = [self.configures.model.goods_description substringWithRange:range];
+    desc = result;
+    NSString *url;
+      if (self.configures.model.images.count > 0) {
+          for (int i = 0; i < self.configures.model.images.count; i++) {
+              JMGoodsInfoImageModel *imgModel = self.configures.model.images[0];
+              url = imgModel.file_path;
+          }
+      }
+    imageUrl =  [NSString stringWithFormat:@"http://app.jmzhipin.com%@",url];
+    shareUrl  = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=%@&task_order_id=%@",self.configures.model.goods_id,self.task_order_id];
+    
+    [self.shareView hide];
     if (tag == 1000) {
-         [self wxShare:0];
-        [self.shareView hide];
+        shareTypeInt = 0;
 
-    }else if (tag == 1001) {
-        [self.shareView hide];
-        [self wxShare:1];
+    }else{
+        shareTypeInt = 1;
     }
+    [JMWXShareAction wxShare:shareTypeInt title:title desc:desc imageUrl:imageUrl shareUrl:shareUrl];
 
+}
+
+-(void)didSelectedGoodsItemsWithModel:(JMGoodsData *)model{
+    JMGoodsDetailViewController *vc = [[JMGoodsDetailViewController alloc]init];
+    vc.title = @"产品详情";
+    vc.goods_id = model.goods_id;
+    vc.task_id = self.task_id;
+    vc.effective_count = self.effective_count;
+    vc.task_order_id = self.task_order_id;
+    if (_viewType == JMGoodsDetailSnapshootType) {
+        vc.viewType = JMGoodsDetailSnapshootType;
+    }else{
+        vc.viewType = JMGoodsDetailDefaultType;
+    }
+    
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark -- 微信分享的是链接
@@ -261,12 +298,24 @@
     
     WXMediaMessage *urlMessage = [WXMediaMessage message];
     urlMessage.title = self.configures.model.title;
-    urlMessage.description = self.configures.model.goods_description;
-    
+//    NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc]
+//                                          initWithData:[self.configures.model.goods_description dataUsingEncoding:
+//                                          NSUnicodeStringEncoding]
+//                                          options:@{
+//                                            NSDocumentTypeDocumentAttribute:
+//                                            NSHTMLTextDocumentType
+//                                          }
+//                                          documentAttributes:nil error:nil];
+//    urlMessage.description = [attrStr string];
+    NSRange startRange = [self.configures.model.goods_description rangeOfString:@"<p>"];
+    NSRange endRange = [self.configures.model.goods_description rangeOfString:@"</p>"];
+    NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
+    NSString *result = [self.configures.model.goods_description substringWithRange:range];
+     urlMessage.description = result;
     //    UIImageView *imgView = [[UIImageView alloc]init];
     //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
     //
-    
+
     NSString *url;
     if (self.configures.model.images.count > 0) {
         for (int i = 0; i < self.configures.model.images.count; i++) {
@@ -280,8 +329,9 @@
     //    UIImage *image = [UIImage imageNamed:@"demi_home"];
     //NSData *thumbData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
     //缩略图,压缩图片,不超过 32 KB
-    UIImage *image = [self handleImageWithURLStr:url];
-    NSData *thumbData = UIImageJPEGRepresentation(image, 0.1);
+    NSString *url2 =  [NSString stringWithFormat:@"http://app.jmzhipin.com%@",url];
+    UIImage *image = [self handleImageWithURLStr:url2];
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
     [urlMessage setThumbData:thumbData];
     //分享实例
     WXWebpageObject *webObj = [WXWebpageObject object];
@@ -293,6 +343,18 @@
     sendReq.message = urlMessage;
     //发送分享
     [WXApi sendReq:sendReq];
+    
+}
+
+
+
+- (NSString *)filterHTML:(NSString *)html{
+    NSDictionary *dic = @{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType};
+    NSData *data = [html dataUsingEncoding:NSUnicodeStringEncoding];
+    NSAttributedString *attriStr = [[NSAttributedString alloc] initWithData:data options:dic documentAttributes:nil error:nil];
+    NSString *str = attriStr.string;
+    //str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+    return str;
     
 }
 
@@ -418,6 +480,12 @@
         JMCSaleTypeDetailGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCSaleTypeDetailGoodsTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell setGoodsArray:self.configures.goodsListArray];
+        cell.delegate = self;
+        if (_viewType == JMGoodsDetailDefaultType) {
+            cell.viewType = JMCSaleTypeDetailGoodsDefaultType;
+        }else if (_viewType == JMGoodsDetailSnapshootType) {
+            cell.viewType = JMCSaleTypeDetailGoodsSnapshootType;
+        }
         return cell;
     }
     

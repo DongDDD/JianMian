@@ -12,7 +12,6 @@
 #import "JMOrderCellData.h"
 
 @interface JMGoodsListView ()<UITableViewDelegate,UITableViewDataSource>
-@property(nonatomic,strong)UITableView *tableView;
 @end
 
 @implementation JMGoodsListView

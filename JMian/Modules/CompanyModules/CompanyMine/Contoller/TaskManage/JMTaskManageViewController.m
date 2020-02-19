@@ -1063,6 +1063,9 @@
         [self getTaskAbilityIDInfoWithUser_id:data.user_user_id type_label_id:data.snapshot_type_label_id];
     }else{
         //去快照
+        if ([data.status isEqualToString:@"0"] || [data.status isEqualToString:@"2"]) {
+            return;
+        }
         [self getTaskInfoDataWithTask_order_id:data.task_order_id];
     }
 //    JMBDetailWebViewController *vc = [[JMBDetailWebViewController alloc]init];

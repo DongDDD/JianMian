@@ -23,6 +23,41 @@
     
 }
 
+- (void)deleteOrderWithOrder_id:(NSString *)order_id
+                           status:(NSString *)status
+                              msg:(NSString *)msg
+
+                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSString *urlStr = [Change_OrderStatus_URL stringByAppendingFormat:@"/%@",order_id];
+    
+    NSDictionary *dic =  @{
+        @"status":status,
+        @"msg":msg
+    };
+    
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
+
+- (void)refundRequestWithOrder_id:(NSString *)order_id
+                           status:(NSString *)status
+                              msg:(NSString *)msg
+                              files:(NSArray *)files
+                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+    NSString *urlStr = [Change_OrderStatus_URL stringByAppendingFormat:@"/%@",order_id];
+    
+    NSDictionary *dic =  @{
+        @"status":status,
+        @"files":files,
+        @"msg":msg
+    };
+    
+    
+    [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodPOST path:urlStr parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];
+    
+}
+
 - (void)deliverGoodsWithOrder_id:(NSString *)order_id
                           status:(NSString *)status
                     logistics_no:(NSString *)logistics_no

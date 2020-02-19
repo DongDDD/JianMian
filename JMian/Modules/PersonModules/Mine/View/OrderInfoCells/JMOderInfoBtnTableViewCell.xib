@@ -385,6 +385,32 @@
                                     <action selector="btnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="gwf-hd-DqT"/>
                                 </connections>
                             </button>
+                            <button hidden="YES" opaque="NO" tag="111" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cE3-5h-fMa">
+                                <rect key="frame" x="0.0" y="0.0" width="69" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="83m-Zk-vnD"/>
+                                    <constraint firstAttribute="width" constant="69" id="j2o-Wt-AA0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <state key="normal" title="取消订单">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                        <real key="value" value="0.5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColorFromUIColor">
+                                        <color key="value" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.maskstoBorder" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="btnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="m2l-qN-zFM"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -402,6 +428,7 @@
                 <outlet property="btn10" destination="O7h-e2-kjM" id="7eC-fv-w8N"/>
                 <outlet property="btn11" destination="aqO-bu-pdq" id="9QD-S8-hLI"/>
                 <outlet property="btn12" destination="2zs-bp-CQj" id="Blx-DO-o0F"/>
+                <outlet property="btn13" destination="cE3-5h-fMa" id="XRq-Zi-w5c"/>
                 <outlet property="btn2" destination="jjs-RF-Va4" id="s3T-qJ-6ch"/>
                 <outlet property="btn3" destination="emR-rI-Qwt" id="sZU-gF-Ix9"/>
                 <outlet property="btn4" destination="Y6N-57-q6F" id="wdl-8u-BGU"/>

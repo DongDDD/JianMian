@@ -22,7 +22,6 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) JMOrderInfoModel *model;
 
 //@property(nonatomic,strong)NSArray *goods;
-@property(nonatomic,copy)NSString *order_id;
 
 @end
 

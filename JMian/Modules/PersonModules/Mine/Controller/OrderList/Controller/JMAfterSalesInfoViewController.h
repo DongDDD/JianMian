@@ -14,6 +14,8 @@ typedef enum : NSUInteger {
     JMAfterSalesInfoViewTypeBeingAfterSales,
     JMAfterSalesInfoViewTypeSetRefund,
     JMAfterSalesInfoViewTypeRefuseRefund,
+    JMAfterSalesInfoViewTypeWaitGoodsReturn,
+
 
 } JMAfterSalesInfolViewType;
 
