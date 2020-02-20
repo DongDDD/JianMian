@@ -714,6 +714,9 @@
 		0496A28C236699110075FA29 /* JMSearchOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0496A28A236699110075FA29 /* JMSearchOrderViewController.m */; };
 		0496A28D236699110075FA29 /* JMSearchOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0496A28B236699110075FA29 /* JMSearchOrderViewController.xib */; };
 		0498B79A2387C24800CC8F3E /* JMPushVCAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0498B7992387C24800CC8F3E /* JMPushVCAction.m */; };
+		0499E48323FE2FD60045CD13 /* JMShopInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0499E48223FE2FD60045CD13 /* JMShopInfoModel.m */; };
+		0499E48C23FE33E10045CD13 /* JMHTTPManager+GetMyShopInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0499E48B23FE33E10045CD13 /* JMHTTPManager+GetMyShopInfo.m */; };
+		0499E48F23FE3B140045CD13 /* JMHTTPManager+UpdateGoodsStatus.m in Sources */ = {isa = PBXBuildFile; fileRef = 0499E48E23FE3B140045CD13 /* JMHTTPManager+UpdateGoodsStatus.m */; };
 		049A515A2248972F007A8068 /* BasicInformationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049A51582248972F007A8068 /* BasicInformationViewController.xib */; };
 		049A515E2248B29C007A8068 /* JobIntensionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049A515C2248B29C007A8068 /* JobIntensionViewController.m */; };
 		049A515F2248B29C007A8068 /* JobIntensionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049A515D2248B29C007A8068 /* JobIntensionViewController.xib */; };
@@ -2453,6 +2456,12 @@
 		0496A28B236699110075FA29 /* JMSearchOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMSearchOrderViewController.xib; sourceTree = "<group>"; };
 		0498B7982387C24800CC8F3E /* JMPushVCAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPushVCAction.h; sourceTree = "<group>"; };
 		0498B7992387C24800CC8F3E /* JMPushVCAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPushVCAction.m; sourceTree = "<group>"; };
+		0499E48123FE2FD60045CD13 /* JMShopInfoModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMShopInfoModel.h; sourceTree = "<group>"; };
+		0499E48223FE2FD60045CD13 /* JMShopInfoModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMShopInfoModel.m; sourceTree = "<group>"; };
+		0499E48A23FE33E10045CD13 /* JMHTTPManager+GetMyShopInfo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+GetMyShopInfo.h"; sourceTree = "<group>"; };
+		0499E48B23FE33E10045CD13 /* JMHTTPManager+GetMyShopInfo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+GetMyShopInfo.m"; sourceTree = "<group>"; };
+		0499E48D23FE3B140045CD13 /* JMHTTPManager+UpdateGoodsStatus.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+UpdateGoodsStatus.h"; sourceTree = "<group>"; };
+		0499E48E23FE3B140045CD13 /* JMHTTPManager+UpdateGoodsStatus.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+UpdateGoodsStatus.m"; sourceTree = "<group>"; };
 		049A51562248972F007A8068 /* BasicInformationViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BasicInformationViewController.h; sourceTree = "<group>"; };
 		049A51582248972F007A8068 /* BasicInformationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicInformationViewController.xib; sourceTree = "<group>"; };
 		049A515B2248B29C007A8068 /* JobIntensionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JobIntensionViewController.h; sourceTree = "<group>"; };
@@ -4218,6 +4227,10 @@
 				045BC92823ED762600EFF70C /* JMHTTPManager+UpdateShopInfo.m */,
 				045BC93023EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.h */,
 				045BC93123EE940A00EFF70C /* JMHTTPManager+GetManageGoodsList.m */,
+				0499E48A23FE33E10045CD13 /* JMHTTPManager+GetMyShopInfo.h */,
+				0499E48B23FE33E10045CD13 /* JMHTTPManager+GetMyShopInfo.m */,
+				0499E48D23FE3B140045CD13 /* JMHTTPManager+UpdateGoodsStatus.h */,
+				0499E48E23FE3B140045CD13 /* JMHTTPManager+UpdateGoodsStatus.m */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -5723,6 +5736,8 @@
 				04BAFBC123CC1B3300041843 /* JMProductSpecicationConfigures.m */,
 				04BAFBC323CC61C400041843 /* JMProductColorData.h */,
 				04BAFBC423CC61C400041843 /* JMProductColorData.m */,
+				0499E48123FE2FD60045CD13 /* JMShopInfoModel.h */,
+				0499E48223FE2FD60045CD13 /* JMShopInfoModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -8558,6 +8573,7 @@
 				6D5DD8702308439D0064612A /* TUIButtonCell.m in Sources */,
 				040B838F2265EF6A00F1A37A /* JMIDCardIdentifyViewController.m in Sources */,
 				6D5DD8982308439E0064612A /* TUIVideoMessageCellData.m in Sources */,
+				0499E48C23FE33E10045CD13 /* JMHTTPManager+GetMyShopInfo.m in Sources */,
 				04731DED22A6A1C90013D7CE /* JMHTTPManager+UpdateAbility.m in Sources */,
 				041997F72267181A00C6C134 /* JMPictureOfPersonDetailViewController.m in Sources */,
 				04A9DFB8225B67D100CD7CC1 /* JMHTTPManager+UpdateInfo.m in Sources */,
@@ -8681,6 +8697,7 @@
 				04C98A8B23F69D3D0067A094 /* JMGoodsInfoTableViewCell.m in Sources */,
 				048A0DD622B8999C006530EC /* JMHTTPManager+FectchMoneyDetail.m in Sources */,
 				6D5DD8852308439D0064612A /* TUIContactActionCellData.m in Sources */,
+				0499E48323FE2FD60045CD13 /* JMShopInfoModel.m in Sources */,
 				04BD32582373F6B5005C096E /* JMPersonIntensionTableViewCell.m in Sources */,
 				045FB42C23D1C2CB009D55C4 /* JMHTTPManager+GetShopInfo.m in Sources */,
 				04C98A7A23F679620067A094 /* JMRefundDetailViewController.m in Sources */,
@@ -8738,6 +8755,7 @@
 				040E36642268205700A7D789 /* JMWorkExperienceView.m in Sources */,
 				0492AE7822F0463400AB21B3 /* JMBindBankCardViewController.m in Sources */,
 				6D020A4B22525C55009BCFE4 /* JMMyReSumeActionTableViewCell.m in Sources */,
+				0499E48F23FE3B140045CD13 /* JMHTTPManager+UpdateGoodsStatus.m in Sources */,
 				040FB7E923A8B97B008CE33B /* JMHTTPManager+AddFriend.m in Sources */,
 				040807B922A3C59E00C0744F /* JMHTTPManager+GetLabels.m in Sources */,
 				048348BF226979CA00DE4630 /* JMWorkLocationViewController.m in Sources */,
@@ -8977,7 +8995,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.87;
+				MARKETING_VERSION = 1.4.88;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9011,7 +9029,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.87;
+				MARKETING_VERSION = 1.4.88;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -7,14 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DimensMacros.h"
+#import "JMShopInfoModel.h"
 NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMMyStoreTitleHeaderTableViewCellIdentifier;
 
 @interface JMMyStoreTitleHeaderTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *iconImage;
 @property (weak, nonatomic) IBOutlet UILabel *storeNameLab;
-@property (nonatomic, strong)JMUserInfoModel *model;
+@property (nonatomic, strong)JMShopInfoModel *model;
 @end
 
 

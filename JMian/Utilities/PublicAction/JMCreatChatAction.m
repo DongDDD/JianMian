@@ -55,6 +55,31 @@
     }];
 }
 
++(void)createServiceChat{
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    NSString *service_id = kFetchMyDefault(@"service_id");
+    NSString *recipient_mark = [NSString stringWithFormat:@"%@b",service_id];
+    NSString *str_b = [NSString stringWithFormat:@"%@b",userModel.user_id];
+    NSString *str_a = [NSString stringWithFormat:@"%@a",userModel.user_id];
+    NSString *sender_mark = ([userModel.type isEqualToString:B_Type_UESR]) ? str_b : str_a;
+    
+    [[JMHTTPManager sharedInstance]createChat_type:@"3" recipient:service_id foreign_key:@"0" sender_mark:sender_mark recipient_mark:recipient_mark successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        JMMessageListModel *messageListModel = [JMMessageListModel mj_objectWithKeyValues:responsObject[@"data"]];
+        JMAllMessageTableViewCellData *data = [[JMAllMessageTableViewCellData alloc]init];
+        data.convType = TConv_Type_C2C;
+        messageListModel.data =data;
+        messageListModel.viewType = JMMessageList_Type_Service;
+        JMChatViewController *vc = [[JMChatViewController alloc]init];
+        vc.myConvModel = messageListModel;
+        vc.myConvModel.service_id = service_id;
+        [[self currentViewController].navigationController pushViewController:vc animated:YES];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+
 +(void)create4TypeChatRequstWithAccount:(NSString *)account{
     [[JMHTTPManager sharedInstance]createFriendChatWithType:@"4" account:account successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {

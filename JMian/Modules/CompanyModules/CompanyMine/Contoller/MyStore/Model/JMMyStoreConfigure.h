@@ -11,7 +11,7 @@
 #import "JMMyStoreOrderStatusTableViewCell.h"
 #import "JMMyStoreManager1TableViewCell.h"
 #import "JMMyStoreManager2TableViewCell.h"
-
+#import "JMShopInfoModel.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, JMMyStoreCellType){
     JMMyStoreTypeTitleHeader = 0 ,
@@ -27,8 +27,7 @@ typedef NS_ENUM(NSInteger, JMMyStoreCellType){
 @property (assign, nonatomic) NSInteger rowsNum;
 @property (assign, nonatomic) NSInteger section;
 @property (copy, nonatomic) NSString *cellId;
-//@property(nonatomic,strong)NSArray *jobListArr;
-@property(nonatomic,strong)NSArray *taskListArr;
+@property (strong, nonatomic) JMShopInfoModel *model;
 
 - (NSInteger)numberOfRowsInSection:(NSInteger)section;
 

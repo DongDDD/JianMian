@@ -20,6 +20,8 @@
     
     NSDictionary *dic = @{
         @"shop_id":shop_id,
+        @"status":status,
+
     };
     
     [[JMHTTPRequest urlParametersWithMethod:JMRequestMethodGET path:Get_GoodsList_URL parameters:dic] sendRequestWithCompletionBlockWithSuccess:successBlock failure:failureBlock];

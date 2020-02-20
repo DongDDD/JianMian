@@ -11,7 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface JMProductManagerViewController : BaseViewController
-
+@property(nonatomic,copy)NSString *shop_id;
 @end
 
 NS_ASSUME_NONNULL_END

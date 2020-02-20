@@ -9,7 +9,12 @@
 #import "JMProductManagerTableViewCell.h"
 #import "DimensMacros.h"
 NSString *const JMProductManagerTableViewCellIdentifier = @"JMProductManagerTableViewCellIdentifier";
+@interface JMProductManagerTableViewCell ()
 
+@property (nonatomic,strong) JMGoodsData *myData;
+
+
+@end
 @implementation JMProductManagerTableViewCell
 
 - (void)awakeFromNib {
@@ -18,6 +23,12 @@ NSString *const JMProductManagerTableViewCellIdentifier = @"JMProductManagerTabl
 }
 
 -(void)setData:(JMGoodsData *)data{
+    _myData = data;
+    if (data.images.count > 0) {
+        JMGoodsImageData *imageData = data.images[0];
+        NSString *url = [NSString stringWithFormat:@"http://app.jmzhipin.com%@",imageData.file_path];
+        [self.imageIcon sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
+    }
     self.titleLab.text = data.title;
     self.priceLab.text =  [NSString stringWithFormat:@"¥  %@", data.price];
     if ([data.status isEqualToString:@"1"]) {
@@ -31,9 +42,14 @@ NSString *const JMProductManagerTableViewCellIdentifier = @"JMProductManagerTabl
     }
     
     
+
+    
 }
 
 - (IBAction)btnAction:(UIButton *)sender {
+    if (_delegate && [_delegate respondsToSelector:@selector(didSelectedBtnWithTitle:data:)]) {
+        [_delegate didSelectedBtnWithTitle:sender.titleLabel.text data:_myData];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

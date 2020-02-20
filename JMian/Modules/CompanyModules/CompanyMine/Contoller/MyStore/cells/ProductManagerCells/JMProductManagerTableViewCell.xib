@@ -79,6 +79,9 @@
                                                 <real key="value" value="14.300000000000001"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DPK-7d-86d"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F9x-Ie-Rmp">
                                         <rect key="frame" x="152.5" y="0.0" width="56.5" height="28"/>
@@ -98,6 +101,9 @@
                                                 <real key="value" value="14.300000000000001"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="7Gb-KR-IvK"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

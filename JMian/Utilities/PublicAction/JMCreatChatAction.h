@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
                                         user_id:(NSString *)user_id
                                     sender_mark:(nullable NSString *)sender_mark
                                  recipient_mark:(nullable NSString *)recipient_mark;
+/// 客服聊天
++(void)createServiceChat;
 @end
 
 NS_ASSUME_NONNULL_END

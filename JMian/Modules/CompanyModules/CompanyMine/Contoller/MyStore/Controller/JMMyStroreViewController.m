@@ -10,6 +10,8 @@
 #import "JMMyStoreConfigure.h"
 #import "JMStroreNotificationViewController.h"
 #import "JMProductManagerViewController.h"
+#import "JMCreatChatAction.h"
+#import "JMHTTPManager+GetMyShopInfo.h"
 
 @interface JMMyStroreViewController ()<UITableViewDelegate,UITableViewDataSource,JMMyStoreManager1TableViewCellDelegate,JMMyStoreManager2TableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -24,13 +26,33 @@
      // Do any additional setup after loading the view from its nib.
     self.title = @"我的店铺";
     [self.view addSubview:self.tableView];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self upDateUserData];
+    [self getData];
 
 }
+
+#pragma mark - data
+-(void)getData{
+    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+
+    [[JMHTTPManager sharedInstance]getMyShopInfoWithShop_id:model.shop_shop_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject) {
+            self.cellConfigures.model = [JMShopInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
+            [self.tableView reloadData];
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
+}
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -65,8 +87,7 @@
             JMMyStoreTitleHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyStoreTitleHeaderTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //        self.userModel.company_real_company_name = self.cellConfigures.model.company_name;
-            JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
-            [cell setModel:model];
+             [cell setModel:self.cellConfigures.model];
             return cell;
         }
         case JMMyStoreTypeOrderStatus: {
@@ -79,6 +100,7 @@
             JMMyStoreManager1TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyStoreManager1TableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
+            [cell setModel:self.cellConfigures.model];
             return cell;
         }
         case JMMyStoreTypeOrderManager2: {
@@ -104,14 +126,13 @@
         vc.viewType = JMStroreNotificationViewPoster;
         vc.title = @"店铺简介";
         vc.content = model.shop_poster;
-            [self.navigationController pushViewController:vc animated:YES];
-            
+        [self.navigationController pushViewController:vc animated:YES];
+        
     }else if (row == 1) {
         JMStroreNotificationViewController *vc = [[JMStroreNotificationViewController alloc]init];
         vc.viewType = JMStroreNotificationViewDesc;
         vc.title = @"店铺公告";
         vc.content = model.shop_description;
-
         [self.navigationController pushViewController:vc animated:YES];
         
     }
@@ -119,12 +140,28 @@
 }
 
 -(void)didSelectStoreManager2ItemWithRow:(NSInteger)row{
+    if (row == 1) {
+        [JMCreatChatAction createServiceChat];
+    }
+    
     if (row == 2) {
         JMProductManagerViewController *vc = [[JMProductManagerViewController alloc]init];
+        vc.shop_id = self.cellConfigures.model.shop_id;
         [self.navigationController pushViewController:vc animated:YES];
 
     }
 
+}
+
+-(void)didSelectedShopStatus:(NSString *)status{
+    if ([status isEqualToString:@"停业整顿"]) {
+      
+    }else if ([status isEqualToString:@"暂停营业"]) {
+    
+    }else if ([status isEqualToString:@"正常营业"]) {
+    
+    }
+    
 }
 
 #pragma mark - Lazy

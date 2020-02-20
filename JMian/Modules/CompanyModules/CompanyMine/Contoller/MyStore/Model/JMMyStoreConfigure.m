@@ -27,7 +27,7 @@
         case JMMyStoreTypeOrderManager1:
             self.rowsNum = 1;
             self.footerheight = 0;
-            self.height = 122;
+            self.height = 145;
             self.cellId = JMMyStoreManager1TableViewCellIdentifier;
             break;
         case JMMyStoreTypeOrderManager2:

@@ -11,6 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMProductManagerTableViewCellIdentifier;
+@protocol JMProductManagerTableViewCellDelegate <NSObject>
+-(void)didSelectedBtnWithTitle:(NSString *)title data:(JMGoodsData *)data;
+@end
 
 @interface JMProductManagerTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *bottomBtn1;
@@ -20,6 +23,8 @@ extern NSString *const JMProductManagerTableViewCellIdentifier;
 @property (nonatomic,strong) JMGoodsData *data;
 @property (weak, nonatomic) IBOutlet UIImageView *imageIcon;
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
+@property (nonatomic,weak)id<JMProductManagerTableViewCellDelegate>delegate;
+
 @end
 
 NS_ASSUME_NONNULL_END

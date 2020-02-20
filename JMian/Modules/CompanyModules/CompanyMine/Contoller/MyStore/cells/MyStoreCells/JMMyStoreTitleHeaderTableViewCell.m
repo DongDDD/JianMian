@@ -7,6 +7,7 @@
 //
 
 #import "JMMyStoreTitleHeaderTableViewCell.h"
+#import "DimensMacros.h"
 NSString *const JMMyStoreTitleHeaderTableViewCellIdentifier = @"JMMyStoreTitleHeaderTableViewCellIdentifier";
 
 @implementation JMMyStoreTitleHeaderTableViewCell
@@ -16,7 +17,7 @@ NSString *const JMMyStoreTitleHeaderTableViewCellIdentifier = @"JMMyStoreTitleHe
     // Initialization code
 }
 
--(void)setModel:(JMUserInfoModel *)model{
+-(void)setModel:(JMShopInfoModel *)model{
     [self.iconImage sd_setImageWithURL:[NSURL URLWithString:model.shop_logo] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.storeNameLab.text = model.shop_name;
     

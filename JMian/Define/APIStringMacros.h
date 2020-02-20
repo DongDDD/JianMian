@@ -151,7 +151,11 @@
 #define Fectch_OrderInfo_URL @"api/order/info"
 //协商历史
 #define Fectch_DiscussList_URL @"api/order/refund/lists"
+//获取我的店铺信息
+#define Fectch_MyShopInfo_URL @"api/shop/info"
 
+//更新商品状态
+#define Update_GoodsStatus_URL @"api/goods/update"
 
 //视频列表
 #define Fectch_VideoList_URL @"api/video/lists"

@@ -10,12 +10,16 @@
 #import "JMTitlesView.h"
 #import "JMProductManagerTableViewCell.h"
 #import "JMSelectProductCategoriesViewController.h"
-#import "JMHTTPManager+GetManageGoodsList.h"
 #import "JMGoodsData.h"
-@interface JMProductManagerViewController ()<UITableViewDelegate,UITableViewDataSource>
+#import "JMHTTPManager+GetGoodsList.h"
+#import "JMHTTPManager+UpdateGoodsStatus.h"
+@interface JMProductManagerViewController ()<UITableViewDelegate,UITableViewDataSource,JMProductManagerTableViewCellDelegate>
 @property(nonatomic,strong)JMTitlesView *titleView;
 @property(nonatomic,strong)UITableView *tableView;
-@property(nonatomic,strong)NSArray *listArray;
+@property(nonatomic,strong)NSMutableArray *listArray;
+@property (nonatomic, copy) NSString *currentStatus;
+@property(nonatomic,assign) NSInteger page;
+@property(nonatomic,assign) NSInteger per_page;
 @property(nonatomic,assign)NSInteger index;
 @end
 
@@ -24,9 +28,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"商品";
-    [self setRightBtnTextName:@"发布"];
+//    [self setRightBtnTextName:@"发布"];
     [self.view addSubview:self.tableView];
-    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.mas_topLayoutGuide);
+        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+    }];
+    [self setupHeaderRefresh];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -34,27 +43,75 @@
     [self getDataWithStatus:@""];
 }
 
+-(void)setupHeaderRefresh
+{
+    MJRefreshNormalHeader *header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(refreshData)];
+    header.lastUpdatedTimeLabel.hidden = YES;
+    header.stateLabel.hidden = YES;
+    self.tableView.mj_header = header;
+//    [self.tableView.mj_header beginRefreshing];
+}
+
+//-(void)setupFooterRefresh
+//{
+//    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+//
+//    // 设置文字
+//    [footer setTitle:@"上拉加载更多" forState:MJRefreshStateIdle];
+//    [footer setTitle:@"加载中..." forState:MJRefreshStateRefreshing];
+//    [footer setTitle:@"没有更多数据了" forState:MJRefreshStateNoMoreData];
+//
+//    // 设置字体
+//    footer.stateLabel.font = [UIFont systemFontOfSize:14];
+//
+//    // 设置颜色
+//    footer.stateLabel.textColor = MASTER_COLOR;
+//
+//    // 设置footer
+//    self.tableView.mj_footer = footer;
+//    //     self.tableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadMoreBills)];
+//}
+
 -(void)rightAction{
     [self.navigationController pushViewController:[JMSelectProductCategoriesViewController new] animated:YES];
 
 }
 
 -(void)getDataWithStatus:(NSString *)status{
-    [[JMHTTPManager sharedInstance]getManagerGoodsLIstWithKeyword:@"" shop_id:@"" status:status page:@"" per_page:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]getGoodsListWithShop_id:self.shop_id status:status keyword:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+
         if (responsObject[@"data"]) {
-            self.listArray = [JMGoodsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
+           NSArray *listArray = [JMGoodsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
             
+            [self.listArray addObjectsFromArray:listArray];
             [self.tableView reloadData];
-        
+            [self.tableView.mj_header endRefreshing];
+            [self.tableView.mj_footer endRefreshing];
+
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
 
+}
+
+
+-(void)updataGoodsStatus:(NSString *)status goods_id:(NSString *)goods_id{
+    [[JMHTTPManager sharedInstance]upDateGoodsStatusWithGoods_id:goods_id status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            [self.listArray removeAllObjects];
+            [self getDataWithStatus:self.currentStatus];
+//            [self.tableView.mj_header beginRefreshing];
+        }
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
 
 
 }
+
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -68,6 +125,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     JMProductManagerTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMProductManagerTableViewCellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.delegate = self;
     [cell setData:self.listArray[indexPath.row]];
     //        self.userModel.company_real_company_name = self.cellConfigures.model.company_name;
     //        [cell setModel:self.userModel viewType:JMUserProfileHeaderCellTypeB];
@@ -76,14 +134,36 @@
     
 }
 
+-(void)didSelectedBtnWithTitle:(NSString *)title data:(nonnull JMGoodsData *)data{
+    if ([title isEqualToString:@"上架"]) {
+        [self updataGoodsStatus:@"1" goods_id:data.goods_id];
+        
+    }else if ([title isEqualToString:@"下架"]) {
+    [self updataGoodsStatus:@"0" goods_id:data.goods_id];
+    
+    }
+}
+
+-(void)refreshData{
+    [self.listArray removeAllObjects];
+    self.page = 1;
+    [self getDataWithStatus:self.currentStatus];
+}
+
 -(void)showPageContentView{
+    [self.listArray removeAllObjects];
+    [self.tableView.mj_header beginRefreshing];
     if (_index == 0) {
+        self.currentStatus = @"";
         [self getDataWithStatus:@""];
         
     }else if (_index == 1) {
+        self.currentStatus = @"0";
         [self getDataWithStatus:@"0"];
         
     }else if (_index == 2) {
+        self.currentStatus = @"1";
+
         [self getDataWithStatus:@"1"];
         
     }
@@ -127,6 +207,14 @@
         
     }
     return _tableView;
+}
+
+
+-(NSMutableArray *)listArray{
+    if (_listArray.count == 0) {
+        _listArray = [NSMutableArray array];
+    }
+    return _listArray;
 }
 /*
 #pragma mark - Navigation
