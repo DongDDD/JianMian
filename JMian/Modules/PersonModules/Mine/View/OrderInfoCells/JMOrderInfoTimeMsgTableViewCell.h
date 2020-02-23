@@ -14,7 +14,10 @@ extern NSString *const JMOrderInfoTimeMsgTableViewCellIdentifier;
 @interface JMOrderInfoTimeMsgTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *time1Lab;
 @property (weak, nonatomic) IBOutlet UILabel *time2Lab;
--(void)setValuesWithTime1:(NSString *)time1 time2:(NSString *)time2;
+@property (weak, nonatomic) IBOutlet UILabel *time3Lab;
+@property (weak, nonatomic) IBOutlet UILabel *time4Lab;
+
+-(void)setValuesWithTime1:(NSString *)time1 time2:(NSString *)time2 logName:(NSString *)logName time4:(NSString *)time4;
 
 @end
 

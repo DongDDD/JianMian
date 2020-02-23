@@ -142,6 +142,7 @@
     [self.shareBgView setHidden:YES];
     [self.shareView setHidden:YES];
 }
+
 #pragma mark -- 微信分享的是链接
 - (void)wxShare:(int)n
 {   //检测是否安装微信

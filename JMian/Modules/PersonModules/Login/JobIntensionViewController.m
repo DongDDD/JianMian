@@ -141,6 +141,7 @@
 
     
 }
+
 //应届生
 - (IBAction)status4Action:(UIButton *)sender {
      [self.statusBtn4 setImage:[UIImage imageNamed:@"蓝点"] forState:UIControlStateNormal];

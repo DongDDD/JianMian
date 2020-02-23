@@ -7,6 +7,7 @@
 //
 
 #import "JMCDetailTaskDecriTableViewCell.h"
+#import "JMDataTransform.h"
 NSString *const JMCDetailTaskDecriTableViewCellIdentifier = @"JMCDetailTaskDecriTableViewCellIdentifier";
 @interface JMCDetailTaskDecriTableViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *taskTitleLab;
@@ -38,25 +39,34 @@ NSString *const JMCDetailTaskDecriTableViewCellIdentifier = @"JMCDetailTaskDecri
         if (model.goods.count > 0) {
             NSMutableArray *arr = [NSMutableArray array];
             for (JMGoodsData *data in model.goods) {
-                [arr addObject:data.salary];
+                if ([data.status isEqualToString:@"1"]) {
+                    [arr addObject:data.salary];
+                     
+                }
             }
-            //最大值
-            double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
-            int max_value2 =  fabs(max_value);
-            //最小值
-            double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
-            int min_value2 =  fabs(min_value);
-            self.paymentMoney.text = [NSString stringWithFormat:@"%d ~ %d",min_value2,max_value2];
+            
+            self.paymentMoney.text = [JMDataTransform getSalaryRangeWithArr:arr];
+//            if (arr.count == 1) {
+//                //单个商品
+//                self.paymentMoney.text =arr[0];
+//            }else{
+//                //多个商品
+//                //最大值
+//                double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+//                int max_value2 =  fabs(max_value);
+//                //最小值
+//                double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+//                int min_value2 =  fabs(min_value);
+//                self.paymentMoney.text = [NSString stringWithFormat:@"%d ~ %d",min_value2,max_value2];
+//
+//            }
         }else{
             self.moneyConstrant.constant = 20;
             [self.paymentMoney setHidden:YES];
             [self.unitLab setHidden:YES];
             
         }
-        
-        
-        
-        
+                
     }else{
         [self.paymentMoney setHidden:NO];
         [self.unitLab setHidden:NO];

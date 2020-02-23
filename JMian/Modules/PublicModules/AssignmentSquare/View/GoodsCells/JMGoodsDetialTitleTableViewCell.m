@@ -7,6 +7,7 @@
 //
 
 #import "JMGoodsDetialTitleTableViewCell.h"
+#import "JMDataTransform.h"
 NSString *const JMGoodsDetialTitleTableViewCellIdentifier = @"JMGoodsDetialTitleTableViewCellIdentifier";
 
 @implementation JMGoodsDetialTitleTableViewCell
@@ -19,8 +20,31 @@ NSString *const JMGoodsDetialTitleTableViewCellIdentifier = @"JMGoodsDetialTitle
 -(void)setModel:(JMGoodsInfoModel *)model{
     self.titleLab.text = model.title;
     self.priceLab.text = model.price;
-    self.salarylab.text = [NSString stringWithFormat:@"佣金: ¥%@",model.salary];
-    
+    NSMutableArray *arr =[NSMutableArray array];
+    for (JMGoodsInfoSkuModel *skuData in model.sku) {
+        [arr addObject:skuData.salary];
+    }
+    self.salarylab.text = [NSString stringWithFormat:@"佣金 ：%@ 元",[JMDataTransform getSalaryRangeWithArr:arr]];
+//    if (arr.count == 1) {
+//            //单个商品
+//            self.salarylab.text = [NSString stringWithFormat:@"佣金 ：%@ 元", arr[0]];
+//        }else{
+//            //多个商品
+//            //最大值
+//            double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+//            int max_value2 =  fabs(max_value);
+//            //最小值
+//            double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+//            int min_value2 =  fabs(min_value);
+//            if (min_value2 == max_value2 ) {
+//                self.salarylab.text  = [NSString stringWithFormat:@"佣金 ：%d 元",max_value2];
+//            }else{
+//                self.salarylab.text = [NSString stringWithFormat:@"佣金：%d ~ %d 元",min_value2,max_value2];
+//
+//            }
+//
+//        }
+ 
 }
 
 

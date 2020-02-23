@@ -14,6 +14,8 @@
 #import "JMApplyForRefundViewController.h"
 #import "JMAfterSalesInfoConfigure.h"
 #import "JMDiscussHistoryViewController.h"
+#import "JMLogisticsInfoViewController.h"
+
 
 @interface JMAfterSalesInfoViewController ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
@@ -79,19 +81,26 @@
          NSString *user_id = [NSString stringWithFormat:@"%@b",self.cellConfigures.model.after_sale_boss_id];
           [JMCreatChatAction create4TypeChatRequstWithAccount:user_id];
     }else if ([btnTtitle isEqualToString:@"客服介入"]){
-         NSString *user_id = [NSString stringWithFormat:@"%@b",self.cellConfigures.model.after_sale_boss_id];
-//           foreign_key = @"0";
-//              chat_type = @"3";
-             NSString *recipient_mark = [NSString stringWithFormat:@"%@b",kFetchMyDefault(@"service_id")];
-//              recipient_id = messagelistModel.service_id;
-            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-              NSString *str_b = [NSString stringWithFormat:@"%@b",self.cellConfigures.model.after_sale_boss_id];
-              NSString *str_a = [NSString stringWithFormat:@"%@a",self.cellConfigures.model.user_id];
-              NSString *sender_mark = ([userModel.type isEqualToString:B_Type_UESR]) ? str_b : str_a;
-//              [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
-        [JMCreatChatAction createServiceTypeChatRequstWithChat_type:@"3" foreign_key:@"0" user_id:self.cellConfigures.model.user_id sender_mark:sender_mark recipient_mark:recipient_mark];
+//         NSString *user_id = [NSString stringWithFormat:@"%@b",self.cellConfigures.model.after_sale_boss_id];
+////           foreign_key = @"0";
+////              chat_type = @"3";
+//             NSString *recipient_mark = [NSString stringWithFormat:@"%@b",kFetchMyDefault(@"service_id")];
+////              recipient_id = messagelistModel.service_id;
+//            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//        NSString *str_b = [NSString stringWithFormat:@"%@b",self.cellConfigures.model.after_sale_boss_id];
+//        NSString *str_a = [NSString stringWithFormat:@"%@a",self.cellConfigures.model.user_id];
+//        NSString *sender_mark = ([userModel.type isEqualToString:B_Type_UESR]) ? str_b : str_a;
+//        //              [self createChatRequstWithType:chat_type foreign_key:foreign_key recipient:recipient_id sender_mark:sender_mark recipient_mark:recipient_mark model:messagelistModel];
+//        [JMCreatChatAction createServiceTypeChatRequstWithChat_type:@"3" foreign_key:@"0" user_id:self.cellConfigures.model.user_id sender_mark:sender_mark recipient_mark:recipient_mark];
+        [JMCreatChatAction createServiceChat];
     }else if ([btnTtitle isEqualToString:@"撤销申请"]){
         [self changOrderStatus:@"6" order_id:self.order_id];
+        
+    }else if ([btnTtitle isEqualToString:@"同意申请"]){
+        [self changOrderStatus:@"8" order_id:self.order_id];
+        
+    }else if ([btnTtitle isEqualToString:@"拒绝申请"]){
+        [self changOrderStatus:@"9" order_id:self.order_id];
         
     }else if ([btnTtitle isEqualToString:@"再次申请"]){
         JMApplyForRefundViewController *vc = [[JMApplyForRefundViewController alloc]init];
@@ -102,8 +111,12 @@
         
     }else if ([btnTtitle isEqualToString:@"确认退款"]){
         [self changOrderStatus:@"11" order_id:self.order_id];
-
         
+        
+    }else if ([btnTtitle isEqualToString:@"去发货"]){
+         JMLogisticsInfoViewController *vc = [[JMLogisticsInfoViewController alloc]init];
+         vc.order_id = self.order_id;
+         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 #pragma mark - UITableViewDataSource
@@ -125,6 +138,8 @@
  }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+
     switch (indexPath.section) {
         case JMAfterSalesInfoTypeTitleHeader: {
             JMOrderInfoHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOrderInfoHeaderTableViewCellIdentifier forIndexPath:indexPath];
@@ -146,6 +161,15 @@
             }else if (_viewType == JMAfterSalesInfoViewTypeWaitGoodsReturn) {
                 cell.titleLab.text = @"等待退货";
 
+            }else if (_viewType == JMAfterSalesInfoViewTypeCDidDeliverGoods) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    cell.titleLab.text = @"对方已发货";
+                    
+                }else{
+                    cell.titleLab.text = @"已退货";
+                    
+                }
+                
             }
             //        self.userModel.company_real_company_name = self.cellConfigures.model.company_name;
 //            [cell setModel:model];
@@ -160,7 +184,7 @@
             JMGoodsInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMGoodsInfoTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             JMGoodsCellData *data = self.cellConfigures.model.goods[indexPath.row];
-            NSString *cover_path = [NSString stringWithFormat:@"http://app.jmzhipin.com%@",data.cover_path];
+            NSString *cover_path = [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,data.cover_path];
 
             [cell setValuesWithImageUrl:cover_path title:data.title quantity:data.quantity price:data.price];
             return cell;
@@ -179,7 +203,6 @@
         case JMAfterSalesInfoTypeBtn: {
             JMOderInfoBtnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOderInfoBtnTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
             cell.delegate = self;
             if (_viewType == JMAfterSalesInfoViewTypeWait) {
                 [cell.btn2 setHidden:NO];
@@ -210,8 +233,28 @@
                     [cell.btn3 setHidden:NO];
                     [cell.btn5 setHidden:NO];
                 }else{
+                    [cell.btn11 setHidden:NO];
+                    [cell.btn3 setHidden:NO];
+                    [cell.btn6 setHidden:NO];
+                }
+            }else if (_viewType == JMAfterSalesInfoViewTypeSetRefund) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                    [cell.btn3 setHidden:NO];
+                    [cell.btn1 setHidden:NO];
+                    [cell.btn12 setHidden:NO];
+                }else{
                     
-                    
+                }
+            }else if (_viewType == JMAfterSalesInfoViewTypeCDidDeliverGoods) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                    [cell.btn3 setHidden:NO];
+                    [cell.btn5 setHidden:NO];
+                }else{
+                    [cell.btn3 setHidden:NO];
+                    [cell.btn11 setHidden:NO];
+
                 }
             }
             

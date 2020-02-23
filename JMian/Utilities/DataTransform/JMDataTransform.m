@@ -139,4 +139,54 @@
     
 }
 
+
+#pragma mark - ============== 正则去除HTML标签 ==============
++ (NSString *)getNormalStringFilterHTMLString:(NSString *)htmlStr{
+    NSString *normalStr = htmlStr.copy;
+    //判断字符串是否有效
+    if (!normalStr || normalStr.length == 0 || [normalStr isEqual:[NSNull null]]) return nil;
+    
+    //过滤正常标签
+    NSRegularExpression *regularExpression=[NSRegularExpression regularExpressionWithPattern:@"<[^>]*>" options:NSRegularExpressionCaseInsensitive error:nil];
+    normalStr = [regularExpression stringByReplacingMatchesInString:normalStr options:NSMatchingReportProgress range:NSMakeRange(0, normalStr.length) withTemplate:@""];
+    
+    //过滤占位符
+    NSRegularExpression *plExpression=[NSRegularExpression regularExpressionWithPattern:@"&[^;]+;" options:NSRegularExpressionCaseInsensitive error:nil];
+    normalStr = [plExpression stringByReplacingMatchesInString:normalStr options:NSMatchingReportProgress range:NSMakeRange(0, normalStr.length) withTemplate:@""];
+    
+    //过滤空格
+    NSRegularExpression *spaceExpression=[NSRegularExpression regularExpressionWithPattern:@"^\\s*|\\s*$" options:NSRegularExpressionCaseInsensitive error:nil];
+    normalStr = [spaceExpression stringByReplacingMatchesInString:normalStr options:NSMatchingReportProgress range:NSMakeRange(0, normalStr.length) withTemplate:@""];
+
+    return normalStr;
+}
+
+
++(NSString *)getSalaryRangeWithArr:(NSArray *)arr{
+    NSString *result;
+    if (arr.count == 1) {
+        result = arr[0];
+    }else{
+        //最大值
+        double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+        //        int max_value2 =  fabs(max_value);
+        //最小值
+        double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+        
+        NSString *min_str = [NSString stringWithFormat:@"%f",min_value];
+        NSString *min_str2 = [JMDataTransform returnFormatter:min_str];
+        
+        NSString *max_str = [NSString stringWithFormat:@"%f",max_value];
+        NSString *max_str2 = [JMDataTransform returnFormatter:max_str];
+        if (max_value == min_value) {
+            result  = max_str2;
+        }else{
+            result = [NSString stringWithFormat:@"%@~%@",min_str2,max_str2];
+            
+        }
+        
+    }
+    
+    return result;
+}
 @end

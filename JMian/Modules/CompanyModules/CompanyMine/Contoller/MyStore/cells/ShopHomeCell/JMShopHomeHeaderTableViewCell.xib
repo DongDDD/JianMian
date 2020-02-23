@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="137" id="KGk-i7-Jjw" customClass="JMShopHomeHeaderTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="349" height="137"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="349" height="137"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_avatar.png" translatesAutoresizingMaskIntoConstraints="NO" id="EQN-VU-EsU">
+                        <rect key="frame" x="20" y="36.5" width="64" height="64"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="64" id="Uxy-Ef-2Zq"/>
+                            <constraint firstAttribute="width" constant="64" id="uvc-NC-zrJ"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer,cornerRadius">
+                                <integer key="value" value="0"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Brand海外品牌店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abj-2k-6lp">
+                        <rect key="frame" x="107" y="47.5" width="177.5" height="22"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="在售商品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bXr-Xn-z7G">
+                        <rect key="frame" x="107" y="79" width="45" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="bXr-Xn-z7G" firstAttribute="leading" secondItem="abj-2k-6lp" secondAttribute="leading" id="Idv-dF-YUO"/>
+                    <constraint firstItem="abj-2k-6lp" firstAttribute="leading" secondItem="EQN-VU-EsU" secondAttribute="trailing" constant="23" id="NVZ-rW-pqV"/>
+                    <constraint firstItem="EQN-VU-EsU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ntK-Vy-3QW"/>
+                    <constraint firstItem="bXr-Xn-z7G" firstAttribute="top" secondItem="abj-2k-6lp" secondAttribute="bottom" constant="9.5" id="ulC-ZV-A1i"/>
+                    <constraint firstItem="abj-2k-6lp" firstAttribute="centerY" secondItem="EQN-VU-EsU" secondAttribute="centerY" constant="-10" id="vk8-Pi-24d"/>
+                    <constraint firstItem="EQN-VU-EsU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="y6S-Fn-nZm"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="goodsCount" destination="bXr-Xn-z7G" id="kFp-f3-AbA"/>
+                <outlet property="iconImage" destination="EQN-VU-EsU" id="9tI-5r-9Cd"/>
+                <outlet property="shopNameLab" destination="abj-2k-6lp" id="AAr-wl-8eo"/>
+            </connections>
+            <point key="canvasLocation" x="152.89855072463769" y="67.96875"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="default_avatar.png" width="23" height="39"/>
+    </resources>
+</document>

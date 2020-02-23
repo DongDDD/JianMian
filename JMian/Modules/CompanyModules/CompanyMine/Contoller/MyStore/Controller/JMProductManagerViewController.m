@@ -131,7 +131,6 @@
     //        [cell setModel:self.userModel viewType:JMUserProfileHeaderCellTypeB];
     return cell;
     
-    
 }
 
 -(void)didSelectedBtnWithTitle:(NSString *)title data:(nonnull JMGoodsData *)data{

@@ -36,15 +36,17 @@
         description = self.content;
     }
     JMUserInfoModel *model  = [JMUserInfoManager getUserInfo];
-    [[JMHTTPManager sharedInstance]updateShopInfoWithShop_id:model.shop_shop_id shop_logo:@"" shop_poster:shop_poster description:description successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateShopInfoWithShop_id:model.shop_shop_id shop_logo:@"" shop_poster:shop_poster description:description status:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"保存成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
             [alert show];
             [self.navigationController popViewControllerAnimated:YES];
         }
+        
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+ 
 
 }
 #pragma mark - textFieldDelegate

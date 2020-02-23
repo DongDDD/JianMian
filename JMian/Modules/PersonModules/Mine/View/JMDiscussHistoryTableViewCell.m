@@ -9,6 +9,7 @@
 #import "JMDiscussHistoryTableViewCell.h"
 #import "DimensMacros.h"
 #import "JMDiscussHistoryImageCollectionViewCell.h"
+#import "APIStringMacros.h"
 NSString *const JMDiscussHistoryTableViewCellIdentifier = @"JMDiscussHistoryTableViewCellIdentifier";
 
 @implementation JMDiscussHistoryTableViewCell
@@ -58,7 +59,7 @@ NSString *const JMDiscussHistoryTableViewCellIdentifier = @"JMDiscussHistoryTabl
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JMDiscussHistoryImageCollectionViewCell *cell = (JMDiscussHistoryImageCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     //    [cell.iconBtn setImage:[UIImage imageNamed:self.imageNameArr[indexPath.row]] forState:UIControlStateNormal];
-    NSString *url = [NSString stringWithFormat:@"http://app.jmzhipin.com%@",_imageArr[indexPath.row]];
+    NSString *url = [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,_imageArr[indexPath.row]];
     [cell.imageView sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     return cell;
 }

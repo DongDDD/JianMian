@@ -12,10 +12,11 @@
 
 @implementation JMHTTPManager (UpdateShopInfo)
 - (void)updateShopInfoWithShop_id:(NSString *)shop_id
-shop_logo:(NSString *)shop_logo
-                        shop_poster:(NSString *)shop_poster
-                        description:(NSString *)description
-                       successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
+                        shop_logo:(NSString *)shop_logo
+                      shop_poster:(NSString *)shop_poster
+                      description:(NSString *)description
+                           status:(NSString *)status
+                     successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock {
     
     NSString *urlStr = [Update_ShopInfo_URL stringByAppendingFormat:@"/%@",shop_id];
 
@@ -23,6 +24,7 @@ shop_logo:(NSString *)shop_logo
                            @"shop_logo":shop_logo,
                            @"shop_poster":shop_poster,
                            @"description":description,
+                           @"status":status,
 
                            };
     

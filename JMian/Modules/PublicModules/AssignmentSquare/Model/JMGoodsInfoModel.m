@@ -12,7 +12,8 @@
 + (NSDictionary *)mj_objectClassInArray {
     return @{
              @"images":@"JMGoodsInfoImageModel",
-             
+             @"sku":@"JMGoodsInfoSkuModel",
+
              };
 }
 
@@ -36,3 +37,8 @@
 
 
 @end
+@implementation JMGoodsInfoSkuModel
+
+
+@end
+

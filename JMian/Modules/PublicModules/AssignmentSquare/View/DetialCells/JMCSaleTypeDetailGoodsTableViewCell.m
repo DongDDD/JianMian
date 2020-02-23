@@ -67,6 +67,10 @@ NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDet
     }else if (_viewType == JMCSaleTypeDetailGoodsSnapshootType) {
         [cell.shareBtn setHidden:NO];
 
+    }else if (_viewType == JMCSaleTypeDetailGoodShopHomeType) {
+        [cell.shareBtn setHidden:YES];
+        [cell.topLeftLab setHidden:YES];
+
     }
     [cell setData:data];
     return cell;

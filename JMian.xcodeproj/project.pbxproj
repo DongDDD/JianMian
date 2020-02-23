@@ -669,6 +669,11 @@
 		0494BFFB238BD5FD0028164C /* JMVideoJobListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494BFF9238BD5FD0028164C /* JMVideoJobListViewController.xib */; };
 		0494C004238BDD940028164C /* JMVideoJoblistTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494C002238BDD940028164C /* JMVideoJoblistTableViewCell.m */; };
 		0494C005238BDD940028164C /* JMVideoJoblistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494C003238BDD940028164C /* JMVideoJoblistTableViewCell.xib */; };
+		0494DF2923FF709200481603 /* JMShopHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494DF2723FF709200481603 /* JMShopHomeViewController.m */; };
+		0494DF2A23FF709200481603 /* JMShopHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494DF2823FF709200481603 /* JMShopHomeViewController.xib */; };
+		0494DF2D23FF776400481603 /* JMShopHomeConfigures.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494DF2C23FF776400481603 /* JMShopHomeConfigures.m */; };
+		0494DF3223FFCC9600481603 /* JMShopHomeHeaderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0494DF3023FFCC9600481603 /* JMShopHomeHeaderTableViewCell.m */; };
+		0494DF3323FFCC9600481603 /* JMShopHomeHeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0494DF3123FFCC9600481603 /* JMShopHomeHeaderTableViewCell.xib */; };
 		04950FCF22AE585600C3D3FB /* JMGoodsDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04950FCD22AE585600C3D3FB /* JMGoodsDescriptionViewController.m */; };
 		04950FD022AE585600C3D3FB /* JMGoodsDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04950FCE22AE585600C3D3FB /* JMGoodsDescriptionViewController.xib */; };
 		04950FDC22AE812C00C3D3FB /* JMTaskManageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04950FDA22AE812C00C3D3FB /* JMTaskManageTableViewCell.m */; };
@@ -2404,6 +2409,14 @@
 		0494C001238BDD940028164C /* JMVideoJoblistTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoJoblistTableViewCell.h; sourceTree = "<group>"; };
 		0494C002238BDD940028164C /* JMVideoJoblistTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoJoblistTableViewCell.m; sourceTree = "<group>"; };
 		0494C003238BDD940028164C /* JMVideoJoblistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVideoJoblistTableViewCell.xib; sourceTree = "<group>"; };
+		0494DF2623FF709200481603 /* JMShopHomeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMShopHomeViewController.h; sourceTree = "<group>"; };
+		0494DF2723FF709200481603 /* JMShopHomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMShopHomeViewController.m; sourceTree = "<group>"; };
+		0494DF2823FF709200481603 /* JMShopHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMShopHomeViewController.xib; sourceTree = "<group>"; };
+		0494DF2B23FF776400481603 /* JMShopHomeConfigures.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMShopHomeConfigures.h; sourceTree = "<group>"; };
+		0494DF2C23FF776400481603 /* JMShopHomeConfigures.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMShopHomeConfigures.m; sourceTree = "<group>"; };
+		0494DF2F23FFCC9600481603 /* JMShopHomeHeaderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMShopHomeHeaderTableViewCell.h; sourceTree = "<group>"; };
+		0494DF3023FFCC9600481603 /* JMShopHomeHeaderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMShopHomeHeaderTableViewCell.m; sourceTree = "<group>"; };
+		0494DF3123FFCC9600481603 /* JMShopHomeHeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMShopHomeHeaderTableViewCell.xib; sourceTree = "<group>"; };
 		04950FCC22AE585600C3D3FB /* JMGoodsDescriptionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMGoodsDescriptionViewController.h; sourceTree = "<group>"; };
 		04950FCD22AE585600C3D3FB /* JMGoodsDescriptionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMGoodsDescriptionViewController.m; sourceTree = "<group>"; };
 		04950FCE22AE585600C3D3FB /* JMGoodsDescriptionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMGoodsDescriptionViewController.xib; sourceTree = "<group>"; };
@@ -5142,6 +5155,9 @@
 				049420AE23C6C33E005357B3 /* JMMyStroreViewController.h */,
 				049420AF23C6C33E005357B3 /* JMMyStroreViewController.m */,
 				049420B023C6C33E005357B3 /* JMMyStroreViewController.xib */,
+				0494DF2623FF709200481603 /* JMShopHomeViewController.h */,
+				0494DF2723FF709200481603 /* JMShopHomeViewController.m */,
+				0494DF2823FF709200481603 /* JMShopHomeViewController.xib */,
 				04F355E523C870B300857F67 /* JMStroreNotificationViewController.h */,
 				04F355E623C870B300857F67 /* JMStroreNotificationViewController.m */,
 				04F355E723C870B300857F67 /* JMStroreNotificationViewController.xib */,
@@ -5180,6 +5196,17 @@
 			);
 			name = Store_slice;
 			path = JMian/Resource/Mine_slices/Store_slice;
+			sourceTree = SOURCE_ROOT;
+		};
+		0494DF2E23FFCC6F00481603 /* ShopHomeCell */ = {
+			isa = PBXGroup;
+			children = (
+				0494DF2F23FFCC9600481603 /* JMShopHomeHeaderTableViewCell.h */,
+				0494DF3023FFCC9600481603 /* JMShopHomeHeaderTableViewCell.m */,
+				0494DF3123FFCC9600481603 /* JMShopHomeHeaderTableViewCell.xib */,
+			);
+			name = ShopHomeCell;
+			path = JMian/Modules/CompanyModules/CompanyMine/Contoller/MyStore/cells/ShopHomeCell;
 			sourceTree = SOURCE_ROOT;
 		};
 		04950FD222AE7ECD00C3D3FB /* TaskManageView */ = {
@@ -5715,6 +5742,7 @@
 		04D6BA9B23C70C1500FAEBAF /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				0494DF2E23FFCC6F00481603 /* ShopHomeCell */,
 				04F355F023C8774600857F67 /* MyStoreCells */,
 				04F355EF23C8772D00857F67 /* ProductManagerCells */,
 			);
@@ -5738,6 +5766,8 @@
 				04BAFBC423CC61C400041843 /* JMProductColorData.m */,
 				0499E48123FE2FD60045CD13 /* JMShopInfoModel.h */,
 				0499E48223FE2FD60045CD13 /* JMShopInfoModel.m */,
+				0494DF2B23FF776400481603 /* JMShopHomeConfigures.h */,
+				0494DF2C23FF776400481603 /* JMShopHomeConfigures.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -7424,6 +7454,7 @@
 				04BBF2C322918E7C0068A9B1 /* C_videos.png in Resources */,
 				04E02E71228BF38900924130 /* loading.png in Resources */,
 				04BD325E2373F799005C096E /* JMPersonWorkExpTableViewCell.xib in Resources */,
+				0494DF2A23FF709200481603 /* JMShopHomeViewController.xib in Resources */,
 				049C653422AD3ED600A93DFE /* YES_Post@3x.png in Resources */,
 				040CA85E225F1EBF006D7A7F /* Location_of_detail_page@2x.png in Resources */,
 				04B0D90623A7929400950C6A /* newFriend@3x.png in Resources */,
@@ -7809,6 +7840,7 @@
 				04C4A17D22CC4B1C0049DA29 /* logo2@2x.png in Resources */,
 				04A2479B224C773A00DEB8E3 /* 0000@3x.png in Resources */,
 				04BE8B4022924241004EB7EC /* notification.png in Resources */,
+				0494DF3323FFCC9600481603 /* JMShopHomeHeaderTableViewCell.xib in Resources */,
 				04AE3B4B231CA93700B54050 /* JMCompanyDetailViewController.xib in Resources */,
 				6D020A792258A408009BCFE4 /* JMEducationalExperienceTableViewCell.xib in Resources */,
 				0474C930239DFE0F00EEF110 /* hx_flash_pic_nopreview@3x.png in Resources */,
@@ -8222,6 +8254,7 @@
 				04EB6CB42255FDD900CBAF79 /* Foundation+Log.m in Sources */,
 				04C4A17622CC4ABF0049DA29 /* JMAboutOursViewController.m in Sources */,
 				0492AE7E22F0463400AB21B3 /* JMWalletViewController.m in Sources */,
+				0494DF3223FFCC9600481603 /* JMShopHomeHeaderTableViewCell.m in Sources */,
 				6D5DD8D32308439E0064612A /* TUIImageCache.m in Sources */,
 				044276DB22F3EDDF00CAE54F /* JMCityListManager.m in Sources */,
 				040B838A2265EC0600F1A37A /* JMCompanyHomeViewController.m in Sources */,
@@ -8701,6 +8734,7 @@
 				04BD32582373F6B5005C096E /* JMPersonIntensionTableViewCell.m in Sources */,
 				045FB42C23D1C2CB009D55C4 /* JMHTTPManager+GetShopInfo.m in Sources */,
 				04C98A7A23F679620067A094 /* JMRefundDetailViewController.m in Sources */,
+				0494DF2D23FF776400481603 /* JMShopHomeConfigures.m in Sources */,
 				04AF886023CACB3800ACE66C /* JMPostProductConfigures.m in Sources */,
 				043D0F9123966A94005C69DD /* JMYoukeAction.m in Sources */,
 				040865E12272FAF1005BB03E /* JMPostJobHomeTableViewCell.m in Sources */,
@@ -8710,6 +8744,7 @@
 				6D82F2982274C63E00B9D2B9 /* JMHTTPManager+Job.m in Sources */,
 				04BD32622373F9FE005C096E /* JMPesonDescTableViewCell.m in Sources */,
 				04B0D90123A78E5700950C6A /* MLMenuCell.m in Sources */,
+				0494DF2923FF709200481603 /* JMShopHomeViewController.m in Sources */,
 				6D5DD8862308439D0064612A /* TCommonContactSelectCellData.m in Sources */,
 				040E365222680FF800A7D789 /* JMHeaderOfPersonDetailView.m in Sources */,
 				040B83A02265F62300F1A37A /* JMIDCardIdentifySecondViewController.m in Sources */,
@@ -8995,7 +9030,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.88;
+				MARKETING_VERSION = 1.4.9;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9029,7 +9064,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.88;
+				MARKETING_VERSION = 1.4.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

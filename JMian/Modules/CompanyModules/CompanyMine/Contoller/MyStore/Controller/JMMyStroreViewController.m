@@ -12,7 +12,8 @@
 #import "JMProductManagerViewController.h"
 #import "JMCreatChatAction.h"
 #import "JMHTTPManager+GetMyShopInfo.h"
-
+#import "JMShopHomeViewController.h"
+#import "JMHTTPManager+UpdateShopInfo.h"
 @interface JMMyStroreViewController ()<UITableViewDelegate,UITableViewDataSource,JMMyStoreManager1TableViewCellDelegate,JMMyStoreManager2TableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)JMMyStoreConfigure *cellConfigures;
@@ -49,7 +50,6 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-
 
 }
 
@@ -93,7 +93,7 @@
         case JMMyStoreTypeOrderStatus: {
             JMMyStoreOrderStatusTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyStoreOrderStatusTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
+            [cell setValueWithAll:self.cellConfigures.model.all_total dfh:self.cellConfigures.model.dfh_total shz:self.cellConfigures.model.shz_total wfk:self.cellConfigures.model.wfk_total];
             return cell;
         }
         case JMMyStoreTypeOrderManager1: {
@@ -107,7 +107,6 @@
             JMMyStoreManager2TableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMMyStoreManager2TableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
-            
             return cell;
         }
         default:
@@ -125,14 +124,21 @@
         JMStroreNotificationViewController *vc = [[JMStroreNotificationViewController alloc]init];
         vc.viewType = JMStroreNotificationViewPoster;
         vc.title = @"店铺简介";
-        vc.content = model.shop_poster;
+        vc.content = self.cellConfigures.model.shop_poster;
         [self.navigationController pushViewController:vc animated:YES];
         
     }else if (row == 1) {
         JMStroreNotificationViewController *vc = [[JMStroreNotificationViewController alloc]init];
         vc.viewType = JMStroreNotificationViewDesc;
         vc.title = @"店铺公告";
-        vc.content = model.shop_description;
+        vc.content =  self.cellConfigures.model.shop_description;
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    else if (row == 3) {
+        JMShopHomeViewController *vc = [[JMShopHomeViewController alloc]init];
+        vc.title = @"店铺首页";
+        vc.shop_id = self.cellConfigures.model.shop_id;
         [self.navigationController pushViewController:vc animated:YES];
         
     }
@@ -140,6 +146,11 @@
 }
 
 -(void)didSelectStoreManager2ItemWithRow:(NSInteger)row{
+    if (row == 0) {
+        JMShopHomeViewController *vc = [[JMShopHomeViewController alloc]init];
+        vc.shop_id = self.cellConfigures.model.shop_id;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     if (row == 1) {
         [JMCreatChatAction createServiceChat];
     }
@@ -148,21 +159,33 @@
         JMProductManagerViewController *vc = [[JMProductManagerViewController alloc]init];
         vc.shop_id = self.cellConfigures.model.shop_id;
         [self.navigationController pushViewController:vc animated:YES];
-
+        
     }
 
 }
 
 -(void)didSelectedShopStatus:(NSString *)status{
-    if ([status isEqualToString:@"停业整顿"]) {
-      
-    }else if ([status isEqualToString:@"暂停营业"]) {
-    
-    }else if ([status isEqualToString:@"正常营业"]) {
-    
+    if ([status isEqualToString:@" 停业整顿"]) {
+        [self upDateShopStatus:@"-1"];
+    }else if ([status isEqualToString:@" 暂停营业"]) {
+        [self upDateShopStatus:@"0"];
+    }else if ([status isEqualToString:@" 正常营业"]) {
+        [self upDateShopStatus:@"1"];
+        
     }
     
 }
+
+-(void)upDateShopStatus:(NSString *)status{
+    JMUserInfoModel *model  = [JMUserInfoManager getUserInfo];
+       [[JMHTTPManager sharedInstance]updateShopInfoWithShop_id:model.shop_shop_id shop_logo:@"" shop_poster:@"" description:@"" status:status successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    
+           
+       } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+           
+       }];
+}
+
 
 #pragma mark - Lazy
 

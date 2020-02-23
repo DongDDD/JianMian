@@ -153,13 +153,28 @@
                                             <action selector="statusBtnAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ue2-cO-V8y"/>
                                         </connections>
                                     </button>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="my8-al-UXg">
+                                        <rect key="frame" x="51" y="15" width="5" height="5"/>
+                                        <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="5" id="Vxb-fp-BYp"/>
+                                            <constraint firstAttribute="height" constant="5" id="bHw-CV-mJO"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <real key="value" value="2.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="BwS-OI-2GG" secondAttribute="trailing" id="5IT-2L-ofN"/>
                                     <constraint firstItem="aZl-I7-eCo" firstAttribute="centerX" secondItem="BwS-OI-2GG" secondAttribute="centerX" id="A8c-Lv-Z1A"/>
                                     <constraint firstItem="aZl-I7-eCo" firstAttribute="top" secondItem="8fg-4Q-ccf" secondAttribute="top" constant="22" id="BGC-R9-nqk"/>
                                     <constraint firstItem="BwS-OI-2GG" firstAttribute="top" secondItem="8fg-4Q-ccf" secondAttribute="top" id="CJg-uo-NZZ"/>
+                                    <constraint firstAttribute="trailing" secondItem="my8-al-UXg" secondAttribute="trailing" constant="31" id="dqU-fD-9v4"/>
                                     <constraint firstItem="H1z-vc-Uex" firstAttribute="centerX" secondItem="aZl-I7-eCo" secondAttribute="centerX" id="fKb-MQ-mAK"/>
+                                    <constraint firstItem="my8-al-UXg" firstAttribute="top" secondItem="8fg-4Q-ccf" secondAttribute="top" constant="15" id="n1T-r1-FQr"/>
                                     <constraint firstItem="BwS-OI-2GG" firstAttribute="leading" secondItem="8fg-4Q-ccf" secondAttribute="leading" id="nt0-Qa-sM1"/>
                                     <constraint firstItem="H1z-vc-Uex" firstAttribute="top" secondItem="aZl-I7-eCo" secondAttribute="bottom" constant="15" id="v6o-2l-CDZ"/>
                                     <constraint firstAttribute="bottom" secondItem="H1z-vc-Uex" secondAttribute="bottom" constant="18" id="yfB-Wd-QqC"/>
@@ -183,8 +198,13 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="BGImageView" destination="3TQ-my-TFl" id="kQv-lY-GwG"/>
+                <outlet property="allLab" destination="zJF-bf-b9g" id="jnK-jU-WEI"/>
+                <outlet property="dfhLab" destination="Dfc-2E-fhU" id="Mi9-bV-P1S"/>
+                <outlet property="dian" destination="my8-al-UXg" id="dfo-Wv-nqj"/>
+                <outlet property="shzLab" destination="vsH-AX-Crd" id="wbd-mG-5GY"/>
+                <outlet property="wfkLab" destination="aZl-I7-eCo" id="edR-ad-iJC"/>
             </connections>
-            <point key="canvasLocation" x="57.971014492753625" y="10.379464285714285"/>
+            <point key="canvasLocation" x="37.681159420289859" y="9.7098214285714288"/>
         </tableViewCell>
     </objects>
     <resources>

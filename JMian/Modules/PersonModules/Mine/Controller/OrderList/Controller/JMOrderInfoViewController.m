@@ -54,12 +54,14 @@
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
-    
-    
+
 }
 
 -(void)deleteOrderStatus:(NSString *)status order_id:(NSString *)order_id msg:(NSString *)msg{
     [[JMHTTPManager sharedInstance]deleteOrderWithOrder_id:order_id status:status msg:msg successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"提交成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
         [self.navigationController popViewControllerAnimated:YES];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
@@ -97,6 +99,14 @@
         }else if (_viewType == JMOrderInfoViewTypeWaitGoodsReturn) {
             vc.viewType = JMAfterSalesInfoViewTypeWaitGoodsReturn;
         
+        }else if (_viewType == JMOrderInfoViewSetRefund) {
+            //对方发起退款
+            vc.viewType = JMAfterSalesInfoViewTypeSetRefund;
+        
+        }else if (_viewType == JMOrderInfoViewCDidDeliverGoods) {
+            //已退货
+            vc.viewType = JMAfterSalesInfoViewTypeCDidDeliverGoods;
+        
         }
         vc.order_id = self.cellConfigures.model.order_id;
         [self.navigationController pushViewController:vc animated:YES];
@@ -118,7 +128,11 @@
     }else if ([btnTtitle isEqualToString:@"取消订单"]){
         [self.refundCauseView show];
 
+    }else if ([btnTtitle isEqualToString:@"客服介入"]){
+        [JMCreatChatAction createServiceChat];
+
     }
+ 
 }
 
 -(void)submitActionWithMsg:(NSString *)msg{
@@ -150,6 +164,7 @@
      return [self.cellConfigures heightForFooterInSection:section];
  }
 
+
 // -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 //     return [self.cellConfigures heightForHeaderInSection:section];
 // }
@@ -159,6 +174,8 @@
 // }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+
     switch (indexPath.section) {
         case JMOrderInfoTypeTitleHeader: {
             JMOrderInfoHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOrderInfoHeaderTableViewCellIdentifier forIndexPath:indexPath];
@@ -184,9 +201,12 @@
                 cell.titleLab.text = @"等待退款";
             }else if (_viewType == JMOrderInfoViewTakeDeliveryGoods) {
                 cell.titleLab.text = @"已收货";
-                if (!_isExtension) {
-                    [cell setOverTime:15];
-                }      
+                if ([userModel.type isEqualToString:C_Type_USER]) {
+                    if (!_isExtension) {
+                        [cell setOverTime:15];
+                    }
+                    
+                }
             }else if (_viewType == JMOrderInfoViewAfterSales) {
                 cell.titleLab.text = @"售后中";
             }else if (_viewType == JMOrderInfoViewSetRefund) {
@@ -199,6 +219,14 @@
                 cell.titleLab.text = @"已取消";
             }else if (_viewType == JMOrderInfoViewTypeWaitGoodsReturn) {
                 cell.titleLab.text = @"等待退货";
+            }else if (_viewType == JMOrderInfoViewCDidDeliverGoods) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    cell.titleLab.text = @"对方已发货";
+
+                }else{
+                    cell.titleLab.text = @"已退货";
+                    
+                }
             }
             //        self.userModel.company_real_company_name = self.cellConfigures.model.company_name;
 //            [cell setModel:model];
@@ -214,7 +242,7 @@
             JMGoodsInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMGoodsInfoTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             JMGoodsCellData *data = self.cellConfigures.model.goods[indexPath.row];
-            NSString *cover_path = [NSString stringWithFormat:@"http://app.jmzhipin.com%@",data.cover_path];
+            NSString *cover_path = [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,data.cover_path];
 
             [cell setValuesWithImageUrl:cover_path title:data.title quantity:data.quantity price:data.price];
             return cell;
@@ -222,27 +250,28 @@
         case JMOrderInfoTypePrice: {
             JMOrderInfoPriceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOrderInfoPriceTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            if (_viewType == JMOrderInfoViewTypeNoPay || _viewType == JMOrderInfoViewDidDeliverGoods || _viewType == JMOrderInfoViewTakeDeliveryGoods || _viewType == JMOrderInfoViewDidDeliverGoods) {
-                cell.titleLab.text = @"订单金额 ";
-                [cell setPrice:self.cellConfigures.model.order_amount];
-            }else if (_viewType == JMOrderInfoViewTypeDidRefund || _viewType == JMOrderInfoViewTypeRefuseRefund){
+//            if (_viewType == JMOrderInfoViewTypeNoPay || _viewType == JMOrderInfoViewDidDeliverGoods || _viewType == JMOrderInfoViewTakeDeliveryGoods || _viewType == JMOrderInfoViewDidDeliverGoods) {
+//            }else
+                if (_viewType == JMOrderInfoViewTypeDidRefund || _viewType == JMOrderInfoViewTypeRefuseRefund){
                 cell.titleLab.text = @"退款金额 ";
                 [cell setPrice:self.cellConfigures.model.pay_amount];
 
+            }else{
+                cell.titleLab.text = @"订单金额 ";
+                [cell setPrice:self.cellConfigures.model.order_amount];
             }
             return cell;
         }
         case JMOrderInfoTypeTimeMsg: {
             JMOrderInfoTimeMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOrderInfoTimeMsgTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell setValuesWithTime1:self.cellConfigures.model.created_at time2:self.cellConfigures.model.pay_time];
+            [cell setValuesWithTime1:self.cellConfigures.model.created_at time2:self.cellConfigures.model.pay_time logName:self.cellConfigures.model.logistics_c_name time4:self.cellConfigures.model.logistics_at_c];
             return cell;
         }
         case JMOrderInfoTypeBtn: {
             JMOderInfoBtnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOderInfoBtnTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
-            JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
             
             if (_viewType == JMOrderInfoViewTypeSuccessfully) {
                 if ([userModel.type isEqualToString:B_Type_UESR]) {
@@ -254,10 +283,17 @@
                 if ([userModel.type isEqualToString:B_Type_UESR]) {
                     [cell.btn2 setHidden:NO];
                 }else{
-                    [cell.btn11 setHidden:NO];
-                    
+                    [cell.btn11 setHidden:NO];                    
                 }
             }else if (_viewType == JMOrderInfoViewTypeWaitSalesReturn) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                        [cell.btn2 setHidden:NO];
+                    }else{
+                        [cell.btn6 setHidden:NO];
+                        [cell.btn11 setHidden:NO];
+                    }
+                    [cell.btn8 setHidden:NO];
+                
             }else if (_viewType == JMOrderInfoViewTypeWaitDeliverGoods) {
                 if ([userModel.type isEqualToString:B_Type_UESR]) {
                     [cell.btn2 setHidden:NO];
@@ -289,10 +325,10 @@
                     [cell.btn2 setHidden:NO];
                 }else{
                     [cell.btn11 setHidden:NO];
+                    [cell.btn4 setHidden:NO];
+                    [cell.btn9 setHidden:NO];
                     
                 }
-                [cell.btn9 setHidden:NO];
-                [cell.btn4 setHidden:NO];
 
             }else if (_viewType == JMOrderInfoViewFinish) {
                 if ([userModel.type isEqualToString:B_Type_UESR]) {
@@ -334,7 +370,6 @@
                     [cell.btn2 setHidden:NO];
                 }else{
                     [cell.btn11 setHidden:NO];
-                    
                 }
                 [cell.btn8 setHidden:NO];
                 
@@ -366,7 +401,19 @@
                 }
                 [cell.btn8 setHidden:NO];
                 
+            }else if (_viewType == JMOrderInfoViewCDidDeliverGoods) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell.btn2 setHidden:NO];
+                    [cell.btn8 setHidden:NO];
+                    
+                }else{
+                    [cell.btn11 setHidden:NO];
+                    [cell.btn8 setHidden:NO];
+                }
+                
+                
             }
+
 
             
             return cell;

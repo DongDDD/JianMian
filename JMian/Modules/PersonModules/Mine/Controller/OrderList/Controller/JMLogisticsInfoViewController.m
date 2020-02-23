@@ -11,13 +11,17 @@
 #import "JMLogisticsCellData.h"
 #import "JMHTTPManager+CreatetLogisticsInfo.h"
 #import "JMHTTPManager+ChangeOrderStatus.h"
-
-@interface JMLogisticsInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
+#import "STPickerSingle.h"
+@interface JMLogisticsInfoViewController ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,STPickerSingleDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *expressageNumTextField;
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *listArray;
+@property (strong, nonatomic) NSMutableArray *titleArray;
+
 @property (weak, nonatomic) IBOutlet UIButton *expressCompanyBtn;
 @property (strong, nonatomic) JMLogisticsCellData *logisticsCelldata;
+@property (strong, nonatomic) STPickerSingle *educationPickerSingle;
+
 @end
 static NSString *cellIdent = @"wuliucellIdent";
 
@@ -30,12 +34,20 @@ static NSString *cellIdent = @"wuliucellIdent";
     self.view.backgroundColor = BG_COLOR;
 //    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapAction)];
 ////    [self.view addGestureRecognizer:tap];
-    [self.view addSubview:self.tableView];
+//    [self.view addSubview:self.tableView];
+//    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.mas_equalTo(self.view);
+//        make.top.mas_equalTo(self.mas_topLayoutGuide);
+//        make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+//    }];
+    
     [self getLabsData];
 }
 
 - (IBAction)chooseExpressCompany:(UIButton *)sender {
-    [self showListView];
+//    [self showListView];
+    [self.view addSubview:self.educationPickerSingle];
+    [self.educationPickerSingle show];
 }
 
 - (IBAction)saoyisaoAction:(UIButton *)sender {
@@ -76,9 +88,8 @@ static NSString *cellIdent = @"wuliucellIdent";
 -(void)getLabsData{
     [[JMHTTPManager sharedInstance]getLabels_Id:@"1083" mode:@"tree" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
-            
             _listArray = [JMLogisticsCellData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
-            
+//
          }
         [self.tableView reloadData];
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -90,12 +101,14 @@ static NSString *cellIdent = @"wuliucellIdent";
 
 -(void)sendGoodsRequst{
     [self.expressageNumTextField resignFirstResponder];
-//    [[JMHTTPManager sharedInstance]createLogisticsInfoWithId:_order_id Logistics_label_id:_logisticsCelldata.label_id logistics_no:self.expressageNumTextField.text successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//        [self showAlertVCSucceesSingleWithMessage:@"物流信息提交成功" btnTitle:@"返回"];
-//    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-    //    }];
-    [[JMHTTPManager sharedInstance]deliverGoodsWithOrder_id:_order_id status:@"6" logistics_no:self.expressageNumTextField.text logistics_id:_logisticsCelldata.label_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    NSString *logistics_no;
+    NSString *logistics_id;
+    if (![self.expressageNumTextField.text isEqualToString:@"无需物流"]) {
+        logistics_no = self.expressageNumTextField.text;
+        logistics_id = _logisticsCelldata.label_id;
+    }
+    
+    [[JMHTTPManager sharedInstance]deliverGoodsWithOrder_id:_order_id status:@"10" logistics_no:logistics_no logistics_id:logistics_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self showAlertVCSucceesSingleWithMessage:@"物流信息提交成功" btnTitle:@"返回"];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -141,12 +154,14 @@ static NSString *cellIdent = @"wuliucellIdent";
     return cell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    _logisticsCelldata = _listArray[indexPath.row];
-    
-    [self.expressCompanyBtn setTitle:_logisticsCelldata.name forState:UIControlStateNormal];
+- (void)pickerSingle:(STPickerSingle *)pickerSingle selectedTitle:(NSString *)selectedTitle row:(NSInteger)row
+{
+    [self.expressCompanyBtn setTitle: _titleArray [row] forState:UIControlStateNormal];
     [self.expressCompanyBtn setTitleColor:TITLE_COLOR forState:UIControlStateNormal];
     
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [UIView animateWithDuration:0.3 animations:^{
         self.tableView.frame = CGRectMake(0,  self.view.frame.size.height, SCREEN_WIDTH, _listArray.count*55);
     }];
@@ -166,6 +181,23 @@ static NSString *cellIdent = @"wuliucellIdent";
         
     }
     return _tableView;
+}
+
+-(STPickerSingle *)educationPickerSingle{
+    if (_educationPickerSingle == nil) {
+        _educationPickerSingle = [[STPickerSingle alloc]init];
+        _educationPickerSingle.title = @"选择物流";
+        _educationPickerSingle.delegate = self;
+        _educationPickerSingle.widthPickerComponent = 200;
+       _titleArray = [NSMutableArray array];
+        for (JMLogisticsCellData *data in  _listArray) {
+            [_titleArray addObject:data.name];
+        }
+        [_titleArray addObject:@"其他"];
+        [_titleArray addObject:@"无需物流"];
+        _educationPickerSingle.arrayData = _titleArray;
+    }
+    return _educationPickerSingle;
 }
 /*
 #pragma mark - Navigation

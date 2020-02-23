@@ -62,6 +62,7 @@
             <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
             <connections>
                 <outlet property="goodsCount" destination="TT6-cC-x2Q" id="uT0-sE-84B"/>
+                <outlet property="headerLab" destination="YqJ-bo-Ccc" id="SjW-Fx-NYP"/>
                 <outlet property="logoImage" destination="kN4-g7-lm2" id="MTt-Wx-m6G"/>
                 <outlet property="titleLab" destination="621-YK-6CE" id="tcZ-AP-XbR"/>
             </connections>

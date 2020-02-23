@@ -221,7 +221,6 @@
     }else  if (row == 2) {
         JMMyStroreViewController *vc = [[JMMyStroreViewController alloc]init];
         [self.navigationController pushViewController:vc animated:YES];
-
     
     }else  if (row == 3) {
     

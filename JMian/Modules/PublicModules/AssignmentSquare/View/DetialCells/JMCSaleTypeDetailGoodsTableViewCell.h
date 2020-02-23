@@ -12,7 +12,10 @@ NS_ASSUME_NONNULL_BEGIN
 typedef enum : NSUInteger {
     JMCSaleTypeDetailGoodsDefaultType,
     JMCSaleTypeDetailGoodsSnapshootType,
+    JMCSaleTypeDetailGoodShopHomeType,
 }  JMCSaleTypeDetailGoodsType;
+
+
 
 extern NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier;
 @protocol JMCSaleTypeDetailGoodsTableViewCellDelegate <NSObject>

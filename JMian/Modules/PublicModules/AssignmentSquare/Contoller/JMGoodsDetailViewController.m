@@ -22,7 +22,7 @@
 #import "WXApi.h"
 #import "JMPublicShareView.h"
 #import "JMWXShareAction.h"
-
+#import "JMDataTransform.h"
 @interface JMGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMGoodsDescTableViewCellDelegate,WKNavigationDelegate,JMCDetailVideoTableViewCellDelegate,JMPublicShareViewDelegate,JMCSaleTypeDetailGoodsTableViewCellDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)JMGoodsDetailConfigures *configures;
@@ -246,11 +246,7 @@
     NSString *shareUrl;
     int shareTypeInt;
     title = self.configures.model.title;
-    NSRange startRange = [self.configures.model.goods_description rangeOfString:@"<p>"];
-    NSRange endRange = [self.configures.model.goods_description rangeOfString:@"</p>"];
-    NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
-    NSString *result = [self.configures.model.goods_description substringWithRange:range];
-    desc = result;
+    desc = [JMDataTransform getNormalStringFilterHTMLString:self.configures.model.goods_description];
     NSString *url;
       if (self.configures.model.images.count > 0) {
           for (int i = 0; i < self.configures.model.images.count; i++) {
@@ -258,7 +254,7 @@
               url = imgModel.file_path;
           }
       }
-    imageUrl =  [NSString stringWithFormat:@"http://app.jmzhipin.com%@",url];
+    imageUrl = [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,url];
     shareUrl  = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=%@&task_order_id=%@",self.configures.model.goods_id,self.task_order_id];
     
     [self.shareView hide];
@@ -271,6 +267,9 @@
     [JMWXShareAction wxShare:shareTypeInt title:title desc:desc imageUrl:imageUrl shareUrl:shareUrl];
 
 }
+
+
+
 
 -(void)didSelectedGoodsItemsWithModel:(JMGoodsData *)model{
     JMGoodsDetailViewController *vc = [[JMGoodsDetailViewController alloc]init];
@@ -288,92 +287,95 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark -- 微信分享的是链接
-- (void)wxShare:(int)n
-{   //检测是否安装微信
-    
-    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
-    sendReq.bText = NO; //不使用文本信息
-    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
-    
-    WXMediaMessage *urlMessage = [WXMediaMessage message];
-    urlMessage.title = self.configures.model.title;
-//    NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc]
-//                                          initWithData:[self.configures.model.goods_description dataUsingEncoding:
-//                                          NSUnicodeStringEncoding]
-//                                          options:@{
-//                                            NSDocumentTypeDocumentAttribute:
-//                                            NSHTMLTextDocumentType
-//                                          }
-//                                          documentAttributes:nil error:nil];
-//    urlMessage.description = [attrStr string];
-    NSRange startRange = [self.configures.model.goods_description rangeOfString:@"<p>"];
-    NSRange endRange = [self.configures.model.goods_description rangeOfString:@"</p>"];
-    NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
-    NSString *result = [self.configures.model.goods_description substringWithRange:range];
-     urlMessage.description = result;
-    //    UIImageView *imgView = [[UIImageView alloc]init];
-    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
-    //
-
-    NSString *url;
-    if (self.configures.model.images.count > 0) {
-        for (int i = 0; i < self.configures.model.images.count; i++) {
-            JMGoodsInfoImageModel *imgModel = self.configures.model.images[0];
-            url = imgModel.file_path;
-        }
-        
-    }
-    
-    //    UIImage *image = [self getImageFromURL:url];
-    //    UIImage *image = [UIImage imageNamed:@"demi_home"];
-    //NSData *thumbData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
-    //缩略图,压缩图片,不超过 32 KB
-    NSString *url2 =  [NSString stringWithFormat:@"http://app.jmzhipin.com%@",url];
-    UIImage *image = [self handleImageWithURLStr:url2];
-    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
-    [urlMessage setThumbData:thumbData];
-    //分享实例
-    WXWebpageObject *webObj = [WXWebpageObject object];
-    NSString *shareUrl = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=%@&task_order_id=%@",self.configures.model.goods_id,self.task_order_id];
-
-    webObj.webpageUrl = shareUrl;
-    
-    urlMessage.mediaObject = webObj;
-    sendReq.message = urlMessage;
-    //发送分享
-    [WXApi sendReq:sendReq];
-    
-}
-
-
-
-- (NSString *)filterHTML:(NSString *)html{
-    NSDictionary *dic = @{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType};
-    NSData *data = [html dataUsingEncoding:NSUnicodeStringEncoding];
-    NSAttributedString *attriStr = [[NSAttributedString alloc] initWithData:data options:dic documentAttributes:nil error:nil];
-    NSString *str = attriStr.string;
-    //str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-    return str;
-    
-}
-
-- (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
-    NSURL *url = [NSURL URLWithString:imageURLStr];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    NSData *newImageData = imageData;
-    // 压缩图片data大小
-    newImageData = UIImageJPEGRepresentation([UIImage imageWithData:newImageData scale:0.1], 0.1f);
-    UIImage *image = [UIImage imageWithData:newImageData];
-    
-    // 压缩图片分辨率(因为data压缩到一定程度后，如果图片分辨率不缩小的话还是不行)
-    CGSize newSize = CGSizeMake(200, 200);
-    UIGraphicsBeginImageContext(newSize);
-    [image drawInRect:CGRectMake(0,0,(NSInteger)newSize.width, (NSInteger)newSize.height)];
-    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
-}
+//#pragma mark -- 微信分享的是链接
+//- (void)wxShare:(int)n
+//{   //检测是否安装微信
+//
+//    SendMessageToWXReq *sendReq = [[SendMessageToWXReq alloc]init];
+//    sendReq.bText = NO; //不使用文本信息
+//    sendReq.scene = n;  //0 = 好友列表 1 = 朋友圈 2 = 收藏
+//
+//    WXMediaMessage *urlMessage = [WXMediaMessage message];
+//    urlMessage.title = self.configures.model.title;
+////    NSMutableAttributedString * attrStr = [[NSMutableAttributedString alloc]
+////                                          initWithData:[self.configures.model.goods_description dataUsingEncoding:
+////                                          NSUnicodeStringEncoding]
+////                                          options:@{
+////                                            NSDocumentTypeDocumentAttribute:
+////                                            NSHTMLTextDocumentType
+////                                          }
+////                                          documentAttributes:nil error:nil];
+////    urlMessage.description = [attrStr string];
+//    NSRange startRange = [self.configures.model.goods_description rangeOfString:@"<p>"];
+//    NSRange endRange = [self.configures.model.goods_description rangeOfString:@"</p>"];
+//    NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
+//    NSString *result = [self.configures.model.goods_description substringWithRange:range];
+//    if ([result containsString:@"<img"]) {
+//        result = @"";
+//    }
+//     urlMessage.description = result;
+//    //    UIImageView *imgView = [[UIImageView alloc]init];
+//    //    [imgView sd_setImageWithURL:[NSURL URLWithString:self.detailModel.company_logo_path]];
+//    //
+//
+//    NSString *url;
+//    if (self.configures.model.images.count > 0) {
+//        for (int i = 0; i < self.configures.model.images.count; i++) {
+//            JMGoodsInfoImageModel *imgModel = self.configures.model.images[0];
+//            url = imgModel.file_path;
+//        }
+//
+//    }
+//
+//    //    UIImage *image = [self getImageFromURL:url];
+//    //    UIImage *image = [UIImage imageNamed:@"demi_home"];
+//    //NSData *thumbData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+//    //缩略图,压缩图片,不超过 32 KB
+//    NSString *url2 =  [NSString stringWithFormat:@"http://app.jmzhipin.com%@",url];
+//    UIImage *image = [self handleImageWithURLStr:url2];
+//    NSData *thumbData = UIImageJPEGRepresentation(image, 0.25);
+//    [urlMessage setThumbData:thumbData];
+//    //分享实例
+//    WXWebpageObject *webObj = [WXWebpageObject object];
+//    NSString *shareUrl = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=%@&task_order_id=%@",self.configures.model.goods_id,self.task_order_id];
+//
+//    webObj.webpageUrl = shareUrl;
+//
+//    urlMessage.mediaObject = webObj;
+//    sendReq.message = urlMessage;
+//    //发送分享
+//    [WXApi sendReq:sendReq];
+//
+//}
+//
+//
+//
+//- (NSString *)filterHTML:(NSString *)html{
+//    NSDictionary *dic = @{NSDocumentTypeDocumentAttribute:NSHTMLTextDocumentType};
+//    NSData *data = [html dataUsingEncoding:NSUnicodeStringEncoding];
+//    NSAttributedString *attriStr = [[NSAttributedString alloc] initWithData:data options:dic documentAttributes:nil error:nil];
+//    NSString *str = attriStr.string;
+//    //str = [str stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+//    return str;
+//
+//}
+//
+//- (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
+//    NSURL *url = [NSURL URLWithString:imageURLStr];
+//    NSData *imageData = [NSData dataWithContentsOfURL:url];
+//    NSData *newImageData = imageData;
+//    // 压缩图片data大小
+//    newImageData = UIImageJPEGRepresentation([UIImage imageWithData:newImageData scale:0.1], 0.1f);
+//    UIImage *image = [UIImage imageWithData:newImageData];
+//
+//    // 压缩图片分辨率(因为data压缩到一定程度后，如果图片分辨率不缩小的话还是不行)
+//    CGSize newSize = CGSizeMake(200, 200);
+//    UIGraphicsBeginImageContext(newSize);
+//    [image drawInRect:CGRectMake(0,0,(NSInteger)newSize.width, (NSInteger)newSize.height)];
+//    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+//    UIGraphicsEndImageContext();
+//    return newImage;
+//}
 
 #pragma mark - WKNavigationDelegate
 - (void)webView:(WKWebView *)webView didFinishNavigation:(WKNavigation *)navigation {
@@ -434,7 +436,6 @@
         }
         if (imagesURLStrings.count > 0) {
             [cell setImagesArr:imagesURLStrings];
-
         }
         return cell;
     }
@@ -459,6 +460,8 @@
         cell.delegate = self;
         cell.webView.navigationDelegate = self;
         [cell setDescStr:self.configures.model.goods_description];
+//            NSString *myStr = [NSString stringWithFormat:@"<head><style>img{max-width:%f !important;}</style></head>",cell.contentView.frame.size.width-20];
+//            NSString *str = [NSString stringWithFormat:@"%@%@",@"<head><style>img{width:100% !important;}</style></head>",self.configures.model.goods_description];
         [cell.webView loadHTMLString:self.configures.model.goods_description baseURL:nil];
 
 //        [cell setModel:self.configures.model];

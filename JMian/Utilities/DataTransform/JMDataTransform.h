@@ -22,6 +22,14 @@ NS_ASSUME_NONNULL_BEGIN
  
 /// @param stringNumber 保留两位小数
 +(NSString*)returnFormatter:(NSString*)stringNumber;
+ 
+/// 正则去除HTML标签
+/// @param htmlStr  html
++ (NSString *)getNormalStringFilterHTMLString:(NSString *)htmlStr;
+
+/// 取数组里面最大值最小值
+/// @param arr
++(NSString *)getSalaryRangeWithArr:(NSArray *)arr;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,7 @@
 
 #import "JMGoodsCollectionViewCell.h"
 #import "DimensMacros.h"
+#import "APIStringMacros.h"
 NSString *const JMGoodsCollectionViewCellIdentifier = @"JMGoodsCollectionViewCellIdentifier";
 @interface JMGoodsCollectionViewCell ()
 
@@ -28,7 +29,7 @@ NSString *const JMGoodsCollectionViewCellIdentifier = @"JMGoodsCollectionViewCel
     self.topLeftLab.text = [NSString stringWithFormat:@"  佣金:¥ %@   ",data.salary];
     if (data.images.count > 0) {
         JMGoodsImageData *imageData = data.images[0];
-        NSString *file_path = [NSString stringWithFormat:@"http://app.jmzhipin.com%@",imageData.file_path];
+        NSString *file_path = [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,imageData.file_path];
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:file_path] placeholderImage:[UIImage imageNamed:@"break"]];
     }
 

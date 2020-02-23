@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
                         shop_logo:(NSString *)shop_logo
                       shop_poster:(NSString *)shop_poster
                       description:(NSString *)description
+                           status:(NSString *)status
                      successBlock:(JMHTTPRequestCompletionSuccessBlock)successBlock failureBlock:(JMHTTPRequestCompletionFailureBlock)failureBlock;
 @end
 

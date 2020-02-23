@@ -37,7 +37,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface BaseViewController : UIViewController
 
 @property(nonatomic,strong)NSString *rightString;
-
 @property(nonatomic,assign)JMJLoginViewType loginViewType;
 -(void)setIsHiddenBackBtn:(BOOL)isHiddenBackBtn;
 //@property(nonatomic,assign)BOOL isHiddenBackBtn;

@@ -355,45 +355,98 @@ static NSString *cellID2 = @"extensionCellID";
     _orderCellData = self.listDataArray[indexPath.row];
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if ([userModel.type isEqualToString:B_Type_UESR]) {
-        if ([_orderCellData.status isEqualToString:@"11"]) {
-            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
-            vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMOrderInfoViewTypeDidRefund;
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }else if([_orderCellData.status isEqualToString:@"8"]){
-            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
-            vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMOrderInfoViewTypeWaitGoodsReturn;
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }else if([_orderCellData.status isEqualToString:@"2"]){
-            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
-            vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMOrderInfoViewTypeWaitDeliverGoods;
-            [self.navigationController pushViewController:vc animated:YES];
-            
-        }else if([_orderCellData.status isEqualToString:@"0"]){
+        if([_orderCellData.status isEqualToString:@"0"]) {
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
             vc.viewType = JMOrderInfoViewTypeNoPay;
             [self.navigationController pushViewController:vc animated:YES];
             
-        }else if([_orderCellData.status isEqualToString:@"7"]){
+        }
+        else  if([_orderCellData.status isEqualToString:@"1"]){
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMOrderInfoViewSetRefund;
+            vc.viewType = JMOrderInfoViewTypeDidDeleteOrder;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else if([_orderCellData.status isEqualToString:@"2"]){
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeWaitDeliverGoods;
             [self.navigationController pushViewController:vc animated:YES];
             
-        }else if([_orderCellData.status isEqualToString:@"6"]){
+        }
+        else if([_orderCellData.status isEqualToString:@"6"]){
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
             vc.viewType = JMOrderInfoViewDidDeliverGoods;
             [self.navigationController pushViewController:vc animated:YES];
             
         }
+        else if([_orderCellData.status isEqualToString:@"7"]){
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewSetRefund;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        else if([_orderCellData.status isEqualToString:@"8"]){
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeWaitGoodsReturn;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        else if([_orderCellData.status isEqualToString:@"9"]){
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeRefuseRefund;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        else if([_orderCellData.status isEqualToString:@"10"]){
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewCDidDeliverGoods;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+       else if ([_orderCellData.status isEqualToString:@"11"]) {
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeDidRefund;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+       else if([_orderCellData.status isEqualToString:@"12"]){
+           JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+           vc.order_id = _orderCellData.order_id;
+           vc.viewType = JMOrderInfoViewTakeDeliveryGoods;
+           [self.navigationController pushViewController:vc animated:YES];
+       }
+  
         
     }else{
+        if ([_orderCellData.status isEqualToString:@"0"]) {
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeNoPay;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        else if ([_orderCellData.status isEqualToString:@"1"]) {
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeDidDeleteOrder;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        else if ([_orderCellData.status isEqualToString:@"2"]) {
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewTypeDidPay;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
         if ([_orderCellData.status isEqualToString:@"6"]) {
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
@@ -402,7 +455,8 @@ static NSString *cellID2 = @"extensionCellID";
                 vc.isExtension = YES;
             }
             [self.navigationController pushViewController:vc animated:YES];
-        }else  if ([_orderCellData.status isEqualToString:@"7"]) {
+        }
+        else  if ([_orderCellData.status isEqualToString:@"7"]) {
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
             vc.viewType = JMOrderInfoViewAfterSales;
@@ -410,31 +464,17 @@ static NSString *cellID2 = @"extensionCellID";
                 vc.isExtension = YES;
             }
             [self.navigationController pushViewController:vc animated:YES];
-        }else if ([_orderCellData.status isEqualToString:@"8"]) {//等待退货
+        }
+        else if ([_orderCellData.status isEqualToString:@"8"]) {//等待退货
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMOrderInfoViewWaitRefund;
+            vc.viewType = JMOrderInfoViewTypeWaitGoodsReturn;
             if (_viewType == JMMyOrderListViewControllerCUserExtension) {
                 vc.isExtension = YES;
             }
             [self.navigationController pushViewController:vc animated:YES];
-        }else if ([_orderCellData.status isEqualToString:@"12"]) {//已收货
-            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
-            vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMOrderInfoViewTakeDeliveryGoods;
-            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
-                vc.isExtension = YES;
-            }
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if ([_orderCellData.status isEqualToString:@"13"]) {
-            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
-            vc.order_id = _orderCellData.order_id;
-            vc.viewType =  JMOrderInfoViewFinish;
-            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
-                vc.isExtension = YES;
-            }
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if ([_orderCellData.status isEqualToString:@"9"]) {
+        }
+        else if ([_orderCellData.status isEqualToString:@"9"]) {
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
             vc.viewType =  JMOrderInfoViewTypeRefuseRefund;
@@ -442,30 +482,38 @@ static NSString *cellID2 = @"extensionCellID";
                 vc.isExtension = YES;
             }
             [self.navigationController pushViewController:vc animated:YES];
-        }else if ([_orderCellData.status isEqualToString:@"11"]) {
+        }
+        else if ([_orderCellData.status isEqualToString:@"10"]) {
+            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
+            vc.order_id = _orderCellData.order_id;
+            vc.viewType = JMOrderInfoViewCDidDeliverGoods;
+            [self.navigationController pushViewController:vc animated:YES];
+            
+        }
+        else if ([_orderCellData.status isEqualToString:@"11"]) {
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
             vc.viewType = JMOrderInfoViewTypeDidRefund;
             [self.navigationController pushViewController:vc animated:YES];
             
-        }else if ([_orderCellData.status isEqualToString:@"2"]) {
+        }
+        else if ([_orderCellData.status isEqualToString:@"12"]) {//已收货
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMOrderInfoViewTypeDidPay;
+            vc.viewType = JMOrderInfoViewTakeDeliveryGoods;
+            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+                vc.isExtension = YES;
+            }
             [self.navigationController pushViewController:vc animated:YES];
-            
-        }else if ([_orderCellData.status isEqualToString:@"1"]) {
+        }
+        else if ([_orderCellData.status isEqualToString:@"13"]) {
             JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
             vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMOrderInfoViewTypeDidDeleteOrder;
+            vc.viewType =  JMOrderInfoViewFinish;
+            if (_viewType == JMMyOrderListViewControllerCUserExtension) {
+                vc.isExtension = YES;
+            }
             [self.navigationController pushViewController:vc animated:YES];
-            
-        }else if ([_orderCellData.status isEqualToString:@"0"]) {
-            JMOrderInfoViewController *vc = [[JMOrderInfoViewController alloc]init];
-            vc.order_id = _orderCellData.order_id;
-            vc.viewType = JMOrderInfoViewTypeNoPay;
-            [self.navigationController pushViewController:vc animated:YES];
-            
         }
         
     }

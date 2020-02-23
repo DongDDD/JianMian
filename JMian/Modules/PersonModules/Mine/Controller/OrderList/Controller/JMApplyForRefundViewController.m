@@ -116,7 +116,6 @@
             NSString *url = responsObject[@"data"][0];
             [self.files addObject:url];
             
-            
         }
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {

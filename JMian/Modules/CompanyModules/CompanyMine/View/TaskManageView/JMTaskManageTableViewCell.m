@@ -8,6 +8,7 @@
 
 #import "JMTaskManageTableViewCell.h"
 #import "DimensMacros.h"
+#import "JMDataTransform.h"
 @interface JMTaskManageTableViewCell ()
 @property (weak, nonatomic) IBOutlet UILabel *headerLab;
 @property (weak, nonatomic) IBOutlet UILabel *moneyLab;
@@ -348,13 +349,13 @@
     for (JMGoodsData *goodsData in _myData.goods) {
         [arr addObject:goodsData.salary];
     }
-    //最大值
-    double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
-    int max_value2 =  fabs(max_value);
-    //最小值
-    double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
-    int min_value2 =  fabs(min_value);
-    NSString *str= [NSString stringWithFormat:@"%d~%d",min_value2,max_value2];
+//    //最大值
+//    double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+//    int max_value2 =  fabs(max_value);
+//    //最小值
+//    double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+//    int min_value2 =  fabs(min_value);
+    NSString *str= [JMDataTransform getSalaryRangeWithArr:arr];
     return str;
 }
 

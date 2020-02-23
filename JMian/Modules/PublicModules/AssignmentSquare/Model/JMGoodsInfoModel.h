@@ -28,11 +28,23 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 @property(nonatomic,strong)NSArray *images;
+@property(nonatomic,strong)NSArray *sku;
+
 @end
 
 @interface JMGoodsInfoImageModel : NSObject
 @property (copy, nonatomic) NSString *file_id;
 @property (copy, nonatomic) NSString *file_path;
+
+@end
+
+@interface JMGoodsInfoSkuModel : NSObject
+@property (copy, nonatomic) NSString *price;
+@property (copy, nonatomic) NSString *salary;
+@property (copy, nonatomic) NSString *inventory;
+@property (copy, nonatomic) NSString *mark;
+@property (copy, nonatomic) NSString *goods_no;
+
 
 @end
 NS_ASSUME_NONNULL_END

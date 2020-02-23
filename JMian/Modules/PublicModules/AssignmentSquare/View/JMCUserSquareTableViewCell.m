@@ -67,31 +67,49 @@
         self.jobLabs.text = @"有定金";
         
     }
+    
     if ([model.payment_method isEqualToString:@"1"]) {
         NSMutableArray *arr = [NSMutableArray array];
         if (model.goods.count > 0) {
             for (JMGoodsData *data in model.goods) {
-                [arr addObject:data.salary];
+                if ([data.status isEqualToString:@"1"]) {
+                    [arr addObject:data.salary];
+                     
+                }
+                
                 //                float floatString = [data.salary floatValue];
                 //                NSLog(@"%2f",floatString);
             }
-                        
-            //最大值
-            double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
-            int max_value2 =  fabs(max_value);
-            //最小值
-            double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
-            NSString *min_str = [NSString stringWithFormat:@"%f",min_value];
-            NSString *min_str2 = [JMDataTransform returnFormatter:min_str];
-            self.paymentLab.text = [NSString stringWithFormat:@"%@~%d",min_str2,max_value2];
+                   
+            if (arr.count == 1) {
+                //单个商品
+                self.paymentLab.text =arr[0];
+            }else{
+                
+                //最大值
+//                double max_value = [[arr valueForKeyPath:@"@max.doubleValue"] doubleValue];
+//                int max_value2 =  fabs(max_value);
+//                //最小值
+//                double min_value = [[arr valueForKeyPath:@"@min.doubleValue"] doubleValue];
+//                NSString *min_str = [NSString stringWithFormat:@"%f",min_value];
+//                NSString *min_str2 = [JMDataTransform returnFormatter:min_str];
+                self.paymentLab.text = [JMDataTransform getSalaryRangeWithArr:arr];;
+                
+                
+                
+            }
             self.unitLab.text = @"元 / 单";
             [self.paymentLab setHidden:NO];
             [self.unitLab setHidden:NO];
+            
+            
         }else{
             [self.paymentLab setHidden:YES];
             [self.unitLab setHidden:YES];
             
         }
+            
+            
     }else{
         [self.paymentLab setHidden:NO];
         [self.unitLab setHidden:NO];

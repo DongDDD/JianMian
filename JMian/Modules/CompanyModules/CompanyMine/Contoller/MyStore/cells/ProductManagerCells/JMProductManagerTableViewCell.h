@@ -16,9 +16,9 @@ extern NSString *const JMProductManagerTableViewCellIdentifier;
 @end
 
 @interface JMProductManagerTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIButton *bottomBtn1;
-@property (weak, nonatomic) IBOutlet UIButton *bottomBtn2;
-@property (weak, nonatomic) IBOutlet UIButton *bottomBtn3;
+@property (weak, nonatomic) IBOutlet UIButton *bottomBtn1;//复制
+@property (weak, nonatomic) IBOutlet UIButton *bottomBtn2;//下架
+@property (weak, nonatomic) IBOutlet UIButton *bottomBtn3;//商家
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (nonatomic,strong) JMGoodsData *data;
 @property (weak, nonatomic) IBOutlet UIImageView *imageIcon;

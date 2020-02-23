@@ -111,7 +111,6 @@
 
 -(void)getHeightForDesc1{
     if (self.model.goods.count > 0) {
-          
         self.height = 270;
     }else{
         self.height = 220;

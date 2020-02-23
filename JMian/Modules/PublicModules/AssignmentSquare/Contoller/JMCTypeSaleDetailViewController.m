@@ -441,7 +441,7 @@
 
 
 -(void)getGoodsListWithShop_id:(NSString *)shop_id{
-    [[JMHTTPManager sharedInstance]getGoodsListWithShop_id:shop_id status:@"" keyword:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]getGoodsListWithShop_id:shop_id status:@"1" keyword:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
 
         if (responsObject[@"data"]) {
             self.configures.goodsListArray = [JMGoodsData mj_objectArrayWithKeyValuesArray:responsObject[@"data"]];
@@ -551,7 +551,8 @@
     }else if (indexPath.section == JMCTypeSaleCellTypeMyStoreHeader){
         JMCSaleTypeDetailStoreHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCSaleTypeDetailStoreHeaderTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [cell setModel:self.configures.shopModel];
+       [cell setValuesWithImageUrl:self.configures.shopModel.shop_logo title:self.configures.shopModel.shop_name goodsCount:self.configures.shopModel.sort];
+//        [cell setModel:self.configures.shopModel];
         return cell;
     }else if (indexPath.section == JMCTypeSaleCellTypeMyStoreGoods){
         JMCSaleTypeDetailGoodsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCSaleTypeDetailGoodsTableViewCellIdentifier forIndexPath:indexPath];
@@ -654,11 +655,7 @@
        NSString *imageUrl;
        NSString *shareUrl;
        title = self.seletedGoodsData.title;
-       NSRange startRange = [self.seletedGoodsData.goods_description rangeOfString:@"<p>"];
-        NSRange endRange = [self.seletedGoodsData.goods_description rangeOfString:@"</p>"];
-        NSRange range = NSMakeRange(startRange.location + startRange.length, endRange.location - startRange.location - startRange.length);
-        NSString *result = [self.seletedGoodsData.goods_description substringWithRange:range];
-       desc = result;
+      desc = [JMDataTransform getNormalStringFilterHTMLString:self.configures.model.goods_description]; 
        NSString *url;
        if (self.seletedGoodsData.images.count > 0) {
            for (int i = 0; i < self.seletedGoodsData.images.count; i++) {
@@ -667,7 +664,7 @@
            }
        }
        //缩略图,压缩图片,不超过 32 KB
-       imageUrl =  [NSString stringWithFormat:@"http://app.jmzhipin.com%@",url];
+       imageUrl =  [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,url];
        shareUrl = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=%@&task_order_id=%@",self.seletedGoodsData.goods_id,self.task_order_id];
        [JMWXShareAction wxShare:type title:title desc:desc imageUrl:imageUrl shareUrl:shareUrl];
     

@@ -13,8 +13,9 @@ typedef enum : NSUInteger {
     JMAfterSalesInfoViewTypeRefuse,
     JMAfterSalesInfoViewTypeBeingAfterSales,
     JMAfterSalesInfoViewTypeSetRefund,
-    JMAfterSalesInfoViewTypeRefuseRefund,
+    JMAfterSalesInfoViewTypeRefuseRefund,//商家拒绝退款 9
     JMAfterSalesInfoViewTypeWaitGoodsReturn,
+    JMAfterSalesInfoViewTypeCDidDeliverGoods,//买家已发货
 
 
 } JMAfterSalesInfolViewType;

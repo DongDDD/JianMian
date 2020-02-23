@@ -15,6 +15,7 @@ NSString *const JMGoodsDescTableViewCellIdentifier = @"JMGoodsDescTableViewCellI
 - (void)awakeFromNib {
     [super awakeFromNib];
     
+
     // 将webView添加到界面
     // Initialization code
 }
@@ -25,8 +26,11 @@ NSString *const JMGoodsDescTableViewCellIdentifier = @"JMGoodsDescTableViewCellI
 //    NSString *str = [NSString stringWithFormat:@"%@%@",myStr,descStr];
     [self.contentView addSubview:self.webView];
     [self.webView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.mas_equalTo(self);
+        make.right.mas_equalTo(self.contentView).offset(-10);
+        make.left.mas_equalTo(self.contentView).offset(10);
+
         make.bottom.mas_equalTo(self);
+        
         make.top.mas_equalTo(self);
     }];
     //    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[descStr dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
@@ -83,10 +87,10 @@ NSString *const JMGoodsDescTableViewCellIdentifier = @"JMGoodsDescTableViewCellI
 -(WKWebView *)webView{
     if (!_webView) {
         _webView = [[WKWebView alloc] init];
-        _webView.scrollView.scrollEnabled = NO;
-        _webView.scrollView.bounces = NO;
-        _webView.scrollView.showsVerticalScrollIndicator = NO;
-        _webView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+//        _webView.scrollView.scrollEnabled = NO;
+//        _webView.scrollView.bounces = NO;
+//        _webView.scrollView.showsVerticalScrollIndicator = NO;
+//        _webView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
     }
     return _webView;

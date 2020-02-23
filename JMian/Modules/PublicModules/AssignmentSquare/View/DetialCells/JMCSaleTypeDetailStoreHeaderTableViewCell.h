@@ -12,11 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString *const JMCSaleTypeDetailStoreHeaderTableViewCellIdentifier;
 
 @interface JMCSaleTypeDetailStoreHeaderTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *headerLab;
 @property(nonatomic,strong)JMShopModel *model;
 @property (weak, nonatomic) IBOutlet UIImageView *logoImage;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *goodsCount;
-
+-(void)setValuesWithImageUrl:(NSString *)imageUrl  title:(NSString *)title goodsCount:(NSString *)goodsCount;
 
 @end
 

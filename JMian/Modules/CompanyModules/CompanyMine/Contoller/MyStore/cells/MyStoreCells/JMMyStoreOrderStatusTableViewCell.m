@@ -13,6 +13,11 @@ NSString *const JMMyStoreOrderStatusTableViewCellIdentifier = @"JMMyStoreOrderSt
 @interface JMMyStoreOrderStatusTableViewCell ()
 @property (strong, nonatomic) NSArray *topTitleArr,*bottomTitleArr;
 @property (weak, nonatomic) IBOutlet UIImageView *BGImageView;
+@property (weak, nonatomic) IBOutlet UILabel *allLab;
+@property (weak, nonatomic) IBOutlet UILabel *dfhLab;
+@property (weak, nonatomic) IBOutlet UILabel *shzLab;
+@property (weak, nonatomic) IBOutlet UILabel *wfkLab;
+@property (weak, nonatomic) IBOutlet UIView *dian;
 
 @end
 
@@ -29,6 +34,21 @@ NSString *const JMMyStoreOrderStatusTableViewCellIdentifier = @"JMMyStoreOrderSt
      self.BGImageView.layer.cornerRadius = 5;
 
     // Initialization code
+}
+
+-(void)setValueWithAll:(NSString *)all dfh:(NSString *)dfh shz:(NSString *)shz wfk:(NSString *)wfk{
+    self.allLab.text = all;
+    self.dfhLab.text = dfh;
+    self.shzLab.text = shz;
+    self.wfkLab.text = wfk;
+    if (![wfk isEqualToString:@"0"]) {
+        [self.dian setHidden:NO];
+    }else{
+        [self.dian setHidden:YES];
+
+    }
+    
+    
 }
 
 - (IBAction)statusBtnAction:(UIButton *)sender {

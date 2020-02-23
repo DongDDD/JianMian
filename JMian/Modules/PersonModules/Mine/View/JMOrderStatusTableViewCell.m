@@ -212,9 +212,16 @@
         [self.statusRightTopLab setHidden:YES];
         [self.didSendGoodsImageView setHidden:NO];
         
+    }else if ([_myData.status isEqualToString:@"12"]) {
+        [self.statusRightTopLab setTitle:@"已收货" forState:UIControlStateNormal];
+        [self.statusRightTopLab setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+        [self.statusRightTopLab setEnabled:NO];
+        [self.statusRightTopLab setHidden:NO];
+        
     }
     
 }
+
 -(void)setC_StatusBtn{
        //已下单
         if ([_myData.status isEqualToString:@"0"]) {
@@ -308,6 +315,18 @@
             [self.comfirmBtn setHidden:YES];
             [self.payBtn setHidden:YES];
             [self.statusRightTopLab setTitle:@"等待退货" forState:UIControlStateNormal];
+            [self.statusRightTopLab setEnabled:NO];
+            [self.statusRightTopLab setHidden:NO];
+            
+        }else if ([_myData.status isEqualToString:@"10"]) {
+            //已退货
+            [self.didSendGoodsImageView setHidden:YES];
+
+            [self.cancelOrderBtn setHidden:YES];
+            [self.contactBtn setHidden:NO];
+            [self.comfirmBtn setHidden:YES];
+            [self.payBtn setHidden:YES];
+            [self.statusRightTopLab setTitle:@"已退货" forState:UIControlStateNormal];
             [self.statusRightTopLab setEnabled:NO];
             [self.statusRightTopLab setHidden:NO];
             

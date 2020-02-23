@@ -17,7 +17,7 @@ extern NSString *const JMMyStoreOrderStatusTableViewCellIdentifier;
 @end
 
 @interface JMMyStoreOrderStatusTableViewCell : UITableViewCell
-
+-(void)setValueWithAll:(NSString *)all dfh:(NSString *)dfh shz:(NSString *)shz wfk:(NSString *)wfk;
 @end
 
 NS_ASSUME_NONNULL_END
