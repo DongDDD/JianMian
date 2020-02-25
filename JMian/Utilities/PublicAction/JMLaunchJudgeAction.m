@@ -1,12 +1,12 @@
 //
-//  JMJudgeViewController.m
+//  JMLaunchJugeAction.m
 //  JMian
 //
-//  Created by mac on 2019/4/26.
-//  Copyright © 2019 mac. All rights reserved.
+//  Created by mac on 2020/2/24.
+//  Copyright © 2020 mac. All rights reserved.
 //
 
-#import "JMJudgeViewController.h"
+#import "JMLaunchJudgeAction.h"
 #import "JMBAndCTabBarViewController.h"
 #import "JMHTTPManager+Login.h"
 #import "NavigationViewController.h"
@@ -21,58 +21,27 @@
 #import "JMHTTPManager+GetServiceID.h"
 #import "JMLogoutAction.h"
 #import "JMPostIMProfileAction.h"
-#import "JMHTTPManager+GetLaunchInfo.h"
-#import "JMLaunchModel.h"
-#import "JMLaunchInfoManager.h"
-@interface JMJudgeViewController ()
-@property (nonatomic, strong) MBProgressHUD *progressHUD;
-@end
 
-@implementation JMJudgeViewController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-//    [[UIApplication sharedApplication].keyWindow addSubview:self.progressHUD];
-    [self getLaunchInfo];
-    UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    [[UIApplication sharedApplication].keyWindow addSubview:imageView];
-     
-    JMLaunchModel *launchModel = [JMLaunchInfoManager getLaunchInInfo];
-    NSString *imaUrl;
-    BOOL isInTime = [JMDataTransform isInTimeWithS_date:launchModel.s_date e_date:launchModel.e_date];
-    int  afterDelay = 0;
-    if (isInTime) {
-        imaUrl = launchModel.cover_path;
-        afterDelay = 2;
-    }
-    
-    [imageView sd_setImageWithURL:[NSURL URLWithString:imaUrl] placeholderImage:[UIImage imageNamed:@"Launch"] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
-       [self performSelector:@selector(testMethod1:) withObject:nil afterDelay:afterDelay];
-         
-    }];
- 
-    self.view.backgroundColor = [UIColor whiteColor];
-    
-}
-
-- (void)testMethod1:(NSTimer*)timer {
-    NSLog(@"timer called");
-    if (kFetchMyDefault(@"token")){
-              [self getUserInfo];
-              [self getServiceRequest];
-          }else{
-              //token为空执行
-              LoginViewController *login = [[LoginViewController alloc] init];
-              NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-              [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-              
-          }
-}
+@implementation JMLaunchJudgeAction
 
 #pragma mark - data
++ (void)launch{
+//     [[UIApplication sharedApplication].keyWindow addSubview:self.progressHUD];
+     if (kFetchMyDefault(@"token")){
+        [self getUserInfo];
+        [self getServiceRequest];
+    }else{
+        //token为空执行
+        
+        LoginViewController *login = [[LoginViewController alloc] init];
+        NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
+        [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
+        
+    }
+    
+}
 
--(void)getUserInfo{
++(void)getUserInfo{
     [[JMHTTPManager sharedInstance] fetchUserInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         JMUserInfoModel *userInfo = [JMUserInfoModel mj_objectWithKeyValues:responsObject[@"data"]];
@@ -85,21 +54,7 @@
     
 }
 
-
--(void)getLaunchInfo{
-    [[JMHTTPManager sharedInstance]getLaunchInfoWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-        if (responsObject[@"data"]) {
-            JMLaunchModel *model  = [JMLaunchModel  mj_objectWithKeyValues:responsObject[@"data"]];
-            [JMLaunchInfoManager saveVersionInfo:model];
-        }
-        
-    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-        
-    }];
-    
-}
-
--(void)getServiceRequest{
++(void)getServiceRequest{
     [[JMHTTPManager sharedInstance]getServiceIdWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {
             NSString *serviceId = responsObject[@"data"][@"service_id"];
@@ -128,7 +83,7 @@
 }
 
 
--(void)judeAction{
++(void)judeAction{
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     model = [JMUserInfoManager getUserInfo];
     //腾讯云返回的usersig是否为空
@@ -148,7 +103,7 @@
                     [JMLogoutAction loginOut];
                 } else{
                     NSString *isYouke = kFetchMyDefault(@"youke");
-                    //游客模式用默认账号
+                   //游客模式用默认账号
                     if (([model.phone isEqualToString:@"17011116666"] || [model.phone isEqualToString:@"13246841721"]) && [isYouke isEqualToString:@"1"]) {
                         [self jugdeStepToVCWithModel:model];
                     }else{
@@ -172,7 +127,7 @@
 
 
 
--(void)jugdeStepToVCWithModel:(JMUserInfoModel *)model{
++(void)jugdeStepToVCWithModel:(JMUserInfoModel *)model{
    
     BaseViewController *vc;
     NSString *vcStr;
@@ -252,7 +207,7 @@
 
 #pragma mark - 判断注册到哪步
 
-- (NSString *)getCompanyStepWhereWitnEnterprise_step:(NSString *)enterprise_step{
++ (NSString *)getCompanyStepWhereWitnEnterprise_step:(NSString *)enterprise_step{
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
 
     NSArray *vcArray = @[@"ChooseIdentity",
@@ -281,7 +236,7 @@
 
 
 //获取个人用户全职填写信息步骤
-- (NSString *)getPersonStepWhereWitnUser_step:(NSString *)user_step{
++ (NSString *)getPersonStepWhereWitnUser_step:(NSString *)user_step{
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
 
     //因为服务器的user_step不是按顺序，但是数组是按顺序取，所以用[NSNull null]占一个位置
@@ -309,18 +264,18 @@
 }
 
 //获取个人用户兼职任务填写信息步骤
-- (void)getPersonPartTimeJobStep{
++ (void)getPersonPartTimeJobStep{
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
     if (userInfoModel.nickname.length > 0 && userInfoModel.avatar.length > 0 && userInfoModel.card_sex.length > 0) {
         JMPostPartTimeResumeViewController *vc = [[JMPostPartTimeResumeViewController alloc]init];
         vc.viewType = JMPostPartTimeResumeViewLogin;
         vc.isHideBackBtn = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+//        [[self currentViewController].navigationController pushViewController:vc animated:YES];
     }else{
         BasicInformationViewController *vc = [[BasicInformationViewController alloc]init];
         vc.viewType = BasicInformationViewTypePartTimeJob;
         vc.isHideBackBtn = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+//          [[self currentViewController].navigationController pushViewController:vc animated:YES];
     }
 
   
@@ -330,7 +285,7 @@
 
 #pragma mark - 登录腾讯云
 
--(void)loginIM_tpye:(NSString *)tpye{
++(void)loginIM_tpye:(NSString *)tpye{
     JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     if ([tpye isEqualToString:NO_Type_USER]){//还没选择身份不用其他判断直接跳选择身份界面
         [self jugdeStepToVCWithModel:model];
@@ -353,9 +308,9 @@
         login_param.appidAt3rd = TIMSdkAppid;
         [[TIMManager sharedInstance] login: login_param succ:^(){
             NSLog(@"Login Succ");
-            [self.progressHUD setHidden:YES];
+//            [self.progressHUD setHidden:YES];
             [self jugdeStepToVCWithModel:model];//根据step跳页面
-            [self upLoadDeviceToken];//申请离线推送
+//            [self upLoadDeviceToken];//申请离线推送
             [JMPostIMProfileAction postIMProfileActionWithUserModel:model];
         } fail:^(int code, NSString * err) {
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"请重新登录"
@@ -370,7 +325,7 @@
     
 }
 
--(void)gotoLoginViewVC{
++(void)gotoLoginViewVC{
 
     LoginViewController *loginVc = [[LoginViewController alloc]init];
     
@@ -381,51 +336,64 @@
 
 #pragma mark - 申请离线推送
 
--(void)upLoadDeviceToken{
-    TIMTokenParam *param = [[TIMTokenParam alloc] init];
-    /* 用户自己到苹果注册开发者证书，在开发者帐号中下载并生成证书(p12 文件)，将生成的 p12 文件传到腾讯证书管理控制台，控制台会自动生成一个证书 ID，将证书 ID 传入一下 busiId 参数中。*/
-#if kAppStoreVersion
-    // App Store 版本
-#if DEBUG
-    param.busiId = 13888;
-#else
-    param.busiId = 13888;
-#endif
-#else
-    //企业证书 ID
-    param.busiId = 13888;
-#endif
-    self.deviceToken = kFetchMyDefault(@"deviceToken");
-    [param setToken:self.deviceToken];
-    //            [UIApplication sharedApplication]
-    [[TIMManager sharedInstance] setToken:param succ:^{
-        NSLog(@"-----> 上传 token 成功 ");
-    } fail:^(int code, NSString *msg) {
-        NSLog(@"-----> 上传 token 失败 ");
-    }];
+//-(void)upLoadDeviceToken{
+//    TIMTokenParam *param = [[TIMTokenParam alloc] init];
+//    /* 用户自己到苹果注册开发者证书，在开发者帐号中下载并生成证书(p12 文件)，将生成的 p12 文件传到腾讯证书管理控制台，控制台会自动生成一个证书 ID，将证书 ID 传入一下 busiId 参数中。*/
+//#if kAppStoreVersion
+//    // App Store 版本
+//#if DEBUG
+//    param.busiId = 13888;
+//#else
+//    param.busiId = 13888;
+//#endif
+//#else
+//    //企业证书 ID
+//    param.busiId = 13888;
+//#endif
+//    self.deviceToken = kFetchMyDefault(@"deviceToken");
+//    [param setToken:self.deviceToken];
+//    //            [UIApplication sharedApplication]
+//    [[TIMManager sharedInstance] setToken:param succ:^{
+//        NSLog(@"-----> 上传 token 成功 ");
+//    } fail:^(int code, NSString *msg) {
+//        NSLog(@"-----> 上传 token 失败 ");
+//    }];
+//
+//
+//
+//}
 
-
-
-}
-
--(MBProgressHUD *)progressHUD{
-    if (!_progressHUD) {
-        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
-        _progressHUD.progress = 0.6;
-        _progressHUD.dimBackground = YES; //设置有遮罩
-        [_progressHUD showAnimated:YES]; //显示进度框
+//获取Window当前显示的ViewController
++ (UIViewController*)currentViewController{
+    //获得当前活动窗口的根视图
+    UIViewController* vc = [UIApplication sharedApplication].keyWindow.rootViewController;
+    while (1)
+    {
+        //根据不同的页面切换方式，逐步取得最上层的viewController
+        if ([vc isKindOfClass:[UITabBarController class]]) {
+            vc = ((UITabBarController*)vc).selectedViewController;
+        }
+        if ([vc isKindOfClass:[UINavigationController class]]) {
+            vc = ((UINavigationController*)vc).visibleViewController;
+        }
+        if (vc.presentedViewController) {
+            vc = vc.presentedViewController;
+        }else{
+            break;
+        }
     }
-    return _progressHUD;
+    return vc;
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+//-(MBProgressHUD *)progressHUD{
+//    if (!_progressHUD) {
+//        _progressHUD = [[MBProgressHUD alloc] initWithView:self.view];
+//        _progressHUD.progress = 0.6;
+//        _progressHUD.dimBackground = YES; //设置有遮罩
+//        [_progressHUD showAnimated:YES]; //显示进度框
+//    }
+//    return _progressHUD;
+//}
 
 @end

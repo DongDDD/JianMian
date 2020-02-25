@@ -189,4 +189,66 @@
     
     return result;
 }
+
++(BOOL)isInTimeWithS_date:(NSString *)s_date e_date:(NSString *)e_date{
+    
+    NSDate *currentDate = [NSDate date]; // 获取当前时间，日期
+    NSString *s_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",s_date];
+    NSString *e_timeStr = [NSString stringWithFormat:@"%@ 00:00:00",e_date];
+    NSDate *s_Date= [self dateFromString:s_timeStr];
+    NSDate *e_Date= [self dateFromString:e_timeStr];
+    
+    int s_result = [self compareOneDay:currentDate withAnotherDay:s_Date];
+    int e_result = [self compareOneDay:currentDate withAnotherDay:e_Date];
+    //s_Date < current < e_Date 在活动时间内
+    if (s_result == 1 && e_result == -1) {
+        return YES;
+        
+    }else if((s_result == 0 || e_result == 0)){
+        return YES;
+    }
+    return NO;
+}
+
++ (NSDate *)dateFromString:(NSString *)dateStr{
+    
+    NSDateFormatter * formatter = [[NSDateFormatter alloc]init];
+    // 注意的是下面给格式的时候,里面一定要和字符串里面的统一
+    // 比如:   dateStr为2017-07-24 17:38:27   那么必须设置成yyyy-MM-dd HH:mm:ss, 如果你设置成yyyy--MM--dd HH:mm:ss, 那么date就是null, 这是需要注意的
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
+    NSDate * date = [formatter dateFromString:dateStr];
+    return date;
+    
+}
+
++(int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    [dateFormatter setDateFormat:@"dd-MM-yyyy"];
+    
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    
+    NSComparisonResult result = [dateA compare:dateB];
+    
+    if (result == NSOrderedDescending) {
+        NSLog(@"oneDay比 anotherDay时间晚");
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        NSLog(@"oneDay比 anotherDay时间早");
+        return -1;
+    }
+    NSLog(@"两者时间是同一个时间");
+    return 0;
+    
+}
+
 @end

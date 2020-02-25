@@ -90,7 +90,7 @@
         case JMShopHomeTypeTitleHeader: {
             JMShopHomeHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMShopHomeHeaderTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell setValuesWithImageUrl:self.cellConfigures.model.shop_logo shopName:self.cellConfigures.model.shop_name goodsCount:self.cellConfigures.model.sort];
+            [cell setValuesWithImageUrl:self.cellConfigures.model.shop_logo shopName:self.cellConfigures.model.shop_name goodsCount:self.cellConfigures.model.all_total];
             return cell;
         }
         case JMShopHomeTypeGoodsList: {

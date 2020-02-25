@@ -11,10 +11,10 @@
 
 #ifdef DEBUG
 //Debug状态下的测试API
-//#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
+//#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
 
-#define IMG_BASE_URL_STRING     @"http://produce.jmzhipin.com"
+#define IMG_BASE_URL_STRING     @"http://app.jmzhipin.com"
 
 //app
 #else
@@ -76,6 +76,8 @@
 #define Info_Work_URL @"api/work/info"
 //活动专题
 #define Special_Activity_URL @"special/info/job_fair"
+//启动广告业
+#define Launch_Activity_URL @"special/info/startup_page"
 
 //B端接口
 #define Create_Company_URL @"api/company/create"

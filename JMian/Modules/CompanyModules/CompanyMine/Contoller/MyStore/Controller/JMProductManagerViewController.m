@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"商品";
-//    [self setRightBtnTextName:@"发布"];
+    [self setRightBtnTextName:@"发布"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
@@ -140,6 +140,9 @@
     }else if ([title isEqualToString:@"下架"]) {
     [self updataGoodsStatus:@"0" goods_id:data.goods_id];
     
+    }else if ([title isEqualToString:@"复制"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"该功能还没开通，敬请等待新版本" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            [alert show];
     }
 }
 
@@ -168,6 +171,7 @@
     }
     
 }
+
 #pragma mark - lazy
 
 - (JMTitlesView *)titleView {

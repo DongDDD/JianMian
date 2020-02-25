@@ -38,7 +38,7 @@
 #import "JMPushVCAction.h"
 #import "JMServiceProtocolWebViewController.h"
 #import "JMLogoutAction.h"
-
+#import "JMLaunchJudgeAction.h"
 
 @interface AppDelegate ()<TIMMessageListener,UIAlertViewDelegate,JMAnswerOrHangUpViewDelegate,JMVideoChatViewDelegate,JMFeedBackChooseViewControllerDelegate,TIMRefreshListener, TIMMessageListener, TIMMessageRevokeListener, TIMUploadProgressListener, TIMUserStatusListener, TIMConnListener, TIMMessageUpdateListener,iVersionDelegate>
 
@@ -177,8 +177,6 @@
 //    [judgevc.view addSubview:self.versionDetailsView];
 
 //    [self getServiceRequest];
-
-
     return YES;
 }
 

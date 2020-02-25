@@ -462,7 +462,10 @@
         [cell setDescStr:self.configures.model.goods_description];
 //            NSString *myStr = [NSString stringWithFormat:@"<head><style>img{max-width:%f !important;}</style></head>",cell.contentView.frame.size.width-20];
 //            NSString *str = [NSString stringWithFormat:@"%@%@",@"<head><style>img{width:100% !important;}</style></head>",self.configures.model.goods_description];
-        [cell.webView loadHTMLString:self.configures.model.goods_description baseURL:nil];
+        if (self.configures.model.goods_description) {
+            [cell.webView loadHTMLString:self.configures.model.goods_description baseURL:nil];
+             
+        }
 
 //        [cell setModel:self.configures.model];
         return cell;

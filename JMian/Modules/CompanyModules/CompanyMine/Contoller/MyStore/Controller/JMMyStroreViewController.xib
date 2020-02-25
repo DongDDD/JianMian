@@ -45,26 +45,6 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                 </textView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="店铺首页" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3nM-rw-OnX">
-                    <rect key="frame" x="44" y="418" width="53.5" height="16"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon_return .png" translatesAutoresizingMaskIntoConstraints="NO" id="fCp-dI-1I3">
-                    <rect key="frame" x="294" y="420" width="7.5" height="12"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="12" id="4nS-iF-Ad1"/>
-                        <constraint firstAttribute="width" constant="7.5" id="p2H-2X-M9v"/>
-                    </constraints>
-                </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="icon-indes.png" translatesAutoresizingMaskIntoConstraints="NO" id="Zfx-Em-FCv">
-                    <rect key="frame" x="20" y="418" width="15" height="15"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="15" id="2rO-D3-ItI"/>
-                        <constraint firstAttribute="height" constant="15" id="V5q-Ck-YOL"/>
-                    </constraints>
-                </imageView>
             </subviews>
             <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -74,15 +54,12 @@
                 <constraint firstItem="FsC-qu-zr7" firstAttribute="centerX" secondItem="5AV-8u-EoC" secondAttribute="centerX" id="Xn6-2Y-Oce"/>
                 <constraint firstItem="5AV-8u-EoC" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="87" id="bhY-si-kN5"/>
                 <constraint firstItem="5AV-8u-EoC" firstAttribute="centerX" secondItem="Q5M-cg-NOt" secondAttribute="centerX" id="nsW-sh-InB"/>
-                <constraint firstItem="3nM-rw-OnX" firstAttribute="leading" secondItem="Zfx-Em-FCv" secondAttribute="trailing" constant="9" id="vJA-bs-Dtg"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="-78.260869565217391" y="75.669642857142847"/>
         </view>
     </objects>
     <resources>
-        <image name="icon-indes.png" width="14.5" height="15.5"/>
         <image name="icon-no_store.png" width="132.5" height="132.5"/>
-        <image name="icon_return .png" width="6.5" height="11"/>
     </resources>
 </document>

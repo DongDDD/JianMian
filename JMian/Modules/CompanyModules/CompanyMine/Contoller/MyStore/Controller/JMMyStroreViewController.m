@@ -26,7 +26,11 @@
     [super viewDidLoad];
      // Do any additional setup after loading the view from its nib.
     self.title = @"我的店铺";
-    [self.view addSubview:self.tableView];
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if (userModel.shop_shop_id) {
+        [self.view addSubview:self.tableView];
+        
+    }
     
 }
 
@@ -119,7 +123,7 @@
 
 #pragma mark - delegate
 -(void)didSelectStoreManager1ItemWithRow:(NSInteger)row{
-    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+//    JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
     if (row == 0) {
         JMStroreNotificationViewController *vc = [[JMStroreNotificationViewController alloc]init];
         vc.viewType = JMStroreNotificationViewPoster;

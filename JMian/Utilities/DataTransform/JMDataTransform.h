@@ -28,8 +28,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)getNormalStringFilterHTMLString:(NSString *)htmlStr;
 
 /// 取数组里面最大值最小值
-/// @param arr
+/// @param arr 数组
 +(NSString *)getSalaryRangeWithArr:(NSArray *)arr;
+
+
+/// 判断是否在活动时间内
+/// @param s_date 开始时间
+/// @param e_date 结束时间
++(BOOL)isInTimeWithS_date:(NSString *)s_date e_date:(NSString *)e_date;
 @end
 
 NS_ASSUME_NONNULL_END

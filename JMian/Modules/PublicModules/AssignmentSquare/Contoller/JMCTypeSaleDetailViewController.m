@@ -551,7 +551,8 @@
     }else if (indexPath.section == JMCTypeSaleCellTypeMyStoreHeader){
         JMCSaleTypeDetailStoreHeaderTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMCSaleTypeDetailStoreHeaderTableViewCellIdentifier forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-       [cell setValuesWithImageUrl:self.configures.shopModel.shop_logo title:self.configures.shopModel.shop_name goodsCount:self.configures.shopModel.sort];
+        NSString *count = [NSString stringWithFormat:@"%lu",(unsigned long)self.configures.goodsListArray.count];
+       [cell setValuesWithImageUrl:self.configures.shopModel.shop_logo title:self.configures.shopModel.shop_name goodsCount:count];
 //        [cell setModel:self.configures.shopModel];
         return cell;
     }else if (indexPath.section == JMCTypeSaleCellTypeMyStoreGoods){

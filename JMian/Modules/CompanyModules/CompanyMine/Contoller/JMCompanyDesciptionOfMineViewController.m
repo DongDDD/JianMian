@@ -39,7 +39,6 @@
 }
 
 -(void)setComDesc:(NSString *)comDesc{
-
     [self.decriptionTextView setContent:comDesc];
     
 }
