@@ -936,6 +936,7 @@
 		04B116CE23B35CD80000D01A /* JMUserProfileImageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B116CC23B35CD80000D01A /* JMUserProfileImageTableViewCell.m */; };
 		04B116CF23B35CD80000D01A /* JMUserProfileImageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B116CD23B35CD80000D01A /* JMUserProfileImageTableViewCell.xib */; };
 		04B116D223B35DEF0000D01A /* JMBUserProfileConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B116D123B35DEF0000D01A /* JMBUserProfileConfigure.m */; };
+		04B205B824064D26006906CC /* JMHTTPManager+PostGoodsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B205B724064D26006906CC /* JMHTTPManager+PostGoodsRequest.m */; };
 		04B4F88222B7A5B300A06E9C /* JMInvoiceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F88122B7A5B300A06E9C /* JMInvoiceModel.m */; };
 		04B4F88522B7BFBE00A06E9C /* JMPostGoodsImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B4F88422B7BFBE00A06E9C /* JMPostGoodsImagesView.m */; };
 		04B4F88722B7BFDB00A06E9C /* JMPostGoodsImagesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B4F88622B7BFDA00A06E9C /* JMPostGoodsImagesView.xib */; };
@@ -2785,6 +2786,8 @@
 		04B116CD23B35CD80000D01A /* JMUserProfileImageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMUserProfileImageTableViewCell.xib; sourceTree = "<group>"; };
 		04B116D023B35DEF0000D01A /* JMBUserProfileConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMBUserProfileConfigure.h; sourceTree = "<group>"; };
 		04B116D123B35DEF0000D01A /* JMBUserProfileConfigure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMBUserProfileConfigure.m; sourceTree = "<group>"; };
+		04B205B624064D26006906CC /* JMHTTPManager+PostGoodsRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+PostGoodsRequest.h"; sourceTree = "<group>"; };
+		04B205B724064D26006906CC /* JMHTTPManager+PostGoodsRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+PostGoodsRequest.m"; sourceTree = "<group>"; };
 		04B4F88022B7A5B300A06E9C /* JMInvoiceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMInvoiceModel.h; sourceTree = "<group>"; };
 		04B4F88122B7A5B300A06E9C /* JMInvoiceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMInvoiceModel.m; sourceTree = "<group>"; };
 		04B4F88322B7BFBE00A06E9C /* JMPostGoodsImagesView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPostGoodsImagesView.h; sourceTree = "<group>"; };
@@ -4262,6 +4265,8 @@
 				0499E48B23FE33E10045CD13 /* JMHTTPManager+GetMyShopInfo.m */,
 				0499E48D23FE3B140045CD13 /* JMHTTPManager+UpdateGoodsStatus.h */,
 				0499E48E23FE3B140045CD13 /* JMHTTPManager+UpdateGoodsStatus.m */,
+				04B205B624064D26006906CC /* JMHTTPManager+PostGoodsRequest.h */,
+				04B205B724064D26006906CC /* JMHTTPManager+PostGoodsRequest.m */,
 			);
 			path = Shop;
 			sourceTree = "<group>";
@@ -8667,6 +8672,7 @@
 				043396912383DCE70010F650 /* JMPushMessageCell.m in Sources */,
 				04EA7E2A23011376005B7CE5 /* JMSnapshotWebViewController.m in Sources */,
 				04AB7A9F23501A0C009A30C0 /* JMVersionDetailsView.m in Sources */,
+				04B205B824064D26006906CC /* JMHTTPManager+PostGoodsRequest.m in Sources */,
 				040E367122687B2D00A7D789 /* JMBottomView.m in Sources */,
 				044A34E023FAD262001997A1 /* JMRefuseRefundViewController.m in Sources */,
 				040A40C02265B2480005E0D7 /* JMCompanyInfoViewController.m in Sources */,
@@ -9074,7 +9080,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.9;
+				MARKETING_VERSION = 1.5.0;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9108,7 +9114,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.4.9;
+				MARKETING_VERSION = 1.5.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

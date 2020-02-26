@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *created_at;
 @property (nonatomic, copy) NSString *pay_time;
 @property (nonatomic, copy) NSString *logistics_at_c;
-@property (nonatomic, copy) NSString *logistics_c_name;
+@property (nonatomic, copy) NSString *logistics_name;
 
  
 

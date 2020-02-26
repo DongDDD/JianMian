@@ -52,8 +52,14 @@ NSString *const JMScrollviewTableViewCellIdentifier = @"JMScrollviewTableViewCel
     _cycleScrollView2.clickItemOperationBlock = ^(NSInteger index) {
         NSLog(@">>>>>  %ld", (long)index);
         UIImageView *img = [[UIImageView alloc]init];
-        [img sd_setImageWithURL:[NSURL URLWithString:imagesURLStrings[index]]];
-        [ZJImageMagnification  scanBigImageWithImageView:img alpha:1];
+        if (imagesURLStrings.count > 0) {
+//            [img sd_setImageWithURL:[NSURL URLWithString:imagesURLStrings[index]]];
+            [img sd_setImageWithURL:[NSURL URLWithString:imagesURLStrings[index]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+                [ZJImageMagnification  scanBigImageWithImageView:img alpha:1];
+                 
+            }];
+             
+        }
     };
     
     

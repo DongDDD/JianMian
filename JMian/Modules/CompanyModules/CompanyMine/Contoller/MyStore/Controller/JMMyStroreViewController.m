@@ -158,12 +158,10 @@
     if (row == 1) {
         [JMCreatChatAction createServiceChat];
     }
-    
     if (row == 2) {
         JMProductManagerViewController *vc = [[JMProductManagerViewController alloc]init];
         vc.shop_id = self.cellConfigures.model.shop_id;
         [self.navigationController pushViewController:vc animated:YES];
-        
     }
 
 }

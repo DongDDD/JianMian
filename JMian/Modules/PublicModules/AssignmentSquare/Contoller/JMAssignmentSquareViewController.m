@@ -345,10 +345,10 @@ static NSString *C_cellIdent = @"CSquareCellID";
 -(void)gotoVideoViewAction{
     [self.loginsucceedView setHidden:YES];
     JMUploadVideoViewController *vc = [[JMUploadVideoViewController alloc]init];
-              vc.title = @"视频简历";
-              vc.viewType = JMUploadVideoViewTypeJobEdit;
-              [self.navigationController pushViewController:vc animated:YES];
-
+    vc.title = @"视频简历";
+    vc.viewType = JMUploadVideoViewTypeJobEdit;
+    [self.navigationController pushViewController:vc animated:YES];
+    
 }
 //- (void)iVersionDidDetectNewVersion:(NSString *)version details:(NSString *)versionDetails{
 ////    NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];

@@ -66,7 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface JMFilesModel : NSObject
 
-@property (nonatomic, copy) NSString *files_type;
+@property (nonatomic, copy) NSString *type;
 @property (nonatomic, copy) NSString *files_file_path;
 @property (nonatomic, copy) NSString *status;
 @property (nonatomic, copy) NSString *file_id;

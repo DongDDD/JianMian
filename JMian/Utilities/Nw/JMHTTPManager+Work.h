@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
                             salary_min:(nullable NSString *)salary_min
                             salary_max:(nullable NSString *)salary_max
                           subway_names:(nullable NSArray *)subway_names
+                            special_id:(nullable NSString *)special_id
                                 status:(NSString * )status
                                   page:(nullable NSString *)page
                               per_page:(nullable NSString *)per_page

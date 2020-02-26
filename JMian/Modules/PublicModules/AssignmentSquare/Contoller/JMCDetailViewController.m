@@ -379,7 +379,7 @@
     //分享实例
     WXWebpageObject *webObj = [WXWebpageObject object];
 //    NSString *url = [NSString stringWithFormat:@"http://www.jmzhipin.com/static/shop/#/shop_info?id=12&task_order_id=1",
-//    webObj.webpageUrl = self.configures.model.share_url;
+    webObj.webpageUrl = self.configures.model.share_url;
     
     urlMessage.mediaObject = webObj;
     sendReq.message = urlMessage;
@@ -712,9 +712,9 @@
 }
 
 -(void)shareViewLeftAction{
-//    [self wxShare:0];
+    [self wxShare:0];
     [self hiddenChoosePayView];
-    [self shareMiniProgram];
+//    [self shareMiniProgram];
     
 }
 -(void)shareViewRightAction{

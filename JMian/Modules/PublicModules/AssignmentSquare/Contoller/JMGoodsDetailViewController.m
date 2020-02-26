@@ -431,7 +431,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSMutableArray *imagesURLStrings = [NSMutableArray array];
         for (JMGoodsInfoImageModel *model in self.configures.model.images) {
-            NSString *url = [NSString stringWithFormat:@"%@%@",API_BASE_URL_ImageSTRING,model.file_path];
+            NSString *url = [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,model.file_path];
             [imagesURLStrings addObject:url];
         }
         if (imagesURLStrings.count > 0) {

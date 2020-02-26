@@ -119,7 +119,7 @@ static const CGFloat kPhotoViewMargin = 12.0;
             
             if (self.companyInfoModel.files.count > 0) {
                 for (JMFilesModel *filesModel in self.companyInfoModel.files) {
-                    if ([filesModel.files_type isEqualToString:@"2"]) {//过滤视频走 只要图片
+                    if ([filesModel.type isEqualToString:@"2"]) {//过滤视频走 只要图片
                         [self.filesModelArray addObject:filesModel];
                     }
                 }

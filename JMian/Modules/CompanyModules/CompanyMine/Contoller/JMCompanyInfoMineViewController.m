@@ -140,7 +140,7 @@
             
             if (self.model.files.count > 0) {
                 for (JMFilesModel *filesModel in self.model.files) {
-                    if ([filesModel.files_type isEqualToString:@"2"]) {//过滤视频走 只要图片
+                    if ([filesModel.type isEqualToString:@"2"]) {//过滤视频走 只要图片
                         [self.imageDataArray addObject:filesModel];
                     }
                 }

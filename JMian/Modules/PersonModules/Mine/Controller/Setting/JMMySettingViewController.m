@@ -16,6 +16,8 @@
 #import "JMAboutOursViewController.h"
 #import "JMOpinionViewController.h"
 #import "ChooseIdentity.h"
+#import "iVersion.h"
+#import "JMCreatChatAction.h"
 
 @interface JMMySettingViewController ()<UITableViewDelegate,UITableViewDataSource,JMUserChangeWindowViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -157,24 +159,43 @@
              [[UIApplication sharedApplication].keyWindow addSubview:_myWindowView];
          }
      
-     }else if (indexPath.section == 1) {
-         NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"02031148487"];
-         // NSLog(@"str======%@",str);
-         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
      }
-    if (indexPath.section == 2) {
-        if (indexPath.row ==0) {
-            JMAboutOursViewController *vc = [[JMAboutOursViewController alloc]init];
-            [self.navigationController pushViewController:vc animated:YES];
-        }else if (indexPath.row ==1) {
-            JMOpinionViewController *vc = [JMOpinionViewController alloc];
-            [self.navigationController pushViewController:vc animated:NO];
-            
-        }
-    }
+     else if (indexPath.section == 1) {
+         if (indexPath.row == 0) {
+             NSMutableString * str=[[NSMutableString alloc] initWithFormat:@"tel:%@",@"02031148487"];
+             // NSLog(@"str======%@",str);
+             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+              
+         }else if (indexPath.row == 1) {
+             JMVersionModel *versionModel = [JMVersionManager getVersoinInfo];
+             NSDictionary *infoDictionary = [[NSBundle mainBundle] infoDictionary];
+             NSString *nowVersionStr = [infoDictionary objectForKey:@"CFBundleShortVersionString"];
+             BOOL isNeedUpDate = [self compareVersion:versionModel.version toVersion:nowVersionStr];
+             if (isNeedUpDate) {
+                 [[iVersion sharedInstance] openAppPageInAppStore];
+             }else{
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"已经是最新版本" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                 [alert show];
+                 
+                 
+             }
+         }
+     }
+    
+     else if (indexPath.section == 2) {
+         if (indexPath.row ==0) {
+             JMAboutOursViewController *vc = [[JMAboutOursViewController alloc]init];
+             [self.navigationController pushViewController:vc animated:YES];
+         }else if (indexPath.row ==1) {
+             [JMCreatChatAction createServiceChat];
+         }
+     }
     
     
-    if (indexPath.section == 3) {
+    
+    
+    
+    else  if (indexPath.section == 3) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"确定要退出吗" preferredStyle: UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         }]];
@@ -184,27 +205,35 @@
         }]];
         
         [self presentViewController:alert animated:YES completion:nil];
-//        [[JMHTTPManager sharedInstance] logoutWithSuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
-//
-//            kRemoveMyDefault(@"token");
-//            kRemoveMyDefault(@"usersig");
-//            //token为空执行
-//
-//            [[TIMManager sharedInstance] logout:^() {
-//                NSLog(@"logout succ");
-//            } fail:^(int code, NSString * err) {
-//                NSLog(@"logout fail: code=%d err=%@", code, err);
-//            }];
-//            LoginViewController *login = [[LoginViewController alloc] init];
-//            NavigationViewController *naVC = [[NavigationViewController alloc] initWithRootViewController:login];
-//            [UIApplication sharedApplication].delegate.window.rootViewController = naVC;
-//        } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
-//
-//
-//        }];
+
     }
     
 }
+
+- (BOOL)compareVersion:(NSString *)version1 toVersion:(NSString *)version2
+{
+    NSArray *list1 = [version1 componentsSeparatedByString:@"."];
+    NSArray *list2 = [version2 componentsSeparatedByString:@"."];
+    for (int i = 0; i < list1.count || i < list2.count; i++)
+    {
+        NSInteger a = 0, b = 0;
+        if (i < list1.count) {
+            a = [list1[i] integerValue];
+        }
+        if (i < list2.count) {
+            b = [list2[i] integerValue];
+        }
+        if (a > b) {
+            return YES;//version1大于version2
+        } else if (a < b) {
+            return NO;//version1小于version2
+        }
+    }
+    return NO;//version1等于version2
+    
+}
+
+
 
 -(void)deleteAction{
     [_myWindowView setHidden:YES];

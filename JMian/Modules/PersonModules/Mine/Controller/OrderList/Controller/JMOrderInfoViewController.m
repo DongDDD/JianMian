@@ -201,10 +201,10 @@
                 cell.titleLab.text = @"等待退款";
             }else if (_viewType == JMOrderInfoViewTakeDeliveryGoods) {
                 cell.titleLab.text = @"已收货";
-                if ([userModel.type isEqualToString:C_Type_USER]) {
+//                if ([userModel.type isEqualToString:C_Type_USER]) {
                     if (!_isExtension) {
                         [cell setOverTime:15];
-                    }
+//                    }
                     
                 }
             }else if (_viewType == JMOrderInfoViewAfterSales) {
@@ -265,7 +265,7 @@
         case JMOrderInfoTypeTimeMsg: {
             JMOrderInfoTimeMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOrderInfoTimeMsgTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell setValuesWithTime1:self.cellConfigures.model.created_at time2:self.cellConfigures.model.pay_time logName:self.cellConfigures.model.logistics_c_name time4:self.cellConfigures.model.logistics_at_c];
+            [cell setValuesWithTime1:self.cellConfigures.model.created_at time2:self.cellConfigures.model.pay_time logName:self.cellConfigures.model.logistics_name time4:self.cellConfigures.model.logistics_at_c];
             return cell;
         }
         case JMOrderInfoTypeBtn: {

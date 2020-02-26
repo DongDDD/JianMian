@@ -135,6 +135,38 @@
     
 }
 
+- (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
+    
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    colectBtn.frame = CGRectMake(45, 0, 25, 25);
+    if (self.configures.model.favorites_id) {
+        colectBtn.selected = YES;
+    }else{
+        colectBtn.selected = NO;
+        
+    }
+    [colectBtn addTarget:self action:@selector(rightAction:) forControlEvents:UIControlEventTouchUpInside];
+    [colectBtn setImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
+    
+    [bgView addSubview:colectBtn];
+    if (imageNameRight2 != nil) {
+        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        shareBtn.frame = CGRectMake(0, 0, 25, 25);
+        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
+        [bgView addSubview:shareBtn];
+        
+    }
+    
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
+    self.navigationItem.rightBarButtonItem = rightItem;
+    
+    
+}
 #pragma mark -- Action
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
@@ -260,7 +292,7 @@
 -(void)rightAction:(UIButton *)sender{
 
     if (_viewType == CTypeSaleViewPreviewType) {
-//        [self showShareView];
+          [self.shareView show];
     }else if (_viewType == CTypeSaleViewDefaultType) {
         sender.selected = !sender.selected;
         if (sender.selected) {
@@ -520,9 +552,9 @@
 
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     if (section == 1) {
-        if (_viewType == CTypeSaleViewDefaultType) {
+        if (_viewType == CTypeSaleViewDefaultType || _viewType == CTypeSaleViewPreviewType) {
             return self.titleView;
-        }else if (_viewType == CTypeSaleViewSnapshootType){
+        }else if (_viewType == CTypeSaleViewSnapshootType) {
             return self.snapshootView;
         }
     }

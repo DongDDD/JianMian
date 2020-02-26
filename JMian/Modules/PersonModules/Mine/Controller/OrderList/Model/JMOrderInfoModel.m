@@ -23,7 +23,7 @@
              @"after_sale_user_id":@"after_sale.user_id",
              @"after_sale_boss_id":@"after_sale.boss_id",
              @"after_sale_created_at":@"after_sale.created_at",
-             @"logistics_c_name":@"logistics_c.name",
+             @"logistics_name":@"logistics.name",
 
              };
 }

@@ -31,7 +31,7 @@
         }else if (indexPath.row == 1) {
             NSMutableArray *imagesURLStrings = [NSMutableArray array];
             for (JMFilesModel *filesModel in self.model.files) {
-                if ([filesModel.files_type isEqualToString:@"2"]) {
+                if ([filesModel.status isEqualToString:@"2"] && [filesModel.type isEqualToString:@"2"]) {
                     [imagesURLStrings addObject:filesModel.files_file_path];
                 }
                 

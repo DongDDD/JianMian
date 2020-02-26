@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
                              recipient_mark:(nullable NSString *)recipient_mark;
 //通用聊天
 +(void)create4TypeChatRequstWithAccount:(NSString *)account;
-//客服聊天
+//客服聊天（弃）
 +(void)createServiceTypeChatRequstWithChat_type:(NSString *)chat_type
                                     foreign_key:(NSString *)foreign_key
                                         user_id:(NSString *)user_id

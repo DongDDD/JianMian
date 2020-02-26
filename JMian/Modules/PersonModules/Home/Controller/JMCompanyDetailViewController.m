@@ -163,7 +163,10 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 NSMutableArray *imagesURLStrings = [NSMutableArray array];
                     for (JMFilesModel *model in self.configures.model.files) {
-                        [imagesURLStrings addObject:model.files_file_path];
+                        if ([model.status isEqualToString:@"2"] && [model.type isEqualToString:@"2"] ) {
+                            [imagesURLStrings addObject:model.files_file_path];
+                             
+                        }
                     }
                     if (imagesURLStrings.count > 0) {
                         [cell setImagesArr:imagesURLStrings];

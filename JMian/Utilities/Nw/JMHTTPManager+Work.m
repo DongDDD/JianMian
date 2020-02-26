@@ -27,6 +27,7 @@
                             salary_min:(nullable NSString *)salary_min
                             salary_max:(nullable NSString *)salary_max
                           subway_names:(nullable NSArray *)subway_names
+                            special_id:(nullable NSString *)special_id
                                 status:(NSString * )status
                                   page:(nullable NSString *)page
                               per_page:(nullable NSString *)per_page
@@ -44,6 +45,7 @@
                                  @"salary_max":salary_max,
                                  @"subway_names":subway_names,
                                  @"status":status,
+                                 @"special_id":special_id,
                                  @"page":page,
                                  @"per_page":per_page
                                  

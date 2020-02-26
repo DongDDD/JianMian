@@ -35,7 +35,7 @@
         case JMOrderInfoTypeTimeMsg:
             self.rowsNum = 1;
             self.footerheight = 0;
-            self.height = 120;
+            self.height = 140;
             break;
             case JMOrderInfoTypeBtn:
                 self.rowsNum = 1;

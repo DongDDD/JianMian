@@ -34,7 +34,7 @@
                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="http://www.jmzhipin.com/" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tAO-X6-n4w">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="http://www.demikuaizhao.com" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tAO-X6-n4w">
                     <rect key="frame" x="102" y="319.5" width="210" height="28"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>

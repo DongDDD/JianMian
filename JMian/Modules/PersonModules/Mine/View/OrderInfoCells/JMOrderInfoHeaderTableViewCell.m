@@ -7,6 +7,7 @@
 //
 
 #import "JMOrderInfoHeaderTableViewCell.h"
+#import "DimensMacros.h"
 NSString *const JMOrderInfoHeaderTableViewCellIdentifier = @"JMOrderInfoHeaderTableViewCellIdentifier";
 @interface JMOrderInfoHeaderTableViewCell ()
  @property(nonatomic,assign)int myOverTime;
@@ -63,10 +64,17 @@ NSString *const JMOrderInfoHeaderTableViewCellIdentifier = @"JMOrderInfoHeaderTa
 //        self.timeLab.text =[ NSString stringWithFormat:@"根据《消费者权益保护法》您还有%@ ，无理由退货", self.topTime];
 //
 //    }
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     if (_myOverTime == 10) {//已发货
         self.timeLab.text =[ NSString stringWithFormat:@"你还有%@ 来确认收货，超时订单自动确认收货", self.topTime];
     }else if (_myOverTime == 15) {//已收货
-        self.timeLab.text =[ NSString stringWithFormat:@"根据《消费者权益保护法》您还有%@ ，无理由退货", self.topTime];
+        if ([userModel.type isEqualToString:B_Type_UESR]) {
+            self.timeLab.text =[ NSString stringWithFormat:@"根据平台相关规定资金将在本平台冻结%@ 后解冻到账", self.topTime];
+        }else{
+            self.timeLab.text =[ NSString stringWithFormat:@"根据《消费者权益保护法》您还有%@ ，无理由退货", self.topTime];
+            
+        }
+        
 
     }
 
