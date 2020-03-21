@@ -103,12 +103,21 @@ static NSString *cellIdent = @"wuliucellIdent";
     [self.expressageNumTextField resignFirstResponder];
     NSString *logistics_no;
     NSString *logistics_id;
+    NSString *status;
+    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    if ([userModel.type isEqualToString:B_Type_UESR]) {
+        status = @"6";
+    }else{
+       status = @"10";
+
+    }
     if (![self.expressageNumTextField.text isEqualToString:@"无需物流"]) {
         logistics_no = self.expressageNumTextField.text;
         logistics_id = _logisticsCelldata.label_id;
     }
     
-    [[JMHTTPManager sharedInstance]deliverGoodsWithOrder_id:_order_id status:@"10" logistics_no:logistics_no logistics_id:logistics_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    
+    [[JMHTTPManager sharedInstance]deliverGoodsWithOrder_id:_order_id status:status logistics_no:logistics_no logistics_id:logistics_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         [self showAlertVCSucceesSingleWithMessage:@"物流信息提交成功" btnTitle:@"返回"];
         
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
@@ -133,11 +142,10 @@ static NSString *cellIdent = @"wuliucellIdent";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
- 
     return 55;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdent];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdent];

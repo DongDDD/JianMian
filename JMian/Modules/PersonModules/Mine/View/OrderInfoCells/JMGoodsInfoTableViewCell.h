@@ -17,8 +17,9 @@ extern NSString *const JMGoodsInfoTableViewCellIdentifier;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab2;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab3;
+@property (weak, nonatomic) IBOutlet UILabel *titleLab4;
 @property (nonatomic, strong) JMGoodsInfoCellData *data;
--(void)setValuesWithImageUrl:(NSString *)ImageUrl title:(NSString *)title quantity:(NSString *)quantity  price:(NSString *)price;
+-(void)setValuesWithImageUrl:(NSString *)ImageUrl title:(NSString *)title quantity:(NSString *)quantity  price:(NSString *)price sku_mark:(NSString *)sku_mark;
 @end
 
 NS_ASSUME_NONNULL_END

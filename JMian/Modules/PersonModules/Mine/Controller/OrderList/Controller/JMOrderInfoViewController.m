@@ -192,9 +192,9 @@
                 cell.titleLab.text = @"未付款";
             }else if (_viewType == JMOrderInfoViewDidDeliverGoods) {
                 cell.titleLab.text = @"已发货";
-                if (!_isExtension) {
+//                if (!_isExtension) {
                     [cell setOverTime:10];
-                }
+//                }
             }else if (_viewType == JMOrderInfoViewFinish) {
                 cell.titleLab.text = @"交易完成";
             }else if (_viewType == JMOrderInfoViewWaitRefund) {
@@ -202,11 +202,11 @@
             }else if (_viewType == JMOrderInfoViewTakeDeliveryGoods) {
                 cell.titleLab.text = @"已收货";
 //                if ([userModel.type isEqualToString:C_Type_USER]) {
-                    if (!_isExtension) {
+//                    if (!_isExtension) {
                         [cell setOverTime:15];
 //                    }
                     
-                }
+//                }
             }else if (_viewType == JMOrderInfoViewAfterSales) {
                 cell.titleLab.text = @"售后中";
             }else if (_viewType == JMOrderInfoViewSetRefund) {
@@ -244,7 +244,7 @@
             JMGoodsCellData *data = self.cellConfigures.model.goods[indexPath.row];
             NSString *cover_path = [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,data.cover_path];
 
-            [cell setValuesWithImageUrl:cover_path title:data.title quantity:data.quantity price:data.price];
+            [cell setValuesWithImageUrl:cover_path title:data.title quantity:data.quantity price:data.price sku_mark:data.sku_mark];
             return cell;
         }
         case JMOrderInfoTypePrice: {

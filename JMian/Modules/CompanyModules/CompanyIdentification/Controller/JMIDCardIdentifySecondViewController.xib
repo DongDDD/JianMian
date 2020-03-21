@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -73,13 +71,11 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="WFG-y5-vaB"/>
                             </constraints>
-                            <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
                         </textField>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请填写身份证信息" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aeJ-cE-in4">
                             <rect key="frame" x="91" y="55.5" width="303" height="50"/>
-                            <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
                         </textField>
@@ -104,7 +100,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sdW-oH-zff">
-                    <rect key="frame" x="20" y="556" width="374" height="50"/>
+                    <rect key="frame" x="20" y="792" width="374" height="50"/>
                     <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="7ot-E8-gYx"/>
@@ -125,6 +121,7 @@
             </subviews>
             <constraints>
                 <constraint firstItem="hGU-8o-WVr" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="23s-Y4-EGz"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="sdW-oH-zff" secondAttribute="bottom" constant="20" id="276-Zu-Ai5"/>
                 <constraint firstItem="D5D-NW-6pk" firstAttribute="width" secondItem="6jv-AZ-LOX" secondAttribute="width" id="5Md-Mz-8a6"/>
                 <constraint firstItem="HMb-oL-t4V" firstAttribute="top" secondItem="6jv-AZ-LOX" secondAttribute="bottom" constant="37" id="7m3-6A-Uxt"/>
                 <constraint firstItem="6jv-AZ-LOX" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="40" id="O7L-6q-Wch"/>
@@ -137,7 +134,6 @@
                 <constraint firstItem="6jv-AZ-LOX" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="10" id="aeh-rd-n3K"/>
                 <constraint firstItem="sdW-oH-zff" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="ekW-iq-SrV"/>
                 <constraint firstItem="D5D-NW-6pk" firstAttribute="top" secondItem="6jv-AZ-LOX" secondAttribute="top" id="fQ1-Pr-Z5Z"/>
-                <constraint firstItem="sdW-oH-zff" firstAttribute="top" secondItem="hGU-8o-WVr" secondAttribute="bottom" constant="190" id="kf0-Zf-vzf"/>
                 <constraint firstItem="D5D-NW-6pk" firstAttribute="bottom" secondItem="6jv-AZ-LOX" secondAttribute="bottom" id="ntF-6F-p6g"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>

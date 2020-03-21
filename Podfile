@@ -23,3 +23,9 @@ pod 'iVersion', '~> 1.11.5'
 pod 'Toast'
 pod 'ISVImageScrollView'
 pod 'TXIMSDK_iOS'
+pod 'ZSSRichTextEditor'
+pod 'YYModel'
+pod 'FMDB'
+
+
+

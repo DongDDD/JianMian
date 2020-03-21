@@ -79,7 +79,7 @@
     JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
     if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
         [self.nameText setEnabled:NO];
-        [self.birtnDateBtn setEnabled:NO];
+//        [self.birtnDateBtn setEnabled:NO];
     }
 //    if ([self.baseVC isKindOfClass:[JMJudgeViewController class]) {
 //        
@@ -190,7 +190,6 @@
 
 
 - (IBAction)headerAction:(id)sender {
-    
     //选取照片上传
     UIActionSheet *sheet;
     // 判断是否支持相机
@@ -263,7 +262,6 @@
 
 
 #pragma mark -textField delegte
-
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
@@ -394,13 +392,13 @@
 
 
 - (IBAction)showDatePeckerAction:(id)sender {
-    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
-    if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改出生年月"
-                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
-        [alert show];
-        return;
-    }
+//    JMUserInfoModel *userInfoModel = [JMUserInfoManager getUserInfo];
+//    if ([userInfoModel.card_status isEqualToString:Card_PassIdentify]) {
+//        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"实名认证通过后不能修改出生年月"
+//                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+//        [alert show];
+//        return;
+//    }
     [self.view addSubview:self.pickerData];
     [self.pickerData show];
 

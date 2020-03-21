@@ -16,7 +16,8 @@ extern NSString *const JMOrderGoodsListTableViewCellIdentifier;
 @property (weak, nonatomic) IBOutlet UILabel *titleLab;
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
 @property (weak, nonatomic) IBOutlet UILabel *quantityLab;
--(void)setValuesWithImageUrl:(NSString *)imageUrl title:(NSString *)title price:(NSString *)price quantity:(NSString *)quantity;
+@property (weak, nonatomic) IBOutlet UILabel *sku_markLab;
+-(void)setValuesWithImageUrl:(NSString *)imageUrl title:(NSString *)title price:(NSString *)price quantity:(NSString *)quantity sku_mark:(NSString *)sku_mark;
 @end
 
 NS_ASSUME_NONNULL_END

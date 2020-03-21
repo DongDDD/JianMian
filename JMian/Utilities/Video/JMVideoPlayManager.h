@@ -45,6 +45,8 @@ typedef NS_ENUM(NSInteger, JMVideoPlayManagerType) {
 
 @property(nonatomic,strong)UIButton *likeBtn;
 @property(nonatomic,strong)UIButton *shareBtn;
+@property(nonatomic,strong)UIButton *reportBtn;
+
 @property(nonatomic,strong)JMVideoDetailInfoView *videoDetailInfoView;
 @property(nonatomic,strong)JMComVideoDetailInfoView *comVideoDetailInfoView;
 @property(nonatomic,strong)JMShareView *shareView;//分享

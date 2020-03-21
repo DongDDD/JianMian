@@ -36,7 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"公司地址";
-    [self initSearchView];
+//    [self initSearchView];
     [self initMapView];
     
     self.request = [[AMapPOIKeywordsSearchRequest alloc] init];
@@ -46,8 +46,22 @@
     self.request.offset = 50;
     self.request.requireExtension = YES;
     [self configLocationManager];
-    [self.view addSubview:self.tableView];
     [self setCenterPoint];
+    [self.view addSubview:self.searchView];
+    [self.view addSubview:self.tableView];
+    [self.searchView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.mas_topLayoutGuideTop);
+        make.height.mas_equalTo(44);
+    }];
+    
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+          make.left.right.mas_equalTo(self.view);
+          make.top.mas_equalTo(self.searchView.mas_bottom).mas_offset(10);
+          make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
+      }];
+    
+    
 }
 
 -(void)rightAction
@@ -65,7 +79,7 @@
     _searchView = [[SearchView alloc]initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH-40, 40)];
     _searchView.searchTextField.delegate = self;
     [self.view addSubview:_searchView];
-    
+
 }
 
 -(void)initMapView{
@@ -73,7 +87,7 @@
     _search.delegate = self;
 
     ///初始化地图
-    _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 300)];
+    _mapView = [[MAMapView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 400)];
     _mapView.delegate = self;
     ///如果您需要进入地图就显示定位小蓝点，则需要下面两行代码
     _mapView.showsUserLocation = YES;
@@ -88,6 +102,7 @@
     [localButton setImage:[UIImage imageNamed:@"my_location"] forState:UIControlStateNormal];
     [self.mapView addSubview:localButton];
 
+    
 }
 
 - (void)setCenterPoint{
@@ -261,10 +276,16 @@
 //    _mapView.userLocation.subtitle = obj.address;
 
 }
+
+//-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+//    return self.searchView;
+//}
+
+
 #pragma mark - Getter
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _searchView.frame.origin.y+_searchView.frame.size.height+10, SCREEN_WIDTH, self.view.frame.size.height-_searchView.frame.size.height-_searchView.frame.origin.y-64) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
         _tableView.backgroundColor = BG_COLOR;
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -275,6 +296,16 @@
         
     }
     return _tableView;
+}
+
+
+-(SearchView *)searchView{
+    if (!_searchView) {
+        _searchView = [[SearchView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 44)];
+        _searchView.searchTextField.delegate = self;
+
+    }
+    return _searchView;
 }
 //-(NSMutableArray *)dataArray{
 //    if (_dataArray == nil) {

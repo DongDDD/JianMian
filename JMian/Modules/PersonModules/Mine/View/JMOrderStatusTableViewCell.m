@@ -165,7 +165,6 @@
         make.right.mas_equalTo(self).offset(-20);
         make.bottom.mas_equalTo(self).offset(-10);
 //        make.height.mas_equalTo(self).offset(30);
-
     }];
     
 }
@@ -178,29 +177,33 @@
 
 -(void)setB_StatusBtn{
     [self.bottomView setHidden:YES];
-     self.bottomViewH.constant = 0;
-     [self.statusRightTopLab setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
+    self.bottomViewH.constant = 0;
+    [self.statusRightTopLab setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
     [self.didSendGoodsImageView setHidden:YES];
-
+    
     if ([_myData.status isEqualToString:@"0"]) {
         [self.statusRightTopLab setTitle:@"未付款" forState:UIControlStateNormal];
         [self.statusRightTopLab setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
         [self.statusRightTopLab setEnabled:NO];
         [self.statusRightTopLab setHidden:NO];
+        [self.didSendGoodsImageView setHidden:YES];
+
         
     }
     else if ([_myData.status isEqualToString:@"1"]) {
         [self.statusRightTopLab setTitle:@"已取消" forState:UIControlStateNormal];
         [self.statusRightTopLab setEnabled:NO];
         [self.statusRightTopLab setHidden:NO];
-        
+        [self.didSendGoodsImageView setHidden:YES];
+
     }
     else if ([_myData.status isEqualToString:@"2"]) {
         [self.statusRightTopLab setTitle:@"去发货" forState:UIControlStateNormal];
         [self.statusRightTopLab setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
         [self.statusRightTopLab setEnabled:YES];
         [self.statusRightTopLab setHidden:NO];
-        
+        [self.didSendGoodsImageView setHidden:YES];
+
     }
     else if ([_myData.status isEqualToString:@"6"]) {
         [self.statusRightTopLab setTitle:@" " forState:UIControlStateNormal];
@@ -213,11 +216,15 @@
         [self.statusRightTopLab setTitle:@"对方发起退款" forState:UIControlStateNormal];
         [self.statusRightTopLab setEnabled:NO];
         [self.statusRightTopLab setHidden:NO];
+       [self.didSendGoodsImageView setHidden:YES];
+
     }
     else if ([_myData.status isEqualToString:@"8"]) {
         [self.statusRightTopLab setTitle:@"等待退货" forState:UIControlStateNormal];
         [self.statusRightTopLab setEnabled:NO];
         [self.statusRightTopLab setHidden:NO];
+        [self.didSendGoodsImageView setHidden:YES];
+
         
     }
     
@@ -226,27 +233,31 @@
         [self.statusRightTopLab setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
         [self.statusRightTopLab setEnabled:NO];
         [self.statusRightTopLab setHidden:NO];
-        
+        [self.didSendGoodsImageView setHidden:YES];
+
     }
     else if ([_myData.status isEqualToString:@"10"]) {
         [self.statusRightTopLab setTitle:@"对方已发货" forState:UIControlStateNormal];
         [self.statusRightTopLab setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
         [self.statusRightTopLab setEnabled:NO];
         [self.statusRightTopLab setHidden:NO];
-        
+        [self.didSendGoodsImageView setHidden:YES];
+
     }
     else if ([_myData.status isEqualToString:@"11"]) {
              [self.statusRightTopLab setTitle:@"已退款" forState:UIControlStateNormal];
         [self.statusRightTopLab setEnabled:NO];
         [self.statusRightTopLab setHidden:NO];
-        
+        [self.didSendGoodsImageView setHidden:YES];
+
     }
     else if ([_myData.status isEqualToString:@"12"]) {
         [self.statusRightTopLab setTitle:@"已收货" forState:UIControlStateNormal];
         [self.statusRightTopLab setTitleColor:MASTER_COLOR forState:UIControlStateNormal];
         [self.statusRightTopLab setEnabled:NO];
         [self.statusRightTopLab setHidden:NO];
-        
+        [self.didSendGoodsImageView setHidden:YES];
+
     }
     
 }
@@ -309,7 +320,6 @@
         else if ([_myData.status isEqualToString:@"8"]) {
             //等待退货
             [self.didSendGoodsImageView setHidden:YES];
-            
             [self.cancelOrderBtn setHidden:YES];
             [self.contactBtn setHidden:NO];
             [self.comfirmBtn setHidden:YES];
@@ -344,6 +354,7 @@
             [self.statusRightTopLab setHidden:NO];
             
         }
+    
         else if ([_myData.status isEqualToString:@"11"]) {
             //订单已退款
             [self.cancelOrderBtn setHidden:YES];

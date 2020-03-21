@@ -9,6 +9,9 @@
 #import "JMPostProductViewController.h"
 #import "JMPostProductConfigures.h"
 #import "JMProductSpecificationViewController.h"
+#import "JMRichTextViewController.h"
+#import "ZSSDemoViewController.h"
+#import "RichTextEditViewController.h"
 
 @interface JMPostProductViewController ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -23,13 +26,17 @@
     self.title = @"发布宝贝";
     [self.view addSubview:self.tableView];
     [self setRightBtnTextName:@"测试按钮"];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
 -(void)rightAction{
-    [self.navigationController pushViewController:[JMProductSpecificationViewController new] animated:YES];
-
+    RichTextEditViewController* controller = [RichTextEditViewController new];
+       [self.navigationController pushViewController:controller animated:YES];
+//    ZSSDemoViewController *demo1 = [[ZSSDemoViewController alloc] init];
+//    [self.navigationController pushViewController:demo1 animated:YES];
 }
+
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

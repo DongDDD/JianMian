@@ -53,16 +53,27 @@
                         <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jJi-Dx-EfT">
+                        <rect key="frame" x="401.5" y="58.5" width="18.5" height="11"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="11" id="4i3-Ka-nQU"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="0.30196078430000001" green="0.30196078430000001" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="sjB-jZ-2Yh" firstAttribute="top" secondItem="Eaz-2Q-4fH" secondAttribute="top" constant="-4" id="22Q-36-nzc"/>
                     <constraint firstAttribute="trailing" secondItem="sjB-jZ-2Yh" secondAttribute="trailing" constant="20" id="3Kf-AA-fVY"/>
                     <constraint firstItem="PIn-uO-tpr" firstAttribute="trailing" secondItem="sjB-jZ-2Yh" secondAttribute="trailing" id="4ZS-rp-3Y1"/>
                     <constraint firstItem="Eaz-2Q-4fH" firstAttribute="bottom" secondItem="f8B-mZ-Qdj" secondAttribute="bottom" id="A6O-fS-y3C"/>
+                    <constraint firstItem="jJi-Dx-EfT" firstAttribute="top" secondItem="PIn-uO-tpr" secondAttribute="bottom" constant="8" id="A7F-5r-sma"/>
                     <constraint firstItem="f8B-mZ-Qdj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B80-Ap-1up"/>
                     <constraint firstItem="Eaz-2Q-4fH" firstAttribute="leading" secondItem="f8B-mZ-Qdj" secondAttribute="trailing" constant="15" id="Dbs-mU-UHo"/>
                     <constraint firstItem="f8B-mZ-Qdj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="NLh-cp-DZm"/>
                     <constraint firstItem="Eaz-2Q-4fH" firstAttribute="top" secondItem="f8B-mZ-Qdj" secondAttribute="top" id="hBV-yE-Pan"/>
+                    <constraint firstItem="jJi-Dx-EfT" firstAttribute="trailing" secondItem="PIn-uO-tpr" secondAttribute="trailing" id="kAk-3Q-rho"/>
                     <constraint firstItem="PIn-uO-tpr" firstAttribute="top" secondItem="sjB-jZ-2Yh" secondAttribute="bottom" constant="8" id="n6j-bb-7RX"/>
                     <constraint firstAttribute="trailing" secondItem="Eaz-2Q-4fH" secondAttribute="trailing" constant="60" id="znh-10-tm4"/>
                 </constraints>
@@ -72,6 +83,7 @@
                 <outlet property="imageIcon" destination="f8B-mZ-Qdj" id="ZVA-78-qYy"/>
                 <outlet property="priceLab" destination="sjB-jZ-2Yh" id="cI4-3p-Tjr"/>
                 <outlet property="quantityLab" destination="PIn-uO-tpr" id="C8o-G8-Liw"/>
+                <outlet property="sku_markLab" destination="jJi-Dx-EfT" id="Gwt-tf-9rv"/>
                 <outlet property="titleLab" destination="Eaz-2Q-4fH" id="m6c-0z-oid"/>
             </connections>
             <point key="canvasLocation" x="-80" y="94"/>

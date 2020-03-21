@@ -13,6 +13,7 @@
 #import "JMGoodsData.h"
 #import "JMHTTPManager+GetGoodsList.h"
 #import "JMHTTPManager+UpdateGoodsStatus.h"
+#import "JMGoodsDetailViewController.h"
 @interface JMProductManagerViewController ()<UITableViewDelegate,UITableViewDataSource,JMProductManagerTableViewCellDelegate>
 @property(nonatomic,strong)JMTitlesView *titleView;
 @property(nonatomic,strong)UITableView *tableView;
@@ -28,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"商品";
-//    [self setRightBtnTextName:@"发布"];
+    [self setRightBtnTextName:@"发布"];
     [self.view addSubview:self.tableView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
@@ -37,10 +38,10 @@
     }];
     [self setupHeaderRefresh];
     // Do any additional setup after loading the view from its nib.
+    [self getDataWithStatus:@""];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
-    [self getDataWithStatus:@""];
 }
 
 -(void)setupHeaderRefresh
@@ -133,6 +134,15 @@
     
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    JMGoodsData *data = self.listArray[indexPath.row];
+    JMGoodsDetailViewController *vc = [[JMGoodsDetailViewController alloc]init];
+    //       vc.title = @"产品详情";
+    vc.goods_id = data.goods_id;
+    vc.viewType = JMGoodsDetailPreviewType;
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
 -(void)didSelectedBtnWithTitle:(NSString *)title data:(nonnull JMGoodsData *)data{
     if ([title isEqualToString:@"上架"]) {
         [self updataGoodsStatus:@"1" goods_id:data.goods_id];

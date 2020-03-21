@@ -62,10 +62,7 @@ static NSString *cellID2 = @"extensionCellID";
             self.title = @"推广订单";
         }else{
             self.title = @"我的订单";
-        
         }
-        
-        
     }
     // Do any additional setup after loading the view from its nib.
 }
@@ -640,20 +637,18 @@ static NSString *cellID2 = @"extensionCellID";
 }
 
 
-
         
 - (JMTitlesView *)titleView {
     if (!_titleView) {
         NSArray *titleArray = [NSArray array];
         JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
         if ([model.type isEqualToString:B_Type_UESR]) {
-            titleArray = @[@"全部", @"已付款", @"未付款",@"已发货"];
+            titleArray = @[@"全部", @"已付款", @"未付款",@"售后中"];
         }else if ([model.type isEqualToString:C_Type_USER]){
             if (_viewType == JMMyOrderListViewControllerCUserExtension) {
                  titleArray = @[@"全部", @"即将到账",@"已到账"];
             }else if (_viewType == JMMyOrderListViewControllerCUser) {
                 titleArray = @[@"全部", @"已付款", @"未付款",@"售后中"];
-            
             }
         }
    

@@ -39,7 +39,7 @@
     JMOrderGoodsListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOrderGoodsListTableViewCellIdentifier forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     JMGoodsInfoCellData *data = self.goods[indexPath.row];
-    [cell setValuesWithImageUrl:data.cover_path title:data.title price:data.price quantity:data.quantity];
+    [cell setValuesWithImageUrl:data.cover_path title:data.title price:data.price quantity:data.quantity sku_mark:data.sku_mark];
     
 //    [cell setData:self.goods[indexPath.row]];
     // Configure the cell...

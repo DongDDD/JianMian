@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 typedef enum : NSUInteger {
     JMGoodsDetailDefaultType,
     JMGoodsDetailSnapshootType,
-
+    JMGoodsDetailPreviewType,
+    
 }  JMGoodsDetailType;
 
 @interface JMGoodsDetailViewController : BaseViewController

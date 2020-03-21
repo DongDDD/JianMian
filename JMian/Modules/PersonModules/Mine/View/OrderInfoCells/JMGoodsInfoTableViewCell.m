@@ -24,14 +24,13 @@ NSString *const JMGoodsInfoTableViewCellIdentifier = @"JMGoodsInfoTableViewCellI
     self.titleLab3.textColor = [UIColor systemRedColor];
 }
 
--(void)setValuesWithImageUrl:(NSString *)ImageUrl title:(NSString *)title quantity:(NSString *)quantity  price:(NSString *)price{
+-(void)setValuesWithImageUrl:(NSString *)ImageUrl title:(NSString *)title quantity:(NSString *)quantity  price:(NSString *)price sku_mark:(NSString *)sku_mark{
     [self.iconImage sd_setImageWithURL:[NSURL URLWithString:ImageUrl] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
       self.titleLab.text = title;
        self.titleLab2.text = [NSString stringWithFormat:@"数量：x%@",quantity];
        self.titleLab3.text = [NSString stringWithFormat:@"¥ %@",price];
        self.titleLab3.textColor = [UIColor systemRedColor];
- 
-    
+      self.titleLab4.text = [NSString stringWithFormat:@"产品规格: %@",sku_mark];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

@@ -136,6 +136,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         self.bottomView.hidden = NO;
         [self.view addSubview:self.bottomView];
         [self.comfirmPostBottomView setHidden:YES];
+        [self.detailView.positionNameTextField setEnabled:NO];
     }else if (_viewType == JMBUserPostSaleJobViewTypeHistory) {
         [self getData];
         [self.comfirmPostBottomView setHidden:NO];
@@ -808,7 +809,7 @@ static NSString *cellIdent = @"BUserPostPositionCell";
     [self.detailView.quantityMaxTextField setText:model.quantity_max];
  
     _task_title = model.task_title;
-    _payment_money = model.payment_money;
+//    _payment_money = model.payment_money;
     _city_id = model.cityID;
     _quantity_max = model.quantity_max;
     
@@ -944,6 +945,8 @@ static NSString *cellIdent = @"BUserPostPositionCell";
         //保留当前status状态，修改编辑
         [self updateTaskInfoRequest_status:_partTimeModel.status];
         
+    }else{
+        [self.navigationController popViewControllerAnimated:YES];
     }
 }
 

@@ -144,10 +144,17 @@
     }];
     [self.view addSubview:self.shareBtn];
     [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.likeBtn.mas_bottom).offset(63);
+        make.top.mas_equalTo(self.likeBtn.mas_bottom).offset(20);
         make.left.mas_equalTo(self.likeBtn);
         make.width.height.mas_equalTo(50);
     }];
+    [self.view addSubview:self.reportBtn];
+    [self.reportBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.shareBtn.mas_bottom).offset(20);
+        make.left.mas_equalTo(self.shareBtn);
+        make.width.height.mas_equalTo(50);
+    }];
+
     [self.view addSubview:self.videoDetailInfoView];
     [self.videoDetailInfoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(self.view.mas_bottom).offset(-130);
@@ -420,14 +427,19 @@
         make.bottom.equalTo(self.view);
         make.left.and.right.equalTo(self.view);
         make.height.mas_equalTo(184+SafeAreaBottomHeight);
-        
     }];
+    
     [self.shareBgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(self.view);
         make.left.and.right.equalTo(self.view);
         make.height.mas_equalTo(self.view);
-        
     }];
+}
+
+-(void)reportAction{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"举报不良视频" message:@"得米团队会尽快进行核实" delegate:self cancelButtonTitle:@"举报视频" otherButtonTitles:@"取消", nil];
+      [alert show];
+    
 }
 
 -(void)play{
@@ -547,6 +559,7 @@
     return result;
     
 }
+
 #pragma mark  lazy
 -(UIButton *)likeBtn{
     if (!_likeBtn) {
@@ -571,6 +584,19 @@
     }
     return _shareBtn;
 }
+
+-(UIButton *)reportBtn{
+    if (!_reportBtn) {
+        _reportBtn = [[UIButton alloc]init];
+        //        _likeBtn.frame = CGRectMake(100, 200, 100, 100);
+        UIImage* icon1 = [UIImage imageNamed:@"report"];
+        [_reportBtn addTarget:self action:@selector(reportAction) forControlEvents:UIControlEventTouchUpInside];
+        [_reportBtn setImage:icon1 forState:UIControlStateNormal];
+    }
+    return _reportBtn;
+}
+
+
 
 -(JMVideoDetailInfoView *)videoDetailInfoView{
     if (!_videoDetailInfoView) {

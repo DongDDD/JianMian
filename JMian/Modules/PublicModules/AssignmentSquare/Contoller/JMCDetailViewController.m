@@ -712,9 +712,9 @@
 }
 
 -(void)shareViewLeftAction{
-    [self wxShare:0];
+//    [self wxShare:0];
     [self hiddenChoosePayView];
-//    [self shareMiniProgram];
+    [self shareMiniProgram];
     
 }
 -(void)shareViewRightAction{

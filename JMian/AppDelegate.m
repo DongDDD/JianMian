@@ -145,9 +145,6 @@
     [iVersion sharedInstance].updateAvailableTitle = @"更新内容";
     [iVersion sharedInstance].showOnFirstLaunch = NO;
 
-  
-
-   
     //MP3播放器
     [[JMPlaySoundsManager sharedInstance] setVideoSounds];
     [[JMPlaySoundsManager sharedInstance] setMoneySounds];
@@ -158,7 +155,7 @@
     [IQKeyboardManager sharedManager].shouldResignOnTouchOutside = YES;
     [IQKeyboardManager sharedManager].enableAutoToolbar = NO;//显示工具条
 //    [IQKeyboardManager sharedManager].toolbarDoneBarButtonItemImage = [UIImage imageNamed:@"icon_return "];
-    [IQKeyboardManager sharedManager].toolbarTintColor = MASTER_COLOR;;
+    [IQKeyboardManager sharedManager].toolbarTintColor = MASTER_COLOR;
 //    [IQKeyboardManager sharedManager].toolbarNextBarButtonItemImage = [UIImage imageNamed:@"down"];
 //    [IQKeyboardManager sharedManager].toolbarPreviousBarButtonItemImage = [UIImage imageNamed:@"up"];
 
@@ -750,15 +747,10 @@
 #pragma mark - 发送拒绝接听视频命令（自定义消息）
 
 -(void)setVideoInvite_receiverID:(NSString *)receiverID dic:(NSDictionary *)dic title:(NSString *)title{
-
-    
-    
-    
     TIMConversation *conv = [[TIMManager sharedInstance]
                              getConversation:(TIMConversationType)TIM_C2C
                              receiver:receiverID];
-    
-    
+        
     TIMCustomElem * custom_elem = [[TIMCustomElem alloc] init];
     
     // 转换为 NSData

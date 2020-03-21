@@ -183,7 +183,7 @@
                 task_id = self.configures.model.task_id;
                 if ([payment_method isEqualToString: @"1"]) {
                     //网络销售
-//                    [self gotoBUserPostPositionVC_task_id:task_id];
+                    [self gotoBUserPostPositionVC_task_id:task_id];
                     
                 }else{
                     //其他兼职
@@ -234,6 +234,16 @@
           }
     
       }
+    
+}
+
+//B端发布网络销售任务
+-(void)gotoBUserPostPositionVC_task_id:(NSString *)task_id{
+    JMBUserPostSaleJobViewController *vc = [[JMBUserPostSaleJobViewController alloc]init];
+    vc.viewType = JMBUserPostSaleJobViewTypeEdit;
+    vc.task_id = task_id;
+    [self.navigationController pushViewController:vc animated:YES];
+    
     
 }
 
@@ -501,6 +511,7 @@
 }
 
 -(void)deleteTaskRequest{
+    
     [[JMHTTPManager sharedInstance]deleteTask_Id:self.task_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:@"删除成功" preferredStyle: UIAlertControllerStyleAlert];
@@ -527,7 +538,63 @@
     }];
 }
 
+-(void)shareMiniProgram {
+    WXMiniProgramObject *object = [WXMiniProgramObject object];
+    object.webpageUrl = self.configures.model.share_url;
+    object.userName = MiniProgramUserName;
+    object.path = [NSString stringWithFormat:@"pages/ability_work/ability_work?id=%@",self.configures.model.task_id];
+    
+    NSString *url;
+    if (self.configures.model.images.count > 0) {
+        for (int i = 0; i < self.configures.model.images.count; i++) {
+            JMCDetailImageModel *imgModel = self.configures.model.images[0];
+            url = imgModel.file_path;
+        }
+        
+    }else if (self.configures.model.company_logo_path){
+        url= self.configures.model.company_logo_path;
+    }
+    
+    //    UIImage *image = [self getImageFromURL:url];
+    //    UIImage *image = [UIImage imageNamed:@"demi_home"];
+    //NSData *thumbData = [NSData dataWithContentsOfURL:[NSURL URLWithString:url]];
+    //缩略图,压缩图片,不超过 32 KB
+    UIImage *image = [self handleImageWithURLStr:url];
+    NSData *thumbData = UIImageJPEGRepresentation(image, 0.1);
+    
+    object.hdImageData = thumbData;
+    object.withShareTicket = @"";
+    object.miniProgramType = WXMiniProgramTypeRelease;
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = self.configures.model.task_title;
+    message.description = self.configures.model.myDescription;
+    message.thumbData = nil;  //兼容旧版本节点的图片，小于32KB，新版本优先
+    //使用WXMiniProgramObject的hdImageData属性
+    message.mediaObject = object;
+    SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = WXSceneSession;  //目前只支持会话
+    [WXApi sendReq:req];
 
+}
+
+- (UIImage *)handleImageWithURLStr:(NSString *)imageURLStr {
+    NSURL *url = [NSURL URLWithString:imageURLStr];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    NSData *newImageData = imageData;
+    // 压缩图片data大小
+    newImageData = UIImageJPEGRepresentation([UIImage imageWithData:newImageData scale:0.1], 0.1f);
+    UIImage *image = [UIImage imageWithData:newImageData];
+    
+    // 压缩图片分辨率(因为data压缩到一定程度后，如果图片分辨率不缩小的话还是不行)
+    CGSize newSize = CGSizeMake(200, 200);
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0,0,(NSInteger)newSize.width, (NSInteger)newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 5;
@@ -667,7 +734,8 @@
             [self setShareGoodsDataWithType:0];
         }else{
             //分享任务
-            [self setShareTaskDataWithType:0];
+            [self shareMiniProgram];
+//            [self setShareTaskDataWithType:0];
         }
         
     }else {
@@ -818,7 +886,15 @@
 //    return  _BGShareView;
 //
 //}
-
+-(UIView *)windowViewBGView{
+    if (!_windowViewBGView) {
+        _windowViewBGView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+        _windowViewBGView.backgroundColor = [UIColor blackColor];
+        [_windowViewBGView setHidden:YES];
+        _windowViewBGView.alpha = 0.3;
+    }
+    return _windowViewBGView;
+}
 -(JMPublicShareView *)shareView{
     if (!_shareView) {
         _shareView = [[JMPublicShareView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];

@@ -186,7 +186,7 @@
             JMGoodsCellData *data = self.cellConfigures.model.goods[indexPath.row];
             NSString *cover_path = [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,data.cover_path];
 
-            [cell setValuesWithImageUrl:cover_path title:data.title quantity:data.quantity price:data.price];
+            [cell setValuesWithImageUrl:cover_path title:data.title quantity:data.quantity price:data.price sku_mark:data.sku_mark];
             return cell;
         }
         case JMAfterSalesInfoTypeDetail: {

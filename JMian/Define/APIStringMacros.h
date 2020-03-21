@@ -12,7 +12,7 @@
 #ifdef DEBUG
 //Debug状态下的测试API
 //#define API_BASE_URL_STRING     @"http://app.jmzhipin.com/"
-#define API_BASE_URL_STRING     @"http://produce.jmzhipin.com/"
+#define API_BASE_URL_STRING     @"http://produc1e.jmzhipin.com/"
 
 #define IMG_BASE_URL_STRING     @"http://produce.jmzhipin.com"
 
@@ -160,6 +160,9 @@
 
 //更新商品状态
 #define Update_GoodsStatus_URL @"api/goods/update"
+//删除商品
+#define Delete_Goods_URL @"api/goods/delete"
+
 
 //视频列表
 #define Fectch_VideoList_URL @"api/video/lists"

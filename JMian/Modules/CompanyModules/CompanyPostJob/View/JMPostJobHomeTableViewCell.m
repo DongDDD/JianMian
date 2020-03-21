@@ -31,10 +31,8 @@
     NSString *experienceStr;
     if ([model.work_experience_max isEqualToString:@"0"]) {
         experienceStr = @"经验不限";
-        
     }else{
         experienceStr = [NSString stringWithFormat:@"%@~%@年",model.work_experience_min,model.work_experience_max];
-        
     }
     NSString *educationStr = [self getEducationStrWithEducation:model.education];
     NSString *cityStr;

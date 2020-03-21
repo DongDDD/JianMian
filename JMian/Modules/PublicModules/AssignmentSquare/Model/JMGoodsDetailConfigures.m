@@ -38,7 +38,7 @@
             self.rowsNum = 1;
             self.footerheight = 1;
             self.headerheight = 0;
-            self.height = self.webViewHeight;
+            self.height = self.webViewHeight+20;
             //            self.height = 100;
             
             //self.cellId = JMMyStoreManager1TableViewCellIdentifier;

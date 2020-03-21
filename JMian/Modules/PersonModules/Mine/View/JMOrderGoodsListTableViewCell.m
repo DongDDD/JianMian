@@ -18,14 +18,14 @@ NSString *const JMOrderGoodsListTableViewCellIdentifier = @"JMOrderGoodsListTabl
     // Initialization code
 }
 //http://app.jmzhipin.com
--(void)setValuesWithImageUrl:(NSString *)imageUrl title:(NSString *)title price:(NSString *)price quantity:(NSString *)quantity{
+-(void)setValuesWithImageUrl:(NSString *)imageUrl title:(NSString *)title price:(NSString *)price quantity:(NSString *)quantity sku_mark:(NSString *)sku_mark{
     
     NSString *url = [NSString stringWithFormat:@"%@%@",IMG_BASE_URL_STRING,imageUrl];
     [self.imageIcon sd_setImageWithURL:[NSURL URLWithString:url] placeholderImage:[UIImage imageNamed:@"default_avatar"]];
     self.titleLab.text = title;
     self.priceLab.text = [NSString stringWithFormat:@"¥ %@",price];
     self.quantityLab.text = [NSString stringWithFormat:@"x%@",quantity];
-    
+    self.sku_markLab.text = [NSString stringWithFormat:@"产品规格: %@",sku_mark];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

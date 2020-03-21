@@ -34,25 +34,33 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAJ-By-aLo">
-                        <rect key="frame" x="134" y="57" width="35.5" height="17"/>
+                        <rect key="frame" x="134" y="52" width="35.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DiZ-bT-gss">
-                        <rect key="frame" x="134" y="82" width="35.5" height="17"/>
+                        <rect key="frame" x="134" y="72" width="35.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7sm-8G-gYh">
+                        <rect key="frame" x="134" y="92" width="35.5" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DiZ-bT-gss" firstAttribute="top" secondItem="aAJ-By-aLo" secondAttribute="bottom" constant="8" id="2tg-Ct-1DE"/>
+                    <constraint firstItem="DiZ-bT-gss" firstAttribute="top" secondItem="aAJ-By-aLo" secondAttribute="bottom" constant="3" id="2tg-Ct-1DE"/>
                     <constraint firstItem="DiZ-bT-gss" firstAttribute="leading" secondItem="aAJ-By-aLo" secondAttribute="leading" id="5ba-Dl-u7c"/>
-                    <constraint firstItem="aAJ-By-aLo" firstAttribute="top" secondItem="gbh-RE-3Er" secondAttribute="bottom" constant="8" id="FOE-Cl-K85"/>
+                    <constraint firstItem="aAJ-By-aLo" firstAttribute="top" secondItem="gbh-RE-3Er" secondAttribute="bottom" constant="3" id="FOE-Cl-K85"/>
+                    <constraint firstItem="7sm-8G-gYh" firstAttribute="top" secondItem="DiZ-bT-gss" secondAttribute="bottom" constant="3" id="LxL-6H-y2U"/>
                     <constraint firstAttribute="trailing" secondItem="gbh-RE-3Er" secondAttribute="trailing" constant="30" id="MBN-Bz-8Ip"/>
                     <constraint firstItem="K6s-nh-Twv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="POQ-jq-3d7"/>
                     <constraint firstItem="K6s-nh-Twv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="S1s-Me-f56"/>
+                    <constraint firstItem="7sm-8G-gYh" firstAttribute="leading" secondItem="DiZ-bT-gss" secondAttribute="leading" id="dEd-fu-FJn"/>
                     <constraint firstItem="gbh-RE-3Er" firstAttribute="top" secondItem="K6s-nh-Twv" secondAttribute="top" id="e4N-19-RQf"/>
                     <constraint firstItem="gbh-RE-3Er" firstAttribute="leading" secondItem="K6s-nh-Twv" secondAttribute="trailing" constant="20" id="hCK-mt-dcC"/>
                     <constraint firstItem="aAJ-By-aLo" firstAttribute="leading" secondItem="gbh-RE-3Er" secondAttribute="leading" id="pY8-Af-vp7"/>
@@ -64,8 +72,9 @@
                 <outlet property="titleLab" destination="gbh-RE-3Er" id="T0c-NV-KxT"/>
                 <outlet property="titleLab2" destination="aAJ-By-aLo" id="YTU-Ql-iZJ"/>
                 <outlet property="titleLab3" destination="DiZ-bT-gss" id="TmP-nu-cXt"/>
+                <outlet property="titleLab4" destination="7sm-8G-gYh" id="6MC-pV-Vp5"/>
             </connections>
-            <point key="canvasLocation" x="-79.710144927536234" y="94.084821428571431"/>
+            <point key="canvasLocation" x="-33" y="89"/>
         </tableViewCell>
     </objects>
 </document>

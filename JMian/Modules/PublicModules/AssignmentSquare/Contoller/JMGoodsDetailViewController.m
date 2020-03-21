@@ -23,7 +23,8 @@
 #import "JMPublicShareView.h"
 #import "JMWXShareAction.h"
 #import "JMDataTransform.h"
-@interface JMGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMGoodsDescTableViewCellDelegate,WKNavigationDelegate,JMCDetailVideoTableViewCellDelegate,JMPublicShareViewDelegate,JMCSaleTypeDetailGoodsTableViewCellDelegate>
+#import "JMHTTPManager+DeleteGoods.h"
+@interface JMGoodsDetailViewController ()<UITableViewDelegate,UITableViewDataSource,JMGoodsDescTableViewCellDelegate,WKNavigationDelegate,JMCDetailVideoTableViewCellDelegate,JMPublicShareViewDelegate,JMCSaleTypeDetailGoodsTableViewCellDelegate,JMTaskApplyForViewDelegate>
 @property(nonatomic,strong)UITableView *tableView;
 @property(nonatomic,strong)JMGoodsDetailConfigures *configures;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
@@ -56,6 +57,15 @@
     }else if (_viewType == JMGoodsDetailDefaultType) {
         self.haveApplyfor.text =  [NSString stringWithFormat:@"%@人已报名",self.effective_count];
         
+    }else if (_viewType == JMGoodsDetailPreviewType) {
+        [self.bottomView setHidden:YES];
+        [self setRightBtnImageViewName:@"Bdelete" imageNameRight2:@""];
+
+        [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_equalTo(self.view);
+            make.top.mas_equalTo(self.view);
+            make.bottom.mas_equalTo(self.view);
+        }];
     }
 
 //    self.webView = [[WKWebView alloc] init];
@@ -102,10 +112,25 @@
 //    //webview控件的最终高度
 //
 //}
-
+ 
 -(void)rightAction{
-    [self.shareView show];
+ 
+    if (_viewType == JMGoodsDetailPreviewType) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"提示" message:@"删除后数据不可恢复" preferredStyle: UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"确认删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self deleteGoods];
+        }]];
+        [alert addAction:[UIAlertAction actionWithTitle:@"返回" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }else{
+        [self.shareView show];
+    }
 }
+
+
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {
               [JMCreatChatAction createC2CTypeChatRequstWithChat_type:@"2" foreign_key:self.task_id user_id:self.configures.model.shop_user_id sender_mark:@"" recipient_mark:@""];
@@ -207,6 +232,24 @@
         }];
 }
 
+
+-(void)deleteGoods{
+    [[JMHTTPManager sharedInstance]deleteGoods_Id:self.goods_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        if (responsObject[@"data"]) {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"已删除" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+              [alert show];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
+}
+
 //申请任务后的创建聊天，用来发送自定义消息
 -(void)createChatToSendCustumMessageRequstWithForeign_key:(NSString *)foreign_key user_id:(NSString *)user_id{
     
@@ -287,6 +330,33 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+-(void)isReadProtocol:(BOOL)isRead{
+    if (isRead) {
+        //不再提醒
+        kSaveMyDefault(@"isRead", @"1");
+        
+    }else{
+        kSaveMyDefault(@"isRead", @"0");
+        
+    }
+    
+}
+
+-(void)applyForViewDeleteAction{
+    [self hiddenApplyForView];
+    
+}
+
+-(void)applyForViewComfirmAction{
+    [self hiddenApplyForView];
+    [self applyForAction];
+    
+}
+-(void)hiddenApplyForView{
+    [self.taskApplyForView setHidden:YES];
+    [self.windowViewBGView setHidden:YES];
+    
+}
 //#pragma mark -- 微信分享的是链接
 //- (void)wxShare:(int)n
 //{   //检测是否安装微信
@@ -404,6 +474,9 @@
 }
 #pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if (_viewType == JMGoodsDetailPreviewType) {
+         return 4;
+    }
     return 6;
 }
 
@@ -543,6 +616,26 @@
     }
     return _shareView;
 
+}
+
+-(UIView *)windowViewBGView{
+    if (!_windowViewBGView) {
+        _windowViewBGView = [[UIView alloc]initWithFrame:[UIApplication sharedApplication].keyWindow.bounds];
+        _windowViewBGView.backgroundColor = [UIColor blackColor];
+        [_windowViewBGView setHidden:YES];
+        _windowViewBGView.alpha = 0.3;
+    }
+    return _windowViewBGView;
+}
+
+-(JMTaskApplyForView *)taskApplyForView{
+    if (!_taskApplyForView) {
+        _taskApplyForView = [[JMTaskApplyForView alloc]init];
+        _taskApplyForView.layer.cornerRadius = 10;
+        [_taskApplyForView setHidden:YES];
+        _taskApplyForView.delegate = self;
+    }
+    return _taskApplyForView;
 }
 /*
 #pragma mark - Navigation
