@@ -30,7 +30,13 @@ NSString *const JMGoodsInfoTableViewCellIdentifier = @"JMGoodsInfoTableViewCellI
        self.titleLab2.text = [NSString stringWithFormat:@"数量：x%@",quantity];
        self.titleLab3.text = [NSString stringWithFormat:@"¥ %@",price];
        self.titleLab3.textColor = [UIColor systemRedColor];
-      self.titleLab4.text = [NSString stringWithFormat:@"产品规格: %@",sku_mark];
+    if (sku_mark.length > 0) {
+        [self.titleLab4 setHidden:NO];
+        self.titleLab4.text = [NSString stringWithFormat:@"产品规格: %@",sku_mark];
+    }else{
+        [self.titleLab4 setHidden:YES];
+
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

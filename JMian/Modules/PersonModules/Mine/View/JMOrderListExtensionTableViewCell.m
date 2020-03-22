@@ -26,6 +26,7 @@
 -(void)setOrderCellData:(JMOrderCellData *)orderCellData{
     _myData = orderCellData;
     self.goodsView.goods = orderCellData.goods;
+    self.goodsView.frame = CGRectMake(0, 40, SCREEN_WIDTH, self.myData.goods.count*60);
     [self.contentView addSubview:self.goodsView];
     NSString *str = [NSString stringWithFormat:@"%@ >",_myData.shop_shop_name];
     [self.titleLab setTitle:str forState:UIControlStateNormal];

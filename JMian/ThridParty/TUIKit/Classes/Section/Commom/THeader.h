@@ -86,6 +86,8 @@
 
 //transfer cell
 #define JMtransferMessageCell_ReuseId @"JMTransferMessageCell"
+//task cell
+#define JMTaskMessageCell_ReuseId @"JMTaskMessage"
 
 //voice cell
 #define TVoiceMessageCell_ReuseId @"TVoiceMessaageCell"

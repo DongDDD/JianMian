@@ -25,7 +25,13 @@ NSString *const JMOrderGoodsListTableViewCellIdentifier = @"JMOrderGoodsListTabl
     self.titleLab.text = title;
     self.priceLab.text = [NSString stringWithFormat:@"¥ %@",price];
     self.quantityLab.text = [NSString stringWithFormat:@"x%@",quantity];
-    self.sku_markLab.text = [NSString stringWithFormat:@"产品规格: %@",sku_mark];
+    if (sku_mark.length > 0) {
+        [self.sku_markLab setHidden:NO];
+        self.sku_markLab.text = [NSString stringWithFormat:@"产品规格: %@",sku_mark];
+    }else{
+        [self.sku_markLab setHidden:YES];
+
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

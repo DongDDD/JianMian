@@ -17,6 +17,7 @@
 #import "TUIFileMessageCell.h"
 #import "TUIJoinGroupMessageCell.h"
 #import "JMTransferTableViewCell.h"
+#import "JMTaskMessageTableViewCell.h"
 #import "TUIKitConfig.h"
 #import "TUIFaceView.h"
 #import "THeader.h"
@@ -51,6 +52,7 @@
 #import "JMPushVCAction.h"
 #import "JMHTTPManager+Transfer.h"//转账
 #import "JMMoneyDetailsViewController.h"
+#import "JMTaskManageViewController.h"
 #define MAX_MESSAGE_SEP_DLAY (5 * 60)
 
 static NSString *cellIdent = @"infoCellIdent";
@@ -150,6 +152,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     [self.tableView registerClass:[TUIFileMessageCell class] forCellReuseIdentifier:TFileMessageCell_ReuseId];
     [self.tableView registerClass:[TUIJoinGroupMessageCell class] forCellReuseIdentifier:TJoinGroupMessageCell_ReuseId];
     [self.tableView registerClass:[JMTransferTableViewCell class] forCellReuseIdentifier:JMtransferMessageCell_ReuseId];
+    [self.tableView registerClass:[JMTaskMessageTableViewCell class] forCellReuseIdentifier:JMTaskMessageCell_ReuseId];
 
     [self.tableView registerNib:[UINib nibWithNibName:@"JMChatDetailInfoTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent];
     [self.tableView registerNib:[UINib nibWithNibName:@"JMChatDetailPartTimeJobTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdent2];
@@ -690,7 +693,9 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             else if([data isKindOfClass:[JMTransferMessageCellData class]]) {
                 data.reuseId = JMtransferMessageCell_ReuseId;
             }
-            
+            else if([data isKindOfClass:[JMTaskMessageCellData class]]) {
+                      data.reuseId = JMTaskMessageCell_ReuseId;
+                  }
             else {
                 return nil;
             }
@@ -1099,17 +1104,25 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }
     if ([cell isKindOfClass:[JMPushMessageCell class]]) {
         JMPushMessageCell *pushCell = (JMPushMessageCell *)cell;
-        NSString *string = [[NSString alloc]initWithData:pushCell.pushData.data encoding:NSUTF8StringEncoding];
-        if ([string isEqualToString:@"message"]) {
-            return;
-        }else if ([string containsString:@":"] || string.length > 0) {
-            NSArray *array = [string componentsSeparatedByString:@":"]; //从字符A中分隔成2个元素的数组
-            NSString *typeStr = array[0];
-            NSString *typeId = array[1];
-            [JMPushVCAction gotoMyVCWithtypeStr:typeStr typeId:typeId];
+        if ([pushCell.pushData.desc isEqualToString:@"[任务申请]"]) {
+            JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+             [vc setMyIndex:0];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            NSString *string = [[NSString alloc]initWithData:pushCell.pushData.data encoding:NSUTF8StringEncoding];
+            if ([string isEqualToString:@"message"]) {
+                return;
+            }else if ([string containsString:@":"] || string.length > 0) {
+                NSArray *array = [string componentsSeparatedByString:@":"]; //从字符A中分隔成2个元素的数组
+                NSString *typeStr = array[0];
+                NSString *typeId = array[1];
+                [JMPushVCAction gotoMyVCWithtypeStr:typeStr typeId:typeId];
+                
+            }
+            NSLog(@"onSelectMessage_JMPushMessageCell");
             
         }
-        NSLog(@"onSelectMessage_JMPushMessageCell");
+        
     }
     
     if ([cell isKindOfClass:[JMTransferTableViewCell class]]) {
@@ -1119,6 +1132,12 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         
     }
     
+    if ([cell isKindOfClass:[JMTaskMessageTableViewCell class]]) {
+         
+        NSLog(@"JMTaskMessageTableViewCell");
+
+        
+    }
 }
 
 //-(void)onSelectMessageNotification:(NSNotification *)notification{

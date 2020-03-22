@@ -113,7 +113,7 @@
     [self.view addSubview:self.choosePayView];
     [[UIApplication sharedApplication].keyWindow addSubview:self.myShareView];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(self.mas_topLayoutGuideTop).mas_offset(44);
+        make.top.mas_equalTo(self.mas_topLayoutGuideTop);
         make.bottom.mas_equalTo(self.mas_bottomLayoutGuide);
         make.left.and.right.mas_equalTo(self.view);
     }];
@@ -1113,9 +1113,10 @@
 
 - (UITableView *)tableView {
     if (!_tableView) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, _titleView.frame.size.height, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
         _tableView.backgroundColor = MASTER_COLOR;
         _tableView.backgroundColor = UIColorFromHEX(0xF5F5F6);
+        _tableView.tableHeaderView = self.titleView;
         _tableView.separatorStyle = NO;
         _tableView.delegate = self;
         _tableView.dataSource = self;

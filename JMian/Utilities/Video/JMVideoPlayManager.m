@@ -105,6 +105,12 @@
         make.width.mas_equalTo(self.view);
         make.height.mas_equalTo(58);
     }];
+    [self.view addSubview:self.reportBtn];
+    [self.reportBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.mas_equalTo(self.comVideoDetailInfoView.mas_top).offset(-20);
+        make.right.mas_equalTo(self.view).offset(-20);
+        make.width.height.mas_equalTo(50);
+    }];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(lookBAction)];
     [self.comVideoDetailInfoView addGestureRecognizer:tap];
 }

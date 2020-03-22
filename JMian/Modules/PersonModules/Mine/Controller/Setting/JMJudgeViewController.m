@@ -387,13 +387,13 @@
 #if kAppStoreVersion
     // App Store 版本
 #if DEBUG
-    param.busiId = 18411;
+    param.busiId = 18523;
 #else
-    param.busiId = 18411;
+    param.busiId = 18523;
 #endif
 #else
     //企业证书 ID
-    param.busiId = 18411;
+    param.busiId = 18523;
 #endif
     self.deviceToken = kFetchMyDefault(@"deviceToken");
     [param setToken:self.deviceToken];

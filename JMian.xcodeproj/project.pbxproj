@@ -794,6 +794,8 @@
 		049E9C6B23CDC75300D91D91 /* JMCSaleTypeDetailGoodsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049E9C6923CDC75300D91D91 /* JMCSaleTypeDetailGoodsTableViewCell.xib */; };
 		049FDBA42289556600E9BC25 /* JMDidUploadVideoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FDBA32289556600E9BC25 /* JMDidUploadVideoView.m */; };
 		049FDBA72289A3C000E9BC25 /* JMPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FDBA62289A3C000E9BC25 /* JMPlayerViewController.m */; };
+		04A12B33242786D0003E0F10 /* JMTaskMessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A12B32242786D0003E0F10 /* JMTaskMessageTableViewCell.m */; };
+		04A12B3624278809003E0F10 /* JMTaskMessageCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A12B3524278809003E0F10 /* JMTaskMessageCellData.m */; };
 		04A2479A224C773A00DEB8E3 /* 0000.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A24797224C773A00DEB8E3 /* 0000.png */; };
 		04A2479B224C773A00DEB8E3 /* 0000@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A24798224C773A00DEB8E3 /* 0000@3x.png */; };
 		04A2479C224C773A00DEB8E3 /* 0000@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04A24799224C773A00DEB8E3 /* 0000@2x.png */; };
@@ -2640,6 +2642,10 @@
 		049FDBA32289556600E9BC25 /* JMDidUploadVideoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMDidUploadVideoView.m; sourceTree = "<group>"; };
 		049FDBA52289A3C000E9BC25 /* JMPlayerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMPlayerViewController.h; sourceTree = "<group>"; };
 		049FDBA62289A3C000E9BC25 /* JMPlayerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMPlayerViewController.m; sourceTree = "<group>"; };
+		04A12B31242786D0003E0F10 /* JMTaskMessageTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTaskMessageTableViewCell.h; sourceTree = "<group>"; };
+		04A12B32242786D0003E0F10 /* JMTaskMessageTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTaskMessageTableViewCell.m; sourceTree = "<group>"; };
+		04A12B3424278809003E0F10 /* JMTaskMessageCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMTaskMessageCellData.h; sourceTree = "<group>"; };
+		04A12B3524278809003E0F10 /* JMTaskMessageCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMTaskMessageCellData.m; sourceTree = "<group>"; };
 		04A24797224C773A00DEB8E3 /* 0000.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 0000.png; sourceTree = "<group>"; };
 		04A24798224C773A00DEB8E3 /* 0000@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0000@3x.png"; sourceTree = "<group>"; };
 		04A24799224C773A00DEB8E3 /* 0000@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "0000@2x.png"; sourceTree = "<group>"; };
@@ -6918,6 +6924,8 @@
 				6D5DD7C22308439D0064612A /* TUIVoiceMessageCellData.m */,
 				041E884F23BB137A00D78540 /* JMTransferMessageCellData.h */,
 				041E885023BB137A00D78540 /* JMTransferMessageCellData.m */,
+				04A12B3424278809003E0F10 /* JMTaskMessageCellData.h */,
+				04A12B3524278809003E0F10 /* JMTaskMessageCellData.m */,
 			);
 			path = CellData;
 			sourceTree = "<group>";
@@ -7009,6 +7017,8 @@
 				6D5DD7FA2308439D0064612A /* TUIVoiceMessageCell.m */,
 				041E885523BB299B00D78540 /* JMTransferTableViewCell.h */,
 				041E885623BB299B00D78540 /* JMTransferTableViewCell.m */,
+				04A12B31242786D0003E0F10 /* JMTaskMessageTableViewCell.h */,
+				04A12B32242786D0003E0F10 /* JMTaskMessageTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -8905,6 +8915,7 @@
 				04A92190230ACAC900AABD0C /* JMCDetailCellConfigures.m in Sources */,
 				6D5DD8BC2308439E0064612A /* TUIUserProfileDataProviderService.m in Sources */,
 				04EA210522AF541E0035C398 /* JMTaskListCellData.m in Sources */,
+				04A12B3624278809003E0F10 /* JMTaskMessageCellData.m in Sources */,
 				048348C5226983C700DE4630 /* UIView+Ext.m in Sources */,
 				6D82F28B2274A61900B9D2B9 /* JMHTTPManager+EducationExperience.m in Sources */,
 				041F67282274654400C4F940 /* JMCompanyDesciptionOfMineViewController.m in Sources */,
@@ -9131,6 +9142,7 @@
 				6DEA99172255ACD00029FE8A /* NSDictionary+NullSafe.m in Sources */,
 				04EA7E2923011376005B7CE5 /* JMPaySucceedViewController.m in Sources */,
 				0492401222F17C940007C8A1 /* JMVIPViewController.m in Sources */,
+				04A12B33242786D0003E0F10 /* JMTaskMessageTableViewCell.m in Sources */,
 				040A40BB226589A50005E0D7 /* JMCompanyBaseInfoViewController.m in Sources */,
 				04CB2FB1233F3AC6007F7E9C /* JMBDetailHeaderInfoTableViewCell.m in Sources */,
 				042E626B240E59BA0031FCC1 /* MMRichTitleCell.m in Sources */,
@@ -9469,7 +9481,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 1.5.4;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9505,7 +9517,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.3;
+				MARKETING_VERSION = 1.5.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

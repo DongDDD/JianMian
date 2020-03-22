@@ -15,6 +15,7 @@
 #import "TUIVideoMessageCell.h"
 #import "TUIFileMessageCell.h"
 #import "JMPushMessageCell.h"
+#import "JMTaskMessageCellData.h"
 #import "JMTransferMessageCellData.h"
 #import "TUIFaceView.h"
 #import "TUIKit.h"
@@ -220,8 +221,12 @@
 
         }else if ([elem1.ext isEqualToString:@"transfer"]) {
             data = [self getTransferCustumCellData:message fromElem:(TIMCustomElem *)elem];
-
-        }else{
+        }
+//        else if ([elem1.desc isEqualToString:@"[任务申请]"]) {
+//            data = [self getTaskCustumCellData:message fromElem:(TIMCustomElem *)elem];
+//
+//        }
+        else{
             data = [self getPushCustumCellData:message fromElem:(TIMCustomElem *)elem];
         }
        
@@ -270,6 +275,17 @@
     return custumData;
 }
 
+//任务申请
+- (JMTaskMessageCellData *) getTaskCustumCellData:(TIMMessage *)message  fromElem:(TIMCustomElem *)elem{
+    TIMCustomElem *custum = (TIMCustomElem *)elem;
+    JMTaskMessageCellData *custumData = [[JMTaskMessageCellData alloc] initWithDirection:(message.isSelf ? MsgDirectionOutgoing : MsgDirectionIncoming)];
+    custumData.desc = custum.desc;
+    custumData.data = custum.data;
+    custumData.ext = custum.ext;
+//
+//
+    return custumData;
+}
 
 //- (JMPushMessageCellData *)getPush2CellData:(TIMMessage *)message fromElem:(TIMCustomElem *)elem{
 //    TIMCustomElem *custum = (TIMCustomElem *)elem;
