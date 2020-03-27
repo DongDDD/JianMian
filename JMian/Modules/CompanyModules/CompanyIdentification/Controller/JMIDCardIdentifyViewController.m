@@ -27,6 +27,8 @@
 
 @property(nonatomic,strong)NSString *imagefontUrl;
 @property(nonatomic,strong)NSString *imagebehindUrl;
+@property(nonatomic,strong)UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *BGVIew;
 
 @end
 
@@ -38,9 +40,30 @@
     self.navigationController.navigationBar.translucent = NO;
     self.extendedLayoutIncludesOpaqueBars = YES;
     // Do any additional setup after loading the view from its nib.
+    [self setRightBtnTextName:@"下一步"];
     
-  
 
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT+100);
+
+}
+
+
+-(void)rightAction{
+    if (_imagefontUrl && _imagebehindUrl) {
+        JMIDCardIdentifySecondViewController *vc = [[JMIDCardIdentifySecondViewController alloc]init];
+        vc.image_front = _imagefontUrl;
+        vc.image_behind = _imagebehindUrl;
+        //    [vc setImg1:_imageView1];
+        //    [vc setImg2:_imageView2];
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }else{
+        [self showAlertSimpleTips:@"提示" message:@"请上传身份证" btnTitle:@"好的"];
+    }
 }
 - (IBAction)tapBtnAction:(UIButton *)sender {
     if (sender.tag == 0) {
@@ -242,6 +265,7 @@
     }];
     
 }
+
 
 
 /*

@@ -199,6 +199,8 @@
     }];
 }
 
+
+
 #pragma mark - B端从兼职人才进来视频聊天
 -(void)setMessageListModel:(JMMessageListModel *)messageListModel{
     //用于发送自定义消息

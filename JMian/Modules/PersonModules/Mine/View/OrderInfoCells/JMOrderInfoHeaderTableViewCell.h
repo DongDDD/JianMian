@@ -16,7 +16,12 @@ extern NSString *const JMOrderInfoHeaderTableViewCellIdentifier;
 @property (weak, nonatomic) IBOutlet UILabel *timeLab;
 @property(nonatomic,strong)NSTimer *activeTimer;
 @property(nonatomic,assign)NSInteger difTime;
+@property(nonatomic,copy)NSString *sendTime;//发货时间
+
 @property(nonatomic,assign)int overTime;
+@property(nonatomic,assign)int isExtension;
+
+-(void)setOverTime:(int)overTime startTime:(NSString *)startTime;
 
 @property(nonatomic,copy)NSString *topTime;
 

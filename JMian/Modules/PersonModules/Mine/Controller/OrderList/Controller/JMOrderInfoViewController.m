@@ -193,7 +193,7 @@
             }else if (_viewType == JMOrderInfoViewDidDeliverGoods) {
                 cell.titleLab.text = @"已发货";
 //                if (!_isExtension) {
-                    [cell setOverTime:10];
+                [cell setOverTime:10 startTime:self.cellConfigures.model.logistics_at];
 //                }
             }else if (_viewType == JMOrderInfoViewFinish) {
                 cell.titleLab.text = @"交易完成";
@@ -202,9 +202,10 @@
             }else if (_viewType == JMOrderInfoViewTakeDeliveryGoods) {
                 cell.titleLab.text = @"已收货";
 //                if ([userModel.type isEqualToString:C_Type_USER]) {
-//                    if (!_isExtension) {
-                        [cell setOverTime:15];
-//                    }
+                    if (_isExtension) {
+                        cell.isExtension = YES;
+                        [cell setOverTime:15 startTime:self.cellConfigures.model.logistics_at];
+                    }
                     
 //                }
             }else if (_viewType == JMOrderInfoViewAfterSales) {
@@ -265,7 +266,7 @@
         case JMOrderInfoTypeTimeMsg: {
             JMOrderInfoTimeMsgTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:JMOrderInfoTimeMsgTableViewCellIdentifier forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            [cell setValuesWithTime1:self.cellConfigures.model.created_at time2:self.cellConfigures.model.pay_time logName:self.cellConfigures.model.logistics_name time4:self.cellConfigures.model.logistics_at_c];
+            [cell setValuesWithTime1:self.cellConfigures.model.created_at time2:self.cellConfigures.model.pay_time logName:self.cellConfigures.model.logistics_name time4:self.cellConfigures.model.logistics_at_c time5:self.cellConfigures.model.logistics_at];
             return cell;
         }
         case JMOrderInfoTypeBtn: {

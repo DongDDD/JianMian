@@ -33,6 +33,8 @@
     }fail:^(int code, NSString * err) {
         NSLog(@"GetFriendsProfile fail: code=%d err=%@", code, err);
     }];
+    
+    self.moneyTextField.keyboardType = UIKeyboardTypeDecimalPad;
     // Do any additional setup after loading the view from its nib.
 }
 

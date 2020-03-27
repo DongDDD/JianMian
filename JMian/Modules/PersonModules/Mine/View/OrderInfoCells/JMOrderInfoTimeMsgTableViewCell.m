@@ -15,7 +15,8 @@ NSString *const JMOrderInfoTimeMsgTableViewCellIdentifier = @"JMOrderInfoTimeMsg
     [super awakeFromNib];
     // Initialization code
 }
--(void)setValuesWithTime1:(NSString *)time1 time2:(NSString *)time2 logName:(NSString *)logName time4:(NSString *)time4{
+-(void)setValuesWithTime1:(NSString *)time1 time2:(NSString *)time2 logName:(NSString *)logName time4:(NSString *)time4 time5:(NSString *)time5{
+    
     
     self.time1Lab.text =  [NSString stringWithFormat:@"创建时间 :%@",time1];
     if (time2.length > 0) {
@@ -27,11 +28,11 @@ NSString *const JMOrderInfoTimeMsgTableViewCellIdentifier = @"JMOrderInfoTimeMsg
     if (time4.length > 0) {
          self.time4Lab.text =  [NSString stringWithFormat:@"退货时间 :%@",time4];
      }
+    if (time5.length > 0) {
+         self.time5Lab.text =  [NSString stringWithFormat:@"发货时间 :%@",time5];
+     }
     
-    
-    
-    
-    
+ 
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

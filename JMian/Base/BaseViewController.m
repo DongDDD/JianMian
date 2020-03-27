@@ -203,6 +203,35 @@
     
 }
 
+-(void)right3Action{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
+     [alert addAction:[UIAlertAction actionWithTitle:@"广告" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+          [alert show];
+     }]];
+     [alert addAction:[UIAlertAction actionWithTitle:@"色情" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+          [alert show];
+         
+     }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"违法-政治敏感内容" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+     [alert show];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"传销" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+     [alert show];
+    }]];
+    
+     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+          [alert show];
+     }]];
+ 
+     [self presentViewController:alert animated:YES completion:nil];
+
+}
+
 - (void)fanhui {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -243,12 +272,9 @@
 -(void)moreAction{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
     [alert addAction:[UIAlertAction actionWithTitle:@"退出登录" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
         [self logout];
-        
     }]];
     [alert addAction:[UIAlertAction actionWithTitle:@"切换身份" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        
         [self changeIdentify];
         
     }]];

@@ -31,15 +31,14 @@ NSString *const JMOrderInfoHeaderTableViewCellIdentifier = @"JMOrderInfoHeaderTa
 }
 
 
--(void)setOverTime:(int)overTime{
+-(void)setOverTime:(int)overTime startTime:(NSString *)startTime{
     _myOverTime = overTime;
     [self.timeLab setHidden:NO];
-    NSString *over_time_str  = [self getOverTimeWithOverTime:overTime];
+//    NSString *over_time_str  = [self getOverTimeWithOverTime:overTime startTime:startTime];
+    NSString *over_time_str = [self getOverTimeWithStartTime:startTime day:overTime];
     NSString *now_time_str = [self getCurrentTimeyyyymmdd];
     _difTime = [self getDateDifferenceWithNowDateStr:now_time_str deadlineStr:over_time_str];
-
-    
-    
+ 
 }
 
  
@@ -68,7 +67,7 @@ NSString *const JMOrderInfoHeaderTableViewCellIdentifier = @"JMOrderInfoHeaderTa
     if (_myOverTime == 10) {//已发货
         self.timeLab.text =[ NSString stringWithFormat:@"你还有%@ 来确认收货，超时订单自动确认收货", self.topTime];
     }else if (_myOverTime == 15) {//已收货
-        if ([userModel.type isEqualToString:B_Type_UESR]) {
+        if ([userModel.type isEqualToString:B_Type_UESR] || self.isExtension) {
             self.timeLab.text =[ NSString stringWithFormat:@"根据平台相关规定资金将在本平台冻结%@ 后解冻到账", self.topTime];
         }else{
             self.timeLab.text =[ NSString stringWithFormat:@"根据《消费者权益保护法》您还有%@ ，无理由退货", self.topTime];
@@ -87,17 +86,41 @@ NSString *const JMOrderInfoHeaderTableViewCellIdentifier = @"JMOrderInfoHeaderTa
     return dayStr;
 }
 
--(NSString *)getOverTimeWithOverTime:(int)overTime{
-    NSDate *currentDate = [NSDate date];
-    int days = overTime;    // n天后的天数
-    NSDate *appointDate;    // 指定日期声明
-    NSTimeInterval oneDay = 24 * 60 * 60;  // 一天一共有多少秒
-    appointDate = [currentDate initWithTimeIntervalSinceNow: oneDay * days];
-    NSDateFormatter *formatDay = [[NSDateFormatter alloc] init];
-     formatDay.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-     NSString *dayStr = [formatDay stringFromDate:appointDate];
-    return dayStr;
+//-(NSString *)getOverTimeWithOverTime:(int)overTime startTime:(NSString *)startTime{
+//    NSString *birthdayStr= startTime;
+//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:8]];//解决8小时时间差问题
+//    NSDate *currentDate = [dateFormatter dateFromString:birthdayStr];
+//
+//
+////    NSDate *currentDate = [NSDate date];
+//    int days = overTime;    // n天后的天数
+//    NSDate *appointDate;    // 指定日期声明
+//    NSTimeInterval oneDay = 24 * 60 * 60;  // 一天一共有多少秒
+//    appointDate = [currentDate initWithTimeIntervalSinceNow: oneDay * days];
+//    NSDateFormatter *formatDay = [[NSDateFormatter alloc] init];
+//     formatDay.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+//     NSString *dayStr = [formatDay stringFromDate:appointDate];
+//    return dayStr;
+//
+//}
+
+- (NSString *)getOverTimeWithStartTime:(NSString *)startTime day:(NSInteger)day {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:8]];//解决8小时时间差问题
+    NSDate *startTimeDate = [dateFormatter dateFromString:startTime];
     
+    NSTimeInterval days = 24 * 60 * 60 * day;  // 一天一共有多少秒
+    NSDate *appointDate = [startTimeDate dateByAddingTimeInterval:days];
+ 
+    NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+    [dateFormatter2 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [dateFormatter2 setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:8]];//解决8小时时间差问题
+
+    NSString *strDate = [dateFormatter2 stringFromDate:appointDate];
+    return strDate;
 }
 
 - (NSInteger)getDateDifferenceWithNowDateStr:(NSString*)nowDateStr deadlineStr:(NSString*)deadlineStr {

@@ -968,7 +968,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
 }
 
 - (void)videoInterviewAction {
-    if (_myConvModel.type) {
+    if ([_myConvModel.type isEqualToString:@"2"]) {
         
         [self gotoVideoChatViewWithForeign_key:_myConvModel.work_task_id recipient:_myConvModel.job_user_user_id chatType:_myConvModel.type];
         
@@ -984,6 +984,7 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
     }
     
 }
+
 -(void)gotoVideoChatViewWithForeign_key:(NSString *)foreign_key
                               recipient:(NSString *)recipient
                                chatType:(NSString *)chatType{

@@ -135,13 +135,13 @@
     
 }
 
-- (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
+- (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2   imageNameRight3:(NSString *)imageNameRight3{
     
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 120, 30)];
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    colectBtn.frame = CGRectMake(45, 0, 25, 25);
+    colectBtn.frame = CGRectMake(100, 0, 25, 25);
     if (self.configures.model.favorites_id) {
         colectBtn.selected = YES;
     }else{
@@ -155,13 +155,20 @@
     [bgView addSubview:colectBtn];
     if (imageNameRight2 != nil) {
         UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(0, 0, 25, 25);
+        shareBtn.frame = CGRectMake(70, 0, 25, 25);
         [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
         [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
         [bgView addSubview:shareBtn];
         
     }
     
+    if (imageNameRight3 != nil) {
+        UIButton *reportBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        reportBtn.frame = CGRectMake(40, 0, 25, 25);
+        [reportBtn addTarget:self action:@selector(right3Action) forControlEvents:UIControlEventTouchUpInside];
+        [reportBtn setImage:[UIImage imageNamed:imageNameRight3] forState:UIControlStateNormal];
+        [bgView addSubview:reportBtn];
+    }
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
     
@@ -277,6 +284,33 @@
     }
 }
 
+-(void)right3Action{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
+     [alert addAction:[UIAlertAction actionWithTitle:@"广告" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+          [alert show];
+     }]];
+     [alert addAction:[UIAlertAction actionWithTitle:@"色情" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+          [alert show];
+         
+     }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"违法-政治敏感内容" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+     [alert show];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"传销" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+     [alert show];
+    }]];
+    
+     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+ 
+     }]];
+ 
+     [self presentViewController:alert animated:YES completion:nil];
+
+}
 -(void)right2Action{
 
     if (_viewType == CTypeSaleViewPreviewType) {
@@ -378,7 +412,7 @@
             }
 
             self.haveApply.text = [NSString stringWithFormat:@"%@人已报名", self.configures.model.effective_count];
-                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare" imageNameRight3:@"pppp"];
 //
 //            }
             if (_viewType == CTypeSaleViewPreviewType) {
@@ -387,7 +421,7 @@
                 [self.tableView reloadData];
 
             }else  if (_viewType == CTypeSaleViewDefaultType) {
-                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+                [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare" imageNameRight3:@"pppp"];
                 [self getCommentInfo];
             
             }

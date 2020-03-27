@@ -68,13 +68,13 @@
     [self.BGShareView addGestureRecognizer:tap];
 }
 
-- (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2 {
+- (void)setRightBtnImageViewName:(NSString *)imageName  imageNameRight2:(NSString *)imageNameRight2  imageNameRight3:(NSString *)imageNameRight3 {
     
-    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 80, 30)];
+    UIView *bgView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 120, 30)];
     
     self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
     UIButton *colectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    colectBtn.frame = CGRectMake(45, 0, 25, 25);
+    colectBtn.frame = CGRectMake(100, 0, 25, 25);
     if (self.configures.model.favorites_id) {
         colectBtn.selected = YES;
     }else{
@@ -86,15 +86,36 @@
     [colectBtn setImage:[UIImage imageNamed:@"Collection_of_selected"] forState:UIControlStateSelected];
     
     [bgView addSubview:colectBtn];
-    if (imageNameRight2 != nil) {
-        UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        shareBtn.frame = CGRectMake(0, 0, 25, 25);
-        [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
-        [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
-        [bgView addSubview:shareBtn];
-        
-    }
+    UIButton *shareBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    shareBtn.frame = CGRectMake(70, 0, 25, 25);
+    [shareBtn addTarget:self action:@selector(right2Action) forControlEvents:UIControlEventTouchUpInside];
+    [shareBtn setImage:[UIImage imageNamed:imageNameRight2] forState:UIControlStateNormal];
+    [bgView addSubview:shareBtn];
     
+    
+    UIButton *reportBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    reportBtn.frame = CGRectMake(40, 0, 25, 25);
+    [reportBtn addTarget:self action:@selector(right3Action) forControlEvents:UIControlEventTouchUpInside];
+    [reportBtn setImage:[UIImage imageNamed:imageNameRight3] forState:UIControlStateNormal];
+    [bgView addSubview:reportBtn];
+    //
+//    [colectBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(bgView);
+//        make.width.mas_equalTo(25);
+//        make.height.mas_equalTo(25);
+//        make.centerY.mas_equalTo(bgView);
+//    }];
+//    [shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.mas_equalTo(colectBtn.mas_left).mas_offset(-5);
+//        make.width.mas_equalTo(25);
+//        make.height.mas_equalTo(25);
+//        make.centerY.mas_equalTo(bgView);
+//    }];
+    //    [reportBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+    //        make.right.mas_equalTo(shareBtn.mas_left).mas_offset(-5);
+//        make.size.mas_equalTo(CGSizeMake(25, 25));
+//        make.centerY.mas_equalTo(bgView);
+//    }];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithCustomView:bgView];
     self.navigationItem.rightBarButtonItem = rightItem;
     
@@ -102,6 +123,35 @@
 }
 
 #pragma mark - Action
+
+-(void)right3Action{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
+     [alert addAction:[UIAlertAction actionWithTitle:@"广告" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+          [alert show];
+     }]];
+     [alert addAction:[UIAlertAction actionWithTitle:@"色情" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+          [alert show];
+         
+     }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"违法-政治敏感内容" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+     [alert show];
+    }]];
+    [alert addAction:[UIAlertAction actionWithTitle:@"传销" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+     [alert show];
+    }]];
+    
+     [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+ 
+     }]];
+ 
+     [self presentViewController:alert animated:YES completion:nil];
+
+}
+
 -(void)right2Action{
     if ([JMYoukeAction youkelimit]) {
          return;
@@ -198,7 +248,7 @@
             
             self.configures.model = [JMBDetailModel mj_objectWithKeyValues:responsObject[@"data"]];
             //判断是否有被收藏过
-            [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+            [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare" imageNameRight3:@"pppp"];
             //标题
             //判断是否有视频
             if (self.configures.model.video_file_path.length > 0 && [self.configures.model.video_status isEqualToString:@"2"]) {
@@ -209,7 +259,7 @@
             }else{
                 self.tableView.tableHeaderView =  [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, CGFLOAT_MIN)];
             }
-            [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare"];
+            [self setRightBtnImageViewName:@"collect" imageNameRight2:@"jobDetailShare" imageNameRight3:@"pppp"];
             
 //            NSMutableArray *imgArr = [NSMutableArray array];
 //            for (JMBDetailImageModel *imgModel in self.configures.model.images) {

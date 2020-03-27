@@ -108,6 +108,9 @@
         receiverID = _myConvModel.data.convId;
         titleStr = _myConvModel.data.title;
         [self setRightBtnImageViewName:@"icon-top3-more"  imageNameRight2:@""];
+    }else{
+        [self setRightBtnImageViewName:@"pppp"  imageNameRight2:@""];
+
     }
     
     _myConvModel.data.convId = receiverID;
@@ -122,10 +125,39 @@
     
 }
 
+ 
 -(void)rightAction{
-    JMGroupInfoViewController *vc = [[JMGroupInfoViewController alloc]init];
-    vc.groupId = _myConvModel.data.convId;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (_myConvModel.viewType == JMMessageList_Type_Group) {
+        JMGroupInfoViewController *vc = [[JMGroupInfoViewController alloc]init];
+        vc.groupId = _myConvModel.data.convId;
+        [self.navigationController pushViewController:vc animated:YES];
+         
+    }else if (_myConvModel.viewType == JMMessageList_Type_C2C) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:nil preferredStyle: UIAlertControllerStyleActionSheet];
+            [alert addAction:[UIAlertAction actionWithTitle:@"广告" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                 [alert show];
+            }]];
+            [alert addAction:[UIAlertAction actionWithTitle:@"色情" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+                 [alert show];
+                
+            }]];
+           [alert addAction:[UIAlertAction actionWithTitle:@"违法-政治敏感内容" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            [alert show];
+           }]];
+           [alert addAction:[UIAlertAction actionWithTitle:@"传销" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"举报成功" delegate:self cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            [alert show];
+           }]];
+           
+            [alert addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+            }]];
+        
+            [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 //-(void)createChatRequstWithForeign_key:(NSString *)foreign_key recipient:(NSString *)recipient chatType:(NSString *)chatType{

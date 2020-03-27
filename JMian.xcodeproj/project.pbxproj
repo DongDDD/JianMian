@@ -293,6 +293,7 @@
 		04256571229EE211000614E7 /* qidong.png in Resources */ = {isa = PBXBuildFile; fileRef = 0425656E229EE211000614E7 /* qidong.png */; };
 		0425CB58228449D600E08587 /* JMVideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0425CB56228449D600E08587 /* JMVideoChatViewController.m */; };
 		0425CB59228449D600E08587 /* JMVideoChatViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0425CB57228449D600E08587 /* JMVideoChatViewController.xib */; };
+		04271436242CE5AA009CC135 /* pppp.png in Resources */ = {isa = PBXBuildFile; fileRef = 04271435242CE5AA009CC135 /* pppp.png */; };
 		0428D7D9241669800024C69F /* JMHTTPManager+DeleteGoods.m in Sources */ = {isa = PBXBuildFile; fileRef = 0428D7D8241669800024C69F /* JMHTTPManager+DeleteGoods.m */; };
 		0429698F240900B000EEF52B /* JMRichTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0429698D240900B000EEF52B /* JMRichTextViewController.m */; };
 		04296990240900B000EEF52B /* JMRichTextViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0429698E240900B000EEF52B /* JMRichTextViewController.xib */; };
@@ -1935,6 +1936,7 @@
 		0425CB55228449D600E08587 /* JMVideoChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVideoChatViewController.h; sourceTree = "<group>"; };
 		0425CB56228449D600E08587 /* JMVideoChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVideoChatViewController.m; sourceTree = "<group>"; };
 		0425CB57228449D600E08587 /* JMVideoChatViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMVideoChatViewController.xib; sourceTree = "<group>"; };
+		04271435242CE5AA009CC135 /* pppp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pppp.png; sourceTree = "<group>"; };
 		0428D7D7241669800024C69F /* JMHTTPManager+DeleteGoods.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMHTTPManager+DeleteGoods.h"; sourceTree = "<group>"; };
 		0428D7D8241669800024C69F /* JMHTTPManager+DeleteGoods.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JMHTTPManager+DeleteGoods.m"; sourceTree = "<group>"; };
 		0429698C240900B000EEF52B /* JMRichTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMRichTextViewController.h; sourceTree = "<group>"; };
@@ -4630,6 +4632,7 @@
 				04CB5BC5242649710059251C /* report.png */,
 				04CB5BC4242649710059251C /* report@2x.png */,
 				04CB5BC6242649710059251C /* report@3x.png */,
+				04271435242CE5AA009CC135 /* pppp.png */,
 				04072F1B2282949D0067A05D /* Wallet_slices */,
 				049555E5227B25A30008AF1C /* Message */,
 				040A40C22265B41A0005E0D7 /* Company_slice */,
@@ -8272,6 +8275,7 @@
 				0495EDD723F3906E00E3B081 /* icon-sales@2x.png in Resources */,
 				04C120DD22882E97001BDEBC /* my_videos_2@3x.png in Resources */,
 				04AE53092404FB2500197798 /* Launch.png in Resources */,
+				04271436242CE5AA009CC135 /* pppp.png in Resources */,
 				04908B5422A912DC000B5AB4 /* JMBUserPostPositionTableViewCell.xib in Resources */,
 				040701A922753755002BF58D /* share2.png in Resources */,
 				040A40C82265B41A0005E0D7 /* company_logo.png in Resources */,
@@ -9481,7 +9485,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.6;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9517,7 +9521,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.4;
+				MARKETING_VERSION = 1.5.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
