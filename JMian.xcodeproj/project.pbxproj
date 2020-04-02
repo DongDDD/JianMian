@@ -412,7 +412,6 @@
 		046888DF2338B28500442E18 /* icon_returnw@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 046888DC2338B28500442E18 /* icon_returnw@3x.png */; };
 		046888E22338C3A200442E18 /* JMComVideoDetailInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046888E12338C3A200442E18 /* JMComVideoDetailInfoView.m */; };
 		046888E42338C3AC00442E18 /* JMComVideoDetailInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046888E32338C3AC00442E18 /* JMComVideoDetailInfoView.xib */; };
-		046F88EF241FBDCF007FA8F1 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 046F88EE241FBDCF007FA8F1 /* HealthKit.framework */; };
 		047270822248D078005FD1FC /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047270812248D078005FD1FC /* BaseViewController.m */; };
 		04731DE122A6445F0013D7CE /* JMHTTPManager+CreateAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 04731DE022A6445F0013D7CE /* JMHTTPManager+CreateAbility.m */; };
 		04731DE722A665650013D7CE /* JMHTTPManager+FectchAbility.m in Sources */ = {isa = PBXBuildFile; fileRef = 04731DE622A665650013D7CE /* JMHTTPManager+FectchAbility.m */; };
@@ -2133,7 +2132,6 @@
 		046888E02338C3A200442E18 /* JMComVideoDetailInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMComVideoDetailInfoView.h; sourceTree = "<group>"; };
 		046888E12338C3A200442E18 /* JMComVideoDetailInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMComVideoDetailInfoView.m; sourceTree = "<group>"; };
 		046888E32338C3AC00442E18 /* JMComVideoDetailInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMComVideoDetailInfoView.xib; sourceTree = "<group>"; };
-		046F88EE241FBDCF007FA8F1 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		047270802248D078005FD1FC /* BaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		047270812248D078005FD1FC /* BaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		0472708A2248F1D0005FD1FC /* DimensMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DimensMacros.h; sourceTree = "<group>"; };
@@ -3723,7 +3721,6 @@
 				6D5DD8CD2308439E0064612A /* libopencore-amrwb.a in Frameworks */,
 				6D5DD8CE2308439E0064612A /* libopencore-amrnb.a in Frameworks */,
 				6DBAA26E2305034800631AD3 /* ImSDK.framework in Frameworks */,
-				046F88EF241FBDCF007FA8F1 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6333,7 +6330,6 @@
 		47579204418359BAEBA6F740 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				046F88EE241FBDCF007FA8F1 /* HealthKit.framework */,
 				042CA65522D6279100ABB7AF /* libAFNetworking.a */,
 				1A0A0237CE80F1BFFCE5F5A9 /* libPods-JMian.a */,
 			);
@@ -9485,7 +9481,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.71;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9521,7 +9517,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.6;
+				MARKETING_VERSION = 1.5.71;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

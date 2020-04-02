@@ -446,7 +446,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "173"
                   endingLineNumber = "173"
-                  offsetFromSymbolStart = "184">
+                  offsetFromSymbolStart = "164">
                </Location>
                <Location
                   uuid = "9C198BB8-33A9-4087-BD11-DF991D3F39D0 - f27013da4a2ec1a8"
@@ -461,7 +461,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "173"
                   endingLineNumber = "173"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -818,7 +818,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
                   endingLineNumber = "66"
-                  offsetFromSymbolStart = "228">
+                  offsetFromSymbolStart = "188">
                </Location>
                <Location
                   uuid = "9BBE6739-FE57-48AA-8147-AD329301933F - d1d5903c24074940"
@@ -833,7 +833,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
                   endingLineNumber = "66"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -866,9 +866,9 @@
             timestampString = "596714889.962322"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "359"
-            endingLineNumber = "359"
-            landmarkName = "@implementation JMPostNewJobViewController"
+            startingLineNumber = "365"
+            endingLineNumber = "365"
+            landmarkName = "JMPostNewJobViewController"
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
@@ -952,7 +952,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "389"
                   endingLineNumber = "389"
-                  offsetFromSymbolStart = "476">
+                  offsetFromSymbolStart = "426">
                </Location>
                <Location
                   uuid = "66620285-F829-4A63-90DC-94A264D4915C - 18409b0af885be06"
@@ -967,7 +967,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "390"
                   endingLineNumber = "390"
-                  offsetFromSymbolStart = "20">
+                  offsetFromSymbolStart = "23">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2615,8 +2615,8 @@
             timestampString = "596714889.964623"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "132"
-            endingLineNumber = "132"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-createJob"
             landmarkType = "7">
          </BreakpointContent>
@@ -2700,8 +2700,8 @@
             timestampString = "596714889.9652359"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "339"
-            endingLineNumber = "339"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
             landmarkName = "-sendAdress_Data:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2717,8 +2717,8 @@
             timestampString = "596714889.965306"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
             landmarkName = "-createJob"
             landmarkType = "7">
          </BreakpointContent>
@@ -2816,7 +2816,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1267"
                   endingLineNumber = "1267"
-                  offsetFromSymbolStart = "168">
+                  offsetFromSymbolStart = "120">
                </Location>
                <Location
                   uuid = "8DB72323-4C48-468D-B467-65628E6989E9 - 288c85187ce0cdc9"
@@ -2831,7 +2831,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1269"
                   endingLineNumber = "1269"
-                  offsetFromSymbolStart = "88">
+                  offsetFromSymbolStart = "76">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3022,8 +3022,8 @@
             filePath = "JMian/Modules/PublicModules/Message/Controller/JMMessageListViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-addGroup:addOption:withContacts:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3120,7 +3120,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "98"
                   endingLineNumber = "98"
-                  offsetFromSymbolStart = "128">
+                  offsetFromSymbolStart = "135">
                </Location>
                <Location
                   uuid = "41F9816E-7D56-421F-8B79-183B440B12E5 - 5a4bc1f5a225f3a1"
@@ -3135,7 +3135,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "98"
                   endingLineNumber = "98"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3551,7 +3551,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
                   endingLineNumber = "192"
-                  offsetFromSymbolStart = "16">
+                  offsetFromSymbolStart = "12">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3569,6 +3569,38 @@
             startingLineNumber = "78"
             endingLineNumber = "78"
             landmarkName = "-setRightBtnImageViewName:imageNameRight2:imageNameRight3:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "63A073AC-CB44-4498-9AB2-55D7FF5D61E2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/CompanyModules/CompanyPostJob/Cotroller/JMPostNewJobViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
+            landmarkName = "-pickerSingle:selectedTitle:row:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C9D2822B-F8A6-4527-B40C-39C60D972966"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PersonModules/Mine/Controller/MyResume/JMMyResumeViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
+            landmarkName = "-didClickCreateResumeAction"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

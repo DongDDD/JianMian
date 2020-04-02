@@ -144,7 +144,10 @@ static NSString *cellIdent = @"allMessageCellIdent";
             };
         }else if (index == 1) {
             JMAddFriendViewController *vc = [[JMAddFriendViewController alloc]init];
+            self.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:vc animated:YES];
+            self.hidesBottomBarWhenPushed=NO;
+
         }else if (index == 2) {
             TUIGroupConversationListController *vc = [[TUIGroupConversationListController alloc]init];
             self.hidesBottomBarWhenPushed=YES;

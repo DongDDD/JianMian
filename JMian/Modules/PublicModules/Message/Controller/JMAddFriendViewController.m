@@ -26,17 +26,27 @@ static NSString *cellIdent = @"friendID";
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:YES];
-    [self.searchBar.searchTextField becomeFirstResponder];
+//    [self.searchBar.searchTextField becomeFirstResponder];
 
     self.searchBar.delegate = self;
     [self.view addSubview:self.tableView];
     // Do any additional setup after loading the view from its nib.
 }
 
+
+-(void)viewWillAppear:(BOOL)animated{
+
+}
+-(void)viewDidAppear:(BOOL)animated{
+//    [self.searchBar.searchTextField becomeFirstResponder];
+ 
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [self.navigationController setNavigationBarHidden:NO];
 
 }
+
 #pragma mark - Data
 
 

@@ -137,7 +137,7 @@ static NSString *cellIdent = @"payCellIdent";
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
     [self showProgressHUD_view:self.view];
     self.myProgressHUD.dimBackground = YES; //设置有遮罩
-    self.myProgressHUD.label.text = @"请求苹果支付"; //设置进度框中的提示文字
+    self.myProgressHUD.label.text = @"请等待"; //设置进度框中的提示文字
     self.myProgressHUD.alpha = 1;//设置遮罩透明度 = 1;
     [[JMHTTPManager sharedInstance]fectchOrderPaymentInfoWithOrder_id:userModel.user_id  scenes:@"app" type:@"3" mode:@"1" is_invoice:_is_invoice successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         if (responsObject[@"data"]) {            

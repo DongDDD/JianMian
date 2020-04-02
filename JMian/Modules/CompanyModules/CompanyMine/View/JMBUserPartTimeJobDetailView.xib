@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -34,9 +32,8 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" tag="1000" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UgY-Ao-Yat">
-                            <rect key="frame" x="168" y="-1" width="200" height="50"/>
+                            <rect key="frame" x="102" y="-1" width="266" height="50"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="200" id="LxO-YU-tnC"/>
                                 <constraint firstAttribute="height" constant="50" id="a12-fk-1Ij"/>
                             </constraints>
                             <state key="normal" title="请选择">
@@ -64,6 +61,7 @@
                         <constraint firstItem="UgY-Ao-Yat" firstAttribute="centerY" secondItem="tJI-lL-5J3" secondAttribute="centerY" id="byN-YE-5kP"/>
                         <constraint firstAttribute="bottom" secondItem="p6a-9z-cXG" secondAttribute="bottom" id="caB-gd-KUB"/>
                         <constraint firstAttribute="trailing" secondItem="p6a-9z-cXG" secondAttribute="trailing" constant="20" id="pOg-Zx-vTh"/>
+                        <constraint firstItem="UgY-Ao-Yat" firstAttribute="leading" secondItem="VsA-5P-szH" secondAttribute="trailing" constant="20" id="r48-fJ-1dh"/>
                         <constraint firstAttribute="trailing" secondItem="lic-UF-2Jc" secondAttribute="trailing" constant="20" id="rtG-pq-Ogl"/>
                         <constraint firstItem="VsA-5P-szH" firstAttribute="leading" secondItem="tJI-lL-5J3" secondAttribute="leading" constant="20" id="uAl-lG-8e1"/>
                     </constraints>
@@ -86,9 +84,8 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <textField opaque="NO" tag="100" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入职位名称" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2yU-U9-De1">
-                            <rect key="frame" x="168" y="-1" width="200" height="50"/>
+                            <rect key="frame" x="102" y="-1" width="266" height="50"/>
                             <constraints>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="5k1-hq-fKh"/>
                                 <constraint firstAttribute="height" constant="50" id="cb3-H5-cVO"/>
                             </constraints>
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -375,7 +372,6 @@
                                 <constraint firstAttribute="height" constant="50" id="5Ef-PP-ayO"/>
                                 <constraint firstAttribute="width" constant="200" id="fIM-2i-d1e"/>
                             </constraints>
-                            <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             <connections>
@@ -535,6 +531,7 @@
                 <constraint firstItem="vx4-Rk-BEy" firstAttribute="height" secondItem="sym-bM-6bA" secondAttribute="height" id="eSZ-sa-ib1"/>
                 <constraint firstItem="928-yo-ARE" firstAttribute="top" secondItem="tJI-lL-5J3" secondAttribute="bottom" id="eb4-2E-xSX"/>
                 <constraint firstItem="D8q-pd-je2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="enM-P5-tsk"/>
+                <constraint firstItem="2yU-U9-De1" firstAttribute="leading" secondItem="UgY-Ao-Yat" secondAttribute="leading" id="gVK-8D-92u"/>
                 <constraint firstItem="Ke8-ud-Bwx" firstAttribute="trailing" secondItem="z2l-s6-IgZ" secondAttribute="trailing" id="hBl-kJ-hUp"/>
                 <constraint firstItem="sym-bM-6bA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="icJ-ew-iUJ"/>
                 <constraint firstItem="UMn-qc-BeD" firstAttribute="trailing" secondItem="pXL-cc-NJA" secondAttribute="trailing" id="k3T-lF-GHc"/>

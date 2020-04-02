@@ -92,7 +92,13 @@
     [self.workPropertyBtn setTitle:self.homeworkModel.work_name forState:UIControlStateNormal];
     self.work_label_id = self.homeworkModel.work_label_id;
     self.workNameTextField.text = self.homeworkModel.work_name;
-    NSString *experienceStr = [NSString stringWithFormat:@"%@~%@年",self.homeworkModel.work_experience_min,self.homeworkModel.work_experience_max];
+    NSString *experienceStr;
+    if ([self.homeworkModel.work_experience_min isEqualToString:@"0"]) {
+        experienceStr = @"不限";
+    }else{
+        experienceStr = [NSString stringWithFormat:@"%@~%@年",self.homeworkModel.work_experience_min,self.homeworkModel.work_experience_max];
+    
+    }
     [self.expriencesBtn setTitle:experienceStr forState:UIControlStateNormal];
     [self.educationBtn setTitle:[self getEducationStrWithEducation:self.homeworkModel.education] forState:UIControlStateNormal];
     NSString *str = [self getSalaryKtransformStrWithMin:self.homeworkModel.salary_min max:self.homeworkModel.salary_max];
@@ -236,13 +242,19 @@
 }
 
 -(void)setExprienceRangeWithExpStr:(NSString *)ExpStr{
-    NSArray *array = [ExpStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
+    if ([ExpStr isEqualToString:@"不限"]) {
+         self.expriencesMin = @"0";
+         self.expriencesMax = @"0";
+    }else{
+        NSArray *array = [ExpStr componentsSeparatedByString:@"~"]; //从字符 ~ 中分隔成2个元素的数组
+        
+        NSString *minStr = array[0];
+        NSString *maxStr = array[1];
+        
+        self.expriencesMin = minStr;
+        self.expriencesMax = maxStr;
     
-    NSString *minStr = array[0];
-    NSString *maxStr = array[1];
-    
-    self.expriencesMin = minStr;
-    self.expriencesMax = maxStr;
+    }
     
 }
 
@@ -387,7 +399,7 @@
         _expPickerSingle.title = @"工作经验";
         _expPickerSingle.titleUnit = @"年";
         _expPickerSingle.widthPickerComponent = SCREEN_WIDTH;
-        _expPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"1~3",
+        _expPickerSingle.arrayData = [NSMutableArray arrayWithObjects:@"不限",@"1~3",
                                             @"3~5",
                                             @"5~10",
                                             nil];
