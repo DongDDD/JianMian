@@ -7,6 +7,7 @@
 //
 
 #import "JMPushMessageCell.h"
+#import "DimensMacros.h"
 
 @implementation JMPushMessageCell
 
@@ -25,5 +26,6 @@
 {
     [super fillWithData:data];
     self.pushData = data;
+    self.content.textColor = MASTER_COLOR;
 }
 @end

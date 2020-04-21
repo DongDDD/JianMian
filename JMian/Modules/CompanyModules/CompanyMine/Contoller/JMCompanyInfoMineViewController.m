@@ -24,9 +24,13 @@
 #import "STPickerSingle.h"
 #import "JMHTTPManager+GetLabels.h"
 #import "JMLabsData.h"
+#import "JMPictureAddViewController.h"
+#import "JMPictureManagerViewController.h"
+#import "HXPhotoModel.h"
+#import "JMTaskGoodsDetailModel.h"
+#import "JMHTTPManager+DeleteGoodsImage.h"
 
-
-@interface JMCompanyInfoMineViewController ()<UIImagePickerControllerDelegate,UIPickerViewDelegate,JMCompanyDesciptionOfMineViewDelegate,Demo3ViewControllerDelegate,UINavigationControllerDelegate,JMGetCompanyLocationViewControllerDelegate>
+@interface JMCompanyInfoMineViewController ()<UIImagePickerControllerDelegate,UIPickerViewDelegate,JMCompanyDesciptionOfMineViewDelegate,Demo3ViewControllerDelegate,UINavigationControllerDelegate,JMGetCompanyLocationViewControllerDelegate,JMPictureAddViewControllerDelegate,JMPictureManagerViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property(nonatomic,strong)JMCompanyInfoModel *model;
@@ -77,6 +81,17 @@
 @property (weak, nonatomic) IBOutlet UIButton *leftBtn;
 @property (weak, nonatomic) IBOutlet UIButton *rightBtn;
 @property (weak, nonatomic) IBOutlet UILabel *videoStatus;
+@property(nonatomic,strong)NSMutableArray *files;
+@property(nonatomic,strong)NSArray *image_arr;
+
+@property (strong, nonatomic)NSMutableArray *imageUrl_arr;//图片链接
+@property (strong, nonatomic)NSMutableArray *imageUrl_arr2;//正确顺序
+@property (nonatomic,strong)NSMutableArray *photoModel_arr;
+@property (nonatomic,strong)NSMutableArray *imageDataArr;;
+
+//@property (strong, nonatomic)NSArray *image_arr;//增加的图片
+@property (strong, nonatomic)NSMutableArray *ids;//图片链接(增加的)或者图片file_id(原来的)
+@property (strong, nonatomic)NSMutableArray *sorts;//排序
 
 @end
 
@@ -141,9 +156,15 @@
             if (self.model.files.count > 0) {
                 for (JMFilesModel *filesModel in self.model.files) {
                     if ([filesModel.type isEqualToString:@"2"]) {//过滤视频走 只要图片
-                        [self.imageDataArray addObject:filesModel];
+                        HXPhotoModel *photoModel = [[HXPhotoModel alloc]init];
+                        photoModel.networkPhotoUrl = [NSURL URLWithString:filesModel.files_file_path];
+                        photoModel.file_id = filesModel.file_id;
+                        [self.photoModel_arr addObject:photoModel];
+                        //                        [self.imageDataArray addObject:filesModel];
+                        
                     }
                 }
+                
 //                if (self.filesModelArray.count > 0) {//获得图片链接数组
 //                    self.imageDataArray = [NSMutableArray array];
 //                    for (JMFilesModel *filesModel in self.filesModelArray) {
@@ -185,6 +206,13 @@
 -(void)uploadCompanyWithImages:(NSArray *)images{
     
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+//    NSMutableArray *imageArr = [NSMutableArray array];
+//    for (NSString *url in images) {
+//        if ([url containsString:@"https://jmsp-images-1257721067.picgz.myqcloud.com"]) {
+//            NSString *strUrl = [url stringByReplacingOccurrencesOfString:@"https://jmsp-images-1257721067.picgz.myqcloud.com" withString:@""];
+//            [imageArr addObject:strUrl];
+//        }
+//    }
     [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:userModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:nil video_path:nil video_cover:nil work_time:nil work_week:nil type_label_id:nil industry_label_id:nil financing:nil employee:nil address:nil url:nil longitude:nil latitude:nil description:nil image_path:images label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片上传成功"
@@ -202,7 +230,7 @@
     NSString *latitude = [NSString stringWithFormat:@"%f",self.POIModel.location.latitude];
     
     [self.progressHUD setHidden:NO];
-    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:_userInfoModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:_imgURL video_path:self.videoURL video_cover:_video_cover work_time:nil work_week:nil type_label_id:nil industry_label_id:_industry_label_id financing:self.facingBtn.titleLabel.text employee:self.employBtn.titleLabel.text address:self.companyAdress.titleLabel.text url:nil longitude:longitude latitude:latitude description:self.companyDecriptionBtn.titleLabel.text image_path:self.addImage_paths label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateCompanyInfo_Id:_userInfoModel.company_id company_name:nil nickname:nil abbreviation:nil logo_path:_imgURL video_path:self.videoURL video_cover:_video_cover work_time:nil work_week:nil type_label_id:nil industry_label_id:_industry_label_id financing:self.facingBtn.titleLabel.text employee:self.employBtn.titleLabel.text address:self.companyAdress.titleLabel.text url:nil longitude:longitude latitude:latitude description:self.companyDecriptionBtn.titleLabel.text image_path:self.files label_id:nil subway:nil corporate:nil reg_capital:nil reg_date:nil reg_address:nil unified_credit_code:nil business_scope:nil license_path:nil successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"公司信息更新成功"
                                                       delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
@@ -312,6 +340,37 @@
     
 }
 
+-(void)uploadImgRequest:(UIImage *)img{
+ 
+    NSArray *array = @[img];
+
+    [[JMHTTPManager sharedInstance]uploadsWithFiles:array successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        if (responsObject[@"data"]) {
+            NSString *url = responsObject[@"data"][0];
+            [self.files addObject:url];
+            
+        }
+        
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+    
+}
+
+-(void)deleteGoodsImageRequsetWithFile_id:(NSString *)file_id{
+    [[JMHTTPManager sharedInstance]deleteGoodsImageWithFile_id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"删除成功" preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:([UIAlertAction actionWithTitle:@"好的" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+        }])];
+        [self presentViewController:alertController animated:YES completion:nil];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
+
+
+}
 #pragma mark - 点击事件
 //- 保存资料
 -(void)fanhui{
@@ -366,13 +425,24 @@
 //    vc.delegate = self;
 //    [self.navigationController pushViewController:vc animated:YES];
     
-    Demo3ViewController *vc = [[Demo3ViewController alloc]init];
-    vc.company_id = self.model.company_id;
-    vc.viewType = Demo3ViewCompanyInfoEdit;
-    vc.delegate = self;
-    [self.navigationController pushViewController:vc animated:YES];
+//    JMPictureAddViewController *vc =  [[JMPictureAddViewController alloc]init];
+//    NSMutableArray *arr = [NSMutableArray array];
+//
+//    for (HXPhotoModel *model in self.photoModel_arr) {
+//        [arr addObject:model.networkPhotoUrl];
+//
+//    }
+//    vc.image_arr = arr;
     
+            JMPictureManagerViewController *vc = [[JMPictureManagerViewController alloc]init];
+    //        vc.imgUrl_arr = self.imageUrl_arr;
+            vc.delegate = self;
+            vc.photoModel_arr = self.photoModel_arr;
+            vc.vc = self;
+            [self.navigationController pushViewController:vc animated:YES];
 }
+
+
 
 //JMMyPictureViewControllerDelegate
 //-(void)sendArray_image_paths:(NSMutableArray *)image_paths{
@@ -496,6 +566,42 @@
     
     
 }
+
+-(void)pictureManagerWithPhotoModel_arr:(NSMutableArray *)photoModel_arr{
+    _isChange = YES;
+    self.photoModel_arr = photoModel_arr;
+    
+    
+    self.ids = [NSMutableArray array];
+    self.sorts = [NSMutableArray array];
+    self.imageUrl_arr = [NSMutableArray array];
+    for (int i = 0; i < photoModel_arr.count; i++) {
+        HXPhotoModel *model = photoModel_arr[i];
+        if (![model.networkPhotoUrl.absoluteString containsString:@"http"] ) {
+            [self.imageUrl_arr addObject:model.networkPhotoUrl];
+        }
+        
+  
+    }
+    
+    [self uploadCompanyWithImages:self.imageUrl_arr.copy];
+//     [self.partTimeJobDetailView.postImgBtn setTitle:@"已上传" forState:UIControlStateNormal];
+//     [self.partTimeJobDetailView.postImgBtn setTitleColor:RightTITLE_COLOR forState:UIControlStateNormal];
+    
+}
+//删除图片
+-(void)deleteSalePositionImageWithIndex:(NSInteger)index{
+    if (self.imageDataArr.count > 0) {
+        JMImageModel *model = self.imageDataArr[index];
+        if (index < self.imageDataArr.count) {
+            [self deleteGoodsImageRequsetWithFile_id:model.file_id];
+            [self.imageDataArr removeObject:model];
+            //        [self.image_arr.mutableCopy removeObjectAtIndex:index];
+        }
+
+    }
+}
+
 
 #pragma mark - pickerViewDelegate
 
@@ -1109,6 +1215,38 @@
     }
     return _filesModelArray;
 }
+
+-(NSMutableArray *)files{
+    if (_files.count == 0) {
+        _files = [NSMutableArray array];
+    }
+    return _files;
+}
+
+-(NSMutableArray *)photoModel_arr{
+    if (_photoModel_arr == nil) {
+        _photoModel_arr = [NSMutableArray array];
+    }
+    return _photoModel_arr;
+    
+}
+
+-(NSMutableArray *)imageUrl_arr{
+    if (_imageUrl_arr == nil) {
+        _imageUrl_arr = [NSMutableArray array];
+    }
+    return _imageUrl_arr;
+    
+}
+-(NSMutableArray *)imageUrl_arr2{
+    if (_imageUrl_arr2 == nil) {
+        _imageUrl_arr2 = [NSMutableArray array];
+    }
+    return _imageUrl_arr2;
+    
+}
+
+
 
 -(MBProgressHUD *)progressHUD{
     if (!_progressHUD) {

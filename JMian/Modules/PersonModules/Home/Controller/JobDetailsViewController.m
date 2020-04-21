@@ -218,11 +218,7 @@
          return;
      }
      
-    
-    JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
-    
-    if ([userModel.card_status isEqualToString:Card_PassIdentify]) {
-        
+ 
         [[JMHTTPManager sharedInstance]createChat_type:@"1" recipient:self.myModel.user_id foreign_key:self.myModel.work_label_id sender_mark:@"" recipient_mark:@"" successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
             
             if(responsObject[@"data"]){
@@ -233,6 +229,11 @@
                 messageListModel.data =data;
                 messageListModel.viewType = JMMessageList_Type_C2C;
                 JMChatViewController *vc = [[JMChatViewController alloc]init];
+                messageListModel.work_work_name = self.myModel.work_name;
+                messageListModel.work_work_id = self.myModel.work_id;
+                messageListModel.work_salary_min = self.myModel.salary_min;
+                messageListModel.work_salary_max = self.myModel.salary_max;
+                messageListModel.work_description = self.myModel.Description;
                 vc.myConvModel = messageListModel;
                 [self.navigationController pushViewController:vc animated:YES];
                 
@@ -241,17 +242,7 @@
             
             
         }];
-        
-        
-    }else{
-        
-        [self showAlertWithTitle:@"提示" message:@"实名认证后才能申请任务" leftTitle:@"返回" rightTitle:@"去实名认证"];
-        
-    }
-    
-    
-    
-    
+ 
 }
 
 -(void)alertRightAction{

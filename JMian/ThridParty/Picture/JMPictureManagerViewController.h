@@ -8,7 +8,9 @@
 
 #import "BaseViewController.h"
 #import "JMImageUrlModel.h"
+#import "JMCompanyInfoViewController.h"
 NS_ASSUME_NONNULL_BEGIN
+
 @protocol JMPictureManagerViewControllerDelegate <NSObject>
 
 -(void)pictureManagerWithPhotoModel_arr:(NSMutableArray *)photoModel_arr;
@@ -18,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface JMPictureManagerViewController : BaseViewController
 @property(nonatomic,weak)id<JMPictureManagerViewControllerDelegate>delegate;
 @property(nonatomic,strong)NSArray *photoModel_arr;
+@property(nonatomic,strong)JMCompanyInfoViewController *vc;
 //@property(nonatomic,copy)NSMutableArray *imgUrl_arr;//用于加载图片，渲染
 
 

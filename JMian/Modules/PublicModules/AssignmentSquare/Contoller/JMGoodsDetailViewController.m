@@ -32,6 +32,7 @@
 @property (nonatomic, strong) JMTaskApplyForView *taskApplyForView;
 @property (nonatomic, strong) JMPublicShareView *shareView;
 @property (weak, nonatomic) IBOutlet UILabel *haveApplyfor;
+@property (weak, nonatomic) IBOutlet UIButton *shareBtn;
 
 @end
 
@@ -41,10 +42,17 @@
     [super viewDidLoad];
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.bottomView];
+    [self.view addSubview:self.shareBtn];
+    self.shareBtn.backgroundColor = MASTER_COLOR;
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.right.mas_equalTo(self.view);
         make.top.mas_equalTo(self.view);
         make.bottom.mas_equalTo(self.bottomView.mas_top);
+    }];
+    [self.shareBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.height.mas_equalTo(50);
+        make.bottom.mas_equalTo(self.view).offset(-SafeAreaBottomHeight);
     }];
     if (_viewType == JMGoodsDetailSnapshootType) {
         [[UIApplication sharedApplication].keyWindow addSubview:self.shareView];
@@ -54,6 +62,7 @@
           [self.tableView mas_updateConstraints:^(MASConstraintMaker *make) {
             make.bottom.mas_equalTo(self.view);
         }];
+        [self.shareBtn setHidden:NO];
     }else if (_viewType == JMGoodsDetailDefaultType) {
         self.haveApplyfor.text =  [NSString stringWithFormat:@"%@人已报名",self.effective_count];
         
@@ -130,6 +139,9 @@
     }
 }
 
+- (IBAction)shareAction:(id)sender {
+     [self.shareView show];
+}
 
 
 - (IBAction)bottomLeftAction:(UIButton *)sender {

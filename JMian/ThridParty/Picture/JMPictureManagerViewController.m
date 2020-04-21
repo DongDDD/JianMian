@@ -10,6 +10,7 @@
 #import "HXPhotoPicker.h"
 #import "JMHTTPManager+Uploads.h"
 #import "JMHTTPManager+DeleteGoodsImage.h"
+#import "JMHTTPManager+CompanyFileDelete.h"
 
 //#import "SDWebImageManager.h"
 
@@ -290,7 +291,12 @@ static const CGFloat kPhotoViewMargin = 12.0;
     for (HXPhotoModel *model in self.photoModel_arr) {
         if (model.file_id && [[model.networkPhotoUrl absoluteString] containsString:networkPhotoUrl]) {
 //            [self.delete_arr addObject:model.localIdentifier];
-            [self deleteGoodsImageRequsetWithFile_id:model.file_id];
+            if (self.vc) {
+                [self deleteCompanyImgRequestWithFile_id:model.file_id];
+            }else{
+                [self deleteGoodsImageRequsetWithFile_id:model.file_id];
+                
+            }
         }
     }
 }
@@ -353,10 +359,23 @@ static const CGFloat kPhotoViewMargin = 12.0;
     } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
         
     }];
+ 
+}
+
+
+//删除公司图片
+-(void)deleteCompanyImgRequestWithFile_id:(NSString *)file_id{
+    [[JMHTTPManager sharedInstance]deleteCompanyFile_Id:file_id successBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"图片删除成功"
+                                                      delegate:nil cancelButtonTitle:@"好的" otherButtonTitles: nil];
+        [alert show];
+    } failureBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull error) {
+        
+    }];
     
     
 }
-
 
 
 #pragma mark -lazy

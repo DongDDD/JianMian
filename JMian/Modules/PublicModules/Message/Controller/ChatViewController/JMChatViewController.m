@@ -79,7 +79,7 @@
     }else if (model.user_id == _myConvModel.sender_user_id) {
         if (_myConvModel.recipient_nickname.length > 0) {
            
-            titleStr = [NSString stringWithFormat:@"%@%@",_myConvModel.recipient_nickname,subTitle];
+            titleStr = [NSString stringWithFormat:@"%@%@",_myConvModel.workInfo_company_name,subTitle];
         }else{
             titleStr = [NSString stringWithFormat:@"%@",_myConvModel.recipient_phone];
         }
@@ -87,7 +87,7 @@
     }else{
         if (_myConvModel.sender_nickname.length > 0) {
            
-            titleStr = [NSString stringWithFormat:@"%@%@",_myConvModel.sender_nickname,subTitle];
+            titleStr = [NSString stringWithFormat:@"%@%@",_myConvModel.workInfo_company_name,subTitle];
         }else{
             titleStr = [NSString stringWithFormat:@"%@",_myConvModel.sender_phone];
         }

@@ -35,6 +35,8 @@
 //    [self.navigationController setNavigationBarHidden:NO];
 //    [self setIsHiddenBackBtn:YES];
     _phoneNumText.delegate = self;
+ 
+    
     _phoneNumText.keyboardType = UIKeyboardTypeNumberPad;
     _captchaText.keyboardType = UIKeyboardTypeNumberPad;
     // Do any additional setup after loading the view from its nib.

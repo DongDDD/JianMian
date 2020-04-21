@@ -53,6 +53,7 @@
 #import "JMHTTPManager+Transfer.h"//转账
 #import "JMMoneyDetailsViewController.h"
 #import "JMTaskManageViewController.h"
+#import "JMManageInterviewViewController.h"
 #define MAX_MESSAGE_SEP_DLAY (5 * 60)
 
 static NSString *cellIdent = @"infoCellIdent";
@@ -1107,7 +1108,14 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
         JMPushMessageCell *pushCell = (JMPushMessageCell *)cell;
         if ([pushCell.pushData.desc isEqualToString:@"[任务申请]"]) {
             JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
-             [vc setMyIndex:0];
+            [vc setMyIndex:0];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([pushCell.pushData.desc containsString:@"任务"]) {
+            JMTaskManageViewController *vc = [[JMTaskManageViewController alloc]init];
+            [vc setMyIndex:0];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([pushCell.pushData.desc containsString:@"面试"]) {
+            JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             NSString *string = [[NSString alloc]initWithData:pushCell.pushData.data encoding:NSUTF8StringEncoding];

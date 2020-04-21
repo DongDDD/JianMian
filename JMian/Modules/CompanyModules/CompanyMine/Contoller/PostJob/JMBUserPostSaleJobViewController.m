@@ -46,7 +46,7 @@
 @property (strong, nonatomic)JMPostGoodsImagesView *postGoodsImagesView;
 @property (strong, nonatomic)JMComfirmPostBottomView *comfirmPostBottomView;
 @property (nonatomic,strong)NSArray *quantityArray;
-@property (nonatomic,strong)NSMutableArray *imageDataArr;;
+@property (nonatomic,strong)NSMutableArray *imageDataArr;
 @property (nonatomic,strong)UIDatePicker *dataPickerView;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property (nonatomic ,assign)BOOL isChange;

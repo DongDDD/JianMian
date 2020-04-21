@@ -119,7 +119,7 @@ NSString *const JMCSaleTypeDetailGoodsTableViewCellIdentifier = @"JMCSaleTypeDet
 //        CGFloat itemWidth = (SCREEN_WIDTH) / 3;
         
         //设置单元格大小
-        flowLayout.itemSize = CGSizeMake(157, 207);
+        flowLayout.itemSize = CGSizeMake(157, 240);
         //最小行间距(默认为10)
         flowLayout.minimumLineSpacing = 10;
         //最小item间距（默认为10）

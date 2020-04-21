@@ -71,7 +71,6 @@
 }
 
 - (NSURLSessionTask *)sessionTaskForRequest:(JMHTTPRequest *)request {
-
     NSMutableURLRequest *urlRequest = nil;
     if(kFetchMyDefault(@"token")) {
         [self.requestSerializer setValue:kFetchMyDefault(@"token") forHTTPHeaderField:@"Authorization"];

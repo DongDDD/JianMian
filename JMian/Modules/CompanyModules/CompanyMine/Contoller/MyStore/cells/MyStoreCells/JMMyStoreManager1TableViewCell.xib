@@ -196,7 +196,7 @@
                 <outlet property="btn2" destination="Vc5-ag-fmd" id="kTx-TH-LTL"/>
                 <outlet property="btn3" destination="xLB-7q-bcz" id="Jhz-KM-TLr"/>
             </connections>
-            <point key="canvasLocation" x="-97.101449275362327" y="118.86160714285714"/>
+            <point key="canvasLocation" x="-114" y="118"/>
         </tableViewCell>
     </objects>
     <resources>

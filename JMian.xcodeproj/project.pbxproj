@@ -340,6 +340,9 @@
 		04380A8E22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A8D22DC118C00EA45C2 /* JMHTTPManager+FectchVersionInfo.m */; };
 		04380A9222DC15C900EA45C2 /* JMVersionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A9122DC15C900EA45C2 /* JMVersionManager.m */; };
 		04380A9522DC167C00EA45C2 /* JMVersionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 04380A9422DC167C00EA45C2 /* JMVersionModel.m */; };
+		043B742F243DE2A800D2D399 /* myGroup@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043B742C243DE2A700D2D399 /* myGroup@3x.png */; };
+		043B7430243DE2A800D2D399 /* myGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 043B742D243DE2A700D2D399 /* myGroup.png */; };
+		043B7431243DE2A800D2D399 /* myGroup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 043B742E243DE2A700D2D399 /* myGroup@2x.png */; };
 		043D0F9123966A94005C69DD /* JMYoukeAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D0F8F23966A93005C69DD /* JMYoukeAction.m */; };
 		043D0F9523966B9A005C69DD /* JMYoukeChooseTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D0F9223966B99005C69DD /* JMYoukeChooseTypeViewController.m */; };
 		043D0F9623966B9A005C69DD /* JMYoukeChooseTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043D0F9423966B9A005C69DD /* JMYoukeChooseTypeViewController.xib */; };
@@ -942,9 +945,6 @@
 		04B0D91223A792F000950C6A /* addFriend@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B0D90F23A792EF00950C6A /* addFriend@3x.png */; };
 		04B0D91323A792F000950C6A /* addFriend.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B0D91023A792EF00950C6A /* addFriend.png */; };
 		04B0D91423A792F000950C6A /* addFriend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B0D91123A792F000950C6A /* addFriend@2x.png */; };
-		04B0D91823A7934C00950C6A /* myGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B0D91523A7934B00950C6A /* myGroup.png */; };
-		04B0D91923A7934C00950C6A /* myGroup@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B0D91623A7934B00950C6A /* myGroup@2x.png */; };
-		04B0D91A23A7934C00950C6A /* myGroup@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B0D91723A7934B00950C6A /* myGroup@3x.png */; };
 		04B1169223B2FADB0000D01A /* JMGroupIntroduceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1169023B2FADB0000D01A /* JMGroupIntroduceViewController.m */; };
 		04B1169323B2FADB0000D01A /* JMGroupIntroduceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B1169123B2FADB0000D01A /* JMGroupIntroduceViewController.xib */; };
 		04B1169D23B34C700000D01A /* JMBUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B1169B23B34C700000D01A /* JMBUserProfileViewController.m */; };
@@ -2021,6 +2021,9 @@
 		04380A9122DC15C900EA45C2 /* JMVersionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVersionManager.m; sourceTree = "<group>"; };
 		04380A9322DC167C00EA45C2 /* JMVersionModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMVersionModel.h; sourceTree = "<group>"; };
 		04380A9422DC167C00EA45C2 /* JMVersionModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMVersionModel.m; sourceTree = "<group>"; };
+		043B742C243DE2A700D2D399 /* myGroup@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myGroup@3x.png"; sourceTree = "<group>"; };
+		043B742D243DE2A700D2D399 /* myGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = myGroup.png; sourceTree = "<group>"; };
+		043B742E243DE2A700D2D399 /* myGroup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myGroup@2x.png"; sourceTree = "<group>"; };
 		043D0F8F23966A93005C69DD /* JMYoukeAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMYoukeAction.m; sourceTree = "<group>"; };
 		043D0F9023966A94005C69DD /* JMYoukeAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMYoukeAction.h; sourceTree = "<group>"; };
 		043D0F9223966B99005C69DD /* JMYoukeChooseTypeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMYoukeChooseTypeViewController.m; sourceTree = "<group>"; };
@@ -2846,9 +2849,6 @@
 		04B0D90F23A792EF00950C6A /* addFriend@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addFriend@3x.png"; sourceTree = "<group>"; };
 		04B0D91023A792EF00950C6A /* addFriend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addFriend.png; sourceTree = "<group>"; };
 		04B0D91123A792F000950C6A /* addFriend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addFriend@2x.png"; sourceTree = "<group>"; };
-		04B0D91523A7934B00950C6A /* myGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myGroup.png; path = "../../../Downloads/icon-more-cat_slices-2/myGroup.png"; sourceTree = "<group>"; };
-		04B0D91623A7934B00950C6A /* myGroup@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "myGroup@2x.png"; path = "../../../Downloads/icon-more-cat_slices-2/myGroup@2x.png"; sourceTree = "<group>"; };
-		04B0D91723A7934B00950C6A /* myGroup@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "myGroup@3x.png"; path = "../../../Downloads/icon-more-cat_slices-2/myGroup@3x.png"; sourceTree = "<group>"; };
 		04B1168F23B2FADB0000D01A /* JMGroupIntroduceViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMGroupIntroduceViewController.h; sourceTree = "<group>"; };
 		04B1169023B2FADB0000D01A /* JMGroupIntroduceViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMGroupIntroduceViewController.m; sourceTree = "<group>"; };
 		04B1169123B2FADB0000D01A /* JMGroupIntroduceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMGroupIntroduceViewController.xib; sourceTree = "<group>"; };
@@ -4619,9 +4619,6 @@
 				04B0D91023A792EF00950C6A /* addFriend.png */,
 				04B0D91123A792F000950C6A /* addFriend@2x.png */,
 				04B0D90F23A792EF00950C6A /* addFriend@3x.png */,
-				04B0D91523A7934B00950C6A /* myGroup.png */,
-				04B0D91623A7934B00950C6A /* myGroup@2x.png */,
-				04B0D91723A7934B00950C6A /* myGroup@3x.png */,
 				04B0D90423A7929300950C6A /* newFriend.png */,
 				04B0D90523A7929300950C6A /* newFriend@2x.png */,
 				04B0D90323A7929300950C6A /* newFriend@3x.png */,
@@ -5479,6 +5476,9 @@
 		049555E5227B25A30008AF1C /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				043B742D243DE2A700D2D399 /* myGroup.png */,
+				043B742E243DE2A700D2D399 /* myGroup@2x.png */,
+				043B742C243DE2A700D2D399 /* myGroup@3x.png */,
 				047BA8852384DAFE00E4F481 /* kf.png */,
 				047BA8832384DAFD00E4F481 /* kf@2x.png */,
 				047BA8842384DAFE00E4F481 /* kf@3x.png */,
@@ -7594,7 +7594,6 @@
 				040B837C2265D73600F1A37A /* companyCamera.png@2x.png in Resources */,
 				04896A0922C07BBD00E674C5 /* JMApplyForProtocolView.xib in Resources */,
 				04AB7AB32350228E009A30C0 /* close_version@3x.png in Resources */,
-				04B0D91823A7934C00950C6A /* myGroup.png in Resources */,
 				04C98A6E23F6525F0067A094 /* icon-state-selection.png in Resources */,
 				6D0209FB224FC1FB009BCFE4 /* JMMineModulesCollectionViewCell.xib in Resources */,
 				049555E8227B25C50008AF1C /* other_bubble.png in Resources */,
@@ -7980,6 +7979,7 @@
 				048348D92269C01200DE4630 /* JMMangerInterviewTableViewCell.xib in Resources */,
 				04BE8B3E22924241004EB7EC /* notification@2x.png in Resources */,
 				049420B823C6C472005357B3 /* icon-no_store.png in Resources */,
+				043B742F243DE2A800D2D399 /* myGroup@3x.png in Resources */,
 				0474C936239DFE0F00EEF110 /* hx_paizhao_bianji_huanyuan@2x.png in Resources */,
 				04950FDD22AE812C00C3D3FB /* JMTaskManageTableViewCell.xib in Resources */,
 				04D8169F2316110A0071C857 /* JMCDetailProduceTableViewCell.xib in Resources */,
@@ -8016,7 +8016,9 @@
 				044A34D123FA6BF0001997A1 /* JMAfterSalesRefundTitleTableViewCell.xib in Resources */,
 				040CA85C225F1EBF006D7A7F /* Location_of_detail_page@3x.png in Resources */,
 				04950FF522AEA1AF00C3D3FB /* jianbian@2x.png in Resources */,
+				043B7430243DE2A800D2D399 /* myGroup.png in Resources */,
 				04EE3C7223F79EA900C88105 /* JMOderInfoBtnTableViewCell.xib in Resources */,
+				043B7431243DE2A800D2D399 /* myGroup@2x.png in Resources */,
 				0492AE7A22F0463400AB21B3 /* JMBindBankCardViewController.xib in Resources */,
 				04A5FD4522C8A58200850604 /* zhuanshi@2x.png in Resources */,
 				049420B923C6C472005357B3 /* icon-no_store@2x.png in Resources */,
@@ -8289,7 +8291,6 @@
 				04B4F88722B7BFDB00A06E9C /* JMPostGoodsImagesView.xib in Resources */,
 				040B837E2265D73600F1A37A /* companyCamera.png in Resources */,
 				0405DE432351B1F5001666AA /* prosperity.png in Resources */,
-				04B0D91A23A7934C00950C6A /* myGroup@3x.png in Resources */,
 				04F355DF23C854B300857F67 /* icon--Backstage-admin@2x.png in Resources */,
 				04A2479C224C773A00DEB8E3 /* 0000@2x.png in Resources */,
 				0494C005238BDD940028164C /* JMVideoJoblistTableViewCell.xib in Resources */,
@@ -8354,7 +8355,6 @@
 				04AC6A2822CDAE4E00693424 /* JMNoDataViewController.xib in Resources */,
 				04C98A7023F6525F0067A094 /* icon-state-selection@3x.png in Resources */,
 				04EA7E3123011376005B7CE5 /* JMSnapshotWebViewController.xib in Resources */,
-				04B0D91923A7934C00950C6A /* myGroup@2x.png in Resources */,
 				0407149E227C6CC70026C368 /* expression@2x.png in Resources */,
 				04072F2A2282949D0067A05D /* particulars@2x.png in Resources */,
 				04BD326D23740F62005C096E /* JMPersonHeaderTableViewCell.xib in Resources */,
@@ -9469,7 +9469,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TIMSDK",
 				);
 				INFOPLIST_FILE = JMian/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9481,7 +9481,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.71;
+				MARKETING_VERSION = 1.5.73;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9505,7 +9505,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TIMSDK",
 				);
 				INFOPLIST_FILE = JMian/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -9517,7 +9517,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.71;
+				MARKETING_VERSION = 1.5.73;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

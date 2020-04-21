@@ -46,9 +46,9 @@
     //判断senderid是不是自己
     if (model.user_id == myConModel.sender_user_id) {
         
-        self.name.text = myConModel.recipient_nickname;
+        self.name.text = myConModel.work_work_name;
     }else{
-        self.name.text = myConModel.sender_nickname;
+        self.name.text = myConModel.work_work_name;
     }
     
     [self setValuesWithChatType:myConModel.type];

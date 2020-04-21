@@ -153,7 +153,7 @@
 }
 
 -(void)updateJob{
-    [[JMHTTPManager sharedInstance]updateWorkWith_Id:self.homeworkModel.work_id city_id:@"3" work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionStr address:self.workLocationBtn.titleLabel.text longitude:_longitude latitude:_latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
+    [[JMHTTPManager sharedInstance]updateWorkWith_Id:self.homeworkModel.work_id city_id:self.city_id work_label_id:_work_label_id work_name:self.workNameTextField.text education:_educationNum work_experience_min:_expriencesMin work_experience_max:_expriencesMax salary_min:_salaryMin salary_max:_salaryMax description:_jobDescriptionStr address:self.workLocationBtn.titleLabel.text longitude:_longitude latitude:_latitude status:@"1" label_ids:nil SuccessBlock:^(JMHTTPRequest * _Nonnull request, id  _Nonnull responsObject) {
         
 //        [self showAlertVCSucceesSingleWithMessage:@"" btnTitle:@""];
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"\n\n\n\n" message:@"更新成功" preferredStyle: UIAlertControllerStyleAlert];
@@ -348,7 +348,7 @@
     [self.workLocationBtn setTitle:adr forState:UIControlStateNormal];
     _longitude = [NSString stringWithFormat:@"%f",data.location.longitude];
     _latitude = [NSString stringWithFormat:@"%f",data.location.latitude];
-    [self getCityIdRequstWithCityName:data.city];
+    [self getCityIdRequstWithCityName:data.district];
 }
 
 

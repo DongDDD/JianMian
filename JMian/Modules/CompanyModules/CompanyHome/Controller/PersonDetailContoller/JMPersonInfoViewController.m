@@ -635,7 +635,7 @@
     CGFloat offsetY = scrollView.contentOffset.y;
 
     if (offsetY > 400) {
-        self.navigationItem.titleView = [self setTitleView];;
+        self.navigationItem.titleView = [self setTitleView];
     }else{
         self.title = @"个人详情";
     }

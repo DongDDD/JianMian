@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,39 +24,37 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DEMI_BIG.png" translatesAutoresizingMaskIntoConstraints="NO" id="bTt-m9-7Gi">
-                    <rect key="frame" x="48" y="111" width="123" height="55"/>
+                    <rect key="frame" x="48" y="37" width="245" height="109"/>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="phone.png" translatesAutoresizingMaskIntoConstraints="NO" id="5K3-J4-jgL">
-                    <rect key="frame" x="48" y="221" width="20" height="27"/>
+                    <rect key="frame" x="48" y="201" width="20" height="27"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="20" id="8Oe-1L-IOq"/>
                         <constraint firstAttribute="height" constant="27" id="OQN-ul-Kwi"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verification_code.png" translatesAutoresizingMaskIntoConstraints="NO" id="E9e-fs-icf">
-                    <rect key="frame" x="48" y="278" width="20" height="27"/>
+                    <rect key="frame" x="48" y="258" width="20" height="27"/>
                 </imageView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入手机号" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5y9-0G-IKN">
-                    <rect key="frame" x="84" y="218" width="212" height="30"/>
+                    <rect key="frame" x="84" y="198" width="212" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="QDE-hJ-Gcv"/>
                         <constraint firstAttribute="width" constant="212" id="cqB-17-3dw"/>
                     </constraints>
-                    <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="验证码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y8f-e0-i2e">
-                    <rect key="frame" x="84" y="278" width="131" height="30"/>
+                    <rect key="frame" x="84" y="258" width="131" height="30"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="131" id="mfI-pl-bfb"/>
                     </constraints>
-                    <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWF-oX-VHW">
-                    <rect key="frame" x="199" y="275" width="146" height="33"/>
+                    <rect key="frame" x="199" y="255" width="146" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="146" id="lip-LB-UeC"/>
                         <constraint firstAttribute="height" constant="33" id="yDS-3h-o3p"/>
@@ -71,7 +67,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hhe-d4-UWW">
-                    <rect key="frame" x="30" y="356" width="315" height="50"/>
+                    <rect key="frame" x="30" y="336" width="315" height="50"/>
                     <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="315" id="ElT-YB-vdb"/>
@@ -90,7 +86,7 @@
                     </connections>
                 </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HYX-nM-SE9">
-                    <rect key="frame" x="276" y="40" width="79" height="30"/>
+                    <rect key="frame" x="276" y="20" width="79" height="30"/>
                     <color key="backgroundColor" red="0.23137254900000001" green="0.78039215689999997" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="cBz-u7-clI"/>
@@ -167,7 +163,7 @@
                 <constraint firstItem="5y9-0G-IKN" firstAttribute="bottom" secondItem="5K3-J4-jgL" secondAttribute="bottom" id="qku-G4-s8p"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
-            <point key="canvasLocation" x="132" y="154.27286356821591"/>
+            <point key="canvasLocation" x="42" y="65"/>
         </view>
     </objects>
     <resources>
