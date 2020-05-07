@@ -192,8 +192,16 @@
                 cell.titleLab.text = @"未付款";
             }else if (_viewType == JMOrderInfoViewDidDeliverGoods) {
                 cell.titleLab.text = @"已发货";
-//                if (!_isExtension) {
-                [cell setOverTime:10 startTime:self.cellConfigures.model.logistics_at];
+//
+                cell.isExtension = _isExtension;
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell setOverTime:15 startTime:self.cellConfigures.model.logistics_at];
+
+                }else{
+                    //显示距离佣金解冻时间还有15天
+                    [cell setOverTime:15 startTime:self.cellConfigures.model.logistics_at];
+
+                }
 //                }
             }else if (_viewType == JMOrderInfoViewFinish) {
                 cell.titleLab.text = @"交易完成";
@@ -201,13 +209,17 @@
                 cell.titleLab.text = @"等待退款";
             }else if (_viewType == JMOrderInfoViewTakeDeliveryGoods) {
                 cell.titleLab.text = @"已收货";
-//                if ([userModel.type isEqualToString:C_Type_USER]) {
-                    if (_isExtension) {
-                        cell.isExtension = YES;
-                        [cell setOverTime:15 startTime:self.cellConfigures.model.logistics_at];
-                    }
+                //                if ([userModel.type isEqualToString:C_Type_USER]) {
+                if ([userModel.type isEqualToString:B_Type_UESR]) {
+                    [cell setOverTime:5 startTime:self.cellConfigures.model.logistics_at];
                     
-//                }
+                }else{
+                    //显示距离佣金解冻时间还有15天
+                    [cell setOverTime:10 startTime:self.cellConfigures.model.logistics_at];
+                    
+                }
+                
+                //                }
             }else if (_viewType == JMOrderInfoViewAfterSales) {
                 cell.titleLab.text = @"售后中";
             }else if (_viewType == JMOrderInfoViewSetRefund) {

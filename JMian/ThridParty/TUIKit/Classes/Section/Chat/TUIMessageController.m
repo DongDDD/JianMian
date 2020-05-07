@@ -54,6 +54,8 @@
 #import "JMMoneyDetailsViewController.h"
 #import "JMTaskManageViewController.h"
 #import "JMManageInterviewViewController.h"
+#import "JMMyOrderListViewController.h"
+#import "JMWalletViewController.h"
 #define MAX_MESSAGE_SEP_DLAY (5 * 60)
 
 static NSString *cellIdent = @"infoCellIdent";
@@ -1116,6 +1118,14 @@ static NSString *cellIdent2 = @"partTimeInfoCellIdent";
             [self.navigationController pushViewController:vc animated:YES];
         }else if ([pushCell.pushData.desc containsString:@"面试"]) {
             JMManageInterviewViewController *vc = [[JMManageInterviewViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([pushCell.pushData.desc isEqualToString:@"用户下单资金到账"]) {
+            JMWalletViewController *vc = [[JMWalletViewController alloc]init];
+            [self.navigationController pushViewController:vc animated:YES];
+        }else if ([pushCell.pushData.desc isEqualToString:@"你有新的订单"]) {
+            JMMyOrderListViewController *vc = [[JMMyOrderListViewController alloc]init];
+            JMUserInfoModel *model = [JMUserInfoManager getUserInfo];
+            vc.viewType = [model.type isEqualToString:B_Type_UESR] ? JMMyOrderListViewControllerBUser : JMMyOrderListViewControllerCUserExtension;
             [self.navigationController pushViewController:vc animated:YES];
         }else{
             NSString *string = [[NSString alloc]initWithData:pushCell.pushData.data encoding:NSUTF8StringEncoding];

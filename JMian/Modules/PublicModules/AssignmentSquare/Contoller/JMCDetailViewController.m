@@ -206,7 +206,9 @@
 //            }
             if (_viewType == JMCDetailPreviewType) {
                 [self initView];
-                [self setRightBtnImageViewName:@"jobDetailShare" imageNameRight2:@"Bdelete"];
+//                [self setRightBtnImageViewName:@"jobDetailShare" imageNameRight2:@"Bdelete"];
+                [self setRightBtnImageViewName:@"jobDetailShare" imageNameRight2:@"Bdelete" imageNameRight3:@""];
+
                 [self.tableView reloadData];
 
             }else  if (_viewType == JMCDetailDefaultType) {

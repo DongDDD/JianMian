@@ -50,7 +50,7 @@
         [moreMenus addObject:[TUIInputMoreCellData videoData]];
         [moreMenus addObject:[TUIInputMoreCellData fileData]];
         if ([_conversation getType] == TConv_Type_C2C) {
-//            [moreMenus addObject:[TUIInputMoreCellData transferData]];
+            [moreMenus addObject:[TUIInputMoreCellData transferData]];
         }
 
         _moreMenus = moreMenus;

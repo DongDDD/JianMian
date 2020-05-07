@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -77,8 +77,8 @@
                         <constraint firstAttribute="bottom" secondItem="LSy-8M-d59" secondAttribute="bottom" constant="4" id="quF-X8-S24"/>
                     </constraints>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wM-99-7Pc">
-                    <rect key="frame" x="0.0" y="762" width="414" height="50"/>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0wM-99-7Pc">
+                    <rect key="frame" x="0.0" y="684" width="414" height="50"/>
                     <color key="backgroundColor" red="0.29803921570000003" green="0.67843137249999996" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="wcG-tt-99v"/>
@@ -96,8 +96,6 @@
                 <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="MEY-ZC-e30" secondAttribute="bottom" id="D0T-8L-Pwj"/>
                 <constraint firstItem="0wM-99-7Pc" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Fls-dH-zbg"/>
                 <constraint firstAttribute="trailing" secondItem="MEY-ZC-e30" secondAttribute="trailing" id="NRU-3Z-IiI"/>
-                <constraint firstItem="MEY-ZC-e30" firstAttribute="top" secondItem="0wM-99-7Pc" secondAttribute="bottom" id="RzM-I6-RcU"/>
-                <constraint firstItem="Q5M-cg-NOt" firstAttribute="bottom" secondItem="0wM-99-7Pc" secondAttribute="bottom" constant="50" id="UM2-9n-Mwc"/>
                 <constraint firstItem="MEY-ZC-e30" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="gTz-4h-JjG"/>
                 <constraint firstItem="0wM-99-7Pc" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="lBc-zV-oWs"/>
             </constraints>

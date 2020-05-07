@@ -45,7 +45,7 @@
     [self addSubview:_money];
     
     UILabel *moneyBottomLab = [[UILabel alloc]init];
-    moneyBottomLab.text = @"可用金额";
+    moneyBottomLab.text = @"可用金币";
     moneyBottomLab.font = [UIFont systemFontOfSize:12];
     moneyBottomLab.textColor = [UIColor whiteColor];
     [self addSubview:moneyBottomLab];
@@ -58,7 +58,7 @@
     [self addSubview:_money2];
     
     UILabel *moneyBottomLab2 = [[UILabel alloc]init];
-    moneyBottomLab2.text = @"冻结金额";
+    moneyBottomLab2.text = @"冻结金币";
     moneyBottomLab2.font = [UIFont systemFontOfSize:12];
     moneyBottomLab2.textColor = [UIColor whiteColor];
     [self addSubview:moneyBottomLab2];
@@ -82,10 +82,11 @@
     }];
     
     [_money mas_makeConstraints:^(MASConstraintMaker *make) {
+        //        make.centerY.mas_equalTo(BGImgView);
+        //        make.left.mas_equalTo(self.mas_left).offset(SCREEN_WIDTH*0.2);
+        //        make.right.mas_equalTo(BGImgView.mas_centerX);
         make.centerY.mas_equalTo(BGImgView);
         make.left.mas_equalTo(self.mas_left).offset(SCREEN_WIDTH*0.2);
-        make.right.mas_equalTo(BGImgView.mas_centerX);
-        
     }];
     
     [moneyBottomLab mas_makeConstraints:^(MASConstraintMaker *make) {

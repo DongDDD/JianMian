@@ -22,7 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"转账";
+    self.title = @"奖励";
 
     [[TIMFriendshipManager sharedInstance] getUsersProfile:@[_user_id] forceUpdate:NO succ:^(NSArray * arr) {
         for (TIMUserProfile * profile in arr) {
@@ -42,7 +42,7 @@
     [self.moneyTextField resignFirstResponder];
     [self.remarkTextField resignFirstResponder];
     if (self.remarkTextField.text.length > 10) {
-        [self showAlertSimpleTips:@"提示" message:@"转账说明不能超过10个字" btnTitle:@"好的"];
+        [self showAlertSimpleTips:@"提示" message:@"说明不能超过10个字" btnTitle:@"好的"];
         return;
     }
 

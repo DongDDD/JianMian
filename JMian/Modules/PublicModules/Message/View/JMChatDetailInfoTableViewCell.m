@@ -46,9 +46,16 @@
     //判断senderid是不是自己
     if (model.user_id == myConModel.sender_user_id) {
         
-        self.name.text = myConModel.work_work_name;
+        self.name.text = myConModel.recipient_nickname;
     }else{
+        self.name.text = myConModel.sender_nickname;
+    }
+    if (myConModel.work_work_name.length > 0) {
         self.name.text = myConModel.work_work_name;
+        
+    }else if (myConModel.job_work_name.length > 0) {
+        self.name.text = myConModel.work_work_name;
+        
     }
     
     [self setValuesWithChatType:myConModel.type];
@@ -63,17 +70,19 @@
 
 -(void)setValuesWithChatType:(NSString *)chatType{
     JMUserInfoModel *userModel = [JMUserInfoManager getUserInfo];
+    NSString *descTips = @"这个人很懒，没填写资料。。。";
     if ([chatType isEqualToString:@"1"]) {//全职对话赋值
         if ([userModel.type isEqualToString:B_Type_UESR]) {
             self.lab1.text = [JMDataTransform getEducationStrWithEducationNum:_myModel.job_vita_education];
             self.salary.text = [self getSalaryStrWithMin:_myModel.job_salary_min max:_myModel.job_salary_max];
-            self.myDescription.text = _myModel.job_vita_description;
+            self.myDescription.text = _myModel.job_vita_description.length > 0 ? _myModel.job_vita_description : descTips;
             self.lab3.text = _myModel.job_work_name;
      
         }else{
             self.lab1.text = [self getEducationStrWithEducation:_myModel.work_education];
             self.salary.text = [self getSalaryStrWithMin:_myModel.work_salary_min max:_myModel.work_salary_max];
-            self.myDescription.text = _myModel.work_description;
+            self.myDescription.text = _myModel.work_description.length > 0 ? _myModel.work_description : descTips;
+;
             self.lab3.text = _myModel.work_work_name;
 
         }
@@ -81,7 +90,8 @@
     }else if ([chatType isEqualToString:@"2"]){//兼职对话赋值
         if ([userModel.type isEqualToString:B_Type_UESR]) {
             self.salary.text = _myModel.job_type_label_name;
-            self.myDescription.text = _myModel.job_description;
+            self.myDescription.text = _myModel.job_description.length > 0 ? _myModel.job_description : descTips;;
+;
             NSMutableArray *array = [NSMutableArray array];
             for (JMChatInfoIndustry *industryModel in _myModel.job_industry) {
                 [array addObject:industryModel.name];
@@ -91,8 +101,10 @@
 //            self.lab2.text = array[1];
 //            self.lab3.text = array[2];
         }else{
+            
+
             self.salary.text = _myModel.job_type_label_name;
-            self.myDescription.text = _myModel.job_description;
+            self.myDescription.text = _myModel.job_description.length > 0 ? _myModel.job_description : descTips;
             NSMutableArray *array = [NSMutableArray array];
             for (JMChatInfoIndustry *industryModel in _myModel.job_industry) {
                 [array addObject:industryModel.name];

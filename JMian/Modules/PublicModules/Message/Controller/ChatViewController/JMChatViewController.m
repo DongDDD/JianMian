@@ -40,11 +40,11 @@
         
         if ([_myConvModel.type isEqualToString:@"1"]) {
             if (_myConvModel.job_work_name) {
-                subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_work_name];
+                subTitle = [NSString stringWithFormat:@" %@",_myConvModel.job_work_name];
             }
         }else{
             if (_myConvModel.job_type_label_name) {
-                subTitle = [NSString stringWithFormat:@"/%@",_myConvModel.job_type_label_name];
+                subTitle = [NSString stringWithFormat:@" %@",_myConvModel.job_type_label_name];
             }
         }
         
@@ -78,8 +78,11 @@
         titleStr = @"系统消息";
     }else if (model.user_id == _myConvModel.sender_user_id) {
         if (_myConvModel.recipient_nickname.length > 0) {
-           
-            titleStr = [NSString stringWithFormat:@"%@%@",_myConvModel.workInfo_company_name,subTitle];
+            if (_myConvModel.workInfo_company_name.length > 0) {
+                titleStr = [NSString stringWithFormat:@"%@/%@",_myConvModel.workInfo_company_name,subTitle];
+            }else{
+                titleStr = subTitle;
+            }
         }else{
             titleStr = [NSString stringWithFormat:@"%@",_myConvModel.recipient_phone];
         }

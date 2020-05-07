@@ -218,6 +218,8 @@
 		0411C19723FD1D8200178BE5 /* icon-chare@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0411C19423FD1D8200178BE5 /* icon-chare@3x.png */; };
 		0411C19823FD1D8200178BE5 /* icon-chare.png in Resources */ = {isa = PBXBuildFile; fileRef = 0411C19523FD1D8200178BE5 /* icon-chare.png */; };
 		0411C19B23FD37E700178BE5 /* JMWXShareAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 0411C19A23FD37E700178BE5 /* JMWXShareAction.m */; };
+		04131449245AA6B90063E3BE /* JMWalletTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04131447245AA6B90063E3BE /* JMWalletTableViewCell.m */; };
+		0413144A245AA6B90063E3BE /* JMWalletTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04131448245AA6B90063E3BE /* JMWalletTableViewCell.xib */; };
 		04196DA5227FE1190000A6AA /* JMAllMessageTableViewCellData.m in Sources */ = {isa = PBXBuildFile; fileRef = 04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */; };
 		04196DAF22805C450000A6AA /* JMMySettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04196DAD22805C450000A6AA /* JMMySettingViewController.m */; };
 		04196DB022805C450000A6AA /* JMMySettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04196DAE22805C450000A6AA /* JMMySettingViewController.xib */; };
@@ -1833,6 +1835,9 @@
 		0411C19523FD1D8200178BE5 /* icon-chare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-chare.png"; sourceTree = "<group>"; };
 		0411C19923FD37E700178BE5 /* JMWXShareAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMWXShareAction.h; sourceTree = "<group>"; };
 		0411C19A23FD37E700178BE5 /* JMWXShareAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMWXShareAction.m; sourceTree = "<group>"; };
+		04131446245AA6B90063E3BE /* JMWalletTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMWalletTableViewCell.h; sourceTree = "<group>"; };
+		04131447245AA6B90063E3BE /* JMWalletTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMWalletTableViewCell.m; sourceTree = "<group>"; };
+		04131448245AA6B90063E3BE /* JMWalletTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = JMWalletTableViewCell.xib; sourceTree = "<group>"; };
 		04196DA3227FE1190000A6AA /* JMAllMessageTableViewCellData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAllMessageTableViewCellData.h; sourceTree = "<group>"; };
 		04196DA4227FE1190000A6AA /* JMAllMessageTableViewCellData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAllMessageTableViewCellData.m; sourceTree = "<group>"; };
 		04196DAC22805C450000A6AA /* JMMySettingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMMySettingViewController.h; sourceTree = "<group>"; };
@@ -7375,6 +7380,9 @@
 				0411C18323FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.h */,
 				0411C18423FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.m */,
 				0411C18523FBD00C00178BE5 /* JMDiscussHistoryImageCollectionViewCell.xib */,
+				04131446245AA6B90063E3BE /* JMWalletTableViewCell.h */,
+				04131447245AA6B90063E3BE /* JMWalletTableViewCell.m */,
+				04131448245AA6B90063E3BE /* JMWalletTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -8282,6 +8290,7 @@
 				040D034D2334861F00B37EE6 /* enshrine2@2x.png in Resources */,
 				041CCF0722A52403002DFED3 /* store@2x.png in Resources */,
 				0495EDD823F3906E00E3B081 /* icon-sales.png in Resources */,
+				0413144A245AA6B90063E3BE /* JMWalletTableViewCell.xib in Resources */,
 				0406768B2315167500562CDB /* JMCDetailCommentTableViewCell.xib in Resources */,
 				049E9C5823CD5FC400D91D91 /* JMCTypeSaleDetailViewController.xib in Resources */,
 				6D020A202250F3F9009BCFE4 /* 组 54@2x.png in Resources */,
@@ -9060,6 +9069,7 @@
 				043396912383DCE70010F650 /* JMPushMessageCell.m in Sources */,
 				04EA7E2A23011376005B7CE5 /* JMSnapshotWebViewController.m in Sources */,
 				04AB7A9F23501A0C009A30C0 /* JMVersionDetailsView.m in Sources */,
+				04131449245AA6B90063E3BE /* JMWalletTableViewCell.m in Sources */,
 				04B205B824064D26006906CC /* JMHTTPManager+PostGoodsRequest.m in Sources */,
 				040E367122687B2D00A7D789 /* JMBottomView.m in Sources */,
 				044A34E023FAD262001997A1 /* JMRefuseRefundViewController.m in Sources */,
@@ -9481,7 +9491,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.73;
+				MARKETING_VERSION = 1.5.74;
 				MTL_ENABLE_DEBUG_INFO = JMian/PrefixHeader.pch;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -9517,7 +9527,7 @@
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrwb",
 					"$(PROJECT_DIR)/JMian/ThridParty/TUIKit/Classes/Third/voiceConvert/opencore-amrnb",
 				);
-				MARKETING_VERSION = 1.5.73;
+				MARKETING_VERSION = 1.5.74;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hanyue.JianMianTest6;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -81,7 +81,7 @@ static TUIInputMoreCellData *TUI_Transfer_MoreCell;
 {
     if (!TUI_Transfer_MoreCell) {
         TUI_Transfer_MoreCell = [[TUIInputMoreCellData alloc] init];
-        TUI_Transfer_MoreCell.title = @"转账";
+        TUI_Transfer_MoreCell.title = @"奖励";
         TUI_Transfer_MoreCell.image = [UIImage imageNamed:@"transfer"];
     }
     return TUI_Transfer_MoreCell;

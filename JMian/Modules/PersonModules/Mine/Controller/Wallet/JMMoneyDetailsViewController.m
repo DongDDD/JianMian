@@ -85,7 +85,7 @@
         _tableView.tableHeaderView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 0, 10)];
         _tableView.sectionFooterHeight = 0;
         _tableView.sectionHeaderHeight = 10;
-        _tableView.rowHeight = 66;
+        _tableView.rowHeight = 95;
         [_tableView registerNib:[UINib nibWithNibName:@"JMMoneyDetailTableViewCell" bundle:nil] forCellReuseIdentifier:TTextMessageCell_ReuseId];
 
         

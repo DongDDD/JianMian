@@ -446,7 +446,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "173"
                   endingLineNumber = "173"
-                  offsetFromSymbolStart = "184">
+                  offsetFromSymbolStart = "192">
                </Location>
                <Location
                   uuid = "9C198BB8-33A9-4087-BD11-DF991D3F39D0 - f27013da4a2ec1a8"
@@ -801,7 +801,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "66"
                   endingLineNumber = "66"
-                  offsetFromSymbolStart = "228">
+                  offsetFromSymbolStart = "216">
                </Location>
                <Location
                   uuid = "9BBE6739-FE57-48AA-8147-AD329301933F - d1d5903c24074940"
@@ -935,7 +935,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "389"
                   endingLineNumber = "389"
-                  offsetFromSymbolStart = "476">
+                  offsetFromSymbolStart = "488">
                </Location>
                <Location
                   uuid = "66620285-F829-4A63-90DC-94A264D4915C - 18409b0af885be06"
@@ -2851,38 +2851,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F40DD313-A50A-4846-9799-7DB7851BD669"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PersonModules/Login/LoginViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "-onResp:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "96037BD2-17F8-42C7-B7BF-999D6584AAE1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PersonModules/Login/LoginViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
-            landmarkName = "-onResp:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "CE368E61-D160-4900-AE48-E7B339AA930F"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -3226,8 +3194,8 @@
             filePath = "JMian/ThridParty/TUIKit/Classes/Section/Chat/TUIMessageController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1139"
-            endingLineNumber = "1139"
+            startingLineNumber = "1149"
+            endingLineNumber = "1149"
             landmarkName = "-onSelectMessage:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3258,26 +3226,10 @@
             filePath = "JMian/Modules/PersonModules/Mine/View/OrderInfoCells/JMOrderInfoHeaderTableViewCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "-getOverTimeWithOverTime:startTime:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "98D2AFC9-FF15-4BBF-A6E1-A03F78EFA212"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PersonModules/Mine/View/OrderInfoCells/JMOrderInfoHeaderTableViewCell.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "-setOverTime:startTime:"
-            landmarkType = "7">
+            startingLineNumber = "124"
+            endingLineNumber = "124"
+            landmarkName = "JMOrderInfoHeaderTableViewCell"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3290,10 +3242,10 @@
             filePath = "JMian/Modules/PersonModules/Mine/View/OrderInfoCells/JMOrderInfoHeaderTableViewCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "-getOverTimeWithOverTime:startTime:"
-            landmarkType = "7">
+            startingLineNumber = "117"
+            endingLineNumber = "117"
+            landmarkName = "JMOrderInfoHeaderTableViewCell"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3306,9 +3258,9 @@
             filePath = "JMian/Modules/PersonModules/Mine/View/OrderInfoCells/JMOrderInfoHeaderTableViewCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "115"
-            endingLineNumber = "115"
-            landmarkName = "-getDate:day:"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "-getOverTimeWithStartTime:day:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3322,9 +3274,9 @@
             filePath = "JMian/Modules/PersonModules/Mine/View/OrderInfoCells/JMOrderInfoHeaderTableViewCell.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
-            landmarkName = "-getDate:day:"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
+            landmarkName = "-getOverTimeWithStartTime:day:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3338,8 +3290,8 @@
             filePath = "JMian/ThridParty/TUIKit/Classes/Section/Chat/TUIMessageController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "995"
-            endingLineNumber = "995"
+            startingLineNumber = "997"
+            endingLineNumber = "997"
             landmarkName = "-gotoVideoChatViewWithForeign_key:recipient:chatType:"
             landmarkType = "7">
          </BreakpointContent>
@@ -3354,8 +3306,8 @@
             filePath = "JMian/ThridParty/TUIKit/Classes/Section/Chat/TUIMessageController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "972"
-            endingLineNumber = "972"
+            startingLineNumber = "974"
+            endingLineNumber = "974"
             landmarkName = "-videoInterviewAction"
             landmarkType = "7">
          </BreakpointContent>
@@ -3388,7 +3340,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "192"
                   endingLineNumber = "192"
-                  offsetFromSymbolStart = "104">
+                  offsetFromSymbolStart = "124">
                </Location>
                <Location
                   uuid = "B9BDE83A-BD33-45FD-9087-476D42D35442 - f4ce7db8ab9e13ee"
@@ -3548,7 +3500,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1018"
                   endingLineNumber = "1018"
-                  offsetFromSymbolStart = "1264">
+                  offsetFromSymbolStart = "1268">
                </Location>
                <Location
                   uuid = "2880E9D4-8B81-497D-A399-430155E78B30 - 889a124442660ef9"
@@ -3563,7 +3515,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1018"
                   endingLineNumber = "1018"
-                  offsetFromSymbolStart = "1308">
+                  offsetFromSymbolStart = "1312">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -3597,38 +3549,6 @@
             startingLineNumber = "586"
             endingLineNumber = "586"
             landmarkName = "-pictureManagerWithPhotoModel_arr:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A2AC11C2-542B-4565-B82C-B201098D686C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/Modules/PublicModules/Message/Controller/ChatViewController/JMChatViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "715E6A79-74D5-4805-B38B-3B2CC6C60684"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "JMian/ThridParty/TUIKit/Classes/Section/Chat/TUIMessageController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "623"
-            endingLineNumber = "623"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3677,6 +3597,86 @@
             startingLineNumber = "412"
             endingLineNumber = "412"
             landmarkName = "-gotoImageVCAction"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "00CF267C-CB20-45D5-B052-390C2A762D22"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PublicModules/AssignmentSquare/Contoller/JMBDetailViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "-right2Action"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "76859911-7A01-4A11-888B-2957C2FEB194"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PublicModules/Message/Controller/JMMessageListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "826"
+            endingLineNumber = "826"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FB1D14C0-E201-43F0-BAED-ED3A3C819590"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PublicModules/Message/Controller/JMMessageListViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "355"
+            endingLineNumber = "355"
+            landmarkName = "-createChatRequstWithType:foreign_key:recipient:sender_mark:recipient_mark:model:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "457ABDC2-99BF-426E-B39C-C5AFD4AECABA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/Modules/PublicModules/Message/View/JMChatDetailInfoTableViewCell.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "-setValuesWithChatType:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "62C7DE6F-A0A8-4D0D-A61E-A68C65153163"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "JMian/ThridParty/TUIKit/Classes/Section/Chat/TUIMessageController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1109"
+            endingLineNumber = "1109"
+            landmarkName = "-onSelectMessage:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

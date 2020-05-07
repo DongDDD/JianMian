@@ -20,11 +20,17 @@ NSString *const JMGoodsDetialTitleTableViewCellIdentifier = @"JMGoodsDetialTitle
 -(void)setModel:(JMGoodsInfoModel *)model{
     self.titleLab.text = model.title;
     self.priceLab.text = model.price;
-    NSMutableArray *arr =[NSMutableArray array];
-    for (JMGoodsInfoSkuModel *skuData in model.sku) {
-        [arr addObject:skuData.salary];
+    if (model.sku.count > 0) {
+        NSMutableArray *arr =[NSMutableArray array];
+        for (JMGoodsInfoSkuModel *skuData in model.sku) {
+            [arr addObject:skuData.salary];
+        }
+         
+        self.salarylab.text = [NSString stringWithFormat:@"佣金 ：%@ 元",[JMDataTransform getSalaryRangeWithArr:arr]];
+    }else{
+        self.salarylab.text = [NSString stringWithFormat:@"佣金 ：%@ 元",model.salary];
     }
-    self.salarylab.text = [NSString stringWithFormat:@"佣金 ：%@ 元",[JMDataTransform getSalaryRangeWithArr:arr]];
+    
 //    if (arr.count == 1) {
 //            //单个商品
 //            self.salarylab.text = [NSString stringWithFormat:@"佣金 ：%@ 元", arr[0]];
